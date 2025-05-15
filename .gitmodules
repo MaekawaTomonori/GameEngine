@@ -1,0 +1,3 @@
+[submodule "vendor/lwlog"]
+	path = vendor/lwlog
+	url = https://github.com/ChristianPanov/lwlog.git
