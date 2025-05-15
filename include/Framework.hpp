@@ -1,9 +1,9 @@
 ﻿#ifndef Framework_HPP_
 #define Framework_HPP_
-#include <memory>
 
+#include <memory>
 #include "Engine/Engine.hpp"
-#include "IGame.hpp"
+class IGame;
 
 class Framework {
     std::unique_ptr<Engine> engine_;
