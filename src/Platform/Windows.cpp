@@ -6,5 +6,5 @@ void Windows::Initialize() {
 }
 
 bool Windows::IsEnabled() const{
-	return enabled_;
+	return window_->IsEnabled();
 }

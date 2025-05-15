@@ -1,4 +1,4 @@
-#include "IGame.hpp"
+#include "include/IGame.hpp"
 
 #include <utility>
 

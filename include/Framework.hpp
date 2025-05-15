@@ -2,19 +2,20 @@
 #define Framework_HPP_
 
 #include <memory>
-#include "Engine/Engine.hpp"
+#include "src/Engine/Engine.hpp"
+
 class IGame;
 
 class Framework {
-    std::unique_ptr<Engine> engine_;
+    //std::unique_ptr<Engine> engine_;
+	std::unique_ptr<Window> window_;
     std::unique_ptr<IGame> game_;
 public:
-	Framework() = default;
-	Framework(std::unique_ptr<IGame> _game);
-	void Run();
+	Framework();
+	void Execute(std::unique_ptr<IGame> _game);
 private:
 	void Initialize();
-	void Update();
+	bool Loop() const;
 	void Shutdown();
 }; // class Framework
 

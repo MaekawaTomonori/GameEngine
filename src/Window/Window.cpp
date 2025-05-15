@@ -1,9 +1,80 @@
 ﻿#include "Window.hpp"
 
-void Window::Create() {
+#include <stdexcept>
 
+LRESULT Window::WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
+    switch (uMsg){
+        case WM_DESTROY:
+            PostQuitMessage(0);
+            return 0;
+        default:
+            break;
+    }
+    return DefWindowProc(hwnd, uMsg, wParam, lParam);
 }
 
-bool Window::IsEnabled() {
+void Window::Create() {
+    // Register the window class
+    hInstance_ = GetModuleHandle(nullptr);
 
+    WNDCLASS wc = {};
+    wc.lpfnWndProc = WindowProc;
+    wc.lpszClassName = title_.c_str();
+    wc.hInstance = hInstance_;
+    wc.hCursor = LoadCursor(nullptr, IDC_ARROW);
+    RegisterClass(&wc);
+
+    LastErr();
+
+    RECT rect = {0, 0, 800, 600};
+
+    AdjustWindowRect(&rect, WS_OVERLAPPEDWINDOW, FALSE);
+
+    // Create the window
+    hWnd_ = CreateWindow(
+        wc.lpszClassName,
+        title_.c_str(),
+        WS_OVERLAPPEDWINDOW,
+        CW_USEDEFAULT, CW_USEDEFAULT, 800, 600,
+        nullptr,
+        nullptr,
+        wc.hInstance,
+        nullptr
+    );
+
+    ShowWindow(hWnd_, SW_SHOW);
+
+    LastErr();
+}
+
+[[nodiscard]]
+bool Window::IsEnabled() {
+    MSG msg{};
+    while (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE)){
+        if (msg.message == WM_QUIT) {
+            return false;
+        }
+        TranslateMessage(&msg);
+        DispatchMessage(&msg);
+    }
+
+    return true;
+}
+
+void Window::LastErr() {
+    LPVOID lpMsgBuf;
+    DWORD dw = GetLastError();
+
+    if (FormatMessage(
+        FORMAT_MESSAGE_ALLOCATE_BUFFER |
+        FORMAT_MESSAGE_FROM_SYSTEM |
+        FORMAT_MESSAGE_IGNORE_INSERTS,
+        NULL,
+        dw,
+        MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
+        (LPTSTR)&lpMsgBuf,
+        0, NULL) == 0){
+        MessageBox(NULL, TEXT("FormatMessage failed"), TEXT("Error"), MB_OK);
+    }
+    MessageBox(NULL, (LPCTSTR)lpMsgBuf, TEXT("Error"), MB_OK);
 }

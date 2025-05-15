@@ -2,7 +2,7 @@
 #define Windows_HPP_
 #include <memory>
 
-#include "Window/Window.hpp"
+#include "src/Window/Window.hpp"
 
 class Windows {
 	bool enabled_ = true;

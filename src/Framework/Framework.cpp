@@ -1,25 +1,33 @@
-﻿#include "Framework.hpp"
-#include "IGame.hpp"
+﻿#include "include/Framework.hpp"
+#include "include/IGame.hpp"
 
-Framework::Framework(std::unique_ptr<IGame> _game) {
-    game_ = std::move(_game);
+Framework::Framework() {
+    //engine_ = std::make_unique<Engine>();
+    //engine_->Initialize();
+    window_ = std::make_unique<Window>();
+    window_->Create();
 }
 
-void Framework::Run() {
+void Framework::Execute(std::unique_ptr<IGame> _game) {
+    game_ = std::move(_game);
     Initialize();
 
-    do{
-        Update();
-    } while (engine_->IsEnabled());
+    while (Loop()){
+        // Main loop
+	    if (game_)break;
+	    game_->Update();
+    }
 }
 
 void Framework::Initialize() {
-    engine_ = std::make_unique<Engine>();
-    engine_->Initialize();
     game_->Initialize();
 }
 
-void Framework::Update() {
+bool Framework::Loop() const {
+    //if (!engine_)return false;
+	//if (!engine_->IsEnabled())return false;
+    //engine_->Update();
+    return window_->IsEnabled();
 }
 
 void Framework::Shutdown() {

@@ -7,8 +7,8 @@ class IGame {
 protected:
 	// Protected inner Config
 	class Config {
-		std::string title_;
 		uint16_t fps_ = 60;
+		std::string title_;
 	public:
 	    Config() = default;
 		Config(std::string _title, uint16_t _fps = 60);

@@ -3,18 +3,18 @@
 
 #include <memory>
 
-#include "Platform/Windows.hpp"
+#include "src/Platform/Windows.hpp"
 
 class Engine {
 	std::unique_ptr<Windows> windows_;
 public:
-	Engine() = default;
+	Engine();
 	~Engine() = default;
 	void Initialize();
 	void Update();
 	void Shutdown();
 
-	bool IsEnabled();
+	bool IsEnabled() const;
 };
 
 #endif
