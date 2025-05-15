@@ -1,4 +1,5 @@
 ﻿#include "Framework.hpp"
+#include "IGame.hpp"
 
 Framework::Framework(std::unique_ptr<IGame> _game) {
     game_ = std::move(_game);

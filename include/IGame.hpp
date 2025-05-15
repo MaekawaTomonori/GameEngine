@@ -10,6 +10,7 @@ protected:
 		std::string title_;
 		uint16_t fps_ = 60;
 	public:
+	    Config() = default;
 		Config(std::string _title, uint16_t _fps = 60);
 	};
 private:

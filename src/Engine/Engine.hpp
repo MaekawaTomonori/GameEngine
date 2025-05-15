@@ -1,15 +1,21 @@
-﻿#pragma once
+﻿#ifndef Engine_HPP_
+#define Engine_HPP_
+
 #include <memory>
 
 #include "Platform/Windows.hpp"
 
 class Engine {
-private:
 	std::unique_ptr<Windows> windows_;
 public:
+	Engine() = default;
+	~Engine() = default;
 	void Initialize();
 	void Update();
 	void Shutdown();
 
 	bool IsEnabled();
 };
+
+#endif
+
