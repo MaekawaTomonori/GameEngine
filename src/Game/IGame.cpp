@@ -7,6 +7,8 @@ IGame::Config::Config(std::string _title, uint16_t _fps) {
     fps_ = _fps;
 }
 
+IGame::IGame() = default;
+
 IGame::Config &IGame::SetConfig(const Config &_config) {
 	config_ = _config;
 	return config_;

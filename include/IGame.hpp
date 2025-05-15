@@ -15,7 +15,7 @@ protected:
 private:
 	Config config_;
 public:
-	IGame() = default;
+	IGame();
 	virtual ~IGame() = default;
 	virtual void Initialize() = 0;
 	virtual void Update() = 0;

@@ -9,7 +9,7 @@ class Framework {
     std::unique_ptr<Engine> engine_;
     std::unique_ptr<IGame> game_;
 public:
-	Framework() = delete;
+	Framework() = default;
 	Framework(std::unique_ptr<IGame> _game);
 	void Run();
 private:
