@@ -1,0 +1,7 @@
+﻿/.vs
+
+# Vcxproj 
+*.vcxproj.user
+
+# output folder
+out/
