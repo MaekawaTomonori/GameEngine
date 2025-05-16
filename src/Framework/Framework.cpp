@@ -14,17 +14,14 @@ void Framework::Execute(std::unique_ptr<IGame> _game) {
 
     while (Loop()){
         // Main loop
-	    if (game_)break;
+	    if (!game_)break;
 	    game_->Update();
     }
 }
 
 void Framework::Initialize() {
-	if (game_){
-		game_->Initialize();
-	} else {
-		(void)game_;
-	}
+	if (!game_)return;
+	game_->Initialize();
 }
 
 bool Framework::Loop() const {
