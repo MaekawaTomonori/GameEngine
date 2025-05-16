@@ -7,6 +7,7 @@
 class Windows {
 	std::unique_ptr<Window> window_;
 public:
+	~Windows() = default;
 	void Initialize();
 
 	bool IsEnabled() const ;

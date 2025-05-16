@@ -7,8 +7,8 @@
 class IGame;
 
 class Framework {
-    std::unique_ptr<Engine> engine_;
-    std::unique_ptr<IGame> game_;
+	std::unique_ptr<Engine> engine_;
+	std::unique_ptr<IGame> game_;
 public:
 	Framework();
 	void Execute(std::unique_ptr<IGame> _game);

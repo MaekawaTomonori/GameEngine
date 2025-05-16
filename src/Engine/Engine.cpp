@@ -17,5 +17,5 @@ void Engine::Shutdown() {
 }
 
 bool Engine::IsEnabled() const {
-    return windows_ ? windows_->IsEnabled() : false;
+	return windows_ ? windows_->IsEnabled() : false;
 }
