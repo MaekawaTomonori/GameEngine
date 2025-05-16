@@ -1,4 +1,4 @@
-﻿#ifndef Engine_HPP_
+#ifndef Engine_HPP_
 #define Engine_HPP_
 
 #include <memory>

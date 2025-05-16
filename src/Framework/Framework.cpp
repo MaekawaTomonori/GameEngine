@@ -2,10 +2,8 @@
 #include "include/IGame.hpp"
 
 Framework::Framework() {
-    //engine_ = std::make_unique<Engine>();
-    //engine_->Initialize();
-    window_ = std::make_unique<Window>();
-    window_->Create();
+    engine_ = std::make_unique<Engine>();
+    engine_->Initialize();
 }
 
 void Framework::Execute(std::unique_ptr<IGame> _game) {
@@ -19,7 +17,7 @@ void Framework::Execute(std::unique_ptr<IGame> _game) {
     }
 }
 
-void Framework::Initialize() {
+void Framework::Initialize() const {
 	if (!game_)return;
 	game_->Initialize();
 }
@@ -28,7 +26,7 @@ bool Framework::Loop() const {
     //if (!engine_)return false;
 	//if (!engine_->IsEnabled())return false;
     //engine_->Update();
-    return window_->IsEnabled();
+    return engine_->IsEnabled();
 }
 
 void Framework::Shutdown() {
