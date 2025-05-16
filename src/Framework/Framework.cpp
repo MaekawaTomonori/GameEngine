@@ -14,7 +14,7 @@ void Framework::Execute(std::unique_ptr<IGame> _game) {
 
     while (Loop()){
         // Main loop
-	    if (game_)break;
+	    if (!game_)break;
 	    game_->Update();
     }
 }
