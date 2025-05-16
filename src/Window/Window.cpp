@@ -2,6 +2,8 @@
 
 #include <stdexcept>
 
+#include "include/Utils.hpp"
+
 LRESULT Window::WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
 	switch (uMsg){
 		case WM_DESTROY:
@@ -22,7 +24,11 @@ bool Window::Create() {
 	wc.lpszClassName = title_.c_str();
 	wc.hInstance = hInstance_;
 	wc.hCursor = LoadCursor(nullptr, IDC_ARROW);
-	RegisterClass(&wc);
+
+	if (!RegisterClass(&wc)){
+		Utils::DisplayLastErr();
+		return false;
+	}
 
 	//LastErr();
 
@@ -43,14 +49,13 @@ bool Window::Create() {
 	);
 
 	if (!hWnd_){
-		LastErr();
+		Utils::DisplayLastErr();
 		return false;
 	}
 
 	ShowWindow(hWnd_, SW_SHOW);
 
 	return true;
-	//LastErr();
 }
 
 [[nodiscard]]
