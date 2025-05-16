@@ -1,4 +1,4 @@
-﻿#ifndef Framework_HPP_
+#ifndef Framework_HPP_
 #define Framework_HPP_
 
 #include <memory>

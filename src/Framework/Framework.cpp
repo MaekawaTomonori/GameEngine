@@ -1,4 +1,4 @@
-﻿#include "include/Framework.hpp"
+#include "include/Framework.hpp"
 #include "include/IGame.hpp"
 
 Framework::Framework() {
@@ -10,7 +10,7 @@ Framework::Framework() {
 
 void Framework::Execute(std::unique_ptr<IGame> _game) {
     game_ = std::move(_game);
-    Initialize();
+    this->Initialize();
 
     while (Loop()){
         // Main loop
@@ -20,7 +20,11 @@ void Framework::Execute(std::unique_ptr<IGame> _game) {
 }
 
 void Framework::Initialize() {
-    game_->Initialize();
+	if (game_){
+		game_->Initialize();
+	} else {
+		(void)game_;
+	}
 }
 
 bool Framework::Loop() const {
