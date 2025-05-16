@@ -12,8 +12,7 @@ class Window {
 public:
 	static LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 	bool Create();
-	static bool IsEnabled();
-	void LastErr();
+	bool IsEnabled();
 private:
 	std::wstring title_ = L"Title";
 

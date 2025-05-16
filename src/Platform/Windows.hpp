@@ -1,16 +1,17 @@
-﻿#ifndef Windows_HPP_
+#ifndef Windows_HPP_
 #define Windows_HPP_
 #include <memory>
 
 #include "src/Window/Window.hpp"
 
 class Windows {
-	bool enabled_ = true;
 	std::unique_ptr<Window> window_;
 public:
 	void Initialize();
 
 	bool IsEnabled() const ;
+
+	static void DisplayLastErr();
 private:
 }; // class Windows
 
