@@ -34,7 +34,9 @@ namespace Utils {
 			return {};
 		}
 		std::wstring result(sizeNeeded, 0);
-		MultiByteToWideChar(CP_UTF8, 0, reinterpret_cast<const char*>(str.data()), static_cast<int>(str.size()), result.data(), sizeNeeded);
+		if (MultiByteToWideChar(CP_UTF8, 0, reinterpret_cast<const char*>(str.data()), static_cast<int>(str.size()), result.data(), sizeNeeded)){
+			return {};
+		}
 		return result;
 	}
 
