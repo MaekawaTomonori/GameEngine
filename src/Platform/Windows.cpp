@@ -1,4 +1,4 @@
-﻿#include "Windows.hpp"
+#include "Windows.hpp"
 
 void Windows::Initialize() {
 	window_ = std::make_unique<Window>();
@@ -6,5 +6,5 @@ void Windows::Initialize() {
 }
 
 bool Windows::IsEnabled() const{
-	return window_->IsEnabled();
+	return window_ ? window_->IsEnabled() : false;
 }
