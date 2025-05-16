@@ -1,8 +1,12 @@
 #include "Windows.hpp"
 
+#include <stdexcept>
+
 void Windows::Initialize() {
 	window_ = std::make_unique<Window>();
-	window_->Create();
+	if (!window_->Create()) {
+		throw std::runtime_error("Failed to create window");
+	}
 }
 
 bool Windows::IsEnabled() const{

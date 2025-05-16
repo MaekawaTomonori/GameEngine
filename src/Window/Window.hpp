@@ -1,4 +1,4 @@
-﻿#ifndef Window_HPP_
+#ifndef Window_HPP_
 #define Window_HPP_
 
 #ifndef NOMINMAX
@@ -11,8 +11,8 @@
 class Window {
 public:
 	static LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
-	void Create();
-	bool IsEnabled();
+	bool Create();
+	static bool IsEnabled();
 	void LastErr();
 private:
 	std::wstring title_ = L"Title";

@@ -1,4 +1,4 @@
-﻿#include "Window.hpp"
+#include "Window.hpp"
 
 #include <stdexcept>
 
@@ -13,7 +13,7 @@ LRESULT Window::WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
     return DefWindowProc(hwnd, uMsg, wParam, lParam);
 }
 
-void Window::Create() {
+bool Window::Create() {
     // Register the window class
     hInstance_ = GetModuleHandle(nullptr);
 
@@ -24,7 +24,7 @@ void Window::Create() {
     wc.hCursor = LoadCursor(nullptr, IDC_ARROW);
     RegisterClass(&wc);
 
-    LastErr();
+    //LastErr();
 
     RECT rect = {0, 0, 800, 600};
 
@@ -42,9 +42,15 @@ void Window::Create() {
         nullptr
     );
 
+	if (!hWnd_){
+		LastErr();
+		return false;
+	}
+
     ShowWindow(hWnd_, SW_SHOW);
 
-    LastErr();
+	return true;
+    //LastErr();
 }
 
 [[nodiscard]]
