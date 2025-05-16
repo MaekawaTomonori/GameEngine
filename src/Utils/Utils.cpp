@@ -37,4 +37,26 @@ namespace Utils {
 		MultiByteToWideChar(CP_UTF8, 0, reinterpret_cast<const char*>(str.data()), static_cast<int>(str.size()), result.data(), sizeNeeded);
 		return result;
 	}
+
+	void DisplayLastErr() {
+		LPVOID lpMsgBuf;
+		DWORD dw = GetLastError();
+
+		if (dw == 0)return;
+
+		if (FormatMessage(
+			FORMAT_MESSAGE_ALLOCATE_BUFFER |
+			FORMAT_MESSAGE_FROM_SYSTEM |
+			FORMAT_MESSAGE_IGNORE_INSERTS,
+			nullptr,
+			dw,
+			MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
+			reinterpret_cast<LPTSTR>(&lpMsgBuf),
+			0, nullptr) == 0){
+			MessageBox(nullptr, TEXT("FormatMessage failed"), TEXT("Error"), MB_OK);
+			return;
+		}
+		MessageBox(nullptr, static_cast<LPCTSTR>(lpMsgBuf), TEXT("Error"), MB_OK);
+		LocalFree(lpMsgBuf);
+	}
 }

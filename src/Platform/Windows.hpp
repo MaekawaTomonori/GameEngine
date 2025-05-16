@@ -12,7 +12,6 @@ public:
 
 	bool IsEnabled() const ;
 
-	static void DisplayLastErr();
 private:
 }; // class Windows
 
