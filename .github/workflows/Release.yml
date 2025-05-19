@@ -1,0 +1,53 @@
+name: Release Build and Upload
+
+on:
+  push:
+    branches:
+      - Release  # Releaseブランチにpush（PRマージ）されたとき発動
+
+jobs:
+  build-release:
+    runs-on: windows-2022
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Set up MSBuild
+        uses: microsoft/setup-msbuild@v2
+
+      - name: Build Library (Release)
+        run: msbuild Engine.vcxproj /p:Configuration=Release /m
+
+      - name: Find .lib file
+        id: find_lib
+        run: |
+          for /r . %%f in (*.lib) do (
+            echo "Found: %%f"
+            echo "LIB_PATH=%%f" >> %GITHUB_ENV%
+            exit /b 0
+          )
+
+      - name: Zip .lib
+        run: |
+          powershell Compress-Archive -Path "$env:LIB_PATH" -DestinationPath "Release.zip"
+
+      - name: Create Release
+        id: create_release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: release-${{ github.run_number }}
+          name: "Release ${{ github.run_number }}"
+          body: "自動生成リリース（.lib配布）"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload Release Asset
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: release-${{ github.run_number }}
+          files: Release.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
