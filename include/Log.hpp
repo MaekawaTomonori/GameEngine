@@ -1,11 +1,9 @@
-//
-// Created by tomo- on 25/05/07.
-//
-
 #ifndef LOG_HPP
 #define LOG_HPP
 
 #include <string>
+
+#include <lwlog.h>
 
 class Log {
 public:
@@ -20,9 +18,10 @@ public:
 
 private:
 	Level level_ = Level::INFO;
-	std::string logFilePath_ = "Log/";
-	std::string logFileName_ = "LatestLog";
-	std::string logFileExt_ = ".log";
+	std::string path_ = "Logs/";
+	std::unique_ptr<lwlog::logger> logger_;
+
+	std::mutex mutex_;
 public:
 	void Initialize();
 

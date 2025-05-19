@@ -4,36 +4,18 @@
 #endif
 
 void Log::Initialize() {
-	/*auto console = std::make_shared<spdlog::sinks::stdout_color_sink_mt>();
-	console->set_pattern("%^[%T] %v%$");
-	sinks_.emplace_back(console);
+	std::lock_guard<std::mutex> lock(mutex_);
 
-	auto file = std::make_shared<spdlog::sinks::daily_file_format_sink_mt>(logFilePath_ + logFileName_ + logFileExt_, 0, 0);
-	file->set_pattern("%^[%T] %v%$");
-	sinks_.emplace_back(file);
+	if (std::filesystem::exists(path_)) {
+		try {
+			std::filesystem::create_directories(path_);
+		} catch (...) {
+			return;
+		}
+	}
 
-	auto logger = std::make_shared<spdlog::logger>("Logger", begin(sinks_), end(sinks_));
-	logger->set_level(static_cast<spdlog::level::level_enum>(level_));
+	lwlog::set_pattern("[%T] [%L] : %v");
 
-#ifdef _WIN32
-	auto windows_sink = std::make_shared<spdlog::sinks::msvc_sink_mt>();
-	sinks_.emplace_back(windows_sink);
-#endif
-
-	spdlog::register_logger(logger);
-
-	spdlog::flush_every(std::chrono::seconds(1));
-	spdlog::init_thread_pool(8192, 2);
-	spdlog::set_default_logger(
-		std::make_shared<spdlog::async_logger>(
-			"async",
-			begin(sinks_),
-			end(sinks_),
-			spdlog::thread_pool()
-		)
-	);
-
-	spdlog::info("Log initialized");*/
 }
 
 void Log::Send(Level _level = Level::INFO, const std::string& message = "") {

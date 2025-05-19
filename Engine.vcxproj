@@ -553,6 +553,11 @@
     <ClCompile Include="src\Utils\Utils.cpp" />
     <ClCompile Include="src\Window\Window.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="vendor\lwlog\lwlog\lwlog.vcxproj">
+      <Project>{ca71e40f-3686-0cc1-ff07-b0206bdb08f2}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

@@ -15,6 +15,7 @@ LRESULT Window::WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
 	return DefWindowProc(hwnd, uMsg, wParam, lParam);
 }
 
+[[nodiscard]]
 bool Window::Create() {
 	// Register the window class
 	hInstance_ = GetModuleHandle(nullptr);
