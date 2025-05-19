@@ -1,0 +1,33 @@
+name: PR Check
+
+on:
+  pull_request:
+    branches: [dev]
+
+jobs:
+  build-and-test:
+    runs-on: windows-2022
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Set up MSBuild
+        uses: microsoft/setup-msbuild@v2
+        with:
+          msbuild-architecture: x64
+
+      - name: Build with MSBuild Debug
+        run: msbuild Engine.vcxproj /p:Configuration=Debug /m
+
+      - name: Build with MSBuild Release
+        run: msbuild Engine.vcxproj /p:Configuration=Release /m
+
+      - name: Run Tests with VSTest
+        run: |
+          vstest.console.exe path\to\your\test\project\bin\Release\YourTestProject.dll
+
+      - name: Run Static Analysis (cppcheck)
+        run: cppcheck --enable=all --error-exitcode=1 --project=Engine.vcxproj
