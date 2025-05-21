@@ -19,8 +19,6 @@ private:
 
 	HWND hWnd_ = nullptr;
 	HINSTANCE hInstance_ = nullptr;
-
-
 }; // class Window
 
 #endif // Window_HPP_

@@ -1,9 +1,7 @@
 #include "Engine.hpp"
-
 #include "include/Singleton.hpp"
 
 Engine::Engine() {
-
 }
 
 void Engine::Initialize() {
@@ -21,7 +19,6 @@ void Engine::Update() {
 }
 
 void Engine::Shutdown() {
-	
 }
 
 bool Engine::IsEnabled() const {
