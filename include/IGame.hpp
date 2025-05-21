@@ -1,4 +1,4 @@
-﻿#ifndef IGame_HPP_
+#ifndef IGame_HPP_
 #define IGame_HPP_
 #include <string>
 #include <cstdint>
@@ -20,6 +20,7 @@ public:
 	virtual ~IGame() = default;
 	virtual void Initialize() = 0;
 	virtual void Update() = 0;
+	virtual void Draw() = 0;
 	virtual void Shutdown() = 0;
 
 protected:

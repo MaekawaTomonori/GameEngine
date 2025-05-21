@@ -541,6 +541,7 @@
     <ClInclude Include="include\Framework.hpp" />
     <ClInclude Include="src\Platform\Windows.hpp" />
     <ClInclude Include="src\Scheduler\Scheduler.hpp" />
+    <ClInclude Include="src\Timer\Timer.hpp" />
     <ClInclude Include="src\Window\Window.hpp" />
   </ItemGroup>
   <ItemGroup>
@@ -550,6 +551,7 @@
     <ClCompile Include="src\Platform\Windows.cpp" />
     <ClCompile Include="src\Scheduler\Scheduler.cpp" />
     <ClCompile Include="src\System\Log.cpp" />
+    <ClCompile Include="src\Timer\Timer.cpp" />
     <ClCompile Include="src\Utils\Utils.cpp" />
     <ClCompile Include="src\Window\Window.cpp" />
   </ItemGroup>
