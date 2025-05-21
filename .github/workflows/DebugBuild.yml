@@ -1,17 +1,14 @@
-name: ReleaseBuild
+name: DebugBuild
 on:
   push:
     branches:
       - dev
-
 env:
   SOLUTION_FILE_PATH: Engine.vcxproj
-  CONFIGURATION: Release
-
+  CONFIGURATION: Debug
 jobs:
   build:
     runs-on: windows-2022
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
