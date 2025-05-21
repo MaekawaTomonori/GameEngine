@@ -15,6 +15,8 @@ void Framework::Execute(std::unique_ptr<IGame> _game) {
 		if (!game_)break;
 		game_->Update();
 	}
+
+	Shutdown();
 }
 
 void Framework::Initialize() const {
