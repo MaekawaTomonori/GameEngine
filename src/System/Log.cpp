@@ -1,5 +1,8 @@
 #include "include/Log.hpp"
 
+#include "include/Utils.hpp"
+#include "src/DirectX/DirectXAdaptor.hpp"
+
 #ifdef _WIN32
 #endif
 
@@ -38,7 +41,9 @@ void Log::Initialize() {
 
 void Log::Send(Level _level = Level::INFO, const std::string& message = "") {
 	(void)_level;
-	(void)message;
+	std::string format = "[" + Utils::DateToString() + "] ";
+	OutputDebugStringA((format + message + '\n').c_str());
+
 	//// Implement logging logic here
 	//// For example, write to a file or console based on the log level
 	//switch (_level) {

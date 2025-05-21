@@ -6,6 +6,7 @@
 #include <Windows.h>
 #include <string>
 #include <algorithm>
+#include <chrono>
 
 namespace Utils {
 	std::string Convert(const std::wstring& str) {
@@ -68,5 +69,26 @@ namespace Utils {
 #ifdef _WIN32
 		MessageBoxA(nullptr, msg.c_str(), msg.c_str(), MB_ICONSTOP);
 #endif
+	}
+
+	std::string DateToString() {
+		using namespace std::chrono;
+		auto now = system_clock::now();
+		auto now_time_t = system_clock::to_time_t(now);
+		auto now_ms = duration_cast<milliseconds>(now.time_since_epoch()) % 1000;
+
+		std::tm tm_snapshot;
+		#if defined(_WIN32) || defined(_WIN64)
+		// Use localtime_s for Windows/MSVC
+		localtime_s(&tm_snapshot, &now_time_t);
+		#else
+		// Use localtime_r for Linux/macOS
+		localtime_r(&now_time_t, &tm_snapshot);
+		#endif
+
+		std::ostringstream oss;
+		oss << std::put_time(&tm_snapshot, "%Y-%m-%d %H:%M:%S");
+		oss << '.' << std::setw(3) << std::setfill('0') << now_ms.count();
+		return oss.str();
 	}
 }

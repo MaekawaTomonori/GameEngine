@@ -8,6 +8,9 @@ void Engine::Initialize() {
 	windows_ = std::make_unique<WinApp>();
 	windows_->Initialize();
 
+	dxAdaptor_ = std::make_unique<DirectXAdaptor>();
+
+
 	input_ = Singleton<Input>::GetInstance();
 	input_->Initialize();
 }
