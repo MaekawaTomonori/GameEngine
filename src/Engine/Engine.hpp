@@ -3,10 +3,13 @@
 
 #include <memory>
 
-#include "src/Platform/Windows.hpp"
+#include "include/Input.hpp"
+#include "src/Platform/WinApp.hpp"
 
 class Engine {
-	std::unique_ptr<Windows> windows_;
+	std::unique_ptr<WinApp> windows_;
+
+	Input* input_ = nullptr;
 public:
 	Engine();
 	~Engine() = default;

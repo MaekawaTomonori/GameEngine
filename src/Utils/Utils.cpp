@@ -41,6 +41,7 @@ namespace Utils {
 	}
 
 	void DisplayLastErr() {
+#ifdef _WIN32
 		LPVOID lpMsgBuf;
 		DWORD dw = GetLastError();
 
@@ -60,5 +61,12 @@ namespace Utils {
 		}
 		MessageBox(nullptr, static_cast<LPCTSTR>(lpMsgBuf), TEXT("Error"), MB_OK);
 		LocalFree(lpMsgBuf);
+#endif
+	}
+
+	void Alert(const std::string &msg) {
+#ifdef _WIN32
+		MessageBoxA(nullptr, msg.c_str(), msg.c_str(), MB_ICONSTOP);
+#endif
 	}
 }

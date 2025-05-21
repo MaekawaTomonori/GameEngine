@@ -1,8 +1,8 @@
-#include "Windows.hpp"
+#include "WinApp.hpp"
 
 #include <stdexcept>
 
-void Windows::Initialize() {
+void WinApp::Initialize() {
 	CoInitializeEx(nullptr, COINIT_MULTITHREADED);
 	window_ = std::make_unique<Window>();
 	if (!window_->Create()) {
@@ -10,7 +10,7 @@ void Windows::Initialize() {
 	}
 }
 
-bool Windows::IsEnabled() const{
+bool WinApp::IsEnabled() const{
 	return window_ ? window_->IsEnabled() : false;
 }
 

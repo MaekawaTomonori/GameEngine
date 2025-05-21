@@ -1,18 +1,18 @@
-#ifndef Windows_HPP_
-#define Windows_HPP_
+#ifndef WinApp_HPP_
+#define WinApp_HPP_
 #include <memory>
 
 #include "src/Window/Window.hpp"
 
-class Windows {
+class WinApp {
 	std::unique_ptr<Window> window_;
 public:
-	~Windows() = default;
+	~WinApp() = default;
 	void Initialize();
 
 	bool IsEnabled() const ;
 
 private:
-}; // class Windows
+}; // class WinApp
 
-#endif // Windows_HPP_
+#endif // WinApp_HPP_
