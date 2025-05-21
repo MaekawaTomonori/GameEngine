@@ -1,5 +1,6 @@
 #include "include/Framework.hpp"
 #include "include/IGame.hpp"
+#include "src/Timer/Timer.hpp"
 
 Framework::Framework() {
 	engine_ = std::make_unique<Engine>();
@@ -8,12 +9,20 @@ Framework::Framework() {
 
 void Framework::Execute(std::unique_ptr<IGame> _game) {
 	game_ = std::move(_game);
-	this->Initialize();
+	Initialize();
 
+	Timer timer(std::chrono::milliseconds(50));
+	timer.Start();
 	while (Loop()){
 		// Main loop
 		if (!game_)break;
-		game_->Update();
+
+		if (timer.Check()){
+			game_->Update();
+			timer.Restart();
+		}
+
+		game_->Draw();
 	}
 
 	Shutdown();
@@ -25,10 +34,11 @@ void Framework::Initialize() const {
 }
 
 bool Framework::Loop() const {
-	//if (!engine_)return false;
-	//if (!engine_->IsEnabled())return false;
-	//engine_->Update();
-	return engine_->IsEnabled();
+	if (!engine_)return false;
+	if (!engine_->IsEnabled())return false;
+
+	engine_->Update();
+	return true;
 }
 
 void Framework::Shutdown() {
