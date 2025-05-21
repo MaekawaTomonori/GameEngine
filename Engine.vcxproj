@@ -553,10 +553,6 @@
     <ClCompile Include="src\Utils\Utils.cpp" />
     <ClCompile Include="src\Window\Window.cpp" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include=".github\workflows\DebugBuild.yml" />
-    <None Include=".github\workflows\Release.yml" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
