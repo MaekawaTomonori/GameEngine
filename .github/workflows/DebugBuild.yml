@@ -1,8 +1,5 @@
 name: DebugBuild
-on:
-  push:
-    branches:
-      - dev
+on: [pull_request]
 env:
   SOLUTION_FILE_PATH: Engine.vcxproj
   CONFIGURATION: Debug
