@@ -2,16 +2,15 @@
 
 #include "include/Log.hpp"
 #include "include/Utils.hpp"
+#include "src/Platform/WinApp.hpp"
 
 #pragma comment(lib, "d3d12.lib")
 #pragma comment(lib, "dxgi.lib")
 
-DirectXAdaptor::DirectXAdaptor() {
-	if (CreateDXGI()) {
-		Log::Send(Log::Level::INFO, "DXGI Created");
-	} else{
-		Utils::Alert("Failed to create DXGI");
-	}
+DirectXAdaptor::DirectXAdaptor(HWND _hWnd, size_t _width, size_t _height) :hWnd_(_hWnd), windowSize_(_width, _height) {
+	if (!CreateDXGI())Utils::Alert("Failed to create DXGI");
+	if (!CreateCommand())Utils::Alert("Failed to create Command");
+
 }
 
 bool DirectXAdaptor::CreateDXGI() {
@@ -69,5 +68,51 @@ bool DirectXAdaptor::CreateDXGI() {
 	}
 
 	Log::Send(Log::Level::INFO, "Complete create DXGI");
+	return true;
+}
+
+bool DirectXAdaptor::CreateCommand() {
+	//Queue
+	D3D12_COMMAND_QUEUE_DESC queueDesc = {};
+	if (FAILED(device_->CreateCommandQueue(&queueDesc, IID_PPV_ARGS(&cQueue_)))) {
+		Log::Send(Log::Level::ERR, "Failed to create command queue");
+		return false;
+	}
+	Log::Send(Log::Level::INFO, "Command Queue Created");
+
+	//Allocator
+	if (FAILED(device_->CreateCommandAllocator(D3D12_COMMAND_LIST_TYPE_DIRECT, IID_PPV_ARGS(&cAllocator_)))){
+		Log::Send(Log::Level::ERR, "Failed to create command allocator");
+		return false;
+	}
+	Log::Send(Log::Level::INFO, "Command Allocator Created");
+
+	//List
+	if (FAILED(device_->CreateCommandList(0, D3D12_COMMAND_LIST_TYPE_DIRECT, cAllocator_.Get(), nullptr, IID_PPV_ARGS(&cList_)))){
+		Log::Send(Log::Level::ERR, "Failed to create command list");
+		return false;
+	}
+	Log::Send(Log::Level::INFO, "Command List Created");
+
+	Log::Send(Log::Level::INFO, "Complete create Commands");
+	return true;
+}
+
+bool DirectXAdaptor::CreateSwapChain() const {
+	DXGI_SWAP_CHAIN_DESC1 desc = {};
+	desc.Width = static_cast<UINT>(windowSize_.first);
+	desc.Height = static_cast<UINT>(windowSize_.second);
+	desc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
+	desc.SampleDesc.Count = 1;
+	desc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
+	desc.BufferCount = 2;
+	desc.SwapEffect = DXGI_SWAP_EFFECT_FLIP_DISCARD;
+
+	if (FAILED(factory_->CreateSwapChainForHwnd(cQueue_.Get(), hWnd_, &desc, nullptr, nullptr, reinterpret_cast<IDXGISwapChain1 **>(swapChain_.Get())))) {
+		Log::Send(Log::Level::ERR, "Failed to create swap chain");
+		return false;
+	}
+	Log::Send(Log::Level::INFO, "Swap Chain Created");
+
 	return true;
 }

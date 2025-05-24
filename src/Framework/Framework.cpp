@@ -28,9 +28,11 @@ void Framework::Execute(std::unique_ptr<IGame> _game) {
 	Shutdown();
 }
 
-void Framework::Initialize() const {
+void Framework::Initialize() {
 	if (!game_)return;
 	game_->Initialize();
+	config_ = &game_->GetCurrentConfig();
+	engine_->ApplyConfig(config_);
 }
 
 bool Framework::Loop() const {

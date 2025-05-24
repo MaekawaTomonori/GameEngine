@@ -10,7 +10,6 @@ void Engine::Initialize() {
 
 	dxAdaptor_ = std::make_unique<DirectXAdaptor>();
 
-
 	input_ = Singleton<Input>::GetInstance();
 	input_->Initialize();
 }
@@ -26,4 +25,8 @@ void Engine::Shutdown() {
 
 bool Engine::IsEnabled() const {
 	return windows_ ? windows_->IsEnabled() : false;
+}
+
+void Engine::ApplyConfig(GameEngine::Config *_config) {
+	config_ = _config;
 }

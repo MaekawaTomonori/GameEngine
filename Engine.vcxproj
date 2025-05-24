@@ -536,6 +536,7 @@
   <ItemGroup>
     <ClInclude Include="include\IGame.hpp" />
     <ClInclude Include="src\DirectX\DirectXAdaptor.hpp" />
+    <ClInclude Include="src\Engine\Config\Config.hpp" />
     <ClInclude Include="src\Engine\Engine.hpp" />
     <ClInclude Include="include\Log.hpp" />
     <ClInclude Include="include\Utils.hpp" />
@@ -549,6 +550,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\DirectX\DirectXAdaptor.cpp" />
+    <ClCompile Include="src\Engine\Config\Config.cpp" />
     <ClCompile Include="src\Engine\Engine.cpp" />
     <ClCompile Include="src\Framework\Framework.cpp" />
     <ClCompile Include="src\Game\IGame.cpp" />

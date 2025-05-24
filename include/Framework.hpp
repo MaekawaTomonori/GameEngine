@@ -3,17 +3,20 @@
 
 #include <memory>
 #include "src/Engine/Engine.hpp"
+#include "src/Engine/Config/Config.hpp"
 
 class IGame;
 
 class Framework {
+	GameEngine::Config* config_ = nullptr;
+
 	std::unique_ptr<Engine> engine_;
 	std::unique_ptr<IGame> game_;
 public:
 	Framework();
 	void Execute(std::unique_ptr<IGame> _game);
 private:
-	void Initialize() const;
+	void Initialize();
 	bool Loop() const;
 	void Shutdown();
 }; // class Framework
