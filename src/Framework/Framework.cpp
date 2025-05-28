@@ -22,7 +22,7 @@ void Framework::Execute(std::unique_ptr<IGame> _game) {
 			timer.Restart();
 		}
 
-		game_->Draw();
+		Draw();
 	}
 
 	Shutdown();
@@ -41,6 +41,14 @@ bool Framework::Loop() const {
 
 	engine_->Update();
 	return true;
+}
+
+void Framework::Draw() {
+	if (!game_)return;
+	game_->Draw();
+
+	if (!engine_)return;
+	engine_->Render();
 }
 
 void Framework::Shutdown() {

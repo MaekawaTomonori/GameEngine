@@ -5,13 +5,13 @@
 
 #include "Config/Config.hpp"
 #include "include/Input.hpp"
-#include "src/DirectX/DirectXAdaptor.hpp"
+#include "src/DirectX/DirectXAdapter.hpp"
 #include "src/Platform/WinApp.hpp"
 
 class Engine {
 	GameEngine::Config* config_ = nullptr;
 	std::unique_ptr<WinApp> windows_;
-	std::unique_ptr<DirectXAdaptor> dxAdaptor_;
+	std::unique_ptr<DirectXAdapter> dxAdaptor_;
 
 	Input* input_ = nullptr;
 public:
@@ -19,6 +19,7 @@ public:
 	~Engine() = default;
 	void Initialize();
 	void Update();
+	void Render();
 	void Shutdown();
 
 	bool IsEnabled() const;
