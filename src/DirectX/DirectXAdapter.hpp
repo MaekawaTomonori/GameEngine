@@ -41,6 +41,11 @@ class DirectXAdapter {
 
 	//Background color
 	Vector4	back = {0.2f, 0.2f, 0.2f, 1.0f}; // Black
+
+	Microsoft::WRL::ComPtr<ID3D12Fence> fence_;
+	uint64_t fenceValue_ = 0;
+	HANDLE fenceEvent_ = nullptr;
+
 public:
     DirectXAdapter(HWND _hWnd, size_t _width, size_t _height);
 
@@ -52,6 +57,7 @@ private:
 	bool CreateCommand();
 	bool CreateSwapChain();
 	bool CreateRTV();
+	bool CreateFence();
 }; // class DirectXAdapter
 
 #endif // DirectXAdaptor_HPP_

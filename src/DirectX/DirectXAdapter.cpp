@@ -9,22 +9,41 @@
 #pragma comment(lib, "d3d12.lib")
 #pragma comment(lib, "dxgi.lib")
 
-DirectXAdapter::DirectXAdapter(HWND _hWnd, size_t _width, size_t _height) :hWnd_(_hWnd), windowSize_(_width, _height) {
+DirectXAdapter::DirectXAdapter(const HWND _hWnd, size_t _width, size_t _height) :windowSize_(_width, _height), hWnd_(_hWnd) {
 	EnableDebugLayer();
 	if (!CreateDXGI())Utils::Alert("Failed to create DXGI");
 	if (!InfoQueue()) Utils::Alert("Failed to create InfoQueue");
 	if (!CreateCommand())Utils::Alert("Failed to create Command");
 	if (!CreateSwapChain()) Utils::Alert("Failed to create SwapChain");
 	if (!CreateRTV()) Utils::Alert("Failed to create RTV");
+	if (!CreateFence()) Utils::Alert("Failed to create Fence");
 	Log::Send(Log::Level::INFO, "DirectXAdapter Initialized");
 }
 
 void DirectXAdapter::Render() {
-	Log::Send(Log::Level::INFO, "Render Start");
+	//Log::Send(Log::Level::INFO, "Render Start");
 
 	UINT bbi = swapChain_->GetCurrentBackBufferIndex();
+
+	D3D12_RESOURCE_BARRIER barrier = {};
+	barrier.Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
+	barrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
+	barrier.Transition.pResource = swapChainResources_[bbi].Get();
+	barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_PRESENT;
+	barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_RENDER_TARGET;
+
+	cList_->ResourceBarrier(1, &barrier);
+
+
+
 	cList_->OMSetRenderTargets(1, &rtvHandles_[bbi], false, nullptr);
 	cList_->ClearRenderTargetView(rtvHandles_[bbi], &back.x, 0, nullptr);
+
+
+
+	barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET;
+	barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_PRESENT;
+	cList_->ResourceBarrier(1, &barrier);
 
 	if (FAILED(cList_->Close())) {
 		Utils::Alert("Failed to close command list");
@@ -33,6 +52,14 @@ void DirectXAdapter::Render() {
 	ID3D12CommandList* commandLists[] = {cList_.Get()};
 	cQueue_->ExecuteCommandLists(_countof(commandLists), commandLists);
 	swapChain_->Present(1, 0);
+
+	++fenceValue_;
+	cQueue_->Signal(fence_.Get(), fenceValue_);
+
+	if (fence_->GetCompletedValue() < fenceValue_){
+		fence_->SetEventOnCompletion(fenceValue_, fenceEvent_);
+		WaitForSingleObject(fenceEvent_, INFINITE);
+	}
 
 	if (FAILED(cAllocator_->Reset())){
 		Utils::Alert("Failed to reset command allocator");
@@ -175,9 +202,7 @@ bool DirectXAdapter::CreateSwapChain() {
 	desc.BufferCount = 2;
 	desc.SwapEffect = DXGI_SWAP_EFFECT_FLIP_DISCARD;
 
-	HRESULT hr = factory_->CreateSwapChainForHwnd(cQueue_.Get(), hWnd_, &desc, nullptr, nullptr, reinterpret_cast<IDXGISwapChain1**>(swapChain_.GetAddressOf()));
-	assert(SUCCEEDED(hr));
-	if (FAILED(hr)){
+	if (FAILED(factory_->CreateSwapChainForHwnd(cQueue_.Get(), hWnd_, &desc, nullptr, nullptr, reinterpret_cast<IDXGISwapChain1**>(swapChain_.GetAddressOf())))){
 		Log::Send(Log::Level::ERR, "Failed to create swap chain");
 		return false;
 	}
@@ -222,5 +247,19 @@ bool DirectXAdapter::CreateRTV() {
 	device_->CreateRenderTargetView(swapChainResources_[1].Get(), &rtvDesc, rtvHandles_[1]);
 
 	Log::Send(Log::Level::INFO, "RTVs Created");
+	return true;
+}
+
+bool DirectXAdapter::CreateFence() {
+	if (FAILED(device_->CreateFence(0, D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(&fence_)))){
+		Log::Send(Log::Level::ERR, "Failed to create fence");
+		return false;
+	}
+	fenceEvent_ = CreateEvent(nullptr, FALSE, FALSE, nullptr);
+	if (fenceEvent_ == nullptr){
+		Log::Send(Log::Level::ERR, "Failed to create fence event");
+		return false;
+	}
+	Log::Send(Log::Level::INFO, "Fence Created");
 	return true;
 }
