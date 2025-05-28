@@ -14,8 +14,7 @@ public:
 	~Window() = default;
 	bool Create();
 	bool IsEnabled();
-
-	HWND GetHandle() const;
+	HWND GetWindowHandle() const;
 
 private:
 	std::wstring title_ = L"Title";

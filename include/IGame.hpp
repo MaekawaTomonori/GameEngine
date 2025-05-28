@@ -15,7 +15,7 @@ public:
 	virtual void Draw() = 0;
 	virtual void Shutdown() = 0;
 	
-	GameEngine::Config& GetCurrentConfig() const;
+	GameEngine::Config& GetCurrentConfig();
 }; // class IGame
 
 #endif // IGame_HPP_

@@ -72,7 +72,7 @@ bool Window::IsEnabled() {
 	return true;
 }
 
-HWND Window::GetHandle() const {
+HWND Window::GetWindowHandle() const {
 	return hWnd_;
 }
 

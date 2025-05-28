@@ -1,6 +1,7 @@
 #ifndef Config_HPP_
 #define Config_HPP_
 #include <cstdint>
+#include <memory>
 #include <string>
 
 namespace GameEngine {
@@ -9,8 +10,10 @@ namespace GameEngine {
 		std::string title_ = "Engine";
 		size_t width_ = 800;
 		size_t height_ = 600;
+
+		static std::unique_ptr<Config> default_;
 	public:
-		Config() = default;
+		Config();
 		Config& SetFPS(uint16_t _fps);
 		Config& SetTitle(const std::string& _title);
 		Config& SetWidth(size_t _width);
@@ -19,10 +22,11 @@ namespace GameEngine {
 
 		Config& Get();
 
-		uint16_t GetFPS() const;
-		std::string GetTitle() const;
 		size_t GetWidth() const;
+
 		size_t GetHeight() const;
+
+		static Config* Default();
 	};
 }
 
