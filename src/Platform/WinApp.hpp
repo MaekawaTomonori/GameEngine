@@ -12,7 +12,11 @@ public:
 
 	bool IsEnabled() const ;
 
+
+	HWND GetHandle() const;
+
 private:
-}; // class WinApp
+	HWND hWnd_ = nullptr;
+};
 
 #endif // WinApp_HPP_

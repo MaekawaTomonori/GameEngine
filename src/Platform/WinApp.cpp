@@ -8,10 +8,15 @@ void WinApp::Initialize() {
 	if (!window_->Create()) {
 		throw std::runtime_error("Failed to create window");
 	}
+	hWnd_ = window_->GetHandle();
 }
 
 bool WinApp::IsEnabled() const{
 	return window_ ? window_->IsEnabled() : false;
+}
+
+HWND WinApp::GetHandle() const {
+	return window_ ? window_->GetHandle() : nullptr;
 }
 
 

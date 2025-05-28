@@ -1,14 +1,13 @@
 #include "Engine.hpp"
 #include "include/Singleton.hpp"
 
-Engine::Engine() {
-}
+Engine::Engine() = default;
 
 void Engine::Initialize() {
 	windows_ = std::make_unique<WinApp>();
 	windows_->Initialize();
 
-	dxAdaptor_ = std::make_unique<DirectXAdaptor>();
+	dxAdaptor_ = std::make_unique<DirectXAdaptor>(windows_->GetHandle(), config_->GetWidth(), config_->GetHeight());
 
 	input_ = Singleton<Input>::GetInstance();
 	input_->Initialize();
@@ -27,6 +26,6 @@ bool Engine::IsEnabled() const {
 	return windows_ ? windows_->IsEnabled() : false;
 }
 
-void Engine::ApplyConfig(GameEngine::Config *_config) {
+void Engine::ApplyConfig(GameEngine::Config* _config) {
 	config_ = _config;
 }

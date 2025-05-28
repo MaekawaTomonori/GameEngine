@@ -31,4 +31,20 @@ namespace GameEngine {
 	Config & Config::Get() {
 		return *this;
 	}
+
+	uint16_t Config::GetFPS() const {
+		return fps_;
+	}
+
+	std::string Config::GetTitle() const {
+		return title_;
+	}
+
+	size_t Config::GetWidth() const {
+		return width_;
+	}
+
+	size_t Config::GetHeight() const {
+		return height_;
+	}
 }

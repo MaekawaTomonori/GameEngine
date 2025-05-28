@@ -18,6 +18,11 @@ namespace GameEngine {
 		Config& SetWindowSize(size_t _width, size_t _height);
 
 		Config& Get();
+
+		uint16_t GetFPS() const;
+		std::string GetTitle() const;
+		size_t GetWidth() const;
+		size_t GetHeight() const;
 	};
 }
 

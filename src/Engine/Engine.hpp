@@ -5,8 +5,8 @@
 
 #include "Config/Config.hpp"
 #include "include/Input.hpp"
-#include "src/DirectX/DirectXAdaptor.hpp"
 #include "src/Platform/WinApp.hpp"
+#include "src/DirectX/DirectXAdaptor.hpp"
 
 class Engine {
 	GameEngine::Config* config_ = nullptr;
