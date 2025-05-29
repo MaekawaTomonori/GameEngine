@@ -3,14 +3,17 @@
 #include <stdexcept>
 
 #include "include/Utils.hpp"
+#include "vendor/imgui/imgui.h"
+
+extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 LRESULT Window::WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
+	if (ImGui_ImplWin32_WndProcHandler(hwnd, uMsg, wParam, lParam))return true;
+
 	switch (uMsg){
 		case WM_DESTROY:
 			PostQuitMessage(0);
 			return 0;
-		default:
-			break;
 	}
 	return DefWindowProc(hwnd, uMsg, wParam, lParam);
 }

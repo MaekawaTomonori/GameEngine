@@ -3,10 +3,12 @@
 
 #include <d3d12.h>
 #include <dxgi1_6.h>
+#include <memory>
 #include <utility>
 #include <vector>
 #include <wrl/client.h>
 
+#include "Heap/Heap.hpp"
 #include "src/Math/Vector4.hpp"
 
 class DirectXAdapter {
@@ -31,7 +33,7 @@ class DirectXAdapter {
 	Microsoft::WRL::ComPtr<IDXGISwapChain4> swapChain_;
 
 	//RTV
-	Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> rtvHeap_;
+	std::unique_ptr<Heap> rtvHeap_;
 
 	//Resource
 	std::vector<Microsoft::WRL::ComPtr<ID3D12Resource>> swapChainResources_;
@@ -58,6 +60,11 @@ private:
 	bool CreateSwapChain();
 	bool CreateRTV();
 	bool CreateFence();
+
+public: //Accessor
+	HWND GetWindowHandle() const;
+	[[nodiscard]] ID3D12Device *GetDevice() const;
+	[[nodiscard]] ID3D12GraphicsCommandList* GetCommandList() const;
 }; // class DirectXAdapter
 
 #endif // DirectXAdaptor_HPP_

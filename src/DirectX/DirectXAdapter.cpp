@@ -213,13 +213,8 @@ bool DirectXAdapter::CreateSwapChain() {
 }
 
 bool DirectXAdapter::CreateRTV() {
-	D3D12_DESCRIPTOR_HEAP_DESC rtvHeapDesc = {};
-	rtvHeapDesc.NumDescriptors = 2; // Double buffering
-	rtvHeapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_RTV;
-	rtvHeapDesc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_NONE;
-
-	if (FAILED(device_->CreateDescriptorHeap(&rtvHeapDesc, IID_PPV_ARGS(&rtvHeap_)))) {
-		Log::Send(Log::Level::ERR, "Failed to create RTV heap");
+	rtvHeap_ = std::make_unique<Heap>();
+	if (!rtvHeap_ || !rtvHeap_->Create(device_.Get(), D3D12_DESCRIPTOR_HEAP_TYPE_RTV, 2, D3D12_DESCRIPTOR_HEAP_FLAG_NONE)) {
 		return false;
 	}
 
@@ -240,7 +235,7 @@ bool DirectXAdapter::CreateRTV() {
 	rtvDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
 	rtvDesc.ViewDimension = D3D12_RTV_DIMENSION_TEXTURE2D;
 
-	rtvHandles_[0] = rtvHeap_->GetCPUDescriptorHandleForHeapStart();
+	rtvHandles_[0] = rtvHeap_->Get()->GetCPUDescriptorHandleForHeapStart();
 	device_->CreateRenderTargetView(swapChainResources_[0].Get(), &rtvDesc, rtvHandles_[0]);
 
 	rtvHandles_[1].ptr = rtvHandles_[0].ptr + device_->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
@@ -262,4 +257,16 @@ bool DirectXAdapter::CreateFence() {
 	}
 	Log::Send(Log::Level::INFO, "Fence Created");
 	return true;
+}
+
+ID3D12Device * DirectXAdapter::GetDevice() const {
+	return device_.Get();
+}
+
+ID3D12GraphicsCommandList * DirectXAdapter::GetCommandList() const {
+	return cList_.Get();
+}
+
+HWND DirectXAdapter::GetWindowHandle() const {
+	return hWnd_;
 }
