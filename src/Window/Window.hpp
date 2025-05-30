@@ -15,6 +15,7 @@ public:
 	bool Create();
 	bool IsEnabled();
 	HWND GetWindowHandle() const;
+	void SetSize(int width, int height) const;
 
 private:
 	std::wstring title_ = L"Title";

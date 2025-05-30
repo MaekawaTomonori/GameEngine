@@ -87,6 +87,8 @@ public: //Accessor
 	HWND GetWindowHandle() const;
 	[[nodiscard]] ID3D12Device *GetDevice() const;
 	[[nodiscard]] ID3D12GraphicsCommandList* GetCommandList() const;
+	size_t GetWidth() const;
+	size_t GetHeight() const;
 }; // class DirectXAdapter
 
 #endif // DirectXAdaptor_HPP_

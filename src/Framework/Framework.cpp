@@ -15,12 +15,8 @@ void Framework::Execute(std::unique_ptr<IGame> _game) {
 	//timer.Start();
 	while (Loop()){
 		// Main loop
-		if (!game_)break;
 
-		//if (timer.Check()){
-			game_->Update();
-		//	timer.Restart();
-		//}
+		Update();
 
 		Draw();
 	}
@@ -38,12 +34,17 @@ void Framework::Initialize() {
 bool Framework::Loop() const {
 	if (!engine_)return false;
 	if (!engine_->IsEnabled())return false;
-
-	engine_->Update();
 	return true;
 }
 
-void Framework::Draw() {
+void Framework::Update() const {
+	if (!engine_)return;
+	engine_->Update();
+	if (!game_)return;
+	game_->Update();
+}
+
+void Framework::Draw() const {
 	if (!game_)return;
 	game_->Draw();
 

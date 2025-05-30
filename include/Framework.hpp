@@ -18,7 +18,8 @@ public:
 private:
 	void Initialize();
 	bool Loop() const;
-	void Draw();
+	void Update() const;
+	void Draw() const;
 	void Shutdown();
 }; // class Framework
 

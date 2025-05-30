@@ -44,7 +44,9 @@ bool Window::Create() {
 		wc.lpszClassName,
 		title_.c_str(),
 		WS_OVERLAPPEDWINDOW,
-		CW_USEDEFAULT, CW_USEDEFAULT, 800, 600,
+		CW_USEDEFAULT, CW_USEDEFAULT, 
+		rect.right - rect.left,
+		rect.bottom - rect.top,
 		nullptr,
 		nullptr,
 		hInstance_,
@@ -78,5 +80,13 @@ bool Window::IsEnabled() {
 
 HWND Window::GetWindowHandle() const {
 	return hWnd_;
+}
+
+void Window::SetSize(const int width, const int height) const {
+	if (hWnd_){
+		RECT rect = {0, 0, width, height};
+
+		SetWindowPos(hWnd_, nullptr, 0, 0, rect.right - rect.left, rect.bottom - rect.top, SWP_NOMOVE | SWP_NOZORDER);
+	}
 }
 

@@ -15,20 +15,19 @@ FrameRateLimiter::FrameRateLimiter(uint16_t maxFps, bool useVsync): maxFps_(maxF
 
 void FrameRateLimiter::WaitForNextFrame() {
 
-	const std::chrono::microseconds targetFrameTime(static_cast<uint64_t>(1e6 / maxFps_));
+	const std::chrono::microseconds TargetFrameTime(static_cast<uint64_t>(1e3 / (maxFps_ + 5)));
 
-	std::chrono::steady_clock::time_point now = std::chrono::steady_clock::now();
-	std::chrono::microseconds elapsedTime =
-		std::chrono::duration_cast<std::chrono::microseconds>(now - reference_);
+	const std::chrono::steady_clock::time_point now = std::chrono::steady_clock::now();
+	std::chrono::microseconds elapsedTime = std::chrono::duration_cast<std::chrono::microseconds>(now - reference_);
 
-	if (elapsedTime < targetFrameTime){
-		std::chrono::microseconds sleepTime = targetFrameTime - elapsedTime;
-		if (sleepTime > std::chrono::milliseconds(2)){
-			std::this_thread::sleep_for(sleepTime - std::chrono::milliseconds(2));
+	if (elapsedTime < TargetFrameTime){
+		std::chrono::microseconds remaining = TargetFrameTime - elapsedTime;
+		while (std::chrono::milliseconds(2) < remaining) {
+			std::this_thread::sleep_for(remaining - std::chrono::milliseconds(2));
 		}
 
-		while (std::chrono::steady_clock::now() - reference_ < targetFrameTime){
-			YieldProcessor();
+		while (std::chrono::steady_clock::now() - reference_ < TargetFrameTime) {
+			std::this_thread::yield();
 		}
 	}
 
@@ -80,7 +79,7 @@ void DirectXAdapter::Render() {
 			command();
 		}
 	}
-
+	renderingCommands_.clear();
 
 	barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET;
 	barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_PRESENT;
@@ -101,7 +100,7 @@ void DirectXAdapter::Render() {
 		return;
 	}
 
-	if (cList_->Reset(cAllocator_.Get(), nullptr)) {
+	if (FAILED(cList_->Reset(cAllocator_.Get(), nullptr))) {
 		Utils::Alert("Failed to reset command list");
 		return;
 	}
@@ -130,7 +129,7 @@ bool DirectXAdapter::CreateDXGI() {
 	Log::Send(Log::Level::INFO, "Factory Created");
 
 	//Adaptor
-	for (UINT i = 0; factory_->EnumAdapterByGpuPreference(i, DXGI_GPU_PREFERENCE_HIGH_PERFORMANCE, IID_PPV_ARGS(&adapter_)); ++i){
+	for (UINT i = 0; SUCCEEDED(factory_->EnumAdapterByGpuPreference(i, DXGI_GPU_PREFERENCE_HIGH_PERFORMANCE, IID_PPV_ARGS(&adapter_))); ++i){
 		// Check if the adapter supports Direct3D 12
 		DXGI_ADAPTER_DESC3 desc;
 		if (FAILED(adapter_->GetDesc3(&desc))){
@@ -304,7 +303,7 @@ void DirectXAdapter::Wait() {
 	if (fence_->GetCompletedValue() < fenceValue_){
 		fence_->SetEventOnCompletion(fenceValue_, fenceEvent_);
 		WaitForSingleObject(fenceEvent_, INFINITE);
-		CloseHandle(fenceEvent_);
+		//CloseHandle(fenceEvent_);
 	}
 
 	fpsLimiter_->WaitForNextFrame(); 
@@ -316,6 +315,14 @@ ID3D12Device * DirectXAdapter::GetDevice() const {
 
 ID3D12GraphicsCommandList * DirectXAdapter::GetCommandList() const {
 	return cList_.Get();
+}
+
+size_t DirectXAdapter::GetWidth() const {
+	return windowSize_.first;
+}
+
+size_t DirectXAdapter::GetHeight() const {
+	return windowSize_.second;
 }
 
 HWND DirectXAdapter::GetWindowHandle() const {

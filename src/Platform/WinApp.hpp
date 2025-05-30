@@ -14,6 +14,8 @@ public:
 
 	HWND GetWindowHandle() const;
 
+	void SetWindowSize(int width, int height) const;
+
 private:
 	HWND hWnd_ = nullptr;
 }; // class WinApp
