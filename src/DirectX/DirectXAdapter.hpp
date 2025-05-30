@@ -3,15 +3,30 @@
 
 #include <d3d12.h>
 #include <dxgi1_6.h>
+#include <functional>
 #include <memory>
 #include <utility>
 #include <vector>
 #include <wrl/client.h>
 
 #include "Heap/Heap.hpp"
-#include "src/Math/Vector4.hpp"
+#include "include/Math/Vector4.hpp"
+#include "src/Timer/Timer.hpp"
+
+class FrameRateLimiter{
+	uint16_t maxFps_;
+	std::chrono::steady_clock::time_point reference_;
+	bool vsyncEnabled_;
+
+public:
+	explicit FrameRateLimiter(uint16_t maxFps, bool useVsync = true);
+
+	void WaitForNextFrame();
+};
 
 class DirectXAdapter {
+
+
 	using WindowSize = std::pair<size_t, size_t>;
 	WindowSize windowSize_ = {800, 600};
 	HWND hWnd_ = nullptr;
@@ -44,13 +59,20 @@ class DirectXAdapter {
 	//Background color
 	Vector4	back = {0.2f, 0.2f, 0.2f, 1.0f}; // Black
 
+	//Fence
 	Microsoft::WRL::ComPtr<ID3D12Fence> fence_;
 	uint64_t fenceValue_ = 0;
 	HANDLE fenceEvent_ = nullptr;
 
+	//RenderingCommand
+	std::vector<std::function<void()>> renderingCommands_;
+
+	std::unique_ptr<FrameRateLimiter> fpsLimiter_ = nullptr;
+
 public:
     DirectXAdapter(HWND _hWnd, size_t _width, size_t _height);
 
+	void Register(std::function<void()> _task);
 	void Render();
 private:
 	void EnableDebugLayer();
@@ -60,7 +82,7 @@ private:
 	bool CreateSwapChain();
 	bool CreateRTV();
 	bool CreateFence();
-
+	void Wait();
 public: //Accessor
 	HWND GetWindowHandle() const;
 	[[nodiscard]] ID3D12Device *GetDevice() const;

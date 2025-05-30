@@ -245,12 +245,12 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)out\$(Platform)\$(Configuration)\$(ProjectName)\</OutDir>
     <IntDir>$(ProjectDir)out\$(Platform)\$(Configuration)\$(ProjectName)\immd\</IntDir>
-    <PublicIncludeDirectories>$(ProjectDir)</PublicIncludeDirectories>
+    <PublicIncludeDirectories>$(ProjectDir);$(ProjectDir)include</PublicIncludeDirectories>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)out\$(Platform)\$(Configuration)\$(ProjectName)\</OutDir>
     <IntDir>$(ProjectDir)out\$(Platform)\$(Configuration)\$(ProjectName)\immd\</IntDir>
-    <PublicIncludeDirectories>$(ProjectDir)</PublicIncludeDirectories>
+    <PublicIncludeDirectories>$(ProjectDir);$(ProjectDir)include</PublicIncludeDirectories>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -482,7 +482,7 @@
       <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)include</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
@@ -520,7 +520,7 @@
       <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)include</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <TreatWarningAsError>true</TreatWarningAsError>
       <Optimization>MinSpace</Optimization>
@@ -534,9 +534,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="include\DebugUI.hpp" />
     <ClInclude Include="include\IGame.hpp" />
     <ClInclude Include="include\Utils.hpp" />
-    <ClInclude Include="src\Debug\DebugUI.hpp" />
     <ClInclude Include="src\DirectX\DirectXAdapter.hpp" />
     <ClInclude Include="src\DirectX\Heap\Heap.hpp" />
     <ClInclude Include="src\Engine\Config\Config.hpp" />
@@ -544,7 +544,7 @@
     <ClInclude Include="include\Log.hpp" />
     <ClInclude Include="include\Framework.hpp" />
     <ClInclude Include="include\Input.hpp" />
-    <ClInclude Include="src\Math\Vector4.hpp" />
+    <ClInclude Include="include\Math\Vector4.hpp" />
     <ClInclude Include="src\Platform\WinApp.hpp" />
     <ClInclude Include="src\Scheduler\Scheduler.hpp" />
     <ClInclude Include="include\Singleton.hpp" />
@@ -570,6 +570,9 @@
     <ClCompile Include="src\Window\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="vendor\imgui\imgui.vcxproj">
+      <Project>{05a9737c-e682-451f-a307-4b01deb9d44b}</Project>
+    </ProjectReference>
     <ProjectReference Include="vendor\lwlog\lwlog\lwlog.vcxproj">
       <Project>{ca71e40f-3686-0cc1-ff07-b0206bdb08f2}</Project>
     </ProjectReference>

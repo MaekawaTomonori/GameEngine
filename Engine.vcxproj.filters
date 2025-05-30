@@ -54,10 +54,10 @@
     <ClInclude Include="include\Utils.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="src\Math\Vector4.hpp">
+    <ClInclude Include="include\Math\Vector4.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="src\Debug\DebugUI.hpp">
+    <ClInclude Include="include\DebugUI.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="src\DirectX\Heap\Heap.hpp">

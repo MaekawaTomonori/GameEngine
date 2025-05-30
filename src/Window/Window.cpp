@@ -47,7 +47,7 @@ bool Window::Create() {
 		CW_USEDEFAULT, CW_USEDEFAULT, 800, 600,
 		nullptr,
 		nullptr,
-		wc.hInstance,
+		hInstance_,
 		nullptr
 	);
 
@@ -57,6 +57,7 @@ bool Window::Create() {
 	}
 
 	ShowWindow(hWnd_, SW_SHOW);
+	UpdateWindow(hWnd_);
 
 	return true;
 }

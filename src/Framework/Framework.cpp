@@ -11,16 +11,16 @@ void Framework::Execute(std::unique_ptr<IGame> _game) {
 	game_ = std::move(_game);
 	Initialize();
 
-	Timer timer(std::chrono::milliseconds(50));
-	timer.Start();
+	//Timer timer(std::chrono::milliseconds(50));
+	//timer.Start();
 	while (Loop()){
 		// Main loop
 		if (!game_)break;
 
-		if (timer.Check()){
+		//if (timer.Check()){
 			game_->Update();
-			timer.Restart();
-		}
+		//	timer.Restart();
+		//}
 
 		Draw();
 	}

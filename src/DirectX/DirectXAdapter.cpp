@@ -1,13 +1,39 @@
 #include "DirectXAdapter.hpp"
 
 #include <cassert>
+#include <thread>
 
 #include "include/Log.hpp"
 #include "include/Utils.hpp"
-#include "src/Platform/WinApp.hpp"
 
 #pragma comment(lib, "d3d12.lib")
 #pragma comment(lib, "dxgi.lib")
+
+FrameRateLimiter::FrameRateLimiter(uint16_t maxFps, bool useVsync): maxFps_(maxFps), vsyncEnabled_(useVsync) {
+	reference_ = std::chrono::steady_clock::now();
+}
+
+void FrameRateLimiter::WaitForNextFrame() {
+
+	const std::chrono::microseconds targetFrameTime(static_cast<uint64_t>(1e6 / maxFps_));
+
+	std::chrono::steady_clock::time_point now = std::chrono::steady_clock::now();
+	std::chrono::microseconds elapsedTime =
+		std::chrono::duration_cast<std::chrono::microseconds>(now - reference_);
+
+	if (elapsedTime < targetFrameTime){
+		std::chrono::microseconds sleepTime = targetFrameTime - elapsedTime;
+		if (sleepTime > std::chrono::milliseconds(2)){
+			std::this_thread::sleep_for(sleepTime - std::chrono::milliseconds(2));
+		}
+
+		while (std::chrono::steady_clock::now() - reference_ < targetFrameTime){
+			YieldProcessor();
+		}
+	}
+
+	reference_ = std::chrono::steady_clock::now();
+}
 
 DirectXAdapter::DirectXAdapter(const HWND _hWnd, size_t _width, size_t _height) :windowSize_(_width, _height), hWnd_(_hWnd) {
 	EnableDebugLayer();
@@ -18,6 +44,14 @@ DirectXAdapter::DirectXAdapter(const HWND _hWnd, size_t _width, size_t _height) 
 	if (!CreateRTV()) Utils::Alert("Failed to create RTV");
 	if (!CreateFence()) Utils::Alert("Failed to create Fence");
 	Log::Send(Log::Level::INFO, "DirectXAdapter Initialized");
+}
+
+void DirectXAdapter::Register(std::function<void()> _task) {
+	if (_task){
+		renderingCommands_.emplace_back(std::move(_task));
+	} else{
+		Log::Send(Log::Level::ERR, "Rendering command is null");
+	}
 }
 
 void DirectXAdapter::Render() {
@@ -40,6 +74,13 @@ void DirectXAdapter::Render() {
 	cList_->ClearRenderTargetView(rtvHandles_[bbi], &back.x, 0, nullptr);
 
 
+	// Execute rendering commands
+	for (const auto& command : renderingCommands_){
+		if (command){
+			command();
+		}
+	}
+
 
 	barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET;
 	barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_PRESENT;
@@ -53,13 +94,7 @@ void DirectXAdapter::Render() {
 	cQueue_->ExecuteCommandLists(_countof(commandLists), commandLists);
 	swapChain_->Present(1, 0);
 
-	++fenceValue_;
-	cQueue_->Signal(fence_.Get(), fenceValue_);
-
-	if (fence_->GetCompletedValue() < fenceValue_){
-		fence_->SetEventOnCompletion(fenceValue_, fenceEvent_);
-		WaitForSingleObject(fenceEvent_, INFINITE);
-	}
+	Wait();
 
 	if (FAILED(cAllocator_->Reset())){
 		Utils::Alert("Failed to reset command allocator");
@@ -255,8 +290,24 @@ bool DirectXAdapter::CreateFence() {
 		Log::Send(Log::Level::ERR, "Failed to create fence event");
 		return false;
 	}
+
+	fpsLimiter_ = std::make_unique<FrameRateLimiter>(static_cast<uint16_t>(60), true); // 60 FPS, VSync enabled
+
 	Log::Send(Log::Level::INFO, "Fence Created");
 	return true;
+}
+
+void DirectXAdapter::Wait() {
+	++fenceValue_;
+	cQueue_->Signal(fence_.Get(), fenceValue_);
+
+	if (fence_->GetCompletedValue() < fenceValue_){
+		fence_->SetEventOnCompletion(fenceValue_, fenceEvent_);
+		WaitForSingleObject(fenceEvent_, INFINITE);
+		CloseHandle(fenceEvent_);
+	}
+
+	fpsLimiter_->WaitForNextFrame(); 
 }
 
 ID3D12Device * DirectXAdapter::GetDevice() const {

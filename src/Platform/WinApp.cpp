@@ -4,8 +4,11 @@
 
 #include "include/Utils.hpp"
 
+#pragma comment(lib, "winmm.lib")
+
 void WinApp::Initialize() {
 	CoInitializeEx(nullptr, COINIT_MULTITHREADED);
+	timeBeginPeriod(1);
 	window_ = std::make_unique<Window>();
 	if (!window_->Create()) {
 		throw std::runtime_error("Failed to create window");

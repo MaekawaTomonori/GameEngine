@@ -9,6 +9,8 @@
 class DebugUI {
 	std::unique_ptr<Heap> heap_;
 	ID3D12GraphicsCommandList* cList_ = nullptr;
+
+	//std::vector<PROCESS> processes_;
 public:
 	~DebugUI();
 	void Initialize(const DirectXAdapter* dx);

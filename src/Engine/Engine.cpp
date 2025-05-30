@@ -12,6 +12,9 @@ void Engine::Initialize() {
 
 	dxAdaptor_ = std::make_unique<DirectXAdapter>(windows_->GetWindowHandle(), config_->GetWidth(), config_->GetHeight());
 
+	debugUI_ = std::make_unique<DebugUI>();
+	debugUI_->Initialize(dxAdaptor_.get());
+
 	input_ = Singleton<Input>::GetInstance();
 	input_->Initialize();
 }
@@ -19,6 +22,10 @@ void Engine::Initialize() {
 void Engine::Update() {
 	if (input_){
 		input_->Update();
+	}	
+
+	if (debugUI_) {
+		debugUI_->Process();
 	}
 }
 
@@ -26,10 +33,12 @@ void Engine::Render() {
 	if (!dxAdaptor_){
 		throw std::runtime_error("DirectXAdapter is not initialized");
 	}
+	dxAdaptor_->Register([&](){debugUI_->Render(); });
 	dxAdaptor_->Render();
 }
 
 void Engine::Shutdown() {
+
 }
 
 bool Engine::IsEnabled() const {
