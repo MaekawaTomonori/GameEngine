@@ -1,6 +1,5 @@
 #include "include/Framework.hpp"
 #include "include/IGame.hpp"
-#include "src/Timer/Timer.hpp"
 
 Framework::Framework() {
 	engine_ = std::make_unique<Engine>();
@@ -11,8 +10,6 @@ void Framework::Execute(std::unique_ptr<IGame> _game) {
 	game_ = std::move(_game);
 	Initialize();
 
-	//Timer timer(std::chrono::milliseconds(50));
-	//timer.Start();
 	while (Loop()){
 		// Main loop
 

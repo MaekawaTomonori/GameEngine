@@ -5,21 +5,21 @@
 #include <wrl/client.h>
 
 class Input {
-	Microsoft::WRL::ComPtr<IDirectInput8> directInput_;
-	Microsoft::WRL::ComPtr<IDirectInputDevice8> keyboard_;
-	Microsoft::WRL::ComPtr<IDirectInputDevice8> mouse_;
-	Microsoft::WRL::ComPtr<IDirectInputDevice8> joystick_;
-	BYTE keyState_[256];
-	BYTE preState_[256];
-	DIMOUSESTATE mouseState_;
-	DIMOUSESTATE preMouseState_;
+    Microsoft::WRL::ComPtr<IDirectInput8> directInput_;
+    Microsoft::WRL::ComPtr<IDirectInputDevice8> keyboard_;
+    Microsoft::WRL::ComPtr<IDirectInputDevice8> mouse_;
+    Microsoft::WRL::ComPtr<IDirectInputDevice8> joystick_;
+    BYTE keyState_[256];
+    BYTE preState_[256];
+    DIMOUSESTATE mouseState_;
+    DIMOUSESTATE preMouseState_;
 
-	//EventSystem* eventSystem_ = nullptr;
+    //EventSystem* eventSystem_ = nullptr;
 public:
-	void Initialize();
-	void Update();
+    void Initialize();
+    void Update();
 
-	//void SetEventSystem(EventSystem* eventSystem) { /*eventSystem_ = eventSystem;*/ }
+    //void SetEventSystem(EventSystem* eventSystem) { /*eventSystem_ = eventSystem;*/ }
 private:
 }; // class Input
 

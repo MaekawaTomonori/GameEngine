@@ -7,18 +7,18 @@
 
 //ImGui Adapter
 class DebugUI {
-	std::unique_ptr<Heap> heap_;
-	ID3D12GraphicsCommandList* cList_ = nullptr;
+    std::unique_ptr<Heap> heap_;
+    ID3D12GraphicsCommandList* cList_ = nullptr;
 
-	//std::vector<PROCESS> processes_;
+    //std::vector<PROCESS> processes_;
 public:
-	~DebugUI();
-	void Initialize(const DirectXAdapter* dx);
-	void Process();
-	void Render() const;
+    ~DebugUI();
+    void Initialize(const DirectXAdapter* dx);
+    void Process();
+    void Render() const;
 
 public:
-	//void AddProcess(PROCESS);
+    //void AddProcess(PROCESS);
 }; // class DebugUI
 
 #endif // DebugUI_HPP_

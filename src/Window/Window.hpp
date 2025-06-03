@@ -9,19 +9,19 @@
 #include <string>
 
 class Window {
-	static LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+    static LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 public:
-	~Window() = default;
-	bool Create();
-	bool IsEnabled();
-	HWND GetWindowHandle() const;
-	void SetSize(int width, int height) const;
+    ~Window() = default;
+    bool Create();
+    bool IsEnabled();
+    HWND GetWindowHandle() const;
+    void SetSize(int width, int height) const;
 
 private:
-	std::wstring title_ = L"Title";
+    std::wstring title_ = L"Title";
 
-	HWND hWnd_ = nullptr;
-	HINSTANCE hInstance_ = nullptr;
+    HWND hWnd_ = nullptr;
+    HINSTANCE hInstance_ = nullptr;
 }; // class Window
 
 #endif // Window_HPP_

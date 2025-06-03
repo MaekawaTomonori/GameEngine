@@ -5,19 +5,19 @@
 #include "src/Window/Window.hpp"
 
 class WinApp {
-	std::unique_ptr<Window> window_;
+    std::unique_ptr<Window> window_;
 public:
-	~WinApp() = default;
-	void Initialize();
+    ~WinApp() = default;
+    void Initialize();
 
-	bool IsEnabled() const ;
+    bool IsEnabled() const ;
 
-	HWND GetWindowHandle() const;
+    HWND GetWindowHandle() const;
 
-	void SetWindowSize(int width, int height) const;
+    void SetWindowSize(int width, int height) const;
 
 private:
-	HWND hWnd_ = nullptr;
+    HWND hWnd_ = nullptr;
 }; // class WinApp
 
 #endif // WinApp_HPP_
