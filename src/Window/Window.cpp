@@ -8,85 +8,85 @@
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 LRESULT Window::WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
-	if (ImGui_ImplWin32_WndProcHandler(hwnd, uMsg, wParam, lParam))return true;
+    if (ImGui_ImplWin32_WndProcHandler(hwnd, uMsg, wParam, lParam))return true;
 
-	switch (uMsg){
-		case WM_DESTROY:
-			PostQuitMessage(0);
-			return 0;
-	}
-	return DefWindowProc(hwnd, uMsg, wParam, lParam);
+    switch (uMsg){
+        case WM_DESTROY:
+            PostQuitMessage(0);
+            return 0;
+    }
+    return DefWindowProc(hwnd, uMsg, wParam, lParam);
 }
 
 bool Window::Create() {
-	// Register the window class
-	hInstance_ = GetModuleHandle(nullptr);
+    // Register the window class
+    hInstance_ = GetModuleHandle(nullptr);
 
-	WNDCLASS wc = {};
-	wc.lpfnWndProc = WindowProc;
-	wc.lpszClassName = title_.c_str();
-	wc.hInstance = hInstance_;
-	wc.hCursor = LoadCursor(nullptr, IDC_ARROW);
+    WNDCLASS wc = {};
+    wc.lpfnWndProc = WindowProc;
+    wc.lpszClassName = title_.c_str();
+    wc.hInstance = hInstance_;
+    wc.hCursor = LoadCursor(nullptr, IDC_ARROW);
 
-	if (!RegisterClass(&wc)){
-		Utils::DisplayLastErr();
-		return false;
-	}
+    if (!RegisterClass(&wc)){
+        Utils::DisplayLastErr();
+        return false;
+    }
 
-	//LastErr();
+    //LastErr();
 
-	RECT rect = {0, 0, 800, 600};
+    RECT rect = {0, 0, 800, 600};
 
-	AdjustWindowRect(&rect, WS_OVERLAPPEDWINDOW, FALSE);
+    AdjustWindowRect(&rect, WS_OVERLAPPEDWINDOW, FALSE);
 
-	// Create the window
-	hWnd_ = CreateWindow(
-		wc.lpszClassName,
-		title_.c_str(),
-		WS_OVERLAPPEDWINDOW,
-		CW_USEDEFAULT, CW_USEDEFAULT, 
-		rect.right - rect.left,
-		rect.bottom - rect.top,
-		nullptr,
-		nullptr,
-		hInstance_,
-		nullptr
-	);
+    // Create the window
+    hWnd_ = CreateWindow(
+        wc.lpszClassName,
+        title_.c_str(),
+        WS_OVERLAPPEDWINDOW,
+        CW_USEDEFAULT, CW_USEDEFAULT, 
+        rect.right - rect.left,
+        rect.bottom - rect.top,
+        nullptr,
+        nullptr,
+        hInstance_,
+        nullptr
+    );
 
-	if (!hWnd_){
-		Utils::DisplayLastErr();
-		return false;
-	}
+    if (!hWnd_){
+        Utils::DisplayLastErr();
+        return false;
+    }
 
-	ShowWindow(hWnd_, SW_SHOW);
-	UpdateWindow(hWnd_);
+    ShowWindow(hWnd_, SW_SHOW);
+    UpdateWindow(hWnd_);
 
-	return true;
+    return true;
 }
 
 [[nodiscard]]
 bool Window::IsEnabled() {
-	MSG msg{};
-	while (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE)){
-		if (msg.message == WM_QUIT) {
-			return false;
-		}
-		TranslateMessage(&msg);
-		DispatchMessage(&msg);
-	}
+    MSG msg{};
+    while (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE)){
+        if (msg.message == WM_QUIT) {
+            return false;
+        }
+        TranslateMessage(&msg);
+        DispatchMessage(&msg);
+    }
 
-	return true;
+    return true;
 }
 
 HWND Window::GetWindowHandle() const {
-	return hWnd_;
+    return hWnd_;
 }
 
 void Window::SetSize(const int width, const int height) const {
-	if (hWnd_){
-		RECT rect = {0, 0, width, height};
+    if (hWnd_){
+        RECT rect = {0, 0, width, height};
 
-		SetWindowPos(hWnd_, nullptr, 0, 0, rect.right - rect.left, rect.bottom - rect.top, SWP_NOMOVE | SWP_NOZORDER);
-	}
+        SetWindowPos(hWnd_, nullptr, 0, 0, rect.right - rect.left, rect.bottom - rect.top, SWP_NOMOVE | SWP_NOZORDER);
+    }
 }
 

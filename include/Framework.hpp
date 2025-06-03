@@ -8,19 +8,19 @@
 class IGame;
 
 class Framework {
-	GameEngine::Config* config_ = nullptr;
+    GameEngine::Config* config_ = nullptr;
 
-	std::unique_ptr<Engine> engine_;
-	std::unique_ptr<IGame> game_;
+    std::unique_ptr<Engine> engine_;
+    std::unique_ptr<IGame> game_;
 public:
-	Framework();
-	void Execute(std::unique_ptr<IGame> _game);
+    Framework();
+    void Execute(std::unique_ptr<IGame> _game);
 private:
-	void Initialize();
-	bool Loop() const;
-	void Update() const;
-	void Draw() const;
-	void Shutdown();
+    void Initialize();
+    bool Loop() const;
+    void Update() const;
+    void Draw() const;
+    void Shutdown();
 }; // class Framework
 
 #endif // Framework_HPP_

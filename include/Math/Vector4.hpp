@@ -3,7 +3,7 @@
 
 
 struct Vector4 {
-	float x, y, z, w;
+    float x, y, z, w;
 }; // class Vector4
 
 #endif // Vector4_HPP_

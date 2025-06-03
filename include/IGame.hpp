@@ -6,16 +6,16 @@
 #include "src/Engine/Config/Config.hpp"
 
 class IGame {
-	std::unique_ptr<GameEngine::Config> config_;
+    std::unique_ptr<GameEngine::Config> config_;
 public:
-	IGame();
-	virtual ~IGame() = default;
-	virtual void Initialize() = 0;
-	virtual void Update() = 0;
-	virtual void Draw() = 0;
-	virtual void Shutdown() = 0;
-	
-	GameEngine::Config& GetCurrentConfig();
+    IGame();
+    virtual ~IGame() = default;
+    virtual void Initialize() = 0;
+    virtual void Update() = 0;
+    virtual void Draw() = 0;
+    virtual void Shutdown() = 0;
+    
+    GameEngine::Config& GetCurrentConfig();
 }; // class IGame
 
 #endif // IGame_HPP_
