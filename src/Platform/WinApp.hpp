@@ -12,7 +12,12 @@ public:
 
 	bool IsEnabled() const ;
 
+	HWND GetWindowHandle() const;
+
+	void SetWindowSize(int width, int height) const;
+
 private:
+	HWND hWnd_ = nullptr;
 }; // class WinApp
 
 #endif // WinApp_HPP_

@@ -11,34 +11,45 @@ void Framework::Execute(std::unique_ptr<IGame> _game) {
 	game_ = std::move(_game);
 	Initialize();
 
-	Timer timer(std::chrono::milliseconds(50));
-	timer.Start();
+	//Timer timer(std::chrono::milliseconds(50));
+	//timer.Start();
 	while (Loop()){
 		// Main loop
-		if (!game_)break;
 
-		if (timer.Check()){
-			game_->Update();
-			timer.Restart();
-		}
+		Update();
 
-		game_->Draw();
+		Draw();
 	}
 
 	Shutdown();
 }
 
-void Framework::Initialize() const {
+void Framework::Initialize() {
 	if (!game_)return;
 	game_->Initialize();
+	config_ = &game_->GetCurrentConfig();
+	engine_->ApplyConfig(config_);
 }
 
 bool Framework::Loop() const {
 	if (!engine_)return false;
 	if (!engine_->IsEnabled())return false;
-
-	engine_->Update();
 	return true;
+}
+
+void Framework::Update() const {
+	if (!engine_)return;
+	engine_->Update();
+	if (!game_)return;
+	game_->Update();
+}
+
+void Framework::Draw() const {
+	if (!game_)return;
+	game_->Draw();
+
+	if (!engine_)return;
+	engine_->Render();
 }
 
 void Framework::Shutdown() {

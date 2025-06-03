@@ -3,14 +3,17 @@
 #include <stdexcept>
 
 #include "include/Utils.hpp"
+#include "vendor/imgui/imgui.h"
+
+extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 LRESULT Window::WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
+	if (ImGui_ImplWin32_WndProcHandler(hwnd, uMsg, wParam, lParam))return true;
+
 	switch (uMsg){
 		case WM_DESTROY:
 			PostQuitMessage(0);
 			return 0;
-		default:
-			break;
 	}
 	return DefWindowProc(hwnd, uMsg, wParam, lParam);
 }
@@ -41,10 +44,12 @@ bool Window::Create() {
 		wc.lpszClassName,
 		title_.c_str(),
 		WS_OVERLAPPEDWINDOW,
-		CW_USEDEFAULT, CW_USEDEFAULT, 800, 600,
+		CW_USEDEFAULT, CW_USEDEFAULT, 
+		rect.right - rect.left,
+		rect.bottom - rect.top,
 		nullptr,
 		nullptr,
-		wc.hInstance,
+		hInstance_,
 		nullptr
 	);
 
@@ -54,6 +59,7 @@ bool Window::Create() {
 	}
 
 	ShowWindow(hWnd_, SW_SHOW);
+	UpdateWindow(hWnd_);
 
 	return true;
 }
@@ -70,5 +76,17 @@ bool Window::IsEnabled() {
 	}
 
 	return true;
+}
+
+HWND Window::GetWindowHandle() const {
+	return hWnd_;
+}
+
+void Window::SetSize(const int width, const int height) const {
+	if (hWnd_){
+		RECT rect = {0, 0, width, height};
+
+		SetWindowPos(hWnd_, nullptr, 0, 0, rect.right - rect.left, rect.bottom - rect.top, SWP_NOMOVE | SWP_NOZORDER);
+	}
 }
 

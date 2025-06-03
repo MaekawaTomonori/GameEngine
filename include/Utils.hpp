@@ -8,6 +8,7 @@ namespace Utils {
 	std::wstring Convert(const std::string& str);
 	void DisplayLastErr();
 	void Alert(const std::string& msg);
+	std::string DateToString();
 };
 
 

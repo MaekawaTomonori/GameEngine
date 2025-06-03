@@ -1,0 +1,24 @@
+#ifndef DebugUI_HPP_
+#define DebugUI_HPP_
+#include <memory>
+
+#include "src/DirectX/DirectXAdapter.hpp"
+#include "src/DirectX/Heap/Heap.hpp"
+
+//ImGui Adapter
+class DebugUI {
+	std::unique_ptr<Heap> heap_;
+	ID3D12GraphicsCommandList* cList_ = nullptr;
+
+	//std::vector<PROCESS> processes_;
+public:
+	~DebugUI();
+	void Initialize(const DirectXAdapter* dx);
+	void Process();
+	void Render() const;
+
+public:
+	//void AddProcess(PROCESS);
+}; // class DebugUI
+
+#endif // DebugUI_HPP_
