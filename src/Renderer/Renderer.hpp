@@ -1,17 +1,15 @@
-#ifndef DirectXAdapter_HPP_
-#define DirectXAdapter_HPP_
+#ifndef Renderer_HPP_
+#define Renderer_HPP_
 
+#include <chrono>
 #include <d3d12.h>
 #include <dxgi1_6.h>
 #include <functional>
-#include <memory>
-#include <utility>
-#include <vector>
 #include <wrl/client.h>
 
-#include "Heap/Heap.hpp"
-#include "include/Math/Vector4.hpp"
-#include "src/Timer/Timer.hpp"
+#include "DirectX/DirectXAdapter.hpp"
+#include "DirectX/Heap/Heap.hpp"
+#include "Math/Vector4.hpp"
 
 class FrameRateLimiter{
     uint16_t maxFps_;
@@ -24,20 +22,7 @@ public:
     void WaitForNextFrame();
 };
 
-class DirectXAdapter {
-
-
-    using WindowSize = std::pair<size_t, size_t>;
-    WindowSize windowSize_ = {800, 600};
-    HWND hWnd_ = nullptr;
-
-    //DegubLayer
-    Microsoft::WRL::ComPtr<ID3D12Debug1> debugLayer_;
-
-    //DXGIs
-    Microsoft::WRL::ComPtr<IDXGIFactory7> factory_;
-    Microsoft::WRL::ComPtr<IDXGIAdapter4> adapter_;
-    Microsoft::WRL::ComPtr<ID3D12Device> device_;
+class Renderer {
 
     //Command
     Microsoft::WRL::ComPtr<ID3D12CommandQueue> cQueue_;
@@ -70,25 +55,12 @@ class DirectXAdapter {
     std::unique_ptr<FrameRateLimiter> fpsLimiter_ = nullptr;
 
 public:
-    DirectXAdapter(HWND _hWnd, size_t _width, size_t _height);
+	void Initialize(DirectXAdapter* _adapter);
 
     void Register(std::function<void()> _task);
-    void Render();
 private:
-    void EnableDebugLayer();
-    bool CreateDXGI();
-    bool InfoQueue() const;
-    bool CreateCommand();
-    bool CreateSwapChain();
-    bool CreateRTV();
-    bool CreateFence();
-    void Wait();
-public: //Accessor
-    HWND GetWindowHandle() const;
-    [[nodiscard]] ID3D12Device *GetDevice() const;
-    [[nodiscard]] ID3D12GraphicsCommandList* GetCommandList() const;
-    size_t GetWidth() const;
-    size_t GetHeight() const;
-}; // class DirectXAdapter
+    void Render();
+	void Wait();
+}; // class Renderer
 
-#endif // DirectXAdaptor_HPP_
+#endif // Renderer_HPP_

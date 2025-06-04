@@ -35,7 +35,6 @@ void Engine::Render() {
         throw std::runtime_error("DirectXAdapter is not initialized");
     }
     dxAdaptor_->Register([&](){debugUI_->Render(); });
-    dxAdaptor_->Render();
 }
 
 void Engine::Shutdown() {

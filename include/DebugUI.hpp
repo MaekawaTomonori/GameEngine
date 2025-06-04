@@ -2,8 +2,8 @@
 #define DebugUI_HPP_
 #include <memory>
 
-#include "src/DirectX/DirectXAdapter.hpp"
-#include "src/DirectX/Heap/Heap.hpp"
+#include "src/Renderer/DirectX/DirectXAdapter.hpp"
+#include "src/Renderer/DirectX/Heap/Heap.hpp"
 
 //ImGui Adapter
 class DebugUI {

@@ -7,7 +7,7 @@
 #include "include/Input.hpp"
 
 #include "src/Platform/WinApp.hpp"
-#include "src/DirectX/DirectXAdapter.hpp"
+#include "src/Renderer/DirectX/DirectXAdapter.hpp"
 #include "DebugUI.hpp"
 
 class Engine {
