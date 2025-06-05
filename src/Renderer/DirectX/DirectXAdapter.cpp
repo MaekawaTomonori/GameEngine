@@ -15,7 +15,6 @@ DirectXAdapter::DirectXAdapter(const HWND _hWnd, size_t _width, size_t _height) 
     if (!InfoQueue()) Utils::Alert("Failed to create InfoQueue");
     if (!CreateCommand())Utils::Alert("Failed to create Command");
     if (!CreateSwapChain()) Utils::Alert("Failed to create SwapChain");
-    if (!CreateRTV()) Utils::Alert("Failed to create RTV");
     if (!CreateFence()) Utils::Alert("Failed to create Fence");
     Log::Send(Log::Level::INFO, "DirectXAdapter Initialized");
 }
@@ -159,47 +158,9 @@ bool DirectXAdapter::CreateSwapChain() {
     return true;
 }
 
-bool DirectXAdapter::CreateRTV() {
-    rtvHeap_ = std::make_unique<Heap>();
-    if (!rtvHeap_ || !rtvHeap_->Create(device_.Get(), D3D12_DESCRIPTOR_HEAP_TYPE_RTV, 2, D3D12_DESCRIPTOR_HEAP_FLAG_NONE)) {
-        return false;
-    }
-
-    Log::Send(Log::Level::INFO, "RTV Heap Created");
-    
-    Microsoft::WRL::ComPtr<ID3D12Resource> swapChainResources[2];
-    for (UINT i = 0; i < 2; ++i){
-        if (FAILED(swapChain_->GetBuffer(i, IID_PPV_ARGS(&swapChainResources[i])))){
-            Log::Send(Log::Level::ERR, "Failed to get swap chain buffer");
-            return false;
-        }
-        swapChainResources_.emplace_back(std::move(swapChainResources[i]));
-    }
-    Log::Send(Log::Level::INFO, "Swap Chain Resources Created");
-
-    //Set RTVs
-    D3D12_RENDER_TARGET_VIEW_DESC rtvDesc = {};
-    rtvDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
-    rtvDesc.ViewDimension = D3D12_RTV_DIMENSION_TEXTURE2D;
-
-    rtvHandles_[0] = rtvHeap_->Get()->GetCPUDescriptorHandleForHeapStart();
-    device_->CreateRenderTargetView(swapChainResources_[0].Get(), &rtvDesc, rtvHandles_[0]);
-
-    rtvHandles_[1].ptr = rtvHandles_[0].ptr + device_->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
-    device_->CreateRenderTargetView(swapChainResources_[1].Get(), &rtvDesc, rtvHandles_[1]);
-
-    Log::Send(Log::Level::INFO, "RTVs Created");
-    return true;
-}
-
 bool DirectXAdapter::CreateFence() {
     if (FAILED(device_->CreateFence(0, D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(&fence_)))){
         Log::Send(Log::Level::ERR, "Failed to create fence");
-        return false;
-    }
-    fenceEvent_ = CreateEvent(nullptr, FALSE, FALSE, nullptr);
-    if (fenceEvent_ == nullptr){
-        Log::Send(Log::Level::ERR, "Failed to create fence event");
         return false;
     }
     Log::Send(Log::Level::INFO, "Fence Created");
@@ -220,6 +181,22 @@ size_t DirectXAdapter::GetWidth() const {
 
 size_t DirectXAdapter::GetHeight() const {
     return windowSize_.second;
+}
+
+ID3D12CommandQueue * DirectXAdapter::GetCommandQueue() const {
+    return cQueue_.Get();
+}
+
+ID3D12CommandAllocator * DirectXAdapter::GetCommandAllocator() const {
+    return cAllocator_.Get();
+}
+
+IDXGISwapChain4* DirectXAdapter::GetSwapChain() const {
+    return swapChain_.Get();
+}
+
+ID3D12Fence * DirectXAdapter::GetFence() const {
+    return fence_.Get();
 }
 
 HWND DirectXAdapter::GetWindowHandle() const {

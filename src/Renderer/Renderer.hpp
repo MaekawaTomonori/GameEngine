@@ -5,6 +5,8 @@
 #include <d3d12.h>
 #include <dxgi1_6.h>
 #include <functional>
+#include <mutex>
+#include <thread>
 #include <wrl/client.h>
 
 #include "DirectX/DirectXAdapter.hpp"
@@ -24,6 +26,12 @@ public:
 
 class Renderer {
 
+    std::thread renderThread_;
+    std::mutex mutex_;
+    std::condition_variable condition_;
+	bool isRunning_ = false;
+    
+
     //Command
     Microsoft::WRL::ComPtr<ID3D12CommandQueue> cQueue_;
     Microsoft::WRL::ComPtr<ID3D12CommandAllocator> cAllocator_;
@@ -32,14 +40,14 @@ class Renderer {
     //SwapChain
     Microsoft::WRL::ComPtr<IDXGISwapChain4> swapChain_;
 
-    //RTV
-    std::unique_ptr<Heap> rtvHeap_;
-
     //Resource
     std::vector<Microsoft::WRL::ComPtr<ID3D12Resource>> swapChainResources_;
 
+    //RTV
+    std::unique_ptr<Heap> rtvHeap_;
+
     //RtvHandle
-    D3D12_CPU_DESCRIPTOR_HANDLE rtvHandles_[2];
+    std::vector<D3D12_CPU_DESCRIPTOR_HANDLE> rtvHandles_;
 
     //Background color
     Vector4	back = {0.2f, 0.2f, 0.2f, 1.0f}; // Black
@@ -55,12 +63,14 @@ class Renderer {
     std::unique_ptr<FrameRateLimiter> fpsLimiter_ = nullptr;
 
 public:
-	void Initialize(DirectXAdapter* _adapter);
+	void Initialize(const DirectXAdapter* _adapter);
 
     void Register(std::function<void()> _task);
-private:
     void Render();
+private:
+	bool CreateRTV(ID3D12Device* _device);
 	void Wait();
+
 }; // class Renderer
 
 #endif // Renderer_HPP_

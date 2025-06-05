@@ -30,7 +30,54 @@ void FrameRateLimiter::WaitForNextFrame() {
     reference_ = std::chrono::steady_clock::now();
 }
 
-void Renderer::Initialize(DirectXAdapter *_adapter) {
+void Renderer::Initialize(const DirectXAdapter *_adapter) {
+    isRunning_ = true;
+    if (!_adapter){
+        Log::Send(Log::Level::ERR, "DirectXAdapter is null");
+        Utils::Alert("DirectXAdapter is Null");
+        return;
+    }
+
+    cQueue_ = _adapter->GetCommandQueue();
+    cAllocator_ = _adapter->GetCommandAllocator();
+    cList_ = _adapter->GetCommandList();
+
+    swapChain_ = _adapter->GetSwapChain();
+
+    swapChainResources_.clear();
+    swapChainResources_.resize(2);
+
+    for (UINT i = 0; i < 2; ++i){
+        if (FAILED(swapChain_->GetBuffer(i, IID_PPV_ARGS(&swapChainResources_[i])))){
+            Log::Send(Log::Level::ERR, "Failed to get swap chain buffer");
+            Utils::Alert("Failed to get swap chain buffer");
+            return;
+        }
+    }
+
+    if (!CreateRTV(_adapter->GetDevice())) {
+        Log::Send(Log::Level::ERR, "Failed to create RTV");
+        Utils::Alert("Failed to create RTV");
+        return;
+    }
+
+    fence_ = _adapter->GetFence();
+    fenceValue_ = 0;
+    fenceEvent_ = CreateEvent(nullptr, false, false, nullptr);
+    if (fenceEvent_ == nullptr){
+        Log::Send(Log::Level::ERR, "Failed to create fence event");
+        Utils::Alert("Failed to create fence event");
+        return;
+    }
+
+    fpsLimiter_ = std::make_unique<FrameRateLimiter>(static_cast<uint16_t>(60), true); // 60 FPS with VSync enabled
+    if (!fpsLimiter_){
+        Log::Send(Log::Level::ERR, "Failed to create FrameRateLimiter");
+        Utils::Alert("Failed to create FrameRateLimiter");
+        return;
+    }
+
+    Log::Send(Log::Level::INFO, "Renderer Initialized");
 }
 
 void Renderer::Register(std::function<void()> _task) {
@@ -101,4 +148,39 @@ void Renderer::Wait() {
     }
 
     fpsLimiter_->WaitForNextFrame();
+}
+
+bool Renderer::CreateRTV(ID3D12Device* _device) {
+    rtvHeap_ = std::make_unique<Heap>();
+    if (!rtvHeap_ || !rtvHeap_->Create(_device, D3D12_DESCRIPTOR_HEAP_TYPE_RTV, 2, D3D12_DESCRIPTOR_HEAP_FLAG_NONE)){
+        return false;
+    }
+
+    Log::Send(Log::Level::INFO, "RTV Heap Created");
+
+    swapChainResources_.resize(2);
+    Microsoft::WRL::ComPtr<ID3D12Resource> swapChainResources[2];
+    for (UINT i = 0; i < 2; ++i){
+        if (FAILED(swapChain_->GetBuffer(i, IID_PPV_ARGS(&swapChainResources[i])))){
+            Log::Send(Log::Level::ERR, "Failed to get swap chain buffer");
+            return false;
+        }
+        swapChainResources_.emplace_back(std::move(swapChainResources[i]));
+    }
+    Log::Send(Log::Level::INFO, "Swap Chain Resources Created");
+
+    //Set RTVs
+    D3D12_RENDER_TARGET_VIEW_DESC rtvDesc = {};
+    rtvDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
+    rtvDesc.ViewDimension = D3D12_RTV_DIMENSION_TEXTURE2D;
+
+    rtvHandles_.resize(2);
+    rtvHandles_[0] = rtvHeap_->Get()->GetCPUDescriptorHandleForHeapStart();
+    _device->CreateRenderTargetView(swapChainResources_[0].Get(), &rtvDesc, rtvHandles_[0]);
+
+    rtvHandles_[1].ptr = rtvHandles_[0].ptr + _device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
+    _device->CreateRenderTargetView(swapChainResources_[1].Get(), &rtvDesc, rtvHandles_[1]);
+
+    Log::Send(Log::Level::INFO, "RTVs Created");
+    return true;
 }
