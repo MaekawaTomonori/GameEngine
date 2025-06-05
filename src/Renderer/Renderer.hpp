@@ -31,6 +31,7 @@ class Renderer {
     std::mutex mutex_;
     std::condition_variable condition_;
 	bool isRunning_ = false;
+    bool commandsProcessed_ = false;
     
 
     //Command
