@@ -30,6 +30,18 @@ void FrameRateLimiter::WaitForNextFrame() {
     reference_ = std::chrono::steady_clock::now();
 }
 
+Renderer::~Renderer() {
+    isRunning_ = false;
+    if (thread_.joinable()){
+        thread_.join();
+    }
+    if (fenceEvent_){
+        CloseHandle(fenceEvent_);
+        fenceEvent_ = nullptr;
+    }
+    Log::Send(Log::Level::INFO, "Renderer Destroyed");
+}
+
 void Renderer::Initialize(const DirectXAdapter *_adapter) {
     isRunning_ = true;
     if (!_adapter){
@@ -81,14 +93,41 @@ void Renderer::Initialize(const DirectXAdapter *_adapter) {
 }
 
 void Renderer::Register(std::function<void()> _task) {
+    std::lock_guard<std::mutex> lock(mutex_);
     if (_task){
-        renderingCommands_.emplace_back(std::move(_task));
+        pendingCommands_.push(std::move(_task));
     } else{
         Log::Send(Log::Level::ERR, "Rendering command is null");
     }
 }
 
 void Renderer::Render() {
+    condition_.notify_one();
+}
+
+void Renderer::Wait() {
+    ++fenceValue_;
+    cQueue_->Signal(fence_.Get(), fenceValue_);
+
+    if (fence_->GetCompletedValue() < fenceValue_){
+        fence_->SetEventOnCompletion(fenceValue_, fenceEvent_);
+        WaitForSingleObject(fenceEvent_, INFINITE);
+        //CloseHandle(fenceEvent_);
+    }
+
+    fpsLimiter_->WaitForNextFrame();
+}
+
+void Renderer::RenderingProcess() {
+    while (isRunning_) {
+        {
+            std::unique_lock<std::mutex> lock(mutex_);
+            
+        }
+    }
+}
+
+void Renderer::ExecuteCommands() {
     UINT bbi = swapChain_->GetCurrentBackBufferIndex();
 
     D3D12_RESOURCE_BARRIER barrier = {};
@@ -105,12 +144,13 @@ void Renderer::Render() {
 
 
     // Execute rendering commands
-    for (const auto& command : renderingCommands_){
+    while (!renderingCommands_.empty()){
+        auto& command = renderingCommands_.front();
+    	renderingCommands_.pop();
         if (command){
             command();
         }
     }
-    renderingCommands_.clear();
 
     barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET;
     barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_PRESENT;
@@ -135,19 +175,6 @@ void Renderer::Render() {
         Utils::Alert("Failed to reset command list");
         return;
     }
-}
-
-void Renderer::Wait() {
-    ++fenceValue_;
-    cQueue_->Signal(fence_.Get(), fenceValue_);
-
-    if (fence_->GetCompletedValue() < fenceValue_){
-        fence_->SetEventOnCompletion(fenceValue_, fenceEvent_);
-        WaitForSingleObject(fenceEvent_, INFINITE);
-        //CloseHandle(fenceEvent_);
-    }
-
-    fpsLimiter_->WaitForNextFrame();
 }
 
 bool Renderer::CreateRTV(ID3D12Device* _device) {

@@ -6,6 +6,7 @@
 #include <dxgi1_6.h>
 #include <functional>
 #include <mutex>
+#include <queue>
 #include <thread>
 #include <wrl/client.h>
 
@@ -26,7 +27,7 @@ public:
 
 class Renderer {
 
-    std::thread renderThread_;
+    std::thread thread_;
     std::mutex mutex_;
     std::condition_variable condition_;
 	bool isRunning_ = false;
@@ -58,11 +59,13 @@ class Renderer {
     HANDLE fenceEvent_ = nullptr;
 
     //RenderingCommand
-    std::vector<std::function<void()>> renderingCommands_;
+    std::queue<std::function<void()>> renderingCommands_;
+    std::queue<std::function<void()>> pendingCommands_;
 
     std::unique_ptr<FrameRateLimiter> fpsLimiter_ = nullptr;
 
 public:
+	~Renderer();
 	void Initialize(const DirectXAdapter* _adapter);
 
     void Register(std::function<void()> _task);
@@ -70,6 +73,11 @@ public:
 private:
 	bool CreateRTV(ID3D12Device* _device);
 	void Wait();
+
+    // thread
+    void RenderingProcess();
+    // frame rendering
+    void ExecuteCommands();
 
 }; // class Renderer
 
