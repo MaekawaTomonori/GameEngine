@@ -41,7 +41,7 @@ void Engine::Render() {
         throw std::runtime_error("DirectXAdapter is not initialized");
     }
     renderer_->Register([&](){debugUI_->Render(); });
-    renderer_->Render();
+    renderer_->ExecuteCommands();
 }
 
 void Engine::Shutdown() {
