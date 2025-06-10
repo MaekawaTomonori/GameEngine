@@ -31,7 +31,6 @@ class Renderer {
     std::mutex mutex_;
     std::condition_variable condition_;
 	bool isRunning_ = false;
-    bool commandsProcessed_ = false;
     
 
     //Command
@@ -68,6 +67,7 @@ class Renderer {
 public:
 	~Renderer();
 	void Initialize(const DirectXAdapter* _adapter);
+    void Shutdown();
 
     void Register(std::function<void()> _task);
     void Render();
@@ -76,6 +76,8 @@ private:
 	void Wait();
 
     // thread
+    void RunThread();
+    // worker loop
     void RenderingProcess();
     // frame rendering
     void ExecuteCommands();

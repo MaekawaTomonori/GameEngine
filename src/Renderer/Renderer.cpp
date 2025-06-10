@@ -89,7 +89,23 @@ void Renderer::Initialize(const DirectXAdapter *_adapter) {
         return;
     }
 
+    RunThread();
+
+
     Log::Send(Log::Level::INFO, "Renderer Initialized");
+}
+
+void Renderer::Shutdown() {
+    {
+        std::lock_guard<std::mutex> lock(mutex_);
+        isRunning_ = false;
+    }
+	if (thread_.joinable()){
+        thread_.join();
+    }
+    renderingCommands_ = {};
+    pendingCommands_ = {};
+    Log::Send(Log::Level::INFO, "Renderer Shutdown");
 }
 
 void Renderer::Register(std::function<void()> _task) {
@@ -118,11 +134,27 @@ void Renderer::Wait() {
     fpsLimiter_->WaitForNextFrame();
 }
 
+void Renderer::RunThread() {
+    thread_ = std::thread([&](){
+        RenderingProcess();
+    });
+}
+
 void Renderer::RenderingProcess() {
     while (isRunning_) {
         {
             std::unique_lock<std::mutex> lock(mutex_);
-            
+            condition_.wait(lock, [this]{ return !pendingCommands_.empty() || !isRunning_; });
+
+            if (!isRunning_ && renderingCommands_.empty() && pendingCommands_.empty()) break;
+
+            if (renderingCommands_.empty() && !pendingCommands_.empty()) {
+	            renderingCommands_ = std::move(pendingCommands_);
+            }
+
+        }
+        if (!renderingCommands_.empty()) {
+            ExecuteCommands();
         }
     }
 }

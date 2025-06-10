@@ -6,6 +6,18 @@ Framework::Framework() {
 	engine_->Initialize();
 }
 
+void Framework::Execute(std::unique_ptr<IGame> _game) {
+	game_ = std::move(_game);
+	Initialize();
+
+	while (Loop()){
+		Update();
+		Draw();
+	}
+
+	Shutdown();
+}
+
 void Framework::Initialize() {
 	if (!game_)return;
 	game_->Initialize();
@@ -22,7 +34,7 @@ bool Framework::Loop() const {
 void Framework::Update() const {
 	if (!engine_)return;
 	engine_->Update();
-    if (engine_->UpdateSkip())return;
+    //if (engine_->UpdateSkip())return;
 	if (!game_)return;
 	game_->Update();
 }
