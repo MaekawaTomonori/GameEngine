@@ -100,7 +100,7 @@ void Renderer::Shutdown() {
         std::lock_guard<std::mutex> lock(mutex_);
         isRunning_ = false;
     }
-	if (thread_.joinable()){
+    if (thread_.joinable()){
         thread_.join();
     }
     renderingCommands_ = {};
@@ -149,7 +149,7 @@ void Renderer::RenderingProcess() {
             if (!isRunning_ && renderingCommands_.empty() && pendingCommands_.empty()) break;
 
             if (renderingCommands_.empty() && !pendingCommands_.empty()) {
-	            renderingCommands_ = std::move(pendingCommands_);
+                renderingCommands_ = std::move(pendingCommands_);
             }
 
         }
@@ -178,7 +178,7 @@ void Renderer::ExecuteCommands() {
     // Execute rendering commands
     while (!renderingCommands_.empty()){
         auto& command = renderingCommands_.front();
-    	renderingCommands_.pop();
+        renderingCommands_.pop();
         if (command){
             command();
         }

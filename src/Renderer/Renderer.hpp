@@ -30,7 +30,7 @@ class Renderer {
     std::thread thread_;
     std::mutex mutex_;
     std::condition_variable condition_;
-	bool isRunning_ = false;
+    bool isRunning_ = false;
     
 
     //Command
@@ -65,15 +65,15 @@ class Renderer {
     std::unique_ptr<FrameRateLimiter> fpsLimiter_ = nullptr;
 
 public:
-	~Renderer();
-	void Initialize(const DirectXAdapter* _adapter);
+    ~Renderer();
+    void Initialize(const DirectXAdapter* _adapter);
     void Shutdown();
 
     void Register(std::function<void()> _task);
     void Render();
 private:
-	bool CreateRTV(ID3D12Device* _device);
-	void Wait();
+    bool CreateRTV(ID3D12Device* _device);
+    void Wait();
 
     // thread
     void RunThread();

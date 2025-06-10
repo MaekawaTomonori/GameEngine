@@ -15,7 +15,7 @@ class Framework {
 public:
     Framework();
 
-	void Execute(std::unique_ptr<IGame> _game);
+    void Execute(std::unique_ptr<IGame> _game);
 
 private:
     void Initialize();
