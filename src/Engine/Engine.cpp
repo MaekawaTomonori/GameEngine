@@ -2,6 +2,8 @@
 #include "include/Singleton.hpp"
 #include <stdexcept>
 
+#include "Utils.hpp"
+
 Engine::Engine() = default;
 
 void Engine::Initialize() {
@@ -34,7 +36,7 @@ void Engine::Update() {
 
 void Engine::Render() {
     if (!dxAdaptor_){
-        throw std::runtime_error("DirectXAdapter is not initialized");
+	    Utils::Alert("DirectXAdapter is not initialized");
     }
     renderer_->Register([&](){debugUI_->Render(); });
     renderer_->Render();

@@ -42,8 +42,8 @@ void DebugUI::Initialize(const DirectXAdapter *dx) {
     cList_ = dx->GetCommandList();
 }
 
-void DebugUI::Process() {
-    ImGui_ImplDX12_NewFrame();
+void DebugUI::Render() const {
+	ImGui_ImplDX12_NewFrame();
     ImGui_ImplWin32_NewFrame();
     ImGui::NewFrame();
 
@@ -57,11 +57,8 @@ void DebugUI::Process() {
 
 
     ImGui::Render();
-}
 
-void DebugUI::Render(){
-    Process();
-    ID3D12DescriptorHeap* heaps[] = {heap_->Get()};
+	ID3D12DescriptorHeap* heaps[] = {heap_->Get()};
     cList_->SetDescriptorHeaps(_countof(heaps), heaps);
     ImGui_ImplDX12_RenderDrawData(ImGui::GetDrawData(), cList_);
 }

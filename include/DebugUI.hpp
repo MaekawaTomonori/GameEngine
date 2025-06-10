@@ -14,12 +14,10 @@ class DebugUI {
 public:
     ~DebugUI();
     void Initialize(const DirectXAdapter* dx);
-    void Render();
+    void Render() const;
 
 public:
     //void AddProcess(PROCESS);
-private:
-    void Process();
 }; // class DebugUI
 
 #endif // DebugUI_HPP_
