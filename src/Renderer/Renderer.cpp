@@ -128,7 +128,6 @@ void Renderer::Wait() {
     if (fence_->GetCompletedValue() < fenceValue_){
         fence_->SetEventOnCompletion(fenceValue_, fenceEvent_);
         WaitForSingleObject(fenceEvent_, INFINITE);
-        //CloseHandle(fenceEvent_);
     }
 
     fpsLimiter_->WaitForNextFrame();
@@ -150,6 +149,7 @@ void Renderer::RenderingProcess() {
 
             if (renderingCommands_.empty() && !pendingCommands_.empty()) {
                 renderingCommands_ = std::move(pendingCommands_);
+                pendingCommands_ = {};
             }
 
         }
