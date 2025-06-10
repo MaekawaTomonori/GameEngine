@@ -59,7 +59,8 @@ void DebugUI::Process() {
     ImGui::Render();
 }
 
-void DebugUI::Render() const {
+void DebugUI::Render(){
+    Process();
     ID3D12DescriptorHeap* heaps[] = {heap_->Get()};
     cList_->SetDescriptorHeaps(_countof(heaps), heaps);
     ImGui_ImplDX12_RenderDrawData(ImGui::GetDrawData(), cList_);

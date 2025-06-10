@@ -30,10 +30,6 @@ void Engine::Update() {
     if (input_){
         input_->Update();
     }
-
-    if (debugUI_) {
-        debugUI_->Process();
-    }
 }
 
 void Engine::Render() {
