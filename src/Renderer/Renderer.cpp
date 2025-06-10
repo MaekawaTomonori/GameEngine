@@ -96,6 +96,8 @@ void Renderer::Initialize(const DirectXAdapter *_adapter) {
 }
 
 void Renderer::Shutdown() {
+    renderingCommands_ = {};
+    pendingCommands_ = {};
     {
         std::lock_guard<std::mutex> lock(mutex_);
         isRunning_ = false;
@@ -103,8 +105,6 @@ void Renderer::Shutdown() {
     if (thread_.joinable()){
         thread_.join();
     }
-    renderingCommands_ = {};
-    pendingCommands_ = {};
     Log::Send(Log::Level::INFO, "Renderer Shutdown");
 }
 

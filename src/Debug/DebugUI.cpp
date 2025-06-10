@@ -1,5 +1,7 @@
 #include "DebugUI.hpp"
 
+#include <mutex>
+
 #include "include/Utils.hpp"
 #include "vendor/imgui/imgui.h"
 #include "vendor/imgui/imgui_impl_dx12.h"
@@ -42,8 +44,9 @@ void DebugUI::Initialize(const DirectXAdapter *dx) {
     cList_ = dx->GetCommandList();
 }
 
-void DebugUI::Render() const {
-	ImGui_ImplDX12_NewFrame();
+void DebugUI::Process() {
+    std::lock_guard<std::mutex> lock(mutex_);
+    ImGui_ImplDX12_NewFrame();
     ImGui_ImplWin32_NewFrame();
     ImGui::NewFrame();
 
@@ -58,8 +61,15 @@ void DebugUI::Render() const {
 
     ImGui::Render();
 
-	ID3D12DescriptorHeap* heaps[] = {heap_->Get()};
+    cache_ = ImGui::GetDrawData();
+}
+
+void DebugUI::Render() {
+    std::lock_guard<std::mutex> lock(mutex_);
+	if (!cache_)return;
+
+    ID3D12DescriptorHeap* heaps[] = {heap_->Get()};
     cList_->SetDescriptorHeaps(_countof(heaps), heaps);
-    ImGui_ImplDX12_RenderDrawData(ImGui::GetDrawData(), cList_);
+    ImGui_ImplDX12_RenderDrawData(cache_, cList_);
 }
 
