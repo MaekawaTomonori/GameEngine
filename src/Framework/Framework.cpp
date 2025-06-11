@@ -5,7 +5,7 @@
 #include "include/IGame.hpp"
 
 Framework::Framework() {
-	config_ = GameEngine::Config::Default();
+    config_ = GameEngine::Config::Default();
 
     windows_ = std::make_unique<WinApp>();
     windows_->Initialize();
@@ -50,7 +50,7 @@ void Framework::Update() const {
     if (input_)input_->Update();
 
     if (timer_->Check()) {
-	    timer_->Restart();
+        timer_->Restart();
         return;
     }
     if (!game_)return;
@@ -78,4 +78,6 @@ void Framework::Shutdown() {
         renderer_->Shutdown();
         renderer_.reset();
     }
+
+    SingletonFinalizer::Finalize();
 }

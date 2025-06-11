@@ -10,9 +10,9 @@ struct ImDrawData;
 
 //ImGui Adapter
 class DebugUI {
-	std::mutex mutex_;
+    std::mutex mutex_;
 
-	std::unique_ptr<Heap> heap_;
+    std::unique_ptr<Heap> heap_;
     ID3D12GraphicsCommandList* cList_ = nullptr;
 
     //std::vector<PROCESS> processes_;
