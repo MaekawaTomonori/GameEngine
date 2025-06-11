@@ -26,6 +26,7 @@ void FrameRateLimiter::WaitForNextFrame() {
             std::this_thread::yield();
         }
     }
+    Log::Send(Log::Level::DEBUG, "Frame Rate Limiter: Frame time: " + std::to_string(elapsedTime.count()) + " micro-sec");
 
     reference_ = std::chrono::steady_clock::now();
 }
@@ -206,6 +207,16 @@ void Renderer::ExecuteCommands() {
     if (FAILED(cList_->Reset(cAllocator_.Get(), nullptr))){
         Utils::Alert("Failed to reset command list");
         return;
+    }
+
+    {
+        std::unique_lock<std::mutex> lock(mutex_);
+
+        if (renderingCommands_.empty() && !pendingCommands_.empty()){
+            renderingCommands_ = std::move(pendingCommands_);
+            pendingCommands_ = {};
+        }
+
     }
 }
 

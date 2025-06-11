@@ -1,6 +1,5 @@
 #include "Engine.hpp"
 #include "include/Singleton.hpp"
-#include <stdexcept>
 
 #include "Utils.hpp"
 
@@ -46,7 +45,7 @@ void Engine::Render() {
 }
 
 void Engine::Shutdown() {
-    
+    renderer_->Shutdown();
 }
 
 bool Engine::IsEnabled() const {
