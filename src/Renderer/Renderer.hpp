@@ -11,8 +11,8 @@
 #include <wrl/client.h>
 
 #include "DebugUI.hpp"
-#include "DirectX/DirectXAdapter.hpp"
-#include "DirectX/Heap/Heap.hpp"
+#include "src/DirectX/DirectXAdapter.hpp"
+#include "src/DirectX/Heap/Heap.hpp"
 #include "Math/Vector4.hpp"
 
 class FrameRateLimiter{

@@ -546,10 +546,9 @@
     <ClInclude Include="include\DebugUI.hpp" />
     <ClInclude Include="include\IGame.hpp" />
     <ClInclude Include="include\Utils.hpp" />
-    <ClInclude Include="src\Renderer\DirectX\DirectXAdapter.hpp" />
-    <ClInclude Include="src\Renderer\DirectX\Heap\Heap.hpp" />
-    <ClInclude Include="src\Engine\Config\Config.hpp" />
-    <ClInclude Include="src\Engine\Engine.hpp" />
+    <ClInclude Include="src\Config\Config.hpp" />
+    <ClInclude Include="src\DirectX\DirectXAdapter.hpp" />
+    <ClInclude Include="src\DirectX\Heap\Heap.hpp" />
     <ClInclude Include="include\Log.hpp" />
     <ClInclude Include="include\Framework.hpp" />
     <ClInclude Include="include\Input.hpp" />
@@ -562,11 +561,10 @@
     <ClInclude Include="src\Window\Window.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Config\Config.cpp" />
     <ClCompile Include="src\Debug\DebugUI.cpp" />
-    <ClCompile Include="src\Renderer\DirectX\DirectXAdapter.cpp" />
-    <ClCompile Include="src\Renderer\DirectX\Heap\Heap.cpp" />
-    <ClCompile Include="src\Engine\Config\Config.cpp" />
-    <ClCompile Include="src\Engine\Engine.cpp" />
+    <ClCompile Include="src\DirectX\DirectXAdapter.cpp" />
+    <ClCompile Include="src\DirectX\Heap\Heap.cpp" />
     <ClCompile Include="src\Framework\Framework.cpp" />
     <ClCompile Include="src\Game\IGame.cpp" />
     <ClCompile Include="src\Input\Input.cpp" />

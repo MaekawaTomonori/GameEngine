@@ -3,8 +3,8 @@
 #include <memory>
 #include <mutex>
 
-#include "src/Renderer/DirectX/DirectXAdapter.hpp"
-#include "src/Renderer/DirectX/Heap/Heap.hpp"
+#include "src/DirectX/DirectXAdapter.hpp"
+#include "src/DirectX/Heap/Heap.hpp"
 
 struct ImDrawData;
 
