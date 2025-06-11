@@ -10,6 +10,7 @@
 #include <thread>
 #include <wrl/client.h>
 
+#include "DebugUI.hpp"
 #include "DirectX/DirectXAdapter.hpp"
 #include "DirectX/Heap/Heap.hpp"
 #include "Math/Vector4.hpp"
@@ -58,6 +59,9 @@ class Renderer {
     uint64_t fenceValue_ = 0;
     HANDLE fenceEvent_ = nullptr;
 
+    DirectXAdapter* adapter_ = nullptr;
+    std::unique_ptr<DebugUI> debugUI_ = nullptr;
+
     //RenderingCommand
     std::queue<std::function<void()>> renderingCommands_;
     std::queue<std::function<void()>> pendingCommands_;
@@ -66,7 +70,7 @@ class Renderer {
 
 public:
     ~Renderer();
-    void Initialize(const DirectXAdapter* _adapter);
+    void Initialize(DirectXAdapter* _adapter);
     void Shutdown();
 
     void Register(std::function<void()> _task);

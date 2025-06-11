@@ -17,8 +17,8 @@ void Engine::Initialize() {
     renderer_ = std::make_unique<Renderer>();
     renderer_->Initialize(dxAdaptor_.get());
 
-    debugUI_ = std::make_unique<DebugUI>();
-    debugUI_->Initialize(dxAdaptor_.get());
+    //debugUI_ = std::make_unique<DebugUI>();
+    //debugUI_->Initialize(dxAdaptor_.get());
 
     input_ = Singleton<Input>::GetInstance();
     input_->Initialize();
@@ -31,16 +31,16 @@ void Engine::Update() {
     if (input_){
         input_->Update();
     }
-    if (debugUI_) {
-	    debugUI_->Process();
-    }
+    //if (debugUI_) {
+	//    debugUI_->Process();
+    //}
 }
 
 void Engine::Render() {
     if (!dxAdaptor_){
 	    Utils::Alert("DirectXAdapter is not initialized");
     }
-    renderer_->Register([&](){debugUI_->Render(); });
+    //renderer_->Register([&](){debugUI_->Render(); });
     renderer_->Render();
 }
 

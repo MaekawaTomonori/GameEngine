@@ -43,13 +43,15 @@ Renderer::~Renderer() {
     Log::Send(Log::Level::INFO, "Renderer Destroyed");
 }
 
-void Renderer::Initialize(const DirectXAdapter *_adapter) {
+void Renderer::Initialize(DirectXAdapter *_adapter) {
     isRunning_ = true;
     if (!_adapter){
         Log::Send(Log::Level::ERR, "DirectXAdapter is null");
         Utils::Alert("DirectXAdapter is Null");
         return;
     }
+
+    adapter_ = _adapter;
 
     cQueue_ = _adapter->GetCommandQueue();
     cAllocator_ = _adapter->GetCommandAllocator();
@@ -90,6 +92,8 @@ void Renderer::Initialize(const DirectXAdapter *_adapter) {
         return;
     }
 
+    debugUI_ = std::make_unique<DebugUI>();
+
     RunThread();
 
 
@@ -102,6 +106,7 @@ void Renderer::Shutdown() {
     {
         std::lock_guard<std::mutex> lock(mutex_);
         isRunning_ = false;
+        condition_.notify_all();
     }
     if (thread_.joinable()){
         thread_.join();
@@ -119,6 +124,14 @@ void Renderer::Register(std::function<void()> _task) {
 }
 
 void Renderer::Render() {
+	{
+        std::lock_guard<std::mutex> lock(mutex_);
+        pendingCommands_ = {};
+	}
+	if (debugUI_){
+        debugUI_->Process();
+		Register([&]{debugUI_->Render();});
+	}
     condition_.notify_one();
 }
 
@@ -136,6 +149,7 @@ void Renderer::Wait() {
 
 void Renderer::RunThread() {
     thread_ = std::thread([&](){
+		debugUI_->Initialize(adapter_);
         RenderingProcess();
     });
 }
@@ -146,9 +160,12 @@ void Renderer::RenderingProcess() {
             std::unique_lock<std::mutex> lock(mutex_);
             condition_.wait(lock, [this]{ return !pendingCommands_.empty() || !isRunning_; });
 
-            if (!isRunning_ && renderingCommands_.empty() && pendingCommands_.empty()) break;
+            if (!isRunning_ && renderingCommands_.empty()) break;
 
-            if (renderingCommands_.empty() && !pendingCommands_.empty()) {
+            if (!pendingCommands_.empty()) {
+                if (!renderingCommands_.empty()) {
+	                renderingCommands_ = {};
+                }
                 renderingCommands_ = std::move(pendingCommands_);
                 pendingCommands_ = {};
             }
@@ -178,7 +195,7 @@ void Renderer::ExecuteCommands() {
 
     // Execute rendering commands
     while (!renderingCommands_.empty()){
-        auto& command = renderingCommands_.front();
+        auto command = renderingCommands_.front();
         renderingCommands_.pop();
         if (command){
             command();

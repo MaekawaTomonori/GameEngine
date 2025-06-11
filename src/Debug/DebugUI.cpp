@@ -60,6 +60,7 @@ void DebugUI::Process() {
 
 
     ImGui::Render();
+    ImGui::UpdatePlatformWindows();
 
     cache_ = ImGui::GetDrawData();
 }
