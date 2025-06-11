@@ -1,7 +1,7 @@
 #include "include/Log.hpp"
 
 #include "include/Utils.hpp"
-#include "src/Renderer/DirectX/DirectXAdapter.hpp"
+#include "src/DirectX/DirectXAdapter.hpp"
 
 #ifdef _WIN32
 #endif

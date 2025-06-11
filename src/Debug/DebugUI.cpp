@@ -67,7 +67,7 @@ void DebugUI::Process() {
 
 void DebugUI::Render() {
     std::lock_guard<std::mutex> lock(mutex_);
-	if (!cache_)return;
+    if (!cache_)return;
 
     ID3D12DescriptorHeap* heaps[] = {heap_->Get()};
     cList_->SetDescriptorHeaps(_countof(heaps), heaps);

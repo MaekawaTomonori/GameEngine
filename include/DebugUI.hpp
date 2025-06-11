@@ -3,16 +3,16 @@
 #include <memory>
 #include <mutex>
 
-#include "src/Renderer/DirectX/DirectXAdapter.hpp"
-#include "src/Renderer/DirectX/Heap/Heap.hpp"
+#include "src/DirectX/DirectXAdapter.hpp"
+#include "src/DirectX/Heap/Heap.hpp"
 
 struct ImDrawData;
 
 //ImGui Adapter
 class DebugUI {
-	std::mutex mutex_;
+    std::mutex mutex_;
 
-	std::unique_ptr<Heap> heap_;
+    std::unique_ptr<Heap> heap_;
     ID3D12GraphicsCommandList* cList_ = nullptr;
 
     //std::vector<PROCESS> processes_;

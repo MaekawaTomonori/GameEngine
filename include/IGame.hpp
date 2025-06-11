@@ -3,7 +3,7 @@
 
 #include <memory>
 
-#include "src/Engine/Config/Config.hpp"
+#include "src/Config/Config.hpp"
 
 class IGame {
     std::unique_ptr<GameEngine::Config> config_;

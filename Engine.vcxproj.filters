@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Engine\Engine.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="include\Log.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
@@ -45,10 +42,7 @@
     <ClInclude Include="include\Singleton.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="src\Renderer\DirectX\DirectXAdapter.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\Config\Config.hpp">
+    <ClInclude Include="src\DirectX\DirectXAdapter.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="include\Utils.hpp">
@@ -60,10 +54,13 @@
     <ClInclude Include="include\DebugUI.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="src\Renderer\DirectX\Heap\Heap.hpp">
+    <ClInclude Include="src\DirectX\Heap\Heap.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="src\Renderer\Renderer.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Config\Config.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
@@ -72,9 +69,6 @@
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="src\System\Log.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Engine\Engine.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\WinApp.cpp">
@@ -98,10 +92,7 @@
     <ClCompile Include="src\System\Singleton\Singleton.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="src\Renderer\DirectX\DirectXAdapter.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Engine\Config\Config.cpp">
+    <ClCompile Include="src\DirectX\DirectXAdapter.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="src\Utils\Utils.cpp">
@@ -113,10 +104,13 @@
     <ClCompile Include="src\Debug\DebugUI.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="src\Renderer\DirectX\Heap\Heap.cpp">
+    <ClCompile Include="src\DirectX\Heap\Heap.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="src\Renderer\Renderer.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Config\Config.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
