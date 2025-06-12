@@ -3,14 +3,10 @@
 
 #include <d3d12.h>
 #include <dxgi1_6.h>
-#include <functional>
-#include <memory>
 #include <utility>
 #include <vector>
 #include <wrl/client.h>
 
-#include "Heap/Heap.hpp"
-#include "include/Math/Vector4.hpp"
 
 class DirectXAdapter{
     using WindowSize = std::pair<size_t, size_t>;

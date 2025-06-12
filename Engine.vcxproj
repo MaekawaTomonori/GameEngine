@@ -545,8 +545,17 @@
   <ItemGroup>
     <ClInclude Include="include\DebugUI.hpp" />
     <ClInclude Include="include\IGame.hpp" />
+    <ClInclude Include="include\Math\Easing.h" />
+    <ClInclude Include="include\Math\Easing.hpp" />
+    <ClInclude Include="include\Math\MathUtils.h" />
+    <ClInclude Include="include\Math\MathUtils.hpp" />
+    <ClInclude Include="include\Math\Matrix.h" />
+    <ClInclude Include="include\Math\Matrix.hpp" />
+    <ClInclude Include="include\Math\Vector2.hpp" />
+    <ClInclude Include="include\Math\Vector3.hpp" />
     <ClInclude Include="include\Utils.hpp" />
     <ClInclude Include="src\Config\Config.hpp" />
+    <ClInclude Include="src\Container\Material.hpp" />
     <ClInclude Include="src\DirectX\DirectXAdapter.hpp" />
     <ClInclude Include="src\DirectX\GraphicsPipeline\GraphicsPipeline.hpp" />
     <ClInclude Include="src\DirectX\Heap\Heap.hpp" />
@@ -560,11 +569,13 @@
     <ClInclude Include="src\Scheduler\Scheduler.hpp" />
     <ClInclude Include="include\Singleton.hpp" />
     <ClInclude Include="src\Sprite\Sprite.hpp" />
+    <ClInclude Include="src\Texture\TextureManager.h" />
     <ClInclude Include="src\Timer\Timer.hpp" />
     <ClInclude Include="src\Window\Window.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Config\Config.cpp" />
+    <ClCompile Include="src\Container\Material.cpp" />
     <ClCompile Include="src\Debug\DebugUI.cpp" />
     <ClCompile Include="src\DirectX\DirectXAdapter.cpp" />
     <ClCompile Include="src\DirectX\GraphicsPipeline\GraphicsPipeline.cpp" />
@@ -573,18 +584,25 @@
     <ClCompile Include="src\Framework\Framework.cpp" />
     <ClCompile Include="src\Game\IGame.cpp" />
     <ClCompile Include="src\Input\Input.cpp" />
-    <ClCompile Include="src\Math\Vector4.cpp" />
+    <ClCompile Include="src\Math\Easing.cpp" />
+    <ClCompile Include="src\Math\MathUtils.cpp" />
+    <ClCompile Include="src\Math\Vector2.cpp" />
+    <ClCompile Include="src\Math\Vector3.cpp" />
     <ClCompile Include="src\Platform\WinApp.cpp" />
     <ClCompile Include="src\Renderer\Renderer.cpp" />
     <ClCompile Include="src\Scheduler\Scheduler.cpp" />
     <ClCompile Include="src\Sprite\Sprite.cpp" />
     <ClCompile Include="src\System\Log.cpp" />
     <ClCompile Include="src\System\Singleton\Singleton.cpp" />
+    <ClCompile Include="src\Texture\TextureManager.cpp" />
     <ClCompile Include="src\Timer\Timer.cpp" />
     <ClCompile Include="src\Utils\Utils.cpp" />
     <ClCompile Include="src\Window\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="vendor\DirectXTex\DirectXTex_Desktop_2022_Win10.vcxproj">
+      <Project>{371b9fa9-4c90-4ac6-a123-aced756d6c77}</Project>
+    </ProjectReference>
     <ProjectReference Include="vendor\imgui\imgui.vcxproj">
       <Project>{05a9737c-e682-451f-a307-4b01deb9d44b}</Project>
     </ProjectReference>
