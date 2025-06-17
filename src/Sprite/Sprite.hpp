@@ -5,7 +5,6 @@
 #include "Math/Vector4.hpp"
 #include "src/DirectX/GraphicsPipeline/GraphicsPipeline.hpp"
 
-
 class Sprite {
 	struct Material {
 		Vector4 color;
