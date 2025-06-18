@@ -59,6 +59,13 @@ class Renderer {
     uint64_t fenceValue_ = 0;
     HANDLE fenceEvent_ = nullptr;
 
+    //Viewport
+    D3D12_VIEWPORT viewport_ = {};
+
+    //Scissor
+    D3D12_RECT scissorRect_ = {};
+
+
     DirectXAdapter* adapter_ = nullptr;
     std::unique_ptr<DebugUI> debugUI_ = nullptr;
 
