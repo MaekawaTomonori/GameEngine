@@ -94,7 +94,7 @@ void Renderer::Initialize(DirectXAdapter *_adapter) {
 
     debugUI_ = std::make_unique<DebugUI>();
 
-    //RunThread();
+    RunThread();
 
 
     Log::Send(Log::Level::INFO, "Renderer Initialized");
@@ -132,8 +132,7 @@ void Renderer::Render() {
         debugUI_->Process();
 		Register([&]{debugUI_->Render();});
 	}
-    //condition_.notify_one();
-    ExecuteCommands();
+    condition_.notify_one();
 }
 
 void Renderer::Wait() {
@@ -149,10 +148,10 @@ void Renderer::Wait() {
 }
 
 void Renderer::RunThread() {
-    //thread_ = std::thread([&](){
+    thread_ = std::thread([&](){
 		debugUI_->Initialize(adapter_);
         RenderingProcess();
-    //});
+    });
 }
 
 void Renderer::RenderingProcess() {

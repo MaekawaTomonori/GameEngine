@@ -103,6 +103,7 @@ bool DirectXAdapter::CreateDXGI() {
         "12.0"
     };
 
+    Log::Send(Log::Level::INFO, "Device Loop Begin");
     for (size_t i = 0; i < _countof(featureLevels); ++i) {
         if (SUCCEEDED(D3D12CreateDevice(adapter_.Get(), featureLevels[i], IID_PPV_ARGS(&device_)))){
             Log::Send(Log::Level::INFO, "Device Created");
@@ -173,6 +174,7 @@ bool DirectXAdapter::CreateCommand() {
 }
 
 bool DirectXAdapter::CreateSwapChain() {
+    Log::Send(Log::Level::INFO, "Create Swap Chain BEGIN");
     DXGI_SWAP_CHAIN_DESC1 desc = {};
     desc.Width = static_cast<UINT>(windowSize_.first);
     desc.Height = static_cast<UINT>(windowSize_.second);
@@ -182,6 +184,7 @@ bool DirectXAdapter::CreateSwapChain() {
     desc.BufferCount = 2;
     desc.SwapEffect = DXGI_SWAP_EFFECT_FLIP_DISCARD;
 
+    Log::Send(Log::Level::INFO, "CreateSwapChainForHwnd");
     if (FAILED(factory_->CreateSwapChainForHwnd(cQueue_.Get(), hWnd_, &desc, nullptr, nullptr, reinterpret_cast<IDXGISwapChain1**>(swapChain_.GetAddressOf())))){
         Log::Send(Log::Level::ERR, "Failed to create swap chain");
         return false;

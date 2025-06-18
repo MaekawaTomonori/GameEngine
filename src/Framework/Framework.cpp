@@ -1,5 +1,6 @@
 #include "include/Framework.hpp"
 
+#include "Log.hpp"
 #include "Singleton.hpp"
 #include "Utils.hpp"
 #include "include/IGame.hpp"
@@ -13,8 +14,8 @@ Framework::Framework() {
 
     dxAdaptor_ = std::make_unique<DirectXAdapter>(windows_->GetWindowHandle(), config_->GetWidth(), config_->GetHeight());
 
-    srv_ = std::make_unique<SRVManager>();
-    srv_->Initialize(dxAdaptor_.get());
+    //srv_ = std::make_unique<SRVManager>();
+    //srv_->Initialize(dxAdaptor_.get());
 
     renderer_ = std::make_unique<Renderer>();
     renderer_->Initialize(dxAdaptor_.get());
@@ -22,11 +23,11 @@ Framework::Framework() {
     input_ = Singleton<Input>::GetInstance();
     input_->Initialize();
 
-    texture_ = Singleton<TextureManager>::GetInstance();
-    texture_->Initialize(dxAdaptor_.get(), srv_.get());
-
-    sprite_ = Singleton<SpriteCommon>::GetInstance();
-    sprite_->Initialize(dxAdaptor_.get());
+    //texture_ = Singleton<TextureManager>::GetInstance();
+    //texture_->Initialize(dxAdaptor_.get(), srv_.get());
+    //
+    //sprite_ = Singleton<SpriteCommon>::GetInstance();
+    //sprite_->Initialize(dxAdaptor_.get());
 
     timer_ = std::make_unique<Timer>(static_cast<std::chrono::milliseconds>(static_cast<uint64_t>(1e4 / 60)));
     timer_->Start();
@@ -48,6 +49,7 @@ void Framework::Initialize() {
     if (!game_)return;
     game_->Initialize();
     config_ = &game_->GetCurrentConfig();
+    Log::Send(Log::Level::INFO, "Game Initialized");
 }
 
 bool Framework::Loop() const {
