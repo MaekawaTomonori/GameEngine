@@ -14,8 +14,8 @@ Framework::Framework() {
 
     dxAdaptor_ = std::make_unique<DirectXAdapter>(windows_->GetWindowHandle(), config_->GetWidth(), config_->GetHeight());
 
-    //srv_ = std::make_unique<SRVManager>();
-    //srv_->Initialize(dxAdaptor_.get());
+    srv_ = std::make_unique<SRVManager>();
+    srv_->Initialize(dxAdaptor_.get());
 
     renderer_ = std::make_unique<Renderer>();
     renderer_->Initialize(dxAdaptor_.get());
@@ -23,9 +23,9 @@ Framework::Framework() {
     input_ = Singleton<Input>::GetInstance();
     input_->Initialize();
 
-    //texture_ = Singleton<TextureManager>::GetInstance();
-    //texture_->Initialize(dxAdaptor_.get(), srv_.get());
-    //
+    texture_ = Singleton<TextureManager>::GetInstance();
+    texture_->Initialize(dxAdaptor_.get(), srv_.get());
+
     //sprite_ = Singleton<SpriteCommon>::GetInstance();
     //sprite_->Initialize(dxAdaptor_.get());
 

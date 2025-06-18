@@ -54,6 +54,7 @@ ID3D12Resource * DirectXAdapter::CreateBufferResource(const size_t _size) const 
 }
 
 void DirectXAdapter::EnableDebugLayer() {
+#ifdef _DEBUG
     if (SUCCEEDED(D3D12GetDebugInterface(IID_PPV_ARGS(&debugLayer_)))){
         debugLayer_->EnableDebugLayer();
         debugLayer_->SetEnableGPUBasedValidation(true);
@@ -62,6 +63,7 @@ void DirectXAdapter::EnableDebugLayer() {
     } else{
         Log::Send(Log::Level::ERR, "Failed to enable debug layer");
     }
+#endif
 }
 
 bool DirectXAdapter::CreateDXGI() {
