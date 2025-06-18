@@ -4,8 +4,9 @@
 #include <format>
 #include <iostream>
 
+#include "Log.hpp"
+
 GraphicsPipeline::~GraphicsPipeline() {
-    // 非同期タスクが実行中なら待機して終了させる
     WaitForAsyncCreation();
 }
 
@@ -17,29 +18,23 @@ void GraphicsPipeline::Create(DirectXAdapter* adapter, Type type) {
 }
 
 void GraphicsPipeline::DrawCall(BlendMode mode) const {
-    // ルートシグネチャの設定
     adapter_->GetCommandList()->SetGraphicsRootSignature(rootSignature_.Get());
 
-    // 指定されたBlendModeのPSOを設定
     {
         std::lock_guard<std::mutex> lock(psoMutex_);
 
         auto it = pipelineStatesByBlendMode_.find(mode);
         if (it != pipelineStatesByBlendMode_.end()){
-            // 要求されたブレンドモードのPSOがある場合
             adapter_->GetCommandList()->SetPipelineState(it->second.Get());
         } else{
-            // なければNONEモードのPSOを使用
             auto defaultIt = pipelineStatesByBlendMode_.find(BlendMode::NONE);
             if (defaultIt != pipelineStatesByBlendMode_.end()){
                 adapter_->GetCommandList()->SetPipelineState(defaultIt->second.Get());
             } else{
-                // NONEモードもなければ最初に見つかったPSOを使用
                 if (!pipelineStatesByBlendMode_.empty()){
                     adapter_->GetCommandList()->SetPipelineState(pipelineStatesByBlendMode_.begin()->second.Get());
                 }
-                // エラーログも出しておく
-                std::cerr << "Warning: No pipeline state found for blend mode " << static_cast<int>(mode) << std::endl;
+                Log::Send(Log::Level::WARNING, "Warning: No pipeline state found for blend mode " + static_cast<int>(mode));
             }
         }
     }
@@ -48,19 +43,15 @@ void GraphicsPipeline::DrawCall(BlendMode mode) const {
 void GraphicsPipeline::Create() {
     CreateShader();
 
-    // シェーダー作成後にリフレクション情報を取得
     if (shader_ && useReflection_){
-        // 頂点シェーダーのリフレクション
         if (shader_->GetVertexShader()){
             if (ReflectShader(
                 shader_->GetVertexShader()->GetBufferPointer(),
                 shader_->GetVertexShader()->GetBufferSize(),
                 vsReflectionData_)){
-                // 成功
-                std::cout << "Vertex shader reflection succeeded" << std::endl;
+                Log::Send(Log::Level::INFO, "Vertex shader reflection succeeded");
             } else{
-                // 失敗
-                std::cerr << "Vertex shader reflection failed" << std::endl;
+                Log::Send(Log::Level::WARNING, "Vertex shader reflection failed");
             }
         }
 
@@ -70,18 +61,14 @@ void GraphicsPipeline::Create() {
                 shader_->GetPixelShader()->GetBufferPointer(),
                 shader_->GetPixelShader()->GetBufferSize(),
                 psReflectionData_)){
-                // 成功
-                std::cout << "Pixel shader reflection succeeded" << std::endl;
+                Log::Send(Log::Level::INFO, "Pixel shader reflection succeeded");
             } else{
-                // 失敗
-                std::cerr << "Pixel shader reflection failed" << std::endl;
+                Log::Send(Log::Level::WARNING, "Pixel shader reflection failed");
             }
         }
 
-        // リフレクション情報からルートシグネチャを作成
         CreateRootSignatureFromReflection();
     } else{
-        // 従来の方法でルートシグネチャを作成
         CreateRootSignature();
     }
 
@@ -90,29 +77,21 @@ void GraphicsPipeline::Create() {
     CreateDepthStencil();
     CreateSampler();
 
-    // まずはデフォルト(NONE)のPSOだけ作成
     CreateDefaultPSO();
 
-    // 他のBlendModeのPSOは非同期で生成
     AsyncCreatePipelineStates();
 }
 
-// NONEモード用のPSO作成
 void GraphicsPipeline::CreateDefaultPSO() {
-    // NONE用のPSOを作成
     CreatePSOWithBlendMode(BlendMode::NONE);
 }
 
-// 非同期でPSOを生成する関数
 void GraphicsPipeline::AsyncCreatePipelineStates() {
-    // すでに非同期処理が実行中なら何もしない
     if (isAsyncCreationActive_.exchange(true)){
         return;
     }
 
-    // 非同期タスクを開始
     asyncCreationFuture_ = std::async(std::launch::async, [this](){
-        // NONE以外のすべてのブレンドモードのPSOを生成
         for (int i = 0; i < static_cast<int>(BlendMode::BLEND_MODE_COUNT); ++i){
             BlendMode mode = static_cast<BlendMode>(i);
             if (mode != BlendMode::NONE){
@@ -380,12 +359,9 @@ void GraphicsPipeline::CreateDepthStencil() {
     }
 }
 
-// 特定のBlendModeに対応するPSOを作成する関数
 void GraphicsPipeline::CreatePSOWithBlendMode(BlendMode mode) {
-    // 各種設定をコピー
     D3D12_GRAPHICS_PIPELINE_STATE_DESC psoDesc = {};
 
-    // ブレンド状態の設定
     D3D12_BLEND_DESC blendDesc = {};
     CreateBlendState(mode, blendDesc);
 
@@ -412,19 +388,16 @@ void GraphicsPipeline::CreatePSOWithBlendMode(BlendMode mode) {
     psoDesc.SampleDesc.Count = 1;
     psoDesc.SampleMask = D3D12_DEFAULT_SAMPLE_MASK;
 
-    // PSOの作成
     Microsoft::WRL::ComPtr<ID3D12PipelineState> pipelineState;
     HRESULT hr = adapter_->GetDevice()->CreateGraphicsPipelineState(
         &psoDesc, IID_PPV_ARGS(&pipelineState));
 
     if (SUCCEEDED(hr)){
-        // 作成したPSOをマップに追加（スレッドセーフに）
         {
             std::lock_guard<std::mutex> lock(psoMutex_);
             pipelineStatesByBlendMode_[mode] = pipelineState;
         }
 
-        // デバッグログ
         std::cout << "Created pipeline state for blend mode " << static_cast<int>(mode) << std::endl;
     } else{
         std::cerr << "Failed to create pipeline state for blend mode "
@@ -433,9 +406,7 @@ void GraphicsPipeline::CreatePSOWithBlendMode(BlendMode mode) {
     }
 }
 
-// シェーダーリフレクション実装
 bool GraphicsPipeline::ReflectShader(const void* shader_bytecode, size_t bytecode_length, ShaderReflectionData& out_data) {
-    // D3D12のシェーダーリフレクションインターフェースを作成
     Microsoft::WRL::ComPtr<ID3D12ShaderReflection> reflection;
     HRESULT hr = D3DReflect(shader_bytecode, bytecode_length, IID_PPV_ARGS(&reflection));
 
@@ -444,12 +415,10 @@ bool GraphicsPipeline::ReflectShader(const void* shader_bytecode, size_t bytecod
         return false;
     }
 
-    // シェーダーの基本情報を取得
     D3D12_SHADER_DESC shaderDesc;
     reflection->GetDesc(&shaderDesc);
     out_data.shaderDesc = shaderDesc;
 
-    // バインドリソース（定数バッファ、テクスチャ、サンプラーなど）を列挙
     for (UINT i = 0; i < shaderDesc.BoundResources; i++){
         D3D12_SHADER_INPUT_BIND_DESC bindDesc;
         reflection->GetResourceBindingDesc(i, &bindDesc);
@@ -464,7 +433,6 @@ bool GraphicsPipeline::ReflectShader(const void* shader_bytecode, size_t bytecod
             case D3D_SIT_CBUFFER:
                 out_data.constantBuffers.push_back(resource);
 
-                // 定数バッファの詳細情報も取得
                 {
                     ID3D12ShaderReflectionConstantBuffer* cbReflection =
                         reflection->GetConstantBufferByName(bindDesc.Name);
@@ -500,7 +468,6 @@ bool GraphicsPipeline::ReflectShader(const void* shader_bytecode, size_t bytecod
     return true;
 }
 
-// 定数バッファレイアウトの抽出
 void GraphicsPipeline::ExtractConstantBufferLayout(
     ID3D12ShaderReflectionConstantBuffer* cb_reflection,
     ConstantBufferLayout& out_layout)
@@ -510,7 +477,6 @@ void GraphicsPipeline::ExtractConstantBufferLayout(
 
     out_layout.size = bufferDesc.Size;
 
-    // 定数バッファ内の変数を列挙
     for (UINT i = 0; i < bufferDesc.Variables; i++){
         ID3D12ShaderReflectionVariable* var = cb_reflection->GetVariableByIndex(i);
 
@@ -521,23 +487,17 @@ void GraphicsPipeline::ExtractConstantBufferLayout(
     }
 }
 
-// シェーダーリフレクションからルートシグネチャを生成
 void GraphicsPipeline::CreateRootSignatureFromReflection() {
-    // 実装省略（リフレクション情報からルートシグネチャを構築するコード）
-    // 既存の実装と同様に処理
 }
 
-// 定数バッファのレイアウト情報を取得
 std::optional<ConstantBufferLayout> GraphicsPipeline::GetConstantBufferLayout(
     const std::string& name) const
 {
-    // まず頂点シェーダーから検索
     auto vs_it = vsReflectionData_.cbufferLayouts.find(name);
     if (vs_it != vsReflectionData_.cbufferLayouts.end()){
         return vs_it->second;
     }
 
-    // 次にピクセルシェーダーから検索
     auto ps_it = psReflectionData_.cbufferLayouts.find(name);
     if (ps_it != psReflectionData_.cbufferLayouts.end()){
         return ps_it->second;
@@ -546,7 +506,6 @@ std::optional<ConstantBufferLayout> GraphicsPipeline::GetConstantBufferLayout(
     return std::nullopt;
 }
 
-// リソースのバインドポイント取得関数の実装
 uint32_t GraphicsPipeline::GetCBVBindPoint(const std::string& name) const {
     auto it = cbvNameToIndex_.find(name);
     if (it != cbvNameToIndex_.end()){

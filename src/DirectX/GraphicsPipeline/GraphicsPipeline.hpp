@@ -12,7 +12,6 @@
 #include <format>
 #include <future>
 #include <mutex>
-#include <thread>
 #include <atomic>
 
 #include "src/DirectX/DirectXAdapter.hpp"
@@ -27,12 +26,9 @@ enum class BlendMode{
     MULTI,
     SCREEN,
     NONE,
-    BLEND_MODE_COUNT // カウント用
+    BLEND_MODE_COUNT
 };
 
-/**
- * シェーダーリソース情報を格納する構造体。
- */
 struct ShaderResourceInfo{
     std::string name;
     D3D12_SHADER_INPUT_BIND_DESC bind_desc;
@@ -40,18 +36,12 @@ struct ShaderResourceInfo{
     uint32_t binding_point;
 };
 
-/**
- * 定数バッファのレイアウト情報。
- */
 struct ConstantBufferLayout{
     std::string name;
     uint32_t size;
     std::vector<D3D12_SHADER_VARIABLE_DESC> variables;
 };
 
-/**
- * シェーダーリフレクション情報を格納する構造体。
- */
 struct ShaderReflectionData{
     std::vector<ShaderResourceInfo> constantBuffers;
     std::vector<ShaderResourceInfo> textures;
@@ -75,10 +65,8 @@ class GraphicsPipeline{
 
     void Create(DirectXAdapter* adapter, Type type);
 
-    // BlendModeを指定してDrawCallを行う
     void DrawCall(BlendMode mode = BlendMode::ALPHA) const;
 
-    // シェーダーリフレクション情報を取得
     const ShaderReflectionData& GetVertexShaderReflection() const {
         return vsReflectionData_;
     }
@@ -86,22 +74,18 @@ class GraphicsPipeline{
         return psReflectionData_;
     }
 
-    // 定数バッファのレイアウト情報を取得
     std::optional<ConstantBufferLayout> GetConstantBufferLayout(const std::string& name) const;
 
-    // インデックスからバインドポイント情報を取得
     uint32_t GetCBVBindPoint(const std::string& name) const;
     uint32_t GetSRVBindPoint(const std::string& name) const;
     uint32_t GetSamplerBindPoint(const std::string& name) const;
     uint32_t GetUAVBindPoint(const std::string& name) const;
 
-    // 非同期生成の完了を待機
     void WaitForAsyncCreation();
 
-    // 特定のBlendModeのPSOが生成済みかどうかチェック
     bool IsPipelineStateReady(BlendMode mode) const;
 
-    private://Methods
+private://Methods
     void Create();
     void CreateRootSignature();
     void DescriptorRange();
@@ -112,21 +96,17 @@ class GraphicsPipeline{
     void CreateSampler();
     void CreateDepthStencil();
 
-    // NONEモード用のPSO作成
     void CreateDefaultPSO();
 
-    // 特定のBlendMode用のPSO作成
     void CreatePSOWithBlendMode(BlendMode mode);
 
-    // 非同期でPSOを生成する関数
     void AsyncCreatePipelineStates();
 
-    // シェーダーリフレクション関連のメソッド
     bool ReflectShader(const void* shader_bytecode, size_t bytecode_length, ShaderReflectionData& out_data);
     void ExtractConstantBufferLayout(ID3D12ShaderReflectionConstantBuffer* cb_reflection, ConstantBufferLayout& out_layout);
     void CreateRootSignatureFromReflection();
 
-    private://Variables
+private://Variables
     DirectXAdapter* adapter_ = nullptr;
 
     Type type_ = Type::MODEL;
@@ -137,11 +117,10 @@ class GraphicsPipeline{
     D3D12_INPUT_LAYOUT_DESC inputLayoutDesc_ {};
     std::vector<D3D12_INPUT_ELEMENT_DESC> inputElementDescs_ {};
 
-    // 各ブレンドモード用のPSO
-    mutable std::mutex psoMutex_; // PSOマップへのアクセス用ミューテックス
+    mutable std::mutex psoMutex_;
     std::unordered_map<BlendMode, Microsoft::WRL::ComPtr<ID3D12PipelineState>> pipelineStatesByBlendMode_;
-    std::atomic<bool> isAsyncCreationActive_ = false; // 非同期処理が実行中かどうか
-    std::future<void> asyncCreationFuture_; // 非同期処理用Future
+    std::atomic<bool> isAsyncCreationActive_ = false;
+    std::future<void> asyncCreationFuture_;
 
     D3D12_RASTERIZER_DESC rasterizerDesc_ {};
 
@@ -152,19 +131,16 @@ class GraphicsPipeline{
     //DepthStencil
     D3D12_DEPTH_STENCIL_DESC depthStencilDesc_ {};
 
-    D3D12_GRAPHICS_PIPELINE_STATE_DESC graphicsPipelineStateDesc {}; // 基本PSO設定
+    D3D12_GRAPHICS_PIPELINE_STATE_DESC graphicsPipelineStateDesc {};
 
-    // シェーダーリフレクション情報
     ShaderReflectionData vsReflectionData_ {};
     ShaderReflectionData psReflectionData_ {};
 
-    // リソース名とバインドポイントのマッピング
     std::unordered_map<std::string, uint32_t> cbvNameToIndex_;
     std::unordered_map<std::string, uint32_t> srvNameToIndex_;
     std::unordered_map<std::string, uint32_t> samplerNameToIndex_;
     std::unordered_map<std::string, uint32_t> uavNameToIndex_;
 
-    // リフレクションを使用するフラグ
     bool useReflection_ = false;
 };
 #endif // GraphicsPipeline_HPP_

@@ -3,11 +3,15 @@
 #include <cassert>
 #include <thread>
 
+#include <d3dcompiler.h>
+
 #include "include/Log.hpp"
 #include "include/Utils.hpp"
 
 #pragma comment(lib, "d3d12.lib")
 #pragma comment(lib, "dxgi.lib")
+#pragma comment(lib, "dxguid.lib")
+#pragma comment(lib, "dxcompiler.lib")
 
 DirectXAdapter::DirectXAdapter(const HWND _hWnd, size_t _width, size_t _height) :windowSize_(_width, _height), hWnd_(_hWnd) {
     EnableDebugLayer();
@@ -35,12 +39,16 @@ ID3D12Resource * DirectXAdapter::CreateBufferResource(const size_t _size) const 
 
     ID3D12Resource* resource = nullptr;
 
-    #ifdef _DEBUG
+#ifdef _DEBUG
     HRESULT hR =
-        #endif
+#endif
         device_->CreateCommittedResource(&properties, D3D12_HEAP_FLAG_NONE, &desc, D3D12_RESOURCE_STATE_GENERIC_READ, nullptr, IID_PPV_ARGS(&resource));
 
-    assert(SUCCEEDED(hR));
+    if (FAILED(hR)) {
+        Log::Send(Log::Level::ERR, "Failed to create buffer resource");
+        Utils::Alert("Failed to create buffer resource");
+        assert(false);
+    }
 
     return resource;
 }

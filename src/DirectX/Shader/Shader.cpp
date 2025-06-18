@@ -6,8 +6,6 @@
 #include "Log.hpp"
 #include "Utils.hpp"
 
-#pragma comment(lib, "dxcompiler.lib")
-
 void Shader::CreateDxc() {
     HRESULT hr = S_OK;
     hr = DxcCreateInstance(CLSID_DxcUtils, IID_PPV_ARGS(&dxcUtils_));
@@ -57,13 +55,13 @@ IDxcBlob* Shader::Compile(const std::wstring& directoryPath, const std::wstring&
 
     ///Compiling
     LPCWSTR arguments[] = {
-        filePath.c_str(), //対象のhlslファイル名
+        filePath.c_str(), 
         L"-E", L"main", //EntryPoint
         L"-T", profile, //ShaderProfile
         L"-I", directoryPath.c_str(), //IncludePath
         L"-Zi", L"-Qembed_debug", //DebugInfo
-        L"-Od", //最適化を外す
-        L"-Zpr", //メモリレイアウトは行優先
+        L"-Od", 
+        L"-Zpr", 
     };
 
     IDxcResult* shaderResult = nullptr;
@@ -94,3 +92,4 @@ IDxcBlob* Shader::Compile(const std::wstring& directoryPath, const std::wstring&
 
     return shaderBlob;
 }
+

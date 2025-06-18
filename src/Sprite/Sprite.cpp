@@ -57,7 +57,7 @@ void Sprite::Initialize() {
 
     size_ = {100, 100};
 
-	AdjustTextureSize();
+    AdjustTextureSize();
 }
 
 void Sprite::Update() {
@@ -104,7 +104,7 @@ void Sprite::Update() {
 }
 
 void Sprite::Draw() {
-	common_->Draw();
+    common_->Draw();
 
     commandList_->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
     commandList_->IASetVertexBuffers(0, 1, &vbv_);

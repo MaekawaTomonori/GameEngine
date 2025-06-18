@@ -563,6 +563,7 @@
     <ClInclude Include="include\Framework.hpp" />
     <ClInclude Include="include\Input.hpp" />
     <ClInclude Include="include\Math\Vector4.hpp" />
+    <ClInclude Include="src\DirectX\Heap\SRVManager.h" />
     <ClInclude Include="src\DirectX\Shader\Shader.h" />
     <ClInclude Include="src\Platform\WinApp.hpp" />
     <ClInclude Include="src\Renderer\Renderer.hpp" />
@@ -581,6 +582,7 @@
     <ClCompile Include="src\DirectX\DirectXAdapter.cpp" />
     <ClCompile Include="src\DirectX\GraphicsPipeline\GraphicsPipeline.cpp" />
     <ClCompile Include="src\DirectX\Heap\Heap.cpp" />
+    <ClCompile Include="src\DirectX\Heap\SRVManager.cpp" />
     <ClCompile Include="src\DirectX\Shader\Shader.cpp" />
     <ClCompile Include="src\Framework\Framework.cpp" />
     <ClCompile Include="src\Game\IGame.cpp" />
