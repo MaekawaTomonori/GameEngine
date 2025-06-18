@@ -43,11 +43,15 @@ Shader* Shader::PSLoad(const std::wstring& name) {
 IDxcBlob* Shader::Compile(const std::wstring& directoryPath, const std::wstring& filePath, const wchar_t* profile,
                           IDxcUtils* dxcUtils, IDxcCompiler3* dxcCompiler, IDxcIncludeHandler* includeHandler) {
     Log::Send(Log::Level::INFO, Utils::Convert(std::format(L"Begin CompileShader, Path : {}, Profile : {}", filePath, profile)));
+    HRESULT hResult = S_FALSE;
     IDxcBlobEncoding* shaderSource = nullptr;
     std::wstring fullPath = directoryPath + filePath;
-    HRESULT hResult = dxcUtils->LoadFile(fullPath.c_str(), nullptr, &shaderSource);
-    assert(SUCCEEDED(hResult));
-
+    if (FAILED(dxcUtils->LoadFile(fullPath.c_str(), nullptr, &shaderSource))) {
+        Log::Send(Log::Level::ERR, Utils::Convert(std::format(L"Failed to load shader file: {}", fullPath)));
+        Utils::Alert("Failed to load shader file: " + Utils::Convert(fullPath));
+        return nullptr;
+    }
+   
     DxcBuffer shaderSourceBuffer;
     shaderSourceBuffer.Ptr = shaderSource->GetBufferPointer();
     shaderSourceBuffer.Size = shaderSource->GetBufferSize();
