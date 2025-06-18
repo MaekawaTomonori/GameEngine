@@ -1,4 +1,4 @@
-#include "Easing.h"
+#include "Math/Easing.hpp"
 
 Vector2 Lerp(Vector2 start, Vector2 end, float t)
 {

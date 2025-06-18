@@ -1,7 +1,7 @@
-﻿#pragma once
+#pragma once
 #include <cmath>
 
-#include "Vector2.h"
+#include "Vector2.hpp"
 
 struct Vector3{
     float x, y, z;
