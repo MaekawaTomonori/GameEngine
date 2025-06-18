@@ -39,6 +39,7 @@ class DirectXAdapter{
 public:
     DirectXAdapter(HWND _hWnd, size_t _width, size_t _height);
 
+    ID3D12Resource* CreateBufferResource(size_t _size) const;
 private:
     void EnableDebugLayer();
     bool CreateDXGI();

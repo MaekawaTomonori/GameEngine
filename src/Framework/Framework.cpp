@@ -19,6 +19,9 @@ Framework::Framework() {
     input_ = Singleton<Input>::GetInstance();
     input_->Initialize();
 
+    sprite_ = Singleton<SpriteCommon>::GetInstance();
+    sprite_->Initialize(dxAdaptor_.get());
+
     timer_ = std::make_unique<Timer>(static_cast<std::chrono::milliseconds>(static_cast<uint64_t>(1e4 / 60)));
     timer_->Start();
 }

@@ -1,11 +1,5 @@
-//
-// Created by tomo- on 25/05/08.
-//
-
 #include "include/Utils.hpp"
 #include <Windows.h>
-#include <string>
-#include <algorithm>
 #include <chrono>
 
 namespace Utils {
@@ -90,5 +84,22 @@ namespace Utils {
         oss << std::put_time(&tm_snapshot, "%Y-%m-%d %H:%M:%S");
         oss << '.' << std::setw(3) << std::setfill('0') << now_ms.count();
         return oss.str();
+    }
+
+	#include <rpc.h>
+    #pragma comment(lib, "rpcrt4.lib")
+
+    std::string GenerateUniqueId() {
+        UUID uuid;
+        UuidCreate(&uuid);
+        RPC_CSTR szUuid = nullptr;
+        UuidToStringA(&uuid, &szUuid);
+        struct UUIDCleaner{
+            RPC_CSTR& ptr;
+            ~UUIDCleaner() {
+                if (ptr)RpcStringFreeA(&ptr);
+            }
+        } cleaner {szUuid};
+        return reinterpret_cast<char*>(szUuid);
     }
 }

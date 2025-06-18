@@ -8,6 +8,7 @@
 #include "src/Config/Config.hpp"
 #include "src/Renderer/Renderer.hpp"
 #include "src/DirectX/DirectXAdapter.hpp"
+#include "src/Sprite/Common/SpriteCommon.hpp"
 #include "src/Timer/Timer.hpp"
 
 class IGame;
@@ -23,6 +24,7 @@ class Framework {
     std::unique_ptr<Timer> timer_;
 
     Input* input_ = nullptr;
+    SpriteCommon* sprite_ = nullptr;
 
 
 public:

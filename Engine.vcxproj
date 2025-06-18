@@ -568,6 +568,7 @@
     <ClInclude Include="src\Renderer\Renderer.hpp" />
     <ClInclude Include="src\Scheduler\Scheduler.hpp" />
     <ClInclude Include="include\Singleton.hpp" />
+    <ClInclude Include="src\Sprite\Common\SpriteCommon.hpp" />
     <ClInclude Include="src\Sprite\Sprite.hpp" />
     <ClInclude Include="src\Texture\TextureManager.h" />
     <ClInclude Include="src\Timer\Timer.hpp" />
@@ -591,6 +592,7 @@
     <ClCompile Include="src\Platform\WinApp.cpp" />
     <ClCompile Include="src\Renderer\Renderer.cpp" />
     <ClCompile Include="src\Scheduler\Scheduler.cpp" />
+    <ClCompile Include="src\Sprite\Common\SpriteCommon.cpp" />
     <ClCompile Include="src\Sprite\Sprite.cpp" />
     <ClCompile Include="src\System\Log.cpp" />
     <ClCompile Include="src\System\Singleton\Singleton.cpp" />

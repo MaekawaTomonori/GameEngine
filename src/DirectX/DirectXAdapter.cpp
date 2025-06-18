@@ -19,6 +19,32 @@ DirectXAdapter::DirectXAdapter(const HWND _hWnd, size_t _width, size_t _height) 
     Log::Send(Log::Level::INFO, "DirectXAdapter Initialized");
 }
 
+ID3D12Resource * DirectXAdapter::CreateBufferResource(const size_t _size) const {
+    D3D12_HEAP_PROPERTIES properties {};
+    properties.Type = D3D12_HEAP_TYPE_UPLOAD;
+
+    //resource setting
+    D3D12_RESOURCE_DESC desc {};
+    desc.Dimension = D3D12_RESOURCE_DIMENSION_BUFFER;
+    desc.Width = _size;
+    desc.Height = 1;
+    desc.DepthOrArraySize = 1;
+    desc.MipLevels = 1;
+    desc.SampleDesc.Count = 1;
+    desc.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
+
+    ID3D12Resource* resource = nullptr;
+
+    #ifdef _DEBUG
+    HRESULT hR =
+        #endif
+        device_->CreateCommittedResource(&properties, D3D12_HEAP_FLAG_NONE, &desc, D3D12_RESOURCE_STATE_GENERIC_READ, nullptr, IID_PPV_ARGS(&resource));
+
+    assert(SUCCEEDED(hR));
+
+    return resource;
+}
+
 void DirectXAdapter::EnableDebugLayer() {
     if (SUCCEEDED(D3D12GetDebugInterface(IID_PPV_ARGS(&debugLayer_)))){
         debugLayer_->EnableDebugLayer();

@@ -1,17 +1,22 @@
 #include "Sprite.hpp"
 
 #include "Singleton.hpp"
+#include "Utils.hpp"
 #include "Math/MathUtils.hpp"
+
+#include "src/Texture/TextureManager.h"
+
 #include "vendor/DirectXTex/DirectXTex.h"
 
-Sprite::Sprite(GraphicsPipeline *_pipeline) {
-    pipeline_ = _pipeline;
+Sprite::Sprite() {
+    common_ = Singleton<SpriteCommon>::GetInstance();
+    adapter_ = common_->GetAdapter();
+
+    uuid_ = Utils::GenerateUniqueId();
 }
 
-Sprite::~Sprite() = default;
-
 void Sprite::Initialize() {
-    vr_.Attach();
+    vr_.Attach(adapter_->CreateBufferResource(sizeof(VertexData) * 4));
     vbv_.BufferLocation = vr_->GetGPUVirtualAddress();
     vbv_.SizeInBytes = sizeof(VertexData) * 4;
     vbv_.StrideInBytes = sizeof(VertexData);
@@ -29,7 +34,7 @@ void Sprite::Initialize() {
     vd_[3].uv = {1, 0};
 
     //IndexData
-    ir_.Attach();
+    ir_.Attach(adapter_->CreateBufferResource(sizeof(uint32_t) * 6));
 
     ibv_.BufferLocation = ir_->GetGPUVirtualAddress();
     ibv_.SizeInBytes = sizeof(uint32_t) * 6;
@@ -45,7 +50,7 @@ void Sprite::Initialize() {
     index_[5] = 2;
 
     //MaterialData
-    mr_.Attach();
+    mr_.Attach(adapter_->CreateBufferResource(sizeof(Material)));
     mr_->Map(0, nullptr, reinterpret_cast<void**>(&material_));
 
     material_->color = {1, 1, 1, 1};
@@ -93,20 +98,20 @@ void Sprite::Update() {
 #pragma endregion
 
     Matrix4x4 worldM = MathUtils::Matrix::MakeAffineMatrix(Vector3{size_.x, size_.y, 1}, {0, 0, rotation_}, {position_.x, position_.y, 0});
-    Matrix4x4 viewProjection = MathUtils::Matrix::MakeIdentity() * MathUtils::Matrix::MakeOrthogonalMatrix(0, config.width, 0, config.height, 0, 100.f);
+    Matrix4x4 viewProjection = MathUtils::Matrix::MakeIdentity() * MathUtils::Matrix::MakeOrthogonalMatrix(0, static_cast<float>(adapter_->GetWidth()), 0, static_cast<float>(adapter_->GetHeight()), 0, 100.f);
 
     worldM = (worldM * viewProjection);
 }
 
 void Sprite::Draw() {
-	pipeline_->DrawCall();
+	common_->Draw();
 
     commandList_->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
     commandList_->IASetVertexBuffers(0, 1, &vbv_);
     commandList_->IASetIndexBuffer(&ibv_);
     commandList_->SetGraphicsRootConstantBufferView(0, mr_->GetGPUVirtualAddress());
     commandList_->SetGraphicsRootConstantBufferView(1, wr_->GetGPUVirtualAddress());
-    commandList_->SetGraphicsRootDescriptorTable(2, Singleton<TextureManager>::GetInstance()->GetGPUHandle(texturePath));
+    commandList_->SetGraphicsRootDescriptorTable(2, Singleton<TextureManager>::GetInstance()->GetGPUHandle(texturePath_));
 
     commandList_->DrawIndexedInstanced(6, 1, 0, 0, 0);
 }

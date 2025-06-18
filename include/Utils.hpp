@@ -9,8 +9,7 @@ namespace Utils {
     void DisplayLastErr();
     void Alert(const std::string& msg);
     std::string DateToString();
+    std::string GenerateUniqueId();
 };
-
-
 
 #endif //UTILS_HPP

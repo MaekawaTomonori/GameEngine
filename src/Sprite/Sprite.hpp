@@ -1,21 +1,23 @@
 #ifndef Sprite_HPP_
 #define Sprite_HPP_
+#include "Common/SpriteCommon.hpp"
 #include "Math/Matrix.hpp"
 #include "Math/Vector2.hpp"
 #include "Math/Vector4.hpp"
 #include "src/DirectX/GraphicsPipeline/GraphicsPipeline.hpp"
 
 class Sprite {
-	struct Material {
-		Vector4 color;
-	};
+    struct Material {
+        Vector4 color;
+    };
 
-	struct VertexData {
-		Vector4 position;
+    struct VertexData {
+        Vector4 position;
         Vector2 uv;
-	};
+    };
 
-    GraphicsPipeline* pipeline_ = nullptr;
+    SpriteCommon* common_ = nullptr;
+    DirectXAdapter* adapter_ = nullptr;
 
     Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> commandList_ = nullptr;
 
@@ -58,8 +60,7 @@ class Sprite {
 
 
 public:
-    Sprite(GraphicsPipeline* _pipeline);
-    ~Sprite();
+    Sprite();
 
     void Initialize();
     void Update();
@@ -102,7 +103,7 @@ public:
     void SetTextureSize(const Vector2& textureSize);
 
 private:
-	void AdjustTextureSize();
+    void AdjustTextureSize();
 }; // class Sprite
 
 #endif // Sprite_HPP_
