@@ -8,6 +8,7 @@
 #include "src/Config/Config.hpp"
 #include "src/Renderer/Renderer.hpp"
 #include "src/DirectX/DirectXAdapter.hpp"
+#include "src/Scene/SceneSwitcher.hpp"
 #include "src/Sprite/Common/SpriteCommon.hpp"
 #include "src/Texture/TextureManager.h"
 #include "src/Timer/Timer.hpp"
@@ -18,6 +19,7 @@ class Framework {
     GameEngine::Config* config_ = nullptr;
 
     std::unique_ptr<IGame> game_;
+    SceneSwitcher* scene_ = nullptr;
 
     std::unique_ptr<WinApp> windows_;
     std::unique_ptr<DirectXAdapter> dxAdaptor_;

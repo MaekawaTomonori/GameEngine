@@ -47,8 +47,8 @@ void Framework::Execute(std::unique_ptr<IGame> _game) {
 
 void Framework::Initialize() {
     if (!game_)return;
-    game_->Initialize();
     config_ = &game_->GetCurrentConfig();
+    scene_ = game_->GetSceneSwitcher();
     Log::Send(Log::Level::INFO, "Game Initialized");
 }
 
@@ -65,12 +65,14 @@ void Framework::Update() const {
         return;
     }
     if (!game_)return;
-    game_->Update();
+    if (!scene_)return;
+    scene_->Update();
 }
 
 void Framework::Draw() const {
     if (!game_)return;
-    game_->Draw();
+    if (!scene_)return;
+    scene_->Draw();
 
     if (!dxAdaptor_){
         Utils::Alert("DirectXAdapter is not initialized");
@@ -81,7 +83,6 @@ void Framework::Draw() const {
 
 void Framework::Shutdown() {
     if (game_){
-        game_->Shutdown();
         game_.reset();
     }
     

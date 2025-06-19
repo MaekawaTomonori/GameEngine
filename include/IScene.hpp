@@ -1,13 +1,11 @@
 #ifndef IScene_HPP_
 #define IScene_HPP_
-#include <memory>
 #include <string>
 
-#include "SceneSwitcher.hpp"
-
+class SceneSwitcher;
 
 class IScene {
-    SceneSwitcher* switcher_ = nullptr;;
+    SceneSwitcher* switcher_ = nullptr;
     bool progress_ = false;
 protected:
     std::string next_;
@@ -20,12 +18,15 @@ public:
     virtual void Initialize() = 0;
     virtual void Update() = 0;
     virtual void Draw() = 0;
+    virtual void Finalize(){}
 
-    void IsProgress() const;
+    bool IsProgress() const;
     void Awake();
+    void Awake(SceneSwitcher* _switcher);
+    void SetSwitcher(SceneSwitcher* _switcher);
 
 protected:
-    void ChangeScene();
+    void Change();
 }; // class IScene
 
 #endif // IScene_HPP_

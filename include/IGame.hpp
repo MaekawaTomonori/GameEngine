@@ -3,19 +3,20 @@
 
 #include <memory>
 
+#include "src/Scene/SceneSwitcher.hpp"
 #include "src/Config/Config.hpp"
+
+class AbstractSceneFactory;
 
 class IGame {
     std::unique_ptr<GameEngine::Config> config_;
+    std::unique_ptr<SceneSwitcher> scene_;
 public:
-    IGame();
+    IGame(std::unique_ptr<AbstractSceneFactory> _factory);
     virtual ~IGame() = default;
-    virtual void Initialize() = 0;
-    virtual void Update() = 0;
-    virtual void Draw() = 0;
-    virtual void Shutdown() = 0;
-    
+
     GameEngine::Config& GetCurrentConfig();
+    SceneSwitcher* GetSceneSwitcher() const;
 }; // class IGame
 
 #endif // IGame_HPP_

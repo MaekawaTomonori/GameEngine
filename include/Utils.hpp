@@ -10,6 +10,7 @@ namespace Utils {
     void Alert(const std::string& msg);
     std::string DateToString();
     std::string GenerateUniqueId();
+    bool EqualsIgnoreCase(std::string str1, std::string str2);
 };
 
 #endif //UTILS_HPP

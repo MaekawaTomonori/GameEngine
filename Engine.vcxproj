@@ -498,6 +498,9 @@
       <Command>
       </Command>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>xcopy /Y /D "$(ProjectDir)Assets\*" "$(SolutionDir)Assets\"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -541,6 +544,9 @@
       <Command>
       </Command>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>xcopy /Y /D "$(ProjectDir)Assets\*" "$(SolutionDir)Assets\"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="include\DebugUI.hpp" />
@@ -567,10 +573,13 @@
     <ClInclude Include="src\DirectX\Shader\Shader.h" />
     <ClInclude Include="src\Platform\WinApp.hpp" />
     <ClInclude Include="src\Renderer\Renderer.hpp" />
+    <ClInclude Include="include\IScene.hpp" />
+    <ClInclude Include="src\Scene\SceneSwitcher.hpp" />
+    <ClInclude Include="include\Factory\AbstractSceneFactory.hpp" />
     <ClInclude Include="src\Scheduler\Scheduler.hpp" />
     <ClInclude Include="include\Singleton.hpp" />
     <ClInclude Include="src\Sprite\Common\SpriteCommon.hpp" />
-    <ClInclude Include="src\Sprite\Sprite.hpp" />
+    <ClInclude Include="include\Sprite.hpp" />
     <ClInclude Include="src\Texture\TextureManager.h" />
     <ClInclude Include="src\Timer\Timer.hpp" />
     <ClInclude Include="src\Window\Window.hpp" />
@@ -593,6 +602,8 @@
     <ClCompile Include="src\Math\Vector3.cpp" />
     <ClCompile Include="src\Platform\WinApp.cpp" />
     <ClCompile Include="src\Renderer\Renderer.cpp" />
+    <ClCompile Include="src\Scene\IScene.cpp" />
+    <ClCompile Include="src\Scene\SceneSwitcher.cpp" />
     <ClCompile Include="src\Scheduler\Scheduler.cpp" />
     <ClCompile Include="src\Sprite\Common\SpriteCommon.cpp" />
     <ClCompile Include="src\Sprite\Sprite.cpp" />
