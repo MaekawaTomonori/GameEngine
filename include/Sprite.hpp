@@ -1,10 +1,11 @@
 #ifndef Sprite_HPP_
 #define Sprite_HPP_
-#include "Common/SpriteCommon.hpp"
 #include "Math/Matrix.hpp"
 #include "Math/Vector2.hpp"
 #include "Math/Vector4.hpp"
 #include "src/DirectX/GraphicsPipeline/GraphicsPipeline.hpp"
+
+class SpriteCommon;
 
 class Sprite {
     struct Material {

@@ -26,7 +26,7 @@ void FrameRateLimiter::WaitForNextFrame() {
             std::this_thread::yield();
         }
     }
-    Log::Send(Log::Level::DEBUG, "Frame Rate Limiter: Frame time: " + std::to_string(elapsedTime.count()) + " micro-sec");
+    //Log::Send(Log::Level::DEBUG, "Frame Rate Limiter: Frame time: " + std::to_string(elapsedTime.count()) + " micro-sec");
 
     reference_ = std::chrono::steady_clock::now();
 }

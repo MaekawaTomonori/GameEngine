@@ -49,7 +49,6 @@ IDxcBlob* Shader::Compile(const std::wstring& directoryPath, const std::wstring&
     if (FAILED(dxcUtils->LoadFile(fullPath.c_str(), nullptr, &shaderSource))) {
         Log::Send(Log::Level::ERR, Utils::Convert(std::format(L"Failed to load shader file: {}", fullPath)));
         Utils::Alert("Failed to load shader file: " + Utils::Convert(fullPath));
-        return nullptr;
     }
    
     DxcBuffer shaderSourceBuffer;

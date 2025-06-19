@@ -3,6 +3,7 @@
 #include "Singleton.hpp"
 #include "Utils.hpp"
 #include "Math/MathUtils.hpp"
+#include "Common/SpriteCommon.hpp"
 
 #include "src/Texture/TextureManager.h"
 
