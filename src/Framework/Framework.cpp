@@ -72,7 +72,7 @@ void Framework::Update() const {
 void Framework::Draw() const {
     if (!game_)return;
     if (!scene_)return;
-    scene_->Draw();
+    renderer_->Register([&] { scene_->Draw(); });
 
     if (!dxAdaptor_){
         Utils::Alert("DirectXAdapter is not initialized");

@@ -76,6 +76,12 @@ void Renderer::Initialize(DirectXAdapter *_adapter) {
         return;
     }
 
+    if (!CreateViewportAndScissor()) {
+        Log::Send(Log::Level::ERR, "Failed to create viewport and scissor rect");
+        Utils::Alert("Failed to create viewport and scissor rect");
+        return;
+    }
+
     fence_ = _adapter->GetFence();
     fenceValue_ = 0;
     fenceEvent_ = CreateEvent(nullptr, false, false, nullptr);
@@ -124,10 +130,6 @@ void Renderer::Register(std::function<void()> _task) {
 }
 
 void Renderer::Render() {
-	{
-        std::lock_guard<std::mutex> lock(mutex_);
-        pendingCommands_ = {};
-	}
 	if (debugUI_){
         debugUI_->Process();
 		Register([&]{debugUI_->Render();});
@@ -192,6 +194,8 @@ void Renderer::ExecuteCommands() {
     cList_->OMSetRenderTargets(1, &rtvHandles_[bbi], false, nullptr);
     cList_->ClearRenderTargetView(rtvHandles_[bbi], &back.x, 0, nullptr);
 
+    cList_->RSSetViewports(1, &viewport_);
+    cList_->RSSetScissorRects(1, &scissorRect_);
 
     // Execute rendering commands
     while (!renderingCommands_.empty()){
@@ -233,7 +237,6 @@ void Renderer::ExecuteCommands() {
             renderingCommands_ = std::move(pendingCommands_);
             pendingCommands_ = {};
         }
-
     }
 }
 
@@ -269,5 +272,21 @@ bool Renderer::CreateRTV(ID3D12Device* _device) {
     _device->CreateRenderTargetView(swapChainResources_[1].Get(), &rtvDesc, rtvHandles_[1]);
 
     Log::Send(Log::Level::INFO, "RTVs Created");
+    return true;
+}
+
+bool Renderer::CreateViewportAndScissor() {
+    viewport_.Width = static_cast<float>(adapter_->GetWidth());
+    viewport_.Height = static_cast<float>(adapter_->GetHeight());
+    viewport_.MinDepth = 0.0f;
+    viewport_.MaxDepth = 1.0f;
+    viewport_.TopLeftX = 0.0f;
+    viewport_.TopLeftY = 0.0f;
+
+	scissorRect_.left = 0;
+    scissorRect_.right = static_cast<LONG>(adapter_->GetWidth());
+    scissorRect_.top = 0;
+    scissorRect_.bottom = static_cast<LONG>(adapter_->GetHeight());
+    Log::Send(Log::Level::INFO, "Viewport and Scissor Rect Created");
     return true;
 }

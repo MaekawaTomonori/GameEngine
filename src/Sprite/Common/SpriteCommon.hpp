@@ -7,11 +7,12 @@
 
 class SpriteCommon {
     DirectXAdapter* adapter_ = nullptr;
+    std::mutex mutex_; 
 
     std::unique_ptr<GraphicsPipeline> pipeline_;
 public:
 	void Initialize(DirectXAdapter* _adapter);
-    void Draw() const;
+    void Draw();
 
     DirectXAdapter* GetAdapter() const {
         return adapter_;

@@ -17,6 +17,11 @@ class Sprite {
         Vector2 uv;
     };
 
+    struct Transformation {
+	    Matrix4x4 wvp;
+        Matrix4x4 world;
+    };
+
     SpriteCommon* common_ = nullptr;
     DirectXAdapter* adapter_ = nullptr;
 
@@ -45,7 +50,7 @@ class Sprite {
 
     // world transform
     Microsoft::WRL::ComPtr<ID3D12Resource> wr_;
-    Matrix4x4* wd_ = nullptr;
+    Transformation* wd_ = nullptr;
 
     Vector2 position_ = {0, 0};
     Vector2 size_ = {100, 100};
@@ -63,7 +68,7 @@ class Sprite {
 public:
     Sprite();
 
-    void Initialize();
+    void Initialize(const std::string&_texture);
     void Update();
     void Draw();
 

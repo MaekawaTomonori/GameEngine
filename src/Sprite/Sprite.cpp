@@ -12,11 +12,15 @@
 Sprite::Sprite() {
     common_ = Singleton<SpriteCommon>::GetInstance();
     adapter_ = common_->GetAdapter();
+    commandList_ = adapter_->GetCommandList();
 
     uuid_ = Utils::GenerateUniqueId();
 }
 
-void Sprite::Initialize() {
+void Sprite::Initialize(const std::string&_texture) {
+    texturePath_ = std::move(_texture);
+    Singleton<TextureManager>::GetInstance()->Load(texturePath_);
+
     vr_.Attach(adapter_->CreateBufferResource(sizeof(VertexData) * 4));
     vbv_.BufferLocation = vr_->GetGPUVirtualAddress();
     vbv_.SizeInBytes = sizeof(VertexData) * 4;
@@ -55,6 +59,11 @@ void Sprite::Initialize() {
     mr_->Map(0, nullptr, reinterpret_cast<void**>(&material_));
 
     material_->color = {1, 1, 1, 1};
+
+    wr_.Attach(adapter_->CreateBufferResource(sizeof(Transformation)));
+    wr_->Map(0, nullptr, reinterpret_cast<void**>(&wd_));
+    wd_->wvp = MathUtils::Matrix::MakeIdentity();
+    wd_->world = MathUtils::Matrix::MakeIdentity();
 
     size_ = {100, 100};
 
@@ -98,10 +107,10 @@ void Sprite::Update() {
     vd_[3].uv= {texRight, texTop};
 #pragma endregion
 
-    Matrix4x4 worldM = MathUtils::Matrix::MakeAffineMatrix(Vector3{size_.x, size_.y, 1}, {0, 0, rotation_}, {position_.x, position_.y, 0});
+    wd_->world = MathUtils::Matrix::MakeAffineMatrix(Vector3{size_.x, size_.y, 1}, {0, 0, rotation_}, {position_.x, position_.y, 0});
     Matrix4x4 viewProjection = MathUtils::Matrix::MakeIdentity() * MathUtils::Matrix::MakeOrthogonalMatrix(0, static_cast<float>(adapter_->GetWidth()), 0, static_cast<float>(adapter_->GetHeight()), 0, 100.f);
 
-    worldM = (worldM * viewProjection);
+    wd_->wvp = (wd_->world * viewProjection);
 }
 
 void Sprite::Draw() {
@@ -121,7 +130,6 @@ void Sprite::AdjustTextureSize() {
     const DirectX::TexMetadata& metadata = Singleton<TextureManager>::GetInstance()->GetTextureMetadata(texturePath_);
     texSize_ = {static_cast<float>(metadata.width), static_cast<float>(metadata.height)};
     size_ = texSize_;
-
 }
 
 const Vector2& Sprite::GetPosition() const {

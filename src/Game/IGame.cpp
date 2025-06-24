@@ -4,10 +4,11 @@ SceneSwitcher * IGame::GetSceneSwitcher() const {
 	return scene_.get();
 }
 
-IGame::IGame(std::unique_ptr<AbstractSceneFactory> _factory) {
+IGame::IGame(std::unique_ptr<AbstractSceneFactory> _factory, const std::string &_scene) {
 	scene_ = std::make_unique<SceneSwitcher>();
     if (_factory){
         scene_->SetFactory(std::move(_factory));
+        scene_->Change(_scene);
     }
 }
 

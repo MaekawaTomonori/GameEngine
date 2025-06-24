@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include <d3d12.h>
+#include <mutex>
 #include <wrl/client.h>
 #include <string>
 #include <unordered_map>
@@ -23,6 +24,8 @@ private: //Variables
     DirectXAdapter* adapter_ = nullptr;
     SRVManager* srvManager_ = nullptr;
 
+    std::mutex mutex_;
+
     std::string folderPath_ = "Assets/Resources/";
 
     std::unordered_map<std::string, Texture> textures_;
@@ -41,12 +44,12 @@ public:
     //All Unload(Clear)
     void Unload();
 
-    const DirectX::TexMetadata& GetTextureMetadata(const std::string& fileName) const;
-    uint32_t GetSrvIndex(const std::string& fileName) const;
+    const DirectX::TexMetadata& GetTextureMetadata(const std::string& fileName);
+    uint32_t GetSrvIndex(const std::string& fileName);
 
     uint32_t GetTextureIndexByFilePath(const std::string& path) const;
 
-    D3D12_GPU_DESCRIPTOR_HANDLE GetGPUHandle(const std::string& fileName) const;
+    D3D12_GPU_DESCRIPTOR_HANDLE GetGPUHandle(const std::string& fileName);
     D3D12_GPU_DESCRIPTOR_HANDLE GetGPUHandle(const uint32_t index) const;
 };
 

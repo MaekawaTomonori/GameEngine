@@ -1,6 +1,7 @@
 #include "TextureManager.h"
 
 #include <format>
+#include <mutex>
 
 #include "Log.hpp"
 #include "Utils.hpp"
@@ -101,12 +102,16 @@ ID3D12Resource* TextureManager::UploadTextureData(ID3D12Resource* texture, const
 
 
 void TextureManager::Initialize(DirectXAdapter* _adapter, SRVManager* _srv) {
+    std::lock_guard<std::mutex> lock(mutex_);
+
     adapter_ = _adapter;
     srvManager_ = _srv;
     Log::Send(Log::Level::INFO, "TextureManager Initialized");
 }
 
 void TextureManager::Load(const std::string& fileName) {
+    std::lock_guard<std::mutex> lock(mutex_);
+
     //Remove FolderPath
     std::string name = fileName;
     size_t pos = 0;
@@ -150,18 +155,23 @@ void TextureManager::Unload() {
     textures_.clear();
 }
 
-const DirectX::TexMetadata& TextureManager::GetTextureMetadata(const std::string& fileName) const {
-    if (textures_.contains(fileName)){
+const DirectX::TexMetadata& TextureManager::GetTextureMetadata(const std::string& fileName) {
+    std::lock_guard<std::mutex> lock(mutex_);
+
+	if (textures_.contains(fileName)){
         return textures_.at(fileName).metadata;
     }
 
+    Load(fileName);
     Log::Send(Log::Level::ERR, std::format("TextureManager::GetTextureMetadata: {} not found", fileName));
-    assert(0);
-    return textures_.at("").metadata;
+    Utils::Alert(std::format("TextureManager::GetTextureMetadata: {} not found", fileName));
+    return textures_.at(fileName).metadata;
 }
 
-uint32_t TextureManager::GetSrvIndex(const std::string& fileName) const {
-    if (textures_.contains(fileName)){
+uint32_t TextureManager::GetSrvIndex(const std::string& fileName) {
+	std::lock_guard<std::mutex> lock(mutex_);
+
+	if (textures_.contains(fileName)){
         return textures_.at(fileName).srvIndex;
     }
 
@@ -180,7 +190,9 @@ uint32_t TextureManager::GetTextureIndexByFilePath(const std::string& path) cons
     return 0;
 }
 
-D3D12_GPU_DESCRIPTOR_HANDLE TextureManager::GetGPUHandle(const std::string& fileName) const {
+D3D12_GPU_DESCRIPTOR_HANDLE TextureManager::GetGPUHandle(const std::string& fileName) {
+    std::lock_guard<std::mutex> lock(mutex_);
+
     std::string name = fileName;
     size_t pos = 0;
     while ((pos = name.find(folderPath_, pos)) != std::string::npos){

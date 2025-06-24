@@ -84,6 +84,8 @@ public:
     void Render();
 private:
     bool CreateRTV(ID3D12Device* _device);
+    bool CreateViewportAndScissor();
+
     void Wait();
 
     // thread

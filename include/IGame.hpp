@@ -12,7 +12,7 @@ class IGame {
     std::unique_ptr<GameEngine::Config> config_;
     std::unique_ptr<SceneSwitcher> scene_;
 public:
-    IGame(std::unique_ptr<AbstractSceneFactory> _factory);
+    IGame(std::unique_ptr<AbstractSceneFactory> _factory, const std::string &_scene = "");
     virtual ~IGame() = default;
 
     GameEngine::Config& GetCurrentConfig();
