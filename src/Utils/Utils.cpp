@@ -86,7 +86,7 @@ namespace Utils {
         return oss.str();
     }
 
-	#include <rpc.h>
+    #include <rpc.h>
     #pragma comment(lib, "rpcrt4.lib")
 
     std::string GenerateUniqueId() {
@@ -104,7 +104,7 @@ namespace Utils {
     }
 
     bool EqualsIgnoreCase(std::string str1, std::string str2) {
-	    return str1.size() == str2.size() && std::equal(str1.begin(), str1.end(), str2.begin(),
-	                                                    [](char a, char b){ return tolower(a) == tolower(b); });
+        return str1.size() == str2.size() && std::equal(str1.begin(), str1.end(), str2.begin(),
+                                                        [](char a, char b){ return tolower(a) == tolower(b); });
     }
 }

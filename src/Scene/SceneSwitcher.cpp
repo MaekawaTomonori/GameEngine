@@ -38,7 +38,7 @@ void SceneSwitcher::Update() {
 
 void SceneSwitcher::Draw() {
     if (scene_){ 
-		scene_->Draw();
+        scene_->Draw();
     }
 }
 
@@ -47,12 +47,12 @@ void SceneSwitcher::SetFactory(std::unique_ptr<AbstractSceneFactory> _factory) {
 }
 
 void SceneSwitcher::Change(const std::string &_name) {
-	if (!factory_) return;
+    if (!factory_) return;
 
     // Already Registered
     if (next_) return;
 
-	next_ = factory_->Create(_name);
+    next_ = factory_->Create(_name);
 
     // out fade
     // Already Destroyed

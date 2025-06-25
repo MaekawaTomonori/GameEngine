@@ -1,8 +1,8 @@
 #include "include/Framework.hpp"
 
+#include "Utils.hpp"
 #include "Log.hpp"
 #include "Singleton.hpp"
-#include "Utils.hpp"
 #include "include/IGame.hpp"
 
 Framework::Framework() {

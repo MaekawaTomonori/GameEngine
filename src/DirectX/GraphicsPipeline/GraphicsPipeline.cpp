@@ -27,43 +27,43 @@ void GraphicsPipeline::DrawCall() const {
 }
 
 void GraphicsPipeline::SetBlendMode(BlendMode mode) {
-	blendMode_ = mode;
+    blendMode_ = mode;
     blendDesc_.RenderTarget[0].BlendEnable = true;
-	switch (blendMode_){
-	case BlendMode::ALPHA:
-		blendDesc_.RenderTarget[0].SrcBlend = D3D12_BLEND_SRC_ALPHA;
-		blendDesc_.RenderTarget[0].BlendOp = D3D12_BLEND_OP_ADD;
-		blendDesc_.RenderTarget[0].DestBlend = D3D12_BLEND_INV_SRC_ALPHA;
-		blendDesc_.RenderTarget[0].SrcBlendAlpha = D3D12_BLEND_ONE;
-		blendDesc_.RenderTarget[0].BlendOpAlpha = D3D12_BLEND_OP_ADD;
-		blendDesc_.RenderTarget[0].DestBlendAlpha = D3D12_BLEND_ZERO;
-		break;
-	case BlendMode::ADD:
-		blendDesc_.RenderTarget[0].SrcBlend = D3D12_BLEND_SRC_ALPHA;
-		blendDesc_.RenderTarget[0].BlendOp = D3D12_BLEND_OP_ADD;
-		blendDesc_.RenderTarget[0].DestBlend = D3D12_BLEND_ONE;
+    switch (blendMode_){
+    case BlendMode::ALPHA:
+        blendDesc_.RenderTarget[0].SrcBlend = D3D12_BLEND_SRC_ALPHA;
+        blendDesc_.RenderTarget[0].BlendOp = D3D12_BLEND_OP_ADD;
+        blendDesc_.RenderTarget[0].DestBlend = D3D12_BLEND_INV_SRC_ALPHA;
+        blendDesc_.RenderTarget[0].SrcBlendAlpha = D3D12_BLEND_ONE;
+        blendDesc_.RenderTarget[0].BlendOpAlpha = D3D12_BLEND_OP_ADD;
+        blendDesc_.RenderTarget[0].DestBlendAlpha = D3D12_BLEND_ZERO;
+        break;
+    case BlendMode::ADD:
+        blendDesc_.RenderTarget[0].SrcBlend = D3D12_BLEND_SRC_ALPHA;
+        blendDesc_.RenderTarget[0].BlendOp = D3D12_BLEND_OP_ADD;
+        blendDesc_.RenderTarget[0].DestBlend = D3D12_BLEND_ONE;
         blendDesc_.RenderTarget[0].SrcBlendAlpha = D3D12_BLEND_ONE;
         blendDesc_.RenderTarget[0].DestBlendAlpha = D3D12_BLEND_ZERO;
         blendDesc_.RenderTarget[0].BlendOpAlpha = D3D12_BLEND_OP_ADD;
-		break;
-	case BlendMode::SUB:
-		blendDesc_.RenderTarget[0].SrcBlend = D3D12_BLEND_SRC_ALPHA;
-		blendDesc_.RenderTarget[0].BlendOp = D3D12_BLEND_OP_REV_SUBTRACT;
-		blendDesc_.RenderTarget[0].DestBlend = D3D12_BLEND_ONE;
-		break;
-	case BlendMode::MULTI:
-		blendDesc_.RenderTarget[0].SrcBlend = D3D12_BLEND_ZERO;
-		blendDesc_.RenderTarget[0].BlendOp = D3D12_BLEND_OP_ADD;
-		blendDesc_.RenderTarget[0].DestBlend = D3D12_BLEND_DEST_COLOR;
-		break;
-	case BlendMode::SCREEN:
-		blendDesc_.RenderTarget[0].SrcBlend = D3D12_BLEND_INV_DEST_COLOR;
-		blendDesc_.RenderTarget[0].BlendOp = D3D12_BLEND_OP_ADD;
-		blendDesc_.RenderTarget[0].DestBlend = D3D12_BLEND_ONE;
-		break;
-	case BlendMode::NONE:
-		blendDesc_.RenderTarget[0].BlendEnable = false;
-	}
+        break;
+    case BlendMode::SUB:
+        blendDesc_.RenderTarget[0].SrcBlend = D3D12_BLEND_SRC_ALPHA;
+        blendDesc_.RenderTarget[0].BlendOp = D3D12_BLEND_OP_REV_SUBTRACT;
+        blendDesc_.RenderTarget[0].DestBlend = D3D12_BLEND_ONE;
+        break;
+    case BlendMode::MULTI:
+        blendDesc_.RenderTarget[0].SrcBlend = D3D12_BLEND_ZERO;
+        blendDesc_.RenderTarget[0].BlendOp = D3D12_BLEND_OP_ADD;
+        blendDesc_.RenderTarget[0].DestBlend = D3D12_BLEND_DEST_COLOR;
+        break;
+    case BlendMode::SCREEN:
+        blendDesc_.RenderTarget[0].SrcBlend = D3D12_BLEND_INV_DEST_COLOR;
+        blendDesc_.RenderTarget[0].BlendOp = D3D12_BLEND_OP_ADD;
+        blendDesc_.RenderTarget[0].DestBlend = D3D12_BLEND_ONE;
+        break;
+    case BlendMode::NONE:
+        blendDesc_.RenderTarget[0].BlendEnable = false;
+    }
     //graphicsPipelineStateDesc.BlendState = blendDesc_;
 }
 
@@ -75,61 +75,74 @@ void GraphicsPipeline::DescriptorRange() {
 }
 
 void GraphicsPipeline::CreateRootSignature() {
-    HRESULT hr = S_OK;
+    HRESULT hr = S_FALSE;
 
     D3D12_ROOT_SIGNATURE_DESC descriptionRootSignature {};
     descriptionRootSignature.Flags = D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT;
 
     DescriptorRange();
 
-    if (type_ == Type::PARTICLE){
-        rootParameters_.resize(3);
-    } else{
-        rootParameters_.resize(6);
+    D3D12_ROOT_PARAMETER rp {};
+    if (type_ != Type::PARTICLE2D){
+        //PixelShader Material
+        rp.ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
+        rp.ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
+        rp.Descriptor.ShaderRegister = 0;
+        rootParameters_.push_back(rp);
     }
-
-    //PixelShader Material
-    rootParameters_[0].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
-    rootParameters_[0].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
-    rootParameters_[0].Descriptor.ShaderRegister = 0;
 
     //VertexShader WVP
-    if (type_ == Type::PARTICLE){
-        rootParameters_[1].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
-        rootParameters_[1].ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX;
-        rootParameters_[1].DescriptorTable.pDescriptorRanges = descriptorRange_;
-        rootParameters_[1].DescriptorTable.NumDescriptorRanges = _countof(descriptorRange_);
+    if (type_ == Type::PARTICLE || type_ == Type::PARTICLE2D){
+        rp.ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
+        rp.ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX;
+        rp.DescriptorTable.pDescriptorRanges = descriptorRange_;
+        rp.DescriptorTable.NumDescriptorRanges = _countof(descriptorRange_);
     } else{
-        rootParameters_[1].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
-        rootParameters_[1].ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX;
-        rootParameters_[1].Descriptor.ShaderRegister = 0;
+        rp.ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
+        rp.ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX;
+        rp.Descriptor.ShaderRegister = 0;
     }
+    rootParameters_.push_back(rp);
 
     //DescriptorTable Texture
-    rootParameters_[2].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
-    rootParameters_[2].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
-    rootParameters_[2].DescriptorTable.pDescriptorRanges = descriptorRange_;
-    rootParameters_[2].DescriptorTable.NumDescriptorRanges = _countof(descriptorRange_);
+    rp.ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
+    rp.ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
+    rp.DescriptorTable.pDescriptorRanges = descriptorRange_;
+    rp.DescriptorTable.NumDescriptorRanges = _countof(descriptorRange_);
+    rootParameters_.push_back(rp);
 
-    if (type_ != Type::PARTICLE){
+    if (type_ == Type::MODEL){
         //DirectionalLight
-        rootParameters_[3].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
-        rootParameters_[3].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
-        rootParameters_[3].Descriptor.ShaderRegister = 1;
+        rp.ParameterType = D3D12_ROOT_PARAMETER_TYPE_SRV;
+        rp.ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
+        rp.Descriptor.ShaderRegister = 1;
+        rootParameters_.push_back(rp);
 
         //Camera For GPU
-        rootParameters_[4].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
-        rootParameters_[4].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
-        rootParameters_[4].Descriptor.ShaderRegister = 2;
+        rp.ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
+        rp.ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
+        rp.Descriptor.ShaderRegister = 2;
+        rootParameters_.push_back(rp);
 
         //PointLight
-        rootParameters_[5].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
-        rootParameters_[5].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
-        rootParameters_[5].Descriptor.ShaderRegister = 3;
+        rp.ParameterType = D3D12_ROOT_PARAMETER_TYPE_SRV;
+        rp.ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
+        rp.Descriptor.ShaderRegister = 3;
+        rootParameters_.push_back(rp);
+
+        //SpotLight
+        rp.ParameterType = D3D12_ROOT_PARAMETER_TYPE_SRV;
+        rp.ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
+        rp.Descriptor.ShaderRegister = 4;
+        rootParameters_.push_back(rp);
+
+        rp.ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
+        rp.ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
+        rp.Descriptor.ShaderRegister = 5;
+        rootParameters_.push_back(rp);
     }
 
-
-	//set
+    //set
     descriptionRootSignature.pParameters = rootParameters_.data();
     descriptionRootSignature.NumParameters = static_cast<UINT>(rootParameters_.size());
 
@@ -154,6 +167,7 @@ void GraphicsPipeline::CreateRootSignature() {
 }
 
 void GraphicsPipeline::CreateInputLayout() {
+    inputElementDescs_.resize(3);
     inputElementDescs_[0].SemanticName = "POSITION";
     inputElementDescs_[0].SemanticIndex = 0;
     inputElementDescs_[0].Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
@@ -165,15 +179,18 @@ void GraphicsPipeline::CreateInputLayout() {
     inputElementDescs_[1].Format = DXGI_FORMAT_R32G32_FLOAT;
     inputElementDescs_[1].AlignedByteOffset = D3D12_APPEND_ALIGNED_ELEMENT;
 
-    inputElementDescs_[2].SemanticName = "NORMAL";
-    inputElementDescs_[2].SemanticIndex = 0;
-    inputElementDescs_[2].Format = DXGI_FORMAT_R32G32B32_FLOAT;
-    inputElementDescs_[2].AlignedByteOffset = D3D12_APPEND_ALIGNED_ELEMENT;
-
+    if (type_ != Type::SPRITE && type_ != Type::PARTICLE2D){
+        inputElementDescs_[2].SemanticName = "NORMAL";
+        inputElementDescs_[2].SemanticIndex = 0;
+        inputElementDescs_[2].Format = DXGI_FORMAT_R32G32B32_FLOAT;
+        inputElementDescs_[2].AlignedByteOffset = D3D12_APPEND_ALIGNED_ELEMENT;
+    }else {
+        inputElementDescs_.resize(2);
+    }
     //System::Debug::Log(std::format(L"InputElementSlot : {}\n", inputElementDescs_[0].InputSlot));
 
-	inputLayoutDesc_.pInputElementDescs = inputElementDescs_;
-    inputLayoutDesc_.NumElements = _countof(inputElementDescs_);
+    inputLayoutDesc_.pInputElementDescs = inputElementDescs_.data();
+    inputLayoutDesc_.NumElements = static_cast<UINT>(inputElementDescs_.size());
 }
 
 void GraphicsPipeline::CreateBlendState() {
@@ -191,37 +208,40 @@ void GraphicsPipeline::CreateShader() {
     switch (type_){
     case Type::MODEL:
         name = L"Object3d";
+        break;
     case Type::SPRITE:
         name = L"Sprite";
-	    break;
+        break;
     case Type::PARTICLE:
+    case Type::PARTICLE2D:
         name = L"Particle";
-	    break;
+        break;
     }
 
     shader_->Create(name);
 }
 
 void GraphicsPipeline::CreateRasterizerState() {
-	switch (type_){
-	case Type::MODEL:
-	    rasterizerDesc_.CullMode = D3D12_CULL_MODE_BACK;
-	    rasterizerDesc_.FillMode = D3D12_FILL_MODE_SOLID;
-		break;
-	case Type::SPRITE:
+    switch (type_){
+    case Type::MODEL:
+        rasterizerDesc_.CullMode = D3D12_CULL_MODE_BACK;
+        rasterizerDesc_.FillMode = D3D12_FILL_MODE_SOLID;
+        break;
+    case Type::SPRITE:
         rasterizerDesc_.CullMode = D3D12_CULL_MODE_NONE;
         rasterizerDesc_.FillMode = D3D12_FILL_MODE_SOLID;
-		break;
-	case Type::PARTICLE:
+        break;
+    case Type::PARTICLE:
+    case Type::PARTICLE2D:
         rasterizerDesc_.CullMode = D3D12_CULL_MODE_NONE;
         rasterizerDesc_.FillMode = D3D12_FILL_MODE_SOLID;
-		break;
-	default: ;
-	}
+        break;
+    default: ;
+    }
 }
 
 void GraphicsPipeline::CreateSampler() {
-    staticSamplers_[0].Filter = D3D12_FILTER_MIN_MAG_MIP_LINEAR;
+    staticSamplers_[0].Filter = D3D12_FILTER_MIN_MAG_MIP_POINT;
     staticSamplers_[0].AddressU = D3D12_TEXTURE_ADDRESS_MODE_WRAP;
     staticSamplers_[0].AddressV = D3D12_TEXTURE_ADDRESS_MODE_WRAP;
     staticSamplers_[0].AddressW = D3D12_TEXTURE_ADDRESS_MODE_WRAP;
@@ -237,7 +257,7 @@ void GraphicsPipeline::CreateDepthStencil() {
     depthStencilDesc_.DepthFunc = D3D12_COMPARISON_FUNC_LESS_EQUAL;
 
     if(type_ == Type::PARTICLE){
-    	//depthStencilDesc_.DepthWriteMask = D3D12_DEPTH_WRITE_MASK_ZERO;
+        //depthStencilDesc_.DepthWriteMask = D3D12_DEPTH_WRITE_MASK_ZERO;
     }
 }
 
@@ -246,13 +266,13 @@ void GraphicsPipeline::CreatePSO() {
     graphicsPipelineStateDesc.InputLayout = inputLayoutDesc_;
     graphicsPipelineStateDesc.BlendState = blendDesc_;
     graphicsPipelineStateDesc.VS = {shader_->GetVertexShader()->GetBufferPointer(), shader_->GetVertexShader()->GetBufferSize()};
-	graphicsPipelineStateDesc.RasterizerState = rasterizerDesc_;
+    graphicsPipelineStateDesc.RasterizerState = rasterizerDesc_;
     graphicsPipelineStateDesc.PS = {shader_->GetPixelShader()->GetBufferPointer(), shader_->GetPixelShader()->GetBufferSize()};
     graphicsPipelineStateDesc.DepthStencilState = depthStencilDesc_;
     graphicsPipelineStateDesc.DSVFormat = DXGI_FORMAT_D24_UNORM_S8_UINT;
 
     graphicsPipelineStateDesc.NumRenderTargets = 1;
-    graphicsPipelineStateDesc.RTVFormats[0] = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
+    graphicsPipelineStateDesc.RTVFormats[0] = DXGI_FORMAT_R8G8B8A8_UNORM;
     graphicsPipelineStateDesc.PrimitiveTopologyType = D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE;
 
     graphicsPipelineStateDesc.SampleDesc.Count = 1;

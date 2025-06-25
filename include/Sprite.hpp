@@ -18,7 +18,7 @@ class Sprite {
     };
 
     struct Transformation {
-	    Matrix4x4 wvp;
+        Matrix4x4 wvp;
         Matrix4x4 world;
     };
 

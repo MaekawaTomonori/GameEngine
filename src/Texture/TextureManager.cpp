@@ -158,7 +158,7 @@ void TextureManager::Unload() {
 const DirectX::TexMetadata& TextureManager::GetTextureMetadata(const std::string& fileName) {
     std::lock_guard<std::mutex> lock(mutex_);
 
-	if (textures_.contains(fileName)){
+    if (textures_.contains(fileName)){
         return textures_.at(fileName).metadata;
     }
 
@@ -169,9 +169,9 @@ const DirectX::TexMetadata& TextureManager::GetTextureMetadata(const std::string
 }
 
 uint32_t TextureManager::GetSrvIndex(const std::string& fileName) {
-	std::lock_guard<std::mutex> lock(mutex_);
+    std::lock_guard<std::mutex> lock(mutex_);
 
-	if (textures_.contains(fileName)){
+    if (textures_.contains(fileName)){
         return textures_.at(fileName).srvIndex;
     }
 
