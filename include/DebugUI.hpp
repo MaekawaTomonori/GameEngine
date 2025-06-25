@@ -23,14 +23,13 @@ class DebugUI {
 
     std::vector<Command> commands_;
 
-    ImDrawData* cache_ = nullptr;
 public:
     ~DebugUI();
     void Initialize(const DirectXAdapter* dx);
     void Process();
-    void Render() const;
+    void Render();
 
-	void RegisterCommand(const std::string &id, std::function<void()> _command);
+	void RegisterCommand(const std::string &_id, std::function<void()> _command);
 private:
 	void DockSpace();
 }; // class DebugUI

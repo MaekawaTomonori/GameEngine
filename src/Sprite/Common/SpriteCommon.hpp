@@ -3,17 +3,22 @@
 #include <memory>
 #include <mutex>
 
+#include "DebugUI.hpp"
 #include "src/DirectX/GraphicsPipeline/GraphicsPipeline.hpp"
-
 
 class SpriteCommon {
     DirectXAdapter* adapter_ = nullptr;
-    std::mutex mutex_; 
+    DebugUI* debugUI_ = nullptr;
+
+	std::mutex mutex_; 
 
     std::unique_ptr<GraphicsPipeline> pipeline_;
+
 public:
-	void Initialize(DirectXAdapter* _adapter);
+	void Initialize(DirectXAdapter* _adapter, DebugUI* _debugUi);
     void Draw();
+
+    void RegisterCommand(const std::string& _id, const std::function<void()> &_command);
 
     DirectXAdapter* GetAdapter() const {
         return adapter_;

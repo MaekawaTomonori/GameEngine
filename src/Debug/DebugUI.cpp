@@ -47,7 +47,9 @@ void DebugUI::Initialize(const DirectXAdapter *dx) {
 }
 
 void DebugUI::Process() {
-    std::lock_guard<std::mutex> lock(mutex_);
+    std::vector<Command> commands = commands_;
+    commands_.clear(); 
+
     ImGui_ImplDX12_NewFrame();
     ImGui_ImplWin32_NewFrame();
     ImGui::NewFrame();
@@ -57,30 +59,30 @@ void DebugUI::Process() {
 
     ImGui::ShowDemoWindow();
 
-    std::ranges::sort(commands_, [](const Command& a, const Command& b){
+    std::ranges::sort(commands, [](const Command& a, const Command& b){
         return a.id < b.id;
     });
     
-    for (const auto &[id, command] : commands_) {
+    for (const auto &[id, command] : commands) {
         command();
     }
 
+
     ImGui::Render();
     ImGui::UpdatePlatformWindows();
-
-    cache_ = ImGui::GetDrawData();
 }
 
-void DebugUI::Render() const {
-    if (!cache_)return;
+void DebugUI::Render() {
+	Process();
 
     ID3D12DescriptorHeap* heaps[] = {heap_->Get()};
     cList_->SetDescriptorHeaps(_countof(heaps), heaps);
-    ImGui_ImplDX12_RenderDrawData(cache_, cList_);
+    ImGui_ImplDX12_RenderDrawData(ImGui::GetDrawData(), cList_);
 }
 
-void DebugUI::RegisterCommand(const std::string &id, std::function<void()> _command) {
-    commands_.push_back({id, std::move(_command)});
+void DebugUI::RegisterCommand(const std::string &_id, std::function<void()> _command) {
+    std::lock_guard<std::mutex> lock(mutex_);
+    commands_.push_back({.id= _id, .command= std::move(_command)});
 }
 
 void DebugUI::DockSpace() {

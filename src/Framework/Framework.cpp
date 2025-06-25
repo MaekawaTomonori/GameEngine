@@ -27,7 +27,7 @@ Framework::Framework() {
     texture_->Initialize(dxAdapter_.get(), srv_.get());
 
     sprite_ = Singleton<SpriteCommon>::GetInstance();
-    sprite_->Initialize(dxAdapter_.get());
+    sprite_->Initialize(dxAdapter_.get(), debugUI_.get());
 
     timer_ = std::make_unique<Timer>(static_cast<std::chrono::milliseconds>(static_cast<uint64_t>(1e4 / 60)));
     timer_->Start();
@@ -73,15 +73,12 @@ void Framework::Draw() const {
     if (!scene_)return;
     if (!srv_)return;
     if (!debugUI_)return;
+	if (!dxAdapter_)return;
 
     srv_->PreDraw();
 
-    debugUI_->Process();
     dxAdapter_->Register([&] { scene_->Draw(); });
 
-    if (!dxAdapter_){
-        Utils::Alert("DirectXAdapter is not initialized");
-    }
     dxAdapter_->Register([&](){debugUI_->Render(); });
     dxAdapter_->Render();
 }

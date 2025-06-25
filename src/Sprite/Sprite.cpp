@@ -2,6 +2,7 @@
 
 #include "Singleton.hpp"
 #include "Utils.hpp"
+#include "imgui.h"
 #include "Math/MathUtils.hpp"
 #include "Common/SpriteCommon.hpp"
 
@@ -71,6 +72,7 @@ void Sprite::Initialize(const std::string&_texture) {
 }
 
 void Sprite::Update() {
+    Debug();
 #pragma region Vertex position
     float left = 0.f - anchorPoint_.x;
     float right = 1.f - anchorPoint_.x;
@@ -130,6 +132,25 @@ void Sprite::AdjustTextureSize() {
     const DirectX::TexMetadata& metadata = Singleton<TextureManager>::GetInstance()->GetTextureMetadata(texturePath_);
     texSize_ = {static_cast<float>(metadata.width), static_cast<float>(metadata.height)};
     size_ = texSize_;
+}
+
+void Sprite::Debug() {
+	common_->RegisterCommand(
+		uuid_,
+        [this](){
+	        ImGui::Begin("Sprite");
+	        if (ImGui::CollapsingHeader(uuid_.c_str())){
+		        ImGui::Text("Texture Path: %s", texturePath_.c_str());
+		        ImGui::DragFloat2("Position", &position_.x, 0.1f);
+		        ImGui::DragFloat2("Size", &size_.x, 1);
+		        ImGui::DragFloat("Rotation", &rotation_);
+		        ImGui::DragFloat2("Anchor Point", &anchorPoint_.x);
+		        ImGui::Checkbox("Flip X", &flipX_);
+		        ImGui::Checkbox("Flip Y", &flipY_);
+            }
+	        ImGui::End();
+		}
+    );
 }
 
 const Vector2& Sprite::GetPosition() const {

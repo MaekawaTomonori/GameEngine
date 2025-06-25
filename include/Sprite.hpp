@@ -110,6 +110,7 @@ public:
 
 private:
     void AdjustTextureSize();
+    void Debug();
 }; // class Sprite
 
 #endif // Sprite_HPP_
