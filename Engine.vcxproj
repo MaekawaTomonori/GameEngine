@@ -565,6 +565,7 @@
     <ClInclude Include="src\Config\Config.hpp" />
     <ClInclude Include="src\Container\Material.hpp" />
     <ClInclude Include="src\DirectX\DirectXAdapter.hpp" />
+    <ClInclude Include="src\DirectX\FrameRate\FrameRateLimiter.hpp" />
     <ClInclude Include="src\DirectX\GraphicsPipeline\GraphicsPipeline.hpp" />
     <ClInclude Include="src\DirectX\Heap\Heap.hpp" />
     <ClInclude Include="include\Log.hpp" />
@@ -574,7 +575,6 @@
     <ClInclude Include="src\DirectX\Heap\SRVManager.h" />
     <ClInclude Include="src\DirectX\Shader\Shader.h" />
     <ClInclude Include="src\Platform\WinApp.hpp" />
-    <ClInclude Include="src\Renderer\Renderer.hpp" />
     <ClInclude Include="include\IScene.hpp" />
     <ClInclude Include="src\Scene\SceneSwitcher.hpp" />
     <ClInclude Include="include\Factory\AbstractSceneFactory.hpp" />
@@ -591,6 +591,7 @@
     <ClCompile Include="src\Container\Material.cpp" />
     <ClCompile Include="src\Debug\DebugUI.cpp" />
     <ClCompile Include="src\DirectX\DirectXAdapter.cpp" />
+    <ClCompile Include="src\DirectX\FrameRate\FrameRateLimiter.cpp" />
     <ClCompile Include="src\DirectX\GraphicsPipeline\GraphicsPipeline.cpp" />
     <ClCompile Include="src\DirectX\Heap\Heap.cpp" />
     <ClCompile Include="src\DirectX\Heap\SRVManager.cpp" />
@@ -603,7 +604,6 @@
     <ClCompile Include="src\Math\Vector2.cpp" />
     <ClCompile Include="src\Math\Vector3.cpp" />
     <ClCompile Include="src\Platform\WinApp.cpp" />
-    <ClCompile Include="src\Renderer\Renderer.cpp" />
     <ClCompile Include="src\Scene\IScene.cpp" />
     <ClCompile Include="src\Scene\SceneSwitcher.cpp" />
     <ClCompile Include="src\Scheduler\Scheduler.cpp" />

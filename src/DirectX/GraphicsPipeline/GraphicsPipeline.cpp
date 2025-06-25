@@ -4,6 +4,7 @@
 #include <format>
 
 #include "Log.hpp"
+#include "Utils.hpp"
 #include "src/DirectX/DirectXAdapter.hpp"
 
 void GraphicsPipeline::Create(DirectXAdapter* _adapter, Type type) {
@@ -20,9 +21,9 @@ void GraphicsPipeline::Create(DirectXAdapter* _adapter, Type type) {
     CreatePSO();
 }
 
-void GraphicsPipeline::DrawCall(ID3D12GraphicsCommandList* commandList) const {
-    commandList->SetGraphicsRootSignature(rootSignature_.Get());
-    commandList->SetPipelineState(graphicsPipelineState_.Get());
+void GraphicsPipeline::DrawCall() const {
+    adapter_->GetCommandList()->SetGraphicsRootSignature(rootSignature_.Get());
+    adapter_->GetCommandList()->SetPipelineState(graphicsPipelineState_.Get());
 }
 
 void GraphicsPipeline::SetBlendMode(BlendMode mode) {
@@ -189,8 +190,9 @@ void GraphicsPipeline::CreateShader() {
     std::wstring name;
     switch (type_){
     case Type::MODEL:
-    case Type::SPRITE:
         name = L"Object3d";
+    case Type::SPRITE:
+        name = L"Sprite";
 	    break;
     case Type::PARTICLE:
         name = L"Particle";
@@ -258,4 +260,9 @@ void GraphicsPipeline::CreatePSO() {
 
     HRESULT hr = adapter_->GetDevice()->CreateGraphicsPipelineState(&graphicsPipelineStateDesc, IID_PPV_ARGS(&graphicsPipelineState_));
     assert(SUCCEEDED(hr));
+    if (FAILED(hr)) {
+        Log::Send(Log::Level::ERR, "Failed to create graphics pipeline state");
+        Utils::Alert("Failed to create graphics pipeline state");
+        assert(false);
+    }
 }

@@ -3,10 +3,10 @@
 
 #include <memory>
 
+#include "DebugUI.hpp"
 #include "Input.hpp"
 #include "src/Platform/WinApp.hpp"
 #include "src/Config/Config.hpp"
-#include "src/Renderer/Renderer.hpp"
 #include "src/DirectX/DirectXAdapter.hpp"
 #include "src/Scene/SceneSwitcher.hpp"
 #include "src/Sprite/Common/SpriteCommon.hpp"
@@ -22,9 +22,9 @@ class Framework {
     SceneSwitcher* scene_ = nullptr;
 
     std::unique_ptr<WinApp> windows_;
-    std::unique_ptr<DirectXAdapter> dxAdaptor_;
+    std::unique_ptr<DirectXAdapter> dxAdapter_;
+    std::unique_ptr<DebugUI> debugUI_;
     std::unique_ptr<SRVManager> srv_;
-    std::unique_ptr<Renderer> renderer_;
     std::unique_ptr<Timer> timer_;
 
     Input* input_ = nullptr;

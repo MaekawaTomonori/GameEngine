@@ -12,22 +12,22 @@ Framework::Framework() {
     windows_->Initialize();
     //windows_->SetWindowSize(static_cast<int>(config_->GetWidth()), static_cast<int>(config_->GetHeight()));
 
-    dxAdaptor_ = std::make_unique<DirectXAdapter>(windows_->GetWindowHandle(), config_->GetWidth(), config_->GetHeight());
+    dxAdapter_ = std::make_unique<DirectXAdapter>(windows_->GetWindowHandle(), config_->GetWidth(), config_->GetHeight());
+
+    debugUI_ = std::make_unique<DebugUI>();
+    debugUI_->Initialize(dxAdapter_.get());
 
     srv_ = std::make_unique<SRVManager>();
-    srv_->Initialize(dxAdaptor_.get());
-
-    renderer_ = std::make_unique<Renderer>();
-    renderer_->Initialize(dxAdaptor_.get());
+    srv_->Initialize(dxAdapter_.get());
 
     input_ = Singleton<Input>::GetInstance();
     input_->Initialize();
 
     texture_ = Singleton<TextureManager>::GetInstance();
-    texture_->Initialize(dxAdaptor_.get(), srv_.get());
+    texture_->Initialize(dxAdapter_.get(), srv_.get());
 
     sprite_ = Singleton<SpriteCommon>::GetInstance();
-    sprite_->Initialize(dxAdaptor_.get());
+    sprite_->Initialize(dxAdapter_.get());
 
     timer_ = std::make_unique<Timer>(static_cast<std::chrono::milliseconds>(static_cast<uint64_t>(1e4 / 60)));
     timer_->Start();
@@ -59,7 +59,6 @@ bool Framework::Loop() const {
 
 void Framework::Update() const {
     if (input_)input_->Update();
-
     if (timer_->Check()) {
         timer_->Restart();
         return;
@@ -72,13 +71,14 @@ void Framework::Update() const {
 void Framework::Draw() const {
     if (!game_)return;
     if (!scene_)return;
-    renderer_->Register([&] { scene_->Draw(); });
+    if (debugUI_)debugUI_->Process();
+    dxAdapter_->Register([&] { scene_->Draw(); });
 
-    if (!dxAdaptor_){
+    if (!dxAdapter_){
         Utils::Alert("DirectXAdapter is not initialized");
     }
-    //renderer_->Register([&](){debugUI_->Render(); });
-    renderer_->Render();
+    dxAdapter_->Register([&](){debugUI_->Render(); });
+    dxAdapter_->Render();
 }
 
 void Framework::Shutdown() {
@@ -86,9 +86,8 @@ void Framework::Shutdown() {
         game_.reset();
     }
     
-    if (renderer_){
-        renderer_->Shutdown();
-        renderer_.reset();
+    if (dxAdapter_){
+        dxAdapter_.reset();
     }
 
     SingletonFinalizer::Finalize();

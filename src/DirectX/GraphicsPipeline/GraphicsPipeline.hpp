@@ -29,7 +29,7 @@ public:
 
 	void Create(DirectXAdapter* _adapter, Type type);
 
-	void DrawCall(ID3D12GraphicsCommandList* commandList) const;
+	void DrawCall() const;
 
     void SetBlendMode(BlendMode mode);
 
@@ -46,7 +46,6 @@ private://Methods
 	void CreatePSO();
 
 private://Variables
-	//借りポ
 	DirectXAdapter* adapter_ = nullptr;
 
 	Type type_ = Type::MODEL;

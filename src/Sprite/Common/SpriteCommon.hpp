@@ -1,6 +1,7 @@
 #ifndef SpriteCommon_HPP_
 #define SpriteCommon_HPP_
 #include <memory>
+#include <mutex>
 
 #include "src/DirectX/GraphicsPipeline/GraphicsPipeline.hpp"
 

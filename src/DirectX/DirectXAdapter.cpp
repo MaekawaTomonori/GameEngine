@@ -5,6 +5,7 @@
 
 #include <d3dcompiler.h>
 
+#include "Heap/Heap.hpp"
 #include "include/Log.hpp"
 #include "include/Utils.hpp"
 
@@ -20,10 +21,15 @@ DirectXAdapter::DirectXAdapter(const HWND _hWnd, size_t _width, size_t _height) 
     if (!CreateCommand())Utils::Alert("Failed to create Command");
     if (!CreateSwapChain()) Utils::Alert("Failed to create SwapChain");
     if (!CreateFence()) Utils::Alert("Failed to create Fence");
+    if (!CreateRTV()) Utils::Alert("Failed to create RTV");
+    if (!CreateDSV()) Utils::Alert("Failed to create DSV");
+    if (!CreateViewportAndScissor()) Utils::Alert("Failed to create Viewport and Scissor");
+    if (!CreateLimiter()) Utils::Alert("Failed to create FrameRateLimiter");
+
     Log::Send(Log::Level::INFO, "DirectXAdapter Initialized");
 }
 
-ID3D12Resource * DirectXAdapter::CreateBufferResource(const size_t _size) const {
+ID3D12Resource* DirectXAdapter::CreateBufferResource(const size_t _size) const {
     D3D12_HEAP_PROPERTIES properties {};
     properties.Type = D3D12_HEAP_TYPE_UPLOAD;
 
@@ -51,6 +57,102 @@ ID3D12Resource * DirectXAdapter::CreateBufferResource(const size_t _size) const 
     }
 
     return resource;
+}
+
+ID3D12Resource* DirectXAdapter::CreateDepthStencilResource(int32_t _width, int32_t _height) const {
+    D3D12_RESOURCE_DESC desc {};
+    desc.Width = _width;
+    desc.Height = _height;
+    desc.MipLevels = 1;
+    desc.DepthOrArraySize = 1;
+    desc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
+    desc.SampleDesc.Count = 1;
+    desc.Dimension = D3D12_RESOURCE_DIMENSION_TEXTURE2D;
+    desc.Flags = D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL;
+
+    D3D12_HEAP_PROPERTIES properties {};
+    properties.Type = D3D12_HEAP_TYPE_DEFAULT;
+
+    D3D12_CLEAR_VALUE clearValue {};
+    clearValue.DepthStencil.Depth = 1.f;
+    clearValue.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
+
+    ID3D12Resource* resource = nullptr;
+    HRESULT hr = device_->CreateCommittedResource(&properties, D3D12_HEAP_FLAG_NONE, &desc, D3D12_RESOURCE_STATE_DEPTH_WRITE, &clearValue, IID_PPV_ARGS(&resource));
+    if (FAILED(hr)){
+        Log::Send(Log::Level::ERR, "Failed to create depth stencil resource");
+        Utils::Alert("Failed to create depth stencil resource");
+        assert(false);
+    }
+
+    return resource;
+}
+
+void DirectXAdapter::Register(std::function<void()> _task) {
+    if (!isRunning_) tasks_.push(std::move(_task));
+    else pending_.push(std::move(_task));
+}
+
+void DirectXAdapter::Render() {
+    isRunning_ = true;
+
+    UINT bbi = swapChain_->GetCurrentBackBufferIndex();
+
+    D3D12_RESOURCE_BARRIER barrier = {};
+    barrier.Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
+    barrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
+    barrier.Transition.pResource = swapChainResources_[bbi].Get();
+    barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_PRESENT;
+    barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_RENDER_TARGET;
+
+    cList_->ResourceBarrier(1, &barrier);
+
+    cList_->OMSetRenderTargets(1, &rtvHandles_[bbi], false, nullptr);
+    cList_->ClearRenderTargetView(rtvHandles_[bbi], &back.x, 0, nullptr);
+
+    cList_->RSSetViewports(1, &viewport_);
+    cList_->RSSetScissorRects(1, &scissorRect_);
+
+    // Execute rendering commands
+    while (!tasks_.empty()){
+        auto command = tasks_.front();
+        tasks_.pop();
+        if (command){
+            command();
+        }
+    }
+
+    if (!tasks_.empty()){
+        Log::Send(Log::Level::WARNING, "There are still pending tasks in the queue");
+    }
+    tasks_.swap(pending_);
+    pending_ = {};
+
+    barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET;
+    barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_PRESENT;
+    cList_->ResourceBarrier(1, &barrier);
+
+    if (FAILED(cList_->Close())){
+        Utils::Alert("Failed to close command list");
+        return;
+    }
+    ID3D12CommandList* commandLists[] = {cList_.Get()};
+    cQueue_->ExecuteCommandLists(_countof(commandLists), commandLists);
+    swapChain_->Present(1, 0);
+
+    Wait();
+
+    if (FAILED(cAllocator_->Reset())){
+        Utils::Alert("Failed to reset command allocator");
+        return;
+    }
+
+    if (FAILED(cList_->Reset(cAllocator_.Get(), nullptr))){
+        Utils::Alert("Failed to reset command list");
+        return;
+    }
+
+    isRunning_ = false;
 }
 
 void DirectXAdapter::EnableDebugLayer() {
@@ -202,8 +304,95 @@ bool DirectXAdapter::CreateFence() {
         Log::Send(Log::Level::ERR, "Failed to create fence");
         return false;
     }
+    fenceEvent_ = CreateEvent(nullptr, false, false, nullptr);
+
     Log::Send(Log::Level::INFO, "Fence Created");
     return true;
+}
+
+bool DirectXAdapter::CreateRTV() {
+    rtvHeap_ = std::make_unique<Heap>();
+    if (!rtvHeap_ || !rtvHeap_->Create(device_.Get(), D3D12_DESCRIPTOR_HEAP_TYPE_RTV, 2, D3D12_DESCRIPTOR_HEAP_FLAG_NONE)){
+        return false;
+    }
+
+    Log::Send(Log::Level::INFO, "RTV Heap Created");
+
+    swapChainResources_.resize(2);
+    for (UINT i = 0; i < 2; ++i){
+        if (FAILED(swapChain_->GetBuffer(i, IID_PPV_ARGS(&swapChainResources_[i])))){
+            Log::Send(Log::Level::ERR, "Failed to get swap chain buffer");
+            return false;
+        }
+    }
+    Log::Send(Log::Level::INFO, "Swap Chain Resources Created");
+
+    //Set RTVs
+    D3D12_RENDER_TARGET_VIEW_DESC rtvDesc = {};
+    rtvDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
+    rtvDesc.ViewDimension = D3D12_RTV_DIMENSION_TEXTURE2D;
+
+    rtvHandles_.resize(2);
+    rtvHandles_[0] = rtvHeap_->Get()->GetCPUDescriptorHandleForHeapStart();
+    device_->CreateRenderTargetView(swapChainResources_[0].Get(), &rtvDesc, rtvHandles_[0]);
+
+    rtvHandles_[1].ptr = rtvHandles_[0].ptr + device_->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
+    device_->CreateRenderTargetView(swapChainResources_[1].Get(), &rtvDesc, rtvHandles_[1]);
+
+    Log::Send(Log::Level::INFO, "RTVs Created");
+    return true;
+}
+
+bool DirectXAdapter::CreateDSV() {
+    depthStencil_.Attach(CreateDepthStencilResource(static_cast<int32_t>(windowSize_.first), static_cast<int32_t>(windowSize_.second)));
+
+    dsvHeap_ = std::make_unique<Heap>();
+    if (!dsvHeap_->Create(device_.Get(), D3D12_DESCRIPTOR_HEAP_TYPE_DSV, 1, D3D12_DESCRIPTOR_HEAP_FLAG_NONE)) {
+        Log::Send(Log::Level::ERR, "Failed to create DSV Heap");
+        return false;
+    }
+
+    D3D12_DEPTH_STENCIL_VIEW_DESC desc = {};
+    desc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
+    desc.ViewDimension = D3D12_DSV_DIMENSION_TEXTURE2D;
+
+    device_->CreateDepthStencilView(depthStencil_.Get(), &desc, dsvHeap_->Get()->GetCPUDescriptorHandleForHeapStart());
+    return true;
+}
+
+bool DirectXAdapter::CreateViewportAndScissor() {
+    viewport_.Width = static_cast<float>(windowSize_.first);
+    viewport_.Height = static_cast<float>(windowSize_.second);
+    viewport_.MinDepth = 0.0f;
+    viewport_.MaxDepth = 1.0f;
+    viewport_.TopLeftX = 0.0f;
+    viewport_.TopLeftY = 0.0f;
+
+    scissorRect_.left = 0;
+    scissorRect_.right = static_cast<LONG>(windowSize_.first);
+    scissorRect_.top = 0;
+    scissorRect_.bottom = static_cast<LONG>(windowSize_.second);
+    Log::Send(Log::Level::INFO, "Viewport and Scissor Rect Created");
+    return true;
+}
+
+bool DirectXAdapter::CreateLimiter() {
+    fpsLimiter_ = std::make_unique<FrameRateLimiter>(static_cast<uint16_t>(60), true); // 60 FPS with VSync enabled
+
+    return fpsLimiter_ != nullptr;
+}
+
+
+void DirectXAdapter::Wait() {
+    ++fenceValue_;
+    cQueue_->Signal(fence_.Get(), fenceValue_);
+
+    if (fence_->GetCompletedValue() < fenceValue_){
+        fence_->SetEventOnCompletion(fenceValue_, fenceEvent_);
+        WaitForSingleObject(fenceEvent_, INFINITE);
+    }
+
+    fpsLimiter_->WaitForNextFrame();
 }
 
 ID3D12Device * DirectXAdapter::GetDevice() const {
