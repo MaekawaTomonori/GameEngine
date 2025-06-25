@@ -1,7 +1,9 @@
 #include "DebugUI.hpp"
 
+#include <algorithm>
 #include <mutex>
 
+#include "imgui_internal.h"
 #include "include/Utils.hpp"
 #include "vendor/imgui/imgui.h"
 #include "vendor/imgui/imgui_impl_dx12.h"
@@ -50,14 +52,18 @@ void DebugUI::Process() {
     ImGui_ImplWin32_NewFrame();
     ImGui::NewFrame();
 
-    // DockingSpace
+    // DockSpace
+    DockSpace();
 
     ImGui::ShowDemoWindow();
 
-    // Do your ImGui rendering here
-
-    // for (PROCESS)
-
+    std::ranges::sort(commands_, [](const Command& a, const Command& b){
+        return a.id < b.id;
+    });
+    
+    for (const auto &[id, command] : commands_) {
+        command();
+    }
 
     ImGui::Render();
     ImGui::UpdatePlatformWindows();
@@ -65,12 +71,25 @@ void DebugUI::Process() {
     cache_ = ImGui::GetDrawData();
 }
 
-void DebugUI::Render() {
-    std::lock_guard<std::mutex> lock(mutex_);
+void DebugUI::Render() const {
     if (!cache_)return;
 
     ID3D12DescriptorHeap* heaps[] = {heap_->Get()};
     cList_->SetDescriptorHeaps(_countof(heaps), heaps);
     ImGui_ImplDX12_RenderDrawData(cache_, cList_);
+}
+
+void DebugUI::RegisterCommand(const std::string &id, std::function<void()> _command) {
+    commands_.push_back({id, std::move(_command)});
+}
+
+void DebugUI::DockSpace() {
+    ImGui::DockSpaceOverViewport(ImGui::GetID(""), ImGui::GetMainViewport());
+    ImGui::Begin("DockSpace", nullptr, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoDocking | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus | ImGuiWindowFlags_NoResize);
+    ImGuiID dockSpaceId = ImGui::GetID("DockSpace");
+    ImGui::DockSpace(dockSpaceId, ImGui::GetContentRegionAvail(), ImGuiDockNodeFlags_PassthruCentralNode | ImGuiDockNodeFlags_NoDockingInCentralNode);
+
+    if (ImGuiDockNode* node = ImGui::DockBuilderGetNode(dockSpaceId))node->LocalFlags |= ImGuiDockNodeFlags_NoTabBar; // Disable tab bar in the central node
+    ImGui::End();
 }
 
