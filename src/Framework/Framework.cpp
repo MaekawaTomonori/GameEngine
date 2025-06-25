@@ -71,7 +71,12 @@ void Framework::Update() const {
 void Framework::Draw() const {
     if (!game_)return;
     if (!scene_)return;
-    if (debugUI_)debugUI_->Process();
+    if (!srv_)return;
+    if (!debugUI_)return;
+
+    srv_->PreDraw();
+
+    debugUI_->Process();
     dxAdapter_->Register([&] { scene_->Draw(); });
 
     if (!dxAdapter_){

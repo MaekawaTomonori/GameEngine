@@ -8,7 +8,7 @@
 class Heap;
 
 class SRVManager{
-    DirectXAdapter* dxCommon_ = nullptr;
+    DirectXAdapter* adapter_ = nullptr;
 
     static const uint32_t kMaxSRVCount;
 
@@ -18,7 +18,7 @@ class SRVManager{
     std::shared_ptr<Heap> heap_;
 
 public:
-	void Initialize(DirectXAdapter* dxCommon);
+	void Initialize(DirectXAdapter* _adapter);
     void Finalize();
 
     uint32_t Allocate();

@@ -8,10 +8,10 @@
 
 const uint32_t SRVManager::kMaxSRVCount = 512;
 
-void SRVManager::Initialize(DirectXAdapter* dxCommon) {
-    dxCommon_ = dxCommon;
+void SRVManager::Initialize(DirectXAdapter* _adapter) {
+    adapter_ = _adapter;
 
-	auto dxc = dxCommon_;
+	auto dxc = adapter_;
     if (!dxc){
         Log::Send(Log::Level::ERR, "SRVManager Initialize Failed");
         return;
@@ -42,7 +42,7 @@ uint32_t SRVManager::Allocate() {
 
 void SRVManager::PreDraw() const {
     ID3D12DescriptorHeap* descriptorHeaps[] = {heap_->Get()};
-    dxCommon_->GetCommandList()->SetDescriptorHeaps(_countof(descriptorHeaps), descriptorHeaps);
+    adapter_->GetCommandList()->SetDescriptorHeaps(_countof(descriptorHeaps), descriptorHeaps);
 }
 
 void SRVManager::CreateSRVforTexture2D(uint32_t srvIndex, ID3D12Resource* pResource, DXGI_FORMAT format, UINT mipMap) {
@@ -52,7 +52,7 @@ void SRVManager::CreateSRVforTexture2D(uint32_t srvIndex, ID3D12Resource* pResou
     desc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
     desc.Texture2D.MipLevels = mipMap;
 
-    dxCommon_->GetDevice()->CreateShaderResourceView(pResource, &desc, heap_->GetCPUHandle(srvIndex));
+    adapter_->GetDevice()->CreateShaderResourceView(pResource, &desc, heap_->GetCPUHandle(srvIndex));
 }
 
 void SRVManager::CreateSRVforStructuredBuffer(uint32_t srvIndex, ID3D12Resource* pResource, UINT numElements, UINT stride) {
@@ -64,11 +64,11 @@ void SRVManager::CreateSRVforStructuredBuffer(uint32_t srvIndex, ID3D12Resource*
     desc.Buffer.Flags = D3D12_BUFFER_SRV_FLAG_NONE;
     desc.Buffer.NumElements = numElements;
     desc.Buffer.StructureByteStride = stride;
-    dxCommon_->GetDevice()->CreateShaderResourceView(pResource, &desc, heap_->GetCPUHandle(srvIndex));
+    adapter_->GetDevice()->CreateShaderResourceView(pResource, &desc, heap_->GetCPUHandle(srvIndex));
 }
 
 void SRVManager::SetGraphicsRootDescriptorTable(UINT rootParameterIndex, uint32_t srvIndex) const {
-    dxCommon_->GetCommandList()->SetGraphicsRootDescriptorTable(rootParameterIndex, heap_->GetGPUHandle(srvIndex));
+    adapter_->GetCommandList()->SetGraphicsRootDescriptorTable(rootParameterIndex, heap_->GetGPUHandle(srvIndex));
 }
 
 ID3D12DescriptorHeap* SRVManager::GetDescriptorHeap() const {

@@ -241,7 +241,7 @@ void GraphicsPipeline::CreateRasterizerState() {
 }
 
 void GraphicsPipeline::CreateSampler() {
-    staticSamplers_[0].Filter = D3D12_FILTER_MIN_MAG_MIP_POINT;
+    staticSamplers_[0].Filter = D3D12_FILTER_MIN_MAG_MIP_LINEAR;
     staticSamplers_[0].AddressU = D3D12_TEXTURE_ADDRESS_MODE_WRAP;
     staticSamplers_[0].AddressV = D3D12_TEXTURE_ADDRESS_MODE_WRAP;
     staticSamplers_[0].AddressW = D3D12_TEXTURE_ADDRESS_MODE_WRAP;
@@ -272,7 +272,7 @@ void GraphicsPipeline::CreatePSO() {
     graphicsPipelineStateDesc.DSVFormat = DXGI_FORMAT_D24_UNORM_S8_UINT;
 
     graphicsPipelineStateDesc.NumRenderTargets = 1;
-    graphicsPipelineStateDesc.RTVFormats[0] = DXGI_FORMAT_R8G8B8A8_UNORM;
+    graphicsPipelineStateDesc.RTVFormats[0] = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
     graphicsPipelineStateDesc.PrimitiveTopologyType = D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE;
 
     graphicsPipelineStateDesc.SampleDesc.Count = 1;

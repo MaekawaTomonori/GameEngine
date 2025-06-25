@@ -105,7 +105,7 @@ void TextureManager::Initialize(DirectXAdapter* _adapter, SRVManager* _srv) {
     std::lock_guard<std::mutex> lock(mutex_);
 
     adapter_ = _adapter;
-    srvManager_ = _srv;
+    srv_ = _srv;
     Log::Send(Log::Level::INFO, "TextureManager Initialized");
 }
 
@@ -124,7 +124,7 @@ void TextureManager::Load(const std::string& fileName) {
         return;
     }
 
-    assert(!srvManager_->IsFull());
+    assert(!srv_->IsFull());
 
     
     //Load Texture
@@ -136,11 +136,11 @@ void TextureManager::Load(const std::string& fileName) {
     texture.resource = CreateTextureResource(img.GetMetadata());
     texture.intermediateResource = UploadTextureData(texture.resource.Get(), img);
 
-    texture.srvIndex = srvManager_->Allocate();
-    texture.cpuHandle = srvManager_->GetCPUHandle(texture.srvIndex);
-    texture.gpuHandle = srvManager_->GetGPUHandle(texture.srvIndex);
+    texture.srvIndex = srv_->Allocate();
+    texture.cpuHandle = srv_->GetCPUHandle(texture.srvIndex);
+    texture.gpuHandle = srv_->GetGPUHandle(texture.srvIndex);
 
-    srvManager_->CreateSRVforTexture2D(texture.srvIndex, texture.resource.Get(), texture.metadata.format, static_cast<UINT>(texture.metadata.mipLevels));
+    srv_->CreateSRVforTexture2D(texture.srvIndex, texture.resource.Get(), texture.metadata.format, static_cast<UINT>(texture.metadata.mipLevels));
 
     Log::Send(Log::Level::INFO, std::format("TextureManager::Load: {}", name));
 }
@@ -211,5 +211,5 @@ D3D12_GPU_DESCRIPTOR_HANDLE TextureManager::GetGPUHandle(const std::string& file
 D3D12_GPU_DESCRIPTOR_HANDLE TextureManager::GetGPUHandle(const uint32_t index) const {
     assert(index <= textures_.size());
     Log::Send(Log::Level::INFO, std::format("TextureManager::GetGPUHandle: index {}", index));
-    return srvManager_->GetGPUHandle(index);
+    return srv_->GetGPUHandle(index);
 }

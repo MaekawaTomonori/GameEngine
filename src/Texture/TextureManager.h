@@ -22,7 +22,7 @@ class TextureManager{
 
 private: //Variables
     DirectXAdapter* adapter_ = nullptr;
-    SRVManager* srvManager_ = nullptr;
+    SRVManager* srv_ = nullptr;
 
     std::mutex mutex_;
 

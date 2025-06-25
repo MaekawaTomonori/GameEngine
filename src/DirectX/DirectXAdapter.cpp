@@ -107,7 +107,8 @@ void DirectXAdapter::Render() {
 
     cList_->ResourceBarrier(1, &barrier);
 
-    cList_->OMSetRenderTargets(1, &rtvHandles_[bbi], false, nullptr);
+    D3D12_CPU_DESCRIPTOR_HANDLE dsvHandle = dsvHeap_->GetCPUHandle(0);
+    cList_->OMSetRenderTargets(1, &rtvHandles_[bbi], false, &dsvHandle);
     cList_->ClearRenderTargetView(rtvHandles_[bbi], &back.x, 0, nullptr);
 
     cList_->RSSetViewports(1, &viewport_);

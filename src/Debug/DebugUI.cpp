@@ -50,13 +50,13 @@ void DebugUI::Process() {
     ImGui_ImplWin32_NewFrame();
     ImGui::NewFrame();
 
+    // DockingSpace
+
     ImGui::ShowDemoWindow();
 
     // Do your ImGui rendering here
 
     // for (PROCESS)
-
-    // DockingSpace
 
 
     ImGui::Render();
