@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="DebugUI">
+    <Position X="8.5" Y="0.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Struct Name="DebugUI::Command">
+        <TypeIdentifier>
+          <NewMemberFileName>include\DebugUI.hpp</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAIAAQAAAgAAAAAAAAAAAACkABAAAQAAKAA=</HashCode>
+      <FileName>include\DebugUI.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Framework" Collapsed="true">
+    <Position X="2.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEQACAAIBAAAAwQAAAgAAYAAIJAAABAAAEAAAACAAAA=</HashCode>
+      <FileName>include\Framework.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IGame">
+    <Position X="5.75" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAACAAAAAAAAAIAAAAAQAgAAAAAAAAAAABA=</HashCode>
+      <FileName>include\IGame.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Input" Collapsed="true">
+    <Position X="0.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAQAAAAIAAECAQAAAAIAAEAAAAAAAAAAAAABAAAAAIA=</HashCode>
+      <FileName>include\Input.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IScene" Collapsed="true">
+    <Position X="2.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQABAAAQABACwAAAAAAAAAAAAAAgAAAAIBEAAAAAEA=</HashCode>
+      <FileName>include\IScene.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Log" Collapsed="true">
+    <Position X="4" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAAQIAAEAACAAAAAEAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>include\Log.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SingletonFinalizer" Collapsed="true">
+    <Position X="2.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAQAAAAAAAgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>include\Singleton.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Singleton&lt;T&gt;" Collapsed="true">
+    <Position X="0.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAACAAAAABABAAEEAAAAgAABAAAA=</HashCode>
+      <FileName>include\Singleton.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sprite" Collapsed="true">
+    <Position X="4" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQoAAAhACCQA4CAAAGIJABAQIhgQiiQIAgAAhrBmAk=</HashCode>
+      <FileName>include\Sprite.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Yu Gothic UI" Size="9" />
+</ClassDiagram>
