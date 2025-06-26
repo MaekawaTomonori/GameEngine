@@ -11,7 +11,6 @@
 #include "src/Scene/SceneSwitcher.hpp"
 #include "src/Sprite/Common/SpriteCommon.hpp"
 #include "src/Texture/TextureManager.h"
-#include "src/Timer/Timer.hpp"
 
 class IGame;
 
@@ -25,7 +24,6 @@ class Framework {
     std::unique_ptr<DirectXAdapter> dxAdapter_;
     std::unique_ptr<DebugUI> debugUI_;
     std::unique_ptr<SRVManager> srv_;
-    std::unique_ptr<Timer> timer_;
 
     Input* input_ = nullptr;
     TextureManager* texture_ = nullptr;
@@ -42,6 +40,8 @@ private:
     void Update() const;
     void Draw() const;
     void Shutdown();
+
+    bool Check() const;
 }; // class Framework
 
 #endif // Framework_HPP_

@@ -1,6 +1,5 @@
 #include "include/Framework.hpp"
 
-#include "Utils.hpp"
 #include "Log.hpp"
 #include "Singleton.hpp"
 #include "include/IGame.hpp"
@@ -28,9 +27,6 @@ Framework::Framework() {
 
     sprite_ = Singleton<SpriteCommon>::GetInstance();
     sprite_->Initialize(dxAdapter_.get(), debugUI_.get());
-
-    timer_ = std::make_unique<Timer>(static_cast<std::chrono::milliseconds>(static_cast<uint64_t>(1e4 / 60)));
-    timer_->Start();
 }
 
 void Framework::Execute(std::unique_ptr<IGame> _game) {
@@ -46,39 +42,30 @@ void Framework::Execute(std::unique_ptr<IGame> _game) {
 }
 
 void Framework::Initialize() {
-    if (!game_)return;
+	if (!game_) return;
     config_ = &game_->GetCurrentConfig();
     scene_ = game_->GetSceneSwitcher();
     Log::Send(Log::Level::INFO, "Game Initialized");
 }
 
 bool Framework::Loop() const {
-    if (!windows_)return false;
+    if (!Check())return false;
     return windows_->IsEnabled();
 }
 
 void Framework::Update() const {
-    if (input_)input_->Update();
-    if (timer_->Check()) {
-        timer_->Restart();
-        return;
-    }
-    if (!game_)return;
-    if (!scene_)return;
+    if (!Check())return;
+
+    input_->Update();
     scene_->Update();
 }
 
 void Framework::Draw() const {
-    if (!game_)return;
-    if (!scene_)return;
-    if (!srv_)return;
-    if (!debugUI_)return;
-	if (!dxAdapter_)return;
+	if (!Check())return;
 
     srv_->PreDraw();
 
     dxAdapter_->Register([&] { scene_->Draw(); });
-
     dxAdapter_->Register([&](){debugUI_->Render(); });
     dxAdapter_->Render();
 }
@@ -94,4 +81,18 @@ void Framework::Shutdown() {
 
     SingletonFinalizer::Finalize();
     CoUninitialize();
+}
+
+bool Framework::Check() const {
+    if (!game_)return false;
+    if (!scene_)return false;
+    if (!windows_)return false;
+    if (!dxAdapter_)return false;
+    if (!debugUI_)return false;
+    if (!srv_)return false;
+    if (!input_)return false;
+    if (!texture_)return false;
+    if (!sprite_)return false;
+
+    return true;
 }
