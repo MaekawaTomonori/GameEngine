@@ -45,10 +45,7 @@ ID3D12Resource* DirectXAdapter::CreateBufferResource(const size_t _size) const {
 
     ID3D12Resource* resource = nullptr;
 
-#ifdef _DEBUG
-    HRESULT hR =
-#endif
-        device_->CreateCommittedResource(&properties, D3D12_HEAP_FLAG_NONE, &desc, D3D12_RESOURCE_STATE_GENERIC_READ, nullptr, IID_PPV_ARGS(&resource));
+    HRESULT hR = device_->CreateCommittedResource(&properties, D3D12_HEAP_FLAG_NONE, &desc, D3D12_RESOURCE_STATE_GENERIC_READ, nullptr, IID_PPV_ARGS(&resource));
 
     if (FAILED(hR)) {
         Log::Send(Log::Level::ERR, "Failed to create buffer resource");

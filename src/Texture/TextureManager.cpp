@@ -54,10 +54,7 @@ ID3D12Resource* TextureManager::CreateTextureResource(const DirectX::TexMetadata
     //Generate Resource
     ID3D12Resource* resource = nullptr;
 
-#ifdef _DEBUG
-    HRESULT hr =
-#endif  
-        adapter_->GetDevice()->CreateCommittedResource(
+    HRESULT hr = adapter_->GetDevice()->CreateCommittedResource(
             &heapProperties,
             D3D12_HEAP_FLAG_NONE,
             &resourceDesc,
@@ -126,7 +123,6 @@ void TextureManager::Load(const std::string& fileName) {
 
     assert(!srv_->IsFull());
 
-    
     //Load Texture
     Texture& texture = textures_[name];
 
