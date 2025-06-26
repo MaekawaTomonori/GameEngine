@@ -68,6 +68,7 @@ void DebugUI::Process() {
         command();
     }
 
+    ImGui::EndFrame();
     ImGui::Render();
 }
 

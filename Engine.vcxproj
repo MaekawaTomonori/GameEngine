@@ -495,8 +495,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>
-      </Command>
+      <Command>xcopy /y /s /i "$(ProjectDir)Assets\*" "$(SolutionDir)Assets\"</Command>
     </PostBuildEvent>
     <PreBuildEvent>
       <Command>
@@ -542,8 +541,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>
-      </Command>
+      <Command>xcopy /y /s /i "$(ProjectDir)Assets\*" "$(SolutionDir)Assets\"</Command>
     </PostBuildEvent>
     <PreBuildEvent>
       <Command>
