@@ -3,11 +3,12 @@
 #include <algorithm>
 #include <mutex>
 
-#include "imgui_internal.h"
 #include "include/Utils.hpp"
-#include "vendor/imgui/imgui.h"
-#include "vendor/imgui/imgui_impl_dx12.h"
-#include "vendor/imgui/imgui_impl_win32.h"
+
+#include "imgui.h"
+#include "imgui_internal.h"
+#include "imgui_impl_dx12.h"
+#include "imgui_impl_win32.h"
 
 DebugUI::~DebugUI() {
     ImGui_ImplDX12_Shutdown();
@@ -55,7 +56,7 @@ void DebugUI::Process() {
     ImGui::NewFrame();
 
     // DockSpace
-    DockSpace();
+    ImGui::DockSpaceOverViewport(ImGui::GetID(""), ImGui::GetMainViewport());
 
     ImGui::ShowDemoWindow();
 
@@ -67,9 +68,7 @@ void DebugUI::Process() {
         command();
     }
 
-
     ImGui::Render();
-    ImGui::UpdatePlatformWindows();
 }
 
 void DebugUI::Render() {
@@ -85,13 +84,4 @@ void DebugUI::RegisterCommand(const std::string &_id, std::function<void()> _com
     commands_.push_back({.id= _id, .command= std::move(_command)});
 }
 
-void DebugUI::DockSpace() {
-    ImGui::DockSpaceOverViewport(ImGui::GetID(""), ImGui::GetMainViewport());
-    ImGui::Begin("DockSpace", nullptr, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoDocking | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus | ImGuiWindowFlags_NoResize);
-    ImGuiID dockSpaceId = ImGui::GetID("DockSpace");
-    ImGui::DockSpace(dockSpaceId, ImGui::GetContentRegionAvail(), ImGuiDockNodeFlags_PassthruCentralNode | ImGuiDockNodeFlags_NoDockingInCentralNode);
-
-    if (ImGuiDockNode* node = ImGui::DockBuilderGetNode(dockSpaceId))node->LocalFlags |= ImGuiDockNodeFlags_NoTabBar; // Disable tab bar in the central node
-    ImGui::End();
-}
 

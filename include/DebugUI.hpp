@@ -26,12 +26,11 @@ class DebugUI {
 public:
     ~DebugUI();
     void Initialize(const DirectXAdapter* dx);
-    void Process();
     void Render();
 
 	void RegisterCommand(const std::string &_id, std::function<void()> _command);
 private:
-	void DockSpace();
+    void Process();
 }; // class DebugUI
 
 #endif // DebugUI_HPP_
