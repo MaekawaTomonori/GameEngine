@@ -56,7 +56,7 @@ void DebugUI::Process() {
     ImGui::NewFrame();
 
     // DockSpace
-    ImGui::DockSpaceOverViewport(ImGui::GetID(""), ImGui::GetMainViewport());
+    ImGui::DockSpaceOverViewport(ImGui::GetID(""), ImGui::GetMainViewport(), ImGuiDockNodeFlags_PassthruCentralNode);
 
     ImGui::ShowDemoWindow();
 
