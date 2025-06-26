@@ -5,14 +5,20 @@
 #include <dxgi1_6.h>
 #include <functional>
 #include <memory>
+#include <queue>
 #include <utility>
 #include <vector>
 #include <wrl/client.h>
 
+#include "FrameRate/FrameRateLimiter.hpp"
 #include "Heap/Heap.hpp"
-#include "include/Math/Vector4.hpp"
+#include "Math/Vector4.hpp"
+
 
 class DirectXAdapter{
+    /// <summary>
+    /// first = width, second = height
+    /// </summary>
     using WindowSize = std::pair<size_t, size_t>;
     WindowSize windowSize_ = {800, 600};
     HWND hWnd_ = nullptr;
@@ -38,10 +44,44 @@ class DirectXAdapter{
 
     //Fence
     Microsoft::WRL::ComPtr<ID3D12Fence> fence_;
+    uint64_t fenceValue_ = 0;
     HANDLE fenceEvent_ = nullptr;
+
+	//RTV
+    std::unique_ptr<Heap> rtvHeap_;
+	std::vector<D3D12_CPU_DESCRIPTOR_HANDLE> rtvHandles_;
+
+    //DSV
+    Microsoft::WRL::ComPtr<ID3D12Resource> depthStencil_;
+    std::unique_ptr<Heap> dsvHeap_;
+
+    //Background color
+    Vector4	back = {0.2f, 0.2f, 0.2f, 1.0f}; // Black
+
+    //Viewport
+    D3D12_VIEWPORT viewport_ = {};
+
+    //Scissor
+    D3D12_RECT scissorRect_ = {};
+
+    //Limiter
+    std::unique_ptr<FrameRateLimiter> fpsLimiter_ = nullptr;
+
+    //Tasks
+    std::queue<std::function<void()>> tasks_;
+    std::queue<std::function<void()>> pending_;
+
+    //Executing Flag
+    bool isRunning_ = false;
 
 public:
     DirectXAdapter(HWND _hWnd, size_t _width, size_t _height);
+
+    ID3D12Resource* CreateBufferResource(size_t _size) const;
+    ID3D12Resource* CreateDepthStencilResource(int32_t _width, int32_t _height) const;
+
+    void Register(std::function<void()> _task);
+    void Render();
 
 private:
     void EnableDebugLayer();
@@ -50,6 +90,12 @@ private:
     bool CreateCommand();
     bool CreateSwapChain();
     bool CreateFence();
+	bool CreateRTV();
+    bool CreateDSV();
+	bool CreateViewportAndScissor();
+    bool CreateLimiter();
+
+    void Wait();
 public: //Accessor
     [[nodiscard]] HWND GetWindowHandle() const;
     [[nodiscard]] ID3D12Device *GetDevice() const;

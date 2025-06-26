@@ -1,7 +1,7 @@
 #include "include/Framework.hpp"
 
+#include "Log.hpp"
 #include "Singleton.hpp"
-#include "Utils.hpp"
 #include "include/IGame.hpp"
 
 Framework::Framework() {
@@ -11,16 +11,22 @@ Framework::Framework() {
     windows_->Initialize();
     //windows_->SetWindowSize(static_cast<int>(config_->GetWidth()), static_cast<int>(config_->GetHeight()));
 
-    dxAdaptor_ = std::make_unique<DirectXAdapter>(windows_->GetWindowHandle(), config_->GetWidth(), config_->GetHeight());
+    dxAdapter_ = std::make_unique<DirectXAdapter>(windows_->GetWindowHandle(), config_->GetWidth(), config_->GetHeight());
 
-    renderer_ = std::make_unique<Renderer>();
-    renderer_->Initialize(dxAdaptor_.get());
+    debugUI_ = std::make_unique<DebugUI>();
+    debugUI_->Initialize(dxAdapter_.get());
+
+    srv_ = std::make_unique<SRVManager>();
+    srv_->Initialize(dxAdapter_.get());
 
     input_ = Singleton<Input>::GetInstance();
     input_->Initialize();
 
-    timer_ = std::make_unique<Timer>(static_cast<std::chrono::milliseconds>(static_cast<uint64_t>(1e4 / 60)));
-    timer_->Start();
+    texture_ = Singleton<TextureManager>::GetInstance();
+    texture_->Initialize(dxAdapter_.get(), srv_.get());
+
+    sprite_ = Singleton<SpriteCommon>::GetInstance();
+    sprite_->Initialize(dxAdapter_.get(), debugUI_.get());
 }
 
 void Framework::Execute(std::unique_ptr<IGame> _game) {
@@ -36,48 +42,57 @@ void Framework::Execute(std::unique_ptr<IGame> _game) {
 }
 
 void Framework::Initialize() {
-    if (!game_)return;
-    game_->Initialize();
+	if (!game_) return;
     config_ = &game_->GetCurrentConfig();
+    scene_ = game_->GetSceneSwitcher();
+    Log::Send(Log::Level::INFO, "Game Initialized");
 }
 
 bool Framework::Loop() const {
-    if (!windows_)return false;
+    if (!Check())return false;
     return windows_->IsEnabled();
 }
 
 void Framework::Update() const {
-    if (input_)input_->Update();
+    if (!Check())return;
 
-    if (timer_->Check()) {
-        timer_->Restart();
-        return;
-    }
-    if (!game_)return;
-    game_->Update();
+    input_->Update();
+    scene_->Update();
 }
 
 void Framework::Draw() const {
-    if (!game_)return;
-    game_->Draw();
+	if (!Check())return;
 
-    if (!dxAdaptor_){
-        Utils::Alert("DirectXAdapter is not initialized");
-    }
-    //renderer_->Register([&](){debugUI_->Render(); });
-    renderer_->Render();
+    srv_->PreDraw();
+
+    dxAdapter_->Register([&] { scene_->Draw(); });
+    dxAdapter_->Register([&](){debugUI_->Render(); });
+    dxAdapter_->Render();
 }
 
 void Framework::Shutdown() {
     if (game_){
-        game_->Shutdown();
         game_.reset();
     }
     
-    if (renderer_){
-        renderer_->Shutdown();
-        renderer_.reset();
+    if (dxAdapter_){
+        dxAdapter_.reset();
     }
 
     SingletonFinalizer::Finalize();
+    CoUninitialize();
+}
+
+bool Framework::Check() const {
+    if (!game_)return false;
+    if (!scene_)return false;
+    if (!windows_)return false;
+    if (!dxAdapter_)return false;
+    if (!debugUI_)return false;
+    if (!srv_)return false;
+    if (!input_)return false;
+    if (!texture_)return false;
+    if (!sprite_)return false;
+
+    return true;
 }

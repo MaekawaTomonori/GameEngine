@@ -1,43 +1,29 @@
-//
-// Created by tomo- on 25/05/08.
-//
-
 #include "include/Utils.hpp"
 #include <Windows.h>
-#include <string>
-#include <algorithm>
 #include <chrono>
 
 namespace Utils {
     std::string Convert(const std::wstring& str) {
-        if (str.empty()){
-            return {};
-        }
+        if (str.empty())return {};
 
-        auto sizeNeeded = WideCharToMultiByte(CP_UTF8, 0, str.data(), static_cast<int>(str.size()), nullptr, 0, nullptr, nullptr);
-        if (sizeNeeded == 0){
-            return {};
-        }
-        std::string result(sizeNeeded, 0);
-        if (WideCharToMultiByte(CP_UTF8, 0, str.data(), static_cast<int>(str.size()), result.data(), sizeNeeded, nullptr, nullptr)) {
-            return {};
-        }
+        auto size_needed = WideCharToMultiByte(CP_UTF8,0,str.data(),static_cast<int>(str.size()),nullptr, 0, nullptr,nullptr);
+        if (size_needed == 0) return {};
+
+        std::string result(size_needed, 0);
+        if (!WideCharToMultiByte(CP_UTF8,0, str.data(),static_cast<int>(str.size()),result.data(), size_needed,nullptr, nullptr))return {};
+
         return result;
     }
 
     std::wstring Convert(const std::string& str) {
-        if (str.empty()){
-            return {};
-        }
+        if (str.empty())return {};
 
-        auto sizeNeeded = MultiByteToWideChar(CP_UTF8, 0, reinterpret_cast<const char*>(str.data()), static_cast<int>(str.size()), nullptr, 0);
-        if (sizeNeeded == 0){
-            return {};
-        }
-        std::wstring result(sizeNeeded, 0);
-        if (MultiByteToWideChar(CP_UTF8, 0, reinterpret_cast<const char*>(str.data()), static_cast<int>(str.size()), result.data(), sizeNeeded)){
-            return {};
-        }
+        auto size_needed = MultiByteToWideChar(CP_UTF8, 0, str.data(),static_cast<int>(str.size()),nullptr, 0);
+        if (size_needed == 0)return {};
+
+        std::wstring result(size_needed, 0);
+        if (!MultiByteToWideChar(CP_UTF8, 0, str.data(),static_cast<int>(str.size()),result.data(), size_needed))return {};
+
         return result;
     }
 
@@ -90,5 +76,27 @@ namespace Utils {
         oss << std::put_time(&tm_snapshot, "%Y-%m-%d %H:%M:%S");
         oss << '.' << std::setw(3) << std::setfill('0') << now_ms.count();
         return oss.str();
+    }
+
+    #include <rpc.h>
+    #pragma comment(lib, "rpcrt4.lib")
+
+    std::string GenerateUniqueId() {
+        UUID uuid;
+        UuidCreate(&uuid);
+        RPC_CSTR szUuid = nullptr;
+        UuidToStringA(&uuid, &szUuid);
+        struct UUIDCleaner{
+            RPC_CSTR& ptr;
+            ~UUIDCleaner() {
+                if (ptr)RpcStringFreeA(&ptr);
+            }
+        } cleaner {szUuid};
+        return reinterpret_cast<char*>(szUuid);
+    }
+
+    bool EqualsIgnoreCase(std::string str1, std::string str2) {
+        return str1.size() == str2.size() && std::equal(str1.begin(), str1.end(), str2.begin(),
+                                                        [](char a, char b){ return tolower(a) == tolower(b); });
     }
 }

@@ -5,3 +5,7 @@
 
 # output folder
 out/
+
+
+# DirectXTex
+vendor/DirectXTex/Shaders/Compiled/*

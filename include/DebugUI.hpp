@@ -10,22 +10,27 @@ struct ImDrawData;
 
 //ImGui Adapter
 class DebugUI {
-    std::mutex mutex_;
+	struct Command {
+		std::string id;
+        std::function<void()> command;
+	};
+
+	std::mutex mutex_;
 
     std::unique_ptr<Heap> heap_;
     ID3D12GraphicsCommandList* cList_ = nullptr;
 
-    //std::vector<PROCESS> processes_;
+    std::vector<Command> commands_;
 
-    ImDrawData* cache_ = nullptr;
 public:
     ~DebugUI();
     void Initialize(const DirectXAdapter* dx);
-    void Process();
     void Render();
 
-public:
-    //void AddProcess(PROCESS);
+	void RegisterCommand(const std::string &_id, std::function<void()> _command);
+
+private:
+    void Process();
 }; // class DebugUI
 
 #endif // DebugUI_HPP_

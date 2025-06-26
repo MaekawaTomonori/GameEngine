@@ -1,11 +1,14 @@
 #include "DebugUI.hpp"
 
+#include <algorithm>
 #include <mutex>
 
 #include "include/Utils.hpp"
-#include "vendor/imgui/imgui.h"
-#include "vendor/imgui/imgui_impl_dx12.h"
-#include "vendor/imgui/imgui_impl_win32.h"
+
+#include "imgui.h"
+#include "imgui_internal.h"
+#include "imgui_impl_dx12.h"
+#include "imgui_impl_win32.h"
 
 DebugUI::~DebugUI() {
     ImGui_ImplDX12_Shutdown();
@@ -45,32 +48,41 @@ void DebugUI::Initialize(const DirectXAdapter *dx) {
 }
 
 void DebugUI::Process() {
-    std::lock_guard<std::mutex> lock(mutex_);
+    std::vector<Command> commands = commands_;
+    commands_.clear(); 
+
     ImGui_ImplDX12_NewFrame();
     ImGui_ImplWin32_NewFrame();
     ImGui::NewFrame();
 
+    // DockSpace
+    ImGui::DockSpaceOverViewport(ImGui::GetID(""), ImGui::GetMainViewport(), ImGuiDockNodeFlags_PassthruCentralNode);
+
     ImGui::ShowDemoWindow();
 
-    // Do your ImGui rendering here
+    std::ranges::sort(commands, [](const Command& a, const Command& b){
+        return a.id < b.id;
+    });
+    
+    for (const auto &[id, command] : commands) {
+        command();
+    }
 
-    // for (PROCESS)
-
-    // DockingSpace
-
-
+    ImGui::EndFrame();
     ImGui::Render();
-    ImGui::UpdatePlatformWindows();
-
-    cache_ = ImGui::GetDrawData();
 }
 
 void DebugUI::Render() {
-    std::lock_guard<std::mutex> lock(mutex_);
-    if (!cache_)return;
+	Process();
 
     ID3D12DescriptorHeap* heaps[] = {heap_->Get()};
     cList_->SetDescriptorHeaps(_countof(heaps), heaps);
-    ImGui_ImplDX12_RenderDrawData(cache_, cList_);
+    ImGui_ImplDX12_RenderDrawData(ImGui::GetDrawData(), cList_);
 }
+
+void DebugUI::RegisterCommand(const std::string &_id, std::function<void()> _command) {
+    std::lock_guard<std::mutex> lock(mutex_);
+    commands_.push_back({.id= _id, .command= std::move(_command)});
+}
+
 
