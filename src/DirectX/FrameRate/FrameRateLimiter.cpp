@@ -7,7 +7,6 @@ FrameRateLimiter::FrameRateLimiter(uint16_t maxFps, bool useVsync): maxFps_(maxF
 }
 
 void FrameRateLimiter::WaitForNextFrame() {
-
     const std::chrono::microseconds TargetFrameTime(static_cast<uint64_t>(1e3 / (maxFps_ + 5)));
 
     const std::chrono::steady_clock::time_point now = std::chrono::steady_clock::now();

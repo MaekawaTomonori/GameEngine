@@ -10,7 +10,7 @@
 #include "src/DirectX/DirectXAdapter.hpp"
 #include "src/Scene/SceneSwitcher.hpp"
 #include "src/Sprite/Common/SpriteCommon.hpp"
-#include "src/Texture/TextureManager.h"
+#include "src/Texture/TextureManager.hpp"
 
 class IGame;
 

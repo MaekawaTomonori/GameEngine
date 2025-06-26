@@ -96,7 +96,7 @@
     <ClInclude Include="include\Math\Matrix.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="src\Texture\TextureManager.h">
+    <ClInclude Include="src\Texture\TextureManager.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="src\Sprite\Common\SpriteCommon.hpp">

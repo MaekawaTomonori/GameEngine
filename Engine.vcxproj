@@ -580,7 +580,7 @@
     <ClInclude Include="include\Singleton.hpp" />
     <ClInclude Include="src\Sprite\Common\SpriteCommon.hpp" />
     <ClInclude Include="include\Sprite.hpp" />
-    <ClInclude Include="src\Texture\TextureManager.h" />
+    <ClInclude Include="src\Texture\TextureManager.hpp" />
     <ClInclude Include="src\Timer\Timer.hpp" />
     <ClInclude Include="src\Window\Window.hpp" />
   </ItemGroup>

@@ -59,5 +59,4 @@ void SceneSwitcher::Change(const std::string &_name) {
     if (!scene_) return;
 
     // Fade
-
 }

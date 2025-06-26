@@ -82,6 +82,7 @@ public:
 
     void Register(std::function<void()> _task);
     void Render();
+
 private:
     void EnableDebugLayer();
     bool CreateDXGI();

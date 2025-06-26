@@ -6,7 +6,7 @@
 #include "Math/MathUtils.hpp"
 #include "Common/SpriteCommon.hpp"
 
-#include "src/Texture/TextureManager.h"
+#include "src/Texture/TextureManager.hpp"
 
 #include "vendor/DirectXTex/DirectXTex.h"
 

@@ -10,7 +10,6 @@ struct ImDrawData;
 
 //ImGui Adapter
 class DebugUI {
-
 	struct Command {
 		std::string id;
         std::function<void()> command;
@@ -29,6 +28,7 @@ public:
     void Render();
 
 	void RegisterCommand(const std::string &_id, std::function<void()> _command);
+
 private:
     void Process();
 }; // class DebugUI

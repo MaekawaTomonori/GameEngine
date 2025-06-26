@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include <d3d12.h>
 #include <mutex>
 #include <wrl/client.h>
@@ -31,7 +31,6 @@ private: //Variables
     std::unordered_map<std::string, Texture> textures_;
 
 private: //Methods
-
     DirectX::ScratchImage LoadTexture(const std::string& filename) const;
     ID3D12Resource* CreateTextureResource(const DirectX::TexMetadata& metadata) const;
     ID3D12Resource* UploadTextureData(ID3D12Resource* texture, const DirectX::ScratchImage& mipImages) const;
