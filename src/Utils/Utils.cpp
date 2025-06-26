@@ -4,34 +4,26 @@
 
 namespace Utils {
     std::string Convert(const std::wstring& str) {
-        if (str.empty()){
-            return {};
-        }
+        if (str.empty())return {};
 
-        auto sizeNeeded = WideCharToMultiByte(CP_UTF8, 0, str.data(), static_cast<int>(str.size()), nullptr, 0, nullptr, nullptr);
-        if (sizeNeeded == 0){
-            return {};
-        }
-        std::string result(sizeNeeded, 0);
-        if (WideCharToMultiByte(CP_UTF8, 0, str.data(), static_cast<int>(str.size()), result.data(), sizeNeeded, nullptr, nullptr)) {
-            return {};
-        }
+        auto size_needed = WideCharToMultiByte(CP_UTF8,0,str.data(),static_cast<int>(str.size()),nullptr, 0, nullptr,nullptr);
+        if (size_needed == 0) return {};
+
+        std::string result(size_needed, 0);
+        if (!WideCharToMultiByte(CP_UTF8,0, str.data(),static_cast<int>(str.size()),result.data(), size_needed,nullptr, nullptr))return {};
+
         return result;
     }
 
     std::wstring Convert(const std::string& str) {
-        if (str.empty()){
-            return {};
-        }
+        if (str.empty())return {};
 
-        auto sizeNeeded = MultiByteToWideChar(CP_UTF8, 0, reinterpret_cast<const char*>(str.data()), static_cast<int>(str.size()), nullptr, 0);
-        if (sizeNeeded == 0){
-            return {};
-        }
-        std::wstring result(sizeNeeded, 0);
-        if (!MultiByteToWideChar(CP_UTF8, 0, reinterpret_cast<const char*>(str.data()), static_cast<int>(str.size()), result.data(), sizeNeeded)){
-            return {};
-        }
+        auto size_needed = MultiByteToWideChar(CP_UTF8, 0, str.data(),static_cast<int>(str.size()),nullptr, 0);
+        if (size_needed == 0)return {};
+
+        std::wstring result(size_needed, 0);
+        if (!MultiByteToWideChar(CP_UTF8, 0, str.data(),static_cast<int>(str.size()),result.data(), size_needed))return {};
+
         return result;
     }
 
