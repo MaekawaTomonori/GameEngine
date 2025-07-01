@@ -14,13 +14,12 @@
 #include "Heap/Heap.hpp"
 #include "Math/Vector4.hpp"
 
-
 class DirectXAdapter{
     /// <summary>
     /// first = width, second = height
     /// </summary>
     using WindowSize = std::pair<size_t, size_t>;
-    WindowSize windowSize_ = {800, 600};
+    WindowSize windowSize_ = { 800, 600 };
     HWND hWnd_ = nullptr;
 
     //DegubLayer
@@ -47,16 +46,16 @@ class DirectXAdapter{
     uint64_t fenceValue_ = 0;
     HANDLE fenceEvent_ = nullptr;
 
-	//RTV
+    //RTV
     std::unique_ptr<Heap> rtvHeap_;
-	std::vector<D3D12_CPU_DESCRIPTOR_HANDLE> rtvHandles_;
+    std::vector<D3D12_CPU_DESCRIPTOR_HANDLE> rtvHandles_;
 
     //DSV
     Microsoft::WRL::ComPtr<ID3D12Resource> depthStencil_;
     std::unique_ptr<Heap> dsvHeap_;
 
     //Background color
-    Vector4	back = {0.2f, 0.2f, 0.2f, 1.0f}; // Black
+    Vector4	back = { 0.2f, 0.2f, 0.2f, 1.0f }; // Black
 
     //Viewport
     D3D12_VIEWPORT viewport_ = {};
@@ -90,15 +89,15 @@ private:
     bool CreateCommand();
     bool CreateSwapChain();
     bool CreateFence();
-	bool CreateRTV();
+    bool CreateRTV();
     bool CreateDSV();
-	bool CreateViewportAndScissor();
+    bool CreateViewportAndScissor();
     bool CreateLimiter();
 
     void Wait();
 public: //Accessor
     [[nodiscard]] HWND GetWindowHandle() const;
-    [[nodiscard]] ID3D12Device *GetDevice() const;
+    [[nodiscard]] ID3D12Device* GetDevice() const;
     [[nodiscard]] ID3D12GraphicsCommandList* GetCommandList() const;
     size_t GetWidth() const;
     size_t GetHeight() const;

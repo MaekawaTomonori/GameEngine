@@ -10,12 +10,12 @@ struct ImDrawData;
 
 //ImGui Adapter
 class DebugUI {
-	struct Command {
-		std::string id;
+    struct Command {
+        std::string id;
         std::function<void()> command;
-	};
+    };
 
-	std::mutex mutex_;
+    std::mutex mutex_;
 
     std::unique_ptr<Heap> heap_;
     ID3D12GraphicsCommandList* cList_ = nullptr;
@@ -27,7 +27,7 @@ public:
     void Initialize(const DirectXAdapter* dx);
     void Render();
 
-	void RegisterCommand(const std::string &_id, std::function<void()> _command);
+    void RegisterCommand(const std::string &_id, std::function<void()> _command);
 
 private:
     void Process();

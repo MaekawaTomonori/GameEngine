@@ -73,7 +73,7 @@ void DebugUI::Process() {
 }
 
 void DebugUI::Render() {
-	Process();
+    Process();
 
     ID3D12DescriptorHeap* heaps[] = {heap_->Get()};
     cList_->SetDescriptorHeaps(_countof(heaps), heaps);

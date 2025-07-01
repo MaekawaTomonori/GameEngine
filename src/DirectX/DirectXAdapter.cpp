@@ -6,8 +6,8 @@
 #include <d3dcompiler.h>
 
 #include "Heap/Heap.hpp"
-#include "include/Log.hpp"
-#include "include/Utils.hpp"
+#include "Log.hpp"
+#include "Utils.hpp"
 
 #pragma comment(lib, "d3d12.lib")
 #pragma comment(lib, "dxgi.lib")
@@ -30,11 +30,11 @@ DirectXAdapter::DirectXAdapter(const HWND _hWnd, size_t _width, size_t _height) 
 }
 
 ID3D12Resource* DirectXAdapter::CreateBufferResource(const size_t _size) const {
-    D3D12_HEAP_PROPERTIES properties {};
+    D3D12_HEAP_PROPERTIES properties{};
     properties.Type = D3D12_HEAP_TYPE_UPLOAD;
 
     //resource setting
-    D3D12_RESOURCE_DESC desc {};
+    D3D12_RESOURCE_DESC desc{};
     desc.Dimension = D3D12_RESOURCE_DIMENSION_BUFFER;
     desc.Width = _size;
     desc.Height = 1;
@@ -47,7 +47,7 @@ ID3D12Resource* DirectXAdapter::CreateBufferResource(const size_t _size) const {
 
     HRESULT hR = device_->CreateCommittedResource(&properties, D3D12_HEAP_FLAG_NONE, &desc, D3D12_RESOURCE_STATE_GENERIC_READ, nullptr, IID_PPV_ARGS(&resource));
 
-    if (FAILED(hR)) {
+    if (FAILED(hR)){
         Log::Send(Log::Level::ERR, "Failed to create buffer resource");
         Utils::Alert("Failed to create buffer resource");
         assert(false);
@@ -57,7 +57,7 @@ ID3D12Resource* DirectXAdapter::CreateBufferResource(const size_t _size) const {
 }
 
 ID3D12Resource* DirectXAdapter::CreateDepthStencilResource(int32_t _width, int32_t _height) const {
-    D3D12_RESOURCE_DESC desc {};
+    D3D12_RESOURCE_DESC desc{};
     desc.Width = _width;
     desc.Height = _height;
     desc.MipLevels = 1;
@@ -67,10 +67,10 @@ ID3D12Resource* DirectXAdapter::CreateDepthStencilResource(int32_t _width, int32
     desc.Dimension = D3D12_RESOURCE_DIMENSION_TEXTURE2D;
     desc.Flags = D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL;
 
-    D3D12_HEAP_PROPERTIES properties {};
+    D3D12_HEAP_PROPERTIES properties{};
     properties.Type = D3D12_HEAP_TYPE_DEFAULT;
 
-    D3D12_CLEAR_VALUE clearValue {};
+    D3D12_CLEAR_VALUE clearValue{};
     clearValue.DepthStencil.Depth = 1.f;
     clearValue.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
 
@@ -134,7 +134,7 @@ void DirectXAdapter::Render() {
         Utils::Alert("Failed to close command list");
         return;
     }
-    ID3D12CommandList* commandLists[] = {cList_.Get()};
+    ID3D12CommandList* commandLists[] = { cList_.Get() };
     cQueue_->ExecuteCommandLists(_countof(commandLists), commandLists);
     swapChain_->Present(1, 0);
 
@@ -206,7 +206,7 @@ bool DirectXAdapter::CreateDXGI() {
     };
 
     Log::Send(Log::Level::INFO, "Device Loop Begin");
-    for (size_t i = 0; i < _countof(featureLevels); ++i) {
+    for (size_t i = 0; i < _countof(featureLevels); ++i){
         if (SUCCEEDED(D3D12CreateDevice(adapter_.Get(), featureLevels[i], IID_PPV_ARGS(&device_)))){
             Log::Send(Log::Level::INFO, "Device Created");
             Log::Send(Log::Level::INFO, "Feature Level: " + std::string(featureLevelNames[i]));
@@ -234,8 +234,8 @@ bool DirectXAdapter::InfoQueue() const {
             infoQueue->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_ERROR, true);
             infoQueue->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_WARNING, true);
 
-            D3D12_MESSAGE_ID denyIds[] = {D3D12_MESSAGE_ID_RESOURCE_BARRIER_MISMATCHING_COMMAND_LIST_TYPE};
-            D3D12_MESSAGE_SEVERITY severities[] = {D3D12_MESSAGE_SEVERITY_INFO};
+            D3D12_MESSAGE_ID denyIds[] = { D3D12_MESSAGE_ID_RESOURCE_BARRIER_MISMATCHING_COMMAND_LIST_TYPE };
+            D3D12_MESSAGE_SEVERITY severities[] = { D3D12_MESSAGE_SEVERITY_INFO };
             D3D12_INFO_QUEUE_FILTER filter = {};
             filter.DenyList.NumIDs = _countof(denyIds);
             filter.DenyList.pIDList = denyIds;
@@ -251,7 +251,7 @@ bool DirectXAdapter::InfoQueue() const {
 bool DirectXAdapter::CreateCommand() {
     //Queue
     D3D12_COMMAND_QUEUE_DESC queueDesc = {};
-    if (FAILED(device_->CreateCommandQueue(&queueDesc, IID_PPV_ARGS(&cQueue_)))) {
+    if (FAILED(device_->CreateCommandQueue(&queueDesc, IID_PPV_ARGS(&cQueue_)))){
         Log::Send(Log::Level::ERR, "Failed to create command queue");
         return false;
     }
@@ -345,7 +345,7 @@ bool DirectXAdapter::CreateDSV() {
     depthStencil_.Attach(CreateDepthStencilResource(static_cast<int32_t>(windowSize_.first), static_cast<int32_t>(windowSize_.second)));
 
     dsvHeap_ = std::make_unique<Heap>();
-    if (!dsvHeap_->Create(device_.Get(), D3D12_DESCRIPTOR_HEAP_TYPE_DSV, 1, D3D12_DESCRIPTOR_HEAP_FLAG_NONE)) {
+    if (!dsvHeap_->Create(device_.Get(), D3D12_DESCRIPTOR_HEAP_TYPE_DSV, 1, D3D12_DESCRIPTOR_HEAP_FLAG_NONE)){
         Log::Send(Log::Level::ERR, "Failed to create DSV Heap");
         return false;
     }
@@ -380,7 +380,6 @@ bool DirectXAdapter::CreateLimiter() {
     return fpsLimiter_ != nullptr;
 }
 
-
 void DirectXAdapter::Wait() {
     ++fenceValue_;
     cQueue_->Signal(fence_.Get(), fenceValue_);
@@ -393,11 +392,11 @@ void DirectXAdapter::Wait() {
     fpsLimiter_->WaitForNextFrame();
 }
 
-ID3D12Device * DirectXAdapter::GetDevice() const {
+ID3D12Device* DirectXAdapter::GetDevice() const {
     return device_.Get();
 }
 
-ID3D12GraphicsCommandList * DirectXAdapter::GetCommandList() const {
+ID3D12GraphicsCommandList* DirectXAdapter::GetCommandList() const {
     return cList_.Get();
 }
 
@@ -409,11 +408,11 @@ size_t DirectXAdapter::GetHeight() const {
     return windowSize_.second;
 }
 
-ID3D12CommandQueue * DirectXAdapter::GetCommandQueue() const {
+ID3D12CommandQueue* DirectXAdapter::GetCommandQueue() const {
     return cQueue_.Get();
 }
 
-ID3D12CommandAllocator * DirectXAdapter::GetCommandAllocator() const {
+ID3D12CommandAllocator* DirectXAdapter::GetCommandAllocator() const {
     return cAllocator_.Get();
 }
 
@@ -421,7 +420,7 @@ IDXGISwapChain4* DirectXAdapter::GetSwapChain() const {
     return swapChain_.Get();
 }
 
-ID3D12Fence * DirectXAdapter::GetFence() const {
+ID3D12Fence* DirectXAdapter::GetFence() const {
     return fence_.Get();
 }
 

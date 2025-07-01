@@ -8,6 +8,8 @@
 #include "src/Platform/WinApp.hpp"
 #include "src/Config/Config.hpp"
 #include "src/DirectX/DirectXAdapter.hpp"
+#include "src/Mesh/Loader/MeshManager.hpp"
+#include "src/Model/Common/ModelCommon.hpp"
 #include "src/Scene/SceneSwitcher.hpp"
 #include "src/Sprite/Common/SpriteCommon.hpp"
 #include "src/Texture/TextureManager.hpp"
@@ -27,7 +29,9 @@ class Framework {
 
     Input* input_ = nullptr;
     TextureManager* texture_ = nullptr;
+    MeshManager* mesh_ = nullptr;
     SpriteCommon* sprite_ = nullptr;
+    ModelCommon* model_ = nullptr;
 
 public:
     Framework();

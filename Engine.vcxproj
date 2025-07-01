@@ -562,6 +562,8 @@
     <ClInclude Include="include\Math\Vector2.hpp" />
     <ClInclude Include="include\Math\Vector3.hpp" />
     <ClInclude Include="include\Utils.hpp" />
+    <ClInclude Include="src\Camera\Camera.hpp" />
+    <ClInclude Include="src\Common\Common.hpp" />
     <ClInclude Include="src\Config\Config.hpp" />
     <ClInclude Include="src\Container\Material.hpp" />
     <ClInclude Include="src\DirectX\DirectXAdapter.hpp" />
@@ -574,6 +576,10 @@
     <ClInclude Include="include\Math\Vector4.hpp" />
     <ClInclude Include="src\DirectX\Heap\SRVManager.h" />
     <ClInclude Include="src\DirectX\Shader\Shader.h" />
+    <ClInclude Include="src\Mesh\Mesh.hpp" />
+    <ClInclude Include="src\Mesh\Loader\MeshManager.hpp" />
+    <ClInclude Include="src\Model\Common\ModelCommon.hpp" />
+    <ClInclude Include="include\Model.hpp" />
     <ClInclude Include="src\Platform\WinApp.hpp" />
     <ClInclude Include="include\IScene.hpp" />
     <ClInclude Include="src\Scene\SceneSwitcher.hpp" />
@@ -587,6 +593,8 @@
     <ClInclude Include="src\Window\Window.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Camera\Camera.cpp" />
+    <ClCompile Include="src\Common\Common.cpp" />
     <ClCompile Include="src\Config\Config.cpp" />
     <ClCompile Include="src\Container\Material.cpp" />
     <ClCompile Include="src\Debug\DebugUI.cpp" />
@@ -603,6 +611,10 @@
     <ClCompile Include="src\Math\MathUtils.cpp" />
     <ClCompile Include="src\Math\Vector2.cpp" />
     <ClCompile Include="src\Math\Vector3.cpp" />
+    <ClCompile Include="src\Mesh\Mesh.cpp" />
+    <ClCompile Include="src\Mesh\Loader\MeshManager.cpp" />
+    <ClCompile Include="src\Model\Common\ModelCommon.cpp" />
+    <ClCompile Include="src\Model\Model.cpp" />
     <ClCompile Include="src\Platform\WinApp.cpp" />
     <ClCompile Include="src\Scene\IScene.cpp" />
     <ClCompile Include="src\Scene\SceneSwitcher.cpp" />

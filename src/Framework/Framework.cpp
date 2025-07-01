@@ -25,6 +25,9 @@ Framework::Framework() {
     texture_ = Singleton<TextureManager>::GetInstance();
     texture_->Initialize(dxAdapter_.get(), srv_.get());
 
+    mesh_ = Singleton<MeshManager>::GetInstance();
+    mesh_->Initialize(dxAdapter_.get());
+
     sprite_ = Singleton<SpriteCommon>::GetInstance();
     sprite_->Initialize(dxAdapter_.get(), debugUI_.get());
 }
@@ -42,7 +45,7 @@ void Framework::Execute(std::unique_ptr<IGame> _game) {
 }
 
 void Framework::Initialize() {
-	if (!game_) return;
+    if (!game_) return;
     config_ = &game_->GetCurrentConfig();
     scene_ = game_->GetSceneSwitcher();
     Log::Send(Log::Level::INFO, "Game Initialized");
@@ -61,7 +64,7 @@ void Framework::Update() const {
 }
 
 void Framework::Draw() const {
-	if (!Check())return;
+    if (!Check())return;
 
     srv_->PreDraw();
 
