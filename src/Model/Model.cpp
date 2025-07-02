@@ -41,9 +41,9 @@ void Model::Initialize(const std::string &_name) {
 
 void Model::Update() {
     Debug();
-    camera_ = Singleton<CameraManager>::GetInstance()->GetActive();
 
-    wd_->world = MathUtils::Matrix::MakeAffineMatrix(transform_);
+    camera_ = Singleton<CameraManager>::GetInstance()->GetActive();
+    wd_->world = MathUtils::Matrix::MakeAffineMatrix(transform_.scale, transform_.rotate, transform_.translate);
     wd_->wvp = wd_->world * camera_->GetViewProjection();
     wd_->inverse = wd_->world.Inverse().Transpose();
 

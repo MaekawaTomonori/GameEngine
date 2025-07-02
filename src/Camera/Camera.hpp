@@ -40,11 +40,10 @@ public:
     Matrix4x4 GetViewProjection() const;
     CameraForGpu GetCameraForGpu() const;
 
-void SetFov(float fov) { fov_ = fov; }
+    void SetFov(float fov) { fov_ = fov; }
     void SetAspectRatio(float aspectRatio) { aspectRatio_ = aspectRatio; }
     void SetNear(float nearPlane) { near_ = nearPlane; }
     void SetFar(float farPlane) { far_ = farPlane; }
-
 }; // class Camera
 
 #endif // Camera_HPP_
