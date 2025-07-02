@@ -1,10 +1,13 @@
 #include "CameraManager.hpp"
 
+#include "DebugUI.hpp"
 #include "Singleton.hpp"
 #include "Utils.hpp"
+#include "imgui.h"
 #include "src/Json/Json.hpp"
 
-void CameraManager::Initialize(const float _ratio) {
+void CameraManager::Initialize(const float _ratio, DebugUI* _debug) {
+    debug_ = _debug;
     ratio_ = _ratio;
 
     Load();
@@ -16,6 +19,8 @@ void CameraManager::Initialize(const float _ratio) {
 }
 
 void CameraManager::Update() {
+    Debug();
+    active_->Update();
 }
 
 Camera* CameraManager::GetActive() const {
@@ -46,6 +51,43 @@ Camera* CameraManager::SetActive(const std::string& _name) {
     Utils::Alert("CameraManager::SetActive: Camera not found, setting to first camera.");
 
     return active_;
+}
+
+void CameraManager::Debug() {
+    debug_->RegisterCommand("CM", [&](){
+        if (ImGui::Begin("Camera")){
+            ImGui::BeginTabBar("Camera");
+            if (ImGui::BeginTabItem("General")){
+                if (ImGui::CollapsingHeader("Files")){
+                    if (ImGui::Button("Load / Reload")){
+                        Load();
+                    }
+                    ImGui::SameLine();
+                    if (ImGui::Button("Save")){
+                        Save();
+                    }
+                }
+                ImGui::Separator();
+                if (ImGui::CollapsingHeader("List")){
+                    for (const auto& name : cameras_ | std::views::keys){
+                        if (ImGui::Button(name.c_str())){
+                            SetActive(name);
+                        }
+                    }
+                }
+                ImGui::EndTabItem();
+            }
+
+            if (ImGui::BeginTabItem("Active")) {
+                ImGui::Text("Active Camera: %s", active_->GetUniqueId().c_str());
+                active_->Debug();
+                ImGui::EndTabItem();
+            }
+
+            ImGui::EndTabBar();
+            ImGui::End();
+        }
+    });
 }
 
 void CameraManager::Load() {

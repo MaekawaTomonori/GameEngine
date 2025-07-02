@@ -1,0 +1,59 @@
+#pragma once
+#include <d3d12.h>
+#include <memory>
+#include <vector>
+#include <wrl/client.h>
+
+#include "DebugUI.hpp"
+#include "src/DirectX/DirectXAdapter.hpp"
+
+#include "LightType.hpp"
+#include "DirectionalLight/DirectionalLight.h"
+#include "PointLight/PointLight.h"
+#include "SpotLight/SpotLight.h"
+
+class LightManager final{
+	struct LightCount{
+        uint32_t dlCount;
+        uint32_t plCount;
+        uint32_t slCount;
+	};
+    DirectXAdapter* adapter_ = nullptr;
+    DebugUI* debug_ = nullptr;
+    Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> commandList_;
+
+    Microsoft::WRL::ComPtr<ID3D12Resource> directionalResource_;
+    DirectionalLight* mdDirectional_ = nullptr;
+
+    Microsoft::WRL::ComPtr<ID3D12Resource> pointResource_;
+    PointLight* mdPointLight_ = nullptr;
+
+    Microsoft::WRL::ComPtr<ID3D12Resource> spotResource_;
+    SpotLight* mdSpotLight_ = nullptr;
+
+    Microsoft::WRL::ComPtr<ID3D12Resource> countResource_;
+    LightCount* lightCount_ = nullptr;
+
+    const LightCount MAX_COUNT {20, 20, 20};
+
+    std::vector<std::unique_ptr<RawDirectionalLight>> rawDirectionalLights_;
+    std::vector<std::unique_ptr<RawPointLight>> rawPointLights_;
+    std::vector<std::unique_ptr<RawSpotLight>> rawSpotLights_;
+
+    std::string path = "Light";
+
+public:
+	void Initialize(DirectXAdapter* _adapter, DebugUI* _debug);
+    void Update();
+    void Draw() const;
+
+    void Add(LightType type);
+
+private:
+    void Debug();
+    void CheckState();
+
+    void Load();
+    void Save() const;
+};
+

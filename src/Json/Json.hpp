@@ -12,7 +12,7 @@ class Json{
     using json = nlohmann::json;
     using Value = std::variant<int32_t, float, Vector2, Vector3, Vector4>;
     using Object = std::map<std::string, Value>; //  key , value || key : [{ key, value }] // Item
-    using Group = std::map<std::string, Object>; // group(ファイル内の一番浅い階層)
+    using Group = std::map<std::string, Object>; // group
 
     const std::string PATH = "Assets/Data/";
     std::map<std::string, Group> datas_; // FileName, Data Groups

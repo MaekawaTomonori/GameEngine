@@ -16,7 +16,6 @@ public:
 private:
     std::string uuid_;
 
-
     Matrix4x4 matrix_{};
     Matrix4x4 view_{};
     Matrix4x4 projection_{};
@@ -34,10 +33,14 @@ public:
     void Update();
     void Debug();
 
+    std::string GetUniqueId();
     const Matrix4x4 &GetView() const { return view_; }
     const Matrix4x4 &GetProjection() const { return projection_; }
     const Matrix4x4 &GetMatrix() const { return matrix_; }
-    void SetFov(float fov) { fov_ = fov; }
+    Matrix4x4 GetViewProjection() const;
+    CameraForGpu GetCameraForGpu() const;
+
+void SetFov(float fov) { fov_ = fov; }
     void SetAspectRatio(float aspectRatio) { aspectRatio_ = aspectRatio; }
     void SetNear(float nearPlane) { near_ = nearPlane; }
     void SetFar(float farPlane) { far_ = farPlane; }

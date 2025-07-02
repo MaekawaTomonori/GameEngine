@@ -1,7 +1,6 @@
 #ifndef Model_HPP_
 #define Model_HPP_
 #include "Math/Matrix.hpp"
-#include "Math/Vector3.hpp"
 #include "src/Camera/Camera.hpp"
 #include "src/Mesh/Mesh.hpp"
 #include "src/Model/Common/ModelCommon.hpp"
@@ -28,9 +27,12 @@ class Model{
     Transformation* wd_ = nullptr;
 
     //Camera
+    Microsoft::WRL::ComPtr<ID3D12Resource> cr_;
+    CameraForGpu* cd_ = nullptr;
+
     Camera* camera_ = nullptr;
 
-    Vector3 position_ = { 0, 0, 0 };
+    Transform transform_;
 
 public:
     Model();
@@ -39,9 +41,10 @@ public:
     void Update();
     void Draw() const;
 
-    void Debug();
-
     void SetMesh(const std::string& _name);
+
+private:
+    void Debug();
 }; // class Model
 
 #endif // Model_HPP_

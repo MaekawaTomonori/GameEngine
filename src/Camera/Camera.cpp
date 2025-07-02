@@ -27,5 +27,23 @@ void Camera::Update() {
 void Camera::Debug() {
     //Manager's Command { -> this -> next -> ...}
     // Inside collapsing header
+    ImGui::Text("Scale: %f, %f, %f", transform_.scale.x, transform_.scale.y, transform_.scale.z);
+    ImGui::DragFloat3("Rotate", &transform_.rotate.x, 0.1f);
+    ImGui::DragFloat3("Translate", &transform_.translate.x, 0.1f);
+    ImGui::DragFloat("FOV", &fov_, 0.01f, 0.01f, 3.14f);
+    ImGui::DragFloat("Aspect Ratio", &aspectRatio_, 0.01f, 0.01f, 10.0f);
+    ImGui::DragFloat("Near Plane", &near_, 0.01f, 0.01f, 100.0f);
+    ImGui::DragFloat("Far Plane", &far_, 0.01f, 100.0f, 10000.0f);
+}
 
+std::string Camera::GetUniqueId() {
+    return uuid_;
+}
+
+Matrix4x4 Camera::GetViewProjection() const {
+    return view_ * projection_;
+}
+
+CameraForGpu Camera::GetCameraForGpu() const {
+    return { transform_.translate };
 }

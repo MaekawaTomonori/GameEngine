@@ -9,6 +9,7 @@
 #include "Singleton.hpp"
 #include "imgui.h"
 #include "Math/Vector3.hpp"
+#include "src/Light/LightManager.hpp"
 #include "src/Texture/TextureManager.hpp"
 
 void Mesh::Initialize(DirectXAdapter* _adapter, const std::string &_directory, const std::string &_name) {
@@ -48,6 +49,10 @@ void Mesh::Draw() {
     commandList_->IASetVertexBuffers(0, 1, &vbv_);
 	commandList_->SetGraphicsRootConstantBufferView(0, mr_->GetGPUVirtualAddress());
     commandList_->SetGraphicsRootDescriptorTable(2, Singleton<TextureManager>::GetInstance()->GetGPUHandle(texture_));
+
+    if (lighting_) {
+        Singleton<LightManager>::GetInstance()->Draw();
+    }
 
     commandList_->DrawInstanced(static_cast<UINT>(modelData_.vertices.size()), 1, 0, 0);
 }

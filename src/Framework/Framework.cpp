@@ -35,7 +35,10 @@ Framework::Framework() {
     model_->Initialize(dxAdapter_.get(), debugUI_.get());
 
     camera_ = Singleton<CameraManager>::GetInstance();
-    camera_->Initialize(static_cast<float>(config_->GetWidth()) / static_cast<float>(config_->GetHeight()));
+    camera_->Initialize(static_cast<float>(config_->GetWidth()) / static_cast<float>(config_->GetHeight()), debugUI_.get());
+
+    light_ = Singleton<LightManager>::GetInstance();
+    light_->Initialize(dxAdapter_.get(), debugUI_.get());
 }
 
 void Framework::Execute(std::unique_ptr<IGame> _game) {
@@ -66,6 +69,8 @@ void Framework::Update() const {
     if (!Check())return;
 
     input_->Update();
+    camera_->Update();
+    light_->Update();
     scene_->Update();
 }
 
