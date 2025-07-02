@@ -4,9 +4,9 @@
 #include <filesystem>
 #include <fstream>
 
+#include "Utils.hpp"
 #include "DebugUI.hpp"
 #include "Singleton.hpp"
-#include "Utils.hpp"
 #include "imgui.h"
 #include "Math/Vector3.hpp"
 #include "src/Texture/TextureManager.hpp"

@@ -1,6 +1,8 @@
 #include "CameraManager.hpp"
 
+#include "Singleton.hpp"
 #include "Utils.hpp"
+#include "src/Json/Json.hpp"
 
 void CameraManager::Initialize(const float _ratio) {
     ratio_ = _ratio;
@@ -47,7 +49,29 @@ Camera* CameraManager::SetActive(const std::string& _name) {
 }
 
 void CameraManager::Load() {
+    active_ = nullptr;
+    cameras_.clear();
+
+    Json* json = Singleton<Json>::GetInstance();
+    if (!json->Load("Camera")) return;
+
+    auto group = json->GetGroups("Camera");
+    for (auto& [groupId, object] : group){
+        Camera* camera = Add(groupId);
+        camera->transform_ = {
+            {1,1,1},
+            std::get<Vector3>(object["Rotate"]),
+            std::get<Vector3>(object["Position"])
+        };
+    }
+    SetActive(cameras_.begin()->first);
 }
 
 void CameraManager::Save() {
+    Json* json = Singleton<Json>::GetInstance();
+    for (auto& [name, camera] : cameras_){
+        json->SetValue("Camera", name, "Position", camera->transform_.translate);
+        json->SetValue("Camera", name, "Rotate", camera->transform_.rotate);
+    }
+    json->Save("Camera");
 }

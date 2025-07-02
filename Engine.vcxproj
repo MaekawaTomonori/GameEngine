@@ -578,6 +578,7 @@
     <ClInclude Include="src\DirectX\Heap\SRVManager.h" />
     <ClInclude Include="src\DirectX\Shader\Shader.h" />
     <ClInclude Include="include\Math\Transform.hpp" />
+    <ClInclude Include="src\Json\Json.hpp" />
     <ClInclude Include="src\Mesh\Mesh.hpp" />
     <ClInclude Include="src\Mesh\Loader\MeshManager.hpp" />
     <ClInclude Include="src\Model\Common\ModelCommon.hpp" />
@@ -610,6 +611,7 @@
     <ClCompile Include="src\Framework\Framework.cpp" />
     <ClCompile Include="src\Game\IGame.cpp" />
     <ClCompile Include="src\Input\Input.cpp" />
+    <ClCompile Include="src\Json\Json.cpp" />
     <ClCompile Include="src\Math\Easing.cpp" />
     <ClCompile Include="src\Math\MathUtils.cpp" />
     <ClCompile Include="src\Math\Vector2.cpp" />
@@ -637,6 +639,9 @@
     </ProjectReference>
     <ProjectReference Include="vendor\imgui\imgui.vcxproj">
       <Project>{05a9737c-e682-451f-a307-4b01deb9d44b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="vendor\json\json.vcxproj">
+      <Project>{32555a2d-11f0-4921-bd34-b4c6404131fe}</Project>
     </ProjectReference>
     <ProjectReference Include="vendor\lwlog\lwlog\lwlog.vcxproj">
       <Project>{ca71e40f-3686-0cc1-ff07-b0206bdb08f2}</Project>
