@@ -2,6 +2,7 @@
 #define Model_HPP_
 #include "Math/Matrix.hpp"
 #include "Math/Vector3.hpp"
+#include "src/Camera/Camera.hpp"
 #include "src/Mesh/Mesh.hpp"
 #include "src/Model/Common/ModelCommon.hpp"
 
@@ -27,6 +28,7 @@ class Model{
     Transformation* wd_ = nullptr;
 
     //Camera
+    Camera* camera_ = nullptr;
 
     Vector3 position_ = { 0, 0, 0 };
 

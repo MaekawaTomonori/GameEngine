@@ -30,6 +30,12 @@ Framework::Framework() {
 
     sprite_ = Singleton<SpriteCommon>::GetInstance();
     sprite_->Initialize(dxAdapter_.get(), debugUI_.get());
+
+    model_ = Singleton<ModelCommon>::GetInstance();
+    model_->Initialize(dxAdapter_.get(), debugUI_.get());
+
+    camera_ = Singleton<CameraManager>::GetInstance();
+    camera_->Initialize(static_cast<float>(config_->GetWidth()) / static_cast<float>(config_->GetHeight()));
 }
 
 void Framework::Execute(std::unique_ptr<IGame> _game) {

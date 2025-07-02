@@ -2,6 +2,7 @@
 #include <cmath>
 
 #include "Matrix.hpp"
+#include "Transform.hpp"
 #include "Vector3.hpp"
 
 //struct Transform;
@@ -44,7 +45,7 @@ namespace MathUtils{
         Matrix4x4 MakeRotateX(float rad);
         Matrix4x4 MakeRotateY(float rad);
         Matrix4x4 MakeRotateZ(float rad);
-        //Matrix4x4 MakeAffineMatrix(const ::Transform& transform);
+        Matrix4x4 MakeAffineMatrix(const ::Transform& transform);
         Matrix4x4 MakeAffineMatrix(const Vector3& scale, const Vector3& rotate, const Vector3& translate);
         Matrix4x4 MakeAffineMatrix(const Matrix4x4& scale, const Matrix4x4& rotate, const Matrix4x4& translate);
 

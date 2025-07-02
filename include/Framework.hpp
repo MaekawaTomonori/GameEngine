@@ -5,6 +5,7 @@
 
 #include "DebugUI.hpp"
 #include "Input.hpp"
+#include "src/Camera/Manager/CameraManager.hpp"
 #include "src/Platform/WinApp.hpp"
 #include "src/Config/Config.hpp"
 #include "src/DirectX/DirectXAdapter.hpp"
@@ -32,6 +33,7 @@ class Framework {
     MeshManager* mesh_ = nullptr;
     SpriteCommon* sprite_ = nullptr;
     ModelCommon* model_ = nullptr;
+	CameraManager* camera_ = nullptr;
 
 public:
     Framework();

@@ -16,7 +16,9 @@ class Mesh {
     };
 
     struct Material {
-        
+        Vector4 color;
+        uint32_t lighting;
+        float shininess;
     };
 
     struct MaterialData {
@@ -29,6 +31,11 @@ class Mesh {
     };
 
     DirectXAdapter* adapter_ = nullptr;
+	Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> commandList_;
+
+    ModelData modelData_;
+
+    std::string name_;
 
     // vertex resource
     Microsoft::WRL::ComPtr<ID3D12Resource> vr_;
@@ -41,17 +48,25 @@ class Mesh {
     Microsoft::WRL::ComPtr<ID3D12Resource> ir_;
     // index buffer view
     D3D12_INDEX_BUFFER_VIEW ibv_ {};
+    // index
     uint32_t* index_ = nullptr;
 
     // material resource
     Microsoft::WRL::ComPtr<ID3D12Resource> mr_;
+    // material
     Material* material_ = nullptr;
 
-    ModelData modelData_;
+    // current texture
+    std::string texture_;
+
+    // lighting
+	bool lighting_ = false;
+
 public:
     void Initialize(DirectXAdapter* _adapter, const std::string &_directory, const std::string &_name);
     void Update();
     void Draw();
+    void Debug();
 
 private:
     void LoadFile(const std::string &_directory, const std::string &_name);

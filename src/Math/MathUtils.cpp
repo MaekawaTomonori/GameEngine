@@ -1,6 +1,8 @@
 #include "Math/MathUtils.hpp"
 #include <random>
 
+#include "Math/Transform.hpp"
+
 Matrix3x3 MathUtils::Matrix::MakeIdentity3x3() {
     return Matrix3x3 {
         1,0,0,
@@ -78,9 +80,9 @@ Matrix4x4 MathUtils::Matrix::MakeRotateZ(const float rad) {
     };
 }
 
-//Matrix4x4 MathUtils::Matrix::MakeAffineMatrix(const ::Transform& transform) {
-//    return MakeAffineMatrix(transform.scale, transform.rotate, transform.translate);
-//}
+Matrix4x4 MathUtils::Matrix::MakeAffineMatrix(const ::Transform& transform) {
+    return MakeAffineMatrix(transform.scale, transform.rotate, transform.translate);
+}
 
 Matrix4x4 MathUtils::Matrix::MakeAffineMatrix(const Vector3& scale, const Vector3& rotate, const Vector3& translate) {
     Matrix4x4 scaleMat = MakeScaleMatrix(scale);

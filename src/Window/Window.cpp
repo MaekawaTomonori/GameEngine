@@ -35,7 +35,7 @@ bool Window::Create() {
 
     //LastErr();
 
-    RECT rect = {0, 0, 800, 600};
+    RECT rect = {0, 0, 1280, 720};
 
     AdjustWindowRect(&rect, WS_OVERLAPPEDWINDOW, FALSE);
 

@@ -4,37 +4,67 @@
 #include <filesystem>
 #include <fstream>
 
+#include "DebugUI.hpp"
+#include "Singleton.hpp"
 #include "Utils.hpp"
+#include "imgui.h"
 #include "Math/Vector3.hpp"
+#include "src/Texture/TextureManager.hpp"
 
 void Mesh::Initialize(DirectXAdapter* _adapter, const std::string &_directory, const std::string &_name) {
     adapter_ = _adapter;
+    commandList_ = adapter_->GetCommandList();
+    name_ = _name;
 
     LoadFile(_directory, _name);
+
+    vr_.Attach(adapter_->CreateBufferResource(sizeof(VertexData) * modelData_.vertices.size()));
+
+    vbv_.BufferLocation = vr_->GetGPUVirtualAddress();
+    vbv_.SizeInBytes = static_cast<UINT>(sizeof(VertexData) * modelData_.vertices.size());
+    vbv_.StrideInBytes = sizeof(VertexData);
+
+    vr_->Map(0, nullptr, reinterpret_cast<void**>(&vd_));
+    memcpy(vd_, modelData_.vertices.data(), sizeof(VertexData) * modelData_.vertices.size());
+
+    mr_.Attach(adapter_->CreateBufferResource(sizeof(Material)));
+    mr_->Map(0, nullptr, reinterpret_cast<void**>(&material_));
+
+    material_->color = Vector4(1.0f, 1.0f, 1.0f, 1.0f);
+    material_->lighting = 0; // Default lighting
+    material_->shininess = 100.f;
+
+    Singleton<TextureManager>::GetInstance()->Load(modelData_.material.texture);
+    texture_ = modelData_.material.texture;
 }
 
 void Mesh::Update() {
 }
 
 void Mesh::Draw() {
+    if (!commandList_)return;
+
+    commandList_->IASetPrimitiveTopology(D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+    commandList_->IASetVertexBuffers(0, 1, &vbv_);
+	commandList_->SetGraphicsRootConstantBufferView(0, mr_->GetGPUVirtualAddress());
+    commandList_->SetGraphicsRootDescriptorTable(2, Singleton<TextureManager>::GetInstance()->GetGPUHandle(texture_));
+
+    commandList_->DrawInstanced(static_cast<UINT>(modelData_.vertices.size()), 1, 0, 0);
+}
+
+void Mesh::Debug() {
+	
 }
 
 void Mesh::LoadFile(const std::string &_directory, const std::string &_name) {
-    std::filesystem::path directory(_directory);
-    if (exists(directory) || !is_directory(directory)) {
-        Utils::Alert("Mesh::LoadFile: Directory does not exist or is not a directory: " + _directory);
-        return;
-    }
-
-    std::filesystem::path file = directory / _name / _name;
-
+    std::filesystem::path directory(_directory + _name);
     //obj
-    if (exists(file / ".obj")){
+    if (exists(directory / (_name +".obj"))){
         LoadObj(Utils::Convert(directory), _name);
         return;
     }
     //gltf
-    if (exists(file / ".gltf")) {
+    if (exists(directory / (_name + ".gltf"))) {
         //LoadGltf((file/".gltf").c_str());
         return;
     }
@@ -49,7 +79,7 @@ void Mesh::LoadObj(const std::string& _directory, const std::string &_name) {
     std::vector<Vector2> texcoords;
     std::string line;
 
-    std::string directory = (_directory + _name + '/');
+    std::string directory = (_directory + '/');
 
     std::ifstream file(directory + _name + ".obj");
     assert(file.is_open());

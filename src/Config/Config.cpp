@@ -22,8 +22,8 @@ namespace GameEngine {
         default_ = std::make_unique<Config>();
         default_->SetFPS(60)
             .SetTitle("Engine")
-            .SetWidth(800)
-            .SetHeight(600);
+            .SetWidth(1280)
+            .SetHeight(720);
         return default_.get();
     }
 
