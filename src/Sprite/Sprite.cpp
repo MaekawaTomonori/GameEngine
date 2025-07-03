@@ -143,7 +143,7 @@ void Sprite::Debug() {
 		        ImGui::Text("Texture Path: %s", texturePath_.c_str());
 		        ImGui::DragFloat2("Position", &position_.x, 0.1f);
 		        ImGui::DragFloat2("Size", &size_.x, 1);
-		        ImGui::DragFloat("Rotation", &rotation_);
+		        ImGui::DragFloat("Rotation", &rotation_, 0.01f);
 		        ImGui::DragFloat2("Anchor Point", &anchorPoint_.x);
 		        ImGui::Checkbox("Flip X", &flipX_);
 		        ImGui::Checkbox("Flip Y", &flipY_);

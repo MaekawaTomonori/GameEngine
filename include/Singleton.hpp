@@ -14,6 +14,7 @@ template <typename T>
 class Singleton {
     static T* instance_;
     static std::once_flag flag_;
+
 public:
     Singleton(const Singleton&) = delete;
     Singleton& operator=(const Singleton&) = delete;

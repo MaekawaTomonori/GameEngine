@@ -1,6 +1,8 @@
 #include "Math/MathUtils.hpp"
 #include <random>
 
+#include "Math/Transform.hpp"
+
 Matrix3x3 MathUtils::Matrix::MakeIdentity3x3() {
     return Matrix3x3 {
         1,0,0,
@@ -78,9 +80,9 @@ Matrix4x4 MathUtils::Matrix::MakeRotateZ(const float rad) {
     };
 }
 
-//Matrix4x4 MathUtils::Matrix::MakeAffineMatrix(const ::Transform& transform) {
-//    return MakeAffineMatrix(transform.scale, transform.rotate, transform.translate);
-//}
+Matrix4x4 MathUtils::Matrix::MakeAffineMatrix(const ::Transform& transform) {
+    return MakeAffineMatrix(transform.scale, transform.rotate, transform.translate);
+}
 
 Matrix4x4 MathUtils::Matrix::MakeAffineMatrix(const Vector3& scale, const Vector3& rotate, const Vector3& translate) {
     Matrix4x4 scaleMat = MakeScaleMatrix(scale);
@@ -107,11 +109,21 @@ Matrix4x4 MathUtils::Matrix::MakeOrthogonalMatrix(float left, float right, float
 }
 
 Matrix4x4 MathUtils::Matrix::MakePerspectiveFovMatrix(float fovY, float aspectRatio, float nearClip, float farClip) {
-    return Matrix4x4 {
-        1 / aspectRatio * (1 / tanf(fovY / 2)), 0, 0, 0,
-        0, 1 / tanf(fovY / 2), 0, 0,
-        0,0, farClip / (farClip - nearClip), 1,
-        0, 0, -(nearClip * farClip) / (farClip - nearClip), 0,
+    //return Matrix4x4 {
+    //    1 / aspectRatio * (1 / tanf(fovY / 2)), 0, 0, 0,
+    //    0, 1 / tanf(fovY / 2), 0, 0,
+    //    0,0, farClip / (farClip - nearClip), 1,
+    //    0, 0, -(nearClip * farClip) / (farClip - nearClip), 0,
+    //};
+    float halfFovY = tanf(fovY * 0.5f);
+    Vector3 scale = { (1.0f/halfFovY) / aspectRatio, 1.0f / halfFovY, farClip / (farClip - nearClip)};
+    float z = -(nearClip * farClip) / (farClip - nearClip);
+
+    return Matrix4x4{
+        scale.x, 0, 0, 0,
+        0, scale.y, 0, 0,
+        0, 0, scale.z, 1,
+        0, 0, z, 0
     };
 }
 
