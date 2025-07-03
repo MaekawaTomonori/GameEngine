@@ -605,6 +605,7 @@
     <ClInclude Include="src\Light\SpotLight\SpotLight.h" />
     <ClInclude Include="src\Mesh\Mesh.hpp" />
     <ClInclude Include="src\Mesh\Loader\MeshManager.hpp" />
+    <ClInclude Include="src\Mesh\Node\Node.hpp" />
     <ClInclude Include="src\Model\Common\ModelCommon.hpp" />
     <ClInclude Include="include\Model.hpp" />
     <ClInclude Include="src\Platform\WinApp.hpp" />

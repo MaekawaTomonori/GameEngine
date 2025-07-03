@@ -186,6 +186,9 @@
     <ClInclude Include="vendor\assimp\include\assimp\config.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="src\Mesh\Node\Node.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Scheduler\Scheduler.cpp">

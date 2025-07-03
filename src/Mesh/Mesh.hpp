@@ -2,10 +2,12 @@
 #define Mesh_HPP_
 #include <d3d12.h>
 #include <string>
+#include <assimp/scene.h>
 #include <wrl/client.h>
 
 #include "Math/Vector2.hpp"
 #include "Math/Vector3.hpp"
+#include "Node/Node.hpp"
 #include "src/Animation/Animation.hpp"
 #include "src/DirectX/DirectXAdapter.hpp"
 
@@ -29,6 +31,7 @@ class Mesh {
     struct ModelData {
         std::vector<VertexData> vertices;
         MaterialData material;
+        Node root;
     };
 
     DirectXAdapter* adapter_ = nullptr;
@@ -74,7 +77,11 @@ private:
     void LoadFile(const std::string &_directory, const std::string &_name);
 
     void LoadObj(const std::string& _directory, const std::string& _name);
-    //void LoadGltf(const char* _fileName);
+    void LoadGltf(const std::string& _directory, const std::string& _name);
+
+    static Node LoadNode(const aiNode* _node);
+
+    void LoadAnimation(const std::string& _directory, const std::string& _name);
 
     MaterialData LoadMaterialTemplateFile(std::string& _directory, std::string& _name);
 }; // class Mesh

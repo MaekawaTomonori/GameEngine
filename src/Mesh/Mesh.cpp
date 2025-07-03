@@ -76,13 +76,13 @@ void Mesh::Debug() {
 void Mesh::LoadFile(const std::string &_directory, const std::string &_name) {
     std::filesystem::path directory(_directory + _name);
     //obj
-    if (std::filesystem::exists(directory / (_name +".obj"))){
+    if (exists(directory / (_name +".obj"))){
         LoadObj(Utils::Convert(directory), _name);
         return;
     }
     //gltf
-    if (std::filesystem::exists(directory / (_name + ".gltf"))) {
-        //LoadGltf((file/".gltf").c_str());
+    if (exists(directory / (_name + ".gltf"))) {
+        LoadGltf(Utils::Convert(directory), _name);
         return;
     }
 
@@ -90,73 +90,6 @@ void Mesh::LoadFile(const std::string &_directory, const std::string &_name) {
 }
 
 void Mesh::LoadObj(const std::string& _directory, const std::string &_name) {
-    //ModelData modelData {};
-    //std::vector<Vector4> positions;
-    //std::vector<Vector3> normals;
-    //std::vector<Vector2> texcoords;
-    //std::string line;
-    //
-    //std::string directory = (_directory + '/');
-    //
-    //std::ifstream file(directory + _name + ".obj");
-    //assert(file.is_open());
-    //
-    //while (std::getline(file, line)){
-    //    std::string identifier;
-    //    std::istringstream s(line);
-    //    s >> identifier;
-    //
-    //    if (identifier == "v"){
-    //        Vector4 position {};
-    //        s >> position.x >> position.y >> position.z;
-    //        position.w = 1;
-    //        positions.push_back(position);
-    //    } else if (identifier == "vt"){
-    //        Vector2 texcoord {};
-    //        s >> texcoord.x >> texcoord.y;
-    //        texcoords.push_back(texcoord);
-    //    } else if (identifier == "vn"){
-    //        Vector3 normal {};
-    //        s >> normal.x >> normal.y >> normal.z;
-    //        normals.push_back(normal);
-    //    } else if (identifier == "f"){
-    //        VertexData triangle[3];
-    //        for (auto &faceVertex: triangle) {
-    //            std::string vertexDefinition;
-    //            s >> vertexDefinition;
-    //
-    //            std::istringstream v(vertexDefinition);
-    //            uint32_t elementIndices[3];
-    //
-    //            for (unsigned int &elementIndex: elementIndices) {
-    //                std::string index;
-    //                std::getline(v, index, '/');
-    //                elementIndex = std::stoi(index);
-    //            }
-    //
-    //            Vector4 position = positions[elementIndices[0] - 1];
-    //            Vector2 texcoord = texcoords[elementIndices[1] - 1];
-    //            Vector3 normal = normals[elementIndices[2] - 1];
-    //
-    //            position.x *= -1;
-    //            texcoord.y = 1 - texcoord.y;
-    //            normal.x *= -1;
-    //
-    //            faceVertex = {position, texcoord, normal};
-    //        }
-    //        modelData.vertices.push_back(triangle[2]);
-    //        modelData.vertices.push_back(triangle[1]);
-    //        modelData.vertices.push_back(triangle[0]);
-    //    } else if (identifier == "mtllib"){
-    //        std::string materialFileName;
-    //        s >> materialFileName;
-    //
-    //        modelData.material = LoadMaterialTemplateFile(directory, materialFileName);
-    //    }
-    //}
-    //
-    //modelData_ = modelData;
-
     Assimp::Importer importer;
     std::string path = _directory + "/" + _name + ".obj";
     const aiScene* scene = importer.ReadFile(path, aiProcess_FlipWindingOrder | aiProcess_FlipUVs);
@@ -198,6 +131,66 @@ void Mesh::LoadObj(const std::string& _directory, const std::string &_name) {
         }
     }
 }
+
+void Mesh::LoadGltf(const std::string& _directory, const std::string& _name) {
+    Assimp::Importer importer;
+    std::string path = _directory + "/" + _name + ".gltf";
+    const aiScene* scene = importer.ReadFile(path, aiProcess_FlipWindingOrder | aiProcess_FlipUVs);
+    if (!scene->HasMeshes()){
+        Utils::Alert("Mesh::LoadGltf: No meshes found in file: " + path);
+        return;
+    }
+
+    modelData_.root = LoadNode(scene->mRootNode);
+}
+
+Node Mesh::LoadNode(const aiNode* _node) {
+    Node result;
+    aiMatrix4x4 local = _node->mTransformation;
+    result.local = Matrix4x4{
+        local.a1, local.b1, local.c1, local.d1,
+        local.a2, local.b2, local.c2, local.d2,
+        local.a3, local.b3, local.c3, local.d3,
+        local.a4, local.b4, local.c4, local.d4
+    };
+
+    result.name = _node->mName.C_Str();
+    result.children.reserve(_node->mNumChildren);
+    for (uint32_t i = 0; i < _node->mNumChildren; ++i){
+        result.children[i] = LoadNode(_node->mChildren[i]);
+    }
+
+    return result;
+}
+
+void Mesh::LoadAnimation(const std::string& _directory, const std::string& _name) {
+    Assimp::Importer importer;
+    std::string path = _directory + "/" + _name + ".gltf";
+    const aiScene* scene = importer.ReadFile(path.c_str(), 0);
+
+    aiAnimation* animation = scene->mAnimations[0];
+    animation_.duration = static_cast<float>(animation->mDuration);
+
+    for (uint32_t channelIndex = 0; channelIndex < animation->mNumChannels; ++channelIndex) {
+        aiNodeAnim* nodeAnim = animation->mChannels[channelIndex];
+        NodeAnimation& nodeAnimation = animation_.nodeAnimations[nodeAnim->mNodeName.C_Str()];
+        for (uint32_t keyIndex = 0; keyIndex < nodeAnim->mNumPositionKeys; ++keyIndex){
+            aiVectorKey& positionKey = nodeAnim->mPositionKeys[keyIndex];
+            nodeAnimation.translate.keyframes.push_back({ Vector3(-positionKey.mValue.x, positionKey.mValue.y, positionKey.mValue.z), static_cast<float>(positionKey.mTime) });
+        }
+        for (uint32_t keyIndex = 0; keyIndex < nodeAnim->mNumRotationKeys; ++keyIndex){
+            aiQuatKey& rotationKey = nodeAnim->mRotationKeys[keyIndex];
+            nodeAnimation.rotation.keyframes.push_back({ Quaternion(rotationKey.mValue.x, -rotationKey.mValue.y, -rotationKey.mValue.z, rotationKey.mValue.w), static_cast<float>(rotationKey.mTime) });
+        }
+        for (uint32_t keyIndex = 0; keyIndex < nodeAnim->mNumScalingKeys; ++keyIndex){
+            aiVectorKey& scalingKey = nodeAnim->mScalingKeys[keyIndex];
+            nodeAnimation.scale.keyframes.push_back({ Vector3(scalingKey.mValue.x, scalingKey.mValue.y, scalingKey.mValue.z), static_cast<float>(scalingKey.mTime) });
+        }
+
+        animation_.nodeAnimations[nodeAnim->mNodeName.C_Str()] = nodeAnimation;
+    }
+}
+
 
 Mesh::MaterialData Mesh::LoadMaterialTemplateFile(std::string &_directory, std::string &_name) {
     MaterialData materialData {};
