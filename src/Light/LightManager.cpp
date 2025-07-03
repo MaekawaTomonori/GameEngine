@@ -145,7 +145,6 @@ void LightManager::Load() {
 }
 
 void LightManager::Save() const {
-
     for (const auto& dl : rawDirectionalLights_){
         dl->Save(path);
     }

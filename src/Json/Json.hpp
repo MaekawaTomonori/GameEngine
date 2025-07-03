@@ -36,8 +36,6 @@ class Json{
     // }
 
 public:
-
-
     void SetValue(const std::string& _path, const std::string& _group, const std::string& _key, const Value& _value);
     Group GetGroups(const std::string& _path);
     Value GetValue(const std::string& _path, const std::string& group, const std::string& key) const;
@@ -46,9 +44,7 @@ public:
     bool Load(const std::string& _path);
     void Save(const std::string& _path);
 
-
 private:
-
     void Register(const std::string& _name);
     void LoadJson(const std::string& _path);
 };

@@ -3,11 +3,11 @@
 #include "Utils.hpp"
 
 class RawLight{
-
 protected:
     std::string uuid_;
 	LightType type_;
     bool enable_ = true;
+
 public:
 	RawLight();
 	virtual ~RawLight() = default;
@@ -32,6 +32,7 @@ public:
 	virtual void DefaultSetting() = 0;
     //ToJson
     virtual void Save(std::string _path) = 0;
+
 protected:
     virtual void ImGuiSetting() = 0;
 };

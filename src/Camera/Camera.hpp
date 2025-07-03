@@ -14,6 +14,7 @@ struct CameraForGpu {
 class Camera {
 public:
     Transform transform_{};
+
 private:
     std::string uuid_;
 
