@@ -58,7 +58,14 @@ void Mesh::Draw() {
 }
 
 void Mesh::Debug() {
-	
+    ImGui::ColorEdit4("Color", &material_->color.x);
+    ImGui::Checkbox("EnableLighting", &lighting_);
+    if (lighting_) {
+        material_->lighting = 1;
+        ImGui::DragFloat("Shininess", &material_->shininess, 0.1f, 0.f, 100.f);
+    } else{
+        material_->lighting = 0;
+    }
 }
 
 void Mesh::LoadFile(const std::string &_directory, const std::string &_name) {

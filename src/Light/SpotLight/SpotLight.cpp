@@ -39,7 +39,6 @@ void RawSpotLight::Save(std::string _path) {
 
 void RawSpotLight::ImGuiSetting() {
     if (ImGui::TreeNode(uuid_.c_str())){
-
         ImGui::ColorEdit4("Color", &light_.color.x);
         ImGui::DragFloat3("Position", &light_.position.x, 0.1f);
         ImGui::DragFloat3("Direction", &light_.direction.x, 0.1f);
@@ -54,7 +53,6 @@ void RawSpotLight::ImGuiSetting() {
 	    }
         ImGui::TreePop();
     }
-
 
     if ((MathUtils::F_PI * 2.f) <= light_.cosAngle){
         light_.cosAngle -= MathUtils::F_PI * 2.f;

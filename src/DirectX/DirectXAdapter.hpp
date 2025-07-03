@@ -95,6 +95,7 @@ private:
     bool CreateLimiter();
 
     void Wait();
+
 public: //Accessor
     [[nodiscard]] HWND GetWindowHandle() const;
     [[nodiscard]] ID3D12Device* GetDevice() const;

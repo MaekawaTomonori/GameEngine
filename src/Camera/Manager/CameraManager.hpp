@@ -21,6 +21,7 @@ class CameraManager {
     std::vector<std::string>names_;
 
     float ratio_ = 0;
+
 public:
     void Initialize(float _ratio, DebugUI* _debug);
     void Update();
