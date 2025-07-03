@@ -26,7 +26,7 @@ void Mesh::Initialize(DirectXAdapter* _adapter, const std::string &_directory, c
     vbv_.StrideInBytes = sizeof(VertexData);
 
     vr_->Map(0, nullptr, reinterpret_cast<void**>(&vd_));
-    memcpy(vd_, modelData_.vertices.data(), sizeof(VertexData) * modelData_.vertices.size());
+    std::copy_n(modelData_.vertices.data(), modelData_.vertices.size(), vd_);
 
     mr_.Attach(adapter_->CreateBufferResource(sizeof(Material)));
     mr_->Map(0, nullptr, reinterpret_cast<void**>(&material_));
