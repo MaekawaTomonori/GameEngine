@@ -8,6 +8,7 @@
 
 struct CameraForGpu {
     Vector3 position;
+    float pad;
 };
 
 class Camera {
@@ -24,7 +25,7 @@ private:
     float aspectRatio_ = .0f;
 
     float near_ = 0.1f;
-    float far_ = 1000.0f;
+    float far_ = 100.0f;
 
 public:
     Camera();

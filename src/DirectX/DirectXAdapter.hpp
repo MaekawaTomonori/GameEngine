@@ -19,7 +19,7 @@ class DirectXAdapter{
     /// first = width, second = height
     /// </summary>
     using WindowSize = std::pair<size_t, size_t>;
-    WindowSize windowSize_ = { 800, 600 };
+    WindowSize windowSize_ = { 1280, 720 };
     HWND hWnd_ = nullptr;
 
     //DegubLayer

@@ -107,6 +107,7 @@ void DirectXAdapter::Render() {
     D3D12_CPU_DESCRIPTOR_HANDLE dsvHandle = dsvHeap_->GetCPUHandle(0);
     cList_->OMSetRenderTargets(1, &rtvHandles_[bbi], false, &dsvHandle);
     cList_->ClearRenderTargetView(rtvHandles_[bbi], &back.x, 0, nullptr);
+    cList_->ClearDepthStencilView(dsvHandle, D3D12_CLEAR_FLAG_DEPTH, 1.f, 0, 0, nullptr);
 
     cList_->RSSetViewports(1, &viewport_);
     cList_->RSSetScissorRects(1, &scissorRect_);
