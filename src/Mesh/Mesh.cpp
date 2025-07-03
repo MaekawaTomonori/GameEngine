@@ -9,6 +9,11 @@
 #include "Singleton.hpp"
 #include "imgui.h"
 #include "Math/Vector3.hpp"
+#include "assimp/Importer.hpp"
+#include "assimp/material.h"
+#include "assimp/mesh.h"
+#include "assimp/scene.h"
+#include "assimp/postprocess.h"
 #include "src/Light/LightManager.hpp"
 #include "src/Texture/TextureManager.hpp"
 
@@ -71,12 +76,12 @@ void Mesh::Debug() {
 void Mesh::LoadFile(const std::string &_directory, const std::string &_name) {
     std::filesystem::path directory(_directory + _name);
     //obj
-    if (exists(directory / (_name +".obj"))){
+    if (std::filesystem::exists(directory / (_name +".obj"))){
         LoadObj(Utils::Convert(directory), _name);
         return;
     }
     //gltf
-    if (exists(directory / (_name + ".gltf"))) {
+    if (std::filesystem::exists(directory / (_name + ".gltf"))) {
         //LoadGltf((file/".gltf").c_str());
         return;
     }
@@ -85,72 +90,113 @@ void Mesh::LoadFile(const std::string &_directory, const std::string &_name) {
 }
 
 void Mesh::LoadObj(const std::string& _directory, const std::string &_name) {
-    ModelData modelData {};
-    std::vector<Vector4> positions;
-    std::vector<Vector3> normals;
-    std::vector<Vector2> texcoords;
-    std::string line;
+    //ModelData modelData {};
+    //std::vector<Vector4> positions;
+    //std::vector<Vector3> normals;
+    //std::vector<Vector2> texcoords;
+    //std::string line;
+    //
+    //std::string directory = (_directory + '/');
+    //
+    //std::ifstream file(directory + _name + ".obj");
+    //assert(file.is_open());
+    //
+    //while (std::getline(file, line)){
+    //    std::string identifier;
+    //    std::istringstream s(line);
+    //    s >> identifier;
+    //
+    //    if (identifier == "v"){
+    //        Vector4 position {};
+    //        s >> position.x >> position.y >> position.z;
+    //        position.w = 1;
+    //        positions.push_back(position);
+    //    } else if (identifier == "vt"){
+    //        Vector2 texcoord {};
+    //        s >> texcoord.x >> texcoord.y;
+    //        texcoords.push_back(texcoord);
+    //    } else if (identifier == "vn"){
+    //        Vector3 normal {};
+    //        s >> normal.x >> normal.y >> normal.z;
+    //        normals.push_back(normal);
+    //    } else if (identifier == "f"){
+    //        VertexData triangle[3];
+    //        for (auto &faceVertex: triangle) {
+    //            std::string vertexDefinition;
+    //            s >> vertexDefinition;
+    //
+    //            std::istringstream v(vertexDefinition);
+    //            uint32_t elementIndices[3];
+    //
+    //            for (unsigned int &elementIndex: elementIndices) {
+    //                std::string index;
+    //                std::getline(v, index, '/');
+    //                elementIndex = std::stoi(index);
+    //            }
+    //
+    //            Vector4 position = positions[elementIndices[0] - 1];
+    //            Vector2 texcoord = texcoords[elementIndices[1] - 1];
+    //            Vector3 normal = normals[elementIndices[2] - 1];
+    //
+    //            position.x *= -1;
+    //            texcoord.y = 1 - texcoord.y;
+    //            normal.x *= -1;
+    //
+    //            faceVertex = {position, texcoord, normal};
+    //        }
+    //        modelData.vertices.push_back(triangle[2]);
+    //        modelData.vertices.push_back(triangle[1]);
+    //        modelData.vertices.push_back(triangle[0]);
+    //    } else if (identifier == "mtllib"){
+    //        std::string materialFileName;
+    //        s >> materialFileName;
+    //
+    //        modelData.material = LoadMaterialTemplateFile(directory, materialFileName);
+    //    }
+    //}
+    //
+    //modelData_ = modelData;
 
-    std::string directory = (_directory + '/');
-
-    std::ifstream file(directory + _name + ".obj");
-    assert(file.is_open());
-
-    while (std::getline(file, line)){
-        std::string identifier;
-        std::istringstream s(line);
-        s >> identifier;
-
-        if (identifier == "v"){
-            Vector4 position {};
-            s >> position.x >> position.y >> position.z;
-            position.w = 1;
-            positions.push_back(position);
-        } else if (identifier == "vt"){
-            Vector2 texcoord {};
-            s >> texcoord.x >> texcoord.y;
-            texcoords.push_back(texcoord);
-        } else if (identifier == "vn"){
-            Vector3 normal {};
-            s >> normal.x >> normal.y >> normal.z;
-            normals.push_back(normal);
-        } else if (identifier == "f"){
-            VertexData triangle[3];
-            for (auto &faceVertex: triangle) {
-                std::string vertexDefinition;
-                s >> vertexDefinition;
-
-                std::istringstream v(vertexDefinition);
-                uint32_t elementIndices[3];
-
-                for (unsigned int &elementIndex: elementIndices) {
-                    std::string index;
-                    std::getline(v, index, '/');
-                    elementIndex = std::stoi(index);
-                }
-
-                Vector4 position = positions[elementIndices[0] - 1];
-                Vector2 texcoord = texcoords[elementIndices[1] - 1];
-                Vector3 normal = normals[elementIndices[2] - 1];
-
-                position.x *= -1;
-                texcoord.y = 1 - texcoord.y;
-                normal.x *= -1;
-
-                faceVertex = {position, texcoord, normal};
+    Assimp::Importer importer;
+    std::string path = _directory + "/" + _name + ".obj";
+    const aiScene* scene = importer.ReadFile(path, aiProcess_FlipWindingOrder | aiProcess_FlipUVs);
+    if (!scene->HasMeshes()){
+        Utils::Alert("Mesh::LoadObj: No meshes found in file: " + path);
+        return;
+    }
+    for (uint32_t meshIndex = 0; meshIndex < scene->mNumMeshes; ++meshIndex) {
+        aiMesh* mesh = scene->mMeshes[meshIndex];
+    
+        for (uint32_t faceIndex = 0; faceIndex < mesh->mNumFaces; ++faceIndex) {
+            aiFace& face = mesh->mFaces[faceIndex];
+    
+            for (uint32_t element = 0; element < face.mNumIndices; ++element) {
+                uint32_t vertex = face.mIndices[element];
+                aiVector3D& position = mesh->mVertices[vertex];
+                aiVector3D& normal = mesh->mNormals[vertex];
+                aiVector3D texcoord = mesh->mTextureCoords[0][vertex];
+    
+                VertexData vertexData{};
+                vertexData.position = Vector4(position.x, position.y, position.z, 1.0f);
+                vertexData.texcoord = Vector2(texcoord.x, texcoord.y);
+                vertexData.normal = Vector3(normal.x, normal.y, normal.z);
+    
+                vertexData.position.x *= -1; // Flip X axis
+                vertexData.normal.x *= -1; // Flip X axis
+    
+                modelData_.vertices.push_back(vertexData);
             }
-            modelData.vertices.push_back(triangle[2]);
-            modelData.vertices.push_back(triangle[1]);
-            modelData.vertices.push_back(triangle[0]);
-        } else if (identifier == "mtllib"){
-            std::string materialFileName;
-            s >> materialFileName;
-
-            modelData.material = LoadMaterialTemplateFile(directory, materialFileName);
+    
+            for (uint32_t materialIndex = 0; materialIndex < scene->mNumMaterials; ++materialIndex) {
+                aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
+                if (material->GetTextureCount(aiTextureType_DIFFUSE)) {
+                    aiString texturePath;
+                    material->GetTexture(aiTextureType_DIFFUSE, 0, &texturePath);
+                    modelData_.material.texture = _directory + "/" + texturePath.C_Str();
+                }
+            }
         }
     }
-
-    modelData_ = modelData;
 }
 
 Mesh::MaterialData Mesh::LoadMaterialTemplateFile(std::string &_directory, std::string &_name) {

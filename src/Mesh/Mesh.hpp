@@ -6,6 +6,7 @@
 
 #include "Math/Vector2.hpp"
 #include "Math/Vector3.hpp"
+#include "src/Animation/Animation.hpp"
 #include "src/DirectX/DirectXAdapter.hpp"
 
 class Mesh {
@@ -34,6 +35,7 @@ class Mesh {
 	Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> commandList_;
 
     ModelData modelData_;
+    Animation animation_;
 
     std::string name_;
 
