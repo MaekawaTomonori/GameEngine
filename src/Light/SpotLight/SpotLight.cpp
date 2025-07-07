@@ -1,6 +1,6 @@
 #include "SpotLight.h"
 
-#include "Singleton.hpp"
+#include "Pattern/Singleton.hpp"
 #include "imgui.h"
 #include "Math/MathUtils.hpp"
 #include "src/Json/Json.hpp"

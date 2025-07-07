@@ -1,6 +1,6 @@
 #include "Sprite.hpp"
 
-#include "Singleton.hpp"
+#include "Pattern/Singleton.hpp"
 #include "Utils.hpp"
 #include "imgui.h"
 #include "Math/MathUtils.hpp"

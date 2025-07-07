@@ -1,6 +1,6 @@
 #include "DirectionalLight.h"
 
-#include "Singleton.hpp"
+#include "Pattern/Singleton.hpp"
 #include "imgui.h"
 #include "src/Json/Json.hpp"
 #include "vendor/MagicEnum/magic_enum.hpp"

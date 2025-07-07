@@ -6,7 +6,7 @@
 
 #include "Utils.hpp"
 #include "DebugUI.hpp"
-#include "Singleton.hpp"
+#include "Pattern/Singleton.hpp"
 #include "imgui.h"
 #include "Math/MathUtils.hpp"
 #include "Math/Vector3.hpp"

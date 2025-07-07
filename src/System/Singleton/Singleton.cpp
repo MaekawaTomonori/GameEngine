@@ -1,4 +1,4 @@
-#include "include/Singleton.hpp"
+#include "Pattern/Singleton.hpp"
 
 namespace{
     constexpr size_t MAX_FINALIZER_SIZE = 256;

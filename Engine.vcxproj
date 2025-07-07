@@ -609,12 +609,14 @@
     <ClInclude Include="src\Mesh\Skeleton\Skeleton.hpp" />
     <ClInclude Include="src\Model\Common\ModelCommon.hpp" />
     <ClInclude Include="include\Model.hpp" />
+    <ClInclude Include="src\Model\Loader\IModelLoader.hpp" />
+    <ClInclude Include="src\Model\Repository\ModelRepository.hpp" />
     <ClInclude Include="src\Platform\WinApp.hpp" />
     <ClInclude Include="include\IScene.hpp" />
     <ClInclude Include="src\Scene\SceneSwitcher.hpp" />
     <ClInclude Include="include\Factory\AbstractSceneFactory.hpp" />
     <ClInclude Include="src\Scheduler\Scheduler.hpp" />
-    <ClInclude Include="include\Singleton.hpp" />
+    <ClInclude Include="include\Pattern\Singleton.hpp" />
     <ClInclude Include="src\Sprite\Common\SpriteCommon.hpp" />
     <ClInclude Include="include\Sprite.hpp" />
     <ClInclude Include="src\Texture\TextureManager.hpp" />
@@ -654,6 +656,7 @@
     <ClCompile Include="src\Mesh\Skeleton\Skeleton.cpp" />
     <ClCompile Include="src\Model\Common\ModelCommon.cpp" />
     <ClCompile Include="src\Model\Model.cpp" />
+    <ClCompile Include="src\Model\Repository\ModelRepository.cpp" />
     <ClCompile Include="src\Platform\WinApp.cpp" />
     <ClCompile Include="src\Scene\IScene.cpp" />
     <ClCompile Include="src\Scene\SceneSwitcher.cpp" />

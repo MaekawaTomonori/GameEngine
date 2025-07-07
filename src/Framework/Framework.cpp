@@ -1,8 +1,8 @@
 #include "include/Framework.hpp"
 
 #include "Log.hpp"
-#include "Singleton.hpp"
-#include "include/IGame.hpp"
+#include "IGame.hpp"
+#include "Pattern/Singleton.hpp"
 
 Framework::Framework() {
     config_ = GameEngine::Config::Default();
