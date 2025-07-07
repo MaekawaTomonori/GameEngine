@@ -8,6 +8,7 @@
 #include "Math/Vector2.hpp"
 #include "Math/Vector3.hpp"
 #include "Node/Node.hpp"
+#include "Skeleton/Skeleton.hpp"
 #include "src/Animation/Animation.hpp"
 #include "src/DirectX/DirectXAdapter.hpp"
 
@@ -83,7 +84,13 @@ private:
 
     void LoadAnimation(const std::string& _directory, const std::string& _name);
 
+    Skeleton CreateSkeleton(const Node& _root);
+
+    int32_t CreateJoint(const Node& _node, const std::optional<int32_t>& _parent, std::vector<Joint>& _joints);
+
     MaterialData LoadMaterialTemplateFile(std::string& _directory, std::string& _name);
+
+    void UpdateSkeleton();
 }; // class Mesh
 
 #endif // Mesh_HPP_

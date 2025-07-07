@@ -8,6 +8,7 @@
 #include "DebugUI.hpp"
 #include "Singleton.hpp"
 #include "imgui.h"
+#include "Math/MathUtils.hpp"
 #include "Math/Vector3.hpp"
 #include "assimp/Importer.hpp"
 #include "assimp/material.h"
@@ -146,13 +147,15 @@ void Mesh::LoadGltf(const std::string& _directory, const std::string& _name) {
 
 Node Mesh::LoadNode(const aiNode* _node) {
     Node result;
-    aiMatrix4x4 local = _node->mTransformation;
-    result.local = Matrix4x4{
-        local.a1, local.b1, local.c1, local.d1,
-        local.a2, local.b2, local.c2, local.d2,
-        local.a3, local.b3, local.c3, local.d3,
-        local.a4, local.b4, local.c4, local.d4
-    };
+    aiVector3D translate, scale;
+    aiQuaternion rotate;
+    Transform transform;
+    _node->mTransformation.Decompose(scale, rotate, translate);
+    transform.scale = { scale.x, scale.y, scale.z };
+    transform.rotate = Quaternion(rotate.x, -rotate.y, -rotate.z, rotate.w);
+    transform.translate = Vector3(-translate.x, translate.y, translate.z);
+    result.transform = transform;
+    result.local = MathUtils::Matrix::MakeAffineMatrix(transform);
 
     result.name = _node->mName.C_Str();
     result.children.reserve(_node->mNumChildren);
@@ -191,6 +194,34 @@ void Mesh::LoadAnimation(const std::string& _directory, const std::string& _name
     }
 }
 
+Skeleton Mesh::CreateSkeleton(const Node& _root) {
+    Skeleton skeleton;
+    skeleton.root = CreateJoint(_root, {}, skeleton.joints);
+
+    for (const Joint& joint : skeleton.joints) {
+        skeleton.map.emplace(joint.name, joint.index);
+    }
+
+    return skeleton;
+}
+
+int32_t Mesh::CreateJoint(const Node& _node, const std::optional<int32_t>& _parent, std::vector<Joint>& _joints) {
+    Joint joint;
+    joint.transform = _node.transform;
+    joint.local = _node.local;
+    joint.space = MathUtils::Matrix::MakeIdentity();
+    joint.name = _node.name;
+    joint.index = static_cast<int32_t>(_joints.size());
+    joint.parent = _parent;
+    _joints.push_back(joint);
+
+    for (const Node& child : _node.children) {
+        int32_t childIndex = CreateJoint(child, joint.index, _joints);
+        _joints[joint.index].children.push_back(childIndex);
+    }
+
+    return joint.index;
+}
 
 Mesh::MaterialData Mesh::LoadMaterialTemplateFile(std::string &_directory, std::string &_name) {
     MaterialData materialData {};
@@ -210,4 +241,8 @@ Mesh::MaterialData Mesh::LoadMaterialTemplateFile(std::string &_directory, std::
         }
     }
     return materialData;
+}
+
+void Mesh::UpdateSkeleton() {
+    for (Joint& joint : )
 }

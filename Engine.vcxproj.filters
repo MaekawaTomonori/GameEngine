@@ -183,10 +183,10 @@
     <ClInclude Include="vendor\assimp\include\assimp\AssertHandler.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="vendor\assimp\include\assimp\config.h">
+    <ClInclude Include="src\Mesh\Node\Node.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="src\Mesh\Node\Node.hpp">
+    <ClInclude Include="src\Mesh\Skeleton\Skeleton.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
@@ -309,6 +309,9 @@
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="src\Light\LightManager.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Mesh\Skeleton\Skeleton.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
