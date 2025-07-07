@@ -5,7 +5,7 @@
 #include <unordered_map>
 
 class ModelRepository {
-    std::unordered_map<std::string, std::unique_ptr<>>
+    //std::unordered_map<std::string, std::unique_ptr<MeshData>> models;
 public:
     ModelRepository();
 

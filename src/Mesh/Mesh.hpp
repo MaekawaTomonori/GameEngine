@@ -40,6 +40,7 @@ class Mesh {
 
     ModelData modelData_;
     Animation animation_;
+    Skeleton skeleton_;
 
     std::string name_;
 
@@ -91,6 +92,7 @@ private:
     MaterialData LoadMaterialTemplateFile(std::string& _directory, std::string& _name);
 
     void UpdateSkeleton();
+    void ApplyAnimation(float _time);
 }; // class Mesh
 
 #endif // Mesh_HPP_

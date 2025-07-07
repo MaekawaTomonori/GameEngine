@@ -46,6 +46,7 @@ void Mesh::Initialize(DirectXAdapter* _adapter, const std::string &_directory, c
 }
 
 void Mesh::Update() {
+    UpdateSkeleton();
 }
 
 void Mesh::Draw() {
@@ -244,5 +245,21 @@ Mesh::MaterialData Mesh::LoadMaterialTemplateFile(std::string &_directory, std::
 }
 
 void Mesh::UpdateSkeleton() {
-    for (Joint& joint : )
+    for (Joint& joint : skeleton_.joints){
+        joint.local = MathUtils::Matrix::MakeAffineMatrix(joint.transform);
+        if (joint.parent){
+            joint.space = joint.local * skeleton_.joints[*joint.parent].space;
+        } else{
+            joint.space = joint.local;
+        }
+    }
+}
+
+void Mesh::ApplyAnimation(float _time) {
+    for (Joint& joint : skeleton_.joints) {
+        if (animation_.nodeAnimations.contains(joint.name)) {
+            const NodeAnimation& rna = animation_.nodeAnimations[joint.name];
+            joint.transform.scale = rna.scale.keyframes;
+        }
+    }
 }

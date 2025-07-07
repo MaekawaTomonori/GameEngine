@@ -4,7 +4,7 @@
 
 class IModelLoader {
 public:
-    virtual std::unique_ptr<>
+    //virtual std::unique_ptr<>
 }; // class IModelLoader
 
 #endif // IModelLoader_HPP_
