@@ -41,6 +41,14 @@ void Mesh::Initialize(DirectXAdapter* _adapter, const std::string &_directory, c
     material_->lighting = 0; // Default lighting
     material_->shininess = 100.f;
 
+    ir_.Attach(adapter_->CreateBufferResource(sizeof(uint32_t) * modelData_.indices.size()));
+    ibv_.BufferLocation = ir_->GetGPUVirtualAddress();
+    ibv_.SizeInBytes = static_cast<UINT>(sizeof(uint32_t) * modelData_.indices.size());
+    ibv_.Format = DXGI_FORMAT_R32_UINT;
+
+    ir_->Map(0, nullptr, reinterpret_cast<void**>(&id_));
+    std::copy_n(modelData_.indices.data(), modelData_.indices.size(), id_);
+
     Singleton<TextureManager>::GetInstance()->Load(modelData_.material.texture);
     texture_ = modelData_.material.texture;
 }
@@ -141,6 +149,40 @@ void Mesh::LoadGltf(const std::string& _directory, const std::string& _name) {
     if (!scene->HasMeshes()){
         Utils::Alert("Mesh::LoadGltf: No meshes found in file: " + path);
         return;
+    }
+
+    for (uint32_t meshIndex = 0; meshIndex < scene->mNumMeshes; ++meshIndex) {
+        aiMesh* mesh = scene->mMeshes[meshIndex];
+
+        if (!mesh->HasNormals() || !mesh->HasTextureCoords(0)) {
+            Utils::Alert("Mesh::LoadGltf: Mesh does not have normals or texture coordinates in file: " + path);
+            continue;
+        }
+
+        modelData_.vertices.resize(mesh->mNumVertices);
+        for (uint32_t vertexIndex = 0; vertexIndex < mesh->mNumVertices; ++vertexIndex) {
+            aiVector3D& position = mesh->mVertices[vertexIndex];
+            aiVector3D& normal = mesh->mNormals[vertexIndex];
+            aiVector3D texcoord = mesh->mTextureCoords[0][vertexIndex];
+
+            VertexData vertexData{};
+            vertexData.position = Vector4(-position.x, position.y, position.z, 1.0f);
+            vertexData.normal = Vector3(-normal.x, normal.y, normal.z);
+            vertexData.texcoord = Vector2(texcoord.x, texcoord.y);
+            modelData_.vertices[vertexIndex] = vertexData;
+        }
+
+        for (uint32_t faceIndex = 0; faceIndex < mesh->mNumFaces; ++faceIndex) {
+            aiFace& face = mesh->mFaces[faceIndex];
+
+            if (face.mNumIndices == 3) {
+                Utils::Alert("Mesh::LoadGltf: Mesh has non-triangular faces in file: " + path);
+            }
+
+            for (uint32_t element = 0; element < face.mNumIndices; ++element){
+                modelData_.indices.push_back(face.mIndices[element]);
+            }
+        }
     }
 
     modelData_.root = LoadNode(scene->mRootNode);
