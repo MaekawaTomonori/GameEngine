@@ -4,11 +4,14 @@
 #include <string>
 #include <unordered_map>
 
-class ModelRepository {
-    //std::unordered_map<std::string, std::unique_ptr<MeshData>> models;
-public:
-    ModelRepository();
+#include "src/Model/Data/ModelData.hpp"
 
+class ModelRepository {
+    std::unordered_map<std::string, std::unique_ptr<ModelData>> models_;
+public:
+    void Add(const std::string& _name, std::unique_ptr<ModelData> _model);
+    // Nullable
+    ModelData* Get(const std::string& _name);
 }; // class ModelRepository
 
 #endif // ModelRepository_HPP_

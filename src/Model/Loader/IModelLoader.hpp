@@ -1,10 +1,15 @@
 #ifndef IModelLoader_HPP_
 #define IModelLoader_HPP_
-#include <memory>
+#include "Model.hpp"
+#include "src/ResourceRepository/ResourceRepository.hpp"
 
 class IModelLoader {
+protected:
+    const std::string ASSETS_FOLDER = "Assets/Resources/";
+
 public:
-    //virtual std::unique_ptr<>
+    virtual ~IModelLoader() = default;
+    virtual Model* LoadModel(const std::string& _directory, const std::string& _name, ResourceRepository* _repository) = 0;
 }; // class IModelLoader
 
 #endif // IModelLoader_HPP_

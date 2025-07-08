@@ -10,7 +10,7 @@
 #include "src/Config/Config.hpp"
 #include "src/DirectX/DirectXAdapter.hpp"
 #include "src/Light/LightManager.hpp"
-#include "src/Mesh/Loader/MeshManager.hpp"
+#include "src/Mesh/Loader/MeshRepository.hpp"
 #include "src/Model/Common/ModelCommon.hpp"
 #include "src/Scene/SceneSwitcher.hpp"
 #include "src/Sprite/Common/SpriteCommon.hpp"
@@ -31,7 +31,7 @@ class Framework {
 
     Input* input_ = nullptr;
     TextureManager* texture_ = nullptr;
-    MeshManager* mesh_ = nullptr;
+    MeshRepository* mesh_ = nullptr;
     SpriteCommon* sprite_ = nullptr;
     ModelCommon* model_ = nullptr;
 	CameraManager* camera_ = nullptr;

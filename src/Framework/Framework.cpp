@@ -25,7 +25,7 @@ Framework::Framework() {
     texture_ = Singleton<TextureManager>::GetInstance();
     texture_->Initialize(dxAdapter_.get(), srv_.get());
 
-    mesh_ = Singleton<MeshManager>::GetInstance();
+    mesh_ = Singleton<MeshRepository>::GetInstance();
     mesh_->Initialize(dxAdapter_.get());
 
     sprite_ = Singleton<SpriteCommon>::GetInstance();

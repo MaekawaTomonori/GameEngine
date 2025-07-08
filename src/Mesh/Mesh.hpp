@@ -5,17 +5,15 @@
 #include <assimp/scene.h>
 #include <wrl/client.h>
 
+#include "Data/MeshData.hpp"
 #include "Math/Vector2.hpp"
 #include "Math/Vector3.hpp"
-#include "Node/Node.hpp"
-#include "Skeleton/Skeleton.hpp"
-#include "src/Animation/Animation.hpp"
 #include "src/DirectX/DirectXAdapter.hpp"
 
 class Mesh {
     struct VertexData {
         Vector4 position;
-        Vector2 texcoord;
+        Vector2 uv;
         Vector3 normal;
     };
 
@@ -25,25 +23,12 @@ class Mesh {
         float shininess;
     };
 
-    struct MaterialData {
-        std::string texture;
-    };
-
-    struct ModelData {
-        std::vector<VertexData> vertices;
-        std::vector<uint32_t> indices;
-        MaterialData material;
-        Node root;
-    };
-
     DirectXAdapter* adapter_ = nullptr;
 	Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> commandList_;
 
-    ModelData modelData_;
-    Animation animation_;
-    Skeleton skeleton_;
-
     std::string name_;
+
+    MeshData data_;
 
     // vertex resource
     Microsoft::WRL::ComPtr<ID3D12Resource> vr_;
@@ -71,29 +56,10 @@ class Mesh {
 	bool lighting_ = false;
 
 public:
-    void Initialize(DirectXAdapter* _adapter, const std::string &_directory, const std::string &_name);
+    void Initialize(DirectXAdapter* _adapter, const std::string &_name, const MeshData& _raw);
     void Update();
-    void Draw();
+    void Draw() const;
     void Debug();
-
-private:
-    void LoadFile(const std::string &_directory, const std::string &_name);
-
-    void LoadObj(const std::string& _directory, const std::string& _name);
-    void LoadGltf(const std::string& _directory, const std::string& _name);
-
-    static Node LoadNode(const aiNode* _node);
-
-    void LoadAnimation(const std::string& _directory, const std::string& _name);
-
-    Skeleton CreateSkeleton(const Node& _root);
-
-    int32_t CreateJoint(const Node& _node, const std::optional<int32_t>& _parent, std::vector<Joint>& _joints);
-
-    MaterialData LoadMaterialTemplateFile(std::string& _directory, std::string& _name);
-
-    void UpdateSkeleton();
-    void ApplyAnimation(float _time);
 }; // class Mesh
 
 #endif // Mesh_HPP_

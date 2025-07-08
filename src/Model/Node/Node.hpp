@@ -7,9 +7,9 @@
 #include "Math/Transform.hpp"
 
 struct Node {
+    std::string name;
     Transform transform;
     Matrix4x4 local;
-    std::string name;
     std::vector<Node> children;
 };
 

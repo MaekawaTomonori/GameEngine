@@ -2,10 +2,10 @@
 #define Model_HPP_
 #include "Math/Matrix.hpp"
 #include "src/Camera/Camera.hpp"
-#include "src/Mesh/Mesh.hpp"
 #include "src/Model/Common/ModelCommon.hpp"
 
 class Model{
+protected:
     struct Transformation{
         Matrix4x4 wvp;
         Matrix4x4 world;
@@ -18,9 +18,7 @@ class Model{
     Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> commandList_ = nullptr;
 
     std::string uuid_;
-
-    Mesh* mesh_ = nullptr;
-    std::string meshName_;
+    Transform transform_;
 
     // world transform
     Microsoft::WRL::ComPtr<ID3D12Resource> wr_;
@@ -32,19 +30,15 @@ class Model{
 
     Camera* camera_ = nullptr;
 
-    Transform transform_;
-
 public:
     Model();
-
-    void Initialize(const std::string& _name);
-    void Update();
-    void Draw() const;
-
-    void SetMesh(const std::string& _name);
+    virtual ~Model() = default;
+    virtual void Initialize(const std::string& _name) = 0;
+    virtual void Update() = 0;
+    virtual void Draw() const = 0;
 
 private:
-    void Debug();
+    virtual void Debug() = 0;
 }; // class Model
 
 #endif // Model_HPP_

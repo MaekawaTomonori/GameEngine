@@ -132,7 +132,7 @@
     <ClInclude Include="src\Camera\Camera.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="src\Mesh\Loader\MeshManager.hpp">
+    <ClInclude Include="src\Mesh\Repository\MeshRepository.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="include\Math\Transform.hpp">
@@ -183,16 +183,34 @@
     <ClInclude Include="vendor\assimp\include\assimp\AssertHandler.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="src\Mesh\Node\Node.hpp">
+    <ClInclude Include="src\Model\Node\Node.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="src\Mesh\Skeleton\Skeleton.hpp">
+    <ClInclude Include="src\Model\Skeleton\Skeleton.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="src\Model\Loader\IModelLoader.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="src\Model\Repository\ModelRepository.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Model\Data\ModelData.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Model\Loader\ObjLoader.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ResourceRepository\ResourceRepository.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Model\obj\ObjModel.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Model\Loader\GltfLoader.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Mesh\Data\MeshData.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
@@ -296,7 +314,7 @@
     <ClCompile Include="src\Camera\Camera.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="src\Mesh\Loader\MeshManager.cpp">
+    <ClCompile Include="src\Mesh\Repository\MeshRepository.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="src\Camera\Manager\CameraManager.cpp">
@@ -317,10 +335,25 @@
     <ClCompile Include="src\Light\LightManager.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="src\Mesh\Skeleton\Skeleton.cpp">
+    <ClCompile Include="src\Model\Skeleton\Skeleton.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="src\Model\Repository\ModelRepository.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Model\Data\ModelData.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Model\Loader\ObjLoader.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ResourceRepository\ResourceRepository.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Model\obj\ObjModel.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Model\Loader\GltfLoader.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
