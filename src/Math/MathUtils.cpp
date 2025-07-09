@@ -81,7 +81,7 @@ Matrix4x4 MathUtils::Matrix::MakeRotateZ(const float rad) {
 }
 
 Matrix4x4 MathUtils::Matrix::MakeAffineMatrix(const ::Transform& transform) {
-    return MakeAffineMatrix(transform.scale, transform.rotate, transform.translate);
+    return MakeAffineMatrix(transform.scale, std::get<Vector3>(transform.rotate), transform.translate);
 }
 
 Matrix4x4 MathUtils::Matrix::MakeAffineMatrix(const Vector3& scale, const Vector3& rotate, const Vector3& translate) {
@@ -95,7 +95,7 @@ Matrix4x4 MathUtils::Matrix::MakeAffineMatrix(const Vector3& scale, const Vector
 }
 
 Matrix4x4 MathUtils::Matrix::MakeAffineMatrix(const Matrix4x4& scale, const Matrix4x4& rotate,
-	const Matrix4x4& translate) {
+    const Matrix4x4& translate) {
     return scale * rotate * translate;
 }
 
@@ -138,7 +138,7 @@ Matrix4x4 MathUtils::Matrix::MakeViewportMatrix(float left, float right, float t
 }
 
 float MathUtils::Random(float min, float max) {
-	std::random_device seed;
+    std::random_device seed;
     std::mt19937 random(seed());
 
     std::uniform_real_distribution<float> dist(min, max);
