@@ -4,17 +4,12 @@
 #include "src/Model/Node/Node.hpp"
 #include "src/Model/Skeleton/Skeleton.hpp"
 
-struct ObjData {
+struct ModelData {
     std::string name;
     std::string mesh;
-}; // class ModelData
-
-struct GltfData {
-    std::string name;
-    std::string mesh;
-
     Node root;
     Animation animation;
     Skeleton skeleton;
 };
+
 #endif // ModelData_HPP_

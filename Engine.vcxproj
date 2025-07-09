@@ -608,7 +608,6 @@
     <ClInclude Include="src\Mesh\Repository\MeshRepository.hpp" />
     <ClInclude Include="src\Model\Loader\GltfLoader.hpp" />
     <ClInclude Include="src\Model\Node\Node.hpp" />
-    <ClInclude Include="src\Model\obj\ObjModel.hpp" />
     <ClInclude Include="src\Model\Skeleton\Skeleton.hpp" />
     <ClInclude Include="src\Model\Common\ModelCommon.hpp" />
     <ClInclude Include="include\Model.hpp" />
@@ -660,7 +659,6 @@
     <ClCompile Include="src\Mesh\Mesh.cpp" />
     <ClCompile Include="src\Mesh\Repository\MeshRepository.cpp" />
     <ClCompile Include="src\Model\Loader\GltfLoader.cpp" />
-    <ClCompile Include="src\Model\obj\ObjModel.cpp" />
     <ClCompile Include="src\Model\Skeleton\Skeleton.cpp" />
     <ClCompile Include="src\Model\Common\ModelCommon.cpp" />
     <ClCompile Include="src\Model\Data\ModelData.cpp" />

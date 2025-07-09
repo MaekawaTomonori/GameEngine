@@ -1,24 +1,31 @@
 #include "GltfLoader.hpp"
 
 #include <assimp/Importer.hpp>
+#include <assimp/anim.h>
+#include <assimp/mesh.h>
 #include <assimp/postprocess.h>
 
 #include "Utils.hpp"
 #include "Math/MathUtils.hpp"
 
-Model* GltfLoader::LoadModel(const std::string& _directory, const std::string& _name, ResourceRepository* _repository) {
-
+void GltfLoader::LoadModel(const std::string& _name, ResourceRepository* _repository) {
+    LoadGltf(ASSETS_FOLDER, _name, _repository);
 }
 
-void GltfLoader::LoadGltf(const std::string& _directory, const std::string& _name) {
+void GltfLoader::LoadGltf(const std::string& _directory, const std::string& _name, ResourceRepository* _repository) {
     Assimp::Importer importer;
-    std::string path = _directory + "/" + _name + ".gltf";
+    std::string path = _directory + _name + "/" + _name + ".gltf";
     const aiScene* scene = importer.ReadFile(path, aiProcess_FlipWindingOrder | aiProcess_FlipUVs);
     if (!scene->HasMeshes()){
         Utils::Alert("GltfLoader::LoadGltf: No meshes found in file: " + path);
         return;
     }
 
+    std::unique_ptr<ModelData> data_ = std::make_unique<ModelData>();
+    data_->name = _name;
+    data_->mesh = _name;
+
+    MeshData meshData;
     for (uint32_t meshIndex = 0; meshIndex < scene->mNumMeshes; ++meshIndex) {
         aiMesh* mesh = scene->mMeshes[meshIndex];
 
@@ -27,41 +34,58 @@ void GltfLoader::LoadGltf(const std::string& _directory, const std::string& _nam
             continue;
         }
 
-        data_.vertices.resize(mesh->mNumVertices);
+        meshData.vertices.resize(mesh->mNumVertices);
         for (uint32_t vertexIndex = 0; vertexIndex < mesh->mNumVertices; ++vertexIndex) {
             aiVector3D& position = mesh->mVertices[vertexIndex];
             aiVector3D& normal = mesh->mNormals[vertexIndex];
             aiVector3D texcoord = mesh->mTextureCoords[0][vertexIndex];
 
-            VertexData vertexData{};
+            Vertex vertexData{};
             vertexData.position = Vector4(-position.x, position.y, position.z, 1.0f);
             vertexData.normal = Vector3(-normal.x, normal.y, normal.z);
-            vertexData.texcoord = Vector2(texcoord.x, texcoord.y);
-            data_.vertices[vertexIndex] = vertexData;
+            vertexData.uv = Vector2(texcoord.x, texcoord.y);
+            meshData.vertices[vertexIndex] = vertexData;
         }
 
         for (uint32_t faceIndex = 0; faceIndex < mesh->mNumFaces; ++faceIndex) {
             aiFace& face = mesh->mFaces[faceIndex];
 
-            if (face.mNumIndices == 3) {
-                Utils::Alert("GltfLoader::LoadGltf: Mesh has non-triangular faces in file: " + path);
+            if (face.mNumIndices != 3) {
+                Utils::Alert("GltfLoader::LoadGltf: Non-triangular face found in mesh: " + std::to_string(meshIndex) + " in file: " + path);
+                return;
             }
 
             for (uint32_t element = 0; element < face.mNumIndices; ++element){
-                data_.indices.push_back(face.mIndices[element]);
+                meshData.indices.push_back(face.mIndices[element]);
+            }
+
+            for (uint32_t materialIndex = 0; materialIndex < scene->mNumMaterials; ++materialIndex) {
+                aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
+                if (material->GetTextureCount(aiTextureType_DIFFUSE)){
+                    aiString texturePath;
+                    material->GetTexture(aiTextureType_DIFFUSE, 0, &texturePath);
+                    meshData.texture = _directory + _name + "/" + texturePath.C_Str();
+                }
             }
         }
     }
 
-    data_.root = LoadNode(scene->mRootNode);
+    _repository->GetMeshRepository()->Add(_name, meshData);
+
+    data_->root = LoadNode(scene->mRootNode);
+    data_->skeleton = CreateSkeleton(data_->root);
+    data_->animation = LoadAnimation(_directory, _name);
+
+    _repository->GetModelRepository()->Add(_name, std::move(data_));
 }
 
 Node GltfLoader::LoadNode(const aiNode* _node) {
     Node result;
     aiVector3D translate, scale;
     aiQuaternion rotate;
-    Transform transform;
     _node->mTransformation.Decompose(scale, rotate, translate);
+
+    Transform transform;
     transform.scale = { scale.x, scale.y, scale.z };
     transform.rotate = Quaternion(rotate.x, -rotate.y, -rotate.z, rotate.w);
     transform.translate = Vector3(-translate.x, translate.y, translate.z);
@@ -77,12 +101,13 @@ Node GltfLoader::LoadNode(const aiNode* _node) {
     return result;
 }
 
-void GltfLoader::LoadAnimation(const std::string& _directory, const std::string& _name) {
+Animation GltfLoader::LoadAnimation(const std::string& _directory, const std::string& _name) {
     Assimp::Importer importer;
-    std::string path = _directory + "/" + _name + ".gltf";
+    std::string path = _directory + _name + "/" + _name + ".gltf";
     const aiScene* scene = importer.ReadFile(path.c_str(), 0);
 
     aiAnimation* animation = scene->mAnimations[0];
+    Animation animation_;
     animation_.duration = static_cast<float>(animation->mDuration);
 
     for (uint32_t channelIndex = 0; channelIndex < animation->mNumChannels; ++channelIndex) {
@@ -103,6 +128,7 @@ void GltfLoader::LoadAnimation(const std::string& _directory, const std::string&
 
         animation_.nodeAnimations[nodeAnim->mNodeName.C_Str()] = nodeAnimation;
     }
+    return animation_;
 }
 
 Skeleton GltfLoader::CreateSkeleton(const Node& _root) {
@@ -134,42 +160,24 @@ int32_t GltfLoader::CreateJoint(const Node& _node, const std::optional<int32_t>&
     return joint.index;
 }
 
-GltfLoader::MaterialData GltfLoader::LoadMaterialTemplateFile(std::string &_directory, std::string &_name) {
-    MaterialData materialData {};
-    std::string line;
-    std::ifstream file(_directory + "/" + _name);
-    assert(file.is_open());
-    while (std::getline(file, line)){
-        std::string identifier;
-        std::istringstream s(line);
-        s >> identifier;
-
-        if (identifier == "map_Kd"){
-            std::string textureFileName;
-            s >> textureFileName;
-
-            materialData.texture = _directory + "/" + textureFileName;
-        }
-    }
-    return materialData;
-}
-
-void GltfLoader::UpdateSkeleton() {
-    for (Joint& joint : skeleton_.joints){
+void GltfLoader::UpdateSkeleton(Skeleton& _skeleton) {
+    for (Joint& joint : _skeleton.joints){
         joint.local = MathUtils::Matrix::MakeAffineMatrix(joint.transform);
         if (joint.parent){
-            joint.space = joint.local * skeleton_.joints[*joint.parent].space;
+            joint.space = joint.local * _skeleton.joints[*joint.parent].space;
         } else{
             joint.space = joint.local;
         }
     }
 }
 
-void GltfLoader::ApplyAnimation(float _time) {
-    for (Joint& joint : skeleton_.joints) {
-        if (animation_.nodeAnimations.contains(joint.name)) {
-            const NodeAnimation& rna = animation_.nodeAnimations[joint.name];
-            joint.transform.scale = rna.scale.keyframes;
+void GltfLoader::ApplyAnimation(float _time, ModelData _data) {
+    for (Joint& joint : _data.skeleton.joints) {
+        if (_data.animation.nodeAnimations.contains(joint.name)) {
+            const NodeAnimation& rna = _data.animation.nodeAnimations[joint.name];
+            (void)rna;
+            (void) _time;
+            //joint.transform.scale = rna.scale.keyframes;
         }
     }
 }

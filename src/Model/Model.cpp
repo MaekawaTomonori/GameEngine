@@ -1,9 +1,14 @@
 #include "Model.hpp"
 
+#include <filesystem>
+
 #include "Log.hpp"
 #include "Pattern/Singleton.hpp"
 #include "Utils.hpp"
 #include "imgui.h"
+#include "Loader/GltfLoader.hpp"
+#include "Loader/IModelLoader.hpp"
+#include "Loader/ObjLoader.hpp"
 #include "Math/MathUtils.hpp"
 #include "src/Camera/Manager/CameraManager.hpp"
 
@@ -14,11 +19,18 @@ Model::Model() :
     uuid_(Utils::GenerateUniqueId()), transform_() {
 }
 
-void Model::Initialize(const std::string &_name) {
+void Model::Initialize(const std::string& _name) {
     if (!adapter_){
         Log::Send(Log::Level::ERR, "Adapter is null");
         return;
     }
+
+    Load(_name);
+
+    data_ = common_->GetResourceRepository()->GetModelRepository()->Get(_name);
+
+    mesh_ = std::make_unique<Mesh>();
+    mesh_->Initialize(adapter_, _name, common_->GetResourceRepository()->GetMeshRepository()->Get(data_->mesh));
 
     wr_.Attach(adapter_->CreateBufferResource(sizeof(Transformation)));
     wr_->Map(0, nullptr, reinterpret_cast<void**>(&wd_));
@@ -40,11 +52,7 @@ void Model::Update() {
     Debug();
 
     camera_ = Singleton<CameraManager>::GetInstance()->GetActive();
-    wd_->world = MathUtils::Matrix::MakeAffineMatrix(transform_.scale, std::get<Vector3>(transform_.rotate), transform_.translate);
-    wd_->wvp = wd_->world * camera_->GetViewProjection();
-    wd_->inverse = wd_->world.Inverse().Transpose();
-
-    *cd_ = camera_->GetCameraForGpu();
+    UpdateMapData();
 }
 
 void Model::Draw() const {
@@ -58,7 +66,21 @@ void Model::Draw() const {
     commandList_->SetGraphicsRootConstantBufferView(1, wr_->GetGPUVirtualAddress());
     commandList_->SetGraphicsRootConstantBufferView(4, cr_->GetGPUVirtualAddress());
 
-    common_->GetMeshRepository()->Draw();
+    mesh_->Draw();
+}
+
+void Model::Load(const std::string& _name) const {
+    std::unique_ptr<IModelLoader> loader;
+    if (std::filesystem::exists("Assets/Resources/" + _name + "/" + _name + ".obj")) {
+        loader = std::make_unique<ObjLoader>();
+    } else if (std::filesystem::exists("Assets/Resources/" + _name + "/" + _name + ".gltf")){
+        loader = std::make_unique<GltfLoader>();
+    } else{
+        Log::Send(Log::Level::ERR, "Model::Load: Model not found: " + _name);
+        Utils::Alert("Model not found: " + _name);
+        return;
+    }
+    loader->LoadModel(_name, common_->GetResourceRepository());
 }
 
 void Model::Debug() {
@@ -82,4 +104,12 @@ void Model::Debug() {
             ImGui::End();
         }
     );
+}
+
+void Model::UpdateMapData() const {
+    wd_->world = MathUtils::Matrix::MakeAffineMatrix(transform_.scale, std::get<Vector3>(transform_.rotate), transform_.translate);
+    wd_->wvp = wd_->world * camera_->GetViewProjection();
+    wd_->inverse = wd_->world.Inverse().Transpose();
+
+    *cd_ = camera_->GetCameraForGpu();
 }

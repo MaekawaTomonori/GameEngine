@@ -47,6 +47,7 @@ namespace MathUtils{
         Matrix4x4 MakeRotateZ(float rad);
         Matrix4x4 MakeAffineMatrix(const ::Transform& transform);
         Matrix4x4 MakeAffineMatrix(const Vector3& scale, const Vector3& rotate, const Vector3& translate);
+        Matrix4x4 MakeAffineMatrix(const Vector3& scale, const Quaternion& rotate, const Vector3& translate);
         Matrix4x4 MakeAffineMatrix(const Matrix4x4& scale, const Matrix4x4& rotate, const Matrix4x4& translate);
 
         Matrix4x4 MakeOrthogonalMatrix(float left, float right, float top, float bottom, float znear, float zfar);

@@ -9,7 +9,7 @@ protected:
 
 public:
     virtual ~IModelLoader() = default;
-    virtual Model* LoadModel(const std::string& _directory, const std::string& _name, ResourceRepository* _repository) = 0;
+    virtual void LoadModel(const std::string& _name, ResourceRepository* _repository) = 0;
 }; // class IModelLoader
 
 #endif // IModelLoader_HPP_

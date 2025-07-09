@@ -16,11 +16,11 @@ void Mesh::Initialize(DirectXAdapter* _adapter, const std::string &_name, const 
     name_ = _name;
     data_ = _raw;
 
-    vr_.Attach(adapter_->CreateBufferResource(sizeof(VertexData) * data_.vertices.size()));
+    vr_.Attach(adapter_->CreateBufferResource(sizeof(Vertex) * data_.vertices.size()));
 
     vbv_.BufferLocation = vr_->GetGPUVirtualAddress();
-    vbv_.SizeInBytes = static_cast<UINT>(sizeof(VertexData) * data_.vertices.size());
-    vbv_.StrideInBytes = sizeof(VertexData);
+    vbv_.SizeInBytes = static_cast<UINT>(sizeof(Vertex) * data_.vertices.size());
+    vbv_.StrideInBytes = sizeof(Vertex);
 
     vr_->Map(0, nullptr, reinterpret_cast<void**>(&vd_));
     std::copy_n(data_.vertices.data(), data_.vertices.size(), vd_);
@@ -32,13 +32,15 @@ void Mesh::Initialize(DirectXAdapter* _adapter, const std::string &_name, const 
     material_->lighting = 0; // Default lighting
     material_->shininess = 100.f;
 
-    ir_.Attach(adapter_->CreateBufferResource(sizeof(uint32_t) * data_.indices.size()));
-    ibv_.BufferLocation = ir_->GetGPUVirtualAddress();
-    ibv_.SizeInBytes = static_cast<UINT>(sizeof(uint32_t) * data_.indices.size());
-    ibv_.Format = DXGI_FORMAT_R32_UINT;
+    if (!data_.indices.empty()){
+        ir_.Attach(adapter_->CreateBufferResource(sizeof(uint32_t) * data_.indices.size()));
+        ibv_.BufferLocation = ir_->GetGPUVirtualAddress();
+        ibv_.SizeInBytes = static_cast<UINT>(sizeof(uint32_t) * data_.indices.size());
+        ibv_.Format = DXGI_FORMAT_R32_UINT;
 
-    ir_->Map(0, nullptr, reinterpret_cast<void**>(&id_));
-    std::copy_n(data_.indices.data(), data_.indices.size(), id_);
+        ir_->Map(0, nullptr, reinterpret_cast<void**>(&id_));
+        std::copy_n(data_.indices.data(), data_.indices.size(), id_);
+    }
 
     Singleton<TextureManager>::GetInstance()->Load(data_.texture);
     texture_ = data_.texture;
@@ -52,15 +54,20 @@ void Mesh::Draw() const {
 
     commandList_->IASetPrimitiveTopology(D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
     commandList_->IASetVertexBuffers(0, 1, &vbv_);
-    commandList_->IASetIndexBuffer(&ibv_);
+    if (!data_.indices.empty()){
+        commandList_->IASetIndexBuffer(&ibv_);
+    }
     commandList_->SetGraphicsRootConstantBufferView(0, mr_->GetGPUVirtualAddress());
     commandList_->SetGraphicsRootDescriptorTable(2, Singleton<TextureManager>::GetInstance()->GetGPUHandle(texture_));
 
     if (lighting_) {
         Singleton<LightManager>::GetInstance()->Draw();
     }
-
-    commandList_->DrawIndexedInstanced(static_cast<UINT>(data_.vertices.size()), 1, 0, 0, 0);
+    if (!data_.indices.empty()){
+        commandList_->DrawIndexedInstanced(static_cast<UINT>(data_.vertices.size()), 1, 0, 0, 0);
+    } else {
+        commandList_->DrawInstanced(static_cast<UINT>(data_.vertices.size()), 1, 0, 0);
+    }
 }
 
 void Mesh::Debug() {

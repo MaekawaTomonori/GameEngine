@@ -2,21 +2,12 @@
 #define Mesh_HPP_
 #include <d3d12.h>
 #include <string>
-#include <assimp/scene.h>
 #include <wrl/client.h>
 
 #include "Data/MeshData.hpp"
-#include "Math/Vector2.hpp"
-#include "Math/Vector3.hpp"
 #include "src/DirectX/DirectXAdapter.hpp"
 
 class Mesh {
-    struct VertexData {
-        Vector4 position;
-        Vector2 uv;
-        Vector3 normal;
-    };
-
     struct Material {
         Vector4 color;
         uint32_t lighting;
@@ -35,7 +26,7 @@ class Mesh {
     // vertex buffer view
     D3D12_VERTEX_BUFFER_VIEW vbv_ {};
     // vertex data
-    VertexData* vd_ = nullptr;
+    Vertex* vd_ = nullptr;
 
     // index resource
     Microsoft::WRL::ComPtr<ID3D12Resource> ir_;

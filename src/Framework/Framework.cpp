@@ -13,6 +13,8 @@ Framework::Framework() {
 
     dxAdapter_ = std::make_unique<DirectXAdapter>(windows_->GetWindowHandle(), config_->GetWidth(), config_->GetHeight());
 
+    resources_ = std::make_unique<ResourceRepository>();
+
     debugUI_ = std::make_unique<DebugUI>();
     debugUI_->Initialize(dxAdapter_.get());
 
@@ -25,14 +27,11 @@ Framework::Framework() {
     texture_ = Singleton<TextureManager>::GetInstance();
     texture_->Initialize(dxAdapter_.get(), srv_.get());
 
-    mesh_ = Singleton<MeshRepository>::GetInstance();
-    mesh_->Initialize(dxAdapter_.get());
-
     sprite_ = Singleton<SpriteCommon>::GetInstance();
     sprite_->Initialize(dxAdapter_.get(), debugUI_.get());
 
     model_ = Singleton<ModelCommon>::GetInstance();
-    model_->Initialize(dxAdapter_.get(), debugUI_.get());
+    model_->Initialize(dxAdapter_.get(), debugUI_.get(), resources_.get());
 
     camera_ = Singleton<CameraManager>::GetInstance();
     camera_->Initialize(static_cast<float>(config_->GetWidth()) / static_cast<float>(config_->GetHeight()), debugUI_.get());

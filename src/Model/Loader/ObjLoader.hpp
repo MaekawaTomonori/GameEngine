@@ -4,7 +4,7 @@
 
 class ObjLoader : public IModelLoader{
 public:
-    ModelData* LoadModel(const std::string& _directory, const std::string& _name, ResourceRepository* _repository) override;
+    void LoadModel(const std::string& _name, ResourceRepository* _repository) override;
 }; // class ObjLoader
 
 #endif // ModelLoader_HPP_

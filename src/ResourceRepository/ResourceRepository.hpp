@@ -9,6 +9,7 @@ class ResourceRepository {
     std::unique_ptr<ModelRepository> model_;
     std::unique_ptr<MeshRepository> mesh_;
 public:
+    ResourceRepository();
     ModelRepository* GetModelRepository() const;
     MeshRepository* GetMeshRepository() const;
 }; // class ResourceRepository
