@@ -53,7 +53,7 @@ void Mesh::Draw() const {
     commandList_->IASetPrimitiveTopology(D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
     commandList_->IASetVertexBuffers(0, 1, &vbv_);
     commandList_->IASetIndexBuffer(&ibv_);
-	commandList_->SetGraphicsRootConstantBufferView(0, mr_->GetGPUVirtualAddress());
+    commandList_->SetGraphicsRootConstantBufferView(0, mr_->GetGPUVirtualAddress());
     commandList_->SetGraphicsRootDescriptorTable(2, Singleton<TextureManager>::GetInstance()->GetGPUHandle(texture_));
 
     if (lighting_) {
