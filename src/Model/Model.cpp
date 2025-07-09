@@ -1,5 +1,6 @@
 #include "Model.hpp"
 
+#include <algorithm>
 #include <filesystem>
 
 #include "Log.hpp"
@@ -27,6 +28,7 @@ void Model::Initialize(const std::string& _name) {
 
     Load(_name);
 
+
     data_ = common_->GetResourceRepository()->GetModelRepository()->Get(_name);
 
     mesh_ = std::make_unique<Mesh>();
@@ -41,6 +43,10 @@ void Model::Initialize(const std::string& _name) {
     cr_.Attach(adapter_->CreateBufferResource(sizeof(CameraForGpu)));
     cr_->Map(0, nullptr, reinterpret_cast<void**>(&cd_));
 
+    CreateSkinCluster();
+
+    mesh_->SetVBV(skinCluster_.influenceBufferView);
+
     transform_ = {
         {1,1,1},
         Vector3{0,0,0},
@@ -50,6 +56,17 @@ void Model::Initialize(const std::string& _name) {
 
 void Model::Update() {
     Debug();
+
+    // Update AnimationTimer
+
+    // ApplyAnimation
+    ApplyAnimation();
+
+    // Update Skeleton
+    UpdateSkeleton();
+
+    //Update SkinCluster
+    UpdateSkinCluster();
 
     camera_ = Singleton<CameraManager>::GetInstance()->GetActive();
     UpdateMapData();
@@ -112,4 +129,91 @@ void Model::UpdateMapData() const {
     wd_->inverse = wd_->world.Inverse().Transpose();
 
     *cd_ = camera_->GetCameraForGpu();
+}
+
+void Model::CreateSkinCluster() {
+    Microsoft::WRL::ComPtr<ID3D12Device> device = adapter_->GetDevice();
+    if (!device){
+        Log::Send(Log::Level::ERR, "DirectXAdapter is not initialized");
+        return;
+    }
+
+    skinCluster_.paletteResource.Attach(adapter_->CreateBufferResource(sizeof(WellForGpu) * data_->skeleton.joints.size()));
+    WellForGpu* mappedPalette = nullptr;
+    skinCluster_.paletteResource->Map(0, nullptr, reinterpret_cast<void**>(&mappedPalette));
+    skinCluster_.mappedPalette = {mappedPalette, data_->skeleton.joints.size()};
+    skinCluster_.srvIndex = common_->GetSRVManager()->Allocate();
+    skinCluster_.paletteHandle = {
+        common_->GetSRVManager()->GetCPUHandle(skinCluster_.srvIndex),
+        common_->GetSRVManager()->GetGPUHandle(skinCluster_.srvIndex)
+    };
+    common_->GetSRVManager()->CreateSRVforStructuredBuffer(skinCluster_.srvIndex, skinCluster_.paletteResource.Get(), static_cast<UINT>(data_->skeleton.joints.size()), sizeof(WellForGpu));
+
+    size_t verticesSize = common_->GetResourceRepository()->GetMeshRepository()->Get(data_->mesh).vertices.size();
+    skinCluster_.influenceResource.Attach(adapter_->CreateBufferResource(sizeof(VertexInfluence) * verticesSize));
+    VertexInfluence* mappedInfluence = nullptr;
+    skinCluster_.influenceResource->Map(0, nullptr, reinterpret_cast<void**>(&mappedInfluence));
+    skinCluster_.mappedInfluence = { mappedInfluence, verticesSize };
+
+    skinCluster_.influenceBufferView.BufferLocation = skinCluster_.influenceResource->GetGPUVirtualAddress();
+    skinCluster_.influenceBufferView.SizeInBytes = static_cast<UINT>(sizeof(VertexInfluence) * verticesSize);
+    skinCluster_.influenceBufferView.StrideInBytes = sizeof(VertexInfluence);
+
+    skinCluster_.bindPoseMatrices.resize(data_->skeleton.joints.size());
+    for (auto& bindPoseMatrix : skinCluster_.bindPoseMatrices) {
+        bindPoseMatrix = MathUtils::Matrix::MakeIdentity();
+    }
+
+    for (const auto& jointWeight : data_->skinCluster) {
+        auto itr = data_->skeleton.map.find(jointWeight.first);
+        if (itr == data_->skeleton.map.end()){
+            Log::Send(Log::Level::ERR, "Joint not found in skeleton: " + jointWeight.first);
+            continue;
+        }
+
+        skinCluster_.bindPoseMatrices[itr->second] = jointWeight.second.inverseBindPose;
+        for (const auto& vertexWeight : jointWeight.second.weights) {
+            auto& currentInfluence = skinCluster_.mappedInfluence[vertexWeight.index];
+            for (uint32_t index = 0; index < MAX_INFLUENCE; ++index) {
+                if (currentInfluence.weights[index] == 0.0f){
+                    currentInfluence.weights[index] = vertexWeight.weight;
+                    currentInfluence.jointIndices[index] = itr->second;
+                    break;
+                }
+            }
+        }
+    }
+}
+
+void Model::UpdateSkinCluster() {
+    for (size_t jointIndex = 0; jointIndex < data_->skeleton.joints.size(); ++jointIndex) {
+        if (skinCluster_.bindPoseMatrices.size() <= jointIndex) {
+            Utils::Alert("Joint index out of bounds in skin cluster update");
+            break;
+        }
+
+        skinCluster_.mappedPalette[jointIndex].space = skinCluster_.bindPoseMatrices[jointIndex] * data_->skeleton.joints[jointIndex].space;
+        skinCluster_.mappedPalette[jointIndex].inverseTranspose = skinCluster_.mappedPalette[jointIndex].space.Inverse().Transpose();
+    }
+}
+
+void Model::ApplyAnimation() {
+    for (Joint& joint : data_->skeleton.joints) {
+        if (data_->animation.nodeAnimations.contains(joint.name)) {
+            const NodeAnimation& rna = data_->animation.nodeAnimations[joint.name];
+            (void)rna;
+            //joint.transform.scale = rna.scale.keyframes;
+        }
+    }
+}
+
+void Model::UpdateSkeleton() {
+    for (Joint& joint : data_->skeleton.joints){
+        joint.local = MathUtils::Matrix::MakeAffineMatrix(joint.transform);
+        if (joint.parent){
+            joint.space = joint.local * data_->skeleton.joints[*joint.parent].space;
+        } else{
+            joint.space = joint.local;
+        }
+    }
 }

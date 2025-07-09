@@ -28,6 +28,8 @@ class Mesh {
     // vertex data
     Vertex* vd_ = nullptr;
 
+    D3D12_VERTEX_BUFFER_VIEW skinning_{};
+
     // index resource
     Microsoft::WRL::ComPtr<ID3D12Resource> ir_;
     // index buffer view
@@ -51,6 +53,8 @@ public:
     void Update();
     void Draw() const;
     void Debug();
+
+    void SetVBV(D3D12_VERTEX_BUFFER_VIEW _vbv);
 }; // class Mesh
 
 #endif // Mesh_HPP_

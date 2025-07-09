@@ -59,6 +59,24 @@ void GltfLoader::LoadGltf(const std::string& _directory, const std::string& _nam
                 meshData.indices.push_back(face.mIndices[element]);
             }
 
+            for (uint32_t boneIndex = 0; boneIndex < mesh->mNumBones; ++boneIndex) {
+                aiBone* bone = mesh->mBones[boneIndex];
+                JointWeightData jointWeightData = data_->skinCluster[bone->mName.C_Str()];
+
+                aiMatrix4x4 bindPose = bone->mOffsetMatrix.Inverse();
+                aiVector3D scale, translate;
+                aiQuaternion rotate;
+                bindPose.Decompose(scale, rotate, translate);
+                jointWeightData.inverseBindPose = MathUtils::Matrix::MakeAffineMatrix({scale.x, scale.y, scale.z}, Quaternion{rotate.x, -rotate.y, -rotate.z, rotate.w}, {-translate.x, translate.y, translate.z}).Inverse();
+
+                for (uint32_t weightIndex = 0; weightIndex < bone->mNumWeights; ++weightIndex) {
+                    jointWeightData.weights.push_back({
+                        bone->mWeights[weightIndex].mWeight,
+                        bone->mWeights[weightIndex].mVertexId
+                    });
+                }
+            }
+
             for (uint32_t materialIndex = 0; materialIndex < scene->mNumMaterials; ++materialIndex) {
                 aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
                 if (material->GetTextureCount(aiTextureType_DIFFUSE)){
@@ -93,7 +111,7 @@ Node GltfLoader::LoadNode(const aiNode* _node) {
     result.local = MathUtils::Matrix::MakeAffineMatrix(transform);
 
     result.name = _node->mName.C_Str();
-    result.children.reserve(_node->mNumChildren);
+    result.children.resize(_node->mNumChildren);
     for (uint32_t i = 0; i < _node->mNumChildren; ++i){
         result.children[i] = LoadNode(_node->mChildren[i]);
     }
@@ -158,26 +176,4 @@ int32_t GltfLoader::CreateJoint(const Node& _node, const std::optional<int32_t>&
     }
 
     return joint.index;
-}
-
-void GltfLoader::UpdateSkeleton(Skeleton& _skeleton) {
-    for (Joint& joint : _skeleton.joints){
-        joint.local = MathUtils::Matrix::MakeAffineMatrix(joint.transform);
-        if (joint.parent){
-            joint.space = joint.local * _skeleton.joints[*joint.parent].space;
-        } else{
-            joint.space = joint.local;
-        }
-    }
-}
-
-void GltfLoader::ApplyAnimation(float _time, ModelData _data) {
-    for (Joint& joint : _data.skeleton.joints) {
-        if (_data.animation.nodeAnimations.contains(joint.name)) {
-            const NodeAnimation& rna = _data.animation.nodeAnimations[joint.name];
-            (void)rna;
-            (void) _time;
-            //joint.transform.scale = rna.scale.keyframes;
-        }
-    }
 }

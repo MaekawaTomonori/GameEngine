@@ -24,6 +24,7 @@ class GraphicsPipeline{
 public:
     enum class Type{
         MODEL,
+        SKINNING_MODEL,
         SPRITE,
         PARTICLE,
         PARTICLE2D,

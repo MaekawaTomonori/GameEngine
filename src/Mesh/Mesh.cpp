@@ -44,6 +44,8 @@ void Mesh::Initialize(DirectXAdapter* _adapter, const std::string &_name, const 
 
     Singleton<TextureManager>::GetInstance()->Load(data_.texture);
     texture_ = data_.texture;
+
+    lighting_ = true;
 }
 
 void Mesh::Update() {
@@ -53,7 +55,13 @@ void Mesh::Draw() const {
     if (!commandList_)return;
 
     commandList_->IASetPrimitiveTopology(D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-    commandList_->IASetVertexBuffers(0, 1, &vbv_);
+
+    D3D12_VERTEX_BUFFER_VIEW vbvs[2] ={
+        vbv_,
+        skinning_
+    };
+    commandList_->IASetVertexBuffers(0, 2, vbvs);
+
     if (!data_.indices.empty()){
         commandList_->IASetIndexBuffer(&ibv_);
     }
@@ -79,4 +87,8 @@ void Mesh::Debug() {
     } else{
         material_->lighting = 0;
     }
+}
+
+void Mesh::SetVBV(D3D12_VERTEX_BUFFER_VIEW _vbv) {
+    skinning_ = _vbv;
 }

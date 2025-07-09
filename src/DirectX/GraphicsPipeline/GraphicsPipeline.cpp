@@ -111,7 +111,7 @@ void GraphicsPipeline::CreateRootSignature() {
     rp.DescriptorTable.NumDescriptorRanges = _countof(descriptorRange_);
     rootParameters_.push_back(rp);
 
-    if (type_ == Type::MODEL){
+    if (type_ == Type::MODEL || type_ == Type::SKINNING_MODEL){
         //DirectionalLight
         rp.ParameterType = D3D12_ROOT_PARAMETER_TYPE_SRV;
         rp.ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
@@ -142,6 +142,13 @@ void GraphicsPipeline::CreateRootSignature() {
         rootParameters_.push_back(rp);
     }
 
+    if (type_ == Type::SKINNING_MODEL) {
+        rp.ParameterType = D3D12_ROOT_PARAMETER_TYPE_SRV;
+        rp.ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX;
+        rp.Descriptor.ShaderRegister = 1; // Bone matrices
+        rootParameters_.push_back(rp);
+    }
+
     //set
     descriptionRootSignature.pParameters = rootParameters_.data();
     descriptionRootSignature.NumParameters = static_cast<UINT>(rootParameters_.size());
@@ -167,25 +174,43 @@ void GraphicsPipeline::CreateRootSignature() {
 }
 
 void GraphicsPipeline::CreateInputLayout() {
-    inputElementDescs_.resize(3);
-    inputElementDescs_[0].SemanticName = "POSITION";
-    inputElementDescs_[0].SemanticIndex = 0;
-    inputElementDescs_[0].Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
-    inputElementDescs_[0].AlignedByteOffset = D3D12_APPEND_ALIGNED_ELEMENT;
-    inputElementDescs_[0].InputSlot = 0;
+    D3D12_INPUT_ELEMENT_DESC ied {};
 
-    inputElementDescs_[1].SemanticName = "TEXCOORD";
-    inputElementDescs_[1].SemanticIndex = 0;
-    inputElementDescs_[1].Format = DXGI_FORMAT_R32G32_FLOAT;
-    inputElementDescs_[1].AlignedByteOffset = D3D12_APPEND_ALIGNED_ELEMENT;
+    ied.SemanticName = "POSITION";
+    ied.SemanticIndex = 0;
+    ied.Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
+    ied.AlignedByteOffset = D3D12_APPEND_ALIGNED_ELEMENT;
+    ied.InputSlot = 0;
+    inputElementDescs_.push_back(ied);
+
+    ied.SemanticName = "TEXCOORD";
+    ied.SemanticIndex = 0;
+    ied.Format = DXGI_FORMAT_R32G32_FLOAT;
+    ied.AlignedByteOffset = D3D12_APPEND_ALIGNED_ELEMENT;
+    inputElementDescs_.push_back(ied);
 
     if (type_ != Type::SPRITE && type_ != Type::PARTICLE2D){
-        inputElementDescs_[2].SemanticName = "NORMAL";
-        inputElementDescs_[2].SemanticIndex = 0;
-        inputElementDescs_[2].Format = DXGI_FORMAT_R32G32B32_FLOAT;
-        inputElementDescs_[2].AlignedByteOffset = D3D12_APPEND_ALIGNED_ELEMENT;
-    }else {
-        inputElementDescs_.resize(2);
+        ied.SemanticName = "NORMAL";
+        ied.SemanticIndex = 0;
+        ied.Format = DXGI_FORMAT_R32G32B32_FLOAT;
+        ied.AlignedByteOffset = D3D12_APPEND_ALIGNED_ELEMENT;
+        inputElementDescs_.push_back(ied);
+    }
+
+    if (type_ == Type::SKINNING_MODEL) {
+        ied.SemanticName = "WEIGHT";
+        ied.SemanticIndex = 0;
+        ied.Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
+        ied.InputSlot = 1;
+        ied.AlignedByteOffset = D3D12_APPEND_ALIGNED_ELEMENT;
+        inputElementDescs_.push_back(ied);
+
+        ied.SemanticName = "INDEX";
+        ied.SemanticIndex = 0;
+        ied.Format = DXGI_FORMAT_R32G32B32A32_SINT;
+        ied.InputSlot = 1;
+        ied.AlignedByteOffset = D3D12_APPEND_ALIGNED_ELEMENT;
+        inputElementDescs_.push_back(ied);
     }
     //System::Debug::Log(std::format(L"InputElementSlot : {}\n", inputElementDescs_[0].InputSlot));
 
@@ -209,6 +234,9 @@ void GraphicsPipeline::CreateShader() {
     case Type::MODEL:
         name = L"Model";
         break;
+    case Type::SKINNING_MODEL:
+        name = L"Skinning";
+        break;
     case Type::SPRITE:
         name = L"Sprite";
         break;
@@ -224,6 +252,7 @@ void GraphicsPipeline::CreateShader() {
 void GraphicsPipeline::CreateRasterizerState() {
     switch (type_){
     case Type::MODEL:
+    case Type::SKINNING_MODEL:
         rasterizerDesc_.CullMode = D3D12_CULL_MODE_BACK;
         rasterizerDesc_.FillMode = D3D12_FILL_MODE_SOLID;
         break;

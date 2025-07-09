@@ -31,7 +31,7 @@ Framework::Framework() {
     sprite_->Initialize(dxAdapter_.get(), debugUI_.get());
 
     model_ = Singleton<ModelCommon>::GetInstance();
-    model_->Initialize(dxAdapter_.get(), debugUI_.get(), resources_.get());
+    model_->Initialize(dxAdapter_.get(), debugUI_.get(), resources_.get(), srv_.get());
 
     camera_ = Singleton<CameraManager>::GetInstance();
     camera_->Initialize(static_cast<float>(config_->GetWidth()) / static_cast<float>(config_->GetHeight()), debugUI_.get());

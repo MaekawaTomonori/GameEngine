@@ -332,9 +332,6 @@
     <ClCompile Include="src\Light\LightManager.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="src\Model\Skeleton\Skeleton.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="src\Model\Repository\ModelRepository.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>

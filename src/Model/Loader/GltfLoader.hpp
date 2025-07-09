@@ -20,9 +20,6 @@ void LoadGltf(const std::string& _directory, const std::string& _name, ResourceR
     Skeleton CreateSkeleton(const Node& _root);
 
     int32_t CreateJoint(const Node& _node, const std::optional<int32_t>& _parent, std::vector<Joint>& _joints);
-
-    static void UpdateSkeleton(Skeleton& _skeleton);
-    static void ApplyAnimation(float _time, ModelData _data);
 }; // class GltfLoader
 
 #endif // GltfLoader_HPP_
