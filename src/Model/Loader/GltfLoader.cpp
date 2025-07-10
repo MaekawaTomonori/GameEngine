@@ -5,6 +5,7 @@
 #include <assimp/mesh.h>
 #include <assimp/postprocess.h>
 
+#include "Log.hpp"
 #include "Utils.hpp"
 #include "Math/MathUtils.hpp"
 
@@ -20,10 +21,12 @@ void GltfLoader::LoadGltf(const std::string& _directory, const std::string& _nam
         Utils::Alert("GltfLoader::LoadGltf: No meshes found in file: " + path);
         return;
     }
+    Log::Send(Log::Level::INFO, "[GLTF Loader] Loaded " + path + " by Assimp");
 
     std::unique_ptr<ModelData> data_ = std::make_unique<ModelData>();
     data_->name = _name;
     data_->mesh = _name;
+    data_->root = LoadNode(scene->mRootNode);
 
     MeshData meshData;
     for (uint32_t meshIndex = 0; meshIndex < scene->mNumMeshes; ++meshIndex) {
@@ -59,38 +62,34 @@ void GltfLoader::LoadGltf(const std::string& _directory, const std::string& _nam
                 meshData.indices.push_back(face.mIndices[element]);
             }
 
-            for (uint32_t boneIndex = 0; boneIndex < mesh->mNumBones; ++boneIndex) {
-                aiBone* bone = mesh->mBones[boneIndex];
-                JointWeightData jointWeightData = data_->skinCluster[bone->mName.C_Str()];
-
-                aiMatrix4x4 bindPose = bone->mOffsetMatrix.Inverse();
-                aiVector3D scale, translate;
-                aiQuaternion rotate;
-                bindPose.Decompose(scale, rotate, translate);
-                jointWeightData.inverseBindPose = MathUtils::Matrix::MakeAffineMatrix({scale.x, scale.y, scale.z}, Quaternion{rotate.x, -rotate.y, -rotate.z, rotate.w}, {-translate.x, translate.y, translate.z}).Inverse();
-
-                for (uint32_t weightIndex = 0; weightIndex < bone->mNumWeights; ++weightIndex) {
-                    jointWeightData.weights.push_back({
-                        bone->mWeights[weightIndex].mWeight,
-                        bone->mWeights[weightIndex].mVertexId
-                    });
-                }
+            aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
+            if (material->GetTextureCount(aiTextureType_DIFFUSE)){
+                aiString texturePath;
+                material->GetTexture(aiTextureType_DIFFUSE, 0, &texturePath);
+                meshData.texture = _directory + _name + "/" + texturePath.C_Str();
             }
+        }
+        for (uint32_t boneIndex = 0; boneIndex < mesh->mNumBones; ++boneIndex) {
+            aiBone* bone = mesh->mBones[boneIndex];
+            JointWeightData& jointWeightData = data_->skinCluster[bone->mName.C_Str()];
 
-            for (uint32_t materialIndex = 0; materialIndex < scene->mNumMaterials; ++materialIndex) {
-                aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
-                if (material->GetTextureCount(aiTextureType_DIFFUSE)){
-                    aiString texturePath;
-                    material->GetTexture(aiTextureType_DIFFUSE, 0, &texturePath);
-                    meshData.texture = _directory + _name + "/" + texturePath.C_Str();
-                }
+            aiMatrix4x4 bindPose = bone->mOffsetMatrix.Inverse();
+            aiVector3D scale, translate;
+            aiQuaternion rotate;
+            bindPose.Decompose(scale, rotate, translate);
+            jointWeightData.inverseBindPose = MathUtils::Matrix::MakeAffineMatrix({scale.x, scale.y, scale.z}, Quaternion{rotate.x, -rotate.y, -rotate.z, rotate.w}, {-translate.x, translate.y, translate.z}).Inverse();
+
+            for (uint32_t weightIndex = 0; weightIndex < bone->mNumWeights; ++weightIndex) {
+                jointWeightData.weights.push_back({
+                    bone->mWeights[weightIndex].mWeight,
+                    bone->mWeights[weightIndex].mVertexId
+                });
             }
         }
     }
 
     _repository->GetMeshRepository()->Add(_name, meshData);
 
-    data_->root = LoadNode(scene->mRootNode);
     data_->skeleton = CreateSkeleton(data_->root);
     data_->animation = LoadAnimation(_directory, _name);
 

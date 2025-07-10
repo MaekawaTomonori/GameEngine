@@ -32,7 +32,7 @@ public:
         COUNT
     };
 
-    void Create(DirectXAdapter* _adapter, Type type);
+    void Create(DirectXAdapter* _adapter, Type _type);
 
     void DrawCall() const;
 
