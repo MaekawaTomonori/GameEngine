@@ -65,10 +65,14 @@ void Model::Initialize(const std::string& _name) {
 void Model::Update() {
     Debug();
 
+
     // Update AnimationTimer
+    animationTime_ += 1.f / 60.f;
+    animationTime_ = fmod(animationTime_, data_->animation.duration);
 
     // ApplyAnimation
     ApplyAnimation();
+    UpdateMapData();
 
     // Update Skeleton
     UpdateSkeleton();
@@ -77,7 +81,6 @@ void Model::Update() {
     UpdateSkinCluster();
 
     camera_ = Singleton<CameraManager>::GetInstance()->GetActive();
-    UpdateMapData();
 }
 
 void Model::Draw() const {
@@ -133,7 +136,7 @@ void Model::Debug() {
 }
 
 void Model::UpdateMapData() const {
-    wd_->world = MathUtils::Matrix::MakeAffineMatrix(transform_.scale, std::get<Vector3>(transform_.rotate), transform_.translate);
+    //wd_->world = MathUtils::Matrix::MakeAffineMatrix(transform_.scale, std::get<Vector3>(transform_.rotate), transform_.translate);
     wd_->wvp = wd_->world * camera_->GetViewProjection();
     wd_->inverse = wd_->world.Inverse().Transpose();
 
@@ -205,7 +208,7 @@ void Model::CreateSkinCluster() {
             for (uint32_t index = 0; index < MAX_INFLUENCE; ++index) {
                 if (currentInfluence.weights[index] == 0.0f){
                     currentInfluence.weights[index] = vertexWeight.weight;
-                    currentInfluence.jointIndices[index] = static_cast<int32_t>(          jointIndex);
+                    currentInfluence.jointIndices[index] = static_cast<int32_t>(jointIndex);
                     break;
                 }
             }
@@ -236,12 +239,16 @@ void Model::UpdateSkeleton() {
     }
 }
 
-void Model::ApplyAnimation() {
+void Model::ApplyAnimation() const {
     for (Joint& joint : data_->skeleton.joints) {
         if (data_->animation.nodeAnimations.contains(joint.name)) {
-            const NodeAnimation& rna = data_->animation.nodeAnimations[joint.name];
-            (void)rna;
-            //joint.transform.scale = rna.scale.keyframes;
+            NodeAnimation& rna = data_->animation.nodeAnimations[joint.name];
+            Vector3 translate = rna.translate.Calculate(animationTime_);
+            Quaternion rotate = rna.rotation.Calculate(animationTime_);
+            Vector3 scale = rna.scale.Calculate(animationTime_);
+            Matrix4x4 local = MathUtils::Matrix::MakeAffineMatrix({scale, rotate, translate});
+
+            wd_->world = local * MathUtils::Matrix::MakeAffineMatrix(transform_);
         }
     }
 }

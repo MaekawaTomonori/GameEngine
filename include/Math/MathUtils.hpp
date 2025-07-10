@@ -9,15 +9,15 @@
 
 namespace MathUtils{
 	constexpr float F_PI = 3.14159265358979323846264338327950288f;
-	constexpr double PI = 3.14159265358979323846264338327950288;
+	constexpr double PI  = 3.14159265358979323846264338327950288;
 
     float Random(float min, float max);
     Vector3 Random(Vector3 min, Vector3 max);
 
-    template<typename Type>
-    Type Lerp(const Type& a, const Type& b, float t) {
-        return a + (b - a) * t;
-    }
+    float Lerp(const float& a, const float& b, float t);
+
+    Vector3 Lerp(const Vector3& a, const Vector3& b, float t);
+    Quaternion Lerp(const Quaternion& a, const Quaternion& b, float t);
 
     template<typename Type>
     Type Factorial(Type n) {

@@ -157,6 +157,27 @@ float MathUtils::Random(float min, float max) {
     return dist(random);
 }
 
+float MathUtils::Lerp(const float& a, const float& b, float t) {
+    return a + (b - a) * t;
+}
+
+Vector3 MathUtils::Lerp(const Vector3& a, const Vector3& b, float t) {
+    return Vector3{
+        Lerp(a.x, b.x, t),
+        Lerp(a.y, b.y, t),
+        Lerp(a.z, b.z, t)
+    };
+}
+
+Quaternion MathUtils::Lerp(const Quaternion& a, const Quaternion& b, float t) {
+    return Quaternion{
+        Lerp(a.x, b.x, t),
+        Lerp(a.y, b.y, t),
+        Lerp(a.z, b.z, t),
+        Lerp(a.w, b.w, t)
+    };
+}
+
 float MathUtils::Distance(const Vector3& a, const Vector3& b) {
     return std::sqrtf(std::powf(a.x - b.x, 2) + std::powf(a.y - b.y, 2) + std::powf(a.z - b.z, 2));
 }

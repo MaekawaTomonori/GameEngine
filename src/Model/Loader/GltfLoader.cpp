@@ -38,7 +38,7 @@ void GltfLoader::LoadGltf(const std::string& _directory, const std::string& _nam
         }
 
         meshData.vertices.reserve(mesh->mNumVertices);
-        meshData.indices.reserve(static_cast<UINT>(mesh->mNumFaces) * 3);
+        meshData.indices.reserve(UINT(mesh->mNumFaces) * 3);
 
         meshData.vertices.resize(mesh->mNumVertices);
         for (uint32_t vertexIndex = 0; vertexIndex < mesh->mNumVertices; ++vertexIndex) {
@@ -61,50 +61,53 @@ void GltfLoader::LoadGltf(const std::string& _directory, const std::string& _nam
                 return;
             }
 
-            meshData.indices.insert(
-                meshData.indices.end(),
-                face.mIndices,
-                face.mIndices + face.mNumIndices
-            );
-
-            if (faceIndex == 0){
-                aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
-                if (material && 0 < material->GetTextureCount(aiTextureType_DIFFUSE)){
-                    aiString texturePath;
-                    if (material->GetTexture(aiTextureType_DIFFUSE, 0, &texturePath) == AI_SUCCESS){
-                        meshData.texture = _directory + _name + "/" + texturePath.C_Str();
-                    }
-                }
+            for (uint32_t elementIndex = 0; elementIndex < face.mNumIndices; ++elementIndex) {
+                meshData.indices.push_back(face.mIndices[elementIndex]);
             }
         }
 
         for (uint32_t boneIndex = 0; boneIndex < mesh->mNumBones; ++boneIndex) {
             aiBone* bone = mesh->mBones[boneIndex];
             if (!bone)continue;
-            JointWeightData& jointWeightData = data_->skinCluster[bone->mName.C_Str()];
 
-            aiMatrix4x4 bindPose = bone->mOffsetMatrix.Inverse();
-            aiVector3D scale, translate;
-            aiQuaternion rotate;
-            bindPose.Decompose(scale, rotate, translate);
+            std::string name = bone->mName.C_Str();
 
-            jointWeightData.inverseBindPose = MathUtils::Matrix::MakeAffineMatrix({scale.x, scale.y, scale.z}, Quaternion{rotate.x, -rotate.y, -rotate.z, rotate.w}, {-translate.x, translate.y, translate.z}).Inverse();
+            auto& skinCluster = data_->skinCluster;
 
-            jointWeightData.weights.reserve(bone->mNumWeights);
+            if (!skinCluster.contains(name)){
+                JointWeightData& jointWeightData = skinCluster[name];
 
-            for (uint32_t weightIndex = 0; weightIndex < bone->mNumWeights; ++weightIndex) {
-                const aiVertexWeight& weight = bone->mWeights[weightIndex];
+                aiMatrix4x4 bindPose = bone->mOffsetMatrix.Inverse();
+                aiVector3D scale, translate;
+                aiQuaternion rotate;
+                bindPose.Decompose(scale, rotate, translate);
 
-                if (weight.mVertexId >= mesh->mNumVertices) {
-                    Log::Send(Log::Level::ERR, "GltfLoader::LoadGltf: Vertex index out of bounds in mesh: " + std::to_string(meshIndex) + " in file: " + path);
-                    Utils::Alert("Vertex index out of bounds in skin cluster creation");
-                    continue;
+                jointWeightData.inverseBindPose = MathUtils::Matrix::MakeAffineMatrix({scale.x, scale.y, scale.z}, Quaternion{rotate.x, -rotate.y, -rotate.z, rotate.w}, {-translate.x, translate.y, translate.z}).Inverse();
+
+                jointWeightData.weights.reserve(bone->mNumWeights);
+
+                for (uint32_t weightIndex = 0; weightIndex < bone->mNumWeights; ++weightIndex) {
+                    const aiVertexWeight& weight = bone->mWeights[weightIndex];
+
+                    if (weight.mVertexId >= mesh->mNumVertices) {
+                        Log::Send(Log::Level::ERR, "GltfLoader::LoadGltf: Vertex index out of bounds in mesh: " + std::to_string(meshIndex) + " in file: " + path);
+                        Utils::Alert("Vertex index out of bounds in skin cluster creation");
+                        continue;
+                    }
+
+                    jointWeightData.weights.push_back({
+                        weight.mWeight,
+                        weight.mVertexId
+                    });
                 }
+            }
+        }
 
-                jointWeightData.weights.push_back({
-                    weight.mWeight,
-                    weight.mVertexId
-                });
+        aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
+        if (material && 0 < material->GetTextureCount(aiTextureType_DIFFUSE)){
+            aiString texturePath;
+            if (material->GetTexture(aiTextureType_DIFFUSE, 0, &texturePath) == AI_SUCCESS){
+                meshData.texture = _directory + _name + "/" + texturePath.C_Str();
             }
         }
     }

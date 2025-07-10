@@ -47,6 +47,8 @@ class Model{
     std::unique_ptr<Mesh> mesh_;
     Camera* camera_ = nullptr;
 
+    float animationTime_ = 0.0f;
+
     ///GPU RESOURCES
     // world transform
     Microsoft::WRL::ComPtr<ID3D12Resource> wr_;
@@ -70,7 +72,7 @@ private:
     void CreateSkinCluster();
     void UpdateSkinCluster();
     void UpdateSkeleton();
-    void ApplyAnimation();
+    void ApplyAnimation() const;
 }; // class Model
 
 #endif // Model_HPP_

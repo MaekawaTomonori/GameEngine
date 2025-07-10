@@ -39,7 +39,7 @@ void Mesh::Initialize(DirectXAdapter* _adapter, const std::string &_name, const 
         ibv_.Format = DXGI_FORMAT_R32_UINT;
 
         ir_->Map(0, nullptr, reinterpret_cast<void**>(&id_));
-        std::copy_n(data_.indices.data(), data_.indices.size(), id_);
+        memcpy(id_, data_.indices.data(), sizeof(uint32_t) * data_.indices.size());
     }
 
     Singleton<TextureManager>::GetInstance()->Load(data_.texture);
@@ -72,7 +72,7 @@ void Mesh::Draw() const {
         Singleton<LightManager>::GetInstance()->Draw();
     }
     if (!data_.indices.empty()){
-        commandList_->DrawIndexedInstanced(static_cast<UINT>(data_.vertices.size()), 1, 0, 0, 0);
+        commandList_->DrawIndexedInstanced(static_cast<UINT>(data_.indices.size()), 1, 0, 0, 0);
     } else {
         commandList_->DrawInstanced(static_cast<UINT>(data_.vertices.size()), 1, 0, 0);
     }
