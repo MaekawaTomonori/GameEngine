@@ -146,11 +146,11 @@ void Model::CreateSkinCluster() {
         Log::Send(Log::Level::ERR, "DirectXAdapter is not initialized");
         return;
     }
-
-    skinCluster_.paletteResource.Attach(adapter_->CreateBufferResource(sizeof(WellForGpu) * data_->skeleton.joints.size()));
+    size_t jointCount = data_->skeleton.joints.size();
+    skinCluster_.paletteResource.Attach(adapter_->CreateBufferResource(sizeof(WellForGpu) * jointCount));
     WellForGpu* mappedPalette = nullptr;
     skinCluster_.paletteResource->Map(0, nullptr, reinterpret_cast<void**>(&mappedPalette));
-    skinCluster_.mappedPalette = {mappedPalette, data_->skeleton.joints.size()};
+    skinCluster_.mappedPalette = {mappedPalette, jointCount};
     skinCluster_.srvIndex = common_->GetSRVManager()->Allocate();
     skinCluster_.paletteHandle = {
         common_->GetSRVManager()->GetCPUHandle(skinCluster_.srvIndex),
@@ -180,13 +180,32 @@ void Model::CreateSkinCluster() {
             continue;
         }
 
+        size_t jointIndex = itr->second;
+        if (jointIndex >= data_->skeleton.joints.size()){
+            Log::Send(Log::Level::ERR, "Joint index out of bounds in skin cluster creation for joint: " + jointWeight.first);
+            Utils::Alert("Joint index out of bounds in skin cluster creation");
+            continue;
+        }
+        if (jointIndex >= skinCluster_.mappedPalette.size()) {
+            Log::Send(Log::Level::ERR, "Joint index out of bounds in skin cluster creation for joint: " + jointWeight.first);
+            Utils::Alert("Joint index out of bounds in skin cluster creation");
+            continue;
+        }
+
         skinCluster_.bindPoseMatrices[itr->second] = jointWeight.second.inverseBindPose;
+
         for (const auto& vertexWeight : jointWeight.second.weights) {
+            if (verticesSize <= vertexWeight.index) {
+                Log::Send(Log::Level::ERR, "Vertex index out of bounds in skin cluster creation for joint: " + jointWeight.first);
+                Utils::Alert("Vertex index out of bounds in skin cluster creation");
+                continue;
+            }
+
             auto& currentInfluence = skinCluster_.mappedInfluence[vertexWeight.index];
             for (uint32_t index = 0; index < MAX_INFLUENCE; ++index) {
                 if (currentInfluence.weights[index] == 0.0f){
                     currentInfluence.weights[index] = vertexWeight.weight;
-                    currentInfluence.jointIndices[index] = itr->second;
+                    currentInfluence.jointIndices[index] = static_cast<int32_t>(          jointIndex);
                     break;
                 }
             }
@@ -206,16 +225,6 @@ void Model::UpdateSkinCluster() {
     }
 }
 
-void Model::ApplyAnimation() {
-    for (Joint& joint : data_->skeleton.joints) {
-        if (data_->animation.nodeAnimations.contains(joint.name)) {
-            const NodeAnimation& rna = data_->animation.nodeAnimations[joint.name];
-            (void)rna;
-            //joint.transform.scale = rna.scale.keyframes;
-        }
-    }
-}
-
 void Model::UpdateSkeleton() {
     for (Joint& joint : data_->skeleton.joints){
         joint.local = MathUtils::Matrix::MakeAffineMatrix(joint.transform);
@@ -223,6 +232,16 @@ void Model::UpdateSkeleton() {
             joint.space = joint.local * data_->skeleton.joints[*joint.parent].space;
         } else{
             joint.space = joint.local;
+        }
+    }
+}
+
+void Model::ApplyAnimation() {
+    for (Joint& joint : data_->skeleton.joints) {
+        if (data_->animation.nodeAnimations.contains(joint.name)) {
+            const NodeAnimation& rna = data_->animation.nodeAnimations[joint.name];
+            (void)rna;
+            //joint.transform.scale = rna.scale.keyframes;
         }
     }
 }

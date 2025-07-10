@@ -16,7 +16,7 @@ void GltfLoader::LoadModel(const std::string& _name, ResourceRepository* _reposi
 void GltfLoader::LoadGltf(const std::string& _directory, const std::string& _name, ResourceRepository* _repository) {
     Assimp::Importer importer;
     std::string path = _directory + _name + "/" + _name + ".gltf";
-    const aiScene* scene = importer.ReadFile(path, aiProcess_FlipWindingOrder | aiProcess_FlipUVs);
+    const aiScene* scene = importer.ReadFile(path, aiProcess_FlipWindingOrder | aiProcess_FlipUVs | aiProcess_Triangulate);
     if (!scene->HasMeshes()){
         Utils::Alert("GltfLoader::LoadGltf: No meshes found in file: " + path);
         return;
@@ -37,52 +37,73 @@ void GltfLoader::LoadGltf(const std::string& _directory, const std::string& _nam
             continue;
         }
 
+        meshData.vertices.reserve(mesh->mNumVertices);
+        meshData.indices.reserve(static_cast<UINT>(mesh->mNumFaces) * 3);
+
         meshData.vertices.resize(mesh->mNumVertices);
         for (uint32_t vertexIndex = 0; vertexIndex < mesh->mNumVertices; ++vertexIndex) {
-            aiVector3D& position = mesh->mVertices[vertexIndex];
-            aiVector3D& normal = mesh->mNormals[vertexIndex];
-            aiVector3D texcoord = mesh->mTextureCoords[0][vertexIndex];
+            const aiVector3D& position = mesh->mVertices[vertexIndex];
+            const aiVector3D& normal = mesh->mNormals[vertexIndex];
+            const aiVector3D uv = mesh->mTextureCoords[0][vertexIndex];
 
             Vertex vertexData{};
             vertexData.position = Vector4(-position.x, position.y, position.z, 1.0f);
             vertexData.normal = Vector3(-normal.x, normal.y, normal.z);
-            vertexData.uv = Vector2(texcoord.x, texcoord.y);
+            vertexData.uv = Vector2(uv.x, uv.y);
             meshData.vertices[vertexIndex] = vertexData;
         }
 
         for (uint32_t faceIndex = 0; faceIndex < mesh->mNumFaces; ++faceIndex) {
-            aiFace& face = mesh->mFaces[faceIndex];
+            const aiFace& face = mesh->mFaces[faceIndex];
 
             if (face.mNumIndices != 3) {
                 Utils::Alert("GltfLoader::LoadGltf: Non-triangular face found in mesh: " + std::to_string(meshIndex) + " in file: " + path);
                 return;
             }
 
-            for (uint32_t element = 0; element < face.mNumIndices; ++element){
-                meshData.indices.push_back(face.mIndices[element]);
-            }
+            meshData.indices.insert(
+                meshData.indices.end(),
+                face.mIndices,
+                face.mIndices + face.mNumIndices
+            );
 
-            aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
-            if (material->GetTextureCount(aiTextureType_DIFFUSE)){
-                aiString texturePath;
-                material->GetTexture(aiTextureType_DIFFUSE, 0, &texturePath);
-                meshData.texture = _directory + _name + "/" + texturePath.C_Str();
+            if (faceIndex == 0){
+                aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
+                if (material && 0 < material->GetTextureCount(aiTextureType_DIFFUSE)){
+                    aiString texturePath;
+                    if (material->GetTexture(aiTextureType_DIFFUSE, 0, &texturePath) == AI_SUCCESS){
+                        meshData.texture = _directory + _name + "/" + texturePath.C_Str();
+                    }
+                }
             }
         }
+
         for (uint32_t boneIndex = 0; boneIndex < mesh->mNumBones; ++boneIndex) {
             aiBone* bone = mesh->mBones[boneIndex];
+            if (!bone)continue;
             JointWeightData& jointWeightData = data_->skinCluster[bone->mName.C_Str()];
 
             aiMatrix4x4 bindPose = bone->mOffsetMatrix.Inverse();
             aiVector3D scale, translate;
             aiQuaternion rotate;
             bindPose.Decompose(scale, rotate, translate);
+
             jointWeightData.inverseBindPose = MathUtils::Matrix::MakeAffineMatrix({scale.x, scale.y, scale.z}, Quaternion{rotate.x, -rotate.y, -rotate.z, rotate.w}, {-translate.x, translate.y, translate.z}).Inverse();
 
+            jointWeightData.weights.reserve(bone->mNumWeights);
+
             for (uint32_t weightIndex = 0; weightIndex < bone->mNumWeights; ++weightIndex) {
+                const aiVertexWeight& weight = bone->mWeights[weightIndex];
+
+                if (weight.mVertexId >= mesh->mNumVertices) {
+                    Log::Send(Log::Level::ERR, "GltfLoader::LoadGltf: Vertex index out of bounds in mesh: " + std::to_string(meshIndex) + " in file: " + path);
+                    Utils::Alert("Vertex index out of bounds in skin cluster creation");
+                    continue;
+                }
+
                 jointWeightData.weights.push_back({
-                    bone->mWeights[weightIndex].mWeight,
-                    bone->mWeights[weightIndex].mVertexId
+                    weight.mWeight,
+                    weight.mVertexId
                 });
             }
         }
