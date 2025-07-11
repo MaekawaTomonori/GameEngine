@@ -80,6 +80,24 @@ Matrix4x4 MathUtils::Matrix::MakeRotateZ(const float rad) {
     };
 }
 
+Matrix4x4 MathUtils::Matrix::MakeRotate(const Quaternion& rotate) {
+    float x2 = rotate.x + rotate.x;
+    float y2 = rotate.y + rotate.y;
+    float z2 = rotate.z + rotate.z;
+    float xy = rotate.x * rotate.y;
+    float xz = rotate.x * rotate.z;
+    float xw = rotate.x * rotate.w;
+    float yz = rotate.y * rotate.z;
+    float yw = rotate.y * rotate.w;
+    float zw = rotate.z * rotate.w;
+    return {
+        1.f - 2.f * (y2 + z2), 2.f * (xy + zw), 2.f * (xz - yw), 0.f,
+        2.f * (xy - zw), 1.f - 2.f * (x2 + z2), 2.f * (yz + xw), 0.f,
+        2.f * (xz + yw), 2.f * (yz + xw), 1.f - 2.f * (x2 + y2), 0.f,
+        0.f, 0.f, 0.f, 1.f
+    };
+}
+
 Matrix4x4 MathUtils::Matrix::MakeAffineMatrix(const ::Transform& transform) {
     return std::holds_alternative<Vector3>(transform.rotate) ? MakeAffineMatrix(transform.scale, std::get<Vector3>(transform.rotate), transform.translate) : MakeAffineMatrix(transform.scale, std::get<Quaternion>(transform.rotate), transform.translate);
 }
@@ -96,11 +114,11 @@ Matrix4x4 MathUtils::Matrix::MakeAffineMatrix(const Vector3& scale, const Vector
 
 Matrix4x4 MathUtils::Matrix::MakeAffineMatrix(const Vector3& scale, const Quaternion& rotate, const Vector3& translate) {
     Matrix4x4 scaleMat = MakeScaleMatrix(scale);
-    Matrix4x4 rotateMat = {
-        1 - 2 * (rotate.y * rotate.y + rotate.z * rotate.z), 2 * (rotate.x * rotate.y - rotate.z * rotate.w), 2 * (rotate.x * rotate.z + rotate.y * rotate.w), 0,
-        2 * (rotate.x * rotate.y + rotate.z * rotate.w), 1 - 2 * (rotate.x * rotate.x + rotate.z * rotate.z), 2 * (rotate.y * rotate.z - rotate.x * rotate.w), 0,
-        2 * (rotate.x * rotate.z - rotate.y * rotate.w), 2 * (rotate.y * rotate.z + rotate.x * rotate.w), 1 - 2 * (rotate.x * rotate.x + rotate.y * rotate.y), 0,
-        0, 0, 0, 1
+    Matrix4x4 rotateMat = { //MakeRotate(rotate);
+            1 - 2 * (rotate.y * rotate.y + rotate.z * rotate.z), 2 * (rotate.x * rotate.y - rotate.z * rotate.w), 2 * (rotate.x * rotate.z + rotate.y * rotate.w), 0,
+            2 * (rotate.x * rotate.y + rotate.z * rotate.w), 1 - 2 * (rotate.x * rotate.x + rotate.z * rotate.z), 2 * (rotate.y * rotate.z - rotate.x * rotate.w), 0,
+            2 * (rotate.x * rotate.z - rotate.y * rotate.w), 2 * (rotate.y * rotate.z + rotate.x * rotate.w), 1 - 2 * (rotate.x * rotate.x + rotate.y * rotate.y), 0,
+            0, 0, 0, 1
     };
     Matrix4x4 translateMat = MakeTranslateMatrix(translate);
     return scaleMat * rotateMat * translateMat;

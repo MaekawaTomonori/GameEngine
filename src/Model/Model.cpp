@@ -1,12 +1,11 @@
 #include "Model.hpp"
 
-#include <algorithm>
 #include <filesystem>
 
 #include "Log.hpp"
-#include "Pattern/Singleton.hpp"
 #include "Utils.hpp"
 #include "imgui.h"
+#include "Pattern/Singleton.hpp"
 #include "Loader/GltfLoader.hpp"
 #include "Loader/IModelLoader.hpp"
 #include "Loader/ObjLoader.hpp"
@@ -154,16 +153,17 @@ void Model::CreateSkinCluster() {
     skinCluster_.paletteResource->Map(0, nullptr, reinterpret_cast<void**>(&mappedPalette));
     skinCluster_.mappedPalette = {mappedPalette, jointCount};
     skinCluster_.srvIndex = common_->GetSRVManager()->Allocate();
+    common_->GetSRVManager()->CreateSRVforStructuredBuffer(skinCluster_.srvIndex, skinCluster_.paletteResource.Get(), static_cast<UINT>(data_->skeleton.joints.size()), sizeof(WellForGpu));
     skinCluster_.paletteHandle = {
         common_->GetSRVManager()->GetCPUHandle(skinCluster_.srvIndex),
         common_->GetSRVManager()->GetGPUHandle(skinCluster_.srvIndex)
     };
-    common_->GetSRVManager()->CreateSRVforStructuredBuffer(skinCluster_.srvIndex, skinCluster_.paletteResource.Get(), static_cast<UINT>(data_->skeleton.joints.size()), sizeof(WellForGpu));
 
     size_t verticesSize = common_->GetResourceRepository()->GetMeshRepository()->Get(data_->mesh).vertices.size();
     skinCluster_.influenceResource.Attach(adapter_->CreateBufferResource(sizeof(VertexInfluence) * verticesSize));
     VertexInfluence* mappedInfluence = nullptr;
     skinCluster_.influenceResource->Map(0, nullptr, reinterpret_cast<void**>(&mappedInfluence));
+    memset(mappedInfluence, 0, sizeof(VertexInfluence) * verticesSize);
     skinCluster_.mappedInfluence = { mappedInfluence, verticesSize };
 
     skinCluster_.influenceBufferView.BufferLocation = skinCluster_.influenceResource->GetGPUVirtualAddress();
@@ -194,7 +194,7 @@ void Model::CreateSkinCluster() {
             continue;
         }
 
-        skinCluster_.bindPoseMatrices[itr->second] = jointWeight.second.inverseBindPose;
+        skinCluster_.bindPoseMatrices[jointIndex] = jointWeight.second.inverseBindPose;
 
         for (const auto& vertexWeight : jointWeight.second.weights) {
             if (verticesSize <= vertexWeight.index) {

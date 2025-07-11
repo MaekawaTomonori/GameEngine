@@ -69,6 +69,7 @@ void Mesh::Draw() const {
     commandList_->SetGraphicsRootDescriptorTable(2, Singleton<TextureManager>::GetInstance()->GetGPUHandle(texture_));
 
     if (lighting_) {
+        material_->lighting = 1;
         Singleton<LightManager>::GetInstance()->Draw();
     }
     if (!data_.indices.empty()){
@@ -82,7 +83,6 @@ void Mesh::Debug() {
     ImGui::ColorEdit4("Color", &material_->color.x);
     ImGui::Checkbox("EnableLighting", &lighting_);
     if (lighting_) {
-        material_->lighting = 1;
         ImGui::DragFloat("Shininess", &material_->shininess, 0.1f, 0.f, 100.f);
     } else{
         material_->lighting = 0;
