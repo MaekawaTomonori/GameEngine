@@ -71,7 +71,8 @@ private:
     void UpdateMapData() const;
     void CreateSkinCluster();
     void UpdateSkinCluster();
-    void UpdateSkeleton();
+    void UpdateSkeleton() const;
+    void UpdateAnimation();
     void ApplyAnimation() const;
 }; // class Model
 

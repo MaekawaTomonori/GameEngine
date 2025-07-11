@@ -25,7 +25,7 @@ T AnimationCurve<T>::Calculate(float _time) {
     for (size_t index = 0; index < keyframes.size(); ++index) {
         size_t next = index + 1;
 
-        if (keyframes[index].time <= _time && _time <- keyframes[next].time) {
+        if (keyframes[index].time <= _time && _time <= keyframes[next].time) {
             float t = (_time - keyframes[index].time) / (keyframes[next].time - keyframes[index].time);
             return MathUtils::Lerp(keyframes[index].value, keyframes[next].value, t);
         }

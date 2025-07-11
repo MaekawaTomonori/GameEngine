@@ -53,7 +53,6 @@ void Model::Initialize(const std::string& _name) {
     CreateSkinCluster();
     Log::Send(Log::Level::INFO, "SkinCluster created for: " + _name);
 
-    mesh_->SetVBV(skinCluster_.influenceBufferView);
 
     transform_ = {
         {1,1,1},
@@ -63,16 +62,12 @@ void Model::Initialize(const std::string& _name) {
 }
 
 void Model::Update() {
+    camera_ = Singleton<CameraManager>::GetInstance()->GetActive();
+
     Debug();
 
-
-    // Update AnimationTimer
-    animationTime_ += 1.f / 60.f;
-    animationTime_ = fmod(animationTime_, data_->animation.duration);
-
-    // ApplyAnimation
-    ApplyAnimation();
-    UpdateMapData();
+    // Update Animation
+    UpdateAnimation();
 
     // Update Skeleton
     UpdateSkeleton();
@@ -80,7 +75,7 @@ void Model::Update() {
     //Update SkinCluster
     UpdateSkinCluster();
 
-    camera_ = Singleton<CameraManager>::GetInstance()->GetActive();
+    UpdateMapData();
 }
 
 void Model::Draw() const {
@@ -95,6 +90,7 @@ void Model::Draw() const {
     commandList_->SetGraphicsRootConstantBufferView(4, cr_->GetGPUVirtualAddress());
     commandList_->SetGraphicsRootDescriptorTable(8, skinCluster_.paletteHandle.second);
 
+    mesh_->SetVBV(skinCluster_.influenceBufferView);
     mesh_->Draw();
 }
 
@@ -128,7 +124,10 @@ void Model::Debug() {
                     };
                 }
 
+                ImGui::DragFloat("Anime Timer", &animationTime_);
+
                 ImGui::SeparatorText("Mesh");
+                mesh_->Debug();
             }
             ImGui::End();
         }
@@ -136,7 +135,7 @@ void Model::Debug() {
 }
 
 void Model::UpdateMapData() const {
-    //wd_->world = MathUtils::Matrix::MakeAffineMatrix(transform_.scale, std::get<Vector3>(transform_.rotate), transform_.translate);
+    wd_->world = MathUtils::Matrix::MakeAffineMatrix(transform_.scale, std::get<Vector3>(transform_.rotate), transform_.translate);
     wd_->wvp = wd_->world * camera_->GetViewProjection();
     wd_->inverse = wd_->world.Inverse().Transpose();
 
@@ -228,7 +227,7 @@ void Model::UpdateSkinCluster() {
     }
 }
 
-void Model::UpdateSkeleton() {
+void Model::UpdateSkeleton() const {
     for (Joint& joint : data_->skeleton.joints){
         joint.local = MathUtils::Matrix::MakeAffineMatrix(joint.transform);
         if (joint.parent){
@@ -239,16 +238,23 @@ void Model::UpdateSkeleton() {
     }
 }
 
+void Model::UpdateAnimation() {
+    // Update AnimationTimer
+    animationTime_ += 1.f;
+    animationTime_ = fmod(animationTime_, data_->animation.duration);
+
+    // ApplyAnimation
+    ApplyAnimation();
+}
+
 void Model::ApplyAnimation() const {
     for (Joint& joint : data_->skeleton.joints) {
         if (data_->animation.nodeAnimations.contains(joint.name)) {
-            NodeAnimation& rna = data_->animation.nodeAnimations[joint.name];
-            Vector3 translate = rna.translate.Calculate(animationTime_);
-            Quaternion rotate = rna.rotation.Calculate(animationTime_);
-            Vector3 scale = rna.scale.Calculate(animationTime_);
-            Matrix4x4 local = MathUtils::Matrix::MakeAffineMatrix({scale, rotate, translate});
+            auto& rna = data_->animation.nodeAnimations[joint.name];
 
-            wd_->world = local * MathUtils::Matrix::MakeAffineMatrix(transform_);
+            joint.transform.scale = rna.scale.Calculate(animationTime_);
+            joint.transform.rotate = (Quaternion)rna.rotation.Calculate(animationTime_);
+            joint.transform.translate = rna.translate.Calculate(animationTime_);
         }
     }
 }

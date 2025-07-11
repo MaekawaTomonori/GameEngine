@@ -147,23 +147,23 @@ Animation GltfLoader::LoadAnimation(const std::string& _directory, const std::st
     std::string path = _directory + _name + "/" + _name + ".gltf";
     const aiScene* scene = importer.ReadFile(path.c_str(), 0);
 
-    aiAnimation* animation = scene->mAnimations[0];
+    const aiAnimation* animation = scene->mAnimations[0];
     Animation animation_;
     animation_.duration = static_cast<float>(animation->mDuration);
 
     for (uint32_t channelIndex = 0; channelIndex < animation->mNumChannels; ++channelIndex) {
-        aiNodeAnim* nodeAnim = animation->mChannels[channelIndex];
+        const aiNodeAnim* nodeAnim = animation->mChannels[channelIndex];
         NodeAnimation& nodeAnimation = animation_.nodeAnimations[nodeAnim->mNodeName.C_Str()];
         for (uint32_t keyIndex = 0; keyIndex < nodeAnim->mNumPositionKeys; ++keyIndex){
-            aiVectorKey& positionKey = nodeAnim->mPositionKeys[keyIndex];
+            const aiVectorKey& positionKey = nodeAnim->mPositionKeys[keyIndex];
             nodeAnimation.translate.keyframes.push_back({ Vector3(-positionKey.mValue.x, positionKey.mValue.y, positionKey.mValue.z), static_cast<float>(positionKey.mTime) });
         }
         for (uint32_t keyIndex = 0; keyIndex < nodeAnim->mNumRotationKeys; ++keyIndex){
-            aiQuatKey& rotationKey = nodeAnim->mRotationKeys[keyIndex];
+            const aiQuatKey& rotationKey = nodeAnim->mRotationKeys[keyIndex];
             nodeAnimation.rotation.keyframes.push_back({ Quaternion(rotationKey.mValue.x, -rotationKey.mValue.y, -rotationKey.mValue.z, rotationKey.mValue.w), static_cast<float>(rotationKey.mTime) });
         }
         for (uint32_t keyIndex = 0; keyIndex < nodeAnim->mNumScalingKeys; ++keyIndex){
-            aiVectorKey& scalingKey = nodeAnim->mScalingKeys[keyIndex];
+            const aiVectorKey& scalingKey = nodeAnim->mScalingKeys[keyIndex];
             nodeAnimation.scale.keyframes.push_back({ Vector3(scalingKey.mValue.x, scalingKey.mValue.y, scalingKey.mValue.z), static_cast<float>(scalingKey.mTime) });
         }
 
