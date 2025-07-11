@@ -222,8 +222,10 @@ void Model::UpdateSkinCluster() {
             break;
         }
 
-        skinCluster_.mappedPalette[jointIndex].space = skinCluster_.bindPoseMatrices[jointIndex] * data_->skeleton.joints[jointIndex].space;
+        skinCluster_.mappedPalette[jointIndex].space = data_->skeleton.joints[jointIndex].space * skinCluster_.bindPoseMatrices[jointIndex];
         skinCluster_.mappedPalette[jointIndex].inverseTranspose = skinCluster_.mappedPalette[jointIndex].space.Inverse().Transpose();
+        
+        Log::Send(Log::Level::DEBUG, "SkinCluster updated for joint " + std::to_string(jointIndex) + " - " + data_->skeleton.joints[jointIndex].name);
     }
 }
 
@@ -231,9 +233,11 @@ void Model::UpdateSkeleton() const {
     for (Joint& joint : data_->skeleton.joints){
         joint.local = MathUtils::Matrix::MakeAffineMatrix(joint.transform);
         if (joint.parent){
-            joint.space = joint.local * data_->skeleton.joints[*joint.parent].space;
+            joint.space = data_->skeleton.joints[*joint.parent].space * joint.local;
+            Log::Send(Log::Level::DEBUG, "Joint " + joint.name + " - parent space applied");
         } else{
             joint.space = joint.local;
+            Log::Send(Log::Level::DEBUG, "Joint " + joint.name + " - root joint, using local space");
         }
     }
 }

@@ -2,6 +2,7 @@
 #include <random>
 
 #include "Math/Transform.hpp"
+#include "Log.hpp"
 
 Matrix3x3 MathUtils::Matrix::MakeIdentity3x3() {
     return Matrix3x3 {
@@ -91,7 +92,8 @@ Matrix4x4 MathUtils::Matrix::MakeAffineMatrix(const Vector3& scale, const Vector
     Matrix4x4 rotateMatZ = MakeRotateZ(rotate.z);
     Matrix4x4 rotateMat = rotateMatX * rotateMatY * rotateMatZ;
     Matrix4x4 translateMat = MakeTranslateMatrix(translate);
-    return scaleMat * rotateMat * translateMat;
+    Log::Send(Log::Level::DEBUG, "Creating affine matrix with TRS order (Translate * Rotate * Scale)");
+    return translateMat * rotateMat * scaleMat;
 }
 
 Matrix4x4 MathUtils::Matrix::MakeAffineMatrix(const Vector3& scale, const Quaternion& rotate, const Vector3& translate) {
@@ -103,12 +105,13 @@ Matrix4x4 MathUtils::Matrix::MakeAffineMatrix(const Vector3& scale, const Quater
         0, 0, 0, 1
     };
     Matrix4x4 translateMat = MakeTranslateMatrix(translate);
-    return scaleMat * rotateMat * translateMat;
+    Log::Send(Log::Level::DEBUG, "Creating affine matrix with Quaternion rotation using TRS order");
+    return translateMat * rotateMat * scaleMat;
 }
 
 Matrix4x4 MathUtils::Matrix::MakeAffineMatrix(const Matrix4x4& scale, const Matrix4x4& rotate,
     const Matrix4x4& translate) {
-    return scale * rotate * translate;
+    return translate * rotate * scale;
 }
 
 Matrix4x4 MathUtils::Matrix::MakeOrthogonalMatrix(float left, float right, float top, float bottom, float znear, float zfar) {
