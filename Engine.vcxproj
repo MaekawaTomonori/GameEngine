@@ -490,6 +490,7 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <WholeProgramOptimization>false</WholeProgramOptimization>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -567,6 +568,7 @@
   <ItemGroup>
     <ClInclude Include="include\DebugUI.hpp" />
     <ClInclude Include="include\IGame.hpp" />
+    <ClInclude Include="include\Line.hpp" />
     <ClInclude Include="include\Math\Easing.h" />
     <ClInclude Include="include\Math\Easing.hpp" />
     <ClInclude Include="include\Math\MathUtils.h" />
@@ -603,6 +605,7 @@
     <ClInclude Include="src\Light\PointLight\PointLight.h" />
     <ClInclude Include="src\Light\RawLight.h" />
     <ClInclude Include="src\Light\SpotLight\SpotLight.h" />
+    <ClInclude Include="src\Line\Common\LineCommon.hpp" />
     <ClInclude Include="src\Mesh\Data\MeshData.hpp" />
     <ClInclude Include="src\Mesh\Mesh.hpp" />
     <ClInclude Include="src\Mesh\Repository\MeshRepository.hpp" />
@@ -652,6 +655,8 @@
     <ClCompile Include="src\Light\LightManager.cpp" />
     <ClCompile Include="src\Light\PointLight\PointLight.cpp" />
     <ClCompile Include="src\Light\SpotLight\SpotLight.cpp" />
+    <ClCompile Include="src\Line\Common\LineCommon.cpp" />
+    <ClCompile Include="src\Line\Line.cpp" />
     <ClCompile Include="src\Math\Easing.cpp" />
     <ClCompile Include="src\Math\MathUtils.cpp" />
     <ClCompile Include="src\Math\Vector2.cpp" />

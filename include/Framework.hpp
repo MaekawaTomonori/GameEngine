@@ -13,6 +13,7 @@
 #include "src/Model/Common/ModelCommon.hpp"
 #include "src/Scene/SceneSwitcher.hpp"
 #include "src/Sprite/Common/SpriteCommon.hpp"
+#include "src/Line/Common/LineCommon.hpp"
 #include "src/Texture/TextureManager.hpp"
 
 class IGame;
@@ -33,6 +34,7 @@ class Framework {
     TextureManager* texture_ = nullptr;
     SpriteCommon* sprite_ = nullptr;
     ModelCommon* model_ = nullptr;
+    LineCommon* line_ = nullptr;
 	CameraManager* camera_ = nullptr;
     LightManager* light_ = nullptr;
 

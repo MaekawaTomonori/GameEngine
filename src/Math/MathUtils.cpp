@@ -1,4 +1,6 @@
 #include "Math/MathUtils.hpp"
+
+#include <cassert>
 #include <random>
 
 #include "Math/Transform.hpp"
@@ -37,21 +39,31 @@ Matrix4x4 MathUtils::Matrix::MakeScaleMatrix(const Vector3& scale) {
     };
 }
 
-//Vector3 MathUtils::Matrix::Transform(const Vector3& vector, const Matrix4x4& matrix) {
-//    Vector3 v = {
-//        vector.x * matrix.matrix[0][0] + vector.y * matrix.matrix[1][0] + vector.z * matrix.matrix[2][0] + 1 * matrix.matrix[3][0],
-//        vector.x * matrix.matrix[0][1] + vector.y * matrix.matrix[1][1] + vector.z * matrix.matrix[2][1] + 1 * matrix.matrix[3][1],
-//        vector.x * matrix.matrix[0][2] + vector.y * matrix.matrix[1][2] + vector.z * matrix.matrix[2][2] + 1 * matrix.matrix[3][2]
-//    };
-//    const float w = vector.x * matrix.matrix[0][3] + vector.y * matrix.matrix[1][3] + vector.z * matrix.matrix[2][3] + 1 * matrix.matrix[3][3];
-//    assert(w != 0);
-//    if (w != 1){
-//        v.x /= w;
-//        v.y /= w;
-//        v.z /= w;
-//    }
-//    return v;
-//}
+Vector3 MathUtils::Matrix::Transform(const Vector3& vector, const Matrix4x4& matrix) {
+    Vector3 v = {
+        vector.x * matrix.matrix[0][0] + vector.y * matrix.matrix[1][0] + vector.z * matrix.matrix[2][0] + 1 * matrix.matrix[3][0],
+        vector.x * matrix.matrix[0][1] + vector.y * matrix.matrix[1][1] + vector.z * matrix.matrix[2][1] + 1 * matrix.matrix[3][1],
+        vector.x * matrix.matrix[0][2] + vector.y * matrix.matrix[1][2] + vector.z * matrix.matrix[2][2] + 1 * matrix.matrix[3][2]
+    };
+    const float w = vector.x * matrix.matrix[0][3] + vector.y * matrix.matrix[1][3] + vector.z * matrix.matrix[2][3] + 1 * matrix.matrix[3][3];
+    assert(w != 0);
+    if (w != 1){
+        v.x /= w;
+        v.y /= w;
+        v.z /= w;
+    }
+    return v;
+}
+
+Vector4 MathUtils::Matrix::Transform(const Vector4& vector, const Matrix4x4& matrix) {
+    Vector4 v = {
+        vector.x * matrix.matrix[0][0] + vector.y * matrix.matrix[1][0] + vector.z * matrix.matrix[2][0] + vector.w * matrix.matrix[3][0],
+        vector.x * matrix.matrix[0][1] + vector.y * matrix.matrix[1][1] + vector.z * matrix.matrix[2][1] + vector.w * matrix.matrix[3][1],
+        vector.x * matrix.matrix[0][2] + vector.y * matrix.matrix[1][2] + vector.z * matrix.matrix[2][2] + vector.w * matrix.matrix[3][2],
+        vector.x * matrix.matrix[0][3] + vector.y * matrix.matrix[1][3] + vector.z * matrix.matrix[2][3] + vector.w * matrix.matrix[3][3]
+    };
+    return v;
+}
 
 Matrix4x4 MathUtils::Matrix::MakeRotateX(const float rad) {
     return {

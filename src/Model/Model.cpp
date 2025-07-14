@@ -58,6 +58,8 @@ void Model::Initialize(const std::string& _name) {
         Vector3{0,0,0},
         {0,0,0},
     };
+
+    line_.Initialize();
 }
 
 void Model::Update() {
@@ -71,8 +73,11 @@ void Model::Update() {
     // Update Skeleton
     UpdateSkeleton();
 
-    //Update SkinCluster
+    // Update SkinCluster
     UpdateSkinCluster();
+
+    // Joint to Line
+    CreateLine();
 
     UpdateMapData();
 }
@@ -82,7 +87,7 @@ void Model::Draw() const {
         Log::Send(Log::Level::ERR, "Command list is null");
         return;
     }
-    
+
     common_->Draw();
 
     commandList_->SetGraphicsRootConstantBufferView(1, wr_->GetGPUVirtualAddress());
@@ -91,6 +96,8 @@ void Model::Draw() const {
 
     mesh_->SetVBV(skinCluster_.influenceBufferView);
     mesh_->Draw();
+
+    DrawLine();
 }
 
 void Model::Load(const std::string& _name) const {
@@ -257,4 +264,18 @@ void Model::ApplyAnimation() const {
             joint.transform.translate = rna.translate.Calculate(animationTime_);
         }
     }
+}
+
+void Model::CreateLine() {
+    line_.Clear();
+    for (auto& joint : data_->skeleton.joints){
+        if (joint.parent.has_value()){
+            line_.AddLine(joint.transform.translate, data_->skeleton.joints[*joint.parent].transform.translate);
+        }
+    }
+    line_.Update();
+}
+
+void Model::DrawLine() const {
+    line_.Draw();
 }

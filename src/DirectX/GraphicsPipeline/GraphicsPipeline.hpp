@@ -28,6 +28,7 @@ public:
         SPRITE,
         PARTICLE,
         PARTICLE2D,
+        LINE,
 
         COUNT
     };
@@ -58,6 +59,7 @@ private://Variables
     Microsoft::WRL::ComPtr<ID3D12RootSignature> rootSignature_;
     std::vector<D3D12_ROOT_PARAMETER> rootParameters_;
     D3D12_DESCRIPTOR_RANGE descriptorRange_[1] {};
+    D3D12_DESCRIPTOR_RANGE lineDescriptorRange_{};
     D3D12_INPUT_LAYOUT_DESC inputLayoutDesc_ {};
     std::vector<D3D12_INPUT_ELEMENT_DESC> inputElementDescs_{};
     BlendMode blendMode_ = BlendMode::NONE;

@@ -4,6 +4,7 @@
 #include "Matrix.hpp"
 #include "Transform.hpp"
 #include "Vector3.hpp"
+#include "Vector4.hpp"
 
 //struct Transform;
 
@@ -41,6 +42,7 @@ namespace MathUtils{
         Matrix4x4 MakeTranslateMatrix(const Vector3& velocity);
         Matrix4x4 MakeScaleMatrix(const Vector3& scale);
         Vector3 Transform(const Vector3& vector, const Matrix4x4& matrix);
+        Vector4 Transform(const Vector4& vector, const Matrix4x4& matrix);
 
         Matrix4x4 MakeRotateX(float rad);
         Matrix4x4 MakeRotateY(float rad);

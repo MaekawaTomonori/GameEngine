@@ -3,6 +3,7 @@
 #include <array>
 #include <span>
 
+#include "Line.hpp"
 #include "Math/Matrix.hpp"
 #include "src/Camera/Camera.hpp"
 #include "src/Mesh/Mesh.hpp"
@@ -49,6 +50,8 @@ class Model{
 
     float animationTime_ = 0.0f;
 
+    Line line_;
+
     ///GPU RESOURCES
     // world transform
     Microsoft::WRL::ComPtr<ID3D12Resource> wr_;
@@ -74,6 +77,9 @@ private:
     void UpdateSkeleton() const;
     void UpdateAnimation();
     void ApplyAnimation() const;
+
+    void CreateLine();
+    void DrawLine() const;
 }; // class Model
 
 #endif // Model_HPP_

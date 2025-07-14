@@ -77,70 +77,108 @@ void GraphicsPipeline::DescriptorRange() {
 void GraphicsPipeline::CreateRootSignature() {
     HRESULT hr = S_FALSE;
 
+    // 既存のパラメータをクリア
+    rootParameters_.clear();
+
     D3D12_ROOT_SIGNATURE_DESC descriptionRootSignature{};
     descriptionRootSignature.Flags = D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT;
 
     DescriptorRange();
 
-    D3D12_ROOT_PARAMETER rp{};
-    if (type_ != Type::PARTICLE2D){
-        //PixelShader Material
-        rp.ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
-        rp.ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
-        rp.Descriptor.ShaderRegister = 0;
-        rootParameters_.push_back(rp);
-    }
+    if (type_ == Type::LINE) {
+        // LINE専用のルートパラメータ設定
+        // [0] Transform CBV (VertexShader)
+        D3D12_ROOT_PARAMETER rp0{};
+        rp0.ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
+        rp0.ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX;
+        rp0.Descriptor.ShaderRegister = 0;
+        rootParameters_.push_back(rp0);
+        
+        // LINE専用のDescriptorRange
+        lineDescriptorRange_.BaseShaderRegister = 0;
+        lineDescriptorRange_.NumDescriptors = 1;
+        lineDescriptorRange_.RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
+        lineDescriptorRange_.OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
+        
+        // [1] Instance Data DescriptorTable (VertexShader)
+        D3D12_ROOT_PARAMETER rp1{};
+        rp1.ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
+        rp1.ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX;
+        rp1.DescriptorTable.pDescriptorRanges = &lineDescriptorRange_;
+        rp1.DescriptorTable.NumDescriptorRanges = 1;
+        rootParameters_.push_back(rp1);
+    } else {
+        D3D12_ROOT_PARAMETER rp{};
+        // 他のタイプ用の設定
+        if (type_ != Type::PARTICLE2D){
+            //PixelShader Material
+            rp.ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
+            rp.ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
+            rp.Descriptor.ShaderRegister = 0;
+            rootParameters_.push_back(rp);
+            rp = {};
+        }
 
-    //VertexShader WVP
-    if (type_ == Type::PARTICLE || type_ == Type::PARTICLE2D){
+        //VertexShader WVP/Transform
+        if (type_ == Type::PARTICLE || type_ == Type::PARTICLE2D){
+            rp.ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
+            rp.ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX;
+            rp.DescriptorTable.pDescriptorRanges = descriptorRange_;
+            rp.DescriptorTable.NumDescriptorRanges = _countof(descriptorRange_);
+        } else{
+            rp.ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
+            rp.ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX;
+            rp.Descriptor.ShaderRegister = 0;
+        }
+        rootParameters_.push_back(rp);
+        rp = {};
+
+        //DescriptorTable Texture
         rp.ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
-        rp.ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX;
+        rp.ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
         rp.DescriptorTable.pDescriptorRanges = descriptorRange_;
         rp.DescriptorTable.NumDescriptorRanges = _countof(descriptorRange_);
-    } else{
-        rp.ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
-        rp.ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX;
-        rp.Descriptor.ShaderRegister = 0;
+        rootParameters_.push_back(rp);
+        rp = {};
     }
-    rootParameters_.push_back(rp);
 
-    //DescriptorTable Texture
-    rp.ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
-    rp.ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
-    rp.DescriptorTable.pDescriptorRanges = descriptorRange_;
-    rp.DescriptorTable.NumDescriptorRanges = _countof(descriptorRange_);
-    rootParameters_.push_back(rp);
-
+    D3D12_ROOT_PARAMETER rp{};
     if (type_ == Type::MODEL || type_ == Type::SKINNING_MODEL){
         //DirectionalLight
         rp.ParameterType = D3D12_ROOT_PARAMETER_TYPE_SRV;
         rp.ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
         rp.Descriptor.ShaderRegister = 1;
         rootParameters_.push_back(rp);
+        rp = {};
+
 
         //Camera For GPU
         rp.ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
         rp.ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
         rp.Descriptor.ShaderRegister = 2;
         rootParameters_.push_back(rp);
+        rp = {};
 
         //PointLight
         rp.ParameterType = D3D12_ROOT_PARAMETER_TYPE_SRV;
         rp.ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
         rp.Descriptor.ShaderRegister = 3;
         rootParameters_.push_back(rp);
+        rp = {};
 
         //SpotLight
         rp.ParameterType = D3D12_ROOT_PARAMETER_TYPE_SRV;
         rp.ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
         rp.Descriptor.ShaderRegister = 4;
         rootParameters_.push_back(rp);
+        rp = {};
 
         //Light Count
         rp.ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
         rp.ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
         rp.Descriptor.ShaderRegister = 5;
         rootParameters_.push_back(rp);
+        rp = {};
     }
 
     if (type_ == Type::SKINNING_MODEL) {
@@ -156,6 +194,7 @@ void GraphicsPipeline::CreateRootSignature() {
         rp.DescriptorTable.NumDescriptorRanges = 1;
         rp.DescriptorTable.pDescriptorRanges = &srvRange;
         rootParameters_.push_back(rp);
+        rp = {};
     }
 
     //set
@@ -191,19 +230,24 @@ void GraphicsPipeline::CreateInputLayout() {
     ied.AlignedByteOffset = D3D12_APPEND_ALIGNED_ELEMENT;
     ied.InputSlot = 0;
     inputElementDescs_.push_back(ied);
+    ied = {};
 
-    ied.SemanticName = "TEXCOORD";
-    ied.SemanticIndex = 0;
-    ied.Format = DXGI_FORMAT_R32G32_FLOAT;
-    ied.AlignedByteOffset = D3D12_APPEND_ALIGNED_ELEMENT;
-    inputElementDescs_.push_back(ied);
+    if (type_ != Type::LINE) {
+        ied.SemanticName = "TEXCOORD";
+        ied.SemanticIndex = 0;
+        ied.Format = DXGI_FORMAT_R32G32_FLOAT;
+        ied.AlignedByteOffset = D3D12_APPEND_ALIGNED_ELEMENT;
+        inputElementDescs_.push_back(ied);
+        ied = {};
+    }
 
-    if (type_ != Type::SPRITE && type_ != Type::PARTICLE2D){
+    if (type_ != Type::SPRITE && type_ != Type::PARTICLE2D && type_ != Type::LINE){
         ied.SemanticName = "NORMAL";
         ied.SemanticIndex = 0;
         ied.Format = DXGI_FORMAT_R32G32B32_FLOAT;
         ied.AlignedByteOffset = D3D12_APPEND_ALIGNED_ELEMENT;
         inputElementDescs_.push_back(ied);
+        ied = {};
     }
 
     if (type_ == Type::SKINNING_MODEL){
@@ -213,6 +257,7 @@ void GraphicsPipeline::CreateInputLayout() {
         ied.InputSlot = 1;
         ied.AlignedByteOffset = D3D12_APPEND_ALIGNED_ELEMENT;
         inputElementDescs_.push_back(ied);
+        ied = {};
 
         ied.SemanticName = "INDEX";
         ied.SemanticIndex = 0;
@@ -220,8 +265,8 @@ void GraphicsPipeline::CreateInputLayout() {
         ied.InputSlot = 1;
         ied.AlignedByteOffset = D3D12_APPEND_ALIGNED_ELEMENT;
         inputElementDescs_.push_back(ied);
+        ied = {};
     }
-    //System::Debug::Log(std::format(L"InputElementSlot : {}\n", inputElementDescs_[0].InputSlot));
 
     inputLayoutDesc_.pInputElementDescs = inputElementDescs_.data();
     inputLayoutDesc_.NumElements = static_cast<UINT>(inputElementDescs_.size());
@@ -253,6 +298,9 @@ void GraphicsPipeline::CreateShader() {
         case Type::PARTICLE2D:
             name = L"Particle";
             break;
+        case Type::LINE:
+            name = L"Line";
+            break;
     }
 
     shader_->Create(name);
@@ -271,6 +319,10 @@ void GraphicsPipeline::CreateRasterizerState() {
             break;
         case Type::PARTICLE:
         case Type::PARTICLE2D:
+            rasterizerDesc_.CullMode = D3D12_CULL_MODE_NONE;
+            rasterizerDesc_.FillMode = D3D12_FILL_MODE_SOLID;
+            break;
+        case Type::LINE:
             rasterizerDesc_.CullMode = D3D12_CULL_MODE_NONE;
             rasterizerDesc_.FillMode = D3D12_FILL_MODE_SOLID;
             break;
@@ -311,7 +363,12 @@ void GraphicsPipeline::CreatePSO() {
 
     graphicsPipelineStateDesc.NumRenderTargets = 1;
     graphicsPipelineStateDesc.RTVFormats[0] = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
-    graphicsPipelineStateDesc.PrimitiveTopologyType = D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE;
+    
+    if (type_ == Type::LINE) {
+        graphicsPipelineStateDesc.PrimitiveTopologyType = D3D12_PRIMITIVE_TOPOLOGY_TYPE_LINE;
+    } else {
+        graphicsPipelineStateDesc.PrimitiveTopologyType = D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE;
+    }
 
     graphicsPipelineStateDesc.SampleDesc.Count = 1;
     graphicsPipelineStateDesc.SampleMask = D3D12_DEFAULT_SAMPLE_MASK;
