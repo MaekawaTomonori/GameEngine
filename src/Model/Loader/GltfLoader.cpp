@@ -180,15 +180,24 @@ Skeleton GltfLoader::CreateSkeleton(const Node& _root) {
         skeleton.map.emplace(joint.name, joint.index);
     }
 
+    for (Joint& joint : skeleton.joints){
+        joint.local = MathUtils::Matrix::MakeAffineMatrix(joint.transform);
+        if (joint.parent){
+            joint.space = joint.local * skeleton.joints[*joint.parent].space;
+        } else{
+            joint.space = joint.local;
+        }
+    }
+
     return skeleton;
 }
 
 int32_t GltfLoader::CreateJoint(const Node& _node, const std::optional<int32_t>& _parent, std::vector<Joint>& _joints) {
     Joint joint;
-    joint.transform = _node.transform;
+    joint.name = _node.name;
     joint.local = _node.local;
     joint.space = MathUtils::Matrix::MakeIdentity();
-    joint.name = _node.name;
+    joint.transform = _node.transform;
     joint.index = static_cast<int32_t>(_joints.size());
     joint.parent = _parent;
     _joints.push_back(joint);

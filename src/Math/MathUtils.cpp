@@ -199,13 +199,22 @@ Vector3 MathUtils::Lerp(const Vector3& a, const Vector3& b, float t) {
     };
 }
 
-Quaternion MathUtils::Lerp(const Quaternion& a, const Quaternion& b, float t) {
-    return Quaternion{
-        Lerp(a.x, b.x, t),
-        Lerp(a.y, b.y, t),
-        Lerp(a.z, b.z, t),
-        Lerp(a.w, b.w, t)
-    };
+Quaternion MathUtils::Slerp(Quaternion& a, Quaternion& b, const float t) {
+    float dot = a.x * b.x + a.y * b.y + a.z * b.z + a.w * b.w;
+    float epsilon = 1e-6f;
+
+    if (dot < 0){
+        dot = -dot;
+        b = { -b.x, -b.y, -b.z, -b.w };
+    }
+    if (1 - dot < epsilon){
+        return a;
+    }
+    float theta = acosf(dot);
+    float sinTheta = sinf(theta);
+    float s0 = sinf((1 - t) * theta) / sinTheta;
+    float s1 = sinf(t * theta) / sinTheta;
+    return a * s0 + b * s1;
 }
 
 float MathUtils::Distance(const Vector3& a, const Vector3& b) {

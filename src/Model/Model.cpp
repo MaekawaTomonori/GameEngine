@@ -259,9 +259,9 @@ void Model::ApplyAnimation() const {
         if (data_->animation.nodeAnimations.contains(joint.name)) {
             auto& rna = data_->animation.nodeAnimations[joint.name];
 
-            joint.transform.scale = rna.scale.Calculate(animationTime_);
-            joint.transform.rotate = (Quaternion)rna.rotation.Calculate(animationTime_);
-            joint.transform.translate = rna.translate.Calculate(animationTime_);
+            joint.transform.scale = AnimationCurveFunction::Calculate(rna.scale, animationTime_);
+            joint.transform.rotate = AnimationCurveFunction::Calculate(rna.rotation, animationTime_);
+            joint.transform.translate = AnimationCurveFunction::Calculate(rna.translate, animationTime_);
         }
     }
 }
@@ -270,7 +270,7 @@ void Model::CreateLine() {
     line_.Clear();
     for (auto& joint : data_->skeleton.joints){
         if (joint.parent.has_value()){
-            line_.AddLine(joint.transform.translate, data_->skeleton.joints[*joint.parent].transform.translate);
+            line_.AddLine(joint.space.GetTranslate(), data_->skeleton.joints[*joint.parent].space.GetTranslate());
         }
     }
     line_.Update();

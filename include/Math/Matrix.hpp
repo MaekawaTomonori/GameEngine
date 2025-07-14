@@ -1,4 +1,5 @@
 #pragma once
+#include "Vector3.hpp"
 
 struct Matrix3x3{
     float matrix[3][3];
@@ -133,5 +134,13 @@ struct Matrix4x4{
         }
 
         return m;
+    }
+
+    Vector3 GetTranslate() const {
+        return Vector3{
+            .x= matrix[3][0],
+            .y= matrix[3][1],
+            .z= matrix[3][2]
+        };
     }
 };
