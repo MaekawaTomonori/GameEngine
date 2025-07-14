@@ -19,82 +19,72 @@ Line::~Line() = default;
 
 void Line::Initialize() {
     CreateVertexBuffer();
-    CreateInstanceBuffer();
-    CreateTransformBuffer();
+    CreateMaterialBuffer();
+    CreateTransformationBuffer();
 }
 
-void Line::Update() {
-    UpdateInstanceBuffer();
+void Line::Update() const {
+    // Update vertex data with positions
+    for (size_t i = 0; i < positions_.size(); ++i){
+        vertexData_[i].position = positions_[i];
+    }
+    Matrix4x4 world = MathUtils::Matrix::MakeIdentity();
+    transformationData_->WVP = world * cameraManager_->GetActive()->GetViewProjection();
 }
 
 void Line::Draw() const {
-    if (currentInstanceCount_ == 0) return;
-
     common_->Draw();
     
     commandList_->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_LINELIST);
     commandList_->IASetVertexBuffers(0, 1, &vertexBufferView_);
     
-    commandList_->SetGraphicsRootConstantBufferView(0, transformResource_->GetGPUVirtualAddress());
-    common_->GetSRVManager()->SetGraphicsRootDescriptorTable(1, instanceSrvIndex_);
+    commandList_->SetGraphicsRootConstantBufferView(0, materialResource_->GetGPUVirtualAddress());
+    commandList_->SetGraphicsRootConstantBufferView(1, transformationResource_->GetGPUVirtualAddress());
     
-    commandList_->DrawInstanced(4, currentInstanceCount_, 0, 0);
+    commandList_->DrawInstanced(static_cast<UINT>(positions_.size()), 1, 0, 0);
 }
 
-void Line::AddLine(const Vector3& start, const Vector3& end, const Vector4& color, float thickness) {
-    if (lines_.size() >= maxInstances_) return;
+void Line::AddLine(const Vector3& start, const Vector3& end) {
+    if (positions_.size() >= MAX_LINES) {
+        Utils::Alert("Line::AddLine: Maximum number of lines exceeded. Cannot add more lines.");
+        return;
+    }
 
-    LineInstance instance;
-    instance.startPos = {start.x, start.y, start.z, thickness};
-    instance.endPos = {end.x, end.y, end.z, 0.0f};
-    instance.color = color;
-    
-    lines_.push_back(instance);
+    positions_.push_back({start.x, start.y, start.z, 1.f});
+    positions_.push_back({end.x, end.y, end.z, 1.f});
 }
 
 void Line::Clear() {
-    lines_.clear();
-    currentInstanceCount_ = 0;
+    positions_.clear();
 }
 
-void Line::SetViewProjectionMatrix(const Matrix4x4& viewProjection) {
-    if (transformData_) {
-        transformData_->viewProjection = viewProjection;
+void Line::SetColor(Vector4 color) const {
+    if (!materialData_){
+        Utils::Alert("Line::SetColor: Material data is not initialized.");
+        return;
     }
+    materialData_->color = color;
 }
 
 void Line::CreateVertexBuffer() {
-    vertexResource_.Attach(adapter_->CreateBufferResource(sizeof(VertexData) * 4));
+    vertexResource_.Attach(adapter_->CreateBufferResource(sizeof(VertexData) * 2 * MAX_LINES));
     vertexBufferView_.BufferLocation = vertexResource_->GetGPUVirtualAddress();
-    vertexBufferView_.SizeInBytes = sizeof(VertexData) * 4;
+    vertexBufferView_.SizeInBytes = sizeof(VertexData) * 2 * MAX_LINES;
     vertexBufferView_.StrideInBytes = sizeof(VertexData);
 
     vertexResource_->Map(0, nullptr, reinterpret_cast<void**>(&vertexData_));
 
     vertexData_[0].position = {0.0f, -0.5f, 0.0f, 1.0f};
     vertexData_[1].position = {0.0f, 0.5f, 0.0f, 1.0f};
-    vertexData_[2].position = {1.0f, -0.5f, 0.0f, 1.0f};
-    vertexData_[3].position = {1.0f, 0.5f, 0.0f, 1.0f};
 }
 
-void Line::CreateInstanceBuffer() {
-    instanceResource_.Attach(adapter_->CreateBufferResource(sizeof(LineInstance) * maxInstances_));
-    instanceResource_->Map(0, nullptr, reinterpret_cast<void**>(&instanceData_));
-    
-    instanceSrvIndex_ = common_->GetSRVManager()->Allocate();
-    common_->GetSRVManager()->CreateSRVforStructuredBuffer(instanceSrvIndex_, instanceResource_.Get(), maxInstances_, sizeof(LineInstance));
-}
+void Line::CreateMaterialBuffer() {
+    materialResource_.Attach(adapter_->CreateBufferResource(sizeof(Material)));
+    materialResource_->Map(0, nullptr, reinterpret_cast<void**>(&materialData_));
+  }
 
-void Line::CreateTransformBuffer() {
-    transformResource_.Attach(adapter_->CreateBufferResource(sizeof(TransformMatrix)));
-    transformResource_->Map(0, nullptr, reinterpret_cast<void**>(&transformData_));
-    
-    transformData_->viewProjection = MathUtils::Matrix::MakeIdentity();
-}
-
-void Line::UpdateInstanceBuffer() {
-    currentInstanceCount_ = static_cast<uint32_t>(lines_.size());
-    if (currentInstanceCount_ > 0 && instanceData_) {
-        std::memcpy(instanceData_, lines_.data(), sizeof(LineInstance) * currentInstanceCount_);
-    }
+void Line::CreateTransformationBuffer() {
+    transformationResource_.Attach(adapter_->CreateBufferResource(sizeof(Transformation)));
+    transformationResource_->Map(0, nullptr, reinterpret_cast<void**>(&transformationData_));
+    transformationData_->WVP = MathUtils::Matrix::MakeIdentity();
 }

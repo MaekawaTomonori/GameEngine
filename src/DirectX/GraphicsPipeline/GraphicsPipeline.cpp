@@ -85,31 +85,20 @@ void GraphicsPipeline::CreateRootSignature() {
 
     DescriptorRange();
 
+    D3D12_ROOT_PARAMETER rp{};
     if (type_ == Type::LINE) {
         // LINE専用のルートパラメータ設定
-        // [0] Transform CBV (VertexShader)
-        D3D12_ROOT_PARAMETER rp0{};
-        rp0.ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
-        rp0.ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX;
-        rp0.Descriptor.ShaderRegister = 0;
-        rootParameters_.push_back(rp0);
-        
-        // LINE専用のDescriptorRange
-        lineDescriptorRange_.BaseShaderRegister = 0;
-        lineDescriptorRange_.NumDescriptors = 1;
-        lineDescriptorRange_.RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
-        lineDescriptorRange_.OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
-        
-        // [1] Instance Data DescriptorTable (VertexShader)
-        D3D12_ROOT_PARAMETER rp1{};
-        rp1.ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
-        rp1.ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX;
-        rp1.DescriptorTable.pDescriptorRanges = &lineDescriptorRange_;
-        rp1.DescriptorTable.NumDescriptorRanges = 1;
-        rootParameters_.push_back(rp1);
+        rp.ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
+        rp.ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
+        rp.Descriptor.ShaderRegister = 0;
+        rootParameters_.push_back(rp);
+        rp = {};
+        rp.ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
+        rp.ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX;
+        rp.Descriptor.ShaderRegister = 0;
+        rootParameters_.push_back(rp);
+        rp = {};
     } else {
-        D3D12_ROOT_PARAMETER rp{};
-        // 他のタイプ用の設定
         if (type_ != Type::PARTICLE2D){
             //PixelShader Material
             rp.ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
@@ -141,8 +130,6 @@ void GraphicsPipeline::CreateRootSignature() {
         rootParameters_.push_back(rp);
         rp = {};
     }
-
-    D3D12_ROOT_PARAMETER rp{};
     if (type_ == Type::MODEL || type_ == Type::SKINNING_MODEL){
         //DirectionalLight
         rp.ParameterType = D3D12_ROOT_PARAMETER_TYPE_SRV;
@@ -150,7 +137,6 @@ void GraphicsPipeline::CreateRootSignature() {
         rp.Descriptor.ShaderRegister = 1;
         rootParameters_.push_back(rp);
         rp = {};
-
 
         //Camera For GPU
         rp.ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;

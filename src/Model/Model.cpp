@@ -273,7 +273,6 @@ void Model::CreateLine() {
             line_.AddLine(joint.transform.translate, data_->skeleton.joints[*joint.parent].transform.translate);
         }
     }
-    line_.SetViewProjectionMatrix(camera_->GetViewProjection());
     line_.Update();
 }
 

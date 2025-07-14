@@ -5,29 +5,26 @@
 #include <wrl/client.h>
 #include <vector>
 #include <string>
+
+#include "Math/Matrix.hpp"
 #include "Math/Vector3.hpp"
 #include "Math/Vector4.hpp"
-#include "Math/Matrix.hpp"
 
 class LineCommon;
 class DirectXAdapter;
 class CameraManager;
 
 class Line {
-public:
-    struct LineInstance {
-        Vector4 startPos;
-        Vector4 endPos;
+    struct VertexData {
+        Vector4 position;
+    };
+
+    struct Material {
         Vector4 color;
     };
 
-    struct TransformMatrix {
-        Matrix4x4 viewProjection;
-    };
-
-private:
-    struct VertexData {
-        Vector4 position;
+    struct Transformation {
+        Matrix4x4 WVP;
     };
 
     LineCommon* common_ = nullptr;
@@ -37,46 +34,42 @@ private:
 
     std::string uuid_;
 
+    const uint32_t MAX_LINES = 1000;
+
     // 基本線形状用の頂点バッファ（2つの頂点）
     Microsoft::WRL::ComPtr<ID3D12Resource> vertexResource_;
     D3D12_VERTEX_BUFFER_VIEW vertexBufferView_{};
     VertexData* vertexData_ = nullptr;
 
-    // インスタンスデータ用のバッファ
-    Microsoft::WRL::ComPtr<ID3D12Resource> instanceResource_;
-    LineInstance* instanceData_ = nullptr;
-    uint32_t maxInstances_ = 1000;
-    uint32_t currentInstanceCount_ = 0;
-    uint32_t instanceSrvIndex_ = 0;
+    // Material
+    Microsoft::WRL::ComPtr<ID3D12Resource> materialResource_;
+    Material* materialData_ = nullptr;
 
-    // 変換行列用のバッファ
-    Microsoft::WRL::ComPtr<ID3D12Resource> transformResource_;
-    TransformMatrix* transformData_ = nullptr;
+    Microsoft::WRL::ComPtr<ID3D12Resource> transformationResource_;
+    Transformation* transformationData_ = nullptr;
 
-    std::vector<LineInstance> lines_;
+    std::vector<Vector4> positions_;
 
 public:
     Line();
     ~Line();
 
     void Initialize();
-    void Update();
+    void Update() const;
     void Draw() const;
 
     // 線を追加
-    void AddLine(const Vector3& start, const Vector3& end, const Vector4& color = {1.0f, 1.0f, 1.0f, 1.0f}, float thickness = 1.0f);
+    void AddLine(const Vector3& start, const Vector3& end);
     
     // すべての線をクリア
     void Clear();
 
-    // ビュープロジェクション行列を設定
-    void SetViewProjectionMatrix(const Matrix4x4& viewProjection);
+    void SetColor(Vector4 color) const;
 
 private:
     void CreateVertexBuffer();
-    void CreateInstanceBuffer();
-    void CreateTransformBuffer();
-    void UpdateInstanceBuffer();
+    void CreateMaterialBuffer();
+    void CreateTransformationBuffer();
 };
 
 #endif // Line_HPP_
