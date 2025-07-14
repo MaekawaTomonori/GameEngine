@@ -52,12 +52,6 @@ void Line::AddLine(const Vector3& start, const Vector3& end, const Vector4& colo
     lines_.push_back(instance);
 }
 
-void Line::AddLineWorldToScreen(const Vector3& startWorld, const Vector3& endWorld, const Vector4& color, float thickness) {
-    Vector3 startScreen = WorldToScreen(startWorld);
-    Vector3 endScreen = WorldToScreen(endWorld);
-    AddLine(startScreen, endScreen, color, thickness);
-}
-
 void Line::Clear() {
     lines_.clear();
     currentInstanceCount_ = 0;
@@ -103,27 +97,4 @@ void Line::UpdateInstanceBuffer() {
     if (currentInstanceCount_ > 0 && instanceData_) {
         std::memcpy(instanceData_, lines_.data(), sizeof(LineInstance) * currentInstanceCount_);
     }
-}
-
-Vector3 Line::WorldToScreen(const Vector3& worldPos) const {
-    if (!cameraManager_) return worldPos;
-    
-    Camera* activeCamera = cameraManager_->GetActive();
-    if (!activeCamera) return worldPos;
-    
-    Matrix4x4 viewProjection = activeCamera->GetViewProjection();
-    
-    Vector4 worldPos4 = {worldPos.x, worldPos.y, worldPos.z, 1.0f};
-    Vector4 clipPos = MathUtils::Matrix::Transform(worldPos4, viewProjection);
-    
-    if (clipPos.w <= 0.0f) return worldPos;
-    
-    Vector3 ndcPos = {clipPos.x / clipPos.w, clipPos.y / clipPos.w, clipPos.z / clipPos.w};
-    
-    Vector3 screenPos;
-    screenPos.x = (ndcPos.x + 1.0f) * 0.5f * 1280.0f;
-    screenPos.y = (1.0f - ndcPos.y) * 0.5f * 720.0f;
-    screenPos.z = ndcPos.z;
-    
-    return screenPos;
 }

@@ -66,9 +66,6 @@ public:
     // 線を追加
     void AddLine(const Vector3& start, const Vector3& end, const Vector4& color = {1.0f, 1.0f, 1.0f, 1.0f}, float thickness = 1.0f);
     
-    // ワールド座標からスクリーン座標で線を追加
-    void AddLineWorldToScreen(const Vector3& startWorld, const Vector3& endWorld, const Vector4& color = {1.0f, 1.0f, 1.0f, 1.0f}, float thickness = 1.0f);
-    
     // すべての線をクリア
     void Clear();
 
@@ -80,8 +77,6 @@ private:
     void CreateInstanceBuffer();
     void CreateTransformBuffer();
     void UpdateInstanceBuffer();
-    
-    Vector3 WorldToScreen(const Vector3& worldPos) const;
 };
 
 #endif // Line_HPP_
