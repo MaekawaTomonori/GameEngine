@@ -48,6 +48,8 @@ class Model{
     std::unique_ptr<Mesh> mesh_;
     Camera* camera_ = nullptr;
 
+    bool animationEnable_ = true;
+    bool animationTimerLock_ = true;
     float animationTime_ = 0.0f;
 
     Line line_;

@@ -1,6 +1,7 @@
 #include "Line.hpp"
 #include "Pattern/Singleton.hpp"
 #include "Utils.hpp"
+#include "imgui_internal.h"
 #include "src/Line/Common/LineCommon.hpp"
 #include "Math/MathUtils.hpp"
 #include "src/DirectX/DirectXAdapter.hpp"
@@ -24,6 +25,12 @@ void Line::Initialize() {
 }
 
 void Line::Update() const {
+    common_->RegisterCommand(uuid_, [&] {
+        ImGui::Begin("Line");
+        ImGui::ColorEdit4("color", &materialData_->color.x);
+        ImGui::End();
+    });
+
     // Update vertex data with positions
     for (size_t i = 0; i < positions_.size(); ++i){
         vertexData_[i].position = positions_[i];

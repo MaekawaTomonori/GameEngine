@@ -38,7 +38,7 @@ void GltfLoader::LoadGltf(const std::string& _directory, const std::string& _nam
         }
 
         meshData.vertices.reserve(mesh->mNumVertices);
-        meshData.indices.reserve(UINT(mesh->mNumFaces) * 3);
+        meshData.indices.reserve(static_cast<UINT>(mesh->mNumFaces) * 3);
 
         meshData.vertices.resize(mesh->mNumVertices);
         for (uint32_t vertexIndex = 0; vertexIndex < mesh->mNumVertices; ++vertexIndex) {
@@ -82,7 +82,11 @@ void GltfLoader::LoadGltf(const std::string& _directory, const std::string& _nam
                 aiQuaternion rotate;
                 bindPose.Decompose(scale, rotate, translate);
 
-                jointWeightData.inverseBindPose = MathUtils::Matrix::MakeAffineMatrix({scale.x, scale.y, scale.z}, Quaternion{rotate.x, -rotate.y, -rotate.z, rotate.w}, {-translate.x, translate.y, translate.z}).Inverse();
+                jointWeightData.inverseBindPose = MathUtils::Matrix::MakeAffineMatrix(
+                Vector3{.x= scale.x, .y= scale.y, .z= scale.z}, 
+                Quaternion{.x= rotate.x, .y= -rotate.y, .z= -rotate.z, .w= rotate.w}, 
+                Vector3{.x= -translate.x, .y= translate.y, .z= translate.z}
+                ).Inverse();
 
                 jointWeightData.weights.reserve(bone->mNumWeights);
 
@@ -128,8 +132,8 @@ Node GltfLoader::LoadNode(const aiNode* _node) {
 
     Transform transform;
     transform.scale = { scale.x, scale.y, scale.z };
-    transform.rotate = Quaternion(rotate.x, -rotate.y, -rotate.z, rotate.w);
-    transform.translate = Vector3(-translate.x, translate.y, translate.z);
+    transform.rotate = Quaternion{.x= rotate.x, .y= -rotate.y, .z= -rotate.z, .w= rotate.w};
+    transform.translate = Vector3{.x= -translate.x, .y= translate.y, .z= translate.z};
     result.transform = transform;
     result.local = MathUtils::Matrix::MakeAffineMatrix(transform);
 
@@ -156,15 +160,24 @@ Animation GltfLoader::LoadAnimation(const std::string& _directory, const std::st
         NodeAnimation& nodeAnimation = animation_.nodeAnimations[nodeAnim->mNodeName.C_Str()];
         for (uint32_t keyIndex = 0; keyIndex < nodeAnim->mNumPositionKeys; ++keyIndex){
             const aiVectorKey& positionKey = nodeAnim->mPositionKeys[keyIndex];
-            nodeAnimation.translate.keyframes.push_back({ Vector3(-positionKey.mValue.x, positionKey.mValue.y, positionKey.mValue.z), static_cast<float>(positionKey.mTime) });
+            nodeAnimation.translate.keyframes.push_back({
+                .value= {.x= -positionKey.mValue.x, .y= positionKey.mValue.y, .z= positionKey.mValue.z},
+                .time= static_cast<float>(positionKey.mTime)
+            });
         }
         for (uint32_t keyIndex = 0; keyIndex < nodeAnim->mNumRotationKeys; ++keyIndex){
             const aiQuatKey& rotationKey = nodeAnim->mRotationKeys[keyIndex];
-            nodeAnimation.rotation.keyframes.push_back({ Quaternion(rotationKey.mValue.x, -rotationKey.mValue.y, -rotationKey.mValue.z, rotationKey.mValue.w), static_cast<float>(rotationKey.mTime) });
+            nodeAnimation.rotation.keyframes.push_back({
+                .value = {.x= rotationKey.mValue.x, .y= -rotationKey.mValue.y, .z= -rotationKey.mValue.z, .w= rotationKey.mValue.w},
+                .time= static_cast<float>(rotationKey.mTime)
+            });
         }
         for (uint32_t keyIndex = 0; keyIndex < nodeAnim->mNumScalingKeys; ++keyIndex){
             const aiVectorKey& scalingKey = nodeAnim->mScalingKeys[keyIndex];
-            nodeAnimation.scale.keyframes.push_back({ Vector3(scalingKey.mValue.x, scalingKey.mValue.y, scalingKey.mValue.z), static_cast<float>(scalingKey.mTime) });
+            nodeAnimation.scale.keyframes.push_back({ 
+                .value= {.x= scalingKey.mValue.x, .y= scalingKey.mValue.y, .z= scalingKey.mValue.z},
+                .time= static_cast<float>(scalingKey.mTime)
+            });
         }
 
         animation_.nodeAnimations[nodeAnim->mNodeName.C_Str()] = nodeAnimation;
@@ -180,22 +193,13 @@ Skeleton GltfLoader::CreateSkeleton(const Node& _root) {
         skeleton.map.emplace(joint.name, joint.index);
     }
 
-    for (Joint& joint : skeleton.joints){
-        joint.local = MathUtils::Matrix::MakeAffineMatrix(joint.transform);
-        if (joint.parent){
-            joint.space = joint.local * skeleton.joints[*joint.parent].space;
-        } else{
-            joint.space = joint.local;
-        }
-    }
-
     return skeleton;
 }
 
 int32_t GltfLoader::CreateJoint(const Node& _node, const std::optional<int32_t>& _parent, std::vector<Joint>& _joints) {
     Joint joint;
     joint.name = _node.name;
-    joint.local = _node.local;
+    joint.local = MathUtils::Matrix::MakeIdentity();
     joint.space = MathUtils::Matrix::MakeIdentity();
     joint.transform = _node.transform;
     joint.index = static_cast<int32_t>(_joints.size());
