@@ -93,9 +93,9 @@ Matrix4x4 MathUtils::Matrix::MakeRotateZ(const float rad) {
 }
 
 Matrix4x4 MathUtils::Matrix::MakeRotate(const Quaternion& rotate) {
-    float x2 = rotate.x + rotate.x;
-    float y2 = rotate.y + rotate.y;
-    float z2 = rotate.z + rotate.z;
+    float x2 = rotate.x * rotate.x;
+    float y2 = rotate.y * rotate.y;
+    float z2 = rotate.z * rotate.z;
     float xy = rotate.x * rotate.y;
     float xz = rotate.x * rotate.z;
     float xw = rotate.x * rotate.w;
@@ -105,7 +105,7 @@ Matrix4x4 MathUtils::Matrix::MakeRotate(const Quaternion& rotate) {
     return {
         1.f - 2.f * (y2 + z2), 2.f * (xy + zw), 2.f * (xz - yw), 0.f,
         2.f * (xy - zw), 1.f - 2.f * (x2 + z2), 2.f * (yz + xw), 0.f,
-        2.f * (xz + yw), 2.f * (yz + xw), 1.f - 2.f * (x2 + y2), 0.f,
+        2.f * (xz + yw), 2.f * (yz - xw), 1.f - 2.f * (x2 + y2), 0.f,
         0.f, 0.f, 0.f, 1.f
     };
 }
@@ -126,12 +126,7 @@ Matrix4x4 MathUtils::Matrix::MakeAffineMatrix(const Vector3& scale, const Vector
 
 Matrix4x4 MathUtils::Matrix::MakeAffineMatrix(const Vector3& scale, const Quaternion& rotate, const Vector3& translate) {
     Matrix4x4 scaleMat = MakeScaleMatrix(scale);
-    Matrix4x4 rotateMat = { //MakeRotate(rotate);
-            1 - 2 * (rotate.y * rotate.y + rotate.z * rotate.z), 2 * (rotate.x * rotate.y - rotate.z * rotate.w), 2 * (rotate.x * rotate.z + rotate.y * rotate.w), 0,
-            2 * (rotate.x * rotate.y + rotate.z * rotate.w), 1 - 2 * (rotate.x * rotate.x + rotate.z * rotate.z), 2 * (rotate.y * rotate.z - rotate.x * rotate.w), 0,
-            2 * (rotate.x * rotate.z - rotate.y * rotate.w), 2 * (rotate.y * rotate.z + rotate.x * rotate.w), 1 - 2 * (rotate.x * rotate.x + rotate.y * rotate.y), 0,
-            0, 0, 0, 1
-    };
+    Matrix4x4 rotateMat = MakeRotate(rotate);
     Matrix4x4 translateMat = MakeTranslateMatrix(translate);
     return scaleMat * rotateMat * translateMat;
 }
@@ -175,7 +170,7 @@ Matrix4x4 MathUtils::Matrix::MakeViewportMatrix(float left, float right, float t
         (right - left) / 2, 0, 0, 0,
         0, -(top - bottom) / 2, 0, 0,
         0, 0, depthMax - depthMin, 0,
-        left + (right - left) / 2, top + (top - bottom) / 2, depthMin, 1
+        left + (right - left) / 2, bottom + (top - bottom) / 2, depthMin, 1
     };
 }
 
@@ -199,22 +194,23 @@ Vector3 MathUtils::Lerp(const Vector3& a, const Vector3& b, float t) {
     };
 }
 
-Quaternion MathUtils::Slerp(Quaternion& a, Quaternion& b, const float t) {
+Quaternion MathUtils::Slerp(const Quaternion& a, const Quaternion& b, const float t) {
     float dot = a.x * b.x + a.y * b.y + a.z * b.z + a.w * b.w;
     float epsilon = 1e-6f;
 
+    Quaternion b_temp = b;
     if (dot < 0){
         dot = -dot;
-        b = { -b.x, -b.y, -b.z, -b.w };
+        b_temp = { -b.x, -b.y, -b.z, -b.w };
     }
     if (1 - dot < epsilon){
-        return a;
+        return (a * (1.0f - t) + b_temp * t).Normalize();
     }
     float theta = acosf(dot);
     float sinTheta = sinf(theta);
     float s0 = sinf((1 - t) * theta) / sinTheta;
     float s1 = sinf(t * theta) / sinTheta;
-    return a * s0 + b * s1;
+    return (a * s0 + b_temp * s1).Normalize();
 }
 
 float MathUtils::Distance(const Vector3& a, const Vector3& b) {

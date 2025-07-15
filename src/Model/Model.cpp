@@ -133,34 +133,38 @@ void Model::Debug() {
                     }
                     ImGui::TreePop();
                 }
+                if (data_->skeleton.has_value()){
+                    Skeleton& skeleton = data_->skeleton.value();
+                    ImGui::SeparatorText("Skeleton");
+                    std::function<void(int32_t)> Recursive = [&](int32_t index){
+                        Joint& joint = skeleton.joints[index];
+                        if (ImGui::TreeNode(joint.name.c_str())) {
+                            ImGui::Text("Joint: %s", joint.name.c_str());
+                            ImGui::Text("Index: %d", joint.index);
+                            ImGui::Text("Parent: %s", joint.parent.has_value() ? skeleton.joints[joint.parent.value()].name.c_str() : "None");
+                            ImGui::Text("Children: %zu", joint.children.size());
+                            ImGui::Spacing();
+                            ImGui::Text("Transform: ");
+                            ImGui::Text("  Scale: (%.2f, %.2f, %.2f)", joint.transform.scale.x, joint.transform.scale.y, joint.transform.scale.z);
+                            if (std::holds_alternative<Quaternion>(joint.transform.rotate)){
+                                Quaternion rotate = std::get<Quaternion>(joint.transform.rotate);
+                                ImGui::Text("  Rotate: (%.2f, %.2f, %.2f, %2f)", rotate.x, rotate.y, rotate.z, rotate.w);
+                            } else {
+                                Vector3 rotate = std::get<Vector3>(joint.transform.rotate);
+                                ImGui::Text("  Rotate: (%.2f, %.2f, %.2f)", rotate.x, rotate.y, rotate.z);
+                            }
+                            ImGui::Text("  Translate: (%.2f, %.2f, %.2f)", joint.transform.translate.x, joint.transform.translate.y, joint.transform.translate.z);
 
-                ImGui::SeparatorText("Skeleton");
-                std::function<void(int32_t)> Recursive = [&](int32_t index){
-                    Joint& joint = data_->skeleton.joints[index];
-                    if (ImGui::TreeNode(joint.name.c_str())) {
-                        ImGui::Text("Joint: %s", joint.name.c_str());
-                        ImGui::Text("Index: %d", joint.index);
-                        ImGui::Text("Parent: %s", joint.parent.has_value() ? data_->skeleton.joints[joint.parent.value()].name.c_str() : "None");
-                        ImGui::Text("Children: %zu", joint.children.size());
-                        ImGui::Text("Transform: ");
-                        ImGui::Text("  Scale: (%.2f, %.2f, %.2f)", joint.transform.scale.x, joint.transform.scale.y, joint.transform.scale.z);
-                        if (std::holds_alternative<Quaternion>(joint.transform.rotate)){
-                            Quaternion rotate = std::get<Quaternion>(joint.transform.rotate);
-                            ImGui::Text("  Rotate: (%.2f, %.2f, %.2f, %2f)", rotate.x, rotate.y, rotate.z, rotate.w);
-                        } else {
-                            Vector3 rotate = std::get<Vector3>(joint.transform.rotate);
-                            ImGui::Text("  Rotate: (%.2f, %.2f, %.2f)", rotate.x, rotate.y, rotate.z);
-                        }
-                        ImGui::Text("  Translate: (%.2f, %.2f, %.2f)", joint.transform.translate.x, joint.transform.translate.y, joint.transform.translate.z);
-                        
 
-                        for (int32_t childIndex : joint.children){
-                            Recursive(childIndex);
+                            for (int32_t childIndex : joint.children){
+                                ImGui::Spacing();
+                                Recursive(childIndex);
+                            }
+                            ImGui::TreePop();
                         }
-                        ImGui::TreePop();
-                    }
-                };
-                Recursive(data_->skeleton.root);
+                    };
+                    Recursive(skeleton.root);
+                }
 
                 ImGui::SeparatorText("Animation");
                 if (ImGui::TreeNode("Details")){
@@ -171,6 +175,8 @@ void Model::Debug() {
                     else ImGui::DragFloat("Anime Timer", &animationTime_);
                     ImGui::TreePop();
                 }
+
+                ImGui::SeparatorText("Mesh");
 
                 if (ImGui::CollapsingHeader("Mesh")){
                     mesh_->Debug();
@@ -195,13 +201,22 @@ void Model::CreateSkinCluster() {
         Log::Send(Log::Level::ERR, "DirectXAdapter is not initialized");
         return;
     }
-    size_t jointCount = data_->skeleton.joints.size();
+
+    if (!data_->skeleton.has_value()) {
+        Log::Send(Log::Level::ERR, "Model data does not contain a skeleton");
+        Utils::Alert("Model data does not contain a skeleton");
+        return;
+    }
+
+    Skeleton& skeleton = data_->skeleton.value();
+
+    size_t jointCount = skeleton.joints.size();
     skinCluster_.paletteResource.Attach(adapter_->CreateBufferResource(sizeof(WellForGpu) * jointCount));
     WellForGpu* mappedPalette = nullptr;
     skinCluster_.paletteResource->Map(0, nullptr, reinterpret_cast<void**>(&mappedPalette));
     skinCluster_.mappedPalette = {mappedPalette, jointCount};
     skinCluster_.srvIndex = common_->GetSRVManager()->Allocate();
-    common_->GetSRVManager()->CreateSRVforStructuredBuffer(skinCluster_.srvIndex, skinCluster_.paletteResource.Get(), static_cast<UINT>(data_->skeleton.joints.size()), sizeof(WellForGpu));
+    common_->GetSRVManager()->CreateSRVforStructuredBuffer(skinCluster_.srvIndex, skinCluster_.paletteResource.Get(), static_cast<UINT>(data_->skeleton.value().joints.size()), sizeof(WellForGpu));
     skinCluster_.paletteHandle = {
         common_->GetSRVManager()->GetCPUHandle(skinCluster_.srvIndex),
         common_->GetSRVManager()->GetGPUHandle(skinCluster_.srvIndex)
@@ -218,20 +233,20 @@ void Model::CreateSkinCluster() {
     skinCluster_.influenceBufferView.SizeInBytes = static_cast<UINT>(sizeof(VertexInfluence) * verticesSize);
     skinCluster_.influenceBufferView.StrideInBytes = sizeof(VertexInfluence);
 
-    skinCluster_.bindPoseMatrices.resize(data_->skeleton.joints.size());
+    skinCluster_.bindPoseMatrices.resize(skeleton.joints.size());
     for (auto& bindPoseMatrix : skinCluster_.bindPoseMatrices) {
         bindPoseMatrix = MathUtils::Matrix::MakeIdentity();
     }
 
     for (const auto& jointWeight : data_->skinCluster) {
-        auto itr = data_->skeleton.map.find(jointWeight.first);
-        if (itr == data_->skeleton.map.end()){
+        auto itr = skeleton.map.find(jointWeight.first);
+        if (itr == skeleton.map.end()){
             Log::Send(Log::Level::ERR, "Joint not found in skeleton: " + jointWeight.first);
             continue;
         }
 
         size_t jointIndex = itr->second;
-        if (jointIndex >= data_->skeleton.joints.size()){
+        if (jointIndex >= skeleton.joints.size()){
             Log::Send(Log::Level::ERR, "Joint index out of bounds in skin cluster creation for joint: " + jointWeight.first);
             Utils::Alert("Joint index out of bounds in skin cluster creation");
             continue;
@@ -264,23 +279,37 @@ void Model::CreateSkinCluster() {
 }
 
 void Model::UpdateSkinCluster() {
-    for (size_t jointIndex = 0; jointIndex < data_->skeleton.joints.size(); ++jointIndex) {
+    if (!data_->skeleton.has_value()) {
+        Log::Send(Log::Level::ERR, "Model data does not contain a skeleton");
+        Utils::Alert("Model data does not contain a skeleton");
+        return;
+    }
+
+    Skeleton& skeleton = data_->skeleton.value();
+    for (size_t jointIndex = 0; jointIndex < skeleton.joints.size(); ++jointIndex) {
         if (skinCluster_.bindPoseMatrices.size() <= jointIndex) {
             Utils::Alert("Joint index out of bounds in skin cluster update");
             break;
         }
 
-        skinCluster_.mappedPalette[jointIndex].space = skinCluster_.bindPoseMatrices[jointIndex] * data_->skeleton.joints[jointIndex].space;
+        skinCluster_.mappedPalette[jointIndex].space = skinCluster_.bindPoseMatrices[jointIndex] * skeleton.joints[jointIndex].space;
         skinCluster_.mappedPalette[jointIndex].inverseTranspose = skinCluster_.mappedPalette[jointIndex].space.Inverse().Transpose();
     }
 }
 
 void Model::UpdateSkeleton() const {
+    if (!data_->skeleton.has_value()) {
+        Log::Send(Log::Level::ERR, "Model data does not contain a skeleton");
+        Utils::Alert("Model data does not contain a skeleton");
+        return;
+    }
+
+    Skeleton& skeleton = data_->skeleton.value();
     std::function<void(int32_t)> RecursiveUpdate = [&](int32_t index){
-        Joint& joint = data_->skeleton.joints[index];
+        Joint& joint = skeleton.joints[index];
         joint.local = MathUtils::Matrix::MakeAffineMatrix(joint.transform);
         if (joint.parent){
-            joint.space = joint.local * data_->skeleton.joints[*joint.parent].space;
+            joint.space = joint.local * skeleton.joints[*joint.parent].space;
         } else{
             joint.space = joint.local;
         }
@@ -290,14 +319,20 @@ void Model::UpdateSkeleton() const {
         }
     };
 
-    RecursiveUpdate(data_->skeleton.root);
+    RecursiveUpdate(skeleton.root);
 }
 
 void Model::UpdateAnimation() {
+    if (!data_->animation.has_value()) {
+        Log::Send(Log::Level::ERR, "Model data does not contain an animation");
+        Utils::Alert("Model data does not contain an animation");
+        return;
+    }
+    Animation& animation = data_->animation.value();
     // Update AnimationTimer
     if (animationEnable_){
-        animationTime_ += 1.f;
-        animationTime_ = fmod(animationTime_, data_->animation.duration);
+        animationTime_ += 1.f / 60.f;
+        animationTime_ = fmod(animationTime_, animation.duration);
     }
 
     // ApplyAnimation
@@ -305,9 +340,23 @@ void Model::UpdateAnimation() {
 }
 
 void Model::ApplyAnimation() const {
-    for (Joint& joint : data_->skeleton.joints) {
-        if (data_->animation.nodeAnimations.contains(joint.name)) {
-            auto& rna = data_->animation.nodeAnimations[joint.name];
+    if (!data_->skeleton.has_value()) {
+        Log::Send(Log::Level::ERR, "Model data does not contain a skeleton");
+        Utils::Alert("Model data does not contain a skeleton");
+        return;
+    }
+    Skeleton& skeleton = data_->skeleton.value();
+
+    if (!data_->animation.has_value()) {
+        Log::Send(Log::Level::ERR, "Model data does not contain an animation");
+        Utils::Alert("Model data does not contain an animation");
+        return;
+    }
+    Animation& animation = data_->animation.value();
+
+    for (Joint& joint : skeleton.joints) {
+        if (animation.nodeAnimations.contains(joint.name)) {
+            auto& rna = animation.nodeAnimations[joint.name];
 
             joint.transform.scale = AnimationCurveFunction::Calculate(rna.scale, animationTime_);
             joint.transform.rotate = AnimationCurveFunction::Calculate(rna.rotation, animationTime_);
@@ -318,10 +367,17 @@ void Model::ApplyAnimation() const {
 
 void Model::CreateLine() {
     line_.Clear();
-        
-    for (auto& joint : data_->skeleton.joints){
+
+    if (!data_->skeleton.has_value()){
+        Log::Send(Log::Level::ERR, "Model data does not contain a skeleton");
+        Utils::Alert("Model data does not contain a skeleton");
+        return;
+    }
+    Skeleton& skeleton = data_->skeleton.value();
+
+    for (auto& joint : skeleton.joints){
         if (joint.parent.has_value()){
-            line_.AddLine(joint.space.GetTranslate(), data_->skeleton.joints[*joint.parent].space.GetTranslate());
+            line_.AddLine(joint.space.GetTranslate(), skeleton.joints[*joint.parent].space.GetTranslate());
         }
     }
     line_.Update();

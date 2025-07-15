@@ -11,15 +11,17 @@ public:
     void LoadModel(const std::string& _name, ResourceRepository* _repository) override;
     
 private:
-void LoadGltf(const std::string& _directory, const std::string& _name, ResourceRepository* _repository);
+    void LoadGltf(const std::string& _directory, const std::string& _name, ResourceRepository* _repository);
 
     static Node LoadNode(const aiNode* _node);
 
-    Animation LoadAnimation(const std::string& _directory, const std::string& _name);
+    static std::optional<Animation> LoadAnimation(const aiScene* _scene, const std::string& _name);
 
-    Skeleton CreateSkeleton(const Node& _root);
+    static Skeleton CreateSkeleton(const Node& _root);
 
-    int32_t CreateJoint(const Node& _node, const std::optional<int32_t>& _parent, std::vector<Joint>& _joints);
+    static int32_t CreateJoint(const Node& _node, const std::optional<int32_t>& _parent, std::vector<Joint>& _joints);
+
+    MeshData LoadMesh(const aiScene* _scene, const std::string& _name, ModelData& _model);
 }; // class GltfLoader
 
 #endif // GltfLoader_HPP_

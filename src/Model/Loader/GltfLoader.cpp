@@ -1,5 +1,6 @@
 #include "GltfLoader.hpp"
 
+#include <assert.h>
 #include <assimp/Importer.hpp>
 #include <assimp/anim.h>
 #include <assimp/mesh.h>
@@ -23,171 +24,87 @@ void GltfLoader::LoadGltf(const std::string& _directory, const std::string& _nam
     }
     Log::Send(Log::Level::INFO, "[GLTF Loader] Loaded " + path + " by Assimp");
 
-    std::unique_ptr<ModelData> data_ = std::make_unique<ModelData>();
-    data_->name = _name;
-    data_->mesh = _name;
-    data_->root = LoadNode(scene->mRootNode);
+    // Model Loader
+    std::unique_ptr<ModelData> model_ = std::make_unique<ModelData>();
+    model_->name = _name;
+    model_->mesh = _name;
+    model_->root = LoadNode(scene->mRootNode);
+    model_->animation = LoadAnimation(scene, _name);
+    model_->skeleton = CreateSkeleton(model_->root);
 
-    MeshData meshData;
-    for (uint32_t meshIndex = 0; meshIndex < scene->mNumMeshes; ++meshIndex) {
-        aiMesh* mesh = scene->mMeshes[meshIndex];
+    //Mesh
+    MeshData mesh_ = LoadMesh(scene, _name, *model_);
 
-        if (!mesh->HasNormals() || !mesh->HasTextureCoords(0)) {
-            Utils::Alert("GltfLoader::LoadGltf: Mesh does not have normals or texture coordinates in file: " + path);
-            continue;
-        }
-
-        meshData.vertices.reserve(mesh->mNumVertices);
-        meshData.indices.reserve(static_cast<UINT>(mesh->mNumFaces) * 3);
-
-        meshData.vertices.resize(mesh->mNumVertices);
-        for (uint32_t vertexIndex = 0; vertexIndex < mesh->mNumVertices; ++vertexIndex) {
-            const aiVector3D& position = mesh->mVertices[vertexIndex];
-            const aiVector3D& normal = mesh->mNormals[vertexIndex];
-            const aiVector3D uv = mesh->mTextureCoords[0][vertexIndex];
-
-            Vertex vertexData{};
-            vertexData.position = Vector4(-position.x, position.y, position.z, 1.0f);
-            vertexData.normal = Vector3(-normal.x, normal.y, normal.z);
-            vertexData.uv = Vector2(uv.x, uv.y);
-            meshData.vertices[vertexIndex] = vertexData;
-        }
-
-        for (uint32_t faceIndex = 0; faceIndex < mesh->mNumFaces; ++faceIndex) {
-            const aiFace& face = mesh->mFaces[faceIndex];
-
-            if (face.mNumIndices != 3) {
-                Utils::Alert("GltfLoader::LoadGltf: Non-triangular face found in mesh: " + std::to_string(meshIndex) + " in file: " + path);
-                return;
-            }
-
-            for (uint32_t elementIndex = 0; elementIndex < face.mNumIndices; ++elementIndex) {
-                meshData.indices.push_back(face.mIndices[elementIndex]);
-            }
-        }
-
-        for (uint32_t boneIndex = 0; boneIndex < mesh->mNumBones; ++boneIndex) {
-            aiBone* bone = mesh->mBones[boneIndex];
-            if (!bone)continue;
-
-            std::string name = bone->mName.C_Str();
-
-            auto& skinCluster = data_->skinCluster;
-
-            if (!skinCluster.contains(name)){
-                JointWeightData& jointWeightData = skinCluster[name];
-
-                aiMatrix4x4 bindPose = bone->mOffsetMatrix.Inverse();
-                aiVector3D scale, translate;
-                aiQuaternion rotate;
-                bindPose.Decompose(scale, rotate, translate);
-
-                jointWeightData.inverseBindPose = MathUtils::Matrix::MakeAffineMatrix(
-                Vector3{.x= scale.x, .y= scale.y, .z= scale.z}, 
-                Quaternion{.x= rotate.x, .y= -rotate.y, .z= -rotate.z, .w= rotate.w}, 
-                Vector3{.x= -translate.x, .y= translate.y, .z= translate.z}
-                ).Inverse();
-
-                jointWeightData.weights.reserve(bone->mNumWeights);
-
-                for (uint32_t weightIndex = 0; weightIndex < bone->mNumWeights; ++weightIndex) {
-                    const aiVertexWeight& weight = bone->mWeights[weightIndex];
-
-                    if (weight.mVertexId >= mesh->mNumVertices) {
-                        Log::Send(Log::Level::ERR, "GltfLoader::LoadGltf: Vertex index out of bounds in mesh: " + std::to_string(meshIndex) + " in file: " + path);
-                        Utils::Alert("Vertex index out of bounds in skin cluster creation");
-                        continue;
-                    }
-
-                    jointWeightData.weights.push_back({
-                        weight.mWeight,
-                        weight.mVertexId
-                    });
-                }
-            }
-        }
-
-        aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
-        if (material && 0 < material->GetTextureCount(aiTextureType_DIFFUSE)){
-            aiString texturePath;
-            if (material->GetTexture(aiTextureType_DIFFUSE, 0, &texturePath) == AI_SUCCESS){
-                meshData.texture = _directory + _name + "/" + texturePath.C_Str();
-            }
-        }
-    }
-
-    _repository->GetMeshRepository()->Add(_name, meshData);
-
-    data_->skeleton = CreateSkeleton(data_->root);
-    data_->animation = LoadAnimation(_directory, _name);
-
-    _repository->GetModelRepository()->Add(_name, std::move(data_));
+    _repository->GetMeshRepository()->Add(_name, mesh_);
+    _repository->GetModelRepository()->Add(_name, std::move(model_));
 }
 
 Node GltfLoader::LoadNode(const aiNode* _node) {
-    Node result;
-    aiVector3D translate, scale;
+    Node node;
+    node.name = _node->mName.C_Str();
+
+    aiVector3D scale, translate;
     aiQuaternion rotate;
     _node->mTransformation.Decompose(scale, rotate, translate);
+    node.transform.scale = Vector3{ .x= scale.x, .y= scale.y, .z= scale.z };
+    node.transform.rotate = Quaternion{.x= rotate.x, .y= -rotate.y, .z= -rotate.z, .w= rotate.w};
+    node.transform.translate = Vector3{ .x = -translate.x, .y = translate.y, .z = translate.z };
+    node.local = MathUtils::Matrix::MakeAffineMatrix(node.transform);
 
-    Transform transform;
-    transform.scale = { scale.x, scale.y, scale.z };
-    transform.rotate = Quaternion{.x= rotate.x, .y= -rotate.y, .z= -rotate.z, .w= rotate.w};
-    transform.translate = Vector3{.x= -translate.x, .y= translate.y, .z= translate.z};
-    result.transform = transform;
-    result.local = MathUtils::Matrix::MakeAffineMatrix(transform);
+    for (unsigned int i = 0; i < _node->mNumChildren; ++i){
+        node.children.push_back(LoadNode(_node->mChildren[i]));
+    }
 
-    result.name = _node->mName.C_Str();
-    result.children.resize(_node->mNumChildren);
-    for (uint32_t i = 0; i < _node->mNumChildren; ++i){
-        result.children[i] = LoadNode(_node->mChildren[i]);
+    return node;
+}
+
+std::optional<Animation> GltfLoader::LoadAnimation(const aiScene* _scene, const std::string& _name) {
+    Animation result;
+
+    if (_scene->mNumAnimations <= 0) {
+        Utils::Alert("GltfLoader::LoadAnimation: No animations found in file: " + _name);
+        return std::nullopt;
+    }
+
+    aiAnimation* animation = _scene->mAnimations[0];
+    result.duration = static_cast<float>(animation->mDuration / animation->mTicksPerSecond);
+
+    for (uint32_t channelIndex = 0; channelIndex < animation->mNumChannels; ++channelIndex) {
+        aiNodeAnim* channel = animation->mChannels[channelIndex];
+        NodeAnimation& nodeAnimation = result.nodeAnimations[channel->mNodeName.C_Str()];
+
+        uint32_t key;
+        for (key = 0; key < channel->mNumPositionKeys; ++key) {
+            aiVectorKey& position = channel->mPositionKeys[key];
+            KeyframeVector3 keyframe;
+            keyframe.time = static_cast<float>(position.mTime / animation->mTicksPerSecond);
+            keyframe.value = {-position.mValue.x, position.mValue.y, position.mValue.z};
+            nodeAnimation.translate.keyframes.push_back(keyframe);
+        }
+
+        for (key = 0; key < channel->mNumRotationKeys; ++key) {
+            aiQuatKey& rotation = channel->mRotationKeys[key];
+            KeyframeQuaternion keyframe;
+            keyframe.time = static_cast<float>(rotation.mTime / animation->mTicksPerSecond);
+            keyframe.value = { rotation.mValue.x, -rotation.mValue.y, -rotation.mValue.z, rotation.mValue.w };
+            nodeAnimation.rotation.keyframes.push_back(keyframe);
+        }
+
+        for (key = 0; key < channel->mNumScalingKeys; ++key) {
+            aiVectorKey& scale = channel->mScalingKeys[key];
+            KeyframeVector3 keyframe;
+            keyframe.time = static_cast<float>(scale.mTime / animation->mTicksPerSecond);
+            keyframe.value = { scale.mValue.x, scale.mValue.y, scale.mValue.z };
+            nodeAnimation.scale.keyframes.push_back(keyframe);
+        }
     }
 
     return result;
 }
 
-Animation GltfLoader::LoadAnimation(const std::string& _directory, const std::string& _name) {
-    Assimp::Importer importer;
-    std::string path = _directory + _name + "/" + _name + ".gltf";
-    const aiScene* scene = importer.ReadFile(path.c_str(), 0);
-
-    const aiAnimation* animation = scene->mAnimations[0];
-    Animation animation_;
-    animation_.duration = static_cast<float>(animation->mDuration);
-
-    for (uint32_t channelIndex = 0; channelIndex < animation->mNumChannels; ++channelIndex) {
-        const aiNodeAnim* nodeAnim = animation->mChannels[channelIndex];
-        NodeAnimation& nodeAnimation = animation_.nodeAnimations[nodeAnim->mNodeName.C_Str()];
-        for (uint32_t keyIndex = 0; keyIndex < nodeAnim->mNumPositionKeys; ++keyIndex){
-            const aiVectorKey& positionKey = nodeAnim->mPositionKeys[keyIndex];
-            nodeAnimation.translate.keyframes.push_back({
-                .value= {.x= -positionKey.mValue.x, .y= positionKey.mValue.y, .z= positionKey.mValue.z},
-                .time= static_cast<float>(positionKey.mTime)
-            });
-        }
-        for (uint32_t keyIndex = 0; keyIndex < nodeAnim->mNumRotationKeys; ++keyIndex){
-            const aiQuatKey& rotationKey = nodeAnim->mRotationKeys[keyIndex];
-            nodeAnimation.rotation.keyframes.push_back({
-                .value = {.x= rotationKey.mValue.x, .y= -rotationKey.mValue.y, .z= -rotationKey.mValue.z, .w= rotationKey.mValue.w},
-                .time= static_cast<float>(rotationKey.mTime)
-            });
-        }
-        for (uint32_t keyIndex = 0; keyIndex < nodeAnim->mNumScalingKeys; ++keyIndex){
-            const aiVectorKey& scalingKey = nodeAnim->mScalingKeys[keyIndex];
-            nodeAnimation.scale.keyframes.push_back({ 
-                .value= {.x= scalingKey.mValue.x, .y= scalingKey.mValue.y, .z= scalingKey.mValue.z},
-                .time= static_cast<float>(scalingKey.mTime)
-            });
-        }
-
-        animation_.nodeAnimations[nodeAnim->mNodeName.C_Str()] = nodeAnimation;
-    }
-    return animation_;
-}
-
 Skeleton GltfLoader::CreateSkeleton(const Node& _root) {
     Skeleton skeleton;
-    skeleton.root = CreateJoint(_root, {}, skeleton.joints);
+    skeleton.root = CreateJoint(_root, std::nullopt, skeleton.joints);
 
     for (const Joint& joint : skeleton.joints) {
         skeleton.map.emplace(joint.name, joint.index);
@@ -199,7 +116,7 @@ Skeleton GltfLoader::CreateSkeleton(const Node& _root) {
 int32_t GltfLoader::CreateJoint(const Node& _node, const std::optional<int32_t>& _parent, std::vector<Joint>& _joints) {
     Joint joint;
     joint.name = _node.name;
-    joint.local = MathUtils::Matrix::MakeIdentity();
+    joint.local = _node.local;
     joint.space = MathUtils::Matrix::MakeIdentity();
     joint.transform = _node.transform;
     joint.index = static_cast<int32_t>(_joints.size());
@@ -212,4 +129,76 @@ int32_t GltfLoader::CreateJoint(const Node& _node, const std::optional<int32_t>&
     }
 
     return joint.index;
+}
+
+MeshData GltfLoader::LoadMesh(const aiScene* _scene, const std::string& _name, ModelData& _model) {
+    MeshData data;
+    for (uint32_t meshIndex = 0; meshIndex < _scene->mNumMeshes; ++meshIndex){
+        aiMesh* mesh = _scene->mMeshes[meshIndex];
+        if (!mesh->HasNormals() || !mesh->HasTextureCoords(0)) {
+            Log::Send(Log::Level::ERR, "GltfLoader::LoadMesh: Mesh does not have normals or texture coordinates");
+            Utils::Alert("Mesh does not have normals or texture coordinates");
+            continue;
+        }
+
+        uint32_t vertexCount = mesh->mNumVertices;
+        data.vertices.resize(vertexCount);
+        for (uint32_t vertexIndex = 0; vertexIndex < vertexCount; ++vertexIndex) {
+            aiVector3D& position = mesh->mVertices[vertexIndex];
+            aiVector3D& normal = mesh->mNormals[vertexIndex];
+            aiVector3D uv = mesh->mTextureCoords[0][vertexIndex];
+            
+            data.vertices[vertexIndex].position = Vector4{ -position.x, position.y, position.z, 1.0f };
+            data.vertices[vertexIndex].normal = Vector3{ -normal.x, normal.y, normal.z };
+            data.vertices[vertexIndex].uv = Vector2{ uv.x, uv.y };
+        }
+
+        for (uint32_t faceIndex = 0; faceIndex < mesh->mNumFaces; ++faceIndex){
+            aiFace& face = mesh->mFaces[faceIndex];
+
+            if (face.mNumIndices != 3) {
+                Log::Send(Log::Level::ERR, "GltfLoader::LoadMesh: Face does not have 3 indices");
+                Utils::Alert("Face does not have 3 indices");
+                continue;
+            }
+
+            for (uint32_t element = 0; element < face.mNumIndices; ++element){
+                data.indices.push_back(face.mIndices[element]);
+            }
+        }
+
+        for (uint32_t boneIndex = 0; boneIndex < mesh->mNumBones; ++boneIndex) {
+            aiBone* bone = mesh->mBones[boneIndex];
+            std::string jointName = bone->mName.C_Str();
+            JointWeightData& jointWeight = _model.skinCluster[jointName];
+
+            aiMatrix4x4 bindPose = bone->mOffsetMatrix.Inverse();
+            aiVector3D scale, translate;
+            aiQuaternion rotate;
+
+            bindPose.Decompose(scale, rotate, translate);
+            jointWeight.inverseBindPose = MathUtils::Matrix::MakeAffineMatrix(
+                Vector3{ .x= scale.x, .y= scale.y, .z= scale.z },
+                Quaternion{ .x= rotate.x, .y= -rotate.y, .z= -rotate.z, .w= rotate.w },
+                Vector3{ .x= -translate.x, .y= translate.y, .z= translate.z }
+            ).Inverse();
+
+            for (uint32_t weightIndex = 0; weightIndex < bone->mNumWeights; ++weightIndex){
+                jointWeight.weights.push_back({
+                    .weight= bone->mWeights[weightIndex].mWeight,
+                    .index= bone->mWeights[weightIndex].mVertexId
+                });
+            }
+        }
+
+        for (uint32_t materialIndex = 0; materialIndex < _scene->mNumMaterials; ++materialIndex){
+            aiMaterial* material = _scene->mMaterials[mesh->mMaterialIndex];
+            if (material->GetTextureCount(aiTextureType_DIFFUSE)){
+                aiString texturePath;
+                material->GetTexture(aiTextureType_DIFFUSE, 0, &texturePath);
+                data.texture = ASSETS_FOLDER + _name + "/" + texturePath.C_Str();
+            }
+        }
+    }
+    return data;
 }

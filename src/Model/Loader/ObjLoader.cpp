@@ -40,16 +40,17 @@ void ObjLoader::LoadModel(const std::string& _name, ResourceRepository* _reposit
 
                 raw.vertices.push_back(vertexData);
             }
+        }
 
-            for (uint32_t materialIndex = 0; materialIndex < scene->mNumMaterials; ++materialIndex){
-                aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
-                if (material->GetTextureCount(aiTextureType_DIFFUSE)){
-                    aiString texturePath;
-                    material->GetTexture(aiTextureType_DIFFUSE, 0, &texturePath);
-                    raw.texture = ASSETS_FOLDER + _name + "/" + texturePath.C_Str();
-                }
+        for (uint32_t materialIndex = 0; materialIndex < scene->mNumMaterials; ++materialIndex){
+            aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
+            if (material->GetTextureCount(aiTextureType_DIFFUSE)){
+                aiString texturePath;
+                material->GetTexture(aiTextureType_DIFFUSE, 0, &texturePath);
+                raw.texture = ASSETS_FOLDER + _name + "/" + texturePath.C_Str();
             }
         }
+
         _repository->GetMeshRepository()->Add(_name, raw);
     }
     _repository->GetModelRepository()->Add(_name, std::move(data));

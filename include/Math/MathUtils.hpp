@@ -18,7 +18,7 @@ namespace MathUtils{
     float Lerp(const float& a, const float& b, float t);
 
     Vector3 Lerp(const Vector3& a, const Vector3& b, float t);
-    Quaternion Slerp(Quaternion& a, Quaternion& b, float t);
+    Quaternion Slerp(const Quaternion& a, const Quaternion& b, float t);
 
     template<typename Type>
     Type Factorial(Type n) {

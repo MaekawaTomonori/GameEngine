@@ -6,6 +6,6 @@ Vector3 Vector3::Random() {
     return {
         MathUtils::Random(-1.f, 1.f),
         MathUtils::Random(-1.f, 1.f),
-        0
+        MathUtils::Random(-1.f, 1.f)
     };
 }

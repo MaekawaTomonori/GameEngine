@@ -19,8 +19,8 @@ struct ModelData {
     std::string name;
     std::string mesh;
     Node root;
-    Animation animation;
-    Skeleton skeleton;
+    std::optional<Animation> animation;
+    std::optional<Skeleton> skeleton;
 };
 
 #endif // ModelData_HPP_
