@@ -155,7 +155,6 @@ void Model::Debug() {
                             }
                             ImGui::Text("  Translate: (%.2f, %.2f, %.2f)", joint.transform.translate.x, joint.transform.translate.y, joint.transform.translate.z);
 
-
                             for (int32_t childIndex : joint.children){
                                 ImGui::Spacing();
                                 Recursive(childIndex);
