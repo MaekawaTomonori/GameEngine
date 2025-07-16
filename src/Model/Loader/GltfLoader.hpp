@@ -23,6 +23,8 @@ private:
 
     MeshData LoadMesh(const aiScene* _scene, const std::string& _name, ModelData& _model) const;
 
+    static void LoadVertexData(const aiMesh* _mesh, MeshData& _data);
+    static void LoadIndexData(const aiMesh* _mesh, MeshData& _data);
     static void LoadBones(const aiMesh* _mesh, ModelData& _model);
 }; // class GltfLoader
 

@@ -147,32 +147,10 @@ MeshData GltfLoader::LoadMesh(const aiScene* _scene, const std::string& _name, M
             continue;
         }
 
-        uint32_t vertexCount = mesh->mNumVertices;
-        data.vertices.resize(vertexCount);
-        for (uint32_t vertexIndex = 0; vertexIndex < vertexCount; ++vertexIndex) {
-            aiVector3D& position = mesh->mVertices[vertexIndex];
-            aiVector3D& normal = mesh->mNormals[vertexIndex];
-            aiVector3D uv = mesh->mTextureCoords[0][vertexIndex];
-            
-            data.vertices[vertexIndex].position = Vector4{ -position.x, position.y, position.z, 1.0f };
-            data.vertices[vertexIndex].normal = Vector3{ -normal.x, normal.y, normal.z };
-            data.vertices[vertexIndex].uv = Vector2{ uv.x, uv.y };
-        }
+        LoadVertexData(mesh, data);
 
-        for (uint32_t faceIndex = 0; faceIndex < mesh->mNumFaces; ++faceIndex){
-            aiFace& face = mesh->mFaces[faceIndex];
-
-            if (face.mNumIndices != 3) {
-                Log::Send(Log::Level::ERR, "GltfLoader::LoadMesh: Face does not have 3 indices");
-                Utils::Alert("Face does not have 3 indices");
-                continue;
-            }
-
-            for (uint32_t element = 0; element < face.mNumIndices; ++element){
-                data.indices.push_back(face.mIndices[element]);
-            }
-        }
-
+        LoadIndexData(mesh, data);
+        
         LoadBones(mesh, _model);
 
         for (uint32_t materialIndex = 0; materialIndex < _scene->mNumMaterials; ++materialIndex){
@@ -185,6 +163,36 @@ MeshData GltfLoader::LoadMesh(const aiScene* _scene, const std::string& _name, M
         }
     }
     return data;
+}
+
+void GltfLoader::LoadVertexData(const aiMesh* _mesh, MeshData& _data) {
+    uint32_t vertexCount = _mesh->mNumVertices;
+    _data.vertices.resize(vertexCount);
+    for (uint32_t vertexIndex = 0; vertexIndex < vertexCount; ++vertexIndex){
+        aiVector3D& position = _mesh->mVertices[vertexIndex];
+        aiVector3D& normal = _mesh->mNormals[vertexIndex];
+        aiVector3D uv = _mesh->mTextureCoords[0][vertexIndex];
+
+        _data.vertices[vertexIndex].position = Vector4{ -position.x, position.y, position.z, 1.0f };
+        _data.vertices[vertexIndex].normal = Vector3{ -normal.x, normal.y, normal.z };
+        _data.vertices[vertexIndex].uv = Vector2{ uv.x, uv.y };
+    }
+}
+
+void GltfLoader::LoadIndexData(const aiMesh* _mesh, MeshData& _data) {
+    for (uint32_t faceIndex = 0; faceIndex < _mesh->mNumFaces; ++faceIndex){
+        aiFace& face = _mesh->mFaces[faceIndex];
+
+        if (face.mNumIndices != 3){
+            Log::Send(Log::Level::ERR, "GltfLoader::LoadMesh: Face does not have 3 indices");
+            Utils::Alert("Face does not have 3 indices");
+            continue;
+        }
+
+        for (uint32_t element = 0; element < face.mNumIndices; ++element){
+            _data.indices.push_back(face.mIndices[element]);
+        }
+    }
 }
 
 void GltfLoader::LoadBones(const aiMesh* _mesh, ModelData& _model) {
