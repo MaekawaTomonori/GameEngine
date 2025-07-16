@@ -76,6 +76,7 @@ private:
     void Debug();
     void UpdateMapData() const;
     void CreateSkinCluster();
+    void SetBindPose(Skeleton& _skeleton);
     void UpdateSkinCluster();
     void UpdateSkeleton() const;
     void UpdateAnimation();

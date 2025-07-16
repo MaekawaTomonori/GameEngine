@@ -137,7 +137,7 @@ int32_t GltfLoader::CreateJoint(const Node& _node, const std::optional<int32_t>&
     return joint.index;
 }
 
-MeshData GltfLoader::LoadMesh(const aiScene* _scene, const std::string& _name, ModelData& _model) {
+MeshData GltfLoader::LoadMesh(const aiScene* _scene, const std::string& _name, ModelData& _model) const {
     MeshData data;
     for (uint32_t meshIndex = 0; meshIndex < _scene->mNumMeshes; ++meshIndex){
         aiMesh* mesh = _scene->mMeshes[meshIndex];
@@ -173,29 +173,7 @@ MeshData GltfLoader::LoadMesh(const aiScene* _scene, const std::string& _name, M
             }
         }
 
-        for (uint32_t boneIndex = 0; boneIndex < mesh->mNumBones; ++boneIndex) {
-            aiBone* bone = mesh->mBones[boneIndex];
-            std::string jointName = bone->mName.C_Str();
-            JointWeightData& jointWeight = _model.skinCluster[jointName];
-
-            aiMatrix4x4 bindPose = bone->mOffsetMatrix.Inverse();
-            aiVector3D scale, translate;
-            aiQuaternion rotate;
-
-            bindPose.Decompose(scale, rotate, translate);
-            jointWeight.inverseBindPose = MathUtils::Matrix::MakeAffineMatrix(
-                Vector3{ .x= scale.x, .y= scale.y, .z= scale.z },
-                Quaternion{ .x= rotate.x, .y= -rotate.y, .z= -rotate.z, .w= rotate.w },
-                Vector3{ .x= -translate.x, .y= translate.y, .z= translate.z }
-            ).Inverse();
-
-            for (uint32_t weightIndex = 0; weightIndex < bone->mNumWeights; ++weightIndex){
-                jointWeight.weights.push_back({
-                    .weight= bone->mWeights[weightIndex].mWeight,
-                    .index= bone->mWeights[weightIndex].mVertexId
-                });
-            }
-        }
+        LoadBones(mesh, _model);
 
         for (uint32_t materialIndex = 0; materialIndex < _scene->mNumMaterials; ++materialIndex){
             aiMaterial* material = _scene->mMaterials[materialIndex];
@@ -207,4 +185,30 @@ MeshData GltfLoader::LoadMesh(const aiScene* _scene, const std::string& _name, M
         }
     }
     return data;
+}
+
+void GltfLoader::LoadBones(const aiMesh* _mesh, ModelData& _model) {
+    for (uint32_t boneIndex = 0; boneIndex < _mesh->mNumBones; ++boneIndex){
+        aiBone* bone = _mesh->mBones[boneIndex];
+        std::string jointName = bone->mName.C_Str();
+        JointWeightData& jointWeight = _model.skinCluster[jointName];
+
+        aiMatrix4x4 bindPose = bone->mOffsetMatrix.Inverse();
+        aiVector3D scale, translate;
+        aiQuaternion rotate;
+
+        bindPose.Decompose(scale, rotate, translate);
+        jointWeight.inverseBindPose = MathUtils::Matrix::MakeAffineMatrix(
+            Vector3{ .x = scale.x, .y = scale.y, .z = scale.z },
+            Quaternion{ .x = rotate.x, .y = -rotate.y, .z = -rotate.z, .w = rotate.w },
+            Vector3{ .x = -translate.x, .y = translate.y, .z = translate.z }
+        ).Inverse();
+
+        for (uint32_t weightIndex = 0; weightIndex < bone->mNumWeights; ++weightIndex){
+            jointWeight.weights.push_back({
+                .weight = bone->mWeights[weightIndex].mWeight,
+                .index = bone->mWeights[weightIndex].mVertexId
+            });
+        }
+    }
 }

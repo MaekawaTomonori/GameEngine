@@ -1,6 +1,6 @@
 #include "ResourceRepository.hpp"
 
-ResourceRepository::ResourceRepository() {
+void ResourceRepository::Initialize() {
     model_ = std::make_unique<ModelRepository>();
     mesh_ = std::make_unique<MeshRepository>();
 }

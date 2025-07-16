@@ -249,20 +249,27 @@ void Model::CreateSkinCluster() {
     skinCluster_.influenceBufferView.SizeInBytes = static_cast<UINT>(sizeof(VertexInfluence) * verticesSize);
     skinCluster_.influenceBufferView.StrideInBytes = sizeof(VertexInfluence);
 
+    SetBindPose(skeleton);
+
+    mesh_->SetVBV(skinCluster_.influenceBufferView);
+}
+
+void Model::SetBindPose(Skeleton& _skeleton) {
+    size_t jointSize = _skeleton.joints.size();
     skinCluster_.inverseBindPoses.resize(jointSize);
-    for (auto& inverseBindPose : skinCluster_.inverseBindPoses) {
+    for (auto& inverseBindPose : skinCluster_.inverseBindPoses){
         inverseBindPose = MathUtils::Matrix::MakeIdentity();
     }
 
-    for (const auto& jointWeight : data_->skinCluster) {
-        auto itr = skeleton.map.find(jointWeight.first);
-        if (itr == skeleton.map.end()){
+    for (const auto& jointWeight : data_->skinCluster){
+        auto itr = _skeleton.map.find(jointWeight.first);
+        if (itr == _skeleton.map.end()){
             continue;
         }
         skinCluster_.inverseBindPoses[itr->second] = jointWeight.second.inverseBindPose;
-        for (const auto& vertexWeight : jointWeight.second.weights) {
+        for (const auto& vertexWeight : jointWeight.second.weights){
             auto& currentInfluence = skinCluster_.mappedInfluence[vertexWeight.index];
-            for (uint32_t index = 0; index < MAX_INFLUENCE; ++index) {
+            for (uint32_t index = 0; index < MAX_INFLUENCE; ++index){
                 if (currentInfluence.weights[index] == 0.f){
                     currentInfluence.weights[index] = vertexWeight.weight;
                     currentInfluence.jointIndices[index] = static_cast<int32_t>(itr->second);
@@ -271,8 +278,6 @@ void Model::CreateSkinCluster() {
             }
         }
     }
-
-    mesh_->SetVBV(skinCluster_.influenceBufferView);
 }
 
 void Model::UpdateSkinCluster() {

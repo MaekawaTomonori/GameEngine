@@ -14,6 +14,7 @@ Framework::Framework() {
     dxAdapter_ = std::make_unique<DirectXAdapter>(windows_->GetWindowHandle(), config_->GetWidth(), config_->GetHeight());
 
     resources_ = std::make_unique<ResourceRepository>();
+    resources_->Initialize();
 
     debugUI_ = std::make_unique<DebugUI>();
     debugUI_->Initialize(dxAdapter_.get());

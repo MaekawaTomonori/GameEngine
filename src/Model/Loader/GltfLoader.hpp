@@ -21,7 +21,9 @@ private:
 
     static int32_t CreateJoint(const Node& _node, const std::optional<int32_t>& _parent, std::vector<Joint>& _joints);
 
-    MeshData LoadMesh(const aiScene* _scene, const std::string& _name, ModelData& _model);
+    MeshData LoadMesh(const aiScene* _scene, const std::string& _name, ModelData& _model) const;
+
+    static void LoadBones(const aiMesh* _mesh, ModelData& _model);
 }; // class GltfLoader
 
 #endif // GltfLoader_HPP_
