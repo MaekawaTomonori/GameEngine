@@ -11,7 +11,7 @@ public:
     void LoadModel(const std::string& _name, ResourceRepository* _repository) override;
     
 private:
-    void LoadGltf(const std::string& _directory, const std::string& _name, ResourceRepository* _repository);
+    void LoadGltf(const std::string& _directory, const std::string& _name, const ResourceRepository* _repository);
 
     static Node LoadNode(const aiNode* _node);
 

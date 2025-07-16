@@ -32,6 +32,13 @@ void Model::Initialize(const std::string& _name) {
 
     data_ = common_->GetResourceRepository()->GetModelRepository()->Get(_name);
 
+    // IsNull
+    if (!data_) {
+        Log::Send(Log::Level::ERR, "Model data is null for: " + _name);
+        Utils::Alert("Model data is null for: " + _name);
+        return;
+    }
+
     Log::Send(Log::Level::INFO, "Creating Mesh: " + _name);
 
     mesh_ = std::make_unique<Mesh>();
@@ -225,6 +232,13 @@ void Model::CreateSkinCluster() {
     skinCluster_.influenceResource.Attach(adapter_->CreateBufferResource(sizeof(VertexInfluence) * verticesSize));
     VertexInfluence* mappedInfluence = nullptr;
     skinCluster_.influenceResource->Map(0, nullptr, reinterpret_cast<void**>(&mappedInfluence));
+
+    if (!mappedInfluence){
+        Log::Send(Log::Level::ERR, "Failed to map influence resource");
+        Utils::Alert("Failed to map influence resource");
+        return;
+    }
+
     memset(mappedInfluence, 0, sizeof(VertexInfluence) * verticesSize);
     skinCluster_.mappedInfluence = { mappedInfluence, verticesSize };
 
@@ -232,8 +246,8 @@ void Model::CreateSkinCluster() {
     skinCluster_.influenceBufferView.SizeInBytes = static_cast<UINT>(sizeof(VertexInfluence) * verticesSize);
     skinCluster_.influenceBufferView.StrideInBytes = sizeof(VertexInfluence);
 
-    skinCluster_.bindPoseMatrices.resize(skeleton.joints.size());
-    for (auto& bindPoseMatrix : skinCluster_.bindPoseMatrices) {
+    skinCluster_.inverseBindPoses.resize(skeleton.joints.size());
+    for (auto& bindPoseMatrix : skinCluster_.inverseBindPoses) {
         bindPoseMatrix = MathUtils::Matrix::MakeIdentity();
     }
 
@@ -256,7 +270,7 @@ void Model::CreateSkinCluster() {
             continue;
         }
 
-        skinCluster_.bindPoseMatrices[jointIndex] = jointWeight.second.inverseBindPose;
+        skinCluster_.inverseBindPoses[jointIndex] = jointWeight.second.inverseBindPose;
 
         for (const auto& vertexWeight : jointWeight.second.weights) {
             if (verticesSize <= vertexWeight.index) {
@@ -286,12 +300,12 @@ void Model::UpdateSkinCluster() {
 
     Skeleton& skeleton = data_->skeleton.value();
     for (size_t jointIndex = 0; jointIndex < skeleton.joints.size(); ++jointIndex) {
-        if (skinCluster_.bindPoseMatrices.size() <= jointIndex) {
+        if (skinCluster_.inverseBindPoses.size() <= jointIndex) {
             Utils::Alert("Joint index out of bounds in skin cluster update");
             break;
         }
 
-        skinCluster_.mappedPalette[jointIndex].space = skinCluster_.bindPoseMatrices[jointIndex] * skeleton.joints[jointIndex].space;
+        skinCluster_.mappedPalette[jointIndex].space = skinCluster_.inverseBindPoses[jointIndex] * skeleton.joints[jointIndex].space;
         skinCluster_.mappedPalette[jointIndex].inverseTranspose = skinCluster_.mappedPalette[jointIndex].space.Inverse().Transpose();
     }
 }

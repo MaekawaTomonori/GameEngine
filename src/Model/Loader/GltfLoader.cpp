@@ -1,6 +1,5 @@
 #include "GltfLoader.hpp"
 
-#include <assert.h>
 #include <assimp/Importer.hpp>
 #include <assimp/anim.h>
 #include <assimp/mesh.h>
@@ -14,10 +13,15 @@ void GltfLoader::LoadModel(const std::string& _name, ResourceRepository* _reposi
     LoadGltf(ASSETS_FOLDER, _name, _repository);
 }
 
-void GltfLoader::LoadGltf(const std::string& _directory, const std::string& _name, ResourceRepository* _repository) {
+void GltfLoader::LoadGltf(const std::string& _directory, const std::string& _name, const ResourceRepository* _repository) {
     Assimp::Importer importer;
     std::string path = _directory + _name + "/" + _name + ".gltf";
     const aiScene* scene = importer.ReadFile(path, aiProcess_FlipWindingOrder | aiProcess_FlipUVs | aiProcess_Triangulate);
+    if (!scene) {
+        Utils::Alert("GltfLoader::LoadGltf: Failed to load file: " + path + "\nError: " + importer.GetErrorString());
+        Log::Send(Log::Level::ERR, "[GLTF Loader] Failed to load " + path + ": " + importer.GetErrorString());
+        return;
+    }
     if (!scene->HasMeshes()){
         Utils::Alert("GltfLoader::LoadGltf: No meshes found in file: " + path);
         return;
@@ -67,7 +71,9 @@ std::optional<Animation> GltfLoader::LoadAnimation(const aiScene* _scene, const 
     }
 
     aiAnimation* animation = _scene->mAnimations[0];
-    result.duration = static_cast<float>(animation->mDuration / animation->mTicksPerSecond);
+    float tps = (animation->mTicksPerSecond == 0.) ? 1.f : static_cast<float>(animation->mTicksPerSecond);
+
+    result.duration = static_cast<float>(animation->mDuration / tps);
 
     for (uint32_t channelIndex = 0; channelIndex < animation->mNumChannels; ++channelIndex) {
         aiNodeAnim* channel = animation->mChannels[channelIndex];
@@ -77,7 +83,7 @@ std::optional<Animation> GltfLoader::LoadAnimation(const aiScene* _scene, const 
         for (key = 0; key < channel->mNumPositionKeys; ++key) {
             aiVectorKey& position = channel->mPositionKeys[key];
             KeyframeVector3 keyframe;
-            keyframe.time = static_cast<float>(position.mTime / animation->mTicksPerSecond);
+            keyframe.time = static_cast<float>(position.mTime / tps);
             keyframe.value = {-position.mValue.x, position.mValue.y, position.mValue.z};
             nodeAnimation.translate.keyframes.push_back(keyframe);
         }
@@ -85,7 +91,7 @@ std::optional<Animation> GltfLoader::LoadAnimation(const aiScene* _scene, const 
         for (key = 0; key < channel->mNumRotationKeys; ++key) {
             aiQuatKey& rotation = channel->mRotationKeys[key];
             KeyframeQuaternion keyframe;
-            keyframe.time = static_cast<float>(rotation.mTime / animation->mTicksPerSecond);
+            keyframe.time = static_cast<float>(rotation.mTime / tps);
             keyframe.value = { rotation.mValue.x, -rotation.mValue.y, -rotation.mValue.z, rotation.mValue.w };
             nodeAnimation.rotation.keyframes.push_back(keyframe);
         }
@@ -93,7 +99,7 @@ std::optional<Animation> GltfLoader::LoadAnimation(const aiScene* _scene, const 
         for (key = 0; key < channel->mNumScalingKeys; ++key) {
             aiVectorKey& scale = channel->mScalingKeys[key];
             KeyframeVector3 keyframe;
-            keyframe.time = static_cast<float>(scale.mTime / animation->mTicksPerSecond);
+            keyframe.time = static_cast<float>(scale.mTime / tps);
             keyframe.value = { scale.mValue.x, scale.mValue.y, scale.mValue.z };
             nodeAnimation.scale.keyframes.push_back(keyframe);
         }
@@ -192,7 +198,7 @@ MeshData GltfLoader::LoadMesh(const aiScene* _scene, const std::string& _name, M
         }
 
         for (uint32_t materialIndex = 0; materialIndex < _scene->mNumMaterials; ++materialIndex){
-            aiMaterial* material = _scene->mMaterials[mesh->mMaterialIndex];
+            aiMaterial* material = _scene->mMaterials[materialIndex];
             if (material->GetTextureCount(aiTextureType_DIFFUSE)){
                 aiString texturePath;
                 material->GetTexture(aiTextureType_DIFFUSE, 0, &texturePath);

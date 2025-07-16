@@ -20,7 +20,7 @@ class Model{
         Matrix4x4 inverseTranspose;
     };
     struct SkinCluster {
-        std::vector<Matrix4x4> bindPoseMatrices;
+        std::vector<Matrix4x4> inverseBindPoses;
 
         Microsoft::WRL::ComPtr<ID3D12Resource> influenceResource;
         D3D12_VERTEX_BUFFER_VIEW influenceBufferView;
