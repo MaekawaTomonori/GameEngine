@@ -28,7 +28,7 @@ class Mesh {
     // vertex data
     Vertex* vd_ = nullptr;
 
-    D3D12_VERTEX_BUFFER_VIEW skinning_{};
+    std::vector<D3D12_VERTEX_BUFFER_VIEW> vbvs_;
 
     // index resource
     Microsoft::WRL::ComPtr<ID3D12Resource> ir_;

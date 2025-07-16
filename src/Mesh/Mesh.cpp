@@ -25,6 +25,8 @@ void Mesh::Initialize(DirectXAdapter* _adapter, const std::string &_name, const 
     vr_->Map(0, nullptr, reinterpret_cast<void**>(&vd_));
     std::copy_n(data_.vertices.data(), data_.vertices.size(), vd_);
 
+    vbvs_.push_back(vbv_);
+
     mr_.Attach(adapter_->CreateBufferResource(sizeof(Material)));
     mr_->Map(0, nullptr, reinterpret_cast<void**>(&material_));
 
@@ -56,11 +58,7 @@ void Mesh::Draw() const {
 
     commandList_->IASetPrimitiveTopology(D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
-    D3D12_VERTEX_BUFFER_VIEW vbvs[2] ={
-        vbv_,
-        skinning_
-    };
-    commandList_->IASetVertexBuffers(0, 2, vbvs);
+    commandList_->IASetVertexBuffers(0, static_cast<UINT>(vbvs_.size()), vbvs_.data());
 
     if (!data_.indices.empty()){
         commandList_->IASetIndexBuffer(&ibv_);
@@ -89,8 +87,8 @@ void Mesh::Debug() {
     }
 }
 
-void Mesh::SetVBV(D3D12_VERTEX_BUFFER_VIEW _vbv) {
-    skinning_ = _vbv;
+void Mesh::SetVBV(const D3D12_VERTEX_BUFFER_VIEW _vbv) {
+    vbvs_.push_back(_vbv);
 }
 
 MeshData Mesh::GetData() const {

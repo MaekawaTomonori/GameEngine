@@ -87,6 +87,9 @@ void Model::Update() {
 
     // Joint to Line
     CreateLine();
+
+    // Mesh Update
+    mesh_->Update();
 }
 
 void Model::Draw() const {
@@ -99,9 +102,9 @@ void Model::Draw() const {
 
     commandList_->SetGraphicsRootConstantBufferView(1, wr_->GetGPUVirtualAddress());
     commandList_->SetGraphicsRootConstantBufferView(4, cr_->GetGPUVirtualAddress());
-    commandList_->SetGraphicsRootDescriptorTable(8, skinCluster_.paletteHandle.second);
-
-    mesh_->SetVBV(skinCluster_.influenceBufferView);
+    if (data_->skeleton.has_value()){
+        commandList_->SetGraphicsRootDescriptorTable(8, skinCluster_.paletteHandle.second);
+    }
     mesh_->Draw();
 
     DrawLine();
@@ -268,6 +271,8 @@ void Model::CreateSkinCluster() {
             }
         }
     }
+
+    mesh_->SetVBV(skinCluster_.influenceBufferView);
 }
 
 void Model::UpdateSkinCluster() {
