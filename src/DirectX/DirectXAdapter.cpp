@@ -85,6 +85,38 @@ ID3D12Resource* DirectXAdapter::CreateDepthStencilResource(int32_t _width, int32
     return resource;
 }
 
+ID3D12Resource* DirectXAdapter::CreateRenderTextureResource(uint32_t _width, uint32_t _height, DXGI_FORMAT _format, const Vector4& _cc) {
+    D3D12_RESOURCE_DESC desc{};
+    desc.Width = _width;
+    desc.Height = _height;
+    desc.MipLevels = 1;
+    desc.DepthOrArraySize = 1;
+    desc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
+    desc.SampleDesc.Count = 1;
+    desc.Dimension = D3D12_RESOURCE_DIMENSION_TEXTURE2D;
+    desc.Flags = D3D12_RESOURCE_FLAG_ALLOW_RENDER_TARGET;
+
+    D3D12_HEAP_PROPERTIES properties{};
+    properties.Type = D3D12_HEAP_TYPE_DEFAULT;
+
+    D3D12_CLEAR_VALUE clearValue{};
+    clearValue.Color[0] = _cc.x;
+    clearValue.Color[1] = _cc.y;
+    clearValue.Color[2] = _cc.z;
+    clearValue.Color[3] = _cc.w;
+    clearValue.Format = _format;
+
+    ID3D12Resource* resource = nullptr;
+    HRESULT hr = device_->CreateCommittedResource(&properties, D3D12_HEAP_FLAG_NONE, &desc, D3D12_RESOURCE_STATE_RENDER_TARGET, &clearValue, IID_PPV_ARGS(&resource));
+    if (FAILED(hr)){
+        Log::Send(Log::Level::ERR, "Failed to create depth stencil resource");
+        Utils::Alert("Failed to create depth stencil resource");
+        assert(false);
+    }
+
+    return resource;
+}
+
 void DirectXAdapter::Register(std::function<void()> _task) {
     if (!isRunning_) tasks_.push(std::move(_task));
     else pending_.push(std::move(_task));

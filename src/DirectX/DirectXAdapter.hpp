@@ -78,6 +78,7 @@ public:
 
     ID3D12Resource* CreateBufferResource(size_t _size) const;
     ID3D12Resource* CreateDepthStencilResource(int32_t _width, int32_t _height) const;
+    ID3D12Resource* CreateRenderTextureResource(uint32_t _width, uint32_t _height, DXGI_FORMAT _format, const Vector4& _cc);
 
     void Register(std::function<void()> _task);
     void Render();

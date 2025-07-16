@@ -13,6 +13,9 @@ Framework::Framework() {
 
     dxAdapter_ = std::make_unique<DirectXAdapter>(windows_->GetWindowHandle(), config_->GetWidth(), config_->GetHeight());
 
+    postProcessor_ = std::make_unique<PostProcessExecutor>();
+    postProcessor_->Initialize(dxAdapter_.get());
+
     resources_ = std::make_unique<ResourceRepository>();
     resources_->Initialize();
 
@@ -83,6 +86,7 @@ void Framework::Draw() const {
     srv_->PreDraw();
 
     dxAdapter_->Register([&] { scene_->Draw(); });
+    dxAdapter_->Register([&] {postProcessor_->Execute(); });
     dxAdapter_->Register([&](){debugUI_->Render(); });
     dxAdapter_->Render();
 }
