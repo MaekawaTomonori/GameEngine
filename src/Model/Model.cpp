@@ -208,6 +208,13 @@ void Model::CreateSkinCluster() {
         return;
     }
 
+    SRVManager* srv = common_->GetSRVManager();
+    if (!srv) {
+        Log::Send(Log::Level::ERR, "SRVManager is not initialized");
+        Utils::Alert("SRVManager is not initialized");
+        return;
+    }
+
     if (!data_->skeleton.has_value()) {
         Log::Send(Log::Level::ERR, "Model data does not contain a skeleton");
         Utils::Alert("Model data does not contain a skeleton");
@@ -216,29 +223,22 @@ void Model::CreateSkinCluster() {
 
     Skeleton& skeleton = data_->skeleton.value();
 
-    size_t jointCount = skeleton.joints.size();
-    skinCluster_.paletteResource.Attach(adapter_->CreateBufferResource(sizeof(WellForGpu) * jointCount));
+    size_t jointSize = skeleton.joints.size();
+    size_t verticesSize = mesh_->GetData().vertices.size();
+
+    //Palette
     WellForGpu* mappedPalette = nullptr;
+    skinCluster_.paletteResource.Attach(adapter_->CreateBufferResource(sizeof(WellForGpu) * jointSize));
     skinCluster_.paletteResource->Map(0, nullptr, reinterpret_cast<void**>(&mappedPalette));
-    skinCluster_.mappedPalette = {mappedPalette, jointCount};
-    skinCluster_.srvIndex = common_->GetSRVManager()->Allocate();
-    common_->GetSRVManager()->CreateSRVforStructuredBuffer(skinCluster_.srvIndex, skinCluster_.paletteResource.Get(), static_cast<UINT>(data_->skeleton.value().joints.size()), sizeof(WellForGpu));
-    skinCluster_.paletteHandle = {
-        common_->GetSRVManager()->GetCPUHandle(skinCluster_.srvIndex),
-        common_->GetSRVManager()->GetGPUHandle(skinCluster_.srvIndex)
-    };
+    skinCluster_.mappedPalette = {mappedPalette, jointSize};
+    skinCluster_.srvIndex = srv->Allocate();
+    skinCluster_.paletteHandle= { srv->GetCPUHandle(skinCluster_.srvIndex), srv->GetGPUHandle(skinCluster_.srvIndex) };
+    srv->CreateSRVforStructuredBuffer(skinCluster_.srvIndex, skinCluster_.paletteResource.Get(), static_cast<UINT>(jointSize), sizeof(WellForGpu));
 
-    size_t verticesSize = common_->GetResourceRepository()->GetMeshRepository()->Get(data_->mesh).vertices.size();
-    skinCluster_.influenceResource.Attach(adapter_->CreateBufferResource(sizeof(VertexInfluence) * verticesSize));
+    //Influenc
     VertexInfluence* mappedInfluence = nullptr;
+    skinCluster_.influenceResource.Attach(adapter_->CreateBufferResource(sizeof(VertexInfluence) * verticesSize));
     skinCluster_.influenceResource->Map(0, nullptr, reinterpret_cast<void**>(&mappedInfluence));
-
-    if (!mappedInfluence){
-        Log::Send(Log::Level::ERR, "Failed to map influence resource");
-        Utils::Alert("Failed to map influence resource");
-        return;
-    }
-
     memset(mappedInfluence, 0, sizeof(VertexInfluence) * verticesSize);
     skinCluster_.mappedInfluence = { mappedInfluence, verticesSize };
 
@@ -246,44 +246,23 @@ void Model::CreateSkinCluster() {
     skinCluster_.influenceBufferView.SizeInBytes = static_cast<UINT>(sizeof(VertexInfluence) * verticesSize);
     skinCluster_.influenceBufferView.StrideInBytes = sizeof(VertexInfluence);
 
-    skinCluster_.inverseBindPoses.resize(skeleton.joints.size());
-    for (auto& bindPoseMatrix : skinCluster_.inverseBindPoses) {
-        bindPoseMatrix = MathUtils::Matrix::MakeIdentity();
+    skinCluster_.inverseBindPoses.resize(jointSize);
+    for (auto& inverseBindPose : skinCluster_.inverseBindPoses) {
+        inverseBindPose = MathUtils::Matrix::MakeIdentity();
     }
 
     for (const auto& jointWeight : data_->skinCluster) {
         auto itr = skeleton.map.find(jointWeight.first);
         if (itr == skeleton.map.end()){
-            Log::Send(Log::Level::ERR, "Joint not found in skeleton: " + jointWeight.first);
             continue;
         }
-
-        size_t jointIndex = itr->second;
-        if (jointIndex >= skeleton.joints.size()){
-            Log::Send(Log::Level::ERR, "Joint index out of bounds in skin cluster creation for joint: " + jointWeight.first);
-            Utils::Alert("Joint index out of bounds in skin cluster creation");
-            continue;
-        }
-        if (jointIndex >= skinCluster_.mappedPalette.size()) {
-            Log::Send(Log::Level::ERR, "Joint index out of bounds in skin cluster creation for joint: " + jointWeight.first);
-            Utils::Alert("Joint index out of bounds in skin cluster creation");
-            continue;
-        }
-
-        skinCluster_.inverseBindPoses[jointIndex] = jointWeight.second.inverseBindPose;
-
+        skinCluster_.inverseBindPoses[itr->second] = jointWeight.second.inverseBindPose;
         for (const auto& vertexWeight : jointWeight.second.weights) {
-            if (verticesSize <= vertexWeight.index) {
-                Log::Send(Log::Level::ERR, "Vertex index out of bounds in skin cluster creation for joint: " + jointWeight.first);
-                Utils::Alert("Vertex index out of bounds in skin cluster creation");
-                continue;
-            }
-
             auto& currentInfluence = skinCluster_.mappedInfluence[vertexWeight.index];
             for (uint32_t index = 0; index < MAX_INFLUENCE; ++index) {
-                if (currentInfluence.weights[index] == 0.0f){
+                if (currentInfluence.weights[index] == 0.f){
                     currentInfluence.weights[index] = vertexWeight.weight;
-                    currentInfluence.jointIndices[index] = static_cast<int32_t>(jointIndex);
+                    currentInfluence.jointIndices[index] = static_cast<int32_t>(itr->second);
                     break;
                 }
             }

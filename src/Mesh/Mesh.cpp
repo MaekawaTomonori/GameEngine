@@ -92,3 +92,7 @@ void Mesh::Debug() {
 void Mesh::SetVBV(D3D12_VERTEX_BUFFER_VIEW _vbv) {
     skinning_ = _vbv;
 }
+
+MeshData Mesh::GetData() const {
+    return data_;
+}
