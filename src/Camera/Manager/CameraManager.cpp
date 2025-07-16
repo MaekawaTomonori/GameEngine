@@ -1,7 +1,7 @@
 #include "CameraManager.hpp"
 
 #include "DebugUI.hpp"
-#include "Singleton.hpp"
+#include "Pattern/Singleton.hpp"
 #include "Utils.hpp"
 #include "imgui.h"
 #include "src/Json/Json.hpp"
@@ -113,7 +113,7 @@ void CameraManager::Save() {
     Json* json = Singleton<Json>::GetInstance();
     for (auto& [name, camera] : cameras_){
         json->SetValue("Camera", name, "Position", camera->transform_.translate);
-        json->SetValue("Camera", name, "Rotate", camera->transform_.rotate);
+        json->SetValue("Camera", name, "Rotate", std::get<Vector3>(camera->transform_.rotate));
     }
     json->Save("Camera");
 }

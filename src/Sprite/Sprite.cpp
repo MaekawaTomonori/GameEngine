@@ -1,6 +1,6 @@
 #include "Sprite.hpp"
 
-#include "Singleton.hpp"
+#include "Pattern/Singleton.hpp"
 #include "Utils.hpp"
 #include "imgui.h"
 #include "Math/MathUtils.hpp"
@@ -109,7 +109,7 @@ void Sprite::Update() {
     vd_[3].uv= {texRight, texTop};
 #pragma endregion
 
-    wd_->world = MathUtils::Matrix::MakeAffineMatrix(Vector3{size_.x, size_.y, 1}, {0, 0, rotation_}, {position_.x, position_.y, 0});
+    wd_->world = MathUtils::Matrix::MakeAffineMatrix({size_.x, size_.y, 1}, Vector3{0, 0, rotation_}, {position_.x, position_.y, 0});
     Matrix4x4 viewProjection = MathUtils::Matrix::MakeIdentity() * MathUtils::Matrix::MakeOrthogonalMatrix(0, static_cast<float>(adapter_->GetWidth()), 0, static_cast<float>(adapter_->GetHeight()), 0, 100.f);
 
     wd_->wvp = (wd_->world * viewProjection);

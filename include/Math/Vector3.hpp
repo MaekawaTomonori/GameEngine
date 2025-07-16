@@ -49,15 +49,15 @@ struct Vector3{
 		return sqrtf(x * x + y * y + z * z);
 	}
 
-	Vector3 Normalize() {
+	Vector3 Normalize() const {
         const float len = Length();
         if (len <= 0.0000001f) return *this;
 
-		this->x /= len;
-		this->y /= len;
-		this->z /= len;
-
-		return *this;
+		return Vector3{
+			x / len,
+			y / len,
+			z / len
+		};
 	}
 
 	static Vector3 Random();

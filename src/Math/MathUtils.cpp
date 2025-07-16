@@ -1,4 +1,6 @@
 #include "Math/MathUtils.hpp"
+
+#include <cassert>
 #include <random>
 
 #include "Math/Transform.hpp"
@@ -37,21 +39,31 @@ Matrix4x4 MathUtils::Matrix::MakeScaleMatrix(const Vector3& scale) {
     };
 }
 
-//Vector3 MathUtils::Matrix::Transform(const Vector3& vector, const Matrix4x4& matrix) {
-//    Vector3 v = {
-//        vector.x * matrix.matrix[0][0] + vector.y * matrix.matrix[1][0] + vector.z * matrix.matrix[2][0] + 1 * matrix.matrix[3][0],
-//        vector.x * matrix.matrix[0][1] + vector.y * matrix.matrix[1][1] + vector.z * matrix.matrix[2][1] + 1 * matrix.matrix[3][1],
-//        vector.x * matrix.matrix[0][2] + vector.y * matrix.matrix[1][2] + vector.z * matrix.matrix[2][2] + 1 * matrix.matrix[3][2]
-//    };
-//    const float w = vector.x * matrix.matrix[0][3] + vector.y * matrix.matrix[1][3] + vector.z * matrix.matrix[2][3] + 1 * matrix.matrix[3][3];
-//    assert(w != 0);
-//    if (w != 1){
-//        v.x /= w;
-//        v.y /= w;
-//        v.z /= w;
-//    }
-//    return v;
-//}
+Vector3 MathUtils::Matrix::Transform(const Vector3& vector, const Matrix4x4& matrix) {
+    Vector3 v = {
+        vector.x * matrix.matrix[0][0] + vector.y * matrix.matrix[1][0] + vector.z * matrix.matrix[2][0] + 1 * matrix.matrix[3][0],
+        vector.x * matrix.matrix[0][1] + vector.y * matrix.matrix[1][1] + vector.z * matrix.matrix[2][1] + 1 * matrix.matrix[3][1],
+        vector.x * matrix.matrix[0][2] + vector.y * matrix.matrix[1][2] + vector.z * matrix.matrix[2][2] + 1 * matrix.matrix[3][2]
+    };
+    const float w = vector.x * matrix.matrix[0][3] + vector.y * matrix.matrix[1][3] + vector.z * matrix.matrix[2][3] + 1 * matrix.matrix[3][3];
+    assert(w != 0);
+    if (w != 1){
+        v.x /= w;
+        v.y /= w;
+        v.z /= w;
+    }
+    return v;
+}
+
+Vector4 MathUtils::Matrix::Transform(const Vector4& vector, const Matrix4x4& matrix) {
+    Vector4 v = {
+        vector.x * matrix.matrix[0][0] + vector.y * matrix.matrix[1][0] + vector.z * matrix.matrix[2][0] + vector.w * matrix.matrix[3][0],
+        vector.x * matrix.matrix[0][1] + vector.y * matrix.matrix[1][1] + vector.z * matrix.matrix[2][1] + vector.w * matrix.matrix[3][1],
+        vector.x * matrix.matrix[0][2] + vector.y * matrix.matrix[1][2] + vector.z * matrix.matrix[2][2] + vector.w * matrix.matrix[3][2],
+        vector.x * matrix.matrix[0][3] + vector.y * matrix.matrix[1][3] + vector.z * matrix.matrix[2][3] + vector.w * matrix.matrix[3][3]
+    };
+    return v;
+}
 
 Matrix4x4 MathUtils::Matrix::MakeRotateX(const float rad) {
     return {
@@ -80,8 +92,26 @@ Matrix4x4 MathUtils::Matrix::MakeRotateZ(const float rad) {
     };
 }
 
+Matrix4x4 MathUtils::Matrix::MakeRotate(const Quaternion& rotate) {
+    float x2 = rotate.x * rotate.x;
+    float y2 = rotate.y * rotate.y;
+    float z2 = rotate.z * rotate.z;
+    float xy = rotate.x * rotate.y;
+    float xz = rotate.x * rotate.z;
+    float xw = rotate.x * rotate.w;
+    float yz = rotate.y * rotate.z;
+    float yw = rotate.y * rotate.w;
+    float zw = rotate.z * rotate.w;
+    return {
+        1.f - 2.f * (y2 + z2), 2.f * (xy + zw), 2.f * (xz - yw), 0.f,
+        2.f * (xy - zw), 1.f - 2.f * (x2 + z2), 2.f * (yz + xw), 0.f,
+        2.f * (xz + yw), 2.f * (yz - xw), 1.f - 2.f * (x2 + y2), 0.f,
+        0.f, 0.f, 0.f, 1.f
+    };
+}
+
 Matrix4x4 MathUtils::Matrix::MakeAffineMatrix(const ::Transform& transform) {
-    return MakeAffineMatrix(transform.scale, transform.rotate, transform.translate);
+    return std::holds_alternative<Vector3>(transform.rotate) ? MakeAffineMatrix(transform.scale, std::get<Vector3>(transform.rotate), transform.translate) : MakeAffineMatrix(transform.scale, std::get<Quaternion>(transform.rotate), transform.translate);
 }
 
 Matrix4x4 MathUtils::Matrix::MakeAffineMatrix(const Vector3& scale, const Vector3& rotate, const Vector3& translate) {
@@ -94,8 +124,15 @@ Matrix4x4 MathUtils::Matrix::MakeAffineMatrix(const Vector3& scale, const Vector
     return scaleMat * rotateMat * translateMat;
 }
 
+Matrix4x4 MathUtils::Matrix::MakeAffineMatrix(const Vector3& scale, const Quaternion& rotate, const Vector3& translate) {
+    Matrix4x4 scaleMat = MakeScaleMatrix(scale);
+    Matrix4x4 rotateMat = MakeRotate(rotate);
+    Matrix4x4 translateMat = MakeTranslateMatrix(translate);
+    return scaleMat * rotateMat * translateMat;
+}
+
 Matrix4x4 MathUtils::Matrix::MakeAffineMatrix(const Matrix4x4& scale, const Matrix4x4& rotate,
-	const Matrix4x4& translate) {
+    const Matrix4x4& translate) {
     return scale * rotate * translate;
 }
 
@@ -133,16 +170,47 @@ Matrix4x4 MathUtils::Matrix::MakeViewportMatrix(float left, float right, float t
         (right - left) / 2, 0, 0, 0,
         0, -(top - bottom) / 2, 0, 0,
         0, 0, depthMax - depthMin, 0,
-        left + (right - left) / 2, top + (top - bottom) / 2, depthMin, 1
+        left + (right - left) / 2, bottom + (top - bottom) / 2, depthMin, 1
     };
 }
 
 float MathUtils::Random(float min, float max) {
-	std::random_device seed;
+    std::random_device seed;
     std::mt19937 random(seed());
 
     std::uniform_real_distribution<float> dist(min, max);
     return dist(random);
+}
+
+float MathUtils::Lerp(const float& a, const float& b, float t) {
+    return a + (b - a) * t;
+}
+
+Vector3 MathUtils::Lerp(const Vector3& a, const Vector3& b, float t) {
+    return Vector3{
+        Lerp(a.x, b.x, t),
+        Lerp(a.y, b.y, t),
+        Lerp(a.z, b.z, t)
+    };
+}
+
+Quaternion MathUtils::Slerp(const Quaternion& a, const Quaternion& b, const float t) {
+    float dot = a.x * b.x + a.y * b.y + a.z * b.z + a.w * b.w;
+    float epsilon = 1e-6f;
+
+    Quaternion b_temp = b;
+    if (dot < 0){
+        dot = -dot;
+        b_temp = { -b.x, -b.y, -b.z, -b.w };
+    }
+    if (1 - dot < epsilon){
+        return (a * (1.0f - t) + b_temp * t).Normalize();
+    }
+    float theta = acosf(dot);
+    float sinTheta = sinf(theta);
+    float s0 = sinf((1 - t) * theta) / sinTheta;
+    float s1 = sinf(t * theta) / sinTheta;
+    return (a * s0 + b_temp * s1).Normalize();
 }
 
 float MathUtils::Distance(const Vector3& a, const Vector3& b) {

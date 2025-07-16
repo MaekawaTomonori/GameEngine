@@ -1,32 +1,31 @@
 #include "Mesh.hpp"
 
-#include <cassert>
 #include <filesystem>
-#include <fstream>
 
-#include "Utils.hpp"
-#include "DebugUI.hpp"
-#include "Singleton.hpp"
 #include "imgui.h"
-#include "Math/Vector3.hpp"
+#include "DebugUI.hpp"
+
+#include "Math/MathUtils.hpp"
+#include "Pattern/Singleton.hpp"
 #include "src/Light/LightManager.hpp"
 #include "src/Texture/TextureManager.hpp"
 
-void Mesh::Initialize(DirectXAdapter* _adapter, const std::string &_directory, const std::string &_name) {
+void Mesh::Initialize(DirectXAdapter* _adapter, const std::string &_name, const MeshData& _raw) {
     adapter_ = _adapter;
     commandList_ = adapter_->GetCommandList();
     name_ = _name;
+    data_ = _raw;
 
-    LoadFile(_directory, _name);
-
-    vr_.Attach(adapter_->CreateBufferResource(sizeof(VertexData) * modelData_.vertices.size()));
+    vr_.Attach(adapter_->CreateBufferResource(sizeof(Vertex) * data_.vertices.size()));
 
     vbv_.BufferLocation = vr_->GetGPUVirtualAddress();
-    vbv_.SizeInBytes = static_cast<UINT>(sizeof(VertexData) * modelData_.vertices.size());
-    vbv_.StrideInBytes = sizeof(VertexData);
+    vbv_.SizeInBytes = static_cast<UINT>(sizeof(Vertex) * data_.vertices.size());
+    vbv_.StrideInBytes = sizeof(Vertex);
 
     vr_->Map(0, nullptr, reinterpret_cast<void**>(&vd_));
-    std::copy_n(modelData_.vertices.data(), modelData_.vertices.size(), vd_);
+    std::copy_n(data_.vertices.data(), data_.vertices.size(), vd_);
+
+    vbvs_.push_back(vbv_);
 
     mr_.Attach(adapter_->CreateBufferResource(sizeof(Material)));
     mr_->Map(0, nullptr, reinterpret_cast<void**>(&material_));
@@ -35,140 +34,63 @@ void Mesh::Initialize(DirectXAdapter* _adapter, const std::string &_directory, c
     material_->lighting = 0; // Default lighting
     material_->shininess = 100.f;
 
-    Singleton<TextureManager>::GetInstance()->Load(modelData_.material.texture);
-    texture_ = modelData_.material.texture;
+    if (!data_.indices.empty()){
+        ir_.Attach(adapter_->CreateBufferResource(sizeof(uint32_t) * data_.indices.size()));
+        ibv_.BufferLocation = ir_->GetGPUVirtualAddress();
+        ibv_.SizeInBytes = static_cast<UINT>(sizeof(uint32_t) * data_.indices.size());
+        ibv_.Format = DXGI_FORMAT_R32_UINT;
+
+        ir_->Map(0, nullptr, reinterpret_cast<void**>(&id_));
+        std::copy_n(data_.indices.data(), data_.indices.size(), id_);
+    }
+
+    Singleton<TextureManager>::GetInstance()->Load(data_.texture);
+    texture_ = data_.texture;
+
+    lighting_ = true;
 }
 
 void Mesh::Update() {
 }
 
-void Mesh::Draw() {
+void Mesh::Draw() const {
     if (!commandList_)return;
 
     commandList_->IASetPrimitiveTopology(D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-    commandList_->IASetVertexBuffers(0, 1, &vbv_);
-	commandList_->SetGraphicsRootConstantBufferView(0, mr_->GetGPUVirtualAddress());
+
+    commandList_->IASetVertexBuffers(0, static_cast<UINT>(vbvs_.size()), vbvs_.data());
+
+    if (!data_.indices.empty()){
+        commandList_->IASetIndexBuffer(&ibv_);
+    }
+    commandList_->SetGraphicsRootConstantBufferView(0, mr_->GetGPUVirtualAddress());
     commandList_->SetGraphicsRootDescriptorTable(2, Singleton<TextureManager>::GetInstance()->GetGPUHandle(texture_));
 
     if (lighting_) {
+        material_->lighting = 1;
         Singleton<LightManager>::GetInstance()->Draw();
     }
-
-    commandList_->DrawInstanced(static_cast<UINT>(modelData_.vertices.size()), 1, 0, 0);
+    if (!data_.indices.empty()){
+        commandList_->DrawIndexedInstanced(static_cast<UINT>(data_.indices.size()), 1, 0, 0, 0);
+    } else {
+        commandList_->DrawInstanced(static_cast<UINT>(data_.vertices.size()), 1, 0, 0);
+    }
 }
 
 void Mesh::Debug() {
     ImGui::ColorEdit4("Color", &material_->color.x);
     ImGui::Checkbox("EnableLighting", &lighting_);
     if (lighting_) {
-        material_->lighting = 1;
         ImGui::DragFloat("Shininess", &material_->shininess, 0.1f, 0.f, 100.f);
     } else{
         material_->lighting = 0;
     }
 }
 
-void Mesh::LoadFile(const std::string &_directory, const std::string &_name) {
-    std::filesystem::path directory(_directory + _name);
-    //obj
-    if (exists(directory / (_name +".obj"))){
-        LoadObj(Utils::Convert(directory), _name);
-        return;
-    }
-    //gltf
-    if (exists(directory / (_name + ".gltf"))) {
-        //LoadGltf((file/".gltf").c_str());
-        return;
-    }
-
-    Utils::Alert("Mesh::LoadFile: No valid mesh file found in directory: " + _directory);
+void Mesh::SetVBV(const D3D12_VERTEX_BUFFER_VIEW _vbv) {
+    vbvs_.push_back(_vbv);
 }
 
-void Mesh::LoadObj(const std::string& _directory, const std::string &_name) {
-    ModelData modelData {};
-    std::vector<Vector4> positions;
-    std::vector<Vector3> normals;
-    std::vector<Vector2> texcoords;
-    std::string line;
-
-    std::string directory = (_directory + '/');
-
-    std::ifstream file(directory + _name + ".obj");
-    assert(file.is_open());
-
-    while (std::getline(file, line)){
-        std::string identifier;
-        std::istringstream s(line);
-        s >> identifier;
-
-        if (identifier == "v"){
-            Vector4 position {};
-            s >> position.x >> position.y >> position.z;
-            position.w = 1;
-            positions.push_back(position);
-        } else if (identifier == "vt"){
-            Vector2 texcoord {};
-            s >> texcoord.x >> texcoord.y;
-            texcoords.push_back(texcoord);
-        } else if (identifier == "vn"){
-            Vector3 normal {};
-            s >> normal.x >> normal.y >> normal.z;
-            normals.push_back(normal);
-        } else if (identifier == "f"){
-            VertexData triangle[3];
-            for (auto &faceVertex: triangle) {
-                std::string vertexDefinition;
-                s >> vertexDefinition;
-
-                std::istringstream v(vertexDefinition);
-                uint32_t elementIndices[3];
-
-                for (unsigned int &elementIndex: elementIndices) {
-                    std::string index;
-                    std::getline(v, index, '/');
-                    elementIndex = std::stoi(index);
-                }
-
-                Vector4 position = positions[elementIndices[0] - 1];
-                Vector2 texcoord = texcoords[elementIndices[1] - 1];
-                Vector3 normal = normals[elementIndices[2] - 1];
-
-                position.x *= -1;
-                texcoord.y = 1 - texcoord.y;
-                normal.x *= -1;
-
-                faceVertex = {position, texcoord, normal};
-            }
-            modelData.vertices.push_back(triangle[2]);
-            modelData.vertices.push_back(triangle[1]);
-            modelData.vertices.push_back(triangle[0]);
-        } else if (identifier == "mtllib"){
-            std::string materialFileName;
-            s >> materialFileName;
-
-            modelData.material = LoadMaterialTemplateFile(directory, materialFileName);
-        }
-    }
-
-    modelData_ = modelData;
-}
-
-Mesh::MaterialData Mesh::LoadMaterialTemplateFile(std::string &_directory, std::string &_name) {
-    MaterialData materialData {};
-    std::string line;
-    std::ifstream file(_directory + "/" + _name);
-    assert(file.is_open());
-    while (std::getline(file, line)){
-        std::string identifier;
-        std::istringstream s(line);
-        s >> identifier;
-
-        if (identifier == "map_Kd"){
-            std::string textureFileName;
-            s >> textureFileName;
-
-            materialData.texture = _directory + "/" + textureFileName;
-        }
-    }
-    return materialData;
+MeshData Mesh::GetData() const {
+    return data_;
 }

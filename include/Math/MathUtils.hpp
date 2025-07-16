@@ -4,20 +4,21 @@
 #include "Matrix.hpp"
 #include "Transform.hpp"
 #include "Vector3.hpp"
+#include "Vector4.hpp"
 
 //struct Transform;
 
 namespace MathUtils{
 	constexpr float F_PI = 3.14159265358979323846264338327950288f;
-	constexpr double PI = 3.14159265358979323846264338327950288;
+	constexpr double PI  = 3.14159265358979323846264338327950288;
 
     float Random(float min, float max);
     Vector3 Random(Vector3 min, Vector3 max);
 
-    template<typename Type>
-    Type Lerp(const Type& a, const Type& b, float t) {
-        return a + (b - a) * t;
-    }
+    float Lerp(const float& a, const float& b, float t);
+
+    Vector3 Lerp(const Vector3& a, const Vector3& b, float t);
+    Quaternion Slerp(const Quaternion& a, const Quaternion& b, float t);
 
     template<typename Type>
     Type Factorial(Type n) {
@@ -41,12 +42,15 @@ namespace MathUtils{
         Matrix4x4 MakeTranslateMatrix(const Vector3& velocity);
         Matrix4x4 MakeScaleMatrix(const Vector3& scale);
         Vector3 Transform(const Vector3& vector, const Matrix4x4& matrix);
+        Vector4 Transform(const Vector4& vector, const Matrix4x4& matrix);
 
         Matrix4x4 MakeRotateX(float rad);
         Matrix4x4 MakeRotateY(float rad);
         Matrix4x4 MakeRotateZ(float rad);
+        Matrix4x4 MakeRotate(const Quaternion& rotate);
         Matrix4x4 MakeAffineMatrix(const ::Transform& transform);
         Matrix4x4 MakeAffineMatrix(const Vector3& scale, const Vector3& rotate, const Vector3& translate);
+        Matrix4x4 MakeAffineMatrix(const Vector3& scale, const Quaternion& rotate, const Vector3& translate);
         Matrix4x4 MakeAffineMatrix(const Matrix4x4& scale, const Matrix4x4& rotate, const Matrix4x4& translate);
 
         Matrix4x4 MakeOrthogonalMatrix(float left, float right, float top, float bottom, float znear, float zfar);

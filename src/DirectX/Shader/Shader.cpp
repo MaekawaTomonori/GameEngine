@@ -46,7 +46,8 @@ IDxcBlob* Shader::Compile(const std::wstring& directoryPath, const std::wstring&
     HRESULT hResult = S_FALSE;
     IDxcBlobEncoding* shaderSource = nullptr;
     std::wstring fullPath = directoryPath + filePath;
-    if (FAILED(dxcUtils->LoadFile(fullPath.c_str(), nullptr, &shaderSource))) {
+    hResult = dxcUtils->LoadFile(fullPath.c_str(), nullptr, &shaderSource);
+    if (FAILED(hResult)) {
         Log::Send(Log::Level::ERR, Utils::Convert(std::format(L"Failed to load shader file: {}", fullPath)));
         Utils::Alert("Failed to load shader file: " + Utils::Convert(fullPath));
     }
@@ -81,7 +82,7 @@ IDxcBlob* Shader::Compile(const std::wstring& directoryPath, const std::wstring&
     shaderResult->GetOutput(DXC_OUT_ERRORS, IID_PPV_ARGS(&shaderError), nullptr);
     if (shaderError != nullptr && shaderError->GetStringLength() != 0){
         Log::Send(Log::Level::ERR, shaderError->GetStringPointer());
-
+        Utils::Alert("Shader Compilation Error");
         assert(false);
     }
 
