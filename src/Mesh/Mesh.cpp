@@ -39,7 +39,7 @@ void Mesh::Initialize(DirectXAdapter* _adapter, const std::string &_name, const 
         ibv_.Format = DXGI_FORMAT_R32_UINT;
 
         ir_->Map(0, nullptr, reinterpret_cast<void**>(&id_));
-        memcpy(id_, data_.indices.data(), sizeof(uint32_t) * data_.indices.size());
+        std::copy_n(data_.indices.data(), data_.indices.size(), id_);
     }
 
     Singleton<TextureManager>::GetInstance()->Load(data_.texture);
