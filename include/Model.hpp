@@ -64,6 +64,7 @@ class Model{
     CameraForGpu* cd_ = nullptr;
 
     SkinCluster skinCluster_;
+
 public:
     Model();
     void Initialize(const std::string& _name);
