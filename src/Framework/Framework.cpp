@@ -3,6 +3,7 @@
 #include "Log.hpp"
 #include "IGame.hpp"
 #include "Pattern/Singleton.hpp"
+#include "src/Renderer/RenderPhase.hpp"
 
 Framework::Framework() {
     config_ = GameEngine::Config::Default();
@@ -15,6 +16,9 @@ Framework::Framework() {
 
     postProcessor_ = std::make_unique<PostProcessExecutor>();
     postProcessor_->Initialize(dxAdapter_.get());
+
+    renderer_ = std::make_unique<Renderer>();
+    renderer_->Initialize(dxAdapter_.get(), postProcessor_.get());
 
     resources_ = std::make_unique<ResourceRepository>();
     resources_->Initialize();
@@ -85,10 +89,10 @@ void Framework::Draw() const {
 
     srv_->PreDraw();
 
-    dxAdapter_->Register([&] { scene_->Draw(); });
-    dxAdapter_->Register([&] {postProcessor_->Execute(); });
-    dxAdapter_->Register([&](){debugUI_->Render(); });
-    dxAdapter_->Render();
+    // 新しいRenderer使用
+    renderer_->Register([&] { scene_->Draw(); }, RenderPhase::Scene);
+    renderer_->Register([&] { debugUI_->Render(); }, RenderPhase::UI);
+    renderer_->Render();
 }
 
 void Framework::Shutdown() {

@@ -222,6 +222,21 @@
     <ClInclude Include="src\PostProcess\IPostEffect.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="src\Renderer\RenderPhase.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Renderer\Renderer.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DirectX\GraphicsPipeline\Object\PipelineStateObject.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DirectX\GraphicsPipeline\Object\RootSignature.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DirectX\GraphicsPipeline\Object\InputLayout.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Scheduler\Scheduler.cpp">
@@ -366,6 +381,18 @@
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="src\PostProcess\Executor\PostProcessExecutor.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Renderer\Renderer.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DirectX\GraphicsPipeline\Object\PipelineStateObject.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DirectX\GraphicsPipeline\Object\RootSignature.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DirectX\GraphicsPipeline\Object\InputLayout.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>

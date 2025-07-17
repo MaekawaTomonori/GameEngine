@@ -81,8 +81,15 @@ public:
     ID3D12Resource* CreateRenderTextureResource(uint32_t _width, uint32_t _height, DXGI_FORMAT _format, const Vector4& _cc);
 
     void Register(std::function<void()> _task);
-    void Render();
     void PreProcess() const;
+    void SetSwapChainRenderTarget() const;
+    
+    // Renderer用のメソッド
+    void BeginFrame();
+    void EndFrame();
+    
+    // DescriptorHandle取得用
+    D3D12_CPU_DESCRIPTOR_HANDLE GetDSVHandle() const;
 
 private:
     void EnableDebugLayer();
@@ -96,6 +103,7 @@ private:
     bool CreateViewportAndScissor();
     bool CreateLimiter();
 
+    void Present();
     void Wait();
 
 public: //Accessor

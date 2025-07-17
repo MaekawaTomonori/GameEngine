@@ -91,7 +91,7 @@ ID3D12Resource* DirectXAdapter::CreateRenderTextureResource(uint32_t _width, uin
     desc.Height = _height;
     desc.MipLevels = 1;
     desc.DepthOrArraySize = 1;
-    desc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
+    desc.Format = _format;
     desc.SampleDesc.Count = 1;
     desc.Dimension = D3D12_RESOURCE_DIMENSION_TEXTURE2D;
     desc.Flags = D3D12_RESOURCE_FLAG_ALLOW_RENDER_TARGET;
@@ -109,8 +109,8 @@ ID3D12Resource* DirectXAdapter::CreateRenderTextureResource(uint32_t _width, uin
     ID3D12Resource* resource = nullptr;
     HRESULT hr = device_->CreateCommittedResource(&properties, D3D12_HEAP_FLAG_NONE, &desc, D3D12_RESOURCE_STATE_RENDER_TARGET, &clearValue, IID_PPV_ARGS(&resource));
     if (FAILED(hr)){
-        Log::Send(Log::Level::ERR, "Failed to create depth stencil resource");
-        Utils::Alert("Failed to create depth stencil resource");
+        Log::Send(Log::Level::ERR, "Failed to create render texture resource");
+        Utils::Alert("Failed to create render texture resource");
         assert(false);
     }
 
@@ -131,10 +131,16 @@ void DirectXAdapter::PreProcess() const {
     cList_->RSSetScissorRects(1, &scissorRect_);
 }
 
-void DirectXAdapter::Render() {
+void DirectXAdapter::BeginFrame() {
     isRunning_ = true;
+}
 
-    // PreDraw
+void DirectXAdapter::EndFrame() {
+    Present();
+    isRunning_ = false;
+}
+
+void DirectXAdapter::SetSwapChainRenderTarget() const {
     UINT bbi = swapChain_->GetCurrentBackBufferIndex();
 
     D3D12_RESOURCE_BARRIER barrier = {};
@@ -153,23 +159,16 @@ void DirectXAdapter::Render() {
 
     cList_->RSSetViewports(1, &viewport_);
     cList_->RSSetScissorRects(1, &scissorRect_);
+}
 
-    // Execute rendering commands what don't need to apply post effects
-    while (!tasks_.empty()){
-        auto command = tasks_.front();
-        tasks_.pop();
-        if (command){
-            command();
-        }
-    }
-
-    if (!tasks_.empty()){
-        Log::Send(Log::Level::WARNING, "There are still pending tasks in the queue");
-    }
-    tasks_.swap(pending_);
-    pending_ = {};
-
+void DirectXAdapter::Present() {
+    UINT bbi = swapChain_->GetCurrentBackBufferIndex();
+    
     // PostDraw
+    D3D12_RESOURCE_BARRIER barrier = {};
+    barrier.Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
+    barrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
+    barrier.Transition.pResource = swapChainResources_[bbi].Get();
     barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET;
     barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_PRESENT;
     cList_->ResourceBarrier(1, &barrier);
@@ -188,13 +187,10 @@ void DirectXAdapter::Render() {
         Utils::Alert("Failed to reset command allocator");
         return;
     }
-
     if (FAILED(cList_->Reset(cAllocator_.Get(), nullptr))){
         Utils::Alert("Failed to reset command list");
         return;
     }
-
-    isRunning_ = false;
 }
 
 void DirectXAdapter::EnableDebugLayer() {
@@ -470,4 +466,8 @@ ID3D12Fence* DirectXAdapter::GetFence() const {
 
 HWND DirectXAdapter::GetWindowHandle() const {
     return hWnd_;
+}
+
+D3D12_CPU_DESCRIPTOR_HANDLE DirectXAdapter::GetDSVHandle() const {
+    return dsvHeap_->GetCPUHandle(0);
 }
