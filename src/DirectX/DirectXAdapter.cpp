@@ -122,9 +122,19 @@ void DirectXAdapter::Register(std::function<void()> _task) {
     else pending_.push(std::move(_task));
 }
 
+// without render target settings
+void DirectXAdapter::PreProcess() const {
+    D3D12_CPU_DESCRIPTOR_HANDLE dsvHandle = dsvHeap_->GetCPUHandle(0);
+    cList_->ClearDepthStencilView(dsvHandle, D3D12_CLEAR_FLAG_DEPTH, 1.f, 0, 0, nullptr);
+
+    cList_->RSSetViewports(1, &viewport_);
+    cList_->RSSetScissorRects(1, &scissorRect_);
+}
+
 void DirectXAdapter::Render() {
     isRunning_ = true;
 
+    // PreDraw
     UINT bbi = swapChain_->GetCurrentBackBufferIndex();
 
     D3D12_RESOURCE_BARRIER barrier = {};
@@ -137,14 +147,14 @@ void DirectXAdapter::Render() {
     cList_->ResourceBarrier(1, &barrier);
 
     D3D12_CPU_DESCRIPTOR_HANDLE dsvHandle = dsvHeap_->GetCPUHandle(0);
+
     cList_->OMSetRenderTargets(1, &rtvHandles_[bbi], false, &dsvHandle);
     cList_->ClearRenderTargetView(rtvHandles_[bbi], &back.x, 0, nullptr);
-    cList_->ClearDepthStencilView(dsvHandle, D3D12_CLEAR_FLAG_DEPTH, 1.f, 0, 0, nullptr);
 
     cList_->RSSetViewports(1, &viewport_);
     cList_->RSSetScissorRects(1, &scissorRect_);
 
-    // Execute rendering commands
+    // Execute rendering commands what don't need to apply post effects
     while (!tasks_.empty()){
         auto command = tasks_.front();
         tasks_.pop();
@@ -159,6 +169,7 @@ void DirectXAdapter::Render() {
     tasks_.swap(pending_);
     pending_ = {};
 
+    // PostDraw
     barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET;
     barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_PRESENT;
     cList_->ResourceBarrier(1, &barrier);
