@@ -3,12 +3,12 @@
 #include "Log.hpp"
 #include "Utils.hpp"
 
-RootSignature RootSignature::SetParameter(D3D12_ROOT_PARAMETER _parameter) {
+RootSignature RootSignature::SetParameter(const D3D12_ROOT_PARAMETER& _parameter) {
     parameters_.push_back(_parameter);
     return *this;
 }
 
-RootSignature RootSignature::SetSampler(D3D12_STATIC_SAMPLER_DESC _sampler) {
+RootSignature RootSignature::SetSampler(const D3D12_STATIC_SAMPLER_DESC& _sampler) {
     samplers_.push_back(_sampler);
     return *this;
 }

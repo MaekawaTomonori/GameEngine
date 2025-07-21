@@ -14,8 +14,8 @@ class RootSignature {
     std::vector<D3D12_STATIC_SAMPLER_DESC> samplers_{};
 
 public:
-    RootSignature SetParameter(D3D12_ROOT_PARAMETER _parameter);
-    RootSignature SetSampler(D3D12_STATIC_SAMPLER_DESC _sampler);
+    RootSignature SetParameter(const D3D12_ROOT_PARAMETER& _parameter);
+    RootSignature SetSampler(const D3D12_STATIC_SAMPLER_DESC& _sampler);
     void Create(ID3D12Device* _device);
     ID3D12RootSignature* Get() const;
 }; // class RootSignature

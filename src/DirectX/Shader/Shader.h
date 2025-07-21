@@ -13,15 +13,13 @@ class Shader{
     std::wstring name_;
     Microsoft::WRL::ComPtr<IDxcBlob> vertexShader_;
     Microsoft::WRL::ComPtr<IDxcBlob> pixelShader_;
-    IDxcBlob* Compile(const std::wstring& directoryPath_, const std::wstring& filePath, const wchar_t* profile, IDxcUtils* dxcUtils, IDxcCompiler3* dxcCompiler, IDxcIncludeHandler* includeHandler);
-
-    void CreateDxc();
-    void CompileShaders();
 
 public:
-    bool Create(const std::wstring& name);
+    Shader() = default;
+    Shader(const std::wstring& _name);
+    bool Create(const std::wstring& _name);
 
-    Shader* PSLoad(const std::wstring& name);
+    Shader* PSLoad(const std::wstring& _name);
 
     IDxcBlob* GetVertexShader() const {
         return vertexShader_.Get();
@@ -29,6 +27,11 @@ public:
     IDxcBlob* GetPixelShader() const {
         return pixelShader_.Get();
     }
+
+private:
+    void CreateDxc();
+    void CompileShaders();
+    IDxcBlob* Compile(const std::wstring& directoryPath_, const std::wstring& _filePath, const wchar_t* _profile, IDxcUtils* _dxcUtils, IDxcCompiler3* _dxcCompiler, IDxcIncludeHandler* _includeHandler);
 };
 
 

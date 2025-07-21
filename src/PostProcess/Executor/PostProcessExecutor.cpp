@@ -18,15 +18,39 @@ void PostProcessExecutor::Initialize(DirectXAdapter* _adapter) {
     // シーン用RenderTextureを作成
     CreateSceneRenderTexture();
 
+    D3D12_DESCRIPTOR_RANGE range{
+        .RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV,
+        .NumDescriptors = 1,
+        .BaseShaderRegister = 0,
+        .RegisterSpace = 0,
+        .OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND
+    };
+
     //Create PSO
     pso_ = std::make_unique<PipelineStateObject>(adapter_);
     pso_->SetRootSignature(
-        RootSignature().SetParameter({
-            .ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV,
-            .Descriptor = {.ShaderRegister = 0, .RegisterSpace = 0 },
+        RootSignature()
+        .SetParameter({
+            .ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE,
+            .DescriptorTable = {
+                .NumDescriptorRanges = 1,
+                .pDescriptorRanges = &range
+            },
             .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL
         })
-    ).Create();
+        .SetSampler({
+            .Filter = D3D12_FILTER_MIN_MAG_MIP_LINEAR,
+            .AddressU = D3D12_TEXTURE_ADDRESS_MODE_WRAP,
+            .AddressV = D3D12_TEXTURE_ADDRESS_MODE_WRAP,
+            .AddressW = D3D12_TEXTURE_ADDRESS_MODE_WRAP,
+            .ComparisonFunc = D3D12_COMPARISON_FUNC_NEVER,
+            .MaxLOD = D3D12_FLOAT32_MAX,
+            .ShaderRegister = 0,
+            .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL
+        })
+    )
+    .SetShader(std::make_unique<Shader>(L"CpyImg"))
+    .Create();
 }
 
 void PostProcessExecutor::Add(std::unique_ptr<IPostEffect> _effect) {
@@ -43,15 +67,7 @@ void PostProcessExecutor::BeginSceneCapture() {
         return;
     }
     
-    // シーンRenderTextureをRenderTargetに設定
-    D3D12_RESOURCE_BARRIER barrier = {};
-    barrier.Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
-    barrier.Transition.pResource = sceneRenderTexture_.Get();
-    barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET;
-    barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE ;
-    
-    adapter_->GetCommandList()->ResourceBarrier(1, &barrier);
-    
+    // RenderTextureは既にRENDER_TARGET状態で作成されているので、バリアは不要
     // 深度ステンシルビューを取得してセット
     D3D12_CPU_DESCRIPTOR_HANDLE dsvHandle = adapter_->GetDSVHandle();
     adapter_->GetCommandList()->OMSetRenderTargets(1, &sceneRTV_, false, &dsvHandle);
@@ -59,8 +75,19 @@ void PostProcessExecutor::BeginSceneCapture() {
     // クリア
     Vector4 clearColor = {0.0f, 0.0f, 0.0f, 0.0f};
     adapter_->GetCommandList()->ClearRenderTargetView(sceneRTV_, &clearColor.x, 0, nullptr);
-
-    adapter_->PreProcess();
+    
+    // ViewportとScissorを設定
+    D3D12_VIEWPORT viewport = {};
+    viewport.Width = static_cast<float>(adapter_->GetWidth());
+    viewport.Height = static_cast<float>(adapter_->GetHeight());
+    viewport.MaxDepth = 1.0f;
+    
+    D3D12_RECT scissor = {};
+    scissor.right = static_cast<LONG>(adapter_->GetWidth());
+    scissor.bottom = static_cast<LONG>(adapter_->GetHeight());
+    
+    adapter_->GetCommandList()->RSSetViewports(1, &viewport);
+    adapter_->GetCommandList()->RSSetScissorRects(1, &scissor);
 }
 
 void PostProcessExecutor::EndSceneCapture() {
@@ -90,14 +117,19 @@ void PostProcessExecutor::Execute() {
 }
 
 void PostProcessExecutor::Draw() {
-    if (!adapter_) {
-        Log::Send(Log::Level::ERR, "DirectXAdapter is not initialized");
+    if (!adapter_ || !pso_) {
+        Log::Send(Log::Level::ERR, "PostProcessExecutor is not properly initialized");
         return;
     }
     
-    // CopyImgシェーダーを使用してフルスクリーンクワッドを三角形で描画
-    // シーンテクスチャをスワップチェーンに描画
-    RenderFullscreenQuad();
+    // PSO設定
+    pso_->DrawCall();
+    
+    // SRVを設定（TODO: 実際のSRVが作成されたら有効化）
+    // adapter_->GetCommandList()->SetGraphicsRootDescriptorTable(0, sceneSRV_);
+    
+    // フルスクリーンクワッドを三角形で描画
+    adapter_->GetCommandList()->DrawInstanced(3, 1, 0, 0);
 }
 
 void PostProcessExecutor::CreateSceneRenderTexture() {
@@ -134,6 +166,10 @@ void PostProcessExecutor::CreateSceneRenderTexture() {
     rtvDesc.ViewDimension = D3D12_RTV_DIMENSION_TEXTURE2D;
     
     adapter_->GetDevice()->CreateRenderTargetView(sceneRenderTexture_.Get(), &rtvDesc, sceneRTV_);
+    
+    // SRVを作成（SRVManagerを使用する必要があるが、今は簡易実装）
+    // TODO: 実際にはSRVManagerを使用してSRVを作成し、sceneSRV_に設定
+    // sceneSRV_ = srvManager->CreateSRVForTexture2D(...);
     
     Log::Send(Log::Level::INFO, "PostProcessExecutor scene render texture created successfully");
 }

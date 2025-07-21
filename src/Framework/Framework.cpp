@@ -89,7 +89,6 @@ void Framework::Draw() const {
 
     srv_->PreDraw();
 
-    // 新しいRenderer使用
     renderer_->Register([&] { scene_->Draw(); }, RenderPhase::Scene);
     renderer_->Register([&] { debugUI_->Render(); }, RenderPhase::UI);
     renderer_->Render();

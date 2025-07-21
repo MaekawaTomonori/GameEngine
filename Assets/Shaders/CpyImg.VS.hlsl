@@ -6,7 +6,7 @@ static const float4 POSITIONS[VERTEX_COUNT] = {
     {-1.f, 1.f, 0.f, 1.f},
     {3.f, 1.f, 0.f, 1.f},
     {-1.f, -3.f, 0.f, 1.f}
-}
+};
 
 static const float2 TEXCOORDS[VERTEX_COUNT] = {
     {0.f, 0.f},
@@ -19,4 +19,4 @@ VertexShaderOutput main(uint vertexId : SV_VertexID) {
     output.position = POSITIONS[vertexId];
     output.texCoord = TEXCOORDS[vertexId];
     return output;
-}
+};
