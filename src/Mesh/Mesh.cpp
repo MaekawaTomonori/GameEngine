@@ -16,31 +16,34 @@ void Mesh::Initialize(DirectXAdapter* _adapter, const std::string &_name, const 
     name_ = _name;
     data_ = _raw;
 
-    vr_.Attach(adapter_->CreateBufferResource(sizeof(Vertex) * data_.vertices.size()));
+    vr_ = std::make_unique<DX12Resource>();
+    vr_->Create(adapter_->CreateBufferResource(sizeof(Vertex) * data_.vertices.size()));
 
-    vbv_.BufferLocation = vr_->GetGPUVirtualAddress();
+    vbv_.BufferLocation = vr_->Get()->GetGPUVirtualAddress();
     vbv_.SizeInBytes = static_cast<UINT>(sizeof(Vertex) * data_.vertices.size());
     vbv_.StrideInBytes = sizeof(Vertex);
 
-    vr_->Map(0, nullptr, reinterpret_cast<void**>(&vd_));
+    vr_->Get()->Map(0, nullptr, reinterpret_cast<void**>(&vd_));
     std::copy_n(data_.vertices.data(), data_.vertices.size(), vd_);
 
     vbvs_.push_back(vbv_);
 
-    mr_.Attach(adapter_->CreateBufferResource(sizeof(Material)));
-    mr_->Map(0, nullptr, reinterpret_cast<void**>(&material_));
+    mr_ = std::make_unique<DX12Resource>();
+    mr_->Create(adapter_->CreateBufferResource(sizeof(Material)));
+    mr_->Get()->Map(0, nullptr, reinterpret_cast<void**>(&material_));
 
     material_->color = Vector4(1.0f, 1.0f, 1.0f, 1.0f);
     material_->lighting = 0; // Default lighting
     material_->shininess = 100.f;
 
     if (!data_.indices.empty()){
-        ir_.Attach(adapter_->CreateBufferResource(sizeof(uint32_t) * data_.indices.size()));
-        ibv_.BufferLocation = ir_->GetGPUVirtualAddress();
+        ir_ = std::make_unique<DX12Resource>();
+        ir_->Create(adapter_->CreateBufferResource(sizeof(uint32_t) * data_.indices.size()));
+        ibv_.BufferLocation = ir_->Get()->GetGPUVirtualAddress();
         ibv_.SizeInBytes = static_cast<UINT>(sizeof(uint32_t) * data_.indices.size());
         ibv_.Format = DXGI_FORMAT_R32_UINT;
 
-        ir_->Map(0, nullptr, reinterpret_cast<void**>(&id_));
+        ir_->Get()->Map(0, nullptr, reinterpret_cast<void**>(&id_));
         std::copy_n(data_.indices.data(), data_.indices.size(), id_);
     }
 

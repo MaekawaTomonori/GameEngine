@@ -13,6 +13,7 @@
 #include "FrameRate/FrameRateLimiter.hpp"
 #include "Heap/Heap.hpp"
 #include "Math/Vector4.hpp"
+#include "Resource/DX12Resource.hpp"
 
 class DirectXAdapter{
     /// <summary>
@@ -39,7 +40,7 @@ class DirectXAdapter{
     Microsoft::WRL::ComPtr<IDXGISwapChain4> swapChain_;
 
     //Resource
-    std::vector<Microsoft::WRL::ComPtr<ID3D12Resource>> swapChainResources_;
+    std::vector<std::unique_ptr<DX12Resource>> swapChainResources_;
 
     //Fence
     Microsoft::WRL::ComPtr<ID3D12Fence> fence_;
@@ -51,7 +52,7 @@ class DirectXAdapter{
     std::vector<D3D12_CPU_DESCRIPTOR_HANDLE> rtvHandles_;
 
     //DSV
-    Microsoft::WRL::ComPtr<ID3D12Resource> depthStencil_;
+    std::unique_ptr<DX12Resource> depthStencil_;
     std::unique_ptr<Heap> dsvHeap_;
 
     //Background color

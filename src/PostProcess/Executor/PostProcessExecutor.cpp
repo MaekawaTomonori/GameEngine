@@ -95,13 +95,7 @@ void PostProcessExecutor::EndSceneCapture() {
         return;
     }
     
-    D3D12_RESOURCE_BARRIER barrier = {};
-    barrier.Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
-    barrier.Transition.pResource = sceneRenderTexture_.Get();
-    barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET;
-    barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE;
-    
-    adapter_->GetCommandList()->ResourceBarrier(1, &barrier);
+    sceneRenderTexture_->ChangeState(adapter_->GetCommandList(), D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE);
 }
 
 void PostProcessExecutor::Execute() {
@@ -146,14 +140,15 @@ void PostProcessExecutor::CreateSceneRenderTexture() {
 
     // 画面サイズのRenderTextureを作成
     Vector4 clearColor{0.0f, 0.0f, 0.0f, 0.0f};
-    sceneRenderTexture_.Attach(adapter_->CreateRenderTextureResource(
+    sceneRenderTexture_ = std::make_unique<DX12Resource>();
+    sceneRenderTexture_->Create(adapter_->CreateRenderTextureResource(
         static_cast<uint32_t>(adapter_->GetWidth()), 
         static_cast<uint32_t>(adapter_->GetHeight()), 
         DXGI_FORMAT_R8G8B8A8_UNORM_SRGB, 
         clearColor
     ));
     
-    if (!sceneRenderTexture_) {
+    if (!sceneRenderTexture_->Get()) {
         Log::Send(Log::Level::ERR, "Failed to create scene render texture");
         return;
     }
@@ -165,7 +160,7 @@ void PostProcessExecutor::CreateSceneRenderTexture() {
     rtvDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
     rtvDesc.ViewDimension = D3D12_RTV_DIMENSION_TEXTURE2D;
     
-    adapter_->GetDevice()->CreateRenderTargetView(sceneRenderTexture_.Get(), &rtvDesc, sceneRTV_);
+    adapter_->GetDevice()->CreateRenderTargetView(sceneRenderTexture_->Get(), &rtvDesc, sceneRTV_);
     
     // SRVを作成（SRVManagerを使用する必要があるが、今は簡易実装）
     // TODO: 実際にはSRVManagerを使用してSRVを作成し、sceneSRV_に設定

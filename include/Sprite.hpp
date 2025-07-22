@@ -4,6 +4,8 @@
 #include "Math/Vector2.hpp"
 #include "Math/Vector4.hpp"
 #include "src/DirectX/GraphicsPipeline/GraphicsPipeline.hpp"
+#include "src/DirectX/Resource/DX12Resource.hpp"
+#include <memory>
 
 class SpriteCommon;
 
@@ -32,24 +34,24 @@ class Sprite {
     std::string texturePath_;
 
     // vertex resource
-    Microsoft::WRL::ComPtr<ID3D12Resource> vr_;
+    std::unique_ptr<DX12Resource> vr_;
     // vertex buffer view
     D3D12_VERTEX_BUFFER_VIEW vbv_{};
     // vertex data
     VertexData* vd_ = nullptr;
 
     // index resource
-    Microsoft::WRL::ComPtr<ID3D12Resource> ir_;
+    std::unique_ptr<DX12Resource> ir_;
     // index buffer view
     D3D12_INDEX_BUFFER_VIEW ibv_{};
     uint32_t* index_ = nullptr;
 
     // material resource
-    Microsoft::WRL::ComPtr<ID3D12Resource> mr_;
+    std::unique_ptr<DX12Resource> mr_;
     Material* material_ = nullptr;
 
     // world transform
-    Microsoft::WRL::ComPtr<ID3D12Resource> wr_;
+    std::unique_ptr<DX12Resource> wr_;
     Transformation* wd_ = nullptr;
 
     Vector2 position_ = {0, 0};

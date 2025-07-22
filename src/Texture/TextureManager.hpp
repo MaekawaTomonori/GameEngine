@@ -4,9 +4,11 @@
 #include <wrl/client.h>
 #include <string>
 #include <unordered_map>
+#include <memory>
 
 #include "src/DirectX/DirectXAdapter.hpp"
 #include "src/DirectX/Heap/SRVManager.h"
+#include "src/DirectX/Resource/DX12Resource.hpp"
 
 #include "vendor/DirectXTex/DirectXTex.h"
 
@@ -14,8 +16,8 @@ class TextureManager{
     struct Texture{
         uint32_t srvIndex;
         DirectX::TexMetadata metadata;
-        Microsoft::WRL::ComPtr<ID3D12Resource> resource;
-        Microsoft::WRL::ComPtr<ID3D12Resource> intermediateResource;
+        std::unique_ptr<DX12Resource> resource;
+        std::unique_ptr<DX12Resource> intermediateResource;
         D3D12_CPU_DESCRIPTOR_HANDLE cpuHandle;
         D3D12_GPU_DESCRIPTOR_HANDLE gpuHandle;
     };

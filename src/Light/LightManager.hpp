@@ -6,6 +6,7 @@
 
 #include "DebugUI.hpp"
 #include "src/DirectX/DirectXAdapter.hpp"
+#include "src/DirectX/Resource/DX12Resource.hpp"
 
 #include "LightType.hpp"
 #include "DirectionalLight/DirectionalLight.h"
@@ -22,16 +23,16 @@ class LightManager final{
     DebugUI* debug_ = nullptr;
     Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> commandList_;
 
-    Microsoft::WRL::ComPtr<ID3D12Resource> directionalResource_;
+    std::unique_ptr<DX12Resource> directionalResource_;
     DirectionalLight* mdDirectional_ = nullptr;
 
-    Microsoft::WRL::ComPtr<ID3D12Resource> pointResource_;
+    std::unique_ptr<DX12Resource> pointResource_;
     PointLight* mdPointLight_ = nullptr;
 
-    Microsoft::WRL::ComPtr<ID3D12Resource> spotResource_;
+    std::unique_ptr<DX12Resource> spotResource_;
     SpotLight* mdSpotLight_ = nullptr;
 
-    Microsoft::WRL::ComPtr<ID3D12Resource> countResource_;
+    std::unique_ptr<DX12Resource> countResource_;
     LightCount* lightCount_ = nullptr;
 
     const LightCount MAX_COUNT {20, 20, 20};

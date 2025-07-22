@@ -7,6 +7,7 @@
 
 #include "src/DirectX/GraphicsPipeline/Object/PipelineStateObject.hpp"
 #include "src/PostProcess/IPostEffect.hpp"
+#include "src/DirectX/Resource/DX12Resource.hpp"
 
 class DirectXAdapter;
 class Heap;
@@ -16,7 +17,7 @@ class PostProcessExecutor {
     std::vector<std::unique_ptr<IPostEffect>> effects_;
     
     // シーン描画用RenderTexture
-    Microsoft::WRL::ComPtr<ID3D12Resource> sceneRenderTexture_;
+    std::unique_ptr<DX12Resource> sceneRenderTexture_;
     std::unique_ptr<Heap> rtvHeap_;
     D3D12_CPU_DESCRIPTOR_HANDLE sceneRTV_{};
     D3D12_GPU_DESCRIPTOR_HANDLE sceneSRV_{};

@@ -46,14 +46,16 @@ void Model::Initialize(const std::string& _name) {
 
     Log::Send(Log::Level::INFO, "Mesh created: " + _name);
 
-    wr_.Attach(adapter_->CreateBufferResource(sizeof(Transformation)));
-    wr_->Map(0, nullptr, reinterpret_cast<void**>(&wd_));
+    wr_ = std::make_unique<DX12Resource>();
+    wr_->Create(adapter_->CreateBufferResource(sizeof(Transformation)));
+    wr_->Get()->Map(0, nullptr, reinterpret_cast<void**>(&wd_));
     wd_->wvp = MathUtils::Matrix::MakeIdentity();
     wd_->world = MathUtils::Matrix::MakeIdentity();
     wd_->inverse = MathUtils::Matrix::MakeIdentity();
 
-    cr_.Attach(adapter_->CreateBufferResource(sizeof(CameraForGpu)));
-    cr_->Map(0, nullptr, reinterpret_cast<void**>(&cd_));
+    cr_ = std::make_unique<DX12Resource>();
+    cr_->Create(adapter_->CreateBufferResource(sizeof(CameraForGpu)));
+    cr_->Get()->Map(0, nullptr, reinterpret_cast<void**>(&cd_));
 
     Log::Send(Log::Level::INFO, "Creating SkinCluster for: " + _name);
     CreateSkinCluster();
@@ -231,21 +233,23 @@ void Model::CreateSkinCluster() {
 
     //Palette
     WellForGpu* mappedPalette = nullptr;
-    skinCluster_.paletteResource.Attach(adapter_->CreateBufferResource(sizeof(WellForGpu) * jointSize));
-    skinCluster_.paletteResource->Map(0, nullptr, reinterpret_cast<void**>(&mappedPalette));
+    skinCluster_.paletteResource = std::make_unique<DX12Resource>();
+    skinCluster_.paletteResource->Create(adapter_->CreateBufferResource(sizeof(WellForGpu) * jointSize));
+    skinCluster_.paletteResource->Get()->Map(0, nullptr, reinterpret_cast<void**>(&mappedPalette));
     skinCluster_.mappedPalette = {mappedPalette, jointSize};
     skinCluster_.srvIndex = srv->Allocate();
     skinCluster_.paletteHandle= { srv->GetCPUHandle(skinCluster_.srvIndex), srv->GetGPUHandle(skinCluster_.srvIndex) };
-    srv->CreateSRVforStructuredBuffer(skinCluster_.srvIndex, skinCluster_.paletteResource.Get(), static_cast<UINT>(jointSize), sizeof(WellForGpu));
+    srv->CreateSRVforStructuredBuffer(skinCluster_.srvIndex, skinCluster_.paletteResource->Get(), static_cast<UINT>(jointSize), sizeof(WellForGpu));
 
     //Influenc
     VertexInfluence* mappedInfluence = nullptr;
-    skinCluster_.influenceResource.Attach(adapter_->CreateBufferResource(sizeof(VertexInfluence) * verticesSize));
-    skinCluster_.influenceResource->Map(0, nullptr, reinterpret_cast<void**>(&mappedInfluence));
+    skinCluster_.influenceResource = std::make_unique<DX12Resource>();
+    skinCluster_.influenceResource->Create(adapter_->CreateBufferResource(sizeof(VertexInfluence) * verticesSize));
+    skinCluster_.influenceResource->Get()->Map(0, nullptr, reinterpret_cast<void**>(&mappedInfluence));
     memset(mappedInfluence, 0, sizeof(VertexInfluence) * verticesSize);
     skinCluster_.mappedInfluence = { mappedInfluence, verticesSize };
 
-    skinCluster_.influenceBufferView.BufferLocation = skinCluster_.influenceResource->GetGPUVirtualAddress();
+    skinCluster_.influenceBufferView.BufferLocation = skinCluster_.influenceResource->Get()->GetGPUVirtualAddress();
     skinCluster_.influenceBufferView.SizeInBytes = static_cast<UINT>(sizeof(VertexInfluence) * verticesSize);
     skinCluster_.influenceBufferView.StrideInBytes = sizeof(VertexInfluence);
 

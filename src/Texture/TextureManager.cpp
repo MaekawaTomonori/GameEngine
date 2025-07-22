@@ -129,14 +129,16 @@ void TextureManager::Load(const std::string& fileName) {
     DirectX::ScratchImage img = LoadTexture(name);
 
     texture.metadata = img.GetMetadata();
-    texture.resource = CreateTextureResource(img.GetMetadata());
-    texture.intermediateResource = UploadTextureData(texture.resource.Get(), img);
+    texture.resource = std::make_unique<DX12Resource>();
+    texture.resource->Create(CreateTextureResource(img.GetMetadata()));
+    texture.intermediateResource = std::make_unique<DX12Resource>();
+    texture.intermediateResource->Create(UploadTextureData(texture.resource->Get(), img));
 
     texture.srvIndex = srv_->Allocate();
     texture.cpuHandle = srv_->GetCPUHandle(texture.srvIndex);
     texture.gpuHandle = srv_->GetGPUHandle(texture.srvIndex);
 
-    srv_->CreateSRVforTexture2D(texture.srvIndex, texture.resource.Get(), texture.metadata.format, static_cast<UINT>(texture.metadata.mipLevels));
+    srv_->CreateSRVforTexture2D(texture.srvIndex, texture.resource->Get(), texture.metadata.format, static_cast<UINT>(texture.metadata.mipLevels));
 
     Log::Send(Log::Level::INFO, std::format("TextureManager::Load: {}", name));
 }

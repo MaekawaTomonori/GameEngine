@@ -143,14 +143,7 @@ void DirectXAdapter::EndFrame() {
 void DirectXAdapter::SetSwapChainRenderTarget() const {
     UINT bbi = swapChain_->GetCurrentBackBufferIndex();
 
-    D3D12_RESOURCE_BARRIER barrier = {};
-    barrier.Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
-    barrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
-    barrier.Transition.pResource = swapChainResources_[bbi].Get();
-    barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_PRESENT;
-    barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_RENDER_TARGET;
-
-    cList_->ResourceBarrier(1, &barrier);
+    swapChainResources_[bbi]->ChangeState(cList_.Get(), D3D12_RESOURCE_STATE_RENDER_TARGET);
 
     D3D12_CPU_DESCRIPTOR_HANDLE dsvHandle = dsvHeap_->GetCPUHandle(0);
 
@@ -165,13 +158,7 @@ void DirectXAdapter::Present() {
     UINT bbi = swapChain_->GetCurrentBackBufferIndex();
     
     // PostDraw
-    D3D12_RESOURCE_BARRIER barrier = {};
-    barrier.Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
-    barrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
-    barrier.Transition.pResource = swapChainResources_[bbi].Get();
-    barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET;
-    barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_PRESENT;
-    cList_->ResourceBarrier(1, &barrier);
+    swapChainResources_[bbi]->ChangeState(cList_.Get(), D3D12_RESOURCE_STATE_PRESENT);
 
     if (FAILED(cList_->Close())){
         Utils::Alert("Failed to close command list");
@@ -358,10 +345,13 @@ bool DirectXAdapter::CreateRTV() {
 
     swapChainResources_.resize(2);
     for (UINT i = 0; i < 2; ++i){
-        if (FAILED(swapChain_->GetBuffer(i, IID_PPV_ARGS(&swapChainResources_[i])))){
+        Microsoft::WRL::ComPtr<ID3D12Resource> resource;
+        if (FAILED(swapChain_->GetBuffer(i, IID_PPV_ARGS(&resource)))){
             Log::Send(Log::Level::ERR, "Failed to get swap chain buffer");
             return false;
         }
+        swapChainResources_[i] = std::make_unique<DX12Resource>();
+        swapChainResources_[i]->Create(resource.Get());
     }
     Log::Send(Log::Level::INFO, "Swap Chain Resources Created");
 
@@ -372,17 +362,18 @@ bool DirectXAdapter::CreateRTV() {
 
     rtvHandles_.resize(2);
     rtvHandles_[0] = rtvHeap_->Get()->GetCPUDescriptorHandleForHeapStart();
-    device_->CreateRenderTargetView(swapChainResources_[0].Get(), &rtvDesc, rtvHandles_[0]);
+    device_->CreateRenderTargetView(swapChainResources_[0]->Get(), &rtvDesc, rtvHandles_[0]);
 
     rtvHandles_[1].ptr = rtvHandles_[0].ptr + device_->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
-    device_->CreateRenderTargetView(swapChainResources_[1].Get(), &rtvDesc, rtvHandles_[1]);
+    device_->CreateRenderTargetView(swapChainResources_[1]->Get(), &rtvDesc, rtvHandles_[1]);
 
     Log::Send(Log::Level::INFO, "RTVs Created");
     return true;
 }
 
 bool DirectXAdapter::CreateDSV() {
-    depthStencil_.Attach(CreateDepthStencilResource(static_cast<int32_t>(windowSize_.first), static_cast<int32_t>(windowSize_.second)));
+    depthStencil_ = std::make_unique<DX12Resource>();
+    depthStencil_->Create(CreateDepthStencilResource(static_cast<int32_t>(windowSize_.first), static_cast<int32_t>(windowSize_.second)));
 
     dsvHeap_ = std::make_unique<Heap>();
     if (!dsvHeap_->Create(device_.Get(), D3D12_DESCRIPTOR_HEAP_TYPE_DSV, 1, D3D12_DESCRIPTOR_HEAP_FLAG_NONE)){
@@ -394,7 +385,7 @@ bool DirectXAdapter::CreateDSV() {
     desc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
     desc.ViewDimension = D3D12_DSV_DIMENSION_TEXTURE2D;
 
-    device_->CreateDepthStencilView(depthStencil_.Get(), &desc, dsvHeap_->Get()->GetCPUDescriptorHandleForHeapStart());
+    device_->CreateDepthStencilView(depthStencil_->Get(), &desc, dsvHeap_->Get()->GetCPUDescriptorHandleForHeapStart());
     return true;
 }
 

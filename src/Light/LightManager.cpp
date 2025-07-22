@@ -153,24 +153,28 @@ void LightManager::Initialize(DirectXAdapter* _adapter, DebugUI* _debug) {
     commandList_ = adapter_->GetCommandList();
 
     // Light Counter
-    countResource_.Attach(adapter_->CreateBufferResource(sizeof(LightCount)));
-    countResource_->Map(0, nullptr, reinterpret_cast<void**>(&lightCount_));
+    countResource_ = std::make_unique<DX12Resource>();
+    countResource_->Create(adapter_->CreateBufferResource(sizeof(LightCount)));
+    countResource_->Get()->Map(0, nullptr, reinterpret_cast<void**>(&lightCount_));
 
     lightCount_->dlCount = 0;
     lightCount_->plCount = 0;
     lightCount_->slCount = 0;
 
     //Directional
-    directionalResource_.Attach(adapter_->CreateBufferResource(sizeof(DirectionalLight) * MAX_COUNT.dlCount));
-    directionalResource_->Map(0, nullptr, reinterpret_cast<void**>(&mdDirectional_));
+    directionalResource_ = std::make_unique<DX12Resource>();
+    directionalResource_->Create(adapter_->CreateBufferResource(sizeof(DirectionalLight) * MAX_COUNT.dlCount));
+    directionalResource_->Get()->Map(0, nullptr, reinterpret_cast<void**>(&mdDirectional_));
 
     //Point
-    pointResource_.Attach(adapter_->CreateBufferResource(sizeof(PointLight) * MAX_COUNT.plCount));
-    pointResource_->Map(0, nullptr, reinterpret_cast<void**>(&mdPointLight_));
+    pointResource_ = std::make_unique<DX12Resource>();
+    pointResource_->Create(adapter_->CreateBufferResource(sizeof(PointLight) * MAX_COUNT.plCount));
+    pointResource_->Get()->Map(0, nullptr, reinterpret_cast<void**>(&mdPointLight_));
 
     //Spot
-    spotResource_.Attach(adapter_->CreateBufferResource(sizeof(SpotLight) * MAX_COUNT.slCount));
-    spotResource_->Map(0, nullptr, reinterpret_cast<void**>(&mdSpotLight_));
+    spotResource_ = std::make_unique<DX12Resource>();
+    spotResource_->Create(adapter_->CreateBufferResource(sizeof(SpotLight) * MAX_COUNT.slCount));
+    spotResource_->Get()->Map(0, nullptr, reinterpret_cast<void**>(&mdSpotLight_));
 
     Load();
 

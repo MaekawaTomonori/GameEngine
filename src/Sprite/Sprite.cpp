@@ -22,12 +22,13 @@ void Sprite::Initialize(const std::string&_texture) {
     texturePath_ = std::move(_texture);
     Singleton<TextureManager>::GetInstance()->Load(texturePath_);
 
-    vr_.Attach(adapter_->CreateBufferResource(sizeof(VertexData) * 4));
-    vbv_.BufferLocation = vr_->GetGPUVirtualAddress();
+    vr_ = std::make_unique<DX12Resource>();
+    vr_->Create(adapter_->CreateBufferResource(sizeof(VertexData) * 4));
+    vbv_.BufferLocation = vr_->Get()->GetGPUVirtualAddress();
     vbv_.SizeInBytes = sizeof(VertexData) * 4;
     vbv_.StrideInBytes = sizeof(VertexData);
 
-    vr_->Map(0, nullptr, reinterpret_cast<void**>(&vd_));
+    vr_->Get()->Map(0, nullptr, reinterpret_cast<void**>(&vd_));
 
     vd_[0].position = {0, 1.f, 0, 1};
     vd_[1].position = {0, 0, 0, 1};
@@ -40,13 +41,14 @@ void Sprite::Initialize(const std::string&_texture) {
     vd_[3].uv = {1, 0};
 
     //IndexData
-    ir_.Attach(adapter_->CreateBufferResource(sizeof(uint32_t) * 6));
+    ir_ = std::make_unique<DX12Resource>();
+    ir_->Create(adapter_->CreateBufferResource(sizeof(uint32_t) * 6));
 
-    ibv_.BufferLocation = ir_->GetGPUVirtualAddress();
+    ibv_.BufferLocation = ir_->Get()->GetGPUVirtualAddress();
     ibv_.SizeInBytes = sizeof(uint32_t) * 6;
     ibv_.Format = DXGI_FORMAT_R32_UINT;
 
-    ir_->Map(0, nullptr, reinterpret_cast<void**>(&index_));
+    ir_->Get()->Map(0, nullptr, reinterpret_cast<void**>(&index_));
 
     index_[0] = 0;
     index_[1] = 1;
@@ -56,13 +58,15 @@ void Sprite::Initialize(const std::string&_texture) {
     index_[5] = 2;
 
     //MaterialData
-    mr_.Attach(adapter_->CreateBufferResource(sizeof(Material)));
-    mr_->Map(0, nullptr, reinterpret_cast<void**>(&material_));
+    mr_ = std::make_unique<DX12Resource>();
+    mr_->Create(adapter_->CreateBufferResource(sizeof(Material)));
+    mr_->Get()->Map(0, nullptr, reinterpret_cast<void**>(&material_));
 
     material_->color = {1, 1, 1, 1};
 
-    wr_.Attach(adapter_->CreateBufferResource(sizeof(Transformation)));
-    wr_->Map(0, nullptr, reinterpret_cast<void**>(&wd_));
+    wr_ = std::make_unique<DX12Resource>();
+    wr_->Create(adapter_->CreateBufferResource(sizeof(Transformation)));
+    wr_->Get()->Map(0, nullptr, reinterpret_cast<void**>(&wd_));
     wd_->wvp = MathUtils::Matrix::MakeIdentity();
     wd_->world = MathUtils::Matrix::MakeIdentity();
 

@@ -8,18 +8,8 @@ void Renderer::Initialize(DirectXAdapter* _adapter, PostProcessExecutor* _postPr
     postProcessor_ = _postProcessor;
 }
 
-void Renderer::Register(std::function<void()> _task, RenderPhase _phase) {
-    switch (_phase) {
-    case RenderPhase::Scene:
-        sceneTasks_.push(_task);
-        break;
-    case RenderPhase::UI:
-        uiTasks_.push(_task);
-        break;
-    case RenderPhase::PostEffect:
-        // PostEffectは直接実行されるため、タスクキューには登録しない
-        break;
-    }
+void Renderer::Register(std::function<void()> _task, bool _applyPostEffect) {
+    
 }
 
 void Renderer::Render() {
