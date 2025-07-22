@@ -17,7 +17,7 @@ void Mesh::Initialize(DirectXAdapter* _adapter, const std::string &_name, const 
     data_ = _raw;
 
     vr_ = std::make_unique<DX12Resource>();
-    vr_->Create(adapter_->CreateBufferResource(sizeof(Vertex) * data_.vertices.size()));
+    vr_ = adapter_->CreateBufferResource(sizeof(Vertex) * data_.vertices.size());
 
     vbv_.BufferLocation = vr_->Get()->GetGPUVirtualAddress();
     vbv_.SizeInBytes = static_cast<UINT>(sizeof(Vertex) * data_.vertices.size());
@@ -29,7 +29,7 @@ void Mesh::Initialize(DirectXAdapter* _adapter, const std::string &_name, const 
     vbvs_.push_back(vbv_);
 
     mr_ = std::make_unique<DX12Resource>();
-    mr_->Create(adapter_->CreateBufferResource(sizeof(Material)));
+    mr_ = adapter_->CreateBufferResource(sizeof(Material));
     mr_->Get()->Map(0, nullptr, reinterpret_cast<void**>(&material_));
 
     material_->color = Vector4(1.0f, 1.0f, 1.0f, 1.0f);
@@ -38,7 +38,7 @@ void Mesh::Initialize(DirectXAdapter* _adapter, const std::string &_name, const 
 
     if (!data_.indices.empty()){
         ir_ = std::make_unique<DX12Resource>();
-        ir_->Create(adapter_->CreateBufferResource(sizeof(uint32_t) * data_.indices.size()));
+        ir_ = adapter_->CreateBufferResource(sizeof(uint32_t) * data_.indices.size());
         ibv_.BufferLocation = ir_->Get()->GetGPUVirtualAddress();
         ibv_.SizeInBytes = static_cast<UINT>(sizeof(uint32_t) * data_.indices.size());
         ibv_.Format = DXGI_FORMAT_R32_UINT;
@@ -66,7 +66,7 @@ void Mesh::Draw() const {
     if (!data_.indices.empty()){
         commandList_->IASetIndexBuffer(&ibv_);
     }
-    commandList_->SetGraphicsRootConstantBufferView(0, mr_->GetGPUVirtualAddress());
+    commandList_->SetGraphicsRootConstantBufferView(0, mr_->Get()->GetGPUVirtualAddress());
     commandList_->SetGraphicsRootDescriptorTable(2, Singleton<TextureManager>::GetInstance()->GetGPUHandle(texture_));
 
     if (lighting_) {

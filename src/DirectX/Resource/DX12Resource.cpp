@@ -2,16 +2,13 @@
 
 #include "Utils.hpp"
 
-void DX12Resource::Create(ID3D12Resource* _resource) {
+void DX12Resource::Create(ID3D12Resource* _resource, D3D12_RESOURCE_STATES _state) {
     resource_.Attach(_resource);
     if (!resource_){
         Utils::Alert("Failed to create DX12 Resource");
+        return;
     }
-    if (resource_){
-        state_ = D3D12_RESOURCE_STATE_COMMON;
-    } else{
-        Utils::Alert("DX12 Resource is null");
-    }
+    state_ = _state;
 }
 
 void DX12Resource::ChangeState(ID3D12GraphicsCommandList* _command, const D3D12_RESOURCE_STATES _state) {

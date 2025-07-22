@@ -45,8 +45,8 @@ void Line::Draw() const {
     commandList_->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_LINELIST);
     commandList_->IASetVertexBuffers(0, 1, &vertexBufferView_);
     
-    commandList_->SetGraphicsRootConstantBufferView(0, materialResource_->GetGPUVirtualAddress());
-    commandList_->SetGraphicsRootConstantBufferView(1, transformationResource_->GetGPUVirtualAddress());
+    commandList_->SetGraphicsRootConstantBufferView(0, materialResource_->Get()->GetGPUVirtualAddress());
+    commandList_->SetGraphicsRootConstantBufferView(1, transformationResource_->Get()->GetGPUVirtualAddress());
     
     commandList_->DrawInstanced(static_cast<UINT>(positions_.size()), 1, 0, 0);
 }
@@ -75,7 +75,7 @@ void Line::SetColor(Vector4 color) const {
 
 void Line::CreateVertexBuffer() {
     vertexResource_ = std::make_unique<DX12Resource>();
-    vertexResource_->Create(adapter_->CreateBufferResource(sizeof(VertexData) * 2 * MAX_LINES));
+    vertexResource_ = adapter_->CreateBufferResource(sizeof(VertexData) * 2 * MAX_LINES);
     vertexBufferView_.BufferLocation = vertexResource_->Get()->GetGPUVirtualAddress();
     vertexBufferView_.SizeInBytes = sizeof(VertexData) * 2 * MAX_LINES;
     vertexBufferView_.StrideInBytes = sizeof(VertexData);
@@ -88,13 +88,13 @@ void Line::CreateVertexBuffer() {
 
 void Line::CreateMaterialBuffer() {
     materialResource_ = std::make_unique<DX12Resource>();
-    materialResource_->Create(adapter_->CreateBufferResource(sizeof(Material)));
+    materialResource_ = adapter_->CreateBufferResource(sizeof(Material));
     materialResource_->Get()->Map(0, nullptr, reinterpret_cast<void**>(&materialData_));
   }
 
 void Line::CreateTransformationBuffer() {
     transformationResource_ = std::make_unique<DX12Resource>();
-    transformationResource_->Create(adapter_->CreateBufferResource(sizeof(Transformation)));
+    transformationResource_ = adapter_->CreateBufferResource(sizeof(Transformation));
     transformationResource_->Get()->Map(0, nullptr, reinterpret_cast<void**>(&transformationData_));
     transformationData_->WVP = MathUtils::Matrix::MakeIdentity();
 }

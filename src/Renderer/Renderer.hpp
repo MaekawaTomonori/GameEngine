@@ -3,7 +3,6 @@
 
 #include <functional>
 #include <queue>
-#include <memory>
 
 class DirectXAdapter;
 class PostProcessExecutor;
@@ -11,10 +10,12 @@ class PostProcessExecutor;
 class Renderer {
     DirectXAdapter* adapter_ = nullptr;
     PostProcessExecutor* postProcessor_ = nullptr;
-    
-    std::queue<std::function<void()>> sceneTasks_;
-    std::queue<std::function<void()>> uiTasks_;
-    
+
+    // PostProcessを適応するタスク
+    std::queue<std::function<void()>> pp_;
+    // PostProcessを適用しないタスク
+    std::queue<std::function<void()>> tasks_;
+
 public:
     void Initialize(DirectXAdapter* _adapter, PostProcessExecutor* _postProcessor);
     
@@ -23,13 +24,6 @@ public:
     void Render();
     
 private:
-    void RenderScene();
-    void ApplyPostEffects();
-    void RenderUI();
-    
-    void SetRenderTarget();
-    void SetSceneRenderTarget();
-    void SetSwapChainRenderTarget();
 }; // class Renderer
 
 #endif // Renderer_HPP_

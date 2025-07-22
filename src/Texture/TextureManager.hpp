@@ -35,7 +35,8 @@ private: //Variables
 private: //Methods
     DirectX::ScratchImage LoadTexture(const std::string& filename) const;
     ID3D12Resource* CreateTextureResource(const DirectX::TexMetadata& metadata) const;
-    ID3D12Resource* UploadTextureData(ID3D12Resource* texture, const DirectX::ScratchImage& mipImages) const;
+    std::unique_ptr<DX12Resource> UploadTextureData(DX12Resource* _texture,
+        const DirectX::ScratchImage& mipImages) const;
 
 public:
     ~TextureManager();

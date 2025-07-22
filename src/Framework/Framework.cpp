@@ -3,7 +3,6 @@
 #include "Log.hpp"
 #include "IGame.hpp"
 #include "Pattern/Singleton.hpp"
-#include "src/Renderer/RenderPhase.hpp"
 
 Framework::Framework() {
     config_ = GameEngine::Config::Default();
@@ -14,8 +13,11 @@ Framework::Framework() {
 
     dxAdapter_ = std::make_unique<DirectXAdapter>(windows_->GetWindowHandle(), config_->GetWidth(), config_->GetHeight());
 
+    srv_ = std::make_unique<SRVManager>();
+    srv_->Initialize(dxAdapter_.get());
+
     postProcessor_ = std::make_unique<PostProcessExecutor>();
-    postProcessor_->Initialize(dxAdapter_.get());
+    postProcessor_->Initialize(dxAdapter_.get(), srv_.get());
 
     renderer_ = std::make_unique<Renderer>();
     renderer_->Initialize(dxAdapter_.get(), postProcessor_.get());
@@ -25,9 +27,6 @@ Framework::Framework() {
 
     debugUI_ = std::make_unique<DebugUI>();
     debugUI_->Initialize(dxAdapter_.get());
-
-    srv_ = std::make_unique<SRVManager>();
-    srv_->Initialize(dxAdapter_.get());
 
     input_ = Singleton<Input>::GetInstance();
     input_->Initialize();
@@ -89,8 +88,8 @@ void Framework::Draw() const {
 
     srv_->PreDraw();
 
-    renderer_->Register([&] { scene_->Draw(); }, RenderPhase::Scene);
-    renderer_->Register([&] { debugUI_->Render(); }, RenderPhase::UI);
+    renderer_->Register([&] { scene_->Draw(); }, true);
+    renderer_->Register([&] { debugUI_->Render(); });
     renderer_->Render();
 }
 

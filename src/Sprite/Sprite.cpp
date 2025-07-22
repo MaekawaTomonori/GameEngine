@@ -23,7 +23,7 @@ void Sprite::Initialize(const std::string&_texture) {
     Singleton<TextureManager>::GetInstance()->Load(texturePath_);
 
     vr_ = std::make_unique<DX12Resource>();
-    vr_->Create(adapter_->CreateBufferResource(sizeof(VertexData) * 4));
+    vr_ = adapter_->CreateBufferResource(sizeof(VertexData) * 4);
     vbv_.BufferLocation = vr_->Get()->GetGPUVirtualAddress();
     vbv_.SizeInBytes = sizeof(VertexData) * 4;
     vbv_.StrideInBytes = sizeof(VertexData);
@@ -42,7 +42,7 @@ void Sprite::Initialize(const std::string&_texture) {
 
     //IndexData
     ir_ = std::make_unique<DX12Resource>();
-    ir_->Create(adapter_->CreateBufferResource(sizeof(uint32_t) * 6));
+    ir_ = adapter_->CreateBufferResource(sizeof(uint32_t) * 6);
 
     ibv_.BufferLocation = ir_->Get()->GetGPUVirtualAddress();
     ibv_.SizeInBytes = sizeof(uint32_t) * 6;
@@ -59,13 +59,13 @@ void Sprite::Initialize(const std::string&_texture) {
 
     //MaterialData
     mr_ = std::make_unique<DX12Resource>();
-    mr_->Create(adapter_->CreateBufferResource(sizeof(Material)));
+    mr_ = adapter_->CreateBufferResource(sizeof(Material));
     mr_->Get()->Map(0, nullptr, reinterpret_cast<void**>(&material_));
 
     material_->color = {1, 1, 1, 1};
 
     wr_ = std::make_unique<DX12Resource>();
-    wr_->Create(adapter_->CreateBufferResource(sizeof(Transformation)));
+    wr_ = adapter_->CreateBufferResource(sizeof(Transformation));
     wr_->Get()->Map(0, nullptr, reinterpret_cast<void**>(&wd_));
     wd_->wvp = MathUtils::Matrix::MakeIdentity();
     wd_->world = MathUtils::Matrix::MakeIdentity();
@@ -125,8 +125,8 @@ void Sprite::Draw() {
     commandList_->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
     commandList_->IASetVertexBuffers(0, 1, &vbv_);
     commandList_->IASetIndexBuffer(&ibv_);
-    commandList_->SetGraphicsRootConstantBufferView(0, mr_->GetGPUVirtualAddress());
-    commandList_->SetGraphicsRootConstantBufferView(1, wr_->GetGPUVirtualAddress());
+    commandList_->SetGraphicsRootConstantBufferView(0, mr_->Get()->GetGPUVirtualAddress());
+    commandList_->SetGraphicsRootConstantBufferView(1, wr_->Get()->GetGPUVirtualAddress());
     commandList_->SetGraphicsRootDescriptorTable(2, Singleton<TextureManager>::GetInstance()->GetGPUHandle(texturePath_));
 
     commandList_->DrawIndexedInstanced(6, 1, 0, 0, 0);

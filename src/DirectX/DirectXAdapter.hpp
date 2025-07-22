@@ -14,6 +14,7 @@
 #include "Heap/Heap.hpp"
 #include "Math/Vector4.hpp"
 #include "Resource/DX12Resource.hpp"
+#include "vendor/DirectXTex/DirectXTex.h"
 
 class DirectXAdapter{
     /// <summary>
@@ -54,6 +55,7 @@ class DirectXAdapter{
     //DSV
     std::unique_ptr<DX12Resource> depthStencil_;
     std::unique_ptr<Heap> dsvHeap_;
+    D3D12_CPU_DESCRIPTOR_HANDLE dsvHandle_;
 
     //Background color
     Vector4	back = { 0.2f, 0.2f, 0.2f, 1.0f }; // Black
@@ -77,20 +79,17 @@ class DirectXAdapter{
 public:
     DirectXAdapter(HWND _hWnd, size_t _width, size_t _height);
 
-    ID3D12Resource* CreateBufferResource(size_t _size) const;
-    ID3D12Resource* CreateDepthStencilResource(int32_t _width, int32_t _height) const;
-    ID3D12Resource* CreateRenderTextureResource(uint32_t _width, uint32_t _height, DXGI_FORMAT _format, const Vector4& _cc);
+    std::unique_ptr<DX12Resource> CreateBufferResource(size_t _size) const;
+    std::unique_ptr<DX12Resource> CreateTextureResource(const DirectX::TexMetadata& metadata) const;
+    std::unique_ptr<DX12Resource> CreateDepthStencilResource(int32_t _width, int32_t _height) const;
+    std::unique_ptr<DX12Resource> CreateRenderTextureResource(uint32_t _width, uint32_t _height, DXGI_FORMAT _format, const Vector4& _cc) const;
 
-    void Register(std::function<void()> _task);
     void PreProcess() const;
-    void SetSwapChainRenderTarget() const;
     
     // Renderer用のメソッド
     void BeginFrame();
     void EndFrame();
     
-    // DescriptorHandle取得用
-    D3D12_CPU_DESCRIPTOR_HANDLE GetDSVHandle() const;
 
 private:
     void EnableDebugLayer();
@@ -104,6 +103,7 @@ private:
     bool CreateViewportAndScissor();
     bool CreateLimiter();
 
+    void SetSwapChainRenderTarget() const;
     void Present();
     void Wait();
 
@@ -117,6 +117,7 @@ public: //Accessor
     ID3D12CommandAllocator* GetCommandAllocator() const;
     IDXGISwapChain4* GetSwapChain() const;
     ID3D12Fence* GetFence() const;
+    D3D12_CPU_DESCRIPTOR_HANDLE GetDSVHandle() const;
 }; // class DirectXAdapter
 
 #endif // DirectXAdaptor_HPP_

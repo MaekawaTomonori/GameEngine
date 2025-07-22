@@ -8,84 +8,36 @@ void Renderer::Initialize(DirectXAdapter* _adapter, PostProcessExecutor* _postPr
     postProcessor_ = _postProcessor;
 }
 
-void Renderer::Register(std::function<void()> _task, bool _applyPostEffect) {
-    
+void Renderer::Register(std::function<void()> _task, const bool _applyPostEffect) {
+    if (_applyPostEffect){
+        pp_.push(std::move(_task));
+    } else{
+        tasks_.push(std::move(_task));
+    }
 }
 
 void Renderer::Render() {
-    adapter_->BeginFrame();
-    
-    // 1. シーン描画フェーズ
-    RenderScene();
-    
-    // 2. PostEffect適用フェーズ
-    ApplyPostEffects();
-    
-    // 3. UI描画フェーズ
-    RenderUI();
-    
-    // フレーム終了処理（Present含む）
-    adapter_->EndFrame();
-}
-
-void Renderer::RenderScene() {
-    if (sceneTasks_.empty()) return;
-    
-    // PostProcessor用RenderTextureに描画開始
-    if (postProcessor_) {
-        SetSceneRenderTarget();
-    } else {
-        // PostProcessorがない場合は直接スワップチェーンに
-        SetSwapChainRenderTarget();
-    }
-    
-    // シーンタスク実行
-    while (!sceneTasks_.empty()) {
-        auto task = sceneTasks_.front();
-        sceneTasks_.pop();
-        if (task) {
+    if (!pp_.empty()){
+        postProcessor_->BeginFrame();
+        while (!pp_.empty()) {
+            if (pp_.empty()) break;
+            auto task = std::move(pp_.front());
+            pp_.pop();
             task();
         }
-    }
-    
-    // PostProcessor用キャプチャ終了
-    if (postProcessor_) {
-        postProcessor_->EndSceneCapture();
-    }
-}
+        postProcessor_->Execute();
+        postProcessor_->EndFrame();
 
-void Renderer::ApplyPostEffects() {
-    if (!postProcessor_) return;
-    
-    // PostEffectチェーンを実行
-    postProcessor_->Execute();
-    
-    // スワップチェーンをRenderTargetに設定
-    SetSwapChainRenderTarget();
-    
-    // 最終的なOffscreenQuadを描画
-    postProcessor_->Draw();
-}
+        tasks_.emplace([this](){postProcessor_->Draw();}); 
+    }
 
-void Renderer::RenderUI() {
-    if (uiTasks_.empty()) return;
-    
-    // 既にスワップチェーンがRenderTargetに設定済み
-    while (!uiTasks_.empty()) {
-        auto task = uiTasks_.front();
-        uiTasks_.pop();
-        if (task) {
+    if (!tasks_.empty()) {
+        adapter_->BeginFrame();
+        while (!tasks_.empty()){
+            auto task = std::move(tasks_.front());
+            tasks_.pop();
             task();
         }
+        adapter_->EndFrame();
     }
-}
-
-void Renderer::SetSceneRenderTarget() {
-    if (postProcessor_) {
-        postProcessor_->BeginSceneCapture();
-    }
-}
-
-void Renderer::SetSwapChainRenderTarget() {
-    adapter_->SetSwapChainRenderTarget();
 }

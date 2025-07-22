@@ -25,76 +25,17 @@ DirectX::ScratchImage TextureManager::LoadTexture(const std::string& filename) c
     return mipImages;
 }
 
-ID3D12Resource* TextureManager::CreateTextureResource(const DirectX::TexMetadata& metadata) const {
-    /// FLOW  ///
-    /// 1. Resource setting from metadata
-    /// 2. Heap setting
-    /// 3. Generate Resource
-    ///
-
-    //Step1
-    //Setting Resource from Metadata
-    D3D12_RESOURCE_DESC resourceDesc {};
-    resourceDesc.Width = static_cast<UINT>(metadata.width);
-    resourceDesc.Height = static_cast<UINT>(metadata.height);
-    resourceDesc.MipLevels = static_cast<UINT16>(metadata.mipLevels);
-    resourceDesc.DepthOrArraySize = static_cast<UINT16>(metadata.arraySize);
-    resourceDesc.Format = metadata.format;
-    resourceDesc.SampleDesc.Count = 1;
-    resourceDesc.Dimension = static_cast<D3D12_RESOURCE_DIMENSION>(metadata.dimension);
-
-    //Step2
-    //HEAP SETTINGs
-    D3D12_HEAP_PROPERTIES heapProperties {};
-    heapProperties.Type = D3D12_HEAP_TYPE_DEFAULT;
-    //heapProperties.CPUPageProperty = D3D12_CPU_PAGE_PROPERTY_WRITE_BACK;
-    //heapProperties.MemoryPoolPreference = D3D12_MEMORY_POOL_L0;
-
-    //Step3
-    //Generate Resource
-    ID3D12Resource* resource = nullptr;
-
-    HRESULT hr = adapter_->GetDevice()->CreateCommittedResource(
-            &heapProperties,
-            D3D12_HEAP_FLAG_NONE,
-            &resourceDesc,
-            D3D12_RESOURCE_STATE_COPY_DEST,
-            nullptr,
-            IID_PPV_ARGS(&resource)
-        );
-
-    if (FAILED(hr)) {
-        Log::Send(Log::Level::ERR, "Failed to create texture resource");
-        Utils::Alert("Failed to create texture resource");
-        assert(false);
-    }
-
-    return resource;
-}
-
 [[nodiscard]]
-ID3D12Resource* TextureManager::UploadTextureData(ID3D12Resource* texture, const DirectX::ScratchImage& mipImages) const {
-    auto dxc = adapter_;
-    if (!dxc){
-        Log::Send(Log::Level::ERR, "SRVManager Initialize Failed");
-        assert(0);
-    }
-
+std::unique_ptr<DX12Resource> TextureManager::UploadTextureData(DX12Resource* _texture,
+    const DirectX::ScratchImage& mipImages) const {
     std::vector<D3D12_SUBRESOURCE_DATA> subResources;
-    PrepareUpload(dxc->GetDevice(), mipImages.GetImages(), mipImages.GetImageCount(), mipImages.GetMetadata(), subResources);
-    uint32_t intermediateSize = static_cast<uint32_t>(GetRequiredIntermediateSize(texture, 0, static_cast<UINT>(subResources.size())));
-    ID3D12Resource* intermediateResource = adapter_->CreateBufferResource(intermediateSize);
-    UpdateSubresources(dxc->GetCommandList(), texture, intermediateResource, 0, 0, static_cast<UINT>(subResources.size()), subResources.data());
+    PrepareUpload(adapter_->GetDevice(), mipImages.GetImages(), mipImages.GetImageCount(), mipImages.GetMetadata(), subResources);
+    uint32_t intermediateSize = static_cast<uint32_t>(GetRequiredIntermediateSize(_texture->Get(), 0, static_cast<UINT>(subResources.size())));
+    std::unique_ptr<DX12Resource> intermediateResource = adapter_->CreateBufferResource(intermediateSize);
+    UpdateSubresources(adapter_->GetCommandList(), _texture->Get(), intermediateResource->Get(), 0, 0, static_cast<UINT>(subResources.size()), subResources.data());
 
-    D3D12_RESOURCE_BARRIER barrier {};
-    barrier.Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
-    barrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
-    barrier.Transition.pResource = texture;
-    barrier.Transition.Subresource = D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES;
-    barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_COPY_DEST;
-    barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_GENERIC_READ;
-    dxc->GetCommandList()->ResourceBarrier(1, &barrier);
-    return intermediateResource;
+    _texture->ChangeState(adapter_->GetCommandList(), D3D12_RESOURCE_STATE_GENERIC_READ);
+    return std::move(intermediateResource);
 }
 
 
@@ -132,7 +73,7 @@ void TextureManager::Load(const std::string& fileName) {
     texture.resource = std::make_unique<DX12Resource>();
     texture.resource->Create(CreateTextureResource(img.GetMetadata()));
     texture.intermediateResource = std::make_unique<DX12Resource>();
-    texture.intermediateResource->Create(UploadTextureData(texture.resource->Get(), img));
+    texture.intermediateResource = UploadTextureData(texture.resource.get(), img);
 
     texture.srvIndex = srv_->Allocate();
     texture.cpuHandle = srv_->GetCPUHandle(texture.srvIndex);
@@ -145,8 +86,8 @@ void TextureManager::Load(const std::string& fileName) {
 
 void TextureManager::Unload() {
     for (auto itr = textures_.begin(); itr != textures_.end(); ){
-        itr->second.resource->Release();
-        itr->second.intermediateResource->Release();
+        itr->second.resource->Get()->Release();
+        itr->second.intermediateResource->Get()->Release();
 
         itr = textures_.erase(itr);
     }
