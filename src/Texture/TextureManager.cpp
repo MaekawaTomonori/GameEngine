@@ -71,7 +71,7 @@ void TextureManager::Load(const std::string& fileName) {
 
     texture.metadata = img.GetMetadata();
     texture.resource = std::make_unique<DX12Resource>();
-    texture.resource->Create(CreateTextureResource(img.GetMetadata()));
+    texture.resource = adapter_->CreateTextureResource(img.GetMetadata());
     texture.intermediateResource = std::make_unique<DX12Resource>();
     texture.intermediateResource = UploadTextureData(texture.resource.get(), img);
 
