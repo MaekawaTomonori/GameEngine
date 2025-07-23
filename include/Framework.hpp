@@ -44,6 +44,7 @@ class Framework {
 
 public:
     Framework();
+    ~Framework();
 
     void Execute(std::unique_ptr<IGame> _game);
 

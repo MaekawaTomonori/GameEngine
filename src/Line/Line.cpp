@@ -74,7 +74,6 @@ void Line::SetColor(Vector4 color) const {
 }
 
 void Line::CreateVertexBuffer() {
-    vertexResource_ = std::make_unique<DX12Resource>();
     vertexResource_ = adapter_->CreateBufferResource(sizeof(VertexData) * 2 * MAX_LINES);
     vertexBufferView_.BufferLocation = vertexResource_->Get()->GetGPUVirtualAddress();
     vertexBufferView_.SizeInBytes = sizeof(VertexData) * 2 * MAX_LINES;
@@ -87,13 +86,11 @@ void Line::CreateVertexBuffer() {
 }
 
 void Line::CreateMaterialBuffer() {
-    materialResource_ = std::make_unique<DX12Resource>();
     materialResource_ = adapter_->CreateBufferResource(sizeof(Material));
     materialResource_->Get()->Map(0, nullptr, reinterpret_cast<void**>(&materialData_));
   }
 
 void Line::CreateTransformationBuffer() {
-    transformationResource_ = std::make_unique<DX12Resource>();
     transformationResource_ = adapter_->CreateBufferResource(sizeof(Transformation));
     transformationResource_->Get()->Map(0, nullptr, reinterpret_cast<void**>(&transformationData_));
     transformationData_->WVP = MathUtils::Matrix::MakeIdentity();

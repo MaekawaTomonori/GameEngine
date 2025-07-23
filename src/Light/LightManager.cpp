@@ -8,6 +8,18 @@
 #include "src/Json/Json.hpp"
 #include "vendor/MagicEnum/magic_enum.hpp"
 
+LightManager::~LightManager() {
+    // Explicitly clear all resources
+    directionalResource_.reset();
+    pointResource_.reset();
+    spotResource_.reset();
+    countResource_.reset();
+    
+    rawDirectionalLights_.clear();
+    rawPointLights_.clear();
+    rawSpotLights_.clear();
+}
+
 void LightManager::Debug() {
     debug_->RegisterCommand("LM", [&](){
         if (ImGui::Begin("Light")){

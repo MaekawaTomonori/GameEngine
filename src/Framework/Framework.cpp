@@ -50,6 +50,41 @@ Framework::Framework() {
     light_->Initialize(dxAdapter_.get(), debugUI_.get());
 }
 
+Framework::~Framework() {
+    if (texture_) {
+        texture_->Unload();
+    }
+
+    if (postProcessor_) {
+        postProcessor_.reset();
+    }
+    if (renderer_) {
+        renderer_.reset();
+    }
+    if (resources_) {
+        resources_.reset();
+    }
+    if (debugUI_) {
+        debugUI_.reset();
+    }
+    if (srv_){
+        srv_->Finalize();
+        srv_.reset();
+    }
+    
+    SingletonFinalizer::Finalize();
+    
+    // Clear adapter last
+    if (dxAdapter_) {
+        dxAdapter_.reset();
+    }
+    if (windows_) {
+        windows_.reset();
+    }
+    
+    CoUninitialize();
+}
+
 void Framework::Execute(std::unique_ptr<IGame> _game) {
     game_ = std::move(_game);
     Initialize();
@@ -97,13 +132,6 @@ void Framework::Shutdown() {
     if (game_){
         game_.reset();
     }
-    
-    if (dxAdapter_){
-        dxAdapter_.reset();
-    }
-
-    SingletonFinalizer::Finalize();
-    CoUninitialize();
 }
 
 bool Framework::Check() const {

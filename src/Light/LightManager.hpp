@@ -44,6 +44,7 @@ class LightManager final{
     std::string path = "Light";
 
 public:
+    ~LightManager();
 	void Initialize(DirectXAdapter* _adapter, DebugUI* _debug);
     void Update();
     void Draw() const;

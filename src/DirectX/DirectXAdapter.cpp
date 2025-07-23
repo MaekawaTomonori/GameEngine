@@ -8,6 +8,7 @@
 #include "Heap/Heap.hpp"
 #include "Log.hpp"
 #include "Utils.hpp"
+#include "LeakChecker/D3DResourceLeakChecker.hpp"
 
 #pragma comment(lib, "d3d12.lib")
 #pragma comment(lib, "dxgi.lib")
@@ -27,6 +28,41 @@ DirectXAdapter::DirectXAdapter(const HWND _hWnd, size_t _width, size_t _height) 
     if (!CreateLimiter()) Utils::Alert("Failed to create FrameRateLimiter");
 
     Log::Send(Log::Level::INFO, "DirectXAdapter Initialized");
+}
+
+DirectXAdapter::~DirectXAdapter() {
+    // Force cleanup before leak check
+    if (fenceEvent_) {
+        CloseHandle(fenceEvent_);
+        fenceEvent_ = nullptr;
+    }
+    
+    // Force all resources to null before leak check
+    swapChainResources_.clear();
+    depthStencil_.reset();
+    rtvHeap_.reset();
+    dsvHeap_.reset();
+    
+    // Clear command objects
+    cList_.Reset();
+    cAllocator_.Reset();
+    cQueue_.Reset();
+    
+    // Clear swap chain and device
+    swapChain_.Reset();
+    fence_.Reset();
+    
+    // Clear DXGI objects
+    adapter_.Reset();
+    factory_.Reset();
+    
+    // Clear device last (but before debug layer)
+    device_.Reset();
+    
+    // Clear debug layer last
+    debugLayer_.Reset();
+    
+    D3DResourceLeakChecker lc;
 }
 
 std::unique_ptr<DX12Resource> DirectXAdapter::CreateBufferResource(const size_t _size) const {
@@ -403,7 +439,7 @@ bool DirectXAdapter::CreateRTV() {
             return false;
         }
         swapChainResources_[i] = std::make_unique<DX12Resource>();
-        swapChainResources_[i]->Create(resource.Get());
+        swapChainResources_[i]->Create(resource);
         swapChainResources_[i]->Get()->SetName(L"SwapChain" + i);
     }
     Log::Send(Log::Level::INFO, "Swap Chain Resources Created");
@@ -425,7 +461,6 @@ bool DirectXAdapter::CreateRTV() {
 }
 
 bool DirectXAdapter::CreateDSV() {
-    depthStencil_ = std::make_unique<DX12Resource>();
     depthStencil_ = CreateDepthStencilResource(static_cast<int32_t>(windowSize_.first), static_cast<int32_t>(windowSize_.second));
 
     dsvHeap_ = std::make_unique<Heap>();

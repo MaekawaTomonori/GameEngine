@@ -16,7 +16,6 @@ void Mesh::Initialize(DirectXAdapter* _adapter, const std::string &_name, const 
     name_ = _name;
     data_ = _raw;
 
-    vr_ = std::make_unique<DX12Resource>();
     vr_ = adapter_->CreateBufferResource(sizeof(Vertex) * data_.vertices.size());
 
     vbv_.BufferLocation = vr_->Get()->GetGPUVirtualAddress();
@@ -28,7 +27,6 @@ void Mesh::Initialize(DirectXAdapter* _adapter, const std::string &_name, const 
 
     vbvs_.push_back(vbv_);
 
-    mr_ = std::make_unique<DX12Resource>();
     mr_ = adapter_->CreateBufferResource(sizeof(Material));
     mr_->Get()->Map(0, nullptr, reinterpret_cast<void**>(&material_));
 
@@ -37,7 +35,6 @@ void Mesh::Initialize(DirectXAdapter* _adapter, const std::string &_name, const 
     material_->shininess = 100.f;
 
     if (!data_.indices.empty()){
-        ir_ = std::make_unique<DX12Resource>();
         ir_ = adapter_->CreateBufferResource(sizeof(uint32_t) * data_.indices.size());
         ibv_.BufferLocation = ir_->Get()->GetGPUVirtualAddress();
         ibv_.SizeInBytes = static_cast<UINT>(sizeof(uint32_t) * data_.indices.size());

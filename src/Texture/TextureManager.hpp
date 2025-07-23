@@ -17,7 +17,6 @@ class TextureManager{
         uint32_t srvIndex;
         DirectX::TexMetadata metadata;
         std::unique_ptr<DX12Resource> resource;
-        std::unique_ptr<DX12Resource> intermediateResource;
         D3D12_CPU_DESCRIPTOR_HANDLE cpuHandle;
         D3D12_GPU_DESCRIPTOR_HANDLE gpuHandle;
     };
@@ -31,11 +30,6 @@ private: //Variables
     std::string folderPath_ = "Assets/Resources/";
 
     std::unordered_map<std::string, Texture> textures_;
-
-private: //Methods
-    DirectX::ScratchImage LoadTexture(const std::string& filename) const;
-    std::unique_ptr<DX12Resource> UploadTextureData(DX12Resource* _texture,
-        const DirectX::ScratchImage& mipImages) const;
 
 public:
     ~TextureManager();
@@ -52,5 +46,9 @@ public:
 
     D3D12_GPU_DESCRIPTOR_HANDLE GetGPUHandle(const std::string& fileName);
     D3D12_GPU_DESCRIPTOR_HANDLE GetGPUHandle(const uint32_t index) const;
+
+private: //Methods
+    DirectX::ScratchImage LoadTexture(const std::string& filename) const;
+    void UploadTextureData(DX12Resource* _texture, const DirectX::ScratchImage& mipImages) const;
 };
 

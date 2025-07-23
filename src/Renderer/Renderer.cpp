@@ -17,6 +17,7 @@ void Renderer::Register(std::function<void()> _task, const bool _applyPostEffect
 }
 
 void Renderer::Render() {
+    std::function<void()> ppFunc;
     if (!pp_.empty()){
         postProcessor_->BeginFrame();
         while (!pp_.empty()) {
@@ -28,11 +29,14 @@ void Renderer::Render() {
         postProcessor_->Execute();
         postProcessor_->EndFrame();
 
-        tasks_.emplace([this](){postProcessor_->Draw();}); 
+        ppFunc = ([this](){postProcessor_->Draw();}); 
     }
 
     if (!tasks_.empty()) {
         adapter_->BeginFrame();
+        if (ppFunc) {
+            ppFunc();
+        }
         while (!tasks_.empty()){
             auto task = std::move(tasks_.front());
             tasks_.pop();

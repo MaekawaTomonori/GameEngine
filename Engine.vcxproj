@@ -599,6 +599,7 @@
     <ClInclude Include="include\Input.hpp" />
     <ClInclude Include="include\Math\Vector4.hpp" />
     <ClInclude Include="src\DirectX\Heap\SRVManager.h" />
+    <ClInclude Include="src\DirectX\LeakChecker\D3DResourceLeakChecker.hpp" />
     <ClInclude Include="src\DirectX\Resource\DX12Resource.hpp" />
     <ClInclude Include="src\DirectX\Shader\Shader.h" />
     <ClInclude Include="include\Math\Transform.hpp" />
@@ -656,6 +657,7 @@
     <ClCompile Include="src\DirectX\GraphicsPipeline\Object\RootSignature.cpp" />
     <ClCompile Include="src\DirectX\Heap\Heap.cpp" />
     <ClCompile Include="src\DirectX\Heap\SRVManager.cpp" />
+    <ClCompile Include="src\DirectX\LeakChecker\D3DResourceLeakChecker.cpp" />
     <ClCompile Include="src\DirectX\Resource\DX12Resource.cpp" />
     <ClCompile Include="src\DirectX\Shader\Shader.cpp" />
     <ClCompile Include="src\Framework\Framework.cpp" />

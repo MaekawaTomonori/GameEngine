@@ -78,6 +78,7 @@ class DirectXAdapter{
 
 public:
     DirectXAdapter(HWND _hWnd, size_t _width, size_t _height);
+    ~DirectXAdapter();
 
     std::unique_ptr<DX12Resource> CreateBufferResource(size_t _size) const;
     std::unique_ptr<DX12Resource> CreateTextureResource(const DirectX::TexMetadata& metadata) const;
@@ -89,7 +90,6 @@ public:
     // Renderer用のメソッド
     void BeginFrame();
     void EndFrame();
-    
 
 private:
     void EnableDebugLayer();

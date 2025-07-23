@@ -11,6 +11,15 @@ void DX12Resource::Create(ID3D12Resource* _resource, D3D12_RESOURCE_STATES _stat
     state_ = _state;
 }
 
+void DX12Resource::Create(Microsoft::WRL::ComPtr<ID3D12Resource> _resource, D3D12_RESOURCE_STATES _state) {
+    resource_ = _resource;
+    if (!resource_){
+        Utils::Alert("Failed to create DX12 Resource");
+        return;
+    }
+    state_ = _state;
+}
+
 void DX12Resource::ChangeState(ID3D12GraphicsCommandList* _command, const D3D12_RESOURCE_STATES _state) {
     if (!resource_) return;
     if (state_ == _state) return;

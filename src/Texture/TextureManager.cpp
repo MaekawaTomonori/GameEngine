@@ -25,17 +25,40 @@ DirectX::ScratchImage TextureManager::LoadTexture(const std::string& filename) c
     return mipImages;
 }
 
-[[nodiscard]]
-std::unique_ptr<DX12Resource> TextureManager::UploadTextureData(DX12Resource* _texture,
-    const DirectX::ScratchImage& mipImages) const {
+void TextureManager::UploadTextureData(DX12Resource* _texture, const DirectX::ScratchImage& mipImages) const {
     std::vector<D3D12_SUBRESOURCE_DATA> subResources;
     PrepareUpload(adapter_->GetDevice(), mipImages.GetImages(), mipImages.GetImageCount(), mipImages.GetMetadata(), subResources);
     uint32_t intermediateSize = static_cast<uint32_t>(GetRequiredIntermediateSize(_texture->Get(), 0, static_cast<UINT>(subResources.size())));
     std::unique_ptr<DX12Resource> intermediateResource = adapter_->CreateBufferResource(intermediateSize);
     UpdateSubresources(adapter_->GetCommandList(), _texture->Get(), intermediateResource->Get(), 0, 0, static_cast<UINT>(subResources.size()), subResources.data());
-
     _texture->ChangeState(adapter_->GetCommandList(), D3D12_RESOURCE_STATE_GENERIC_READ);
-    return std::move(intermediateResource);
+    if (adapter_->GetCommandList()->Close()) {
+        Utils::Alert("");
+        return;
+    }
+
+    ID3D12CommandList* cls[] = { adapter_->GetCommandList() };
+    adapter_->GetCommandQueue()->ExecuteCommandLists(_countof(cls), cls);
+
+    UINT64 fenceValue{};
+    // コマンドキューの実行を待つ
+    adapter_->GetCommandQueue()->Signal(adapter_->GetFence(), ++fenceValue);
+    if (adapter_->GetFence()->GetCompletedValue() < fenceValue) {
+        HANDLE fenceEvent = CreateEvent(nullptr, false, false, nullptr);
+        adapter_->GetFence()->SetEventOnCompletion(fenceValue, fenceEvent);
+        WaitForSingleObject(fenceEvent, INFINITE);
+        CloseHandle(fenceEvent);
+    }
+    
+    // CommandAllocatorとCommandListをリセット
+    if (adapter_->GetCommandAllocator()->Reset()) {
+        Utils::Alert("Failed to reset command allocator");
+        return;
+    }
+    if (adapter_->GetCommandList()->Reset(adapter_->GetCommandAllocator(), nullptr)) {
+        Utils::Alert("Failed to reset command list");
+        return;
+    }
 }
 
 
@@ -64,16 +87,24 @@ void TextureManager::Load(const std::string& fileName) {
 
     assert(!srv_->IsFull());
 
+    /// FLOW
+    /// 1. Load Texture Data in CPU
+    /// 2. Create TextureResource (VRAM)
+    /// 3. Create UploadHeap Resource (IntermediateResource)
+    /// 4. Upload IntermediateResource to CPU
+    /// 5. Stack Command (3 -> 2) to CommandList
+    /// 6. Execute Using CommandQueue
+    /// 7. Wait 
+
+
     //Load Texture
     Texture& texture = textures_[name];
 
     DirectX::ScratchImage img = LoadTexture(name);
 
     texture.metadata = img.GetMetadata();
-    texture.resource = std::make_unique<DX12Resource>();
     texture.resource = adapter_->CreateTextureResource(img.GetMetadata());
-    texture.intermediateResource = std::make_unique<DX12Resource>();
-    texture.intermediateResource = UploadTextureData(texture.resource.get(), img);
+    UploadTextureData(texture.resource.get(), img);
 
     texture.srvIndex = srv_->Allocate();
     texture.cpuHandle = srv_->GetCPUHandle(texture.srvIndex);
@@ -86,8 +117,7 @@ void TextureManager::Load(const std::string& fileName) {
 
 void TextureManager::Unload() {
     for (auto itr = textures_.begin(); itr != textures_.end(); ){
-        itr->second.resource->Get()->Release();
-        itr->second.intermediateResource->Get()->Release();
+        itr->second.resource.reset();
 
         itr = textures_.erase(itr);
     }
