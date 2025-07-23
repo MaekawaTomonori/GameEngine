@@ -1,14 +1,16 @@
 #include "DirectXAdapter.hpp"
 
 #include <cassert>
-#include <thread>
 
 #include <d3dcompiler.h>
 
 #include "Heap/Heap.hpp"
 #include "Log.hpp"
 #include "Utils.hpp"
+#include "imgui.h"
 #include "LeakChecker/D3DResourceLeakChecker.hpp"
+
+#include "include/DebugUI.hpp"
 
 #pragma comment(lib, "d3d12.lib")
 #pragma comment(lib, "dxgi.lib")
@@ -228,6 +230,17 @@ void DirectXAdapter::BeginFrame() {
 void DirectXAdapter::EndFrame() {
     Present();
     isRunning_ = false;
+}
+
+void DirectXAdapter::DisplayFPS(DebugUI* _debug) const {
+    _debug->RegisterCommand(
+        "FPS",
+        [this]() {
+            ImGui::Begin("FPS");
+            ImGui::ProgressBar(fpsLimiter_->GetCurrentFps() / fpsLimiter_->GetMaxFps());
+            ImGui::End();
+        }
+    );
 }
 
 void DirectXAdapter::SetSwapChainRenderTarget() const {

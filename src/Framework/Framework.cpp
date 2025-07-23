@@ -121,6 +121,8 @@ void Framework::Update() const {
 void Framework::Draw() const {
     if (!Check())return;
 
+    dxAdapter_->DisplayFPS(debugUI_.get());
+
     srv_->PreDraw();
 
     renderer_->Register([&] { scene_->Draw(); }, true);

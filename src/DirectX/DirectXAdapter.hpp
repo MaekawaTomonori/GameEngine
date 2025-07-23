@@ -16,6 +16,8 @@
 #include "Resource/DX12Resource.hpp"
 #include "vendor/DirectXTex/DirectXTex.h"
 
+class DebugUI;
+
 class DirectXAdapter{
     /// <summary>
     /// first = width, second = height
@@ -90,6 +92,8 @@ public:
     // Renderer用のメソッド
     void BeginFrame();
     void EndFrame();
+
+    void DisplayFPS(DebugUI* _debug) const;
 
 private:
     void EnableDebugLayer();
