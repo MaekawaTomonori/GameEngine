@@ -440,7 +440,7 @@ bool DirectXAdapter::CreateRTV() {
         }
         swapChainResources_[i] = std::make_unique<DX12Resource>();
         swapChainResources_[i]->Create(resource);
-        swapChainResources_[i]->Get()->SetName(L"SwapChain" + i);
+        swapChainResources_[i]->Get()->SetName(std::wstring(L"SwapChain" + std::to_wstring(i)).c_str());
     }
     Log::Send(Log::Level::INFO, "Swap Chain Resources Created");
 

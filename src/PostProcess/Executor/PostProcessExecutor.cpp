@@ -27,31 +27,41 @@ void PostProcessExecutor::Initialize(DirectXAdapter* _adapter, SRVManager* _srv)
         .RegisterSpace = 0,
         .OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND
     };
-
+    D3D12_BLEND_DESC blendDesc{};
+    blendDesc.RenderTarget[0].BlendEnable = true;
+    blendDesc.RenderTarget[0].RenderTargetWriteMask = D3D12_COLOR_WRITE_ENABLE_ALL;
+    blendDesc.RenderTarget[0].SrcBlend = D3D12_BLEND_SRC_ALPHA;
+    blendDesc.RenderTarget[0].BlendOp = D3D12_BLEND_OP_ADD;
+    blendDesc.RenderTarget[0].DestBlend = D3D12_BLEND_INV_SRC_ALPHA;
+    blendDesc.RenderTarget[0].SrcBlendAlpha = D3D12_BLEND_ONE;
+    blendDesc.RenderTarget[0].BlendOpAlpha = D3D12_BLEND_OP_ADD;
+    blendDesc.RenderTarget[0].DestBlendAlpha = D3D12_BLEND_ZERO;
+    
     //Create PSO
     pso_ = std::make_unique<PipelineStateObject>(adapter_);
     pso_->SetRootSignature(
-        RootSignature()
-        .SetParameter({
-            .ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE,
-            .DescriptorTable = {
-                .NumDescriptorRanges = 1,
-                .pDescriptorRanges = &range
-            },
-            .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL
-        })
-        .SetSampler({
-            .Filter = D3D12_FILTER_MIN_MAG_MIP_LINEAR,
-            .AddressU = D3D12_TEXTURE_ADDRESS_MODE_WRAP,
-            .AddressV = D3D12_TEXTURE_ADDRESS_MODE_WRAP,
-            .AddressW = D3D12_TEXTURE_ADDRESS_MODE_WRAP,
-            .ComparisonFunc = D3D12_COMPARISON_FUNC_NEVER,
-            .MaxLOD = D3D12_FLOAT32_MAX,
-            .ShaderRegister = 0,
-            .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL
-        })
+        RootSignature().SetParameter({
+                .ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE,
+                .DescriptorTable = {
+                    .NumDescriptorRanges = 1,
+                    .pDescriptorRanges = &range
+                },
+                .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL
+            })
+            .SetSampler({
+                .Filter = D3D12_FILTER_MIN_MAG_MIP_LINEAR,
+                .AddressU = D3D12_TEXTURE_ADDRESS_MODE_WRAP,
+                .AddressV = D3D12_TEXTURE_ADDRESS_MODE_WRAP,
+                .AddressW = D3D12_TEXTURE_ADDRESS_MODE_WRAP,
+                .ComparisonFunc = D3D12_COMPARISON_FUNC_NEVER,
+                .MaxLOD = D3D12_FLOAT32_MAX,
+                .ShaderRegister = 0,
+                .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL
+            })
     )
+    .SetBlendDesc(blendDesc)
     .SetShader(std::make_unique<Shader>(L"CpyImg"))
+    .SetTopologyType(D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE)
     .Create();
 }
 
@@ -105,12 +115,14 @@ void PostProcessExecutor::Draw() const {
     }
 
     srv_->PreDraw();
+    adapter_->PreProcess();
+    adapter_->GetCommandList()->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
     // PSO設定
     pso_->DrawCall();
 
     adapter_->GetCommandList()->SetGraphicsRootDescriptorTable(0, srvHandle_);
-    
+
     // フルスクリーンクワッドを三角形で描画
     adapter_->GetCommandList()->DrawInstanced(3, 1, 0, 0);
 }

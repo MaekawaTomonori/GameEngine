@@ -16,6 +16,8 @@ class PipelineStateObject {
 
     std::unique_ptr<Shader> shader_;
 
+    D3D12_BLEND_DESC blendDesc_{};
+
     D3D12_PRIMITIVE_TOPOLOGY_TYPE topologyType_ = D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE;
 
     D3D12_GRAPHICS_PIPELINE_STATE_DESC desc_{};
@@ -24,8 +26,9 @@ class PipelineStateObject {
 public:
     PipelineStateObject() = delete;
     PipelineStateObject(DirectXAdapter* _adapter);
-    PipelineStateObject& SetRootSignature(RootSignature _rootSignature);
-    PipelineStateObject& SetInputLayout(InputLayout _inputLayout);
+    PipelineStateObject& SetRootSignature(const RootSignature& _rootSignature);
+    PipelineStateObject& SetInputLayout(const InputLayout& _inputLayout);
+    PipelineStateObject& SetBlendDesc(const D3D12_BLEND_DESC& _blendDesc);
     PipelineStateObject& SetShader(std::unique_ptr<Shader> _shader);
     PipelineStateObject& SetTopologyType(D3D12_PRIMITIVE_TOPOLOGY_TYPE _topologyType);
 
