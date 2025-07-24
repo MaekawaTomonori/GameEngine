@@ -17,7 +17,8 @@ class Shader{
 public:
     Shader() = default;
     Shader(const std::wstring& _name);
-    bool Create(const std::wstring& _name);
+    Shader(const std::wstring& _vs, const std::wstring& _ps);
+
 
     Shader* PSLoad(const std::wstring& _name);
 
@@ -29,8 +30,11 @@ public:
     }
 
 private:
+    bool Create(const std::wstring& _name);
+    bool Create(const std::wstring& _vs, const std::wstring& _ps);
     void CreateDxc();
     void CompileShaders();
+    void CompileShaders(const std::wstring& _vs, const std::wstring& _ps);
     IDxcBlob* Compile(const std::wstring& directoryPath_, const std::wstring& _filePath, const wchar_t* _profile, IDxcUtils* _dxcUtils, IDxcCompiler3* _dxcCompiler, IDxcIncludeHandler* _includeHandler);
 };
 

@@ -590,6 +590,7 @@
     <ClInclude Include="src\DirectX\DirectXAdapter.hpp" />
     <ClInclude Include="src\DirectX\FrameRate\FrameRateLimiter.hpp" />
     <ClInclude Include="src\DirectX\GraphicsPipeline\GraphicsPipeline.hpp" />
+    <ClInclude Include="src\DirectX\GraphicsPipeline\Object\BlendMode.hpp" />
     <ClInclude Include="src\DirectX\GraphicsPipeline\Object\InputLayout.hpp" />
     <ClInclude Include="src\DirectX\GraphicsPipeline\Object\PipelineStateObject.hpp" />
     <ClInclude Include="src\DirectX\GraphicsPipeline\Object\RootSignature.hpp" />
@@ -626,6 +627,7 @@
     <ClInclude Include="src\Platform\WinApp.hpp" />
     <ClInclude Include="include\IScene.hpp" />
     <ClInclude Include="src\PostProcess\Executor\PostProcessExecutor.hpp" />
+    <ClInclude Include="src\PostProcess\Grayscale\Grayscale.hpp" />
     <ClInclude Include="src\PostProcess\IPostEffect.hpp" />
     <ClInclude Include="src\Renderer\Renderer.hpp" />
     <ClInclude Include="src\ResourceRepository\ResourceRepository.hpp" />
@@ -684,6 +686,8 @@
     <ClCompile Include="src\Model\Repository\ModelRepository.cpp" />
     <ClCompile Include="src\Platform\WinApp.cpp" />
     <ClCompile Include="src\PostProcess\Executor\PostProcessExecutor.cpp" />
+    <ClCompile Include="src\PostProcess\Grayscale\Grayscale.cpp" />
+    <ClCompile Include="src\PostProcess\IPostEffect.cpp" />
     <ClCompile Include="src\Renderer\Renderer.cpp" />
     <ClCompile Include="src\ResourceRepository\ResourceRepository.cpp" />
     <ClCompile Include="src\Scene\IScene.cpp" />

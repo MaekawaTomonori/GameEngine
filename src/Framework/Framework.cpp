@@ -3,6 +3,7 @@
 #include "Log.hpp"
 #include "IGame.hpp"
 #include "Pattern/Singleton.hpp"
+#include "src/PostProcess/Grayscale/Grayscale.hpp"
 
 Framework::Framework() {
     config_ = GameEngine::Config::Default();
@@ -16,17 +17,17 @@ Framework::Framework() {
     srv_ = std::make_unique<SRVManager>();
     srv_->Initialize(dxAdapter_.get());
 
+    debugUI_ = std::make_unique<DebugUI>();
+    debugUI_->Initialize(dxAdapter_.get());
+
     postProcessor_ = std::make_unique<PostProcessExecutor>();
-    postProcessor_->Initialize(dxAdapter_.get(), srv_.get());
+    postProcessor_->Initialize(dxAdapter_.get(), srv_.get(), debugUI_.get());
 
     renderer_ = std::make_unique<Renderer>();
     renderer_->Initialize(dxAdapter_.get(), postProcessor_.get());
 
     resources_ = std::make_unique<ResourceRepository>();
     resources_->Initialize();
-
-    debugUI_ = std::make_unique<DebugUI>();
-    debugUI_->Initialize(dxAdapter_.get());
 
     input_ = Singleton<Input>::GetInstance();
     input_->Initialize();
@@ -48,6 +49,8 @@ Framework::Framework() {
 
     light_ = Singleton<LightManager>::GetInstance();
     light_->Initialize(dxAdapter_.get(), debugUI_.get());
+
+    postProcessor_->Add(std::make_unique<Grayscale>(dxAdapter_.get(), srv_.get()), "Grayscale");
 }
 
 Framework::~Framework() {
@@ -122,6 +125,7 @@ void Framework::Draw() const {
     if (!Check())return;
 
     dxAdapter_->DisplayFPS(debugUI_.get());
+    postProcessor_->Debug();
 
     srv_->PreDraw();
 

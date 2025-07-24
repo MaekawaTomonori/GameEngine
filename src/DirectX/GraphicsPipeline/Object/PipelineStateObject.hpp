@@ -3,6 +3,7 @@
 #include <d3d12.h>
 #include <wrl/client.h>
 
+#include "BlendMode.hpp"
 #include "InputLayout.hpp"
 #include "RootSignature.hpp"
 #include "src/DirectX/DirectXAdapter.hpp"
@@ -28,7 +29,8 @@ public:
     PipelineStateObject(DirectXAdapter* _adapter);
     PipelineStateObject& SetRootSignature(const RootSignature& _rootSignature);
     PipelineStateObject& SetInputLayout(const InputLayout& _inputLayout);
-    PipelineStateObject& SetBlendDesc(const D3D12_BLEND_DESC& _blendDesc);
+    PipelineStateObject& SetBlend(const D3D12_BLEND_DESC& _blendDesc);
+    PipelineStateObject& SetBlend(BlendMode _blendMode);
     PipelineStateObject& SetShader(std::unique_ptr<Shader> _shader);
     PipelineStateObject& SetTopologyType(D3D12_PRIMITIVE_TOPOLOGY_TYPE _topologyType);
 

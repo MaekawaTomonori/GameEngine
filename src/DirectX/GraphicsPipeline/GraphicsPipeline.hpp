@@ -5,20 +5,11 @@
 #include <vector>
 #include <wrl/client.h>
 
+#include "Object/BlendMode.hpp"
 #include "src/DirectX/Shader/Shader.h"
 
 class DirectXAdapter;
 class Heap;
-
-enum class BlendMode{
-    ALPHA,
-    ADD,
-    SUB,
-    MULTI,
-    SCREEN,
-
-    NONE
-};
 
 class GraphicsPipeline{
 public:

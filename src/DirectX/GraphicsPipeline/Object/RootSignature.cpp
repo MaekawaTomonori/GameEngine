@@ -3,7 +3,7 @@
 #include "Log.hpp"
 #include "Utils.hpp"
 
-RootSignature RootSignature::SetParameter(const D3D12_ROOT_PARAMETER& _parameter) {
+RootSignature RootSignature::AddParameter(const D3D12_ROOT_PARAMETER& _parameter) {
     parameters_.push_back(_parameter);
     return *this;
 }

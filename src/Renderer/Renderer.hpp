@@ -19,7 +19,7 @@ class Renderer {
 public:
     void Initialize(DirectXAdapter* _adapter, PostProcessExecutor* _postProcessor);
     
-    void Register(std::function<void()> _task, bool _applyPostEffect = false);
+    void Register(const std::function<void()>& _task, bool _applyPostEffect = false);
     
     void Render();
     

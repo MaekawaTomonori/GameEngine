@@ -240,6 +240,12 @@
     <ClInclude Include="src\DirectX\LeakChecker\D3DResourceLeakChecker.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="src\PostProcess\Grayscale\Grayscale.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DirectX\GraphicsPipeline\Object\BlendMode.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Scheduler\Scheduler.cpp">
@@ -402,6 +408,12 @@
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="src\DirectX\LeakChecker\D3DResourceLeakChecker.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PostProcess\IPostEffect.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PostProcess\Grayscale\Grayscale.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>

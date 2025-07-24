@@ -8,7 +8,7 @@ void Renderer::Initialize(DirectXAdapter* _adapter, PostProcessExecutor* _postPr
     postProcessor_ = _postProcessor;
 }
 
-void Renderer::Register(std::function<void()> _task, const bool _applyPostEffect) {
+void Renderer::Register(const std::function<void()>& _task, const bool _applyPostEffect) {
     if (_applyPostEffect){
         pp_.push(std::move(_task));
     } else{
@@ -26,8 +26,8 @@ void Renderer::Render() {
             pp_.pop();
             task();
         }
-        postProcessor_->Execute();
         postProcessor_->EndFrame();
+        postProcessor_->Execute();
 
         ppFunc = ([this](){postProcessor_->Draw();}); 
     }

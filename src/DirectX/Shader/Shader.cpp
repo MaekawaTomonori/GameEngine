@@ -15,6 +15,15 @@ Shader::Shader(const std::wstring& _name) {
     Log::Send(Log::Level::INFO, Utils::Convert(std::format(L"Shader created successfully: {}", _name)));
 }
 
+Shader::Shader(const std::wstring& _vs, const std::wstring& _ps) {
+    if (!Create(_vs, _ps)){
+        Log::Send(Log::Level::ERR, Utils::Convert(std::format(L"Failed to create shader: {}, {}", _vs, _ps)));
+        Utils::Alert("Failed to create shader: " + Utils::Convert(_vs) + ", " + Utils::Convert(_ps));
+        return;
+    }
+    Log::Send(Log::Level::INFO, Utils::Convert(std::format(L"Shader created successfully: {}, {}", _vs, _ps)));
+}
+
 void Shader::CreateDxc() {
     HRESULT hr = S_OK;
     hr = DxcCreateInstance(CLSID_DxcUtils, IID_PPV_ARGS(&dxcUtils_));
@@ -35,11 +44,23 @@ void Shader::CompileShaders() {
     }*/
 }
 
+void Shader::CompileShaders(const std::wstring& _vs, const std::wstring& _ps) {
+    vertexShader_.Attach(Compile(L"Assets/Shaders/", _vs + L".VS.hlsl", L"vs_6_0", dxcUtils_.Get(), dxcCompiler_.Get(), includeHandler_.Get()));
+    pixelShader_.Attach(Compile(L"Assets/Shaders/", _ps + L".PS.hlsl", L"ps_6_0", dxcUtils_.Get(), dxcCompiler_.Get(), includeHandler_.Get()));
+}
+
 bool Shader::Create(const std::wstring& _name) {
     name_ = _name;
 
     CreateDxc();
     CompileShaders();
+
+    return true;
+}
+
+bool Shader::Create(const std::wstring& _vs, const std::wstring& _ps) {
+    CreateDxc();
+    CompileShaders(_vs, _ps);
 
     return true;
 }

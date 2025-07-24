@@ -1,6 +1,8 @@
 #include "PostProcessExecutor.hpp"
 
+#include "DebugUI.hpp"
 #include "Log.hpp"
+#include "imgui.h"
 #include "src/DirectX/DirectXAdapter.hpp"
 #include "src/DirectX/GraphicsPipeline/Object/InputLayout.hpp"
 #include "src/DirectX/Heap/Heap.hpp"
@@ -8,9 +10,10 @@
 #include "src/DirectX/Heap/SRVManager.h"
 #include "src/PostProcess/IPostEffect.hpp"
 
-void PostProcessExecutor::Initialize(DirectXAdapter* _adapter, SRVManager* _srv) {
+void PostProcessExecutor::Initialize(DirectXAdapter* _adapter, SRVManager* _srv, DebugUI* _debug) {
     adapter_ = _adapter;
     srv_ = _srv;
+    debugUI_ = _debug;
 
     if (!adapter_) {
         Log::Send(Log::Level::ERR, "DirectXAdapter is not initialized");
@@ -40,7 +43,7 @@ void PostProcessExecutor::Initialize(DirectXAdapter* _adapter, SRVManager* _srv)
     //Create PSO
     pso_ = std::make_unique<PipelineStateObject>(adapter_);
     pso_->SetRootSignature(
-        RootSignature().SetParameter({
+        RootSignature().AddParameter({
                 .ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE,
                 .DescriptorTable = {
                     .NumDescriptorRanges = 1,
@@ -59,15 +62,19 @@ void PostProcessExecutor::Initialize(DirectXAdapter* _adapter, SRVManager* _srv)
                 .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL
             })
     )
-    .SetBlendDesc(blendDesc)
+    .SetBlend(blendDesc)
     .SetShader(std::make_unique<Shader>(L"CpyImg"))
     .SetTopologyType(D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE)
     .Create();
 }
 
-void PostProcessExecutor::Add(std::unique_ptr<IPostEffect> _effect) {
+void PostProcessExecutor::Add(std::unique_ptr<IPostEffect> _effect, const std::string& _name) {
     if (_effect){
-        effects_.emplace_back(std::move(_effect));
+        // エフェクト用のRTVハンドルを割り当て
+        auto rtvHandle = rtvHeap_->GetCPUHandle(static_cast<uint32_t>(effects_.size()) + 1);
+        _effect->SetRTVHandle(rtvHandle);
+        _effect->Initialize();
+        effects_.emplace_back(EffectData{std::move(_effect), _name, true});
     } else{
         Log::Send(Log::Level::ERR, "Attempted to add a null post effect");
     }
@@ -96,16 +103,21 @@ void PostProcessExecutor::EndFrame() const {
     renderTexture_->ChangeState(adapter_->GetCommandList(), D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE);
 }
 
-void PostProcessExecutor::Execute() const {
+void PostProcessExecutor::Execute() {
     if (!adapter_) {
         Log::Send(Log::Level::ERR, "DirectXAdapter is not initialized");
         return;
     }
-    
+
+    auto handle = srv_->GetGPUHandle(srvIndex_);
+
     // エフェクトチェーン処理
     for (const auto& effect : effects_) {
-        effect->Apply();
+        if (!effect.enabled)continue;
+        handle = effect.effect->Apply(handle);
     }
+
+    srvHandle_ = handle;
 }
 
 void PostProcessExecutor::Draw() const {
@@ -127,20 +139,43 @@ void PostProcessExecutor::Draw() const {
     adapter_->GetCommandList()->DrawInstanced(3, 1, 0, 0);
 }
 
+void PostProcessExecutor::Debug() {
+    debugUI_->RegisterCommand("PostEffect", [&](){
+        ImGui::Begin("PostEffect");
+        if (ImGui::BeginTabBar("PostEffect")){
+            if (ImGui::BeginTabItem("List")) {
+                for (auto& effect : effects_) {
+                    ImGui::Checkbox(effect.name.c_str(), &effect.enabled);
+                }
+                ImGui::EndTabItem();
+            }
+
+            if (ImGui::BeginTabItem("Details")){
+                for (auto& effect : effects_) {
+                    effect.effect->Debug();
+                }
+                ImGui::EndTabItem();
+            }
+
+            ImGui::EndTabBar();
+        }
+        ImGui::End();
+    });
+}
+
 void PostProcessExecutor::CreateSceneRenderTexture() {
     if (!adapter_) {
         return;
     }
 
-    // RTVHeapを作成
+    // RTVHeapを作成（シーン用1つ + エフェクト用複数）
     rtvHeap_ = std::make_unique<Heap>();
-    if (!rtvHeap_->Create(adapter_->GetDevice(), D3D12_DESCRIPTOR_HEAP_TYPE_RTV, 4, D3D12_DESCRIPTOR_HEAP_FLAG_NONE)) {
+    if (!rtvHeap_->Create(adapter_->GetDevice(), D3D12_DESCRIPTOR_HEAP_TYPE_RTV, 16, D3D12_DESCRIPTOR_HEAP_FLAG_NONE)) {
         Log::Send(Log::Level::ERR, "Failed to create RTV heap for PostProcessExecutor");
         return;
     }
 
     // 画面サイズのRenderTextureを作成
-    renderTexture_ = std::make_unique<DX12Resource>();
     renderTexture_ = adapter_->CreateRenderTextureResource(
         static_cast<uint32_t>(adapter_->GetWidth()), 
         static_cast<uint32_t>(adapter_->GetHeight()), 
@@ -157,7 +192,7 @@ void PostProcessExecutor::CreateSceneRenderTexture() {
     
     // RTVを作成
     rtvHandle_ = rtvHeap_->GetCPUHandle(0);
-    
+
     D3D12_RENDER_TARGET_VIEW_DESC rtvDesc = {};
     rtvDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
     rtvDesc.ViewDimension = D3D12_RTV_DIMENSION_TEXTURE2D;

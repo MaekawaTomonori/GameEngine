@@ -18,12 +18,12 @@
 
 class DebugUI;
 
-class DirectXAdapter{
+class DirectXAdapter {
     /// <summary>
     /// first = width, second = height
     /// </summary>
     using WindowSize = std::pair<size_t, size_t>;
-    WindowSize windowSize_ = { 1280, 720 };
+    WindowSize windowSize_ = {1280, 720};
     HWND hWnd_ = nullptr;
 
     //DegubLayer
@@ -60,7 +60,7 @@ class DirectXAdapter{
     D3D12_CPU_DESCRIPTOR_HANDLE dsvHandle_;
 
     //Background color
-    Vector4	back = { 0.2f, 0.2f, 0.2f, 1.0f }; // Black
+    Vector4 back = {0.2f, 0.2f, 0.2f, 1.0f}; // Black
 
     //Viewport
     D3D12_VIEWPORT viewport_ = {};
@@ -85,10 +85,11 @@ public:
     std::unique_ptr<DX12Resource> CreateBufferResource(size_t _size) const;
     std::unique_ptr<DX12Resource> CreateTextureResource(const DirectX::TexMetadata& metadata) const;
     std::unique_ptr<DX12Resource> CreateDepthStencilResource(int32_t _width, int32_t _height) const;
-    std::unique_ptr<DX12Resource> CreateRenderTextureResource(uint32_t _width, uint32_t _height, DXGI_FORMAT _format, const Vector4& _cc) const;
+    std::unique_ptr<DX12Resource> CreateRenderTextureResource(uint32_t _width, uint32_t _height, DXGI_FORMAT _format,
+        const Vector4& _cc) const;
 
     void PreProcess() const;
-    
+
     // Renderer用のメソッド
     void BeginFrame();
     void EndFrame();
@@ -98,7 +99,7 @@ public:
 private:
     void EnableDebugLayer();
     bool CreateDXGI();
-    bool InfoQueue() const;
+    [[nodiscard]] bool InfoQueue() const;
     bool CreateCommand();
     bool CreateSwapChain();
     bool CreateFence();

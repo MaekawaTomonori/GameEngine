@@ -13,11 +13,18 @@ class DirectXAdapter;
 class Heap;
 
 class PostProcessExecutor {
+    struct EffectData {
+        std::unique_ptr<IPostEffect> effect;
+        std::string name;
+        bool enabled = true;
+    };
+
     DirectXAdapter* adapter_ = nullptr;
     SRVManager* srv_ = nullptr;
+    DebugUI* debugUI_ = nullptr;
 
-    std::vector<std::unique_ptr<IPostEffect>> effects_;
-    
+    std::vector<EffectData> effects_;
+
     // シーン描画用RenderTexture
     std::unique_ptr<DX12Resource> renderTexture_;
     std::unique_ptr<Heap> rtvHeap_;
@@ -29,14 +36,18 @@ class PostProcessExecutor {
     Vector4 clearColor_{ 0.0f, 0.0f, 0.0f, 0.0f };
     uint32_t srvIndex_ = 0;
 
+    std::unique_ptr<DX12Resource> tempBuffer_;
+
 public:
-    void Initialize(DirectXAdapter* _adapter, SRVManager* _srv);
-    void Add(std::unique_ptr<IPostEffect> _effect);
+    void Initialize(DirectXAdapter* _adapter, SRVManager* _srv, DebugUI* _debug);
+    void Add(std::unique_ptr<IPostEffect> _effect, const std::string& _name = "NoName");
     
     void BeginFrame() const;
     void EndFrame() const;
-    void Execute() const;
+    void Execute();
     void Draw() const;
+
+    void Debug();
 
 private:
     void CreateSceneRenderTexture();

@@ -5,6 +5,7 @@
 
 #include "Log.hpp"
 #include "Utils.hpp"
+#include "Object/BlendMode.hpp"
 #include "src/DirectX/DirectXAdapter.hpp"
 
 void GraphicsPipeline::Create(DirectXAdapter* _adapter, const Type _type) {
@@ -260,14 +261,13 @@ void GraphicsPipeline::CreateInputLayout() {
 
 void GraphicsPipeline::CreateBlendState() {
     blendDesc_.RenderTarget[0].RenderTargetWriteMask = D3D12_COLOR_WRITE_ENABLE_ALL;
-
+    SetBlendMode(BlendMode::ALPHA);
     if (type_ == Type::PARTICLE){
         SetBlendMode(BlendMode::ADD);
     }
 }
 
 void GraphicsPipeline::CreateShader() {
-    shader_ = std::make_unique<Shader>();
 
     std::wstring name;
     switch (type_){
@@ -289,7 +289,7 @@ void GraphicsPipeline::CreateShader() {
             break;
     }
 
-    shader_->Create(name);
+    shader_ = std::make_unique<Shader>(name);
 }
 
 void GraphicsPipeline::CreateRasterizerState() {
