@@ -2,6 +2,20 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## ファイル検索とアクセス規則
+
+### アセットファイルの検索
+- **Assetsファイル**と言及された場合は、`.\Assets\`フォルダから開始して関連するサブフォルダにアクセスしてください
+  - シェーダー: `.\Assets\Shaders\`
+  - テクスチャ: `.\Assets\Resources\`（PNG、JPGファイル）
+  - モデル: `.\Assets\Resources\`（GLTF、OBJ、Blendファイル）
+  - フォント: `.\Assets\Fonts\`
+  - データ: `.\Assets\Data\`
+
+### クラスとソースコードの検索
+- **クラス、システム、実装**と言及された場合は、`.\src\`フォルダから開始して検索してください
+- サブシステム別ディレクトリ構造に従ってナビゲートしてください
+
 ## プロジェクト概要
 
 これはC++20 DirectX12ベースのゲームエンジンテンプレートのEngineコンポーネントです。Engineディレクトリには、レンダリング、入力処理、シーン管理、リソース読み込みなどの主要なゲームエンジン機能を提供する静的ライブラリ（.lib）が含まれています。

@@ -14,12 +14,12 @@ D3D12_GPU_DESCRIPTOR_HANDLE IPostEffect::Apply(const D3D12_GPU_DESCRIPTOR_HANDLE
 
     output_->ChangeState(adapter_->GetCommandList(), D3D12_RESOURCE_STATE_RENDER_TARGET);
 
+    pso_->DrawCall();
+
     adapter_->GetCommandList()->OMSetRenderTargets(1, &rtvHandle_, false, nullptr);
     adapter_->GetCommandList()->ClearRenderTargetView(rtvHandle_, &CLEAR_COLOR.x, 0, nullptr);
 
     adapter_->GetCommandList()->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-    
-    pso_->DrawCall();
 
     adapter_->GetCommandList()->SetGraphicsRootDescriptorTable(0, _handle);
 

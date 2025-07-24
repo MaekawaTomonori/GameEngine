@@ -626,6 +626,7 @@
     <ClInclude Include="src\Model\Repository\ModelRepository.hpp" />
     <ClInclude Include="src\Platform\WinApp.hpp" />
     <ClInclude Include="include\IScene.hpp" />
+    <ClInclude Include="src\PostProcess\BoxBlur\BoxBlur.hpp" />
     <ClInclude Include="src\PostProcess\Executor\PostProcessExecutor.hpp" />
     <ClInclude Include="src\PostProcess\Grayscale\Grayscale.hpp" />
     <ClInclude Include="src\PostProcess\IPostEffect.hpp" />
@@ -686,6 +687,7 @@
     <ClCompile Include="src\Model\Model.cpp" />
     <ClCompile Include="src\Model\Repository\ModelRepository.cpp" />
     <ClCompile Include="src\Platform\WinApp.cpp" />
+    <ClCompile Include="src\PostProcess\BoxBlur\BoxBlur.cpp" />
     <ClCompile Include="src\PostProcess\Executor\PostProcessExecutor.cpp" />
     <ClCompile Include="src\PostProcess\Grayscale\Grayscale.cpp" />
     <ClCompile Include="src\PostProcess\IPostEffect.cpp" />
