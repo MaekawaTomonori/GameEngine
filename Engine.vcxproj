@@ -629,6 +629,7 @@
     <ClInclude Include="src\PostProcess\Executor\PostProcessExecutor.hpp" />
     <ClInclude Include="src\PostProcess\Grayscale\Grayscale.hpp" />
     <ClInclude Include="src\PostProcess\IPostEffect.hpp" />
+    <ClInclude Include="src\PostProcess\Vignette\Vignette.hpp" />
     <ClInclude Include="src\Renderer\Renderer.hpp" />
     <ClInclude Include="src\ResourceRepository\ResourceRepository.hpp" />
     <ClInclude Include="src\Scene\SceneSwitcher.hpp" />
@@ -688,6 +689,7 @@
     <ClCompile Include="src\PostProcess\Executor\PostProcessExecutor.cpp" />
     <ClCompile Include="src\PostProcess\Grayscale\Grayscale.cpp" />
     <ClCompile Include="src\PostProcess\IPostEffect.cpp" />
+    <ClCompile Include="src\PostProcess\Vignette\Vignette.cpp" />
     <ClCompile Include="src\Renderer\Renderer.cpp" />
     <ClCompile Include="src\ResourceRepository\ResourceRepository.cpp" />
     <ClCompile Include="src\Scene\IScene.cpp" />

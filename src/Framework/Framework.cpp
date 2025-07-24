@@ -4,6 +4,7 @@
 #include "IGame.hpp"
 #include "Pattern/Singleton.hpp"
 #include "src/PostProcess/Grayscale/Grayscale.hpp"
+#include "src/PostProcess/Vignette/Vignette.hpp"
 
 Framework::Framework() {
     config_ = GameEngine::Config::Default();
@@ -51,6 +52,7 @@ Framework::Framework() {
     light_->Initialize(dxAdapter_.get(), debugUI_.get());
 
     postProcessor_->Add(std::make_unique<Grayscale>(dxAdapter_.get(), srv_.get()), "Grayscale");
+    postProcessor_->Add(std::make_unique<Vignette>(dxAdapter_.get(), srv_.get()), "Vignette");
 }
 
 Framework::~Framework() {
