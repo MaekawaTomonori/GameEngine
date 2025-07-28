@@ -637,6 +637,8 @@
     <ClInclude Include="include\Factory\AbstractSceneFactory.hpp" />
     <ClInclude Include="src\Scheduler\Scheduler.hpp" />
     <ClInclude Include="include\Pattern\Singleton.hpp" />
+    <ClInclude Include="src\Sky\Common\SkyCommon.hpp" />
+    <ClInclude Include="src\Sky\Skybox.hpp" />
     <ClInclude Include="src\Sprite\Common\SpriteCommon.hpp" />
     <ClInclude Include="include\Sprite.hpp" />
     <ClInclude Include="src\Texture\TextureManager.hpp" />
@@ -697,6 +699,8 @@
     <ClCompile Include="src\Scene\IScene.cpp" />
     <ClCompile Include="src\Scene\SceneSwitcher.cpp" />
     <ClCompile Include="src\Scheduler\Scheduler.cpp" />
+    <ClCompile Include="src\Sky\Common\SkyCommon.cpp" />
+    <ClCompile Include="src\Sky\Skybox.cpp" />
     <ClCompile Include="src\Sprite\Common\SpriteCommon.cpp" />
     <ClCompile Include="src\Sprite\Sprite.cpp" />
     <ClCompile Include="src\System\Log.cpp" />

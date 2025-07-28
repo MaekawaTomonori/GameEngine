@@ -50,5 +50,7 @@ public:
 private: //Methods
     DirectX::ScratchImage LoadTexture(const std::string& filename) const;
     void UploadTextureData(DX12Resource* _texture, const DirectX::ScratchImage& mipImages) const;
+
+    static DirectX::ScratchImage LoadDDS(const std::wstring& _path);
 };
 

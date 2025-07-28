@@ -15,7 +15,11 @@ DirectX::ScratchImage TextureManager::LoadTexture(const std::string& filename) c
     DirectX::ScratchImage image {};
     std::string fullPath = folderPath_ + filename;
     std::wstring filePathW = Utils::Convert(fullPath);
-    HRESULT hr = LoadFromWICFile(filePathW.c_str(), DirectX::WIC_FLAGS_FORCE_SRGB, nullptr, image);
+
+    if (filePathW.ends_with(L".dds"))return LoadDDS(filePathW);
+
+    [[maybe_unused]]HRESULT hr = LoadFromWICFile(filePathW.c_str(), DirectX::WIC_FLAGS_FORCE_SRGB, nullptr, image);
+    
     assert(SUCCEEDED(hr));
 
     DirectX::ScratchImage mipImages {};
@@ -59,6 +63,31 @@ void TextureManager::UploadTextureData(DX12Resource* _texture, const DirectX::Sc
         Utils::Alert("Failed to reset command list");
         return;
     }
+}
+
+DirectX::ScratchImage TextureManager::LoadDDS(const std::wstring& _path) {
+    DirectX::ScratchImage image{};
+    HRESULT hr = LoadFromDDSFile(_path.c_str(), DirectX::DDS_FLAGS_NONE, nullptr, image);
+
+    if (FAILED(hr)) {
+        Log::Send(Log::Level::ERR, std::format("Failed to load DDS file: {}", Utils::Convert(_path)));
+        Utils::Alert(std::format("Failed to load DDS file: {}", Utils::Convert(_path)));
+        return {};
+    }
+
+    DirectX::ScratchImage mip;
+    if (DirectX::IsCompressed(image.GetMetadata().format)) {
+        mip = std::move(image);
+    } else {
+        hr = GenerateMipMaps(image.GetImages(), image.GetImageCount(), image.GetMetadata(), DirectX::TEX_FILTER_SRGB, 4, mip);
+        if (FAILED(hr)){
+            Log::Send(Log::Level::ERR, std::format("Failed to generate mipmaps for DDS file: {}", Utils::Convert(_path)));
+            Utils::Alert(std::format("Failed to generate mipmaps for DDS file: {}", Utils::Convert(_path)));
+            return {};
+        }
+    }
+
+    return mip;
 }
 
 
@@ -110,7 +139,11 @@ void TextureManager::Load(const std::string& fileName) {
     texture.cpuHandle = srv_->GetCPUHandle(texture.srvIndex);
     texture.gpuHandle = srv_->GetGPUHandle(texture.srvIndex);
 
-    srv_->CreateSRVforTexture2D(texture.srvIndex, texture.resource->Get(), texture.metadata.format, static_cast<UINT>(texture.metadata.mipLevels));
+    if (texture.metadata.IsCubemap()) {
+        srv_->CreateSRVforCubemap(texture.srvIndex, texture.resource->Get(), texture.metadata.format);
+    }else{
+        srv_->CreateSRVforTexture2D(texture.srvIndex, texture.resource->Get(), texture.metadata.format, static_cast<UINT>(texture.metadata.mipLevels));
+    }
 
     Log::Send(Log::Level::INFO, std::format("TextureManager::Load: {}", name));
 }
