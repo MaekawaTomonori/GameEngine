@@ -20,7 +20,10 @@ PixelOutput main(VertexShaderOutput input) {
     float2 correct = input.texCoord * (1.f - input.texCoord.yx);
     float value = correct.x * correct.y * gMaterial.intensity;
     value = saturate(pow(value, 0.8f));
-    output.color.rgb *= value * gMaterial.color.rgb;
+    float edge = 1.f - value;
+    float strength = edge * gMaterial.color.a;
+    output.color.rgb = lerp(output.color.rgb, gMaterial.color.rgb, strength);
+    //output.color.rgb = lerp(gMaterial.color.rgb, output.color.rgb, value);
     output.color.a = 1.f;
     return output;
 };

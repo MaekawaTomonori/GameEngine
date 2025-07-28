@@ -56,7 +56,8 @@ void Vignette::Initialize() {
 void Vignette::Debug() {
     if (ImGui::TreeNode("Vignette-Details")){
         ImGui::ColorEdit3("Color", &material_->color.x);
-        ImGui::DragFloat("Intensity", &material_->intensity);
+        ImGui::DragFloat("Density", &material_->color.w, 0.01f, 0.f, 100.f);
+        ImGui::DragFloat("Intensity", &material_->intensity, 0.1f, 0.f, 100.f);
         ImGui::TreePop();
     }
 }
