@@ -27,6 +27,7 @@ public:
     }
 protected:
     void Setup(DirectXAdapter* _adapter, DebugUI* _debugUi,GraphicsPipeline::Type _type);
+    void Setup(DirectXAdapter* _adapter, DebugUI* _debugUi);
 }; // class Common
 
 #endif // Common_HPP_
