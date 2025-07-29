@@ -8,7 +8,7 @@ class InputLayout {
     std::vector<D3D12_INPUT_ELEMENT_DESC> elements_;
 
 public:
-    InputLayout SetElement(const D3D12_INPUT_ELEMENT_DESC& _element);
+    InputLayout& SetElement(const D3D12_INPUT_ELEMENT_DESC& _element);
     //InputLayout SetElement(InputElement _element);
 
     D3D12_INPUT_LAYOUT_DESC Get() const;

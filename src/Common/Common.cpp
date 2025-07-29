@@ -1,14 +1,5 @@
 #include "Common.hpp"
 
-void Common::Setup(DirectXAdapter* _adapter, DebugUI* _debugUi, const GraphicsPipeline::Type _type) {
-    std::lock_guard<std::mutex> lock(mutex_);
-    adapter_ = _adapter;
-    debugUI_ = _debugUi;
-
-    pipeline_ = std::make_unique<GraphicsPipeline>();
-    pipeline_->Create(adapter_, _type);
-}
-
 void Common::Setup(DirectXAdapter* _adapter, DebugUI* _debugUi) {
     std::lock_guard<std::mutex> lock(mutex_);
     adapter_ = _adapter;
