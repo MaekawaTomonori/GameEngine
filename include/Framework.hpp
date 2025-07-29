@@ -16,6 +16,8 @@
 #include "src/Line/Common/LineCommon.hpp"
 #include "src/PostProcess/Executor/PostProcessExecutor.hpp"
 #include "src/Renderer/Renderer.hpp"
+#include "src/Stage/StageRepository.hpp"
+#include "src/Stage/Loader/StageLoader.hpp"
 #include "src/Texture/TextureManager.hpp"
 
 class IGame;
@@ -33,6 +35,8 @@ class Framework {
     std::unique_ptr<ResourceRepository> resources_;
     std::unique_ptr<DebugUI> debugUI_;
     std::unique_ptr<SRVManager> srv_;
+    std::unique_ptr<StageRepository> stageRepository_;
+    std::unique_ptr<StageLoader> stageLoader_;
 
     Input* input_ = nullptr;
     TextureManager* texture_ = nullptr;

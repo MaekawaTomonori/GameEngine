@@ -31,6 +31,11 @@ Framework::Framework() {
     resources_ = std::make_unique<ResourceRepository>();
     resources_->Initialize();
 
+    stageRepository_ = std::make_unique<StageRepository>();
+
+    stageLoader_ = std::make_unique<StageLoader>();
+    stageLoader_->Initialize(stageRepository_.get());
+
     input_ = Singleton<Input>::GetInstance();
     input_->Initialize();
 
@@ -55,6 +60,12 @@ Framework::Framework() {
     postProcessor_->Add(std::make_unique<Grayscale>(dxAdapter_.get(), srv_.get()), "Grayscale");
     postProcessor_->Add(std::make_unique<Vignette>(dxAdapter_.get(), srv_.get()), "Vignette");
     postProcessor_->Add(std::make_unique<BoxBlur>(dxAdapter_.get(), srv_.get()), "BoxBlur");
+
+    if (!stageLoader_->Load("Level")) {
+        Log::Send(Log::Level::ERR, "Failed to load stage data");
+    } else{
+        Log::Send(Log::Level::INFO, "Stage data loaded successfully");
+    }
 }
 
 Framework::~Framework() {

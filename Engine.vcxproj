@@ -612,6 +612,7 @@
     <ClInclude Include="src\Light\RawLight.h" />
     <ClInclude Include="src\Light\SpotLight\SpotLight.h" />
     <ClInclude Include="src\Line\Common\LineCommon.hpp" />
+    <ClInclude Include="src\Stage\Loader\StageLoader.hpp" />
     <ClInclude Include="src\Mesh\Data\MeshData.hpp" />
     <ClInclude Include="src\Mesh\Mesh.hpp" />
     <ClInclude Include="src\Mesh\Repository\MeshRepository.hpp" />
@@ -641,6 +642,8 @@
     <ClInclude Include="src\Sky\Skybox.hpp" />
     <ClInclude Include="src\Sprite\Common\SpriteCommon.hpp" />
     <ClInclude Include="include\Sprite.hpp" />
+    <ClInclude Include="src\Stage\LevelData.hpp" />
+    <ClInclude Include="src\Stage\StageRepository.hpp" />
     <ClInclude Include="src\Texture\TextureManager.hpp" />
     <ClInclude Include="src\Timer\Timer.hpp" />
     <ClInclude Include="src\Window\Window.hpp" />
@@ -676,6 +679,7 @@
     <ClCompile Include="src\Light\SpotLight\SpotLight.cpp" />
     <ClCompile Include="src\Line\Common\LineCommon.cpp" />
     <ClCompile Include="src\Line\Line.cpp" />
+    <ClCompile Include="src\Stage\Loader\StageLoader.cpp" />
     <ClCompile Include="src\Math\Easing.cpp" />
     <ClCompile Include="src\Math\MathUtils.cpp" />
     <ClCompile Include="src\Math\Vector2.cpp" />
@@ -703,6 +707,7 @@
     <ClCompile Include="src\Sky\Skybox.cpp" />
     <ClCompile Include="src\Sprite\Common\SpriteCommon.cpp" />
     <ClCompile Include="src\Sprite\Sprite.cpp" />
+    <ClCompile Include="src\Stage\StageRepository.cpp" />
     <ClCompile Include="src\System\Log.cpp" />
     <ClCompile Include="src\System\Singleton\Singleton.cpp" />
     <ClCompile Include="src\Texture\TextureManager.cpp" />
