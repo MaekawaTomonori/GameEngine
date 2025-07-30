@@ -31,10 +31,7 @@ Framework::Framework() {
     resources_ = std::make_unique<ResourceRepository>();
     resources_->Initialize();
 
-    stageRepository_ = std::make_unique<StageRepository>();
-
-    stageLoader_ = std::make_unique<StageLoader>();
-    stageLoader_->Initialize(stageRepository_.get());
+    level_ = std::make_unique<LevelEditor>(debugUI_.get());
 
     input_ = Singleton<Input>::GetInstance();
     input_->Initialize();
@@ -61,16 +58,16 @@ Framework::Framework() {
     postProcessor_->Add(std::make_unique<Vignette>(dxAdapter_.get(), srv_.get()), "Vignette");
     postProcessor_->Add(std::make_unique<BoxBlur>(dxAdapter_.get(), srv_.get()), "BoxBlur");
 
-    if (!stageLoader_->Load("Level")) {
-        Log::Send(Log::Level::ERR, "Failed to load stage data");
-    } else{
-        Log::Send(Log::Level::INFO, "Stage data loaded successfully");
-    }
+    level_->Initialize("Level");
 }
 
 Framework::~Framework() {
     if (texture_) {
         texture_->Unload();
+    }
+
+    if (level_) {
+        level_.reset();
     }
 
     if (postProcessor_) {
@@ -119,6 +116,7 @@ void Framework::Initialize() {
     if (!game_) return;
     config_ = &game_->GetCurrentConfig();
     scene_ = game_->GetSceneSwitcher();
+    windows_->SetTitle(config_->GetTitle());
     Log::Send(Log::Level::INFO, "Game Initialized");
 }
 
@@ -133,6 +131,7 @@ void Framework::Update() const {
     input_->Update();
     camera_->Update();
     light_->Update();
+    level_->Update();
     scene_->Update();
 }
 
@@ -145,6 +144,7 @@ void Framework::Draw() const {
     srv_->PreDraw();
 
     renderer_->Register([&] { scene_->Draw(); }, true);
+    renderer_->Register([&]{ level_->Draw(); });
     renderer_->Register([&] { debugUI_->Render(); });
     renderer_->Render();
 }

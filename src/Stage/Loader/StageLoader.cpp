@@ -3,6 +3,7 @@
 #include <fstream>
 
 #include "Log.hpp"
+#include "Model.hpp"
 #include "Utils.hpp"
 #include "vendor/json/json.hpp"
 
@@ -11,6 +12,16 @@ void StageLoader::Initialize(StageRepository* _repository) {
 }
 
 bool StageLoader::Load(const std::string& _path) const {
+    if (repository_->Get(_path)){
+        Log::Send(Log::Level::INFO, "Stage already loaded: " + _path);
+        if (Utils::ConfirmDialog("Stage '" + _path + "' is already loaded. Do you want to reload it?")) {
+            repository_->Remove(_path);
+            Log::Send(Log::Level::INFO, "Removed existing stage data for reload: " + _path);
+        }else{
+            return true;
+        }
+    }
+
     std::string fullPath = DIR + _path + ".json";
 
     Log::Send(Log::Level::INFO, "StageLoader::Load " + fullPath);
@@ -60,7 +71,7 @@ bool StageLoader::Load(const std::string& _path) const {
     return true;
 }
 
-std::unique_ptr<LevelData> StageLoader::Recursive(nlohmann::json _base) {
+std::unique_ptr<LevelData> StageLoader::Recursive(const nlohmann::json& _base) {
     std::unique_ptr<LevelData> data = std::make_unique<LevelData>();
 
     for (nlohmann::json object : _base["objects"]){
@@ -79,6 +90,11 @@ std::unique_ptr<LevelData> StageLoader::Recursive(nlohmann::json _base) {
         } else{
             Log::Send(Log::Level::ERR, "Mesh object missing 'name' in stage file: " + _base.at("name").get<std::string>());
             Utils::Alert("Mesh object missing 'name' in stage file: " + _base.at("name").get<std::string>());
+        }
+
+        if (object.contains("file_name")) {
+            objectData.file = object["file_name"].get<std::string>();
+            Model::Load(objectData.file);
         }
 
         if (!object.contains("transform")){

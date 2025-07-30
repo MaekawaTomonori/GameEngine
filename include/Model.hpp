@@ -73,8 +73,13 @@ public:
     void Update();
     void Draw() const;
 
+    Model& SetTranslate(Vector3 _translate);
+    Model& SetRotate(Vector3 _rotate);
+    Model& SetScale(Vector3 _scale);
+
+    static void Load(const std::string& _name);
+
 private:
-    void Load(const std::string& _name) const;
     void Debug();
     void UpdateMapData() const;
     void CreateSkinCluster();

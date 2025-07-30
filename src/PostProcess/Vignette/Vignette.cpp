@@ -51,13 +51,15 @@ void Vignette::Initialize() {
 
     material_->color = {1.f, 1.f, 1.f, 1.f};
     material_->intensity = 16.f;
+    material_->scale = 0.8f;
 }
 
 void Vignette::Debug() {
     if (ImGui::TreeNode("Vignette-Details")){
         ImGui::ColorEdit3("Color", &material_->color.x);
-        ImGui::DragFloat("Density", &material_->color.w, 0.01f, 0.f, 100.f);
-        ImGui::DragFloat("Intensity", &material_->intensity, 0.1f, 0.f, 100.f);
+        ImGui::DragFloat("FrameScale", &material_->scale, 0.01f, 0.f, 1.f);
+        ImGui::DragFloat("Density", &material_->color.w, 0.001f, 0.f, 1.f);
+        ImGui::DragFloat("Intensity", &material_->intensity, 0.1f, 5.f, 100.f);
         ImGui::TreePop();
     }
 }

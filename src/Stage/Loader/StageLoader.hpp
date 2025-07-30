@@ -15,7 +15,7 @@ public:
     void Initialize(StageRepository* _repository);
     bool Load(const std::string& _path) const;
 private:
-    static std::unique_ptr<LevelData> Recursive(nlohmann::json _base);
+    static std::unique_ptr<LevelData> Recursive(const nlohmann::json& _base);
 }; // class StageLoader
 
 #endif // StageLoader_HPP_

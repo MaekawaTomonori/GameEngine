@@ -13,6 +13,7 @@ class StageRepository {
 public:
     LevelData* Get(const std::string& _name);
     void Add(const std::string& _name, std::unique_ptr<LevelData> _data);
+    void Remove(const std::string& _name);
 }; // class StageRepository
 
 #endif // StageRepository_HPP_

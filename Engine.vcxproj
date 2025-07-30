@@ -612,6 +612,7 @@
     <ClInclude Include="src\Light\RawLight.h" />
     <ClInclude Include="src\Light\SpotLight\SpotLight.h" />
     <ClInclude Include="src\Line\Common\LineCommon.hpp" />
+    <ClInclude Include="src\Stage\LevelEditor.hpp" />
     <ClInclude Include="src\Stage\Loader\StageLoader.hpp" />
     <ClInclude Include="src\Mesh\Data\MeshData.hpp" />
     <ClInclude Include="src\Mesh\Mesh.hpp" />
@@ -679,6 +680,7 @@
     <ClCompile Include="src\Light\SpotLight\SpotLight.cpp" />
     <ClCompile Include="src\Line\Common\LineCommon.cpp" />
     <ClCompile Include="src\Line\Line.cpp" />
+    <ClCompile Include="src\Stage\LevelEditor.cpp" />
     <ClCompile Include="src\Stage\Loader\StageLoader.cpp" />
     <ClCompile Include="src\Math\Easing.cpp" />
     <ClCompile Include="src\Math\MathUtils.cpp" />

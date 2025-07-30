@@ -11,6 +11,7 @@ namespace Utils {
     std::string DateToString();
     std::string GenerateUniqueId();
     bool EqualsIgnoreCase(std::string str1, std::string str2);
+    bool ConfirmDialog(const std::string& _msg);
 };
 
 #endif //UTILS_HPP

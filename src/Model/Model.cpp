@@ -55,9 +55,14 @@ void Model::Initialize(const std::string& _name) {
     cr_ = (adapter_->CreateBufferResource(sizeof(CameraForGpu)));
     cr_->Get()->Map(0, nullptr, reinterpret_cast<void**>(&cd_));
 
-    Log::Send(Log::Level::INFO, "Creating SkinCluster for: " + _name);
-    CreateSkinCluster();
-    Log::Send(Log::Level::INFO, "SkinCluster created for: " + _name);
+    // Create SkinCluster only if skeleton exists and skinCluster data is available
+    if (data_->skeleton.has_value() && !data_->skinCluster.empty()) {
+        Log::Send(Log::Level::INFO, "Creating SkinCluster for: " + _name);
+        CreateSkinCluster();
+        Log::Send(Log::Level::INFO, "SkinCluster created for: " + _name);
+    } else {
+        Log::Send(Log::Level::INFO, "No valid skinning data found, skipping SkinCluster creation for: " + _name);
+    }
 
 
     transform_ = {
@@ -74,19 +79,19 @@ void Model::Update() {
 
     Debug();
 
-    // Update Animation
-    UpdateAnimation();
-
-    // Update Skeleton
-    UpdateSkeleton();
-
-    // Update SkinCluster
-    UpdateSkinCluster();
+    // Update Animation, Skeleton, and SkinCluster only if valid skinning data exists
+    if (data_->skeleton.has_value() && !data_->skinCluster.empty()) {
+        UpdateAnimation();
+        UpdateSkeleton();
+        UpdateSkinCluster();
+    }
 
     UpdateMapData();
 
-    // Joint to Line
-    CreateLine();
+    // Joint to Line (only if valid skinning data exists)
+    if (data_->skeleton.has_value() && !data_->skinCluster.empty()) {
+        CreateLine();
+    }
 
     // Mesh Update
     mesh_->Update();
@@ -98,19 +103,38 @@ void Model::Draw() const {
         return;
     }
 
-    common_->Draw();
-
-    commandList_->SetGraphicsRootConstantBufferView(1, wr_->Get()->GetGPUVirtualAddress());
-    commandList_->SetGraphicsRootConstantBufferView(4, cr_->Get()->GetGPUVirtualAddress());
-    if (data_->skeleton.has_value()){
+    // Use appropriate pipeline based on valid skinning data availability
+    if (data_->skeleton.has_value() && !data_->skinCluster.empty()) {
+        common_->DrawSkinning();
+        commandList_->SetGraphicsRootConstantBufferView(1, wr_->Get()->GetGPUVirtualAddress());
+        commandList_->SetGraphicsRootConstantBufferView(4, cr_->Get()->GetGPUVirtualAddress());
         commandList_->SetGraphicsRootDescriptorTable(8, skinCluster_.paletteHandle.second);
+    } else {
+        common_->DrawStatic();
+        commandList_->SetGraphicsRootConstantBufferView(1, wr_->Get()->GetGPUVirtualAddress());
+        commandList_->SetGraphicsRootConstantBufferView(4, cr_->Get()->GetGPUVirtualAddress());
     }
     mesh_->Draw();
 
     DrawLine();
 }
 
-void Model::Load(const std::string& _name) const {
+Model& Model::SetTranslate(const Vector3 _translate) {
+    transform_.translate = _translate;
+    return *this;
+}
+
+Model& Model::SetRotate(const Vector3 _rotate) {
+    transform_.rotate = _rotate;
+    return *this;
+}
+
+Model& Model::SetScale(const Vector3 _scale) {
+    transform_.scale = _scale;
+    return *this;
+}
+
+void Model::Load(const std::string& _name) {
     std::unique_ptr<IModelLoader> loader;
     if (std::filesystem::exists("Assets/Resources/" + _name + "/" + _name + ".obj")) {
         loader = std::make_unique<ObjLoader>();
@@ -121,7 +145,7 @@ void Model::Load(const std::string& _name) const {
         Utils::Alert("Model not found: " + _name);
         return;
     }
-    loader->LoadModel(_name, common_->GetResourceRepository());
+    loader->LoadModel(_name, Singleton<ModelCommon>::GetInstance()->GetResourceRepository());
 }
 
 void Model::Debug() {
@@ -175,14 +199,16 @@ void Model::Debug() {
                     Recursive(skeleton.root);
                 }
 
-                ImGui::SeparatorText("Animation");
-                if (ImGui::TreeNode("Details")){
-                    ImGui::Checkbox("Enable", &animationEnable_);
-                    ImGui::SameLine();
-                    ImGui::Checkbox("TimerLock", &animationTimerLock_);
-                    if (animationTimerLock_)ImGui::Text("Timer : %f", animationTime_);
-                    else ImGui::DragFloat("Anime Timer", &animationTime_);
-                    ImGui::TreePop();
+                if (data_->animation.has_value()){
+                    ImGui::SeparatorText("Animation");
+                    if (ImGui::TreeNode("Details")){
+                        ImGui::Checkbox("Enable", &animationEnable_);
+                        ImGui::SameLine();
+                        ImGui::Checkbox("TimerLock", &animationTimerLock_);
+                        if (animationTimerLock_)ImGui::Text("Timer : %f", animationTime_);
+                        else ImGui::DragFloat("Anime Timer", &animationTime_);
+                        ImGui::TreePop();
+                    }
                 }
 
                 ImGui::SeparatorText("Mesh");
@@ -218,9 +244,8 @@ void Model::CreateSkinCluster() {
         return;
     }
 
-    if (!data_->skeleton.has_value()) {
-        Log::Send(Log::Level::ERR, "Model data does not contain a skeleton");
-        Utils::Alert("Model data does not contain a skeleton");
+    if (!data_->skeleton.has_value() || data_->skinCluster.empty()) {
+        Log::Send(Log::Level::WARNING, "Model data does not contain valid skinning data, skipping skin cluster creation");
         return;
     }
 
@@ -281,9 +306,8 @@ void Model::SetBindPose(Skeleton& _skeleton) {
 }
 
 void Model::UpdateSkinCluster() {
-    if (!data_->skeleton.has_value()) {
-        Log::Send(Log::Level::ERR, "Model data does not contain a skeleton");
-        Utils::Alert("Model data does not contain a skeleton");
+    if (!data_->skeleton.has_value() || data_->skinCluster.empty()) {
+        Log::Send(Log::Level::WARNING, "Model data does not contain valid skinning data, skipping skin cluster update");
         return;
     }
 
@@ -300,9 +324,8 @@ void Model::UpdateSkinCluster() {
 }
 
 void Model::UpdateSkeleton() const {
-    if (!data_->skeleton.has_value()) {
-        Log::Send(Log::Level::ERR, "Model data does not contain a skeleton");
-        Utils::Alert("Model data does not contain a skeleton");
+    if (!data_->skeleton.has_value() || data_->skinCluster.empty()) {
+        Log::Send(Log::Level::WARNING, "Model data does not contain valid skinning data, skipping skeleton update");
         return;
     }
 
@@ -326,8 +349,7 @@ void Model::UpdateSkeleton() const {
 
 void Model::UpdateAnimation() {
     if (!data_->animation.has_value()) {
-        Log::Send(Log::Level::ERR, "Model data does not contain an animation");
-        Utils::Alert("Model data does not contain an animation");
+        Log::Send(Log::Level::WARNING, "Model data does not contain an animation");
         return;
     }
     Animation& animation = data_->animation.value();
@@ -342,9 +364,8 @@ void Model::UpdateAnimation() {
 }
 
 void Model::ApplyAnimation() const {
-    if (!data_->skeleton.has_value()) {
-        Log::Send(Log::Level::ERR, "Model data does not contain a skeleton");
-        Utils::Alert("Model data does not contain a skeleton");
+    if (!data_->skeleton.has_value() || data_->skinCluster.empty()) {
+        Log::Send(Log::Level::WARNING, "Model data does not contain valid skinning data, skipping animation application");
         return;
     }
     Skeleton& skeleton = data_->skeleton.value();
@@ -370,9 +391,8 @@ void Model::ApplyAnimation() const {
 void Model::CreateLine() {
     line_.Clear();
 
-    if (!data_->skeleton.has_value()){
-        Log::Send(Log::Level::ERR, "Model data does not contain a skeleton");
-        Utils::Alert("Model data does not contain a skeleton");
+    if (!data_->skeleton.has_value() || data_->skinCluster.empty()){
+        Log::Send(Log::Level::WARNING, "Model data does not contain valid skinning data, skipping line creation");
         return;
     }
     Skeleton& skeleton = data_->skeleton.value();

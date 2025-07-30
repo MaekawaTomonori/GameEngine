@@ -1,0 +1,49 @@
+{
+    "name": "Scene",
+    "objects": [
+        {
+            "type": "MESH",
+            "name": "Cube",
+            "file_name": "cube",
+            "transform": {
+                "translation": [
+                    -3.690000057220459,
+                    0.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.001",
+            "file_name": "cube",
+            "transform": {
+                "translation": [
+                    0.0,
+                    3.269999980926514,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            }
+        }
+    ]
+}

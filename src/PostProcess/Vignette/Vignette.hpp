@@ -6,7 +6,8 @@ class Vignette : public IPostEffect{
     struct Material {
         Vector4 color;
         float intensity;
-        float pad[3];
+        float scale;
+        float pad[2];
     };
 
     std::unique_ptr<DX12Resource> mr_;
