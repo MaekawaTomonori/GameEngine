@@ -1,7 +1,10 @@
 #include "Skybox.hpp"
 
+#include "imgui.h"
+#include "Math/MathUtils.hpp"
 #include "Pattern/Singleton.hpp"
 #include "src/Texture/TextureManager.hpp"
+#include "src/Camera/Manager/CameraManager.hpp"
 
 void Skybox::Initialize(const std::string& _texture) {
     texture_ = _texture;
@@ -12,10 +15,64 @@ void Skybox::Initialize(const std::string& _texture) {
     common_ = Singleton<SkyCommon>::GetInstance();
     adapter_ = common_->GetAdapter();
 
+    CreateVertex();
+    CreateIndex();
+
+    // Transform constant buffer
+    wr_ = adapter_->CreateBufferResource(sizeof(Transformation));
+    wr_->Get()->Map(0, nullptr, reinterpret_cast<void**>(&wd_));
+
+    // Material constant buffer
+    mr_ = adapter_->CreateBufferResource(sizeof(Material));
+    mr_->Get()->Map(0, nullptr, reinterpret_cast<void**>(&md_));
+    
+    // Initialize material color
+    md_->color = {1.0f, 1.0f, 1.0f, 1.0f};
+
+    transform_ = {
+        {50.f, 50.f, 50.f},
+        Vector3{0.f, 0.f, 0.f},
+        {0.f, 0.f, 0.f}
+    };
+}
+
+void Skybox::Update() {
+    float scale = transform_.scale.x;
+    common_->RegisterCommand("Skybox", [&]{
+        ImGui::Begin("Skybox");
+        ImGui::DragFloat("Scale", &scale, 0.1f);
+        ImGui::End();
+    });
+
+    transform_.scale = {scale, scale, scale};
+
+    wd_->wvp = MathUtils::Matrix::MakeAffineMatrix(transform_) * Singleton<CameraManager>::GetInstance()->GetActive()->GetViewProjection();
+}
+
+void Skybox::Draw() {
+    TextureManager* tm = Singleton<TextureManager>::GetInstance();
+
+    // Set vertex buffer
+    adapter_->GetCommandList()->IASetVertexBuffers(0, 1, &vbv_);
+    adapter_->GetCommandList()->IASetIndexBuffer(&ibv_);
+    adapter_->GetCommandList()->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+
+    // Draw call from common (sets PSO and root signature)
+    common_->Draw();
+
+    // Set constant buffers
+    adapter_->GetCommandList()->SetGraphicsRootConstantBufferView(0, mr_->Get()->GetGPUVirtualAddress()); // Material
+    adapter_->GetCommandList()->SetGraphicsRootConstantBufferView(1, wr_->Get()->GetGPUVirtualAddress()); // Transform
+
+    // Set texture
+    adapter_->GetCommandList()->SetGraphicsRootDescriptorTable(2, tm->GetGPUHandle(texture_));
+
+    // Draw indexed
+    adapter_->GetCommandList()->DrawIndexedInstanced(36, 1, 0, 0, 0);
 }
 
 void Skybox::CreateVertex() {
-    vr_ = adapter_->CreateBufferResource(sizeof(VertexData));
+    vr_ = adapter_->CreateBufferResource(sizeof(VertexData) * 24);
     vbv_.BufferLocation = vr_->Get()->GetGPUVirtualAddress();
     vbv_.SizeInBytes = sizeof(VertexData) * 24;
     vbv_.StrideInBytes = sizeof(VertexData);

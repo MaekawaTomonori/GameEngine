@@ -14,6 +14,8 @@ class Mesh {
         Vector4 color;
         uint32_t lighting;
         float shininess;
+        float coefficient;
+        float pad[2];
     };
 
     DirectXAdapter* adapter_ = nullptr;

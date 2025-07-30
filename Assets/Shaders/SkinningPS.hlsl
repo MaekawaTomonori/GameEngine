@@ -4,6 +4,8 @@ struct Material{
     float32_t4 color;
     uint32_t enableLighting;
     float32_t shininess;
+    float coefficient;
+    float2 pad;
 };
 ConstantBuffer<Material> gMaterial : register(b0);
 
@@ -127,6 +129,12 @@ PixelShaderOutput main(VertexShaderOutput input)
     }
 
     finalRGB = col;
+
+    float3 ctp = normalize(input.worldPosition - gCamera.worldPosition);
+    float3 reflectDir = reflect(ctp, normalize(input.normal));  
+    float4 environmentColor = gEnvironment.Sample(gSampler, reflectDir);
+
+    finalRGB += environmentColor.rgb * gMaterial.coefficient;
 
     //final set
     output.color = float32_t4(finalRGB, a);

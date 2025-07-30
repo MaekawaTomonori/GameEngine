@@ -67,6 +67,9 @@ class Model{
 
     SkinCluster skinCluster_;
 
+    // Environment mapping
+    std::string environmentTexture_ = "";
+
 public:
     Model();
     void Initialize(const std::string& _name);
@@ -76,6 +79,7 @@ public:
     Model& SetTranslate(Vector3 _translate);
     Model& SetRotate(Vector3 _rotate);
     Model& SetScale(Vector3 _scale);
+    Model& SetEnvironmentTexture(const std::string& _texture);
 
     static void Load(const std::string& _name);
 

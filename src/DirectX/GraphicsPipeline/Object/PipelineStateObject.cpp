@@ -65,6 +65,16 @@ PipelineStateObject& PipelineStateObject::SetBlend(const BlendMode _blendMode) {
     return *this;
 }
 
+PipelineStateObject& PipelineStateObject::SetRasterizer(const D3D12_RASTERIZER_DESC _rasterizer) {
+    rasterizer_ = _rasterizer;
+    return *this;
+}
+
+PipelineStateObject& PipelineStateObject::SetDepthStencil(const D3D12_DEPTH_STENCIL_DESC& _depthStencilDesc) {
+    depthStencilDesc_ = _depthStencilDesc;
+    return *this;
+}
+
 PipelineStateObject& PipelineStateObject::SetShader(std::unique_ptr<Shader> _shader) {
     shader_ = std::move(_shader);
     return *this;
@@ -75,15 +85,19 @@ PipelineStateObject& PipelineStateObject::SetTopologyType(const D3D12_PRIMITIVE_
     return *this;
 }
 
+PipelineStateObject& PipelineStateObject::SetDSVFormat(DXGI_FORMAT _format) {
+    desc_.DSVFormat = _format;
+    return *this;
+}
+
 void PipelineStateObject::Create() {
     desc_.pRootSignature = rootSignature_.Get();
     desc_.InputLayout = inputLayout_.Get();
     desc_.BlendState = blendDesc_;
     desc_.VS = { shader_->GetVertexShader()->GetBufferPointer(), shader_->GetVertexShader()->GetBufferSize() };
-    desc_.RasterizerState.CullMode = D3D12_CULL_MODE_BACK;
-    desc_.RasterizerState.FillMode = D3D12_FILL_MODE_SOLID;
+    desc_.RasterizerState = rasterizer_;
     desc_.PS = { shader_->GetPixelShader()->GetBufferPointer(), shader_->GetPixelShader()->GetBufferSize() };
-    desc_.DepthStencilState.DepthEnable = false;
+    desc_.DepthStencilState = depthStencilDesc_;
 
     desc_.NumRenderTargets = 1;
     desc_.RTVFormats[0] = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;

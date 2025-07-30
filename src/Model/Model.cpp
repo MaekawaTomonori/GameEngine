@@ -11,6 +11,7 @@
 #include "Loader/ObjLoader.hpp"
 #include "Math/MathUtils.hpp"
 #include "src/Camera/Manager/CameraManager.hpp"
+#include "src/Texture/TextureManager.hpp"
 
 Model::Model() :
     common_(Singleton<ModelCommon>::GetInstance()),
@@ -71,6 +72,11 @@ void Model::Initialize(const std::string& _name) {
         {0,0,0},
     };
 
+    // Set default environment texture if none specified
+    if (environmentTexture_.empty()) {
+        environmentTexture_ = "white.png";
+    }
+
     line_.Initialize();
 }
 
@@ -103,16 +109,22 @@ void Model::Draw() const {
         return;
     }
 
+    TextureManager* tm = Singleton<TextureManager>::GetInstance();
+
     // Use appropriate pipeline based on valid skinning data availability
     if (data_->skeleton.has_value() && !data_->skinCluster.empty()) {
         common_->DrawSkinning();
         commandList_->SetGraphicsRootConstantBufferView(1, wr_->Get()->GetGPUVirtualAddress());
         commandList_->SetGraphicsRootConstantBufferView(4, cr_->Get()->GetGPUVirtualAddress());
-        commandList_->SetGraphicsRootDescriptorTable(8, skinCluster_.paletteHandle.second);
+        // Environment TextureCube (parameter 8)
+        commandList_->SetGraphicsRootDescriptorTable(8, tm->GetGPUHandle(environmentTexture_));
+        commandList_->SetGraphicsRootDescriptorTable(9, skinCluster_.paletteHandle.second);
     } else {
         common_->DrawStatic();
         commandList_->SetGraphicsRootConstantBufferView(1, wr_->Get()->GetGPUVirtualAddress());
         commandList_->SetGraphicsRootConstantBufferView(4, cr_->Get()->GetGPUVirtualAddress());
+        // Environment TextureCube (parameter 8)
+        commandList_->SetGraphicsRootDescriptorTable(8, tm->GetGPUHandle(environmentTexture_));
     }
     mesh_->Draw();
 
@@ -131,6 +143,15 @@ Model& Model::SetRotate(const Vector3 _rotate) {
 
 Model& Model::SetScale(const Vector3 _scale) {
     transform_.scale = _scale;
+    return *this;
+}
+
+Model& Model::SetEnvironmentTexture(const std::string& _texture) {
+    environmentTexture_ = _texture;
+    if (!_texture.empty()) {
+        TextureManager* tm = Singleton<TextureManager>::GetInstance();
+        tm->Load(_texture);
+    }
     return *this;
 }
 
@@ -213,8 +234,9 @@ void Model::Debug() {
 
                 ImGui::SeparatorText("Mesh");
 
-                if (ImGui::CollapsingHeader("Mesh")){
+                if (ImGui::TreeNode("Mesh")){
                     mesh_->Debug();
+                    ImGui::TreePop();
                 }
             }
             ImGui::End();

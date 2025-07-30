@@ -82,7 +82,21 @@ void ModelCommon::Initialize(DirectXAdapter *_adapter, DebugUI *_debugUi) {
 	rootParameter.Descriptor.ShaderRegister = 5;
 	rootSignature.AddParameter(rootParameter);
 	
-	// 9. Animation SRV (Vertex Shader, Descriptor Table)
+	// 9. Environment TextureCube SRV (Pixel Shader, Descriptor Table, register 5)
+	D3D12_DESCRIPTOR_RANGE environmentRange = {};
+	environmentRange.BaseShaderRegister = 5;
+	environmentRange.NumDescriptors = 1;
+	environmentRange.RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
+	environmentRange.OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
+	
+	rootParameter = {};
+	rootParameter.ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
+	rootParameter.ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
+	rootParameter.DescriptorTable.pDescriptorRanges = &environmentRange;
+	rootParameter.DescriptorTable.NumDescriptorRanges = 1;
+	rootSignature.AddParameter(rootParameter);
+	
+	// 10. Animation SRV (Vertex Shader, Descriptor Table)
 	D3D12_DESCRIPTOR_RANGE animationRange = {};
 	animationRange.RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
 	animationRange.NumDescriptors = 1;
@@ -200,6 +214,20 @@ void ModelCommon::CreateStaticPipeline() {
 	rootParameter.ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
 	rootParameter.ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
 	rootParameter.Descriptor.ShaderRegister = 5;
+	staticRootSignature.AddParameter(rootParameter);
+	
+	// 9. Environment TextureCube SRV (Pixel Shader, Descriptor Table, register 5)
+	D3D12_DESCRIPTOR_RANGE staticEnvironmentRange = {};
+	staticEnvironmentRange.BaseShaderRegister = 5;
+	staticEnvironmentRange.NumDescriptors = 1;
+	staticEnvironmentRange.RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
+	staticEnvironmentRange.OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
+	
+	rootParameter = {};
+	rootParameter.ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
+	rootParameter.ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
+	rootParameter.DescriptorTable.pDescriptorRanges = &staticEnvironmentRange;
+	rootParameter.DescriptorTable.NumDescriptorRanges = 1;
 	staticRootSignature.AddParameter(rootParameter);
 	
 	// サンプラー設定

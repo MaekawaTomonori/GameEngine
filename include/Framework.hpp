@@ -16,6 +16,7 @@
 #include "src/Line/Common/LineCommon.hpp"
 #include "src/PostProcess/Executor/PostProcessExecutor.hpp"
 #include "src/Renderer/Renderer.hpp"
+#include "src/Sky/Common/SkyCommon.hpp"
 #include "src/Stage/LevelEditor.hpp"
 #include "src/Texture/TextureManager.hpp"
 
@@ -41,6 +42,7 @@ class Framework {
     SpriteCommon* sprite_ = nullptr;
     ModelCommon* model_ = nullptr;
     LineCommon* line_ = nullptr;
+    SkyCommon* sky_ = nullptr;
 	CameraManager* camera_ = nullptr;
     LightManager* light_ = nullptr;
 

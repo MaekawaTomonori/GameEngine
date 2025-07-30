@@ -33,6 +33,7 @@ void Mesh::Initialize(DirectXAdapter* _adapter, const std::string &_name, const 
     material_->color = Vector4(1.0f, 1.0f, 1.0f, 1.0f);
     material_->lighting = 0; // Default lighting
     material_->shininess = 100.f;
+    material_->coefficient = 0.0f; // Environment mapping coefficient (disabled by default)
 
     if (!data_.indices.empty()){
         ir_ = adapter_->CreateBufferResource(sizeof(uint32_t) * data_.indices.size());
@@ -85,6 +86,7 @@ void Mesh::Debug() {
     } else{
         material_->lighting = 0;
     }
+    ImGui::DragFloat("Environment Coefficient", &material_->coefficient, 0.01f, 0.0f, 1.0f);
 }
 
 void Mesh::SetVBV(const D3D12_VERTEX_BUFFER_VIEW _vbv) {

@@ -19,6 +19,13 @@ class PipelineStateObject {
 
     D3D12_BLEND_DESC blendDesc_{};
 
+    D3D12_RASTERIZER_DESC rasterizer_{
+        .FillMode = D3D12_FILL_MODE_SOLID,
+        .CullMode = D3D12_CULL_MODE_BACK,
+    };
+
+    D3D12_DEPTH_STENCIL_DESC depthStencilDesc_ = {};
+
     D3D12_PRIMITIVE_TOPOLOGY_TYPE topologyType_ = D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE;
 
     D3D12_GRAPHICS_PIPELINE_STATE_DESC desc_{};
@@ -31,8 +38,11 @@ public:
     PipelineStateObject& SetInputLayout(const InputLayout& _inputLayout);
     PipelineStateObject& SetBlend(const D3D12_BLEND_DESC& _blendDesc);
     PipelineStateObject& SetBlend(BlendMode _blendMode);
+    PipelineStateObject& SetRasterizer(const D3D12_RASTERIZER_DESC _rasterizer);
+    PipelineStateObject& SetDepthStencil(const D3D12_DEPTH_STENCIL_DESC& _depthStencilDesc);
     PipelineStateObject& SetShader(std::unique_ptr<Shader> _shader);
     PipelineStateObject& SetTopologyType(D3D12_PRIMITIVE_TOPOLOGY_TYPE _topologyType);
+    PipelineStateObject& SetDSVFormat(DXGI_FORMAT _format);
 
     void Create();
     void DrawCall() const;

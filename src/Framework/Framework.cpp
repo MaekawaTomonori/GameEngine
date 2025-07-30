@@ -48,6 +48,9 @@ Framework::Framework() {
     line_ = Singleton<LineCommon>::GetInstance();
     line_->Initialize(dxAdapter_.get(), debugUI_.get(), srv_.get());
 
+    sky_ = Singleton<SkyCommon>::GetInstance();
+    sky_->Initialize(dxAdapter_.get(), debugUI_.get());
+
     camera_ = Singleton<CameraManager>::GetInstance();
     camera_->Initialize(static_cast<float>(config_->GetWidth()) / static_cast<float>(config_->GetHeight()), debugUI_.get());
 
@@ -58,7 +61,7 @@ Framework::Framework() {
     postProcessor_->Add(std::make_unique<Vignette>(dxAdapter_.get(), srv_.get()), "Vignette");
     postProcessor_->Add(std::make_unique<BoxBlur>(dxAdapter_.get(), srv_.get()), "BoxBlur");
 
-    level_->Initialize("Level");
+    //level_->Initialize("Level");
 }
 
 Framework::~Framework() {

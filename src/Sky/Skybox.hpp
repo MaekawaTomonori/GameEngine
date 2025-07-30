@@ -4,12 +4,22 @@
 #include <string>
 
 #include "Common/SkyCommon.hpp"
+#include "Math/Matrix.hpp"
+#include "Math/Transform.hpp"
 #include "Math/Vector4.hpp"
 #include "src/DirectX/Resource/DX12Resource.hpp"
 
 class Skybox {
     struct VertexData {
         Vector4 position;
+    };
+
+    struct Transformation {
+        Matrix4x4 wvp;
+    };
+
+    struct Material {
+        Vector4 color;
     };
 
     SkyCommon* common_ = nullptr;
@@ -25,8 +35,18 @@ class Skybox {
     D3D12_INDEX_BUFFER_VIEW ibv_{};
     uint32_t* id_ = nullptr;
 
+    std::unique_ptr<DX12Resource> wr_;
+    Transformation* wd_ = nullptr;
+
+    std::unique_ptr<DX12Resource> mr_;
+    Material* md_ = nullptr;
+
+    Transform transform_ {};
+    
 public:
     void Initialize(const std::string& _texture);
+    void Update();
+    void Draw();
 
 private:
     void CreateVertex();
