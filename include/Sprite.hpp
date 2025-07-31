@@ -3,9 +3,10 @@
 #include "Math/Matrix.hpp"
 #include "Math/Vector2.hpp"
 #include "Math/Vector4.hpp"
-#include "src/DirectX/GraphicsPipeline/GraphicsPipeline.hpp"
 #include "src/DirectX/Resource/DX12Resource.hpp"
 #include <memory>
+
+#include "src/DirectX/DirectXAdapter.hpp"
 
 class SpriteCommon;
 

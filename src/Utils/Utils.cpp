@@ -100,7 +100,7 @@ namespace Utils {
                                                         [](char a, char b){ return tolower(a) == tolower(b); });
     }
 
-    bool ConfirmDialog(const std::string& _msg) {
+    bool ConfirmDialog([[maybe_unused]]const std::string& _msg) {
 #ifdef _DEBUG
 #ifdef _WIN32
         int result = MessageBoxA(nullptr, _msg.c_str(), "Confirm", MB_YESNO | MB_ICONQUESTION);
