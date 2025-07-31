@@ -66,9 +66,6 @@
     <ClInclude Include="src\DirectX\Shader\Shader.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="src\DirectX\GraphicsPipeline\GraphicsPipeline.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="src\Container\Material.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
@@ -225,15 +222,6 @@
     <ClInclude Include="src\Renderer\Renderer.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="src\DirectX\GraphicsPipeline\Object\PipelineStateObject.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="src\DirectX\GraphicsPipeline\Object\RootSignature.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="src\DirectX\GraphicsPipeline\Object\InputLayout.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="src\DirectX\Resource\DX12Resource.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
@@ -241,9 +229,6 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="src\PostProcess\Grayscale\Grayscale.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="src\DirectX\GraphicsPipeline\Object\BlendMode.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="src\PostProcess\Vignette\Vignette.hpp">
@@ -268,6 +253,18 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="src\Stage\LevelEditor.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DirectX\GraphicsPipeline\Object\BlendMode.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DirectX\GraphicsPipeline\Object\InputLayout.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DirectX\GraphicsPipeline\Object\PipelineStateObject.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DirectX\GraphicsPipeline\Object\RootSignature.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
@@ -318,9 +315,6 @@
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="src\DirectX\Shader\Shader.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="src\DirectX\GraphicsPipeline\GraphicsPipeline.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="src\Container\Material.cpp">
@@ -419,15 +413,6 @@
     <ClCompile Include="src\Renderer\Renderer.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="src\DirectX\GraphicsPipeline\Object\PipelineStateObject.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="src\DirectX\GraphicsPipeline\Object\RootSignature.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="src\DirectX\GraphicsPipeline\Object\InputLayout.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="src\DirectX\Resource\DX12Resource.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
@@ -459,6 +444,15 @@
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="src\Stage\LevelEditor.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DirectX\GraphicsPipeline\Object\InputLayout.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DirectX\GraphicsPipeline\Object\PipelineStateObject.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DirectX\GraphicsPipeline\Object\RootSignature.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>

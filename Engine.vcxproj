@@ -589,7 +589,6 @@
     <ClInclude Include="src\Container\Material.hpp" />
     <ClInclude Include="src\DirectX\DirectXAdapter.hpp" />
     <ClInclude Include="src\DirectX\FrameRate\FrameRateLimiter.hpp" />
-    <ClInclude Include="src\DirectX\GraphicsPipeline\GraphicsPipeline.hpp" />
     <ClInclude Include="src\DirectX\GraphicsPipeline\Object\BlendMode.hpp" />
     <ClInclude Include="src\DirectX\GraphicsPipeline\Object\InputLayout.hpp" />
     <ClInclude Include="src\DirectX\GraphicsPipeline\Object\PipelineStateObject.hpp" />
@@ -661,7 +660,6 @@
     <ClCompile Include="src\Debug\DebugUI.cpp" />
     <ClCompile Include="src\DirectX\DirectXAdapter.cpp" />
     <ClCompile Include="src\DirectX\FrameRate\FrameRateLimiter.cpp" />
-    <ClCompile Include="src\DirectX\GraphicsPipeline\GraphicsPipeline.cpp" />
     <ClCompile Include="src\DirectX\GraphicsPipeline\Object\InputLayout.cpp" />
     <ClCompile Include="src\DirectX\GraphicsPipeline\Object\PipelineStateObject.cpp" />
     <ClCompile Include="src\DirectX\GraphicsPipeline\Object\RootSignature.cpp" />
