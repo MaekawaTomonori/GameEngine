@@ -32,7 +32,6 @@ void LevelEditor::Update() {
         object.model->Update();
     }
     tick_++;
-
 }
 
 void LevelEditor::Draw() const {

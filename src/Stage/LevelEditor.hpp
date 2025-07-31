@@ -28,6 +28,7 @@ public:
     void Initialize(const std::string& _name);
     void Update();
     void Draw() const;
+
 private:
     void Spawn();
     void Debug();

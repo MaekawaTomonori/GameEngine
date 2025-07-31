@@ -9,6 +9,7 @@ class BoxBlur : public IPostEffect{
 
     std::unique_ptr<DX12Resource> mr_;
     Material* material_ = nullptr;
+
 public:
     BoxBlur(DirectXAdapter* _adapter, SRVManager* _srv) :
         IPostEffect(_adapter, _srv) {
@@ -19,7 +20,6 @@ public:
 
 protected:
     void Modifier() override;
-
 }; // class BoxBlur
 
 #endif // BoxBlur_HPP_

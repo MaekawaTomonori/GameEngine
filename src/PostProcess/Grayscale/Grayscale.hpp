@@ -12,6 +12,7 @@ class Grayscale : public IPostEffect{
 
     std::unique_ptr<DX12Resource> mr_;
     Material* material_ = nullptr;
+
 public:
     Grayscale(DirectXAdapter* _adapter, SRVManager* _srv) :
         IPostEffect(_adapter, _srv) {
@@ -22,7 +23,6 @@ public:
 
 protected:
     void Modifier() override;
-
 }; // class Grayscale
 
 #endif // Grayscale_HPP_
