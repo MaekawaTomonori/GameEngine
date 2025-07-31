@@ -4,12 +4,8 @@
 
 
 class SkyCommon : public Common{
-    
 public:
     void Initialize(DirectXAdapter* _adapter, DebugUI* _debugUi) override;
-
-private:
-
 }; // class SkyCommon
 
 #endif // SkyCommon_HPP_
