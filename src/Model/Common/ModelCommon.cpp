@@ -24,93 +24,116 @@ void ModelCommon::Initialize(DirectXAdapter *_adapter, DebugUI *_debugUi) {
 }
 
 void ModelCommon::CreateSkinningPipeline() const {
-	// RootSignature設定 (SKINNING_MODEL用)
-    // for 3. Texture SRV (Pixel Shader, Descriptor Table)
-	D3D12_DESCRIPTOR_RANGE textureRange = {};
-	textureRange.BaseShaderRegister = 0;
-	textureRange.NumDescriptors = 1;
-	textureRange.RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
-	textureRange.OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
+	D3D12_DESCRIPTOR_RANGE textureRange{
+        .RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV,
+        .NumDescriptors = 1,
+        .BaseShaderRegister = 0,
+        .RegisterSpace = 0,
+        .OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND
+    };
 
-    // for 9. Environment TextureCube
-    D3D12_DESCRIPTOR_RANGE environmentRange = {};
-	environmentRange.BaseShaderRegister = 5;
-	environmentRange.NumDescriptors = 1;
-	environmentRange.RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
-    environmentRange.OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
+    D3D12_DESCRIPTOR_RANGE environmentRange{
+        .RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV,
+        .NumDescriptors = 1,
+        .BaseShaderRegister = 5,
+        .RegisterSpace = 0,
+        .OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND
+    };
 
-    // for 10. Animation SRV
-    D3D12_DESCRIPTOR_RANGE animationRange = {};
-	animationRange.BaseShaderRegister = 0;
-	animationRange.NumDescriptors = 1;
-	animationRange.RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
-    animationRange.OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
+    D3D12_DESCRIPTOR_RANGE animationRange{
+        .RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV,
+        .NumDescriptors = 1,
+        .BaseShaderRegister = 0,
+        .RegisterSpace = 0,
+        .OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND
+    };
 
 	// PipelineStateObject作成 (Skinning用)
-	pipeline_->SetRootSignature(RootSignature{}
-        // 1. Material CBV (Pixel Shader, register 0)
-        .AddParameter({
-            .ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV,
-            .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL,
-            .Descriptor.ShaderRegister = 0
-        })
-        // 2. Transform CBV (Vertex Shader, register 0)
-        .AddParameter({
-            .ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV,
-            .ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX,
-            .Descriptor.ShaderRegister = 0
-        })
-        // 3. Texture SRV (Pixel Shader, Descriptor Table)
-        .AddParameter({
-            .ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE,
-            .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL,
-            .DescriptorTable.pDescriptorRanges = &textureRange,
-            .DescriptorTable.NumDescriptorRanges = 1
-        })
-        // 4. DirectionalLight SRV (Pixel Shader, register 1)
-        .AddParameter({
-            .ParameterType = D3D12_ROOT_PARAMETER_TYPE_SRV,
-            .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL,
-            .Descriptor.ShaderRegister = 1
-        })
-        // 5. Camera CBV (Pixel Shader, register 2)
-        .AddParameter({
-            .ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV,
-            .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL,
-            .Descriptor.ShaderRegister = 2
-        })
-        // 6. PointLight SRV (Pixel Shader, register 3)
-        .AddParameter({
-            .ParameterType = D3D12_ROOT_PARAMETER_TYPE_SRV,
-            .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL,
-            .Descriptor.ShaderRegister = 3
-        })
-        // 7. SpotLight SRV (Pixel Shader, register 4)
-        .AddParameter({
-            .ParameterType = D3D12_ROOT_PARAMETER_TYPE_SRV,
-            .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL,
-            .Descriptor.ShaderRegister = 4
-        })
-        // 8. Light Count CBV (Pixel Shader, register 5)
-        .AddParameter({
-            .ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV,
-            .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL,
-            .Descriptor.ShaderRegister = 5
-        })
-        // 9. Environment TextureCube SRV (Pixel Shader, Descriptor Table, register 5)
-        .AddParameter({
-            .ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE,
-            .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL,
-            .DescriptorTable.pDescriptorRanges = &environmentRange,
-            .DescriptorTable.NumDescriptorRanges = 1
-        })
-        // 10. Animation SRV (Vertex Shader, Descriptor Table)
-        .AddParameter({
-            .ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE,
-            .ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX,
-            .DescriptorTable.pDescriptorRanges = &animationRange,
-            .DescriptorTable.NumDescriptorRanges = 1
-        })
+	pipeline_->SetRootSignature(
+        RootSignature()
+            // 1. Material CBV (Pixel Shader, register 0)
+            .AddParameter({
+                .ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV,
+                .Descriptor = {
+                    .ShaderRegister = 0
+                },
+                .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL
+            })
+            // 2. Transform CBV (Vertex Shader, register 0)
+            .AddParameter({
+                .ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV,
+                .Descriptor = {
+                    .ShaderRegister = 0
+                },
+                .ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX
+            })
+            // 3. Texture SRV (Pixel Shader, Descriptor Table)
+            .AddParameter({
+                .ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE,
+                .DescriptorTable = {
+                    .NumDescriptorRanges = 1,
+                    .pDescriptorRanges = &textureRange
+                },
+                .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL
+            })
+            // 4. DirectionalLight SRV (Pixel Shader, register 1)
+            .AddParameter({
+                .ParameterType = D3D12_ROOT_PARAMETER_TYPE_SRV,
+                .Descriptor = {
+                    .ShaderRegister = 1
+                },
+                .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL
+            })
+            // 5. Camera CBV (Pixel Shader, register 2)
+            .AddParameter({
+                .ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV,
+                .Descriptor = {
+                    .ShaderRegister = 2
+                },
+                .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL
+            })
+            // 6. PointLight SRV (Pixel Shader, register 3)
+            .AddParameter({
+                .ParameterType = D3D12_ROOT_PARAMETER_TYPE_SRV,
+                .Descriptor = {
+                    .ShaderRegister = 3
+                },
+                .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL
+            })
+            // 7. SpotLight SRV (Pixel Shader, register 4)
+            .AddParameter({
+                .ParameterType = D3D12_ROOT_PARAMETER_TYPE_SRV,
+                .Descriptor = {
+                    .ShaderRegister = 4
+                },
+                .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL
+            })
+            // 8. Light Count CBV (Pixel Shader, register 5)
+            .AddParameter({
+                .ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV,
+                .Descriptor = {
+                    .ShaderRegister = 5
+                },
+                .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL
+            })
+            // 9. Environment TextureCube SRV (Pixel Shader, Descriptor Table, register 5)
+            .AddParameter({
+                .ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE,
+                .DescriptorTable = {
+                    .NumDescriptorRanges = 1,
+                    .pDescriptorRanges = &environmentRange
+                },
+                .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL
+            })
+            // 10. Animation SRV (Vertex Shader, Descriptor Table)
+            .AddParameter({
+                .ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE,
+                .DescriptorTable = {
+                    .NumDescriptorRanges = 1,
+                    .pDescriptorRanges = &animationRange
+                },
+                .ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX
+            })
         // サンプラー設定
         .SetSampler({
             .Filter = D3D12_FILTER_MIN_MAG_MIP_LINEAR,
@@ -141,79 +164,99 @@ void ModelCommon::CreateSkinningPipeline() const {
 }
 
 void ModelCommon::CreateStaticPipeline() const {
-	// RootSignature設定 (STATIC_MODEL用)
-    // for 3. Texture SRV (Pixel Shader, Descriptor Table)
-	D3D12_DESCRIPTOR_RANGE textureRange = {};
-	textureRange.BaseShaderRegister = 0;
-	textureRange.NumDescriptors = 1;
-	textureRange.RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
-	textureRange.OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
+	D3D12_DESCRIPTOR_RANGE textureRange{
+        .RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV,
+        .NumDescriptors = 1,
+        .BaseShaderRegister = 0,
+        .RegisterSpace = 0,
+        .OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND
+    };
 
-    // for 9. Light Count
-    D3D12_DESCRIPTOR_RANGE staticEnvironmentRange = {};
-	staticEnvironmentRange.BaseShaderRegister = 5;
-	staticEnvironmentRange.NumDescriptors = 1;
-	staticEnvironmentRange.RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
-    staticEnvironmentRange.OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
+    D3D12_DESCRIPTOR_RANGE staticEnvironmentRange{
+        .RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV,
+        .NumDescriptors = 1,
+        .BaseShaderRegister = 5,
+        .RegisterSpace = 0,
+        .OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND
+    };
 
 	// PipelineStateObject作成 (Static用)
-	staticPipeline_->SetRootSignature(RootSignature{}
-        // 1. Material CBV (Pixel Shader, register 0)
-        .AddParameter({
-            .ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV,
-            .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL,
-            .Descriptor.ShaderRegister = 0
-        })
-        // 2. Transform CBV (Vertex Shader, register 0)
-        .AddParameter({
-            .ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV,
-            .ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX,
-            .Descriptor.ShaderRegister = 0
-        })
-        // 3. Texture SRV (Pixel Shader, Descriptor Table)
-        .AddParameter({
-            .ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE,
-            .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL,
-            .DescriptorTable.pDescriptorRanges = &textureRange,
-            .DescriptorTable.NumDescriptorRanges = 1
-        })
-        // 4. DirectionalLight SRV (Pixel Shader, register 1)
-        .AddParameter({
-            .ParameterType = D3D12_ROOT_PARAMETER_TYPE_SRV,
-            .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL,
-            .Descriptor.ShaderRegister = 1
-        })
-        // 5. Camera CBV (Pixel Shader, register 2)
-        .AddParameter({
-            .ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV,
-            .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL,
-            .Descriptor.ShaderRegister = 2
-        })
-        // 6. PointLight SRV (Pixel Shader, register 3)
-        .AddParameter({
-            .ParameterType = D3D12_ROOT_PARAMETER_TYPE_SRV,
-            .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL,
-            .Descriptor.ShaderRegister = 3
-        })
-        // 7. SpotLight SRV (Pixel Shader, register 4)
-        .AddParameter({
-            .ParameterType = D3D12_ROOT_PARAMETER_TYPE_SRV,
-            .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL,
-            .Descriptor.ShaderRegister = 4
-        })
-        // 8. Light Count CBV (Pixel Shader, register 5)
-        .AddParameter({
-            .ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV,
-            .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL,
-            .Descriptor.ShaderRegister = 5
-        })
-        // 9. Environment TextureCube SRV (Pixel Shader, Descriptor Table, register 5)
-        .AddParameter({
-            .ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE,
-            .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL,
-            .DescriptorTable.pDescriptorRanges = &staticEnvironmentRange,
-            .DescriptorTable.NumDescriptorRanges = 1
-        })
+	staticPipeline_->SetRootSignature(
+        RootSignature()
+            // 1. Material CBV (Pixel Shader, register 0)
+            .AddParameter({
+                .ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV,
+                .Descriptor = {
+                    .ShaderRegister = 0
+                },
+                .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL
+            })
+            // 2. Transform CBV (Vertex Shader, register 0)
+            .AddParameter({
+                .ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV,
+                .Descriptor = {
+                    .ShaderRegister = 0
+                },
+                .ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX
+            })
+            // 3. Texture SRV (Pixel Shader, Descriptor Table)
+            .AddParameter({
+                .ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE,
+                .DescriptorTable = {
+                    .NumDescriptorRanges = 1,
+                    .pDescriptorRanges = &textureRange
+                },
+                .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL
+            })
+            // 4. DirectionalLight SRV (Pixel Shader, register 1)
+            .AddParameter({
+                .ParameterType = D3D12_ROOT_PARAMETER_TYPE_SRV,
+                .Descriptor = {
+                    .ShaderRegister = 1
+                },
+                .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL
+            })
+            // 5. Camera CBV (Pixel Shader, register 2)
+            .AddParameter({
+                .ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV,
+                .Descriptor = {
+                    .ShaderRegister = 2
+                },
+                .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL
+            })
+            // 6. PointLight SRV (Pixel Shader, register 3)
+            .AddParameter({
+                .ParameterType = D3D12_ROOT_PARAMETER_TYPE_SRV,
+                .Descriptor = {
+                    .ShaderRegister = 3
+                },
+                .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL
+            })
+            // 7. SpotLight SRV (Pixel Shader, register 4)
+            .AddParameter({
+                .ParameterType = D3D12_ROOT_PARAMETER_TYPE_SRV,
+                .Descriptor = {
+                    .ShaderRegister = 4
+                },
+                .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL
+            })
+            // 8. Light Count CBV (Pixel Shader, register 5)
+            .AddParameter({
+                .ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV,
+                .Descriptor = {
+                    .ShaderRegister = 5
+                },
+                .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL
+            })
+            // 9. Environment TextureCube SRV (Pixel Shader, Descriptor Table, register 5)
+            .AddParameter({
+                .ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE,
+                .DescriptorTable = {
+                    .NumDescriptorRanges = 1,
+                    .pDescriptorRanges = &staticEnvironmentRange
+                },
+                .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL
+            })
         // サンプラー設定
         .SetSampler({
             .Filter = D3D12_FILTER_MIN_MAG_MIP_LINEAR,

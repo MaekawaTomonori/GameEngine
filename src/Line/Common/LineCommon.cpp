@@ -12,19 +12,24 @@ void LineCommon::Initialize(DirectXAdapter* _adapter, DebugUI* _debugUi) {
     pipeline_ = std::make_unique<PipelineStateObject>(_adapter);
     
     // PipelineStateObject作成 (Line用)
-    pipeline_->SetRootSignature(RootSignature{}
-        // 1. Material CBV (Pixel Shader, register 0)
-        .AddParameter({
-            .ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV,
-            .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL,
-            .Descriptor.ShaderRegister = 0
-        })
-        // 2. Transform CBV (Vertex Shader, register 0)
-        .AddParameter({
-            .ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV,
-            .ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX,
-            .Descriptor.ShaderRegister = 0
-        })
+    pipeline_->SetRootSignature(
+        RootSignature()
+            // 1. Material CBV (Pixel Shader, register 0)
+            .AddParameter({
+                .ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV,
+                .Descriptor = {
+                    .ShaderRegister = 0
+                },
+                .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL
+            })
+            // 2. Transform CBV (Vertex Shader, register 0)
+            .AddParameter({
+                .ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV,
+                .Descriptor = {
+                    .ShaderRegister = 0
+                },
+                .ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX
+            })
     )
     .SetInputLayout(InputLayout{}// InputLayout設定 (LINE用)
         .SetElement({"POSITION", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, D3D12_APPEND_ALIGNED_ELEMENT, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0})

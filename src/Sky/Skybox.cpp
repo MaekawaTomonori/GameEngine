@@ -37,7 +37,7 @@ void Skybox::Initialize(const std::string& _texture) {
 }
 
 void Skybox::Update() {
-    float scale = transform_.scale.x;
+    float& scale = transform_.scale.x;
     common_->RegisterCommand("Skybox", [&]{
         ImGui::Begin("Skybox");
         ImGui::DragFloat("Scale", &scale, 0.1f);
