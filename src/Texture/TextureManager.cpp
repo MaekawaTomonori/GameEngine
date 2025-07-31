@@ -15,7 +15,11 @@ DirectX::ScratchImage TextureManager::LoadTexture(const std::string& filename) c
     DirectX::ScratchImage image {};
     std::string fullPath = folderPath_ + filename;
     std::wstring filePathW = Utils::Convert(fullPath);
-    HRESULT hr = LoadFromWICFile(filePathW.c_str(), DirectX::WIC_FLAGS_FORCE_SRGB, nullptr, image);
+
+    if (filePathW.ends_with(L".dds"))return LoadDDS(filePathW);
+
+    [[maybe_unused]]HRESULT hr = LoadFromWICFile(filePathW.c_str(), DirectX::WIC_FLAGS_FORCE_SRGB, nullptr, image);
+    
     assert(SUCCEEDED(hr));
 
     DirectX::ScratchImage mipImages {};
@@ -25,76 +29,65 @@ DirectX::ScratchImage TextureManager::LoadTexture(const std::string& filename) c
     return mipImages;
 }
 
-ID3D12Resource* TextureManager::CreateTextureResource(const DirectX::TexMetadata& metadata) const {
-    /// FLOW  ///
-    /// 1. Resource setting from metadata
-    /// 2. Heap setting
-    /// 3. Generate Resource
-    ///
-
-    //Step1
-    //Setting Resource from Metadata
-    D3D12_RESOURCE_DESC resourceDesc {};
-    resourceDesc.Width = static_cast<UINT>(metadata.width);
-    resourceDesc.Height = static_cast<UINT>(metadata.height);
-    resourceDesc.MipLevels = static_cast<UINT16>(metadata.mipLevels);
-    resourceDesc.DepthOrArraySize = static_cast<UINT16>(metadata.arraySize);
-    resourceDesc.Format = metadata.format;
-    resourceDesc.SampleDesc.Count = 1;
-    resourceDesc.Dimension = static_cast<D3D12_RESOURCE_DIMENSION>(metadata.dimension);
-
-    //Step2
-    //HEAP SETTINGs
-    D3D12_HEAP_PROPERTIES heapProperties {};
-    heapProperties.Type = D3D12_HEAP_TYPE_DEFAULT;
-    //heapProperties.CPUPageProperty = D3D12_CPU_PAGE_PROPERTY_WRITE_BACK;
-    //heapProperties.MemoryPoolPreference = D3D12_MEMORY_POOL_L0;
-
-    //Step3
-    //Generate Resource
-    ID3D12Resource* resource = nullptr;
-
-    HRESULT hr = adapter_->GetDevice()->CreateCommittedResource(
-            &heapProperties,
-            D3D12_HEAP_FLAG_NONE,
-            &resourceDesc,
-            D3D12_RESOURCE_STATE_COPY_DEST,
-            nullptr,
-            IID_PPV_ARGS(&resource)
-        );
-
-    if (FAILED(hr)) {
-        Log::Send(Log::Level::ERR, "Failed to create texture resource");
-        Utils::Alert("Failed to create texture resource");
-        assert(false);
+void TextureManager::UploadTextureData(DX12Resource* _texture, const DirectX::ScratchImage& mipImages) const {
+    std::vector<D3D12_SUBRESOURCE_DATA> subResources;
+    PrepareUpload(adapter_->GetDevice(), mipImages.GetImages(), mipImages.GetImageCount(), mipImages.GetMetadata(), subResources);
+    uint32_t intermediateSize = static_cast<uint32_t>(GetRequiredIntermediateSize(_texture->Get(), 0, static_cast<UINT>(subResources.size())));
+    std::unique_ptr<DX12Resource> intermediateResource = adapter_->CreateBufferResource(intermediateSize);
+    UpdateSubresources(adapter_->GetCommandList(), _texture->Get(), intermediateResource->Get(), 0, 0, static_cast<UINT>(subResources.size()), subResources.data());
+    _texture->ChangeState(adapter_->GetCommandList(), D3D12_RESOURCE_STATE_GENERIC_READ);
+    if (adapter_->GetCommandList()->Close()) {
+        Utils::Alert("");
+        return;
     }
 
-    return resource;
+    ID3D12CommandList* cls[] = { adapter_->GetCommandList() };
+    adapter_->GetCommandQueue()->ExecuteCommandLists(_countof(cls), cls);
+
+    UINT64 fenceValue{};
+    // コマンドキューの実行を待つ
+    adapter_->GetCommandQueue()->Signal(adapter_->GetFence(), ++fenceValue);
+    if (adapter_->GetFence()->GetCompletedValue() < fenceValue) {
+        HANDLE fenceEvent = CreateEvent(nullptr, false, false, nullptr);
+        adapter_->GetFence()->SetEventOnCompletion(fenceValue, fenceEvent);
+        WaitForSingleObject(fenceEvent, INFINITE);
+        CloseHandle(fenceEvent);
+    }
+    
+    // CommandAllocatorとCommandListをリセット
+    if (adapter_->GetCommandAllocator()->Reset()) {
+        Utils::Alert("Failed to reset command allocator");
+        return;
+    }
+    if (adapter_->GetCommandList()->Reset(adapter_->GetCommandAllocator(), nullptr)) {
+        Utils::Alert("Failed to reset command list");
+        return;
+    }
 }
 
-[[nodiscard]]
-ID3D12Resource* TextureManager::UploadTextureData(ID3D12Resource* texture, const DirectX::ScratchImage& mipImages) const {
-    auto dxc = adapter_;
-    if (!dxc){
-        Log::Send(Log::Level::ERR, "SRVManager Initialize Failed");
-        assert(0);
+DirectX::ScratchImage TextureManager::LoadDDS(const std::wstring& _path) {
+    DirectX::ScratchImage image{};
+    HRESULT hr = LoadFromDDSFile(_path.c_str(), DirectX::DDS_FLAGS_NONE, nullptr, image);
+
+    if (FAILED(hr)) {
+        Log::Send(Log::Level::ERR, std::format("Failed to load DDS file: {}", Utils::Convert(_path)));
+        Utils::Alert(std::format("Failed to load DDS file: {}", Utils::Convert(_path)));
+        return {};
     }
 
-    std::vector<D3D12_SUBRESOURCE_DATA> subResources;
-    PrepareUpload(dxc->GetDevice(), mipImages.GetImages(), mipImages.GetImageCount(), mipImages.GetMetadata(), subResources);
-    uint32_t intermediateSize = static_cast<uint32_t>(GetRequiredIntermediateSize(texture, 0, static_cast<UINT>(subResources.size())));
-    ID3D12Resource* intermediateResource = adapter_->CreateBufferResource(intermediateSize);
-    UpdateSubresources(dxc->GetCommandList(), texture, intermediateResource, 0, 0, static_cast<UINT>(subResources.size()), subResources.data());
+    DirectX::ScratchImage mip;
+    if (DirectX::IsCompressed(image.GetMetadata().format)) {
+        mip = std::move(image);
+    } else {
+        hr = GenerateMipMaps(image.GetImages(), image.GetImageCount(), image.GetMetadata(), DirectX::TEX_FILTER_SRGB, 4, mip);
+        if (FAILED(hr)){
+            Log::Send(Log::Level::ERR, std::format("Failed to generate mipmaps for DDS file: {}", Utils::Convert(_path)));
+            Utils::Alert(std::format("Failed to generate mipmaps for DDS file: {}", Utils::Convert(_path)));
+            return {};
+        }
+    }
 
-    D3D12_RESOURCE_BARRIER barrier {};
-    barrier.Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
-    barrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
-    barrier.Transition.pResource = texture;
-    barrier.Transition.Subresource = D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES;
-    barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_COPY_DEST;
-    barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_GENERIC_READ;
-    dxc->GetCommandList()->ResourceBarrier(1, &barrier);
-    return intermediateResource;
+    return mip;
 }
 
 
@@ -123,28 +116,41 @@ void TextureManager::Load(const std::string& fileName) {
 
     assert(!srv_->IsFull());
 
+    /// FLOW
+    /// 1. Load Texture Data in CPU
+    /// 2. Create TextureResource (VRAM)
+    /// 3. Create UploadHeap Resource (IntermediateResource)
+    /// 4. Upload IntermediateResource to CPU
+    /// 5. Stack Command (3 -> 2) to CommandList
+    /// 6. Execute Using CommandQueue
+    /// 7. Wait 
+
+
     //Load Texture
     Texture& texture = textures_[name];
 
     DirectX::ScratchImage img = LoadTexture(name);
 
     texture.metadata = img.GetMetadata();
-    texture.resource = CreateTextureResource(img.GetMetadata());
-    texture.intermediateResource = UploadTextureData(texture.resource.Get(), img);
+    texture.resource = adapter_->CreateTextureResource(img.GetMetadata());
+    UploadTextureData(texture.resource.get(), img);
 
     texture.srvIndex = srv_->Allocate();
     texture.cpuHandle = srv_->GetCPUHandle(texture.srvIndex);
     texture.gpuHandle = srv_->GetGPUHandle(texture.srvIndex);
 
-    srv_->CreateSRVforTexture2D(texture.srvIndex, texture.resource.Get(), texture.metadata.format, static_cast<UINT>(texture.metadata.mipLevels));
+    if (texture.metadata.IsCubemap()) {
+        srv_->CreateSRVforCubemap(texture.srvIndex, texture.resource->Get(), texture.metadata.format);
+    }else{
+        srv_->CreateSRVforTexture2D(texture.srvIndex, texture.resource->Get(), texture.metadata.format, static_cast<UINT>(texture.metadata.mipLevels));
+    }
 
     Log::Send(Log::Level::INFO, std::format("TextureManager::Load: {}", name));
 }
 
 void TextureManager::Unload() {
     for (auto itr = textures_.begin(); itr != textures_.end(); ){
-        itr->second.resource->Release();
-        itr->second.intermediateResource->Release();
+        itr->second.resource.reset();
 
         itr = textures_.erase(itr);
     }

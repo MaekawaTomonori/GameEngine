@@ -14,6 +14,10 @@ namespace GameEngine {
         return height_;
     }
 
+    std::string Config::GetTitle() const {
+        return title_;
+    }
+
     Config* Config::Default() {
         if (default_){
             return default_.get();

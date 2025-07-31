@@ -36,4 +36,8 @@ void WinApp::SetWindowSize(const int width, const int height) const {
     }
 }
 
+void WinApp::SetTitle(const std::string& _title) const {
+    window_->SetTitle(_title);
+}
+
 

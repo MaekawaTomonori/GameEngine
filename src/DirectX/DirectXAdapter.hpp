@@ -13,13 +13,17 @@
 #include "FrameRate/FrameRateLimiter.hpp"
 #include "Heap/Heap.hpp"
 #include "Math/Vector4.hpp"
+#include "Resource/DX12Resource.hpp"
+#include "vendor/DirectXTex/DirectXTex.h"
 
-class DirectXAdapter{
+class DebugUI;
+
+class DirectXAdapter {
     /// <summary>
     /// first = width, second = height
     /// </summary>
     using WindowSize = std::pair<size_t, size_t>;
-    WindowSize windowSize_ = { 1280, 720 };
+    WindowSize windowSize_ = {1280, 720};
     HWND hWnd_ = nullptr;
 
     //DegubLayer
@@ -39,7 +43,7 @@ class DirectXAdapter{
     Microsoft::WRL::ComPtr<IDXGISwapChain4> swapChain_;
 
     //Resource
-    std::vector<Microsoft::WRL::ComPtr<ID3D12Resource>> swapChainResources_;
+    std::vector<std::unique_ptr<DX12Resource>> swapChainResources_;
 
     //Fence
     Microsoft::WRL::ComPtr<ID3D12Fence> fence_;
@@ -51,11 +55,12 @@ class DirectXAdapter{
     std::vector<D3D12_CPU_DESCRIPTOR_HANDLE> rtvHandles_;
 
     //DSV
-    Microsoft::WRL::ComPtr<ID3D12Resource> depthStencil_;
+    std::unique_ptr<DX12Resource> depthStencil_;
     std::unique_ptr<Heap> dsvHeap_;
+    D3D12_CPU_DESCRIPTOR_HANDLE dsvHandle_;
 
     //Background color
-    Vector4	back = { 0.2f, 0.2f, 0.2f, 1.0f }; // Black
+    Vector4 back = {0.2f, 0.2f, 0.2f, 1.0f}; // Black
 
     //Viewport
     D3D12_VIEWPORT viewport_ = {};
@@ -75,17 +80,26 @@ class DirectXAdapter{
 
 public:
     DirectXAdapter(HWND _hWnd, size_t _width, size_t _height);
+    ~DirectXAdapter();
 
-    ID3D12Resource* CreateBufferResource(size_t _size) const;
-    ID3D12Resource* CreateDepthStencilResource(int32_t _width, int32_t _height) const;
+    std::unique_ptr<DX12Resource> CreateBufferResource(size_t _size) const;
+    std::unique_ptr<DX12Resource> CreateTextureResource(const DirectX::TexMetadata& metadata) const;
+    std::unique_ptr<DX12Resource> CreateDepthStencilResource(int32_t _width, int32_t _height) const;
+    std::unique_ptr<DX12Resource> CreateRenderTextureResource(uint32_t _width, uint32_t _height, DXGI_FORMAT _format,
+        const Vector4& _cc) const;
 
-    void Register(std::function<void()> _task);
-    void Render();
+    void PreProcess() const;
+
+    // Renderer用のメソッド
+    void BeginFrame();
+    void EndFrame();
+
+    void DisplayFPS(DebugUI* _debug) const;
 
 private:
     void EnableDebugLayer();
     bool CreateDXGI();
-    bool InfoQueue() const;
+    [[nodiscard]] bool InfoQueue() const;
     bool CreateCommand();
     bool CreateSwapChain();
     bool CreateFence();
@@ -94,6 +108,8 @@ private:
     bool CreateViewportAndScissor();
     bool CreateLimiter();
 
+    void SetSwapChainRenderTarget() const;
+    void Present();
     void Wait();
 
 public: //Accessor
@@ -106,6 +122,7 @@ public: //Accessor
     ID3D12CommandAllocator* GetCommandAllocator() const;
     IDXGISwapChain4* GetSwapChain() const;
     ID3D12Fence* GetFence() const;
+    D3D12_CPU_DESCRIPTOR_HANDLE GetDSVHandle() const;
 }; // class DirectXAdapter
 
 #endif // DirectXAdaptor_HPP_

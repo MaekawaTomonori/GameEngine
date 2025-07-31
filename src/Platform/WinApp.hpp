@@ -16,6 +16,8 @@ public:
 
     void SetWindowSize(int width, int height) const;
 
+    void SetTitle(const std::string& _title) const;
+
 private:
     HWND hWnd_ = nullptr;
 }; // class WinApp

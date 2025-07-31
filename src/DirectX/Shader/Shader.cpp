@@ -6,6 +6,24 @@
 #include "Log.hpp"
 #include "Utils.hpp"
 
+Shader::Shader(const std::wstring& _name) {
+    if (!Create(_name)) {
+        Log::Send(Log::Level::ERR, Utils::Convert(std::format(L"Failed to create shader: {}", _name)));
+        Utils::Alert("Failed to create shader: " + Utils::Convert(_name));
+        return;
+    }
+    Log::Send(Log::Level::INFO, Utils::Convert(std::format(L"Shader created successfully: {}", _name)));
+}
+
+Shader::Shader(const std::wstring& _vs, const std::wstring& _ps) {
+    if (!Create(_vs, _ps)){
+        Log::Send(Log::Level::ERR, Utils::Convert(std::format(L"Failed to create shader: {}, {}", _vs, _ps)));
+        Utils::Alert("Failed to create shader: " + Utils::Convert(_vs) + ", " + Utils::Convert(_ps));
+        return;
+    }
+    Log::Send(Log::Level::INFO, Utils::Convert(std::format(L"Shader created successfully: {}, {}", _vs, _ps)));
+}
+
 void Shader::CreateDxc() {
     HRESULT hr = S_OK;
     hr = DxcCreateInstance(CLSID_DxcUtils, IID_PPV_ARGS(&dxcUtils_));
@@ -26,8 +44,13 @@ void Shader::CompileShaders() {
     }*/
 }
 
-bool Shader::Create(const std::wstring& name) {
-    name_ = name;
+void Shader::CompileShaders(const std::wstring& _vs, const std::wstring& _ps) {
+    vertexShader_.Attach(Compile(L"Assets/Shaders/", _vs + L".VS.hlsl", L"vs_6_0", dxcUtils_.Get(), dxcCompiler_.Get(), includeHandler_.Get()));
+    pixelShader_.Attach(Compile(L"Assets/Shaders/", _ps + L".PS.hlsl", L"ps_6_0", dxcUtils_.Get(), dxcCompiler_.Get(), includeHandler_.Get()));
+}
+
+bool Shader::Create(const std::wstring& _name) {
+    name_ = _name;
 
     CreateDxc();
     CompileShaders();
@@ -35,18 +58,24 @@ bool Shader::Create(const std::wstring& name) {
     return true;
 }
 
-Shader* Shader::PSLoad(const std::wstring& name) {
-    pixelShader_.Attach(Compile(L"Assets/Shaders/", name + L".hlsl", L"ps_6_0", dxcUtils_.Get(), dxcCompiler_.Get(), includeHandler_.Get()));
+bool Shader::Create(const std::wstring& _vs, const std::wstring& _ps) {
+    CreateDxc();
+    CompileShaders(_vs, _ps);
+
+    return true;
+}
+
+Shader* Shader::PSLoad(const std::wstring& _name) {
+    pixelShader_.Attach(Compile(L"Assets/Shaders/", _name + L".hlsl", L"ps_6_0", dxcUtils_.Get(), dxcCompiler_.Get(), includeHandler_.Get()));
     return this;
 }
 
-IDxcBlob* Shader::Compile(const std::wstring& directoryPath, const std::wstring& filePath, const wchar_t* profile,
-                          IDxcUtils* dxcUtils, IDxcCompiler3* dxcCompiler, IDxcIncludeHandler* includeHandler) {
-    Log::Send(Log::Level::INFO, Utils::Convert(std::format(L"Begin CompileShader, Path : {}, Profile : {}", filePath, profile)));
+IDxcBlob* Shader::Compile(const std::wstring& _directoryPath, const std::wstring& _filePath, const wchar_t* _profile, IDxcUtils* _dxcUtils, IDxcCompiler3* _dxcCompiler, IDxcIncludeHandler* _includeHandler) {
+    Log::Send(Log::Level::INFO, Utils::Convert(std::format(L"Begin CompileShader, Path : {}, Profile : {}", _filePath, _profile)));
     HRESULT hResult = S_FALSE;
     IDxcBlobEncoding* shaderSource = nullptr;
-    std::wstring fullPath = directoryPath + filePath;
-    hResult = dxcUtils->LoadFile(fullPath.c_str(), nullptr, &shaderSource);
+    std::wstring fullPath = _directoryPath + _filePath;
+    hResult = _dxcUtils->LoadFile(fullPath.c_str(), nullptr, &shaderSource);
     if (FAILED(hResult)) {
         Log::Send(Log::Level::ERR, Utils::Convert(std::format(L"Failed to load shader file: {}", fullPath)));
         Utils::Alert("Failed to load shader file: " + Utils::Convert(fullPath));
@@ -59,21 +88,21 @@ IDxcBlob* Shader::Compile(const std::wstring& directoryPath, const std::wstring&
 
     ///Compiling
     LPCWSTR arguments[] = {
-        filePath.c_str(), 
+        _filePath.c_str(), 
         L"-E", L"main", //EntryPoint
-        L"-T", profile, //ShaderProfile
-        L"-I", directoryPath.c_str(), //IncludePath
+        L"-T", _profile, //ShaderProfile
+        L"-I", _directoryPath.c_str(), //IncludePath
         L"-Zi", L"-Qembed_debug", //DebugInfo
         L"-Od", 
         L"-Zpr", 
     };
 
     IDxcResult* shaderResult = nullptr;
-    hResult = dxcCompiler->Compile(
+    hResult = _dxcCompiler->Compile(
         &shaderSourceBuffer,
         arguments,
         _countof(arguments),
-        includeHandler,
+        _includeHandler,
         IID_PPV_ARGS(&shaderResult)
     );
     assert(SUCCEEDED(hResult));
@@ -90,7 +119,7 @@ IDxcBlob* Shader::Compile(const std::wstring& directoryPath, const std::wstring&
     hResult = shaderResult->GetOutput(DXC_OUT_OBJECT, IID_PPV_ARGS(&shaderBlob), nullptr);
     assert(SUCCEEDED(hResult));
 
-    Log::Send(Log::Level::INFO, Utils::Convert(std::format(L"Compile Succeed, Path : {}, Profile : {}", filePath, profile)));
+    Log::Send(Log::Level::INFO, Utils::Convert(std::format(L"Compile Succeed, Path : {}, Profile : {}", _filePath, _profile)));
     shaderSource->Release();
     shaderResult->Release();
 

@@ -26,6 +26,7 @@ public:
 
     void CreateSRVforTexture2D(uint32_t srvIndex, ID3D12Resource* pResource, DXGI_FORMAT format, UINT mipMap);
     void CreateSRVforStructuredBuffer(uint32_t srvIndex, ID3D12Resource* pResource, UINT numElements, UINT stride);
+    void CreateSRVforCubemap(uint32_t _srvIndex, ID3D12Resource* _pResource, DXGI_FORMAT _format);
 
     void SetGraphicsRootDescriptorTable(UINT rootParameterIndex, uint32_t srvIndex) const;
 

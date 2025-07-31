@@ -5,10 +5,12 @@
 #include <wrl/client.h>
 #include <vector>
 #include <string>
+#include <memory>
 
 #include "Math/Matrix.hpp"
 #include "Math/Vector3.hpp"
 #include "Math/Vector4.hpp"
+#include "src/DirectX/Resource/DX12Resource.hpp"
 
 class LineCommon;
 class DirectXAdapter;
@@ -37,15 +39,15 @@ class Line {
     const uint32_t MAX_LINES = 1000;
 
     // 基本線形状用の頂点バッファ（2つの頂点）
-    Microsoft::WRL::ComPtr<ID3D12Resource> vertexResource_;
+    std::unique_ptr<DX12Resource> vertexResource_;
     D3D12_VERTEX_BUFFER_VIEW vertexBufferView_{};
     VertexData* vertexData_ = nullptr;
 
     // Material
-    Microsoft::WRL::ComPtr<ID3D12Resource> materialResource_;
+    std::unique_ptr<DX12Resource> materialResource_;
     Material* materialData_ = nullptr;
 
-    Microsoft::WRL::ComPtr<ID3D12Resource> transformationResource_;
+    std::unique_ptr<DX12Resource> transformationResource_;
     Transformation* transformationData_ = nullptr;
 
     std::vector<Vector4> positions_;

@@ -544,6 +544,7 @@
       <Optimization>MinSpace</Optimization>
       <StructMemberAlignment>Default</StructMemberAlignment>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -589,13 +590,18 @@
     <ClInclude Include="src\Container\Material.hpp" />
     <ClInclude Include="src\DirectX\DirectXAdapter.hpp" />
     <ClInclude Include="src\DirectX\FrameRate\FrameRateLimiter.hpp" />
-    <ClInclude Include="src\DirectX\GraphicsPipeline\GraphicsPipeline.hpp" />
+    <ClInclude Include="src\DirectX\GraphicsPipeline\Object\BlendMode.hpp" />
+    <ClInclude Include="src\DirectX\GraphicsPipeline\Object\InputLayout.hpp" />
+    <ClInclude Include="src\DirectX\GraphicsPipeline\Object\PipelineStateObject.hpp" />
+    <ClInclude Include="src\DirectX\GraphicsPipeline\Object\RootSignature.hpp" />
     <ClInclude Include="src\DirectX\Heap\Heap.hpp" />
     <ClInclude Include="include\Log.hpp" />
     <ClInclude Include="include\Framework.hpp" />
     <ClInclude Include="include\Input.hpp" />
     <ClInclude Include="include\Math\Vector4.hpp" />
     <ClInclude Include="src\DirectX\Heap\SRVManager.h" />
+    <ClInclude Include="src\DirectX\LeakChecker\D3DResourceLeakChecker.hpp" />
+    <ClInclude Include="src\DirectX\Resource\DX12Resource.hpp" />
     <ClInclude Include="src\DirectX\Shader\Shader.h" />
     <ClInclude Include="include\Math\Transform.hpp" />
     <ClInclude Include="src\Json\Json.hpp" />
@@ -606,6 +612,8 @@
     <ClInclude Include="src\Light\RawLight.h" />
     <ClInclude Include="src\Light\SpotLight\SpotLight.h" />
     <ClInclude Include="src\Line\Common\LineCommon.hpp" />
+    <ClInclude Include="src\Stage\LevelEditor.hpp" />
+    <ClInclude Include="src\Stage\Loader\StageLoader.hpp" />
     <ClInclude Include="src\Mesh\Data\MeshData.hpp" />
     <ClInclude Include="src\Mesh\Mesh.hpp" />
     <ClInclude Include="src\Mesh\Repository\MeshRepository.hpp" />
@@ -620,13 +628,23 @@
     <ClInclude Include="src\Model\Repository\ModelRepository.hpp" />
     <ClInclude Include="src\Platform\WinApp.hpp" />
     <ClInclude Include="include\IScene.hpp" />
+    <ClInclude Include="src\PostProcess\BoxBlur\BoxBlur.hpp" />
+    <ClInclude Include="src\PostProcess\Executor\PostProcessExecutor.hpp" />
+    <ClInclude Include="src\PostProcess\Grayscale\Grayscale.hpp" />
+    <ClInclude Include="src\PostProcess\IPostEffect.hpp" />
+    <ClInclude Include="src\PostProcess\Vignette\Vignette.hpp" />
+    <ClInclude Include="src\Renderer\Renderer.hpp" />
     <ClInclude Include="src\ResourceRepository\ResourceRepository.hpp" />
     <ClInclude Include="src\Scene\SceneSwitcher.hpp" />
     <ClInclude Include="include\Factory\AbstractSceneFactory.hpp" />
     <ClInclude Include="src\Scheduler\Scheduler.hpp" />
     <ClInclude Include="include\Pattern\Singleton.hpp" />
+    <ClInclude Include="src\Sky\Common\SkyCommon.hpp" />
+    <ClInclude Include="src\Sky\Skybox.hpp" />
     <ClInclude Include="src\Sprite\Common\SpriteCommon.hpp" />
     <ClInclude Include="include\Sprite.hpp" />
+    <ClInclude Include="src\Stage\LevelData.hpp" />
+    <ClInclude Include="src\Stage\StageRepository.hpp" />
     <ClInclude Include="src\Texture\TextureManager.hpp" />
     <ClInclude Include="src\Timer\Timer.hpp" />
     <ClInclude Include="src\Window\Window.hpp" />
@@ -643,9 +661,13 @@
     <ClCompile Include="src\Debug\DebugUI.cpp" />
     <ClCompile Include="src\DirectX\DirectXAdapter.cpp" />
     <ClCompile Include="src\DirectX\FrameRate\FrameRateLimiter.cpp" />
-    <ClCompile Include="src\DirectX\GraphicsPipeline\GraphicsPipeline.cpp" />
+    <ClCompile Include="src\DirectX\GraphicsPipeline\Object\InputLayout.cpp" />
+    <ClCompile Include="src\DirectX\GraphicsPipeline\Object\PipelineStateObject.cpp" />
+    <ClCompile Include="src\DirectX\GraphicsPipeline\Object\RootSignature.cpp" />
     <ClCompile Include="src\DirectX\Heap\Heap.cpp" />
     <ClCompile Include="src\DirectX\Heap\SRVManager.cpp" />
+    <ClCompile Include="src\DirectX\LeakChecker\D3DResourceLeakChecker.cpp" />
+    <ClCompile Include="src\DirectX\Resource\DX12Resource.cpp" />
     <ClCompile Include="src\DirectX\Shader\Shader.cpp" />
     <ClCompile Include="src\Framework\Framework.cpp" />
     <ClCompile Include="src\Game\IGame.cpp" />
@@ -657,6 +679,8 @@
     <ClCompile Include="src\Light\SpotLight\SpotLight.cpp" />
     <ClCompile Include="src\Line\Common\LineCommon.cpp" />
     <ClCompile Include="src\Line\Line.cpp" />
+    <ClCompile Include="src\Stage\LevelEditor.cpp" />
+    <ClCompile Include="src\Stage\Loader\StageLoader.cpp" />
     <ClCompile Include="src\Math\Easing.cpp" />
     <ClCompile Include="src\Math\MathUtils.cpp" />
     <ClCompile Include="src\Math\Vector2.cpp" />
@@ -670,12 +694,21 @@
     <ClCompile Include="src\Model\Model.cpp" />
     <ClCompile Include="src\Model\Repository\ModelRepository.cpp" />
     <ClCompile Include="src\Platform\WinApp.cpp" />
+    <ClCompile Include="src\PostProcess\BoxBlur\BoxBlur.cpp" />
+    <ClCompile Include="src\PostProcess\Executor\PostProcessExecutor.cpp" />
+    <ClCompile Include="src\PostProcess\Grayscale\Grayscale.cpp" />
+    <ClCompile Include="src\PostProcess\IPostEffect.cpp" />
+    <ClCompile Include="src\PostProcess\Vignette\Vignette.cpp" />
+    <ClCompile Include="src\Renderer\Renderer.cpp" />
     <ClCompile Include="src\ResourceRepository\ResourceRepository.cpp" />
     <ClCompile Include="src\Scene\IScene.cpp" />
     <ClCompile Include="src\Scene\SceneSwitcher.cpp" />
     <ClCompile Include="src\Scheduler\Scheduler.cpp" />
+    <ClCompile Include="src\Sky\Common\SkyCommon.cpp" />
+    <ClCompile Include="src\Sky\Skybox.cpp" />
     <ClCompile Include="src\Sprite\Common\SpriteCommon.cpp" />
     <ClCompile Include="src\Sprite\Sprite.cpp" />
+    <ClCompile Include="src\Stage\StageRepository.cpp" />
     <ClCompile Include="src\System\Log.cpp" />
     <ClCompile Include="src\System\Singleton\Singleton.cpp" />
     <ClCompile Include="src\Texture\TextureManager.cpp" />

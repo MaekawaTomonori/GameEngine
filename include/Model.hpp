@@ -2,12 +2,14 @@
 #define Model_HPP_
 #include <array>
 #include <span>
+#include <memory>
 
 #include "Line.hpp"
 #include "Math/Matrix.hpp"
 #include "src/Camera/Camera.hpp"
 #include "src/Mesh/Mesh.hpp"
 #include "src/Model/Common/ModelCommon.hpp"
+#include "src/DirectX/Resource/DX12Resource.hpp"
 
 const uint32_t MAX_INFLUENCE = 4;
 class Model{
@@ -22,11 +24,11 @@ class Model{
     struct SkinCluster {
         std::vector<Matrix4x4> inverseBindPoses;
 
-        Microsoft::WRL::ComPtr<ID3D12Resource> influenceResource;
+        std::unique_ptr<DX12Resource> influenceResource;
         D3D12_VERTEX_BUFFER_VIEW influenceBufferView;
         std::span<VertexInfluence> mappedInfluence;
 
-        Microsoft::WRL::ComPtr<ID3D12Resource> paletteResource;
+        std::unique_ptr<DX12Resource> paletteResource;
         std::span<WellForGpu> mappedPalette;
         uint32_t srvIndex;
         std::pair<D3D12_CPU_DESCRIPTOR_HANDLE, D3D12_GPU_DESCRIPTOR_HANDLE> paletteHandle;
@@ -56,14 +58,17 @@ class Model{
 
     ///GPU RESOURCES
     // world transform
-    Microsoft::WRL::ComPtr<ID3D12Resource> wr_;
+    std::unique_ptr<DX12Resource> wr_;
     Transformation* wd_ = nullptr;
 
     //Camera
-    Microsoft::WRL::ComPtr<ID3D12Resource> cr_;
+    std::unique_ptr<DX12Resource> cr_;
     CameraForGpu* cd_ = nullptr;
 
     SkinCluster skinCluster_;
+
+    // Environment mapping
+    std::string environmentTexture_ = "";
 
 public:
     Model();
@@ -71,8 +76,14 @@ public:
     void Update();
     void Draw() const;
 
+    Model& SetTranslate(Vector3 _translate);
+    Model& SetRotate(Vector3 _rotate);
+    Model& SetScale(Vector3 _scale);
+    Model& SetEnvironmentTexture(const std::string& _texture);
+
+    static void Load(const std::string& _name);
+
 private:
-    void Load(const std::string& _name) const;
     void Debug();
     void UpdateMapData() const;
     void CreateSkinCluster();

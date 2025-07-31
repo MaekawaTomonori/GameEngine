@@ -4,9 +4,11 @@
 #include <wrl/client.h>
 #include <string>
 #include <unordered_map>
+#include <memory>
 
 #include "src/DirectX/DirectXAdapter.hpp"
 #include "src/DirectX/Heap/SRVManager.h"
+#include "src/DirectX/Resource/DX12Resource.hpp"
 
 #include "vendor/DirectXTex/DirectXTex.h"
 
@@ -14,8 +16,7 @@ class TextureManager{
     struct Texture{
         uint32_t srvIndex;
         DirectX::TexMetadata metadata;
-        Microsoft::WRL::ComPtr<ID3D12Resource> resource;
-        Microsoft::WRL::ComPtr<ID3D12Resource> intermediateResource;
+        std::unique_ptr<DX12Resource> resource;
         D3D12_CPU_DESCRIPTOR_HANDLE cpuHandle;
         D3D12_GPU_DESCRIPTOR_HANDLE gpuHandle;
     };
@@ -29,11 +30,6 @@ private: //Variables
     std::string folderPath_ = "Assets/Resources/";
 
     std::unordered_map<std::string, Texture> textures_;
-
-private: //Methods
-    DirectX::ScratchImage LoadTexture(const std::string& filename) const;
-    ID3D12Resource* CreateTextureResource(const DirectX::TexMetadata& metadata) const;
-    ID3D12Resource* UploadTextureData(ID3D12Resource* texture, const DirectX::ScratchImage& mipImages) const;
 
 public:
     ~TextureManager();
@@ -50,5 +46,11 @@ public:
 
     D3D12_GPU_DESCRIPTOR_HANDLE GetGPUHandle(const std::string& fileName);
     D3D12_GPU_DESCRIPTOR_HANDLE GetGPUHandle(const uint32_t index) const;
+
+private: //Methods
+    DirectX::ScratchImage LoadTexture(const std::string& filename) const;
+    void UploadTextureData(DX12Resource* _texture, const DirectX::ScratchImage& mipImages) const;
+
+    static DirectX::ScratchImage LoadDDS(const std::wstring& _path);
 };
 

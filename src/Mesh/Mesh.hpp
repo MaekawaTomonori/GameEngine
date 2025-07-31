@@ -3,15 +3,19 @@
 #include <d3d12.h>
 #include <string>
 #include <wrl/client.h>
+#include <memory>
 
 #include "Data/MeshData.hpp"
 #include "src/DirectX/DirectXAdapter.hpp"
+#include "src/DirectX/Resource/DX12Resource.hpp"
 
 class Mesh {
     struct Material {
         Vector4 color;
         uint32_t lighting;
         float shininess;
+        float coefficient;
+        float pad[2];
     };
 
     DirectXAdapter* adapter_ = nullptr;
@@ -22,7 +26,7 @@ class Mesh {
     MeshData data_;
 
     // vertex resource
-    Microsoft::WRL::ComPtr<ID3D12Resource> vr_;
+    std::unique_ptr<DX12Resource> vr_;
     // vertex buffer view
     D3D12_VERTEX_BUFFER_VIEW vbv_ {};
     // vertex data
@@ -31,14 +35,14 @@ class Mesh {
     std::vector<D3D12_VERTEX_BUFFER_VIEW> vbvs_;
 
     // index resource
-    Microsoft::WRL::ComPtr<ID3D12Resource> ir_;
+    std::unique_ptr<DX12Resource> ir_;
     // index buffer view
     D3D12_INDEX_BUFFER_VIEW ibv_ {};
     // index
     uint32_t* id_ = nullptr;
 
     // material resource
-    Microsoft::WRL::ComPtr<ID3D12Resource> mr_;
+    std::unique_ptr<DX12Resource> mr_;
     // material
     Material* material_ = nullptr;
 

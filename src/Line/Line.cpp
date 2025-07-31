@@ -5,7 +5,6 @@
 #include "src/Line/Common/LineCommon.hpp"
 #include "Math/MathUtils.hpp"
 #include "src/DirectX/DirectXAdapter.hpp"
-#include "src/DirectX/Heap/SRVManager.h"
 #include "src/Camera/Manager/CameraManager.hpp"
 
 Line::Line() {
@@ -45,8 +44,8 @@ void Line::Draw() const {
     commandList_->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_LINELIST);
     commandList_->IASetVertexBuffers(0, 1, &vertexBufferView_);
     
-    commandList_->SetGraphicsRootConstantBufferView(0, materialResource_->GetGPUVirtualAddress());
-    commandList_->SetGraphicsRootConstantBufferView(1, transformationResource_->GetGPUVirtualAddress());
+    commandList_->SetGraphicsRootConstantBufferView(0, materialResource_->Get()->GetGPUVirtualAddress());
+    commandList_->SetGraphicsRootConstantBufferView(1, transformationResource_->Get()->GetGPUVirtualAddress());
     
     commandList_->DrawInstanced(static_cast<UINT>(positions_.size()), 1, 0, 0);
 }
@@ -74,24 +73,24 @@ void Line::SetColor(Vector4 color) const {
 }
 
 void Line::CreateVertexBuffer() {
-    vertexResource_.Attach(adapter_->CreateBufferResource(sizeof(VertexData) * 2 * MAX_LINES));
-    vertexBufferView_.BufferLocation = vertexResource_->GetGPUVirtualAddress();
+    vertexResource_ = adapter_->CreateBufferResource(sizeof(VertexData) * 2 * MAX_LINES);
+    vertexBufferView_.BufferLocation = vertexResource_->Get()->GetGPUVirtualAddress();
     vertexBufferView_.SizeInBytes = sizeof(VertexData) * 2 * MAX_LINES;
     vertexBufferView_.StrideInBytes = sizeof(VertexData);
 
-    vertexResource_->Map(0, nullptr, reinterpret_cast<void**>(&vertexData_));
+    vertexResource_->Get()->Map(0, nullptr, reinterpret_cast<void**>(&vertexData_));
 
     vertexData_[0].position = {0.0f, -0.5f, 0.0f, 1.0f};
     vertexData_[1].position = {0.0f, 0.5f, 0.0f, 1.0f};
 }
 
 void Line::CreateMaterialBuffer() {
-    materialResource_.Attach(adapter_->CreateBufferResource(sizeof(Material)));
-    materialResource_->Map(0, nullptr, reinterpret_cast<void**>(&materialData_));
+    materialResource_ = adapter_->CreateBufferResource(sizeof(Material));
+    materialResource_->Get()->Map(0, nullptr, reinterpret_cast<void**>(&materialData_));
   }
 
 void Line::CreateTransformationBuffer() {
-    transformationResource_.Attach(adapter_->CreateBufferResource(sizeof(Transformation)));
-    transformationResource_->Map(0, nullptr, reinterpret_cast<void**>(&transformationData_));
+    transformationResource_ = adapter_->CreateBufferResource(sizeof(Transformation));
+    transformationResource_->Get()->Map(0, nullptr, reinterpret_cast<void**>(&transformationData_));
     transformationData_->WVP = MathUtils::Matrix::MakeIdentity();
 }

@@ -4,7 +4,7 @@
 
 #include "DebugUI.hpp"
 #include "src/DirectX/DirectXAdapter.hpp"
-#include "src/DirectX/GraphicsPipeline/GraphicsPipeline.hpp"
+#include "src/DirectX/GraphicsPipeline/Object/PipelineStateObject.hpp"
 
 class Common {
 protected:
@@ -13,7 +13,7 @@ protected:
 
     std::mutex mutex_;
 
-    std::unique_ptr<GraphicsPipeline> pipeline_;
+    std::unique_ptr<PipelineStateObject> pipeline_;
 
 public:
     virtual ~Common() = default;
@@ -26,7 +26,7 @@ public:
         return adapter_;
     }
 protected:
-    void Setup(DirectXAdapter* _adapter, DebugUI* _debugUi,GraphicsPipeline::Type _type);
+    void Setup(DirectXAdapter* _adapter, DebugUI* _debugUi);
 }; // class Common
 
 #endif // Common_HPP_

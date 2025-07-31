@@ -26,6 +26,8 @@ namespace GameEngine {
 
         size_t GetHeight() const;
 
+        std::string GetTitle() const;
+
         static Config* Default();
     };
 }

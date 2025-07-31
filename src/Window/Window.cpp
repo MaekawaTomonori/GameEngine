@@ -90,3 +90,7 @@ void Window::SetSize(const int width, const int height) const {
     }
 }
 
+void Window::SetTitle(const std::string& _title) {
+    title_ = Utils::Convert(_title);
+}
+

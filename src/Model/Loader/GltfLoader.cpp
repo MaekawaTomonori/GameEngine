@@ -66,7 +66,7 @@ std::optional<Animation> GltfLoader::LoadAnimation(const aiScene* _scene, const 
     Animation result;
 
     if (_scene->mNumAnimations <= 0) {
-        Utils::Alert("GltfLoader::LoadAnimation: No animations found in file: " + _name);
+        Log::Send(Log::Level::WARNING, "GltfLoader::LoadAnimation: No animations found in file: " + _name);
         return std::nullopt;
     }
 

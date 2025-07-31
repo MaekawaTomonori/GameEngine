@@ -67,6 +67,18 @@ void SRVManager::CreateSRVforStructuredBuffer(uint32_t srvIndex, ID3D12Resource*
     adapter_->GetDevice()->CreateShaderResourceView(pResource, &desc, heap_->GetCPUHandle(srvIndex));
 }
 
+void SRVManager::CreateSRVforCubemap(uint32_t _srvIndex, ID3D12Resource* _pResource, DXGI_FORMAT _format) {
+    D3D12_SHADER_RESOURCE_VIEW_DESC desc{};
+    desc.Format = _format;
+    desc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
+    desc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURECUBE;
+    desc.TextureCube.MostDetailedMip = 0;
+    desc.TextureCube.MipLevels = UINT_MAX;
+    desc.TextureCube.ResourceMinLODClamp = 0.f;
+
+    adapter_->GetDevice()->CreateShaderResourceView(_pResource, &desc, heap_->GetCPUHandle(_srvIndex));
+}
+
 void SRVManager::SetGraphicsRootDescriptorTable(UINT rootParameterIndex, uint32_t srvIndex) const {
     adapter_->GetCommandList()->SetGraphicsRootDescriptorTable(rootParameterIndex, heap_->GetGPUHandle(srvIndex));
 }

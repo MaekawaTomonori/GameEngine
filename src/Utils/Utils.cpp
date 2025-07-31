@@ -99,4 +99,17 @@ namespace Utils {
         return str1.size() == str2.size() && std::equal(str1.begin(), str1.end(), str2.begin(),
                                                         [](char a, char b){ return tolower(a) == tolower(b); });
     }
+
+    bool ConfirmDialog([[maybe_unused]]const std::string& _msg) {
+#ifdef _DEBUG
+#ifdef _WIN32
+        int result = MessageBoxA(nullptr, _msg.c_str(), "Confirm", MB_YESNO | MB_ICONQUESTION);
+        return result == IDYES;
+#else
+        return false;
+#endif
+#else
+        return false;
+#endif
+    }
 }

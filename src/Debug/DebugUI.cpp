@@ -43,6 +43,7 @@ void DebugUI::Initialize(const DirectXAdapter *dx) {
     ImGuiIO& io = ImGui::GetIO();
     io.ConfigFlags |= ImGuiConfigFlags_DockingEnable; // Enable Docking
     io.FontGlobalScale = 1.f / ImGui_ImplWin32_GetDpiScaleForHwnd(dx->GetWindowHandle());
+    io.IniFilename = "Assets\\Config\\imgui.ini"; 
 
     cList_ = dx->GetCommandList();
 }

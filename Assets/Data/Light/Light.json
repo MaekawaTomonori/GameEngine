@@ -1,0 +1,19 @@
+{
+    "Light": {
+        "ab3e3d1e-b32a-4c5b-91ab-e03f061edfba": {
+            "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+            ],
+            "direction": [
+                0.0,
+                -1.0,
+                0.0
+            ],
+            "intensity": 1.0,
+            "type": 0
+        }
+    }
+}

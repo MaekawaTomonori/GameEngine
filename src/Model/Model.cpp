@@ -11,6 +11,7 @@
 #include "Loader/ObjLoader.hpp"
 #include "Math/MathUtils.hpp"
 #include "src/Camera/Manager/CameraManager.hpp"
+#include "src/Texture/TextureManager.hpp"
 
 Model::Model() :
     common_(Singleton<ModelCommon>::GetInstance()),
@@ -46,18 +47,23 @@ void Model::Initialize(const std::string& _name) {
 
     Log::Send(Log::Level::INFO, "Mesh created: " + _name);
 
-    wr_.Attach(adapter_->CreateBufferResource(sizeof(Transformation)));
-    wr_->Map(0, nullptr, reinterpret_cast<void**>(&wd_));
+    wr_ = (adapter_->CreateBufferResource(sizeof(Transformation)));
+    wr_->Get()->Map(0, nullptr, reinterpret_cast<void**>(&wd_));
     wd_->wvp = MathUtils::Matrix::MakeIdentity();
     wd_->world = MathUtils::Matrix::MakeIdentity();
     wd_->inverse = MathUtils::Matrix::MakeIdentity();
 
-    cr_.Attach(adapter_->CreateBufferResource(sizeof(CameraForGpu)));
-    cr_->Map(0, nullptr, reinterpret_cast<void**>(&cd_));
+    cr_ = (adapter_->CreateBufferResource(sizeof(CameraForGpu)));
+    cr_->Get()->Map(0, nullptr, reinterpret_cast<void**>(&cd_));
 
-    Log::Send(Log::Level::INFO, "Creating SkinCluster for: " + _name);
-    CreateSkinCluster();
-    Log::Send(Log::Level::INFO, "SkinCluster created for: " + _name);
+    // Create SkinCluster only if skeleton exists and skinCluster data is available
+    if (data_->skeleton.has_value() && !data_->skinCluster.empty()) {
+        Log::Send(Log::Level::INFO, "Creating SkinCluster for: " + _name);
+        CreateSkinCluster();
+        Log::Send(Log::Level::INFO, "SkinCluster created for: " + _name);
+    } else {
+        Log::Send(Log::Level::INFO, "No valid skinning data found, skipping SkinCluster creation for: " + _name);
+    }
 
 
     transform_ = {
@@ -65,6 +71,11 @@ void Model::Initialize(const std::string& _name) {
         Vector3{0,0,0},
         {0,0,0},
     };
+
+    // Set default environment texture if none specified
+    if (environmentTexture_.empty()) {
+        environmentTexture_ = "white.png";
+    }
 
     line_.Initialize();
 }
@@ -74,19 +85,19 @@ void Model::Update() {
 
     Debug();
 
-    // Update Animation
-    UpdateAnimation();
-
-    // Update Skeleton
-    UpdateSkeleton();
-
-    // Update SkinCluster
-    UpdateSkinCluster();
+    // Update Animation, Skeleton, and SkinCluster only if valid skinning data exists
+    if (data_->skeleton.has_value() && !data_->skinCluster.empty()) {
+        UpdateAnimation();
+        UpdateSkeleton();
+        UpdateSkinCluster();
+    }
 
     UpdateMapData();
 
-    // Joint to Line
-    CreateLine();
+    // Joint to Line (only if valid skinning data exists)
+    if (data_->skeleton.has_value() && !data_->skinCluster.empty()) {
+        CreateLine();
+    }
 
     // Mesh Update
     mesh_->Update();
@@ -98,19 +109,53 @@ void Model::Draw() const {
         return;
     }
 
-    common_->Draw();
+    TextureManager* tm = Singleton<TextureManager>::GetInstance();
 
-    commandList_->SetGraphicsRootConstantBufferView(1, wr_->GetGPUVirtualAddress());
-    commandList_->SetGraphicsRootConstantBufferView(4, cr_->GetGPUVirtualAddress());
-    if (data_->skeleton.has_value()){
-        commandList_->SetGraphicsRootDescriptorTable(8, skinCluster_.paletteHandle.second);
+    // Use appropriate pipeline based on valid skinning data availability
+    if (data_->skeleton.has_value() && !data_->skinCluster.empty()) {
+        common_->DrawSkinning();
+        commandList_->SetGraphicsRootConstantBufferView(1, wr_->Get()->GetGPUVirtualAddress());
+        commandList_->SetGraphicsRootConstantBufferView(4, cr_->Get()->GetGPUVirtualAddress());
+        // Environment TextureCube (parameter 8)
+        commandList_->SetGraphicsRootDescriptorTable(8, tm->GetGPUHandle(environmentTexture_));
+        commandList_->SetGraphicsRootDescriptorTable(9, skinCluster_.paletteHandle.second);
+    } else {
+        common_->DrawStatic();
+        commandList_->SetGraphicsRootConstantBufferView(1, wr_->Get()->GetGPUVirtualAddress());
+        commandList_->SetGraphicsRootConstantBufferView(4, cr_->Get()->GetGPUVirtualAddress());
+        // Environment TextureCube (parameter 8)
+        commandList_->SetGraphicsRootDescriptorTable(8, tm->GetGPUHandle(environmentTexture_));
     }
     mesh_->Draw();
 
     DrawLine();
 }
 
-void Model::Load(const std::string& _name) const {
+Model& Model::SetTranslate(const Vector3 _translate) {
+    transform_.translate = _translate;
+    return *this;
+}
+
+Model& Model::SetRotate(const Vector3 _rotate) {
+    transform_.rotate = _rotate;
+    return *this;
+}
+
+Model& Model::SetScale(const Vector3 _scale) {
+    transform_.scale = _scale;
+    return *this;
+}
+
+Model& Model::SetEnvironmentTexture(const std::string& _texture) {
+    environmentTexture_ = _texture;
+    if (!_texture.empty()) {
+        TextureManager* tm = Singleton<TextureManager>::GetInstance();
+        tm->Load(_texture);
+    }
+    return *this;
+}
+
+void Model::Load(const std::string& _name) {
     std::unique_ptr<IModelLoader> loader;
     if (std::filesystem::exists("Assets/Resources/" + _name + "/" + _name + ".obj")) {
         loader = std::make_unique<ObjLoader>();
@@ -121,7 +166,7 @@ void Model::Load(const std::string& _name) const {
         Utils::Alert("Model not found: " + _name);
         return;
     }
-    loader->LoadModel(_name, common_->GetResourceRepository());
+    loader->LoadModel(_name, Singleton<ModelCommon>::GetInstance()->GetResourceRepository());
 }
 
 void Model::Debug() {
@@ -175,20 +220,23 @@ void Model::Debug() {
                     Recursive(skeleton.root);
                 }
 
-                ImGui::SeparatorText("Animation");
-                if (ImGui::TreeNode("Details")){
-                    ImGui::Checkbox("Enable", &animationEnable_);
-                    ImGui::SameLine();
-                    ImGui::Checkbox("TimerLock", &animationTimerLock_);
-                    if (animationTimerLock_)ImGui::Text("Timer : %f", animationTime_);
-                    else ImGui::DragFloat("Anime Timer", &animationTime_);
-                    ImGui::TreePop();
+                if (data_->animation.has_value()){
+                    ImGui::SeparatorText("Animation");
+                    if (ImGui::TreeNode("Details")){
+                        ImGui::Checkbox("Enable", &animationEnable_);
+                        ImGui::SameLine();
+                        ImGui::Checkbox("TimerLock", &animationTimerLock_);
+                        if (animationTimerLock_)ImGui::Text("Timer : %f", animationTime_);
+                        else ImGui::DragFloat("Anime Timer", &animationTime_);
+                        ImGui::TreePop();
+                    }
                 }
 
                 ImGui::SeparatorText("Mesh");
 
-                if (ImGui::CollapsingHeader("Mesh")){
+                if (ImGui::TreeNode("Mesh")){
                     mesh_->Debug();
+                    ImGui::TreePop();
                 }
             }
             ImGui::End();
@@ -218,9 +266,8 @@ void Model::CreateSkinCluster() {
         return;
     }
 
-    if (!data_->skeleton.has_value()) {
-        Log::Send(Log::Level::ERR, "Model data does not contain a skeleton");
-        Utils::Alert("Model data does not contain a skeleton");
+    if (!data_->skeleton.has_value() || data_->skinCluster.empty()) {
+        Log::Send(Log::Level::WARNING, "Model data does not contain valid skinning data, skipping skin cluster creation");
         return;
     }
 
@@ -231,21 +278,21 @@ void Model::CreateSkinCluster() {
 
     //Palette
     WellForGpu* mappedPalette = nullptr;
-    skinCluster_.paletteResource.Attach(adapter_->CreateBufferResource(sizeof(WellForGpu) * jointSize));
-    skinCluster_.paletteResource->Map(0, nullptr, reinterpret_cast<void**>(&mappedPalette));
+    skinCluster_.paletteResource = (adapter_->CreateBufferResource(sizeof(WellForGpu) * jointSize));
+    skinCluster_.paletteResource->Get()->Map(0, nullptr, reinterpret_cast<void**>(&mappedPalette));
     skinCluster_.mappedPalette = {mappedPalette, jointSize};
     skinCluster_.srvIndex = srv->Allocate();
     skinCluster_.paletteHandle= { srv->GetCPUHandle(skinCluster_.srvIndex), srv->GetGPUHandle(skinCluster_.srvIndex) };
-    srv->CreateSRVforStructuredBuffer(skinCluster_.srvIndex, skinCluster_.paletteResource.Get(), static_cast<UINT>(jointSize), sizeof(WellForGpu));
+    srv->CreateSRVforStructuredBuffer(skinCluster_.srvIndex, skinCluster_.paletteResource->Get(), static_cast<UINT>(jointSize), sizeof(WellForGpu));
 
     //Influenc
     VertexInfluence* mappedInfluence = nullptr;
-    skinCluster_.influenceResource.Attach(adapter_->CreateBufferResource(sizeof(VertexInfluence) * verticesSize));
-    skinCluster_.influenceResource->Map(0, nullptr, reinterpret_cast<void**>(&mappedInfluence));
+    skinCluster_.influenceResource = (adapter_->CreateBufferResource(sizeof(VertexInfluence) * verticesSize));
+    skinCluster_.influenceResource->Get()->Map(0, nullptr, reinterpret_cast<void**>(&mappedInfluence));
     memset(mappedInfluence, 0, sizeof(VertexInfluence) * verticesSize);
     skinCluster_.mappedInfluence = { mappedInfluence, verticesSize };
 
-    skinCluster_.influenceBufferView.BufferLocation = skinCluster_.influenceResource->GetGPUVirtualAddress();
+    skinCluster_.influenceBufferView.BufferLocation = skinCluster_.influenceResource->Get()->GetGPUVirtualAddress();
     skinCluster_.influenceBufferView.SizeInBytes = static_cast<UINT>(sizeof(VertexInfluence) * verticesSize);
     skinCluster_.influenceBufferView.StrideInBytes = sizeof(VertexInfluence);
 
@@ -281,9 +328,8 @@ void Model::SetBindPose(Skeleton& _skeleton) {
 }
 
 void Model::UpdateSkinCluster() {
-    if (!data_->skeleton.has_value()) {
-        Log::Send(Log::Level::ERR, "Model data does not contain a skeleton");
-        Utils::Alert("Model data does not contain a skeleton");
+    if (!data_->skeleton.has_value() || data_->skinCluster.empty()) {
+        Log::Send(Log::Level::WARNING, "Model data does not contain valid skinning data, skipping skin cluster update");
         return;
     }
 
@@ -300,9 +346,8 @@ void Model::UpdateSkinCluster() {
 }
 
 void Model::UpdateSkeleton() const {
-    if (!data_->skeleton.has_value()) {
-        Log::Send(Log::Level::ERR, "Model data does not contain a skeleton");
-        Utils::Alert("Model data does not contain a skeleton");
+    if (!data_->skeleton.has_value() || data_->skinCluster.empty()) {
+        Log::Send(Log::Level::WARNING, "Model data does not contain valid skinning data, skipping skeleton update");
         return;
     }
 
@@ -326,8 +371,7 @@ void Model::UpdateSkeleton() const {
 
 void Model::UpdateAnimation() {
     if (!data_->animation.has_value()) {
-        Log::Send(Log::Level::ERR, "Model data does not contain an animation");
-        Utils::Alert("Model data does not contain an animation");
+        Log::Send(Log::Level::WARNING, "Model data does not contain an animation");
         return;
     }
     Animation& animation = data_->animation.value();
@@ -342,9 +386,8 @@ void Model::UpdateAnimation() {
 }
 
 void Model::ApplyAnimation() const {
-    if (!data_->skeleton.has_value()) {
-        Log::Send(Log::Level::ERR, "Model data does not contain a skeleton");
-        Utils::Alert("Model data does not contain a skeleton");
+    if (!data_->skeleton.has_value() || data_->skinCluster.empty()) {
+        Log::Send(Log::Level::WARNING, "Model data does not contain valid skinning data, skipping animation application");
         return;
     }
     Skeleton& skeleton = data_->skeleton.value();
@@ -370,9 +413,8 @@ void Model::ApplyAnimation() const {
 void Model::CreateLine() {
     line_.Clear();
 
-    if (!data_->skeleton.has_value()){
-        Log::Send(Log::Level::ERR, "Model data does not contain a skeleton");
-        Utils::Alert("Model data does not contain a skeleton");
+    if (!data_->skeleton.has_value() || data_->skinCluster.empty()){
+        Log::Send(Log::Level::WARNING, "Model data does not contain valid skinning data, skipping line creation");
         return;
     }
     Skeleton& skeleton = data_->skeleton.value();

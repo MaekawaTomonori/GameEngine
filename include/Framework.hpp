@@ -14,6 +14,10 @@
 #include "src/Scene/SceneSwitcher.hpp"
 #include "src/Sprite/Common/SpriteCommon.hpp"
 #include "src/Line/Common/LineCommon.hpp"
+#include "src/PostProcess/Executor/PostProcessExecutor.hpp"
+#include "src/Renderer/Renderer.hpp"
+#include "src/Sky/Common/SkyCommon.hpp"
+#include "src/Stage/LevelEditor.hpp"
 #include "src/Texture/TextureManager.hpp"
 
 class IGame;
@@ -26,20 +30,25 @@ class Framework {
 
     std::unique_ptr<WinApp> windows_;
     std::unique_ptr<DirectXAdapter> dxAdapter_;
+    std::unique_ptr<PostProcessExecutor> postProcessor_;
+    std::unique_ptr<Renderer> renderer_;
     std::unique_ptr<ResourceRepository> resources_;
     std::unique_ptr<DebugUI> debugUI_;
     std::unique_ptr<SRVManager> srv_;
+    std::unique_ptr<LevelEditor> level_;
 
     Input* input_ = nullptr;
     TextureManager* texture_ = nullptr;
     SpriteCommon* sprite_ = nullptr;
     ModelCommon* model_ = nullptr;
     LineCommon* line_ = nullptr;
+    SkyCommon* sky_ = nullptr;
 	CameraManager* camera_ = nullptr;
     LightManager* light_ = nullptr;
 
 public:
     Framework();
+    ~Framework();
 
     void Execute(std::unique_ptr<IGame> _game);
 
