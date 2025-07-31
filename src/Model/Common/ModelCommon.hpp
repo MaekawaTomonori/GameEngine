@@ -12,7 +12,9 @@ class ModelCommon : public Common{
     std::unique_ptr<PipelineStateObject> staticPipeline_;
     
     void Initialize(DirectXAdapter *_adapter, DebugUI *_debugUi) override;
-    void CreateStaticPipeline();
+    void CreateSkinningPipeline() const;
+    void CreateStaticPipeline() const;
+
 public:
     void Initialize(DirectXAdapter* _adapter, DebugUI* _debugUi, ResourceRepository* _resource, SRVManager* _srv);
    

@@ -11,37 +11,31 @@ void LineCommon::Initialize(DirectXAdapter* _adapter, DebugUI* _debugUi) {
     // PipelineStateObjectの初期化
     pipeline_ = std::make_unique<PipelineStateObject>(_adapter);
     
-    // RootSignature設定 (LINE用)
-    RootSignature rootSignature;
-    D3D12_ROOT_PARAMETER rootParameter = {};
-    
-    // 1. Material CBV (Pixel Shader, register 0)
-    rootParameter.ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
-    rootParameter.ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
-    rootParameter.Descriptor.ShaderRegister = 0;
-    rootSignature.AddParameter(rootParameter);
-    
-    // 2. Transform CBV (Vertex Shader, register 0)
-    rootParameter = {};
-    rootParameter.ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
-    rootParameter.ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX;
-    rootParameter.Descriptor.ShaderRegister = 0;
-    rootSignature.AddParameter(rootParameter);
-    
-    // InputLayout設定 (LINE用)
-    InputLayout inputLayout;
-    inputLayout.SetElement({"POSITION", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, D3D12_APPEND_ALIGNED_ELEMENT, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0});
-    
-    // シェーダー設定 (LINE用)
-    auto shader = std::make_unique<Shader>(L"Line");
-    
-    // PipelineStateObject作成
-    pipeline_->SetRootSignature(rootSignature)
-              .SetInputLayout(inputLayout)
-              .SetBlend(BlendMode::NONE)
-              .SetShader(std::move(shader))
-              .SetTopologyType(D3D12_PRIMITIVE_TOPOLOGY_TYPE_LINE)
-              .Create();
+    // PipelineStateObject作成 (Line用)
+    pipeline_->SetRootSignature(RootSignature{}
+        // 1. Material CBV (Pixel Shader, register 0)
+        .AddParameter({
+            .ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV,
+            .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL,
+            .Descriptor.ShaderRegister = 0
+        })
+        // 2. Transform CBV (Vertex Shader, register 0)
+        .AddParameter({
+            .ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV,
+            .ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX,
+            .Descriptor.ShaderRegister = 0
+        })
+    )
+    .SetInputLayout(InputLayout{}// InputLayout設定 (LINE用)
+        .SetElement({"POSITION", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, D3D12_APPEND_ALIGNED_ELEMENT, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0})
+    )
+    .SetBlend(BlendMode::NONE)
+    .SetShader(
+        // シェーダー設定 (LINE用)
+        std::make_unique<Shader>(L"Line")
+    )
+    .SetTopologyType(D3D12_PRIMITIVE_TOPOLOGY_TYPE_LINE)
+    .Create();
 }
 
 void LineCommon::Initialize(DirectXAdapter* _adapter, DebugUI* _debugUi, SRVManager* _srv) {

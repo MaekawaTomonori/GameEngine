@@ -68,7 +68,6 @@ Framework::~Framework() {
     if (texture_) {
         texture_->Unload();
     }
-
     if (level_) {
         level_.reset();
     }
@@ -91,14 +90,6 @@ Framework::~Framework() {
     }
     
     SingletonFinalizer::Finalize();
-    
-    // Clear adapter last
-    if (dxAdapter_) {
-        dxAdapter_.reset();
-    }
-    if (windows_) {
-        windows_.reset();
-    }
     
     CoUninitialize();
 }
