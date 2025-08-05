@@ -1,7 +1,3 @@
-//
-// Created by tomo- on 25/05/07.
-//
-
 #ifndef LOG_HPP
 #define LOG_HPP
 
@@ -11,7 +7,7 @@ class Log {
 public:
     enum class Level{
         TRACE = 0,
-        DEBUG = 1,
+        DBG = 1,
         INFO = 2,
         WARNING = 3,
         ERR = 4,
@@ -28,7 +24,5 @@ public:
 
     static void Send(Level level, const std::string& message);
 };
-
-
 
 #endif //LOG_HPP

@@ -1,459 +1,654 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="ソース ファイル">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    <Filter Include="include">
+      <UniqueIdentifier>{89AF369E-F58E-B539-FEA6-40106A051C9B}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ヘッダー ファイル">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    <Filter Include="include\Factory">
+      <UniqueIdentifier>{D03C1632-3CC8-83F6-45D9-06EBB1E3DFF6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="リソース ファイル">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    <Filter Include="include\Math">
+      <UniqueIdentifier>{0232CD69-EE94-5C0E-971A-95C4835C2891}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\Pattern">
+      <UniqueIdentifier>{56121035-C29D-7DF9-CBAE-00EE37B9D9F9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{2DAB880B-99B4-887C-2230-9F7C8E38947C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Animation">
+      <UniqueIdentifier>{5C00BBE1-C8C0-3618-91FB-7F95FD7A7BF4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Camera">
+      <UniqueIdentifier>{054BA008-F102-E255-5A0A-BBB146E17C46}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Camera\Manager">
+      <UniqueIdentifier>{2FBCC5D5-1BA0-862B-8400-817E700371AD}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Common">
+      <UniqueIdentifier>{C5C39D09-B17B-DF56-1A83-B8B2065A7A47}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Config">
+      <UniqueIdentifier>{92319E09-7EE9-DF56-E7F0-B8B2D3C77A47}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Container">
+      <UniqueIdentifier>{3F0F2748-ABCF-A27E-740A-ECFBE089E75A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Debug">
+      <UniqueIdentifier>{63A3C3B2-CF0D-7829-184C-29CF84F5557E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\DirectX">
+      <UniqueIdentifier>{EF6AA77C-5B20-2072-E414-1A4950C91676}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\DirectX\FrameRate">
+      <UniqueIdentifier>{D518AF9B-4185-6A96-0A79-02F476A48CFE}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\DirectX\GraphicsPipeline">
+      <UniqueIdentifier>{057882D9-F132-7285-9AEA-EACF8684BC15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\DirectX\GraphicsPipeline\Object">
+      <UniqueIdentifier>{EB8DB62D-5747-21D8-E0A6-3BB24C5FD747}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\DirectX\Heap">
+      <UniqueIdentifier>{DC4DD6F0-C846-F542-F178-DAC7DDD0D44E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\DirectX\LeakChecker">
+      <UniqueIdentifier>{F07B4C51-5CB3-94E8-65BD-F80BD173BBE1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\DirectX\Resource">
+      <UniqueIdentifier>{E6098151-D298-0A1B-7BB7-1E1667251BC1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\DirectX\Shader">
+      <UniqueIdentifier>{B5178099-A1FB-40EF-0A5C-3B42F65E2B71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Framework">
+      <UniqueIdentifier>{EAC3A871-5684-24A8-1FBF-6D258B3E6984}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Game">
+      <UniqueIdentifier>{F6C81ECF-E295-79DA-0BAF-6782F7DAAE68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Input">
+      <UniqueIdentifier>{EC4823B3-58B3-D729-A1F1-88CF0D9BB57E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Json">
+      <UniqueIdentifier>{F6BA20CF-E287-7BDA-0BA1-6982F7CCB068}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Light">
+      <UniqueIdentifier>{94AC56B3-0017-0B2A-4955-BCCFB5FEE87E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Light\DirectionalLight">
+      <UniqueIdentifier>{89E65E24-75F6-0AF5-DEAF-6F13CADEF98D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Light\PointLight">
+      <UniqueIdentifier>{053B0451-F1C9-8D1A-9AE8-A11586569EC0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Light\SpotLight">
+      <UniqueIdentifier>{213FFE0D-8DA0-DB1B-160E-22CE826E12DB}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Line">
+      <UniqueIdentifier>{04A921CF-F075-7CDA-198F-6A8205BBB168}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Line\Common">
+      <UniqueIdentifier>{BCE9E14C-2875-4F11-3186-D2059D90AB11}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Math">
+      <UniqueIdentifier>{261422CF-12E1-7CDA-3BFA-6A822726B268}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Mesh">
+      <UniqueIdentifier>{092522CF-F5F1-7CDA-1E0B-6B820A37B268}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Mesh\Data">
+      <UniqueIdentifier>{1228B9FB-7EE8-3432-4723-7EAFB3A2790E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Mesh\Repository">
+      <UniqueIdentifier>{F8F0AB48-6452-8956-EDBF-CF085920C015}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Model">
+      <UniqueIdentifier>{2D026CB3-996C-202A-E2AA-D1CF4E54FE7E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Model\Common">
+      <UniqueIdentifier>{C53A79F3-B133-9845-DA65-7DCAC6BD7751}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Model\Data">
+      <UniqueIdentifier>{B6DBAECD-A2A9-A2D3-8B3D-13FA77AA7E38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Model\Loader">
+      <UniqueIdentifier>{53EC7008-3FE5-8F5A-6817-75DF546F6F66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Model\Node">
+      <UniqueIdentifier>{0291B4CD-EE5E-A8D3-D7F2-18FAC35F8438}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Model\Repository">
+      <UniqueIdentifier>{9CCF2A47-885E-B410-317D-C80B1DEBC4B6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Model\Skeleton">
+      <UniqueIdentifier>{01AA2634-ED8D-E789-56EE-E1DC42F1D10B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Platform">
+      <UniqueIdentifier>{21CA02E5-0D2D-9289-B6B2-CA3FA2F45D0C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\PostProcess">
+      <UniqueIdentifier>{E180BCF2-4D0C-2AB7-561D-ADABC22786B7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\PostProcess\BoxBlur">
+      <UniqueIdentifier>{2EB7C3CC-9AEE-0B64-A3F8-6F870FAF325D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\PostProcess\Executor">
+      <UniqueIdentifier>{3F4ED4B4-2B73-2335-54BE-08C540422253}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\PostProcess\Grayscale">
+      <UniqueIdentifier>{4BC606AE-B788-3A38-0039-C9C46C3A1316}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\PostProcess\Vignette">
+      <UniqueIdentifier>{367BF2E7-22A0-4168-4BEB-26F8376F4086}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Renderer">
+      <UniqueIdentifier>{73D1DFBF-5F34-6F64-08BA-A71AF4FB3AE7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\ResourceRepository">
+      <UniqueIdentifier>{84F978DA-70F3-A12C-5960-383D45F90799}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Scene">
+      <UniqueIdentifier>{0A06D2B3-7670-862A-BFAE-37D02B58647F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Scheduler">
+      <UniqueIdentifier>{5B2C3A8C-C7EC-B5C2-9027-FF3FFCA6FA9E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Sky">
+      <UniqueIdentifier>{D3AE2FA9-3F8E-AE44-48A6-391BB40415A6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Sky\Common">
+      <UniqueIdentifier>{AB7093DD-973E-87E3-80D2-F7096C3F6348}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Sprite">
+      <UniqueIdentifier>{D313052F-BFCB-467C-28D3-1FD814AAE16C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Sprite\Common">
+      <UniqueIdentifier>{AB35C5DA-174C-C370-60C3-4E92CC1894F8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Stage">
+      <UniqueIdentifier>{9046DBB3-FCB0-8F2A-45EF-40D0B1986D7F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Stage\Loader">
+      <UniqueIdentifier>{56030130-42FC-1F82-6B2E-05075786FF8D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\System">
+      <UniqueIdentifier>{A1A9A82F-8D61-EA7C-F668-C3D8E23F856D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\System\Singleton">
+      <UniqueIdentifier>{23A88C69-0F37-1633-B855-2A2EA4C326D9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Texture">
+      <UniqueIdentifier>{8DAD6B43-F962-E438-8257-DE0FEE0BDB3C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Timer">
+      <UniqueIdentifier>{BD89E7B3-29F4-9B2A-7232-4DD0DEDB797F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Utils">
+      <UniqueIdentifier>{4D9AFFB3-B904-B42A-0243-65D06EEC917F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Window">
+      <UniqueIdentifier>{74C3D837-607B-1A85-C982-F3E0B559B575}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vendor">
+      <UniqueIdentifier>{B3738122-9F15-ACF8-88D0-BF4C74113349}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vendor\MagicEnum">
+      <UniqueIdentifier>{388A131E-2483-3270-4DB5-17F5390D127C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vendor\assimp">
+      <UniqueIdentifier>{6F57A1F8-DB17-1D2F-A452-66AC10D2610B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vendor\assimp\include">
+      <UniqueIdentifier>{E27D8AD0-4EEA-45CB-17DE-DD2883096833}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vendor\assimp\include\assimp">
+      <UniqueIdentifier>{BE36F154-AAF1-E000-53A9-594B3F432B91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vendor\json">
+      <UniqueIdentifier>{5C537BC1-C808-F4B6-51FD-ED8DBDB1EABA}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\Log.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Scheduler\Scheduler.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Platform\WinApp.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Window\Window.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Framework.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="include\IGame.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Timer\Timer.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Input.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Pattern\Singleton.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="src\DirectX\DirectXAdapter.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Utils.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Math\Vector4.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="include\DebugUI.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="src\DirectX\Heap\Heap.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Config\Config.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Sprite.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="src\DirectX\Shader\Shader.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Container\Material.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Math\Vector2.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Math\MathUtils.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Math\Matrix.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Math\Easing.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Math\Vector3.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Math\Easing.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Math\MathUtils.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Math\Matrix.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Texture\TextureManager.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Sprite\Common\SpriteCommon.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="src\DirectX\Heap\SRVManager.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="include\IScene.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Scene\SceneSwitcher.hpp">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="include\Factory\AbstractSceneFactory.hpp">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>include\Factory</Filter>
     </ClInclude>
-    <ClInclude Include="src\DirectX\FrameRate\FrameRateLimiter.hpp">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="include\Framework.hpp">
+      <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\Model.hpp">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="include\IGame.hpp">
+      <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="src\Model\Common\ModelCommon.hpp">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="include\IScene.hpp">
+      <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="src\Common\Common.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Mesh\Mesh.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Camera\Camera.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Mesh\Repository\MeshRepository.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Math\Transform.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Camera\Manager\CameraManager.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Json\Json.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Light\DirectionalLight\DirectionalLight.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Light\PointLight\PointLight.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Light\RawLight.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Light\SpotLight\SpotLight.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Light\LightManager.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Light\LightType.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="vendor\json\json.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="vendor\MagicEnum\magic_enum.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Animation\KeyFrame.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Animation\NodeAnimation.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Math\Quaternion.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Animation\Animation.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="vendor\assimp\include\assimp\AssertHandler.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Model\Node\Node.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Model\Skeleton\Skeleton.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Model\Loader\IModelLoader.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Model\Repository\ModelRepository.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Model\Data\ModelData.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Model\Loader\ObjLoader.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="src\ResourceRepository\ResourceRepository.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Model\Loader\GltfLoader.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Mesh\Data\MeshData.hpp">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Line\Common\LineCommon.hpp">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="include\Input.hpp">
+      <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="include\Line.hpp">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="src\PostProcess\Executor\PostProcessExecutor.hpp">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="include\Log.hpp">
+      <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="src\PostProcess\IPostEffect.hpp">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="include\Math\Easing.h">
+      <Filter>include\Math</Filter>
     </ClInclude>
-    <ClInclude Include="src\Renderer\Renderer.hpp">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="include\Math\Easing.hpp">
+      <Filter>include\Math</Filter>
     </ClInclude>
-    <ClInclude Include="src\DirectX\Resource\DX12Resource.hpp">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="include\Math\MathUtils.h">
+      <Filter>include\Math</Filter>
     </ClInclude>
-    <ClInclude Include="src\DirectX\LeakChecker\D3DResourceLeakChecker.hpp">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="include\Math\MathUtils.hpp">
+      <Filter>include\Math</Filter>
     </ClInclude>
-    <ClInclude Include="src\PostProcess\Grayscale\Grayscale.hpp">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="include\Math\Matrix.h">
+      <Filter>include\Math</Filter>
     </ClInclude>
-    <ClInclude Include="src\PostProcess\Vignette\Vignette.hpp">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="include\Math\Matrix.hpp">
+      <Filter>include\Math</Filter>
     </ClInclude>
-    <ClInclude Include="src\PostProcess\BoxBlur\BoxBlur.hpp">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="include\Math\Quaternion.hpp">
+      <Filter>include\Math</Filter>
     </ClInclude>
-    <ClInclude Include="src\Sky\Skybox.hpp">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="include\Math\Transform.hpp">
+      <Filter>include\Math</Filter>
     </ClInclude>
-    <ClInclude Include="src\Sky\Common\SkyCommon.hpp">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="include\Math\Vector2.hpp">
+      <Filter>include\Math</Filter>
     </ClInclude>
-    <ClInclude Include="src\Stage\Loader\StageLoader.hpp">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="include\Math\Vector3.hpp">
+      <Filter>include\Math</Filter>
     </ClInclude>
-    <ClInclude Include="src\Stage\StageRepository.hpp">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="include\Math\Vector4.hpp">
+      <Filter>include\Math</Filter>
     </ClInclude>
-    <ClInclude Include="src\Stage\LevelData.hpp">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="include\Model.hpp">
+      <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="src\Stage\LevelEditor.hpp">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="include\Pattern\Singleton.hpp">
+      <Filter>include\Pattern</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Sprite.hpp">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utils.hpp">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Animation\Animation.hpp">
+      <Filter>src\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Animation\KeyFrame.hpp">
+      <Filter>src\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Animation\NodeAnimation.hpp">
+      <Filter>src\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Camera\Camera.hpp">
+      <Filter>src\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Camera\Manager\CameraManager.hpp">
+      <Filter>src\Camera\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Common\Common.hpp">
+      <Filter>src\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Config\Config.hpp">
+      <Filter>src\Config</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Container\Material.hpp">
+      <Filter>src\Container</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DirectX\DirectXAdapter.hpp">
+      <Filter>src\DirectX</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DirectX\FrameRate\FrameRateLimiter.hpp">
+      <Filter>src\DirectX\FrameRate</Filter>
     </ClInclude>
     <ClInclude Include="src\DirectX\GraphicsPipeline\Object\BlendMode.hpp">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>src\DirectX\GraphicsPipeline\Object</Filter>
     </ClInclude>
     <ClInclude Include="src\DirectX\GraphicsPipeline\Object\InputLayout.hpp">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>src\DirectX\GraphicsPipeline\Object</Filter>
     </ClInclude>
     <ClInclude Include="src\DirectX\GraphicsPipeline\Object\PipelineStateObject.hpp">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>src\DirectX\GraphicsPipeline\Object</Filter>
     </ClInclude>
     <ClInclude Include="src\DirectX\GraphicsPipeline\Object\RootSignature.hpp">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>src\DirectX\GraphicsPipeline\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DirectX\Heap\Heap.hpp">
+      <Filter>src\DirectX\Heap</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DirectX\Heap\SRVManager.h">
+      <Filter>src\DirectX\Heap</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DirectX\LeakChecker\D3DResourceLeakChecker.hpp">
+      <Filter>src\DirectX\LeakChecker</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DirectX\Resource\DX12Resource.hpp">
+      <Filter>src\DirectX\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DirectX\Shader\Shader.h">
+      <Filter>src\DirectX\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Json\Json.hpp">
+      <Filter>src\Json</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Light\DirectionalLight\DirectionalLight.h">
+      <Filter>src\Light\DirectionalLight</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Light\LightManager.hpp">
+      <Filter>src\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Light\LightType.hpp">
+      <Filter>src\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Light\PointLight\PointLight.h">
+      <Filter>src\Light\PointLight</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Light\RawLight.h">
+      <Filter>src\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Light\SpotLight\SpotLight.h">
+      <Filter>src\Light\SpotLight</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Line\Common\LineCommon.hpp">
+      <Filter>src\Line\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Mesh\Data\MeshData.hpp">
+      <Filter>src\Mesh\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Mesh\Mesh.hpp">
+      <Filter>src\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Mesh\Repository\MeshRepository.hpp">
+      <Filter>src\Mesh\Repository</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Model\Common\ModelCommon.hpp">
+      <Filter>src\Model\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Model\Data\ModelData.hpp">
+      <Filter>src\Model\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Model\Loader\GltfLoader.hpp">
+      <Filter>src\Model\Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Model\Loader\IModelLoader.hpp">
+      <Filter>src\Model\Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Model\Loader\ObjLoader.hpp">
+      <Filter>src\Model\Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Model\Node\Node.hpp">
+      <Filter>src\Model\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Model\Repository\ModelRepository.hpp">
+      <Filter>src\Model\Repository</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Model\Skeleton\Skeleton.hpp">
+      <Filter>src\Model\Skeleton</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\WinApp.hpp">
+      <Filter>src\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PostProcess\BoxBlur\BoxBlur.hpp">
+      <Filter>src\PostProcess\BoxBlur</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PostProcess\Executor\PostProcessExecutor.hpp">
+      <Filter>src\PostProcess\Executor</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PostProcess\Grayscale\Grayscale.hpp">
+      <Filter>src\PostProcess\Grayscale</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PostProcess\IPostEffect.hpp">
+      <Filter>src\PostProcess</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PostProcess\Vignette\Vignette.hpp">
+      <Filter>src\PostProcess\Vignette</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Renderer\Renderer.hpp">
+      <Filter>src\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ResourceRepository\ResourceRepository.hpp">
+      <Filter>src\ResourceRepository</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Scene\SceneSwitcher.hpp">
+      <Filter>src\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Scheduler\Scheduler.hpp">
+      <Filter>src\Scheduler</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Sky\Common\SkyCommon.hpp">
+      <Filter>src\Sky\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Sky\Skybox.hpp">
+      <Filter>src\Sky</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Sprite\Common\SpriteCommon.hpp">
+      <Filter>src\Sprite\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Stage\LevelData.hpp">
+      <Filter>src\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Stage\LevelEditor.hpp">
+      <Filter>src\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Stage\Loader\StageLoader.hpp">
+      <Filter>src\Stage\Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Stage\StageRepository.hpp">
+      <Filter>src\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Texture\TextureManager.hpp">
+      <Filter>src\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Timer\Timer.hpp">
+      <Filter>src\Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Window\Window.hpp">
+      <Filter>src\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\MagicEnum\magic_enum.hpp">
+      <Filter>vendor\MagicEnum</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\assimp\include\assimp\AssertHandler.h">
+      <Filter>vendor\assimp\include\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\json\json.hpp">
+      <Filter>vendor\json</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Scheduler\Scheduler.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="src\System\Log.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Platform\WinApp.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Window\Window.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Framework\Framework.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Game\IGame.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Timer\Timer.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Input\Input.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="src\System\Singleton\Singleton.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="src\DirectX\DirectXAdapter.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Utils\Utils.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Debug\DebugUI.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="src\DirectX\Heap\Heap.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Config\Config.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Sprite\Sprite.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="src\DirectX\Shader\Shader.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Container\Material.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Math\MathUtils.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Math\Easing.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Math\Vector2.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Math\Vector3.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Texture\TextureManager.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Sprite\Common\SpriteCommon.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="src\DirectX\Heap\SRVManager.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Scene\IScene.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Scene\SceneSwitcher.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="src\DirectX\FrameRate\FrameRateLimiter.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Model\Model.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Model\Common\ModelCommon.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Common\Common.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Mesh\Mesh.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="src\Camera\Camera.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Mesh\Repository\MeshRepository.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>src\Camera</Filter>
     </ClCompile>
     <ClCompile Include="src\Camera\Manager\CameraManager.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>src\Camera\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="src\Json\Json.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="src\Common\Common.cpp">
+      <Filter>src\Common</Filter>
     </ClCompile>
-    <ClCompile Include="src\Light\DirectionalLight\DirectionalLight.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="src\Config\Config.cpp">
+      <Filter>src\Config</Filter>
     </ClCompile>
-    <ClCompile Include="src\Light\PointLight\PointLight.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="src\Container\Material.cpp">
+      <Filter>src\Container</Filter>
     </ClCompile>
-    <ClCompile Include="src\Light\SpotLight\SpotLight.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="src\Debug\DebugUI.cpp">
+      <Filter>src\Debug</Filter>
     </ClCompile>
-    <ClCompile Include="src\Light\LightManager.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="src\DirectX\DirectXAdapter.cpp">
+      <Filter>src\DirectX</Filter>
     </ClCompile>
-    <ClCompile Include="src\Model\Repository\ModelRepository.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Model\Data\ModelData.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Model\Loader\ObjLoader.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ResourceRepository\ResourceRepository.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Model\Loader\GltfLoader.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Line\Line.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Line\Common\LineCommon.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="src\PostProcess\Executor\PostProcessExecutor.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Renderer\Renderer.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="src\DirectX\Resource\DX12Resource.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="src\DirectX\LeakChecker\D3DResourceLeakChecker.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="src\PostProcess\IPostEffect.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="src\PostProcess\Grayscale\Grayscale.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="src\PostProcess\Vignette\Vignette.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="src\PostProcess\BoxBlur\BoxBlur.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Sky\Skybox.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Sky\Common\SkyCommon.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Stage\Loader\StageLoader.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Stage\StageRepository.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Stage\LevelEditor.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="src\DirectX\FrameRate\FrameRateLimiter.cpp">
+      <Filter>src\DirectX\FrameRate</Filter>
     </ClCompile>
     <ClCompile Include="src\DirectX\GraphicsPipeline\Object\InputLayout.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>src\DirectX\GraphicsPipeline\Object</Filter>
     </ClCompile>
     <ClCompile Include="src\DirectX\GraphicsPipeline\Object\PipelineStateObject.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>src\DirectX\GraphicsPipeline\Object</Filter>
     </ClCompile>
     <ClCompile Include="src\DirectX\GraphicsPipeline\Object\RootSignature.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>src\DirectX\GraphicsPipeline\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DirectX\Heap\Heap.cpp">
+      <Filter>src\DirectX\Heap</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DirectX\Heap\SRVManager.cpp">
+      <Filter>src\DirectX\Heap</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DirectX\LeakChecker\D3DResourceLeakChecker.cpp">
+      <Filter>src\DirectX\LeakChecker</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DirectX\Resource\DX12Resource.cpp">
+      <Filter>src\DirectX\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DirectX\Shader\Shader.cpp">
+      <Filter>src\DirectX\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Framework\Framework.cpp">
+      <Filter>src\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game\IGame.cpp">
+      <Filter>src\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Input\Input.cpp">
+      <Filter>src\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Json\Json.cpp">
+      <Filter>src\Json</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Light\DirectionalLight\DirectionalLight.cpp">
+      <Filter>src\Light\DirectionalLight</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Light\LightManager.cpp">
+      <Filter>src\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Light\PointLight\PointLight.cpp">
+      <Filter>src\Light\PointLight</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Light\SpotLight\SpotLight.cpp">
+      <Filter>src\Light\SpotLight</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Line\Common\LineCommon.cpp">
+      <Filter>src\Line\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Line\Line.cpp">
+      <Filter>src\Line</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Math\Easing.cpp">
+      <Filter>src\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Math\MathUtils.cpp">
+      <Filter>src\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Math\Vector2.cpp">
+      <Filter>src\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Math\Vector3.cpp">
+      <Filter>src\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Mesh\Mesh.cpp">
+      <Filter>src\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Mesh\Repository\MeshRepository.cpp">
+      <Filter>src\Mesh\Repository</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Model\Common\ModelCommon.cpp">
+      <Filter>src\Model\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Model\Data\ModelData.cpp">
+      <Filter>src\Model\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Model\Loader\GltfLoader.cpp">
+      <Filter>src\Model\Loader</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Model\Loader\ObjLoader.cpp">
+      <Filter>src\Model\Loader</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Model\Model.cpp">
+      <Filter>src\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Model\Repository\ModelRepository.cpp">
+      <Filter>src\Model\Repository</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\WinApp.cpp">
+      <Filter>src\Platform</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PostProcess\BoxBlur\BoxBlur.cpp">
+      <Filter>src\PostProcess\BoxBlur</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PostProcess\Executor\PostProcessExecutor.cpp">
+      <Filter>src\PostProcess\Executor</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PostProcess\Grayscale\Grayscale.cpp">
+      <Filter>src\PostProcess\Grayscale</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PostProcess\IPostEffect.cpp">
+      <Filter>src\PostProcess</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PostProcess\Vignette\Vignette.cpp">
+      <Filter>src\PostProcess\Vignette</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Renderer\Renderer.cpp">
+      <Filter>src\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ResourceRepository\ResourceRepository.cpp">
+      <Filter>src\ResourceRepository</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Scene\IScene.cpp">
+      <Filter>src\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Scene\SceneSwitcher.cpp">
+      <Filter>src\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Scheduler\Scheduler.cpp">
+      <Filter>src\Scheduler</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Sky\Common\SkyCommon.cpp">
+      <Filter>src\Sky\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Sky\Skybox.cpp">
+      <Filter>src\Sky</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Sprite\Common\SpriteCommon.cpp">
+      <Filter>src\Sprite\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Sprite\Sprite.cpp">
+      <Filter>src\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Stage\LevelEditor.cpp">
+      <Filter>src\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Stage\Loader\StageLoader.cpp">
+      <Filter>src\Stage\Loader</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Stage\StageRepository.cpp">
+      <Filter>src\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="src\System\Log.cpp">
+      <Filter>src\System</Filter>
+    </ClCompile>
+    <ClCompile Include="src\System\Singleton\Singleton.cpp">
+      <Filter>src\System\Singleton</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Texture\TextureManager.cpp">
+      <Filter>src\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Timer\Timer.cpp">
+      <Filter>src\Timer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Utils\Utils.cpp">
+      <Filter>src\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Window\Window.cpp">
+      <Filter>src\Window</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
