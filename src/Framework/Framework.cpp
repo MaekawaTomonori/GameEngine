@@ -10,6 +10,8 @@
 Framework::Framework() {
     config_ = GameEngine::Config::Default();
 
+    Log::Initialize();
+
     windows_ = std::make_unique<WinApp>();
     windows_->Initialize();
     //windows_->SetWindowSize(static_cast<int>(config_->GetWidth()), static_cast<int>(config_->GetHeight()));
