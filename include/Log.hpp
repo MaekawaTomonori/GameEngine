@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <memory>
+#include <filesystem>
 
 // Forward declarations
 namespace spdlog {
@@ -30,11 +31,26 @@ private:
     static std::string logFilePath_;
     static std::string logFileName_;
     static std::string logFileExt_;
+    static std::string executablePath_;
+    static std::string workingDirectory_;
 
 public:
     static void Initialize();
     static void Send(Level level, const std::string& message);
+    static void SendWithContext(Level level, const std::string& message, const std::string& context = "");
+    static void LogExecutionContext();
+    static void LogFileOperation(const std::string& operation, const std::string& filePath, bool success = true, const std::string& details = "");
     static void SetLevel(Level level);
+    
+private:
+    static void InitializeExecutionContext();
+    static std::string GetCurrentWorkingDirectory();
+    static std::string GetExecutablePath();
+    
+    // Legacy compatibility - will be removed
+    static void LogWorkingDirectory();
+    static void LogFileSystemDiagnostics(const std::string& targetPath, const std::string& context = "");
+    static void SendWithPath(Level level, const std::string& message, const std::string& context = "");
 };
 
 #endif //LOG_HPP
