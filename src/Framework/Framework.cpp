@@ -11,6 +11,11 @@ Framework::Framework() {
     config_ = GameEngine::Config::Default();
 
     Log::Initialize();
+    
+    // Log startup diagnostics
+    Log::SendWithContext(Log::Level::INFO, "Framework initialization started", "FRAMEWORK");
+    Log::LogFileOperation("STARTUP_CHECK", "Assets", std::filesystem::exists("Assets"), "Checking assets directory");
+    Log::LogFileOperation("STARTUP_CHECK", "Assets/Shaders", std::filesystem::exists("Assets/Shaders"), "Checking shaders directory");
 
     windows_ = std::make_unique<WinApp>();
     windows_->Initialize();

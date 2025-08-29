@@ -20,11 +20,20 @@ DirectX::ScratchImage TextureManager::LoadTexture(const std::string& filename) c
 
     [[maybe_unused]]HRESULT hr = LoadFromWICFile(filePathW.c_str(), DirectX::WIC_FLAGS_FORCE_SRGB, nullptr, image);
     
-    assert(SUCCEEDED(hr));
+    if (FAILED(hr)) {
+        Log::Send(Log::Level::ERR, std::format("Failed to load texture file: {}", fullPath));
+        Utils::Alert(std::format("Failed to load texture file: {}", fullPath));
+        return {};
+    }
 
     DirectX::ScratchImage mipImages {};
     hr = GenerateMipMaps(image.GetImages(), image.GetImageCount(), image.GetMetadata(), DirectX::TEX_FILTER_SRGB, 0, mipImages);
-    assert(SUCCEEDED(hr));
+
+    if (FAILED(hr)) {
+        Log::Send(Log::Level::ERR, std::format("Failed to generate mipmaps for texture file: {}", fullPath));
+        Utils::Alert(std::format("Failed to generate mipmaps for texture file: {}", fullPath));
+        return {};
+    }
 
     return mipImages;
 }

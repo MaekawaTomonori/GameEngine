@@ -64,7 +64,7 @@ DirectXAdapter::~DirectXAdapter() {
     // Clear debug layer last
     debugLayer_.Reset();
     
-    D3DResourceLeakChecker lc;
+    D3DResourceLeakChecker _lc;
 }
 
 std::unique_ptr<DX12Resource> DirectXAdapter::CreateBufferResource(const size_t _size) const {
