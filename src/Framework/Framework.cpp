@@ -41,7 +41,7 @@ Framework::Framework() {
     level_ = std::make_unique<LevelEditor>(debugUI_.get());
 
     input_ = Singleton<Input>::GetInstance();
-    input_->Initialize();
+    input_->Initialize(windows_->GetWindowHandle(), windows_->GetInstanceHandle());
 
     texture_ = Singleton<TextureManager>::GetInstance();
     texture_->Initialize(dxAdapter_.get(), srv_.get());
