@@ -82,6 +82,10 @@ HWND Window::GetWindowHandle() const {
     return hWnd_;
 }
 
+HINSTANCE Window::GetInstanceHandle() const {
+    return hInstance_;
+}
+
 void Window::SetSize(const int width, const int height) const {
     if (hWnd_){
         RECT rect = {0, 0, width, height};
