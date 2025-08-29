@@ -33,8 +33,6 @@ void Input::Initialize(HWND _hWnd, HINSTANCE _hInstance) {
         Utils::Alert("Failed to set keyboard cooperative level.");
         return;
     }
-
-
 }
 
 void Input::Update() {
