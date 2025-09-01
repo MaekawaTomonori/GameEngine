@@ -155,6 +155,10 @@ void ModelCommon::CreateSkinningPipeline() const {
         .SetElement({"INDEX", 0, DXGI_FORMAT_R32G32B32A32_SINT, 1, D3D12_APPEND_ALIGNED_ELEMENT, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0})
 	 )
 	.SetBlend(BlendMode::ALPHA)
+    //.SetRasterizer({
+    //    .FillMode = D3D12_FILL_MODE_SOLID,
+    //    .CullMode = D3D12_CULL_MODE_BACK
+    //})
 	.SetShader(
 	    // シェーダー設定 (SKINNING_MODEL用)
 	    std::make_unique<Shader>(L"Skinning")

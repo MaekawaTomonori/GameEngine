@@ -16,7 +16,7 @@ void GltfLoader::LoadModel(const std::string& _name, ResourceRepository* _reposi
 void GltfLoader::LoadGltf(const std::string& _directory, const std::string& _name, const ResourceRepository* _repository) {
     Assimp::Importer importer;
     std::string path = _directory + _name + "/" + _name + ".gltf";
-    const aiScene* scene = importer.ReadFile(path,aiProcess_FlipUVs | aiProcess_Triangulate);
+    const aiScene* scene = importer.ReadFile(path, aiProcess_FlipUVs | aiProcess_Triangulate);
     if (!scene) {
         Utils::Alert("GltfLoader::LoadGltf: Failed to load file: " + path + "\nError: " + importer.GetErrorString());
         Log::Send(Log::Level::ERR, "[GLTF Loader] Failed to load " + path + ": " + importer.GetErrorString());
@@ -201,16 +201,17 @@ void GltfLoader::LoadBones(const aiMesh* _mesh, ModelData& _model) {
         std::string jointName = bone->mName.C_Str();
         JointWeightData& jointWeight = _model.skinCluster[jointName];
 
-        aiMatrix4x4 bindPose = bone->mOffsetMatrix.Inverse();
+        // bone->mOffsetMatrix is already the inverse bind pose matrix
+        aiMatrix4x4 inverseBindPose = bone->mOffsetMatrix;
         aiVector3D scale, translate;
         aiQuaternion rotate;
 
-        bindPose.Decompose(scale, rotate, translate);
+        inverseBindPose.Decompose(scale, rotate, translate);
         jointWeight.inverseBindPose = MathUtils::Matrix::MakeAffineMatrix(
             Vector3{ .x = scale.x, .y = scale.y, .z = scale.z },
             Quaternion{ .x = rotate.x, .y = -rotate.y, .z = -rotate.z, .w = rotate.w },
             Vector3{ .x = -translate.x, .y = translate.y, .z = translate.z }
-        ).Inverse();
+        );
 
         for (uint32_t weightIndex = 0; weightIndex < bone->mNumWeights; ++weightIndex){
             jointWeight.weights.push_back({
