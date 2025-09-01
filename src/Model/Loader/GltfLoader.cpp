@@ -16,7 +16,7 @@ void GltfLoader::LoadModel(const std::string& _name, ResourceRepository* _reposi
 void GltfLoader::LoadGltf(const std::string& _directory, const std::string& _name, const ResourceRepository* _repository) {
     Assimp::Importer importer;
     std::string path = _directory + _name + "/" + _name + ".gltf";
-    const aiScene* scene = importer.ReadFile(path, aiProcess_FlipWindingOrder | aiProcess_FlipUVs | aiProcess_Triangulate);
+    const aiScene* scene = importer.ReadFile(path,aiProcess_FlipUVs | aiProcess_Triangulate);
     if (!scene) {
         Utils::Alert("GltfLoader::LoadGltf: Failed to load file: " + path + "\nError: " + importer.GetErrorString());
         Log::Send(Log::Level::ERR, "[GLTF Loader] Failed to load " + path + ": " + importer.GetErrorString());
