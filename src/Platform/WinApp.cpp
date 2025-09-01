@@ -2,6 +2,7 @@
 
 #include <stdexcept>
 
+#include "Log.hpp"
 #include "include/Utils.hpp"
 
 #pragma comment(lib, "winmm.lib")
@@ -17,8 +18,16 @@ void WinApp::Initialize() {
     }
     hWnd_ = window_->GetWindowHandle();
     if (!hWnd_){
+        Log::Send(Log::Level::ERR, "Failed to get window handle");
         Utils::DisplayLastErr();
         throw std::runtime_error("Failed to get window handle");
+    }
+
+    hInstance_ = window_->GetInstanceHandle();
+    if (!hInstance_){
+        Log::Send(Log::Level::ERR, "Failed to get instance handle");
+        Utils::DisplayLastErr();
+        throw std::runtime_error("Failed to get instance handle");
     }
 }
 
@@ -28,6 +37,10 @@ bool WinApp::IsEnabled() const{
 
 HWND WinApp::GetWindowHandle() const {
     return hWnd_;
+}
+
+HINSTANCE WinApp::GetInstanceHandle() const {
+    return hInstance_;
 }
 
 void WinApp::SetWindowSize(const int width, const int height) const {
