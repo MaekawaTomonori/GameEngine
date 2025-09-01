@@ -76,6 +76,8 @@ public:
     void Update();
     void Draw() const;
 
+    Vector3 GetPosition() const;
+
     Model& SetTranslate(Vector3 _translate);
     Model& SetRotate(Vector3 _rotate);
     Model& SetScale(Vector3 _scale);

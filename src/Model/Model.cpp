@@ -96,7 +96,7 @@ void Model::Update() {
 
     // Joint to Line (only if valid skinning data exists)
     if (data_->skeleton.has_value() && !data_->skinCluster.empty()) {
-        CreateLine();
+        //CreateLine();
     }
 
     // Mesh Update
@@ -127,8 +127,10 @@ void Model::Draw() const {
         commandList_->SetGraphicsRootDescriptorTable(8, tm->GetGPUHandle(environmentTexture_));
     }
     mesh_->Draw();
+}
 
-    DrawLine();
+Vector3 Model::GetPosition() const {
+    return transform_.translate;
 }
 
 Model& Model::SetTranslate(const Vector3 _translate) {
