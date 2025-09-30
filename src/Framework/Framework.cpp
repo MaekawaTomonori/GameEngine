@@ -58,7 +58,7 @@ Framework::Framework() {
     sky_ = Singleton<SkyCommon>::GetInstance();
     sky_->Initialize(dxAdapter_.get(), debugUI_.get());
 
-    camera_ = Singleton<CameraManager>::GetInstance();
+    camera_ = Singleton<CameraController>::GetInstance();
     camera_->Initialize(static_cast<float>(config_->GetWidth()) / static_cast<float>(config_->GetHeight()), debugUI_.get());
 
     light_ = Singleton<LightManager>::GetInstance();

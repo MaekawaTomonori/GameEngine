@@ -10,7 +10,7 @@
 #include "Loader/IModelLoader.hpp"
 #include "Loader/ObjLoader.hpp"
 #include "Math/MathUtils.hpp"
-#include "src/Camera/Manager/CameraManager.hpp"
+#include "src/Camera/Controller/CameraController.hpp"
 #include "src/Texture/TextureManager.hpp"
 
 Model::Model() :
@@ -81,7 +81,7 @@ void Model::Initialize(const std::string& _name) {
 }
 
 void Model::Update() {
-    camera_ = Singleton<CameraManager>::GetInstance()->GetActive();
+    camera_ = Singleton<CameraController>::GetInstance()->GetActive();
 
     Debug();
 
