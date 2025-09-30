@@ -62,7 +62,7 @@ void DebugUI::Process() {
     // Custom menu bar with FPS display
     if (ImGui::BeginMainMenuBar()) {
         ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.85f, 0.85f, 0.85f, 1.0f));
-        ImGui::Text("🎮 Game Engine Debug Interface");
+        ImGui::Text("Game Engine Debug Interface");
         ImGui::PopStyleColor();
         
         ImGui::SameLine(ImGui::GetWindowWidth() - 200);

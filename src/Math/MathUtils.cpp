@@ -186,6 +186,13 @@ float MathUtils::Lerp(const float& a, const float& b, float t) {
     return a + (b - a) * t;
 }
 
+Vector2 MathUtils::Lerp(const Vector2& a, const Vector2& b, float t) {
+    return Vector2{
+        Lerp(a.x, b.x, t),
+        Lerp(a.y, b.y, t)
+    };
+}
+
 Vector3 MathUtils::Lerp(const Vector3& a, const Vector3& b, float t) {
     return Vector3{
         Lerp(a.x, b.x, t),

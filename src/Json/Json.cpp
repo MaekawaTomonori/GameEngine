@@ -10,9 +10,14 @@ void Json::Register(const std::string& name) {
     datas_[name];
 }
 
-void Json::LoadJson(const std::string& _path) {
+void Json::LoadJson(const std::string& _path, std::string _name) {
+    // Use _path as filename if _name is empty
+    if (_name.empty()) {
+        _name = _path;
+    }
+    
     //Open File
-    std::string path = PATH + _path + "/" + _path + ".json";
+    std::string path = PATH + _path + "/" + _name + ".json";
     std::ifstream file;
     file.open(path);
     if (!file.is_open()){
@@ -52,7 +57,40 @@ void Json::LoadJson(const std::string& _path) {
                 } else if (object->size() == 4){
                     Vector4 value = {object->at(0).get<float>(), object->at(1).get<float>(), object->at(2).get<float>(), object->at(3).get<float>()};
                     SetValue(_path, groupKey, key, value);
+                } else {
+                    if (object->at(0).is_number()) {
+                        // Array of floats
+                        std::vector<float> floatArray;
+                        for (const auto& item : *object) {
+                            if (item.is_number()) {
+                                floatArray.push_back(item.get<float>());
+                            }
+                        }
+                        SetValue(_path, groupKey, key, floatArray);
+                    } else if (object->at(0).is_array() && object->at(0).size() == 2){
+                        // Array of Vector2
+                        std::vector<Vector2> vectorArray;
+                        for (const auto& item : *object){
+                            if (item.is_array() && item.size() == 2){
+                                vectorArray.push_back({ item[0].get<float>(), item[1].get<float>() });
+                            }
+                        }
+                        SetValue(_path, groupKey, key, vectorArray);
+                    } else if (object->at(0).is_array() && object->at(0).size() == 3) {
+                        // Array of Vector3
+                        std::vector<Vector3> vectorArray;
+                        for (const auto& item : *object) {
+                            if (item.is_array() && item.size() == 3) {
+                                vectorArray.push_back({item[0].get<float>(), item[1].get<float>(), item[2].get<float>()});
+                            }
+                        }
+                        SetValue(_path, groupKey, key, vectorArray);
+                    } 
+                    SetValue(_path, groupKey, key, object->get<std::string>());
                 }
+            } else if (object->is_string()) {
+                std::string value = object->get<std::string>();
+                SetValue(_path, groupKey, key, value);
             }
         }
     }
@@ -98,10 +136,18 @@ void Json::RemoveGroup(const std::string& _path, const std::string& _group) {
     data->second.erase(group);
 }
 
-bool Json::Load(const std::string& _path) {
+bool Json::Load(const std::string& _path, std::string _name) {
     Register(_path);
 
     Log::Send(Log::Level::INFO, _path + " loading");
+    
+    // If _name is specified, load only that file
+    if (!_name.empty()) {
+        LoadJson(_path, _name);
+        return true;
+    }
+    
+    // If _name is empty, load all JSON files in the directory
     std::filesystem::path dir(PATH + _path + "/");
     if (!exists(dir)){
         return false;
@@ -116,12 +162,12 @@ bool Json::Load(const std::string& _path) {
             continue;
         }
 
-        LoadJson(path.stem().string());
+        LoadJson(_path, path.stem().string());
     }
     return true;
 }
 
-void Json::Save(const std::string& _path) {
+void Json::Save(const std::string& _path, std::string _name) {
     auto group = datas_.find(_path);
     assert(group != datas_.end());
 
@@ -140,13 +186,30 @@ void Json::Save(const std::string& _path) {
                 item[key] = std::get<float>(value);
             } else if (std::holds_alternative<Vector2>(value)){
                 Vector2 v = std::get<Vector2>(value);
-                item[key] = {v.x, v.y};
+                item[key] = { v.x, v.y };
             } else if (std::holds_alternative<Vector3>(value)){
                 Vector3 v = std::get<Vector3>(value);
-                item[key] = {v.x, v.y, v.z};
+                item[key] = { v.x, v.y, v.z };
             } else if (std::holds_alternative<Vector4>(value)){
                 Vector4 v = std::get<Vector4>(value);
-                item[key] = {v.x, v.y, v.z, v.w};
+                item[key] = { v.x, v.y, v.z, v.w };
+            } else if (std::holds_alternative<std::vector<float>>(value)){
+                std::vector<float> v = std::get<std::vector<float>>(value);
+                item[key] = v;
+            } else if (std::holds_alternative<std::vector<Vector2>>(value)){
+                json array = json::array();
+                for (const auto& [x, y] : std::get<std::vector<Vector2>>(value)){
+                    array.push_back({ x, y});
+                }
+                item[key] = array;
+            } else if (std::holds_alternative<std::vector<Vector3>>(value)){
+                json array = json::array();
+                for (const auto& [x, y, z] : std::get<std::vector<Vector3>>(value)) {
+                    array.push_back({x, y, z});
+                }
+                item[key] = array;
+            } else if (std::holds_alternative<std::string>(value)){
+                item[key] = std::get<std::string>(value);
             }
         }
     }
@@ -156,7 +219,9 @@ void Json::Save(const std::string& _path) {
         create_directories(dir);
     }
 
-    std::string path = dir.string() + _path + ".json";
+    if (_name.empty()) _name = _path;
+
+    std::string path = dir.string() + _name + ".json";
     std::ofstream file(path, std::ios::trunc);
 
     if (!file.is_open()){

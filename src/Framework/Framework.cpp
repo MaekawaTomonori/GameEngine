@@ -61,6 +61,9 @@ Framework::Framework() {
     camera_ = Singleton<CameraController>::GetInstance();
     camera_->Initialize(static_cast<float>(config_->GetWidth()) / static_cast<float>(config_->GetHeight()), debugUI_.get());
 
+    cameraDirector_ = Singleton<CameraDirector>::GetInstance();
+    cameraDirector_->Initialize(debugUI_.get());
+
     light_ = Singleton<LightManager>::GetInstance();
     light_->Initialize(dxAdapter_.get(), debugUI_.get());
 

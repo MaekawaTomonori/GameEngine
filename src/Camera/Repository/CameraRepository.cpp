@@ -41,7 +41,8 @@ bool CameraRepository::IsEmpty() const {
 
 std::vector<std::string> CameraRepository::GetNames() const {
     std::vector<std::string> names;
-    for (const auto& [name, camera] : cameras_) {
+    names.reserve(cameras_.size());
+    for (const auto& name : cameras_ | std::views::keys) {
         names.push_back(name);
     }
     return names;

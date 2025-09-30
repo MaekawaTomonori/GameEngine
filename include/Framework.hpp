@@ -6,6 +6,7 @@
 #include "DebugUI.hpp"
 #include "Input.hpp"
 #include "src/Camera/Controller/CameraController.hpp"
+#include "src/Camera/Director/CameraDirector.hpp"
 #include "src/Platform/WinApp.hpp"
 #include "src/Config/Config.hpp"
 #include "src/DirectX/DirectXAdapter.hpp"
@@ -43,8 +44,10 @@ class Framework {
     ModelCommon* model_ = nullptr;
     LineCommon* line_ = nullptr;
     SkyCommon* sky_ = nullptr;
-	CameraController* camera_ = nullptr;
     LightManager* light_ = nullptr;
+
+    CameraController* camera_ = nullptr;
+    CameraDirector* cameraDirector_ = nullptr;
 
 public:
     Framework();

@@ -461,6 +461,7 @@
     </ClInclude>
     <ClInclude Include="src\Camera\Repository\CameraRepository.hpp" />
     <ClInclude Include="src\Camera\Controller\CameraController.hpp" />
+    <ClInclude Include="src\Camera\Director\CameraDirector.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Camera\Camera.cpp">
@@ -648,6 +649,7 @@
     </ClCompile>
     <ClCompile Include="src\Camera\Repository\CameraRepository.cpp" />
     <ClCompile Include="src\Camera\Controller\CameraController.cpp" />
+    <ClCompile Include="src\Camera\Director\CameraDirector.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

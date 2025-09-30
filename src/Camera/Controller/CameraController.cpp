@@ -1,7 +1,6 @@
 #include "CameraController.hpp"
 
 #include "DebugUI.hpp"
-#include "Pattern/Singleton.hpp"
 #include "Utils.hpp"
 #include "imgui.h"
 #include "src/Json/Json.hpp"
