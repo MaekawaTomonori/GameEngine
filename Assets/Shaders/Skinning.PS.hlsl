@@ -1,4 +1,4 @@
-﻿#include "Model.hlsli"
+#include "Model.hlsli"
 
 struct Material{
     float32_t4 color;
@@ -6,6 +6,7 @@ struct Material{
     float32_t shininess;
     float coefficient;
     float2 pad;
+    float4x4 uvTransform;
 };
 ConstantBuffer<Material> gMaterial : register(b0);
 

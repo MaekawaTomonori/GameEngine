@@ -6,16 +6,20 @@
 #include <memory>
 
 #include "Data/MeshData.hpp"
+#include "Math/Matrix.hpp"
 #include "src/DirectX/DirectXAdapter.hpp"
 #include "src/DirectX/Resource/DX12Resource.hpp"
 
 class Mesh {
     struct Material {
-        Vector4 color;
-        uint32_t lighting;
-        float shininess;
-        float coefficient;
-        float pad[2];
+        Vector4 color;           // 16 bytes (aligned)
+        uint32_t lighting;       // 4 bytes
+        float shininess;         // 4 bytes  
+        float coefficient;       // 4 bytes
+        float pad1;              // 4 bytes (padding to 16-byte boundary)
+        Vector2 tilingMul;       // 8 bytes
+        Vector2 pad2;            // 8 bytes (padding to 16-byte boundary)
+        Matrix4x4 uvTransform;   // 64 bytes (aligned)
     };
 
     DirectXAdapter* adapter_ = nullptr;
@@ -51,6 +55,10 @@ class Mesh {
 
     // lighting
 	bool lighting_ = false;
+
+    // tiling aspect ratio lock
+    bool aspectRatioLocked_ = false;
+    float aspectRatio_ = 1.0f;
 
 public:
     void Initialize(DirectXAdapter* _adapter, const std::string &_name, const MeshData& _raw);
