@@ -48,35 +48,40 @@ void Json::LoadJson(const std::string& _path, std::string _name) {
                 float value = object->get<float>();
                 SetValue(_path, groupKey, key,value);
             } else if (object->is_array()){
-                if (object->size() == 2){
-                    Vector2 value = {object->at(0).get<float>(), object->at(1).get<float>()};
-                    SetValue(_path, groupKey, key, value);
-                } else if (object->size() == 3){
-                    Vector3 value = {object->at(0).get<float>(), object->at(1).get<float>(), object->at(2).get<float>()};
-                    SetValue(_path, groupKey, key, value);
-                } else if (object->size() == 4){
-                    Vector4 value = {object->at(0).get<float>(), object->at(1).get<float>(), object->at(2).get<float>(), object->at(3).get<float>()};
-                    SetValue(_path, groupKey, key, value);
-                } else {
-                    if (object->at(0).is_number()) {
+                if (!object->at(0).is_array()){
+                    // Array [v1, v2, ...]
+                    if (object->size() == 2){
+                        Vector2 value = {object->at(0).get<float>(), object->at(1).get<float>()};
+                        SetValue(_path, groupKey, key, value);
+                    } else if (object->size() == 3){
+                        Vector3 value = {object->at(0).get<float>(), object->at(1).get<float>(), object->at(2).get<float>()};
+                        SetValue(_path, groupKey, key, value);
+                    } else if (object->size() == 4){
+                        Vector4 value = {object->at(0).get<float>(), object->at(1).get<float>(), object->at(2).get<float>(), object->at(3).get<float>()};
+                        SetValue(_path, groupKey, key, value);
+                    }
+                }else {
+                    // Array of arrays [[v1,v2,...], [v1,v2,...], ...]
+                    auto array = object->at(0);
+                    if (array.is_number()) {
                         // Array of floats
                         std::vector<float> floatArray;
-                        for (const auto& item : *object) {
+                        for (const auto& item : array) {
                             if (item.is_number()) {
                                 floatArray.push_back(item.get<float>());
                             }
                         }
                         SetValue(_path, groupKey, key, floatArray);
-                    } else if (object->at(0).is_array() && object->at(0).size() == 2){
+                    } else if (array.is_array() && array.size() == 2){
                         // Array of Vector2
                         std::vector<Vector2> vectorArray;
-                        for (const auto& item : *object){
-                            if (item.is_array() && item.size() == 2){
+                        for (const auto& item : *object) {
+                            if (item.is_array() && item.size() == 2) {
                                 vectorArray.push_back({ item[0].get<float>(), item[1].get<float>() });
                             }
                         }
                         SetValue(_path, groupKey, key, vectorArray);
-                    } else if (object->at(0).is_array() && object->at(0).size() == 3) {
+                    } else if (array.is_array() && array.size() == 3) {
                         // Array of Vector3
                         std::vector<Vector3> vectorArray;
                         for (const auto& item : *object) {
@@ -85,8 +90,7 @@ void Json::LoadJson(const std::string& _path, std::string _name) {
                             }
                         }
                         SetValue(_path, groupKey, key, vectorArray);
-                    } 
-                    SetValue(_path, groupKey, key, object->get<std::string>());
+                    }
                 }
             } else if (object->is_string()) {
                 std::string value = object->get<std::string>();

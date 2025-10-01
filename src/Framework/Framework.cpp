@@ -133,6 +133,7 @@ void Framework::Update() const {
     if (!Check())return;
 
     input_->Update();
+    cameraDirector_->Update();
     camera_->Update();
     light_->Update();
     level_->Update();

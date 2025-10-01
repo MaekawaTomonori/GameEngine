@@ -38,9 +38,8 @@ Camera* CameraController::SetActive(const std::string& name) {
         Utils::Alert("CameraController::SetActive: No cameras available.");
         return nullptr;
     }
-    
-    Camera* camera = repository_->Get(name);
-    if (camera) {
+
+    if (Camera* camera = repository_->Get(name)) {
         activeCamera_ = camera;
         return activeCamera_;
     }
@@ -55,8 +54,9 @@ Camera* CameraController::SetActive(const std::string& name) {
 
 void CameraController::Debug() {
     debug_->RegisterCommand("CM", [&](){
-        if (ImGui::Begin("Camera")){
-            ImGui::BeginTabBar("Camera");
+        ImGui::Begin("Camera");
+
+        if (ImGui::BeginTabBar("Camera")){
             if (ImGui::BeginTabItem("General")){
                 if (ImGui::CollapsingHeader("Files")){
                     if (ImGui::Button("Load / Reload")){
@@ -88,10 +88,10 @@ void CameraController::Debug() {
                 }
                 ImGui::EndTabItem();
             }
-
             ImGui::EndTabBar();
-            ImGui::End();
         }
+
+        ImGui::End();
     });
 }
 

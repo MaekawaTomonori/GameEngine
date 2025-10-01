@@ -34,6 +34,15 @@ class CameraDirector {
     Transform originalTransform_{};
     std::string currentWorkKey_;
 
+    // Editor state
+    bool showEditor_ = false;
+    std::string newWorkName_;
+    Work editingWork_;
+    std::string editingWorkKey_;
+    int selectedPointIndex_ = -1;
+    bool isEditingWork_ = false;
+    bool isPreviewingPoint_ = false;
+
 public:
     void Initialize(DebugUI* _debug);
     void Update();
@@ -41,11 +50,25 @@ public:
     void Run(const std::string& _key);
 
 private:
+    void Debug();
     const std::vector<std::string>& GetAvailableWorks() const { return availableWorks_; }
     void LoadWorkList();
     void LoadWork(const std::string& _key);
     void OnComplete();
     Point InterpolatePoint(const Point& start, const Point& end, float t);
+
+    // Editor functions
+    void ShowEditor();
+    void RenderGizmos();
+    void SaveWork(const std::string& _key, const Work& _work);
+    void StartEditingWork(const std::string& _key);
+    void StopEditingWork();
+    void DeleteWork(const std::string& _key);
+    void AddPoint();
+    void RemovePoint(int _index);
+    void CaptureCurrentCameraAsPoint();
+    void PreviewPoint(int _index);
+    void StopPreview();
 }; // class CameraDirector
 
 #endif // CameraDirector_HPP_
