@@ -21,12 +21,18 @@ class CameraDirector {
         float duration;
     };
 
+    struct Item {
+        std::string key;
+        bool loop;
+    };
+
     std::unordered_map<std::string, Work> works_;
-    std::vector<std::string> availableWorks_;
+    std::vector<Item> availableWorks_;
 
     DebugUI* debug_ = nullptr;
 
     bool isProgress_ = false;
+    bool isLoop_ = false;
 
     float timer_ = 0;
 
@@ -51,7 +57,6 @@ public:
 
 private:
     void Debug();
-    const std::vector<std::string>& GetAvailableWorks() const { return availableWorks_; }
     void LoadWorkList();
     void LoadWork(const std::string& _key);
     void OnComplete();

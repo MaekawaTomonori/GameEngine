@@ -2,6 +2,7 @@
 #include "CameraDirector.hpp"
 
 #include <filesystem>
+#include <utility>
 
 #include "Utils.hpp"
 #include "imgui.h"
@@ -38,10 +39,14 @@ void CameraDirector::Update() {
     timer_ += 1.0f / 60.0f; // Assuming 60 FPS
     
     float progress = timer_ / currentWork.duration;
-    
+
     if (progress >= 1.0f) {
-        OnComplete();
-        return;
+        if (isLoop_) {
+            timer_ = 0.0f; // Reset timer for loop
+        } else {
+            OnComplete();
+            return;
+        }
     }
     
     // Calculate which segment we're in
@@ -71,22 +76,81 @@ void CameraDirector::Debug() {
     debug_->RegisterCommand("CameraDirector", [this]() {
         ImGui::Begin("CameraDirector");
 
-        ImGui::Checkbox("Show Editor", &showEditor_);
-
-        ImGui::Separator();
-
+        // Status section
         ImGui::Text("Status: %s", isProgress_ ? "Playing" : "Idle");
         if (isProgress_) {
             ImGui::Text("Current Work: %s", currentWorkKey_.c_str());
-            ImGui::Text("Timer: %.2f", timer_);
+            ImGui::Text("Timer: %.2f / %.2f", timer_, works_[currentWorkKey_].duration);
+            ImGui::ProgressBar(timer_ / works_[currentWorkKey_].duration);
         }
 
         ImGui::Separator();
 
-        ImGui::Text("Available Works: %zu", availableWorks_.size());
-        if (ImGui::Button("Refresh Work List")) {
-            LoadWorkList();
+        // Available works section
+        if (ImGui::CollapsingHeader("Available Works", ImGuiTreeNodeFlags_DefaultOpen)) {
+            ImGui::Text("Count: %zu", availableWorks_.size());
+
+            if (isProgress_ && isLoop_) {
+                ImGui::SameLine();
+                ImGui::TextColored(ImVec4(0.2f, 0.7f, 0.2f, 1.0f), "[Looping]");
+            }
+
+            if (ImGui::Button("Refresh")) {
+                LoadWorkList();
+            }
+
+            ImGui::Separator();
+
+            for (auto& item : availableWorks_) {
+                ImGui::PushID(item.key.c_str());
+
+                bool isPlaying = (isProgress_ && currentWorkKey_ == item.key);
+
+                // Work name
+                if (isPlaying) {
+                    ImGui::TextColored(ImVec4(0.7f, 0.2f, 0.2f, 1.0f), "%s", item.key.c_str());
+                } else {
+                    ImGui::Text("%s", item.key.c_str());
+                }
+
+                ImGui::SameLine();
+
+                // Play button
+                if (ImGui::Button("Play")) {
+                    Run(item.key);
+                }
+
+                ImGui::SameLine();
+
+                // Loop checkbox
+                bool previousLoop = item.loop;
+                if (ImGui::Checkbox("Loop", &item.loop)) {
+                    // If currently playing this work and loop was unchecked
+                    if (isPlaying && previousLoop && !item.loop) {
+                        isLoop_ = false;
+                    }
+                    // If currently playing this work and loop was checked
+                    else if (isPlaying && !previousLoop && item.loop) {
+                        isLoop_ = true;
+                    }
+                }
+
+                ImGui::PopID();
+            }
         }
+
+        ImGui::Separator();
+
+        // Editor toggle
+        if (ImGui::Button(showEditor_ ? "Close Editor" : "Open Editor")) {
+            showEditor_ = !showEditor_;
+
+            // Stop playback when opening editor
+            if (showEditor_ && isProgress_) {
+                OnComplete();
+            }
+        }
+
         ImGui::End();
     });
 }
@@ -98,19 +162,21 @@ void CameraDirector::Load(const std::string& _key) {
 void CameraDirector::Run(const std::string& _key) {
     if (isProgress_ || isEditingWork_) return;
 
-    for (const auto& work : availableWorks_) {
-        if (Utils::EqualsIgnoreCase(_key, work)){
-            LoadWork(work);
+    for (const auto& item : availableWorks_) {
+        if (Utils::EqualsIgnoreCase(_key, item.key)){
+            LoadWork(item.key);
+            isLoop_ = item.loop;
+            break;
         }
     }
-    
+
     if (!works_.contains(_key)) return;
 
     isProgress_ = true;
     timer_ = 0;
     currentWorkKey_ = _key;
     active_ = Singleton<CameraController>::GetInstance()->GetActive();
-    
+
     if (active_) {
         originalTransform_ = active_->transform_;
     }
@@ -119,18 +185,21 @@ void CameraDirector::Run(const std::string& _key) {
 void CameraDirector::LoadWorkList() {
     availableWorks_.clear();
     works_.clear();
-    
+
     const std::string cameraworkDir = "Assets/Data/Camerawork/";
-    
+
     if (!std::filesystem::exists(cameraworkDir)) {
         return;
     }
-    
+
     // Scan directory for JSON files
     for (const auto& entry : std::filesystem::directory_iterator(cameraworkDir)) {
         if (entry.is_regular_file() && entry.path().extension() == ".json") {
             std::string filename = entry.path().stem().string();
-            availableWorks_.push_back(filename);
+            Item item;
+            item.key = filename;
+            item.loop = false;
+            availableWorks_.push_back(item);
         }
     }
 }
@@ -179,8 +248,9 @@ void CameraDirector::OnComplete() {
     if (active_) {
         active_->transform_ = originalTransform_;
     }
-    
+
     isProgress_ = false;
+    isLoop_ = false;
     timer_ = 0;
     currentWorkKey_.clear();
     active_ = nullptr;
@@ -200,32 +270,33 @@ void CameraDirector::ShowEditor() {
         ImGui::Begin("Camerawork Editor");
         // Work list section
         if (ImGui::CollapsingHeader("Available Works", ImGuiTreeNodeFlags_DefaultOpen)) {
-            for (const auto& workName : availableWorks_) {
-                ImGui::PushID(workName.c_str());
+            for (const auto& item : availableWorks_) {
+                ImGui::PushID(item.key.c_str());
+
+                bool isCurrentlyEditing = (isEditingWork_ && editingWorkKey_ == item.key);
 
                 if (ImGui::Button("Edit")) {
                     if (!isEditingWork_) {
-                        LoadWork(workName);
-                        if (works_.contains(workName)) {
-                            StartEditingWork(workName);
+                        LoadWork(item.key);
+                        if (works_.contains(item.key)) {
+                            StartEditingWork(item.key);
                         }
                     }
                 }
 
                 ImGui::SameLine();
-                if (ImGui::Button("Play")) {
-                    Run(workName);
-                }
-
-                ImGui::SameLine();
                 if (ImGui::Button("Delete")) {
-                    if (!isEditingWork_ || editingWorkKey_ != workName) {
-                        DeleteWork(workName);
+                    if (!isCurrentlyEditing) {
+                        DeleteWork(item.key);
                     }
                 }
 
                 ImGui::SameLine();
-                ImGui::Text("%s", workName.c_str());
+                if (isCurrentlyEditing) {
+                    ImGui::TextColored(ImVec4(0.2f, 0.7f, 0.2f, 1.0f), "%s [Editing]", item.key.c_str());
+                } else {
+                    ImGui::Text("%s", item.key.c_str());
+                }
 
                 ImGui::PopID();
             }
@@ -282,7 +353,7 @@ void CameraDirector::ShowEditor() {
             for (size_t i = 0; i < editingWork_.points.size(); ++i) {
                 ImGui::PushID(static_cast<int>(i));
 
-                bool isSelected = (selectedPointIndex_ == static_cast<int>(i));
+                bool isSelected = (std::cmp_equal(selectedPointIndex_, i));
                 if (ImGui::Selectable(("Point " + std::to_string(i)).c_str(), isSelected)) {
                     selectedPointIndex_ = static_cast<int>(i);
                 }
@@ -304,8 +375,7 @@ void CameraDirector::ShowEditor() {
 
                     ImGui::SameLine();
                     if (ImGui::Button("Update from Camera")) {
-                        Camera* camera = Singleton<CameraController>::GetInstance()->GetActive();
-                        if (camera) {
+                        if (Camera* camera = Singleton<CameraController>::GetInstance()->GetActive()) {
                             point.position = camera->transform_.translate;
                             point.rotation = Vector2(std::get<Vector3>(camera->transform_.rotate).y, std::get<Vector3>(camera->transform_.rotate).x);
                         }
