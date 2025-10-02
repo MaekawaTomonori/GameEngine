@@ -14,10 +14,6 @@ class Vignette : public IPostEffect{
     Material* material_ = nullptr;
 
 public:
-    Vignette(DirectXAdapter* _adapter, SRVManager* _srv) :
-        IPostEffect(_adapter, _srv) {
-    }
-
     void Initialize() override;
     void Debug() override;
 

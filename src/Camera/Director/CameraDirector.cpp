@@ -76,12 +76,14 @@ void CameraDirector::Debug() {
     debug_->RegisterCommand("CameraDirector", [this]() {
         ImGui::Begin("CameraDirector");
 
-        // Status section
-        ImGui::Text("Status: %s", isProgress_ ? "Playing" : "Idle");
-        if (isProgress_) {
-            ImGui::Text("Current Work: %s", currentWorkKey_.c_str());
-            ImGui::Text("Timer: %.2f / %.2f", timer_, works_[currentWorkKey_].duration);
-            ImGui::ProgressBar(timer_ / works_[currentWorkKey_].duration);
+        // Editor toggle at the top
+        if (ImGui::Button(showEditor_ ? "Close Editor" : "Open Editor")) {
+            showEditor_ = !showEditor_;
+
+            // Stop playback when opening editor
+            if (showEditor_ && isProgress_) {
+                OnComplete();
+            }
         }
 
         ImGui::Separator();
@@ -90,11 +92,7 @@ void CameraDirector::Debug() {
         if (ImGui::CollapsingHeader("Available Works", ImGuiTreeNodeFlags_DefaultOpen)) {
             ImGui::Text("Count: %zu", availableWorks_.size());
 
-            if (isProgress_ && isLoop_) {
-                ImGui::SameLine();
-                ImGui::TextColored(ImVec4(0.2f, 0.7f, 0.2f, 1.0f), "[Looping]");
-            }
-
+            ImGui::SameLine();
             if (ImGui::Button("Refresh")) {
                 LoadWorkList();
             }
@@ -106,32 +104,37 @@ void CameraDirector::Debug() {
 
                 bool isPlaying = (isProgress_ && currentWorkKey_ == item.key);
 
-                // Work name
+                // Work name - color changes during playback
                 if (isPlaying) {
-                    ImGui::TextColored(ImVec4(0.7f, 0.2f, 0.2f, 1.0f), "%s", item.key.c_str());
+                    ImGui::TextColored(ImVec4(0.2f, 0.8f, 0.2f, 1.0f), "%s", item.key.c_str());
                 } else {
                     ImGui::Text("%s", item.key.c_str());
                 }
 
                 ImGui::SameLine();
 
-                // Play button
-                if (ImGui::Button("Play")) {
-                    Run(item.key);
+                // Play/Stop button (toggles based on playing state)
+                if (isPlaying) {
+                    // Stop button (red text)
+                    ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.0f, 0.3f, 0.3f, 1.0f));
+                    if (ImGui::Button("Stop")) {
+                        Stop();
+                    }
+                    ImGui::PopStyleColor();
+                } else {
+                    // Play button
+                    if (ImGui::Button("Play")) {
+                        Run(item.key, item.loop);
+                    }
                 }
 
                 ImGui::SameLine();
 
-                // Loop checkbox
-                bool previousLoop = item.loop;
+                // Loop checkbox (always in same position)
                 if (ImGui::Checkbox("Loop", &item.loop)) {
-                    // If currently playing this work and loop was unchecked
-                    if (isPlaying && previousLoop && !item.loop) {
-                        isLoop_ = false;
-                    }
-                    // If currently playing this work and loop was checked
-                    else if (isPlaying && !previousLoop && item.loop) {
-                        isLoop_ = true;
+                    // If currently playing this work, update the active loop state
+                    if (isPlaying) {
+                        isLoop_ = item.loop;
                     }
                 }
 
@@ -141,14 +144,27 @@ void CameraDirector::Debug() {
 
         ImGui::Separator();
 
-        // Editor toggle
-        if (ImGui::Button(showEditor_ ? "Close Editor" : "Open Editor")) {
-            showEditor_ = !showEditor_;
+        // Status section at the bottom
+        ImGui::Text("Status: %s", isProgress_ ? "Playing" : "Idle");
 
-            // Stop playback when opening editor
-            if (showEditor_ && isProgress_) {
-                OnComplete();
+        // Details section (collapsible)
+        static bool showDetails = false;
+        if (ImGui::Button(showDetails ? "Hide Details" : "Show Details")) {
+            showDetails = !showDetails;
+        }
+
+        if (showDetails && isProgress_) {
+            ImGui::Indent();
+            ImGui::Text("Current Work: %s", currentWorkKey_.c_str());
+            ImGui::Text("Timer: %.2f / %.2f", timer_, works_[currentWorkKey_].duration);
+            ImGui::Text("Loop: %s", isLoop_ ? "ON" : "OFF");
+            ImGui::ProgressBar(timer_ / works_[currentWorkKey_].duration);
+
+            // Stop button in details
+            if (ImGui::Button("Stop Playback")) {
+                Stop();
             }
+            ImGui::Unindent();
         }
 
         ImGui::End();
@@ -159,18 +175,31 @@ void CameraDirector::Load(const std::string& _key) {
     LoadWork(_key);
 }
 
-void CameraDirector::Run(const std::string& _key) {
+void CameraDirector::Run(const std::string& _key, bool _loop) {
     if (isProgress_ || isEditingWork_) return;
 
-    for (const auto& item : availableWorks_) {
-        if (Utils::EqualsIgnoreCase(_key, item.key)){
-            LoadWork(item.key);
-            isLoop_ = item.loop;
-            break;
+    // Load work if not already loaded
+    if (!works_.contains(_key)) {
+        for (const auto& item : availableWorks_) {
+            if (Utils::EqualsIgnoreCase(_key, item.key)){
+                LoadWork(item.key);
+                break;
+            }
         }
     }
 
     if (!works_.contains(_key)) return;
+
+    // Set loop flag
+    isLoop_ = _loop;
+
+    // Update availableWorks_ item loop state to sync with UI
+    for (auto& item : availableWorks_) {
+        if (Utils::EqualsIgnoreCase(_key, item.key)){
+            item.loop = _loop;
+            break;
+        }
+    }
 
     isProgress_ = true;
     timer_ = 0;
@@ -180,6 +209,11 @@ void CameraDirector::Run(const std::string& _key) {
     if (active_) {
         originalTransform_ = active_->transform_;
     }
+}
+
+void CameraDirector::Stop() {
+    if (!isProgress_) return;
+    OnComplete();
 }
 
 void CameraDirector::LoadWorkList() {

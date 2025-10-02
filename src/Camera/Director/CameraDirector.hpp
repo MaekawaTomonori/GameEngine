@@ -53,7 +53,10 @@ public:
     void Initialize(DebugUI* _debug);
     void Update();
     void Load(const std::string& _key);
-    void Run(const std::string& _key);
+    void Run(const std::string& _key, bool _loop = false);
+    void Stop();
+    bool IsPlaying() const { return isProgress_; }
+    const std::string& GetCurrentWork() const { return currentWorkKey_; }
 
 private:
     void Debug();

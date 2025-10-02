@@ -67,10 +67,6 @@ Framework::Framework() {
     light_ = Singleton<LightManager>::GetInstance();
     light_->Initialize(dxAdapter_.get(), debugUI_.get());
 
-    postProcessor_->Add(std::make_unique<Grayscale>(dxAdapter_.get(), srv_.get()), "Grayscale");
-    postProcessor_->Add(std::make_unique<Vignette>(dxAdapter_.get(), srv_.get()), "Vignette");
-    postProcessor_->Add(std::make_unique<BoxBlur>(dxAdapter_.get(), srv_.get()), "BoxBlur");
-
     //level_->Initialize("Level");
 }
 
@@ -120,6 +116,7 @@ void Framework::Initialize() {
     if (!game_) return;
     config_ = &game_->GetCurrentConfig();
     scene_ = game_->GetSceneSwitcher();
+    game_->SetPostProcessor(postProcessor_.get());
     windows_->SetTitle(config_->GetTitle());
     Log::Send(Log::Level::INFO, "Game Initialized");
 }

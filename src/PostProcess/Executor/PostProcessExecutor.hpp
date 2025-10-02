@@ -47,6 +47,8 @@ public:
     void Execute();
     void Draw() const;
 
+    void SetActive(const std::string& _name, bool _enable);
+
     void Debug();
 
 private:
