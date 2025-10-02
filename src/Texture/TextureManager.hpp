@@ -25,6 +25,10 @@ private: //Variables
     DirectXAdapter* adapter_ = nullptr;
     SRVManager* srv_ = nullptr;
 
+    // テクスチャアップロード専用のコマンドオブジェクト
+    Microsoft::WRL::ComPtr<ID3D12CommandAllocator> uploadCommandAllocator_;
+    Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> uploadCommandList_;
+
     std::mutex mutex_;
 
     std::string folderPath_ = "Assets/Resources/";

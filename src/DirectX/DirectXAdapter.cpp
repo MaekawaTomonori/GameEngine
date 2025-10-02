@@ -514,14 +514,9 @@ bool DirectXAdapter::CreateLimiter() {
 }
 
 void DirectXAdapter::Wait() {
-    ++fenceValue_;
-    cQueue_->Signal(fence_.Get(), fenceValue_);
-
-    if (fence_->GetCompletedValue() < fenceValue_){
-        fence_->SetEventOnCompletion(fenceValue_, fenceEvent_);
-        WaitForSingleObject(fenceEvent_, INFINITE);
-    }
-
+    uint64_t currentFenceValue = GetNextFenceValue();
+    cQueue_->Signal(fence_.Get(), currentFenceValue);
+    WaitForFenceValue(currentFenceValue);
     fpsLimiter_->WaitForNextFrame();
 }
 
@@ -563,4 +558,17 @@ HWND DirectXAdapter::GetWindowHandle() const {
 
 D3D12_CPU_DESCRIPTOR_HANDLE DirectXAdapter::GetDSVHandle() const {
     return dsvHandle_;
+}
+
+uint64_t DirectXAdapter::GetNextFenceValue() {
+    return ++fenceValue_;
+}
+
+void DirectXAdapter::WaitForFenceValue(uint64_t fenceValue) {
+    if (fence_->GetCompletedValue() < fenceValue) {
+        HANDLE fenceEvent = CreateEvent(nullptr, false, false, nullptr);
+        fence_->SetEventOnCompletion(fenceValue, fenceEvent);
+        WaitForSingleObject(fenceEvent, INFINITE);
+        CloseHandle(fenceEvent);
+    }
 }
