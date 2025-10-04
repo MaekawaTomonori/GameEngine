@@ -69,6 +69,9 @@ public:
     void SetVBV(D3D12_VERTEX_BUFFER_VIEW _vbv);
 
     MeshData GetData() const;
+
+    // Texture management
+    void SetTexture(const std::string& _texturePath);
 }; // class Mesh
 
 #endif // Mesh_HPP_

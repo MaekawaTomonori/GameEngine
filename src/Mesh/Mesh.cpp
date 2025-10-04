@@ -154,3 +154,11 @@ void Mesh::SetVBV(const D3D12_VERTEX_BUFFER_VIEW _vbv) {
 MeshData Mesh::GetData() const {
     return data_;
 }
+
+void Mesh::SetTexture(const std::string& _texturePath) {
+    // Load the new texture
+    Singleton<TextureManager>::GetInstance()->Load(_texturePath);
+
+    // Update the current texture path
+    texture_ = _texturePath;
+}
