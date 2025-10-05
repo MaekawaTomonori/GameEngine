@@ -33,7 +33,7 @@ class PostProcessExecutor {
 
     std::unique_ptr<PipelineStateObject> pso_;
 
-    Vector4 clearColor_{ 0.2f, 0.2f, 0.2f, .0f };
+    Vector4 clearColor_{ 0.2f, 0.2f, 0.2f, 1.0f };
     uint32_t srvIndex_ = 0;
 
     std::unique_ptr<DX12Resource> tempBuffer_;

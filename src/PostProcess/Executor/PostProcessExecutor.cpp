@@ -52,7 +52,7 @@ void PostProcessExecutor::Initialize(DirectXAdapter* _adapter, SRVManager* _srv,
                 .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL
             })
     )
-    .SetBlend(BlendMode::ALPHA)
+    .SetBlend(BlendMode::NONE)
     .SetShader(std::make_unique<Shader>(L"CpyImg"))
     .SetTopologyType(D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE)
     .Create();

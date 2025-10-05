@@ -6,7 +6,7 @@
 
 class IPostEffect {
 protected:
-    const Vector4 CLEAR_COLOR = { 0.2f, 0.2f, 0.2f, .0f };
+    const Vector4 CLEAR_COLOR = { 0.2f, 0.2f, 0.2f, 1.0f };
 
     DirectXAdapter* adapter_ = nullptr;
     SRVManager* srv_ = nullptr;
