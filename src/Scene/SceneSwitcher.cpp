@@ -1,5 +1,8 @@
 #include "SceneSwitcher.hpp"
 
+#include "Pattern/Singleton.hpp"
+#include "src/Camera/Director/CameraDirector.hpp"
+
 void SceneSwitcher::Update() {
     // Scene Changer
     //if (changer_->InProgress()){
@@ -21,6 +24,8 @@ void SceneSwitcher::Update() {
         scene_->Initialize();
         scene_->Update();
 
+        Singleton<CameraDirector>::GetInstance()->Stop();
+        
         //changer_->Awake(scene_->GetEntryEffect(), ISceneEffect::State::In);
     }
 
