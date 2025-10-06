@@ -124,7 +124,7 @@ void PostProcessExecutor::Draw() const {
     // PSO設定
     pso_->DrawCall();
 
-#ifdef _DEBUG
+//#ifdef _DEBUG
 
     //debugUI_->RegisterCommand("SceneRendering", [&]() {
     //    ImGui::Begin("Scene");
@@ -144,7 +144,7 @@ void PostProcessExecutor::Draw() const {
 
     // フルスクリーンクワッドを三角形で描画
     adapter_->GetCommandList()->DrawInstanced(3, 1, 0, 0);
-#endif
+//#endif
 }
 
 void PostProcessExecutor::SetActive(const std::string& _name, bool _enable) {
