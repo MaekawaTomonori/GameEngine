@@ -9,8 +9,10 @@
 #include "imgui_internal.h"
 #include "imgui_impl_dx12.h"
 #include "imgui_impl_win32.h"
+#include "imnodes.h"
 
 DebugUI::~DebugUI() {
+    ImNodes::DestroyContext();
     ImGui_ImplDX12_Shutdown();
     ImGui_ImplWin32_Shutdown();
     ImGui::DestroyContext();
@@ -27,6 +29,7 @@ void DebugUI::Initialize(const DirectXAdapter *dx) {
         return;
     }
     ImGui::CreateContext();
+    ImNodes::CreateContext();
     SetupModernStyle();
 
     ImGui_ImplDX12_Init(

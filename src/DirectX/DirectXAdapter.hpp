@@ -126,7 +126,7 @@ public: //Accessor
 
     // Fence値管理のためのメソッド
     uint64_t GetNextFenceValue();
-    void WaitForFenceValue(uint64_t fenceValue);
+    void WaitForFenceValue(uint64_t _fenceValue) const;
 }; // class DirectXAdapter
 
 #endif // DirectXAdaptor_HPP_

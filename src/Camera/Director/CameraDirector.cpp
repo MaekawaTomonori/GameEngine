@@ -2,16 +2,19 @@
 #include "CameraDirector.hpp"
 
 #include <filesystem>
+#include <fstream>
 #include <utility>
+#include <algorithm>
 
 #include "Utils.hpp"
 #include "imgui.h"
 #include "ImGuizmo.h"
+#include "imnodes.h"
 #include "Math/MathUtils.hpp"
 #include "Pattern/Singleton.hpp"
 #include "src/Camera/Camera.hpp"
 #include "src/Camera/Controller/CameraController.hpp"
-#include "src/Json/Json.hpp"
+#include "vendor/json/json.hpp"
 
 void CameraDirector::Initialize(DebugUI* _debug) {
     debug_ = _debug;
@@ -34,10 +37,9 @@ void CameraDirector::Update() {
 
     if (!isProgress_ || !active_) return;
 
-
     const Work& currentWork = works_[currentWorkKey_];
     timer_ += 1.0f / 60.0f; // Assuming 60 FPS
-    
+
     float progress = timer_ / currentWork.duration;
 
     if (progress >= 1.0f) {
@@ -48,23 +50,32 @@ void CameraDirector::Update() {
             return;
         }
     }
-    
-    // Calculate which segment we're in
-    if (currentWork.points.size() < 2) return;
-    
-    float segmentDuration = currentWork.duration / (currentWork.points.size() - 1);
+
+    // Check if order array is valid
+    if (currentWork.order.size() < 2) return;
+
+    // Find points by name from order array
+    float segmentDuration = currentWork.duration / (currentWork.order.size() - 1);
     int segmentIndex = static_cast<int>(timer_ / segmentDuration);
-    segmentIndex = std::min(segmentIndex, static_cast<int>(currentWork.points.size() - 2));
-    
+    segmentIndex = std::min(segmentIndex, static_cast<int>(currentWork.order.size() - 2));
+
     float segmentProgress = (timer_ - segmentIndex * segmentDuration) / segmentDuration;
     segmentProgress = std::clamp(segmentProgress, 0.0f, 1.0f);
-    
+
+    // Find start and end points by name
+    const std::string& startName = currentWork.order[segmentIndex];
+    const std::string& endName = currentWork.order[segmentIndex + 1];
+
+    auto startIt = std::find_if(currentWork.points.begin(), currentWork.points.end(),
+        [&startName](const Point& p) { return p.name == startName; });
+    auto endIt = std::find_if(currentWork.points.begin(), currentWork.points.end(),
+        [&endName](const Point& p) { return p.name == endName; });
+
+    if (startIt == currentWork.points.end() || endIt == currentWork.points.end()) return;
+
     // Interpolate between current and next point
-    const Point& startPoint = currentWork.points[segmentIndex];
-    const Point& endPoint = currentWork.points[segmentIndex + 1];
-    
-    Point interpolatedPoint = InterpolatePoint(startPoint, endPoint, segmentProgress);
-    
+    Point interpolatedPoint = InterpolatePoint(*startIt, *endIt, segmentProgress);
+
     // Apply to camera
     active_->transform_.translate = interpolatedPoint.position;
     active_->transform_.rotate = Vector3(interpolatedPoint.rotation.y, interpolatedPoint.rotation.x, 0.0f);
@@ -239,43 +250,61 @@ void CameraDirector::LoadWorkList() {
 }
 
 void CameraDirector::LoadWork(const std::string& _key) {
-    Json* json = Singleton<Json>::GetInstance();
-    if (!json->Load("Camerawork", _key)) return;
-    
-    auto groups = json->GetGroups("Camerawork");
-    if (!groups.empty()) {
-        const auto& workData = groups.begin()->second;
-        Work work{};
-        
-        // Extract duration
-        if (workData.contains("duration")) {
-            work.duration = std::get<float>(workData.at("duration"));
-        }
-        
-        // Extract arrays
-        std::vector<Vector3> positions;
-        std::vector<Vector2> rotations;
+    std::string path = "Assets/Data/Camerawork/" + _key + ".json";
+    std::ifstream file(path);
+    if (!file.is_open()) return;
 
-        std::string key = "positions";
-        if (workData.contains(key)) {
-            positions = std::get<std::vector<Vector3>>(workData.at(key));
-        }
+    nlohmann::json root;
+    file >> root;
+    file.close();
 
-        key = "rotations";
-        if (workData.contains(key)){
-            rotations = std::get<std::vector<Vector2>>(workData.at(key));
-        }
-        
-        // Create points from arrays
-        for (size_t i = 0; i < positions.size(); ++i) {
+    if (!root.contains("Camerawork")) return;
+    auto& cameraworkData = root["Camerawork"];
+    if (!cameraworkData.contains(_key)) return;
+
+    auto& workData = cameraworkData[_key];
+    Work work{};
+
+    // Extract duration
+    if (workData.contains("duration")) {
+        work.duration = workData["duration"].get<float>();
+    }
+
+    // Extract order array
+    if (workData.contains("order")) {
+        work.order = workData["order"].get<std::vector<std::string>>();
+    }
+
+    // Extract points array
+    if (workData.contains("points")) {
+        for (const auto& pointData : workData["points"]) {
             Point point;
-            point.position = positions[i];
-            point.rotation = (i < rotations.size()) ? rotations[i] : Vector2{0.0f, 0.0f};
+
+            if (pointData.contains("name")) {
+                point.name = pointData["name"].get<std::string>();
+            }
+
+            if (pointData.contains("position") && pointData["position"].is_array() && pointData["position"].size() == 3) {
+                point.position = Vector3(
+                    pointData["position"][0].get<float>(),
+                    pointData["position"][1].get<float>(),
+                    pointData["position"][2].get<float>()
+                );
+            }
+
+            if (pointData.contains("rotation") && pointData["rotation"].is_array() && pointData["rotation"].size() == 3) {
+                // Rotation format: [yaw, pitch, roll] - we use x=yaw, y=pitch
+                point.rotation = Vector2(
+                    pointData["rotation"][0].get<float>(),
+                    pointData["rotation"][1].get<float>()
+                );
+            }
+
             work.points.push_back(point);
         }
-        
-        works_[_key] = work;
     }
+
+    works_[_key] = work;
 }
 
 void CameraDirector::OnComplete() {
@@ -343,6 +372,8 @@ void CameraDirector::ShowEditor() {
             static char nameBuffer[256] = "";
             ImGui::InputText("Name", nameBuffer, sizeof(nameBuffer));
 
+            ImGui::SameLine();
+
             if (ImGui::Button("Create")) {
                 if (strlen(nameBuffer) > 0 && !isEditingWork_) {
                     std::string newName = nameBuffer;
@@ -358,37 +389,37 @@ void CameraDirector::ShowEditor() {
         if (!editingWorkKey_.empty() && isEditingWork_) {
             ImGui::Text("Editing: %s", editingWorkKey_.c_str());
 
-            ImGui::DragFloat("Duration", &editingWork_.duration, 0.1f, 0.1f, 60.0f);
-
-            if (ImGui::Button("Capture Current Camera")) {
-                CaptureCurrentCameraAsPoint();
-            }
-
-            ImGui::SameLine();
-            if (ImGui::Button("Add Empty Point")) {
-                AddPoint();
-            }
-
             ImGui::SameLine();
             if (ImGui::Button("Save")) {
                 SaveWork(editingWorkKey_, editingWork_);
             }
-
             ImGui::SameLine();
+
             if (ImGui::Button("Cancel")) {
                 StopEditingWork();
             }
 
+
             ImGui::Separator();
+
+            ImGui::DragFloat("Duration", &editingWork_.duration, 0.1f, 0.1f, 60.0f);
 
             // Points list
             ImGui::Text("Points (%zu)", editingWork_.points.size());
+            ImGui::SameLine();
+            if (ImGui::Button("Add Empty Point")) {
+                AddPoint();
+            }
+            ImGui::SameLine();
+            if (ImGui::Button("Capture Current Camera")) {
+                CaptureCurrentCameraAsPoint();
+            }
 
             for (size_t i = 0; i < editingWork_.points.size(); ++i) {
                 ImGui::PushID(static_cast<int>(i));
 
                 bool isSelected = (std::cmp_equal(selectedPointIndex_, i));
-                if (ImGui::Selectable(("Point " + std::to_string(i)).c_str(), isSelected)) {
+                if (ImGui::Selectable(editingWork_.points[i].name.c_str(), isSelected)) {
                     selectedPointIndex_ = static_cast<int>(i);
                 }
 
@@ -396,6 +427,14 @@ void CameraDirector::ShowEditor() {
                     ImGui::Indent();
 
                     Point& point = editingWork_.points[i];
+
+                    // Point name input
+                    char nameBuffer[256];
+                    strncpy_s(nameBuffer, point.name.c_str(), sizeof(nameBuffer) - 1);
+                    nameBuffer[sizeof(nameBuffer) - 1] = '\0';
+                    if (ImGui::InputText("Name", nameBuffer, sizeof(nameBuffer))) {
+                        point.name = nameBuffer;
+                    }
 
                     if (!isPreviewingPoint_) {
                         if (ImGui::Button("Preview")) {
@@ -428,84 +467,175 @@ void CameraDirector::ShowEditor() {
 
                 ImGui::PopID();
             }
+
+            ImGui::Separator();
+
+            // Order Node Editor
+            if (ImGui::CollapsingHeader("Order Node Editor", ImGuiTreeNodeFlags_DefaultOpen)) {
+                ImGui::Text("Connect points to define order:");
+                ImGui::Text("Points: %zu, Order: %zu", editingWork_.points.size(), editingWork_.order.size());
+
+                // Safety check
+                if (editingWork_.points.empty()) {
+                    ImGui::TextColored(ImVec4(1, 0, 0, 1), "Add points first!");
+                } else {
+                    ImNodes::BeginNodeEditor();
+
+                // Draw nodes for each point
+                for (size_t i = 0; i < editingWork_.points.size(); ++i) {
+                    int nodeId = static_cast<int>(i);
+                    ImNodes::BeginNode(nodeId);
+
+                    ImNodes::BeginNodeTitleBar();
+                    ImGui::TextUnformatted(editingWork_.points[i].name.c_str());
+                    ImNodes::EndNodeTitleBar();
+
+                    // Output attribute (connects to next point)
+                    ImNodes::BeginOutputAttribute(nodeId * 2);
+                    ImGui::Text("Out");
+                    ImNodes::EndOutputAttribute();
+
+                    // Input attribute (receives connection from previous point)
+                    ImNodes::BeginInputAttribute(nodeId * 2 + 1);
+                    ImGui::Text("In");
+                    ImNodes::EndInputAttribute();
+
+                    ImNodes::EndNode();
+                }
+
+                // Draw links
+                if (editingWork_.order.size() > 1) {
+                    for (size_t i = 0; i < editingWork_.order.size() - 1; ++i) {
+                        // Find indices
+                        auto currentIt = std::find_if(editingWork_.points.begin(), editingWork_.points.end(),
+                            [&](const Point& p) { return p.name == editingWork_.order[i]; });
+                        auto nextIt = std::find_if(editingWork_.points.begin(), editingWork_.points.end(),
+                            [&](const Point& p) { return p.name == editingWork_.order[i + 1]; });
+
+                        if (currentIt != editingWork_.points.end() && nextIt != editingWork_.points.end()) {
+                            int currentIdx = static_cast<int>(std::distance(editingWork_.points.begin(), currentIt));
+                            int nextIdx = static_cast<int>(std::distance(editingWork_.points.begin(), nextIt));
+
+                            int linkId = static_cast<int>(i);
+                            ImNodes::Link(linkId, currentIdx * 2, nextIdx * 2 + 1);
+                        }
+                    }
+                }
+
+                ImNodes::EndNodeEditor();
+
+                // Handle new link creation
+                int startAttr, endAttr;
+                if (ImNodes::IsLinkCreated(&startAttr, &endAttr)) {
+                    int startNode = startAttr / 2;
+                    int endNode = (endAttr - 1) / 2;
+
+                    if (startNode >= 0 && startNode < static_cast<int>(editingWork_.points.size()) &&
+                        endNode >= 0 && endNode < static_cast<int>(editingWork_.points.size()) &&
+                        startNode != endNode) {
+
+                        std::string startName = editingWork_.points[startNode].name;
+                        std::string endName = editingWork_.points[endNode].name;
+
+                        // Rebuild order array from all links
+                        // This is a simplified approach - proper topological sort would be better
+                        if (editingWork_.order.empty()) {
+                            editingWork_.order.push_back(startName);
+                        }
+
+                        // Check if endName already exists
+                        auto endIt = std::find(editingWork_.order.begin(), editingWork_.order.end(), endName);
+                        if (endIt == editingWork_.order.end()) {
+                            // Find position of startName and insert after it
+                            auto startIt = std::find(editingWork_.order.begin(), editingWork_.order.end(), startName);
+                            if (startIt != editingWork_.order.end()) {
+                                editingWork_.order.insert(startIt + 1, endName);
+                            } else {
+                                // startName not in order, add both
+                                editingWork_.order.push_back(startName);
+                                editingWork_.order.push_back(endName);
+                            }
+                        }
+                    }
+                }
+
+                // Handle link deletion - just clear order and let user rebuild
+                int linkId;
+                if (ImNodes::IsLinkDestroyed(&linkId)) {
+                    // For now, just clear the order when a link is deleted
+                    // User needs to reconnect nodes to rebuild order
+                    editingWork_.order.clear();
+                }
+
+                ImGui::Separator();
+                ImGui::Text("Current Order (%zu points):", editingWork_.order.size());
+                for (size_t i = 0; i < editingWork_.order.size(); ++i) {
+                    if (i < editingWork_.order.size()) {
+                        ImGui::Text("%zu: %s", i + 1, editingWork_.order[i].c_str());
+                    }
+                }
+
+                if (ImGui::Button("Clear Order")) {
+                    editingWork_.order.clear();
+                }
+                }
+            }
         }
         ImGui::End();
-
-        // Render gizmos after ImGui windows
-        RenderGizmos();
     });
-}
-
-void CameraDirector::RenderGizmos() {
-    if (!isEditingWork_ || !active_) return;
-    if (selectedPointIndex_ < 0 || selectedPointIndex_ >= static_cast<int>(editingWork_.points.size())) return;
-
-    Point& selectedPoint = editingWork_.points[selectedPointIndex_];
-
-    // Setup ImGuizmo
-    ImGuizmo::SetOrthographic(false);
-
-    ImGuiIO& io = ImGui::GetIO();
-    ImGuizmo::SetRect(0, 0, io.DisplaySize.x, io.DisplaySize.y);
-
-    // Get camera matrices
-    Matrix4x4 view = active_->GetView();
-    Matrix4x4 projection = active_->GetProjection();
-
-    // Create transform matrix for the point
-    Matrix4x4 translation = MathUtils::Matrix::MakeTranslateMatrix(selectedPoint.position);
-    Matrix4x4 rotationY = MathUtils::Matrix::MakeRotateY(selectedPoint.rotation.x); // yaw
-    Matrix4x4 rotationX = MathUtils::Matrix::MakeRotateX(selectedPoint.rotation.y); // pitch
-    Matrix4x4 transform = translation * rotationY * rotationX;
-
-    // Manipulate with ImGuizmo
-    static ImGuizmo::OPERATION currentOperation = ImGuizmo::TRANSLATE;
-    static ImGuizmo::MODE currentMode = ImGuizmo::WORLD;
-
-    if (ImGui::IsKeyPressed(ImGuiKey_T)) currentOperation = ImGuizmo::TRANSLATE;
-    if (ImGui::IsKeyPressed(ImGuiKey_R)) currentOperation = ImGuizmo::ROTATE;
-
-    ImGuizmo::Manipulate(
-        reinterpret_cast<float*>(&view),
-        reinterpret_cast<float*>(&projection),
-        currentOperation,
-        currentMode,
-        reinterpret_cast<float*>(&transform)
-    );
-
-    // Extract position and rotation from modified transform
-    if (ImGuizmo::IsUsing()) {
-        selectedPoint.position = Vector3(transform.matrix[3][0], transform.matrix[3][1], transform.matrix[3][2]);
-
-        // Extract rotation (simplified - proper extraction would use decomposition)
-        // For now, update rotation based on transform changes
-        float yaw = atan2f(transform.matrix[2][0], transform.matrix[2][2]);
-        float pitch = asinf(-transform.matrix[2][1]);
-        selectedPoint.rotation = Vector2(yaw, pitch);
-    }
 }
 
 void CameraDirector::SaveWork(const std::string& _key, const Work& _work) {
     if (_key.empty()) return;
 
-    Json* json = Singleton<Json>::GetInstance();
+    nlohmann::json root;
 
-    // Prepare data for saving
-    std::vector<Vector3> positions;
-    std::vector<Vector2> rotations;
-
-    for (const auto& point : _work.points) {
-        positions.push_back(point.position);
-        rotations.push_back(point.rotation);
+    // Read existing file if it exists to preserve other works
+    std::string path = "Assets/Data/Camerawork/" + _key + ".json";
+    std::ifstream inFile(path);
+    if (inFile.is_open()) {
+        inFile >> root;
+        inFile.close();
     }
 
-    // Set values
-    json->SetValue("Camerawork", _key, "duration", _work.duration);
-    json->SetValue("Camerawork", _key, "positions", positions);
-    json->SetValue("Camerawork", _key, "rotations", rotations);
+    // Create Camerawork root if it doesn't exist
+    if (!root.contains("Camerawork")) {
+        root["Camerawork"] = nlohmann::json::object();
+    }
 
-    // Save to file
-    json->Save("Camerawork", _key);
+    // Build work data
+    nlohmann::json workData;
+    workData["duration"] = _work.duration;
+    workData["order"] = _work.order;
+
+    // Build points array
+    nlohmann::json pointsArray = nlohmann::json::array();
+    for (const auto& point : _work.points) {
+        nlohmann::json pointObj;
+        pointObj["name"] = point.name;
+        pointObj["position"] = {point.position.x, point.position.y, point.position.z};
+        pointObj["rotation"] = {point.rotation.x, point.rotation.y, 0.0f}; // Add roll as 0
+        pointsArray.push_back(pointObj);
+    }
+    workData["points"] = pointsArray;
+
+    // Set work data
+    root["Camerawork"][_key] = workData;
+
+    // Ensure directory exists
+    std::filesystem::path dirPath = "Assets/Data/Camerawork/";
+    if (!std::filesystem::exists(dirPath)) {
+        std::filesystem::create_directories(dirPath);
+    }
+
+    // Write to file
+    std::ofstream outFile(path, std::ios::trunc);
+    if (!outFile.is_open()) {
+        return;
+    }
+
+    outFile << root.dump(4) << '\n';
+    outFile.close();
 
     // Update cache
     works_[_key] = _work;
@@ -538,6 +668,7 @@ void CameraDirector::StartEditingWork(const std::string& _key) {
     if (active_) {
         originalTransform_ = active_->transform_;
     }
+
 }
 
 void CameraDirector::StopEditingWork() {
@@ -578,6 +709,7 @@ void CameraDirector::DeleteWork(const std::string& _key) {
 
 void CameraDirector::AddPoint() {
     Point newPoint{};
+    newPoint.name = "Point" + std::to_string(editingWork_.points.size());
     newPoint.position = Vector3(0.0f, 0.0f, 0.0f);
     newPoint.rotation = Vector2(0.0f, 0.0f);
     editingWork_.points.push_back(newPoint);
@@ -603,6 +735,7 @@ void CameraDirector::CaptureCurrentCameraAsPoint() {
     if (!camera) return;
 
     Point newPoint{};
+    newPoint.name = "Point" + std::to_string(editingWork_.points.size());
     newPoint.position = camera->transform_.translate;
     newPoint.rotation = Vector2(std::get<Vector3>(camera->transform_.rotate).y, std::get<Vector3>(camera->transform_.rotate).x);
 
