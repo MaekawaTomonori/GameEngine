@@ -533,7 +533,6 @@ void CameraDirector::ShowEditor() {
                     if (startNode >= 0 && startNode < static_cast<int>(editingWork_.points.size()) &&
                         endNode >= 0 && endNode < static_cast<int>(editingWork_.points.size()) &&
                         startNode != endNode) {
-
                         std::string startName = editingWork_.points[startNode].name;
                         std::string endName = editingWork_.points[endNode].name;
 
@@ -668,7 +667,6 @@ void CameraDirector::StartEditingWork(const std::string& _key) {
     if (active_) {
         originalTransform_ = active_->transform_;
     }
-
 }
 
 void CameraDirector::StopEditingWork() {

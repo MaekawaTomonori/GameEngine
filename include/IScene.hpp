@@ -8,6 +8,7 @@ class IGame;
 class IScene {
     SceneSwitcher* switcher_ = nullptr;
     bool progress_ = false;
+
 protected:
     std::string next_;
     IGame* game_ = nullptr;

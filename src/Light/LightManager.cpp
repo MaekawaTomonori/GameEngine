@@ -62,7 +62,6 @@ void LightManager::Debug() {
             ImGui::EndTabBar();
         }
         ImGui::End();
-        
     });
 }
 
