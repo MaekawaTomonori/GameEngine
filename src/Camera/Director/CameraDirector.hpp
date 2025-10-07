@@ -13,11 +13,13 @@ class CameraDirector {
     const std::string FilePath = "Resources/Data/Camerawork/";
 
     struct Point {
+        std::string name;
         Vector3 position;
         Vector2 rotation; // x: yaw, y: pitch
     };
     struct Work {
         std::vector<Point> points;
+        std::vector<std::string> order; // Point name sequence for camerawork progression
         float duration;
     };
 
@@ -67,7 +69,6 @@ private:
 
     // Editor functions
     void ShowEditor();
-    void RenderGizmos();
     void SaveWork(const std::string& _key, const Work& _work);
     void StartEditingWork(const std::string& _key);
     void StopEditingWork();
