@@ -327,14 +327,14 @@ bool DirectXAdapter::CreateDXGI() {
         D3D_FEATURE_LEVEL_12_1,
         D3D_FEATURE_LEVEL_12_0
     };
-    const char* featureLevelNames[] = {
-        "12.2",
-        "12.1",
-        "12.0"
-    };
 
     Log::Send(Log::Level::INFO, "Device Loop Begin");
     for (size_t i = 0; i < _countof(featureLevels); ++i){
+        const char* featureLevelNames[] = {
+            "12.2",
+            "12.1",
+            "12.0"
+        };
         if (SUCCEEDED(D3D12CreateDevice(adapter_.Get(), featureLevels[i], IID_PPV_ARGS(&device_)))){
             Log::Send(Log::Level::INFO, "Device Created");
             Log::Send(Log::Level::INFO, "Feature Level: " + std::string(featureLevelNames[i]));
@@ -514,14 +514,9 @@ bool DirectXAdapter::CreateLimiter() {
 }
 
 void DirectXAdapter::Wait() {
-    ++fenceValue_;
-    cQueue_->Signal(fence_.Get(), fenceValue_);
-
-    if (fence_->GetCompletedValue() < fenceValue_){
-        fence_->SetEventOnCompletion(fenceValue_, fenceEvent_);
-        WaitForSingleObject(fenceEvent_, INFINITE);
-    }
-
+    uint64_t currentFenceValue = GetNextFenceValue();
+    cQueue_->Signal(fence_.Get(), currentFenceValue);
+    WaitForFenceValue(currentFenceValue);
     fpsLimiter_->WaitForNextFrame();
 }
 
@@ -563,4 +558,17 @@ HWND DirectXAdapter::GetWindowHandle() const {
 
 D3D12_CPU_DESCRIPTOR_HANDLE DirectXAdapter::GetDSVHandle() const {
     return dsvHandle_;
+}
+
+uint64_t DirectXAdapter::GetNextFenceValue() {
+    return ++fenceValue_;
+}
+
+void DirectXAdapter::WaitForFenceValue(const uint64_t _fenceValue) const {
+    if (fence_->GetCompletedValue() < _fenceValue) {
+        HANDLE fenceEvent = CreateEvent(nullptr, false, false, nullptr);
+        fence_->SetEventOnCompletion(_fenceValue, fenceEvent);
+        WaitForSingleObject(fenceEvent, INFINITE);
+        CloseHandle(fenceEvent);
+    }
 }

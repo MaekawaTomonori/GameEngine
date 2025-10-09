@@ -6,7 +6,7 @@
 
 class IPostEffect {
 protected:
-    const Vector4 CLEAR_COLOR = { 0.2f, 0.2f, 0.2f, .0f };
+    const Vector4 CLEAR_COLOR = { 0.2f, 0.2f, 0.2f, 1.0f };
 
     DirectXAdapter* adapter_ = nullptr;
     SRVManager* srv_ = nullptr;
@@ -20,8 +20,8 @@ protected:
     D3D12_GPU_DESCRIPTOR_HANDLE handle_{};
 
 public:
-    IPostEffect(DirectXAdapter* _adapter, SRVManager* _srv);
     virtual ~IPostEffect() = default;
+    void SetUp(DirectXAdapter* _adapter, SRVManager* _srv);
     virtual void Initialize() = 0;
     D3D12_GPU_DESCRIPTOR_HANDLE Apply(D3D12_GPU_DESCRIPTOR_HANDLE _handle);
     void SetRTVHandle(D3D12_CPU_DESCRIPTOR_HANDLE rtvHandle);

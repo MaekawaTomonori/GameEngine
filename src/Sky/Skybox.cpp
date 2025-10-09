@@ -4,7 +4,7 @@
 #include "Math/MathUtils.hpp"
 #include "Pattern/Singleton.hpp"
 #include "src/Texture/TextureManager.hpp"
-#include "src/Camera/Manager/CameraManager.hpp"
+#include "src/Camera/Controller/CameraController.hpp"
 
 void Skybox::Initialize(const std::string& _texture) {
     texture_ = _texture;
@@ -46,7 +46,7 @@ void Skybox::Update() {
 
     transform_.scale = {scale, scale, scale};
 
-    wd_->wvp = MathUtils::Matrix::MakeAffineMatrix(transform_) * Singleton<CameraManager>::GetInstance()->GetActive()->GetViewProjection();
+    wd_->wvp = MathUtils::Matrix::MakeAffineMatrix(transform_) * Singleton<CameraController>::GetInstance()->GetActive()->GetViewProjection();
 }
 
 void Skybox::Draw() {

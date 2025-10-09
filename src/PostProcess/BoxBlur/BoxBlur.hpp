@@ -11,10 +11,6 @@ class BoxBlur : public IPostEffect{
     Material* material_ = nullptr;
 
 public:
-    BoxBlur(DirectXAdapter* _adapter, SRVManager* _srv) :
-        IPostEffect(_adapter, _srv) {
-    }
-
     void Initialize() override;
     void Debug() override;
 

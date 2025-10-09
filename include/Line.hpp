@@ -14,7 +14,7 @@
 
 class LineCommon;
 class DirectXAdapter;
-class CameraManager;
+class CameraController;
 
 class Line {
     struct VertexData {
@@ -32,7 +32,7 @@ class Line {
     LineCommon* common_ = nullptr;
     DirectXAdapter* adapter_ = nullptr;
     Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> commandList_ = nullptr;
-    CameraManager* cameraManager_ = nullptr;
+    CameraController* cameraManager_ = nullptr;
 
     std::string uuid_;
 

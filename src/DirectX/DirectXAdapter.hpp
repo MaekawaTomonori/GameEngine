@@ -123,6 +123,10 @@ public: //Accessor
     IDXGISwapChain4* GetSwapChain() const;
     ID3D12Fence* GetFence() const;
     D3D12_CPU_DESCRIPTOR_HANDLE GetDSVHandle() const;
+
+    // Fence値管理のためのメソッド
+    uint64_t GetNextFenceValue();
+    void WaitForFenceValue(uint64_t _fenceValue) const;
 }; // class DirectXAdapter
 
 #endif // DirectXAdaptor_HPP_

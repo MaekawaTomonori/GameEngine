@@ -14,10 +14,6 @@ class Grayscale : public IPostEffect{
     Material* material_ = nullptr;
 
 public:
-    Grayscale(DirectXAdapter* _adapter, SRVManager* _srv) :
-        IPostEffect(_adapter, _srv) {
-    }
-
     void Initialize() override;
     void Debug() override;
 

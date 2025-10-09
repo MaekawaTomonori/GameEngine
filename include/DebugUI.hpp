@@ -31,6 +31,7 @@ public:
 
 private:
     void Process();
+    void SetupModernStyle();
 }; // class DebugUI
 
 #endif // DebugUI_HPP_

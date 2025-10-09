@@ -5,13 +5,13 @@
 #include "src/Line/Common/LineCommon.hpp"
 #include "Math/MathUtils.hpp"
 #include "src/DirectX/DirectXAdapter.hpp"
-#include "src/Camera/Manager/CameraManager.hpp"
+#include "src/Camera/Controller/CameraController.hpp"
 
 Line::Line() {
     common_ = Singleton<LineCommon>::GetInstance();
     adapter_ = common_->GetAdapter();
     commandList_ = adapter_->GetCommandList();
-    cameraManager_ = Singleton<CameraManager>::GetInstance();
+    cameraManager_ = Singleton<CameraController>::GetInstance();
     uuid_ = Utils::GenerateUniqueId();
 }
 

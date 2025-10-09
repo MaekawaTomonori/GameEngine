@@ -4,10 +4,12 @@
 
 #include "Utils.hpp"
 
-
-IPostEffect::IPostEffect(DirectXAdapter* _adapter, SRVManager* _srv) :adapter_(_adapter), srv_(_srv) {
+void IPostEffect::SetUp(DirectXAdapter* _adapter, SRVManager* _srv) {
+    adapter_ = _adapter;
+    srv_ = _srv;
     CreateOutput();
 }
+
 
 D3D12_GPU_DESCRIPTOR_HANDLE IPostEffect::Apply(const D3D12_GPU_DESCRIPTOR_HANDLE _handle) {
     if (!output_) Utils::Alert("");

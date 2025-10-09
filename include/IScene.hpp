@@ -3,12 +3,15 @@
 #include <string>
 
 class SceneSwitcher;
+class IGame;
 
 class IScene {
     SceneSwitcher* switcher_ = nullptr;
     bool progress_ = false;
+
 protected:
     std::string next_;
+    IGame* game_ = nullptr;
 
     // Fade Types
     // in
@@ -24,6 +27,7 @@ public:
     void Awake();
     void Awake(SceneSwitcher* _switcher);
     void SetSwitcher(SceneSwitcher* _switcher);
+    void SetGame(IGame* _game);
 
 protected:
     void Change();

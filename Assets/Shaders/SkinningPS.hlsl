@@ -1,11 +1,12 @@
-﻿#include "Model.hlsli"
+#include "Model.hlsli"
 
 struct Material{
     float32_t4 color;
     uint32_t enableLighting;
     float32_t shininess;
     float coefficient;
-    float2 pad;
+    float2 tilingMul;
+    float4x4 uvTransform;
 };
 ConstantBuffer<Material> gMaterial : register(b0);
 
@@ -61,8 +62,12 @@ struct PixelShaderOutput{
 PixelShaderOutput main(VertexShaderOutput input)
 {
     PixelShaderOutput output;
-    float32_t4 texColor = gTexture.Sample(gSampler, input.texcoord);
+    
+    float4 transformedUV = mul(float4(input.texcoord, 0.f, 1.f), gMaterial.uvTransform);
+    transformedUV.xy *= gMaterial.tilingMul;
 
+    float32_t4 texColor = gTexture.Sample(gSampler, transformedUV.xy);
+    
     if (texColor.a == 0.f)
     {
         discard;

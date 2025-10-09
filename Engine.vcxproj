@@ -37,7 +37,7 @@
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
@@ -49,7 +49,7 @@
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -229,7 +229,9 @@
     <ClInclude Include="src\Animation\KeyFrame.hpp" />
     <ClInclude Include="src\Animation\NodeAnimation.hpp" />
     <ClInclude Include="src\Camera\Camera.hpp" />
-    <ClInclude Include="src\Camera\Manager\CameraManager.hpp" />
+    <ClInclude Include="src\Camera\Controller\CameraController.hpp" />
+    <ClInclude Include="src\Camera\Director\CameraDirector.hpp" />
+    <ClInclude Include="src\Camera\Repository\CameraRepository.hpp" />
     <ClInclude Include="src\Common\Common.hpp" />
     <ClInclude Include="src\Config\Config.hpp" />
     <ClInclude Include="src\Container\Material.hpp" />
@@ -289,7 +291,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Camera\Camera.cpp" />
-    <ClCompile Include="src\Camera\Manager\CameraManager.cpp" />
+    <ClCompile Include="src\Camera\Controller\CameraController.cpp" />
+    <ClCompile Include="src\Camera\Director\CameraDirector.cpp" />
+    <ClCompile Include="src\Camera\Repository\CameraRepository.cpp" />
     <ClCompile Include="src\Common\Common.cpp" />
     <ClCompile Include="src\Config\Config.cpp" />
     <ClCompile Include="src\Container\Material.cpp" />

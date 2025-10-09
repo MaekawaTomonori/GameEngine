@@ -291,9 +291,6 @@
     <ClInclude Include="src\Camera\Camera.hpp">
       <Filter>src\Camera</Filter>
     </ClInclude>
-    <ClInclude Include="src\Camera\Manager\CameraManager.hpp">
-      <Filter>src\Camera\Manager</Filter>
-    </ClInclude>
     <ClInclude Include="src\Common\Common.hpp">
       <Filter>src\Common</Filter>
     </ClInclude>
@@ -462,13 +459,13 @@
     <ClInclude Include="vendor\json\json.hpp">
       <Filter>vendor\json</Filter>
     </ClInclude>
+    <ClInclude Include="src\Camera\Repository\CameraRepository.hpp" />
+    <ClInclude Include="src\Camera\Controller\CameraController.hpp" />
+    <ClInclude Include="src\Camera\Director\CameraDirector.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Camera\Camera.cpp">
       <Filter>src\Camera</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Camera\Manager\CameraManager.cpp">
-      <Filter>src\Camera\Manager</Filter>
     </ClCompile>
     <ClCompile Include="src\Common\Common.cpp">
       <Filter>src\Common</Filter>
@@ -650,6 +647,9 @@
     <ClCompile Include="src\Window\Window.cpp">
       <Filter>src\Window</Filter>
     </ClCompile>
+    <ClCompile Include="src\Camera\Repository\CameraRepository.cpp" />
+    <ClCompile Include="src\Camera\Controller\CameraController.cpp" />
+    <ClCompile Include="src\Camera\Director\CameraDirector.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

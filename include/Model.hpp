@@ -80,6 +80,7 @@ public:
     Model& SetRotate(Vector3 _rotate);
     Model& SetScale(Vector3 _scale);
     Model& SetEnvironmentTexture(const std::string& _texture);
+    Model& SetTexture(const std::string& _texture);
 
     static void Load(const std::string& _name);
 

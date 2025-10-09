@@ -58,15 +58,14 @@ Framework::Framework() {
     sky_ = Singleton<SkyCommon>::GetInstance();
     sky_->Initialize(dxAdapter_.get(), debugUI_.get());
 
-    camera_ = Singleton<CameraManager>::GetInstance();
+    camera_ = Singleton<CameraController>::GetInstance();
     camera_->Initialize(static_cast<float>(config_->GetWidth()) / static_cast<float>(config_->GetHeight()), debugUI_.get());
+
+    cameraDirector_ = Singleton<CameraDirector>::GetInstance();
+    cameraDirector_->Initialize(debugUI_.get());
 
     light_ = Singleton<LightManager>::GetInstance();
     light_->Initialize(dxAdapter_.get(), debugUI_.get());
-
-    postProcessor_->Add(std::make_unique<Grayscale>(dxAdapter_.get(), srv_.get()), "Grayscale");
-    postProcessor_->Add(std::make_unique<Vignette>(dxAdapter_.get(), srv_.get()), "Vignette");
-    postProcessor_->Add(std::make_unique<BoxBlur>(dxAdapter_.get(), srv_.get()), "BoxBlur");
 
     //level_->Initialize("Level");
 }
@@ -117,6 +116,8 @@ void Framework::Initialize() {
     if (!game_) return;
     config_ = &game_->GetCurrentConfig();
     scene_ = game_->GetSceneSwitcher();
+    scene_->SetDebugUI(debugUI_.get());
+    game_->SetPostProcessor(postProcessor_.get());
     windows_->SetTitle(config_->GetTitle());
     Log::Send(Log::Level::INFO, "Game Initialized");
 }
@@ -130,6 +131,7 @@ void Framework::Update() const {
     if (!Check())return;
 
     input_->Update();
+    cameraDirector_->Update();
     camera_->Update();
     light_->Update();
     level_->Update();

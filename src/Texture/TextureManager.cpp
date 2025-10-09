@@ -43,35 +43,31 @@ void TextureManager::UploadTextureData(DX12Resource* _texture, const DirectX::Sc
     PrepareUpload(adapter_->GetDevice(), mipImages.GetImages(), mipImages.GetImageCount(), mipImages.GetMetadata(), subResources);
     uint32_t intermediateSize = static_cast<uint32_t>(GetRequiredIntermediateSize(_texture->Get(), 0, static_cast<UINT>(subResources.size())));
     std::unique_ptr<DX12Resource> intermediateResource = adapter_->CreateBufferResource(intermediateSize);
-    UpdateSubresources(adapter_->GetCommandList(), _texture->Get(), intermediateResource->Get(), 0, 0, static_cast<UINT>(subResources.size()), subResources.data());
-    _texture->ChangeState(adapter_->GetCommandList(), D3D12_RESOURCE_STATE_GENERIC_READ);
-    if (adapter_->GetCommandList()->Close()) {
-        Utils::Alert("");
+
+    // 専用のコマンドアロケーターとコマンドリストをリセット
+    if (FAILED(uploadCommandAllocator_->Reset())) {
+        Utils::Alert("Failed to reset upload command allocator");
+        return;
+    }
+    if (FAILED(uploadCommandList_->Reset(uploadCommandAllocator_.Get(), nullptr))) {
+        Utils::Alert("Failed to reset upload command list");
         return;
     }
 
-    ID3D12CommandList* cls[] = { adapter_->GetCommandList() };
+    UpdateSubresources(uploadCommandList_.Get(), _texture->Get(), intermediateResource->Get(), 0, 0, static_cast<UINT>(subResources.size()), subResources.data());
+    _texture->ChangeState(uploadCommandList_.Get(), D3D12_RESOURCE_STATE_GENERIC_READ);
+    if (FAILED(uploadCommandList_->Close())) {
+        Utils::Alert("Failed to close upload command list");
+        return;
+    }
+
+    ID3D12CommandList* cls[] = { uploadCommandList_.Get() };
     adapter_->GetCommandQueue()->ExecuteCommandLists(_countof(cls), cls);
 
-    UINT64 fenceValue{};
-    // コマンドキューの実行を待つ
-    adapter_->GetCommandQueue()->Signal(adapter_->GetFence(), ++fenceValue);
-    if (adapter_->GetFence()->GetCompletedValue() < fenceValue) {
-        HANDLE fenceEvent = CreateEvent(nullptr, false, false, nullptr);
-        adapter_->GetFence()->SetEventOnCompletion(fenceValue, fenceEvent);
-        WaitForSingleObject(fenceEvent, INFINITE);
-        CloseHandle(fenceEvent);
-    }
-    
-    // CommandAllocatorとCommandListをリセット
-    if (adapter_->GetCommandAllocator()->Reset()) {
-        Utils::Alert("Failed to reset command allocator");
-        return;
-    }
-    if (adapter_->GetCommandList()->Reset(adapter_->GetCommandAllocator(), nullptr)) {
-        Utils::Alert("Failed to reset command list");
-        return;
-    }
+    // 適切なFence値管理を使用してコマンドキューの実行を待つ
+    uint64_t fenceValue = adapter_->GetNextFenceValue();
+    adapter_->GetCommandQueue()->Signal(adapter_->GetFence(), fenceValue);
+    adapter_->WaitForFenceValue(fenceValue);
 }
 
 DirectX::ScratchImage TextureManager::LoadDDS(const std::wstring& _path) {
@@ -105,6 +101,32 @@ void TextureManager::Initialize(DirectXAdapter* _adapter, SRVManager* _srv) {
 
     adapter_ = _adapter;
     srv_ = _srv;
+
+    // テクスチャアップロード専用のコマンドアロケーターとコマンドリストを作成
+    HRESULT hr = adapter_->GetDevice()->CreateCommandAllocator(
+        D3D12_COMMAND_LIST_TYPE_DIRECT,
+        IID_PPV_ARGS(&uploadCommandAllocator_)
+    );
+    if (FAILED(hr)) {
+        Utils::Alert("Failed to create upload command allocator");
+        return;
+    }
+
+    hr = adapter_->GetDevice()->CreateCommandList(
+        0,
+        D3D12_COMMAND_LIST_TYPE_DIRECT,
+        uploadCommandAllocator_.Get(),
+        nullptr,
+        IID_PPV_ARGS(&uploadCommandList_)
+    );
+    if (FAILED(hr)) {
+        Utils::Alert("Failed to create upload command list");
+        return;
+    }
+
+    // 初期状態では閉じておく
+    uploadCommandList_->Close();
+
     Log::Send(Log::Level::INFO, "TextureManager Initialized");
 }
 

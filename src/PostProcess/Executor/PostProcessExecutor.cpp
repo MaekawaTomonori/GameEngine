@@ -4,7 +4,6 @@
 #include "Log.hpp"
 #include "imgui.h"
 #include "src/DirectX/DirectXAdapter.hpp"
-#include "src/DirectX/GraphicsPipeline/Object/InputLayout.hpp"
 #include "src/DirectX/Heap/Heap.hpp"
 #include "src/DirectX/GraphicsPipeline/Object/PipelineStateObject.hpp"
 #include "src/DirectX/Heap/SRVManager.h"
@@ -53,7 +52,7 @@ void PostProcessExecutor::Initialize(DirectXAdapter* _adapter, SRVManager* _srv,
                 .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL
             })
     )
-    .SetBlend(BlendMode::ALPHA)
+    .SetBlend(BlendMode::NONE)
     .SetShader(std::make_unique<Shader>(L"CpyImg"))
     .SetTopologyType(D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE)
     .Create();
@@ -61,6 +60,7 @@ void PostProcessExecutor::Initialize(DirectXAdapter* _adapter, SRVManager* _srv,
 
 void PostProcessExecutor::Add(std::unique_ptr<IPostEffect> _effect, const std::string& _name) {
     if (_effect){
+        _effect->SetUp(adapter_, srv_);
         // エフェクト用のRTVハンドルを割り当て
         auto rtvHandle = rtvHeap_->GetCPUHandle(static_cast<uint32_t>(effects_.size()) + 1);
         _effect->SetRTVHandle(rtvHandle);
@@ -125,27 +125,35 @@ void PostProcessExecutor::Draw() const {
     pso_->DrawCall();
 
 //#ifdef _DEBUG
-//
-//    debugUI_->RegisterCommand("SceneRendering", [&]() {
-//        ImGui::Begin("Scene");
-//        
-//        // RenderTextureをImGuiで表示
-//        if (srvHandle_.ptr != 0) {
-//            ImTextureID textureID = srvHandle_.ptr;
-//            ImVec2 imageSize = ImVec2(static_cast<float>(adapter_->GetWidth()), static_cast<float>(adapter_->GetHeight()));
-//            ImGui::Image(textureID, imageSize);
-//        }
-//        
-//        ImGui::End();
-//    });
-//
-//#else
 
+    //debugUI_->RegisterCommand("SceneRendering", [&]() {
+    //    ImGui::Begin("Scene");
+    //    
+    //    // RenderTextureをImGuiで表示
+    //    if (srvHandle_.ptr != 0) {
+    //        ImTextureID textureID = srvHandle_.ptr;
+    //        ImVec2 imageSize = ImVec2(static_cast<float>(adapter_->GetWidth()), static_cast<float>(adapter_->GetHeight()));
+    //        ImGui::Image(textureID, imageSize);
+    //    }
+    //    
+    //    ImGui::End();
+    //});
+
+//#else
     adapter_->GetCommandList()->SetGraphicsRootDescriptorTable(0, srvHandle_);
 
     // フルスクリーンクワッドを三角形で描画
     adapter_->GetCommandList()->DrawInstanced(3, 1, 0, 0);
 //#endif
+}
+
+void PostProcessExecutor::SetActive(const std::string& _name, bool _enable) {
+    for (auto& effect : effects_) {
+        if (effect.name == _name) {
+            effect.enabled = _enable;
+            return;
+        }
+    }
 }
 
 void PostProcessExecutor::Debug() {
