@@ -116,6 +116,7 @@ void Framework::Initialize() {
     if (!game_) return;
     config_ = &game_->GetCurrentConfig();
     scene_ = game_->GetSceneSwitcher();
+    scene_->SetDebugUI(debugUI_.get());
     game_->SetPostProcessor(postProcessor_.get());
     windows_->SetTitle(config_->GetTitle());
     Log::Send(Log::Level::INFO, "Game Initialized");

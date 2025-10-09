@@ -9,7 +9,6 @@
 #include "Utils.hpp"
 #include "imgui.h"
 #include "ImGuizmo.h"
-#include "imnodes.h"
 #include "Math/MathUtils.hpp"
 #include "Pattern/Singleton.hpp"
 #include "src/Camera/Camera.hpp"
@@ -191,15 +190,14 @@ void CameraDirector::Run(const std::string& _key, bool _loop) {
 
     // Load work if not already loaded
     if (!works_.contains(_key)) {
-        for (const auto& item : availableWorks_) {
-            if (Utils::EqualsIgnoreCase(_key, item.key)){
-                LoadWork(item.key);
-                break;
-            }
-        }
+        // Try to load directly from file first
+        LoadWork(_key);
     }
 
-    if (!works_.contains(_key)) return;
+    if (!works_.contains(_key)) {
+        // If still not found, return silently
+        return;
+    }
 
     // Set loop flag
     isLoop_ = _loop;
@@ -470,113 +468,94 @@ void CameraDirector::ShowEditor() {
 
             ImGui::Separator();
 
-            // Order Node Editor
-            if (ImGui::CollapsingHeader("Order Node Editor", ImGuiTreeNodeFlags_DefaultOpen)) {
-                ImGui::Text("Connect points to define order:");
+            // Order Editor
+            if (ImGui::CollapsingHeader("Order Editor", ImGuiTreeNodeFlags_DefaultOpen)) {
                 ImGui::Text("Points: %zu, Order: %zu", editingWork_.points.size(), editingWork_.order.size());
 
-                // Safety check
+                // Compact Point Selection with Combo Box
+                static int selectedPointIndex = 0;
                 if (editingWork_.points.empty()) {
                     ImGui::TextColored(ImVec4(1, 0, 0, 1), "Add points first!");
                 } else {
-                    ImNodes::BeginNodeEditor();
-
-                // Draw nodes for each point
-                for (size_t i = 0; i < editingWork_.points.size(); ++i) {
-                    int nodeId = static_cast<int>(i);
-                    ImNodes::BeginNode(nodeId);
-
-                    ImNodes::BeginNodeTitleBar();
-                    ImGui::TextUnformatted(editingWork_.points[i].name.c_str());
-                    ImNodes::EndNodeTitleBar();
-
-                    // Output attribute (connects to next point)
-                    ImNodes::BeginOutputAttribute(nodeId * 2);
-                    ImGui::Text("Out");
-                    ImNodes::EndOutputAttribute();
-
-                    // Input attribute (receives connection from previous point)
-                    ImNodes::BeginInputAttribute(nodeId * 2 + 1);
-                    ImGui::Text("In");
-                    ImNodes::EndInputAttribute();
-
-                    ImNodes::EndNode();
-                }
-
-                // Draw links
-                if (editingWork_.order.size() > 1) {
-                    for (size_t i = 0; i < editingWork_.order.size() - 1; ++i) {
-                        // Find indices
-                        auto currentIt = std::find_if(editingWork_.points.begin(), editingWork_.points.end(),
-                            [&](const Point& p) { return p.name == editingWork_.order[i]; });
-                        auto nextIt = std::find_if(editingWork_.points.begin(), editingWork_.points.end(),
-                            [&](const Point& p) { return p.name == editingWork_.order[i + 1]; });
-
-                        if (currentIt != editingWork_.points.end() && nextIt != editingWork_.points.end()) {
-                            int currentIdx = static_cast<int>(std::distance(editingWork_.points.begin(), currentIt));
-                            int nextIdx = static_cast<int>(std::distance(editingWork_.points.begin(), nextIt));
-
-                            int linkId = static_cast<int>(i);
-                            ImNodes::Link(linkId, currentIdx * 2, nextIdx * 2 + 1);
-                        }
-                    }
-                }
-
-                ImNodes::EndNodeEditor();
-
-                // Handle new link creation
-                int startAttr, endAttr;
-                if (ImNodes::IsLinkCreated(&startAttr, &endAttr)) {
-                    int startNode = startAttr / 2;
-                    int endNode = (endAttr - 1) / 2;
-
-                    if (startNode >= 0 && startNode < static_cast<int>(editingWork_.points.size()) &&
-                        endNode >= 0 && endNode < static_cast<int>(editingWork_.points.size()) &&
-                        startNode != endNode) {
-                        std::string startName = editingWork_.points[startNode].name;
-                        std::string endName = editingWork_.points[endNode].name;
-
-                        // Rebuild order array from all links
-                        // This is a simplified approach - proper topological sort would be better
-                        if (editingWork_.order.empty()) {
-                            editingWork_.order.push_back(startName);
-                        }
-
-                        // Check if endName already exists
-                        auto endIt = std::find(editingWork_.order.begin(), editingWork_.order.end(), endName);
-                        if (endIt == editingWork_.order.end()) {
-                            // Find position of startName and insert after it
-                            auto startIt = std::find(editingWork_.order.begin(), editingWork_.order.end(), startName);
-                            if (startIt != editingWork_.order.end()) {
-                                editingWork_.order.insert(startIt + 1, endName);
-                            } else {
-                                // startName not in order, add both
-                                editingWork_.order.push_back(startName);
-                                editingWork_.order.push_back(endName);
+                    ImGui::Text("Add Point:");
+                    ImGui::SameLine();
+                    ImGui::SetNextItemWidth(200);
+                    if (ImGui::BeginCombo("##PointSelector", editingWork_.points[selectedPointIndex].name.c_str())) {
+                        for (size_t i = 0; i < editingWork_.points.size(); ++i) {
+                            bool isSelected = (selectedPointIndex == static_cast<int>(i));
+                            if (ImGui::Selectable(editingWork_.points[i].name.c_str(), isSelected)) {
+                                selectedPointIndex = static_cast<int>(i);
+                            }
+                            if (isSelected) {
+                                ImGui::SetItemDefaultFocus();
                             }
                         }
+                        ImGui::EndCombo();
                     }
-                }
-
-                // Handle link deletion - just clear order and let user rebuild
-                int linkId;
-                if (ImNodes::IsLinkDestroyed(&linkId)) {
-                    // For now, just clear the order when a link is deleted
-                    // User needs to reconnect nodes to rebuild order
-                    editingWork_.order.clear();
+                    ImGui::SameLine();
+                    if (ImGui::Button("Add to Order")) {
+                        editingWork_.order.push_back(editingWork_.points[selectedPointIndex].name);
+                    }
                 }
 
                 ImGui::Separator();
-                ImGui::Text("Current Order (%zu points):", editingWork_.order.size());
-                for (size_t i = 0; i < editingWork_.order.size(); ++i) {
-                    if (i < editingWork_.order.size()) {
-                        ImGui::Text("%zu: %s", i + 1, editingWork_.order[i].c_str());
+
+                // Order List with drag-drop reordering and delete buttons
+                if (ImGui::BeginChild("OrderList", ImVec2(0, 200), true)) {
+                    ImGui::Text("Camera Path Order (Drag to reorder):");
+                    ImGui::Separator();
+
+                    if (editingWork_.order.empty()) {
+                        ImGui::TextColored(ImVec4(0.7f, 0.7f, 0.7f, 1), "No points in order. Select from above.");
+                    } else {
+                        for (size_t i = 0; i < editingWork_.order.size(); ++i) {
+                            ImGui::PushID(static_cast<int>(i));
+
+                            // Drag-drop source
+                            ImGui::Selectable(("##order_" + std::to_string(i)).c_str(), false,
+                                ImGuiSelectableFlags_AllowItemOverlap);
+
+                            if (ImGui::BeginDragDropSource(ImGuiDragDropFlags_None)) {
+                                ImGui::SetDragDropPayload("ORDER_ITEM", &i, sizeof(size_t));
+                                ImGui::Text("%zu: %s", i + 1, editingWork_.order[i].c_str());
+                                ImGui::EndDragDropSource();
+                            }
+
+                            // Drag-drop target
+                            if (ImGui::BeginDragDropTarget()) {
+                                if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("ORDER_ITEM")) {
+                                    size_t sourceIndex = *(const size_t*)payload->Data;
+                                    if (sourceIndex != i) {
+                                        // Swap items
+                                        std::string temp = editingWork_.order[sourceIndex];
+                                        editingWork_.order.erase(editingWork_.order.begin() + sourceIndex);
+                                        editingWork_.order.insert(editingWork_.order.begin() + i, temp);
+                                    }
+                                }
+                                ImGui::EndDragDropTarget();
+                            }
+
+                            ImGui::SameLine(0, 0);
+                            ImGui::Text("%zu: %s", i + 1, editingWork_.order[i].c_str());
+
+                            // Delete button on the right
+                            ImGui::SameLine(ImGui::GetContentRegionAvail().x - 60);
+                            if (ImGui::Button(("Delete##" + std::to_string(i)).c_str())) {
+                                editingWork_.order.erase(editingWork_.order.begin() + i);
+                                ImGui::PopID();
+                                break; // Exit loop after modifying vector
+                            }
+
+                            ImGui::PopID();
+                        }
                     }
                 }
+                ImGui::EndChild();
 
-                if (ImGui::Button("Clear Order")) {
+                ImGui::Separator();
+
+                if (ImGui::Button("Clear All Order")) {
                     editingWork_.order.clear();
-                }
                 }
             }
         }
