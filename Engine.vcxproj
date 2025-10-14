@@ -184,6 +184,9 @@
     <ClInclude Include="src\Renderer\Renderer.hpp" />
     <ClInclude Include="src\ResourceRepository\ResourceRepository.hpp" />
     <ClInclude Include="src\Scene\SceneSwitcher.hpp" />
+    <ClInclude Include="src\Scene\Transition\ITransitionEffect.hpp" />
+    <ClInclude Include="src\Scene\Transition\Transition.hpp" />
+    <ClInclude Include="src\Scene\Transition\Fade.hpp" />
     <ClInclude Include="src\Scheduler\Scheduler.hpp" />
     <ClInclude Include="src\Sky\Common\SkyCommon.hpp" />
     <ClInclude Include="src\Sky\Skybox.hpp" />
@@ -250,6 +253,8 @@
     <ClCompile Include="src\ResourceRepository\ResourceRepository.cpp" />
     <ClCompile Include="src\Scene\IScene.cpp" />
     <ClCompile Include="src\Scene\SceneSwitcher.cpp" />
+    <ClCompile Include="src\Scene\Transition\Transition.cpp" />
+    <ClCompile Include="src\Scene\Transition\Fade.cpp" />
     <ClCompile Include="src\Scheduler\Scheduler.cpp" />
     <ClCompile Include="src\Sky\Common\SkyCommon.cpp" />
     <ClCompile Include="src\Sky\Skybox.cpp" />

@@ -1,6 +1,7 @@
 #ifndef IScene_HPP_
 #define IScene_HPP_
 #include <string>
+#include "src/Scene/Transition/Transition.hpp"
 
 class SceneSwitcher;
 class DebugUI;
@@ -17,9 +18,8 @@ protected:
     PostProcessExecutor* postEffects_ = nullptr;
     DebugUI* debug_ = nullptr;
 
-    // Fade Types
-    // in
-    // out
+    Transition::Type entryTransition_ = Transition::Type::None;
+    Transition::Type exitTransition_ = Transition::Type::None;
 public:
     virtual ~IScene() = default;
     virtual void Initialize() = 0;
@@ -32,6 +32,9 @@ public:
     void Setup(SceneSwitcher* _switcher, PostProcessExecutor* _ppe, DebugUI* _debug) { switcher_ = _switcher; postEffects_ = _ppe; debug_ = _debug; }
 
     const std::string& GetName() const { return name_; }
+
+    Transition::Type GetEntryTransition() const { return entryTransition_; }
+    Transition::Type GetExitTransition() const { return exitTransition_; }
 
 protected:
     void Change();
