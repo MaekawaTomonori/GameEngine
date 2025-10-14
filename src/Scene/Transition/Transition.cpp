@@ -25,9 +25,11 @@ void Transition::Awake(const Type _type, const ITransitionEffect::State _state) 
 }
 
 void Transition::Awake(const Type _type, const ITransitionEffect::State _state, const float _duration) {
-    type_ = _type;
-    CreateEffect(_type);
-
+    if (_type == Type::None)return;
+    if (_state != ITransitionEffect::State::In){
+        type_ = _type;
+        CreateEffect(_type);
+    }
     if (effect_) {
         effect_->Initialize();
         effect_->Start(_state, _duration);

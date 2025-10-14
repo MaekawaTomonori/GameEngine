@@ -36,7 +36,7 @@ void SceneSwitcher::Update() {
         scene_->Setup(this, ppe_, debug_);
         scene_->Initialize();
 
-        transition_->Awake(scene_->GetEntryTransition(), ITransitionEffect::State::In, 6.f);
+        transition_->Awake(scene_->GetEntryTransition(), ITransitionEffect::State::In, 1.f);
         return;
     }
 
