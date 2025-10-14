@@ -3,15 +3,19 @@
 #include <string>
 
 class SceneSwitcher;
-class IGame;
+class DebugUI;
+class PostProcessExecutor;
 
 class IScene {
     SceneSwitcher* switcher_ = nullptr;
     bool progress_ = false;
 
 protected:
+    std::string name_;
     std::string next_;
-    IGame* game_ = nullptr;
+
+    PostProcessExecutor* postEffects_ = nullptr;
+    DebugUI* debug_ = nullptr;
 
     // Fade Types
     // in
@@ -25,9 +29,9 @@ public:
 
     bool IsProgress() const;
     void Awake();
-    void Awake(SceneSwitcher* _switcher);
-    void SetSwitcher(SceneSwitcher* _switcher);
-    void SetGame(IGame* _game);
+    void Setup(SceneSwitcher* _switcher, PostProcessExecutor* _ppe, DebugUI* _debug) { switcher_ = _switcher; postEffects_ = _ppe; debug_ = _debug; }
+
+    const std::string& GetName() const { return name_; }
 
 protected:
     void Change();

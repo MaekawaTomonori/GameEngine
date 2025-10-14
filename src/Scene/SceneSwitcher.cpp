@@ -4,6 +4,11 @@
 #include "Pattern/Singleton.hpp"
 #include "src/Camera/Director/CameraDirector.hpp"
 
+void SceneSwitcher::Setup(PostProcessExecutor* _ppe, DebugUI* _debug) {
+    ppe_ = _ppe;
+    debug_ = _debug;
+}
+
 void SceneSwitcher::Update() {
     Debug();
     // Scene Changer
@@ -23,7 +28,7 @@ void SceneSwitcher::Update() {
 
         next_.reset();
         next_ = nullptr;
-        scene_->SetSwitcher(this);
+        scene_->Setup(this, ppe_, debug_);
         scene_->Initialize();
         scene_->Update();
 
@@ -51,12 +56,12 @@ void SceneSwitcher::Draw() {
 void SceneSwitcher::Debug() {
     debug_->RegisterCommand("SceneSwitcher", [this]() {
         ImGui::Begin("SceneSwitcher");
-        //if (scene_) {
-        //    ImGui::Text("Current Scene: %s", typeid(*scene_).name());
-        //} else {
-        //    ImGui::Text("No active scene");
-        //}
-        //ImGui::Separator();
+        if (scene_) {
+            ImGui::Text("Current Scene: %s", scene_->GetName().c_str());
+        } else {
+            ImGui::Text("No active scene");
+        }
+        ImGui::Separator();
         
         static char sceneName[128] = "";
         ImGui::InputText("Scene Name", sceneName, sizeof(sceneName));

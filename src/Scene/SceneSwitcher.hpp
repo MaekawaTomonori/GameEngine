@@ -10,12 +10,14 @@
 class SceneSwitcher {
 	std::unique_ptr<AbstractSceneFactory> factory_;
 
+    PostProcessExecutor* ppe_ = nullptr;
     DebugUI* debug_ = nullptr;
 
     std::unique_ptr<IScene> scene_;
     std::unique_ptr<IScene> next_;
 
 public:
+    void Setup(PostProcessExecutor* _ppe, DebugUI* _debug);
 	void Update();
     void Draw();
 
@@ -23,7 +25,6 @@ public:
     void Change(const std::string& _name);
 
     void Debug();
-    void SetDebugUI(DebugUI* _debug) { debug_ = _debug; }
 }; // class SceneSwitcher
 
 #endif // SceneSwitcher_HPP_
