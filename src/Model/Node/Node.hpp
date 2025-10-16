@@ -6,6 +6,10 @@
 #include "Math/Matrix.hpp"
 #include "Math/Transform.hpp"
 
+/// <summary>
+/// ノードデータ
+/// モデルの階層構造を表現
+/// </summary>
 struct Node {
     std::string name;
     Transform transform;

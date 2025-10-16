@@ -5,6 +5,10 @@
 
 #include "NodeAnimation.hpp"
 
+/// <summary>
+/// アニメーションデータ
+/// ノードアニメーションのコレクションと再生時間を保持
+/// </summary>
 struct Animation {
     float duration;
     std::map<std::string, NodeAnimation> nodeAnimations;

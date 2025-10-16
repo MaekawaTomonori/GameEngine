@@ -1,0 +1,233 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.14.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>PortfolioGame Engine: Singleton&lt; T &gt; クラステンプレート</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">PortfolioGame Engine<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">C++20 DirectX12 Game Engine</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.14.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','検索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('classSingleton.html','','classSingleton-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">読み取り中…</div>
+<div class="SRStatus" id="Searching">検索中…</div>
+<div class="SRStatus" id="NoMatches">一致する文字列を見つけられません</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Singleton&lt; T &gt; クラステンプレート</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>シングルトンパターンテンプレートクラス スレッドセーフな単一インスタンス管理を提供  
+ <a href="#details">[詳解]</a></p>
+
+<p><code>#include &lt;<a class="el" href="Singleton_8hpp_source.html">Singleton.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+公開メンバ関数</h2></td></tr>
+<tr class="memitem:a23b2407170cc04f6746874704b928044" id="r_a23b2407170cc04f6746874704b928044"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a23b2407170cc04f6746874704b928044">Singleton</a> (const <a class="el" href="classSingleton.html">Singleton</a> &amp;)=delete</td></tr>
+<tr class="memitem:a77024ec0dcc861c2d5f4a848d726e2ad" id="r_a77024ec0dcc861c2d5f4a848d726e2ad"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSingleton.html">Singleton</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a77024ec0dcc861c2d5f4a848d726e2ad">operator=</a> (const <a class="el" href="classSingleton.html">Singleton</a> &amp;)=delete</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+静的公開メンバ関数</h2></td></tr>
+<tr class="memitem:a7b90075f8e4471743fd3596be874e5d1" id="r_a7b90075f8e4471743fd3596be874e5d1"><td class="memItemLeft" align="right" valign="top">static T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7b90075f8e4471743fd3596be874e5d1">GetInstance</a> ()</td></tr>
+<tr class="memdesc:a7b90075f8e4471743fd3596be874e5d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">シングルトンインスタンスを取得  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">詳解</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename T&gt;<br />
+class Singleton&lt; T &gt;</div><p>シングルトンパターンテンプレートクラス スレッドセーフな単一インスタンス管理を提供 </p>
+
+<p class="definition"> <a class="el" href="Singleton_8hpp_source.html">Singleton.hpp</a> の <a class="el" href="Singleton_8hpp_source.html#l00031">31</a> 行目に定義があります。</p>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">構築子と解体子</h2>
+<a id="a23b2407170cc04f6746874704b928044" name="a23b2407170cc04f6746874704b928044"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a23b2407170cc04f6746874704b928044">&#9670;&#160;</a></span>Singleton()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classSingleton.html">Singleton</a>&lt; T &gt;<a class="el" href="classSingleton.html">::Singleton</a> </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classSingleton.html">Singleton</a>&lt; T &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel delete">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="reference">参照先 <a class="el" href="#a23b2407170cc04f6746874704b928044">Singleton()</a>.</p>
+
+<p class="reference">参照元 <a class="el" href="#a77024ec0dcc861c2d5f4a848d726e2ad">operator=()</a>, <a class="el" href="#a23b2407170cc04f6746874704b928044">Singleton()</a>.</p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">関数詳解</h2>
+<a id="a7b90075f8e4471743fd3596be874e5d1" name="a7b90075f8e4471743fd3596be874e5d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7b90075f8e4471743fd3596be874e5d1">&#9670;&#160;</a></span>GetInstance()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T * <a class="el" href="classSingleton.html">Singleton</a>&lt; T &gt;::GetInstance </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>シングルトンインスタンスを取得 </p>
+<dl class="section return"><dt>戻り値</dt><dd>インスタンスへのポインタ</dd></dl>
+
+<p class="definition"> <a class="el" href="Singleton_8hpp_source.html">Singleton.hpp</a> の <a class="el" href="Singleton_8hpp_source.html#l00043">43</a> 行目に定義があります。</p>
+
+<p class="reference">参照元 <a class="el" href="Mesh_8cpp_source.html#l00062">Mesh::Draw()</a>, <a class="el" href="Model_8cpp_source.html#l00106">Model::Draw()</a>, <a class="el" href="Skybox_8cpp_source.html#l00052">Skybox::Draw()</a>, <a class="el" href="Sprite_8cpp_source.html#l00118">Sprite::Draw()</a>, <a class="el" href="Framework_8cpp_source.html#l00010">Framework::Framework()</a>, <a class="el" href="Mesh_8cpp_source.html#l00013">Mesh::Initialize()</a>, <a class="el" href="Skybox_8cpp_source.html#l00009">Skybox::Initialize()</a>, <a class="el" href="Sprite_8cpp_source.html#l00021">Sprite::Initialize()</a>, <a class="el" href="Line_8cpp_source.html#l00010">Line::Line()</a>, <a class="el" href="Model_8cpp_source.html#l00167">Model::Load()</a>, <a class="el" href="CameraRepository_8cpp_source.html#l00058">CameraRepository::LoadFromFile()</a>, <a class="el" href="CameraDirector_8cpp_source.html#l00188">CameraDirector::Run()</a>, <a class="el" href="DirectionalLight_8cpp_source.html#l00015">RawDirectionalLight::Save()</a>, <a class="el" href="PointLight_8cpp_source.html#l00021">RawPointLight::Save()</a>, <a class="el" href="SpotLight_8cpp_source.html#l00026">RawSpotLight::Save()</a>, <a class="el" href="CameraRepository_8cpp_source.html#l00075">CameraRepository::SaveToFile()</a>, <a class="el" href="Model_8cpp_source.html#l00149">Model::SetEnvironmentTexture()</a>, <a class="el" href="Mesh_8cpp_source.html#l00158">Mesh::SetTexture()</a>, <a class="el" href="Sprite_8cpp_source.html#l00013">Sprite::Sprite()</a>, <a class="el" href="Model_8cpp_source.html#l00083">Model::Update()</a>, <a class="el" href="SceneSwitcher_8cpp_source.html#l00015">SceneSwitcher::Update()</a>, <a class="el" href="Skybox_8cpp_source.html#l00039">Skybox::Update()</a>, <a class="el" href="Sprite_8cpp_source.html#l00074">Sprite::Update()</a> (計23項目).</p>
+
+</div>
+</div>
+<a id="a77024ec0dcc861c2d5f4a848d726e2ad" name="a77024ec0dcc861c2d5f4a848d726e2ad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a77024ec0dcc861c2d5f4a848d726e2ad">&#9670;&#160;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classSingleton.html">Singleton</a> &amp; <a class="el" href="classSingleton.html">Singleton</a>&lt; T &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classSingleton.html">Singleton</a>&lt; T &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel delete">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="reference">参照先 <a class="el" href="#a23b2407170cc04f6746874704b928044">Singleton()</a>.</p>
+
+</div>
+</div>
+<hr/>このクラス詳解は次のファイルから抽出されました:<ul>
+<li>C:/Users/tomo-/source/repos/PortfolioGame/Engine/include/Pattern/<a class="el" href="Singleton_8hpp_source.html">Singleton.hpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="classSingleton.html">Singleton</a></li>
+    <li class="footer"><span class="timestamp"></span>作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.14.0 </li>
+  </ul>
+</div>
+</body>
+</html>

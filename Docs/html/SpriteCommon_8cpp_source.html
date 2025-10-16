@@ -1,0 +1,195 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.14.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>PortfolioGame Engine: C:/Users/tomo-/source/repos/PortfolioGame/Engine/src/Sprite/Common/SpriteCommon.cpp ソースファイル</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">PortfolioGame Engine<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">C++20 DirectX12 Game Engine</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.14.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','検索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('SpriteCommon_8cpp_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">読み取り中…</div>
+<div class="SRStatus" id="Searching">検索中…</div>
+<div class="SRStatus" id="NoMatches">一致する文字列を見つけられません</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">SpriteCommon.cpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="SpriteCommon_8cpp.html">[詳解]</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#include &quot;<a class="code" href="SpriteCommon_8hpp.html">SpriteCommon.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;<a class="code" href="BlendMode_8hpp.html">src/DirectX/GraphicsPipeline/Object/BlendMode.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="InputLayout_8hpp.html">src/DirectX/GraphicsPipeline/Object/InputLayout.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;<a class="code" href="RootSignature_8hpp.html">src/DirectX/GraphicsPipeline/Object/RootSignature.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;<a class="code" href="Shader_8h.html">src/DirectX/Shader/Shader.h</a>&quot;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="foldopen" id="foldopen00008" data-start="{" data-end="}">
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno"><a class="line" href="classSpriteCommon.html#a20418d30dff7afcb1e0acaa41f25ea4a">    8</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classSpriteCommon.html#a20418d30dff7afcb1e0acaa41f25ea4a">SpriteCommon::Initialize</a>(<a class="code hl_class" href="classDirectXAdapter.html">DirectXAdapter</a>* _adapter, <a class="code hl_class" href="classDebugUI.html">DebugUI</a>* _debugUi) {</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>    <a class="code hl_function" href="classCommon.html#aec7be1d29837ac9454da288b29f2f294">Setup</a>(_adapter, _debugUi);</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>    </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    <span class="comment">// PipelineStateObjectの初期化</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    <a class="code hl_variable" href="classCommon.html#a56791becb6f297b823111b69ce45398d">pipeline_</a> = std::make_unique&lt;PipelineStateObject&gt;(_adapter);</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    D3D12_DESCRIPTOR_RANGE textureRange{</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>        .RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV,</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>        .NumDescriptors = 1,</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>        .BaseShaderRegister = 0,</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>        .RegisterSpace = 0,</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>        .OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    };</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <span class="comment">// PipelineStateObject作成 (Sprite用)</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <a class="code hl_variable" href="classCommon.html#a56791becb6f297b823111b69ce45398d">pipeline_</a>-&gt;SetRootSignature(</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>        <a class="code hl_class" href="classRootSignature.html">RootSignature</a>()</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>            <span class="comment">// 1. Material CBV (Pixel Shader, register 0)</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>            .AddParameter({</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>                .ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV,</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>                .Descriptor = {</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>                    .ShaderRegister = 0</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>                },</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>                .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>            })</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>            <span class="comment">// 2. Transform CBV (Vertex Shader, register 0)</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>            .<a class="code hl_function" href="classRootSignature.html#a6d6cd5a567816ca14e34f47841d98901">AddParameter</a>({</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>                .ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV,</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>                .Descriptor = {</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>                    .ShaderRegister = 0</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>                },</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>                .ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>            })</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>            <span class="comment">// 3. Texture SRV (Pixel Shader, Descriptor Table)</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>            .<a class="code hl_function" href="classRootSignature.html#a6d6cd5a567816ca14e34f47841d98901">AddParameter</a>({</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>                .ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE,</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>                .DescriptorTable = {</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>                    .NumDescriptorRanges = 1,</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>                    .pDescriptorRanges = &amp;textureRange</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>                },</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>                .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>            })</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        <span class="comment">// サンプラー設定</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        .<a class="code hl_function" href="classRootSignature.html#a031abb8bf17536401f88c9a5f51b08eb">SetSampler</a>({</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>            .Filter = D3D12_FILTER_MIN_MAG_MIP_LINEAR,</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>            .AddressU = D3D12_TEXTURE_ADDRESS_MODE_WRAP,</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>            .AddressV = D3D12_TEXTURE_ADDRESS_MODE_WRAP,</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>            .AddressW = D3D12_TEXTURE_ADDRESS_MODE_WRAP,</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>            .ComparisonFunc = D3D12_COMPARISON_FUNC_NEVER,</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>            .MaxLOD = D3D12_FLOAT32_MAX,</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>            .ShaderRegister = 0,</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>            .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        })    </div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    )</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    .SetInputLayout(<a class="code hl_class" href="classInputLayout.html">InputLayout</a>{}</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        .<a class="code hl_function" href="classInputLayout.html#a7c8232ab0bd4c9830db907c6da5887cb">SetElement</a>({<span class="stringliteral">&quot;POSITION&quot;</span>, 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, D3D12_APPEND_ALIGNED_ELEMENT, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0})</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        .<a class="code hl_function" href="classInputLayout.html#a7c8232ab0bd4c9830db907c6da5887cb">SetElement</a>({<span class="stringliteral">&quot;TEXCOORD&quot;</span>, 0, DXGI_FORMAT_R32G32_FLOAT, 0, D3D12_APPEND_ALIGNED_ELEMENT, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0})</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    )</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    .SetBlend(<a class="code hl_enumvalue" href="BlendMode_8hpp.html#a30323fa90e24ca484998b9fba6c40e85a002101f8725e5c78d9f30d87f3fa4c87">BlendMode::ALPHA</a>)</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    .SetShader(std::make_unique&lt;Shader&gt;(L<span class="stringliteral">&quot;Sprite&quot;</span>))</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    .SetTopologyType(D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE)</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    .Create();</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>}</div>
+</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
+<div class="ttc" id="aBlendMode_8hpp_html"><div class="ttname"><a href="BlendMode_8hpp.html">BlendMode.hpp</a></div></div>
+<div class="ttc" id="aBlendMode_8hpp_html_a30323fa90e24ca484998b9fba6c40e85a002101f8725e5c78d9f30d87f3fa4c87"><div class="ttname"><a href="BlendMode_8hpp.html#a30323fa90e24ca484998b9fba6c40e85a002101f8725e5c78d9f30d87f3fa4c87">BlendMode::ALPHA</a></div><div class="ttdeci">@ ALPHA</div><div class="ttdef"><b>Definition</b> <a href="BlendMode_8hpp_source.html#l00005">BlendMode.hpp:5</a></div></div>
+<div class="ttc" id="aInputLayout_8hpp_html"><div class="ttname"><a href="InputLayout_8hpp.html">InputLayout.hpp</a></div></div>
+<div class="ttc" id="aRootSignature_8hpp_html"><div class="ttname"><a href="RootSignature_8hpp.html">RootSignature.hpp</a></div></div>
+<div class="ttc" id="aShader_8h_html"><div class="ttname"><a href="Shader_8h.html">Shader.h</a></div></div>
+<div class="ttc" id="aSpriteCommon_8hpp_html"><div class="ttname"><a href="SpriteCommon_8hpp.html">SpriteCommon.hpp</a></div></div>
+<div class="ttc" id="aclassCommon_html_a56791becb6f297b823111b69ce45398d"><div class="ttname"><a href="classCommon.html#a56791becb6f297b823111b69ce45398d">Common::pipeline_</a></div><div class="ttdeci">std::unique_ptr&lt; PipelineStateObject &gt; pipeline_</div><div class="ttdef"><b>Definition</b> <a href="Common_8hpp_source.html#l00016">Common.hpp:16</a></div></div>
+<div class="ttc" id="aclassCommon_html_aec7be1d29837ac9454da288b29f2f294"><div class="ttname"><a href="classCommon.html#aec7be1d29837ac9454da288b29f2f294">Common::Setup</a></div><div class="ttdeci">void Setup(DirectXAdapter *_adapter, DebugUI *_debugUi)</div><div class="ttdef"><b>Definition</b> <a href="Common_8cpp_source.html#l00003">Common.cpp:3</a></div></div>
+<div class="ttc" id="aclassDebugUI_html"><div class="ttname"><a href="classDebugUI.html">DebugUI</a></div><div class="ttdoc">ImGuiアダプタークラス デバッグUIの描画とコマンド管理を提供</div><div class="ttdef"><b>Definition</b> <a href="DebugUI_8hpp_source.html#l00015">DebugUI.hpp:15</a></div></div>
+<div class="ttc" id="aclassDirectXAdapter_html"><div class="ttname"><a href="classDirectXAdapter.html">DirectXAdapter</a></div><div class="ttdoc">DirectX12アダプタークラス DirectX12の初期化とデバイス管理を提供</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8hpp_source.html#l00025">DirectXAdapter.hpp:25</a></div></div>
+<div class="ttc" id="aclassInputLayout_html"><div class="ttname"><a href="classInputLayout.html">InputLayout</a></div><div class="ttdef"><b>Definition</b> <a href="InputLayout_8hpp_source.html#l00006">InputLayout.hpp:6</a></div></div>
+<div class="ttc" id="aclassInputLayout_html_a7c8232ab0bd4c9830db907c6da5887cb"><div class="ttname"><a href="classInputLayout.html#a7c8232ab0bd4c9830db907c6da5887cb">InputLayout::SetElement</a></div><div class="ttdeci">InputLayout &amp; SetElement(const D3D12_INPUT_ELEMENT_DESC &amp;_element)</div><div class="ttdef"><b>Definition</b> <a href="InputLayout_8cpp_source.html#l00003">InputLayout.cpp:3</a></div></div>
+<div class="ttc" id="aclassRootSignature_html"><div class="ttname"><a href="classRootSignature.html">RootSignature</a></div><div class="ttdef"><b>Definition</b> <a href="RootSignature_8hpp_source.html#l00008">RootSignature.hpp:8</a></div></div>
+<div class="ttc" id="aclassRootSignature_html_a031abb8bf17536401f88c9a5f51b08eb"><div class="ttname"><a href="classRootSignature.html#a031abb8bf17536401f88c9a5f51b08eb">RootSignature::SetSampler</a></div><div class="ttdeci">RootSignature &amp; SetSampler(const D3D12_STATIC_SAMPLER_DESC &amp;_sampler)</div><div class="ttdef"><b>Definition</b> <a href="RootSignature_8cpp_source.html#l00011">RootSignature.cpp:11</a></div></div>
+<div class="ttc" id="aclassRootSignature_html_a6d6cd5a567816ca14e34f47841d98901"><div class="ttname"><a href="classRootSignature.html#a6d6cd5a567816ca14e34f47841d98901">RootSignature::AddParameter</a></div><div class="ttdeci">RootSignature &amp; AddParameter(const D3D12_ROOT_PARAMETER &amp;_parameter)</div><div class="ttdef"><b>Definition</b> <a href="RootSignature_8cpp_source.html#l00006">RootSignature.cpp:6</a></div></div>
+<div class="ttc" id="aclassSpriteCommon_html_a20418d30dff7afcb1e0acaa41f25ea4a"><div class="ttname"><a href="classSpriteCommon.html#a20418d30dff7afcb1e0acaa41f25ea4a">SpriteCommon::Initialize</a></div><div class="ttdeci">void Initialize(DirectXAdapter *_adapter, DebugUI *_debugUi) override</div><div class="ttdef"><b>Definition</b> <a href="#l00008">SpriteCommon.cpp:8</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a href="dir_909c286288939002c1b25213a067bdba.html">Sprite</a></li><li class="navelem"><a href="dir_c27cb4f1352f494a0d00cb2d05d35956.html">Common</a></li><li class="navelem"><a href="SpriteCommon_8cpp.html">SpriteCommon.cpp</a></li>
+    <li class="footer"><span class="timestamp"></span>作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.14.0 </li>
+  </ul>
+</div>
+</body>
+</html>

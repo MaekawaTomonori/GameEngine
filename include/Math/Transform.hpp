@@ -5,6 +5,10 @@
 #include "Quaternion.hpp"
 #include "Vector3.hpp"
 
+/// <summary>
+/// 3D変換データ構造体
+/// スケール、回転、平行移動を保持
+/// </summary>
 struct Transform {
 	Vector3 scale;
 	std::variant<Vector3, Quaternion> rotate;

@@ -1,0 +1,384 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.14.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>PortfolioGame Engine: C:/Users/tomo-/source/repos/PortfolioGame/Engine/src/Model/Loader/GltfLoader.cpp ソースファイル</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">PortfolioGame Engine<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">C++20 DirectX12 Game Engine</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.14.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','検索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('GltfLoader_8cpp_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">読み取り中…</div>
+<div class="SRStatus" id="Searching">検索中…</div>
+<div class="SRStatus" id="NoMatches">一致する文字列を見つけられません</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">GltfLoader.cpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="GltfLoader_8cpp.html">[詳解]</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#include &quot;<a class="code" href="GltfLoader_8hpp.html">GltfLoader.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;assimp/Importer.hpp&gt;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;assimp/anim.h&gt;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;assimp/mesh.h&gt;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;assimp/postprocess.h&gt;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;<a class="code" href="Log_8hpp.html">Log.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;<a class="code" href="Utils_8hpp.html">Utils.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;<a class="code" href="MathUtils_8hpp.html">Math/MathUtils.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="foldopen" id="foldopen00012" data-start="{" data-end="}">
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="classGltfLoader.html#a9225803f518d3708c1541cfe4f145b82">   12</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classGltfLoader.html#a9225803f518d3708c1541cfe4f145b82">GltfLoader::LoadModel</a>(<span class="keyword">const</span> std::string&amp; _name, <a class="code hl_class" href="classResourceRepository.html">ResourceRepository</a>* _repository) {</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    LoadGltf(<a class="code hl_variable" href="classIModelLoader.html#a87bb7caceb51c4aa8716d21408107bef">ASSETS_FOLDER</a>, _name, _repository);</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>}</div>
+</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keywordtype">void</span> GltfLoader::LoadGltf(<span class="keyword">const</span> std::string&amp; _directory, <span class="keyword">const</span> std::string&amp; _name, <span class="keyword">const</span> <a class="code hl_class" href="classResourceRepository.html">ResourceRepository</a>* _repository) {</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    Assimp::Importer importer;</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    std::string path = _directory + _name + <span class="stringliteral">&quot;/&quot;</span> + _name + <span class="stringliteral">&quot;.gltf&quot;</span>;</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <span class="keyword">const</span> aiScene* scene = importer.ReadFile(path, aiProcess_FlipWindingOrder | aiProcess_FlipUVs | aiProcess_Triangulate);</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <span class="keywordflow">if</span> (!scene) {</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>        <a class="code hl_function" href="namespaceUtils.html#aa35c12cebe61c9d818df8944b3a66706">Utils::Alert</a>(<span class="stringliteral">&quot;GltfLoader::LoadGltf: Failed to load file: &quot;</span> + path + <span class="stringliteral">&quot;\nError: &quot;</span> + importer.GetErrorString());</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        <a class="code hl_function" href="classLog.html#a1a96849014a462fb22eb2247323cb2dc">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, <span class="stringliteral">&quot;[GLTF Loader] Failed to load &quot;</span> + path + <span class="stringliteral">&quot;: &quot;</span> + importer.GetErrorString());</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    }</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <span class="keywordflow">if</span> (!scene-&gt;HasMeshes()){</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        <a class="code hl_function" href="namespaceUtils.html#aa35c12cebe61c9d818df8944b3a66706">Utils::Alert</a>(<span class="stringliteral">&quot;GltfLoader::LoadGltf: No meshes found in file: &quot;</span> + path);</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    }</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <a class="code hl_function" href="classLog.html#a1a96849014a462fb22eb2247323cb2dc">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>, <span class="stringliteral">&quot;[GLTF Loader] Loaded &quot;</span> + path + <span class="stringliteral">&quot; by Assimp&quot;</span>);</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="comment">// Model Loader</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    std::unique_ptr&lt;ModelData&gt; model_ = std::make_unique&lt;ModelData&gt;();</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    model_-&gt;name = _name;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    model_-&gt;mesh = _name;</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    model_-&gt;root = LoadNode(scene-&gt;mRootNode);</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    model_-&gt;animation = LoadAnimation(scene, _name);</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    model_-&gt;skeleton = CreateSkeleton(model_-&gt;root);</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="comment">//Mesh</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    MeshData mesh_ = LoadMesh(scene, _name, *model_);</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    _repository-&gt;<a class="code hl_function" href="classResourceRepository.html#a75fdd68ad9888e5e76d10a6d7cb554b4">GetMeshRepository</a>()-&gt;<a class="code hl_function" href="classMeshRepository.html#a290fdef08bf90e66c00c6c9c5e0f2492">Add</a>(_name, mesh_);</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    _repository-&gt;<a class="code hl_function" href="classResourceRepository.html#ad0b1344ad546267302d2d3bad18aebc2">GetModelRepository</a>()-&gt;<a class="code hl_function" href="classModelRepository.html#af9f26431792428a60332cfc6b653a911">Add</a>(_name, std::move(model_));</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>}</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><a class="code hl_struct" href="structNode.html">Node</a> GltfLoader::LoadNode(<span class="keyword">const</span> aiNode* _node) {</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    Node node;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    node.<a class="code hl_variable" href="structNode.html#aa829edc37a2c92dacdab95bcef248175">name</a> = _node-&gt;mName.C_Str();</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    aiVector3D scale, translate;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    aiQuaternion rotate;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    _node-&gt;mTransformation.Decompose(scale, rotate, translate);</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    node.<a class="code hl_variable" href="structNode.html#a3bb2f13d17b8b6b01f82d471940977a2">transform</a>.<a class="code hl_variable" href="structTransform.html#a2b4006024b283c6af2813e78e7092364">scale</a> = Vector3{ .x= scale.x, .y= scale.y, .z= scale.z };</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    node.<a class="code hl_variable" href="structNode.html#a3bb2f13d17b8b6b01f82d471940977a2">transform</a>.<a class="code hl_variable" href="structTransform.html#a0e57e180d268a3c34a9d7691bf21e934">rotate</a> = Quaternion{.x= rotate.x, .y= -rotate.y, .z= -rotate.z, .w= rotate.w};</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    node.<a class="code hl_variable" href="structNode.html#a3bb2f13d17b8b6b01f82d471940977a2">transform</a>.<a class="code hl_variable" href="structTransform.html#a0bfe2382285607f36bd686c6d25fe85d">translate</a> = Vector3{ .x = -translate.x, .y = translate.y, .z = translate.z };</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    node.<a class="code hl_variable" href="structNode.html#a44b4bc0f61e65b6447eaa24f695b2740">local</a> = <a class="code hl_function" href="namespaceMathUtils_1_1Matrix.html#a0e85b5bf5f1c3672e757f8598bf74b5f">MathUtils::Matrix::MakeAffineMatrix</a>(node.<a class="code hl_variable" href="structNode.html#a3bb2f13d17b8b6b01f82d471940977a2">transform</a>);</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; _node-&gt;mNumChildren; ++i){</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>        node.<a class="code hl_variable" href="structNode.html#af7ddc81358470c3bf7a7819c8b77f53d">children</a>.push_back(LoadNode(_node-&gt;mChildren[i]));</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    }</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <span class="keywordflow">return</span> node;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>}</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>std::optional&lt;Animation&gt; GltfLoader::LoadAnimation(<span class="keyword">const</span> aiScene* _scene, <span class="keyword">const</span> std::string&amp; _name) {</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    Animation result;</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    <span class="keywordflow">if</span> (_scene-&gt;mNumAnimations &lt;= 0) {</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        <a class="code hl_function" href="classLog.html#a1a96849014a462fb22eb2247323cb2dc">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea059e9861e0400dfbe05c98a841f3f96b">Log::Level::WARNING</a>, <span class="stringliteral">&quot;GltfLoader::LoadAnimation: No animations found in file: &quot;</span> + _name);</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>        <span class="keywordflow">return</span> std::nullopt;</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    }</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    aiAnimation* animation = _scene-&gt;mAnimations[0];</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    <span class="keywordtype">float</span> tps = (animation-&gt;mTicksPerSecond == 0.) ? 1.f : static_cast&lt;float&gt;(animation-&gt;mTicksPerSecond);</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    result.<a class="code hl_variable" href="structAnimation.html#a66cc7333638f071b0401072ba95c55fd">duration</a> = <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(animation-&gt;mDuration / tps);</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    <span class="keywordflow">for</span> (uint32_t channelIndex = 0; channelIndex &lt; animation-&gt;mNumChannels; ++channelIndex) {</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>        aiNodeAnim* channel = animation-&gt;mChannels[channelIndex];</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>        NodeAnimation&amp; nodeAnimation = result.<a class="code hl_variable" href="structAnimation.html#ade5e4c5d87fd8387d12d08a98331a9ba">nodeAnimations</a>[channel-&gt;mNodeName.C_Str()];</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>        uint32_t key;</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>        <span class="keywordflow">for</span> (key = 0; key &lt; channel-&gt;mNumPositionKeys; ++key) {</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>            aiVectorKey&amp; position = channel-&gt;mPositionKeys[key];</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>            <a class="code hl_typedef" href="KeyFrame_8hpp.html#a67c0ef80840d3edb8dec1d9fb6be9c03">KeyframeVector3</a> keyframe;</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>            keyframe.<a class="code hl_variable" href="structKeyframe.html#abe885f982835db759fc5e52b3ed41227">time</a> = <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(position.mTime / tps);</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>            keyframe.<a class="code hl_variable" href="structKeyframe.html#ab0cd6a837157ff59b78c8f9ce04fd28e">value</a> = {-position.mValue.x, position.mValue.y, position.mValue.z};</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>            nodeAnimation.<a class="code hl_variable" href="structNodeAnimation.html#aadfeef2517a847af3d52eb0bf4788e7b">translate</a>.<a class="code hl_variable" href="structAnimationCurve.html#a9f4846d434d6d5f830ec383f7bd57964">keyframes</a>.push_back(keyframe);</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>        }</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>        <span class="keywordflow">for</span> (key = 0; key &lt; channel-&gt;mNumRotationKeys; ++key) {</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>            aiQuatKey&amp; rotation = channel-&gt;mRotationKeys[key];</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>            <a class="code hl_typedef" href="KeyFrame_8hpp.html#a2ab0723cca5ea831c153544e99a04d43">KeyframeQuaternion</a> keyframe;</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>            keyframe.<a class="code hl_variable" href="structKeyframe.html#abe885f982835db759fc5e52b3ed41227">time</a> = <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(rotation.mTime / tps);</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>            keyframe.<a class="code hl_variable" href="structKeyframe.html#ab0cd6a837157ff59b78c8f9ce04fd28e">value</a> = { rotation.mValue.x, -rotation.mValue.y, -rotation.mValue.z, rotation.mValue.w };</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>            nodeAnimation.<a class="code hl_variable" href="structNodeAnimation.html#abff16af5b1447cedceaed85731707458">rotation</a>.<a class="code hl_variable" href="structAnimationCurve.html#a9f4846d434d6d5f830ec383f7bd57964">keyframes</a>.push_back(keyframe);</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>        }</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>        <span class="keywordflow">for</span> (key = 0; key &lt; channel-&gt;mNumScalingKeys; ++key) {</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>            aiVectorKey&amp; scale = channel-&gt;mScalingKeys[key];</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>            <a class="code hl_typedef" href="KeyFrame_8hpp.html#a67c0ef80840d3edb8dec1d9fb6be9c03">KeyframeVector3</a> keyframe;</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>            keyframe.<a class="code hl_variable" href="structKeyframe.html#abe885f982835db759fc5e52b3ed41227">time</a> = <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(scale.mTime / tps);</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>            keyframe.<a class="code hl_variable" href="structKeyframe.html#ab0cd6a837157ff59b78c8f9ce04fd28e">value</a> = { scale.mValue.x, scale.mValue.y, scale.mValue.z };</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>            nodeAnimation.<a class="code hl_variable" href="structNodeAnimation.html#a912aec4dc4a4c7c8541e260cf8651b40">scale</a>.<a class="code hl_variable" href="structAnimationCurve.html#a9f4846d434d6d5f830ec383f7bd57964">keyframes</a>.push_back(keyframe);</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>        }</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    }</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span> </div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    <span class="keywordflow">return</span> result;</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>}</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span> </div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span><a class="code hl_struct" href="structSkeleton.html">Skeleton</a> GltfLoader::CreateSkeleton(<span class="keyword">const</span> <a class="code hl_struct" href="structNode.html">Node</a>&amp; _root) {</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    Skeleton skeleton;</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    skeleton.<a class="code hl_variable" href="structSkeleton.html#a0fd9b11fbe91caa6ba2bcb86616b1bf0">root</a> = CreateJoint(_root, std::nullopt, skeleton.<a class="code hl_variable" href="structSkeleton.html#aea268e832fd584fd7d26d4f11a2dcf19">joints</a>);</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span> </div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    <span class="keywordflow">for</span> (<span class="keyword">const</span> Joint&amp; joint : skeleton.<a class="code hl_variable" href="structSkeleton.html#aea268e832fd584fd7d26d4f11a2dcf19">joints</a>) {</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>        skeleton.<a class="code hl_variable" href="structSkeleton.html#a1ab6dd74411ca55c0d22dbf69c71f9b1">map</a>.emplace(joint.<a class="code hl_variable" href="structJoint.html#a57e3afaab4abae515d5053018e3cc886">name</a>, joint.<a class="code hl_variable" href="structJoint.html#a3496cf560550a65ab6d3f385bc87c3c0">index</a>);</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    }</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span> </div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    <span class="keywordflow">return</span> skeleton;</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>}</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span> </div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>int32_t GltfLoader::CreateJoint(<span class="keyword">const</span> <a class="code hl_struct" href="structNode.html">Node</a>&amp; _node, <span class="keyword">const</span> std::optional&lt;int32_t&gt;&amp; _parent, std::vector&lt;Joint&gt;&amp; _joints) {</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    Joint joint;</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    joint.<a class="code hl_variable" href="structJoint.html#a57e3afaab4abae515d5053018e3cc886">name</a> = _node.<a class="code hl_variable" href="structNode.html#aa829edc37a2c92dacdab95bcef248175">name</a>;</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    joint.<a class="code hl_variable" href="structJoint.html#ad6c189aba3170dfd9b28775b8c8cf09a">local</a> = _node.<a class="code hl_variable" href="structNode.html#a44b4bc0f61e65b6447eaa24f695b2740">local</a>;</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    joint.<a class="code hl_variable" href="structJoint.html#a7f2845fcb4ef0b92a04f5cc477d7ba53">space</a> = <a class="code hl_function" href="namespaceMathUtils_1_1Matrix.html#a1c40c9daddc0ed10682814216053a4f4">MathUtils::Matrix::MakeIdentity</a>();</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    joint.<a class="code hl_variable" href="structJoint.html#a080b6261e90e1de1c9720bcc38b1ffed">transform</a> = _node.<a class="code hl_variable" href="structNode.html#a3bb2f13d17b8b6b01f82d471940977a2">transform</a>;</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    joint.<a class="code hl_variable" href="structJoint.html#a3496cf560550a65ab6d3f385bc87c3c0">index</a> = <span class="keyword">static_cast&lt;</span>int32_t<span class="keyword">&gt;</span>(_joints.size());</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>    joint.<a class="code hl_variable" href="structJoint.html#a08006960139e10ad57a015c1e4de3314">parent</a> = _parent;</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>    _joints.push_back(joint);</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span> </div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    <span class="keywordflow">for</span> (<span class="keyword">const</span> Node&amp; child : _node.<a class="code hl_variable" href="structNode.html#af7ddc81358470c3bf7a7819c8b77f53d">children</a>) {</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>        int32_t childIndex = CreateJoint(child, joint.<a class="code hl_variable" href="structJoint.html#a3496cf560550a65ab6d3f385bc87c3c0">index</a>, _joints);</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>        _joints[joint.<a class="code hl_variable" href="structJoint.html#a3496cf560550a65ab6d3f385bc87c3c0">index</a>].children.push_back(childIndex);</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    }</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span> </div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>    <span class="keywordflow">return</span> joint.<a class="code hl_variable" href="structJoint.html#a3496cf560550a65ab6d3f385bc87c3c0">index</a>;</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>}</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span> </div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span><a class="code hl_struct" href="structMeshData.html">MeshData</a> GltfLoader::LoadMesh(<span class="keyword">const</span> aiScene* _scene, <span class="keyword">const</span> std::string&amp; _name, <a class="code hl_struct" href="structModelData.html">ModelData</a>&amp; _model)<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>    MeshData data;</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>    <span class="keywordflow">for</span> (uint32_t meshIndex = 0; meshIndex &lt; _scene-&gt;mNumMeshes; ++meshIndex){</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>        aiMesh* mesh = _scene-&gt;mMeshes[meshIndex];</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>        <span class="keywordflow">if</span> (!mesh-&gt;HasNormals() || !mesh-&gt;HasTextureCoords(0)) {</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>            <a class="code hl_function" href="classLog.html#a1a96849014a462fb22eb2247323cb2dc">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, <span class="stringliteral">&quot;GltfLoader::LoadMesh: Mesh does not have normals or texture coordinates&quot;</span>);</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>            <a class="code hl_function" href="namespaceUtils.html#aa35c12cebe61c9d818df8944b3a66706">Utils::Alert</a>(<span class="stringliteral">&quot;Mesh does not have normals or texture coordinates&quot;</span>);</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>            <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>        }</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span> </div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>        LoadVertexData(mesh, data);</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span> </div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>        LoadIndexData(mesh, data);</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>        </div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>        LoadBones(mesh, _model);</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span> </div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>        <span class="keywordflow">for</span> (uint32_t materialIndex = 0; materialIndex &lt; _scene-&gt;mNumMaterials; ++materialIndex){</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>            aiMaterial* material = _scene-&gt;mMaterials[materialIndex];</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>            <span class="keywordflow">if</span> (material-&gt;GetTextureCount(aiTextureType_DIFFUSE)){</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>                aiString texturePath;</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>                material-&gt;GetTexture(aiTextureType_DIFFUSE, 0, &amp;texturePath);</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>                data.<a class="code hl_variable" href="structMeshData.html#ab7bed81125007b625b5b001517ae957b">texture</a> = <a class="code hl_variable" href="classIModelLoader.html#a87bb7caceb51c4aa8716d21408107bef">ASSETS_FOLDER</a> + _name + <span class="stringliteral">&quot;/&quot;</span> + texturePath.C_Str();</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>            }</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>        }</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>    }</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>    <span class="keywordflow">return</span> data;</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>}</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span> </div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span><span class="keywordtype">void</span> GltfLoader::LoadVertexData(<span class="keyword">const</span> aiMesh* _mesh, <a class="code hl_struct" href="structMeshData.html">MeshData</a>&amp; _data) {</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>    uint32_t vertexCount = _mesh-&gt;mNumVertices;</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>    _data.<a class="code hl_variable" href="structMeshData.html#aac93fd7e3e5968c5f4376038ef1aac96">vertices</a>.resize(vertexCount);</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>    <span class="keywordflow">for</span> (uint32_t vertexIndex = 0; vertexIndex &lt; vertexCount; ++vertexIndex){</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>        aiVector3D&amp; position = _mesh-&gt;mVertices[vertexIndex];</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>        aiVector3D&amp; normal = _mesh-&gt;mNormals[vertexIndex];</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>        aiVector3D uv = _mesh-&gt;mTextureCoords[0][vertexIndex];</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span> </div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>        _data.<a class="code hl_variable" href="structMeshData.html#aac93fd7e3e5968c5f4376038ef1aac96">vertices</a>[vertexIndex].position = Vector4{ -position.x, position.y, position.z, 1.0f };</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>        _data.<a class="code hl_variable" href="structMeshData.html#aac93fd7e3e5968c5f4376038ef1aac96">vertices</a>[vertexIndex].normal = Vector3{ -normal.x, normal.y, normal.z };</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>        _data.<a class="code hl_variable" href="structMeshData.html#aac93fd7e3e5968c5f4376038ef1aac96">vertices</a>[vertexIndex].uv = Vector2{ uv.x, uv.y };</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>    }</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>}</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span> </div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span><span class="keywordtype">void</span> GltfLoader::LoadIndexData(<span class="keyword">const</span> aiMesh* _mesh, <a class="code hl_struct" href="structMeshData.html">MeshData</a>&amp; _data) {</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>    <span class="keywordflow">for</span> (uint32_t faceIndex = 0; faceIndex &lt; _mesh-&gt;mNumFaces; ++faceIndex){</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>        aiFace&amp; face = _mesh-&gt;mFaces[faceIndex];</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span> </div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>        <span class="keywordflow">if</span> (face.mNumIndices != 3){</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>            <a class="code hl_function" href="classLog.html#a1a96849014a462fb22eb2247323cb2dc">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, <span class="stringliteral">&quot;GltfLoader::LoadMesh: Face does not have 3 indices&quot;</span>);</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>            <a class="code hl_function" href="namespaceUtils.html#aa35c12cebe61c9d818df8944b3a66706">Utils::Alert</a>(<span class="stringliteral">&quot;Face does not have 3 indices&quot;</span>);</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>            <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>        }</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span> </div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>        <span class="keywordflow">for</span> (uint32_t element = 0; element &lt; face.mNumIndices; ++element){</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>            _data.<a class="code hl_variable" href="structMeshData.html#a79e9a85738fa0fa5b5e81d79c6960741">indices</a>.push_back(face.mIndices[element]);</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>        }</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>    }</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>}</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span> </div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span><span class="keywordtype">void</span> GltfLoader::LoadBones(<span class="keyword">const</span> aiMesh* _mesh, <a class="code hl_struct" href="structModelData.html">ModelData</a>&amp; _model) {</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>    <span class="keywordflow">for</span> (uint32_t boneIndex = 0; boneIndex &lt; _mesh-&gt;mNumBones; ++boneIndex){</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>        aiBone* bone = _mesh-&gt;mBones[boneIndex];</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>        std::string jointName = bone-&gt;mName.C_Str();</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>        JointWeightData&amp; jointWeight = _model.<a class="code hl_variable" href="structModelData.html#ae7388cd2134f5f9c7d3078c599a68011">skinCluster</a>[jointName];</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span> </div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>        aiMatrix4x4 bindPose = bone-&gt;mOffsetMatrix.Inverse();</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>        aiVector3D scale, translate;</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>        aiQuaternion rotate;</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span> </div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>        bindPose.Decompose(scale, rotate, translate);</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>        jointWeight.<a class="code hl_variable" href="structJointWeightData.html#ad72b331a765f837f4aeb8e6f74e8199b">inverseBindPose</a> = <a class="code hl_function" href="namespaceMathUtils_1_1Matrix.html#a0e85b5bf5f1c3672e757f8598bf74b5f">MathUtils::Matrix::MakeAffineMatrix</a>(</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>            Vector3{ .x = scale.x, .y = scale.y, .z = scale.z },</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>            Quaternion{ .x = rotate.x, .y = -rotate.y, .z = -rotate.z, .w = rotate.w },</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>            Vector3{ .x = -translate.x, .y = translate.y, .z = translate.z }</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>        ).Inverse();</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span> </div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>        <span class="keywordflow">for</span> (uint32_t weightIndex = 0; weightIndex &lt; bone-&gt;mNumWeights; ++weightIndex){</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>            jointWeight.<a class="code hl_variable" href="structJointWeightData.html#a0e723bfafc04bb284deb1794cf335f51">weights</a>.push_back({</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>                .weight = bone-&gt;mWeights[weightIndex].mWeight,</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>                .index = bone-&gt;mWeights[weightIndex].mVertexId</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>            });</div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>        }</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>    }</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>}</div>
+<div class="ttc" id="aGltfLoader_8hpp_html"><div class="ttname"><a href="GltfLoader_8hpp.html">GltfLoader.hpp</a></div></div>
+<div class="ttc" id="aKeyFrame_8hpp_html_a2ab0723cca5ea831c153544e99a04d43"><div class="ttname"><a href="KeyFrame_8hpp.html#a2ab0723cca5ea831c153544e99a04d43">KeyframeQuaternion</a></div><div class="ttdeci">Keyframe&lt; Quaternion &gt; KeyframeQuaternion</div><div class="ttdef"><b>Definition</b> <a href="KeyFrame_8hpp_source.html#l00013">KeyFrame.hpp:13</a></div></div>
+<div class="ttc" id="aKeyFrame_8hpp_html_a67c0ef80840d3edb8dec1d9fb6be9c03"><div class="ttname"><a href="KeyFrame_8hpp.html#a67c0ef80840d3edb8dec1d9fb6be9c03">KeyframeVector3</a></div><div class="ttdeci">Keyframe&lt; Vector3 &gt; KeyframeVector3</div><div class="ttdef"><b>Definition</b> <a href="KeyFrame_8hpp_source.html#l00012">KeyFrame.hpp:12</a></div></div>
+<div class="ttc" id="aLog_8hpp_html"><div class="ttname"><a href="Log_8hpp.html">Log.hpp</a></div></div>
+<div class="ttc" id="aMathUtils_8hpp_html"><div class="ttname"><a href="MathUtils_8hpp.html">MathUtils.hpp</a></div></div>
+<div class="ttc" id="aUtils_8hpp_html"><div class="ttname"><a href="Utils_8hpp.html">Utils.hpp</a></div></div>
+<div class="ttc" id="aclassGltfLoader_html_a9225803f518d3708c1541cfe4f145b82"><div class="ttname"><a href="classGltfLoader.html#a9225803f518d3708c1541cfe4f145b82">GltfLoader::LoadModel</a></div><div class="ttdeci">void LoadModel(const std::string &amp;_name, ResourceRepository *_repository) override</div><div class="ttdef"><b>Definition</b> <a href="#l00012">GltfLoader.cpp:12</a></div></div>
+<div class="ttc" id="aclassIModelLoader_html_a87bb7caceb51c4aa8716d21408107bef"><div class="ttname"><a href="classIModelLoader.html#a87bb7caceb51c4aa8716d21408107bef">IModelLoader::ASSETS_FOLDER</a></div><div class="ttdeci">const std::string ASSETS_FOLDER</div><div class="ttdef"><b>Definition</b> <a href="IModelLoader_8hpp_source.html#l00008">IModelLoader.hpp:8</a></div></div>
+<div class="ttc" id="aclassLog_html_a1a96849014a462fb22eb2247323cb2dc"><div class="ttname"><a href="classLog.html#a1a96849014a462fb22eb2247323cb2dc">Log::Send</a></div><div class="ttdeci">static void Send(Level level, const std::string &amp;message)</div><div class="ttdoc">ログメッセージを送信</div><div class="ttdef"><b>Definition</b> <a href="Log_8cpp_source.html#l00068">Log.cpp:68</a></div></div>
+<div class="ttc" id="aclassLog_html_afb5d4c945d835d194a295461d752531ea059e9861e0400dfbe05c98a841f3f96b"><div class="ttname"><a href="classLog.html#afb5d4c945d835d194a295461d752531ea059e9861e0400dfbe05c98a841f3f96b">Log::Level::WARNING</a></div><div class="ttdeci">@ WARNING</div><div class="ttdef"><b>Definition</b> <a href="Log_8hpp_source.html#l00030">Log.hpp:30</a></div></div>
+<div class="ttc" id="aclassLog_html_afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3"><div class="ttname"><a href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a></div><div class="ttdeci">@ INFO</div><div class="ttdef"><b>Definition</b> <a href="Log_8hpp_source.html#l00029">Log.hpp:29</a></div></div>
+<div class="ttc" id="aclassLog_html_afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482"><div class="ttname"><a href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a></div><div class="ttdeci">@ ERR</div><div class="ttdef"><b>Definition</b> <a href="Log_8hpp_source.html#l00031">Log.hpp:31</a></div></div>
+<div class="ttc" id="aclassMeshRepository_html_a290fdef08bf90e66c00c6c9c5e0f2492"><div class="ttname"><a href="classMeshRepository.html#a290fdef08bf90e66c00c6c9c5e0f2492">MeshRepository::Add</a></div><div class="ttdeci">void Add(const std::string &amp;_name, MeshData _raw)</div><div class="ttdef"><b>Definition</b> <a href="MeshRepository_8cpp_source.html#l00007">MeshRepository.cpp:7</a></div></div>
+<div class="ttc" id="aclassModelRepository_html_af9f26431792428a60332cfc6b653a911"><div class="ttname"><a href="classModelRepository.html#af9f26431792428a60332cfc6b653a911">ModelRepository::Add</a></div><div class="ttdeci">void Add(const std::string &amp;_name, std::unique_ptr&lt; ModelData &gt; _model)</div><div class="ttdoc">モデルデータを追加</div><div class="ttdef"><b>Definition</b> <a href="ModelRepository_8cpp_source.html#l00003">ModelRepository.cpp:3</a></div></div>
+<div class="ttc" id="aclassResourceRepository_html"><div class="ttname"><a href="classResourceRepository.html">ResourceRepository</a></div><div class="ttdoc">リソースリポジトリクラス モデルとメッシュのリポジトリを統合管理</div><div class="ttdef"><b>Definition</b> <a href="ResourceRepository_8hpp_source.html#l00012">ResourceRepository.hpp:12</a></div></div>
+<div class="ttc" id="aclassResourceRepository_html_a75fdd68ad9888e5e76d10a6d7cb554b4"><div class="ttname"><a href="classResourceRepository.html#a75fdd68ad9888e5e76d10a6d7cb554b4">ResourceRepository::GetMeshRepository</a></div><div class="ttdeci">MeshRepository * GetMeshRepository() const</div><div class="ttdoc">メッシュリポジトリを取得</div><div class="ttdef"><b>Definition</b> <a href="ResourceRepository_8cpp_source.html#l00012">ResourceRepository.cpp:12</a></div></div>
+<div class="ttc" id="aclassResourceRepository_html_ad0b1344ad546267302d2d3bad18aebc2"><div class="ttname"><a href="classResourceRepository.html#ad0b1344ad546267302d2d3bad18aebc2">ResourceRepository::GetModelRepository</a></div><div class="ttdeci">ModelRepository * GetModelRepository() const</div><div class="ttdoc">モデルリポジトリを取得</div><div class="ttdef"><b>Definition</b> <a href="ResourceRepository_8cpp_source.html#l00008">ResourceRepository.cpp:8</a></div></div>
+<div class="ttc" id="anamespaceMathUtils_1_1Matrix_html_a0e85b5bf5f1c3672e757f8598bf74b5f"><div class="ttname"><a href="namespaceMathUtils_1_1Matrix.html#a0e85b5bf5f1c3672e757f8598bf74b5f">MathUtils::Matrix::MakeAffineMatrix</a></div><div class="ttdeci">Matrix4x4 MakeAffineMatrix(const ::Transform &amp;transform)</div><div class="ttdef"><b>Definition</b> <a href="MathUtils_8cpp_source.html#l00113">MathUtils.cpp:113</a></div></div>
+<div class="ttc" id="anamespaceMathUtils_1_1Matrix_html_a1c40c9daddc0ed10682814216053a4f4"><div class="ttname"><a href="namespaceMathUtils_1_1Matrix.html#a1c40c9daddc0ed10682814216053a4f4">MathUtils::Matrix::MakeIdentity</a></div><div class="ttdeci">Matrix4x4 MakeIdentity()</div><div class="ttdef"><b>Definition</b> <a href="MathUtils_8cpp_source.html#l00016">MathUtils.cpp:16</a></div></div>
+<div class="ttc" id="anamespaceUtils_html_aa35c12cebe61c9d818df8944b3a66706"><div class="ttname"><a href="namespaceUtils.html#aa35c12cebe61c9d818df8944b3a66706">Utils::Alert</a></div><div class="ttdeci">void Alert(const std::string &amp;msg)</div><div class="ttdef"><b>Definition</b> <a href="Utils_8cpp_source.html#l00054">Utils.cpp:54</a></div></div>
+<div class="ttc" id="astructAnimationCurve_html_a9f4846d434d6d5f830ec383f7bd57964"><div class="ttname"><a href="structAnimationCurve.html#a9f4846d434d6d5f830ec383f7bd57964">AnimationCurve::keyframes</a></div><div class="ttdeci">std::vector&lt; Keyframe&lt; T &gt; &gt; keyframes</div><div class="ttdef"><b>Definition</b> <a href="NodeAnimation_8hpp_source.html#l00013">NodeAnimation.hpp:13</a></div></div>
+<div class="ttc" id="astructAnimation_html_a66cc7333638f071b0401072ba95c55fd"><div class="ttname"><a href="structAnimation.html#a66cc7333638f071b0401072ba95c55fd">Animation::duration</a></div><div class="ttdeci">float duration</div><div class="ttdef"><b>Definition</b> <a href="Animation_8hpp_source.html#l00013">Animation.hpp:13</a></div></div>
+<div class="ttc" id="astructAnimation_html_ade5e4c5d87fd8387d12d08a98331a9ba"><div class="ttname"><a href="structAnimation.html#ade5e4c5d87fd8387d12d08a98331a9ba">Animation::nodeAnimations</a></div><div class="ttdeci">std::map&lt; std::string, NodeAnimation &gt; nodeAnimations</div><div class="ttdef"><b>Definition</b> <a href="Animation_8hpp_source.html#l00014">Animation.hpp:14</a></div></div>
+<div class="ttc" id="astructJointWeightData_html_a0e723bfafc04bb284deb1794cf335f51"><div class="ttname"><a href="structJointWeightData.html#a0e723bfafc04bb284deb1794cf335f51">JointWeightData::weights</a></div><div class="ttdeci">std::vector&lt; VertexWeightData &gt; weights</div><div class="ttdef"><b>Definition</b> <a href="ModelData_8hpp_source.html#l00020">ModelData.hpp:20</a></div></div>
+<div class="ttc" id="astructJointWeightData_html_ad72b331a765f837f4aeb8e6f74e8199b"><div class="ttname"><a href="structJointWeightData.html#ad72b331a765f837f4aeb8e6f74e8199b">JointWeightData::inverseBindPose</a></div><div class="ttdeci">Matrix4x4 inverseBindPose</div><div class="ttdef"><b>Definition</b> <a href="ModelData_8hpp_source.html#l00019">ModelData.hpp:19</a></div></div>
+<div class="ttc" id="astructJoint_html_a08006960139e10ad57a015c1e4de3314"><div class="ttname"><a href="structJoint.html#a08006960139e10ad57a015c1e4de3314">Joint::parent</a></div><div class="ttdeci">std::optional&lt; int32_t &gt; parent</div><div class="ttdef"><b>Definition</b> <a href="Skeleton_8hpp_source.html#l00022">Skeleton.hpp:22</a></div></div>
+<div class="ttc" id="astructJoint_html_a080b6261e90e1de1c9720bcc38b1ffed"><div class="ttname"><a href="structJoint.html#a080b6261e90e1de1c9720bcc38b1ffed">Joint::transform</a></div><div class="ttdeci">Transform transform</div><div class="ttdef"><b>Definition</b> <a href="Skeleton_8hpp_source.html#l00016">Skeleton.hpp:16</a></div></div>
+<div class="ttc" id="astructJoint_html_a3496cf560550a65ab6d3f385bc87c3c0"><div class="ttname"><a href="structJoint.html#a3496cf560550a65ab6d3f385bc87c3c0">Joint::index</a></div><div class="ttdeci">int32_t index</div><div class="ttdef"><b>Definition</b> <a href="Skeleton_8hpp_source.html#l00021">Skeleton.hpp:21</a></div></div>
+<div class="ttc" id="astructJoint_html_a57e3afaab4abae515d5053018e3cc886"><div class="ttname"><a href="structJoint.html#a57e3afaab4abae515d5053018e3cc886">Joint::name</a></div><div class="ttdeci">std::string name</div><div class="ttdef"><b>Definition</b> <a href="Skeleton_8hpp_source.html#l00019">Skeleton.hpp:19</a></div></div>
+<div class="ttc" id="astructJoint_html_a7f2845fcb4ef0b92a04f5cc477d7ba53"><div class="ttname"><a href="structJoint.html#a7f2845fcb4ef0b92a04f5cc477d7ba53">Joint::space</a></div><div class="ttdeci">Matrix4x4 space</div><div class="ttdef"><b>Definition</b> <a href="Skeleton_8hpp_source.html#l00018">Skeleton.hpp:18</a></div></div>
+<div class="ttc" id="astructJoint_html_ad6c189aba3170dfd9b28775b8c8cf09a"><div class="ttname"><a href="structJoint.html#ad6c189aba3170dfd9b28775b8c8cf09a">Joint::local</a></div><div class="ttdeci">Matrix4x4 local</div><div class="ttdef"><b>Definition</b> <a href="Skeleton_8hpp_source.html#l00017">Skeleton.hpp:17</a></div></div>
+<div class="ttc" id="astructKeyframe_html_ab0cd6a837157ff59b78c8f9ce04fd28e"><div class="ttname"><a href="structKeyframe.html#ab0cd6a837157ff59b78c8f9ce04fd28e">Keyframe::value</a></div><div class="ttdeci">T value</div><div class="ttdef"><b>Definition</b> <a href="KeyFrame_8hpp_source.html#l00008">KeyFrame.hpp:8</a></div></div>
+<div class="ttc" id="astructKeyframe_html_abe885f982835db759fc5e52b3ed41227"><div class="ttname"><a href="structKeyframe.html#abe885f982835db759fc5e52b3ed41227">Keyframe::time</a></div><div class="ttdeci">float time</div><div class="ttdef"><b>Definition</b> <a href="KeyFrame_8hpp_source.html#l00009">KeyFrame.hpp:9</a></div></div>
+<div class="ttc" id="astructMeshData_html"><div class="ttname"><a href="structMeshData.html">MeshData</a></div><div class="ttdef"><b>Definition</b> <a href="MeshData_8hpp_source.html#l00016">MeshData.hpp:16</a></div></div>
+<div class="ttc" id="astructMeshData_html_a79e9a85738fa0fa5b5e81d79c6960741"><div class="ttname"><a href="structMeshData.html#a79e9a85738fa0fa5b5e81d79c6960741">MeshData::indices</a></div><div class="ttdeci">std::vector&lt; uint32_t &gt; indices</div><div class="ttdef"><b>Definition</b> <a href="MeshData_8hpp_source.html#l00018">MeshData.hpp:18</a></div></div>
+<div class="ttc" id="astructMeshData_html_aac93fd7e3e5968c5f4376038ef1aac96"><div class="ttname"><a href="structMeshData.html#aac93fd7e3e5968c5f4376038ef1aac96">MeshData::vertices</a></div><div class="ttdeci">std::vector&lt; Vertex &gt; vertices</div><div class="ttdef"><b>Definition</b> <a href="MeshData_8hpp_source.html#l00017">MeshData.hpp:17</a></div></div>
+<div class="ttc" id="astructMeshData_html_ab7bed81125007b625b5b001517ae957b"><div class="ttname"><a href="structMeshData.html#ab7bed81125007b625b5b001517ae957b">MeshData::texture</a></div><div class="ttdeci">std::string texture</div><div class="ttdef"><b>Definition</b> <a href="MeshData_8hpp_source.html#l00019">MeshData.hpp:19</a></div></div>
+<div class="ttc" id="astructModelData_html"><div class="ttname"><a href="structModelData.html">ModelData</a></div><div class="ttdoc">モデルデータ メッシュ、アニメーション、スケルトン情報を保持</div><div class="ttdef"><b>Definition</b> <a href="ModelData_8hpp_source.html#l00027">ModelData.hpp:27</a></div></div>
+<div class="ttc" id="astructModelData_html_ae7388cd2134f5f9c7d3078c599a68011"><div class="ttname"><a href="structModelData.html#ae7388cd2134f5f9c7d3078c599a68011">ModelData::skinCluster</a></div><div class="ttdeci">std::map&lt; std::string, JointWeightData &gt; skinCluster</div><div class="ttdef"><b>Definition</b> <a href="ModelData_8hpp_source.html#l00028">ModelData.hpp:28</a></div></div>
+<div class="ttc" id="astructNodeAnimation_html_a912aec4dc4a4c7c8541e260cf8651b40"><div class="ttname"><a href="structNodeAnimation.html#a912aec4dc4a4c7c8541e260cf8651b40">NodeAnimation::scale</a></div><div class="ttdeci">AnimationCurve&lt; Vector3 &gt; scale</div><div class="ttdef"><b>Definition</b> <a href="NodeAnimation_8hpp_source.html#l00019">NodeAnimation.hpp:19</a></div></div>
+<div class="ttc" id="astructNodeAnimation_html_aadfeef2517a847af3d52eb0bf4788e7b"><div class="ttname"><a href="structNodeAnimation.html#aadfeef2517a847af3d52eb0bf4788e7b">NodeAnimation::translate</a></div><div class="ttdeci">AnimationCurve&lt; Vector3 &gt; translate</div><div class="ttdef"><b>Definition</b> <a href="NodeAnimation_8hpp_source.html#l00017">NodeAnimation.hpp:17</a></div></div>
+<div class="ttc" id="astructNodeAnimation_html_abff16af5b1447cedceaed85731707458"><div class="ttname"><a href="structNodeAnimation.html#abff16af5b1447cedceaed85731707458">NodeAnimation::rotation</a></div><div class="ttdeci">AnimationCurve&lt; Quaternion &gt; rotation</div><div class="ttdef"><b>Definition</b> <a href="NodeAnimation_8hpp_source.html#l00018">NodeAnimation.hpp:18</a></div></div>
+<div class="ttc" id="astructNode_html"><div class="ttname"><a href="structNode.html">Node</a></div><div class="ttdoc">ノードデータ モデルの階層構造を表現</div><div class="ttdef"><b>Definition</b> <a href="Node_8hpp_source.html#l00013">Node.hpp:13</a></div></div>
+<div class="ttc" id="astructNode_html_a3bb2f13d17b8b6b01f82d471940977a2"><div class="ttname"><a href="structNode.html#a3bb2f13d17b8b6b01f82d471940977a2">Node::transform</a></div><div class="ttdeci">Transform transform</div><div class="ttdef"><b>Definition</b> <a href="Node_8hpp_source.html#l00015">Node.hpp:15</a></div></div>
+<div class="ttc" id="astructNode_html_a44b4bc0f61e65b6447eaa24f695b2740"><div class="ttname"><a href="structNode.html#a44b4bc0f61e65b6447eaa24f695b2740">Node::local</a></div><div class="ttdeci">Matrix4x4 local</div><div class="ttdef"><b>Definition</b> <a href="Node_8hpp_source.html#l00016">Node.hpp:16</a></div></div>
+<div class="ttc" id="astructNode_html_aa829edc37a2c92dacdab95bcef248175"><div class="ttname"><a href="structNode.html#aa829edc37a2c92dacdab95bcef248175">Node::name</a></div><div class="ttdeci">std::string name</div><div class="ttdef"><b>Definition</b> <a href="Node_8hpp_source.html#l00014">Node.hpp:14</a></div></div>
+<div class="ttc" id="astructNode_html_af7ddc81358470c3bf7a7819c8b77f53d"><div class="ttname"><a href="structNode.html#af7ddc81358470c3bf7a7819c8b77f53d">Node::children</a></div><div class="ttdeci">std::vector&lt; Node &gt; children</div><div class="ttdef"><b>Definition</b> <a href="Node_8hpp_source.html#l00017">Node.hpp:17</a></div></div>
+<div class="ttc" id="astructSkeleton_html"><div class="ttname"><a href="structSkeleton.html">Skeleton</a></div><div class="ttdoc">スケルトンデータ ジョイント階層とマッピング情報を保持</div><div class="ttdef"><b>Definition</b> <a href="Skeleton_8hpp_source.html#l00029">Skeleton.hpp:29</a></div></div>
+<div class="ttc" id="astructSkeleton_html_a0fd9b11fbe91caa6ba2bcb86616b1bf0"><div class="ttname"><a href="structSkeleton.html#a0fd9b11fbe91caa6ba2bcb86616b1bf0">Skeleton::root</a></div><div class="ttdeci">int32_t root</div><div class="ttdef"><b>Definition</b> <a href="Skeleton_8hpp_source.html#l00030">Skeleton.hpp:30</a></div></div>
+<div class="ttc" id="astructSkeleton_html_a1ab6dd74411ca55c0d22dbf69c71f9b1"><div class="ttname"><a href="structSkeleton.html#a1ab6dd74411ca55c0d22dbf69c71f9b1">Skeleton::map</a></div><div class="ttdeci">std::map&lt; std::string, int32_t &gt; map</div><div class="ttdef"><b>Definition</b> <a href="Skeleton_8hpp_source.html#l00031">Skeleton.hpp:31</a></div></div>
+<div class="ttc" id="astructSkeleton_html_aea268e832fd584fd7d26d4f11a2dcf19"><div class="ttname"><a href="structSkeleton.html#aea268e832fd584fd7d26d4f11a2dcf19">Skeleton::joints</a></div><div class="ttdeci">std::vector&lt; Joint &gt; joints</div><div class="ttdef"><b>Definition</b> <a href="Skeleton_8hpp_source.html#l00032">Skeleton.hpp:32</a></div></div>
+<div class="ttc" id="astructTransform_html_a0bfe2382285607f36bd686c6d25fe85d"><div class="ttname"><a href="structTransform.html#a0bfe2382285607f36bd686c6d25fe85d">Transform::translate</a></div><div class="ttdeci">Vector3 translate</div><div class="ttdef"><b>Definition</b> <a href="Transform_8hpp_source.html#l00015">Transform.hpp:15</a></div></div>
+<div class="ttc" id="astructTransform_html_a0e57e180d268a3c34a9d7691bf21e934"><div class="ttname"><a href="structTransform.html#a0e57e180d268a3c34a9d7691bf21e934">Transform::rotate</a></div><div class="ttdeci">std::variant&lt; Vector3, Quaternion &gt; rotate</div><div class="ttdef"><b>Definition</b> <a href="Transform_8hpp_source.html#l00014">Transform.hpp:14</a></div></div>
+<div class="ttc" id="astructTransform_html_a2b4006024b283c6af2813e78e7092364"><div class="ttname"><a href="structTransform.html#a2b4006024b283c6af2813e78e7092364">Transform::scale</a></div><div class="ttdeci">Vector3 scale</div><div class="ttdef"><b>Definition</b> <a href="Transform_8hpp_source.html#l00013">Transform.hpp:13</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a href="dir_32e188284d239da8bb14ec1dabb0c35f.html">Model</a></li><li class="navelem"><a href="dir_aa79645136f550af3f328110421da7cc.html">Loader</a></li><li class="navelem"><a href="GltfLoader_8cpp.html">GltfLoader.cpp</a></li>
+    <li class="footer"><span class="timestamp"></span>作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.14.0 </li>
+  </ul>
+</div>
+</body>
+</html>

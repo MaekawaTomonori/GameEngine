@@ -1,0 +1,25 @@
+var classSprite =
+[
+    [ "Sprite", "classSprite.html#a12cba3ac1868418add3c4d95ce87e615", null ],
+    [ "Draw", "classSprite.html#a054a4c340c14c3d218b99e484bf83d21", null ],
+    [ "GetAnchorPoint", "classSprite.html#a3c4c7d54444c311da2b4baa2d605e399", null ],
+    [ "GetColor", "classSprite.html#a31202ac855810107f97b1ce627a1771c", null ],
+    [ "GetPosition", "classSprite.html#a923c78dd593185e624ed7f14607857ec", null ],
+    [ "GetRotation", "classSprite.html#ab344a3b431b82c0350dab59c076eec8c", null ],
+    [ "GetSize", "classSprite.html#a4a737c8991739ef16e54a2989d6fabd6", null ],
+    [ "GetTextureLeftTop", "classSprite.html#a3b5121a3f9d726a70ba817cefdc9969d", null ],
+    [ "GetTextureSize", "classSprite.html#a85eb54a1ef93e038f90a15908a5ab744", null ],
+    [ "Initialize", "classSprite.html#a431a8d5512646518384ff8e677a7b174", null ],
+    [ "IsFlipX", "classSprite.html#a93c88ecde8bf8ffce86ccd6c23e7805c", null ],
+    [ "IsFlipY", "classSprite.html#a01dde3293edf3256aa18cf053c95d144", null ],
+    [ "SetAnchorPoint", "classSprite.html#a70e1a546e6bd642dabe6522ce3f67ea3", null ],
+    [ "SetColor", "classSprite.html#aa82dd340829e8cf49e9525d0cf4170b0", null ],
+    [ "SetFlipX", "classSprite.html#a0f6947ff89b975e76a253deaaf62155d", null ],
+    [ "SetFlipY", "classSprite.html#a5fc9961b8ef0e99ed64b2da2ff5cf6c2", null ],
+    [ "SetPosition", "classSprite.html#a55cd3100cd7473ab7b9209161b65434a", null ],
+    [ "SetRotation", "classSprite.html#af81ed668095305488b3a6ab9b028010d", null ],
+    [ "SetSize", "classSprite.html#a703c949fada5d543bf7c087f43e8da5a", null ],
+    [ "SetTextureLeftTop", "classSprite.html#ac267d5c280f88dc735bb25351c75f37f", null ],
+    [ "SetTextureSize", "classSprite.html#aaae012c3048411fd69e9b893c6090359", null ],
+    [ "Update", "classSprite.html#aee0a7bfb6597fb08458f3b116cf1b17f", null ]
+];

@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.14.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>PortfolioGame Engine: C:/Users/tomo-/source/repos/PortfolioGame/Engine/src/Scene/SceneSwitcher.hpp ソースファイル</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">PortfolioGame Engine<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">C++20 DirectX12 Game Engine</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.14.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','検索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('SceneSwitcher_8hpp_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">読み取り中…</div>
+<div class="SRStatus" id="Searching">検索中…</div>
+<div class="SRStatus" id="NoMatches">一致する文字列を見つけられません</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">SceneSwitcher.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="SceneSwitcher_8hpp.html">[詳解]</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef SceneSwitcher_HPP_</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define SceneSwitcher_HPP_</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;memory&gt;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;<a class="code" href="DebugUI_8hpp.html">DebugUI.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;<a class="code" href="IScene_8hpp.html">IScene.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;<a class="code" href="AbstractSceneFactory_8hpp.html">Factory/AbstractSceneFactory.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">class </span><a class="code hl_class" href="classTransition.html">Transition</a>;</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span></div>
+<div class="foldopen" id="foldopen00016" data-start="{" data-end="};">
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="classSceneSwitcher.html">   16</a></span><span class="keyword">class </span><a class="code hl_class" href="classSceneSwitcher.html">SceneSwitcher</a> {</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    std::unique_ptr&lt;AbstractSceneFactory&gt; factory_;</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <a class="code hl_class" href="classPostProcessExecutor.html">PostProcessExecutor</a>* ppe_ = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <a class="code hl_class" href="classDebugUI.html">DebugUI</a>* debug_ = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    std::unique_ptr&lt;IScene&gt; scene_;</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    std::unique_ptr&lt;IScene&gt; next_;</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    std::unique_ptr&lt;Transition&gt; transition_;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classSceneSwitcher.html#a87ed2c5193016dd5bdbf36de86e0c8e8">Setup</a>(<a class="code hl_class" href="classPostProcessExecutor.html">PostProcessExecutor</a>* _ppe, <a class="code hl_class" href="classDebugUI.html">DebugUI</a>* _debug);</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classSceneSwitcher.html#ae789040ffcff5bf41c9b098f902c4b47">Update</a>();</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classSceneSwitcher.html#aaa2f2d6b4d8bcf3daeaa0a53b4c40226">Draw</a>();</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classSceneSwitcher.html#a560809f29f9c02cc1246ec06e48e372a">SetFactory</a>(std::unique_ptr&lt;AbstractSceneFactory&gt; _factory);</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classSceneSwitcher.html#a4528a1be76f6925038254e0e8e0fc06d">Change</a>(<span class="keyword">const</span> std::string&amp; _name);</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classSceneSwitcher.html#a4ec925fd7848bb9a7e8e4a9f446417f8">Debug</a>();</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>}; <span class="comment">// class SceneSwitcher</span></div>
+</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="preprocessor">#endif </span><span class="comment">// SceneSwitcher_HPP_</span></div>
+<div class="ttc" id="aAbstractSceneFactory_8hpp_html"><div class="ttname"><a href="AbstractSceneFactory_8hpp.html">AbstractSceneFactory.hpp</a></div></div>
+<div class="ttc" id="aDebugUI_8hpp_html"><div class="ttname"><a href="DebugUI_8hpp.html">DebugUI.hpp</a></div></div>
+<div class="ttc" id="aIScene_8hpp_html"><div class="ttname"><a href="IScene_8hpp.html">IScene.hpp</a></div></div>
+<div class="ttc" id="aclassDebugUI_html"><div class="ttname"><a href="classDebugUI.html">DebugUI</a></div><div class="ttdoc">ImGuiアダプタークラス デバッグUIの描画とコマンド管理を提供</div><div class="ttdef"><b>Definition</b> <a href="DebugUI_8hpp_source.html#l00015">DebugUI.hpp:15</a></div></div>
+<div class="ttc" id="aclassPostProcessExecutor_html"><div class="ttname"><a href="classPostProcessExecutor.html">PostProcessExecutor</a></div><div class="ttdef"><b>Definition</b> <a href="PostProcessExecutor_8hpp_source.html#l00015">PostProcessExecutor.hpp:15</a></div></div>
+<div class="ttc" id="aclassSceneSwitcher_html"><div class="ttname"><a href="classSceneSwitcher.html">SceneSwitcher</a></div><div class="ttdoc">シーン切り替え管理クラス シーン遷移とトランジションエフェクトを管理</div><div class="ttdef"><b>Definition</b> <a href="#l00016">SceneSwitcher.hpp:16</a></div></div>
+<div class="ttc" id="aclassSceneSwitcher_html_a4528a1be76f6925038254e0e8e0fc06d"><div class="ttname"><a href="classSceneSwitcher.html#a4528a1be76f6925038254e0e8e0fc06d">SceneSwitcher::Change</a></div><div class="ttdeci">void Change(const std::string &amp;_name)</div><div class="ttdoc">シーンを変更</div><div class="ttdef"><b>Definition</b> <a href="SceneSwitcher_8cpp_source.html#l00088">SceneSwitcher.cpp:88</a></div></div>
+<div class="ttc" id="aclassSceneSwitcher_html_a4ec925fd7848bb9a7e8e4a9f446417f8"><div class="ttname"><a href="classSceneSwitcher.html#a4ec925fd7848bb9a7e8e4a9f446417f8">SceneSwitcher::Debug</a></div><div class="ttdeci">void Debug()</div><div class="ttdoc">デバッグ情報の表示</div><div class="ttdef"><b>Definition</b> <a href="SceneSwitcher_8cpp_source.html#l00063">SceneSwitcher.cpp:63</a></div></div>
+<div class="ttc" id="aclassSceneSwitcher_html_a560809f29f9c02cc1246ec06e48e372a"><div class="ttname"><a href="classSceneSwitcher.html#a560809f29f9c02cc1246ec06e48e372a">SceneSwitcher::SetFactory</a></div><div class="ttdeci">void SetFactory(std::unique_ptr&lt; AbstractSceneFactory &gt; _factory)</div><div class="ttdoc">シーンファクトリーを設定</div><div class="ttdef"><b>Definition</b> <a href="SceneSwitcher_8cpp_source.html#l00084">SceneSwitcher.cpp:84</a></div></div>
+<div class="ttc" id="aclassSceneSwitcher_html_a87ed2c5193016dd5bdbf36de86e0c8e8"><div class="ttname"><a href="classSceneSwitcher.html#a87ed2c5193016dd5bdbf36de86e0c8e8">SceneSwitcher::Setup</a></div><div class="ttdeci">void Setup(PostProcessExecutor *_ppe, DebugUI *_debug)</div><div class="ttdoc">セットアップ</div><div class="ttdef"><b>Definition</b> <a href="SceneSwitcher_8cpp_source.html#l00008">SceneSwitcher.cpp:8</a></div></div>
+<div class="ttc" id="aclassSceneSwitcher_html_aaa2f2d6b4d8bcf3daeaa0a53b4c40226"><div class="ttname"><a href="classSceneSwitcher.html#aaa2f2d6b4d8bcf3daeaa0a53b4c40226">SceneSwitcher::Draw</a></div><div class="ttdeci">void Draw()</div><div class="ttdoc">描画処理</div><div class="ttdef"><b>Definition</b> <a href="SceneSwitcher_8cpp_source.html#l00054">SceneSwitcher.cpp:54</a></div></div>
+<div class="ttc" id="aclassSceneSwitcher_html_ae789040ffcff5bf41c9b098f902c4b47"><div class="ttname"><a href="classSceneSwitcher.html#ae789040ffcff5bf41c9b098f902c4b47">SceneSwitcher::Update</a></div><div class="ttdeci">void Update()</div><div class="ttdoc">更新処理</div><div class="ttdef"><b>Definition</b> <a href="SceneSwitcher_8cpp_source.html#l00015">SceneSwitcher.cpp:15</a></div></div>
+<div class="ttc" id="aclassTransition_html"><div class="ttname"><a href="classTransition.html">Transition</a></div><div class="ttdef"><b>Definition</b> <a href="Transition_8hpp_source.html#l00006">Transition.hpp:6</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a href="dir_204260ac86670e69c647eaba8962e745.html">Scene</a></li><li class="navelem"><a href="SceneSwitcher_8hpp.html">SceneSwitcher.hpp</a></li>
+    <li class="footer"><span class="timestamp"></span>作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.14.0 </li>
+  </ul>
+</div>
+</body>
+</html>

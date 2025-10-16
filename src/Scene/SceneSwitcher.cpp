@@ -3,14 +3,24 @@
 #include "imgui.h"
 #include "Pattern/Singleton.hpp"
 #include "src/Camera/Director/CameraDirector.hpp"
+#include "src/Scene/Transition/Transition.hpp"
+
+void SceneSwitcher::Setup(PostProcessExecutor* _ppe, DebugUI* _debug) {
+    ppe_ = _ppe;
+    debug_ = _debug;
+    transition_ = std::make_unique<Transition>();
+    transition_->Initialize();
+}
 
 void SceneSwitcher::Update() {
     Debug();
-    // Scene Changer
-    //if (changer_->InProgress()){
-    //    changer_->Update();
-    //    return;
-    //}
+
+    // Scene Change/ in Transition process
+    // Transition in/out
+    if (transition_->InProgress()){
+        transition_->Update();
+        return;
+    }
 
     if (next_){
         if (scene_){
@@ -23,40 +33,42 @@ void SceneSwitcher::Update() {
 
         next_.reset();
         next_ = nullptr;
-        scene_->SetSwitcher(this);
+        scene_->Setup(this, ppe_, debug_);
         scene_->Initialize();
-        scene_->Update();
 
-        //changer_->Awake(scene_->GetEntryEffect(), ISceneEffect::State::In);
+        transition_->Awake(scene_->GetEntryTransition(), ITransitionEffect::State::In, 1.f);
+        return;
     }
 
     if (!scene_)return;
 
-    // ChangeProcess End
-    //if (changer_->InProgress())return;
-
-    //if (!scene_->InProgress()){
+    if (!scene_->IsProgress()){
         scene_->Awake();
-    //}
+    }
 
-    scene_->Update();
+    if (scene_->IsProgress()){
+        scene_->Update();
+    }
 }
 
 void SceneSwitcher::Draw() {
-    if (scene_){ 
+    if (scene_){
         scene_->Draw();
+    }
+    if (transition_) {
+        transition_->Draw();
     }
 }
 
 void SceneSwitcher::Debug() {
     debug_->RegisterCommand("SceneSwitcher", [this]() {
         ImGui::Begin("SceneSwitcher");
-        //if (scene_) {
-        //    ImGui::Text("Current Scene: %s", typeid(*scene_).name());
-        //} else {
-        //    ImGui::Text("No active scene");
-        //}
-        //ImGui::Separator();
+        if (scene_) {
+            ImGui::Text("Current Scene: %s", scene_->GetName().c_str());
+        } else {
+            ImGui::Text("No active scene");
+        }
+        ImGui::Separator();
         
         static char sceneName[128] = "";
         ImGui::InputText("Scene Name", sceneName, sizeof(sceneName));
@@ -81,9 +93,9 @@ void SceneSwitcher::Change(const std::string &_name) {
 
     next_ = factory_->Create(_name);
 
-    // out fade
     // Already Destroyed
     if (!scene_) return;
 
-    // Fade
+    // Scene Change Transition
+    transition_->Awake(scene_->GetExitTransition(), ITransitionEffect::State::Out);
 }

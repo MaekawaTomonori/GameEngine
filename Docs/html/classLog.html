@@ -1,0 +1,443 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.14.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>PortfolioGame Engine: Log クラス</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">PortfolioGame Engine<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">C++20 DirectX12 Game Engine</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.14.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','検索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('classLog.html','','classLog-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">読み取り中…</div>
+<div class="SRStatus" id="Searching">検索中…</div>
+<div class="SRStatus" id="NoMatches">一致する文字列を見つけられません</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Log クラス</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>ロギングクラス spdlogを使用したログ出力とファイル管理を提供  
+ <a href="#details">[詳解]</a></p>
+
+<p><code>#include &lt;<a class="el" href="Log_8hpp_source.html">Log.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
+公開型</h2></td></tr>
+<tr class="memitem:afb5d4c945d835d194a295461d752531e" id="r_afb5d4c945d835d194a295461d752531e"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afb5d4c945d835d194a295461d752531e">Level</a> { <br />
+&#160;&#160;<a class="el" href="#afb5d4c945d835d194a295461d752531ea2d3e4144aa384b18849ab9a8abad74d6">TRACE</a> = 0
+, <a class="el" href="#afb5d4c945d835d194a295461d752531eaa642a85aab89544a289fb1f29eab689d">DBG</a> = 1
+, <a class="el" href="#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">INFO</a> = 2
+, <a class="el" href="#afb5d4c945d835d194a295461d752531ea059e9861e0400dfbe05c98a841f3f96b">WARNING</a> = 3
+, <br />
+&#160;&#160;<a class="el" href="#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">ERR</a> = 4
+, <a class="el" href="#afb5d4c945d835d194a295461d752531ea19da7170bea36556dde582519795f3fc">FATAL</a> = 5
+<br />
+ }</td></tr>
+<tr class="memdesc:afb5d4c945d835d194a295461d752531e"><td class="mdescLeft">&#160;</td><td class="mdescRight">ログレベル列挙型  <a href="#afb5d4c945d835d194a295461d752531e">[詳解]</a><br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+静的公開メンバ関数</h2></td></tr>
+<tr class="memitem:ac9340bbc2812222f9950ec8448fff93d" id="r_ac9340bbc2812222f9950ec8448fff93d"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac9340bbc2812222f9950ec8448fff93d">Initialize</a> ()</td></tr>
+<tr class="memdesc:ac9340bbc2812222f9950ec8448fff93d"><td class="mdescLeft">&#160;</td><td class="mdescRight">ロギングシステムを初期化  <br /></td></tr>
+<tr class="memitem:a1a96849014a462fb22eb2247323cb2dc" id="r_a1a96849014a462fb22eb2247323cb2dc"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1a96849014a462fb22eb2247323cb2dc">Send</a> (<a class="el" href="#afb5d4c945d835d194a295461d752531e">Level</a> level, const std::string &amp;message)</td></tr>
+<tr class="memdesc:a1a96849014a462fb22eb2247323cb2dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">ログメッセージを送信  <br /></td></tr>
+<tr class="memitem:a9d31b9d4a2d37eee10ba977114f81c70" id="r_a9d31b9d4a2d37eee10ba977114f81c70"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9d31b9d4a2d37eee10ba977114f81c70">SendWithContext</a> (<a class="el" href="#afb5d4c945d835d194a295461d752531e">Level</a> level, const std::string &amp;message, const std::string &amp;context=&quot;&quot;)</td></tr>
+<tr class="memdesc:a9d31b9d4a2d37eee10ba977114f81c70"><td class="mdescLeft">&#160;</td><td class="mdescRight">コンテキスト付きログメッセージを送信  <br /></td></tr>
+<tr class="memitem:adcac000ca73087b359ddd65317940c49" id="r_adcac000ca73087b359ddd65317940c49"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adcac000ca73087b359ddd65317940c49">LogExecutionContext</a> ()</td></tr>
+<tr class="memdesc:adcac000ca73087b359ddd65317940c49"><td class="mdescLeft">&#160;</td><td class="mdescRight">実行コンテキストをログに記録  <br /></td></tr>
+<tr class="memitem:a59e8a969b60a64aac1411df445fe67ac" id="r_a59e8a969b60a64aac1411df445fe67ac"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a59e8a969b60a64aac1411df445fe67ac">LogFileOperation</a> (const std::string &amp;operation, const std::string &amp;filePath, bool success=true, const std::string &amp;details=&quot;&quot;)</td></tr>
+<tr class="memdesc:a59e8a969b60a64aac1411df445fe67ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">ファイル操作をログに記録  <br /></td></tr>
+<tr class="memitem:a1b6ae8345ea62ad1532444fa36accafe" id="r_a1b6ae8345ea62ad1532444fa36accafe"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1b6ae8345ea62ad1532444fa36accafe">SetLevel</a> (<a class="el" href="#afb5d4c945d835d194a295461d752531e">Level</a> level)</td></tr>
+<tr class="memdesc:a1b6ae8345ea62ad1532444fa36accafe"><td class="mdescLeft">&#160;</td><td class="mdescRight">ログレベルを設定  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">詳解</h2>
+<div class="textblock"><p>ロギングクラス spdlogを使用したログ出力とファイル管理を提供 </p>
+
+<p class="definition"> <a class="el" href="Log_8hpp_source.html">Log.hpp</a> の <a class="el" href="Log_8hpp_source.html#l00021">21</a> 行目に定義があります。</p>
+</div><a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">列挙型メンバ詳解</h2>
+<a id="afb5d4c945d835d194a295461d752531e" name="afb5d4c945d835d194a295461d752531e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb5d4c945d835d194a295461d752531e">&#9670;&#160;</a></span>Level</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum class <a class="el" href="#afb5d4c945d835d194a295461d752531e">Log::Level</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel strong">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>ログレベル列挙型 </p>
+<table class="fieldtable">
+<tr><th colspan="2">列挙値</th></tr><tr><td class="fieldname"><a id="afb5d4c945d835d194a295461d752531ea2d3e4144aa384b18849ab9a8abad74d6" name="afb5d4c945d835d194a295461d752531ea2d3e4144aa384b18849ab9a8abad74d6"></a>TRACE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="afb5d4c945d835d194a295461d752531eaa642a85aab89544a289fb1f29eab689d" name="afb5d4c945d835d194a295461d752531eaa642a85aab89544a289fb1f29eab689d"></a>DBG&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3" name="afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3"></a>INFO&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="afb5d4c945d835d194a295461d752531ea059e9861e0400dfbe05c98a841f3f96b" name="afb5d4c945d835d194a295461d752531ea059e9861e0400dfbe05c98a841f3f96b"></a>WARNING&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482" name="afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482"></a>ERR&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="afb5d4c945d835d194a295461d752531ea19da7170bea36556dde582519795f3fc" name="afb5d4c945d835d194a295461d752531ea19da7170bea36556dde582519795f3fc"></a>FATAL&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+<p class="definition"> <a class="el" href="Log_8hpp_source.html">Log.hpp</a> の <a class="el" href="Log_8hpp_source.html#l00026">26</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">関数詳解</h2>
+<a id="ac9340bbc2812222f9950ec8448fff93d" name="ac9340bbc2812222f9950ec8448fff93d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac9340bbc2812222f9950ec8448fff93d">&#9670;&#160;</a></span>Initialize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Log::Initialize </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>ロギングシステムを初期化 </p>
+
+<p class="definition"> <a class="el" href="Log_8cpp_source.html">Log.cpp</a> の <a class="el" href="Log_8cpp_source.html#l00028">28</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="Log_8cpp_source.html#l00132">LogExecutionContext()</a>.</p>
+
+<p class="reference">参照元 <a class="el" href="Framework_8cpp_source.html#l00010">Framework::Framework()</a>.</p>
+
+</div>
+</div>
+<a id="adcac000ca73087b359ddd65317940c49" name="adcac000ca73087b359ddd65317940c49"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adcac000ca73087b359ddd65317940c49">&#9670;&#160;</a></span>LogExecutionContext()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Log::LogExecutionContext </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>実行コンテキストをログに記録 </p>
+
+<p class="definition"> <a class="el" href="Log_8cpp_source.html">Log.cpp</a> の <a class="el" href="Log_8cpp_source.html#l00132">132</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="Log_8hpp_source.html#l00029">INFO</a>, <a class="el" href="Log_8cpp_source.html#l00068">Send()</a>.</p>
+
+<p class="reference">参照元 <a class="el" href="Log_8cpp_source.html#l00028">Initialize()</a>.</p>
+
+</div>
+</div>
+<a id="a59e8a969b60a64aac1411df445fe67ac" name="a59e8a969b60a64aac1411df445fe67ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a59e8a969b60a64aac1411df445fe67ac">&#9670;&#160;</a></span>LogFileOperation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Log::LogFileOperation </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>operation</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>filePath</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>success</em></span><span class="paramdefsep"> = </span><span class="paramdefval">true</span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>details</em></span><span class="paramdefsep"> = </span><span class="paramdefval">&quot;&quot;</span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>ファイル操作をログに記録 </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">operation</td><td>操作名</td></tr>
+    <tr><td class="paramname">filePath</td><td>ファイルパス</td></tr>
+    <tr><td class="paramname">success</td><td>成功したかどうか</td></tr>
+    <tr><td class="paramname">details</td><td>詳細情報</td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition"> <a class="el" href="Log_8cpp_source.html">Log.cpp</a> の <a class="el" href="Log_8cpp_source.html#l00139">139</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="Log_8hpp_source.html#l00031">ERR</a>, <a class="el" href="Log_8hpp_source.html#l00029">INFO</a>, <a class="el" href="Log_8cpp_source.html#l00068">Send()</a>.</p>
+
+<p class="reference">参照元 <a class="el" href="Framework_8cpp_source.html#l00010">Framework::Framework()</a>.</p>
+
+</div>
+</div>
+<a id="a1a96849014a462fb22eb2247323cb2dc" name="a1a96849014a462fb22eb2247323cb2dc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a96849014a462fb22eb2247323cb2dc">&#9670;&#160;</a></span>Send()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Log::Send </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#afb5d4c945d835d194a295461d752531e">Level</a></td>          <td class="paramname"><span class="paramname"><em>level</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>message</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>ログメッセージを送信 </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">level</td><td>ログレベル</td></tr>
+    <tr><td class="paramname">message</td><td>メッセージ</td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition"> <a class="el" href="Log_8cpp_source.html">Log.cpp</a> の <a class="el" href="Log_8cpp_source.html#l00068">68</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="Log_8hpp_source.html#l00028">DBG</a>, <a class="el" href="Log_8hpp_source.html#l00031">ERR</a>, <a class="el" href="Log_8hpp_source.html#l00032">FATAL</a>, <a class="el" href="Log_8hpp_source.html#l00029">INFO</a>, <a class="el" href="Log_8hpp_source.html#l00027">TRACE</a>, <a class="el" href="Log_8hpp_source.html#l00030">WARNING</a>.</p>
+
+<p class="reference">参照元 <a class="el" href="PostProcessExecutor_8cpp_source.html#l00061">PostProcessExecutor::Add()</a>, <a class="el" href="PostProcessExecutor_8cpp_source.html#l00074">PostProcessExecutor::BeginFrame()</a>, <a class="el" href="PipelineStateObject_8cpp_source.html#l00093">PipelineStateObject::Create()</a>, <a class="el" href="RootSignature_8cpp_source.html#l00016">RootSignature::Create()</a>, <a class="el" href="DirectXAdapter_8cpp_source.html#l00070">DirectXAdapter::CreateBufferResource()</a>, <a class="el" href="DirectXAdapter_8cpp_source.html#l00151">DirectXAdapter::CreateDepthStencilResource()</a>, <a class="el" href="DirectXAdapter_8cpp_source.html#l00182">DirectXAdapter::CreateRenderTextureResource()</a>, <a class="el" href="DirectXAdapter_8cpp_source.html#l00100">DirectXAdapter::CreateTextureResource()</a>, <a class="el" href="DirectXAdapter_8cpp_source.html#l00020">DirectXAdapter::DirectXAdapter()</a>, <a class="el" href="Model_8cpp_source.html#l00106">Model::Draw()</a>, <a class="el" href="PostProcessExecutor_8cpp_source.html#l00114">PostProcessExecutor::Draw()</a>, <a class="el" href="PipelineStateObject_8cpp_source.html#l00119">PipelineStateObject::DrawCall()</a>, <a class="el" href="PostProcessExecutor_8cpp_source.html#l00097">PostProcessExecutor::Execute()</a>, <a class="el" href="TextureManager_8cpp_source.html#l00226">TextureManager::GetGPUHandle()</a>, <a class="el" href="TextureManager_8cpp_source.html#l00244">TextureManager::GetGPUHandle()</a>, <a class="el" href="TextureManager_8cpp_source.html#l00204">TextureManager::GetSrvIndex()</a>, <a class="el" href="TextureManager_8cpp_source.html#l00216">TextureManager::GetTextureIndexByFilePath()</a>, <a class="el" href="TextureManager_8cpp_source.html#l00191">TextureManager::GetTextureMetadata()</a>, <a class="el" href="Input_8cpp_source.html#l00009">Input::Initialize()</a>, <a class="el" href="LightManager_8cpp_source.html#l00161">LightManager::Initialize()</a>, <a class="el" href="Model_8cpp_source.html#l00023">Model::Initialize()</a>, <a class="el" href="PostProcessExecutor_8cpp_source.html#l00012">PostProcessExecutor::Initialize()</a>, <a class="el" href="SRVManager_8cpp_source.html#l00011">SRVManager::Initialize()</a>, <a class="el" href="TextureManager_8cpp_source.html#l00099">TextureManager::Initialize()</a>, <a class="el" href="WinApp_8cpp_source.html#l00010">WinApp::Initialize()</a>, <a class="el" href="Json_8cpp_source.html#l00143">Json::Load()</a>, <a class="el" href="Model_8cpp_source.html#l00167">Model::Load()</a>, <a class="el" href="StageLoader_8cpp_source.html#l00014">StageLoader::Load()</a>, <a class="el" href="TextureManager_8cpp_source.html#l00133">TextureManager::Load()</a>, <a class="el" href="Log_8cpp_source.html#l00132">LogExecutionContext()</a>, <a class="el" href="Log_8cpp_source.html#l00139">LogFileOperation()</a>, <a class="el" href="Json_8cpp_source.html#l00174">Json::Save()</a>, <a class="el" href="Log_8cpp_source.html#l00126">SendWithContext()</a>, <a class="el" href="Model_8cpp_source.html#l00158">Model::SetTexture()</a> (計34項目).</p>
+
+</div>
+</div>
+<a id="a9d31b9d4a2d37eee10ba977114f81c70" name="a9d31b9d4a2d37eee10ba977114f81c70"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d31b9d4a2d37eee10ba977114f81c70">&#9670;&#160;</a></span>SendWithContext()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Log::SendWithContext </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#afb5d4c945d835d194a295461d752531e">Level</a></td>          <td class="paramname"><span class="paramname"><em>level</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>message</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>context</em></span><span class="paramdefsep"> = </span><span class="paramdefval">&quot;&quot;</span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>コンテキスト付きログメッセージを送信 </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">level</td><td>ログレベル</td></tr>
+    <tr><td class="paramname">message</td><td>メッセージ</td></tr>
+    <tr><td class="paramname">context</td><td>コンテキスト情報</td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition"> <a class="el" href="Log_8cpp_source.html">Log.cpp</a> の <a class="el" href="Log_8cpp_source.html#l00126">126</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="Log_8cpp_source.html#l00068">Send()</a>.</p>
+
+<p class="reference">参照元 <a class="el" href="Framework_8cpp_source.html#l00010">Framework::Framework()</a>, <a class="el" href="Shader_8cpp_source.html#l00010">Shader::Shader()</a>, <a class="el" href="Shader_8cpp_source.html#l00019">Shader::Shader()</a>.</p>
+
+</div>
+</div>
+<a id="a1b6ae8345ea62ad1532444fa36accafe" name="a1b6ae8345ea62ad1532444fa36accafe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1b6ae8345ea62ad1532444fa36accafe">&#9670;&#160;</a></span>SetLevel()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Log::SetLevel </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#afb5d4c945d835d194a295461d752531e">Level</a></td>          <td class="paramname"><span class="paramname"><em>level</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>ログレベルを設定 </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">level</td><td>ログレベル</td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition"> <a class="el" href="Log_8cpp_source.html">Log.cpp</a> の <a class="el" href="Log_8cpp_source.html#l00178">178</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<hr/>このクラス詳解は次のファイルから抽出されました:<ul>
+<li>C:/Users/tomo-/source/repos/PortfolioGame/Engine/include/<a class="el" href="Log_8hpp_source.html">Log.hpp</a></li>
+<li>C:/Users/tomo-/source/repos/PortfolioGame/Engine/src/System/<a class="el" href="Log_8cpp_source.html">Log.cpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="classLog.html">Log</a></li>
+    <li class="footer"><span class="timestamp"></span>作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.14.0 </li>
+  </ul>
+</div>
+</body>
+</html>

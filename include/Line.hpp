@@ -16,15 +16,28 @@ class LineCommon;
 class DirectXAdapter;
 class CameraController;
 
+/// <summary>
+/// 3Dラインレンダリングクラス
+/// デバッグ用の3D線分描画を提供
+/// </summary>
 class Line {
+    /// <summary>
+    /// ラインの頂点データ
+    /// </summary>
     struct VertexData {
         Vector4 position;
     };
 
+    /// <summary>
+    /// ラインのマテリアルデータ
+    /// </summary>
     struct Material {
         Vector4 color;
     };
 
+    /// <summary>
+    /// ラインの変換行列データ
+    /// </summary>
     struct Transformation {
         Matrix4x4 WVP;
     };
@@ -56,21 +69,53 @@ public:
     Line();
     ~Line();
 
+    /// <summary>
+    /// ラインを初期化
+    /// </summary>
     void Initialize();
+
+    /// <summary>
+    /// ラインの更新処理
+    /// </summary>
     void Update() const;
+
+    /// <summary>
+    /// ラインを描画
+    /// </summary>
     void Draw() const;
 
-    // 線を追加
+    /// <summary>
+    /// 線を追加
+    /// </summary>
+    /// <param name="start">始点座標</param>
+    /// <param name="end">終点座標</param>
     void AddLine(const Vector3& start, const Vector3& end);
-    
-    // すべての線をクリア
+
+    /// <summary>
+    /// すべての線をクリア
+    /// </summary>
     void Clear();
 
+    /// <summary>
+    /// 色を設定
+    /// </summary>
+    /// <param name="color">色ベクトル</param>
     void SetColor(Vector4 color) const;
 
 private:
+    /// <summary>
+    /// 頂点バッファの生成
+    /// </summary>
     void CreateVertexBuffer();
+
+    /// <summary>
+    /// マテリアルバッファの生成
+    /// </summary>
     void CreateMaterialBuffer();
+
+    /// <summary>
+    /// 変換バッファの生成
+    /// </summary>
     void CreateTransformationBuffer();
 };
 

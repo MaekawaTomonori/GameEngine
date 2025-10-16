@@ -1,0 +1,166 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.14.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>PortfolioGame Engine: C:/Users/tomo-/source/repos/PortfolioGame/Engine/src/Light/DirectionalLight/DirectionalLight.h ソースファイル</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">PortfolioGame Engine<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">C++20 DirectX12 Game Engine</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.14.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','検索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('DirectionalLight_8h_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">読み取り中…</div>
+<div class="SRStatus" id="Searching">検索中…</div>
+<div class="SRStatus" id="NoMatches">一致する文字列を見つけられません</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">DirectionalLight.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="DirectionalLight_8h.html">[詳解]</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="Vector3_8hpp.html">Math/Vector3.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;<a class="code" href="Vector4_8hpp.html">Math/Vector4.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;<a class="code" href="RawLight_8h.html">src/Light/RawLight.h</a>&quot;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="foldopen" id="foldopen00008" data-start="{" data-end="};">
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno"><a class="line" href="structDirectionalLight.html">    8</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structDirectionalLight.html">DirectionalLight</a>{</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno"><a class="line" href="structDirectionalLight.html#af7cec050b680e38218d207936671820b">    9</a></span>    <a class="code hl_struct" href="structVector4.html">Vector4</a> <a class="code hl_variable" href="structDirectionalLight.html#af7cec050b680e38218d207936671820b">color</a>;</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="structDirectionalLight.html#a9d5d17335ecd6a191c65d8711ad8577a">   10</a></span>    <a class="code hl_struct" href="structVector3.html">Vector3</a> <a class="code hl_variable" href="structDirectionalLight.html#a9d5d17335ecd6a191c65d8711ad8577a">direction</a>;</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="structDirectionalLight.html#ab269f01389cd88101e7d27ce7e149e5e">   11</a></span>    <span class="keywordtype">float</span> <a class="code hl_variable" href="structDirectionalLight.html#ab269f01389cd88101e7d27ce7e149e5e">intensity</a>;</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>};</div>
+</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="foldopen" id="foldopen00014" data-start="{" data-end="};">
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="classRawDirectionalLight.html">   14</a></span><span class="keyword">class </span><a class="code hl_class" href="classRawDirectionalLight.html">RawDirectionalLight</a> : <span class="keyword">public</span> <a class="code hl_function" href="classRawLight.html#a205d80281d1d03ea397cb92a32d37d98">RawLight</a>{</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <a class="code hl_struct" href="structDirectionalLight.html">DirectionalLight</a> light_ {};</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="classRawDirectionalLight.html#a600956b1551f342a46577352fe65fc08">   18</a></span>    <a class="code hl_function" href="classRawDirectionalLight.html#a600956b1551f342a46577352fe65fc08">~RawDirectionalLight</a>() <span class="keyword">override</span> = <span class="keywordflow">default</span>;</div>
+<div class="foldopen" id="foldopen00019" data-start="{" data-end="}">
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="classRawDirectionalLight.html#a7a76b25a3ed4d285e4fe59b967634b81">   19</a></span>    <a class="code hl_struct" href="structDirectionalLight.html">DirectionalLight</a>&amp; <a class="code hl_function" href="classRawDirectionalLight.html#a7a76b25a3ed4d285e4fe59b967634b81">GetLight</a>() {</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>        <span class="keywordflow">return</span> light_;</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    }</div>
+</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classRawDirectionalLight.html#ae516cd26143ad1c23cf15a48d1f41c1c">DefaultSetting</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classRawDirectionalLight.html#aa19a9b3d6e376c2869fdea2d7e335013">Save</a>(std::string _path) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
+<div class="foldopen" id="foldopen00026" data-start="{" data-end="}">
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="classRawDirectionalLight.html#a3b525dcd2678e2ec324a0b673430e387">   26</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classRawDirectionalLight.html#a3b525dcd2678e2ec324a0b673430e387">Set</a>(<span class="keyword">const</span> std::string&amp; _uuid, <span class="keyword">const</span> <a class="code hl_struct" href="structDirectionalLight.html">DirectionalLight</a>&amp; _light) {</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>        <a class="code hl_variable" href="classRawLight.html#aee757911a2317fa782d276cba88e7f9d">uuid_</a> = _uuid;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        light_ = _light;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    }</div>
+</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="keyword">protected</span>:</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classRawDirectionalLight.html#aaf3283211961446b69d39bb58d9cd329">ImGuiSetting</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>};</div>
+</div>
+<div class="ttc" id="aRawLight_8h_html"><div class="ttname"><a href="RawLight_8h.html">RawLight.h</a></div></div>
+<div class="ttc" id="aVector3_8hpp_html"><div class="ttname"><a href="Vector3_8hpp.html">Vector3.hpp</a></div></div>
+<div class="ttc" id="aVector4_8hpp_html"><div class="ttname"><a href="Vector4_8hpp.html">Vector4.hpp</a></div></div>
+<div class="ttc" id="aclassRawDirectionalLight_html"><div class="ttname"><a href="classRawDirectionalLight.html">RawDirectionalLight</a></div><div class="ttdef"><b>Definition</b> <a href="#l00014">DirectionalLight.h:14</a></div></div>
+<div class="ttc" id="aclassRawDirectionalLight_html_a3b525dcd2678e2ec324a0b673430e387"><div class="ttname"><a href="classRawDirectionalLight.html#a3b525dcd2678e2ec324a0b673430e387">RawDirectionalLight::Set</a></div><div class="ttdeci">void Set(const std::string &amp;_uuid, const DirectionalLight &amp;_light)</div><div class="ttdef"><b>Definition</b> <a href="#l00026">DirectionalLight.h:26</a></div></div>
+<div class="ttc" id="aclassRawDirectionalLight_html_a600956b1551f342a46577352fe65fc08"><div class="ttname"><a href="classRawDirectionalLight.html#a600956b1551f342a46577352fe65fc08">RawDirectionalLight::~RawDirectionalLight</a></div><div class="ttdeci">~RawDirectionalLight() override=default</div></div>
+<div class="ttc" id="aclassRawDirectionalLight_html_a7a76b25a3ed4d285e4fe59b967634b81"><div class="ttname"><a href="classRawDirectionalLight.html#a7a76b25a3ed4d285e4fe59b967634b81">RawDirectionalLight::GetLight</a></div><div class="ttdeci">DirectionalLight &amp; GetLight()</div><div class="ttdef"><b>Definition</b> <a href="#l00019">DirectionalLight.h:19</a></div></div>
+<div class="ttc" id="aclassRawDirectionalLight_html_aa19a9b3d6e376c2869fdea2d7e335013"><div class="ttname"><a href="classRawDirectionalLight.html#aa19a9b3d6e376c2869fdea2d7e335013">RawDirectionalLight::Save</a></div><div class="ttdeci">void Save(std::string _path) override</div><div class="ttdef"><b>Definition</b> <a href="DirectionalLight_8cpp_source.html#l00015">DirectionalLight.cpp:15</a></div></div>
+<div class="ttc" id="aclassRawDirectionalLight_html_aaf3283211961446b69d39bb58d9cd329"><div class="ttname"><a href="classRawDirectionalLight.html#aaf3283211961446b69d39bb58d9cd329">RawDirectionalLight::ImGuiSetting</a></div><div class="ttdeci">void ImGuiSetting() override</div><div class="ttdef"><b>Definition</b> <a href="DirectionalLight_8cpp_source.html#l00024">DirectionalLight.cpp:24</a></div></div>
+<div class="ttc" id="aclassRawDirectionalLight_html_ae516cd26143ad1c23cf15a48d1f41c1c"><div class="ttname"><a href="classRawDirectionalLight.html#ae516cd26143ad1c23cf15a48d1f41c1c">RawDirectionalLight::DefaultSetting</a></div><div class="ttdeci">void DefaultSetting() override</div><div class="ttdef"><b>Definition</b> <a href="DirectionalLight_8cpp_source.html#l00008">DirectionalLight.cpp:8</a></div></div>
+<div class="ttc" id="aclassRawLight_html_a205d80281d1d03ea397cb92a32d37d98"><div class="ttname"><a href="classRawLight.html#a205d80281d1d03ea397cb92a32d37d98">RawLight::RawLight</a></div><div class="ttdeci">RawLight()</div><div class="ttdef"><b>Definition</b> <a href="RawLight_8h_source.html#l00040">RawLight.h:40</a></div></div>
+<div class="ttc" id="aclassRawLight_html_aee757911a2317fa782d276cba88e7f9d"><div class="ttname"><a href="classRawLight.html#aee757911a2317fa782d276cba88e7f9d">RawLight::uuid_</a></div><div class="ttdeci">std::string uuid_</div><div class="ttdef"><b>Definition</b> <a href="RawLight_8h_source.html#l00007">RawLight.h:7</a></div></div>
+<div class="ttc" id="astructDirectionalLight_html"><div class="ttname"><a href="structDirectionalLight.html">DirectionalLight</a></div><div class="ttdef"><b>Definition</b> <a href="#l00008">DirectionalLight.h:8</a></div></div>
+<div class="ttc" id="astructDirectionalLight_html_a9d5d17335ecd6a191c65d8711ad8577a"><div class="ttname"><a href="structDirectionalLight.html#a9d5d17335ecd6a191c65d8711ad8577a">DirectionalLight::direction</a></div><div class="ttdeci">Vector3 direction</div><div class="ttdef"><b>Definition</b> <a href="#l00010">DirectionalLight.h:10</a></div></div>
+<div class="ttc" id="astructDirectionalLight_html_ab269f01389cd88101e7d27ce7e149e5e"><div class="ttname"><a href="structDirectionalLight.html#ab269f01389cd88101e7d27ce7e149e5e">DirectionalLight::intensity</a></div><div class="ttdeci">float intensity</div><div class="ttdef"><b>Definition</b> <a href="#l00011">DirectionalLight.h:11</a></div></div>
+<div class="ttc" id="astructDirectionalLight_html_af7cec050b680e38218d207936671820b"><div class="ttname"><a href="structDirectionalLight.html#af7cec050b680e38218d207936671820b">DirectionalLight::color</a></div><div class="ttdeci">Vector4 color</div><div class="ttdef"><b>Definition</b> <a href="#l00009">DirectionalLight.h:9</a></div></div>
+<div class="ttc" id="astructVector3_html"><div class="ttname"><a href="structVector3.html">Vector3</a></div><div class="ttdoc">3Dベクトル構造体 3D座標と基本的なベクトル演算を提供</div><div class="ttdef"><b>Definition</b> <a href="Vector3_8hpp_source.html#l00010">Vector3.hpp:10</a></div></div>
+<div class="ttc" id="astructVector4_html"><div class="ttname"><a href="structVector4.html">Vector4</a></div><div class="ttdoc">4Dベクトル構造体 RGBA色や同次座標を表現</div><div class="ttdef"><b>Definition</b> <a href="Vector4_8hpp_source.html#l00007">Vector4.hpp:7</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a href="dir_0bea4804a055a8738b8ad450a8ea4ec1.html">Light</a></li><li class="navelem"><a href="dir_d977c846570b3c6156a692bf94d47d4c.html">DirectionalLight</a></li><li class="navelem"><a href="DirectionalLight_8h.html">DirectionalLight.h</a></li>
+    <li class="footer"><span class="timestamp"></span>作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.14.0 </li>
+  </ul>
+</div>
+</body>
+</html>

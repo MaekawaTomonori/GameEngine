@@ -1,0 +1,162 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.14.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>PortfolioGame Engine: C:/Users/tomo-/source/repos/PortfolioGame/Engine/include/Math/MathUtils.hpp ファイル</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">PortfolioGame Engine<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">C++20 DirectX12 Game Engine</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.14.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','検索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('MathUtils_8hpp.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">読み取り中…</div>
+<div class="SRStatus" id="Searching">検索中…</div>
+<div class="SRStatus" id="NoMatches">一致する文字列を見つけられません</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">MathUtils.hpp ファイル</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &lt;cmath&gt;</code><br />
+<code>#include &quot;<a class="el" href="Matrix_8hpp_source.html">Matrix.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="Transform_8hpp_source.html">Transform.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="Vector3_8hpp_source.html">Vector3.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="Vector4_8hpp_source.html">Vector4.hpp</a>&quot;</code><br />
+</div>
+<p><a href="MathUtils_8hpp_source.html">[ソースコード]</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
+名前空間</h2></td></tr>
+<tr class="memitem:MathUtils" id="r_MathUtils"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMathUtils.html">MathUtils</a></td></tr>
+<tr class="memitem:MathUtils_3A_3AMatrix" id="r_MathUtils_3A_3AMatrix"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMathUtils_1_1Matrix.html">MathUtils::Matrix</a></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+関数</h2></td></tr>
+<tr class="memitem:aa5fba89b7b58c32b17a142b2ccde90b6" id="r_aa5fba89b7b58c32b17a142b2ccde90b6"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMathUtils.html#aa5fba89b7b58c32b17a142b2ccde90b6">MathUtils::Random</a> (float min, float max)</td></tr>
+<tr class="memitem:ae68b3eaea9743d6c4a351825ed456b0d" id="r_ae68b3eaea9743d6c4a351825ed456b0d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structVector3.html">Vector3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMathUtils.html#ae68b3eaea9743d6c4a351825ed456b0d">MathUtils::Random</a> (<a class="el" href="structVector3.html">Vector3</a> min, <a class="el" href="structVector3.html">Vector3</a> max)</td></tr>
+<tr class="memitem:a556aec43aaef5eda7d2f14dbca81a65c" id="r_a556aec43aaef5eda7d2f14dbca81a65c"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMathUtils.html#a556aec43aaef5eda7d2f14dbca81a65c">MathUtils::Lerp</a> (const float &amp;a, const float &amp;b, float t)</td></tr>
+<tr class="memitem:a8d755ac6ec97cc02797c78bd7946e4f0" id="r_a8d755ac6ec97cc02797c78bd7946e4f0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structVector2.html">Vector2</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMathUtils.html#a8d755ac6ec97cc02797c78bd7946e4f0">MathUtils::Lerp</a> (const <a class="el" href="structVector2.html">Vector2</a> &amp;a, const <a class="el" href="structVector2.html">Vector2</a> &amp;b, float t)</td></tr>
+<tr class="memitem:aa3ff980308d5e577c5896d4136ff2338" id="r_aa3ff980308d5e577c5896d4136ff2338"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structVector3.html">Vector3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMathUtils.html#aa3ff980308d5e577c5896d4136ff2338">MathUtils::Lerp</a> (const <a class="el" href="structVector3.html">Vector3</a> &amp;a, const <a class="el" href="structVector3.html">Vector3</a> &amp;b, float t)</td></tr>
+<tr class="memitem:ab7f734b08027f18641babe2f9595a1a9" id="r_ab7f734b08027f18641babe2f9595a1a9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structQuaternion.html">Quaternion</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMathUtils.html#ab7f734b08027f18641babe2f9595a1a9">MathUtils::Slerp</a> (const <a class="el" href="structQuaternion.html">Quaternion</a> &amp;a, const <a class="el" href="structQuaternion.html">Quaternion</a> &amp;b, float t)</td></tr>
+<tr class="memitem:a3052bf310025c534606fd9a346f2e53a" id="r_a3052bf310025c534606fd9a346f2e53a"><td class="memTemplParams" colspan="2">template&lt;typename Type&gt; </td></tr>
+<tr class="memitem:a3052bf310025c534606fd9a346f2e53a template"><td class="memItemLeft" align="right" valign="top">Type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMathUtils.html#a3052bf310025c534606fd9a346f2e53a">MathUtils::Factorial</a> (Type n)</td></tr>
+<tr class="memitem:a510170fabf720ee8293903cb15c3e38e" id="r_a510170fabf720ee8293903cb15c3e38e"><td class="memTemplParams" colspan="2">template&lt;typename Type&gt; </td></tr>
+<tr class="memitem:a510170fabf720ee8293903cb15c3e38e template"><td class="memItemLeft" align="right" valign="top">Type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMathUtils.html#a510170fabf720ee8293903cb15c3e38e">MathUtils::Permutation</a> (Type n, Type r)</td></tr>
+<tr class="memitem:a6f8e08a980900c67451859372b87a292" id="r_a6f8e08a980900c67451859372b87a292"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMathUtils.html#a6f8e08a980900c67451859372b87a292">MathUtils::Distance</a> (const <a class="el" href="structVector3.html">Vector3</a> &amp;a, const <a class="el" href="structVector3.html">Vector3</a> &amp;b)</td></tr>
+<tr class="memitem:ad5a69fe5ab304c446e1fb643bca95d6f" id="r_ad5a69fe5ab304c446e1fb643bca95d6f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structMatrix3x3.html">Matrix3x3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMathUtils_1_1Matrix.html#ad5a69fe5ab304c446e1fb643bca95d6f">MathUtils::Matrix::MakeIdentity3x3</a> ()</td></tr>
+<tr class="memitem:a1c40c9daddc0ed10682814216053a4f4" id="r_a1c40c9daddc0ed10682814216053a4f4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structMatrix4x4.html">Matrix4x4</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMathUtils_1_1Matrix.html#a1c40c9daddc0ed10682814216053a4f4">MathUtils::Matrix::MakeIdentity</a> ()</td></tr>
+<tr class="memitem:ae64e0ba5c1d9cb74e10796de4e4b1a01" id="r_ae64e0ba5c1d9cb74e10796de4e4b1a01"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structMatrix4x4.html">Matrix4x4</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMathUtils_1_1Matrix.html#ae64e0ba5c1d9cb74e10796de4e4b1a01">MathUtils::Matrix::MakeTranslateMatrix</a> (const <a class="el" href="structVector3.html">Vector3</a> &amp;velocity)</td></tr>
+<tr class="memitem:a2f07ee1cefde4e2066ca201556e5b8a6" id="r_a2f07ee1cefde4e2066ca201556e5b8a6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structMatrix4x4.html">Matrix4x4</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMathUtils_1_1Matrix.html#a2f07ee1cefde4e2066ca201556e5b8a6">MathUtils::Matrix::MakeScaleMatrix</a> (const <a class="el" href="structVector3.html">Vector3</a> &amp;scale)</td></tr>
+<tr class="memitem:ad4f1731dc7a3e800ef31daf416b77532" id="r_ad4f1731dc7a3e800ef31daf416b77532"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structVector3.html">Vector3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMathUtils_1_1Matrix.html#ad4f1731dc7a3e800ef31daf416b77532">MathUtils::Matrix::Transform</a> (const <a class="el" href="structVector3.html">Vector3</a> &amp;vector, const <a class="el" href="structMatrix4x4.html">Matrix4x4</a> &amp;matrix)</td></tr>
+<tr class="memitem:a55a688d88d6d43a0817fffe5b7c29096" id="r_a55a688d88d6d43a0817fffe5b7c29096"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structVector4.html">Vector4</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMathUtils_1_1Matrix.html#a55a688d88d6d43a0817fffe5b7c29096">MathUtils::Matrix::Transform</a> (const <a class="el" href="structVector4.html">Vector4</a> &amp;vector, const <a class="el" href="structMatrix4x4.html">Matrix4x4</a> &amp;matrix)</td></tr>
+<tr class="memitem:a57e7e4e21d475069b58abb695d712520" id="r_a57e7e4e21d475069b58abb695d712520"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structMatrix4x4.html">Matrix4x4</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMathUtils_1_1Matrix.html#a57e7e4e21d475069b58abb695d712520">MathUtils::Matrix::MakeRotateX</a> (float rad)</td></tr>
+<tr class="memitem:adc3ff6fa0206d9a74b0c729623e8a4c0" id="r_adc3ff6fa0206d9a74b0c729623e8a4c0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structMatrix4x4.html">Matrix4x4</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMathUtils_1_1Matrix.html#adc3ff6fa0206d9a74b0c729623e8a4c0">MathUtils::Matrix::MakeRotateY</a> (float rad)</td></tr>
+<tr class="memitem:a47f057e57269c053f7f9953ab1c25a89" id="r_a47f057e57269c053f7f9953ab1c25a89"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structMatrix4x4.html">Matrix4x4</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMathUtils_1_1Matrix.html#a47f057e57269c053f7f9953ab1c25a89">MathUtils::Matrix::MakeRotateZ</a> (float rad)</td></tr>
+<tr class="memitem:a4ba7c39657265cd5808cbce29d9b407a" id="r_a4ba7c39657265cd5808cbce29d9b407a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structMatrix4x4.html">Matrix4x4</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMathUtils_1_1Matrix.html#a4ba7c39657265cd5808cbce29d9b407a">MathUtils::Matrix::MakeRotate</a> (const <a class="el" href="structQuaternion.html">Quaternion</a> &amp;rotate)</td></tr>
+<tr class="memitem:a0e85b5bf5f1c3672e757f8598bf74b5f" id="r_a0e85b5bf5f1c3672e757f8598bf74b5f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structMatrix4x4.html">Matrix4x4</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMathUtils_1_1Matrix.html#a0e85b5bf5f1c3672e757f8598bf74b5f">MathUtils::Matrix::MakeAffineMatrix</a> (const <a class="el" href="structTransform.html">::Transform</a> &amp;transform)</td></tr>
+<tr class="memitem:a088773a6c89cc35b5d41e200e774499a" id="r_a088773a6c89cc35b5d41e200e774499a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structMatrix4x4.html">Matrix4x4</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMathUtils_1_1Matrix.html#a088773a6c89cc35b5d41e200e774499a">MathUtils::Matrix::MakeAffineMatrix</a> (const <a class="el" href="structVector3.html">Vector3</a> &amp;scale, const <a class="el" href="structVector3.html">Vector3</a> &amp;rotate, const <a class="el" href="structVector3.html">Vector3</a> &amp;translate)</td></tr>
+<tr class="memitem:a3881008886f288779076b3b4ed4830bd" id="r_a3881008886f288779076b3b4ed4830bd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structMatrix4x4.html">Matrix4x4</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMathUtils_1_1Matrix.html#a3881008886f288779076b3b4ed4830bd">MathUtils::Matrix::MakeAffineMatrix</a> (const <a class="el" href="structVector3.html">Vector3</a> &amp;scale, const <a class="el" href="structQuaternion.html">Quaternion</a> &amp;rotate, const <a class="el" href="structVector3.html">Vector3</a> &amp;translate)</td></tr>
+<tr class="memitem:a51efbfd19f50b8fe9f0249fe39709f76" id="r_a51efbfd19f50b8fe9f0249fe39709f76"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structMatrix4x4.html">Matrix4x4</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMathUtils_1_1Matrix.html#a51efbfd19f50b8fe9f0249fe39709f76">MathUtils::Matrix::MakeAffineMatrix</a> (const <a class="el" href="structMatrix4x4.html">Matrix4x4</a> &amp;scale, const <a class="el" href="structMatrix4x4.html">Matrix4x4</a> &amp;rotate, const <a class="el" href="structMatrix4x4.html">Matrix4x4</a> &amp;translate)</td></tr>
+<tr class="memitem:ac6b90eb3003aaefcce0295b57c4d658d" id="r_ac6b90eb3003aaefcce0295b57c4d658d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structMatrix4x4.html">Matrix4x4</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMathUtils_1_1Matrix.html#ac6b90eb3003aaefcce0295b57c4d658d">MathUtils::Matrix::MakeOrthogonalMatrix</a> (float left, float right, float top, float bottom, float znear, float zfar)</td></tr>
+<tr class="memitem:ad1037aa30877292a360b8883d5f231e0" id="r_ad1037aa30877292a360b8883d5f231e0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structMatrix4x4.html">Matrix4x4</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMathUtils_1_1Matrix.html#ad1037aa30877292a360b8883d5f231e0">MathUtils::Matrix::MakePerspectiveFovMatrix</a> (float fovY, float aspectRatio, float nearClip, float farClip)</td></tr>
+<tr class="memitem:a43c223591e0838693aca0861c196eff8" id="r_a43c223591e0838693aca0861c196eff8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structMatrix4x4.html">Matrix4x4</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMathUtils_1_1Matrix.html#a43c223591e0838693aca0861c196eff8">MathUtils::Matrix::MakeViewportMatrix</a> (float width, float height, float top, float bottom, float depthMax, float depthMin)</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
+変数</h2></td></tr>
+<tr class="memitem:ae7178224b281913df7a84ec38659de41" id="r_ae7178224b281913df7a84ec38659de41"><td class="memItemLeft" align="right" valign="top">constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMathUtils.html#ae7178224b281913df7a84ec38659de41">MathUtils::F_PI</a> = 3.14159265358979323846264338327950288f</td></tr>
+<tr class="memitem:a9f598fca98aa916ad6e2d831fcc1421e" id="r_a9f598fca98aa916ad6e2d831fcc1421e"><td class="memItemLeft" align="right" valign="top">constexpr double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMathUtils.html#a9f598fca98aa916ad6e2d831fcc1421e">MathUtils::PI</a> = 3.14159265358979323846264338327950288</td></tr>
+</table>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a href="dir_6169d17290d9404be5262c21e04fa2c7.html">Math</a></li><li class="navelem"><a href="MathUtils_8hpp.html">MathUtils.hpp</a></li>
+    <li class="footer"><span class="timestamp"></span>作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.14.0 </li>
+  </ul>
+</div>
+</body>
+</html>

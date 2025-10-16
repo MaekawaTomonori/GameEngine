@@ -12,7 +12,14 @@
 
 #include "vendor/DirectXTex/DirectXTex.h"
 
+/// <summary>
+/// テクスチャ管理クラス
+/// テクスチャの読み込み、キャッシュ、GPUアップロードを管理
+/// </summary>
 class TextureManager{
+    /// <summary>
+    /// テクスチャデータ
+    /// </summary>
     struct Texture{
         uint32_t srvIndex;
         DirectX::TexMetadata metadata;
@@ -37,18 +44,58 @@ private: //Variables
 
 public:
     ~TextureManager();
+
+    /// <summary>
+    /// テクスチャマネージャーを初期化
+    /// </summary>
+    /// <param name="_adapter">DirectXアダプター</param>
+    /// <param name="_srv">SRVマネージャー</param>
     void Initialize(DirectXAdapter* _adapter, SRVManager* _srv);
+
+    /// <summary>
+    /// テクスチャを読み込み
+    /// </summary>
+    /// <param name="fileName">ファイル名</param>
     void Load(const std::string& fileName);
 
-    //All Unload(Clear)
+    /// <summary>
+    /// すべてのテクスチャをアンロード（クリア）
+    /// </summary>
     void Unload();
 
+    /// <summary>
+    /// テクスチャメタデータを取得
+    /// </summary>
+    /// <param name="fileName">ファイル名</param>
+    /// <returns>テクスチャメタデータへの参照</returns>
     const DirectX::TexMetadata& GetTextureMetadata(const std::string& fileName);
+
+    /// <summary>
+    /// SRVインデックスを取得
+    /// </summary>
+    /// <param name="fileName">ファイル名</param>
+    /// <returns>SRVインデックス</returns>
     uint32_t GetSrvIndex(const std::string& fileName);
 
+    /// <summary>
+    /// ファイルパスからテクスチャインデックスを取得
+    /// </summary>
+    /// <param name="path">ファイルパス</param>
+    /// <returns>テクスチャインデックス</returns>
     uint32_t GetTextureIndexByFilePath(const std::string& path) const;
 
+    /// <summary>
+    /// GPUハンドルを取得（ファイル名指定）
+    /// </summary>
+    /// <param name="fileName">ファイル名</param>
+    /// <returns>GPUディスクリプタハンドル</returns>
     D3D12_GPU_DESCRIPTOR_HANDLE GetGPUHandle(const std::string& fileName);
+
+    /// <summary>
+    /// GPUハンドルを取得（インデックス指定）
+    /// </summary>
+    /// <param name="index">インデックス</param>
+    /// <returns>GPUディスクリプタハンドル</returns>
     D3D12_GPU_DESCRIPTOR_HANDLE GetGPUHandle(const uint32_t index) const;
 
 private: //Methods
