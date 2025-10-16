@@ -1,0 +1,190 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.14.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>PortfolioGame Engine: C:/Users/tomo-/source/repos/PortfolioGame/Engine/src/DirectX/GraphicsPipeline/Object/RootSignature.cpp ソースファイル</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">PortfolioGame Engine<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">C++20 DirectX12 Game Engine</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.14.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','検索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('RootSignature_8cpp_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">読み取り中…</div>
+<div class="SRStatus" id="Searching">検索中…</div>
+<div class="SRStatus" id="NoMatches">一致する文字列を見つけられません</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">RootSignature.cpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="RootSignature_8cpp.html">[詳解]</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#include &quot;<a class="code" href="RootSignature_8hpp.html">RootSignature.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;<a class="code" href="Log_8hpp.html">Log.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="Utils_8hpp.html">Utils.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
+<div class="foldopen" id="foldopen00006" data-start="{" data-end="}">
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno"><a class="line" href="classRootSignature.html#a6d6cd5a567816ca14e34f47841d98901">    6</a></span><a class="code hl_class" href="classRootSignature.html">RootSignature</a>&amp; <a class="code hl_function" href="classRootSignature.html#a6d6cd5a567816ca14e34f47841d98901">RootSignature::AddParameter</a>(<span class="keyword">const</span> D3D12_ROOT_PARAMETER&amp; _parameter) {</div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span>    parameters_.push_back(_parameter);</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>}</div>
+</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="foldopen" id="foldopen00011" data-start="{" data-end="}">
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="classRootSignature.html#a031abb8bf17536401f88c9a5f51b08eb">   11</a></span><a class="code hl_class" href="classRootSignature.html">RootSignature</a>&amp; <a class="code hl_function" href="classRootSignature.html#a031abb8bf17536401f88c9a5f51b08eb">RootSignature::SetSampler</a>(<span class="keyword">const</span> D3D12_STATIC_SAMPLER_DESC&amp; _sampler) {</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    samplers_.push_back(_sampler);</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>}</div>
+</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<div class="foldopen" id="foldopen00016" data-start="{" data-end="}">
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="classRootSignature.html#aacca0a460cf7d27886497917cff3e5c9">   16</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classRootSignature.html#aacca0a460cf7d27886497917cff3e5c9">RootSignature::Create</a>(ID3D12Device* _device) {</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="keywordflow">if</span> (!_device) {</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>        <a class="code hl_function" href="classLog.html#a1a96849014a462fb22eb2247323cb2dc">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, <span class="stringliteral">&quot;Device is null&quot;</span>);</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>        <a class="code hl_function" href="namespaceUtils.html#aa35c12cebe61c9d818df8944b3a66706">Utils::Alert</a>(<span class="stringliteral">&quot;Device is null&quot;</span>);</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    }</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    desc_.Flags = D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT;</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    desc_.pParameters = parameters_.data();</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    desc_.NumParameters = <span class="keyword">static_cast&lt;</span>UINT<span class="keyword">&gt;</span>(parameters_.size());</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    desc_.pStaticSamplers = samplers_.data();</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    desc_.NumStaticSamplers = <span class="keyword">static_cast&lt;</span>UINT<span class="keyword">&gt;</span>(samplers_.size());</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    Microsoft::WRL::ComPtr&lt;ID3DBlob&gt; sigBlob;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    Microsoft::WRL::ComPtr&lt;ID3DBlob&gt; errBlob;</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    HRESULT hr = D3D12SerializeRootSignature(</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        &amp;desc_,</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>        D3D_ROOT_SIGNATURE_VERSION_1,</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        &amp;sigBlob,</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        &amp;errBlob</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    );</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keywordflow">if</span> (FAILED(hr)) {</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        <a class="code hl_function" href="classLog.html#a1a96849014a462fb22eb2247323cb2dc">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, <span class="stringliteral">&quot;Failed to serialize root signature&quot;</span>);</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        <a class="code hl_function" href="namespaceUtils.html#aa35c12cebe61c9d818df8944b3a66706">Utils::Alert</a>(<span class="stringliteral">&quot;Failed to serialize root signature&quot;</span>);</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    }</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    hr = _device-&gt;CreateRootSignature(</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        0,</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        sigBlob-&gt;GetBufferPointer(),</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        sigBlob-&gt;GetBufferSize(),</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        IID_PPV_ARGS(&amp;data_)</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    );</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    <span class="keywordflow">if</span> (FAILED(hr)) {</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        <a class="code hl_function" href="classLog.html#a1a96849014a462fb22eb2247323cb2dc">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, <span class="stringliteral">&quot;Failed to create root signature&quot;</span>);</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        <a class="code hl_function" href="namespaceUtils.html#aa35c12cebe61c9d818df8944b3a66706">Utils::Alert</a>(<span class="stringliteral">&quot;Failed to create root signature&quot;</span>);</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    }</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <a class="code hl_function" href="classLog.html#a1a96849014a462fb22eb2247323cb2dc">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>, <span class="stringliteral">&quot;Root signature created successfully&quot;</span>);</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>}</div>
+</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
+<div class="foldopen" id="foldopen00062" data-start="{" data-end="}">
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno"><a class="line" href="classRootSignature.html#a1604250a85568942f6db38a3be911fe9">   62</a></span>ID3D12RootSignature* <a class="code hl_function" href="classRootSignature.html#a1604250a85568942f6db38a3be911fe9">RootSignature::Get</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    <span class="keywordflow">return</span> data_.Get();</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>}</div>
+</div>
+<div class="ttc" id="aLog_8hpp_html"><div class="ttname"><a href="Log_8hpp.html">Log.hpp</a></div></div>
+<div class="ttc" id="aRootSignature_8hpp_html"><div class="ttname"><a href="RootSignature_8hpp.html">RootSignature.hpp</a></div></div>
+<div class="ttc" id="aUtils_8hpp_html"><div class="ttname"><a href="Utils_8hpp.html">Utils.hpp</a></div></div>
+<div class="ttc" id="aclassLog_html_a1a96849014a462fb22eb2247323cb2dc"><div class="ttname"><a href="classLog.html#a1a96849014a462fb22eb2247323cb2dc">Log::Send</a></div><div class="ttdeci">static void Send(Level level, const std::string &amp;message)</div><div class="ttdoc">ログメッセージを送信</div><div class="ttdef"><b>Definition</b> <a href="Log_8cpp_source.html#l00068">Log.cpp:68</a></div></div>
+<div class="ttc" id="aclassLog_html_afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3"><div class="ttname"><a href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a></div><div class="ttdeci">@ INFO</div><div class="ttdef"><b>Definition</b> <a href="Log_8hpp_source.html#l00029">Log.hpp:29</a></div></div>
+<div class="ttc" id="aclassLog_html_afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482"><div class="ttname"><a href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a></div><div class="ttdeci">@ ERR</div><div class="ttdef"><b>Definition</b> <a href="Log_8hpp_source.html#l00031">Log.hpp:31</a></div></div>
+<div class="ttc" id="aclassRootSignature_html"><div class="ttname"><a href="classRootSignature.html">RootSignature</a></div><div class="ttdef"><b>Definition</b> <a href="RootSignature_8hpp_source.html#l00008">RootSignature.hpp:8</a></div></div>
+<div class="ttc" id="aclassRootSignature_html_a031abb8bf17536401f88c9a5f51b08eb"><div class="ttname"><a href="classRootSignature.html#a031abb8bf17536401f88c9a5f51b08eb">RootSignature::SetSampler</a></div><div class="ttdeci">RootSignature &amp; SetSampler(const D3D12_STATIC_SAMPLER_DESC &amp;_sampler)</div><div class="ttdef"><b>Definition</b> <a href="#l00011">RootSignature.cpp:11</a></div></div>
+<div class="ttc" id="aclassRootSignature_html_a1604250a85568942f6db38a3be911fe9"><div class="ttname"><a href="classRootSignature.html#a1604250a85568942f6db38a3be911fe9">RootSignature::Get</a></div><div class="ttdeci">ID3D12RootSignature * Get() const</div><div class="ttdef"><b>Definition</b> <a href="#l00062">RootSignature.cpp:62</a></div></div>
+<div class="ttc" id="aclassRootSignature_html_a6d6cd5a567816ca14e34f47841d98901"><div class="ttname"><a href="classRootSignature.html#a6d6cd5a567816ca14e34f47841d98901">RootSignature::AddParameter</a></div><div class="ttdeci">RootSignature &amp; AddParameter(const D3D12_ROOT_PARAMETER &amp;_parameter)</div><div class="ttdef"><b>Definition</b> <a href="#l00006">RootSignature.cpp:6</a></div></div>
+<div class="ttc" id="aclassRootSignature_html_aacca0a460cf7d27886497917cff3e5c9"><div class="ttname"><a href="classRootSignature.html#aacca0a460cf7d27886497917cff3e5c9">RootSignature::Create</a></div><div class="ttdeci">void Create(ID3D12Device *_device)</div><div class="ttdef"><b>Definition</b> <a href="#l00016">RootSignature.cpp:16</a></div></div>
+<div class="ttc" id="anamespaceUtils_html_aa35c12cebe61c9d818df8944b3a66706"><div class="ttname"><a href="namespaceUtils.html#aa35c12cebe61c9d818df8944b3a66706">Utils::Alert</a></div><div class="ttdeci">void Alert(const std::string &amp;msg)</div><div class="ttdef"><b>Definition</b> <a href="Utils_8cpp_source.html#l00054">Utils.cpp:54</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a href="dir_31399d34f22961890ce23f7132fb3e96.html">DirectX</a></li><li class="navelem"><a href="dir_5e152dc6ce4833044bc05fc6d25a6808.html">GraphicsPipeline</a></li><li class="navelem"><a href="dir_e872fbfcf4dac2296573d0e1ccfba4a6.html">Object</a></li><li class="navelem"><a href="RootSignature_8cpp.html">RootSignature.cpp</a></li>
+    <li class="footer"><span class="timestamp"></span>作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.14.0 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,712 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.14.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>PortfolioGame Engine: Sprite クラス</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">PortfolioGame Engine<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">C++20 DirectX12 Game Engine</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.14.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','検索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('classSprite.html','','classSprite-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">読み取り中…</div>
+<div class="SRStatus" id="Searching">検索中…</div>
+<div class="SRStatus" id="NoMatches">一致する文字列を見つけられません</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Sprite クラス</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>2Dスプライトクラス テクスチャ付き2D四角形の描画を管理  
+ <a href="#details">[詳解]</a></p>
+
+<p><code>#include &lt;<a class="el" href="Sprite_8hpp_source.html">Sprite.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+公開メンバ関数</h2></td></tr>
+<tr class="memitem:a12cba3ac1868418add3c4d95ce87e615" id="r_a12cba3ac1868418add3c4d95ce87e615"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a12cba3ac1868418add3c4d95ce87e615">Sprite</a> ()</td></tr>
+<tr class="memitem:a431a8d5512646518384ff8e677a7b174" id="r_a431a8d5512646518384ff8e677a7b174"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a431a8d5512646518384ff8e677a7b174">Initialize</a> (const std::string &amp;_texture)</td></tr>
+<tr class="memdesc:a431a8d5512646518384ff8e677a7b174"><td class="mdescLeft">&#160;</td><td class="mdescRight">スプライトを初期化  <br /></td></tr>
+<tr class="memitem:aee0a7bfb6597fb08458f3b116cf1b17f" id="r_aee0a7bfb6597fb08458f3b116cf1b17f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aee0a7bfb6597fb08458f3b116cf1b17f">Update</a> ()</td></tr>
+<tr class="memdesc:aee0a7bfb6597fb08458f3b116cf1b17f"><td class="mdescLeft">&#160;</td><td class="mdescRight">スプライトの更新処理  <br /></td></tr>
+<tr class="memitem:a054a4c340c14c3d218b99e484bf83d21" id="r_a054a4c340c14c3d218b99e484bf83d21"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a054a4c340c14c3d218b99e484bf83d21">Draw</a> ()</td></tr>
+<tr class="memdesc:a054a4c340c14c3d218b99e484bf83d21"><td class="mdescLeft">&#160;</td><td class="mdescRight">スプライトを描画  <br /></td></tr>
+<tr class="memitem:a923c78dd593185e624ed7f14607857ec" id="r_a923c78dd593185e624ed7f14607857ec"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structVector2.html">Vector2</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a923c78dd593185e624ed7f14607857ec">GetPosition</a> () const</td></tr>
+<tr class="memdesc:a923c78dd593185e624ed7f14607857ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">位置を取得  <br /></td></tr>
+<tr class="memitem:a55cd3100cd7473ab7b9209161b65434a" id="r_a55cd3100cd7473ab7b9209161b65434a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a55cd3100cd7473ab7b9209161b65434a">SetPosition</a> (const <a class="el" href="structVector2.html">Vector2</a> &amp;p)</td></tr>
+<tr class="memdesc:a55cd3100cd7473ab7b9209161b65434a"><td class="mdescLeft">&#160;</td><td class="mdescRight">位置を設定  <br /></td></tr>
+<tr class="memitem:a4a737c8991739ef16e54a2989d6fabd6" id="r_a4a737c8991739ef16e54a2989d6fabd6"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structVector2.html">Vector2</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4a737c8991739ef16e54a2989d6fabd6">GetSize</a> () const</td></tr>
+<tr class="memdesc:a4a737c8991739ef16e54a2989d6fabd6"><td class="mdescLeft">&#160;</td><td class="mdescRight">サイズを取得  <br /></td></tr>
+<tr class="memitem:a703c949fada5d543bf7c087f43e8da5a" id="r_a703c949fada5d543bf7c087f43e8da5a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a703c949fada5d543bf7c087f43e8da5a">SetSize</a> (const <a class="el" href="structVector2.html">Vector2</a> &amp;s)</td></tr>
+<tr class="memdesc:a703c949fada5d543bf7c087f43e8da5a"><td class="mdescLeft">&#160;</td><td class="mdescRight">サイズを設定  <br /></td></tr>
+<tr class="memitem:ab344a3b431b82c0350dab59c076eec8c" id="r_ab344a3b431b82c0350dab59c076eec8c"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab344a3b431b82c0350dab59c076eec8c">GetRotation</a> () const</td></tr>
+<tr class="memdesc:ab344a3b431b82c0350dab59c076eec8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">回転角度を取得  <br /></td></tr>
+<tr class="memitem:af81ed668095305488b3a6ab9b028010d" id="r_af81ed668095305488b3a6ab9b028010d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af81ed668095305488b3a6ab9b028010d">SetRotation</a> (float r)</td></tr>
+<tr class="memdesc:af81ed668095305488b3a6ab9b028010d"><td class="mdescLeft">&#160;</td><td class="mdescRight">回転角度を設定  <br /></td></tr>
+<tr class="memitem:a31202ac855810107f97b1ce627a1771c" id="r_a31202ac855810107f97b1ce627a1771c"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structVector4.html">Vector4</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a31202ac855810107f97b1ce627a1771c">GetColor</a> () const</td></tr>
+<tr class="memdesc:a31202ac855810107f97b1ce627a1771c"><td class="mdescLeft">&#160;</td><td class="mdescRight">色を取得  <br /></td></tr>
+<tr class="memitem:aa82dd340829e8cf49e9525d0cf4170b0" id="r_aa82dd340829e8cf49e9525d0cf4170b0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa82dd340829e8cf49e9525d0cf4170b0">SetColor</a> (const <a class="el" href="structVector4.html">Vector4</a> &amp;color) const</td></tr>
+<tr class="memdesc:aa82dd340829e8cf49e9525d0cf4170b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">色を設定  <br /></td></tr>
+<tr class="memitem:a3c4c7d54444c311da2b4baa2d605e399" id="r_a3c4c7d54444c311da2b4baa2d605e399"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structVector2.html">Vector2</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3c4c7d54444c311da2b4baa2d605e399">GetAnchorPoint</a> () const</td></tr>
+<tr class="memdesc:a3c4c7d54444c311da2b4baa2d605e399"><td class="mdescLeft">&#160;</td><td class="mdescRight">アンカーポイントを取得  <br /></td></tr>
+<tr class="memitem:a70e1a546e6bd642dabe6522ce3f67ea3" id="r_a70e1a546e6bd642dabe6522ce3f67ea3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a70e1a546e6bd642dabe6522ce3f67ea3">SetAnchorPoint</a> (const <a class="el" href="structVector2.html">Vector2</a> &amp;a)</td></tr>
+<tr class="memdesc:a70e1a546e6bd642dabe6522ce3f67ea3"><td class="mdescLeft">&#160;</td><td class="mdescRight">アンカーポイントを設定  <br /></td></tr>
+<tr class="memitem:a93c88ecde8bf8ffce86ccd6c23e7805c" id="r_a93c88ecde8bf8ffce86ccd6c23e7805c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a93c88ecde8bf8ffce86ccd6c23e7805c">IsFlipX</a> () const</td></tr>
+<tr class="memdesc:a93c88ecde8bf8ffce86ccd6c23e7805c"><td class="mdescLeft">&#160;</td><td class="mdescRight">X軸反転の状態を取得  <br /></td></tr>
+<tr class="memitem:a0f6947ff89b975e76a253deaaf62155d" id="r_a0f6947ff89b975e76a253deaaf62155d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0f6947ff89b975e76a253deaaf62155d">SetFlipX</a> (bool f)</td></tr>
+<tr class="memdesc:a0f6947ff89b975e76a253deaaf62155d"><td class="mdescLeft">&#160;</td><td class="mdescRight">X軸反転を設定  <br /></td></tr>
+<tr class="memitem:a01dde3293edf3256aa18cf053c95d144" id="r_a01dde3293edf3256aa18cf053c95d144"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a01dde3293edf3256aa18cf053c95d144">IsFlipY</a> () const</td></tr>
+<tr class="memdesc:a01dde3293edf3256aa18cf053c95d144"><td class="mdescLeft">&#160;</td><td class="mdescRight">Y軸反転の状態を取得  <br /></td></tr>
+<tr class="memitem:a5fc9961b8ef0e99ed64b2da2ff5cf6c2" id="r_a5fc9961b8ef0e99ed64b2da2ff5cf6c2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5fc9961b8ef0e99ed64b2da2ff5cf6c2">SetFlipY</a> (bool f)</td></tr>
+<tr class="memdesc:a5fc9961b8ef0e99ed64b2da2ff5cf6c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Y軸反転を設定  <br /></td></tr>
+<tr class="memitem:a3b5121a3f9d726a70ba817cefdc9969d" id="r_a3b5121a3f9d726a70ba817cefdc9969d"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structVector2.html">Vector2</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3b5121a3f9d726a70ba817cefdc9969d">GetTextureLeftTop</a> () const</td></tr>
+<tr class="memdesc:a3b5121a3f9d726a70ba817cefdc9969d"><td class="mdescLeft">&#160;</td><td class="mdescRight">テクスチャの左上座標を取得  <br /></td></tr>
+<tr class="memitem:ac267d5c280f88dc735bb25351c75f37f" id="r_ac267d5c280f88dc735bb25351c75f37f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac267d5c280f88dc735bb25351c75f37f">SetTextureLeftTop</a> (const <a class="el" href="structVector2.html">Vector2</a> &amp;textureLeftTop)</td></tr>
+<tr class="memdesc:ac267d5c280f88dc735bb25351c75f37f"><td class="mdescLeft">&#160;</td><td class="mdescRight">テクスチャの左上座標を設定  <br /></td></tr>
+<tr class="memitem:a85eb54a1ef93e038f90a15908a5ab744" id="r_a85eb54a1ef93e038f90a15908a5ab744"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structVector2.html">Vector2</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a85eb54a1ef93e038f90a15908a5ab744">GetTextureSize</a> () const</td></tr>
+<tr class="memdesc:a85eb54a1ef93e038f90a15908a5ab744"><td class="mdescLeft">&#160;</td><td class="mdescRight">テクスチャサイズを取得  <br /></td></tr>
+<tr class="memitem:aaae012c3048411fd69e9b893c6090359" id="r_aaae012c3048411fd69e9b893c6090359"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aaae012c3048411fd69e9b893c6090359">SetTextureSize</a> (const <a class="el" href="structVector2.html">Vector2</a> &amp;textureSize)</td></tr>
+<tr class="memdesc:aaae012c3048411fd69e9b893c6090359"><td class="mdescLeft">&#160;</td><td class="mdescRight">テクスチャサイズを設定  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">詳解</h2>
+<div class="textblock"><p>2Dスプライトクラス テクスチャ付き2D四角形の描画を管理 </p>
+
+<p class="definition"> <a class="el" href="Sprite_8hpp_source.html">Sprite.hpp</a> の <a class="el" href="Sprite_8hpp_source.html#l00017">17</a> 行目に定義があります。</p>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">構築子と解体子</h2>
+<a id="a12cba3ac1868418add3c4d95ce87e615" name="a12cba3ac1868418add3c4d95ce87e615"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a12cba3ac1868418add3c4d95ce87e615">&#9670;&#160;</a></span>Sprite()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Sprite::Sprite </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="Sprite_8cpp_source.html">Sprite.cpp</a> の <a class="el" href="Sprite_8cpp_source.html#l00013">13</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="Utils_8cpp_source.html#l00084">Utils::GenerateUniqueId()</a>, <a class="el" href="Singleton_8hpp_source.html#l00043">Singleton&lt; T &gt;::GetInstance()</a>.</p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">関数詳解</h2>
+<a id="a054a4c340c14c3d218b99e484bf83d21" name="a054a4c340c14c3d218b99e484bf83d21"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a054a4c340c14c3d218b99e484bf83d21">&#9670;&#160;</a></span>Draw()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Sprite::Draw </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>スプライトを描画 </p>
+
+<p class="definition"> <a class="el" href="Sprite_8cpp_source.html">Sprite.cpp</a> の <a class="el" href="Sprite_8cpp_source.html#l00118">118</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="Singleton_8hpp_source.html#l00043">Singleton&lt; T &gt;::GetInstance()</a>.</p>
+
+</div>
+</div>
+<a id="a3c4c7d54444c311da2b4baa2d605e399" name="a3c4c7d54444c311da2b4baa2d605e399"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c4c7d54444c311da2b4baa2d605e399">&#9670;&#160;</a></span>GetAnchorPoint()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="structVector2.html">Vector2</a> &amp; Sprite::GetAnchorPoint </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>アンカーポイントを取得 </p>
+<dl class="section return"><dt>戻り値</dt><dd>アンカーポイントへの参照</dd></dl>
+
+<p class="definition"> <a class="el" href="Sprite_8cpp_source.html">Sprite.cpp</a> の <a class="el" href="Sprite_8cpp_source.html#l00188">188</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="a31202ac855810107f97b1ce627a1771c" name="a31202ac855810107f97b1ce627a1771c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a31202ac855810107f97b1ce627a1771c">&#9670;&#160;</a></span>GetColor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="structVector4.html">Vector4</a> &amp; Sprite::GetColor </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>色を取得 </p>
+<dl class="section return"><dt>戻り値</dt><dd>色ベクトルへの参照</dd></dl>
+
+<p class="definition"> <a class="el" href="Sprite_8cpp_source.html">Sprite.cpp</a> の <a class="el" href="Sprite_8cpp_source.html#l00180">180</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="a923c78dd593185e624ed7f14607857ec" name="a923c78dd593185e624ed7f14607857ec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a923c78dd593185e624ed7f14607857ec">&#9670;&#160;</a></span>GetPosition()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="structVector2.html">Vector2</a> &amp; Sprite::GetPosition </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>位置を取得 </p>
+<dl class="section return"><dt>戻り値</dt><dd>位置ベクトルへの参照</dd></dl>
+
+<p class="definition"> <a class="el" href="Sprite_8cpp_source.html">Sprite.cpp</a> の <a class="el" href="Sprite_8cpp_source.html#l00156">156</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="ab344a3b431b82c0350dab59c076eec8c" name="ab344a3b431b82c0350dab59c076eec8c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab344a3b431b82c0350dab59c076eec8c">&#9670;&#160;</a></span>GetRotation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Sprite::GetRotation </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>回転角度を取得 </p>
+<dl class="section return"><dt>戻り値</dt><dd>回転角度（ラジアン）</dd></dl>
+
+<p class="definition"> <a class="el" href="Sprite_8cpp_source.html">Sprite.cpp</a> の <a class="el" href="Sprite_8cpp_source.html#l00172">172</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="a4a737c8991739ef16e54a2989d6fabd6" name="a4a737c8991739ef16e54a2989d6fabd6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a737c8991739ef16e54a2989d6fabd6">&#9670;&#160;</a></span>GetSize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="structVector2.html">Vector2</a> &amp; Sprite::GetSize </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>サイズを取得 </p>
+<dl class="section return"><dt>戻り値</dt><dd>サイズベクトルへの参照</dd></dl>
+
+<p class="definition"> <a class="el" href="Sprite_8cpp_source.html">Sprite.cpp</a> の <a class="el" href="Sprite_8cpp_source.html#l00164">164</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="a3b5121a3f9d726a70ba817cefdc9969d" name="a3b5121a3f9d726a70ba817cefdc9969d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b5121a3f9d726a70ba817cefdc9969d">&#9670;&#160;</a></span>GetTextureLeftTop()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="structVector2.html">Vector2</a> &amp; Sprite::GetTextureLeftTop </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>テクスチャの左上座標を取得 </p>
+<dl class="section return"><dt>戻り値</dt><dd>左上座標への参照</dd></dl>
+
+<p class="definition"> <a class="el" href="Sprite_8cpp_source.html">Sprite.cpp</a> の <a class="el" href="Sprite_8cpp_source.html#l00212">212</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="a85eb54a1ef93e038f90a15908a5ab744" name="a85eb54a1ef93e038f90a15908a5ab744"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a85eb54a1ef93e038f90a15908a5ab744">&#9670;&#160;</a></span>GetTextureSize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="structVector2.html">Vector2</a> &amp; Sprite::GetTextureSize </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>テクスチャサイズを取得 </p>
+<dl class="section return"><dt>戻り値</dt><dd>テクスチャサイズへの参照</dd></dl>
+
+<p class="definition"> <a class="el" href="Sprite_8cpp_source.html">Sprite.cpp</a> の <a class="el" href="Sprite_8cpp_source.html#l00220">220</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="a431a8d5512646518384ff8e677a7b174" name="a431a8d5512646518384ff8e677a7b174"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a431a8d5512646518384ff8e677a7b174">&#9670;&#160;</a></span>Initialize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Sprite::Initialize </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>_texture</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>スプライトを初期化 </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_texture</td><td>テクスチャパス</td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition"> <a class="el" href="Sprite_8cpp_source.html">Sprite.cpp</a> の <a class="el" href="Sprite_8cpp_source.html#l00021">21</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="Singleton_8hpp_source.html#l00043">Singleton&lt; T &gt;::GetInstance()</a>, <a class="el" href="MathUtils_8cpp_source.html#l00016">MathUtils::Matrix::MakeIdentity()</a>.</p>
+
+</div>
+</div>
+<a id="a93c88ecde8bf8ffce86ccd6c23e7805c" name="a93c88ecde8bf8ffce86ccd6c23e7805c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a93c88ecde8bf8ffce86ccd6c23e7805c">&#9670;&#160;</a></span>IsFlipX()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Sprite::IsFlipX </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>X軸反転の状態を取得 </p>
+<dl class="section return"><dt>戻り値</dt><dd>反転している場合true</dd></dl>
+
+<p class="definition"> <a class="el" href="Sprite_8cpp_source.html">Sprite.cpp</a> の <a class="el" href="Sprite_8cpp_source.html#l00196">196</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="a01dde3293edf3256aa18cf053c95d144" name="a01dde3293edf3256aa18cf053c95d144"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a01dde3293edf3256aa18cf053c95d144">&#9670;&#160;</a></span>IsFlipY()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Sprite::IsFlipY </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Y軸反転の状態を取得 </p>
+<dl class="section return"><dt>戻り値</dt><dd>反転している場合true</dd></dl>
+
+<p class="definition"> <a class="el" href="Sprite_8cpp_source.html">Sprite.cpp</a> の <a class="el" href="Sprite_8cpp_source.html#l00204">204</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="a70e1a546e6bd642dabe6522ce3f67ea3" name="a70e1a546e6bd642dabe6522ce3f67ea3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a70e1a546e6bd642dabe6522ce3f67ea3">&#9670;&#160;</a></span>SetAnchorPoint()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Sprite::SetAnchorPoint </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structVector2.html">Vector2</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>a</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>アンカーポイントを設定 </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>アンカーポイント</td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition"> <a class="el" href="Sprite_8cpp_source.html">Sprite.cpp</a> の <a class="el" href="Sprite_8cpp_source.html#l00192">192</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="aa82dd340829e8cf49e9525d0cf4170b0" name="aa82dd340829e8cf49e9525d0cf4170b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa82dd340829e8cf49e9525d0cf4170b0">&#9670;&#160;</a></span>SetColor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Sprite::SetColor </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structVector4.html">Vector4</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>color</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>色を設定 </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">color</td><td>色ベクトル</td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition"> <a class="el" href="Sprite_8cpp_source.html">Sprite.cpp</a> の <a class="el" href="Sprite_8cpp_source.html#l00184">184</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="a0f6947ff89b975e76a253deaaf62155d" name="a0f6947ff89b975e76a253deaaf62155d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f6947ff89b975e76a253deaaf62155d">&#9670;&#160;</a></span>SetFlipX()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Sprite::SetFlipX </td>
+          <td>(</td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>f</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>X軸反転を設定 </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>反転する場合true</td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition"> <a class="el" href="Sprite_8cpp_source.html">Sprite.cpp</a> の <a class="el" href="Sprite_8cpp_source.html#l00200">200</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="a5fc9961b8ef0e99ed64b2da2ff5cf6c2" name="a5fc9961b8ef0e99ed64b2da2ff5cf6c2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5fc9961b8ef0e99ed64b2da2ff5cf6c2">&#9670;&#160;</a></span>SetFlipY()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Sprite::SetFlipY </td>
+          <td>(</td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>f</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Y軸反転を設定 </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>反転する場合true</td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition"> <a class="el" href="Sprite_8cpp_source.html">Sprite.cpp</a> の <a class="el" href="Sprite_8cpp_source.html#l00208">208</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="a55cd3100cd7473ab7b9209161b65434a" name="a55cd3100cd7473ab7b9209161b65434a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a55cd3100cd7473ab7b9209161b65434a">&#9670;&#160;</a></span>SetPosition()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Sprite::SetPosition </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structVector2.html">Vector2</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>p</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>位置を設定 </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>位置ベクトル</td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition"> <a class="el" href="Sprite_8cpp_source.html">Sprite.cpp</a> の <a class="el" href="Sprite_8cpp_source.html#l00160">160</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="af81ed668095305488b3a6ab9b028010d" name="af81ed668095305488b3a6ab9b028010d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af81ed668095305488b3a6ab9b028010d">&#9670;&#160;</a></span>SetRotation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Sprite::SetRotation </td>
+          <td>(</td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>r</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>回転角度を設定 </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">r</td><td>回転角度（ラジアン）</td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition"> <a class="el" href="Sprite_8cpp_source.html">Sprite.cpp</a> の <a class="el" href="Sprite_8cpp_source.html#l00176">176</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="a703c949fada5d543bf7c087f43e8da5a" name="a703c949fada5d543bf7c087f43e8da5a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a703c949fada5d543bf7c087f43e8da5a">&#9670;&#160;</a></span>SetSize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Sprite::SetSize </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structVector2.html">Vector2</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>s</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>サイズを設定 </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td>サイズベクトル</td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition"> <a class="el" href="Sprite_8cpp_source.html">Sprite.cpp</a> の <a class="el" href="Sprite_8cpp_source.html#l00168">168</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="ac267d5c280f88dc735bb25351c75f37f" name="ac267d5c280f88dc735bb25351c75f37f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac267d5c280f88dc735bb25351c75f37f">&#9670;&#160;</a></span>SetTextureLeftTop()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Sprite::SetTextureLeftTop </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structVector2.html">Vector2</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>textureLeftTop</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>テクスチャの左上座標を設定 </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">textureLeftTop</td><td>左上座標</td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition"> <a class="el" href="Sprite_8cpp_source.html">Sprite.cpp</a> の <a class="el" href="Sprite_8cpp_source.html#l00216">216</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="aaae012c3048411fd69e9b893c6090359" name="aaae012c3048411fd69e9b893c6090359"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaae012c3048411fd69e9b893c6090359">&#9670;&#160;</a></span>SetTextureSize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Sprite::SetTextureSize </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structVector2.html">Vector2</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>textureSize</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>テクスチャサイズを設定 </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">textureSize</td><td>テクスチャサイズ</td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition"> <a class="el" href="Sprite_8cpp_source.html">Sprite.cpp</a> の <a class="el" href="Sprite_8cpp_source.html#l00224">224</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="aee0a7bfb6597fb08458f3b116cf1b17f" name="aee0a7bfb6597fb08458f3b116cf1b17f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aee0a7bfb6597fb08458f3b116cf1b17f">&#9670;&#160;</a></span>Update()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Sprite::Update </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>スプライトの更新処理 </p>
+
+<p class="definition"> <a class="el" href="Sprite_8cpp_source.html">Sprite.cpp</a> の <a class="el" href="Sprite_8cpp_source.html#l00074">74</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="Singleton_8hpp_source.html#l00043">Singleton&lt; T &gt;::GetInstance()</a>, <a class="el" href="MathUtils_8cpp_source.html#l00113">MathUtils::Matrix::MakeAffineMatrix()</a>, <a class="el" href="MathUtils_8cpp_source.html#l00016">MathUtils::Matrix::MakeIdentity()</a>, <a class="el" href="MathUtils_8cpp_source.html#l00139">MathUtils::Matrix::MakeOrthogonalMatrix()</a>.</p>
+
+</div>
+</div>
+<hr/>このクラス詳解は次のファイルから抽出されました:<ul>
+<li>C:/Users/tomo-/source/repos/PortfolioGame/Engine/include/<a class="el" href="Sprite_8hpp_source.html">Sprite.hpp</a></li>
+<li>C:/Users/tomo-/source/repos/PortfolioGame/Engine/src/Sprite/<a class="el" href="Sprite_8cpp_source.html">Sprite.cpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="classSprite.html">Sprite</a></li>
+    <li class="footer"><span class="timestamp"></span>作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.14.0 </li>
+  </ul>
+</div>
+</body>
+</html>

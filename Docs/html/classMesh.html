@@ -1,0 +1,332 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.14.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>PortfolioGame Engine: Mesh クラス</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">PortfolioGame Engine<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">C++20 DirectX12 Game Engine</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.14.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','検索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('classMesh.html','','classMesh-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">読み取り中…</div>
+<div class="SRStatus" id="Searching">検索中…</div>
+<div class="SRStatus" id="NoMatches">一致する文字列を見つけられません</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Mesh クラス</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>メッシュクラス 頂点データ、インデックス、マテリアルを管理  
+ <a href="#details">[詳解]</a></p>
+
+<p><code>#include &lt;<a class="el" href="Mesh_8hpp_source.html">Mesh.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+公開メンバ関数</h2></td></tr>
+<tr class="memitem:a3698ba6613ec342e370bc1865e8f6ffa" id="r_a3698ba6613ec342e370bc1865e8f6ffa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3698ba6613ec342e370bc1865e8f6ffa">Initialize</a> (<a class="el" href="classDirectXAdapter.html">DirectXAdapter</a> *_adapter, const std::string &amp;_name, const <a class="el" href="structMeshData.html">MeshData</a> &amp;_raw)</td></tr>
+<tr class="memdesc:a3698ba6613ec342e370bc1865e8f6ffa"><td class="mdescLeft">&#160;</td><td class="mdescRight">メッシュを初期化  <br /></td></tr>
+<tr class="memitem:a356f1de95058340d7f11eefe794cfe8a" id="r_a356f1de95058340d7f11eefe794cfe8a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a356f1de95058340d7f11eefe794cfe8a">Update</a> ()</td></tr>
+<tr class="memdesc:a356f1de95058340d7f11eefe794cfe8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">メッシュの更新処理  <br /></td></tr>
+<tr class="memitem:abf84fe4ef735490769268685087e0e32" id="r_abf84fe4ef735490769268685087e0e32"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abf84fe4ef735490769268685087e0e32">Draw</a> () const</td></tr>
+<tr class="memdesc:abf84fe4ef735490769268685087e0e32"><td class="mdescLeft">&#160;</td><td class="mdescRight">メッシュを描画  <br /></td></tr>
+<tr class="memitem:aa4273b914190bf357a8e5783f507dbf8" id="r_aa4273b914190bf357a8e5783f507dbf8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa4273b914190bf357a8e5783f507dbf8">Debug</a> ()</td></tr>
+<tr class="memdesc:aa4273b914190bf357a8e5783f507dbf8"><td class="mdescLeft">&#160;</td><td class="mdescRight">デバッグ情報の表示  <br /></td></tr>
+<tr class="memitem:a6c099dd1df78c710aefd8973e4d7f90e" id="r_a6c099dd1df78c710aefd8973e4d7f90e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6c099dd1df78c710aefd8973e4d7f90e">SetVBV</a> (D3D12_VERTEX_BUFFER_VIEW _vbv)</td></tr>
+<tr class="memdesc:a6c099dd1df78c710aefd8973e4d7f90e"><td class="mdescLeft">&#160;</td><td class="mdescRight">頂点バッファビューを設定  <br /></td></tr>
+<tr class="memitem:a45733c8b9432ef0becde4bb5fe6b7c39" id="r_a45733c8b9432ef0becde4bb5fe6b7c39"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structMeshData.html">MeshData</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a45733c8b9432ef0becde4bb5fe6b7c39">GetData</a> () const</td></tr>
+<tr class="memdesc:a45733c8b9432ef0becde4bb5fe6b7c39"><td class="mdescLeft">&#160;</td><td class="mdescRight">メッシュデータを取得  <br /></td></tr>
+<tr class="memitem:a62b78c884dc190abda74fd1222c3b7cd" id="r_a62b78c884dc190abda74fd1222c3b7cd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a62b78c884dc190abda74fd1222c3b7cd">SetTexture</a> (const std::string &amp;_texturePath)</td></tr>
+<tr class="memdesc:a62b78c884dc190abda74fd1222c3b7cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">テクスチャを設定  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">詳解</h2>
+<div class="textblock"><p>メッシュクラス 頂点データ、インデックス、マテリアルを管理 </p>
+
+<p class="definition"> <a class="el" href="Mesh_8hpp_source.html">Mesh.hpp</a> の <a class="el" href="Mesh_8hpp_source.html#l00017">17</a> 行目に定義があります。</p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">関数詳解</h2>
+<a id="aa4273b914190bf357a8e5783f507dbf8" name="aa4273b914190bf357a8e5783f507dbf8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa4273b914190bf357a8e5783f507dbf8">&#9670;&#160;</a></span>Debug()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Mesh::Debug </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>デバッグ情報の表示 </p>
+
+<p class="definition"> <a class="el" href="Mesh_8cpp_source.html">Mesh.cpp</a> の <a class="el" href="Mesh_8cpp_source.html#l00086">86</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="MathUtils_8cpp_source.html#l00016">MathUtils::Matrix::MakeIdentity()</a>.</p>
+
+</div>
+</div>
+<a id="abf84fe4ef735490769268685087e0e32" name="abf84fe4ef735490769268685087e0e32"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf84fe4ef735490769268685087e0e32">&#9670;&#160;</a></span>Draw()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Mesh::Draw </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>メッシュを描画 </p>
+
+<p class="definition"> <a class="el" href="Mesh_8cpp_source.html">Mesh.cpp</a> の <a class="el" href="Mesh_8cpp_source.html#l00062">62</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="Singleton_8hpp_source.html#l00043">Singleton&lt; T &gt;::GetInstance()</a>.</p>
+
+</div>
+</div>
+<a id="a45733c8b9432ef0becde4bb5fe6b7c39" name="a45733c8b9432ef0becde4bb5fe6b7c39"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a45733c8b9432ef0becde4bb5fe6b7c39">&#9670;&#160;</a></span>GetData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structMeshData.html">MeshData</a> Mesh::GetData </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>メッシュデータを取得 </p>
+<dl class="section return"><dt>戻り値</dt><dd>メッシュデータ</dd></dl>
+
+<p class="definition"> <a class="el" href="Mesh_8cpp_source.html">Mesh.cpp</a> の <a class="el" href="Mesh_8cpp_source.html#l00154">154</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="a3698ba6613ec342e370bc1865e8f6ffa" name="a3698ba6613ec342e370bc1865e8f6ffa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3698ba6613ec342e370bc1865e8f6ffa">&#9670;&#160;</a></span>Initialize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Mesh::Initialize </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classDirectXAdapter.html">DirectXAdapter</a> *</td>          <td class="paramname"><span class="paramname"><em>_adapter</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>_name</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structMeshData.html">MeshData</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>_raw</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>メッシュを初期化 </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_adapter</td><td>DirectXアダプター</td></tr>
+    <tr><td class="paramname">_name</td><td>メッシュ名</td></tr>
+    <tr><td class="paramname">_raw</td><td>メッシュデータ</td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition"> <a class="el" href="Mesh_8cpp_source.html">Mesh.cpp</a> の <a class="el" href="Mesh_8cpp_source.html#l00013">13</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="DirectXAdapter_8cpp_source.html#l00527">DirectXAdapter::GetCommandList()</a>, <a class="el" href="Singleton_8hpp_source.html#l00043">Singleton&lt; T &gt;::GetInstance()</a>, <a class="el" href="MathUtils_8cpp_source.html#l00016">MathUtils::Matrix::MakeIdentity()</a>.</p>
+
+</div>
+</div>
+<a id="a62b78c884dc190abda74fd1222c3b7cd" name="a62b78c884dc190abda74fd1222c3b7cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62b78c884dc190abda74fd1222c3b7cd">&#9670;&#160;</a></span>SetTexture()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Mesh::SetTexture </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>_texturePath</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>テクスチャを設定 </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_texturePath</td><td>テクスチャパス</td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition"> <a class="el" href="Mesh_8cpp_source.html">Mesh.cpp</a> の <a class="el" href="Mesh_8cpp_source.html#l00158">158</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="Singleton_8hpp_source.html#l00043">Singleton&lt; T &gt;::GetInstance()</a>.</p>
+
+</div>
+</div>
+<a id="a6c099dd1df78c710aefd8973e4d7f90e" name="a6c099dd1df78c710aefd8973e4d7f90e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6c099dd1df78c710aefd8973e4d7f90e">&#9670;&#160;</a></span>SetVBV()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Mesh::SetVBV </td>
+          <td>(</td>
+          <td class="paramtype">D3D12_VERTEX_BUFFER_VIEW</td>          <td class="paramname"><span class="paramname"><em>_vbv</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>頂点バッファビューを設定 </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_vbv</td><td>頂点バッファビュー</td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition"> <a class="el" href="Mesh_8cpp_source.html">Mesh.cpp</a> の <a class="el" href="Mesh_8cpp_source.html#l00150">150</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="a356f1de95058340d7f11eefe794cfe8a" name="a356f1de95058340d7f11eefe794cfe8a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a356f1de95058340d7f11eefe794cfe8a">&#9670;&#160;</a></span>Update()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Mesh::Update </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>メッシュの更新処理 </p>
+
+<p class="definition"> <a class="el" href="Mesh_8cpp_source.html">Mesh.cpp</a> の <a class="el" href="Mesh_8cpp_source.html#l00056">56</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="MathUtils_8cpp_source.html#l00016">MathUtils::Matrix::MakeIdentity()</a>, <a class="el" href="MathUtils_8cpp_source.html#l00033">MathUtils::Matrix::MakeScaleMatrix()</a>.</p>
+
+</div>
+</div>
+<hr/>このクラス詳解は次のファイルから抽出されました:<ul>
+<li>C:/Users/tomo-/source/repos/PortfolioGame/Engine/src/Mesh/<a class="el" href="Mesh_8hpp_source.html">Mesh.hpp</a></li>
+<li>C:/Users/tomo-/source/repos/PortfolioGame/Engine/src/Mesh/<a class="el" href="Mesh_8cpp_source.html">Mesh.cpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="classMesh.html">Mesh</a></li>
+    <li class="footer"><span class="timestamp"></span>作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.14.0 </li>
+  </ul>
+</div>
+</body>
+</html>

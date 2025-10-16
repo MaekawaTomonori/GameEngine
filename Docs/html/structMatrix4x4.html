@@ -1,0 +1,393 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.14.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>PortfolioGame Engine: Matrix4x4 構造体</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">PortfolioGame Engine<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">C++20 DirectX12 Game Engine</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.14.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','検索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('structMatrix4x4.html','','structMatrix4x4-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">読み取り中…</div>
+<div class="SRStatus" id="Searching">検索中…</div>
+<div class="SRStatus" id="NoMatches">一致する文字列を見つけられません</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Matrix4x4 構造体</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>4x4行列構造体 3D変換と投影演算を提供  
+ <a href="#details">[詳解]</a></p>
+
+<p><code>#include &lt;<a class="el" href="Matrix_8hpp_source.html">Matrix.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+公開メンバ関数</h2></td></tr>
+<tr class="memitem:a8e5abd340eef361f18bd8cc7166fef1b" id="r_a8e5abd340eef361f18bd8cc7166fef1b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structMatrix4x4.html">Matrix4x4</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8e5abd340eef361f18bd8cc7166fef1b">operator+</a> (const <a class="el" href="structMatrix4x4.html">Matrix4x4</a> &amp;other) const</td></tr>
+<tr class="memitem:a4d4f16882462f4afc18debc6594019a1" id="r_a4d4f16882462f4afc18debc6594019a1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structMatrix4x4.html">Matrix4x4</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4d4f16882462f4afc18debc6594019a1">operator-</a> (const <a class="el" href="structMatrix4x4.html">Matrix4x4</a> &amp;other) const</td></tr>
+<tr class="memitem:a78f9a791f2954af500a34c7ce207f6d8" id="r_a78f9a791f2954af500a34c7ce207f6d8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structMatrix4x4.html">Matrix4x4</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a78f9a791f2954af500a34c7ce207f6d8">operator*</a> (const float &amp;other) const</td></tr>
+<tr class="memitem:a1c687b90d224b7fac251d8539b8d1a57" id="r_a1c687b90d224b7fac251d8539b8d1a57"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structMatrix4x4.html">Matrix4x4</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1c687b90d224b7fac251d8539b8d1a57">operator*</a> (const <a class="el" href="structMatrix4x4.html">Matrix4x4</a> &amp;other) const</td></tr>
+<tr class="memitem:adf991e0cef3eb2a24985f6ff376b7041" id="r_adf991e0cef3eb2a24985f6ff376b7041"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structMatrix4x4.html">Matrix4x4</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adf991e0cef3eb2a24985f6ff376b7041">operator/</a> (const float &amp;other) const</td></tr>
+<tr class="memitem:a832428555f20de0282927c663df60800" id="r_a832428555f20de0282927c663df60800"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structMatrix4x4.html">Matrix4x4</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a832428555f20de0282927c663df60800">Inverse</a> () const</td></tr>
+<tr class="memitem:aa43e0f614629fcc336b5e5064c9aecf5" id="r_aa43e0f614629fcc336b5e5064c9aecf5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structMatrix4x4.html">Matrix4x4</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa43e0f614629fcc336b5e5064c9aecf5">Transpose</a> () const</td></tr>
+<tr class="memitem:a63e94fbb8b4949510792be65e9a1663f" id="r_a63e94fbb8b4949510792be65e9a1663f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structVector3.html">Vector3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a63e94fbb8b4949510792be65e9a1663f">GetTranslate</a> () const</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+公開変数類</h2></td></tr>
+<tr class="memitem:a4c0a9edebd02c85ab9328280917e1e46" id="r_a4c0a9edebd02c85ab9328280917e1e46"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4c0a9edebd02c85ab9328280917e1e46">matrix</a> [4][4]</td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">詳解</h2>
+<div class="textblock"><p>4x4行列構造体 3D変換と投影演算を提供 </p>
+
+<p class="definition"> <a class="el" href="Matrix_8hpp_source.html">Matrix.hpp</a> の <a class="el" href="Matrix_8hpp_source.html#l00015">15</a> 行目に定義があります。</p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">関数詳解</h2>
+<a id="a63e94fbb8b4949510792be65e9a1663f" name="a63e94fbb8b4949510792be65e9a1663f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a63e94fbb8b4949510792be65e9a1663f">&#9670;&#160;</a></span>GetTranslate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structVector3.html">Vector3</a> Matrix4x4::GetTranslate </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="Matrix_8hpp_source.html">Matrix.hpp</a> の <a class="el" href="Matrix_8hpp_source.html#l00158">158</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="Matrix_8hpp_source.html#l00016">matrix</a>.</p>
+
+</div>
+</div>
+<a id="a832428555f20de0282927c663df60800" name="a832428555f20de0282927c663df60800"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a832428555f20de0282927c663df60800">&#9670;&#160;</a></span>Inverse()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structMatrix4x4.html">Matrix4x4</a> Matrix4x4::Inverse </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="Matrix_8hpp_source.html">Matrix.hpp</a> の <a class="el" href="Matrix_8hpp_source.html#l00109">109</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="Matrix_8hpp_source.html#l00016">matrix</a>.</p>
+
+</div>
+</div>
+<a id="a78f9a791f2954af500a34c7ce207f6d8" name="a78f9a791f2954af500a34c7ce207f6d8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a78f9a791f2954af500a34c7ce207f6d8">&#9670;&#160;</a></span>operator*() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structMatrix4x4.html">Matrix4x4</a> Matrix4x4::operator* </td>
+          <td>(</td>
+          <td class="paramtype">const float &amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="Matrix_8hpp_source.html">Matrix.hpp</a> の <a class="el" href="Matrix_8hpp_source.html#l00058">58</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="Matrix_8hpp_source.html#l00016">matrix</a>.</p>
+
+</div>
+</div>
+<a id="a1c687b90d224b7fac251d8539b8d1a57" name="a1c687b90d224b7fac251d8539b8d1a57"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c687b90d224b7fac251d8539b8d1a57">&#9670;&#160;</a></span>operator*() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structMatrix4x4.html">Matrix4x4</a> Matrix4x4::operator* </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structMatrix4x4.html">Matrix4x4</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="Matrix_8hpp_source.html">Matrix.hpp</a> の <a class="el" href="Matrix_8hpp_source.html#l00078">78</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="Matrix_8hpp_source.html#l00016">matrix</a>.</p>
+
+</div>
+</div>
+<a id="a8e5abd340eef361f18bd8cc7166fef1b" name="a8e5abd340eef361f18bd8cc7166fef1b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8e5abd340eef361f18bd8cc7166fef1b">&#9670;&#160;</a></span>operator+()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structMatrix4x4.html">Matrix4x4</a> Matrix4x4::operator+ </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structMatrix4x4.html">Matrix4x4</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="Matrix_8hpp_source.html">Matrix.hpp</a> の <a class="el" href="Matrix_8hpp_source.html#l00018">18</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="Matrix_8hpp_source.html#l00016">matrix</a>.</p>
+
+</div>
+</div>
+<a id="a4d4f16882462f4afc18debc6594019a1" name="a4d4f16882462f4afc18debc6594019a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4d4f16882462f4afc18debc6594019a1">&#9670;&#160;</a></span>operator-()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structMatrix4x4.html">Matrix4x4</a> Matrix4x4::operator- </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structMatrix4x4.html">Matrix4x4</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="Matrix_8hpp_source.html">Matrix.hpp</a> の <a class="el" href="Matrix_8hpp_source.html#l00038">38</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="Matrix_8hpp_source.html#l00016">matrix</a>.</p>
+
+</div>
+</div>
+<a id="adf991e0cef3eb2a24985f6ff376b7041" name="adf991e0cef3eb2a24985f6ff376b7041"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf991e0cef3eb2a24985f6ff376b7041">&#9670;&#160;</a></span>operator/()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structMatrix4x4.html">Matrix4x4</a> Matrix4x4::operator/ </td>
+          <td>(</td>
+          <td class="paramtype">const float &amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="Matrix_8hpp_source.html">Matrix.hpp</a> の <a class="el" href="Matrix_8hpp_source.html#l00089">89</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="Matrix_8hpp_source.html#l00016">matrix</a>.</p>
+
+</div>
+</div>
+<a id="aa43e0f614629fcc336b5e5064c9aecf5" name="aa43e0f614629fcc336b5e5064c9aecf5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa43e0f614629fcc336b5e5064c9aecf5">&#9670;&#160;</a></span>Transpose()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structMatrix4x4.html">Matrix4x4</a> Matrix4x4::Transpose </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="Matrix_8hpp_source.html">Matrix.hpp</a> の <a class="el" href="Matrix_8hpp_source.html#l00146">146</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="Matrix_8hpp_source.html#l00016">matrix</a>.</p>
+
+</div>
+</div>
+<a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">メンバ詳解</h2>
+<a id="a4c0a9edebd02c85ab9328280917e1e46" name="a4c0a9edebd02c85ab9328280917e1e46"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c0a9edebd02c85ab9328280917e1e46">&#9670;&#160;</a></span>matrix</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Matrix4x4::matrix[4][4]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="Matrix_8hpp_source.html">Matrix.hpp</a> の <a class="el" href="Matrix_8hpp_source.html#l00016">16</a> 行目に定義があります。</p>
+
+<p class="reference">参照元 <a class="el" href="Matrix_8hpp_source.html#l00158">GetTranslate()</a>, <a class="el" href="Matrix_8hpp_source.html#l00109">Inverse()</a>, <a class="el" href="Matrix_8hpp_source.html#l00058">operator*()</a>, <a class="el" href="Matrix_8hpp_source.html#l00078">operator*()</a>, <a class="el" href="Matrix_8hpp_source.html#l00018">operator+()</a>, <a class="el" href="Matrix_8hpp_source.html#l00038">operator-()</a>, <a class="el" href="Matrix_8hpp_source.html#l00089">operator/()</a>, <a class="el" href="MathUtils_8cpp_source.html#l00042">MathUtils::Matrix::Transform()</a>, <a class="el" href="MathUtils_8cpp_source.html#l00058">MathUtils::Matrix::Transform()</a>, <a class="el" href="Matrix_8hpp_source.html#l00146">Transpose()</a>.</p>
+
+</div>
+</div>
+<hr/>この構造体詳解は次のファイルから抽出されました:<ul>
+<li>C:/Users/tomo-/source/repos/PortfolioGame/Engine/include/Math/<a class="el" href="Matrix_8hpp_source.html">Matrix.hpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="structMatrix4x4.html">Matrix4x4</a></li>
+    <li class="footer"><span class="timestamp"></span>作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.14.0 </li>
+  </ul>
+</div>
+</body>
+</html>

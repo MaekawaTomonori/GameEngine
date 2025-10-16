@@ -1,0 +1,205 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.14.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>PortfolioGame Engine: C:/Users/tomo-/source/repos/PortfolioGame/Engine/include/Line.hpp ソースファイル</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">PortfolioGame Engine<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">C++20 DirectX12 Game Engine</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.14.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','検索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('Line_8hpp_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">読み取り中…</div>
+<div class="SRStatus" id="Searching">検索中…</div>
+<div class="SRStatus" id="NoMatches">一致する文字列を見つけられません</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Line.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="Line_8hpp.html">[詳解]</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef Line_HPP_</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define Line_HPP_</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;d3d12.h&gt;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;wrl/client.h&gt;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;memory&gt;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;<a class="code" href="Matrix_8hpp.html">Math/Matrix.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;<a class="code" href="Vector3_8hpp.html">Math/Vector3.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;<a class="code" href="Vector4_8hpp.html">Math/Vector4.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="DX12Resource_8hpp.html">src/DirectX/Resource/DX12Resource.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">class </span><a class="code hl_class" href="classLineCommon.html">LineCommon</a>;</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keyword">class </span><a class="code hl_class" href="classDirectXAdapter.html">DirectXAdapter</a>;</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">class </span><a class="code hl_class" href="classCameraController.html">CameraController</a>;</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span></div>
+<div class="foldopen" id="foldopen00023" data-start="{" data-end="};">
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="classLine.html">   23</a></span><span class="keyword">class </span><a class="code hl_function" href="classLine.html#acc11b8a429d8cdd63ba6803dff5602b3">Line</a> {</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="keyword">struct </span>VertexData {</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        <a class="code hl_struct" href="structVector4.html">Vector4</a> position;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    };</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="keyword">struct </span>Material {</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>        <a class="code hl_struct" href="structVector4.html">Vector4</a> color;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    };</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="keyword">struct </span>Transformation {</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        <a class="code hl_struct" href="structMatrix4x4.html">Matrix4x4</a> WVP;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    };</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <a class="code hl_class" href="classLineCommon.html">LineCommon</a>* common_ = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <a class="code hl_class" href="classDirectXAdapter.html">DirectXAdapter</a>* adapter_ = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    Microsoft::WRL::ComPtr&lt;ID3D12GraphicsCommandList&gt; commandList_ = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <a class="code hl_class" href="classCameraController.html">CameraController</a>* cameraManager_ = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    std::string uuid_;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <span class="keyword">const</span> uint32_t MAX_LINES = 1000;</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <span class="comment">// 基本線形状用の頂点バッファ（2つの頂点）</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    std::unique_ptr&lt;DX12Resource&gt; vertexResource_;</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    D3D12_VERTEX_BUFFER_VIEW vertexBufferView_{};</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    VertexData* vertexData_ = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <span class="comment">// Material</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    std::unique_ptr&lt;DX12Resource&gt; materialResource_;</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    Material* materialData_ = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    std::unique_ptr&lt;DX12Resource&gt; transformationResource_;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    Transformation* transformationData_ = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    std::vector&lt;Vector4&gt; positions_;</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <a class="code hl_function" href="classLine.html#acc11b8a429d8cdd63ba6803dff5602b3">Line</a>();</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno"><a class="line" href="classLine.html#aabe85f48d22d92b62257091f48174fac">   70</a></span>    <a class="code hl_function" href="classLine.html#aabe85f48d22d92b62257091f48174fac">~Line</a>();</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span></div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classLine.html#aa596fba48c72141176f5e10c9141315b">Initialize</a>();</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span></div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classLine.html#afdd1678b3c26f7e9092755ec6d3aa8af">Update</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span></div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classLine.html#ae4f97bb029103dd93bc989ecbe49f02e">Draw</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span></div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classLine.html#aabb56eb8b9746fc2770b25f20e293a96">AddLine</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structVector3.html">Vector3</a>&amp; start, <span class="keyword">const</span> <a class="code hl_struct" href="structVector3.html">Vector3</a>&amp; end);</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span></div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classLine.html#a2ce04139752c4917c2ccf63b82e3df83">Clear</a>();</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span></div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classLine.html#a361c99ef29a201ff7f399c17f975ac88">SetColor</a>(<a class="code hl_struct" href="structVector4.html">Vector4</a> color) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    <span class="keywordtype">void</span> CreateVertexBuffer();</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span></div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    <span class="keywordtype">void</span> CreateMaterialBuffer();</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span></div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    <span class="keywordtype">void</span> CreateTransformationBuffer();</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>};</div>
+</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span> </div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span><span class="preprocessor">#endif </span><span class="comment">// Line_HPP_</span></div>
+<div class="ttc" id="aDX12Resource_8hpp_html"><div class="ttname"><a href="DX12Resource_8hpp.html">DX12Resource.hpp</a></div></div>
+<div class="ttc" id="aMatrix_8hpp_html"><div class="ttname"><a href="Matrix_8hpp.html">Matrix.hpp</a></div></div>
+<div class="ttc" id="aVector3_8hpp_html"><div class="ttname"><a href="Vector3_8hpp.html">Vector3.hpp</a></div></div>
+<div class="ttc" id="aVector4_8hpp_html"><div class="ttname"><a href="Vector4_8hpp.html">Vector4.hpp</a></div></div>
+<div class="ttc" id="aclassCameraController_html"><div class="ttname"><a href="classCameraController.html">CameraController</a></div><div class="ttdef"><b>Definition</b> <a href="CameraController_8hpp_source.html#l00010">CameraController.hpp:10</a></div></div>
+<div class="ttc" id="aclassDirectXAdapter_html"><div class="ttname"><a href="classDirectXAdapter.html">DirectXAdapter</a></div><div class="ttdoc">DirectX12アダプタークラス DirectX12の初期化とデバイス管理を提供</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8hpp_source.html#l00025">DirectXAdapter.hpp:25</a></div></div>
+<div class="ttc" id="aclassLineCommon_html"><div class="ttname"><a href="classLineCommon.html">LineCommon</a></div><div class="ttdef"><b>Definition</b> <a href="LineCommon_8hpp_source.html#l00006">LineCommon.hpp:6</a></div></div>
+<div class="ttc" id="aclassLine_html_a2ce04139752c4917c2ccf63b82e3df83"><div class="ttname"><a href="classLine.html#a2ce04139752c4917c2ccf63b82e3df83">Line::Clear</a></div><div class="ttdeci">void Clear()</div><div class="ttdoc">すべての線をクリア</div><div class="ttdef"><b>Definition</b> <a href="Line_8cpp_source.html#l00063">Line.cpp:63</a></div></div>
+<div class="ttc" id="aclassLine_html_a361c99ef29a201ff7f399c17f975ac88"><div class="ttname"><a href="classLine.html#a361c99ef29a201ff7f399c17f975ac88">Line::SetColor</a></div><div class="ttdeci">void SetColor(Vector4 color) const</div><div class="ttdoc">色を設定</div><div class="ttdef"><b>Definition</b> <a href="Line_8cpp_source.html#l00067">Line.cpp:67</a></div></div>
+<div class="ttc" id="aclassLine_html_aa596fba48c72141176f5e10c9141315b"><div class="ttname"><a href="classLine.html#aa596fba48c72141176f5e10c9141315b">Line::Initialize</a></div><div class="ttdeci">void Initialize()</div><div class="ttdoc">ラインを初期化</div><div class="ttdef"><b>Definition</b> <a href="Line_8cpp_source.html#l00020">Line.cpp:20</a></div></div>
+<div class="ttc" id="aclassLine_html_aabb56eb8b9746fc2770b25f20e293a96"><div class="ttname"><a href="classLine.html#aabb56eb8b9746fc2770b25f20e293a96">Line::AddLine</a></div><div class="ttdeci">void AddLine(const Vector3 &amp;start, const Vector3 &amp;end)</div><div class="ttdoc">線を追加</div><div class="ttdef"><b>Definition</b> <a href="Line_8cpp_source.html#l00053">Line.cpp:53</a></div></div>
+<div class="ttc" id="aclassLine_html_aabe85f48d22d92b62257091f48174fac"><div class="ttname"><a href="classLine.html#aabe85f48d22d92b62257091f48174fac">Line::~Line</a></div><div class="ttdeci">~Line()</div></div>
+<div class="ttc" id="aclassLine_html_acc11b8a429d8cdd63ba6803dff5602b3"><div class="ttname"><a href="classLine.html#acc11b8a429d8cdd63ba6803dff5602b3">Line::Line</a></div><div class="ttdeci">Line()</div><div class="ttdef"><b>Definition</b> <a href="Line_8cpp_source.html#l00010">Line.cpp:10</a></div></div>
+<div class="ttc" id="aclassLine_html_ae4f97bb029103dd93bc989ecbe49f02e"><div class="ttname"><a href="classLine.html#ae4f97bb029103dd93bc989ecbe49f02e">Line::Draw</a></div><div class="ttdeci">void Draw() const</div><div class="ttdoc">ラインを描画</div><div class="ttdef"><b>Definition</b> <a href="Line_8cpp_source.html#l00041">Line.cpp:41</a></div></div>
+<div class="ttc" id="aclassLine_html_afdd1678b3c26f7e9092755ec6d3aa8af"><div class="ttname"><a href="classLine.html#afdd1678b3c26f7e9092755ec6d3aa8af">Line::Update</a></div><div class="ttdeci">void Update() const</div><div class="ttdoc">ラインの更新処理</div><div class="ttdef"><b>Definition</b> <a href="Line_8cpp_source.html#l00026">Line.cpp:26</a></div></div>
+<div class="ttc" id="astructMatrix4x4_html"><div class="ttname"><a href="structMatrix4x4.html">Matrix4x4</a></div><div class="ttdoc">4x4行列構造体 3D変換と投影演算を提供</div><div class="ttdef"><b>Definition</b> <a href="Matrix_8hpp_source.html#l00015">Matrix.hpp:15</a></div></div>
+<div class="ttc" id="astructVector3_html"><div class="ttname"><a href="structVector3.html">Vector3</a></div><div class="ttdoc">3Dベクトル構造体 3D座標と基本的なベクトル演算を提供</div><div class="ttdef"><b>Definition</b> <a href="Vector3_8hpp_source.html#l00010">Vector3.hpp:10</a></div></div>
+<div class="ttc" id="astructVector4_html"><div class="ttname"><a href="structVector4.html">Vector4</a></div><div class="ttdoc">4Dベクトル構造体 RGBA色や同次座標を表現</div><div class="ttdef"><b>Definition</b> <a href="Vector4_8hpp_source.html#l00007">Vector4.hpp:7</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a href="Line_8hpp.html">Line.hpp</a></li>
+    <li class="footer"><span class="timestamp"></span>作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.14.0 </li>
+  </ul>
+</div>
+</body>
+</html>

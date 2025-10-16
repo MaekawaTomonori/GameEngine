@@ -1,0 +1,380 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.14.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>PortfolioGame Engine: Transition クラス</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">PortfolioGame Engine<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">C++20 DirectX12 Game Engine</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.14.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','検索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('classTransition.html','','classTransition-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">読み取り中…</div>
+<div class="SRStatus" id="Searching">検索中…</div>
+<div class="SRStatus" id="NoMatches">一致する文字列を見つけられません</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Transition クラス</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;<a class="el" href="Transition_8hpp_source.html">Transition.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
+公開型</h2></td></tr>
+<tr class="memitem:aca03fd04a22c40b5315f79e6f1122253" id="r_aca03fd04a22c40b5315f79e6f1122253"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aca03fd04a22c40b5315f79e6f1122253">Type</a> { <a class="el" href="#aca03fd04a22c40b5315f79e6f1122253a6adf97f83acf6453d4a6a4b1070f3754">None</a>
+, <a class="el" href="#aca03fd04a22c40b5315f79e6f1122253a04e0385c10aefee8e4681617d2f3ef40">Fade</a>
+, <a class="el" href="#aca03fd04a22c40b5315f79e6f1122253a6160a53ece50ce6d4f5ef4452549835e">Slide</a>
+ }</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+公開メンバ関数</h2></td></tr>
+<tr class="memitem:ab34e061640134781d5f522ec54bb75cd" id="r_ab34e061640134781d5f522ec54bb75cd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab34e061640134781d5f522ec54bb75cd">Transition</a> ()=default</td></tr>
+<tr class="memitem:a8188371835c70df89e30274994ee9cf5" id="r_a8188371835c70df89e30274994ee9cf5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8188371835c70df89e30274994ee9cf5">~Transition</a> ()=default</td></tr>
+<tr class="memitem:a17a6957f9533e3a6b90c9e3288863eef" id="r_a17a6957f9533e3a6b90c9e3288863eef"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a17a6957f9533e3a6b90c9e3288863eef">Initialize</a> ()</td></tr>
+<tr class="memitem:afa699138288c6a552aff575d50fe599b" id="r_afa699138288c6a552aff575d50fe599b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afa699138288c6a552aff575d50fe599b">Update</a> ()</td></tr>
+<tr class="memitem:a8488355d46a27a9209fc5c0960d2c859" id="r_a8488355d46a27a9209fc5c0960d2c859"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8488355d46a27a9209fc5c0960d2c859">Draw</a> ()</td></tr>
+<tr class="memitem:ac07725de59e8c6520741b7a9d3bec8fd" id="r_ac07725de59e8c6520741b7a9d3bec8fd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac07725de59e8c6520741b7a9d3bec8fd">Awake</a> (<a class="el" href="#aca03fd04a22c40b5315f79e6f1122253">Type</a> _type, <a class="el" href="classITransitionEffect.html#a86868f632ccdf014543bbf471096227b">ITransitionEffect::State</a> _state)</td></tr>
+<tr class="memitem:a00b54bae79f74cfbe98fd98a8b303c79" id="r_a00b54bae79f74cfbe98fd98a8b303c79"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a00b54bae79f74cfbe98fd98a8b303c79">Awake</a> (<a class="el" href="#aca03fd04a22c40b5315f79e6f1122253">Type</a> _type, <a class="el" href="classITransitionEffect.html#a86868f632ccdf014543bbf471096227b">ITransitionEffect::State</a> _state, float _duration)</td></tr>
+<tr class="memitem:a71d505de85fbe2b4a6ff8492ab59a3bc" id="r_a71d505de85fbe2b4a6ff8492ab59a3bc"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a71d505de85fbe2b4a6ff8492ab59a3bc">InProgress</a> () const</td></tr>
+<tr class="memitem:a02c269f065786034782a6a4e73ea8ddb" id="r_a02c269f065786034782a6a4e73ea8ddb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a02c269f065786034782a6a4e73ea8ddb">SetDefaultDuration</a> (float _duration)</td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">詳解</h2>
+<div class="textblock">
+<p class="definition"> <a class="el" href="Transition_8hpp_source.html">Transition.hpp</a> の <a class="el" href="Transition_8hpp_source.html#l00006">6</a> 行目に定義があります。</p>
+</div><a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">列挙型メンバ詳解</h2>
+<a id="aca03fd04a22c40b5315f79e6f1122253" name="aca03fd04a22c40b5315f79e6f1122253"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca03fd04a22c40b5315f79e6f1122253">&#9670;&#160;</a></span>Type</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum class <a class="el" href="#aca03fd04a22c40b5315f79e6f1122253">Transition::Type</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel strong">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">列挙値</th></tr><tr><td class="fieldname"><a id="aca03fd04a22c40b5315f79e6f1122253a6adf97f83acf6453d4a6a4b1070f3754" name="aca03fd04a22c40b5315f79e6f1122253a6adf97f83acf6453d4a6a4b1070f3754"></a>None&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aca03fd04a22c40b5315f79e6f1122253a04e0385c10aefee8e4681617d2f3ef40" name="aca03fd04a22c40b5315f79e6f1122253a04e0385c10aefee8e4681617d2f3ef40"></a>Fade&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aca03fd04a22c40b5315f79e6f1122253a6160a53ece50ce6d4f5ef4452549835e" name="aca03fd04a22c40b5315f79e6f1122253a6160a53ece50ce6d4f5ef4452549835e"></a>Slide&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+<p class="definition"> <a class="el" href="Transition_8hpp_source.html">Transition.hpp</a> の <a class="el" href="Transition_8hpp_source.html#l00008">8</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">構築子と解体子</h2>
+<a id="ab34e061640134781d5f522ec54bb75cd" name="ab34e061640134781d5f522ec54bb75cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab34e061640134781d5f522ec54bb75cd">&#9670;&#160;</a></span>Transition()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Transition::Transition </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel default">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8188371835c70df89e30274994ee9cf5" name="a8188371835c70df89e30274994ee9cf5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8188371835c70df89e30274994ee9cf5">&#9670;&#160;</a></span>~Transition()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Transition::~Transition </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel default">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">関数詳解</h2>
+<a id="ac07725de59e8c6520741b7a9d3bec8fd" name="ac07725de59e8c6520741b7a9d3bec8fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac07725de59e8c6520741b7a9d3bec8fd">&#9670;&#160;</a></span>Awake() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Transition::Awake </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#aca03fd04a22c40b5315f79e6f1122253">Type</a></td>          <td class="paramname"><span class="paramname"><em>_type</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classITransitionEffect.html#a86868f632ccdf014543bbf471096227b">ITransitionEffect::State</a></td>          <td class="paramname"><span class="paramname"><em>_state</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="Transition_8cpp_source.html">Transition.cpp</a> の <a class="el" href="Transition_8cpp_source.html#l00022">22</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="Transition_8cpp_source.html#l00022">Awake()</a>, <a class="el" href="Transition_8hpp_source.html#l00009">None</a>.</p>
+
+<p class="reference">参照元 <a class="el" href="Transition_8cpp_source.html#l00022">Awake()</a>.</p>
+
+</div>
+</div>
+<a id="a00b54bae79f74cfbe98fd98a8b303c79" name="a00b54bae79f74cfbe98fd98a8b303c79"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a00b54bae79f74cfbe98fd98a8b303c79">&#9670;&#160;</a></span>Awake() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Transition::Awake </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#aca03fd04a22c40b5315f79e6f1122253">Type</a></td>          <td class="paramname"><span class="paramname"><em>_type</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classITransitionEffect.html#a86868f632ccdf014543bbf471096227b">ITransitionEffect::State</a></td>          <td class="paramname"><span class="paramname"><em>_state</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>_duration</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="Transition_8cpp_source.html">Transition.cpp</a> の <a class="el" href="Transition_8cpp_source.html#l00027">27</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="ITransitionEffect_8hpp_source.html#l00015">ITransitionEffect::In</a>, <a class="el" href="Transition_8hpp_source.html#l00009">None</a>.</p>
+
+</div>
+</div>
+<a id="a8488355d46a27a9209fc5c0960d2c859" name="a8488355d46a27a9209fc5c0960d2c859"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8488355d46a27a9209fc5c0960d2c859">&#9670;&#160;</a></span>Draw()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Transition::Draw </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="Transition_8cpp_source.html">Transition.cpp</a> の <a class="el" href="Transition_8cpp_source.html#l00016">16</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="a17a6957f9533e3a6b90c9e3288863eef" name="a17a6957f9533e3a6b90c9e3288863eef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a17a6957f9533e3a6b90c9e3288863eef">&#9670;&#160;</a></span>Initialize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Transition::Initialize </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="Transition_8cpp_source.html">Transition.cpp</a> の <a class="el" href="Transition_8cpp_source.html#l00004">4</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="Transition_8hpp_source.html#l00009">None</a>.</p>
+
+</div>
+</div>
+<a id="a71d505de85fbe2b4a6ff8492ab59a3bc" name="a71d505de85fbe2b4a6ff8492ab59a3bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a71d505de85fbe2b4a6ff8492ab59a3bc">&#9670;&#160;</a></span>InProgress()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Transition::InProgress </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="Transition_8cpp_source.html">Transition.cpp</a> の <a class="el" href="Transition_8cpp_source.html#l00039">39</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="a02c269f065786034782a6a4e73ea8ddb" name="a02c269f065786034782a6a4e73ea8ddb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a02c269f065786034782a6a4e73ea8ddb">&#9670;&#160;</a></span>SetDefaultDuration()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Transition::SetDefaultDuration </td>
+          <td>(</td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>_duration</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="Transition_8cpp_source.html">Transition.cpp</a> の <a class="el" href="Transition_8cpp_source.html#l00046">46</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="afa699138288c6a552aff575d50fe599b" name="afa699138288c6a552aff575d50fe599b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afa699138288c6a552aff575d50fe599b">&#9670;&#160;</a></span>Update()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Transition::Update </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="Transition_8cpp_source.html">Transition.cpp</a> の <a class="el" href="Transition_8cpp_source.html#l00008">8</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="Transition_8hpp_source.html#l00009">None</a>.</p>
+
+</div>
+</div>
+<hr/>このクラス詳解は次のファイルから抽出されました:<ul>
+<li>C:/Users/tomo-/source/repos/PortfolioGame/Engine/src/Scene/Transition/<a class="el" href="Transition_8hpp_source.html">Transition.hpp</a></li>
+<li>C:/Users/tomo-/source/repos/PortfolioGame/Engine/src/Scene/Transition/<a class="el" href="Transition_8cpp_source.html">Transition.cpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="classTransition.html">Transition</a></li>
+    <li class="footer"><span class="timestamp"></span>作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.14.0 </li>
+  </ul>
+</div>
+</body>
+</html>
