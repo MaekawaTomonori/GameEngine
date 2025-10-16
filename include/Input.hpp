@@ -4,6 +4,10 @@
 #include <dinput.h>
 #include <wrl/client.h>
 
+/// <summary>
+/// 入力処理クラス
+/// キーボード、マウス、ジョイスティックの入力を管理
+/// </summary>
 class Input {
     HINSTANCE hInstance_{};
     HWND hWnd_{};

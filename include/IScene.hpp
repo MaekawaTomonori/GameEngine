@@ -7,6 +7,10 @@ class SceneSwitcher;
 class DebugUI;
 class PostProcessExecutor;
 
+/// <summary>
+/// ゲームシーンの基底インターフェース
+/// シーンのライフサイクル管理とトランジションを提供
+/// </summary>
 class IScene {
     SceneSwitcher* switcher_ = nullptr;
     bool progress_ = false;

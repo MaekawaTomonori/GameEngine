@@ -10,7 +10,14 @@
 #include "src/DirectX/DirectXAdapter.hpp"
 #include "src/DirectX/Resource/DX12Resource.hpp"
 
+/// <summary>
+/// メッシュクラス
+/// 頂点データ、インデックス、マテリアルを管理
+/// </summary>
 class Mesh {
+    /// <summary>
+    /// メッシュのマテリアルデータ
+    /// </summary>
     struct Material {
         Vector4 color;           // 16 bytes (aligned)
         uint32_t lighting;       // 4 bytes

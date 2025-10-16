@@ -4,6 +4,10 @@
 #include "src/DirectX/Heap/SRVManager.h"
 #include "src/DirectX/GraphicsPipeline/Object/PipelineStateObject.hpp"
 
+/// <summary>
+/// ポストエフェクト基底インターフェース
+/// シェーダーベースのポストプロセス効果を実装するための基底クラス
+/// </summary>
 class IPostEffect {
 protected:
     const Vector4 CLEAR_COLOR = { 0.2f, 0.2f, 0.2f, 1.0f };

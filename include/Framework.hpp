@@ -23,6 +23,10 @@
 
 class IGame;
 
+/// <summary>
+/// メインアプリケーションフレームワーククラス
+/// ゲームループの実行とシステムコーディネーションを管理
+/// </summary>
 class Framework {
     GameEngine::Config* config_ = nullptr;
 

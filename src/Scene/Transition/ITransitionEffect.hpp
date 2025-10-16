@@ -1,8 +1,15 @@
 #ifndef ITransitionEffect_HPP_
 #define ITransitionEffect_HPP_
 
+/// <summary>
+/// トランジションエフェクト基底インターフェース
+/// シーン遷移時のエフェクトを実装するための基底クラス
+/// </summary>
 class ITransitionEffect {
 public:
+    /// <summary>
+    /// トランジション状態
+    /// </summary>
     enum class State {
         None,
         In,

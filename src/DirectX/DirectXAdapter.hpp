@@ -18,6 +18,10 @@
 
 class DebugUI;
 
+/// <summary>
+/// DirectX12アダプタークラス
+/// DirectX12の初期化とデバイス管理を提供
+/// </summary>
 class DirectXAdapter {
     /// <summary>
     /// first = width, second = height

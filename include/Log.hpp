@@ -14,8 +14,15 @@ namespace spdlog {
     }
 }
 
+/// <summary>
+/// ロギングクラス
+/// spdlogを使用したログ出力とファイル管理を提供
+/// </summary>
 class Log {
 public:
+    /// <summary>
+    /// ログレベル列挙型
+    /// </summary>
     enum class Level{
         TRACE = 0,
         DBG = 1,

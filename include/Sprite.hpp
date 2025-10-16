@@ -10,16 +10,29 @@
 
 class SpriteCommon;
 
+/// <summary>
+/// 2Dスプライトクラス
+/// テクスチャ付き2D四角形の描画を管理
+/// </summary>
 class Sprite {
+    /// <summary>
+    /// スプライトのマテリアルデータ
+    /// </summary>
     struct Material {
         Vector4 color;
     };
 
+    /// <summary>
+    /// スプライトの頂点データ
+    /// </summary>
     struct VertexData {
         Vector4 position;
         Vector2 uv;
     };
 
+    /// <summary>
+    /// スプライトの変換行列データ
+    /// </summary>
     struct Transformation {
         Matrix4x4 wvp;
         Matrix4x4 world;

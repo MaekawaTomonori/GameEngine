@@ -6,11 +6,18 @@
 #include "Math/Transform.hpp"
 #include "Math/Vector3.hpp"
 
+/// <summary>
+/// GPU転送用のカメラデータ
+/// </summary>
 struct CameraForGpu {
     Vector3 position;
     float pad;
 };
 
+/// <summary>
+/// カメラクラス
+/// ビュー行列と投影行列を管理
+/// </summary>
 class Camera {
 public:
     Transform transform_{};

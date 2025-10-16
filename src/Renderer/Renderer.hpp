@@ -7,6 +7,10 @@
 class DirectXAdapter;
 class PostProcessExecutor;
 
+/// <summary>
+/// レンダラークラス
+/// 描画タスクの管理とポストプロセス適用を制御
+/// </summary>
 class Renderer {
     DirectXAdapter* adapter_ = nullptr;
     PostProcessExecutor* postProcessor_ = nullptr;

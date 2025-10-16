@@ -12,7 +12,14 @@
 
 #include "vendor/DirectXTex/DirectXTex.h"
 
+/// <summary>
+/// テクスチャ管理クラス
+/// テクスチャの読み込み、キャッシュ、GPUアップロードを管理
+/// </summary>
 class TextureManager{
+    /// <summary>
+    /// テクスチャデータ
+    /// </summary>
     struct Texture{
         uint32_t srvIndex;
         DirectX::TexMetadata metadata;

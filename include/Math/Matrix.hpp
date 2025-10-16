@@ -1,10 +1,17 @@
 #pragma once
 #include "Vector3.hpp"
 
+/// <summary>
+/// 3x3行列構造体
+/// </summary>
 struct Matrix3x3{
     float matrix[3][3];
 };
 
+/// <summary>
+/// 4x4行列構造体
+/// 3D変換と投影演算を提供
+/// </summary>
 struct Matrix4x4{
     float matrix[4][4];
 

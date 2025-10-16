@@ -8,8 +8,14 @@
 
 struct ImDrawData;
 
-//ImGui Adapter
+/// <summary>
+/// ImGuiアダプタークラス
+/// デバッグUIの描画とコマンド管理を提供
+/// </summary>
 class DebugUI {
+    /// <summary>
+    /// デバッグUIコマンド
+    /// </summary>
     struct Command {
         std::string id;
         std::function<void()> command;

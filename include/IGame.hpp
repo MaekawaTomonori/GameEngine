@@ -9,6 +9,10 @@
 class AbstractSceneFactory;
 class PostProcessExecutor;
 
+/// <summary>
+/// ゲーム実装の基底インターフェース
+/// シーン管理と設定の統合を提供
+/// </summary>
 class IGame {
     std::unique_ptr<GameEngine::Config> config_;
     std::unique_ptr<SceneSwitcher> scene_;

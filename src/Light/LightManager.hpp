@@ -13,7 +13,14 @@
 #include "PointLight/PointLight.h"
 #include "SpotLight/SpotLight.h"
 
+/// <summary>
+/// ライト管理クラス
+/// 指向性ライト、点光源、スポットライトを統合管理
+/// </summary>
 class LightManager final{
+	/// <summary>
+	/// ライト数カウント
+	/// </summary>
 	struct LightCount{
         uint32_t dlCount;
         uint32_t plCount;

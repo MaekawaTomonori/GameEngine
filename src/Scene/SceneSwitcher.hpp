@@ -9,6 +9,10 @@
 
 class Transition;
 
+/// <summary>
+/// シーン切り替え管理クラス
+/// シーン遷移とトランジションエフェクトを管理
+/// </summary>
 class SceneSwitcher {
 	std::unique_ptr<AbstractSceneFactory> factory_;
 

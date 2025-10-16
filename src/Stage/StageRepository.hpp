@@ -7,7 +7,10 @@
 
 #include "LevelData.hpp"
 
-
+/// <summary>
+/// ステージリポジトリクラス
+/// レベルデータのキャッシュと管理を提供
+/// </summary>
 class StageRepository {
     std::unordered_map<std::string, std::unique_ptr<LevelData>> data_;
 public:

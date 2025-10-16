@@ -4,6 +4,10 @@
 #include <inttypes.h>
 #include <wrl/client.h>
 
+/// <summary>
+/// ディスクリプタヒープクラス
+/// DirectX12のディスクリプタヒープを管理
+/// </summary>
 class Heap {
     ID3D12Device* device_ = nullptr; // Assume this is set elsewhere, or pass it in the constructor
     Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> heap_;

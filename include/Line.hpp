@@ -16,15 +16,28 @@ class LineCommon;
 class DirectXAdapter;
 class CameraController;
 
+/// <summary>
+/// 3Dラインレンダリングクラス
+/// デバッグ用の3D線分描画を提供
+/// </summary>
 class Line {
+    /// <summary>
+    /// ラインの頂点データ
+    /// </summary>
     struct VertexData {
         Vector4 position;
     };
 
+    /// <summary>
+    /// ラインのマテリアルデータ
+    /// </summary>
     struct Material {
         Vector4 color;
     };
 
+    /// <summary>
+    /// ラインの変換行列データ
+    /// </summary>
     struct Transformation {
         Matrix4x4 WVP;
     };

@@ -6,6 +6,10 @@
 
 #include "src/Model/Data/ModelData.hpp"
 
+/// <summary>
+/// モデルリポジトリクラス
+/// モデルデータのキャッシュと管理を提供
+/// </summary>
 class ModelRepository {
     std::unordered_map<std::string, std::unique_ptr<ModelData>> models_;
 public:

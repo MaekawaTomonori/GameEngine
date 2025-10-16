@@ -12,15 +12,32 @@
 #include "src/DirectX/Resource/DX12Resource.hpp"
 
 const uint32_t MAX_INFLUENCE = 4;
+
+/// <summary>
+/// 3Dモデルクラス
+/// メッシュ、テクスチャ、アニメーション、スキニングを管理
+/// </summary>
 class Model{
+    /// <summary>
+    /// 頂点のスキニング影響情報
+    /// </summary>
     struct VertexInfluence {
         std::array<float, MAX_INFLUENCE> weights;
         std::array<int32_t, MAX_INFLUENCE> jointIndices;
     };
+
+    /// <summary>
+    /// GPU用のスキニングデータ
+    /// </summary>
     struct WellForGpu {
         Matrix4x4 space;
         Matrix4x4 inverseTranspose;
     };
+
+    /// <summary>
+    /// スキンクラスターデータ
+    /// アニメーション用のボーン変換情報を保持
+    /// </summary>
     struct SkinCluster {
         std::vector<Matrix4x4> inverseBindPoses;
 
@@ -33,6 +50,10 @@ class Model{
         uint32_t srvIndex;
         std::pair<D3D12_CPU_DESCRIPTOR_HANDLE, D3D12_GPU_DESCRIPTOR_HANDLE> paletteHandle;
     };
+
+    /// <summary>
+    /// モデルの変換行列データ
+    /// </summary>
     struct Transformation{
         Matrix4x4 wvp;
         Matrix4x4 world;

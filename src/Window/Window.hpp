@@ -8,6 +8,10 @@
 #include <Windows.h>
 #include <string>
 
+/// <summary>
+/// ウィンドウクラス
+/// Windowsウィンドウの生成と管理を提供
+/// </summary>
 class Window {
     static LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 public:

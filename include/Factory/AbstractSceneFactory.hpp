@@ -5,6 +5,10 @@
 
 class IScene;
 
+/// <summary>
+/// シーンファクトリーの抽象基底クラス
+/// ゲーム固有のシーン生成を実装するためのインターフェース
+/// </summary>
 class AbstractSceneFactory {
 public:
 	virtual ~AbstractSceneFactory() = default;

@@ -5,6 +5,10 @@
 #include "src/Mesh/Repository/MeshRepository.hpp"
 #include "src/Model/Repository/ModelRepository.hpp"
 
+/// <summary>
+/// リソースリポジトリクラス
+/// モデルとメッシュのリポジトリを統合管理
+/// </summary>
 class ResourceRepository {
     std::unique_ptr<ModelRepository> model_;
     std::unique_ptr<MeshRepository> mesh_;

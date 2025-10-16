@@ -3,6 +3,10 @@
 #include <mutex>
 #include <cassert>
 
+/// <summary>
+/// シングルトンファイナライザークラス
+/// シングルトンインスタンスの破棄を管理
+/// </summary>
 class SingletonFinalizer{
     public:
     using Finalizer = void(*)();
@@ -10,6 +14,10 @@ class SingletonFinalizer{
     static void Finalize();
 };
 
+/// <summary>
+/// シングルトンパターンテンプレートクラス
+/// スレッドセーフな単一インスタンス管理を提供
+/// </summary>
 template <typename T>
 class Singleton {
     static T* instance_;

@@ -3,6 +3,10 @@
 #include <wrl/client.h>
 #include <d3d12.h>
 
+/// <summary>
+/// DirectX12リソースラッパークラス
+/// リソース状態遷移を管理
+/// </summary>
 class DX12Resource {
     Microsoft::WRL::ComPtr<ID3D12Resource> resource_;
     D3D12_RESOURCE_STATES state_ = D3D12_RESOURCE_STATE_COMMON;
