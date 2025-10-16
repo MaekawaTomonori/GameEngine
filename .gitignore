@@ -9,3 +9,9 @@ out/
 
 # DirectXTex
 vendor/DirectXTex/Shaders/Compiled/*
+
+# Doxygen generated documentation
+Docs/html/
+Docs/latex/
+Docs/xml/
+Docs/rtf/
