@@ -25,10 +25,35 @@ protected:
 
 public:
     virtual ~IPostEffect() = default;
+
+    /// <summary>
+    /// セットアップ
+    /// </summary>
+    /// <param name="_adapter">DirectXアダプター</param>
+    /// <param name="_srv">SRVマネージャー</param>
     void SetUp(DirectXAdapter* _adapter, SRVManager* _srv);
+
+    /// <summary>
+    /// 初期化処理（純粋仮想関数）
+    /// </summary>
     virtual void Initialize() = 0;
+
+    /// <summary>
+    /// ポストエフェクトを適用
+    /// </summary>
+    /// <param name="_handle">入力GPUハンドル</param>
+    /// <returns>出力GPUハンドル</returns>
     D3D12_GPU_DESCRIPTOR_HANDLE Apply(D3D12_GPU_DESCRIPTOR_HANDLE _handle);
+
+    /// <summary>
+    /// RTVハンドルを設定
+    /// </summary>
+    /// <param name="rtvHandle">RTVハンドル</param>
     void SetRTVHandle(D3D12_CPU_DESCRIPTOR_HANDLE rtvHandle);
+
+    /// <summary>
+    /// デバッグ情報の表示（純粋仮想関数）
+    /// </summary>
     virtual void Debug() = 0;
 
 protected:

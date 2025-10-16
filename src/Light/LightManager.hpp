@@ -52,10 +52,28 @@ class LightManager final{
 
 public:
     ~LightManager();
+
+    /// <summary>
+    /// ライトマネージャーを初期化
+    /// </summary>
+    /// <param name="_adapter">DirectXアダプター</param>
+    /// <param name="_debug">デバッグUI</param>
 	void Initialize(DirectXAdapter* _adapter, DebugUI* _debug);
+
+    /// <summary>
+    /// ライトの更新処理
+    /// </summary>
     void Update();
+
+    /// <summary>
+    /// ライトを描画
+    /// </summary>
     void Draw() const;
 
+    /// <summary>
+    /// ライトを追加
+    /// </summary>
+    /// <param name="type">ライトタイプ</param>
     void Add(LightType type);
 
 private:

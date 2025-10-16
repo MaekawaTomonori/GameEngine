@@ -57,15 +57,43 @@ public:
     Framework();
     ~Framework();
 
+    /// <summary>
+    /// ゲームを実行
+    /// </summary>
+    /// <param name="_game">実行するゲームインスタンス</param>
     void Execute(std::unique_ptr<IGame> _game);
 
 private:
+    /// <summary>
+    /// フレームワークの初期化
+    /// </summary>
     void Initialize();
+
+    /// <summary>
+    /// メインループの実行
+    /// </summary>
+    /// <returns>ループを継続する場合true</returns>
     bool Loop() const;
+
+    /// <summary>
+    /// 更新処理
+    /// </summary>
     void Update() const;
+
+    /// <summary>
+    /// 描画処理
+    /// </summary>
     void Draw() const;
+
+    /// <summary>
+    /// シャットダウン処理
+    /// </summary>
     void Shutdown();
 
+    /// <summary>
+    /// システム状態のチェック
+    /// </summary>
+    /// <returns>正常な場合true</returns>
     bool Check() const;
 }; // class Framework
 

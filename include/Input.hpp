@@ -23,8 +23,23 @@ class Input {
 
     //EventSystem* eventSystem_ = nullptr;
 public:
+    /// <summary>
+    /// 入力システムを初期化
+    /// </summary>
+    /// <param name="_hWnd">ウィンドウハンドル</param>
+    /// <param name="_hInstance">インスタンスハンドル</param>
     void Initialize(HWND _hWnd, HINSTANCE _hInstance);
+
+    /// <summary>
+    /// 入力状態を更新
+    /// </summary>
     void Update();
+
+    /// <summary>
+    /// キーが押されているかを判定
+    /// </summary>
+    /// <param name="_key">キーコード</param>
+    /// <returns>押されている場合true</returns>
     bool IsPress(BYTE _key) const;
 
     //void SetEventSystem(EventSystem* eventSystem) { /*eventSystem_ = eventSystem;*/ }

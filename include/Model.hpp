@@ -93,29 +93,114 @@ class Model{
 
 public:
     Model();
+
+    /// <summary>
+    /// モデルを初期化
+    /// </summary>
+    /// <param name="_name">モデル名</param>
     void Initialize(const std::string& _name);
+
+    /// <summary>
+    /// モデルの更新処理
+    /// </summary>
     void Update();
+
+    /// <summary>
+    /// モデルを描画
+    /// </summary>
     void Draw() const;
 
+    /// <summary>
+    /// 平行移動を設定
+    /// </summary>
+    /// <param name="_translate">平行移動ベクトル</param>
+    /// <returns>メソッドチェーン用の自身への参照</returns>
     Model& SetTranslate(Vector3 _translate);
+
+    /// <summary>
+    /// 回転を設定
+    /// </summary>
+    /// <param name="_rotate">回転ベクトル</param>
+    /// <returns>メソッドチェーン用の自身への参照</returns>
     Model& SetRotate(Vector3 _rotate);
+
+    /// <summary>
+    /// スケールを設定
+    /// </summary>
+    /// <param name="_scale">スケールベクトル</param>
+    /// <returns>メソッドチェーン用の自身への参照</returns>
     Model& SetScale(Vector3 _scale);
+
+    /// <summary>
+    /// 環境マッピング用テクスチャを設定
+    /// </summary>
+    /// <param name="_texture">テクスチャパス</param>
+    /// <returns>メソッドチェーン用の自身への参照</returns>
     Model& SetEnvironmentTexture(const std::string& _texture);
+
+    /// <summary>
+    /// テクスチャを設定
+    /// </summary>
+    /// <param name="_texture">テクスチャパス</param>
+    /// <returns>メソッドチェーン用の自身への参照</returns>
     Model& SetTexture(const std::string& _texture);
 
+    /// <summary>
+    /// モデルデータを事前読み込み
+    /// </summary>
+    /// <param name="_name">モデル名</param>
     static void Load(const std::string& _name);
 
 private:
+    /// <summary>
+    /// デバッグ情報の表示
+    /// </summary>
     void Debug();
+
+    /// <summary>
+    /// マップデータの更新
+    /// </summary>
     void UpdateMapData() const;
+
+    /// <summary>
+    /// スキンクラスターの生成
+    /// </summary>
     void CreateSkinCluster();
+
+    /// <summary>
+    /// バインドポーズの設定
+    /// </summary>
+    /// <param name="_skeleton">スケルトン</param>
     void SetBindPose(Skeleton& _skeleton);
+
+    /// <summary>
+    /// スキンクラスターの更新
+    /// </summary>
     void UpdateSkinCluster();
+
+    /// <summary>
+    /// スケルトンの更新
+    /// </summary>
     void UpdateSkeleton() const;
+
+    /// <summary>
+    /// アニメーションの更新
+    /// </summary>
     void UpdateAnimation();
+
+    /// <summary>
+    /// アニメーションの適用
+    /// </summary>
     void ApplyAnimation() const;
 
+    /// <summary>
+    /// デバッグ用ラインの生成
+    /// </summary>
     void CreateLine();
+
+    /// <summary>
+    /// デバッグ用ラインの描画
+    /// </summary>
     void DrawLine() const;
 }; // class Model
 

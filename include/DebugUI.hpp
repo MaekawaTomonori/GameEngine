@@ -30,13 +30,34 @@ class DebugUI {
 
 public:
     ~DebugUI();
+
+    /// <summary>
+    /// デバッグUIを初期化
+    /// </summary>
+    /// <param name="dx">DirectXアダプター</param>
     void Initialize(const DirectXAdapter* dx);
+
+    /// <summary>
+    /// デバッグUIをレンダリング
+    /// </summary>
     void Render();
 
+    /// <summary>
+    /// デバッグコマンドを登録
+    /// </summary>
+    /// <param name="_id">コマンドID</param>
+    /// <param name="_command">実行する関数</param>
     void RegisterCommand(const std::string &_id, std::function<void()> _command);
 
 private:
+    /// <summary>
+    /// 登録されたコマンドを処理
+    /// </summary>
     void Process();
+
+    /// <summary>
+    /// モダンスタイルのセットアップ
+    /// </summary>
     void SetupModernStyle();
 }; // class DebugUI
 

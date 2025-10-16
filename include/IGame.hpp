@@ -21,7 +21,16 @@ public:
     IGame(std::unique_ptr<AbstractSceneFactory> _factory, const std::string &_scene = "");
     virtual ~IGame() = default;
 
+    /// <summary>
+    /// 現在の設定を取得
+    /// </summary>
+    /// <returns>設定への参照</returns>
     GameEngine::Config& GetCurrentConfig();
+
+    /// <summary>
+    /// シーン切り替え管理を取得
+    /// </summary>
+    /// <returns>シーン切り替え管理のポインタ</returns>
     SceneSwitcher* GetSceneSwitcher() const;
 }; // class IGame
 

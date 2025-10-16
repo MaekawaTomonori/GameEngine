@@ -10,7 +10,16 @@
 class SingletonFinalizer{
     public:
     using Finalizer = void(*)();
+
+    /// <summary>
+    /// ファイナライザーを追加
+    /// </summary>
+    /// <param name="finalizer">終了処理関数</param>
     static void AddFinalizer(Finalizer finalizer);
+
+    /// <summary>
+    /// 全シングルトンを破棄
+    /// </summary>
     static void Finalize();
 };
 
@@ -27,6 +36,10 @@ public:
     Singleton(const Singleton&) = delete;
     Singleton& operator=(const Singleton&) = delete;
 
+    /// <summary>
+    /// シングルトンインスタンスを取得
+    /// </summary>
+    /// <returns>インスタンスへのポインタ</returns>
     static T* GetInstance() {
         std::call_once(flag_, Create);
         assert(instance_);
