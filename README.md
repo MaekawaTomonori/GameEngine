@@ -24,4 +24,4 @@
 **Mac** | - | -
 
 ## Document
-- [Document](Docs/html/index.html)
+- [Document](https://MaekawaTomonori.github.io/GameEngine/)
