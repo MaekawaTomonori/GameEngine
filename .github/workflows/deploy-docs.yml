@@ -21,12 +21,12 @@ jobs:
 
     - name: Generate documentation
       run: |
-        cd Engine/Docs
+        cd Docs
         doxygen Doxyfile
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./Engine/Docs/html
+        publish_dir: ./Docs/html
         publish_branch: gh-pages
