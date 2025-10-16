@@ -1,0 +1,162 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>PortfolioGame Engine: /home/runner/work/GameEngine/GameEngine/src/Model/Common/ModelCommon.hpp ソースファイル</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">PortfolioGame Engine<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">C++20 DirectX12 Game Engine</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','検索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function() { init_codefold(0); });
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('ModelCommon_8hpp_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">読み取り中…</div>
+<div class="SRStatus" id="Searching">検索中…</div>
+<div class="SRStatus" id="NoMatches">一致する文字列を見つけられません</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">ModelCommon.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="ModelCommon_8hpp.html">[詳解]</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef ModelCommon_HPP_</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define ModelCommon_HPP_</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="Common_8hpp.html">src/Common/Common.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;<a class="code" href="SRVManager_8h.html">src/DirectX/Heap/SRVManager.h</a>&quot;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;<a class="code" href="ResourceRepository_8hpp.html">src/ResourceRepository/ResourceRepository.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="foldopen" id="foldopen00008" data-start="{" data-end="};">
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno"><a class="line" href="classModelCommon.html">    8</a></span><span class="keyword">class </span><a class="code hl_class" href="classModelCommon.html">ModelCommon</a> : <span class="keyword">public</span> <a class="code hl_class" href="classCommon.html">Common</a>{</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>    <a class="code hl_class" href="classResourceRepository.html">ResourceRepository</a>* resource_ = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>    <a class="code hl_class" href="classSRVManager.html">SRVManager</a>* srv_ = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    std::unique_ptr&lt;PipelineStateObject&gt; staticPipeline_;</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    <span class="keywordtype">void</span> Initialize(<a class="code hl_class" href="classDirectXAdapter.html">DirectXAdapter</a> *_adapter, <a class="code hl_class" href="classDebugUI.html">DebugUI</a> *_debugUi) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <span class="keywordtype">void</span> CreateSkinningPipeline() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <span class="keywordtype">void</span> CreateStaticPipeline() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <span class="keywordtype">void</span> Initialize(<a class="code hl_class" href="classDirectXAdapter.html">DirectXAdapter</a>* _adapter, <a class="code hl_class" href="classDebugUI.html">DebugUI</a>* _debugUi, <a class="code hl_class" href="classResourceRepository.html">ResourceRepository</a>* _resource, <a class="code hl_class" href="classSRVManager.html">SRVManager</a>* _srv);</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>   </div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classModelCommon.html#ade04bb612cfb76cfe3351ec73c628009">DrawSkinning</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classModelCommon.html#a1f98b05bc6592d10c5814db883f31c6c">DrawStatic</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    </div>
+<div class="foldopen" id="foldopen00024" data-start="{" data-end="}">
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="classModelCommon.html#ac4a5effbc142ca70380a06bfec0369b2">   24</a></span>    <a class="code hl_class" href="classResourceRepository.html">ResourceRepository</a>* <a class="code hl_function" href="classModelCommon.html#ac4a5effbc142ca70380a06bfec0369b2">GetResourceRepository</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        <span class="keywordflow">return</span> resource_;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    }</div>
+</div>
+<div class="foldopen" id="foldopen00027" data-start="{" data-end="}">
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="classModelCommon.html#a33e697baa0ec17fc95e1f952c04f57ca">   27</a></span>    <a class="code hl_class" href="classSRVManager.html">SRVManager</a>* <a class="code hl_function" href="classModelCommon.html#a33e697baa0ec17fc95e1f952c04f57ca">GetSRVManager</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        <span class="keywordflow">return</span> srv_;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    }</div>
+</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>}; <span class="comment">// class ModelCommon</span></div>
+</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="preprocessor">#endif </span><span class="comment">// ModelCommon_HPP_</span></div>
+<div class="ttc" id="aCommon_8hpp_html"><div class="ttname"><a href="Common_8hpp.html">Common.hpp</a></div></div>
+<div class="ttc" id="aResourceRepository_8hpp_html"><div class="ttname"><a href="ResourceRepository_8hpp.html">ResourceRepository.hpp</a></div></div>
+<div class="ttc" id="aSRVManager_8h_html"><div class="ttname"><a href="SRVManager_8h.html">SRVManager.h</a></div></div>
+<div class="ttc" id="aclassCommon_html"><div class="ttname"><a href="classCommon.html">Common</a></div><div class="ttdef"><b>Definition</b> <a href="Common_8hpp_source.html#l00009">Common.hpp:9</a></div></div>
+<div class="ttc" id="aclassDebugUI_html"><div class="ttname"><a href="classDebugUI.html">DebugUI</a></div><div class="ttdoc">ImGuiアダプタークラス デバッグUIの描画とコマンド管理を提供</div><div class="ttdef"><b>Definition</b> <a href="DebugUI_8hpp_source.html#l00015">DebugUI.hpp:15</a></div></div>
+<div class="ttc" id="aclassDirectXAdapter_html"><div class="ttname"><a href="classDirectXAdapter.html">DirectXAdapter</a></div><div class="ttdoc">DirectX12アダプタークラス DirectX12の初期化とデバイス管理を提供</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8hpp_source.html#l00025">DirectXAdapter.hpp:25</a></div></div>
+<div class="ttc" id="aclassModelCommon_html"><div class="ttname"><a href="classModelCommon.html">ModelCommon</a></div><div class="ttdef"><b>Definition</b> <a href="ModelCommon_8hpp_source.html#l00008">ModelCommon.hpp:8</a></div></div>
+<div class="ttc" id="aclassModelCommon_html_a1f98b05bc6592d10c5814db883f31c6c"><div class="ttname"><a href="classModelCommon.html#a1f98b05bc6592d10c5814db883f31c6c">ModelCommon::DrawStatic</a></div><div class="ttdeci">void DrawStatic() const</div><div class="ttdef"><b>Definition</b> <a href="ModelCommon_8cpp_source.html#l00291">ModelCommon.cpp:291</a></div></div>
+<div class="ttc" id="aclassModelCommon_html_a33e697baa0ec17fc95e1f952c04f57ca"><div class="ttname"><a href="classModelCommon.html#a33e697baa0ec17fc95e1f952c04f57ca">ModelCommon::GetSRVManager</a></div><div class="ttdeci">SRVManager * GetSRVManager() const</div><div class="ttdef"><b>Definition</b> <a href="ModelCommon_8hpp_source.html#l00027">ModelCommon.hpp:27</a></div></div>
+<div class="ttc" id="aclassModelCommon_html_ac4a5effbc142ca70380a06bfec0369b2"><div class="ttname"><a href="classModelCommon.html#ac4a5effbc142ca70380a06bfec0369b2">ModelCommon::GetResourceRepository</a></div><div class="ttdeci">ResourceRepository * GetResourceRepository() const</div><div class="ttdef"><b>Definition</b> <a href="ModelCommon_8hpp_source.html#l00024">ModelCommon.hpp:24</a></div></div>
+<div class="ttc" id="aclassModelCommon_html_ade04bb612cfb76cfe3351ec73c628009"><div class="ttname"><a href="classModelCommon.html#ade04bb612cfb76cfe3351ec73c628009">ModelCommon::DrawSkinning</a></div><div class="ttdeci">void DrawSkinning() const</div><div class="ttdef"><b>Definition</b> <a href="ModelCommon_8cpp_source.html#l00287">ModelCommon.cpp:287</a></div></div>
+<div class="ttc" id="aclassResourceRepository_html"><div class="ttname"><a href="classResourceRepository.html">ResourceRepository</a></div><div class="ttdoc">リソースリポジトリクラス モデルとメッシュのリポジトリを統合管理</div><div class="ttdef"><b>Definition</b> <a href="ResourceRepository_8hpp_source.html#l00012">ResourceRepository.hpp:12</a></div></div>
+<div class="ttc" id="aclassSRVManager_html"><div class="ttname"><a href="classSRVManager.html">SRVManager</a></div><div class="ttdef"><b>Definition</b> <a href="SRVManager_8h_source.html#l00010">SRVManager.h:10</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_32e188284d239da8bb14ec1dabb0c35f.html">Model</a></li><li class="navelem"><a class="el" href="dir_b2f92e52a2eafb814cc1aab98605e6c6.html">Common</a></li><li class="navelem"><a class="el" href="ModelCommon_8hpp.html">ModelCommon.hpp</a></li>
+    <li class="footer">2025年10月16日(木) 07時14分00秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,452 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>PortfolioGame Engine: Model クラス</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">PortfolioGame Engine<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">C++20 DirectX12 Game Engine</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','検索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('classModel.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">読み取り中…</div>
+<div class="SRStatus" id="Searching">検索中…</div>
+<div class="SRStatus" id="NoMatches">一致する文字列を見つけられません</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">クラス</a> &#124;
+<a href="#pub-methods">公開メンバ関数</a> &#124;
+<a href="#pub-static-methods">静的公開メンバ関数</a> &#124;
+<a href="classModel-members.html">全メンバ一覧</a>  </div>
+  <div class="headertitle"><div class="title">Model クラス</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>3Dモデルクラス メッシュ、テクスチャ、アニメーション、スキニングを管理  
+ <a href="classModel.html#details">[詳解]</a></p>
+
+<p><code>#include &lt;<a class="el" href="Model_8hpp_source.html">Model.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+公開メンバ関数</h2></td></tr>
+<tr class="memitem:ae3b375de5f6df4faf74a95d64748e048" id="r_ae3b375de5f6df4faf74a95d64748e048"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModel.html#ae3b375de5f6df4faf74a95d64748e048">Model</a> ()</td></tr>
+<tr class="separator:ae3b375de5f6df4faf74a95d64748e048"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a286a5df73ab954682659e290436a12f2" id="r_a286a5df73ab954682659e290436a12f2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModel.html#a286a5df73ab954682659e290436a12f2">Initialize</a> (const std::string &amp;_name)</td></tr>
+<tr class="memdesc:a286a5df73ab954682659e290436a12f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">モデルを初期化  <br /></td></tr>
+<tr class="separator:a286a5df73ab954682659e290436a12f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa83183aaf1b9ef29bf554a2ce10b40eb" id="r_aa83183aaf1b9ef29bf554a2ce10b40eb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModel.html#aa83183aaf1b9ef29bf554a2ce10b40eb">Update</a> ()</td></tr>
+<tr class="memdesc:aa83183aaf1b9ef29bf554a2ce10b40eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">モデルの更新処理  <br /></td></tr>
+<tr class="separator:aa83183aaf1b9ef29bf554a2ce10b40eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45d8e86f2fbba2f62e998903151a4d1d" id="r_a45d8e86f2fbba2f62e998903151a4d1d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModel.html#a45d8e86f2fbba2f62e998903151a4d1d">Draw</a> () const</td></tr>
+<tr class="memdesc:a45d8e86f2fbba2f62e998903151a4d1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">モデルを描画  <br /></td></tr>
+<tr class="separator:a45d8e86f2fbba2f62e998903151a4d1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7d4d4c343ddf747844e732fb49f5507" id="r_ab7d4d4c343ddf747844e732fb49f5507"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classModel.html">Model</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModel.html#ab7d4d4c343ddf747844e732fb49f5507">SetTranslate</a> (<a class="el" href="structVector3.html">Vector3</a> _translate)</td></tr>
+<tr class="memdesc:ab7d4d4c343ddf747844e732fb49f5507"><td class="mdescLeft">&#160;</td><td class="mdescRight">平行移動を設定  <br /></td></tr>
+<tr class="separator:ab7d4d4c343ddf747844e732fb49f5507"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aecba8b82c8b10a56137630e2ba360045" id="r_aecba8b82c8b10a56137630e2ba360045"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classModel.html">Model</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModel.html#aecba8b82c8b10a56137630e2ba360045">SetRotate</a> (<a class="el" href="structVector3.html">Vector3</a> _rotate)</td></tr>
+<tr class="memdesc:aecba8b82c8b10a56137630e2ba360045"><td class="mdescLeft">&#160;</td><td class="mdescRight">回転を設定  <br /></td></tr>
+<tr class="separator:aecba8b82c8b10a56137630e2ba360045"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeceea7223a51c7fa97de7a63459e82fd" id="r_aeceea7223a51c7fa97de7a63459e82fd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classModel.html">Model</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModel.html#aeceea7223a51c7fa97de7a63459e82fd">SetScale</a> (<a class="el" href="structVector3.html">Vector3</a> _scale)</td></tr>
+<tr class="memdesc:aeceea7223a51c7fa97de7a63459e82fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">スケールを設定  <br /></td></tr>
+<tr class="separator:aeceea7223a51c7fa97de7a63459e82fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a98665feaf1aa6bcfece778fa2ee159c3" id="r_a98665feaf1aa6bcfece778fa2ee159c3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classModel.html">Model</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModel.html#a98665feaf1aa6bcfece778fa2ee159c3">SetEnvironmentTexture</a> (const std::string &amp;_texture)</td></tr>
+<tr class="memdesc:a98665feaf1aa6bcfece778fa2ee159c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">環境マッピング用テクスチャを設定  <br /></td></tr>
+<tr class="separator:a98665feaf1aa6bcfece778fa2ee159c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac02ef8d4c5375b8501e1a6806eace580" id="r_ac02ef8d4c5375b8501e1a6806eace580"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classModel.html">Model</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModel.html#ac02ef8d4c5375b8501e1a6806eace580">SetTexture</a> (const std::string &amp;_texture)</td></tr>
+<tr class="memdesc:ac02ef8d4c5375b8501e1a6806eace580"><td class="mdescLeft">&#160;</td><td class="mdescRight">テクスチャを設定  <br /></td></tr>
+<tr class="separator:ac02ef8d4c5375b8501e1a6806eace580"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+静的公開メンバ関数</h2></td></tr>
+<tr class="memitem:ab59947c2eee7a7d8c5f66aa6b684c583" id="r_ab59947c2eee7a7d8c5f66aa6b684c583"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModel.html#ab59947c2eee7a7d8c5f66aa6b684c583">Load</a> (const std::string &amp;_name)</td></tr>
+<tr class="memdesc:ab59947c2eee7a7d8c5f66aa6b684c583"><td class="mdescLeft">&#160;</td><td class="mdescRight">モデルデータを事前読み込み  <br /></td></tr>
+<tr class="separator:ab59947c2eee7a7d8c5f66aa6b684c583"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">詳解</h2>
+<div class="textblock"><p>3Dモデルクラス メッシュ、テクスチャ、アニメーション、スキニングを管理 </p>
+
+<p class="definition"> <a class="el" href="Model_8hpp_source.html">Model.hpp</a> の <a class="el" href="Model_8hpp_source.html#l00020">20</a> 行目に定義があります。</p>
+</div><h2 class="groupheader">構築子と解体子</h2>
+<a id="ae3b375de5f6df4faf74a95d64748e048" name="ae3b375de5f6df4faf74a95d64748e048"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae3b375de5f6df4faf74a95d64748e048">&#9670;&#160;</a></span>Model()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Model::Model </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="Model_8cpp_source.html">Model.cpp</a> の <a class="el" href="Model_8cpp_source.html#l00016">16</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<h2 class="groupheader">関数詳解</h2>
+<a id="a45d8e86f2fbba2f62e998903151a4d1d" name="a45d8e86f2fbba2f62e998903151a4d1d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a45d8e86f2fbba2f62e998903151a4d1d">&#9670;&#160;</a></span>Draw()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Model::Draw </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>モデルを描画 </p>
+
+<p class="definition"> <a class="el" href="Model_8cpp_source.html">Model.cpp</a> の <a class="el" href="Model_8cpp_source.html#l00106">106</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="ModelCommon_8cpp_source.html#l00287">ModelCommon::DrawSkinning()</a>, <a class="el" href="ModelCommon_8cpp_source.html#l00291">ModelCommon::DrawStatic()</a>, <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::ERR</a>, <a class="el" href="TextureManager_8cpp_source.html#l00226">TextureManager::GetGPUHandle()</a>, <a class="el" href="Singleton_8hpp_source.html#l00043">Singleton&lt; T &gt;::GetInstance()</a>, <a class="el" href="Log_8cpp_source.html#l00068">Log::Send()</a>, <a class="el" href="ModelData_8hpp_source.html#l00033">ModelData::skeleton</a>, <a class="el" href="ModelData_8hpp_source.html#l00028">ModelData::skinCluster</a>.</p>
+
+</div>
+</div>
+<a id="a286a5df73ab954682659e290436a12f2" name="a286a5df73ab954682659e290436a12f2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a286a5df73ab954682659e290436a12f2">&#9670;&#160;</a></span>Initialize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Model::Initialize </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>_name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>モデルを初期化 </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_name</td><td>モデル名</td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition"> <a class="el" href="Model_8cpp_source.html">Model.cpp</a> の <a class="el" href="Model_8cpp_source.html#l00023">23</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="Utils_8cpp_source.html#l00054">Utils::Alert()</a>, <a class="el" href="DirectXAdapter_8cpp_source.html#l00070">DirectXAdapter::CreateBufferResource()</a>, <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::ERR</a>, <a class="el" href="MeshRepository_8cpp_source.html#l00012">MeshRepository::Get()</a>, <a class="el" href="ModelRepository_8cpp_source.html#l00007">ModelRepository::Get()</a>, <a class="el" href="ResourceRepository_8cpp_source.html#l00012">ResourceRepository::GetMeshRepository()</a>, <a class="el" href="ResourceRepository_8cpp_source.html#l00008">ResourceRepository::GetModelRepository()</a>, <a class="el" href="ModelCommon_8hpp_source.html#l00024">ModelCommon::GetResourceRepository()</a>, <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::INFO</a>, <a class="el" href="Line_8cpp_source.html#l00020">Line::Initialize()</a>, <a class="el" href="Model_8cpp_source.html#l00167">Load()</a>, <a class="el" href="MathUtils_8cpp_source.html#l00016">MathUtils::Matrix::MakeIdentity()</a>, <a class="el" href="ModelData_8hpp_source.html#l00030">ModelData::mesh</a>, <a class="el" href="Log_8cpp_source.html#l00068">Log::Send()</a>, <a class="el" href="ModelData_8hpp_source.html#l00033">ModelData::skeleton</a>, <a class="el" href="ModelData_8hpp_source.html#l00028">ModelData::skinCluster</a> (計16項目).</p>
+
+</div>
+</div>
+<a id="ab59947c2eee7a7d8c5f66aa6b684c583" name="ab59947c2eee7a7d8c5f66aa6b684c583"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab59947c2eee7a7d8c5f66aa6b684c583">&#9670;&#160;</a></span>Load()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Model::Load </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>_name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>モデルデータを事前読み込み </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_name</td><td>モデル名</td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition"> <a class="el" href="Model_8cpp_source.html">Model.cpp</a> の <a class="el" href="Model_8cpp_source.html#l00167">167</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="Utils_8cpp_source.html#l00054">Utils::Alert()</a>, <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::ERR</a>, <a class="el" href="Log_8cpp_source.html#l00068">Log::Send()</a>.</p>
+
+<p class="reference">参照元 <a class="el" href="Model_8cpp_source.html#l00023">Initialize()</a>.</p>
+
+</div>
+</div>
+<a id="a98665feaf1aa6bcfece778fa2ee159c3" name="a98665feaf1aa6bcfece778fa2ee159c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a98665feaf1aa6bcfece778fa2ee159c3">&#9670;&#160;</a></span>SetEnvironmentTexture()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classModel.html">Model</a> &amp; Model::SetEnvironmentTexture </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>_texture</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>環境マッピング用テクスチャを設定 </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_texture</td><td>テクスチャパス</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>戻り値</dt><dd>メソッドチェーン用の自身への参照</dd></dl>
+
+<p class="definition"> <a class="el" href="Model_8cpp_source.html">Model.cpp</a> の <a class="el" href="Model_8cpp_source.html#l00149">149</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="Singleton_8hpp_source.html#l00043">Singleton&lt; T &gt;::GetInstance()</a>, <a class="el" href="TextureManager_8cpp_source.html#l00133">TextureManager::Load()</a>.</p>
+
+</div>
+</div>
+<a id="aecba8b82c8b10a56137630e2ba360045" name="aecba8b82c8b10a56137630e2ba360045"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aecba8b82c8b10a56137630e2ba360045">&#9670;&#160;</a></span>SetRotate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classModel.html">Model</a> &amp; Model::SetRotate </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structVector3.html">Vector3</a>&#160;</td>
+          <td class="paramname"><em>_rotate</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>回転を設定 </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_rotate</td><td>回転ベクトル</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>戻り値</dt><dd>メソッドチェーン用の自身への参照</dd></dl>
+
+<p class="definition"> <a class="el" href="Model_8cpp_source.html">Model.cpp</a> の <a class="el" href="Model_8cpp_source.html#l00139">139</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="Transform_8hpp_source.html#l00014">Transform::rotate</a>.</p>
+
+</div>
+</div>
+<a id="aeceea7223a51c7fa97de7a63459e82fd" name="aeceea7223a51c7fa97de7a63459e82fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeceea7223a51c7fa97de7a63459e82fd">&#9670;&#160;</a></span>SetScale()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classModel.html">Model</a> &amp; Model::SetScale </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structVector3.html">Vector3</a>&#160;</td>
+          <td class="paramname"><em>_scale</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>スケールを設定 </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_scale</td><td>スケールベクトル</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>戻り値</dt><dd>メソッドチェーン用の自身への参照</dd></dl>
+
+<p class="definition"> <a class="el" href="Model_8cpp_source.html">Model.cpp</a> の <a class="el" href="Model_8cpp_source.html#l00144">144</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="Transform_8hpp_source.html#l00013">Transform::scale</a>.</p>
+
+</div>
+</div>
+<a id="ac02ef8d4c5375b8501e1a6806eace580" name="ac02ef8d4c5375b8501e1a6806eace580"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac02ef8d4c5375b8501e1a6806eace580">&#9670;&#160;</a></span>SetTexture()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classModel.html">Model</a> &amp; Model::SetTexture </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>_texture</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>テクスチャを設定 </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_texture</td><td>テクスチャパス</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>戻り値</dt><dd>メソッドチェーン用の自身への参照</dd></dl>
+
+<p class="definition"> <a class="el" href="Model_8cpp_source.html">Model.cpp</a> の <a class="el" href="Model_8cpp_source.html#l00158">158</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="Log_8cpp_source.html#l00068">Log::Send()</a>, <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531ea059e9861e0400dfbe05c98a841f3f96b">Log::WARNING</a>.</p>
+
+</div>
+</div>
+<a id="ab7d4d4c343ddf747844e732fb49f5507" name="ab7d4d4c343ddf747844e732fb49f5507"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab7d4d4c343ddf747844e732fb49f5507">&#9670;&#160;</a></span>SetTranslate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classModel.html">Model</a> &amp; Model::SetTranslate </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structVector3.html">Vector3</a>&#160;</td>
+          <td class="paramname"><em>_translate</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>平行移動を設定 </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_translate</td><td>平行移動ベクトル</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>戻り値</dt><dd>メソッドチェーン用の自身への参照</dd></dl>
+
+<p class="definition"> <a class="el" href="Model_8cpp_source.html">Model.cpp</a> の <a class="el" href="Model_8cpp_source.html#l00134">134</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="Transform_8hpp_source.html#l00015">Transform::translate</a>.</p>
+
+</div>
+</div>
+<a id="aa83183aaf1b9ef29bf554a2ce10b40eb" name="aa83183aaf1b9ef29bf554a2ce10b40eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa83183aaf1b9ef29bf554a2ce10b40eb">&#9670;&#160;</a></span>Update()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Model::Update </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>モデルの更新処理 </p>
+
+<p class="definition"> <a class="el" href="Model_8cpp_source.html">Model.cpp</a> の <a class="el" href="Model_8cpp_source.html#l00083">83</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="Singleton_8hpp_source.html#l00043">Singleton&lt; T &gt;::GetInstance()</a>, <a class="el" href="ModelData_8hpp_source.html#l00033">ModelData::skeleton</a>, <a class="el" href="ModelData_8hpp_source.html#l00028">ModelData::skinCluster</a>.</p>
+
+</div>
+</div>
+<hr/>このクラス詳解は次のファイルから抽出されました:<ul>
+<li>/home/runner/work/GameEngine/GameEngine/include/<a class="el" href="Model_8hpp_source.html">Model.hpp</a></li>
+<li>/home/runner/work/GameEngine/GameEngine/src/Model/<a class="el" href="Model_8cpp_source.html">Model.cpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="classModel.html">Model</a></li>
+    <li class="footer">2025年10月16日(木) 07時14分00秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+  </ul>
+</div>
+</body>
+</html>

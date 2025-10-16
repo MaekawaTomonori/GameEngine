@@ -1,0 +1,197 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>PortfolioGame Engine: /home/runner/work/GameEngine/GameEngine/src/Light/RawLight.h ソースファイル</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">PortfolioGame Engine<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">C++20 DirectX12 Game Engine</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','検索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function() { init_codefold(0); });
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('RawLight_8h_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">読み取り中…</div>
+<div class="SRStatus" id="Searching">検索中…</div>
+<div class="SRStatus" id="NoMatches">一致する文字列を見つけられません</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">RawLight.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="RawLight_8h.html">[詳解]</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#include &quot;<a class="code" href="LightType_8hpp.html">LightType.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;<a class="code" href="Utils_8hpp.html">Utils.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="foldopen" id="foldopen00005" data-start="{" data-end="};">
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno"><a class="line" href="classRawLight.html">    5</a></span><span class="keyword">class </span><a class="code hl_class" href="classRawLight.html">RawLight</a>{</div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">protected</span>:</div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno"><a class="line" href="classRawLight.html#aee757911a2317fa782d276cba88e7f9d">    7</a></span>    std::string <a class="code hl_variable" href="classRawLight.html#aee757911a2317fa782d276cba88e7f9d">uuid_</a>;</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno"><a class="line" href="classRawLight.html#af42e5167bd37be9858031d48802910b2">    8</a></span>    <a class="code hl_enumeration" href="LightType_8hpp.html#adc3ec8293e6a97ebe43f0196b9a7f638">LightType</a> <a class="code hl_variable" href="classRawLight.html#af42e5167bd37be9858031d48802910b2">type_</a>;</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno"><a class="line" href="classRawLight.html#a416c4f454098f5d3526f9a23c6beec38">    9</a></span>    <span class="keywordtype">bool</span> <a class="code hl_variable" href="classRawLight.html#a416c4f454098f5d3526f9a23c6beec38">enable_</a> = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    <a class="code hl_function" href="classRawLight.html#a205d80281d1d03ea397cb92a32d37d98">RawLight</a>();</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="classRawLight.html#a651507c85c1388fe3fa4bbedcae0a72c">   13</a></span>    <span class="keyword">virtual</span> <a class="code hl_function" href="classRawLight.html#a651507c85c1388fe3fa4bbedcae0a72c">~RawLight</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="classRawLight.html#a3e8b072fc1b3a2c286004e54612f60f1">   15</a></span>    <a class="code hl_function" href="classRawLight.html#a3e8b072fc1b3a2c286004e54612f60f1">RawLight</a>(<span class="keyword">const</span> <a class="code hl_class" href="classRawLight.html">RawLight</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="classRawLight.html#a8be8572995bb02317ddbe74004b01b18">   16</a></span>    <a class="code hl_class" href="classRawLight.html">RawLight</a>&amp; <a class="code hl_function" href="classRawLight.html#a8be8572995bb02317ddbe74004b01b18">operator=</a>(<span class="keyword">const</span> <a class="code hl_class" href="classRawLight.html">RawLight</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classRawLight.html#a21290be78fb74dee6c2a7835942f5706">Update</a>();</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classRawLight.html#aad2ca65c0c549c68ab386f22ca432db1">IsEnable</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="foldopen" id="foldopen00022" data-start="{" data-end="}">
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="classRawLight.html#aec395a05ca74d0b862728d43044a79f6">   22</a></span>    <a class="code hl_class" href="classRawLight.html">RawLight</a>&amp; <a class="code hl_function" href="classRawLight.html#aec395a05ca74d0b862728d43044a79f6">SetUUID</a>(<span class="keyword">const</span> std::string&amp; uuid) {</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>        <a class="code hl_variable" href="classRawLight.html#aee757911a2317fa782d276cba88e7f9d">uuid_</a> = uuid;</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    }</div>
+</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
+<div class="foldopen" id="foldopen00027" data-start="{" data-end="}">
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="classRawLight.html#a5ee792e77f3f2c8b7c5127d4bab05555">   27</a></span>    std::string <a class="code hl_function" href="classRawLight.html#a5ee792e77f3f2c8b7c5127d4bab05555">GetUUID</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="classRawLight.html#aee757911a2317fa782d276cba88e7f9d">uuid_</a>;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    }</div>
+</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="comment">//DefaultAdd</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="classRawLight.html#ab77101e2c02127a7efd4c76a4fcc8272">   32</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classRawLight.html#ab77101e2c02127a7efd4c76a4fcc8272">DefaultSetting</a>() = 0;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <span class="comment">//ToJson</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="classRawLight.html#ac5ec584e0ab220c6cfedc51a477309a2">   34</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classRawLight.html#ac5ec584e0ab220c6cfedc51a477309a2">Save</a>(std::string _path) = 0;</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="keyword">protected</span>:</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="classRawLight.html#a6fe50366f2c52e1e8f9b9c3e8aefea4f">   37</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classRawLight.html#a6fe50366f2c52e1e8f9b9c3e8aefea4f">ImGuiSetting</a>() = 0;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>};</div>
+</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
+<div class="foldopen" id="foldopen00040" data-start="{" data-end="}">
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="classRawLight.html#a205d80281d1d03ea397cb92a32d37d98">   40</a></span><span class="keyword">inline</span> <a class="code hl_function" href="classRawLight.html#a205d80281d1d03ea397cb92a32d37d98">RawLight::RawLight</a>() {</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <a class="code hl_variable" href="classRawLight.html#af42e5167bd37be9858031d48802910b2">type_</a> = <a class="code hl_enumvalue" href="LightType_8hpp.html#adc3ec8293e6a97ebe43f0196b9a7f638ab04a8341537fac392bfd17776491d03c">LightType::Directional</a>;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <a class="code hl_variable" href="classRawLight.html#aee757911a2317fa782d276cba88e7f9d">uuid_</a> = <a class="code hl_function" href="namespaceUtils.html#ada99389f4602daf6d5bf5246cca33854">Utils::GenerateUniqueId</a>();</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>}</div>
+</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
+<div class="foldopen" id="foldopen00045" data-start="{" data-end="}">
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="classRawLight.html#a21290be78fb74dee6c2a7835942f5706">   45</a></span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classRawLight.html#a21290be78fb74dee6c2a7835942f5706">RawLight::Update</a>() {</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="preprocessor">#ifdef _DEBUG</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <a class="code hl_function" href="classRawLight.html#a6fe50366f2c52e1e8f9b9c3e8aefea4f">ImGuiSetting</a>();</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>}</div>
+</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
+<div class="foldopen" id="foldopen00051" data-start="{" data-end="}">
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="classRawLight.html#aad2ca65c0c549c68ab386f22ca432db1">   51</a></span><span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classRawLight.html#aad2ca65c0c549c68ab386f22ca432db1">RawLight::IsEnable</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <span class="keywordflow">return</span> <a class="code hl_variable" href="classRawLight.html#a416c4f454098f5d3526f9a23c6beec38">enable_</a>;</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>}</div>
+</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
+<div class="ttc" id="aLightType_8hpp_html"><div class="ttname"><a href="LightType_8hpp.html">LightType.hpp</a></div></div>
+<div class="ttc" id="aLightType_8hpp_html_adc3ec8293e6a97ebe43f0196b9a7f638"><div class="ttname"><a href="LightType_8hpp.html#adc3ec8293e6a97ebe43f0196b9a7f638">LightType</a></div><div class="ttdeci">LightType</div><div class="ttdef"><b>Definition</b> <a href="LightType_8hpp_source.html#l00004">LightType.hpp:4</a></div></div>
+<div class="ttc" id="aLightType_8hpp_html_adc3ec8293e6a97ebe43f0196b9a7f638ab04a8341537fac392bfd17776491d03c"><div class="ttname"><a href="LightType_8hpp.html#adc3ec8293e6a97ebe43f0196b9a7f638ab04a8341537fac392bfd17776491d03c">LightType::Directional</a></div><div class="ttdeci">@ Directional</div></div>
+<div class="ttc" id="aUtils_8hpp_html"><div class="ttname"><a href="Utils_8hpp.html">Utils.hpp</a></div></div>
+<div class="ttc" id="aclassRawLight_html"><div class="ttname"><a href="classRawLight.html">RawLight</a></div><div class="ttdef"><b>Definition</b> <a href="RawLight_8h_source.html#l00005">RawLight.h:5</a></div></div>
+<div class="ttc" id="aclassRawLight_html_a205d80281d1d03ea397cb92a32d37d98"><div class="ttname"><a href="classRawLight.html#a205d80281d1d03ea397cb92a32d37d98">RawLight::RawLight</a></div><div class="ttdeci">RawLight()</div><div class="ttdef"><b>Definition</b> <a href="RawLight_8h_source.html#l00040">RawLight.h:40</a></div></div>
+<div class="ttc" id="aclassRawLight_html_a21290be78fb74dee6c2a7835942f5706"><div class="ttname"><a href="classRawLight.html#a21290be78fb74dee6c2a7835942f5706">RawLight::Update</a></div><div class="ttdeci">void Update()</div><div class="ttdef"><b>Definition</b> <a href="RawLight_8h_source.html#l00045">RawLight.h:45</a></div></div>
+<div class="ttc" id="aclassRawLight_html_a3e8b072fc1b3a2c286004e54612f60f1"><div class="ttname"><a href="classRawLight.html#a3e8b072fc1b3a2c286004e54612f60f1">RawLight::RawLight</a></div><div class="ttdeci">RawLight(const RawLight &amp;)=delete</div></div>
+<div class="ttc" id="aclassRawLight_html_a416c4f454098f5d3526f9a23c6beec38"><div class="ttname"><a href="classRawLight.html#a416c4f454098f5d3526f9a23c6beec38">RawLight::enable_</a></div><div class="ttdeci">bool enable_</div><div class="ttdef"><b>Definition</b> <a href="RawLight_8h_source.html#l00009">RawLight.h:9</a></div></div>
+<div class="ttc" id="aclassRawLight_html_a5ee792e77f3f2c8b7c5127d4bab05555"><div class="ttname"><a href="classRawLight.html#a5ee792e77f3f2c8b7c5127d4bab05555">RawLight::GetUUID</a></div><div class="ttdeci">std::string GetUUID() const</div><div class="ttdef"><b>Definition</b> <a href="RawLight_8h_source.html#l00027">RawLight.h:27</a></div></div>
+<div class="ttc" id="aclassRawLight_html_a651507c85c1388fe3fa4bbedcae0a72c"><div class="ttname"><a href="classRawLight.html#a651507c85c1388fe3fa4bbedcae0a72c">RawLight::~RawLight</a></div><div class="ttdeci">virtual ~RawLight()=default</div></div>
+<div class="ttc" id="aclassRawLight_html_a6fe50366f2c52e1e8f9b9c3e8aefea4f"><div class="ttname"><a href="classRawLight.html#a6fe50366f2c52e1e8f9b9c3e8aefea4f">RawLight::ImGuiSetting</a></div><div class="ttdeci">virtual void ImGuiSetting()=0</div></div>
+<div class="ttc" id="aclassRawLight_html_a8be8572995bb02317ddbe74004b01b18"><div class="ttname"><a href="classRawLight.html#a8be8572995bb02317ddbe74004b01b18">RawLight::operator=</a></div><div class="ttdeci">RawLight &amp; operator=(const RawLight &amp;)=delete</div></div>
+<div class="ttc" id="aclassRawLight_html_aad2ca65c0c549c68ab386f22ca432db1"><div class="ttname"><a href="classRawLight.html#aad2ca65c0c549c68ab386f22ca432db1">RawLight::IsEnable</a></div><div class="ttdeci">bool IsEnable() const</div><div class="ttdef"><b>Definition</b> <a href="RawLight_8h_source.html#l00051">RawLight.h:51</a></div></div>
+<div class="ttc" id="aclassRawLight_html_ab77101e2c02127a7efd4c76a4fcc8272"><div class="ttname"><a href="classRawLight.html#ab77101e2c02127a7efd4c76a4fcc8272">RawLight::DefaultSetting</a></div><div class="ttdeci">virtual void DefaultSetting()=0</div></div>
+<div class="ttc" id="aclassRawLight_html_ac5ec584e0ab220c6cfedc51a477309a2"><div class="ttname"><a href="classRawLight.html#ac5ec584e0ab220c6cfedc51a477309a2">RawLight::Save</a></div><div class="ttdeci">virtual void Save(std::string _path)=0</div></div>
+<div class="ttc" id="aclassRawLight_html_aec395a05ca74d0b862728d43044a79f6"><div class="ttname"><a href="classRawLight.html#aec395a05ca74d0b862728d43044a79f6">RawLight::SetUUID</a></div><div class="ttdeci">RawLight &amp; SetUUID(const std::string &amp;uuid)</div><div class="ttdef"><b>Definition</b> <a href="RawLight_8h_source.html#l00022">RawLight.h:22</a></div></div>
+<div class="ttc" id="aclassRawLight_html_aee757911a2317fa782d276cba88e7f9d"><div class="ttname"><a href="classRawLight.html#aee757911a2317fa782d276cba88e7f9d">RawLight::uuid_</a></div><div class="ttdeci">std::string uuid_</div><div class="ttdef"><b>Definition</b> <a href="RawLight_8h_source.html#l00007">RawLight.h:7</a></div></div>
+<div class="ttc" id="aclassRawLight_html_af42e5167bd37be9858031d48802910b2"><div class="ttname"><a href="classRawLight.html#af42e5167bd37be9858031d48802910b2">RawLight::type_</a></div><div class="ttdeci">LightType type_</div><div class="ttdef"><b>Definition</b> <a href="RawLight_8h_source.html#l00008">RawLight.h:8</a></div></div>
+<div class="ttc" id="anamespaceUtils_html_ada99389f4602daf6d5bf5246cca33854"><div class="ttname"><a href="namespaceUtils.html#ada99389f4602daf6d5bf5246cca33854">Utils::GenerateUniqueId</a></div><div class="ttdeci">std::string GenerateUniqueId()</div><div class="ttdef"><b>Definition</b> <a href="Utils_8cpp_source.html#l00084">Utils.cpp:84</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_0bea4804a055a8738b8ad450a8ea4ec1.html">Light</a></li><li class="navelem"><a class="el" href="RawLight_8h.html">RawLight.h</a></li>
+    <li class="footer">2025年10月16日(木) 07時14分00秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+  </ul>
+</div>
+</body>
+</html>

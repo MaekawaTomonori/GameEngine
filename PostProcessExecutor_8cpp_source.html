@@ -1,0 +1,388 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>PortfolioGame Engine: /home/runner/work/GameEngine/GameEngine/src/PostProcess/Executor/PostProcessExecutor.cpp ソースファイル</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">PortfolioGame Engine<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">C++20 DirectX12 Game Engine</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','検索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function() { init_codefold(0); });
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('PostProcessExecutor_8cpp_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">読み取り中…</div>
+<div class="SRStatus" id="Searching">検索中…</div>
+<div class="SRStatus" id="NoMatches">一致する文字列を見つけられません</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">PostProcessExecutor.cpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="PostProcessExecutor_8cpp.html">[詳解]</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#include &quot;<a class="code" href="PostProcessExecutor_8hpp.html">PostProcessExecutor.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;<a class="code" href="DebugUI_8hpp.html">DebugUI.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="Log_8hpp.html">Log.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;imgui.h&quot;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;<a class="code" href="DirectXAdapter_8hpp.html">src/DirectX/DirectXAdapter.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;<a class="code" href="Heap_8hpp.html">src/DirectX/Heap/Heap.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;<a class="code" href="PipelineStateObject_8hpp.html">src/DirectX/GraphicsPipeline/Object/PipelineStateObject.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;<a class="code" href="SRVManager_8h.html">src/DirectX/Heap/SRVManager.h</a>&quot;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;<a class="code" href="IPostEffect_8hpp.html">src/PostProcess/IPostEffect.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="foldopen" id="foldopen00012" data-start="{" data-end="}">
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="classPostProcessExecutor.html#a6d8faf6f90fbaaba68671c4e1e8de2cd">   12</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classPostProcessExecutor.html#a6d8faf6f90fbaaba68671c4e1e8de2cd">PostProcessExecutor::Initialize</a>(<a class="code hl_class" href="classDirectXAdapter.html">DirectXAdapter</a>* _adapter, <a class="code hl_class" href="classSRVManager.html">SRVManager</a>* _srv, <a class="code hl_class" href="classDebugUI.html">DebugUI</a>* _debug) {</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    adapter_ = _adapter;</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    srv_ = _srv;</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    debugUI_ = _debug;</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="keywordflow">if</span> (!adapter_) {</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>        <a class="code hl_function" href="classLog.html#a1a96849014a462fb22eb2247323cb2dc">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, <span class="stringliteral">&quot;DirectXAdapter is not initialized&quot;</span>);</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    }</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <span class="comment">// シーン用RenderTextureを作成</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    CreateSceneRenderTexture();</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    D3D12_DESCRIPTOR_RANGE range{</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        .RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV,</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>        .NumDescriptors = 1,</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        .BaseShaderRegister = 0,</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>        .RegisterSpace = 0,</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>        .OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    };</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <span class="comment">//Create PSO</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    pso_ = std::make_unique&lt;PipelineStateObject&gt;(adapter_);</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    pso_-&gt;SetRootSignature(</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        <a class="code hl_class" href="classRootSignature.html">RootSignature</a>().AddParameter({</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>                .ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE,</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>                .DescriptorTable = {</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>                    .NumDescriptorRanges = 1,</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>                    .pDescriptorRanges = &amp;range</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>                },</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>                .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>            })</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>            .SetSampler({</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>                .Filter = D3D12_FILTER_MIN_MAG_MIP_LINEAR,</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>                .AddressU = D3D12_TEXTURE_ADDRESS_MODE_WRAP,</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>                .AddressV = D3D12_TEXTURE_ADDRESS_MODE_WRAP,</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>                .AddressW = D3D12_TEXTURE_ADDRESS_MODE_WRAP,</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>                .ComparisonFunc = D3D12_COMPARISON_FUNC_NEVER,</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>                .MaxLOD = D3D12_FLOAT32_MAX,</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>                .ShaderRegister = 0,</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>                .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>            })</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    )</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    .SetBlend(<a class="code hl_enumvalue" href="BlendMode_8hpp.html#a30323fa90e24ca484998b9fba6c40e85ab50339a10e1de285ac99d4c3990b8693">BlendMode::NONE</a>)</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    .SetShader(std::make_unique&lt;Shader&gt;(L<span class="stringliteral">&quot;CpyImg&quot;</span>))</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    .SetTopologyType(D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE)</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    .Create();</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>}</div>
+</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
+<div class="foldopen" id="foldopen00061" data-start="{" data-end="}">
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno"><a class="line" href="classPostProcessExecutor.html#a20e592ca2994b9091bc005b4f4102f5f">   61</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classPostProcessExecutor.html#a20e592ca2994b9091bc005b4f4102f5f">PostProcessExecutor::Add</a>(std::unique_ptr&lt;IPostEffect&gt; _effect, <span class="keyword">const</span> std::string&amp; _name) {</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <span class="keywordflow">if</span> (_effect){</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        _effect-&gt;SetUp(adapter_, srv_);</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        <span class="comment">// エフェクト用のRTVハンドルを割り当て</span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        <span class="keyword">auto</span> rtvHandle = rtvHeap_-&gt;GetCPUHandle(<span class="keyword">static_cast&lt;</span>uint32_t<span class="keyword">&gt;</span>(effects_.size()) + 1);</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>        _effect-&gt;SetRTVHandle(rtvHandle);</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>        _effect-&gt;Initialize();</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        effects_.emplace_back(EffectData{std::move(_effect), _name, <span class="keyword">true</span>});</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    } <span class="keywordflow">else</span>{</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>        <a class="code hl_function" href="classLog.html#a1a96849014a462fb22eb2247323cb2dc">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, <span class="stringliteral">&quot;Attempted to add a null post effect&quot;</span>);</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    }</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>}</div>
+</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
+<div class="foldopen" id="foldopen00074" data-start="{" data-end="}">
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno"><a class="line" href="classPostProcessExecutor.html#a76bdc95372e84d8393cbafea7b7df8a7">   74</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classPostProcessExecutor.html#a76bdc95372e84d8393cbafea7b7df8a7">PostProcessExecutor::BeginFrame</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    <span class="keywordflow">if</span> (!adapter_ || !renderTexture_) {</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>        <a class="code hl_function" href="classLog.html#a1a96849014a462fb22eb2247323cb2dc">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, <span class="stringliteral">&quot;PostProcessExecutor is not properly initialized&quot;</span>);</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    }</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    renderTexture_-&gt;ChangeState(adapter_-&gt;<a class="code hl_function" href="classDirectXAdapter.html#abc7797e145abbf8c6b66d89ce219adbf">GetCommandList</a>(), D3D12_RESOURCE_STATE_RENDER_TARGET);</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    <span class="keyword">auto</span> dsvHandle = adapter_-&gt;<a class="code hl_function" href="classDirectXAdapter.html#ae42c454315be5b6c511d8c297435886e">GetDSVHandle</a>();</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    adapter_-&gt;<a class="code hl_function" href="classDirectXAdapter.html#abc7797e145abbf8c6b66d89ce219adbf">GetCommandList</a>()-&gt;OMSetRenderTargets(1, &amp;rtvHandle_, <span class="keyword">false</span>, &amp;dsvHandle);</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    adapter_-&gt;<a class="code hl_function" href="classDirectXAdapter.html#abc7797e145abbf8c6b66d89ce219adbf">GetCommandList</a>()-&gt;ClearRenderTargetView(rtvHandle_, &amp;clearColor_.<a class="code hl_variable" href="structVector4.html#a1cc671b8b90e1b8145e74f128d828fbe">x</a>, 0, <span class="keyword">nullptr</span>);</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    adapter_-&gt;<a class="code hl_function" href="classDirectXAdapter.html#a5caa8b31df1102febe4016600a6c7fbd">PreProcess</a>();</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>}</div>
+</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
+<div class="foldopen" id="foldopen00089" data-start="{" data-end="}">
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno"><a class="line" href="classPostProcessExecutor.html#a5394827a0c5c97483fe957138d3c5d6c">   89</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classPostProcessExecutor.html#a5394827a0c5c97483fe957138d3c5d6c">PostProcessExecutor::EndFrame</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    <span class="keywordflow">if</span> (!adapter_ || !renderTexture_) {</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    }</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    </div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    renderTexture_-&gt;ChangeState(adapter_-&gt;<a class="code hl_function" href="classDirectXAdapter.html#abc7797e145abbf8c6b66d89ce219adbf">GetCommandList</a>(), D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE);</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>}</div>
+</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span> </div>
+<div class="foldopen" id="foldopen00097" data-start="{" data-end="}">
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno"><a class="line" href="classPostProcessExecutor.html#a8322f922ebe3f1444ee573ab3960d76d">   97</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classPostProcessExecutor.html#a8322f922ebe3f1444ee573ab3960d76d">PostProcessExecutor::Execute</a>() {</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    <span class="keywordflow">if</span> (!adapter_) {</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>        <a class="code hl_function" href="classLog.html#a1a96849014a462fb22eb2247323cb2dc">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, <span class="stringliteral">&quot;DirectXAdapter is not initialized&quot;</span>);</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    }</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    <span class="keyword">auto</span> handle = srv_-&gt;<a class="code hl_function" href="classSRVManager.html#a50f3a4b23df601f5f07eab1faaa21b2c">GetGPUHandle</a>(srvIndex_);</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    <span class="comment">// エフェクトチェーン処理</span></div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; effect : effects_) {</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>        <span class="keywordflow">if</span> (!effect.enabled)<span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>        handle = effect.effect-&gt;Apply(handle);</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    }</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span> </div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    srvHandle_ = handle;</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>}</div>
+</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span> </div>
+<div class="foldopen" id="foldopen00114" data-start="{" data-end="}">
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno"><a class="line" href="classPostProcessExecutor.html#ac9fc2402efe9f6791365982dfaefacea">  114</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classPostProcessExecutor.html#ac9fc2402efe9f6791365982dfaefacea">PostProcessExecutor::Draw</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    <span class="keywordflow">if</span> (!adapter_ || !pso_) {</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>        <a class="code hl_function" href="classLog.html#a1a96849014a462fb22eb2247323cb2dc">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, <span class="stringliteral">&quot;PostProcessExecutor is not properly initialized&quot;</span>);</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    }</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span> </div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>    srv_-&gt;<a class="code hl_function" href="classSRVManager.html#a1713664e29361b62ed0b8f64d0a7d0f2">PreDraw</a>();</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    adapter_-&gt;<a class="code hl_function" href="classDirectXAdapter.html#a5caa8b31df1102febe4016600a6c7fbd">PreProcess</a>();</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    adapter_-&gt;<a class="code hl_function" href="classDirectXAdapter.html#abc7797e145abbf8c6b66d89ce219adbf">GetCommandList</a>()-&gt;IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span> </div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    <span class="comment">// PSO設定</span></div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    pso_-&gt;DrawCall();</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span> </div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span><span class="comment">//#ifdef _DEBUG</span></div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span> </div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>    <span class="comment">//debugUI_-&gt;RegisterCommand(&quot;SceneRendering&quot;, [&amp;]() {</span></div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>    <span class="comment">//    ImGui::Begin(&quot;Scene&quot;);</span></div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    <span class="comment">//    </span></div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    <span class="comment">//    // RenderTextureをImGuiで表示</span></div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>    <span class="comment">//    if (srvHandle_.ptr != 0) {</span></div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>    <span class="comment">//        ImTextureID textureID = srvHandle_.ptr;</span></div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    <span class="comment">//        ImVec2 imageSize = ImVec2(static_cast&lt;float&gt;(adapter_-&gt;GetWidth()), static_cast&lt;float&gt;(adapter_-&gt;GetHeight()));</span></div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>    <span class="comment">//        ImGui::Image(textureID, imageSize);</span></div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>    <span class="comment">//    }</span></div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>    <span class="comment">//    </span></div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>    <span class="comment">//    ImGui::End();</span></div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>    <span class="comment">//});</span></div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span> </div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span><span class="comment">//#else</span></div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>    adapter_-&gt;<a class="code hl_function" href="classDirectXAdapter.html#abc7797e145abbf8c6b66d89ce219adbf">GetCommandList</a>()-&gt;SetGraphicsRootDescriptorTable(0, srvHandle_);</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span> </div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>    <span class="comment">// フルスクリーンクワッドを三角形で描画</span></div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>    adapter_-&gt;<a class="code hl_function" href="classDirectXAdapter.html#abc7797e145abbf8c6b66d89ce219adbf">GetCommandList</a>()-&gt;DrawInstanced(3, 1, 0, 0);</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span><span class="comment">//#endif</span></div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>}</div>
+</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span> </div>
+<div class="foldopen" id="foldopen00150" data-start="{" data-end="}">
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno"><a class="line" href="classPostProcessExecutor.html#a59b510e45f46ad87308269fbc36836e1">  150</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classPostProcessExecutor.html#a59b510e45f46ad87308269fbc36836e1">PostProcessExecutor::SetActive</a>(<span class="keyword">const</span> std::string&amp; _name, <span class="keywordtype">bool</span> _enable) {</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; effect : effects_) {</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>        <span class="keywordflow">if</span> (effect.name == _name) {</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>            effect.enabled = _enable;</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>            <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>        }</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>    }</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>}</div>
+</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span> </div>
+<div class="foldopen" id="foldopen00159" data-start="{" data-end="}">
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno"><a class="line" href="classPostProcessExecutor.html#a1b5dd858bf7d3e3ca2140dde7385668c">  159</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classPostProcessExecutor.html#a1b5dd858bf7d3e3ca2140dde7385668c">PostProcessExecutor::Debug</a>() {</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>    debugUI_-&gt;<a class="code hl_function" href="classDebugUI.html#a6367814777960cab7c04db03744447c7">RegisterCommand</a>(<span class="stringliteral">&quot;PostEffect&quot;</span>, [&amp;](){</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>        ImGui::Begin(<span class="stringliteral">&quot;PostEffect&quot;</span>);</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>        <span class="keywordflow">if</span> (ImGui::BeginTabBar(<span class="stringliteral">&quot;PostEffect&quot;</span>)){</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>            <span class="keywordflow">if</span> (ImGui::BeginTabItem(<span class="stringliteral">&quot;List&quot;</span>)) {</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>                <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; effect : effects_) {</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>                    ImGui::Checkbox(effect.name.c_str(), &amp;effect.enabled);</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>                }</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>                ImGui::EndTabItem();</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>            }</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span> </div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>            <span class="keywordflow">if</span> (ImGui::BeginTabItem(<span class="stringliteral">&quot;Details&quot;</span>)){</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>                <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; effect : effects_) {</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>                    effect.effect-&gt;Debug();</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>                }</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>                ImGui::EndTabItem();</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>            }</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span> </div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>            ImGui::EndTabBar();</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>        }</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>        ImGui::End();</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>    });</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>}</div>
+</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span> </div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span><span class="keywordtype">void</span> PostProcessExecutor::CreateSceneRenderTexture() {</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>    <span class="keywordflow">if</span> (!adapter_) {</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>    }</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span> </div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>    <span class="comment">// RTVHeapを作成（シーン用1つ + エフェクト用複数）</span></div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>    rtvHeap_ = std::make_unique&lt;Heap&gt;();</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>    <span class="keywordflow">if</span> (!rtvHeap_-&gt;Create(adapter_-&gt;<a class="code hl_function" href="classDirectXAdapter.html#a28fe87825525272f00fd06231a0c1632">GetDevice</a>(), D3D12_DESCRIPTOR_HEAP_TYPE_RTV, 16, D3D12_DESCRIPTOR_HEAP_FLAG_NONE)) {</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>        <a class="code hl_function" href="classLog.html#a1a96849014a462fb22eb2247323cb2dc">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, <span class="stringliteral">&quot;Failed to create RTV heap for PostProcessExecutor&quot;</span>);</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>    }</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span> </div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>    <span class="comment">// 画面サイズのRenderTextureを作成</span></div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>    renderTexture_ = adapter_-&gt;<a class="code hl_function" href="classDirectXAdapter.html#a6e8fa2518fe43611bc83625caa4884f9">CreateRenderTextureResource</a>(</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>        <span class="keyword">static_cast&lt;</span>uint32_t<span class="keyword">&gt;</span>(adapter_-&gt;<a class="code hl_function" href="classDirectXAdapter.html#a0fba31180c1f84825e4b5da99fdc3371">GetWidth</a>()), </div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>        <span class="keyword">static_cast&lt;</span>uint32_t<span class="keyword">&gt;</span>(adapter_-&gt;<a class="code hl_function" href="classDirectXAdapter.html#a73060803a4ebb0fc3be2ace3f93b5aef">GetHeight</a>()), </div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>        DXGI_FORMAT_R8G8B8A8_UNORM_SRGB, </div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>        clearColor_</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>    );</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span> </div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>    renderTexture_-&gt;Get()-&gt;SetName(L<span class="stringliteral">&quot;RenderTexture&quot;</span>);</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span> </div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>    <span class="keywordflow">if</span> (!renderTexture_-&gt;Get()) {</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>        <a class="code hl_function" href="classLog.html#a1a96849014a462fb22eb2247323cb2dc">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, <span class="stringliteral">&quot;Failed to create scene render texture&quot;</span>);</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>    }</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>    </div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>    <span class="comment">// RTVを作成</span></div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>    rtvHandle_ = rtvHeap_-&gt;GetCPUHandle(0);</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span> </div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>    D3D12_RENDER_TARGET_VIEW_DESC rtvDesc = {};</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>    rtvDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>    rtvDesc.ViewDimension = D3D12_RTV_DIMENSION_TEXTURE2D;</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>    </div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>    adapter_-&gt;<a class="code hl_function" href="classDirectXAdapter.html#a28fe87825525272f00fd06231a0c1632">GetDevice</a>()-&gt;CreateRenderTargetView(renderTexture_-&gt;Get(), &amp;rtvDesc, rtvHandle_);</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span> </div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>    srvIndex_ = srv_-&gt;<a class="code hl_function" href="classSRVManager.html#a1e7a23d2422f4228cc6a9436ad1de225">Allocate</a>();</div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>    srv_-&gt;<a class="code hl_function" href="classSRVManager.html#a2cca745cb3489ce9ff676186348d9728">CreateSRVforTexture2D</a>(srvIndex_, renderTexture_-&gt;Get(), DXGI_FORMAT_R8G8B8A8_UNORM_SRGB, 1);</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>    srvHandle_ = srv_-&gt;<a class="code hl_function" href="classSRVManager.html#a50f3a4b23df601f5f07eab1faaa21b2c">GetGPUHandle</a>(srvIndex_);</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span> </div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>    <a class="code hl_function" href="classLog.html#a1a96849014a462fb22eb2247323cb2dc">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>, <span class="stringliteral">&quot;PostProcessExecutor scene render texture created successfully&quot;</span>);</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>}</div>
+<div class="ttc" id="aBlendMode_8hpp_html_a30323fa90e24ca484998b9fba6c40e85ab50339a10e1de285ac99d4c3990b8693"><div class="ttname"><a href="BlendMode_8hpp.html#a30323fa90e24ca484998b9fba6c40e85ab50339a10e1de285ac99d4c3990b8693">BlendMode::NONE</a></div><div class="ttdeci">@ NONE</div></div>
+<div class="ttc" id="aDebugUI_8hpp_html"><div class="ttname"><a href="DebugUI_8hpp.html">DebugUI.hpp</a></div></div>
+<div class="ttc" id="aDirectXAdapter_8hpp_html"><div class="ttname"><a href="DirectXAdapter_8hpp.html">DirectXAdapter.hpp</a></div></div>
+<div class="ttc" id="aHeap_8hpp_html"><div class="ttname"><a href="Heap_8hpp.html">Heap.hpp</a></div></div>
+<div class="ttc" id="aIPostEffect_8hpp_html"><div class="ttname"><a href="IPostEffect_8hpp.html">IPostEffect.hpp</a></div></div>
+<div class="ttc" id="aLog_8hpp_html"><div class="ttname"><a href="Log_8hpp.html">Log.hpp</a></div></div>
+<div class="ttc" id="aPipelineStateObject_8hpp_html"><div class="ttname"><a href="PipelineStateObject_8hpp.html">PipelineStateObject.hpp</a></div></div>
+<div class="ttc" id="aPostProcessExecutor_8hpp_html"><div class="ttname"><a href="PostProcessExecutor_8hpp.html">PostProcessExecutor.hpp</a></div></div>
+<div class="ttc" id="aSRVManager_8h_html"><div class="ttname"><a href="SRVManager_8h.html">SRVManager.h</a></div></div>
+<div class="ttc" id="aclassDebugUI_html"><div class="ttname"><a href="classDebugUI.html">DebugUI</a></div><div class="ttdoc">ImGuiアダプタークラス デバッグUIの描画とコマンド管理を提供</div><div class="ttdef"><b>Definition</b> <a href="DebugUI_8hpp_source.html#l00015">DebugUI.hpp:15</a></div></div>
+<div class="ttc" id="aclassDebugUI_html_a6367814777960cab7c04db03744447c7"><div class="ttname"><a href="classDebugUI.html#a6367814777960cab7c04db03744447c7">DebugUI::RegisterCommand</a></div><div class="ttdeci">void RegisterCommand(const std::string &amp;_id, std::function&lt; void()&gt; _command)</div><div class="ttdoc">デバッグコマンドを登録</div><div class="ttdef"><b>Definition</b> <a href="DebugUI_8cpp_source.html#l00101">DebugUI.cpp:101</a></div></div>
+<div class="ttc" id="aclassDirectXAdapter_html"><div class="ttname"><a href="classDirectXAdapter.html">DirectXAdapter</a></div><div class="ttdoc">DirectX12アダプタークラス DirectX12の初期化とデバイス管理を提供</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8hpp_source.html#l00025">DirectXAdapter.hpp:25</a></div></div>
+<div class="ttc" id="aclassDirectXAdapter_html_a0fba31180c1f84825e4b5da99fdc3371"><div class="ttname"><a href="classDirectXAdapter.html#a0fba31180c1f84825e4b5da99fdc3371">DirectXAdapter::GetWidth</a></div><div class="ttdeci">size_t GetWidth() const</div><div class="ttdoc">ウィンドウ幅を取得</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8cpp_source.html#l00531">DirectXAdapter.cpp:531</a></div></div>
+<div class="ttc" id="aclassDirectXAdapter_html_a28fe87825525272f00fd06231a0c1632"><div class="ttname"><a href="classDirectXAdapter.html#a28fe87825525272f00fd06231a0c1632">DirectXAdapter::GetDevice</a></div><div class="ttdeci">ID3D12Device * GetDevice() const</div><div class="ttdoc">DirectX12デバイスを取得</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8cpp_source.html#l00523">DirectXAdapter.cpp:523</a></div></div>
+<div class="ttc" id="aclassDirectXAdapter_html_a5caa8b31df1102febe4016600a6c7fbd"><div class="ttname"><a href="classDirectXAdapter.html#a5caa8b31df1102febe4016600a6c7fbd">DirectXAdapter::PreProcess</a></div><div class="ttdeci">void PreProcess() const</div><div class="ttdoc">プリプロセス処理</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8cpp_source.html#l00218">DirectXAdapter.cpp:218</a></div></div>
+<div class="ttc" id="aclassDirectXAdapter_html_a6e8fa2518fe43611bc83625caa4884f9"><div class="ttname"><a href="classDirectXAdapter.html#a6e8fa2518fe43611bc83625caa4884f9">DirectXAdapter::CreateRenderTextureResource</a></div><div class="ttdeci">std::unique_ptr&lt; DX12Resource &gt; CreateRenderTextureResource(uint32_t _width, uint32_t _height, DXGI_FORMAT _format, const Vector4 &amp;_cc) const</div><div class="ttdoc">レンダーテクスチャリソースを作成</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8cpp_source.html#l00182">DirectXAdapter.cpp:182</a></div></div>
+<div class="ttc" id="aclassDirectXAdapter_html_a73060803a4ebb0fc3be2ace3f93b5aef"><div class="ttname"><a href="classDirectXAdapter.html#a73060803a4ebb0fc3be2ace3f93b5aef">DirectXAdapter::GetHeight</a></div><div class="ttdeci">size_t GetHeight() const</div><div class="ttdoc">ウィンドウ高さを取得</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8cpp_source.html#l00535">DirectXAdapter.cpp:535</a></div></div>
+<div class="ttc" id="aclassDirectXAdapter_html_abc7797e145abbf8c6b66d89ce219adbf"><div class="ttname"><a href="classDirectXAdapter.html#abc7797e145abbf8c6b66d89ce219adbf">DirectXAdapter::GetCommandList</a></div><div class="ttdeci">ID3D12GraphicsCommandList * GetCommandList() const</div><div class="ttdoc">コマンドリストを取得</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8cpp_source.html#l00527">DirectXAdapter.cpp:527</a></div></div>
+<div class="ttc" id="aclassDirectXAdapter_html_ae42c454315be5b6c511d8c297435886e"><div class="ttname"><a href="classDirectXAdapter.html#ae42c454315be5b6c511d8c297435886e">DirectXAdapter::GetDSVHandle</a></div><div class="ttdeci">D3D12_CPU_DESCRIPTOR_HANDLE GetDSVHandle() const</div><div class="ttdoc">DSVハンドルを取得</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8cpp_source.html#l00559">DirectXAdapter.cpp:559</a></div></div>
+<div class="ttc" id="aclassLog_html_a1a96849014a462fb22eb2247323cb2dc"><div class="ttname"><a href="classLog.html#a1a96849014a462fb22eb2247323cb2dc">Log::Send</a></div><div class="ttdeci">static void Send(Level level, const std::string &amp;message)</div><div class="ttdoc">ログメッセージを送信</div><div class="ttdef"><b>Definition</b> <a href="Log_8cpp_source.html#l00068">Log.cpp:68</a></div></div>
+<div class="ttc" id="aclassLog_html_afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3"><div class="ttname"><a href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a></div><div class="ttdeci">@ INFO</div></div>
+<div class="ttc" id="aclassLog_html_afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482"><div class="ttname"><a href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a></div><div class="ttdeci">@ ERR</div></div>
+<div class="ttc" id="aclassPostProcessExecutor_html_a1b5dd858bf7d3e3ca2140dde7385668c"><div class="ttname"><a href="classPostProcessExecutor.html#a1b5dd858bf7d3e3ca2140dde7385668c">PostProcessExecutor::Debug</a></div><div class="ttdeci">void Debug()</div><div class="ttdef"><b>Definition</b> <a href="PostProcessExecutor_8cpp_source.html#l00159">PostProcessExecutor.cpp:159</a></div></div>
+<div class="ttc" id="aclassPostProcessExecutor_html_a20e592ca2994b9091bc005b4f4102f5f"><div class="ttname"><a href="classPostProcessExecutor.html#a20e592ca2994b9091bc005b4f4102f5f">PostProcessExecutor::Add</a></div><div class="ttdeci">void Add(std::unique_ptr&lt; IPostEffect &gt; _effect, const std::string &amp;_name=&quot;NoName&quot;)</div><div class="ttdef"><b>Definition</b> <a href="PostProcessExecutor_8cpp_source.html#l00061">PostProcessExecutor.cpp:61</a></div></div>
+<div class="ttc" id="aclassPostProcessExecutor_html_a5394827a0c5c97483fe957138d3c5d6c"><div class="ttname"><a href="classPostProcessExecutor.html#a5394827a0c5c97483fe957138d3c5d6c">PostProcessExecutor::EndFrame</a></div><div class="ttdeci">void EndFrame() const</div><div class="ttdef"><b>Definition</b> <a href="PostProcessExecutor_8cpp_source.html#l00089">PostProcessExecutor.cpp:89</a></div></div>
+<div class="ttc" id="aclassPostProcessExecutor_html_a59b510e45f46ad87308269fbc36836e1"><div class="ttname"><a href="classPostProcessExecutor.html#a59b510e45f46ad87308269fbc36836e1">PostProcessExecutor::SetActive</a></div><div class="ttdeci">void SetActive(const std::string &amp;_name, bool _enable)</div><div class="ttdef"><b>Definition</b> <a href="PostProcessExecutor_8cpp_source.html#l00150">PostProcessExecutor.cpp:150</a></div></div>
+<div class="ttc" id="aclassPostProcessExecutor_html_a6d8faf6f90fbaaba68671c4e1e8de2cd"><div class="ttname"><a href="classPostProcessExecutor.html#a6d8faf6f90fbaaba68671c4e1e8de2cd">PostProcessExecutor::Initialize</a></div><div class="ttdeci">void Initialize(DirectXAdapter *_adapter, SRVManager *_srv, DebugUI *_debug)</div><div class="ttdef"><b>Definition</b> <a href="PostProcessExecutor_8cpp_source.html#l00012">PostProcessExecutor.cpp:12</a></div></div>
+<div class="ttc" id="aclassPostProcessExecutor_html_a76bdc95372e84d8393cbafea7b7df8a7"><div class="ttname"><a href="classPostProcessExecutor.html#a76bdc95372e84d8393cbafea7b7df8a7">PostProcessExecutor::BeginFrame</a></div><div class="ttdeci">void BeginFrame() const</div><div class="ttdef"><b>Definition</b> <a href="PostProcessExecutor_8cpp_source.html#l00074">PostProcessExecutor.cpp:74</a></div></div>
+<div class="ttc" id="aclassPostProcessExecutor_html_a8322f922ebe3f1444ee573ab3960d76d"><div class="ttname"><a href="classPostProcessExecutor.html#a8322f922ebe3f1444ee573ab3960d76d">PostProcessExecutor::Execute</a></div><div class="ttdeci">void Execute()</div><div class="ttdef"><b>Definition</b> <a href="PostProcessExecutor_8cpp_source.html#l00097">PostProcessExecutor.cpp:97</a></div></div>
+<div class="ttc" id="aclassPostProcessExecutor_html_ac9fc2402efe9f6791365982dfaefacea"><div class="ttname"><a href="classPostProcessExecutor.html#ac9fc2402efe9f6791365982dfaefacea">PostProcessExecutor::Draw</a></div><div class="ttdeci">void Draw() const</div><div class="ttdef"><b>Definition</b> <a href="PostProcessExecutor_8cpp_source.html#l00114">PostProcessExecutor.cpp:114</a></div></div>
+<div class="ttc" id="aclassRootSignature_html"><div class="ttname"><a href="classRootSignature.html">RootSignature</a></div><div class="ttdef"><b>Definition</b> <a href="RootSignature_8hpp_source.html#l00008">RootSignature.hpp:8</a></div></div>
+<div class="ttc" id="aclassSRVManager_html"><div class="ttname"><a href="classSRVManager.html">SRVManager</a></div><div class="ttdef"><b>Definition</b> <a href="SRVManager_8h_source.html#l00010">SRVManager.h:10</a></div></div>
+<div class="ttc" id="aclassSRVManager_html_a1713664e29361b62ed0b8f64d0a7d0f2"><div class="ttname"><a href="classSRVManager.html#a1713664e29361b62ed0b8f64d0a7d0f2">SRVManager::PreDraw</a></div><div class="ttdeci">void PreDraw() const</div><div class="ttdef"><b>Definition</b> <a href="SRVManager_8cpp_source.html#l00043">SRVManager.cpp:43</a></div></div>
+<div class="ttc" id="aclassSRVManager_html_a1e7a23d2422f4228cc6a9436ad1de225"><div class="ttname"><a href="classSRVManager.html#a1e7a23d2422f4228cc6a9436ad1de225">SRVManager::Allocate</a></div><div class="ttdeci">uint32_t Allocate()</div><div class="ttdef"><b>Definition</b> <a href="SRVManager_8cpp_source.html#l00033">SRVManager.cpp:33</a></div></div>
+<div class="ttc" id="aclassSRVManager_html_a2cca745cb3489ce9ff676186348d9728"><div class="ttname"><a href="classSRVManager.html#a2cca745cb3489ce9ff676186348d9728">SRVManager::CreateSRVforTexture2D</a></div><div class="ttdeci">void CreateSRVforTexture2D(uint32_t srvIndex, ID3D12Resource *pResource, DXGI_FORMAT format, UINT mipMap)</div><div class="ttdef"><b>Definition</b> <a href="SRVManager_8cpp_source.html#l00048">SRVManager.cpp:48</a></div></div>
+<div class="ttc" id="aclassSRVManager_html_a50f3a4b23df601f5f07eab1faaa21b2c"><div class="ttname"><a href="classSRVManager.html#a50f3a4b23df601f5f07eab1faaa21b2c">SRVManager::GetGPUHandle</a></div><div class="ttdeci">D3D12_GPU_DESCRIPTOR_HANDLE GetGPUHandle(uint32_t index) const</div><div class="ttdef"><b>Definition</b> <a href="SRVManager_8cpp_source.html#l00095">SRVManager.cpp:95</a></div></div>
+<div class="ttc" id="astructVector4_html_a1cc671b8b90e1b8145e74f128d828fbe"><div class="ttname"><a href="structVector4.html#a1cc671b8b90e1b8145e74f128d828fbe">Vector4::x</a></div><div class="ttdeci">float x</div><div class="ttdef"><b>Definition</b> <a href="Vector4_8hpp_source.html#l00008">Vector4.hpp:8</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_0aad7dfa151619e6dfb72b346155edbe.html">PostProcess</a></li><li class="navelem"><a class="el" href="dir_b6d1c099af687e6ab812b3c96ef27baa.html">Executor</a></li><li class="navelem"><a class="el" href="PostProcessExecutor_8cpp.html">PostProcessExecutor.cpp</a></li>
+    <li class="footer">2025年10月16日(木) 07時14分00秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,282 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>PortfolioGame Engine: DX12Resource クラス</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">PortfolioGame Engine<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">C++20 DirectX12 Game Engine</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','検索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('classDX12Resource.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">読み取り中…</div>
+<div class="SRStatus" id="Searching">検索中…</div>
+<div class="SRStatus" id="NoMatches">一致する文字列を見つけられません</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">公開メンバ関数</a> &#124;
+<a href="classDX12Resource-members.html">全メンバ一覧</a>  </div>
+  <div class="headertitle"><div class="title">DX12Resource クラス</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>DirectX12リソースラッパークラス リソース状態遷移を管理  
+ <a href="classDX12Resource.html#details">[詳解]</a></p>
+
+<p><code>#include &lt;<a class="el" href="DX12Resource_8hpp_source.html">DX12Resource.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+公開メンバ関数</h2></td></tr>
+<tr class="memitem:ad72a4fefee65f8aaf6a95b8124c46d36" id="r_ad72a4fefee65f8aaf6a95b8124c46d36"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDX12Resource.html#ad72a4fefee65f8aaf6a95b8124c46d36">Create</a> (ID3D12Resource *_resource, D3D12_RESOURCE_STATES _state=D3D12_RESOURCE_STATE_COMMON)</td></tr>
+<tr class="memdesc:ad72a4fefee65f8aaf6a95b8124c46d36"><td class="mdescLeft">&#160;</td><td class="mdescRight">リソースを作成  <br /></td></tr>
+<tr class="separator:ad72a4fefee65f8aaf6a95b8124c46d36"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af993a8d4835b85eefaaecb2168935ee4" id="r_af993a8d4835b85eefaaecb2168935ee4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDX12Resource.html#af993a8d4835b85eefaaecb2168935ee4">Create</a> (const Microsoft::WRL::ComPtr&lt; ID3D12Resource &gt; &amp;_resource, D3D12_RESOURCE_STATES _state=D3D12_RESOURCE_STATE_COMMON)</td></tr>
+<tr class="memdesc:af993a8d4835b85eefaaecb2168935ee4"><td class="mdescLeft">&#160;</td><td class="mdescRight">リソースを作成  <br /></td></tr>
+<tr class="separator:af993a8d4835b85eefaaecb2168935ee4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab449563ef728d837d81b333e9910aad8" id="r_ab449563ef728d837d81b333e9910aad8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDX12Resource.html#ab449563ef728d837d81b333e9910aad8">ChangeState</a> (ID3D12GraphicsCommandList *_command, D3D12_RESOURCE_STATES _state)</td></tr>
+<tr class="memdesc:ab449563ef728d837d81b333e9910aad8"><td class="mdescLeft">&#160;</td><td class="mdescRight">リソース状態を変更  <br /></td></tr>
+<tr class="separator:ab449563ef728d837d81b333e9910aad8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7de5777515323fc496662e3e01c83a30" id="r_a7de5777515323fc496662e3e01c83a30"><td class="memItemLeft" align="right" valign="top">ID3D12Resource *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDX12Resource.html#a7de5777515323fc496662e3e01c83a30">Get</a> () const</td></tr>
+<tr class="memdesc:a7de5777515323fc496662e3e01c83a30"><td class="mdescLeft">&#160;</td><td class="mdescRight">リソースを取得  <br /></td></tr>
+<tr class="separator:a7de5777515323fc496662e3e01c83a30"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">詳解</h2>
+<div class="textblock"><p>DirectX12リソースラッパークラス リソース状態遷移を管理 </p>
+
+<p class="definition"> <a class="el" href="DX12Resource_8hpp_source.html">DX12Resource.hpp</a> の <a class="el" href="DX12Resource_8hpp_source.html#l00010">10</a> 行目に定義があります。</p>
+</div><h2 class="groupheader">関数詳解</h2>
+<a id="ab449563ef728d837d81b333e9910aad8" name="ab449563ef728d837d81b333e9910aad8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab449563ef728d837d81b333e9910aad8">&#9670;&#160;</a></span>ChangeState()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void DX12Resource::ChangeState </td>
+          <td>(</td>
+          <td class="paramtype">ID3D12GraphicsCommandList *&#160;</td>
+          <td class="paramname"><em>_command</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">D3D12_RESOURCE_STATES&#160;</td>
+          <td class="paramname"><em>_state</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>リソース状態を変更 </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_command</td><td>コマンドリスト</td></tr>
+    <tr><td class="paramname">_state</td><td>新しいリソース状態</td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition"> <a class="el" href="DX12Resource_8cpp_source.html">DX12Resource.cpp</a> の <a class="el" href="DX12Resource_8cpp_source.html#l00023">23</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="af993a8d4835b85eefaaecb2168935ee4" name="af993a8d4835b85eefaaecb2168935ee4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af993a8d4835b85eefaaecb2168935ee4">&#9670;&#160;</a></span>Create() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void DX12Resource::Create </td>
+          <td>(</td>
+          <td class="paramtype">const Microsoft::WRL::ComPtr&lt; ID3D12Resource &gt; &amp;&#160;</td>
+          <td class="paramname"><em>_resource</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">D3D12_RESOURCE_STATES&#160;</td>
+          <td class="paramname"><em>_state</em> = <code>D3D12_RESOURCE_STATE_COMMON</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>リソースを作成 </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_resource</td><td>リソースのComPtr</td></tr>
+    <tr><td class="paramname">_state</td><td>初期リソース状態</td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition"> <a class="el" href="DX12Resource_8cpp_source.html">DX12Resource.cpp</a> の <a class="el" href="DX12Resource_8cpp_source.html#l00014">14</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="Utils_8cpp_source.html#l00054">Utils::Alert()</a>.</p>
+
+</div>
+</div>
+<a id="ad72a4fefee65f8aaf6a95b8124c46d36" name="ad72a4fefee65f8aaf6a95b8124c46d36"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad72a4fefee65f8aaf6a95b8124c46d36">&#9670;&#160;</a></span>Create() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void DX12Resource::Create </td>
+          <td>(</td>
+          <td class="paramtype">ID3D12Resource *&#160;</td>
+          <td class="paramname"><em>_resource</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">D3D12_RESOURCE_STATES&#160;</td>
+          <td class="paramname"><em>_state</em> = <code>D3D12_RESOURCE_STATE_COMMON</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>リソースを作成 </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_resource</td><td>リソースポインタ</td></tr>
+    <tr><td class="paramname">_state</td><td>初期リソース状態</td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition"> <a class="el" href="DX12Resource_8cpp_source.html">DX12Resource.cpp</a> の <a class="el" href="DX12Resource_8cpp_source.html#l00005">5</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="Utils_8cpp_source.html#l00054">Utils::Alert()</a>.</p>
+
+</div>
+</div>
+<a id="a7de5777515323fc496662e3e01c83a30" name="a7de5777515323fc496662e3e01c83a30"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7de5777515323fc496662e3e01c83a30">&#9670;&#160;</a></span>Get()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ID3D12Resource * DX12Resource::Get </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>リソースを取得 </p>
+<dl class="section return"><dt>戻り値</dt><dd>リソースポインタ</dd></dl>
+
+<p class="definition"> <a class="el" href="DX12Resource_8cpp_source.html">DX12Resource.cpp</a> の <a class="el" href="DX12Resource_8cpp_source.html#l00038">38</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<hr/>このクラス詳解は次のファイルから抽出されました:<ul>
+<li>/home/runner/work/GameEngine/GameEngine/src/DirectX/Resource/<a class="el" href="DX12Resource_8hpp_source.html">DX12Resource.hpp</a></li>
+<li>/home/runner/work/GameEngine/GameEngine/src/DirectX/Resource/<a class="el" href="DX12Resource_8cpp_source.html">DX12Resource.cpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="classDX12Resource.html">DX12Resource</a></li>
+    <li class="footer">2025年10月16日(木) 07時14分00秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+  </ul>
+</div>
+</body>
+</html>

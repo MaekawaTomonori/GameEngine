@@ -1,0 +1,316 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>PortfolioGame Engine: /home/runner/work/GameEngine/GameEngine/src/Mesh/Mesh.cpp ソースファイル</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">PortfolioGame Engine<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">C++20 DirectX12 Game Engine</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','検索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function() { init_codefold(0); });
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('Mesh_8cpp_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">読み取り中…</div>
+<div class="SRStatus" id="Searching">検索中…</div>
+<div class="SRStatus" id="NoMatches">一致する文字列を見つけられません</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Mesh.cpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="Mesh_8cpp.html">[詳解]</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#include &quot;<a class="code" href="Mesh_8hpp.html">Mesh.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;filesystem&gt;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;imgui.h&quot;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;<a class="code" href="DebugUI_8hpp.html">DebugUI.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;<a class="code" href="MathUtils_8hpp.html">Math/MathUtils.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;<a class="code" href="Singleton_8hpp.html">Pattern/Singleton.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;<a class="code" href="LightManager_8hpp.html">src/Light/LightManager.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;<a class="code" href="TextureManager_8hpp.html">src/Texture/TextureManager.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="foldopen" id="foldopen00013" data-start="{" data-end="}">
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="classMesh.html#a3698ba6613ec342e370bc1865e8f6ffa">   13</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classMesh.html#a3698ba6613ec342e370bc1865e8f6ffa">Mesh::Initialize</a>(<a class="code hl_class" href="classDirectXAdapter.html">DirectXAdapter</a>* _adapter, <span class="keyword">const</span> std::string &amp;_name, <span class="keyword">const</span> <a class="code hl_struct" href="structMeshData.html">MeshData</a>&amp; _raw) {</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    adapter_ = _adapter;</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    commandList_ = adapter_-&gt;<a class="code hl_function" href="classDirectXAdapter.html#abc7797e145abbf8c6b66d89ce219adbf">GetCommandList</a>();</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    name_ = _name;</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    data_ = _raw;</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    vr_ = adapter_-&gt;<a class="code hl_function" href="classDirectXAdapter.html#ab4b4c251cdfee90870ce155e610c9500">CreateBufferResource</a>(<span class="keyword">sizeof</span>(<a class="code hl_struct" href="structVertex.html">Vertex</a>) * data_.<a class="code hl_variable" href="structMeshData.html#aac93fd7e3e5968c5f4376038ef1aac96">vertices</a>.size());</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    vbv_.BufferLocation = vr_-&gt;Get()-&gt;GetGPUVirtualAddress();</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    vbv_.SizeInBytes = <span class="keyword">static_cast&lt;</span>UINT<span class="keyword">&gt;</span>(<span class="keyword">sizeof</span>(<a class="code hl_struct" href="structVertex.html">Vertex</a>) * data_.<a class="code hl_variable" href="structMeshData.html#aac93fd7e3e5968c5f4376038ef1aac96">vertices</a>.size());</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    vbv_.StrideInBytes = <span class="keyword">sizeof</span>(<a class="code hl_struct" href="structVertex.html">Vertex</a>);</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    vr_-&gt;Get()-&gt;Map(0, <span class="keyword">nullptr</span>, <span class="keyword">reinterpret_cast&lt;</span><span class="keywordtype">void</span>**<span class="keyword">&gt;</span>(&amp;vd_));</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    std::copy_n(data_.<a class="code hl_variable" href="structMeshData.html#aac93fd7e3e5968c5f4376038ef1aac96">vertices</a>.data(), data_.<a class="code hl_variable" href="structMeshData.html#aac93fd7e3e5968c5f4376038ef1aac96">vertices</a>.size(), vd_);</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    vbvs_.push_back(vbv_);</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    mr_ = adapter_-&gt;<a class="code hl_function" href="classDirectXAdapter.html#ab4b4c251cdfee90870ce155e610c9500">CreateBufferResource</a>(<span class="keyword">sizeof</span>(Material));</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    mr_-&gt;Get()-&gt;Map(0, <span class="keyword">nullptr</span>, <span class="keyword">reinterpret_cast&lt;</span><span class="keywordtype">void</span>**<span class="keyword">&gt;</span>(&amp;material_));</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    material_-&gt;color = <a class="code hl_struct" href="structVector4.html">Vector4</a>(1.0f, 1.0f, 1.0f, 1.0f);</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    material_-&gt;lighting = 0; <span class="comment">// Default lighting</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    material_-&gt;shininess = 100.f;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    material_-&gt;coefficient = 0.0f; <span class="comment">// Environment mapping coefficient (disabled by default)</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    material_-&gt;tilingMul = <a class="code hl_struct" href="structVector2.html">Vector2</a>(1.0f, 1.0f);</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    material_-&gt;uvTransform = <a class="code hl_function" href="namespaceMathUtils_1_1Matrix.html#a1c40c9daddc0ed10682814216053a4f4">MathUtils::Matrix::MakeIdentity</a>();</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keywordflow">if</span> (!data_.<a class="code hl_variable" href="structMeshData.html#a79e9a85738fa0fa5b5e81d79c6960741">indices</a>.empty()){</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        ir_ = adapter_-&gt;<a class="code hl_function" href="classDirectXAdapter.html#ab4b4c251cdfee90870ce155e610c9500">CreateBufferResource</a>(<span class="keyword">sizeof</span>(uint32_t) * data_.<a class="code hl_variable" href="structMeshData.html#a79e9a85738fa0fa5b5e81d79c6960741">indices</a>.size());</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        ibv_.BufferLocation = ir_-&gt;Get()-&gt;GetGPUVirtualAddress();</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        ibv_.SizeInBytes = <span class="keyword">static_cast&lt;</span>UINT<span class="keyword">&gt;</span>(<span class="keyword">sizeof</span>(uint32_t) * data_.<a class="code hl_variable" href="structMeshData.html#a79e9a85738fa0fa5b5e81d79c6960741">indices</a>.size());</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        ibv_.Format = DXGI_FORMAT_R32_UINT;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        ir_-&gt;Get()-&gt;Map(0, <span class="keyword">nullptr</span>, <span class="keyword">reinterpret_cast&lt;</span><span class="keywordtype">void</span>**<span class="keyword">&gt;</span>(&amp;id_));</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        std::copy_n(data_.<a class="code hl_variable" href="structMeshData.html#a79e9a85738fa0fa5b5e81d79c6960741">indices</a>.data(), data_.<a class="code hl_variable" href="structMeshData.html#a79e9a85738fa0fa5b5e81d79c6960741">indices</a>.size(), id_);</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    }</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <a class="code hl_function" href="classSingleton.html#a7b90075f8e4471743fd3596be874e5d1">Singleton&lt;TextureManager&gt;::GetInstance</a>()-&gt;Load(data_.<a class="code hl_variable" href="structMeshData.html#ab7bed81125007b625b5b001517ae957b">texture</a>);</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    texture_ = data_.<a class="code hl_variable" href="structMeshData.html#ab7bed81125007b625b5b001517ae957b">texture</a>;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    lighting_ = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>}</div>
+</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
+<div class="foldopen" id="foldopen00056" data-start="{" data-end="}">
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno"><a class="line" href="classMesh.html#a356f1de95058340d7f11eefe794cfe8a">   56</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classMesh.html#a356f1de95058340d7f11eefe794cfe8a">Mesh::Update</a>() {</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    <span class="keywordflow">if</span> (material_) {</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        material_-&gt;uvTransform = <a class="code hl_function" href="namespaceMathUtils_1_1Matrix.html#a1c40c9daddc0ed10682814216053a4f4">MathUtils::Matrix::MakeIdentity</a>() * <a class="code hl_function" href="namespaceMathUtils_1_1Matrix.html#a2f07ee1cefde4e2066ca201556e5b8a6">MathUtils::Matrix::MakeScaleMatrix</a>({ material_-&gt;tilingMul.x, material_-&gt;tilingMul.y, 1.0f });</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    }</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>}</div>
+</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
+<div class="foldopen" id="foldopen00062" data-start="{" data-end="}">
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno"><a class="line" href="classMesh.html#abf84fe4ef735490769268685087e0e32">   62</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classMesh.html#abf84fe4ef735490769268685087e0e32">Mesh::Draw</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    <span class="keywordflow">if</span> (!commandList_)<span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    commandList_-&gt;IASetPrimitiveTopology(D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST);</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    commandList_-&gt;IASetVertexBuffers(0, <span class="keyword">static_cast&lt;</span>UINT<span class="keyword">&gt;</span>(vbvs_.size()), vbvs_.data());</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <span class="keywordflow">if</span> (!data_.<a class="code hl_variable" href="structMeshData.html#a79e9a85738fa0fa5b5e81d79c6960741">indices</a>.empty()){</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>        commandList_-&gt;IASetIndexBuffer(&amp;ibv_);</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    }</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    commandList_-&gt;SetGraphicsRootConstantBufferView(0, mr_-&gt;Get()-&gt;GetGPUVirtualAddress());</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    commandList_-&gt;SetGraphicsRootDescriptorTable(2, <a class="code hl_class" href="classSingleton.html">Singleton&lt;TextureManager&gt;::GetInstance</a>()-&gt;GetGPUHandle(texture_));</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    <span class="keywordflow">if</span> (lighting_) {</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>        material_-&gt;lighting = 1;</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>        <a class="code hl_function" href="classSingleton.html#a7b90075f8e4471743fd3596be874e5d1">Singleton&lt;LightManager&gt;::GetInstance</a>()-&gt;Draw();</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    }</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    <span class="keywordflow">if</span> (!data_.<a class="code hl_variable" href="structMeshData.html#a79e9a85738fa0fa5b5e81d79c6960741">indices</a>.empty()){</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>        commandList_-&gt;DrawIndexedInstanced(<span class="keyword">static_cast&lt;</span>UINT<span class="keyword">&gt;</span>(data_.<a class="code hl_variable" href="structMeshData.html#a79e9a85738fa0fa5b5e81d79c6960741">indices</a>.size()), 1, 0, 0, 0);</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>        commandList_-&gt;DrawInstanced(<span class="keyword">static_cast&lt;</span>UINT<span class="keyword">&gt;</span>(data_.<a class="code hl_variable" href="structMeshData.html#aac93fd7e3e5968c5f4376038ef1aac96">vertices</a>.size()), 1, 0, 0);</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    }</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>}</div>
+</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
+<div class="foldopen" id="foldopen00086" data-start="{" data-end="}">
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno"><a class="line" href="classMesh.html#aa4273b914190bf357a8e5783f507dbf8">   86</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classMesh.html#aa4273b914190bf357a8e5783f507dbf8">Mesh::Debug</a>() {</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    ImGui::ColorEdit4(<span class="stringliteral">&quot;Color&quot;</span>, &amp;material_-&gt;color.x);</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    ImGui::Checkbox(<span class="stringliteral">&quot;EnableLighting&quot;</span>, &amp;lighting_);</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    <span class="keywordflow">if</span> (lighting_) {</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>        ImGui::DragFloat(<span class="stringliteral">&quot;Shininess&quot;</span>, &amp;material_-&gt;shininess, 0.1f, 0.f, 100.f);</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    } <span class="keywordflow">else</span>{</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>        material_-&gt;lighting = 0;</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    }</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    ImGui::DragFloat(<span class="stringliteral">&quot;Environment Coefficient&quot;</span>, &amp;material_-&gt;coefficient, 0.01f, 0.0f, 1.0f);</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    </div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    ImGui::Separator();</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    ImGui::Text(<span class="stringliteral">&quot;UV Settings&quot;</span>);</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    </div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    ImGui::Checkbox(<span class="stringliteral">&quot;Lock Aspect Ratio&quot;</span>, &amp;aspectRatioLocked_);</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    </div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    <span class="keywordflow">if</span> (aspectRatioLocked_) {</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>        <span class="comment">// Store previous values to detect changes</span></div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>        <span class="keyword">static</span> <span class="keywordtype">float</span> prevX = material_-&gt;tilingMul.x;</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>        <span class="keyword">static</span> <span class="keywordtype">float</span> prevY = material_-&gt;tilingMul.y;</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>        </div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>        <span class="comment">// Update aspect ratio when first locking</span></div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>        <span class="keywordflow">if</span> (ImGui::IsItemActivated()) {</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>            <span class="keywordflow">if</span> (material_-&gt;tilingMul.y != 0.0f) {</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>                aspectRatio_ = material_-&gt;tilingMul.x / material_-&gt;tilingMul.y;</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>            }</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>            prevX = material_-&gt;tilingMul.x;</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>            prevY = material_-&gt;tilingMul.y;</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>        }</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>        </div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>        <span class="keywordflow">if</span> (ImGui::DragFloat(<span class="stringliteral">&quot;Tiling X&quot;</span>, &amp;material_-&gt;tilingMul.x, 0.1f, 0.1f, 10.0f)) {</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>            <span class="comment">// X changed, update Y to maintain aspect ratio</span></div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>            <span class="keywordflow">if</span> (material_-&gt;tilingMul.x != prevX) {</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>                material_-&gt;tilingMul.y = material_-&gt;tilingMul.x / aspectRatio_;</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>                prevX = material_-&gt;tilingMul.x;</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>                prevY = material_-&gt;tilingMul.y;</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>            }</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>        }</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>        </div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>        <span class="keywordflow">if</span> (ImGui::DragFloat(<span class="stringliteral">&quot;Tiling Y&quot;</span>, &amp;material_-&gt;tilingMul.y, 0.1f, 0.1f, 10.0f)) {</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>            <span class="comment">// Y changed, update X to maintain aspect ratio</span></div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>            <span class="keywordflow">if</span> (material_-&gt;tilingMul.y != prevY) {</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>                material_-&gt;tilingMul.x = material_-&gt;tilingMul.y * aspectRatio_;</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>                prevX = material_-&gt;tilingMul.x;</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>                prevY = material_-&gt;tilingMul.y;</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>            }</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>        }</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>        ImGui::DragFloat2(<span class="stringliteral">&quot;Tiling Multiplier&quot;</span>, &amp;material_-&gt;tilingMul.x, 0.1f, 0.1f, 10.0f);</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>    }</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    </div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>    ImGui::Text(<span class="stringliteral">&quot;UV Transform&quot;</span>);</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>    <span class="keywordflow">if</span> (ImGui::TreeNode(<span class="stringliteral">&quot;UV Transform Matrix&quot;</span>)) {</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>        ImGui::DragFloat4(<span class="stringliteral">&quot;Row 1&quot;</span>, &amp;material_-&gt;uvTransform.matrix[0][0], 0.01f);</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>        ImGui::DragFloat4(<span class="stringliteral">&quot;Row 2&quot;</span>, &amp;material_-&gt;uvTransform.matrix[1][0], 0.01f);</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>        ImGui::DragFloat4(<span class="stringliteral">&quot;Row 3&quot;</span>, &amp;material_-&gt;uvTransform.matrix[2][0], 0.01f);</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>        ImGui::DragFloat4(<span class="stringliteral">&quot;Row 4&quot;</span>, &amp;material_-&gt;uvTransform.matrix[3][0], 0.01f);</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>        </div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>        <span class="keywordflow">if</span> (ImGui::Button(<span class="stringliteral">&quot;Reset to Identity&quot;</span>)) {</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>            material_-&gt;uvTransform = <a class="code hl_function" href="namespaceMathUtils_1_1Matrix.html#a1c40c9daddc0ed10682814216053a4f4">MathUtils::Matrix::MakeIdentity</a>();</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>        }</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>        ImGui::TreePop();</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>    }</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>}</div>
+</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span> </div>
+<div class="foldopen" id="foldopen00150" data-start="{" data-end="}">
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno"><a class="line" href="classMesh.html#a6c099dd1df78c710aefd8973e4d7f90e">  150</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classMesh.html#a6c099dd1df78c710aefd8973e4d7f90e">Mesh::SetVBV</a>(<span class="keyword">const</span> D3D12_VERTEX_BUFFER_VIEW _vbv) {</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>    vbvs_.push_back(_vbv);</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>}</div>
+</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span> </div>
+<div class="foldopen" id="foldopen00154" data-start="{" data-end="}">
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno"><a class="line" href="classMesh.html#a45733c8b9432ef0becde4bb5fe6b7c39">  154</a></span><a class="code hl_struct" href="structMeshData.html">MeshData</a> <a class="code hl_function" href="classMesh.html#a45733c8b9432ef0becde4bb5fe6b7c39">Mesh::GetData</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>    <span class="keywordflow">return</span> data_;</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>}</div>
+</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span> </div>
+<div class="foldopen" id="foldopen00158" data-start="{" data-end="}">
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno"><a class="line" href="classMesh.html#a62b78c884dc190abda74fd1222c3b7cd">  158</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classMesh.html#a62b78c884dc190abda74fd1222c3b7cd">Mesh::SetTexture</a>(<span class="keyword">const</span> std::string&amp; _texturePath) {</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>    <span class="comment">// Load the new texture</span></div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>    <a class="code hl_function" href="classSingleton.html#a7b90075f8e4471743fd3596be874e5d1">Singleton&lt;TextureManager&gt;::GetInstance</a>()-&gt;Load(_texturePath);</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span> </div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>    <span class="comment">// Update the current texture path</span></div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>    texture_ = _texturePath;</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>}</div>
+</div>
+<div class="ttc" id="aDebugUI_8hpp_html"><div class="ttname"><a href="DebugUI_8hpp.html">DebugUI.hpp</a></div></div>
+<div class="ttc" id="aLightManager_8hpp_html"><div class="ttname"><a href="LightManager_8hpp.html">LightManager.hpp</a></div></div>
+<div class="ttc" id="aMathUtils_8hpp_html"><div class="ttname"><a href="MathUtils_8hpp.html">MathUtils.hpp</a></div></div>
+<div class="ttc" id="aMesh_8hpp_html"><div class="ttname"><a href="Mesh_8hpp.html">Mesh.hpp</a></div></div>
+<div class="ttc" id="aSingleton_8hpp_html"><div class="ttname"><a href="Singleton_8hpp.html">Singleton.hpp</a></div></div>
+<div class="ttc" id="aTextureManager_8hpp_html"><div class="ttname"><a href="TextureManager_8hpp.html">TextureManager.hpp</a></div></div>
+<div class="ttc" id="aclassDirectXAdapter_html"><div class="ttname"><a href="classDirectXAdapter.html">DirectXAdapter</a></div><div class="ttdoc">DirectX12アダプタークラス DirectX12の初期化とデバイス管理を提供</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8hpp_source.html#l00025">DirectXAdapter.hpp:25</a></div></div>
+<div class="ttc" id="aclassDirectXAdapter_html_ab4b4c251cdfee90870ce155e610c9500"><div class="ttname"><a href="classDirectXAdapter.html#ab4b4c251cdfee90870ce155e610c9500">DirectXAdapter::CreateBufferResource</a></div><div class="ttdeci">std::unique_ptr&lt; DX12Resource &gt; CreateBufferResource(size_t _size) const</div><div class="ttdoc">バッファリソースを作成</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8cpp_source.html#l00070">DirectXAdapter.cpp:70</a></div></div>
+<div class="ttc" id="aclassDirectXAdapter_html_abc7797e145abbf8c6b66d89ce219adbf"><div class="ttname"><a href="classDirectXAdapter.html#abc7797e145abbf8c6b66d89ce219adbf">DirectXAdapter::GetCommandList</a></div><div class="ttdeci">ID3D12GraphicsCommandList * GetCommandList() const</div><div class="ttdoc">コマンドリストを取得</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8cpp_source.html#l00527">DirectXAdapter.cpp:527</a></div></div>
+<div class="ttc" id="aclassMesh_html_a356f1de95058340d7f11eefe794cfe8a"><div class="ttname"><a href="classMesh.html#a356f1de95058340d7f11eefe794cfe8a">Mesh::Update</a></div><div class="ttdeci">void Update()</div><div class="ttdoc">メッシュの更新処理</div><div class="ttdef"><b>Definition</b> <a href="Mesh_8cpp_source.html#l00056">Mesh.cpp:56</a></div></div>
+<div class="ttc" id="aclassMesh_html_a3698ba6613ec342e370bc1865e8f6ffa"><div class="ttname"><a href="classMesh.html#a3698ba6613ec342e370bc1865e8f6ffa">Mesh::Initialize</a></div><div class="ttdeci">void Initialize(DirectXAdapter *_adapter, const std::string &amp;_name, const MeshData &amp;_raw)</div><div class="ttdoc">メッシュを初期化</div><div class="ttdef"><b>Definition</b> <a href="Mesh_8cpp_source.html#l00013">Mesh.cpp:13</a></div></div>
+<div class="ttc" id="aclassMesh_html_a45733c8b9432ef0becde4bb5fe6b7c39"><div class="ttname"><a href="classMesh.html#a45733c8b9432ef0becde4bb5fe6b7c39">Mesh::GetData</a></div><div class="ttdeci">MeshData GetData() const</div><div class="ttdoc">メッシュデータを取得</div><div class="ttdef"><b>Definition</b> <a href="Mesh_8cpp_source.html#l00154">Mesh.cpp:154</a></div></div>
+<div class="ttc" id="aclassMesh_html_a62b78c884dc190abda74fd1222c3b7cd"><div class="ttname"><a href="classMesh.html#a62b78c884dc190abda74fd1222c3b7cd">Mesh::SetTexture</a></div><div class="ttdeci">void SetTexture(const std::string &amp;_texturePath)</div><div class="ttdoc">テクスチャを設定</div><div class="ttdef"><b>Definition</b> <a href="Mesh_8cpp_source.html#l00158">Mesh.cpp:158</a></div></div>
+<div class="ttc" id="aclassMesh_html_a6c099dd1df78c710aefd8973e4d7f90e"><div class="ttname"><a href="classMesh.html#a6c099dd1df78c710aefd8973e4d7f90e">Mesh::SetVBV</a></div><div class="ttdeci">void SetVBV(D3D12_VERTEX_BUFFER_VIEW _vbv)</div><div class="ttdoc">頂点バッファビューを設定</div><div class="ttdef"><b>Definition</b> <a href="Mesh_8cpp_source.html#l00150">Mesh.cpp:150</a></div></div>
+<div class="ttc" id="aclassMesh_html_aa4273b914190bf357a8e5783f507dbf8"><div class="ttname"><a href="classMesh.html#aa4273b914190bf357a8e5783f507dbf8">Mesh::Debug</a></div><div class="ttdeci">void Debug()</div><div class="ttdoc">デバッグ情報の表示</div><div class="ttdef"><b>Definition</b> <a href="Mesh_8cpp_source.html#l00086">Mesh.cpp:86</a></div></div>
+<div class="ttc" id="aclassMesh_html_abf84fe4ef735490769268685087e0e32"><div class="ttname"><a href="classMesh.html#abf84fe4ef735490769268685087e0e32">Mesh::Draw</a></div><div class="ttdeci">void Draw() const</div><div class="ttdoc">メッシュを描画</div><div class="ttdef"><b>Definition</b> <a href="Mesh_8cpp_source.html#l00062">Mesh.cpp:62</a></div></div>
+<div class="ttc" id="aclassSingleton_html"><div class="ttname"><a href="classSingleton.html">Singleton</a></div><div class="ttdoc">シングルトンパターンテンプレートクラス スレッドセーフな単一インスタンス管理を提供</div><div class="ttdef"><b>Definition</b> <a href="Singleton_8hpp_source.html#l00031">Singleton.hpp:31</a></div></div>
+<div class="ttc" id="aclassSingleton_html_a7b90075f8e4471743fd3596be874e5d1"><div class="ttname"><a href="classSingleton.html#a7b90075f8e4471743fd3596be874e5d1">Singleton::GetInstance</a></div><div class="ttdeci">static T * GetInstance()</div><div class="ttdoc">シングルトンインスタンスを取得</div><div class="ttdef"><b>Definition</b> <a href="Singleton_8hpp_source.html#l00043">Singleton.hpp:43</a></div></div>
+<div class="ttc" id="anamespaceMathUtils_1_1Matrix_html_a1c40c9daddc0ed10682814216053a4f4"><div class="ttname"><a href="namespaceMathUtils_1_1Matrix.html#a1c40c9daddc0ed10682814216053a4f4">MathUtils::Matrix::MakeIdentity</a></div><div class="ttdeci">Matrix4x4 MakeIdentity()</div><div class="ttdef"><b>Definition</b> <a href="MathUtils_8cpp_source.html#l00016">MathUtils.cpp:16</a></div></div>
+<div class="ttc" id="anamespaceMathUtils_1_1Matrix_html_a2f07ee1cefde4e2066ca201556e5b8a6"><div class="ttname"><a href="namespaceMathUtils_1_1Matrix.html#a2f07ee1cefde4e2066ca201556e5b8a6">MathUtils::Matrix::MakeScaleMatrix</a></div><div class="ttdeci">Matrix4x4 MakeScaleMatrix(const Vector3 &amp;scale)</div><div class="ttdef"><b>Definition</b> <a href="MathUtils_8cpp_source.html#l00033">MathUtils.cpp:33</a></div></div>
+<div class="ttc" id="astructMeshData_html"><div class="ttname"><a href="structMeshData.html">MeshData</a></div><div class="ttdef"><b>Definition</b> <a href="MeshData_8hpp_source.html#l00016">MeshData.hpp:16</a></div></div>
+<div class="ttc" id="astructMeshData_html_a79e9a85738fa0fa5b5e81d79c6960741"><div class="ttname"><a href="structMeshData.html#a79e9a85738fa0fa5b5e81d79c6960741">MeshData::indices</a></div><div class="ttdeci">std::vector&lt; uint32_t &gt; indices</div><div class="ttdef"><b>Definition</b> <a href="MeshData_8hpp_source.html#l00018">MeshData.hpp:18</a></div></div>
+<div class="ttc" id="astructMeshData_html_aac93fd7e3e5968c5f4376038ef1aac96"><div class="ttname"><a href="structMeshData.html#aac93fd7e3e5968c5f4376038ef1aac96">MeshData::vertices</a></div><div class="ttdeci">std::vector&lt; Vertex &gt; vertices</div><div class="ttdef"><b>Definition</b> <a href="MeshData_8hpp_source.html#l00017">MeshData.hpp:17</a></div></div>
+<div class="ttc" id="astructMeshData_html_ab7bed81125007b625b5b001517ae957b"><div class="ttname"><a href="structMeshData.html#ab7bed81125007b625b5b001517ae957b">MeshData::texture</a></div><div class="ttdeci">std::string texture</div><div class="ttdef"><b>Definition</b> <a href="MeshData_8hpp_source.html#l00019">MeshData.hpp:19</a></div></div>
+<div class="ttc" id="astructVector2_html"><div class="ttname"><a href="structVector2.html">Vector2</a></div><div class="ttdoc">2Dベクトル構造体 2D座標と基本的なベクトル演算を提供</div><div class="ttdef"><b>Definition</b> <a href="Vector2_8hpp_source.html#l00008">Vector2.hpp:8</a></div></div>
+<div class="ttc" id="astructVector4_html"><div class="ttname"><a href="structVector4.html">Vector4</a></div><div class="ttdoc">4Dベクトル構造体 RGBA色や同次座標を表現</div><div class="ttdef"><b>Definition</b> <a href="Vector4_8hpp_source.html#l00007">Vector4.hpp:7</a></div></div>
+<div class="ttc" id="astructVertex_html"><div class="ttname"><a href="structVertex.html">Vertex</a></div><div class="ttdef"><b>Definition</b> <a href="MeshData_8hpp_source.html#l00010">MeshData.hpp:10</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_3e32a96ce5cfcb0c73109361e7fa459f.html">Mesh</a></li><li class="navelem"><a class="el" href="Mesh_8cpp.html">Mesh.cpp</a></li>
+    <li class="footer">2025年10月16日(木) 07時14分00秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+  </ul>
+</div>
+</body>
+</html>

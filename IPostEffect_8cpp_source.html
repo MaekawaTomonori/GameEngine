@@ -1,0 +1,198 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>PortfolioGame Engine: /home/runner/work/GameEngine/GameEngine/src/PostProcess/IPostEffect.cpp ソースファイル</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">PortfolioGame Engine<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">C++20 DirectX12 Game Engine</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','検索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function() { init_codefold(0); });
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('IPostEffect_8cpp_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">読み取り中…</div>
+<div class="SRStatus" id="Searching">検索中…</div>
+<div class="SRStatus" id="NoMatches">一致する文字列を見つけられません</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">IPostEffect.cpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="IPostEffect_8cpp.html">[詳解]</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#include &quot;<a class="code" href="IPostEffect_8hpp.html">IPostEffect.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;d3d12.h&gt;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;<a class="code" href="Utils_8hpp.html">Utils.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
+<div class="foldopen" id="foldopen00007" data-start="{" data-end="}">
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno"><a class="line" href="classIPostEffect.html#a02584365355c40bbb77d2a9558a92e4d">    7</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classIPostEffect.html#a02584365355c40bbb77d2a9558a92e4d">IPostEffect::SetUp</a>(<a class="code hl_class" href="classDirectXAdapter.html">DirectXAdapter</a>* _adapter, <a class="code hl_class" href="classSRVManager.html">SRVManager</a>* _srv) {</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>    <a class="code hl_variable" href="classIPostEffect.html#af243e74d5ae3c7c51202d7d75ca87873">adapter_</a> = _adapter;</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>    <a class="code hl_variable" href="classIPostEffect.html#aebebf521e696773487be1412f9d8a509">srv_</a> = _srv;</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>    <a class="code hl_function" href="classIPostEffect.html#aca73455bd632277bf5cc476313c83217">CreateOutput</a>();</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>}</div>
+</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="foldopen" id="foldopen00014" data-start="{" data-end="}">
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="classIPostEffect.html#a92340d8f3785eaf52501ac02866c549a">   14</a></span>D3D12_GPU_DESCRIPTOR_HANDLE <a class="code hl_function" href="classIPostEffect.html#a92340d8f3785eaf52501ac02866c549a">IPostEffect::Apply</a>(<span class="keyword">const</span> D3D12_GPU_DESCRIPTOR_HANDLE _handle) {</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <span class="keywordflow">if</span> (!<a class="code hl_variable" href="classIPostEffect.html#a030babb9fa7adc6f2898ed3b7fd653cc">output_</a>) <a class="code hl_function" href="namespaceUtils.html#aa35c12cebe61c9d818df8944b3a66706">Utils::Alert</a>(<span class="stringliteral">&quot;&quot;</span>);</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <a class="code hl_variable" href="classIPostEffect.html#a030babb9fa7adc6f2898ed3b7fd653cc">output_</a>-&gt;ChangeState(<a class="code hl_variable" href="classIPostEffect.html#af243e74d5ae3c7c51202d7d75ca87873">adapter_</a>-&gt;<a class="code hl_function" href="classDirectXAdapter.html#abc7797e145abbf8c6b66d89ce219adbf">GetCommandList</a>(), D3D12_RESOURCE_STATE_RENDER_TARGET);</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <a class="code hl_variable" href="classIPostEffect.html#ad5b0aba2047a34e79d563f1ee0fe008f">pso_</a>-&gt;DrawCall();</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <a class="code hl_variable" href="classIPostEffect.html#af243e74d5ae3c7c51202d7d75ca87873">adapter_</a>-&gt;<a class="code hl_function" href="classDirectXAdapter.html#abc7797e145abbf8c6b66d89ce219adbf">GetCommandList</a>()-&gt;OMSetRenderTargets(1, &amp;<a class="code hl_variable" href="classIPostEffect.html#a023ba9eb932df36c3f0b04959806db87">rtvHandle_</a>, <span class="keyword">false</span>, <span class="keyword">nullptr</span>);</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <a class="code hl_variable" href="classIPostEffect.html#af243e74d5ae3c7c51202d7d75ca87873">adapter_</a>-&gt;<a class="code hl_function" href="classDirectXAdapter.html#abc7797e145abbf8c6b66d89ce219adbf">GetCommandList</a>()-&gt;ClearRenderTargetView(<a class="code hl_variable" href="classIPostEffect.html#a023ba9eb932df36c3f0b04959806db87">rtvHandle_</a>, &amp;<a class="code hl_variable" href="classIPostEffect.html#ae0dc01028757f721f28df7ba30cdd48e">CLEAR_COLOR</a>.<a class="code hl_variable" href="structVector4.html#a1cc671b8b90e1b8145e74f128d828fbe">x</a>, 0, <span class="keyword">nullptr</span>);</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <a class="code hl_variable" href="classIPostEffect.html#af243e74d5ae3c7c51202d7d75ca87873">adapter_</a>-&gt;<a class="code hl_function" href="classDirectXAdapter.html#abc7797e145abbf8c6b66d89ce219adbf">GetCommandList</a>()-&gt;IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <a class="code hl_variable" href="classIPostEffect.html#af243e74d5ae3c7c51202d7d75ca87873">adapter_</a>-&gt;<a class="code hl_function" href="classDirectXAdapter.html#abc7797e145abbf8c6b66d89ce219adbf">GetCommandList</a>()-&gt;SetGraphicsRootDescriptorTable(0, _handle);</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <a class="code hl_function" href="classIPostEffect.html#a714a743aff95fad87356f280810dd286">Modifier</a>();</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <a class="code hl_variable" href="classIPostEffect.html#af243e74d5ae3c7c51202d7d75ca87873">adapter_</a>-&gt;<a class="code hl_function" href="classDirectXAdapter.html#abc7797e145abbf8c6b66d89ce219adbf">GetCommandList</a>()-&gt;DrawInstanced(3, 1, 0, 0);</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <a class="code hl_variable" href="classIPostEffect.html#a030babb9fa7adc6f2898ed3b7fd653cc">output_</a>-&gt;ChangeState(<a class="code hl_variable" href="classIPostEffect.html#af243e74d5ae3c7c51202d7d75ca87873">adapter_</a>-&gt;<a class="code hl_function" href="classDirectXAdapter.html#abc7797e145abbf8c6b66d89ce219adbf">GetCommandList</a>(), D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE);</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="keywordflow">return</span> <a class="code hl_variable" href="classIPostEffect.html#aebebf521e696773487be1412f9d8a509">srv_</a>-&gt;<a class="code hl_function" href="classSRVManager.html#a50f3a4b23df601f5f07eab1faaa21b2c">GetGPUHandle</a>(<a class="code hl_variable" href="classIPostEffect.html#a264ad5a2434240dbb6482b9fe0f973a1">index_</a>);</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>}</div>
+</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
+<div class="foldopen" id="foldopen00037" data-start="{" data-end="}">
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="classIPostEffect.html#aca73455bd632277bf5cc476313c83217">   37</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classIPostEffect.html#aca73455bd632277bf5cc476313c83217">IPostEffect::CreateOutput</a>() {</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <a class="code hl_variable" href="classIPostEffect.html#a030babb9fa7adc6f2898ed3b7fd653cc">output_</a> = <a class="code hl_variable" href="classIPostEffect.html#af243e74d5ae3c7c51202d7d75ca87873">adapter_</a>-&gt;<a class="code hl_function" href="classDirectXAdapter.html#a6e8fa2518fe43611bc83625caa4884f9">CreateRenderTextureResource</a>(<span class="keyword">static_cast&lt;</span>uint32_t<span class="keyword">&gt;</span>(<a class="code hl_variable" href="classIPostEffect.html#af243e74d5ae3c7c51202d7d75ca87873">adapter_</a>-&gt;<a class="code hl_function" href="classDirectXAdapter.html#a0fba31180c1f84825e4b5da99fdc3371">GetWidth</a>()), <span class="keyword">static_cast&lt;</span>uint32_t<span class="keyword">&gt;</span>(<a class="code hl_variable" href="classIPostEffect.html#af243e74d5ae3c7c51202d7d75ca87873">adapter_</a>-&gt;<a class="code hl_function" href="classDirectXAdapter.html#a73060803a4ebb0fc3be2ace3f93b5aef">GetHeight</a>()), DXGI_FORMAT_R8G8B8A8_UNORM_SRGB, <a class="code hl_variable" href="classIPostEffect.html#ae0dc01028757f721f28df7ba30cdd48e">CLEAR_COLOR</a>);</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <a class="code hl_variable" href="classIPostEffect.html#a264ad5a2434240dbb6482b9fe0f973a1">index_</a> = <a class="code hl_variable" href="classIPostEffect.html#aebebf521e696773487be1412f9d8a509">srv_</a>-&gt;<a class="code hl_function" href="classSRVManager.html#a1e7a23d2422f4228cc6a9436ad1de225">Allocate</a>();</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <a class="code hl_variable" href="classIPostEffect.html#aebebf521e696773487be1412f9d8a509">srv_</a>-&gt;<a class="code hl_function" href="classSRVManager.html#a2cca745cb3489ce9ff676186348d9728">CreateSRVforTexture2D</a>(<a class="code hl_variable" href="classIPostEffect.html#a264ad5a2434240dbb6482b9fe0f973a1">index_</a>, <a class="code hl_variable" href="classIPostEffect.html#a030babb9fa7adc6f2898ed3b7fd653cc">output_</a>-&gt;Get(), DXGI_FORMAT_R8G8B8A8_UNORM_SRGB, 1);</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <a class="code hl_variable" href="classIPostEffect.html#add903b173582345e40decf67fde5ee2f">handle_</a> = <a class="code hl_variable" href="classIPostEffect.html#aebebf521e696773487be1412f9d8a509">srv_</a>-&gt;<a class="code hl_function" href="classSRVManager.html#a50f3a4b23df601f5f07eab1faaa21b2c">GetGPUHandle</a>(<a class="code hl_variable" href="classIPostEffect.html#a264ad5a2434240dbb6482b9fe0f973a1">index_</a>);</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>}</div>
+</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
+<div class="foldopen" id="foldopen00045" data-start="{" data-end="}">
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="classIPostEffect.html#a76f8e5a7dde283d4dff591e2e11d282a">   45</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classIPostEffect.html#a76f8e5a7dde283d4dff591e2e11d282a">IPostEffect::SetRTVHandle</a>(D3D12_CPU_DESCRIPTOR_HANDLE rtvHandle) {</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <a class="code hl_variable" href="classIPostEffect.html#a023ba9eb932df36c3f0b04959806db87">rtvHandle_</a> = rtvHandle;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    </div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    D3D12_RENDER_TARGET_VIEW_DESC rtvDesc = {};</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    rtvDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    rtvDesc.ViewDimension = D3D12_RTV_DIMENSION_TEXTURE2D;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <a class="code hl_variable" href="classIPostEffect.html#af243e74d5ae3c7c51202d7d75ca87873">adapter_</a>-&gt;<a class="code hl_function" href="classDirectXAdapter.html#a28fe87825525272f00fd06231a0c1632">GetDevice</a>()-&gt;CreateRenderTargetView(<a class="code hl_variable" href="classIPostEffect.html#a030babb9fa7adc6f2898ed3b7fd653cc">output_</a>-&gt;Get(), &amp;rtvDesc, <a class="code hl_variable" href="classIPostEffect.html#a023ba9eb932df36c3f0b04959806db87">rtvHandle_</a>);</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>}</div>
+</div>
+<div class="ttc" id="aIPostEffect_8hpp_html"><div class="ttname"><a href="IPostEffect_8hpp.html">IPostEffect.hpp</a></div></div>
+<div class="ttc" id="aUtils_8hpp_html"><div class="ttname"><a href="Utils_8hpp.html">Utils.hpp</a></div></div>
+<div class="ttc" id="aclassDirectXAdapter_html"><div class="ttname"><a href="classDirectXAdapter.html">DirectXAdapter</a></div><div class="ttdoc">DirectX12アダプタークラス DirectX12の初期化とデバイス管理を提供</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8hpp_source.html#l00025">DirectXAdapter.hpp:25</a></div></div>
+<div class="ttc" id="aclassDirectXAdapter_html_a0fba31180c1f84825e4b5da99fdc3371"><div class="ttname"><a href="classDirectXAdapter.html#a0fba31180c1f84825e4b5da99fdc3371">DirectXAdapter::GetWidth</a></div><div class="ttdeci">size_t GetWidth() const</div><div class="ttdoc">ウィンドウ幅を取得</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8cpp_source.html#l00531">DirectXAdapter.cpp:531</a></div></div>
+<div class="ttc" id="aclassDirectXAdapter_html_a28fe87825525272f00fd06231a0c1632"><div class="ttname"><a href="classDirectXAdapter.html#a28fe87825525272f00fd06231a0c1632">DirectXAdapter::GetDevice</a></div><div class="ttdeci">ID3D12Device * GetDevice() const</div><div class="ttdoc">DirectX12デバイスを取得</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8cpp_source.html#l00523">DirectXAdapter.cpp:523</a></div></div>
+<div class="ttc" id="aclassDirectXAdapter_html_a6e8fa2518fe43611bc83625caa4884f9"><div class="ttname"><a href="classDirectXAdapter.html#a6e8fa2518fe43611bc83625caa4884f9">DirectXAdapter::CreateRenderTextureResource</a></div><div class="ttdeci">std::unique_ptr&lt; DX12Resource &gt; CreateRenderTextureResource(uint32_t _width, uint32_t _height, DXGI_FORMAT _format, const Vector4 &amp;_cc) const</div><div class="ttdoc">レンダーテクスチャリソースを作成</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8cpp_source.html#l00182">DirectXAdapter.cpp:182</a></div></div>
+<div class="ttc" id="aclassDirectXAdapter_html_a73060803a4ebb0fc3be2ace3f93b5aef"><div class="ttname"><a href="classDirectXAdapter.html#a73060803a4ebb0fc3be2ace3f93b5aef">DirectXAdapter::GetHeight</a></div><div class="ttdeci">size_t GetHeight() const</div><div class="ttdoc">ウィンドウ高さを取得</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8cpp_source.html#l00535">DirectXAdapter.cpp:535</a></div></div>
+<div class="ttc" id="aclassDirectXAdapter_html_abc7797e145abbf8c6b66d89ce219adbf"><div class="ttname"><a href="classDirectXAdapter.html#abc7797e145abbf8c6b66d89ce219adbf">DirectXAdapter::GetCommandList</a></div><div class="ttdeci">ID3D12GraphicsCommandList * GetCommandList() const</div><div class="ttdoc">コマンドリストを取得</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8cpp_source.html#l00527">DirectXAdapter.cpp:527</a></div></div>
+<div class="ttc" id="aclassIPostEffect_html_a023ba9eb932df36c3f0b04959806db87"><div class="ttname"><a href="classIPostEffect.html#a023ba9eb932df36c3f0b04959806db87">IPostEffect::rtvHandle_</a></div><div class="ttdeci">D3D12_CPU_DESCRIPTOR_HANDLE rtvHandle_</div><div class="ttdef"><b>Definition</b> <a href="IPostEffect_8hpp_source.html#l00021">IPostEffect.hpp:21</a></div></div>
+<div class="ttc" id="aclassIPostEffect_html_a02584365355c40bbb77d2a9558a92e4d"><div class="ttname"><a href="classIPostEffect.html#a02584365355c40bbb77d2a9558a92e4d">IPostEffect::SetUp</a></div><div class="ttdeci">void SetUp(DirectXAdapter *_adapter, SRVManager *_srv)</div><div class="ttdoc">セットアップ</div><div class="ttdef"><b>Definition</b> <a href="IPostEffect_8cpp_source.html#l00007">IPostEffect.cpp:7</a></div></div>
+<div class="ttc" id="aclassIPostEffect_html_a030babb9fa7adc6f2898ed3b7fd653cc"><div class="ttname"><a href="classIPostEffect.html#a030babb9fa7adc6f2898ed3b7fd653cc">IPostEffect::output_</a></div><div class="ttdeci">std::unique_ptr&lt; DX12Resource &gt; output_</div><div class="ttdef"><b>Definition</b> <a href="IPostEffect_8hpp_source.html#l00019">IPostEffect.hpp:19</a></div></div>
+<div class="ttc" id="aclassIPostEffect_html_a264ad5a2434240dbb6482b9fe0f973a1"><div class="ttname"><a href="classIPostEffect.html#a264ad5a2434240dbb6482b9fe0f973a1">IPostEffect::index_</a></div><div class="ttdeci">uint32_t index_</div><div class="ttdef"><b>Definition</b> <a href="IPostEffect_8hpp_source.html#l00023">IPostEffect.hpp:23</a></div></div>
+<div class="ttc" id="aclassIPostEffect_html_a714a743aff95fad87356f280810dd286"><div class="ttname"><a href="classIPostEffect.html#a714a743aff95fad87356f280810dd286">IPostEffect::Modifier</a></div><div class="ttdeci">virtual void Modifier()=0</div></div>
+<div class="ttc" id="aclassIPostEffect_html_a76f8e5a7dde283d4dff591e2e11d282a"><div class="ttname"><a href="classIPostEffect.html#a76f8e5a7dde283d4dff591e2e11d282a">IPostEffect::SetRTVHandle</a></div><div class="ttdeci">void SetRTVHandle(D3D12_CPU_DESCRIPTOR_HANDLE rtvHandle)</div><div class="ttdoc">RTVハンドルを設定</div><div class="ttdef"><b>Definition</b> <a href="IPostEffect_8cpp_source.html#l00045">IPostEffect.cpp:45</a></div></div>
+<div class="ttc" id="aclassIPostEffect_html_a92340d8f3785eaf52501ac02866c549a"><div class="ttname"><a href="classIPostEffect.html#a92340d8f3785eaf52501ac02866c549a">IPostEffect::Apply</a></div><div class="ttdeci">D3D12_GPU_DESCRIPTOR_HANDLE Apply(D3D12_GPU_DESCRIPTOR_HANDLE _handle)</div><div class="ttdoc">ポストエフェクトを適用</div><div class="ttdef"><b>Definition</b> <a href="IPostEffect_8cpp_source.html#l00014">IPostEffect.cpp:14</a></div></div>
+<div class="ttc" id="aclassIPostEffect_html_aca73455bd632277bf5cc476313c83217"><div class="ttname"><a href="classIPostEffect.html#aca73455bd632277bf5cc476313c83217">IPostEffect::CreateOutput</a></div><div class="ttdeci">void CreateOutput()</div><div class="ttdef"><b>Definition</b> <a href="IPostEffect_8cpp_source.html#l00037">IPostEffect.cpp:37</a></div></div>
+<div class="ttc" id="aclassIPostEffect_html_ad5b0aba2047a34e79d563f1ee0fe008f"><div class="ttname"><a href="classIPostEffect.html#ad5b0aba2047a34e79d563f1ee0fe008f">IPostEffect::pso_</a></div><div class="ttdeci">std::unique_ptr&lt; PipelineStateObject &gt; pso_</div><div class="ttdef"><b>Definition</b> <a href="IPostEffect_8hpp_source.html#l00018">IPostEffect.hpp:18</a></div></div>
+<div class="ttc" id="aclassIPostEffect_html_add903b173582345e40decf67fde5ee2f"><div class="ttname"><a href="classIPostEffect.html#add903b173582345e40decf67fde5ee2f">IPostEffect::handle_</a></div><div class="ttdeci">D3D12_GPU_DESCRIPTOR_HANDLE handle_</div><div class="ttdef"><b>Definition</b> <a href="IPostEffect_8hpp_source.html#l00024">IPostEffect.hpp:24</a></div></div>
+<div class="ttc" id="aclassIPostEffect_html_ae0dc01028757f721f28df7ba30cdd48e"><div class="ttname"><a href="classIPostEffect.html#ae0dc01028757f721f28df7ba30cdd48e">IPostEffect::CLEAR_COLOR</a></div><div class="ttdeci">const Vector4 CLEAR_COLOR</div><div class="ttdef"><b>Definition</b> <a href="IPostEffect_8hpp_source.html#l00013">IPostEffect.hpp:13</a></div></div>
+<div class="ttc" id="aclassIPostEffect_html_aebebf521e696773487be1412f9d8a509"><div class="ttname"><a href="classIPostEffect.html#aebebf521e696773487be1412f9d8a509">IPostEffect::srv_</a></div><div class="ttdeci">SRVManager * srv_</div><div class="ttdef"><b>Definition</b> <a href="IPostEffect_8hpp_source.html#l00016">IPostEffect.hpp:16</a></div></div>
+<div class="ttc" id="aclassIPostEffect_html_af243e74d5ae3c7c51202d7d75ca87873"><div class="ttname"><a href="classIPostEffect.html#af243e74d5ae3c7c51202d7d75ca87873">IPostEffect::adapter_</a></div><div class="ttdeci">DirectXAdapter * adapter_</div><div class="ttdef"><b>Definition</b> <a href="IPostEffect_8hpp_source.html#l00015">IPostEffect.hpp:15</a></div></div>
+<div class="ttc" id="aclassSRVManager_html"><div class="ttname"><a href="classSRVManager.html">SRVManager</a></div><div class="ttdef"><b>Definition</b> <a href="SRVManager_8h_source.html#l00010">SRVManager.h:10</a></div></div>
+<div class="ttc" id="aclassSRVManager_html_a1e7a23d2422f4228cc6a9436ad1de225"><div class="ttname"><a href="classSRVManager.html#a1e7a23d2422f4228cc6a9436ad1de225">SRVManager::Allocate</a></div><div class="ttdeci">uint32_t Allocate()</div><div class="ttdef"><b>Definition</b> <a href="SRVManager_8cpp_source.html#l00033">SRVManager.cpp:33</a></div></div>
+<div class="ttc" id="aclassSRVManager_html_a2cca745cb3489ce9ff676186348d9728"><div class="ttname"><a href="classSRVManager.html#a2cca745cb3489ce9ff676186348d9728">SRVManager::CreateSRVforTexture2D</a></div><div class="ttdeci">void CreateSRVforTexture2D(uint32_t srvIndex, ID3D12Resource *pResource, DXGI_FORMAT format, UINT mipMap)</div><div class="ttdef"><b>Definition</b> <a href="SRVManager_8cpp_source.html#l00048">SRVManager.cpp:48</a></div></div>
+<div class="ttc" id="aclassSRVManager_html_a50f3a4b23df601f5f07eab1faaa21b2c"><div class="ttname"><a href="classSRVManager.html#a50f3a4b23df601f5f07eab1faaa21b2c">SRVManager::GetGPUHandle</a></div><div class="ttdeci">D3D12_GPU_DESCRIPTOR_HANDLE GetGPUHandle(uint32_t index) const</div><div class="ttdef"><b>Definition</b> <a href="SRVManager_8cpp_source.html#l00095">SRVManager.cpp:95</a></div></div>
+<div class="ttc" id="anamespaceUtils_html_aa35c12cebe61c9d818df8944b3a66706"><div class="ttname"><a href="namespaceUtils.html#aa35c12cebe61c9d818df8944b3a66706">Utils::Alert</a></div><div class="ttdeci">void Alert(const std::string &amp;msg)</div><div class="ttdef"><b>Definition</b> <a href="Utils_8cpp_source.html#l00054">Utils.cpp:54</a></div></div>
+<div class="ttc" id="astructVector4_html_a1cc671b8b90e1b8145e74f128d828fbe"><div class="ttname"><a href="structVector4.html#a1cc671b8b90e1b8145e74f128d828fbe">Vector4::x</a></div><div class="ttdeci">float x</div><div class="ttdef"><b>Definition</b> <a href="Vector4_8hpp_source.html#l00008">Vector4.hpp:8</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_0aad7dfa151619e6dfb72b346155edbe.html">PostProcess</a></li><li class="navelem"><a class="el" href="IPostEffect_8cpp.html">IPostEffect.cpp</a></li>
+    <li class="footer">2025年10月16日(木) 07時14分00秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+  </ul>
+</div>
+</body>
+</html>
