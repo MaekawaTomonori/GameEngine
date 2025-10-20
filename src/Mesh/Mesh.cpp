@@ -162,3 +162,9 @@ void Mesh::SetTexture(const std::string& _texturePath) {
     // Update the current texture path
     texture_ = _texturePath;
 }
+
+void Mesh::SetTextureSize(const Vector2 _tilingMul) const {
+    if (material_) {
+        material_->tilingMul = _tilingMul;
+    }
+}

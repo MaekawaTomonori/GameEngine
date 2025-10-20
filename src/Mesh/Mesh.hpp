@@ -108,6 +108,12 @@ public:
     /// </summary>
     /// <param name="_texturePath">テクスチャパス</param>
     void SetTexture(const std::string& _texturePath);
+
+    /// <summary>
+    ///  テクスチャのサイズを設定
+    /// </summary>
+    /// <param name="_tilingMul">テクスチャのタイリング倍率</param>
+    void SetTextureSize(Vector2 _tilingMul) const;
 }; // class Mesh
 
 #endif // Mesh_HPP_

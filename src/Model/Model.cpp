@@ -164,6 +164,15 @@ Model& Model::SetTexture(const std::string& _texture) {
     return *this;
 }
 
+Model& Model::SetTilingMultiply(const Vector2 _mul) {
+    if (mesh_) {
+        mesh_->SetTextureSize(_mul);
+    } else {
+        Log::Send(Log::Level::WARNING, "Mesh is not initialized. Cannot set tiling multiplier.");
+    }
+    return *this;
+}
+
 void Model::Load(const std::string& _name) {
     std::unique_ptr<IModelLoader> loader;
     if (std::filesystem::exists("Assets/Resources/" + _name + "/" + _name + ".obj")) {

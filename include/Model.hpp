@@ -146,6 +146,13 @@ public:
     Model& SetTexture(const std::string& _texture);
 
     /// <summary>
+    /// テクスチャのタイリング倍率を設定
+    /// </summary>
+    /// <param name="_mul">タイリング倍率</param>
+    /// <returns>メソッドチェーン用の自身への参照</returns>
+    Model& SetTilingMultiply(Vector2 _mul);
+
+    /// <summary>
     /// モデルデータを事前読み込み
     /// </summary>
     /// <param name="_name">モデル名</param>

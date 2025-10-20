@@ -30,7 +30,7 @@ void Skybox::Initialize(const std::string& _texture) {
     md_->color = {1.0f, 1.0f, 1.0f, 1.0f};
 
     transform_ = {
-        {50.f, 50.f, 50.f},
+        {200.f, 200.f, 200.f},
         Vector3{0.f, 0.f, 0.f},
         {0.f, 0.f, 0.f}
     };
