@@ -112,14 +112,19 @@ void CameraDirector::Debug() {
                 bool isPlaying = (isProgress_ && currentWorkKey_ == item.key);
                 bool isCurrentlyEditing = (isEditingWork_ && editingWorkKey_ == item.key);
 
-                // Work name - color changes during playback or editing
+                // Status indicator (fixed width to prevent layout shift)
                 if (isPlaying) {
-                    ImGui::TextColored(ImVec4(0.2f, 0.8f, 0.2f, 1.0f), "%s", item.key.c_str());
+                    ImGui::TextColored(ImVec4(0.2f, 0.8f, 0.2f, 1.0f), "[Play]");
                 } else if (isCurrentlyEditing) {
-                    ImGui::TextColored(ImVec4(0.2f, 0.7f, 0.2f, 1.0f), "%s [Editing]", item.key.c_str());
+                    ImGui::TextColored(ImVec4(0.8f, 0.6f, 0.2f, 1.0f), "[Edit]");
                 } else {
-                    ImGui::Text("%s", item.key.c_str());
+                    ImGui::Text("      "); // Empty space to maintain layout
                 }
+
+                ImGui::SameLine();
+
+                // Work name
+                ImGui::Text("%s", item.key.c_str());
 
                 ImGui::SameLine();
 
@@ -516,7 +521,13 @@ void CameraDirector::ShowEditor() {
     if (!debug_) return;
 
     debug_->RegisterCommand("Camerawork Editor", [this]() {
+        bool isEditorOpen = showEditor_;
         ImGui::Begin("Camerawork Editor", &showEditor_);
+
+        // If window was closed by X button, stop editing
+        if (isEditorOpen && !showEditor_ && isEditingWork_) {
+            StopEditingWork();
+        }
 
         // Only show editor if a work is being edited
         if (!editingWorkKey_.empty() && isEditingWork_) {
