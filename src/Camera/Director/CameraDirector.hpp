@@ -12,14 +12,35 @@ class Camera;
 class CameraDirector {
     const std::string FilePath = "Resources/Data/Camerawork/";
 
+    enum class InterpolationType {
+        Linear,
+        EaseInQuad,
+        EaseOutQuad,
+        EaseInOutQuad,
+        EaseInCubic,
+        EaseOutCubic,
+        EaseInOutCubic
+    };
+
     struct Point {
         std::string name;
         Vector3 position;
         Vector2 rotation; // x: yaw, y: pitch
+        bool useLookAt = false; // LookAt機能を使用するか
+        Vector3 lookAtTarget = Vector3(0.0f, 0.0f, 0.0f); // 注視点座標
     };
+
+    struct Segment {
+        std::string startPoint;
+        std::string endPoint;
+        InterpolationType positionInterpolationType = InterpolationType::Linear;
+        InterpolationType rotationInterpolationType = InterpolationType::Linear;
+    };
+
     struct Work {
         std::vector<Point> points;
-        std::vector<std::string> order; // Point name sequence for camerawork progression
+        std::vector<std::string> order; // Point name sequence for camerawork progression (legacy)
+        std::vector<Segment> segments; // New segment-based approach with interpolation types
         float duration;
     };
 
@@ -66,6 +87,12 @@ private:
     void LoadWork(const std::string& _key);
     void OnComplete();
     Point InterpolatePoint(const Point& start, const Point& end, float t);
+    Point InterpolatePointWithType(const Point& start, const Point& end, float t, InterpolationType type);
+    Point InterpolatePointWithSeparateTypes(const Point& start, const Point& end, float t, InterpolationType posType, InterpolationType rotType);
+    void MigrateOrderToSegments(Work& work);
+    InterpolationType StringToInterpolationType(const std::string& typeStr);
+    std::string InterpolationTypeToString(InterpolationType type);
+    Vector2 CalculateLookAtRotation(const Vector3& position, const Vector3& target);
 
     // Editor functions
     void ShowEditor();

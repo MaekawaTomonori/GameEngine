@@ -6,8 +6,6 @@
 #include "src/DirectX/DirectXAdapter.hpp"
 #include "src/DirectX/Heap/Heap.hpp"
 
-struct ImDrawData;
-
 /// <summary>
 /// ImGuiアダプタークラス
 /// デバッグUIの描画とコマンド管理を提供
