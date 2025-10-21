@@ -12,10 +12,12 @@
 #include "imnodes.h"
 
 DebugUI::~DebugUI() {
+#ifdef _DEBUG
     ImNodes::DestroyContext();
     ImGui_ImplDX12_Shutdown();
     ImGui_ImplWin32_Shutdown();
     ImGui::DestroyContext();
+#endif
 }
 
 void DebugUI::Initialize(const DirectXAdapter *dx) {
@@ -23,6 +25,7 @@ void DebugUI::Initialize(const DirectXAdapter *dx) {
         Utils::Alert("DirectXAdapter is null");
         return;
     }
+#ifdef _DEBUG
     heap_ = std::make_unique<Heap>();
     if (!heap_->Create(dx->GetDevice(), D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV, 128, D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE)){
         Utils::Alert("Failed to create ImGui Heap");
@@ -49,6 +52,7 @@ void DebugUI::Initialize(const DirectXAdapter *dx) {
     io.IniFilename = "Assets\\Config\\imgui.ini"; 
 
     cList_ = dx->GetCommandList();
+#endif
 }
 
 void DebugUI::Process() {
@@ -76,8 +80,6 @@ void DebugUI::Process() {
         ImGui::EndMainMenuBar();
     }
 
-    ImGui::ShowDemoWindow();
-
     std::ranges::sort(commands, [](const Command& a, const Command& b){
         return a.id < b.id;
     });
@@ -91,11 +93,13 @@ void DebugUI::Process() {
 }
 
 void DebugUI::Render() {
+#ifdef _DEBUG
     Process();
 
     ID3D12DescriptorHeap* heaps[] = {heap_->Get()};
     cList_->SetDescriptorHeaps(_countof(heaps), heaps);
     ImGui_ImplDX12_RenderDrawData(ImGui::GetDrawData(), cList_);
+#endif
 }
 
 void DebugUI::RegisterCommand(const std::string &_id, std::function<void()> _command) {
