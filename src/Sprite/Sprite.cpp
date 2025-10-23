@@ -19,7 +19,7 @@ Sprite::Sprite() {
 }
 
 void Sprite::Initialize(const std::string&_texture) {
-    texturePath_ = std::move(_texture);
+    texturePath_ = _texture;
     Singleton<TextureManager>::GetInstance()->Load(texturePath_);
 
     vr_ = adapter_->CreateBufferResource(sizeof(VertexData) * 4);
