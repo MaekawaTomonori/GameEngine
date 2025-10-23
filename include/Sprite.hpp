@@ -80,6 +80,7 @@ class Sprite {
     Vector2 leftTop_{};
     Vector2 texSize_ = {100, 100};
 
+    bool posteffect_ = false;
 
 public:
     Sprite();
@@ -193,8 +194,8 @@ public:
     /// <summary>
     /// テクスチャの左上座標を設定
     /// </summary>
-    /// <param name="textureLeftTop">左上座標</param>
-    void SetTextureLeftTop(const Vector2& textureLeftTop);
+    /// <param name="_textureLeftTop">左上座標</param>
+    void SetTextureLeftTop(const Vector2& _textureLeftTop);
 
     /// <summary>
     /// テクスチャサイズを取得
@@ -205,8 +206,14 @@ public:
     /// <summary>
     /// テクスチャサイズを設定
     /// </summary>
-    /// <param name="textureSize">テクスチャサイズ</param>
-    void SetTextureSize(const Vector2& textureSize);
+    /// <param name="_textureSize">テクスチャサイズ</param>
+    void SetTextureSize(const Vector2& _textureSize);
+
+    /// <summary>
+    /// ポストエフェクトを有効化/無効化
+    /// </summary>
+    /// <param name="_active">アクティブにする場合true</param>
+    void SetActivePostEffect(bool _active);
 
 private:
     /// <summary>

@@ -116,16 +116,16 @@ void Sprite::Update() {
 }
 
 void Sprite::Draw() {
-    common_->Draw();
+    common_->RegisterDraw([&]{
+        commandList_->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+        commandList_->IASetVertexBuffers(0, 1, &vbv_);
+        commandList_->IASetIndexBuffer(&ibv_);
+        commandList_->SetGraphicsRootConstantBufferView(0, mr_->Get()->GetGPUVirtualAddress());
+        commandList_->SetGraphicsRootConstantBufferView(1, wr_->Get()->GetGPUVirtualAddress());
+        commandList_->SetGraphicsRootDescriptorTable(2, Singleton<TextureManager>::GetInstance()->GetGPUHandle(texturePath_));
 
-    commandList_->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-    commandList_->IASetVertexBuffers(0, 1, &vbv_);
-    commandList_->IASetIndexBuffer(&ibv_);
-    commandList_->SetGraphicsRootConstantBufferView(0, mr_->Get()->GetGPUVirtualAddress());
-    commandList_->SetGraphicsRootConstantBufferView(1, wr_->Get()->GetGPUVirtualAddress());
-    commandList_->SetGraphicsRootDescriptorTable(2, Singleton<TextureManager>::GetInstance()->GetGPUHandle(texturePath_));
-
-    commandList_->DrawIndexedInstanced(6, 1, 0, 0, 0);
+        commandList_->DrawIndexedInstanced(6, 1, 0, 0, 0);
+    }, posteffect_);
 }
 
 void Sprite::AdjustTextureSize() {
@@ -135,7 +135,7 @@ void Sprite::AdjustTextureSize() {
 }
 
 void Sprite::Debug() {
-	common_->RegisterCommand(
+	common_->RegisterDebug(
 		uuid_,
         [this](){
 	        ImGui::Begin("Sprite");
@@ -213,14 +213,18 @@ const Vector2& Sprite::GetTextureLeftTop() const {
     return leftTop_;
 }
 
-void Sprite::SetTextureLeftTop(const Vector2& textureLeftTop) {
-    leftTop_ = textureLeftTop;
+void Sprite::SetTextureLeftTop(const Vector2& _textureLeftTop) {
+    leftTop_ = _textureLeftTop;
 }
 
 const Vector2& Sprite::GetTextureSize() const {
     return texSize_;
 }
 
-void Sprite::SetTextureSize(const Vector2& textureSize) {
-    texSize_ = textureSize;
+void Sprite::SetTextureSize(const Vector2& _textureSize) {
+    texSize_ = _textureSize;
+}
+
+void Sprite::SetActivePostEffect(const bool _active) {
+    posteffect_ = _active;
 }
