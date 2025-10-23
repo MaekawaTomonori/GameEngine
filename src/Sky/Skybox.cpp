@@ -38,7 +38,7 @@ void Skybox::Initialize(const std::string& _texture) {
 
 void Skybox::Update() {
     float& scale = transform_.scale.x;
-    common_->RegisterCommand("Skybox", [&]{
+    common_->RegisterDebug("Skybox", [&]{
         ImGui::Begin("Skybox");
         ImGui::DragFloat("Scale", &scale, 0.1f);
         ImGui::End();
@@ -50,25 +50,21 @@ void Skybox::Update() {
 }
 
 void Skybox::Draw() {
-    TextureManager* tm = Singleton<TextureManager>::GetInstance();
+    common_->RegisterDraw([this]() {
+        TextureManager* tm = Singleton<TextureManager>::GetInstance();
+        ID3D12GraphicsCommandList* commandList = adapter_->GetCommandList();
 
-    // Set vertex buffer
-    adapter_->GetCommandList()->IASetVertexBuffers(0, 1, &vbv_);
-    adapter_->GetCommandList()->IASetIndexBuffer(&ibv_);
-    adapter_->GetCommandList()->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+        commandList->IASetVertexBuffers(0, 1, &vbv_);
+        commandList->IASetIndexBuffer(&ibv_);
+        commandList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
-    // Draw call from common (sets PSO and root signature)
-    common_->Draw();
+        commandList->SetGraphicsRootConstantBufferView(0, mr_->Get()->GetGPUVirtualAddress());
+        commandList->SetGraphicsRootConstantBufferView(1, wr_->Get()->GetGPUVirtualAddress());
 
-    // Set constant buffers
-    adapter_->GetCommandList()->SetGraphicsRootConstantBufferView(0, mr_->Get()->GetGPUVirtualAddress()); // Material
-    adapter_->GetCommandList()->SetGraphicsRootConstantBufferView(1, wr_->Get()->GetGPUVirtualAddress()); // Transform
+        commandList->SetGraphicsRootDescriptorTable(2, tm->GetGPUHandle(texture_));
 
-    // Set texture
-    adapter_->GetCommandList()->SetGraphicsRootDescriptorTable(2, tm->GetGPUHandle(texture_));
-
-    // Draw indexed
-    adapter_->GetCommandList()->DrawIndexedInstanced(36, 1, 0, 0, 0);
+        commandList->DrawIndexedInstanced(36, 1, 0, 0, 0);
+    }, posteffect_);
 }
 
 void Skybox::CreateVertex() {
