@@ -8,16 +8,24 @@
 class ModelCommon : public Common{
     ResourceRepository* resource_ = nullptr;
     SRVManager* srv_ = nullptr;
-    
+
     std::unique_ptr<PipelineStateObject> staticPipeline_;
-    
+
+    std::vector<RenderingCommand> staticDrawCommands_;
+    std::vector<RenderingCommand> skinningDrawCommands_;
+
     void Initialize(DirectXAdapter *_adapter, DebugUI *_debugUi) override;
     void CreateSkinningPipeline() const;
     void CreateStaticPipeline() const;
 
 public:
     void Initialize(DirectXAdapter* _adapter, DebugUI* _debugUi, ResourceRepository* _resource, SRVManager* _srv);
-   
+
+    void RegisterStaticDraw(const std::function<void()>& _command, bool _isApplyPostEffect = true);
+    void RegisterSkinningDraw(const std::function<void()>& _command, bool _isApplyPostEffect = true);
+
+    void Draw(Renderer* _renderer) override;
+
     void DrawSkinning() const;
     void DrawStatic() const;
     

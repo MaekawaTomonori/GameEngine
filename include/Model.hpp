@@ -88,8 +88,9 @@ class Model{
 
     SkinCluster skinCluster_;
 
-    // Environment mapping
     std::string environmentTexture_ = "";
+
+    bool posteffect_ = true;
 
 public:
     Model();

@@ -13,6 +13,7 @@ void Common::Draw(Renderer* _renderer) {
     std::vector<std::function<void()>> noPostEffectTasks;
     {
         for (const auto& command : drawFunctions_){
+            if (!command.func)continue;
             if (command.applyPostEffects){
                 postEffectTasks.push_back(command.func);
             } else {
@@ -22,22 +23,25 @@ void Common::Draw(Renderer* _renderer) {
         drawFunctions_.clear();
     }
 
-    _renderer->Register([&]{
-        if (pipeline_){
+    if (!pipeline_) return;
+    if (!noPostEffectTasks.empty()) {
+        _renderer->Register([this, noPostEffectTasks](){
             pipeline_->DrawCall();
-        }
+            for (auto& task : noPostEffectTasks){
+                task();
+            }
+        });
+    }
 
-        for (auto& task : noPostEffectTasks){
-            task();
-        }
-    });
+    if (!postEffectTasks.empty()) {
+        _renderer->Register([this, postEffectTasks](){
+            pipeline_->DrawCall();
 
-    _renderer->Register([&]{
-        for (auto& task : postEffectTasks){
-            task();
-        }
-    }, true);
-
+            for (auto& task : postEffectTasks){
+                task();
+            }
+        }, true);
+    }
 }
 
 void Common::RegisterDebug(const std::string &_id, const std::function<void()> &_command) {

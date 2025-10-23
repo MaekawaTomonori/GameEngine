@@ -28,7 +28,7 @@ protected:
 public:
     virtual ~Common() = default;
     virtual void Initialize(DirectXAdapter* _adapter, DebugUI* _debugUi) = 0;
-    void Draw(Renderer* _renderer);
+    virtual void Draw(Renderer* _renderer);
 
     void RegisterDebug(const std::string& _id, const std::function<void()>& _command);
     void RegisterDraw(const std::function<void()>& _command, bool _isApplyPostEffect = true);

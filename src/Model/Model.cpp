@@ -110,23 +110,24 @@ void Model::Draw() const {
     }
 
     TextureManager* tm = Singleton<TextureManager>::GetInstance();
+    bool useSkinning = data_->skeleton.has_value() && !data_->skinCluster.empty();
 
-    // Use appropriate pipeline based on valid skinning data availability
-    if (data_->skeleton.has_value() && !data_->skinCluster.empty()) {
-        common_->DrawSkinning();
-        commandList_->SetGraphicsRootConstantBufferView(1, wr_->Get()->GetGPUVirtualAddress());
-        commandList_->SetGraphicsRootConstantBufferView(4, cr_->Get()->GetGPUVirtualAddress());
-        // Environment TextureCube (parameter 8)
-        commandList_->SetGraphicsRootDescriptorTable(8, tm->GetGPUHandle(environmentTexture_));
-        commandList_->SetGraphicsRootDescriptorTable(9, skinCluster_.paletteHandle.second);
+    if (useSkinning) {
+        common_->RegisterSkinningDraw([this, tm]() {
+            commandList_->SetGraphicsRootConstantBufferView(1, wr_->Get()->GetGPUVirtualAddress());
+            commandList_->SetGraphicsRootConstantBufferView(4, cr_->Get()->GetGPUVirtualAddress());
+            commandList_->SetGraphicsRootDescriptorTable(8, tm->GetGPUHandle(environmentTexture_));
+            commandList_->SetGraphicsRootDescriptorTable(9, skinCluster_.paletteHandle.second);
+            mesh_->Draw();
+        }, posteffect_);
     } else {
-        common_->DrawStatic();
-        commandList_->SetGraphicsRootConstantBufferView(1, wr_->Get()->GetGPUVirtualAddress());
-        commandList_->SetGraphicsRootConstantBufferView(4, cr_->Get()->GetGPUVirtualAddress());
-        // Environment TextureCube (parameter 8)
-        commandList_->SetGraphicsRootDescriptorTable(8, tm->GetGPUHandle(environmentTexture_));
+        common_->RegisterStaticDraw([this, tm]() {
+            commandList_->SetGraphicsRootConstantBufferView(1, wr_->Get()->GetGPUVirtualAddress());
+            commandList_->SetGraphicsRootConstantBufferView(4, cr_->Get()->GetGPUVirtualAddress());
+            commandList_->SetGraphicsRootDescriptorTable(8, tm->GetGPUHandle(environmentTexture_));
+            mesh_->Draw();
+        }, posteffect_);
     }
-    mesh_->Draw();
 
     DrawLine();
 }
@@ -188,7 +189,7 @@ void Model::Load(const std::string& _name) {
 }
 
 void Model::Debug() {
-    common_->RegisterCommand(
+    common_->RegisterDebug(
         uuid_, [&]() {
             ImGui::Begin("Model");
             if (ImGui::CollapsingHeader(uuid_.c_str())) {

@@ -284,6 +284,89 @@ void ModelCommon::CreateStaticPipeline() const {
 	Log::Send(Log::Level::INFO, "Static model pipeline created successfully");
 }
 
+void ModelCommon::RegisterStaticDraw(const std::function<void()>& _command, bool _isApplyPostEffect) {
+    std::lock_guard<std::mutex> lock(mutex_);
+    staticDrawCommands_.push_back({ _command, _isApplyPostEffect });
+}
+
+void ModelCommon::RegisterSkinningDraw(const std::function<void()>& _command, bool _isApplyPostEffect) {
+    std::lock_guard<std::mutex> lock(mutex_);
+    skinningDrawCommands_.push_back({ _command, _isApplyPostEffect });
+}
+
+void ModelCommon::Draw(Renderer* _renderer) {
+    std::vector<std::function<void()>> staticPostEffectTasks;
+    std::vector<std::function<void()>> staticNoPostEffectTasks;
+    std::vector<std::function<void()>> skinningPostEffectTasks;
+    std::vector<std::function<void()>> skinningNoPostEffectTasks;
+
+    {
+        std::lock_guard<std::mutex> lock(mutex_);
+
+        for (const auto& command : staticDrawCommands_) {
+            if (command.applyPostEffects) {
+                staticPostEffectTasks.push_back(command.func);
+            } else {
+                staticNoPostEffectTasks.push_back(command.func);
+            }
+        }
+        staticDrawCommands_.clear();
+
+        for (const auto& command : skinningDrawCommands_) {
+            if (command.applyPostEffects) {
+                skinningPostEffectTasks.push_back(command.func);
+            } else {
+                skinningNoPostEffectTasks.push_back(command.func);
+            }
+        }
+        skinningDrawCommands_.clear();
+    }
+
+    if (!staticNoPostEffectTasks.empty()) {
+        _renderer->Register([this, staticNoPostEffectTasks]() {
+            if (staticPipeline_) {
+                staticPipeline_->DrawCall();
+            }
+            for (auto& task : staticNoPostEffectTasks) {
+                task();
+            }
+        });
+    }
+
+    if (!staticPostEffectTasks.empty()) {
+        _renderer->Register([this, staticPostEffectTasks]() {
+            if (staticPipeline_) {
+                staticPipeline_->DrawCall();
+            }
+            for (auto& task : staticPostEffectTasks) {
+                task();
+            }
+        }, true);
+    }
+
+    if (!skinningNoPostEffectTasks.empty()) {
+        _renderer->Register([this, skinningNoPostEffectTasks]() {
+            if (pipeline_) {
+                pipeline_->DrawCall();
+            }
+            for (auto& task : skinningNoPostEffectTasks) {
+                task();
+            }
+        });
+    }
+
+    if (!skinningPostEffectTasks.empty()) {
+        _renderer->Register([this, skinningPostEffectTasks]() {
+            if (pipeline_) {
+                pipeline_->DrawCall();
+            }
+            for (auto& task : skinningPostEffectTasks) {
+                task();
+            }
+        }, true);
+    }
+}
+
 void ModelCommon::DrawSkinning() const {
 	pipeline_->DrawCall();
 }
