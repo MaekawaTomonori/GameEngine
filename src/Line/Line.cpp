@@ -24,7 +24,7 @@ void Line::Initialize() {
 }
 
 void Line::Update() const {
-    common_->RegisterCommand(uuid_, [&] {
+    common_->RegisterDebug(uuid_, [&] {
         ImGui::Begin("Line");
         ImGui::ColorEdit4("color", &materialData_->color.x);
         ImGui::End();
@@ -39,15 +39,15 @@ void Line::Update() const {
 }
 
 void Line::Draw() const {
-    common_->Draw();
-    
-    commandList_->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_LINELIST);
-    commandList_->IASetVertexBuffers(0, 1, &vertexBufferView_);
-    
-    commandList_->SetGraphicsRootConstantBufferView(0, materialResource_->Get()->GetGPUVirtualAddress());
-    commandList_->SetGraphicsRootConstantBufferView(1, transformationResource_->Get()->GetGPUVirtualAddress());
-    
-    commandList_->DrawInstanced(static_cast<UINT>(positions_.size()), 1, 0, 0);
+    common_->RegisterDraw([this]() {
+        commandList_->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_LINELIST);
+        commandList_->IASetVertexBuffers(0, 1, &vertexBufferView_);
+
+        commandList_->SetGraphicsRootConstantBufferView(0, materialResource_->Get()->GetGPUVirtualAddress());
+        commandList_->SetGraphicsRootConstantBufferView(1, transformationResource_->Get()->GetGPUVirtualAddress());
+
+        commandList_->DrawInstanced(static_cast<UINT>(positions_.size()), 1, 0, 0);
+    }, false);
 }
 
 void Line::AddLine(const Vector3& start, const Vector3& end) {
