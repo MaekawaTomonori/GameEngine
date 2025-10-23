@@ -145,7 +145,11 @@ void Framework::Draw() const {
 
     srv_->PreDraw();
 
-    renderer_->Register([&] { scene_->Draw(); }, true);
+    sprite_->Draw(renderer_.get());
+    model_->Draw(renderer_.get());
+    line_->Draw(renderer_.get());
+    sky_->Draw(renderer_.get());
+
     renderer_->Register([&]{ level_->Draw(); });
     renderer_->Register([&] { debugUI_->Render(); });
     renderer_->Render();
