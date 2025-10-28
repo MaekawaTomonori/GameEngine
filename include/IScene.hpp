@@ -86,7 +86,7 @@ public:
 
 protected:
     /// <summary>
-    /// シーンを変更
+    /// シーンをnext_に変更
     /// </summary>
     void Change();
 }; // class IScene
