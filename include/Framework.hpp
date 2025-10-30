@@ -3,8 +3,8 @@
 
 #include <memory>
 
-#include "DebugUI.hpp"
 #include "Input.hpp"
+#include "DebugUI.hpp"
 #include "src/Camera/Controller/CameraController.hpp"
 #include "src/Camera/Director/CameraDirector.hpp"
 #include "src/Platform/WinApp.hpp"
