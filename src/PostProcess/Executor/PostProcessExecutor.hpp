@@ -2,6 +2,7 @@
 #define PostProcessExecutor_HPP_
 #include <vector>
 #include <memory>
+#include <functional>
 #include <d3d12.h>
 
 #include "src/DirectX/GraphicsPipeline/Object/PipelineStateObject.hpp"
@@ -65,6 +66,7 @@ class PostProcessExecutor {
     float animationTimer_ = 0.f;
     float animationDuration_ = 0.f;
     std::vector<std::string> animatingEffects_;  // エフェクト名リスト
+    std::function<void()> onAnimationComplete_;  // アニメーション完了コールバック
 
     // Preset editor
     std::unique_ptr<PostProcessPresetEditor> presetEditor_;
@@ -103,7 +105,13 @@ public:
     /// <param name="_presetName">プリセット名（presets.jsonのキー）</param>
     /// <param name="_mode">"add"または"replace"</param>
     /// <param name="_ignoreList">無視するエフェクト名リスト</param>
-    void ApplyPreset(const std::string& _presetName, const std::string& _mode = "replace", const std::vector<std::string>& _ignoreList = {});
+    /// <param name="_onComplete">アニメーション完了時のコールバック（オプション）</param>
+    void ApplyPreset(
+        const std::string& _presetName,
+        const std::string& _mode = "replace",
+        const std::vector<std::string>& _ignoreList = {},
+        std::function<void()> _onComplete = nullptr
+    );
 
     /// <summary>
     /// アニメーション更新（毎フレーム呼び出し）

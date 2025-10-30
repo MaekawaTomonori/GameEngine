@@ -293,7 +293,10 @@ IPostEffect* PostProcessExecutor::FindOrCreate(const std::string& _type, const s
     return effects_.back().effect.get();
 }
 
-void PostProcessExecutor::ApplyPreset(const std::string& _presetName, const std::string& _mode, const std::vector<std::string>& _ignoreList) {
+void PostProcessExecutor::ApplyPreset(const std::string& _presetName, const std::string& _mode, const std::vector<std::string>& _ignoreList, std::function<void()> _onComplete) {
+    // コールバックを保存
+    onAnimationComplete_ = _onComplete;
+
     std::string path = "./Assets/Data/PostEffect/presets.json";
 
     // ファイルが存在しない場合はエラー
@@ -422,7 +425,34 @@ void PostProcessExecutor::Update(float _deltaTime) {
     // アニメーション完了チェック
     if (t >= 1.0f) {
         isAnimating_ = false;
-        Log::Send(Log::Level::INFO, "PostEffect animation completed");
+
+        // アニメーション完了後、該当エフェクトをデフォルト値に戻して無効化
+        for (const auto& effectName : animatingEffects_) {
+            for (auto& effectData : effects_) {
+                if (effectData.name == effectName) {
+                    // エフェクトを無効化
+                    effectData.enabled = false;
+
+                    // デフォルト値に戻すため、Initialize()を再実行
+                    effectData.effect->Initialize();
+
+                    Log::Send(Log::Level::INFO, std::format("Reset and disabled effect '{}'", effectName));
+                    break;
+                }
+            }
+        }
+
+        // アニメーション対象リストをクリア
+        animatingEffects_.clear();
+
+        Log::Send(Log::Level::INFO, "PostEffect animation completed and effects reset");
+
+        // コールバックが設定されている場合は呼び出す
+        if (onAnimationComplete_) {
+            Log::Send(Log::Level::INFO, "Calling animation complete callback");
+            onAnimationComplete_();
+            onAnimationComplete_ = nullptr;  // コールバックをクリア
+        }
     }
 }
 
