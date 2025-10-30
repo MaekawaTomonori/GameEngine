@@ -201,6 +201,15 @@ Vector3 MathUtils::Lerp(const Vector3& a, const Vector3& b, float t) {
     };
 }
 
+Vector4 MathUtils::Lerp(const Vector4& a, const Vector4& b, float t) {
+    return Vector4{
+        Lerp(a.x, b.x, t),
+        Lerp(a.y, b.y, t),
+        Lerp(a.z, b.z, t),
+        Lerp(a.w, b.w, t)
+    };
+}
+
 Quaternion MathUtils::Slerp(const Quaternion& a, const Quaternion& b, const float t) {
     float dot = a.x * b.x + a.y * b.y + a.z * b.z + a.w * b.w;
     float epsilon = 1e-6f;

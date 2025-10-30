@@ -19,6 +19,7 @@ namespace MathUtils{
 
     Vector2 Lerp(const Vector2& a, const Vector2& b, float t);
     Vector3 Lerp(const Vector3& a, const Vector3& b, float t);
+    Vector4 Lerp(const Vector4& a, const Vector4& b, float t);
     Quaternion Slerp(const Quaternion& a, const Quaternion& b, float t);
 
     template<typename Type>

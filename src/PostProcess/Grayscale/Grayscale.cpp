@@ -65,3 +65,8 @@ void Grayscale::Debug() {
 void Grayscale::Modifier() {
     adapter_->GetCommandList()->SetGraphicsRootConstantBufferView(1, mr_->Get()->GetGPUVirtualAddress());
 }
+
+void Grayscale::LoadPreset(const std::string& presetName) { (void)presetName;}
+void Grayscale::SavePreset(const std::string& presetName) { (void)presetName;}
+nlohmann::json Grayscale::SaveParameters() const { return nlohmann::json();}
+void Grayscale::UpdateAnimation(float t) { (void)t;}

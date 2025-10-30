@@ -60,4 +60,8 @@ namespace GameEngine {
     Config & Config::Get() {
         return *this;
     }
+
+    uint16_t Config::GetFPS() const {
+        return fps_;
+    }
 }

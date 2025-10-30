@@ -7,6 +7,7 @@
 #include "src/Config/Config.hpp"
 
 class AbstractSceneFactory;
+class AbstractPostEffectFactory;
 class PostProcessExecutor;
 
 /// <summary>
@@ -16,6 +17,7 @@ class PostProcessExecutor;
 class IGame {
     std::unique_ptr<GameEngine::Config> config_;
     std::unique_ptr<SceneSwitcher> scene_;
+    std::unique_ptr<AbstractPostEffectFactory> postEffectFactory_;
 
 public:
     IGame(std::unique_ptr<AbstractSceneFactory> _factory, const std::string &_scene = "");
@@ -32,6 +34,18 @@ public:
     /// </summary>
     /// <returns>シーン切り替え管理のポインタ</returns>
     SceneSwitcher* GetSceneSwitcher() const;
+
+    /// <summary>
+    /// PostEffectFactoryを設定
+    /// </summary>
+    /// <param name="_factory">PostEffectファクトリー</param>
+    void SetPostEffectFactory(std::unique_ptr<AbstractPostEffectFactory> _factory);
+
+    /// <summary>
+    /// PostEffectFactoryを取得
+    /// </summary>
+    /// <returns>PostEffectファクトリーのポインタ</returns>
+    AbstractPostEffectFactory* GetPostEffectFactory() const;
 }; // class IGame
 
 #endif // IGame_HPP_

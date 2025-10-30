@@ -62,3 +62,8 @@ void BoxBlur::Debug() {
 void BoxBlur::Modifier() {
     adapter_->GetCommandList()->SetGraphicsRootConstantBufferView(1, mr_->Get()->GetGPUVirtualAddress());
 }
+
+void BoxBlur::LoadPreset(const std::string& presetName) { (void)presetName;}
+void BoxBlur::SavePreset(const std::string& presetName) { (void)presetName;}
+nlohmann::json BoxBlur::SaveParameters() const { return nlohmann::json(); }
+void BoxBlur::UpdateAnimation(float t) { (void)t;}

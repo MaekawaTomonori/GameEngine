@@ -1,6 +1,14 @@
 #include "Vignette.hpp"
 
 #include "imgui.h"
+#include "Log.hpp"
+#include <filesystem>
+#include <fstream>
+
+#include "Math/MathUtils.hpp"
+#include "vendor/json/json.hpp"
+
+using json = nlohmann::json;
 
 void Vignette::Initialize() {
     D3D12_DESCRIPTOR_RANGE range{
@@ -55,15 +63,124 @@ void Vignette::Initialize() {
 }
 
 void Vignette::Debug() {
-    if (ImGui::TreeNode("Vignette-Details")){
-        ImGui::ColorEdit3("Color", &material_->color.x);
-        ImGui::DragFloat("FrameScale", &material_->scale, 0.01f, 0.f, 1.f);
-        ImGui::DragFloat("Density", &material_->color.w, 0.001f, 0.f, 1.f);
-        ImGui::DragFloat("Intensity", &material_->intensity, 0.1f, 5.f, 100.f);
-        ImGui::TreePop();
-    }
+    ImGui::ColorEdit3("Color", &material_->color.x);
+    ImGui::DragFloat("FrameScale", &material_->scale, 0.01f, 0.f, 1.f);
+    ImGui::DragFloat("Density", &material_->color.w, 0.001f, 0.f, 1.f);
+    ImGui::DragFloat("Intensity", &material_->intensity, 0.1f, 5.f, 100.f);
 }
 
 void Vignette::Modifier() {
     adapter_->GetCommandList()->SetGraphicsRootConstantBufferView(1, mr_->Get()->GetGPUVirtualAddress());
+}
+
+void Vignette::LoadPreset(const std::string& presetName) {
+    std::string path = "./Assets/Data/PostEffect/Vignette/" + presetName + ".json";
+
+    // ファイル不在時はデフォルト値
+    if (!std::filesystem::exists(path)) {
+        keyframes_.clear();
+        keyframes_["Start"] = {0.0f, 1.0f, Vector4(0.f, 0.f, 0.f, 1.f)};
+        keyframes_["End"] = {0.5f, 1.2f, Vector4(0.05f, 0.05f, 0.05f, 1.f)};
+        keyframeOrder_ = {"Start", "End"};
+        return;
+    }
+
+    std::ifstream file(path);
+    if (!file.is_open()) {
+        Log::Send(Log::Level::WARNING, std::format("Failed to open preset file: {}", path));
+        return;
+    }
+
+    json paramJson;
+    file >> paramJson;
+    file.close();
+
+    // 任意名キーフレーム読み込み
+    keyframes_.clear();
+    for (auto& [name, data] : paramJson.items()) {
+        if (name == "keyframes") continue;
+        KeyframeData kf;
+        kf.intensity = data["intensity"];
+        kf.scale = data["scale"];
+        kf.color = Vector4(data["color"][0], data["color"][1], data["color"][2]);
+        keyframes_[name] = kf;
+    }
+
+    if (paramJson.contains("keyframes")) {
+        keyframeOrder_ = paramJson["keyframes"].get<std::vector<std::string>>();
+    }
+
+    // キーフレーム検証
+    for (const auto& name : keyframeOrder_) {
+        if (keyframes_.find(name) == keyframes_.end()) {
+            Log::Send(Log::Level::WARNING, std::format("Keyframe '{}' not found, using defaults", name));
+            keyframes_.clear();
+            keyframes_["Start"] = {0.0f, 1.0f, Vector4(0, 0, 0, 1)};
+            keyframes_["End"] = {0.5f, 1.2f, Vector4(0.05f, 0.05f, 0.05f, 1.f)};
+            keyframeOrder_ = {"Start", "End"};
+            break;
+        }
+    }
+}
+
+void Vignette::UpdateAnimation(float t) {
+    // Q43: 単一キーフレーム対応
+    if (keyframeOrder_.size() == 1) {
+        const auto& kf = keyframes_[keyframeOrder_[0]];
+        material_->intensity = kf.intensity;
+        material_->scale = kf.scale;
+        material_->color = Vector4(kf.color.x, kf.color.y, kf.color.z, material_->color.w);
+        return;
+    }
+
+    if (keyframeOrder_.size() < 2) return;
+
+    // セグメント計算
+    float segmentCount = static_cast<float>(keyframeOrder_.size() - 1);
+    float segmentProgress = t * segmentCount;
+    int currentSegment = static_cast<int>(segmentProgress);
+    float segmentT = segmentProgress - currentSegment;
+
+    if (currentSegment >= static_cast<int>(segmentCount)) {
+        currentSegment = static_cast<int>(segmentCount) - 1;
+        segmentT = 1.0f;
+    }
+
+    const auto& startKf = keyframes_[keyframeOrder_[currentSegment]];
+    const auto& endKf = keyframes_[keyframeOrder_[currentSegment + 1]];
+
+    // Linear補間
+    material_->intensity = std::lerp(startKf.intensity, endKf.intensity, segmentT);
+    material_->scale = std::lerp(startKf.scale, endKf.scale, segmentT);
+    Vector4 color = MathUtils::Lerp(startKf.color, endKf.color, segmentT);
+    material_->color = Vector4(color.x, color.y, color.z, material_->color.w);
+}
+
+void Vignette::SavePreset(const std::string& presetName) {
+    std::string path = "./Assets/Data/PostEffect/Vignette/" + presetName + ".json";
+
+    // ディレクトリ作成
+    std::filesystem::create_directories("./Assets/Data/PostEffect/Vignette");
+
+    json paramJson = SaveParameters();
+
+    std::ofstream file(path);
+    if (!file.is_open()) {
+        Log::Send(Log::Level::ERR, std::format("Failed to save preset '{}': {}", presetName, path));
+        return;
+    }
+
+    file << paramJson.dump(4);
+    file.close();
+}
+
+nlohmann::json Vignette::SaveParameters() const {
+    json j;
+    for (const auto& [name, kf] : keyframes_) {
+        j[name]["intensity"] = kf.intensity;
+        j[name]["scale"] = kf.scale;
+        j[name]["color"] = {kf.color.x, kf.color.y, kf.color.z};
+    }
+    j["keyframes"] = keyframeOrder_;
+    return j;
 }

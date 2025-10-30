@@ -22,6 +22,8 @@ namespace GameEngine {
 
         Config& Get();
 
+        uint16_t GetFPS() const;
+
         size_t GetWidth() const;
 
         size_t GetHeight() const;

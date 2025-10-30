@@ -3,6 +3,7 @@
 #include "src/DirectX/DirectXAdapter.hpp"
 #include "src/DirectX/Heap/SRVManager.h"
 #include "src/DirectX/GraphicsPipeline/Object/PipelineStateObject.hpp"
+#include "vendor/json/json.hpp"
 
 /// <summary>
 /// ポストエフェクト基底インターフェース
@@ -55,6 +56,88 @@ public:
     /// デバッグ情報の表示（純粋仮想関数）
     /// </summary>
     virtual void Debug() = 0;
+
+    /// <summary>
+    /// プリセットからパラメータを読み込み
+    /// </summary>
+    /// <param name="presetName">プリセット名</param>
+    virtual void LoadPreset(const std::string& presetName) = 0;
+    
+    /// <summary>
+    /// 現在のパラメータをプリセットとして保存
+    /// </summary>
+    /// <param name="presetName">プリセット名</param>
+    virtual void SavePreset(const std::string& presetName) = 0;
+    
+    /// <summary>
+    /// 現在のパラメータをJSONに変換
+    /// </summary>
+    /// <returns>パラメータのJSON表現</returns>
+    virtual nlohmann::json SaveParameters() const = 0;
+    
+    /// <summary>
+    /// アニメーション進行（tは0.0~1.0）
+    /// </summary>
+    /// <param name="t">アニメーション進行度（0.0: 開始、1.0: 終了）</param>
+    virtual void UpdateAnimation(float t) = 0;
+    
+    ///// <summary>
+    ///// キーフレーム名リストを取得
+    ///// </summary>
+    ///// <returns>キーフレーム名の配列</returns>
+    //virtual std::vector<std::string> GetKeyframeNames() const = 0;
+    //
+    ///// <summary>
+    ///// キーフレームの順序を取得
+    ///// </summary>
+    ///// <returns>キーフレーム名の順序配列</returns>
+    //virtual std::vector<std::string> GetKeyframeOrder() const = 0;
+    //
+    ///// <summary>
+    ///// キーフレームの順序を設定
+    ///// </summary>
+    ///// <param name="order">新しい順序配列</param>
+    //virtual void SetKeyframeOrder(const std::vector<std::string>& order) = 0;
+    //
+    ///// <summary>
+    ///// 新しいキーフレームを追加
+    ///// </summary>
+    ///// <param name="name">キーフレーム名</param>
+    ///// <returns>追加成功ならtrue</returns>
+    //virtual bool AddKeyframe(const std::string& name) = 0;
+    //
+    ///// <summary>
+    ///// キーフレームを削除
+    ///// </summary>
+    ///// <param name="name">キーフレーム名</param>
+    ///// <returns>削除成功ならtrue</returns>
+    //virtual bool RemoveKeyframe(const std::string& name) = 0;
+    //
+    ///// <summary>
+    ///// キーフレーム名を変更
+    ///// </summary>
+    ///// <param name="oldName">元の名前</param>
+    ///// <param name="newName">新しい名前</param>
+    ///// <returns>変更成功ならtrue</returns>
+    //virtual bool RenameKeyframe(const std::string& oldName, const std::string& newName) = 0;
+    //
+    ///// <summary>
+    ///// 指定したキーフレームのパラメータをImGuiで編集
+    ///// </summary>
+    ///// <param name="keyframeName">編集対象のキーフレーム名</param>
+    //virtual void EditKeyframe(const std::string& keyframeName) = 0;
+    //
+    ///// <summary>
+    ///// 指定したキーフレームのパラメータを現在の状態に適用（プレビュー用）
+    ///// </summary>
+    ///// <param name="keyframeName">適用するキーフレーム名</param>
+    //virtual void ApplyKeyframe(const std::string& keyframeName) = 0;
+    //
+    ///// <summary>
+    ///// 現在のエフェクト状態をキーフレームとしてキャプチャ
+    ///// </summary>
+    ///// <param name="keyframeName">保存先キーフレーム名</param>
+    //virtual void CaptureCurrentStateAsKeyframe(const std::string& keyframeName) = 0;
 
 protected:
     void CreateOutput();

@@ -117,6 +117,12 @@ void Framework::Initialize() {
     config_ = &game_->GetCurrentConfig();
     scene_ = game_->GetSceneSwitcher();
     scene_->Setup(postProcessor_.get(), debugUI_.get());
+
+    // PostEffectFactoryを設定
+    if (game_->GetPostEffectFactory()) {
+        postProcessor_->SetFactory(game_->GetPostEffectFactory());
+    }
+
     windows_->SetTitle(config_->GetTitle());
     Log::Send(Log::Level::INFO, "Game Initialized");
 }
@@ -134,6 +140,11 @@ void Framework::Update() const {
     camera_->Update();
     light_->Update();
     level_->Update();
+
+    // PostEffect animation update
+    float deltaTime = 1.0f / config_->GetFPS();
+    postProcessor_->Update(deltaTime);
+
     scene_->Update();
 }
 
