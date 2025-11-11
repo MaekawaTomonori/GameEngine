@@ -155,6 +155,12 @@ void ModelCommon::CreateSkinningPipeline() const {
         .SetElement({"INDEX", 0, DXGI_FORMAT_R32G32B32A32_SINT, 1, D3D12_APPEND_ALIGNED_ELEMENT, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0})
 	 )
 	.SetBlend(BlendMode::ALPHA)
+	.SetDepthStencil({
+	    .DepthEnable = true,
+	    .DepthWriteMask = D3D12_DEPTH_WRITE_MASK_ALL,
+	    .DepthFunc = D3D12_COMPARISON_FUNC_LESS_EQUAL
+	})
+	.SetDSVFormat(DXGI_FORMAT_D24_UNORM_S8_UINT)
 	.SetShader(
 	    // シェーダー設定 (SKINNING_MODEL用)
 	    std::make_unique<Shader>(L"Skinning")
@@ -275,6 +281,12 @@ void ModelCommon::CreateStaticPipeline() const {
         .SetElement({"NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, D3D12_APPEND_ALIGNED_ELEMENT, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0})
 	 )
 	.SetBlend(BlendMode::ALPHA)
+	.SetDepthStencil({
+	    .DepthEnable = true,
+	    .DepthWriteMask = D3D12_DEPTH_WRITE_MASK_ALL,
+	    .DepthFunc = D3D12_COMPARISON_FUNC_LESS_EQUAL
+	})
+	.SetDSVFormat(DXGI_FORMAT_D24_UNORM_S8_UINT)
 	.SetShader(
 	    // シェーダー設定 (STATIC_MODEL用)
 	    std::make_unique<Shader>(L"Model")
