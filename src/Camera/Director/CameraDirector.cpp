@@ -182,19 +182,17 @@ void CameraDirector::Debug() {
         ImGui::Separator();
 
         // Create new work section
-        if (ImGui::CollapsingHeader("Create New Work")) {
-            static char nameBuffer[256] = "";
-            ImGui::InputText("Name", nameBuffer, sizeof(nameBuffer));
+        static char nameBuffer[256] = "";
+        ImGui::InputText("Name", nameBuffer, sizeof(nameBuffer));
 
-            ImGui::SameLine();
+        ImGui::SameLine();
 
-            if (ImGui::Button("Create")) {
-                if (strlen(nameBuffer) > 0 && !isEditingWork_) {
-                    std::string newName = nameBuffer;
-                    StartEditingWork(newName);
-                    showEditor_ = true;
-                    nameBuffer[0] = '\0';
-                }
+        if (ImGui::Button("Create")) {
+            if (strlen(nameBuffer) > 0 && !isEditingWork_) {
+                std::string newName = nameBuffer;
+                StartEditingWork(newName);
+                showEditor_ = true;
+                nameBuffer[0] = '\0';
             }
         }
 

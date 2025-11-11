@@ -467,6 +467,8 @@
     <ClInclude Include="src\Scene\Transition\Fade.hpp" />
     <ClInclude Include="include\Factory\AbstractPostEffectFactory.hpp" />
     <ClInclude Include="src\PostProcess\Editor\PostProcessPresetEditor.hpp" />
+    <ClInclude Include="src\Particle\ParticleSystem.hpp" />
+    <ClInclude Include="src\Particle\Emitter\Emitter.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Camera\Camera.cpp">
@@ -658,6 +660,8 @@
     <ClCompile Include="src\Scene\Transition\Transition.cpp" />
     <ClCompile Include="src\Scene\Transition\Fade.cpp" />
     <ClCompile Include="src\PostProcess\Editor\PostProcessPresetEditor.cpp" />
+    <ClCompile Include="src\Particle\ParticleSystem.cpp" />
+    <ClCompile Include="src\Particle\Emitter\Emitter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

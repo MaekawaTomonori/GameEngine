@@ -59,7 +59,7 @@
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level4</WarningLevel>
-      <PreprocessorDefinitions>_LIB;NDEBUG;DEBUG;_DEBUG;_WINDOWS;_UNICODE;UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_LIB;NDEBUG;DEBUG;_DEBUG;_WINDOWS;_UNICODE;UNICODE;_DBG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>vendor\assimp\include;vendor\imgui;vendor\DirectXTex;vendor\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
@@ -176,6 +176,8 @@
     <ClInclude Include="src\Model\Node\Node.hpp" />
     <ClInclude Include="src\Model\Repository\ModelRepository.hpp" />
     <ClInclude Include="src\Model\Skeleton\Skeleton.hpp" />
+    <ClInclude Include="src\Particle\Emitter\Emitter.hpp" />
+    <ClInclude Include="src\Particle\ParticleSystem.hpp" />
     <ClInclude Include="src\Platform\WinApp.hpp" />
     <ClInclude Include="src\PostProcess\BoxBlur\BoxBlur.hpp" />
     <ClInclude Include="src\PostProcess\Editor\PostProcessPresetEditor.hpp" />
@@ -245,6 +247,8 @@
     <ClCompile Include="src\Model\Loader\ObjLoader.cpp" />
     <ClCompile Include="src\Model\Model.cpp" />
     <ClCompile Include="src\Model\Repository\ModelRepository.cpp" />
+    <ClCompile Include="src\Particle\Emitter\Emitter.cpp" />
+    <ClCompile Include="src\Particle\ParticleSystem.cpp" />
     <ClCompile Include="src\Platform\WinApp.cpp" />
     <ClCompile Include="src\PostProcess\BoxBlur\BoxBlur.cpp" />
     <ClCompile Include="src\PostProcess\Editor\PostProcessPresetEditor.cpp" />

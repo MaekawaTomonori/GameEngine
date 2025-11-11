@@ -5,11 +5,13 @@
 
 #include "include/Utils.hpp"
 
+#ifdef _DEBUG
 #include "imgui.h"
 #include "imgui_internal.h"
 #include "imgui_impl_dx12.h"
 #include "imgui_impl_win32.h"
 #include "imnodes.h"
+#endif
 
 DebugUI::~DebugUI() {
 #ifdef _DEBUG
@@ -56,6 +58,7 @@ void DebugUI::Initialize(const DirectXAdapter *dx) {
 }
 
 void DebugUI::Process() {
+#ifdef _DEBUG
     std::vector<Command> commands = commands_;
     commands_.clear(); 
 
@@ -90,6 +93,7 @@ void DebugUI::Process() {
 
     ImGui::EndFrame();
     ImGui::Render();
+#endif
 }
 
 void DebugUI::Render() {
@@ -108,6 +112,7 @@ void DebugUI::RegisterCommand(const std::string &_id, std::function<void()> _com
 }
 
 void DebugUI::SetupModernStyle() {
+#ifdef _DEBUG
     ImGuiStyle& style = ImGui::GetStyle();
     ImVec4* colors = style.Colors;
 
@@ -184,6 +189,7 @@ void DebugUI::SetupModernStyle() {
     style.GrabRounding      = 3;
     style.LogSliderDeadzone = 4;
     style.TabRounding       = 4;
+#endif
 }
 
 
