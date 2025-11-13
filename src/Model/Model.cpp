@@ -174,6 +174,13 @@ Model& Model::SetTilingMultiply(const Vector2 _mul) {
     return *this;
 }
 
+Model& Model::SetColor(const Vector4 _color) {
+    if (mesh_) {
+        mesh_->SetColor(_color);
+    }
+    return *this;
+}
+
 void Model::Load(const std::string& _name) {
     std::unique_ptr<IModelLoader> loader;
     if (std::filesystem::exists("Assets/Resources/" + _name + "/" + _name + ".obj")) {
@@ -192,6 +199,7 @@ void Model::Debug() {
     common_->RegisterDebug(
         uuid_, [&]() {
             ImGui::Begin("Model");
+            ImGui::PushID(uuid_.c_str());
             if (ImGui::CollapsingHeader(uuid_.c_str())) {
                 ImGui::SeparatorText("Model Info");
                 if (ImGui::TreeNode("Transform")){
@@ -258,6 +266,7 @@ void Model::Debug() {
                     ImGui::TreePop();
                 }
             }
+            ImGui::PopID();
             ImGui::End();
         }
     );

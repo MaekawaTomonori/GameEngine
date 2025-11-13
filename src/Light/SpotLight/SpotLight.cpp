@@ -38,6 +38,7 @@ void RawSpotLight::Save(std::string _path) {
 }
 
 void RawSpotLight::ImGuiSetting() {
+    ImGui::PushID(uuid_.c_str());
     if (ImGui::TreeNode(uuid_.c_str())){
         ImGui::ColorEdit4("Color", &light_.color.x);
         ImGui::DragFloat3("Position", &light_.position.x, 0.1f);
@@ -53,6 +54,7 @@ void RawSpotLight::ImGuiSetting() {
 	    }
         ImGui::TreePop();
     }
+    ImGui::PopID();
 
     if ((MathUtils::F_PI * 2.f) <= light_.cosAngle){
         light_.cosAngle -= MathUtils::F_PI * 2.f;
@@ -64,5 +66,12 @@ void RawSpotLight::ImGuiSetting() {
     if (light_.falloffStart < light_.cosAngle){
         light_.falloffStart = light_.cosAngle + std::cos(MathUtils::F_PI / 10.f);
     }
-    light_.direction.Normalize();
+
+    light_.direction = light_.direction.Normalize();
+}
+
+void RawSpotLight::FollowRef() {
+    if (ref_.has_value()) {
+        light_.position = ref_.value();
+    }
 }

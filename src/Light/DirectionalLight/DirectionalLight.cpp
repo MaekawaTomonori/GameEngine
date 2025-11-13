@@ -22,6 +22,7 @@ void RawDirectionalLight::Save(std::string _path) {
 }
 
 void RawDirectionalLight::ImGuiSetting() {
+    ImGui::PushID(uuid_.c_str());
     if (ImGui::TreeNode(uuid_.c_str())){
         ImGui::ColorEdit4("Color", &light_.color.x);
         ImGui::DragFloat3("Direction", &light_.direction.x, 0.1f);
@@ -33,6 +34,9 @@ void RawDirectionalLight::ImGuiSetting() {
         }
         ImGui::TreePop();
     }
+    ImGui::PopID();
 
-    light_.direction.Normalize();
+    light_.direction = light_.direction.Normalize();
 }
+
+void RawDirectionalLight::FollowRef() { }

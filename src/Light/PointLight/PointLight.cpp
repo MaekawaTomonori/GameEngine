@@ -42,3 +42,9 @@ void RawPointLight::ImGuiSetting() {
         ImGui::TreePop();
     }
 }
+
+void RawPointLight::FollowRef() {
+    if (ref_.has_value()) {
+        light_.position = ref_.value();
+    }
+}

@@ -228,6 +228,9 @@ void LightManager::Add(LightType type) {
         }
         directional = std::make_unique<RawDirectionalLight>();
         directional->DefaultSetting();
+        if (ref_.has_value()){
+            directional->SetReference(ref_.value());
+        }
         rawDirectionalLights_.push_back(std::move(directional));
         break;
     case LightType::Point:
@@ -236,6 +239,9 @@ void LightManager::Add(LightType type) {
         }
         point = std::make_unique<RawPointLight>();
         point->DefaultSetting();
+        if (ref_.has_value()){
+            point->SetReference(ref_.value());
+        }
         rawPointLights_.push_back(std::move(point));
         break;
     case LightType::Spot:
@@ -244,7 +250,15 @@ void LightManager::Add(LightType type) {
         }
         spot = std::make_unique<RawSpotLight>();
         spot->DefaultSetting();
+        if (ref_.has_value()){
+            spot->SetReference(ref_.value());
+        }
         rawSpotLights_.push_back(std::move(spot));
         break;
     }
 }
+
+void LightManager::SetReference(Vector3& _ref) {
+    ref_ = std::ref(_ref);
+}
+

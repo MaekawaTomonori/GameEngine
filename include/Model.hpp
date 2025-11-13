@@ -153,6 +153,10 @@ public:
     /// <returns>メソッドチェーン用の自身への参照</returns>
     Model& SetTilingMultiply(Vector2 _mul);
 
+    ///
+    ///
+    Model& SetColor(Vector4 _color);
+
     /// <summary>
     /// モデルデータを事前読み込み
     /// </summary>

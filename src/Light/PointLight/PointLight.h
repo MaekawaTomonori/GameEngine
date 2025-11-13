@@ -27,7 +27,6 @@ public:
 
 protected:
 	void ImGuiSetting() override;
-
-public:
+    void FollowRef() override;
 };
 

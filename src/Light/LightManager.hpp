@@ -50,6 +50,8 @@ class LightManager final{
 
     std::string path = "Light";
 
+    std::optional<std::reference_wrapper<Vector3>> ref_;
+
 public:
     ~LightManager();
 
@@ -75,6 +77,12 @@ public:
     /// </summary>
     /// <param name="type">ライトタイプ</param>
     void Add(LightType type);
+
+    /// <summary>
+    /// ライトの参照座標を設定
+    /// </summary>
+    /// <param name="_ref">参照座標</param>
+    void SetReference(Vector3& _ref);
 
 private:
     void Debug();
