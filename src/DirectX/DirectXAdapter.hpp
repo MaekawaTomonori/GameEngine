@@ -116,8 +116,9 @@ public:
     /// <param name="_format">フォーマット</param>
     /// <param name="_cc">クリアカラー</param>
     /// <returns>作成されたリソース</returns>
-    std::unique_ptr<DX12Resource> CreateRenderTextureResource(uint32_t _width, uint32_t _height, DXGI_FORMAT _format,
-        const Vector4& _cc) const;
+    std::unique_ptr<DX12Resource> CreateRenderTextureResource(uint32_t _width, uint32_t _height, DXGI_FORMAT _format, const Vector4& _cc) const;
+
+    std::unique_ptr<DX12Resource> CreateUnorderedAccessView() const;
 
     /// <summary>
     /// プリプロセス処理

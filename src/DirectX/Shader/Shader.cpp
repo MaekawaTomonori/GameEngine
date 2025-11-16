@@ -74,6 +74,13 @@ Shader* Shader::PSLoad(const std::wstring& _name) {
     return this;
 }
 
+IDxcBlob* Shader::CompileCS(const std::wstring& _name) const {
+    std::wstring shaderDir = FindShaderDirectory();
+    Microsoft::WRL::ComPtr<IDxcBlob> computeShader;
+    computeShader.Attach(Compile(shaderDir, _name + L".CS.hlsl", L"cs_6_0", dxcUtils_.Get(), dxcCompiler_.Get(), includeHandler_.Get()));
+    return computeShader.Get();
+}
+
 IDxcBlob* Shader::Compile(const std::wstring& _directoryPath, const std::wstring& _filePath, const wchar_t* _profile, IDxcUtils* _dxcUtils, IDxcCompiler3* _dxcCompiler, IDxcIncludeHandler* _includeHandler) {
     Log::SendWithContext(Log::Level::INFO, Utils::Convert(std::format(L"Begin CompileShader, Path : {}, Profile : {}", _filePath, _profile)), "SHADER");
     

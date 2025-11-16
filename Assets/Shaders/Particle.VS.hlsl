@@ -13,7 +13,7 @@ struct VSInput{
     float4 color : COLOR0;
 }
 
-VSOutput main(VSInput input, uint vertexID : SV_VertexID, uint instanceID : SV_InstanceID){
+VSOutput main(VSInput input, uint instanceID : SV_InstanceID){
     VSOutput output;
 
     output.position = mul(input.wvp, gParticles[instanceID].wvp);

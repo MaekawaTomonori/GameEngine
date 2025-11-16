@@ -214,6 +214,34 @@ std::unique_ptr<DX12Resource> DirectXAdapter::CreateRenderTextureResource(uint32
     return std::move(wrapper);
 }
 
+std::unique_ptr<DX12Resource> DirectXAdapter::CreateUnorderedAccessView() const {
+    std::unique_ptr<DX12Resource> wrapper = std::make_unique<DX12Resource>();
+
+    D3D12_RESOURCE_DESC desc {};
+    desc.Flags = D3D12_RESOURCE_FLAG_ALLOW_UNORDERED_ACCESS;
+
+    D3D12_HEAP_PROPERTIES properties{};
+    properties.Type = D3D12_HEAP_TYPE_DEFAULT;
+
+    ID3D12Resource* resource = nullptr;
+    HRESULT hr = device_->CreateCommittedResource(
+        &properties,
+        D3D12_HEAP_FLAG_NONE,
+        &desc,
+        D3D12_RESOURCE_STATE_UNORDERED_ACCESS,
+        nullptr,
+        IID_PPV_ARGS(&resource)
+    );
+    if (FAILED(hr)) {
+        Log::Send(Log::Level::ERR, "Failed to create unordered access view");
+        Utils::Alert("Failed to create unordered access view");
+        throw std::runtime_error("Failed to create unordered access view");
+    }
+
+    wrapper->Create(resource, D3D12_RESOURCE_STATE_COMMON);
+    return std::move(wrapper);
+}
+
 // without render target settings
 void DirectXAdapter::PreProcess() const {
     cList_->ClearDepthStencilView(dsvHandle_, D3D12_CLEAR_FLAG_DEPTH, 1.f, 0, 0, nullptr);

@@ -306,16 +306,16 @@
     <ClInclude Include="src\DirectX\FrameRate\FrameRateLimiter.hpp">
       <Filter>src\DirectX\FrameRate</Filter>
     </ClInclude>
-    <ClInclude Include="src\DirectX\GraphicsPipeline\Object\BlendMode.hpp">
+    <ClInclude Include="src\DirectX\RootSignature\BlendMode.hpp">
       <Filter>src\DirectX\GraphicsPipeline\Object</Filter>
     </ClInclude>
-    <ClInclude Include="src\DirectX\GraphicsPipeline\Object\InputLayout.hpp">
+    <ClInclude Include="src\DirectX\RootSignature\InputLayout.hpp">
       <Filter>src\DirectX\GraphicsPipeline\Object</Filter>
     </ClInclude>
     <ClInclude Include="src\DirectX\GraphicsPipeline\Object\PipelineStateObject.hpp">
       <Filter>src\DirectX\GraphicsPipeline\Object</Filter>
     </ClInclude>
-    <ClInclude Include="src\DirectX\GraphicsPipeline\Object\RootSignature.hpp">
+    <ClInclude Include="src\DirectX\RootSignature\RootSignature.hpp">
       <Filter>src\DirectX\GraphicsPipeline\Object</Filter>
     </ClInclude>
     <ClInclude Include="src\DirectX\Heap\Heap.hpp">
@@ -467,8 +467,10 @@
     <ClInclude Include="src\Scene\Transition\Fade.hpp" />
     <ClInclude Include="include\Factory\AbstractPostEffectFactory.hpp" />
     <ClInclude Include="src\PostProcess\Editor\PostProcessPresetEditor.hpp" />
-    <ClInclude Include="src\Particle\ParticleSystem.hpp" />
-    <ClInclude Include="src\Particle\Emitter\Emitter.hpp" />
+    <ClInclude Include="src\ParticleSystem\ParticleSystem.hpp" />
+    <ClInclude Include="src\ParticleSystem\Emitter\Emitter.hpp" />
+    <ClInclude Include="src\ParticleSystem\Particle\Particle.hpp" />
+    <ClInclude Include="src\DirectX\Compute\ComputePipeline.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Camera\Camera.cpp">
@@ -492,13 +494,13 @@
     <ClCompile Include="src\DirectX\FrameRate\FrameRateLimiter.cpp">
       <Filter>src\DirectX\FrameRate</Filter>
     </ClCompile>
-    <ClCompile Include="src\DirectX\GraphicsPipeline\Object\InputLayout.cpp">
+    <ClCompile Include="src\DirectX\RootSignature\InputLayout.cpp">
       <Filter>src\DirectX\GraphicsPipeline\Object</Filter>
     </ClCompile>
     <ClCompile Include="src\DirectX\GraphicsPipeline\Object\PipelineStateObject.cpp">
       <Filter>src\DirectX\GraphicsPipeline\Object</Filter>
     </ClCompile>
-    <ClCompile Include="src\DirectX\GraphicsPipeline\Object\RootSignature.cpp">
+    <ClCompile Include="src\DirectX\RootSignature\RootSignature.cpp">
       <Filter>src\DirectX\GraphicsPipeline\Object</Filter>
     </ClCompile>
     <ClCompile Include="src\DirectX\Heap\Heap.cpp">
@@ -660,8 +662,10 @@
     <ClCompile Include="src\Scene\Transition\Transition.cpp" />
     <ClCompile Include="src\Scene\Transition\Fade.cpp" />
     <ClCompile Include="src\PostProcess\Editor\PostProcessPresetEditor.cpp" />
-    <ClCompile Include="src\Particle\ParticleSystem.cpp" />
-    <ClCompile Include="src\Particle\Emitter\Emitter.cpp" />
+    <ClCompile Include="src\ParticleSystem\ParticleSystem.cpp" />
+    <ClCompile Include="src\ParticleSystem\Emitter\Emitter.cpp" />
+    <ClCompile Include="src\ParticleSystem\Particle\Particle.cpp" />
+    <ClCompile Include="src\DirectX\Compute\ComputePipeline.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
