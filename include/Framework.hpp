@@ -15,6 +15,7 @@
 #include "src/Scene/SceneSwitcher.hpp"
 #include "src/Sprite/Common/SpriteCommon.hpp"
 #include "src/Line/Common/LineCommon.hpp"
+#include "src/ParticleSystem/ParticleSystem.hpp"
 #include "src/PostProcess/Executor/PostProcessExecutor.hpp"
 #include "src/Renderer/Renderer.hpp"
 #include "src/Sky/Common/SkyCommon.hpp"
@@ -41,6 +42,7 @@ class Framework {
     std::unique_ptr<DebugUI> debugUI_;
     std::unique_ptr<SRVManager> srv_;
     std::unique_ptr<LevelEditor> level_;
+    std::unique_ptr<ParticleSystem> particle_;
 
     Input* input_ = nullptr;
     TextureManager* texture_ = nullptr;

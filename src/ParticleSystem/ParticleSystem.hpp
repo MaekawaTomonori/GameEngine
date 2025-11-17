@@ -28,17 +28,20 @@ public:
 
 private:
     std::optional<std::reference_wrapper<DirectXAdapter>> adapter_;
-    std::optional<std::reference_wrapper<Renderer>> renderer_;
+    std::optional<std::reference_wrapper<SRVManager>> srv_;
 
     std::unordered_map<std::string, std::unique_ptr<Group>> groups_;
 
 public:
+    ParticleSystem(DirectXAdapter& _adapter, SRVManager& _srv);
+
     void Initialize();
     void Update();
-    void Draw();
+    void Draw(std::reference_wrapper<Renderer> _renderer);
 
     GroupEditor Register(const std::string& _name, Vector3 _position);
     GroupEditor Edit(const std::string& _name) const;
+    void Delete(const std::string& _name);
 
 private:
 

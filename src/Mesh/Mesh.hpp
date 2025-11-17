@@ -84,7 +84,7 @@ public:
     /// <summary>
     /// メッシュを描画
     /// </summary>
-    void Draw() const;
+    void Draw(uint16_t _instanceCount = 1) const;
 
     /// <summary>
     /// デバッグ情報の表示

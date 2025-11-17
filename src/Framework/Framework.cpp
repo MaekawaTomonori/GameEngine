@@ -3,9 +3,6 @@
 #include "Log.hpp"
 #include "IGame.hpp"
 #include "Pattern/Singleton.hpp"
-#include "src/PostProcess/BoxBlur/BoxBlur.hpp"
-#include "src/PostProcess/Grayscale/Grayscale.hpp"
-#include "src/PostProcess/Vignette/Vignette.hpp"
 
 Framework::Framework() {
     config_ = GameEngine::Config::Default();
@@ -39,6 +36,9 @@ Framework::Framework() {
     resources_->Initialize();
 
     level_ = std::make_unique<LevelEditor>(debugUI_.get());
+
+    particle_ = std::make_unique<ParticleSystem>(*dxAdapter_.get(), *srv_.get());
+    particle_->Initialize();
 
     input_ = Singleton<Input>::GetInstance();
     input_->Initialize(windows_->GetWindowHandle(), windows_->GetInstanceHandle());
@@ -140,9 +140,10 @@ void Framework::Update() const {
     camera_->Update();
     light_->Update();
     level_->Update();
+    particle_->Update();
 
     // PostEffect animation update
-    float deltaTime = 1.0f / config_->GetFPS();
+    float deltaTime = 1.0f / static_cast<float>(config_->GetFPS());
     postProcessor_->Update(deltaTime);
 
     scene_->Update();
@@ -162,6 +163,7 @@ void Framework::Draw() const {
     model_->Draw(renderer_.get());
     sprite_->Draw(renderer_.get());
     line_->Draw(renderer_.get());
+    particle_->Draw(*renderer_.get());
 
     renderer_->Register([&]{ level_->Draw(); });
     renderer_->Register([&] { debugUI_->Render(); });

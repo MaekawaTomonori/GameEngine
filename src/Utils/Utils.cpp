@@ -2,6 +2,8 @@
 #include <Windows.h>
 #include <chrono>
 
+#include "Log.hpp"
+
 namespace Utils {
     std::string Convert(const std::wstring& str) {
         if (str.empty())return {};
@@ -52,6 +54,7 @@ namespace Utils {
     }
 
     void Alert(const std::string &msg) {
+        Log::Send(Log::Level::WARNING, msg);
 #ifdef _WIN32
         MessageBoxA(nullptr, msg.c_str(), msg.c_str(), MB_ICONSTOP);
 #endif

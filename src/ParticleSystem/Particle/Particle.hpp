@@ -1,20 +1,28 @@
 #ifndef Particle_HPP_
 #define Particle_HPP_
-#include "Math/Vector3.hpp"
+#include <functional>
+
+#include "Math/Matrix.hpp"
 #include "Math/Vector4.hpp"
 
 class Particle {
-    struct ForGpu {
-        Vector3 position;
-        Vector3 scale;
-        float lifetime;
-        Vector3 velocity;
-        float timer;
-        Vector4 color;
-    };
+    std::function<void()> update_;
+
+    Vector3 position_{};
+    Vector3 scale_{1.f, 1.f, 1.f};
+    Vector4 color_{1.f, 1.f, 1.f, 1.f};
+    float duration_ = 0.f;
 
 public:
-    
+    void Initialize(float _duration);
+    void Update();
+
+    bool IsDead() const;
+
+    Vector3 GetPosition() const;
+    Vector3 GetScale() const;
+    Vector4 GetColor() const;
+
 private:
 
 }; // class Particle

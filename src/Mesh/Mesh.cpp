@@ -59,7 +59,7 @@ void Mesh::Update() {
     }
 }
 
-void Mesh::Draw() const {
+void Mesh::Draw(const uint16_t _instanceCount) const {
     if (!commandList_)return;
 
     commandList_->IASetPrimitiveTopology(D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
@@ -76,11 +76,7 @@ void Mesh::Draw() const {
         material_->lighting = 1;
         Singleton<LightManager>::GetInstance()->Draw();
     }
-    if (!data_.indices.empty()){
-        commandList_->DrawIndexedInstanced(static_cast<UINT>(data_.indices.size()), 1, 0, 0, 0);
-    } else {
-        commandList_->DrawInstanced(static_cast<UINT>(data_.vertices.size()), 1, 0, 0);
-    }
+    !data_.indices.empty() ? commandList_->DrawIndexedInstanced(static_cast<UINT>(data_.indices.size()), _instanceCount, 0, 0, 0) : commandList_->DrawInstanced(static_cast<UINT>(data_.vertices.size()), _instanceCount, 0, 0);
 }
 
 void Mesh::Debug() {

@@ -1,8 +1,8 @@
 #include "LineCommon.hpp"
 
-#include "src/DirectX/GraphicsPipeline/Object/BlendMode.hpp"
-#include "src/DirectX/GraphicsPipeline/Object/InputLayout.hpp"
-#include "src/DirectX/GraphicsPipeline/Object/RootSignature.hpp"
+#include "src/DirectX/RootSignature/BlendMode.hpp"
+#include "src/DirectX/RootSignature/InputLayout.hpp"
+#include "src/DirectX/RootSignature/RootSignature.hpp"
 #include "src/DirectX/Shader/Shader.h"
 
 void LineCommon::Initialize(DirectXAdapter* _adapter, DebugUI* _debugUi) {
