@@ -17,7 +17,7 @@ const uint32_t MAX_INFLUENCE = 4;
 /// 3Dモデルクラス
 /// メッシュ、テクスチャ、アニメーション、スキニングを管理
 /// </summary>
-class Model{
+class Model {
     /// <summary>
     /// 頂点のスキニング影響情報
     /// </summary>
@@ -54,7 +54,7 @@ class Model{
     /// <summary>
     /// モデルの変換行列データ
     /// </summary>
-    struct Transformation{
+    struct Transformation {
         Matrix4x4 wvp;
         Matrix4x4 world;
         Matrix4x4 inverse;
@@ -156,6 +156,8 @@ public:
     ///
     ///
     Model& SetColor(Vector4 _color);
+
+    std::string GetUniqueId();
 
     /// <summary>
     /// モデルデータを事前読み込み

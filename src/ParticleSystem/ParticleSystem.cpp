@@ -12,15 +12,21 @@ ParticleSystem::ParticleSystem(DirectXAdapter& _adapter, SRVManager& _srv) :adap
 ParticleSystem::GroupEditor::GroupEditor(Group* _group) : group_(_group) {
 }
 
+ParticleSystem::GroupEditor& ParticleSystem::GroupEditor::AddEmitter() {
+    //std::unique_ptr<Emitter> emitter = std::make_unique<Emitter>(adapter_, );
+    //group_->emitters.push_back()
+    return *this;
+}
+
 void ParticleSystem::Initialize() {
-    
+
 }
 
 void ParticleSystem::Update() {
     if (groups_.empty())return;
 
     for (const auto& group : groups_ | std::views::values) {
-        for (const auto& emitter : group->emitters){
+        for (const auto& emitter : group->emitters) {
             emitter->Update();
         }
     }
@@ -29,13 +35,13 @@ void ParticleSystem::Update() {
 void ParticleSystem::Draw(const std::reference_wrapper<Renderer> _renderer) {
     if (groups_.empty())return;
 
-    _renderer.get().Register([&]{
+    _renderer.get().Register([&] {
         for (auto& group : groups_ | std::views::values) {
             for (auto& emitter : group->emitters) {
                 emitter->Draw();
             }
         }
-    }, true);
+        }, true);
 }
 
 ParticleSystem::GroupEditor ParticleSystem::Register(const std::string& _name, Vector3 _position) {
@@ -46,12 +52,12 @@ ParticleSystem::GroupEditor ParticleSystem::Register(const std::string& _name, V
 
     groups_.emplace(_name, std::make_unique<Group>(_position));
 
-    return {groups_.at(_name).get()};
+    return { groups_.at(_name).get() };
 }
 
 ParticleSystem::GroupEditor ParticleSystem::Edit(const std::string& _name) const {
     if (groups_.contains(_name)) {
-        return {groups_.at(_name).get()};
+        return { groups_.at(_name).get() };
     }
 
     Log::Send(Log::Level::WARNING, "Group not found.");

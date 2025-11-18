@@ -41,6 +41,7 @@ public:
     /// <param name="_key">キーコード</param>
     /// <returns>押されている場合true</returns>
     bool IsPress(BYTE _key) const;
+    bool IsTrigger(BYTE _key) const;
 
     //void SetEventSystem(EventSystem* eventSystem) { /*eventSystem_ = eventSystem;*/ }
 private:

@@ -23,7 +23,7 @@ public:
         Group* group_;
     public:
         GroupEditor(Group* _group);
-
+        GroupEditor& AddEmitter();
     };
 
 private:

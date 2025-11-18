@@ -43,6 +43,10 @@ void Input::Update() {
     }
 }
 
-bool Input::IsPress(BYTE _key) const {
+bool Input::IsPress(const BYTE _key) const {
     return keyState_[_key];
+}
+
+bool Input::IsTrigger(const BYTE _key) const {
+    return keyState_[_key] && !preState_[_key];
 }
