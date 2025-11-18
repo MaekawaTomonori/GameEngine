@@ -1,6 +1,8 @@
 #ifndef IScene_HPP_
 #define IScene_HPP_
 #include <string>
+
+#include "src/ParticleSystem/ParticleSystem.hpp"
 #include "src/Scene/Transition/Transition.hpp"
 
 class SceneSwitcher;
@@ -19,11 +21,9 @@ protected:
     std::string name_;
     std::string next_;
 
-    PostProcessExecutor* postEffects_ = nullptr;
-    DebugUI* debug_ = nullptr;
-
     Transition::Type entryTransition_ = Transition::Type::None;
     Transition::Type exitTransition_ = Transition::Type::None;
+
 public:
     virtual ~IScene() = default;
 
@@ -61,10 +61,8 @@ public:
     /// <summary>
     /// シーンのセットアップ
     /// </summary>
-    /// <param name="_switcher">シーン切り替え管理</param>
-    /// <param name="_ppe">ポストプロセス実行管理</param>
-    /// <param name="_debug">デバッグUI</param>
-    void Setup(SceneSwitcher* _switcher, PostProcessExecutor* _ppe, DebugUI* _debug) { switcher_ = _switcher; postEffects_ = _ppe; debug_ = _debug; }
+    /// <param name="_switcher">シーン切り替え</param>
+    void Setup(SceneSwitcher* _switcher);
 
     /// <summary>
     /// シーン名を取得
@@ -89,6 +87,10 @@ protected:
     /// シーンをnext_に変更
     /// </summary>
     void Change();
+
+    PostProcessExecutor* PostEffect() const;
+    DebugUI* DebugUI() const;
+    ParticleSystem* Particle() const;
 }; // class IScene
 
 #endif // IScene_HPP_

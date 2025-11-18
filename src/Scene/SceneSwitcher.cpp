@@ -5,9 +5,9 @@
 #include "src/Camera/Director/CameraDirector.hpp"
 #include "src/Scene/Transition/Transition.hpp"
 
-void SceneSwitcher::Setup(PostProcessExecutor* _ppe, DebugUI* _debug) {
-    ppe_ = _ppe;
-    debug_ = _debug;
+void SceneSwitcher::Setup(Context _context) {
+    context_ = _context;
+
     transition_ = std::make_unique<Transition>();
     transition_->Initialize();
 }
@@ -33,7 +33,7 @@ void SceneSwitcher::Update() {
 
         next_.reset();
         next_ = nullptr;
-        scene_->Setup(this, ppe_, debug_);
+        scene_->Setup(this);
         scene_->Initialize();
 
         transition_->Awake(scene_->GetEntryTransition(), ITransitionEffect::State::In, 1.f);
@@ -61,7 +61,7 @@ void SceneSwitcher::Draw() {
 }
 
 void SceneSwitcher::Debug() {
-    debug_->RegisterCommand("SceneSwitcher", [this]() {
+    context_.debug->RegisterCommand("SceneSwitcher", [this]() {
         ImGui::Begin("SceneSwitcher");
         if (scene_) {
             ImGui::Text("Current Scene: %s", scene_->GetName().c_str());

@@ -10,9 +10,25 @@ void IScene::Awake() {
     progress_ = true;
 }
 
+void IScene::Setup(SceneSwitcher* _switcher) {
+    switcher_ = _switcher;
+}
+
 void IScene::Change() {
 	if (!switcher_) return;
     if (next_.empty()) return;
     switcher_->Change(next_);
 	progress_ = false;
+}
+
+PostProcessExecutor* IScene::PostEffect() const {
+    return switcher_->GetContext().ppe;
+}
+
+DebugUI* IScene::DebugUI() const {
+    return switcher_->GetContext().debug;
+}
+
+ParticleSystem* IScene::Particle() const {
+    return switcher_->GetContext().particle;
 }

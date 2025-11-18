@@ -52,7 +52,13 @@ public:
     /// </summary>
     /// <param name="level">ログレベル</param>
     /// <param name="message">メッセージ</param>
-    static void Send(Level level, const std::string& message);
+    static void Send(Level level, const std::string& message = "");
+
+    /// <summary>
+    /// ログメッセージを送信(Debug)
+    /// </summary>
+    /// <param name="message">メッセージ</param>
+    static void Send(const std::string& message);
 
     /// <summary>
     /// コンテキスト付きログメッセージを送信

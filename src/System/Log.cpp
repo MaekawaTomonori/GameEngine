@@ -1,6 +1,5 @@
 #include "include/Log.hpp"
 
-#include "include/Utils.hpp"
 #include "src/DirectX/DirectXAdapter.hpp"
 
 #include <spdlog/spdlog.h>
@@ -34,18 +33,18 @@ void Log::Initialize() {
 
     // Console sink with execution context in pattern
     auto console = std::make_shared<spdlog::sinks::stdout_color_sink_mt>();
-    console->set_pattern("%^[%T] [%l] [Engine] [" + workingDirectory_ + "] %v%$");
+    console->set_pattern("%^[%T] [%l] %v%$");
     sinks_.emplace_back(console);
 
     // Daily rotating file sink with full execution context
     auto file = std::make_shared<spdlog::sinks::daily_file_sink_mt>(logFilePath_ + logFileName_ + logFileExt_, 0, 0);
-    file->set_pattern("[%Y-%m-%d %T] [%l] [Engine] [EXE:" + executablePath_ + "] [CWD:" + workingDirectory_ + "] %v");
+    file->set_pattern("[%Y-%m-%d %T] [%l] %v");
     sinks_.emplace_back(file);
 
 #ifdef _WIN32
     // Visual Studio output window sink with execution context
     auto windows_sink = std::make_shared<spdlog::sinks::msvc_sink_mt>();
-    windows_sink->set_pattern("[%T] [%l] [Engine] [" + workingDirectory_ + "] %v");
+    windows_sink->set_pattern("[%T] [%l] %v");
     sinks_.emplace_back(windows_sink);
 #endif
 
@@ -86,6 +85,10 @@ void Log::Send(Level _level, const std::string& message) {
             spdlog::critical(message);
             break;
     }
+}
+
+void Log::Send(const std::string& message) {
+    spdlog::debug(message);
 }
 
 void Log::InitializeExecutionContext() {

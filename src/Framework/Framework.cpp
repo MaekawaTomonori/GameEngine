@@ -116,7 +116,7 @@ void Framework::Initialize() {
     if (!game_) return;
     config_ = &game_->GetCurrentConfig();
     scene_ = game_->GetSceneSwitcher();
-    scene_->Setup(postProcessor_.get(), debugUI_.get());
+    scene_->Setup({postProcessor_.get(), debugUI_.get(), particle_.get()});
 
     // PostEffectFactoryを設定
     if (game_->GetPostEffectFactory()) {

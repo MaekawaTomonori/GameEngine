@@ -4,6 +4,9 @@
 #include <string>
 
 #include "DebugUI.hpp"
+#include "src/PostProcess/Editor/PostProcessPresetEditor.hpp"
+#include "src/ParticleSystem/ParticleSystem.hpp"
+
 #include "IScene.hpp"
 #include "Factory/AbstractSceneFactory.hpp"
 
@@ -14,10 +17,17 @@ class Transition;
 /// シーン遷移とトランジションエフェクトを管理
 /// </summary>
 class SceneSwitcher {
-	std::unique_ptr<AbstractSceneFactory> factory_;
+public:
+    struct Context {
+        PostProcessExecutor* ppe = nullptr;
+        DebugUI* debug = nullptr;
+        ParticleSystem* particle = nullptr;
+    };
 
-    PostProcessExecutor* ppe_ = nullptr;
-    DebugUI* debug_ = nullptr;
+private:
+    std::unique_ptr<AbstractSceneFactory> factory_;
+
+    Context context_;
 
     std::unique_ptr<IScene> scene_;
     std::unique_ptr<IScene> next_;
@@ -28,14 +38,13 @@ public:
     /// <summary>
     /// セットアップ
     /// </summary>
-    /// <param name="_ppe">ポストプロセス実行管理</param>
-    /// <param name="_debug">デバッグUI</param>
-    void Setup(PostProcessExecutor* _ppe, DebugUI* _debug);
+    /// <param name="_context">コンテキスト</param>
+    void Setup(Context _context);
 
     /// <summary>
     /// 更新処理
     /// </summary>
-	void Update();
+    void Update();
 
     /// <summary>
     /// 描画処理
@@ -58,6 +67,8 @@ public:
     /// デバッグ情報の表示
     /// </summary>
     void Debug();
+
+    const Context& GetContext() const { return context_; }
 }; // class SceneSwitcher
 
 #endif // SceneSwitcher_HPP_
