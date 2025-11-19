@@ -8,7 +8,7 @@ Framework::Framework() {
     config_ = GameEngine::Config::Default();
 
     Log::Initialize();
-    
+
     // Log startup diagnostics
     Log::SendWithContext(Log::Level::INFO, "Framework initialization started", "FRAMEWORK");
     Log::LogFileOperation("STARTUP_CHECK", "Assets", std::filesystem::exists("Assets"), "Checking assets directory");
@@ -37,7 +37,7 @@ Framework::Framework() {
 
     level_ = std::make_unique<LevelEditor>(debugUI_.get());
 
-    particle_ = std::make_unique<ParticleSystem>(*dxAdapter_.get(), *srv_.get());
+    particle_ = std::make_unique<ParticleSystem>(dxAdapter_.get(), srv_.get(), resources_->GetMeshRepository());
     particle_->Initialize();
 
     input_ = Singleton<Input>::GetInstance();
@@ -90,13 +90,13 @@ Framework::~Framework() {
     if (debugUI_) {
         debugUI_.reset();
     }
-    if (srv_){
+    if (srv_) {
         srv_->Finalize();
         srv_.reset();
     }
-    
+
     SingletonFinalizer::Finalize();
-    
+
     CoUninitialize();
 }
 
@@ -104,7 +104,7 @@ void Framework::Execute(std::unique_ptr<IGame> _game) {
     game_ = std::move(_game);
     Initialize();
 
-    while (Loop()){
+    while (Loop()) {
         Update();
         Draw();
     }
@@ -116,7 +116,7 @@ void Framework::Initialize() {
     if (!game_) return;
     config_ = &game_->GetCurrentConfig();
     scene_ = game_->GetSceneSwitcher();
-    scene_->Setup({postProcessor_.get(), debugUI_.get(), particle_.get()});
+    scene_->Setup({ postProcessor_.get(), debugUI_.get(), particle_.get() });
 
     // PostEffectFactoryを設定
     if (game_->GetPostEffectFactory()) {
@@ -165,13 +165,13 @@ void Framework::Draw() const {
     line_->Draw(renderer_.get());
     particle_->Draw(*renderer_.get());
 
-    renderer_->Register([&]{ level_->Draw(); });
+    renderer_->Register([&] { level_->Draw(); });
     renderer_->Register([&] { debugUI_->Render(); });
     renderer_->Render();
 }
 
 void Framework::Shutdown() {
-    if (game_){
+    if (game_) {
         game_.reset();
     }
 }

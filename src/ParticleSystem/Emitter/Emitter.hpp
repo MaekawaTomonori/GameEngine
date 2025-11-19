@@ -1,7 +1,6 @@
 #ifndef Emitter_HPP_
 #define Emitter_HPP_
 #include <memory>
-#include <optional>
 #include <span>
 
 #include "Math/MathUtils.hpp"
@@ -32,10 +31,11 @@ class Emitter {
     const uint16_t MAX = 1024;
     const Matrix4x4 BackToFront = MathUtils::Matrix::MakeRotateY(MathUtils::F_PI);
 
-    std::optional<const std::reference_wrapper<DirectXAdapter>> adapter_;
-    std::optional<const std::reference_wrapper<SRVManager>> srv_;
+    DirectXAdapter* adapter_ = nullptr;
+    SRVManager* srv_ = nullptr;
 
     Vector3 position_{};
+    float frequency_ = 0.f;
     std::vector<std::unique_ptr<Particle>> particles_;
 
     uint16_t actives_ = 0;
@@ -47,10 +47,9 @@ class Emitter {
     D3D12_GPU_DESCRIPTOR_HANDLE handle_;
 
     std::unique_ptr<Mesh> mesh_;
-    //std::unique_ptr<ComputePipeline> pipeline_;
 
 public:
-    Emitter(DirectXAdapter& _adapter, SRVManager& _srv);
+    Emitter(DirectXAdapter* _adapter, SRVManager* _srv);
     void Initialize(std::unique_ptr<Mesh> _mesh);
     void Update();
     void Draw();
