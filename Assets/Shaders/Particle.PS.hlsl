@@ -1,10 +1,5 @@
 #include "Particle.hlsli"
 
-struct Material {
-    float32_t4 color;
-};
-ConstantBuffer<Material> gMaterial : register(b0);
-
 Texture2D gTexture : register(t0);
 SamplerState gSampler : register(s0);
 
@@ -21,7 +16,7 @@ PSOutput main(VSOutput input) {
         discard;
     }
 
-    output.color = texColor * input.color * gMaterial.color;
+    output.color = texColor * input.color;
 
     if(output.color.a < 0.001f){
         discard;

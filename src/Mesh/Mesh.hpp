@@ -120,6 +120,8 @@ public:
     /// </summary>
     /// <param name="_color">変更後の色</param>
     void SetColor(Vector4 _color) const;
+
+    void EnableLighting(bool _active);
 }; // class Mesh
 
 #endif // Mesh_HPP_

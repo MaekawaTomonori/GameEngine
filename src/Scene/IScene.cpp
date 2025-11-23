@@ -25,10 +25,6 @@ PostProcessExecutor* IScene::PostEffect() const {
     return switcher_->GetContext().ppe;
 }
 
-DebugUI* IScene::DebugUI() const {
-    return switcher_->GetContext().debug;
-}
-
 ParticleSystem* IScene::Particle() const {
     return switcher_->GetContext().particle;
 }

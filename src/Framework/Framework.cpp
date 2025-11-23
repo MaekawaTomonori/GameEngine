@@ -37,7 +37,7 @@ Framework::Framework() {
 
     level_ = std::make_unique<LevelEditor>(debugUI_.get());
 
-    particle_ = std::make_unique<ParticleSystem>(dxAdapter_.get(), srv_.get(), resources_->GetMeshRepository());
+    particle_ = std::make_unique<ParticleSystem>(dxAdapter_.get(), srv_.get(), resources_->GetMeshRepository(), debugUI_.get());
     particle_->Initialize();
 
     input_ = Singleton<Input>::GetInstance();
@@ -163,7 +163,7 @@ void Framework::Draw() const {
     model_->Draw(renderer_.get());
     sprite_->Draw(renderer_.get());
     line_->Draw(renderer_.get());
-    particle_->Draw(*renderer_.get());
+    particle_->Draw(renderer_.get());
 
     renderer_->Register([&] { level_->Draw(); });
     renderer_->Register([&] { debugUI_->Render(); });

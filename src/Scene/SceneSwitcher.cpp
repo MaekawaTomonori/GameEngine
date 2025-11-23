@@ -5,7 +5,7 @@
 #include "src/Camera/Director/CameraDirector.hpp"
 #include "src/Scene/Transition/Transition.hpp"
 
-void SceneSwitcher::Setup(Context _context) {
+void SceneSwitcher::Setup(const Context& _context) {
     context_ = _context;
 
     transition_ = std::make_unique<Transition>();
@@ -78,6 +78,11 @@ void SceneSwitcher::Debug() {
             }
         }
         ImGui::End();
+    });
+
+    if (!scene_)return;
+    context_.debug->RegisterCommand("Game", [this]() {
+        scene_->Debug();
     });
 }
 

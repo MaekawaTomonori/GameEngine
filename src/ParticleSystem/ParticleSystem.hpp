@@ -25,6 +25,8 @@ public:
     struct EmitterConfig {
         std::string texture = "white_x16.png";
         float frequency = 1.0f;
+        uint16_t spawnCount = 1;
+        Vector4 color = { 1.f, 1.f, 1.f, 1.f };
     };
 
     class GroupEditor {
@@ -38,25 +40,29 @@ public:
     public:
         GroupEditor(std::string _name, Group* _group, DirectXAdapter* _adapter, SRVManager* _srv, MeshRepository* _mesh);
         GroupEditor& AddEmitter(const EmitterConfig& _config);
+        GroupEditor& SetPosition(const Vector3& _position);
+        GroupEditor& ClearEmitters();
+        GroupEditor& Emit();
     };
 
 private:
     DirectXAdapter* adapter_ = nullptr;
     SRVManager* srv_ = nullptr;
     MeshRepository* mesh_ = nullptr;
+    DebugUI* debugUI_ = nullptr;
 
     std::unordered_map<std::string, std::unique_ptr<Group>> groups_;
 
     std::unique_ptr<PipelineStateObject> pso_ = nullptr;
 
 public:
-    ParticleSystem(DirectXAdapter* _adapter, SRVManager* _srv, MeshRepository* _mesh);
+    ParticleSystem(DirectXAdapter* _adapter, SRVManager* _srv, MeshRepository* _mesh, DebugUI* _debugUI);
 
     void Initialize();
     void Update();
-    void Draw(std::reference_wrapper<Renderer> _renderer);
+    void Draw(Renderer* _renderer);
 
-    GroupEditor Register(const std::string& _name, Vector3 _position);
+    GroupEditor Register(const std::string& _name, Vector3 _position = Vector3{ 0.f, 0.f, 0.f });
     GroupEditor Edit(const std::string& _name) const;
     void Delete(const std::string& _name);
 
@@ -68,6 +74,7 @@ public:
 
 private:
     void SetupPSO();
+    void Debug();
 }; // class ParticleSystem
 
 #endif // ParticleSystem_HPP_

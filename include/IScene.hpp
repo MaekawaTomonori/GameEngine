@@ -36,7 +36,7 @@ public:
     /// 更新処理（純粋仮想関数）
     /// </summary>
     virtual void Update() = 0;
-
+    
     /// <summary>
     /// 描画処理（純粋仮想関数）
     /// </summary>
@@ -45,7 +45,7 @@ public:
     /// <summary>
     /// 終了処理
     /// </summary>
-    virtual void Finalize(){}
+    virtual void Finalize() {}
 
     /// <summary>
     /// シーンが進行中かを判定
@@ -82,6 +82,11 @@ public:
     /// <returns>トランジションタイプ</returns>
     Transition::Type GetExitTransition() const { return exitTransition_; }
 
+    /// <summary>
+    /// Debug用 ImGuiはここで扱うようにする
+    /// </summary>
+    virtual void Debug() {}
+
 protected:
     /// <summary>
     /// シーンをnext_に変更
@@ -89,7 +94,6 @@ protected:
     void Change();
 
     PostProcessExecutor* PostEffect() const;
-    DebugUI* DebugUI() const;
     ParticleSystem* Particle() const;
 }; // class IScene
 

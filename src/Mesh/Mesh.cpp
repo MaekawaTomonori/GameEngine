@@ -168,3 +168,7 @@ void Mesh::SetTextureSize(const Vector2 _tilingMul) const {
 void Mesh::SetColor(const Vector4 _color) const {
     material_->color = _color;
 }
+
+void Mesh::EnableLighting(bool _active) {
+    lighting_ = _active;
+}

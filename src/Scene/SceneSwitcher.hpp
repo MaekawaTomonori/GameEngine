@@ -39,7 +39,7 @@ public:
     /// セットアップ
     /// </summary>
     /// <param name="_context">コンテキスト</param>
-    void Setup(Context _context);
+    void Setup(const Context& _context);
 
     /// <summary>
     /// 更新処理

@@ -8,7 +8,7 @@
 #include "src/DirectX/DirectXAdapter.hpp"
 #include "src/DirectX/Heap/SRVManager.h"
 #include "src/DirectX/Resource/DX12Resource.hpp"
-#include "src/Mesh/Mesh.hpp"
+#include "src/Mesh/Data/MeshData.hpp"
 #include "src/ParticleSystem/Particle/Particle.hpp"
 //#include "src/DirectX/Compute/ComputePipeline.hpp"
 
@@ -36,9 +36,18 @@ class Emitter {
 
     Vector3 position_{};
     float frequency_ = 0.f;
+    uint16_t spawnCount_ = 1;
+    Vector4 color_{ 1.f, 1.f, 1.f, 1.f };
+
     std::vector<std::unique_ptr<Particle>> particles_;
 
     uint16_t actives_ = 0;
+
+    std::string name_ = "Emitter";
+    std::string uuid_;
+    MeshData data_;
+
+    std::string texture_ = "white_x16.png";
 
     std::unique_ptr<DX12Resource> resource_;
     std::span<ForGpu> mapped_;
@@ -46,18 +55,36 @@ class Emitter {
     uint32_t index_ = 0;
     D3D12_GPU_DESCRIPTOR_HANDLE handle_;
 
-    std::unique_ptr<Mesh> mesh_;
+    std::unique_ptr<DX12Resource> vr_;
+    D3D12_VERTEX_BUFFER_VIEW vbv_{};
+    std::span<Vertex> vd_;
+
+    std::unique_ptr<DX12Resource> ir_;
+    D3D12_INDEX_BUFFER_VIEW ibv_{};
+    std::span<uint32_t> id_;
 
 public:
     Emitter(DirectXAdapter* _adapter, SRVManager* _srv);
-    void Initialize(std::unique_ptr<Mesh> _mesh);
+    void Initialize(const MeshData& _mesh);
     void Update();
     void Draw();
+    void Emit();
 
-    void Spawn(const uint16_t& _count = 1);
+    void Debug();
 
-private:
+    Emitter& SetPosition(const Vector3& _position);
+
+    Emitter& SetFrequency(const float& _frequency);
+
+    Emitter& SetSpawnCount(const uint16_t& _count);
+
+    Emitter& SetColor(const Vector4& _color);
+
+    Emitter& SetTexture(const std::string& _texture);
+
+    private:
     void RegisterGpu();
+    void Spawn(const uint16_t& _count);
 }; // class Emitter
 
 #endif // Emitter_HPP_
