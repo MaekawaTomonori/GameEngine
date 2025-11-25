@@ -8,7 +8,7 @@
 /// 3D座標と基本的なベクトル演算を提供
 /// </summary>
 struct Vector3{
-    float x, y, z;
+    float x = 0.f, y = 0.f, z = 0.f;
 
     Vector3 operator+(const Vector3& v) const {
         return {x + v.x, y + v.y, z + v.z};

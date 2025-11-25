@@ -4,6 +4,8 @@
 #include <random>
 
 #include "Math/Transform.hpp"
+#include "Pattern/Singleton.hpp"
+#include "src/Random/RandomEngine.hpp"
 
 Matrix3x3 MathUtils::Matrix::MakeIdentity3x3() {
     return Matrix3x3 {
@@ -175,11 +177,7 @@ Matrix4x4 MathUtils::Matrix::MakeViewportMatrix(float left, float right, float t
 }
 
 float MathUtils::Random(float min, float max) {
-    std::random_device seed;
-    std::mt19937 random(seed());
-
-    std::uniform_real_distribution<float> dist(min, max);
-    return dist(random);
+    return Singleton<RandomEngine>::GetInstance()->Get(min, max);
 }
 
 float MathUtils::Lerp(const float& a, const float& b, float t) {

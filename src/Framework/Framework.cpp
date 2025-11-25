@@ -3,6 +3,7 @@
 #include "Log.hpp"
 #include "IGame.hpp"
 #include "Pattern/Singleton.hpp"
+#include "src/Random/RandomEngine.hpp"
 
 Framework::Framework() {
     config_ = GameEngine::Config::Default();
@@ -66,6 +67,8 @@ Framework::Framework() {
 
     light_ = Singleton<LightManager>::GetInstance();
     light_->Initialize(dxAdapter_.get(), debugUI_.get());
+
+    Singleton<RandomEngine>::GetInstance()->Initialize();
 
     //level_->Initialize("Level");
 }

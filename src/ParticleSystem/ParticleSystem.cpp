@@ -19,16 +19,30 @@ ParticleSystem::GroupEditor::GroupEditor(std::string _name, Group* _group, Direc
 ParticleSystem::GroupEditor& ParticleSystem::GroupEditor::AddEmitter(const EmitterConfig& _config) {
     std::unique_ptr<Emitter> emitter = std::make_unique<Emitter>(adapter_, srv_);
     emitter->Initialize(mesh_->Get("plane"));
-    emitter->SetTexture(_config.texture);
-    emitter->SetFrequency(_config.frequency);
-    emitter->SetSpawnCount(_config.spawnCount);
-    emitter->SetColor(_config.color);
+    emitter->SetTexture(_config.texture)
+        .Enable(_config.active)
+        .SetFrequency(_config.frequency)
+        .SetDuration(_config.duration)
+        .SetSpawnCount(_config.spawnCount)
+        .SetSize(_config.size)
+        .SetVelocity(_config.velocity)
+        .SetColor(_config.color)
+        .SetUpdateFunction(_config.updateFunc);
     group_->emitters.push_back(std::move(emitter));
     return *this;
 }
 
 ParticleSystem::GroupEditor& ParticleSystem::GroupEditor::SetPosition(const Vector3& _position) {
     group_->position = _position;
+    return *this;
+}
+
+ParticleSystem::GroupEditor& ParticleSystem::GroupEditor::SetEnable(bool _enable) {
+    group_->enable = _enable;
+    for (const auto& emitter : group_->emitters) {
+        emitter->Enable(_enable);
+    }
+
     return *this;
 }
 
@@ -44,7 +58,6 @@ ParticleSystem::GroupEditor& ParticleSystem::GroupEditor::Emit() {
     return *this;
 }
 
-
 void ParticleSystem::Initialize() {
     SetupPSO();
 }
@@ -56,7 +69,8 @@ void ParticleSystem::Update() {
 
     for (const auto& group : groups_ | std::views::values) {
         for (const auto& emitter : group->emitters) {
-            emitter->Update();
+            emitter->Enable(group->enable)
+                .Update();
         }
     }
 }
@@ -75,12 +89,34 @@ void ParticleSystem::Draw(Renderer* _renderer) {
 }
 
 void ParticleSystem::Debug() {
-    debugUI_->RegisterCommand("ParticleSystemDebug", [&] { 
+    debugUI_->RegisterCommand("ParticleSystemDebug", [&] {
         ImGui::Begin("Particle System Debug");
         for (const auto& [name, group] : groups_) {
+            ImGui::PushID(name.c_str());
             if (ImGui::CollapsingHeader(name.c_str())) {
+                // Enable/Disable Toggle Button
+                if (group->enable) {
+                    ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(1.0f, 0.0f, 0.0f, 1.0f));  // Red
+                    ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(0.8f, 0.0f, 0.0f, 1.0f));
+                    ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(0.6f, 0.0f, 0.0f, 1.0f));
+                    if (ImGui::Button("Disable")) {
+                        group->enable = false;
+                    }
+                    ImGui::PopStyleColor(3);
+                } else {
+                    ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.0f, 1.0f, 0.0f, 1.0f));  // Lime
+                    ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(0.0f, 0.8f, 0.0f, 1.0f));
+                    ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(0.0f, 0.6f, 0.0f, 1.0f));
+                    if (ImGui::Button("Enable")) {
+                        group->enable = true;
+                    }
+                    ImGui::PopStyleColor(3);
+                }
+
+                ImGui::SameLine();
                 ImGui::Text("Position: %f, %f, %f", group->position.x, group->position.y, group->position.z);
-                ImGui::Text("Emitters: %d", group->emitters.size());
+                ImGui::Text("Emitters: %d", static_cast<int>(group->emitters.size()));
+
                 if (ImGui::Button("Emit")) {
                     for (const auto& emitter : group->emitters) {
                         emitter->Emit();
@@ -91,6 +127,7 @@ void ParticleSystem::Debug() {
                     emitter->Debug();
                 }
             }
+            ImGui::PopID();
         }
         ImGui::End();
     });
@@ -115,6 +152,15 @@ ParticleSystem::GroupEditor ParticleSystem::Edit(const std::string& _name) const
     Log::Send(Log::Level::WARNING, "Group not found.");
     Utils::Alert("Group not found.");
     throw std::runtime_error("Group not found.");
+}
+
+void ParticleSystem::Enable(const std::string& _name) const {
+    if (!groups_.contains(_name)) {
+        Log::Send(Log::Level::WARNING, "Group not found. GroupName : " + _name);
+        return;
+    }
+
+    groups_.at(_name)->enable = true;
 }
 
 void ParticleSystem::Delete(const std::string& _name) {
@@ -194,7 +240,7 @@ void ParticleSystem::SetupPSO() {
         })
         .SetDepthStencil({
             .DepthEnable = true,
-            .DepthWriteMask = D3D12_DEPTH_WRITE_MASK_ALL,
+            .DepthWriteMask = D3D12_DEPTH_WRITE_MASK_ZERO,
             .DepthFunc = D3D12_COMPARISON_FUNC_LESS_EQUAL,
         })
         .SetDSVFormat(DXGI_FORMAT_D24_UNORM_S8_UINT)

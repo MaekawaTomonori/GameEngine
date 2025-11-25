@@ -56,7 +56,7 @@ public:
     /// テクスチャを読み込み
     /// </summary>
     /// <param name="fileName">ファイル名</param>
-    void Load(const std::string& fileName);
+    bool Load(const std::string& fileName);
 
     /// <summary>
     /// すべてのテクスチャをアンロード（クリア）

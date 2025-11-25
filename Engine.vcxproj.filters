@@ -471,6 +471,7 @@
     <ClInclude Include="src\ParticleSystem\Emitter\Emitter.hpp" />
     <ClInclude Include="src\ParticleSystem\Particle\Particle.hpp" />
     <ClInclude Include="src\DirectX\Compute\ComputePipeline.hpp" />
+    <ClInclude Include="src\Random\RandomEngine.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Camera\Camera.cpp">
@@ -666,6 +667,7 @@
     <ClCompile Include="src\ParticleSystem\Emitter\Emitter.cpp" />
     <ClCompile Include="src\ParticleSystem\Particle\Particle.cpp" />
     <ClCompile Include="src\DirectX\Compute\ComputePipeline.cpp" />
+    <ClCompile Include="src\Random\RandomEngine.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

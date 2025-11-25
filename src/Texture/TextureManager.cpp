@@ -130,7 +130,7 @@ void TextureManager::Initialize(DirectXAdapter* _adapter, SRVManager* _srv) {
     Log::Send(Log::Level::INFO, "TextureManager Initialized");
 }
 
-void TextureManager::Load(const std::string& fileName) {
+bool TextureManager::Load(const std::string& fileName) {
     std::lock_guard<std::mutex> lock(mutex_);
 
     //Remove FolderPath
@@ -142,7 +142,7 @@ void TextureManager::Load(const std::string& fileName) {
     
     //Check if texture is already loaded
     if (textures_.contains(name)){
-        return;
+        return true;
     }
 
     assert(!srv_->IsFull());
@@ -158,12 +158,22 @@ void TextureManager::Load(const std::string& fileName) {
 
 
     //Load Texture
-    Texture& texture = textures_[name];
-
     DirectX::ScratchImage img = LoadTexture(name);
 
+    if (!img.GetImages() || img.GetImageCount() == 0) {
+        Log::Send(Log::Level::ERR, std::format("TextureManager::Load: Failed to load texture: {}", name));
+        return false;
+    }
+
+    Texture texture;
     texture.metadata = img.GetMetadata();
     texture.resource = adapter_->CreateTextureResource(img.GetMetadata());
+
+    if (!texture.resource) {
+        Log::Send(Log::Level::ERR, std::format("TextureManager::Load: Failed to create texture resource: {}", name));
+        return false;
+    }
+
     UploadTextureData(texture.resource.get(), img);
 
     texture.srvIndex = srv_->Allocate();
@@ -176,7 +186,10 @@ void TextureManager::Load(const std::string& fileName) {
         srv_->CreateSRVforTexture2D(texture.srvIndex, texture.resource->Get(), texture.metadata.format, static_cast<UINT>(texture.metadata.mipLevels));
     }
 
+    textures_[name] = std::move(texture);
+
     Log::Send(Log::Level::INFO, std::format("TextureManager::Load: {}", name));
+    return true;
 }
 
 void TextureManager::Unload() {

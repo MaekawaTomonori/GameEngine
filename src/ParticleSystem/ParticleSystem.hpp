@@ -13,6 +13,7 @@
 
 class ParticleSystem {
     struct Group {
+        bool enable = false;
         Vector3 position;
         std::vector<std::unique_ptr<Emitter>> emitters;
 
@@ -24,9 +25,15 @@ class ParticleSystem {
 public:
     struct EmitterConfig {
         std::string texture = "white_x16.png";
+        bool active = false;
         float frequency = 1.0f;
+        float duration = 1.f;
         uint16_t spawnCount = 1;
+        Vector3 size = {1.f, 1.f, 1.f};
+        Vector3 velocity = {0.f, 0.f, 0.f};
         Vector4 color = { 1.f, 1.f, 1.f, 1.f };
+        // float time, Vector3& current velocity, Vector4& current color
+        std::function<void(float, Vector3&, Vector4&)> updateFunc;
     };
 
     class GroupEditor {
@@ -41,6 +48,7 @@ public:
         GroupEditor(std::string _name, Group* _group, DirectXAdapter* _adapter, SRVManager* _srv, MeshRepository* _mesh);
         GroupEditor& AddEmitter(const EmitterConfig& _config);
         GroupEditor& SetPosition(const Vector3& _position);
+        GroupEditor& SetEnable(bool _enable);
         GroupEditor& ClearEmitters();
         GroupEditor& Emit();
     };
@@ -64,6 +72,7 @@ public:
 
     GroupEditor Register(const std::string& _name, Vector3 _position = Vector3{ 0.f, 0.f, 0.f });
     GroupEditor Edit(const std::string& _name) const;
+    void Enable(const std::string& _name) const;
     void Delete(const std::string& _name);
 
     /// @brief Registers a new particle group from a JSON string.

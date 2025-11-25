@@ -60,6 +60,8 @@ void Emitter::Initialize(const MeshData& _mesh) {
 }
 
 void Emitter::Update() {
+    FrequencyUpdate();
+
     RegisterGpu();
 }
 
@@ -90,14 +92,19 @@ void Emitter::Emit() {
 void Emitter::Debug() {
     ImGui::PushID(uuid_.c_str());
     if (ImGui::TreeNode((name_ + " (" + uuid_ + ")").c_str())){
-        ImGui::DragFloat3("Position", &position_.x, 0.1f);
-        ImGui::DragFloat("Frequency", &frequency_, 0.01f, 0.f, 100.f);
-        ImGui::DragInt("Spawn Count", reinterpret_cast<int*>(&spawnCount_), 1.f, 1, 1000);
-        ImGui::ColorEdit4("Color", &color_.x);
         ImGui::Text("Texture: %s", texture_.c_str());
+        ImGui::DragFloat3("Position", &position_.x, 0.1f);
+        ImGui::DragInt("Spawn Count", reinterpret_cast<int*>(&spawnCount_), 1.f, 1, 1000);
+        ImGui::DragFloat("Frequency", &frequency_, 0.01f, 0.f, 100.f);
+        ImGui::DragFloat("Duration", &duration_, 0.01f, 0.f, 100.f);
+        ImGui::DragFloat3("Size", &size_.x, 0.01f, 0.f, 100.f);
+        ImGui::ColorEdit4("Color", &color_.x);
 
-        for (const auto& particle : particles_) {
-            particle->Debug();
+        if (ImGui::TreeNode("Particles")){
+            for (const auto& particle : particles_) {
+                particle->Debug();
+            }
+            ImGui::TreePop();
         }
 
         ImGui::TreePop();
@@ -128,12 +135,57 @@ Emitter& Emitter::SetTexture(const std::string& _texture) {
     return *this;
 }
 
+Emitter& Emitter::SetSize(const float& _size) {
+    size_ = {_size, _size, _size};
+    return *this;
+}
+
+Emitter& Emitter::SetSize(const Vector3& _size) {
+    size_ = _size;
+    return *this;
+}
+
+Emitter& Emitter::SetVelocity(const Vector3& _velocity) {
+    velocity_ = _velocity;
+    return *this;
+}
+
+Emitter& Emitter::SetUpdateFunction(const std::function<void(float, Vector3&, Vector4&)>& _func) {
+    particleFunc_ = _func;
+    return *this;
+}
+
+Emitter& Emitter::SetDuration(const float& _duration) {
+    duration_ = _duration;
+    return *this;
+}
+
+Emitter& Emitter::Enable(bool _active) {
+    active_ = _active;
+    return *this;
+}
+
+void Emitter::FrequencyUpdate() {
+    if (!active_) return;
+    if (frequency_ <= 0.01f) return;
+    if (frequency_ <= timer_) {
+        timer_ = 0.f;
+        Emit();
+        return;
+    }
+
+    constexpr float DeltaTime = 1.f / 60.f;
+    timer_ += DeltaTime;
+}
+
 void Emitter::Spawn(const uint16_t& _count) {
     for (uint16_t i = 0; i < _count; ++i) {
         std::unique_ptr<Particle> particle = std::make_unique<Particle>();
-        particle->SetPosition(Vector3{ 0.f, 0.f, 0.f })
-            .SetScale(Vector3{ 1.f, 1.f, 1.f })
+        particle->SetPosition({})
+            .SetScale(size_)
             .SetColor(color_)
+            .SetVelocity(velocity_)
+            .SetUpdateFunction(particleFunc_)
             .Initialize(3.f);
         particles_.emplace_back(std::move(particle));
     }

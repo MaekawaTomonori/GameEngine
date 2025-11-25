@@ -34,10 +34,17 @@ class Emitter {
     DirectXAdapter* adapter_ = nullptr;
     SRVManager* srv_ = nullptr;
 
+    bool active_ = false;
+
     Vector3 position_{};
+    float duration_ = 1.f;
     float frequency_ = 0.f;
     uint16_t spawnCount_ = 1;
+    Vector3 size_{ 1.f, 1.f, 1.f };
+    Vector3 velocity_ {};
     Vector4 color_{ 1.f, 1.f, 1.f, 1.f };
+    float timer_ = 0.f;
+    std::function<void(float, Vector3&, Vector4&)> particleFunc_;
 
     std::vector<std::unique_ptr<Particle>> particles_;
 
@@ -72,9 +79,13 @@ public:
 
     void Debug();
 
+    Emitter& Enable(bool _active = true);
+    
     Emitter& SetPosition(const Vector3& _position);
 
     Emitter& SetFrequency(const float& _frequency);
+    
+    Emitter& SetDuration(const float& _duration);
 
     Emitter& SetSpawnCount(const uint16_t& _count);
 
@@ -82,9 +93,18 @@ public:
 
     Emitter& SetTexture(const std::string& _texture);
 
-    private:
-    void RegisterGpu();
+    Emitter& SetSize(const float& _size);
+
+    Emitter& SetSize(const Vector3& _size);
+
+    Emitter& SetVelocity(const Vector3& _velocity);
+    
+    Emitter& SetUpdateFunction(const std::function<void(float, Vector3&, Vector4&)>& _func);
+
+private:
+    void FrequencyUpdate();
     void Spawn(const uint16_t& _count);
+    void RegisterGpu();
 }; // class Emitter
 
 #endif // Emitter_HPP_
