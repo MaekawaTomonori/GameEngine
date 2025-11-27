@@ -114,7 +114,7 @@
   <ItemGroup>
     <ClInclude Include="include\DebugUI.hpp" />
     <ClInclude Include="include\Factory\AbstractPostEffectFactory.hpp" />
-    <ClInclude Include="include\Factory\AbstractSceneFactory.hpp" />
+    <ClInclude Include="src\Scene\SceneFactory.hpp" />
     <ClInclude Include="include\Framework.hpp" />
     <ClInclude Include="include\IGame.hpp" />
     <ClInclude Include="include\IScene.hpp" />
@@ -215,7 +215,6 @@
     <ClCompile Include="src\Camera\Director\CameraDirector.cpp" />
     <ClCompile Include="src\Camera\Repository\CameraRepository.cpp" />
     <ClCompile Include="src\Common\Common.cpp" />
-    <ClCompile Include="src\Config\Config.cpp" />
     <ClCompile Include="src\Container\Material.cpp" />
     <ClCompile Include="src\Debug\DebugUI.cpp" />
     <ClCompile Include="src\DirectX\Compute\ComputePipeline.cpp" />
@@ -265,6 +264,7 @@
     <ClCompile Include="src\Renderer\Renderer.cpp" />
     <ClCompile Include="src\ResourceRepository\ResourceRepository.cpp" />
     <ClCompile Include="src\Scene\IScene.cpp" />
+    <ClCompile Include="src\Scene\SceneFactory.cpp" />
     <ClCompile Include="src\Scene\SceneSwitcher.cpp" />
     <ClCompile Include="src\Scene\Transition\Transition.cpp" />
     <ClCompile Include="src\Scene\Transition\Fade.cpp" />

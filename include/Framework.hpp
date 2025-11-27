@@ -29,7 +29,7 @@ class IGame;
 /// ゲームループの実行とシステムコーディネーションを管理
 /// </summary>
 class Framework {
-    GameEngine::Config* config_ = nullptr;
+    GameEngine::Config config_{};
 
     std::unique_ptr<IGame> game_;
     SceneSwitcher* scene_ = nullptr;

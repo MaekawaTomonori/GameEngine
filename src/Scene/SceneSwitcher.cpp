@@ -5,6 +5,10 @@
 #include "src/Camera/Director/CameraDirector.hpp"
 #include "src/Scene/Transition/Transition.hpp"
 
+SceneSwitcher::SceneSwitcher() {
+    factory_ = std::make_unique<SceneFactory>();
+}
+
 void SceneSwitcher::Setup(const Context& _context) {
     context_ = _context;
 
@@ -60,23 +64,81 @@ void SceneSwitcher::Draw() {
     }
 }
 
+void SceneSwitcher::RegisterScene(const std::string& _name, const std::function<std::unique_ptr<IScene>()>& _creator) const {
+    if (!factory_) return;
+    factory_->Register(_name, _creator);
+}
+
 void SceneSwitcher::Debug() {
     context_.debug->RegisterCommand("SceneSwitcher", [this]() {
+        static int selectedIndex = 0;
+        static std::string selectedScene;
+
         ImGui::Begin("SceneSwitcher");
+
+        // 現在のシーン表示
         if (scene_) {
             ImGui::Text("Current Scene: %s", scene_->GetName().c_str());
         } else {
             ImGui::Text("No active scene");
         }
+
         ImGui::Separator();
-        
-        static char sceneName[128] = "";
-        ImGui::InputText("Scene Name", sceneName, sizeof(sceneName));
-        if (ImGui::Button("Change Scene")) {
-            if (strlen(sceneName) > 0) {
-                Change(sceneName);
+
+        // 登録されているシーン一覧を取得
+        if (factory_) {
+            auto registeredScenes = factory_->GetRegisteredScenes();
+
+            if (!registeredScenes.empty()) {
+                // コンボボックス用のプレビュー文字列
+                const char* previewValue = selectedIndex < registeredScenes.size()
+                    ? registeredScenes[selectedIndex].c_str()
+                    : "Select Scene";
+
+                if (ImGui::BeginCombo("##Scene List", previewValue)) {
+                    for (int i = 0; i < registeredScenes.size(); ++i) {
+                        const bool isSelected = (selectedIndex == i);
+                        if (ImGui::Selectable(registeredScenes[i].c_str(), isSelected)) {
+                            selectedIndex = i;
+                            selectedScene = registeredScenes[i];
+                        }
+
+                        // 選択中の項目にフォーカス
+                        if (isSelected) {
+                            ImGui::SetItemDefaultFocus();
+                        }
+                    }
+                    ImGui::EndCombo();
+                }
+
+                ImGui::SameLine();
+
+                // シーン変更ボタン
+                bool isCurrent = scene_ && scene_->GetName() == selectedScene;
+                if (isCurrent) {
+                    ImGui::BeginDisabled();
+                }
+
+                if (ImGui::Button("Change Scene")) {
+                    if (!selectedScene.empty() && !isCurrent) {
+                        Change(selectedScene);
+                    }
+                }
+
+                // 現在のシーンの場合はツールチップを表示
+                if (isCurrent) {
+                    if (ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenDisabled)) {
+                        ImGui::SetTooltip("This scene is currently active");
+                    }
+                    ImGui::EndDisabled();
+                }
+            } else {
+                ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "No scenes registered");
             }
+        } else {
+            ImGui::TextColored(ImVec4(1.0f, 0.0f, 0.0f, 1.0f), "Factory not initialized");
         }
+
         ImGui::End();
     });
 
@@ -86,8 +148,8 @@ void SceneSwitcher::Debug() {
     });
 }
 
-void SceneSwitcher::SetFactory(std::unique_ptr<AbstractSceneFactory> _factory) {
-    factory_ = std::move(_factory);
+const SceneSwitcher::Context& SceneSwitcher::GetContext() const {
+    return context_;
 }
 
 void SceneSwitcher::Change(const std::string &_name) {

@@ -6,8 +6,6 @@
 #include "src/Random/RandomEngine.hpp"
 
 Framework::Framework() {
-    config_ = GameEngine::Config::Default();
-
     Log::Initialize();
 
     // Log startup diagnostics
@@ -19,7 +17,7 @@ Framework::Framework() {
     windows_->Initialize();
     //windows_->SetWindowSize(static_cast<int>(config_->GetWidth()), static_cast<int>(config_->GetHeight()));
 
-    dxAdapter_ = std::make_unique<DirectXAdapter>(windows_->GetWindowHandle(), config_->GetWidth(), config_->GetHeight());
+    dxAdapter_ = std::make_unique<DirectXAdapter>(windows_->GetWindowHandle(), config_.width, config_.height);
 
     srv_ = std::make_unique<SRVManager>();
     srv_->Initialize(dxAdapter_.get());
@@ -60,7 +58,7 @@ Framework::Framework() {
     sky_->Initialize(dxAdapter_.get(), debugUI_.get());
 
     camera_ = Singleton<CameraController>::GetInstance();
-    camera_->Initialize(static_cast<float>(config_->GetWidth()) / static_cast<float>(config_->GetHeight()), debugUI_.get());
+    camera_->Initialize(static_cast<float>(config_.width) / static_cast<float>(config_.height), debugUI_.get());
 
     cameraDirector_ = Singleton<CameraDirector>::GetInstance();
     cameraDirector_->Initialize(debugUI_.get());
@@ -74,29 +72,16 @@ Framework::Framework() {
 }
 
 Framework::~Framework() {
-    if (texture_) {
-        texture_->Unload();
-    }
-    if (level_) {
-        level_.reset();
-    }
+    texture_->Unload();
+    level_.reset();
+    postProcessor_.reset();
+    renderer_.reset();
 
-    if (postProcessor_) {
-        postProcessor_.reset();
-    }
-    if (renderer_) {
-        renderer_.reset();
-    }
-    if (resources_) {
-        resources_.reset();
-    }
-    if (debugUI_) {
-        debugUI_.reset();
-    }
-    if (srv_) {
-        srv_->Finalize();
-        srv_.reset();
-    }
+    resources_.reset();
+    debugUI_.reset();
+
+    srv_->Finalize();
+    srv_.reset();
 
     SingletonFinalizer::Finalize();
 
@@ -117,16 +102,17 @@ void Framework::Execute(std::unique_ptr<IGame> _game) {
 
 void Framework::Initialize() {
     if (!game_) return;
-    config_ = &game_->GetCurrentConfig();
+    game_->Initialize(config_);
     scene_ = game_->GetSceneSwitcher();
     scene_->Setup({ postProcessor_.get(), debugUI_.get(), particle_.get() });
+    scene_->Change(config_.defaultScene);
 
     // PostEffectFactoryを設定
-    if (game_->GetPostEffectFactory()) {
-        postProcessor_->SetFactory(game_->GetPostEffectFactory());
+    if (const auto& peFac = game_->GetPostEffectFactory()) {
+        postProcessor_->SetFactory(peFac);
     }
 
-    windows_->SetTitle(config_->GetTitle());
+    windows_->SetTitle(config_.title);
     Log::Send(Log::Level::INFO, "Game Initialized");
 }
 
@@ -146,7 +132,7 @@ void Framework::Update() const {
     particle_->Update();
 
     // PostEffect animation update
-    float deltaTime = 1.0f / static_cast<float>(config_->GetFPS());
+    float deltaTime = 1.0f / static_cast<float>(config_.fps);
     postProcessor_->Update(deltaTime);
 
     scene_->Update();

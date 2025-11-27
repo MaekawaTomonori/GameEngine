@@ -1,7 +1,6 @@
 #define NOMINMAX
 #include "Fade.hpp"
 #include "Sprite.hpp"
-#include "src/Config/Config.hpp"
 #include <algorithm>
 
 Fade::Fade() {
@@ -11,9 +10,8 @@ Fade::Fade() {
 void Fade::Initialize() {
     sprite_->Initialize("BlackFilter.png");
 
-    auto* config = GameEngine::Config::Default();
-    float width = static_cast<float>(config->GetWidth());
-    float height = static_cast<float>(config->GetHeight());
+    float width = static_cast<float>(1920);
+    float height = static_cast<float>(720);
 
     sprite_->SetSize({width, height});
     sprite_->SetPosition({width * 0.5f, height * 0.5f});

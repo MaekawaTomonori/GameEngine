@@ -8,7 +8,7 @@
 #include "src/ParticleSystem/ParticleSystem.hpp"
 
 #include "IScene.hpp"
-#include "Factory/AbstractSceneFactory.hpp"
+#include "SceneFactory.hpp"
 
 class Transition;
 
@@ -25,7 +25,7 @@ public:
     };
 
 private:
-    std::unique_ptr<AbstractSceneFactory> factory_;
+    std::unique_ptr<SceneFactory> factory_;
 
     Context context_;
 
@@ -35,6 +35,7 @@ private:
     std::unique_ptr<Transition> transition_;
 
 public:
+    SceneSwitcher();
     /// <summary>
     /// セットアップ
     /// </summary>
@@ -51,11 +52,10 @@ public:
     /// </summary>
     void Draw();
 
-    /// <summary>
-    /// シーンファクトリーを設定
-    /// </summary>
-    /// <param name="_factory">シーンファクトリー</param>
-    void SetFactory(std::unique_ptr<AbstractSceneFactory> _factory);
+    /// @brief シーンを登録する
+    /// @param _name シーン名
+    /// @param _creator シーン生成関数
+    void RegisterScene(const std::string& _name, const std::function<std::unique_ptr<IScene>()>& _creator) const;
 
     /// <summary>
     /// シーンを変更
@@ -68,7 +68,7 @@ public:
     /// </summary>
     void Debug();
 
-    const Context& GetContext() const { return context_; }
+    const Context& GetContext() const;
 }; // class SceneSwitcher
 
 #endif // SceneSwitcher_HPP_

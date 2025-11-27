@@ -15,19 +15,14 @@ class PostProcessExecutor;
 /// シーン管理と設定の統合を提供
 /// </summary>
 class IGame {
-    std::unique_ptr<GameEngine::Config> config_;
     std::unique_ptr<SceneSwitcher> scene_;
     std::unique_ptr<AbstractPostEffectFactory> postEffectFactory_;
 
 public:
-    IGame(std::unique_ptr<AbstractSceneFactory> _factory, const std::string &_scene = "");
-    virtual ~IGame() = default;
+    IGame();
+    virtual ~IGame();
 
-    /// <summary>
-    /// 現在の設定を取得
-    /// </summary>
-    /// <returns>設定への参照</returns>
-    GameEngine::Config& GetCurrentConfig();
+    virtual void Initialize(GameEngine::Config& _config) = 0;
 
     /// <summary>
     /// シーン切り替え管理を取得
@@ -46,6 +41,10 @@ public:
     /// </summary>
     /// <returns>PostEffectファクトリーのポインタ</returns>
     AbstractPostEffectFactory* GetPostEffectFactory() const;
+
+protected:
+    void RegisterScene(const std::string& _name, const std::function<std::unique_ptr<IScene>()>& _creator) const;
+
 }; // class IGame
 
 #endif // IGame_HPP_
