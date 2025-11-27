@@ -128,7 +128,9 @@ void SceneSwitcher::Debug() {
                 // 現在のシーンの場合はツールチップを表示
                 if (isCurrent) {
                     if (ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenDisabled)) {
-                        ImGui::SetTooltip("This scene is currently active");
+                        ImGui::BeginTooltip();
+                        ImGui::TextColored(ImVec4(0.f, 1.f, 0.f, 1.f), "This scene is currently active");
+                        ImGui::EndTooltip();
                     }
                     ImGui::EndDisabled();
                 }
