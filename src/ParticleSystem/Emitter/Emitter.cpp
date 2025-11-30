@@ -181,7 +181,7 @@ void Emitter::FrequencyUpdate() {
 void Emitter::Spawn(const uint16_t& _count) {
     for (uint16_t i = 0; i < _count; ++i) {
         std::unique_ptr<Particle> particle = std::make_unique<Particle>();
-        particle->SetPosition({})
+        particle->SetPosition(position_)
             .SetScale(size_)
             .SetColor(color_)
             .SetVelocity(velocity_)
@@ -208,7 +208,7 @@ void Emitter::RegisterGpu() {
         mapped_[actives_].world = MathUtils::Matrix::MakeAffineMatrix(
             MathUtils::Matrix::MakeScaleMatrix(particle->GetScale()),
             billboard,
-            MathUtils::Matrix::MakeTranslateMatrix(position_ + particle->GetPosition())
+            MathUtils::Matrix::MakeTranslateMatrix(particle->GetPosition())
         );
         mapped_[actives_].wvp = mapped_[actives_].world * ac->GetViewProjection();
         mapped_[actives_].color = particle->GetColor();

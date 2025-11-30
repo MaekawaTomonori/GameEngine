@@ -75,6 +75,8 @@ public:
     void Enable(const std::string& _name) const;
     void Delete(const std::string& _name);
 
+    void Emit(const std::string& _name);
+
     /// @brief Registers a new particle group from a JSON string.
     /// @param _json The JSON string containing the group data.
     /// @param _name The name of the group (optional).

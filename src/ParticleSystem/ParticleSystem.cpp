@@ -154,6 +154,14 @@ ParticleSystem::GroupEditor ParticleSystem::Edit(const std::string& _name) const
     throw std::runtime_error("Group not found.");
 }
 
+void ParticleSystem::Emit(const std::string& _name) {
+    if (groups_.contains(_name)) {
+        for (const auto& emitter : groups_[_name]->emitters) {
+            emitter->Emit();
+        }
+    }
+}
+
 void ParticleSystem::Enable(const std::string& _name) const {
     if (!groups_.contains(_name)) {
         Log::Send(Log::Level::WARNING, "Group not found. GroupName : " + _name);
