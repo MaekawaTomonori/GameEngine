@@ -2,6 +2,7 @@
 
 #include "Log.hpp"
 #include "Utils.hpp"
+#include "imgui.h"
 
 #pragma comment(lib, "dinput8.lib")
 #pragma comment(lib, "dxguid.lib")
@@ -36,11 +37,12 @@ void Input::Initialize(HWND _hWnd, HINSTANCE _hInstance) {
 }
 
 void Input::Update() {
-    if (keyboard_) {
-        keyboard_->Acquire();
-        memcpy_s(preState_, sizeof(keyState_), keyState_, sizeof(keyState_));
-        keyboard_->GetDeviceState(sizeof(keyState_), keyState_);
-    }
+    const ImGuiIO& io = ImGui::GetIO();
+
+    // Keyboard update
+    if (!io.WantCaptureKeyboard) {UpdateKeyboard();}
+
+    // Mouse 
 }
 
 bool Input::IsPress(const BYTE _key) const {
@@ -49,4 +51,12 @@ bool Input::IsPress(const BYTE _key) const {
 
 bool Input::IsTrigger(const BYTE _key) const {
     return keyState_[_key] && !preState_[_key];
+}
+
+void Input::UpdateKeyboard() {
+    if (keyboard_) {
+        keyboard_->Acquire();
+        memcpy_s(preState_, sizeof(keyState_), keyState_, sizeof(keyState_));
+        keyboard_->GetDeviceState(sizeof(keyState_), keyState_);
+    }
 }

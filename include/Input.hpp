@@ -45,6 +45,8 @@ public:
 
     //void SetEventSystem(EventSystem* eventSystem) { /*eventSystem_ = eventSystem;*/ }
 private:
+    void UpdateKeyboard();
+
 }; // class Input
 
 #endif // Input_HPP_
