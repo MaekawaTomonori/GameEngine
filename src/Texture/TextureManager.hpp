@@ -1,4 +1,6 @@
-#pragma once
+#ifndef TEXTUREMANAGER_HPP_
+#define TEXTUREMANAGER_HPP_
+
 #include <d3d12.h>
 #include <mutex>
 #include <wrl/client.h>
@@ -94,4 +96,6 @@ private: //Methods
 
     static DirectX::ScratchImage LoadDDS(const std::wstring& _path);
 };
+
+#endif // TEXTUREMANAGER_HPP_
 

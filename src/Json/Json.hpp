@@ -1,4 +1,6 @@
-#pragma once
+#ifndef JSON_HPP_
+#define JSON_HPP_
+
 #include <map>
 #include <string>
 #include <variant>
@@ -48,4 +50,6 @@ private:
     void Register(const std::string& _name);
     void LoadJson(const std::string& _path, std::string _name);
 };
+
+#endif // JSON_HPP_
 

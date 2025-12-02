@@ -1,4 +1,6 @@
-#pragma once
+#ifndef LIGHTMANAGER_HPP_
+#define LIGHTMANAGER_HPP_
+
 #include <d3d12.h>
 #include <memory>
 #include <vector>
@@ -84,4 +86,6 @@ private:
     void Load();
     void Save() const;
 };
+
+#endif // LIGHTMANAGER_HPP_
 
