@@ -2,10 +2,9 @@
 #define Quaternion_HPP_
 #include <cmath>
 
-/// <summary>
-/// クォータニオン構造体
-/// 3D回転を表現し、ジンバルロックを回避
-/// </summary>
+/** @brief クォータニオン構造体
+ ** 3D回転を表現し、ジンバルロックを回避
+ **/
 struct Quaternion{
     float x, y, z, w;
 

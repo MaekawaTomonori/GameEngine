@@ -5,10 +5,9 @@
 
 #include "Vector2.hpp"
 
-/// <summary>
-/// 3Dベクトル構造体
-/// 3D座標と基本的なベクトル演算を提供
-/// </summary>
+/** @brief 3Dベクトル構造体
+ ** 3D座標と基本的なベクトル演算を提供
+ **/
 struct Vector3{
     float x = 0.f, y = 0.f, z = 0.f;
 

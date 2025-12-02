@@ -12,10 +12,9 @@
 
 class Transition;
 
-/// <summary>
-/// シーン切り替え管理クラス
-/// シーン遷移とトランジションエフェクトを管理
-/// </summary>
+/** @brief シーン切り替え管理クラス
+ ** シーン遷移とトランジションエフェクトを管理
+ **/
 class SceneSwitcher {
 public:
     struct Context {
@@ -36,20 +35,17 @@ private:
 
 public:
     SceneSwitcher();
-    /// <summary>
-    /// セットアップ
-    /// </summary>
-    /// <param name="_context">コンテキスト</param>
+    /** @brief セットアップ
+     ** @param _context コンテキスト
+     **/
     void Setup(const Context& _context);
 
-    /// <summary>
-    /// 更新処理
-    /// </summary>
+    /** @brief 更新処理
+     **/
     void Update();
 
-    /// <summary>
-    /// 描画処理
-    /// </summary>
+    /** @brief 描画処理
+     **/
     void Draw();
 
     /// @brief シーンを登録する
@@ -57,15 +53,13 @@ public:
     /// @param _creator シーン生成関数
     void RegisterScene(const std::string& _name, const std::function<std::unique_ptr<IScene>()>& _creator) const;
 
-    /// <summary>
-    /// シーンを変更
-    /// </summary>
-    /// <param name="_name">シーン名</param>
+    /** @brief シーンを変更
+     ** @param _name シーン名
+     **/
     void Change(const std::string& _name);
 
-    /// <summary>
-    /// デバッグ情報の表示
-    /// </summary>
+    /** @brief デバッグ情報の表示
+     **/
     void Debug();
 
     const Context& GetContext() const;

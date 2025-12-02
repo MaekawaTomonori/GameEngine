@@ -8,10 +8,9 @@
 
 class IScene;
 
-/// <summary>
-/// シーンファクトリーの抽象基底クラス
-/// ゲーム固有のシーン生成を実装するためのインターフェース
-/// </summary>
+/** @brief シーンファクトリーの抽象基底クラス
+ ** ゲーム固有のシーン生成を実装するためのインターフェース
+ **/
 class SceneFactory {
     using CreateFunc = std::function<std::unique_ptr<IScene>()>;
     std::unordered_map<std::string, CreateFunc> creators_;

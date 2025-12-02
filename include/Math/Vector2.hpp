@@ -3,10 +3,9 @@
 
 #include <cmath>
 
-/// <summary>
-/// 2Dベクトル構造体
-/// 2D座標と基本的なベクトル演算を提供
-/// </summary>
+/** @brief 2Dベクトル構造体
+ ** 2D座標と基本的なベクトル演算を提供
+ **/
 struct Vector2{
     float x, y;
 

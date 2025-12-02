@@ -5,29 +5,25 @@
 #include "src/Mesh/Repository/MeshRepository.hpp"
 #include "src/Model/Repository/ModelRepository.hpp"
 
-/// <summary>
-/// リソースリポジトリクラス
-/// モデルとメッシュのリポジトリを統合管理
-/// </summary>
+/** @brief リソースリポジトリクラス
+ ** モデルとメッシュのリポジトリを統合管理
+ **/
 class ResourceRepository {
     std::unique_ptr<ModelRepository> model_;
     std::unique_ptr<MeshRepository> mesh_;
 public:
-    /// <summary>
-    /// リソースリポジトリを初期化
-    /// </summary>
+    /** @brief リソースリポジトリを初期化
+     **/
     void Initialize();
 
-    /// <summary>
-    /// モデルリポジトリを取得
-    /// </summary>
-    /// <returns>モデルリポジトリポインタ</returns>
+    /** @brief モデルリポジトリを取得
+     ** @return モデルリポジトリポインタ
+     **/
     ModelRepository* GetModelRepository() const;
 
-    /// <summary>
-    /// メッシュリポジトリを取得
-    /// </summary>
-    /// <returns>メッシュリポジトリポインタ</returns>
+    /** @brief メッシュリポジトリを取得
+     ** @return メッシュリポジトリポインタ
+     **/
     MeshRepository* GetMeshRepository() const;
 }; // class ResourceRepository
 

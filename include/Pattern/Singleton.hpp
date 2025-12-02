@@ -3,30 +3,26 @@
 #include <mutex>
 #include <cassert>
 
-/// <summary>
-/// シングルトンファイナライザークラス
-/// シングルトンインスタンスの破棄を管理
-/// </summary>
+/** @brief シングルトンファイナライザークラス
+ ** シングルトンインスタンスの破棄を管理
+ **/
 class SingletonFinalizer{
     public:
     using Finalizer = void(*)();
 
-    /// <summary>
-    /// ファイナライザーを追加
-    /// </summary>
-    /// <param name="finalizer">終了処理関数</param>
+    /** @brief ファイナライザーを追加
+     ** @param finalizer 終了処理関数
+     **/
     static void AddFinalizer(Finalizer finalizer);
 
-    /// <summary>
-    /// 全シングルトンを破棄
-    /// </summary>
+    /** @brief 全シングルトンを破棄
+     **/
     static void Finalize();
 };
 
-/// <summary>
-/// シングルトンパターンテンプレートクラス
-/// スレッドセーフな単一インスタンス管理を提供
-/// </summary>
+/** @brief シングルトンパターンテンプレートクラス
+ ** スレッドセーフな単一インスタンス管理を提供
+ **/
 template <typename T>
 class Singleton {
     static T* instance_;
@@ -36,10 +32,9 @@ public:
     Singleton(const Singleton&) = delete;
     Singleton& operator=(const Singleton&) = delete;
 
-    /// <summary>
-    /// シングルトンインスタンスを取得
-    /// </summary>
-    /// <returns>インスタンスへのポインタ</returns>
+    /** @brief シングルトンインスタンスを取得
+     ** @return インスタンスへのポインタ
+     **/
     static T* GetInstance() {
         std::call_once(flag_, Create);
         assert(instance_);

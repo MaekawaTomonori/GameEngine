@@ -7,31 +7,27 @@
 
 #include "LevelData.hpp"
 
-/// <summary>
-/// ステージリポジトリクラス
-/// レベルデータのキャッシュと管理を提供
-/// </summary>
+/** @brief ステージリポジトリクラス
+ ** レベルデータのキャッシュと管理を提供
+ **/
 class StageRepository {
     std::unordered_map<std::string, std::unique_ptr<LevelData>> data_;
 public:
-    /// <summary>
-    /// レベルデータを取得
-    /// </summary>
-    /// <param name="_name">レベル名</param>
-    /// <returns>レベルデータポインタ</returns>
+    /** @brief レベルデータを取得
+     ** @param _name レベル名
+     ** @return レベルデータポインタ
+     **/
     LevelData* Get(const std::string& _name);
 
-    /// <summary>
-    /// レベルデータを追加
-    /// </summary>
-    /// <param name="_name">レベル名</param>
-    /// <param name="_data">レベルデータ</param>
+    /** @brief レベルデータを追加
+     ** @param _name レベル名
+     ** @param _data レベルデータ
+     **/
     void Add(const std::string& _name, std::unique_ptr<LevelData> _data);
 
-    /// <summary>
-    /// レベルデータを削除
-    /// </summary>
-    /// <param name="_name">レベル名</param>
+    /** @brief レベルデータを削除
+     ** @param _name レベル名
+     **/
     void Remove(const std::string& _name);
 }; // class StageRepository
 

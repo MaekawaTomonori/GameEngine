@@ -8,25 +8,22 @@
 class DebugUI;
 class PostProcessExecutor;
 
-/// <summary>
-/// PostProcessプリセット構成エディター
-/// presets.jsonの編集のみを担当（プリセット構成管理）
-/// キーフレーム編集は各Effectが担当
-/// </summary>
+/** @brief PostProcessプリセット構成エディター
+ ** presets.jsonの編集のみを担当（プリセット構成管理）
+ ** キーフレーム編集は各Effectが担当
+ **/
 class PostProcessPresetEditor {
 public:
-    /// <summary>
-    /// プリセットメンバー（エフェクト構成）
-    /// </summary>
+    /** @brief プリセットメンバー（エフェクト構成）
+     **/
     struct PresetMember {
         std::string type;        // "Vignette"
         std::string name;        // "MainVignette"
         bool autoCreate = true;  // 自動生成フラグ
     };
 
-    /// <summary>
-    /// プリセット構成データ
-    /// </summary>
+    /** @brief プリセット構成データ
+     **/
     struct PresetData {
         std::string name;                       // "DarkScene"
         std::string mode = "maintain_state";    // "disable_unlisted" or "maintain_state"
@@ -73,115 +70,93 @@ public:
     PostProcessPresetEditor() = default;
     ~PostProcessPresetEditor() = default;
 
-    /// <summary>
-    /// 初期化
-    /// </summary>
+    /** @brief 初期化
+     **/
     void Initialize(DebugUI* _debug, PostProcessExecutor* _executor);
 
-    /// <summary>
-    /// エディターウィンドウを表示
-    /// </summary>
+    /** @brief エディターウィンドウを表示
+     **/
     void ShowEditor();
 
-    /// <summary>
-    /// エディターを開く
-    /// </summary>
+    /** @brief エディターを開く
+     **/
     void OpenEditor(const std::string& _presetName = "");
 
-    /// <summary>
-    /// エディターを閉じる
-    /// </summary>
+    /** @brief エディターを閉じる
+     **/
     void CloseEditor();
 
-    /// <summary>
-    /// エディターが開いているか
-    /// </summary>
+    /** @brief エディターが開いているか
+     **/
     bool IsOpen() const { return showEditor_; }
 
 private:
-    /// <summary>
-    /// プリセットを読み込んで編集開始
-    /// </summary>
+    /** @brief プリセットを読み込んで編集開始
+     **/
     void LoadPresetForEditing(const std::string& _presetName);
 
-    /// <summary>
-    /// 編集中のプリセットを保存
-    /// </summary>
+    /** @brief 編集中のプリセットを保存
+     **/
     void SaveEditingPreset();
 
-    /// <summary>
-    /// 新規プリセット作成
-    /// </summary>
+    /** @brief 新規プリセット作成
+     **/
     void CreateNewPreset(const std::string& _name = "");
 
-    /// <summary>
-    /// プリセット編集を停止
-    /// </summary>
+    /** @brief プリセット編集を停止
+     **/
     void StopEditingPreset();
 
-    /// <summary>
-    /// プリセットを削除
-    /// </summary>
+    /** @brief プリセットを削除
+     **/
     void DeletePreset(const std::string& _presetName);
 
-    /// <summary>
-    /// 利用可能なプリセット一覧を取得
-    /// </summary>
+    /** @brief 利用可能なプリセット一覧を取得
+     **/
     std::vector<std::string> GetAvailablePresets() const;
 
-    /// <summary>
-    /// 利用可能なエフェクトタイプ一覧を取得
-    /// </summary>
+    /** @brief 利用可能なエフェクトタイプ一覧を取得
+     **/
     std::vector<std::string> GetAvailableEffectTypes() const;
 
-    /// <summary>
-    /// メンバー追加
-    /// </summary>
+    /** @brief メンバー追加
+     **/
     void AddMember(const std::string& _type, const std::string& _name, bool _autoCreate = true);
 
-    /// <summary>
-    /// メンバー削除
-    /// </summary>
+    /** @brief メンバー削除
+     **/
     void RemoveMember(int index);
 
-    /// <summary>
-    /// メンバーを上に移動
-    /// </summary>
+    /** @brief メンバーを上に移動
+     **/
     void MoveMemberUp(int index);
 
-    /// <summary>
-    /// メンバーを下に移動
-    /// </summary>
+    /** @brief メンバーを下に移動
+     **/
     void MoveMemberDown(int index);
 
-    /// <summary>
-    /// プリセットを複製
-    /// </summary>
+    /** @brief プリセットを複製
+     **/
     void DuplicatePreset(const std::string& _sourceName, const std::string& _newName);
 
-    /// <summary>
-    /// プリセットをプレビュー
-    /// </summary>
+    /** @brief プリセットをプレビュー
+     **/
     void PreviewPreset(const std::string& _presetName);
 
-    /// <summary>
-    /// プレビューを停止
-    /// </summary>
+    /** @brief プレビューを停止
+     **/
     void StopPreview();
 
-    /// <summary>
-    /// プリセットを実行（Executorに適用）
-    /// </summary>
+    /** @brief プリセットを実行（Executorに適用）
+     **/
     void ApplyPreset(const std::string& _presetName);
 
-    /// <summary>
-    /// プリセット名のバリデーション
-    /// </summary>
+    /** @brief プリセット名のバリデーション
+     **/
     bool ValidatePresetName(const std::string& _name, std::string& _errorMsg) const;
 
-    /// <summary>
-    /// プリセット情報を取得（表示用）
-    /// </summary>
+    /** @brief プリセット情報を取得（表示用）
+     **/
     struct PresetInfo {
         std::string name;
         int memberCount;
@@ -190,9 +165,8 @@ private:
     };
     PresetInfo GetPresetInfo(const std::string& _presetName) const;
 
-    /// <summary>
-    /// フィルタ・ソート済みプリセット一覧を取得
-    /// </summary>
+    /** @brief フィルタ・ソート済みプリセット一覧を取得
+     **/
     std::vector<std::string> GetFilteredAndSortedPresets() const;
 
     // UI Rendering Methods

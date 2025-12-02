@@ -13,14 +13,12 @@
 #include "PointLight/PointLight.h"
 #include "SpotLight/SpotLight.h"
 
-/// <summary>
-/// ライト管理クラス
-/// 指向性ライト、点光源、スポットライトを統合管理
-/// </summary>
+/** @brief ライト管理クラス
+ ** 指向性ライト、点光源、スポットライトを統合管理
+ **/
 class LightManager final{
-	/// <summary>
-	/// ライト数カウント
-	/// </summary>
+	/** @brief ライト数カウント
+	 **/
 	struct LightCount{
         uint32_t dlCount;
         uint32_t plCount;
@@ -55,33 +53,28 @@ class LightManager final{
 public:
     ~LightManager();
 
-    /// <summary>
-    /// ライトマネージャーを初期化
-    /// </summary>
-    /// <param name="_adapter">DirectXアダプター</param>
-    /// <param name="_debug">デバッグUI</param>
+    /** @brief ライトマネージャーを初期化
+     ** @param _adapter DirectXアダプター
+     ** @param _debug デバッグUI
+     **/
 	void Initialize(DirectXAdapter* _adapter, DebugUI* _debug);
 
-    /// <summary>
-    /// ライトの更新処理
-    /// </summary>
+    /** @brief ライトの更新処理
+     **/
     void Update();
 
-    /// <summary>
-    /// ライトを描画
-    /// </summary>
+    /** @brief ライトを描画
+     **/
     void Draw() const;
 
-    /// <summary>
-    /// ライトを追加
-    /// </summary>
-    /// <param name="type">ライトタイプ</param>
+    /** @brief ライトを追加
+     ** @param type ライトタイプ
+     **/
     void Add(LightType type);
 
-    /// <summary>
-    /// ライトの参照座標を設定
-    /// </summary>
-    /// <param name="_ref">参照座標</param>
+    /** @brief ライトの参照座標を設定
+     ** @param _ref 参照座標
+     **/
     void SetReference(Vector3& _ref);
 
 private:

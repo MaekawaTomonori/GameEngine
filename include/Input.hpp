@@ -4,10 +4,9 @@
 #include <dinput.h>
 #include <wrl/client.h>
 
-/// <summary>
-/// 入力処理クラス
-/// キーボード、マウス、ジョイスティックの入力を管理
-/// </summary>
+/** @brief 入力処理クラス
+ ** キーボード、マウス、ジョイスティックの入力を管理
+ **/
 class Input {
     HINSTANCE hInstance_{};
     HWND hWnd_{};
@@ -23,23 +22,20 @@ class Input {
 
     //EventSystem* eventSystem_ = nullptr;
 public:
-    /// <summary>
-    /// 入力システムを初期化
-    /// </summary>
-    /// <param name="_hWnd">ウィンドウハンドル</param>
-    /// <param name="_hInstance">インスタンスハンドル</param>
+    /** @brief 入力システムを初期化
+     ** @param _hWnd ウィンドウハンドル
+     ** @param _hInstance インスタンスハンドル
+     **/
     void Initialize(HWND _hWnd, HINSTANCE _hInstance);
 
-    /// <summary>
-    /// 入力状態を更新
-    /// </summary>
+    /** @brief 入力状態を更新
+     **/
     void Update();
 
-    /// <summary>
-    /// キーが押されているかを判定
-    /// </summary>
-    /// <param name="_key">キーコード</param>
-    /// <returns>押されている場合true</returns>
+    /** @brief キーが押されているかを判定
+     ** @param _key キーコード
+     ** @return 押されている場合true
+     **/
     bool IsPress(BYTE _key) const;
     bool IsTrigger(BYTE _key) const;
 

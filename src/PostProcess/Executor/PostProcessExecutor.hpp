@@ -72,22 +72,20 @@ class PostProcessExecutor {
     std::unique_ptr<PostProcessPresetEditor> presetEditor_;
 
 public:
-    /// <summary>
-    /// 初期化処理
-    /// <param name=_adapter"> DirectXアダプター</param>
-    ///  <param name=_srv"> SRVマネージャー</param>
-    /// <param name=_debug"> デバッグUI</param>
-    /// </summary>
+    /** @brief 初期化処理
+     ** <param name=_adapter"> DirectXアダプター</param>
+     **  <param name=_srv"> SRVマネージャー</param>
+     ** <param name=_debug"> デバッグUI</param>
+     **/
     void Initialize(DirectXAdapter* _adapter, SRVManager* _srv, DebugUI* _debug);
 
-    /// <summary>
-    /// ポストエフェクトファクトリーの設定
-    /// </summary>
+    /** @brief ポストエフェクトファクトリーの設定
+     **/
     void SetFactory(AbstractPostEffectFactory* _factory);
 
-    /// <summary>
-    ///  エフェクトの追加
     ///
+    /** @brief  エフェクトの追加
+     **/
     void Add(std::unique_ptr<IPostEffect> _effect, const std::string& _name = "NoName");
 
     void BeginFrame() const;
@@ -99,13 +97,12 @@ public:
 
     void Debug();
 
-    /// <summary>
-    /// プリセットを適用（遅延初期化 + アニメーション開始）
-    /// </summary>
-    /// <param name="_presetName">プリセット名（presets.jsonのキー）</param>
-    /// <param name="_mode">"add"または"replace"</param>
-    /// <param name="_ignoreList">無視するエフェクト名リスト</param>
-    /// <param name="_onComplete">アニメーション完了時のコールバック（オプション）</param>
+    /** @brief プリセットを適用（遅延初期化 + アニメーション開始）
+     ** @param _presetName プリセット名（presets.jsonのキー）
+     ** @param _mode "add"または"replace"
+     ** @param _ignoreList 無視するエフェクト名リスト
+     ** @param _onComplete アニメーション完了時のコールバック（オプション）
+     **/
     void ApplyPreset(
         const std::string& _presetName,
         const std::string& _mode = "replace",
@@ -113,22 +110,19 @@ public:
         std::function<void()> _onComplete = nullptr
     );
 
-    /// <summary>
-    /// アニメーション更新（毎フレーム呼び出し）
-    /// </summary>
-    /// <param name="_deltaTime">フレーム間時間</param>
+    /** @brief アニメーション更新（毎フレーム呼び出し）
+     ** @param _deltaTime フレーム間時間
+     **/
     void Update(float _deltaTime);
 
-    /// <summary>
-    /// 現在のアクティブエフェクトの状態をJSONに保存
-    /// </summary>
-    /// <param name="_presetName">保存先プリセット名</param>
+    /** @brief 現在のアクティブエフェクトの状態をJSONに保存
+     ** @param _presetName 保存先プリセット名
+     **/
     void SavePreset(const std::string& _presetName);
 
-    /// <summary>
-    /// プリセットエディターを開く
-    /// </summary>
-    /// <param name="_presetName">編集するプリセット名（空なら新規作成）</param>
+    /** @brief プリセットエディターを開く
+     ** @param _presetName 編集するプリセット名（空なら新規作成）
+     **/
     void OpenPresetEditor(const std::string& _presetName = "");
 
     /// @brief エフェクトを検索、なければ生成
@@ -138,17 +132,15 @@ public:
     /// @return エフェクトポインタ、生成失敗時はnullptr
     IPostEffect* FindOrCreate(const std::string& _type, const std::string& _name, bool _create);
 
-    /// <summary>
-    /// レンダーテクスチャをリサイズ（ウィンドウリサイズ時に呼び出し）
-    /// </summary>
+    /** @brief レンダーテクスチャをリサイズ（ウィンドウリサイズ時に呼び出し）
+     **/
     void ResizeRenderTextures();
 
 private:
     void CreateSceneRenderTexture();
 
-    /// <summary>
-    /// RTV/SRV記述子を作成（DRY原則に基づく共通化）
-    /// </summary>
+    /** @brief RTV/SRV記述子を作成（DRY原則に基づく共通化）
+     **/
     void CreateRenderTextureViews();
 }; // class PostProcessExecutor
 

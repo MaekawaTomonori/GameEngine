@@ -8,10 +8,9 @@
 #include <Windows.h>
 #include <string>
 
-/// <summary>
-/// ウィンドウクラス
-/// Windowsウィンドウの生成と管理を提供
-/// </summary>
+/** @brief ウィンドウクラス
+ ** Windowsウィンドウの生成と管理を提供
+ **/
 class Window {
     std::wstring title_ = L"Title";
 
@@ -26,64 +25,54 @@ class Window {
 public:
     ~Window() = default;
 
-    /// <summary>
-    /// ウィンドウを作成
-    /// </summary>
-    /// <returns>成功した場合true</returns>
+    /** @brief ウィンドウを作成
+     ** @return 成功した場合true
+     **/
     bool Create();
 
-    /// <summary>
-    /// ウィンドウが有効かを判定
-    /// </summary>
-    /// <returns>有効な場合true</returns>
+    /** @brief ウィンドウが有効かを判定
+     ** @return 有効な場合true
+     **/
     bool IsEnabled();
 
-    /// <summary>
-    /// ウィンドウハンドルを取得
-    /// </summary>
-    /// <returns>ウィンドウハンドル</returns>
+    /** @brief ウィンドウハンドルを取得
+     ** @return ウィンドウハンドル
+     **/
     HWND GetWindowHandle() const;
 
-    /// <summary>
-    /// インスタンスハンドルを取得
-    /// </summary>
-    /// <returns>インスタンスハンドル</returns>
+    /** @brief インスタンスハンドルを取得
+     ** @return インスタンスハンドル
+     **/
     HINSTANCE GetInstanceHandle() const;
 
-    /// <summary>
-    /// ウィンドウサイズを設定
-    /// </summary>
-    /// <param name="width">幅</param>
-    /// <param name="height">高さ</param>
+    /** @brief ウィンドウサイズを設定
+     ** @param width 幅
+     ** @param height 高さ
+     **/
     void SetSize(int width, int height) const;
 
-    /// <summary>
-    /// ウィンドウタイトルを設定
-    /// </summary>
-    /// <param name="_title">タイトル文字列</param>
+    /** @brief ウィンドウタイトルを設定
+     ** @param _title タイトル文字列
+     **/
     void SetTitle(const std::string& _title);
-    /// <summary>
-    /// ボーダレスウィンドウモードを切り替え
-    /// </summary>
+    /** @brief ボーダレスウィンドウモードを切り替え
+     **/
     void ToggleBorderless();
 
-    /// <summary>
-    /// ボーダレスモードかどうか
-    /// </summary>
-    /// <returns>ボーダレスモードの場合true</returns>
+    /** @brief ボーダレスモードかどうか
+     ** @return ボーダレスモードの場合true
+     **/
     bool IsBorderless() const { return isBorderless_; }
 
 private:
     static LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
-    /// <summary>
-    /// ボーダレスフルスクリーン化
-    /// </summary>
+    /** @brief ボーダレスフルスクリーン化
+     **/
     void BorderlessFullScreen();
 
-    /// <summary>
-    /// 通常ウィンドウモードに戻す
-    /// </summary>
+    /** @brief 通常ウィンドウモードに戻す
+     **/
     void RestoreWindowMode() const;
 
 }; // class Window

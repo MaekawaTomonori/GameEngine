@@ -6,18 +6,16 @@
 #include "Math/Transform.hpp"
 #include "Math/Vector3.hpp"
 
-/// <summary>
-/// GPU転送用のカメラデータ
-/// </summary>
+/** @brief GPU転送用のカメラデータ
+ **/
 struct CameraForGpu {
     Vector3 position;
     float pad;
 };
 
-/// <summary>
-/// カメラクラス
-/// ビュー行列と投影行列を管理
-/// </summary>
+/** @brief カメラクラス
+ ** ビュー行列と投影行列を管理
+ **/
 class Camera {
 public:
     Transform transform_{};
@@ -38,80 +36,67 @@ private:
 public:
     Camera();
 
-    /// <summary>
-    /// カメラを初期化
-    /// </summary>
-    /// <param name="_ratio">アスペクト比</param>
+    /** @brief カメラを初期化
+     ** @param _ratio アスペクト比
+     **/
     void Initialize(float _ratio);
 
-    /// <summary>
-    /// カメラの更新処理
-    /// </summary>
+    /** @brief カメラの更新処理
+     **/
     void Update();
 
-    /// <summary>
-    /// デバッグ情報の表示
-    /// </summary>
+    /** @brief デバッグ情報の表示
+     **/
     void Debug();
 
-    /// <summary>
-    /// ユニークIDを取得
-    /// </summary>
-    /// <returns>ユニークID文字列</returns>
+    /** @brief ユニークIDを取得
+     ** @return ユニークID文字列
+     **/
     std::string GetUniqueId();
 
-    /// <summary>
-    /// ビュー行列を取得
-    /// </summary>
-    /// <returns>ビュー行列への参照</returns>
+    /** @brief ビュー行列を取得
+     ** @return ビュー行列への参照
+     **/
     const Matrix4x4 &GetView() const { return view_; }
 
-    /// <summary>
-    /// 投影行列を取得
-    /// </summary>
-    /// <returns>投影行列への参照</returns>
+    /** @brief 投影行列を取得
+     ** @return 投影行列への参照
+     **/
     const Matrix4x4 &GetProjection() const { return projection_; }
 
-    /// <summary>
-    /// カメラ行列を取得
-    /// </summary>
-    /// <returns>カメラ行列への参照</returns>
+    /** @brief カメラ行列を取得
+     ** @return カメラ行列への参照
+     **/
     const Matrix4x4 &GetMatrix() const { return matrix_; }
 
-    /// <summary>
-    /// ビュー投影行列を取得
-    /// </summary>
-    /// <returns>ビュー投影行列</returns>
+    /** @brief ビュー投影行列を取得
+     ** @return ビュー投影行列
+     **/
     Matrix4x4 GetViewProjection() const;
 
-    /// <summary>
-    /// GPU転送用カメラデータを取得
-    /// </summary>
-    /// <returns>GPU用カメラデータ</returns>
+    /** @brief GPU転送用カメラデータを取得
+     ** @return GPU用カメラデータ
+     **/
     CameraForGpu GetCameraForGpu() const;
 
-    /// <summary>
-    /// 視野角を設定
-    /// </summary>
-    /// <param name="fov">視野角（ラジアン）</param>
+    /** @brief 視野角を設定
+     ** @param fov 視野角（ラジアン）
+     **/
     void SetFov(float fov) { fov_ = fov; }
 
-    /// <summary>
-    /// アスペクト比を設定
-    /// </summary>
-    /// <param name="aspectRatio">アスペクト比</param>
+    /** @brief アスペクト比を設定
+     ** @param aspectRatio アスペクト比
+     **/
     void SetAspectRatio(float aspectRatio) { aspectRatio_ = aspectRatio; }
 
-    /// <summary>
-    /// ニアクリップ平面を設定
-    /// </summary>
-    /// <param name="nearPlane">ニアクリップ距離</param>
+    /** @brief ニアクリップ平面を設定
+     ** @param nearPlane ニアクリップ距離
+     **/
     void SetNear(float nearPlane) { near_ = nearPlane; }
 
-    /// <summary>
-    /// ファークリップ平面を設定
-    /// </summary>
-    /// <param name="farPlane">ファークリップ距離</param>
+    /** @brief ファークリップ平面を設定
+     ** @param farPlane ファークリップ距離
+     **/
     void SetFar(float farPlane) { far_ = farPlane; }
 }; // class Camera
 

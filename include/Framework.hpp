@@ -24,10 +24,9 @@
 
 class IGame;
 
-/// <summary>
-/// メインアプリケーションフレームワーククラス
-/// ゲームループの実行とシステムコーディネーションを管理
-/// </summary>
+/** @brief メインアプリケーションフレームワーククラス
+ ** ゲームループの実行とシステムコーディネーションを管理
+ **/
 class Framework {
     GameEngine::Config config_{};
 
@@ -59,50 +58,42 @@ public:
     Framework();
     ~Framework();
 
-    /// <summary>
-    /// ゲームを実行
-    /// </summary>
-    /// <param name="_game">実行するゲームインスタンス</param>
+    /** @brief ゲームを実行
+     ** @param _game 実行するゲームインスタンス
+     **/
     void Execute(std::unique_ptr<IGame> _game);
 
 private:
-    /// <summary>
-    /// フレームワークの初期化
-    /// </summary>
+    /** @brief フレームワークの初期化
+     **/
     void Initialize();
 
-    /// <summary>
-    /// メインループの実行
-    /// </summary>
-    /// <returns>ループを継続する場合true</returns>
+    /** @brief メインループの実行
+     ** @return ループを継続する場合true
+     **/
     bool Loop() const;
 
-    /// <summary>
-    /// 更新処理
-    /// </summary>
+    /** @brief 更新処理
+     **/
     void Update() const;
 
-    /// <summary>
-    /// 描画処理
-    /// </summary>
+    /** @brief 描画処理
+     **/
     void Draw() const;
 
-    /// <summary>
-    /// シャットダウン処理
-    /// </summary>
+    /** @brief シャットダウン処理
+     **/
     void Shutdown();
 
-    /// <summary>
-    /// システム状態のチェック
-    /// </summary>
-    /// <returns>正常な場合true</returns>
+    /** @brief システム状態のチェック
+     ** @return 正常な場合true
+     **/
     bool Check() const;
 
-    /// <summary>
-    /// ウィンドウリサイズ処理（DRY原則に基づく抽出）
-    /// </summary>
-    /// <param name="width">新しい幅</param>
-    /// <param name="height">新しい高さ</param>
+    /** @brief ウィンドウリサイズ処理（DRY原則に基づく抽出）
+     ** @param width 新しい幅
+     ** @param height 新しい高さ
+     **/
     void HandleWindowResize(int width, int height) const;
 }; // class Framework
 

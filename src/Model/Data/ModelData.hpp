@@ -4,26 +4,23 @@
 #include "src/Model/Node/Node.hpp"
 #include "src/Model/Skeleton/Skeleton.hpp"
 
-/// <summary>
-/// 頂点ウェイトデータ
-/// </summary>
+/** @brief 頂点ウェイトデータ
+ **/
 struct VertexWeightData {
     float weight;
     uint32_t index;
 };
 
-/// <summary>
-/// ジョイントウェイトデータ
-/// </summary>
+/** @brief ジョイントウェイトデータ
+ **/
 struct JointWeightData {
     Matrix4x4 inverseBindPose;
     std::vector<VertexWeightData> weights;
 };
 
-/// <summary>
-/// モデルデータ
-/// メッシュ、アニメーション、スケルトン情報を保持
-/// </summary>
+/** @brief モデルデータ
+ ** メッシュ、アニメーション、スケルトン情報を保持
+ **/
 struct ModelData {
     std::map<std::string, JointWeightData> skinCluster;
     std::string name;

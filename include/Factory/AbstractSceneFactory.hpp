@@ -5,19 +5,17 @@
 
 class IScene;
 
-/// <summary>
-/// シーンファクトリーの抽象基底クラス
-/// ゲーム固有のシーン生成を実装するためのインターフェース
-/// </summary>
+/** @brief シーンファクトリーの抽象基底クラス
+ ** ゲーム固有のシーン生成を実装するためのインターフェース
+ **/
 class AbstractSceneFactory {
 public:
 	virtual ~AbstractSceneFactory() = default;
 
-    /// <summary>
-    /// シーンを生成（純粋仮想関数）
-    /// </summary>
-    /// <param name="sceneName">シーン名</param>
-    /// <returns>生成されたシーンのユニークポインタ</returns>
+    /** @brief シーンを生成（純粋仮想関数）
+     ** @param sceneName シーン名
+     ** @return 生成されたシーンのユニークポインタ
+     **/
     virtual std::unique_ptr<IScene> Create(const std::string& sceneName) = 0;
 }; // class AbstractSceneFactory
 

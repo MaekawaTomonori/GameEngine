@@ -13,31 +13,27 @@
 
 const uint32_t MAX_INFLUENCE = 4;
 
-/// <summary>
-/// 3Dモデルクラス
-/// メッシュ、テクスチャ、アニメーション、スキニングを管理
-/// </summary>
+/** @brief 3Dモデルクラス
+ ** メッシュ、テクスチャ、アニメーション、スキニングを管理
+ **/
 class Model {
-    /// <summary>
-    /// 頂点のスキニング影響情報
-    /// </summary>
+    /** @brief 頂点のスキニング影響情報
+     **/
     struct VertexInfluence {
         std::array<float, MAX_INFLUENCE> weights;
         std::array<int32_t, MAX_INFLUENCE> jointIndices;
     };
 
-    /// <summary>
-    /// GPU用のスキニングデータ
-    /// </summary>
+    /** @brief GPU用のスキニングデータ
+     **/
     struct WellForGpu {
         Matrix4x4 space;
         Matrix4x4 inverseTranspose;
     };
 
-    /// <summary>
-    /// スキンクラスターデータ
-    /// アニメーション用のボーン変換情報を保持
-    /// </summary>
+    /** @brief スキンクラスターデータ
+     ** アニメーション用のボーン変換情報を保持
+     **/
     struct SkinCluster {
         std::vector<Matrix4x4> inverseBindPoses;
 
@@ -51,9 +47,8 @@ class Model {
         std::pair<D3D12_CPU_DESCRIPTOR_HANDLE, D3D12_GPU_DESCRIPTOR_HANDLE> paletteHandle;
     };
 
-    /// <summary>
-    /// モデルの変換行列データ
-    /// </summary>
+    /** @brief モデルの変換行列データ
+     **/
     struct Transformation {
         Matrix4x4 wvp;
         Matrix4x4 world;
@@ -95,62 +90,53 @@ class Model {
 public:
     Model();
 
-    /// <summary>
-    /// モデルを初期化
-    /// </summary>
-    /// <param name="_name">モデル名</param>
+    /** @brief モデルを初期化
+     ** @param _name モデル名
+     **/
     void Initialize(const std::string& _name);
 
-    /// <summary>
-    /// モデルの更新処理
-    /// </summary>
+    /** @brief モデルの更新処理
+     **/
     void Update();
 
-    /// <summary>
-    /// モデルを描画
-    /// </summary>
+    /** @brief モデルを描画
+     **/
     void Draw() const;
 
-    /// <summary>
-    /// 平行移動を設定
-    /// </summary>
-    /// <param name="_translate">平行移動ベクトル</param>
-    /// <returns>メソッドチェーン用の自身への参照</returns>
+    /** @brief 平行移動を設定
+     ** @param _translate 平行移動ベクトル
+     ** @return メソッドチェーン用の自身への参照
+     **/
     Model& SetTranslate(Vector3 _translate);
 
-    /// <summary>
-    /// 回転を設定
-    /// </summary>
-    /// <param name="_rotate">回転ベクトル</param>
-    /// <returns>メソッドチェーン用の自身への参照</returns>
+    /** @brief 回転を設定
+     ** @param _rotate 回転ベクトル
+     ** @return メソッドチェーン用の自身への参照
+     **/
     Model& SetRotate(Vector3 _rotate);
 
-    /// <summary>
-    /// スケールを設定
-    /// </summary>
-    /// <param name="_scale">スケールベクトル</param>
-    /// <returns>メソッドチェーン用の自身への参照</returns>
+    /** @brief スケールを設定
+     ** @param _scale スケールベクトル
+     ** @return メソッドチェーン用の自身への参照
+     **/
     Model& SetScale(Vector3 _scale);
 
-    /// <summary>
-    /// 環境マッピング用テクスチャを設定
-    /// </summary>
-    /// <param name="_texture">テクスチャパス</param>
-    /// <returns>メソッドチェーン用の自身への参照</returns>
+    /** @brief 環境マッピング用テクスチャを設定
+     ** @param _texture テクスチャパス
+     ** @return メソッドチェーン用の自身への参照
+     **/
     Model& SetEnvironmentTexture(const std::string& _texture);
 
-    /// <summary>
-    /// テクスチャを設定
-    /// </summary>
-    /// <param name="_texture">テクスチャパス</param>
-    /// <returns>メソッドチェーン用の自身への参照</returns>
+    /** @brief テクスチャを設定
+     ** @param _texture テクスチャパス
+     ** @return メソッドチェーン用の自身への参照
+     **/
     Model& SetTexture(const std::string& _texture);
 
-    /// <summary>
-    /// テクスチャのタイリング倍率を設定
-    /// </summary>
-    /// <param name="_mul">タイリング倍率</param>
-    /// <returns>メソッドチェーン用の自身への参照</returns>
+    /** @brief テクスチャのタイリング倍率を設定
+     ** @param _mul タイリング倍率
+     ** @return メソッドチェーン用の自身への参照
+     **/
     Model& SetTilingMultiply(Vector2 _mul);
 
     ///
@@ -159,62 +145,51 @@ public:
 
     std::string GetUniqueId();
 
-    /// <summary>
-    /// モデルデータを事前読み込み
-    /// </summary>
-    /// <param name="_name">モデル名</param>
+    /** @brief モデルデータを事前読み込み
+     ** @param _name モデル名
+     **/
     static void Load(const std::string& _name);
 
 private:
-    /// <summary>
-    /// デバッグ情報の表示
-    /// </summary>
+    /** @brief デバッグ情報の表示
+     **/
     void Debug();
 
-    /// <summary>
-    /// マップデータの更新
-    /// </summary>
+    /** @brief マップデータの更新
+     **/
     void UpdateMapData() const;
 
-    /// <summary>
-    /// スキンクラスターの生成
-    /// </summary>
+    /** @brief スキンクラスターの生成
+     **/
     void CreateSkinCluster();
 
-    /// <summary>
-    /// バインドポーズの設定
-    /// </summary>
-    /// <param name="_skeleton">スケルトン</param>
+    /** @brief バインドポーズの設定
+     ** @param _skeleton スケルトン
+     **/
     void SetBindPose(Skeleton& _skeleton);
 
-    /// <summary>
-    /// スキンクラスターの更新
-    /// </summary>
+    /** @brief スキンクラスターの更新
+     **/
     void UpdateSkinCluster();
 
-    /// <summary>
-    /// スケルトンの更新
-    /// </summary>
+    /** @brief スケルトンの更新
+     **/
     void UpdateSkeleton() const;
 
-    /// <summary>
-    /// アニメーションの更新
-    /// </summary>
+    /** @brief アニメーションの更新
+     **/
     void UpdateAnimation();
 
-    /// <summary>
-    /// アニメーションの適用
-    /// </summary>
+    /** @brief アニメーションの適用
+     **/
     void ApplyAnimation() const;
 
-    /// <summary>
-    /// デバッグ用ラインの生成
-    /// </summary>
+    /** @brief デバッグ用ラインの生成
+     **/
     void CreateLine();
 
-    /// <summary>
-    /// デバッグ用ラインの描画
-    /// </summary>
+    /** @brief デバッグ用ラインの描画
+     **/
     void DrawLine() const;
 }; // class Model
 
