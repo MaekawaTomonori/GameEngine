@@ -1,3 +1,7 @@
+#ifndef NOMINMAX
+#define NOMINMAX
+#endif
+
 #include "DirectXAdapter.hpp"
 
 #include <cassert>
@@ -279,6 +283,19 @@ void DirectXAdapter::SetSwapChainRenderTarget() const {
     cList_->OMSetRenderTargets(1, &rtvHandles_[bbi], false, nullptr);
     cList_->ClearRenderTargetView(rtvHandles_[bbi], &back.x, 0, nullptr);
 
+    // デバッグ: 実際のSwapChainバッファサイズを確認
+    static bool firstFrame = true;
+    if (firstFrame) {
+        D3D12_RESOURCE_DESC desc = swapChainResources_[bbi]->Get()->GetDesc();
+        Log::Send(Log::Level::INFO,
+            "[RENDER] SwapChain buffer actual size: " +
+            std::to_string(desc.Width) + "x" + std::to_string(desc.Height));
+        Log::Send(Log::Level::INFO,
+            "[RENDER] Viewport size: " +
+            std::to_string(static_cast<int>(viewport_.Width)) + "x" + std::to_string(static_cast<int>(viewport_.Height)));
+        firstFrame = false;
+    }
+
     cList_->RSSetViewports(1, &viewport_);
     cList_->RSSetScissorRects(1, &scissorRect_);
 }
@@ -465,27 +482,38 @@ bool DirectXAdapter::CreateFence() {
 }
 
 bool DirectXAdapter::CreateRTV() {
-    rtvHeap_ = std::make_unique<Heap>();
-    if (!rtvHeap_ || !rtvHeap_->Create(device_.Get(), D3D12_DESCRIPTOR_HEAP_TYPE_RTV, 2, D3D12_DESCRIPTOR_HEAP_FLAG_NONE)){
-        return false;
+    // RTVヒープは初回のみ作成、リサイズ時は既存のものを再利用
+    if (!rtvHeap_) {
+        rtvHeap_ = std::make_unique<Heap>();
+        if (!rtvHeap_->Create(device_.Get(), D3D12_DESCRIPTOR_HEAP_TYPE_RTV, 2, D3D12_DESCRIPTOR_HEAP_FLAG_NONE)){
+            Log::Send(Log::Level::ERR, "Failed to create RTV Heap");
+            return false;
+        }
+        Log::Send(Log::Level::INFO, "RTV Heap Created");
     }
 
-    Log::Send(Log::Level::INFO, "RTV Heap Created");
-
+    // SwapChainバッファを取得してラップ
     swapChainResources_.resize(2);
     for (UINT i = 0; i < 2; ++i){
         Microsoft::WRL::ComPtr<ID3D12Resource> resource;
         if (FAILED(swapChain_->GetBuffer(i, IID_PPV_ARGS(&resource)))){
-            Log::Send(Log::Level::ERR, "Failed to get swap chain buffer");
+            Log::Send(Log::Level::ERR, "Failed to get swap chain buffer " + std::to_string(i));
             return false;
         }
+
+        // 新しいバッファサイズを確認
+        D3D12_RESOURCE_DESC desc = resource->GetDesc();
+        Log::Send(Log::Level::INFO,
+            "SwapChain buffer " + std::to_string(i) + " size: " +
+            std::to_string(desc.Width) + "x" + std::to_string(desc.Height));
+
         swapChainResources_[i] = std::make_unique<DX12Resource>();
         swapChainResources_[i]->Create(resource);
         swapChainResources_[i]->Get()->SetName(std::wstring(L"SwapChain" + std::to_wstring(i)).c_str());
     }
     Log::Send(Log::Level::INFO, "Swap Chain Resources Created");
 
-    //Set RTVs
+    // RTVディスクリプタを作成（既存のヒープに上書き）
     D3D12_RENDER_TARGET_VIEW_DESC rtvDesc = {};
     rtvDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
     rtvDesc.ViewDimension = D3D12_RTV_DIMENSION_TEXTURE2D;
@@ -502,20 +530,36 @@ bool DirectXAdapter::CreateRTV() {
 }
 
 bool DirectXAdapter::CreateDSV() {
+    // 新しいサイズで深度ステンシルリソースを作成
     depthStencil_ = CreateDepthStencilResource(static_cast<int32_t>(windowSize_.first), static_cast<int32_t>(windowSize_.second));
 
-    dsvHeap_ = std::make_unique<Heap>();
-    if (!dsvHeap_->Create(device_.Get(), D3D12_DESCRIPTOR_HEAP_TYPE_DSV, 1, D3D12_DESCRIPTOR_HEAP_FLAG_NONE)){
-        Log::Send(Log::Level::ERR, "Failed to create DSV Heap");
+    if (!depthStencil_) {
+        Log::Send(Log::Level::ERR, "Failed to create depth stencil resource");
         return false;
     }
 
+    Log::Send(Log::Level::INFO,
+        "Depth stencil buffer created: " + std::to_string(windowSize_.first) + "x" + std::to_string(windowSize_.second));
+
+    // DSVヒープは初回のみ作成、リサイズ時は既存のものを再利用
+    if (!dsvHeap_) {
+        dsvHeap_ = std::make_unique<Heap>();
+        if (!dsvHeap_->Create(device_.Get(), D3D12_DESCRIPTOR_HEAP_TYPE_DSV, 1, D3D12_DESCRIPTOR_HEAP_FLAG_NONE)){
+            Log::Send(Log::Level::ERR, "Failed to create DSV Heap");
+            return false;
+        }
+        Log::Send(Log::Level::INFO, "DSV Heap Created");
+    }
+
+    // DSVディスクリプタを作成（既存のヒープに上書き）
     D3D12_DEPTH_STENCIL_VIEW_DESC desc = {};
     desc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
     desc.ViewDimension = D3D12_DSV_DIMENSION_TEXTURE2D;
 
     device_->CreateDepthStencilView(depthStencil_->Get(), &desc, dsvHeap_->Get()->GetCPUDescriptorHandleForHeapStart());
     dsvHandle_ = dsvHeap_->GetCPUHandle(0);
+
+    Log::Send(Log::Level::INFO, "DSV Created");
     return true;
 }
 
@@ -533,6 +577,101 @@ bool DirectXAdapter::CreateViewportAndScissor() {
     scissorRect_.bottom = static_cast<LONG>(windowSize_.second);
     Log::Send(Log::Level::INFO, "Viewport and Scissor Rect Created");
     return true;
+}
+
+void DirectXAdapter::UpdateWindowSize(size_t _width, size_t _height) {
+    Log::Send(Log::Level::INFO,
+        "UpdateWindowSize called: " + std::to_string(_width) + "x" + std::to_string(_height) +
+        " (current: " + std::to_string(windowSize_.first) + "x" + std::to_string(windowSize_.second) + ")");
+
+    // サイズが変わらない場合は何もしない
+    if (_width == windowSize_.first && _height == windowSize_.second) {
+        Log::Send(Log::Level::WARNING, "Window size unchanged, skipping resize");
+        return;
+    }
+
+    // 最小サイズ制約
+    _width = std::max(_width, static_cast<size_t>(1));
+    _height = std::max(_height, static_cast<size_t>(1));
+
+    Log::Send(Log::Level::INFO,
+        "*** STARTING RESIZE: " + std::to_string(windowSize_.first) + "x" + std::to_string(windowSize_.second) +
+        " → " + std::to_string(_width) + "x" + std::to_string(_height) + " ***");
+
+    // GPU同期（重要！）- コマンドキューを完全にフラッシュ
+    uint64_t fenceValue = GetNextFenceValue();
+    cQueue_->Signal(fence_.Get(), fenceValue);
+    WaitForFenceValue(fenceValue);
+
+    Log::Send(Log::Level::INFO, "GPU synchronized, releasing resources...");
+
+    // SwapChainバッファへの参照を完全に解放
+    for (auto& resource : swapChainResources_) {
+        if (resource) {
+            resource.reset();
+        }
+    }
+    swapChainResources_.clear();
+    rtvHandles_.clear();
+
+    // 深度ステンシルバッファを解放
+    if (depthStencil_) {
+        depthStencil_.reset();
+    }
+
+    Log::Send(Log::Level::INFO, "Resources released, resizing swap chain...");
+
+    // SwapChainをリサイズ
+    HRESULT hr = swapChain_->ResizeBuffers(
+        2,                              // バッファ数
+        static_cast<UINT>(_width),      // 新しい幅
+        static_cast<UINT>(_height),     // 新しい高さ
+        DXGI_FORMAT_R8G8B8A8_UNORM,    // フォーマット
+        0                               // フラグ
+    );
+
+    if (FAILED(hr)) {
+        Log::Send(Log::Level::ERR,
+            "Failed to resize swap chain buffers - HRESULT: 0x" +
+            std::to_string(static_cast<unsigned long>(hr)));
+
+        // デバイス削除エラーの特別処理
+        if (hr == DXGI_ERROR_DEVICE_REMOVED) {
+            HRESULT reason = device_->GetDeviceRemovedReason();
+            Log::Send(Log::Level::ERR,
+                "Device removed! Reason: 0x" + std::to_string(static_cast<unsigned long>(reason)));
+        }
+
+        Utils::Alert("Failed to resize swap chain");
+        return;
+    }
+
+    Log::Send(Log::Level::INFO, "SwapChain resized successfully");
+
+    // ウィンドウサイズを更新
+    windowSize_ = {_width, _height};
+
+    // RTVを再作成
+    if (!CreateRTV()) {
+        Log::Send(Log::Level::ERR, "Failed to recreate RTV after resize");
+        Utils::Alert("Failed to recreate RTV");
+        return;
+    }
+
+    // 深度ステンシルバッファを再作成
+    if (!CreateDSV()) {
+        Log::Send(Log::Level::ERR, "Failed to recreate DSV after resize");
+        Utils::Alert("Failed to recreate DSV");
+        return;
+    }
+
+    // ビューポートとシザー矩形を更新
+    viewport_.Width = static_cast<float>(_width);
+    viewport_.Height = static_cast<float>(_height);
+    scissorRect_.right = static_cast<LONG>(_width);
+    scissorRect_.bottom = static_cast<LONG>(_height);
+
+    Log::Send(Log::Level::INFO, "Window resize completed successfully");
 }
 
 bool DirectXAdapter::CreateLimiter() {

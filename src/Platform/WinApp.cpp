@@ -53,4 +53,23 @@ void WinApp::SetTitle(const std::string& _title) const {
     window_->SetTitle(_title);
 }
 
+void WinApp::ToggleBorderless() const {
+    if (window_) {
+        window_->ToggleBorderless();
+    }
+}
+
+void WinApp::GetClientSize(int& width, int& height) const {
+    if (!hWnd_) {
+        width = 1280;
+        height = 720;
+        return;
+    }
+
+    RECT clientRect;
+    GetClientRect(hWnd_, &clientRect);
+    width = clientRect.right - clientRect.left;
+    height = clientRect.bottom - clientRect.top;
+}
+
 

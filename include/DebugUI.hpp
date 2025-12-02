@@ -22,7 +22,7 @@ class DebugUI {
     std::mutex mutex_;
 
     std::unique_ptr<Heap> heap_;
-    ID3D12GraphicsCommandList* cList_ = nullptr;
+    const DirectXAdapter* adapter_ = nullptr;
 
     std::vector<Command> commands_;
 
@@ -32,8 +32,8 @@ public:
     /// <summary>
     /// デバッグUIを初期化
     /// </summary>
-    /// <param name="dx">DirectXアダプター</param>
-    void Initialize(const DirectXAdapter* dx);
+    /// <param name="_adapter">DirectXアダプター</param>
+    void Initialize(const DirectXAdapter* _adapter);
 
     /// <summary>
     /// デバッグUIをレンダリング
@@ -46,6 +46,13 @@ public:
     /// <param name="_id">コマンドID</param>
     /// <param name="_command">実行する関数</param>
     void RegisterCommand(const std::string &_id, std::function<void()> _command);
+
+    /// <summary>
+    /// ImGuiディスプレイサイズを更新（ウィンドウリサイズ時）
+    /// </summary>
+    /// <param name="width">新しい幅</param>
+    /// <param name="height">新しい高さ</param>
+    void UpdateDisplaySize(int width, int height);
 
 private:
     /// <summary>

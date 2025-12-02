@@ -21,6 +21,10 @@ public:
     void SetWindowSize(int width, int height) const;
 
     void SetTitle(const std::string& _title) const;
+
+    void ToggleBorderless() const;
+
+    void GetClientSize(int& width, int& height) const;
 }; // class WinApp
 
 #endif // WinApp_HPP_

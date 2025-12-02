@@ -138,6 +138,11 @@ public:
     /// @return エフェクトポインタ、生成失敗時はnullptr
     IPostEffect* FindOrCreate(const std::string& _type, const std::string& _name, bool _create);
 
+    /// <summary>
+    /// レンダーテクスチャをリサイズ（ウィンドウリサイズ時に呼び出し）
+    /// </summary>
+    void ResizeRenderTextures();
+
 private:
     void CreateSceneRenderTexture();
 }; // class PostProcessExecutor

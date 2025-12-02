@@ -141,6 +141,13 @@ public:
     /// <param name="_debug">デバッグUI</param>
     void DisplayFPS(DebugUI* _debug) const;
 
+    /// <summary>
+    /// ウィンドウサイズを更新（ビューポートとシザー矩形も更新）
+    /// </summary>
+    /// <param name="_width">新しい幅</param>
+    /// <param name="_height">新しい高さ</param>
+    void UpdateWindowSize(size_t _width, size_t _height);
+
 private:
     void EnableDebugLayer();
     bool CreateDXGI();

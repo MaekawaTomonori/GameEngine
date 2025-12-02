@@ -37,10 +37,13 @@ void Input::Initialize(HWND _hWnd, HINSTANCE _hInstance) {
 }
 
 void Input::Update() {
+#ifdef _DEBUG
     const ImGuiIO& io = ImGui::GetIO();
 
     // Keyboard update
-    if (!io.WantCaptureKeyboard) {UpdateKeyboard();}
+    if (!io.WantCaptureKeyboard) 
+#endif
+        UpdateKeyboard();
 
     // Mouse 
 }

@@ -258,6 +258,51 @@ void PostProcessExecutor::CreateSceneRenderTexture() {
     Log::Send(Log::Level::INFO, "PostProcessExecutor scene render texture created successfully");
 }
 
+void PostProcessExecutor::ResizeRenderTextures() {
+    if (!adapter_) {
+        return;
+    }
+
+    Log::Send(Log::Level::INFO,
+        "PostProcessExecutor: Resizing render textures to " +
+        std::to_string(adapter_->GetWidth()) + "x" + std::to_string(adapter_->GetHeight()));
+
+    // 既存のレンダーテクスチャを解放
+    if (renderTexture_) {
+        renderTexture_.reset();
+    }
+
+    // 新しいサイズでレンダーテクスチャを再作成
+    renderTexture_ = adapter_->CreateRenderTextureResource(
+        static_cast<uint32_t>(adapter_->GetWidth()),
+        static_cast<uint32_t>(adapter_->GetHeight()),
+        DXGI_FORMAT_R8G8B8A8_UNORM_SRGB,
+        clearColor_
+    );
+
+    renderTexture_->Get()->SetName(L"RenderTexture");
+
+    if (!renderTexture_->Get()) {
+        Log::Send(Log::Level::ERR, "Failed to recreate scene render texture");
+        return;
+    }
+
+    // RTVを再作成（既存のヒープに上書き）
+    rtvHandle_ = rtvHeap_->GetCPUHandle(0);
+
+    D3D12_RENDER_TARGET_VIEW_DESC rtvDesc = {};
+    rtvDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
+    rtvDesc.ViewDimension = D3D12_RTV_DIMENSION_TEXTURE2D;
+
+    adapter_->GetDevice()->CreateRenderTargetView(renderTexture_->Get(), &rtvDesc, rtvHandle_);
+
+    // SRVを再作成（同じインデックスに上書き）
+    srv_->CreateSRVforTexture2D(srvIndex_, renderTexture_->Get(), DXGI_FORMAT_R8G8B8A8_UNORM_SRGB, 1);
+    srvHandle_ = srv_->GetGPUHandle(srvIndex_);
+
+    Log::Send(Log::Level::INFO, "PostProcessExecutor render textures resized successfully");
+}
+
 IPostEffect* PostProcessExecutor::FindOrCreate(const std::string& _type, const std::string& _name, bool _create) {
     // 既存インスタンス検索
     for (auto& effectData : effects_) {

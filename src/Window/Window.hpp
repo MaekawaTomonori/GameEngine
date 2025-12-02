@@ -13,7 +13,15 @@
 /// Windowsウィンドウの生成と管理を提供
 /// </summary>
 class Window {
-    static LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+    std::wstring title_ = L"Title";
+
+    HWND hWnd_ = nullptr;
+    HINSTANCE hInstance_ = nullptr;
+    bool isBorderless_ = false;
+
+    RECT previousRect_{};
+    LONG previousStyle_ = 0;
+
 public:
     ~Window() = default;
 
@@ -53,12 +61,30 @@ public:
     /// </summary>
     /// <param name="_title">タイトル文字列</param>
     void SetTitle(const std::string& _title);
+    /// <summary>
+    /// ボーダレスウィンドウモードを切り替え
+    /// </summary>
+    void ToggleBorderless();
+
+    /// <summary>
+    /// ボーダレスモードかどうか
+    /// </summary>
+    /// <returns>ボーダレスモードの場合true</returns>
+    bool IsBorderless() const { return isBorderless_; }
 
 private:
-    std::wstring title_ = L"Title";
+    static LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
-    HWND hWnd_ = nullptr;
-    HINSTANCE hInstance_ = nullptr;
+    /// <summary>
+    /// ボーダレスフルスクリーン化
+    /// </summary>
+    void BorderlessFullScreen();
+
+    /// <summary>
+    /// 通常ウィンドウモードに戻す
+    /// </summary>
+    void RestoreWindowMode() const;
+
 }; // class Window
 
 #endif // Window_HPP_

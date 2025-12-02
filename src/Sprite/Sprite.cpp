@@ -73,6 +73,7 @@ void Sprite::Initialize(const std::string&_texture) {
 
 void Sprite::Update() {
     Debug();
+
 #pragma region Vertex position
     float left = 0.f - anchorPoint_.x;
     float right = 1.f - anchorPoint_.x;

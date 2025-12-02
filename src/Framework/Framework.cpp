@@ -125,6 +125,22 @@ void Framework::Update() const {
     if (!Check())return;
 
     input_->Update();
+
+
+    /// Borderless fullscreen toggle
+    if (input_->IsTrigger(DIK_F10)) {
+        windows_->ToggleBorderless();
+
+        // ウィンドウサイズを取得してDirectXAdapter、ImGui、カメラを更新
+        int width, height;
+        windows_->GetClientSize(width, height);
+        dxAdapter_->UpdateWindowSize(static_cast<size_t>(width), static_cast<size_t>(height));
+        postProcessor_->ResizeRenderTextures();
+
+        debugUI_->UpdateDisplaySize(width, height);
+
+    }
+
     cameraDirector_->Update();
     camera_->Update();
     light_->Update();

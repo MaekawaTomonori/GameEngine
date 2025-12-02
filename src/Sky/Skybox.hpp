@@ -50,6 +50,8 @@ public:
     void Update();
     void Draw();
 
+    void SetColor(const Vector4& _color) const;
+
 private:
     void CreateVertex();
     void CreateIndex();

@@ -67,6 +67,10 @@ void Skybox::Draw() {
     }, posteffect_);
 }
 
+void Skybox::SetColor(const Vector4& _color) const {
+    md_->color = _color;
+}
+
 void Skybox::CreateVertex() {
     vr_ = adapter_->CreateBufferResource(sizeof(VertexData) * 24);
     vbv_.BufferLocation = vr_->Get()->GetGPUVirtualAddress();
