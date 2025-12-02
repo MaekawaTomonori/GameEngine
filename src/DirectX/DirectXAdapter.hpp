@@ -62,7 +62,7 @@ class DirectXAdapter {
     D3D12_CPU_DESCRIPTOR_HANDLE dsvHandle_;
 
     //Background color
-    Vector4 back = {0.2f, 0.2f, 0.2f, 1.0f}; // Black
+    Vector4 back_ = {0.2f, 0.2f, 0.2f, 1.0f}; // Black
 
     //Viewport
     D3D12_VIEWPORT viewport_ = {};
