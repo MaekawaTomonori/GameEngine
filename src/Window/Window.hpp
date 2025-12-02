@@ -20,6 +20,7 @@ class Window {
     bool isBorderless_ = false;
 
     RECT previousRect_{};
+    RECT previousClient_{};
     LONG previousStyle_ = 0;
 
 public:

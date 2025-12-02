@@ -87,7 +87,8 @@ void Window::BorderlessFullScreen() {
     if (!hWnd_) return;
     
     previousStyle_ = GetWindowLong(hWnd_, GWL_STYLE);
-    GetClientRect(hWnd_, &previousRect_);
+    GetWindowRect(hWnd_, &previousRect_);
+    GetClientRect(hWnd_, &previousClient_);
     
     // ウィンドウスタイル変更（ボーダレス）
     SetWindowLongPtr(hWnd_, GWL_STYLE, WS_POPUP | WS_VISIBLE);
@@ -137,25 +138,25 @@ void Window::RestoreWindowMode() const {
 
     // リサイズ不可のウィンドウスタイルに戻す
     SetWindowLongPtr(hWnd_, GWL_STYLE, previousStyle_);
+    SetWindowLongPtr(hWnd_, GWL_EXSTYLE, 0);
 
     // 元のサイズに戻す
-    RECT rect = previousRect_;
+    RECT rect = previousClient_;
+    RECT window = previousRect_;
     AdjustWindowRect(&rect, previousStyle_, FALSE);
 
     // ウィンドウを中央に配置
-    int screenWidth = GetSystemMetrics(SM_CXSCREEN);
-    int screenHeight = GetSystemMetrics(SM_CYSCREEN);
     int windowWidth = rect.right - rect.left;
     int windowHeight = rect.bottom - rect.top;
 
     if (!SetWindowPos(
         hWnd_,
         HWND_NOTOPMOST,
-        (screenWidth - windowWidth) / 2,
-        (screenHeight - windowHeight) / 2,
+        window.left,
+        window.top,
         windowWidth,
         windowHeight,
-        SWP_FRAMECHANGED | SWP_NOOWNERZORDER
+        SWP_NOZORDER |SWP_FRAMECHANGED | SWP_NOOWNERZORDER
     )) {
         Utils::DisplayLastErr();
     }
