@@ -1,4 +1,5 @@
-#pragma once
+#ifndef EASING_HPP_
+#define EASING_HPP_
 
 #include "Vector2.hpp"
 #include "Vector3.hpp"
@@ -37,3 +38,5 @@ namespace Ease {
         Vector3 Cubic(Vector3 start, Vector3 end, float t);
     }
 }
+
+#endif // EASING_HPP_

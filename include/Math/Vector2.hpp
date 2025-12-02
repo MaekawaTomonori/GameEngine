@@ -1,4 +1,6 @@
-﻿#pragma once
+﻿#ifndef VECTOR2_HPP_
+#define VECTOR2_HPP_
+
 #include <cmath>
 
 /// <summary>
@@ -46,4 +48,6 @@ struct Vector2{
 
     static Vector2 Random();
 };
+
+#endif // VECTOR2_HPP_
 

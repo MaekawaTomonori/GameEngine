@@ -1,4 +1,6 @@
-#pragma once
+#ifndef MATRIX_HPP_
+#define MATRIX_HPP_
+
 #include "Vector3.hpp"
 
 /// <summary>
@@ -163,3 +165,5 @@ struct Matrix4x4{
         };
     }
 };
+
+#endif // MATRIX_HPP_

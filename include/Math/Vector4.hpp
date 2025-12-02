@@ -1,4 +1,5 @@
-﻿#pragma once
+﻿#ifndef VECTOR4_HPP_
+#define VECTOR4_HPP_
 
 /// <summary>
 /// 4Dベクトル構造体
@@ -7,3 +8,5 @@
 struct Vector4{
 	float x, y, z, w;
 };
+
+#endif // VECTOR4_HPP_

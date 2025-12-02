@@ -1,4 +1,6 @@
-#pragma once
+#ifndef MATH_UTILS_HPP_
+#define MATH_UTILS_HPP_
+
 #include <cmath>
 
 #include "Matrix.hpp"
@@ -60,4 +62,6 @@ namespace MathUtils{
         Matrix4x4 MakeViewportMatrix(float width, float height, float top, float bottom, float depthMax, float depthMin);
     }
 };
+
+#endif // MATH_UTILS_HPP_
 
