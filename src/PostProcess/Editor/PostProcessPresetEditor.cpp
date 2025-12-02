@@ -1364,24 +1364,24 @@ void PostProcessPresetEditor::RenderPointParameters() {
 }
 void PostProcessPresetEditor::AddKeyframePoint(const std::string& pointName) {
     if (pointName.empty()) return;
-    
+
     // 既に存在するか確認
     if (editingKeyframes_.contains(pointName)) {
         Log::Send(Log::Level::WARNING, std::format("Keyframe point '{}' already exists", pointName));
         return;
     }
-    
+
     // 新しいポイントをデフォルト値で作成（Vignetteの例）
     nlohmann::json defaultParams;
     defaultParams["intensity"] = 16.0f;
     defaultParams["scale"] = 0.8f;
     defaultParams["color"] = {1.0f, 1.0f, 1.0f};
-    
+
     editingKeyframes_[pointName] = defaultParams;
     editingKeyframeOrder_.push_back(pointName);
-    
+
     keyframesDirty_ = true;
-    
+
     Log::Send(Log::Level::INFO, std::format("Added keyframe point '{}'", pointName));
 }
 
@@ -1389,15 +1389,15 @@ void PostProcessPresetEditor::RemoveKeyframePoint(int pointIndex) {
     if (pointIndex < 0 || pointIndex >= static_cast<int>(editingKeyframeOrder_.size())) {
         return;
     }
-    
+
     const std::string& pointName = editingKeyframeOrder_[pointIndex];
-    
+
     // JSONから削除
     editingKeyframes_.erase(pointName);
-    
+
     // 順序配列から削除
     editingKeyframeOrder_.erase(editingKeyframeOrder_.begin() + pointIndex);
-    
+
     // 選択インデックスを調整
     if (selectedPointIndex_ >= pointIndex) {
         selectedPointIndex_--;
@@ -1405,9 +1405,9 @@ void PostProcessPresetEditor::RemoveKeyframePoint(int pointIndex) {
             selectedPointIndex_ = 0;
         }
     }
-    
+
     keyframesDirty_ = true;
-    
+
     Log::Send(Log::Level::INFO, std::format("Removed keyframe point '{}'", pointName));
 }
 
@@ -1415,15 +1415,15 @@ void PostProcessPresetEditor::MovePointUp(int pointIndex) {
     if (pointIndex <= 0 || pointIndex >= static_cast<int>(editingKeyframeOrder_.size())) {
         return;
     }
-    
+
     std::swap(editingKeyframeOrder_[pointIndex], editingKeyframeOrder_[pointIndex - 1]);
-    
+
     if (selectedPointIndex_ == pointIndex) {
         selectedPointIndex_ = pointIndex - 1;
     } else if (selectedPointIndex_ == pointIndex - 1) {
         selectedPointIndex_ = pointIndex;
     }
-    
+
     keyframesDirty_ = true;
 }
 
@@ -1431,15 +1431,15 @@ void PostProcessPresetEditor::MovePointDown(int pointIndex) {
     if (pointIndex < 0 || pointIndex >= static_cast<int>(editingKeyframeOrder_.size()) - 1) {
         return;
     }
-    
+
     std::swap(editingKeyframeOrder_[pointIndex], editingKeyframeOrder_[pointIndex + 1]);
-    
+
     if (selectedPointIndex_ == pointIndex) {
         selectedPointIndex_ = pointIndex + 1;
     } else if (selectedPointIndex_ == pointIndex + 1) {
         selectedPointIndex_ = pointIndex;
     }
-    
+
     keyframesDirty_ = true;
 }
 

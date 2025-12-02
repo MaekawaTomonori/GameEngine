@@ -85,14 +85,14 @@ bool Window::IsEnabled() {
 
 void Window::BorderlessFullScreen() {
     if (!hWnd_) return;
-    
+
     previousStyle_ = GetWindowLong(hWnd_, GWL_STYLE);
     GetWindowRect(hWnd_, &previousRect_);
     GetClientRect(hWnd_, &previousClient_);
-    
+
     // ウィンドウスタイル変更（ボーダレス）
     SetWindowLongPtr(hWnd_, GWL_STYLE, WS_POPUP | WS_VISIBLE);
-    
+
     // モニタ情報取得
     HMONITOR hMon = MonitorFromWindow(hWnd_, MONITOR_DEFAULTTONEAREST);
     MONITORINFO mi = { sizeof(mi) };
@@ -100,7 +100,7 @@ void Window::BorderlessFullScreen() {
         Utils::DisplayLastErr();
         return;
     }
-    
+
     // スタイル変更を即座に反映してフルスクリーン化
     if (!SetWindowPos(
         hWnd_,

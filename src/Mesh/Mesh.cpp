@@ -88,17 +88,17 @@ void Mesh::Debug() {
         material_->lighting = 0;
     }
     ImGui::DragFloat("Environment Coefficient", &material_->coefficient, 0.01f, 0.0f, 1.0f);
-    
+
     ImGui::Separator();
     ImGui::Text("UV Settings");
-    
+
     ImGui::Checkbox("Lock Aspect Ratio", &aspectRatioLocked_);
-    
+
     if (aspectRatioLocked_) {
         // Store previous values to detect changes
         static float prevX = material_->tilingMul.x;
         static float prevY = material_->tilingMul.y;
-        
+
         // Update aspect ratio when first locking
         if (ImGui::IsItemActivated()) {
             if (material_->tilingMul.y != 0.0f) {
@@ -107,7 +107,7 @@ void Mesh::Debug() {
             prevX = material_->tilingMul.x;
             prevY = material_->tilingMul.y;
         }
-        
+
         if (ImGui::DragFloat("Tiling X", &material_->tilingMul.x, 0.1f, 0.1f, 10.0f)) {
             // X changed, update Y to maintain aspect ratio
             if (material_->tilingMul.x != prevX) {
@@ -116,7 +116,7 @@ void Mesh::Debug() {
                 prevY = material_->tilingMul.y;
             }
         }
-        
+
         if (ImGui::DragFloat("Tiling Y", &material_->tilingMul.y, 0.1f, 0.1f, 10.0f)) {
             // Y changed, update X to maintain aspect ratio
             if (material_->tilingMul.y != prevY) {
@@ -128,14 +128,14 @@ void Mesh::Debug() {
     } else {
         ImGui::DragFloat2("Tiling Multiplier", &material_->tilingMul.x, 0.1f, 0.1f, 10.0f);
     }
-    
+
     ImGui::Text("UV Transform");
     if (ImGui::TreeNode("UV Transform Matrix")) {
         ImGui::DragFloat4("Row 1", &material_->uvTransform.matrix[0][0], 0.01f);
         ImGui::DragFloat4("Row 2", &material_->uvTransform.matrix[1][0], 0.01f);
         ImGui::DragFloat4("Row 3", &material_->uvTransform.matrix[2][0], 0.01f);
         ImGui::DragFloat4("Row 4", &material_->uvTransform.matrix[3][0], 0.01f);
-        
+
         if (ImGui::Button("Reset to Identity")) {
             material_->uvTransform = MathUtils::Matrix::MakeIdentity();
         }

@@ -16,7 +16,7 @@ class SceneFactory {
     std::unordered_map<std::string, CreateFunc> creators_;
 
 public:
-    
+
     /// @brief シーンを登録する
     /// @param _name シーンの登録名
     /// @param _creator ISceneを継承したシーン生成関数
@@ -30,6 +30,6 @@ public:
     /// @brief 登録されているシーン名の一覧を取得
     /// @returns シーン名のリスト
     std::vector<std::string> GetRegisteredScenes() const;
-}; 
+};
 
 #endif // SceneFactory_HPP_

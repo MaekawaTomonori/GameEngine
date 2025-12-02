@@ -7,10 +7,10 @@
 
 void LineCommon::Initialize(DirectXAdapter* _adapter, DebugUI* _debugUi) {
     Setup(_adapter, _debugUi);
-    
+
     // PipelineStateObjectの初期化
     pipeline_ = std::make_unique<PipelineStateObject>(_adapter);
-    
+
     // PipelineStateObject作成 (Line用)
     pipeline_->SetRootSignature(
         RootSignature()

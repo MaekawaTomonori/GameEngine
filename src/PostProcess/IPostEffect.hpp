@@ -55,22 +55,22 @@ public:
      ** @param presetName プリセット名
      **/
     virtual void LoadPreset(const std::string& presetName) = 0;
-    
+
     /** @brief 現在のパラメータをプリセットとして保存
      ** @param presetName プリセット名
      **/
     virtual void SavePreset(const std::string& presetName) = 0;
-    
+
     /** @brief 現在のパラメータをJSONに変換
      ** @return パラメータのJSON表現
      **/
     virtual nlohmann::json SaveParameters() const = 0;
-    
+
     /** @brief アニメーション進行（tは0.0~1.0）
      ** @param t アニメーション進行度（0.0: 開始、1.0: 終了）
      **/
     virtual void UpdateAnimation(float t) = 0;
-    
+
     ///// <summary>
     ///// キーフレーム名リストを取得
     ///// </summary>

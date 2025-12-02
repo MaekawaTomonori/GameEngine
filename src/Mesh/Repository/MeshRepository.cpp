@@ -19,6 +19,6 @@ MeshData MeshRepository::Get(const std::string& _name) {
     if (data_.contains(_name)){return data_[_name];}
 
     Utils::Alert("MeshRepository: Mesh not found: " + _name);
-    
+
     return {};
 }

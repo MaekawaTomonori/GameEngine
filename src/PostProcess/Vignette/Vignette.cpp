@@ -18,7 +18,7 @@ void Vignette::Initialize() {
         .RegisterSpace = 0,
         .OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND
     };
-    
+
     //Create PSO
     pso_ = std::make_unique<PipelineStateObject>(adapter_);
     pso_->SetRootSignature(

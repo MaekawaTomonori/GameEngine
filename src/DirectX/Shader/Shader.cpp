@@ -83,23 +83,23 @@ IDxcBlob* Shader::CompileCS(const std::wstring& _name) const {
 
 IDxcBlob* Shader::Compile(const std::wstring& _directoryPath, const std::wstring& _filePath, const wchar_t* _profile, IDxcUtils* _dxcUtils, IDxcCompiler3* _dxcCompiler, IDxcIncludeHandler* _includeHandler) {
     Log::SendWithContext(Log::Level::INFO, Utils::Convert(std::format(L"Begin CompileShader, Path : {}, Profile : {}", _filePath, _profile)), "SHADER");
-    
+
     HRESULT hResult = S_FALSE;
     IDxcBlobEncoding* shaderSource = nullptr;
     std::wstring fullPath = _directoryPath + _filePath;
-    
+
     // Log file operation attempt
     Log::LogFileOperation("SHADER_LOAD", Utils::Convert(fullPath), true, "Attempting to load shader file");
-    
+
     hResult = _dxcUtils->LoadFile(fullPath.c_str(), nullptr, &shaderSource);
     if (FAILED(hResult)) {
         Log::LogFileOperation("SHADER_LOAD", Utils::Convert(fullPath), false, "DirectX shader file load failed");
         Utils::Alert("Failed to load shader file: " + Utils::Convert(fullPath));
         return nullptr;
     }
-    
+
     Log::LogFileOperation("SHADER_LOAD", Utils::Convert(fullPath), true, "Shader file loaded successfully");
-   
+
     DxcBuffer shaderSourceBuffer;
     shaderSourceBuffer.Ptr = shaderSource->GetBufferPointer();
     shaderSourceBuffer.Size = shaderSource->GetBufferSize();
@@ -107,13 +107,13 @@ IDxcBlob* Shader::Compile(const std::wstring& _directoryPath, const std::wstring
 
     ///Compiling
     LPCWSTR arguments[] = {
-        _filePath.c_str(), 
+        _filePath.c_str(),
         L"-E", L"main", //EntryPoint
         L"-T", _profile, //ShaderProfile
         L"-I", _directoryPath.c_str(), //IncludePath
         L"-Zi", L"-Qembed_debug", //DebugInfo
-        L"-Od", 
-        L"-Zpr", 
+        L"-Od",
+        L"-Zpr",
     };
 
     IDxcResult* shaderResult = nullptr;
@@ -147,25 +147,25 @@ IDxcBlob* Shader::Compile(const std::wstring& _directoryPath, const std::wstring
 
 std::wstring Shader::FindShaderDirectory() {
     Log::SendWithContext(Log::Level::INFO, "Searching for shader directory", "SHADER_PATH");
-    
+
     // List of possible shader directory paths to try
     std::vector<std::wstring> candidatePaths = {
         L"Assets/Shaders/",                    // Original relative path
         L"./Assets/Shaders/",                  // Explicit current directory
         L"../Assets/Shaders/",                 // Parent directory
-        L"../../Assets/Shaders/",              // Grandparent directory  
+        L"../../Assets/Shaders/",              // Grandparent directory
         L"../Engine/Assets/Shaders/",          // Relative to Game project
         L"../../Engine/Assets/Shaders/",       // Two levels up from Game output
         L"Engine/Assets/Shaders/",             // Direct Engine path
         L"GameTemplate/Engine/Assets/Shaders/" // Full relative path from solution
     };
-    
+
     for (const auto& candidatePath : candidatePaths) {
         try {
             std::string candidatePathStr = Utils::Convert(candidatePath);
             if (std::filesystem::exists(candidatePath)) {
                 Log::LogFileOperation("DIRECTORY_CHECK", candidatePathStr, true, "Directory exists");
-                
+
                 // Verify it contains shader files
                 bool hasShaderFiles = false;
                 for (const auto& entry : std::filesystem::directory_iterator(candidatePath)) {
@@ -174,7 +174,7 @@ std::wstring Shader::FindShaderDirectory() {
                         break;
                     }
                 }
-                
+
                 if (hasShaderFiles) {
                     Log::LogFileOperation("SHADER_DIRECTORY", candidatePathStr, true, "Valid shader directory found with .hlsl files");
                     return candidatePath;
@@ -188,11 +188,11 @@ std::wstring Shader::FindShaderDirectory() {
             Log::LogFileOperation("DIRECTORY_CHECK", Utils::Convert(candidatePath), false, std::string("Exception: ") + e.what());
         }
     }
-    
+
     // If no valid path found, log error and return default
     Log::SendWithContext(Log::Level::ERR, "No valid shader directory found! Using default path.", "SHADER_PATH");
     Log::LogExecutionContext();
-    
+
     return L"Assets/Shaders/";
 }
 

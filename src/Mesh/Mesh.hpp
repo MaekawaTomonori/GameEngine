@@ -19,7 +19,7 @@ class Mesh {
     struct Material {
         Vector4 color;           // 16 bytes (aligned)
         uint32_t lighting;       // 4 bytes
-        float shininess;         // 4 bytes  
+        float shininess;         // 4 bytes
         float coefficient;       // 4 bytes
         float pad1;              // 4 bytes (padding to 16-byte boundary)
         Vector2 tilingMul;       // 8 bytes

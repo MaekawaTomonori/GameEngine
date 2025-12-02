@@ -10,11 +10,11 @@ void CameraRepository::Initialize(float ratio) {
 
 Camera* CameraRepository::Add(const std::string& name) {
     std::string actualName = name.empty() ? GenerateUniqueName() : name;
-    
+
     if (cameras_.contains(actualName)) {
         return cameras_[actualName].get();
     }
-    
+
     cameras_[actualName] = std::make_unique<Camera>();
     cameras_[actualName]->Initialize(ratio_);
     return cameras_[actualName].get();
@@ -57,7 +57,7 @@ std::string CameraRepository::GetFirstName() const {
 
 void CameraRepository::LoadFromFile() {
     Clear();
-    
+
     Json* json = Singleton<Json>::GetInstance();
     if (!json->Load("Camera")) return;
 

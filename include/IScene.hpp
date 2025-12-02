@@ -33,7 +33,7 @@ public:
     /** @brief 更新処理（純粋仮想関数）
      **/
     virtual void Update() = 0;
-    
+
     /** @brief 描画処理（純粋仮想関数）
      **/
     virtual void Draw() = 0;

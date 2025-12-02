@@ -14,7 +14,7 @@ LightManager::~LightManager() {
     pointResource_.reset();
     spotResource_.reset();
     countResource_.reset();
-    
+
     rawDirectionalLights_.clear();
     rawPointLights_.clear();
     rawSpotLights_.clear();

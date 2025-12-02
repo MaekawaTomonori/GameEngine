@@ -9,16 +9,16 @@
 
 void ModelCommon::Initialize(DirectXAdapter *_adapter, DebugUI *_debugUi) {
 	Setup(_adapter, _debugUi);
-	
+
 	// PipelineStateObjectの初期化 (Skinning用)
 	pipeline_ = std::make_unique<PipelineStateObject>(_adapter);
-	
+
 	// PipelineStateObjectの初期化 (Static用)
 	staticPipeline_ = std::make_unique<PipelineStateObject>(_adapter);
-	
+
 	// Skinning Model用のパイプライン作成
 	CreateSkinningPipeline();
-	
+
 	// Static Model用のパイプライン作成
 	CreateStaticPipeline();
 }
@@ -144,7 +144,7 @@ void ModelCommon::CreateSkinningPipeline() const {
             .MaxLOD = D3D12_FLOAT32_MAX,
             .ShaderRegister = 0,
             .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL
-        })    
+        })
     )
 	.SetInputLayout(InputLayout{}// InputLayout設定 (SKINNING_MODEL用 - WEIGHTとINDEX含む)
 		.SetElement({"POSITION", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, D3D12_APPEND_ALIGNED_ELEMENT, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0})
@@ -273,7 +273,7 @@ void ModelCommon::CreateStaticPipeline() const {
             .MaxLOD = D3D12_FLOAT32_MAX,
             .ShaderRegister = 0,
             .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL
-        })    
+        })
     )
 	.SetInputLayout(InputLayout{}// InputLayout設定 (STATIC_MODEL用 - WEIGHTとINDEXなし)
 		.SetElement({"POSITION", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, D3D12_APPEND_ALIGNED_ELEMENT, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0})

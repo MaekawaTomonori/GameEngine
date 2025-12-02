@@ -35,7 +35,7 @@ public:
     /** @brief 登録されたタスクをレンダリング
      **/
     void Render();
-    
+
 private:
 }; // class Renderer
 

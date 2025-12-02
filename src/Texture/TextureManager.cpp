@@ -19,7 +19,7 @@ DirectX::ScratchImage TextureManager::LoadTexture(const std::string& filename) c
     if (filePathW.ends_with(L".dds"))return LoadDDS(filePathW);
 
     [[maybe_unused]]HRESULT hr = LoadFromWICFile(filePathW.c_str(), DirectX::WIC_FLAGS_FORCE_SRGB, nullptr, image);
-    
+
     if (FAILED(hr)) {
         Log::Send(Log::Level::ERR, std::format("Failed to load texture file: {}", fullPath));
         Utils::Alert(std::format("Failed to load texture file: {}", fullPath));
@@ -139,7 +139,7 @@ bool TextureManager::Load(const std::string& fileName) {
     while((pos = name.find(folderPath_, pos)) != std::string::npos){
         name.erase(pos, folderPath_.length());
     }
-    
+
     //Check if texture is already loaded
     if (textures_.contains(name)){
         return true;
@@ -154,7 +154,7 @@ bool TextureManager::Load(const std::string& fileName) {
     /// 4. Upload IntermediateResource to CPU
     /// 5. Stack Command (3 -> 2) to CommandList
     /// 6. Execute Using CommandQueue
-    /// 7. Wait 
+    /// 7. Wait
 
 
     //Load Texture

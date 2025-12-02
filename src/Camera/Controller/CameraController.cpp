@@ -43,12 +43,12 @@ Camera* CameraController::SetActive(const std::string& name) {
         activeCamera_ = camera;
         return activeCamera_;
     }
-    
+
     Utils::Alert("CameraController::SetActive: Camera not found, setting to first camera.");
     if (!repository_->GetFirstName().empty()) {
         activeCamera_ = repository_->Get(repository_->GetFirstName());
     }
-    
+
     return activeCamera_;
 }
 
@@ -98,7 +98,7 @@ void CameraController::Debug() {
 void CameraController::Load() {
     activeCamera_ = nullptr;
     repository_->LoadFromFile();
-    
+
     if (!repository_->IsEmpty()) {
         SetActive(repository_->GetFirstName());
     }

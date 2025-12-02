@@ -8,7 +8,7 @@ class LineCommon : public Common {
     void Initialize(DirectXAdapter* _adapter, DebugUI* _debugUi) override;
 public:
     void Initialize(DirectXAdapter* _adapter, DebugUI* _debugUi, SRVManager* _srv);
-    
+
     SRVManager* GetSRVManager() const {
         return srv_;
     }

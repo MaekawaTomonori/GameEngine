@@ -20,7 +20,7 @@ class Particle {
 public:
     void Initialize(float _duration);
     void Update();
-    
+
     void Debug();
 
     bool IsDead() const;

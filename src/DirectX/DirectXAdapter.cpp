@@ -42,32 +42,32 @@ DirectXAdapter::~DirectXAdapter() {
         CloseHandle(fenceEvent_);
         fenceEvent_ = nullptr;
     }
-    
+
     // Force all resources to null before leak check
     swapChainResources_.clear();
     depthStencil_.reset();
     rtvHeap_.reset();
     dsvHeap_.reset();
-    
+
     // Clear command objects
     cList_.Reset();
     cAllocator_.Reset();
     cQueue_.Reset();
-    
+
     // Clear swap chain and device
     swapChain_.Reset();
     fence_.Reset();
-    
+
     // Clear DXGI objects
     adapter_.Reset();
     factory_.Reset();
-    
+
     // Clear device last (but before debug layer)
     device_.Reset();
-    
+
     // Clear debug layer last
     debugLayer_.Reset();
-    
+
     D3DResourceLeakChecker _lc;
 }
 
@@ -302,7 +302,7 @@ void DirectXAdapter::SetSwapChainRenderTarget() const {
 
 void DirectXAdapter::Present() {
     UINT bbi = swapChain_->GetCurrentBackBufferIndex();
-    
+
     // PostDraw
     swapChainResources_[bbi]->ChangeState(cList_.Get(), D3D12_RESOURCE_STATE_PRESENT);
 

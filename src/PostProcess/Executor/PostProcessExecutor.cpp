@@ -37,7 +37,7 @@ void PostProcessExecutor::Initialize(DirectXAdapter* _adapter, SRVManager* _srv,
         .RegisterSpace = 0,
         .OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND
     };
-    
+
     //Create PSO
     pso_ = std::make_unique<PipelineStateObject>(adapter_);
     pso_->SetRootSignature(
@@ -106,7 +106,7 @@ void PostProcessExecutor::EndFrame() const {
     if (!adapter_ || !renderTexture_) {
         return;
     }
-    
+
     renderTexture_->ChangeState(adapter_->GetCommandList(), D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE);
 }
 
@@ -144,14 +144,14 @@ void PostProcessExecutor::Draw() const {
 
     //debugUI_->RegisterCommand("SceneRendering", [&]() {
     //    ImGui::Begin("Scene");
-    //    
+    //
     //    // RenderTextureをImGuiで表示
     //    if (srvHandle_.ptr != 0) {
     //        ImTextureID textureID = srvHandle_.ptr;
     //        ImVec2 imageSize = ImVec2(static_cast<float>(adapter_->GetWidth()), static_cast<float>(adapter_->GetHeight()));
     //        ImGui::Image(textureID, imageSize);
     //    }
-    //    
+    //
     //    ImGui::End();
     //});
 
@@ -229,9 +229,9 @@ void PostProcessExecutor::CreateSceneRenderTexture() {
 
     // 画面サイズのRenderTextureを作成
     renderTexture_ = adapter_->CreateRenderTextureResource(
-        static_cast<uint32_t>(adapter_->GetWidth()), 
-        static_cast<uint32_t>(adapter_->GetHeight()), 
-        DXGI_FORMAT_R8G8B8A8_UNORM_SRGB, 
+        static_cast<uint32_t>(adapter_->GetWidth()),
+        static_cast<uint32_t>(adapter_->GetHeight()),
+        DXGI_FORMAT_R8G8B8A8_UNORM_SRGB,
         clearColor_
     );
 

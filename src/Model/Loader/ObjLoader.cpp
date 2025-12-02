@@ -34,7 +34,7 @@ void ObjLoader::LoadModel(const std::string& _name, ResourceRepository* _reposit
                 vertexData.position = Vector4(position.x, position.y, position.z, 1.0f);
                 vertexData.uv = Vector2(uv.x, uv.y);
                 vertexData.normal = Vector3(normal.x, normal.y, normal.z);
-                
+
                 vertexData.position.x *= -1; // Flip X axis
                 vertexData.normal.x *= -1; // Flip X axis
 

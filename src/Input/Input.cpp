@@ -41,11 +41,11 @@ void Input::Update() {
     const ImGuiIO& io = ImGui::GetIO();
 
     // Keyboard update
-    if (!io.WantCaptureKeyboard) 
+    if (!io.WantCaptureKeyboard)
 #endif
         UpdateKeyboard();
 
-    // Mouse 
+    // Mouse
 }
 
 bool Input::IsPress(const BYTE _key) const {

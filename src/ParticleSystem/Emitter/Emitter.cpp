@@ -19,7 +19,7 @@ void Emitter::Initialize(const MeshData& _mesh) {
         Utils::Alert("Emitter failed to initialize: SRVManager not available");
         throw std::runtime_error("Emitter failed to initialize: SRVManager not available");
     }
-    
+
     uuid_ = Utils::GenerateUniqueId();
 
     data_ = _mesh;
@@ -202,7 +202,7 @@ void Emitter::RegisterGpu() {
     std::erase_if(particles_, [&](const auto& _p) { return _p->IsDead(); });
 
     if (particles_.empty())return;
-    
+
     for (auto& particle : particles_) {
         particle->Update();
         mapped_[actives_].world = MathUtils::Matrix::MakeAffineMatrix(
@@ -214,5 +214,5 @@ void Emitter::RegisterGpu() {
         mapped_[actives_].color = particle->GetColor();
         ++actives_;
     }
-    
+
 }

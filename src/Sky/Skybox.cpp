@@ -25,7 +25,7 @@ void Skybox::Initialize(const std::string& _texture) {
     // Material constant buffer
     mr_ = adapter_->CreateBufferResource(sizeof(Material));
     mr_->Get()->Map(0, nullptr, reinterpret_cast<void**>(&md_));
-    
+
     // Initialize material color
     md_->color = {1.0f, 1.0f, 1.0f, 1.0f};
 

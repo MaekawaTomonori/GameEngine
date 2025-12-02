@@ -80,11 +80,11 @@ public:
     void Debug();
 
     Emitter& Enable(bool _active = true);
-    
+
     Emitter& SetPosition(const Vector3& _position);
 
     Emitter& SetFrequency(const float& _frequency);
-    
+
     Emitter& SetDuration(const float& _duration);
 
     Emitter& SetSpawnCount(const uint16_t& _count);
@@ -98,7 +98,7 @@ public:
     Emitter& SetSize(const Vector3& _size);
 
     Emitter& SetVelocity(const Vector3& _velocity);
-    
+
     Emitter& SetUpdateFunction(const std::function<void(float, Vector3&, Vector4&)>& _func);
 
 private:

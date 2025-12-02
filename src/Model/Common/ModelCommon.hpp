@@ -28,7 +28,7 @@ public:
 
     void DrawSkinning() const;
     void DrawStatic() const;
-    
+
     ResourceRepository* GetResourceRepository() const {
         return resource_;
     }

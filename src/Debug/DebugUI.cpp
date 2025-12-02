@@ -40,11 +40,11 @@ void DebugUI::Initialize(const DirectXAdapter *_adapter) {
     SetupModernStyle();
 
     ImGui_ImplDX12_Init(
-        _adapter->GetDevice(), 
+        _adapter->GetDevice(),
         2,
-        DXGI_FORMAT_R8G8B8A8_UNORM_SRGB, 
-        heap_->Get(), 
-        heap_->Get()->GetCPUDescriptorHandleForHeapStart(), 
+        DXGI_FORMAT_R8G8B8A8_UNORM_SRGB,
+        heap_->Get(),
+        heap_->Get()->GetCPUDescriptorHandleForHeapStart(),
         heap_->Get()->GetGPUDescriptorHandleForHeapStart()
     );
 
@@ -53,7 +53,7 @@ void DebugUI::Initialize(const DirectXAdapter *_adapter) {
     ImGuiIO& io = ImGui::GetIO();
     io.ConfigFlags |= ImGuiConfigFlags_DockingEnable; // Enable Docking
     io.FontGlobalScale = 1.f / ImGui_ImplWin32_GetDpiScaleForHwnd(_adapter->GetWindowHandle());
-    io.IniFilename = "Assets\\Config\\imgui.ini"; 
+    io.IniFilename = "Assets\\Config\\imgui.ini";
 
 #endif
 }
@@ -61,7 +61,7 @@ void DebugUI::Initialize(const DirectXAdapter *_adapter) {
 void DebugUI::Process() {
 #ifdef _DEBUG
     std::vector<Command> commands = commands_;
-    commands_.clear(); 
+    commands_.clear();
 
     ImGui_ImplDX12_NewFrame();
     ImGui_ImplWin32_NewFrame();
@@ -75,19 +75,19 @@ void DebugUI::Process() {
         ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.85f, 0.85f, 0.85f, 1.0f));
         ImGui::Text("Game Engine Debug Interface");
         ImGui::PopStyleColor();
-        
+
         ImGui::SameLine(ImGui::GetWindowWidth() - 200);
         ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.8f, 0.4f, 0.4f, 1.0f));
         ImGui::Text("FPS: %.1f", ImGui::GetIO().Framerate);
         ImGui::PopStyleColor();
-        
+
         ImGui::EndMainMenuBar();
     }
 
     std::ranges::sort(commands, [](const Command& a, const Command& b){
         return a.id < b.id;
     });
-    
+
     for (const auto &[id, command] : commands) {
         command();
     }

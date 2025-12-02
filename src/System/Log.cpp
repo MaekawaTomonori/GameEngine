@@ -27,7 +27,7 @@ std::string Log::workingDirectory_;
 void Log::Initialize() {
     // Initialize execution context information
     InitializeExecutionContext();
-    
+
     // Clear any existing sinks
     sinks_.clear();
 
@@ -59,7 +59,7 @@ void Log::Initialize() {
     spdlog::flush_every(std::chrono::seconds(1));
 
     spdlog::info("Log system initialized");
-    
+
     // Log execution context immediately after initialization
     LogExecutionContext();
 }
@@ -142,11 +142,11 @@ void Log::LogExecutionContext() {
 void Log::LogFileOperation(const std::string& operation, const std::string& filePath, bool success, const std::string& details) {
     std::string status = success ? "SUCCESS" : "FAILED";
     std::string message = std::format("FILE_OP [{}] {} -> {}", status, operation, filePath);
-    
+
     if (!details.empty()) {
         message += " (" + details + ")";
     }
-    
+
     // Check if file exists and add absolute path info
     try {
         if (std::filesystem::exists(filePath)) {
@@ -158,7 +158,7 @@ void Log::LogFileOperation(const std::string& operation, const std::string& file
     } catch (const std::exception& e) {
         message += std::format(" [PATH_ERROR: {}]", e.what());
     }
-    
+
     Level logLevel = success ? Level::INFO : Level::ERR;
     Send(logLevel, message);
 }
