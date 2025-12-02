@@ -579,6 +579,32 @@ bool DirectXAdapter::CreateViewportAndScissor() {
     return true;
 }
 
+void DirectXAdapter::SyncGPU() {
+    // GPU同期（コマンドキューを完全にフラッシュ）
+    uint64_t fenceValue = GetNextFenceValue();
+    cQueue_->Signal(fence_.Get(), fenceValue);
+    WaitForFenceValue(fenceValue);
+    Log::Send(Log::Level::INFO, "GPU synchronized");
+}
+
+void DirectXAdapter::ReleaseSwapChainResources() {
+    // SwapChainバッファへの参照を完全に解放
+    for (auto& resource : swapChainResources_) {
+        if (resource) {
+            resource.reset();
+        }
+    }
+    swapChainResources_.clear();
+    rtvHandles_.clear();
+
+    // 深度ステンシルバッファを解放
+    if (depthStencil_) {
+        depthStencil_.reset();
+    }
+
+    Log::Send(Log::Level::INFO, "SwapChain resources released");
+}
+
 void DirectXAdapter::UpdateWindowSize(size_t _width, size_t _height) {
     Log::Send(Log::Level::INFO,
         "UpdateWindowSize called: " + std::to_string(_width) + "x" + std::to_string(_height) +
@@ -598,28 +624,11 @@ void DirectXAdapter::UpdateWindowSize(size_t _width, size_t _height) {
         "*** STARTING RESIZE: " + std::to_string(windowSize_.first) + "x" + std::to_string(windowSize_.second) +
         " → " + std::to_string(_width) + "x" + std::to_string(_height) + " ***");
 
-    // GPU同期（重要！）- コマンドキューを完全にフラッシュ
-    uint64_t fenceValue = GetNextFenceValue();
-    cQueue_->Signal(fence_.Get(), fenceValue);
-    WaitForFenceValue(fenceValue);
+    // RAII化：GPU同期とリソース解放を専用メソッドで実行
+    SyncGPU();
+    ReleaseSwapChainResources();
 
-    Log::Send(Log::Level::INFO, "GPU synchronized, releasing resources...");
-
-    // SwapChainバッファへの参照を完全に解放
-    for (auto& resource : swapChainResources_) {
-        if (resource) {
-            resource.reset();
-        }
-    }
-    swapChainResources_.clear();
-    rtvHandles_.clear();
-
-    // 深度ステンシルバッファを解放
-    if (depthStencil_) {
-        depthStencil_.reset();
-    }
-
-    Log::Send(Log::Level::INFO, "Resources released, resizing swap chain...");
+    Log::Send(Log::Level::INFO, "Resizing swap chain...");
 
     // SwapChainをリサイズ
     HRESULT hr = swapChain_->ResizeBuffers(

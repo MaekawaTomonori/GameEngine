@@ -145,6 +145,11 @@ public:
 
 private:
     void CreateSceneRenderTexture();
+
+    /// <summary>
+    /// RTV/SRV記述子を作成（DRY原則に基づく共通化）
+    /// </summary>
+    void CreateRenderTextureViews();
 }; // class PostProcessExecutor
 
 #endif // PostProcessExecutor_HPP_

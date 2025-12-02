@@ -126,19 +126,13 @@ void Framework::Update() const {
 
     input_->Update();
 
-
     /// Borderless fullscreen toggle
     if (input_->IsTrigger(DIK_F10)) {
         windows_->ToggleBorderless();
 
-        // ウィンドウサイズを取得してDirectXAdapter、ImGui、カメラを更新
         int width, height;
         windows_->GetClientSize(width, height);
-        dxAdapter_->UpdateWindowSize(static_cast<size_t>(width), static_cast<size_t>(height));
-        postProcessor_->ResizeRenderTextures();
-
-        debugUI_->UpdateDisplaySize(width, height);
-
+        HandleWindowResize(width, height);
     }
 
     cameraDirector_->Update();
@@ -193,4 +187,21 @@ bool Framework::Check() const {
     if (!sprite_)return false;
 
     return true;
+}
+
+void Framework::HandleWindowResize(int width, int height) const {
+    // DirectXリソースのリサイズ
+    dxAdapter_->UpdateWindowSize(static_cast<size_t>(width), static_cast<size_t>(height));
+
+    // ポストプロセッサのレンダーテクスチャをリサイズ
+    postProcessor_->ResizeRenderTextures();
+
+    // ImGuiのディスプレイサイズを更新
+    debugUI_->UpdateDisplaySize(width, height);
+
+    // カメラのアスペクト比を更新
+    float aspectRatio = static_cast<float>(width) / static_cast<float>(height);
+    if (camera_ && camera_->GetActive()) {
+        camera_->GetActive()->SetAspectRatio(aspectRatio);
+    }
 }

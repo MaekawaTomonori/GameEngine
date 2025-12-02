@@ -97,6 +97,13 @@ private:
     /// </summary>
     /// <returns>正常な場合true</returns>
     bool Check() const;
+
+    /// <summary>
+    /// ウィンドウリサイズ処理（DRY原則に基づく抽出）
+    /// </summary>
+    /// <param name="width">新しい幅</param>
+    /// <param name="height">新しい高さ</param>
+    void HandleWindowResize(int width, int height) const;
 }; // class Framework
 
 #endif // Framework_HPP_

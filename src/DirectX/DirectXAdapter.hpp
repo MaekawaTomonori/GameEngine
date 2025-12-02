@@ -164,6 +164,26 @@ private:
     void Present();
     void Wait();
 
+    /// <summary>
+    /// GPU同期を実行（RAII化のためのヘルパー）
+    /// </summary>
+    void SyncGPU();
+
+    /// <summary>
+    /// SwapChainリソースを安全に解放（RAII化のためのヘルパー）
+    /// </summary>
+    void ReleaseSwapChainResources();
+
+    /// <summary>
+    /// RTV記述子を作成（Single Responsibility）
+    /// </summary>
+    void CreateRTVDescriptors();
+
+    /// <summary>
+    /// DSV記述子を作成（Single Responsibility）
+    /// </summary>
+    void CreateDSVDescriptor();
+
 public: //Accessor
     /// <summary>
     /// ウィンドウハンドルを取得
