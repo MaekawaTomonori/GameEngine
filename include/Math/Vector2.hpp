@@ -1,4 +1,4 @@
-﻿#ifndef VECTOR2_HPP_
+#ifndef VECTOR2_HPP_
 #define VECTOR2_HPP_
 
 #include <cmath>
@@ -10,28 +10,28 @@ struct Vector2{
     float x, y;
 
     Vector2 operator+(const Vector2& _v) const {
-        return { x + v.x, y + v.y };
+        return { x + _v.x, y + _v.y };
     }
 
     Vector2 operator-(const Vector2& _v) const {
-        return { x - v.x, y - v.y };
+        return { x - _v.x, y - _v.y };
     }
 
     Vector2 operator*(const Vector2& _v) const {
-		return { x * v.x, y * v.y };
+		return { x * _v.x, y * _v.y };
     }
 
     Vector2 operator*(const float _f) const {
-        return { x * f, y * f };
+        return { x * _f, y * _f };
     }
 
 	void operator+=(const Vector2& _v) {
-		x += v.x;
-		y += v.y;
+		x += _v.x;
+		y += _v.y;
 	}
 
     bool operator==(const Vector2& _v) const {
-        return x == v.x && y == v.y;
+        return x == _v.x && y == _v.y;
     }
 
     float Length() const {

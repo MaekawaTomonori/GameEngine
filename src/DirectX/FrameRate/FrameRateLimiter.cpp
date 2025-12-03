@@ -2,7 +2,7 @@
 
 #include <thread>
 
-FrameRateLimiter::FrameRateLimiter(uint16_t _maxFps, bool _useVsync): maxFps_(maxFps), vsyncEnabled_(useVsync), reference_(std::chrono::steady_clock::now()){
+FrameRateLimiter::FrameRateLimiter(uint16_t _maxFps, bool _useVsync): maxFps_(_maxFps), vsyncEnabled_(_useVsync), reference_(std::chrono::steady_clock::now()){
 }
 
 void FrameRateLimiter::WaitForNextFrame() {

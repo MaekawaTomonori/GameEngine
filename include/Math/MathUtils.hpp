@@ -26,14 +26,14 @@ namespace MathUtils{
 
     template<typename Type>
     Type Factorial(Type _n) {
-        if (n <= 0)return 1;
+        if (_n <= 0)return 1;
 
-        return static_cast<Type>(n * Factorial(n - 1));
+        return static_cast<Type>(_n * Factorial(_n - 1));
     }
 
     template <typename Type>
     Type Permutation(Type _n, Type _r) {
-        return static_cast<Type>(Factorial(n) / Factorial(n - r));
+        return static_cast<Type>(Factorial(_n) / Factorial(_n - _r));
     }
 
     float Distance(const Vector3& _a, const Vector3& _b);

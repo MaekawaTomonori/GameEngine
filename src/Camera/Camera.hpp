@@ -80,24 +80,24 @@ public:
     CameraForGpu GetCameraForGpu() const;
 
     /** @brief 視野角を設定
-     ** @param fov 視野角（ラジアン）
+     ** @param _fov 視野角（ラジアン）
      **/
-    void SetFov(float _fov) { fov_ = fov; }
+    void SetFov(const float _fov) { fov_ = _fov; }
 
     /** @brief アスペクト比を設定
-     ** @param aspectRatio アスペクト比
+     ** @param _aspectRatio アスペクト比
      **/
-    void SetAspectRatio(float _aspectRatio) { aspectRatio_ = aspectRatio; }
+    void SetAspectRatio(const float _aspectRatio) { aspectRatio_ = _aspectRatio; }
 
     /** @brief ニアクリップ平面を設定
-     ** @param nearPlane ニアクリップ距離
+     ** @param _nearPlane ニアクリップ距離
      **/
-    void SetNear(float _nearPlane) { near_ = nearPlane; }
+    void SetNear(const float _nearPlane) { near_ = _nearPlane; }
 
     /** @brief ファークリップ平面を設定
-     ** @param farPlane ファークリップ距離
+     ** @param _farPlane ファークリップ距離
      **/
-    void SetFar(float _farPlane) { far_ = farPlane; }
+    void SetFar(const float _farPlane) { far_ = _farPlane; }
 }; // class Camera
 
 #endif // Camera_HPP_

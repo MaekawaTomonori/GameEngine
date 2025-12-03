@@ -17,13 +17,13 @@ public:
     void Update();
 
     Camera* GetActive() const;
-    Camera* Add(const std::string& _name = "");
+    Camera* Add(const std::string& _name = "") const;
     Camera* SetActive(const std::string& _name);
 
 private:
     void Debug();
     void Load();
-    void Save();
+    void Save() const;
 }; // class CameraController
 
 #endif // CameraController_HPP_

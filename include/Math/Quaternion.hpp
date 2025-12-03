@@ -9,24 +9,24 @@ struct Quaternion{
     float x, y, z, w;
 
     Quaternion operator+(const Quaternion& _q) const {
-        return { x + q.x, y + q.y, z + q.z, w + q.w };
+        return { x + _q.x, y + _q.y, z + _q.z, w + _q.w };
     }
 
     Quaternion operator*(const Quaternion& _q) const {
         return {
-            w * q.x + x * q.w + y * q.z - z * q.y,
-            w * q.y - x * q.z + y * q.w + z * q.x,
-            w * q.z + x * q.y - y * q.x + z * q.w,
-            w * q.w - x * q.x - y * q.y - z * q.z
+            w * _q.x + x * _q.w + y * _q.z - z * _q.y,
+            w * _q.y - x * _q.z + y * _q.w + z * _q.x,
+            w * _q.z + x * _q.y - y * _q.x + z * _q.w,
+            w * _q.w - x * _q.x - y * _q.y - z * _q.z
         };
     }
 
     Quaternion operator*(const float _s) const {
-        return { x * s, y * s, z * s, w * s };
+        return { x * _s, y * _s, z * _s, w * _s };
     }
 
     Quaternion operator/(const float _s) const {
-        return { x / s, y / s, z / s, w / s };
+        return { x / _s, y / _s, z / _s, w / _s };
     }
 
     static Quaternion Identity() {

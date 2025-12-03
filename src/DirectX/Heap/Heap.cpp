@@ -24,12 +24,12 @@ ID3D12DescriptorHeap * Heap::Get() const {
 
 D3D12_CPU_DESCRIPTOR_HANDLE Heap::GetCPUHandle(uint32_t _index) const {
     D3D12_CPU_DESCRIPTOR_HANDLE handle = heap_->GetCPUDescriptorHandleForHeapStart();
-    handle.ptr += static_cast<SIZE_T>(device_->GetDescriptorHandleIncrementSize(type_)) * index;
+    handle.ptr += static_cast<SIZE_T>(device_->GetDescriptorHandleIncrementSize(type_)) * _index;
     return handle;
 }
 
 D3D12_GPU_DESCRIPTOR_HANDLE Heap::GetGPUHandle(uint32_t _index) const {
     D3D12_GPU_DESCRIPTOR_HANDLE handle = heap_->GetGPUDescriptorHandleForHeapStart();
-    handle.ptr += static_cast<SIZE_T>(device_->GetDescriptorHandleIncrementSize(type_)) * index;
+    handle.ptr += static_cast<SIZE_T>(device_->GetDescriptorHandleIncrementSize(type_)) * _index;
     return handle;
 }

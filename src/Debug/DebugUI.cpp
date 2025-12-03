@@ -85,7 +85,7 @@ void DebugUI::Process() {
     }
 
     std::ranges::sort(commands, [](const Command& _a, const Command& _b){
-        return a.id < b.id;
+        return _a.id < _b.id;
     });
 
     for (const auto &[id, command] : commands) {
@@ -116,10 +116,10 @@ void DebugUI::UpdateDisplaySize(int _width, int _height) {
 #ifdef _DEBUG
     if (ImGui::GetCurrentContext()) {
         ImGuiIO& io = ImGui::GetIO();
-        io.DisplaySize = ImVec2(static_cast<float>(width), static_cast<float>(height));
+        io.DisplaySize = ImVec2(static_cast<float>(_width), static_cast<float>(_height));
         io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
         io.FontGlobalScale = 1.f / ImGui_ImplWin32_GetDpiScaleForHwnd(adapter_->GetWindowHandle());
-        Log::Send(Log::Level::INFO, "ImGui display size updated: " + std::to_string(width) + "x" + std::to_string(height));
+        Log::Send(Log::Level::INFO, "ImGui display size updated: " + std::to_string(_width) + "x" + std::to_string(_height));
     }
 #endif
 }

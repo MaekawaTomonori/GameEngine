@@ -191,16 +191,16 @@ bool Framework::Check() const {
 
 void Framework::HandleWindowResize(int _width, int _height) const {
     // DirectXリソースのリサイズ
-    dxAdapter_->UpdateWindowSize(static_cast<size_t>(width), static_cast<size_t>(height));
+    dxAdapter_->UpdateWindowSize(static_cast<size_t>(_width), static_cast<size_t>(_height));
 
     // ポストプロセッサのレンダーテクスチャをリサイズ
     postProcessor_->ResizeRenderTextures();
 
     // ImGuiのディスプレイサイズを更新
-    debugUI_->UpdateDisplaySize(width, height);
+    debugUI_->UpdateDisplaySize(_width, _height);
 
     // カメラのアスペクト比を更新
-    float aspectRatio = static_cast<float>(width) / static_cast<float>(height);
+    float aspectRatio = static_cast<float>(_width) / static_cast<float>(_height);
     if (camera_ && camera_->GetActive()) {
         camera_->GetActive()->SetAspectRatio(aspectRatio);
     }

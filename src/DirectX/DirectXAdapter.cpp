@@ -113,13 +113,13 @@ std::unique_ptr<DX12Resource> DirectXAdapter::CreateTextureResource(const Direct
     //Step1
     //Setting Resource from Metadata
     D3D12_RESOURCE_DESC resourceDesc{};
-    resourceDesc.Width = static_cast<UINT>(metadata.width);
-    resourceDesc.Height = static_cast<UINT>(metadata.height);
-    resourceDesc.MipLevels = static_cast<UINT16>(metadata.mipLevels);
-    resourceDesc.DepthOrArraySize = static_cast<UINT16>(metadata.arraySize);
-    resourceDesc.Format = metadata.format;
+    resourceDesc.Width = static_cast<UINT>(_metadata.width);
+    resourceDesc.Height = static_cast<UINT>(_metadata.height);
+    resourceDesc.MipLevels = static_cast<UINT16>(_metadata.mipLevels);
+    resourceDesc.DepthOrArraySize = static_cast<UINT16>(_metadata.arraySize);
+    resourceDesc.Format = _metadata.format;
     resourceDesc.SampleDesc.Count = 1;
-    resourceDesc.Dimension = static_cast<D3D12_RESOURCE_DIMENSION>(metadata.dimension);
+    resourceDesc.Dimension = static_cast<D3D12_RESOURCE_DIMENSION>(_metadata.dimension);
 
     //Step2
     //HEAP SETTINGs

@@ -74,9 +74,9 @@ void CameraDirector::Update() {
 
     // Find start and end points by name
     auto startIt = std::find_if(currentWork.points.begin(), currentWork.points.end(),
-        [&currentSegment](const Point& _p) { return p.name == currentSegment.startPoint; });
+        [&currentSegment](const Point& _p) { return _p.name == currentSegment.startPoint; });
     auto endIt = std::find_if(currentWork.points.begin(), currentWork.points.end(),
-        [&currentSegment](const Point& _p) { return p.name == currentSegment.endPoint; });
+        [&currentSegment](const Point& _p) { return _p.name == currentSegment.endPoint; });
 
     if (startIt == currentWork.points.end() || endIt == currentWork.points.end()) return;
 
@@ -406,44 +406,44 @@ void CameraDirector::OnComplete() {
 
 CameraDirector::Point CameraDirector::InterpolatePoint(const Point& _start, const Point& _end, float _t) {
     Point result;
-    result.position = MathUtils::Lerp(start.position, end.position, t);
-    result.rotation = MathUtils::Lerp(start.rotation, end.rotation, t);
+    result.position = MathUtils::Lerp(_start.position, _end.position, _t);
+    result.rotation = MathUtils::Lerp(_start.rotation, _end.rotation, _t);
     return result;
 }
 
 CameraDirector::Point CameraDirector::InterpolatePointWithType(const Point& _start, const Point& _end, float _t, InterpolationType _type) {
     // Legacy function: use same interpolation for both position and rotation
-    return InterpolatePointWithSeparateTypes(start, end, t, type, type);
+    return InterpolatePointWithSeparateTypes(_start, _end, _t, _type, _type);
 }
 
 CameraDirector::Point CameraDirector::InterpolatePointWithSeparateTypes(const Point& _start, const Point& _end, float _t, InterpolationType _posType, InterpolationType _rotType) {
     Point result;
-    result.name = start.name;
+    result.name = _start.name;
 
     // Lambda to select interpolation function based on type
-    auto interpolate = [t](const auto& _a, const auto& _b, InterpolationType _type) {
-        switch (type) {
-            case InterpolationType::EaseInQuad: return Ease::In::Quad(a, b, t);
-            case InterpolationType::EaseOutQuad: return Ease::Out::Quad(a, b, t);
-            case InterpolationType::EaseInOutQuad: return Ease::InOut::Quad(a, b, t);
-            case InterpolationType::EaseInCubic: return Ease::In::Cubic(a, b, t);
-            case InterpolationType::EaseOutCubic: return Ease::Out::Cubic(a, b, t);
-            case InterpolationType::EaseInOutCubic: return Ease::InOut::Cubic(a, b, t);
-            default: return MathUtils::Lerp(a, b, t);
+    auto interpolate = [_t](const auto& _a, const auto& _b, InterpolationType _type) {
+        switch (_type) {
+            case InterpolationType::EaseInQuad: return Ease::In::Quad(_a, _b, _t);
+            case InterpolationType::EaseOutQuad: return Ease::Out::Quad(_a, _b, _t);
+            case InterpolationType::EaseInOutQuad: return Ease::InOut::Quad(_a, _b, _t);
+            case InterpolationType::EaseInCubic: return Ease::In::Cubic(_a, _b, _t);
+            case InterpolationType::EaseOutCubic: return Ease::Out::Cubic(_a, _b, _t);
+            case InterpolationType::EaseInOutCubic: return Ease::InOut::Cubic(_a, _b, _t);
+            default: return MathUtils::Lerp(_a, _b, _t);
         }
     };
 
     // Interpolate position with position interpolation type
-    result.position = interpolate(start.position, end.position, posType);
+    result.position = interpolate(_start.position, _end.position, _posType);
 
     // Handle LookAt or rotation with rotation interpolation type
-    if (start.useLookAt && end.useLookAt) {
+    if (_start.useLookAt && _end.useLookAt) {
         result.useLookAt = true;
-        result.lookAtTarget = interpolate(start.lookAtTarget, end.lookAtTarget, posType);
+        result.lookAtTarget = interpolate(_start.lookAtTarget, _end.lookAtTarget, _posType);
         result.rotation = CalculateLookAtRotation(result.position, result.lookAtTarget);
     } else {
         result.useLookAt = false;
-        result.rotation = interpolate(start.rotation, end.rotation, rotType);
+        result.rotation = interpolate(_start.rotation, _end.rotation, _rotType);
     }
 
     return result;
@@ -451,35 +451,35 @@ CameraDirector::Point CameraDirector::InterpolatePointWithSeparateTypes(const Po
 
 void CameraDirector::MigrateOrderToSegments(Work& _work) {
     // If segments already exist, no need to migrate
-    if (!work.segments.empty()) return;
+    if (!_work.segments.empty()) return;
 
     // If order array doesn't exist or has less than 2 elements, nothing to migrate
-    if (work.order.size() < 2) return;
+    if (_work.order.size() < 2) return;
 
     // Convert order array to segments with Linear interpolation
-    for (size_t i = 0; i < work.order.size() - 1; ++i) {
+    for (size_t i = 0; i < _work.order.size() - 1; ++i) {
         Segment segment;
-        segment.startPoint = work.order[i];
-        segment.endPoint = work.order[i + 1];
+        segment.startPoint = _work.order[i];
+        segment.endPoint = _work.order[i + 1];
         segment.positionInterpolationType = InterpolationType::Linear;
         segment.rotationInterpolationType = InterpolationType::Linear;
-        work.segments.push_back(segment);
+        _work.segments.push_back(segment);
     }
 }
 
 CameraDirector::InterpolationType CameraDirector::StringToInterpolationType(const std::string& _typeStr) {
-    if (Utils::EqualsIgnoreCase(typeStr, "Linear")) return InterpolationType::Linear;
-    if (Utils::EqualsIgnoreCase(typeStr, "EaseInQuad")) return InterpolationType::EaseInQuad;
-    if (Utils::EqualsIgnoreCase(typeStr, "EaseOutQuad")) return InterpolationType::EaseOutQuad;
-    if (Utils::EqualsIgnoreCase(typeStr, "EaseInOutQuad")) return InterpolationType::EaseInOutQuad;
-    if (Utils::EqualsIgnoreCase(typeStr, "EaseInCubic")) return InterpolationType::EaseInCubic;
-    if (Utils::EqualsIgnoreCase(typeStr, "EaseOutCubic")) return InterpolationType::EaseOutCubic;
-    if (Utils::EqualsIgnoreCase(typeStr, "EaseInOutCubic")) return InterpolationType::EaseInOutCubic;
+    if (Utils::EqualsIgnoreCase(_typeStr, "Linear")) return InterpolationType::Linear;
+    if (Utils::EqualsIgnoreCase(_typeStr, "EaseInQuad")) return InterpolationType::EaseInQuad;
+    if (Utils::EqualsIgnoreCase(_typeStr, "EaseOutQuad")) return InterpolationType::EaseOutQuad;
+    if (Utils::EqualsIgnoreCase(_typeStr, "EaseInOutQuad")) return InterpolationType::EaseInOutQuad;
+    if (Utils::EqualsIgnoreCase(_typeStr, "EaseInCubic")) return InterpolationType::EaseInCubic;
+    if (Utils::EqualsIgnoreCase(_typeStr, "EaseOutCubic")) return InterpolationType::EaseOutCubic;
+    if (Utils::EqualsIgnoreCase(_typeStr, "EaseInOutCubic")) return InterpolationType::EaseInOutCubic;
     return InterpolationType::Linear; // Default
 }
 
 std::string CameraDirector::InterpolationTypeToString(InterpolationType _type) {
-    switch (type) {
+    switch (_type) {
         case InterpolationType::Linear: return "Linear";
         case InterpolationType::EaseInQuad: return "EaseInQuad";
         case InterpolationType::EaseOutQuad: return "EaseOutQuad";
@@ -493,7 +493,7 @@ std::string CameraDirector::InterpolationTypeToString(InterpolationType _type) {
 
 Vector2 CameraDirector::CalculateLookAtRotation(const Vector3& _position, const Vector3& _target) {
     // Calculate direction vector from camera to target
-    Vector3 direction = target - position;
+    Vector3 direction = _target - _position;
 
     // Calculate horizontal distance
     float horizontalDistance = std::sqrt(direction.x * direction.x + direction.z * direction.z);

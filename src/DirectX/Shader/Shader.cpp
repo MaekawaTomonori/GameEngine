@@ -185,7 +185,7 @@ std::wstring Shader::FindShaderDirectory() {
                 Log::LogFileOperation("DIRECTORY_CHECK", candidatePathStr, false, "Directory does not exist");
             }
         } catch (const std::exception& _e) {
-            Log::LogFileOperation("DIRECTORY_CHECK", Utils::Convert(candidatePath), false, std::string("Exception: ") + e.what());
+            Log::LogFileOperation("DIRECTORY_CHECK", Utils::Convert(candidatePath), false, std::string("Exception: ") + _e.what());
         }
     }
 

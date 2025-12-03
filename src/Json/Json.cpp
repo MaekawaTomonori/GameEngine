@@ -5,9 +5,9 @@
 #include "Log.hpp"
 
 void Json::Register(const std::string& _name) {
-    if (datas_.contains(name))return;
+    if (datas_.contains(_name))return;
 
-    datas_[name];
+    datas_[_name];
 }
 
 void Json::LoadJson(const std::string& _path, std::string _name) {
