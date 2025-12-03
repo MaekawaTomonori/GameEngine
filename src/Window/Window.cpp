@@ -5,9 +5,9 @@
 #include "include/Utils.hpp"
 #include "vendor/imgui/imgui.h"
 
-extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND _hWnd, UINT _msg, WPARAM _wParam, LPARAM _lParam);
 
-LRESULT Window::WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
+LRESULT Window::WindowProc(HWND _hwnd, UINT _uMsg, WPARAM _wParam, LPARAM _lParam) {
 #ifdef _DEBUG
     if (ImGui_ImplWin32_WndProcHandler(hwnd, uMsg, wParam, lParam))return true;
 #endif
@@ -170,7 +170,7 @@ HINSTANCE Window::GetInstanceHandle() const {
     return hInstance_;
 }
 
-void Window::SetSize(const int width, const int height) const {
+void Window::SetSize(const int _width, const int _height) const {
     if (hWnd_){
         RECT rect = {0, 0, width, height};
 
@@ -181,4 +181,3 @@ void Window::SetSize(const int width, const int height) const {
 void Window::SetTitle(const std::string& _title) {
     title_ = Utils::Convert(_title);
 }
-

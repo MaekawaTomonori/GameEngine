@@ -18,7 +18,7 @@ void RawSpotLight::DefaultSetting() {
     light_.falloffStart = std::cos(MathUtils::F_PI / 4.f);
 }
 
-void RawSpotLight::Set(const std::string& uuid, const SpotLight& sl) {
+void RawSpotLight::Set(const std::string& _uuid, const SpotLight& _sl) {
     uuid_ = uuid;
     light_ = sl;
 }

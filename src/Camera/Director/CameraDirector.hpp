@@ -86,13 +86,13 @@ private:
     void LoadWorkList();
     void LoadWork(const std::string& _key);
     void OnComplete();
-    Point InterpolatePoint(const Point& start, const Point& end, float t);
-    Point InterpolatePointWithType(const Point& start, const Point& end, float t, InterpolationType type);
-    Point InterpolatePointWithSeparateTypes(const Point& start, const Point& end, float t, InterpolationType posType, InterpolationType rotType);
-    void MigrateOrderToSegments(Work& work);
-    InterpolationType StringToInterpolationType(const std::string& typeStr);
-    std::string InterpolationTypeToString(InterpolationType type);
-    Vector2 CalculateLookAtRotation(const Vector3& position, const Vector3& target);
+    Point InterpolatePoint(const Point& _start, const Point& _end, float _t);
+    Point InterpolatePointWithType(const Point& _start, const Point& _end, float _t, InterpolationType _type);
+    Point InterpolatePointWithSeparateTypes(const Point& _start, const Point& _end, float _t, InterpolationType _posType, InterpolationType _rotType);
+    void MigrateOrderToSegments(Work& _work);
+    InterpolationType StringToInterpolationType(const std::string& _typeStr);
+    std::string InterpolationTypeToString(InterpolationType _type);
+    Vector2 CalculateLookAtRotation(const Vector3& _position, const Vector3& _target);
 
     // Editor functions
     void ShowEditor();

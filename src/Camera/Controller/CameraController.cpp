@@ -5,7 +5,7 @@
 #include "imgui.h"
 #include "src/Json/Json.hpp"
 
-void CameraController::Initialize(float ratio, DebugUI* debug) {
+void CameraController::Initialize(float _ratio, DebugUI* _debug) {
     debug_ = debug;
     repository_ = std::make_unique<CameraRepository>();
     repository_->Initialize(ratio);
@@ -29,11 +29,11 @@ Camera* CameraController::GetActive() const {
     return activeCamera_;
 }
 
-Camera* CameraController::Add(const std::string& name) {
+Camera* CameraController::Add(const std::string& _name) {
     return repository_->Add(name);
 }
 
-Camera* CameraController::SetActive(const std::string& name) {
+Camera* CameraController::SetActive(const std::string& _name) {
     if (repository_->IsEmpty()) {
         Utils::Alert("CameraController::SetActive: No cameras available.");
         return nullptr;
@@ -44,7 +44,7 @@ Camera* CameraController::SetActive(const std::string& name) {
         return activeCamera_;
     }
 
-    Utils::Alert("CameraController::SetActive: Camera not found, setting to first camera.");
+    Utils::Alert("CameraController::SetActive: Camera not _found, setting to first camera.");
     if (!repository_->GetFirstName().empty()) {
         activeCamera_ = repository_->Get(repository_->GetFirstName());
     }

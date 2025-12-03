@@ -42,7 +42,7 @@ void IPostEffect::CreateOutput() {
     handle_ = srv_->GetGPUHandle(index_);
 }
 
-void IPostEffect::SetRTVHandle(D3D12_CPU_DESCRIPTOR_HANDLE rtvHandle) {
+void IPostEffect::SetRTVHandle(D3D12_CPU_DESCRIPTOR_HANDLE _rtvHandle) {
     rtvHandle_ = rtvHandle;
 
     D3D12_RENDER_TARGET_VIEW_DESC rtvDesc = {};

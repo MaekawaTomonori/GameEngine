@@ -8,11 +8,11 @@
 struct Quaternion{
     float x, y, z, w;
 
-    Quaternion operator+(const Quaternion& q) const {
+    Quaternion operator+(const Quaternion& _q) const {
         return { x + q.x, y + q.y, z + q.z, w + q.w };
     }
 
-    Quaternion operator*(const Quaternion& q) const {
+    Quaternion operator*(const Quaternion& _q) const {
         return {
             w * q.x + x * q.w + y * q.z - z * q.y,
             w * q.y - x * q.z + y * q.w + z * q.x,
@@ -21,11 +21,11 @@ struct Quaternion{
         };
     }
 
-    Quaternion operator*(const float s) const {
+    Quaternion operator*(const float _s) const {
         return { x * s, y * s, z * s, w * s };
     }
 
-    Quaternion operator/(const float s) const {
+    Quaternion operator/(const float _s) const {
         return { x / s, y / s, z / s, w / s };
     }
 

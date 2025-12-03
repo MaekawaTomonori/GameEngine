@@ -189,7 +189,7 @@ bool Framework::Check() const {
     return true;
 }
 
-void Framework::HandleWindowResize(int width, int height) const {
+void Framework::HandleWindowResize(int _width, int _height) const {
     // DirectXリソースのリサイズ
     dxAdapter_->UpdateWindowSize(static_cast<size_t>(width), static_cast<size_t>(height));
 

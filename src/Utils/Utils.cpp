@@ -5,7 +5,7 @@
 #include "Log.hpp"
 
 namespace Utils {
-    std::string Convert(const std::wstring& str) {
+    std::string Convert(const std::wstring& _str) {
         if (str.empty())return {};
 
         auto size_needed = WideCharToMultiByte(CP_UTF8,0,str.data(),static_cast<int>(str.size()),nullptr, 0, nullptr,nullptr);
@@ -17,7 +17,7 @@ namespace Utils {
         return result;
     }
 
-    std::wstring Convert(const std::string& str) {
+    std::wstring Convert(const std::string& _str) {
         if (str.empty())return {};
 
         auto size_needed = MultiByteToWideChar(CP_UTF8, 0, str.data(),static_cast<int>(str.size()),nullptr, 0);
@@ -98,9 +98,9 @@ namespace Utils {
         return reinterpret_cast<char*>(szUuid);
     }
 
-    bool EqualsIgnoreCase(std::string str1, std::string str2) {
+    bool EqualsIgnoreCase(std::string _str1, std::string _str2) {
         return str1.size() == str2.size() && std::equal(str1.begin(), str1.end(), str2.begin(),
-                                                        [](char a, char b){ return tolower(a) == tolower(b); });
+                                                        [](char _a, char _b){ return tolower(a) == tolower(b); });
     }
 
     bool ConfirmDialog([[maybe_unused]]const std::string& _msg) {

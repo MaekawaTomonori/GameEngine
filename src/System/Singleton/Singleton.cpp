@@ -8,7 +8,7 @@ namespace{
     SingletonFinalizer::Finalizer finalizers[MAX_FINALIZER_SIZE];
 }
 
-void SingletonFinalizer::AddFinalizer(Finalizer finalizer) {
+void SingletonFinalizer::AddFinalizer(Finalizer _finalizer) {
     std::lock_guard<std::mutex> lock(mutex);
     assert(finalizerSize < MAX_FINALIZER_SIZE);
     finalizers[finalizerSize++] = finalizer;

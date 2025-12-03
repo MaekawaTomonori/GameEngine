@@ -45,7 +45,7 @@ void SRVManager::PreDraw() const {
     adapter_->GetCommandList()->SetDescriptorHeaps(_countof(descriptorHeaps), descriptorHeaps);
 }
 
-void SRVManager::CreateSRVforTexture2D(uint32_t srvIndex, ID3D12Resource* pResource, DXGI_FORMAT format, UINT mipMap) {
+void SRVManager::CreateSRVforTexture2D(uint32_t _srvIndex, ID3D12Resource* _pResource, DXGI_FORMAT _format, UINT _mipMap) {
     D3D12_SHADER_RESOURCE_VIEW_DESC desc {};
     desc.Format = format;
     desc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
@@ -55,7 +55,7 @@ void SRVManager::CreateSRVforTexture2D(uint32_t srvIndex, ID3D12Resource* pResou
     adapter_->GetDevice()->CreateShaderResourceView(pResource, &desc, heap_->GetCPUHandle(srvIndex));
 }
 
-void SRVManager::CreateSRVforStructuredBuffer(uint32_t srvIndex, ID3D12Resource* pResource, UINT numElements, UINT stride) {
+void SRVManager::CreateSRVforStructuredBuffer(uint32_t _srvIndex, ID3D12Resource* _pResource, UINT _numElements, UINT _stride) {
     D3D12_SHADER_RESOURCE_VIEW_DESC desc {};
     desc.Format = DXGI_FORMAT_UNKNOWN;
     desc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
@@ -79,7 +79,7 @@ void SRVManager::CreateSRVforCubemap(uint32_t _srvIndex, ID3D12Resource* _pResou
     adapter_->GetDevice()->CreateShaderResourceView(_pResource, &desc, heap_->GetCPUHandle(_srvIndex));
 }
 
-void SRVManager::SetGraphicsRootDescriptorTable(UINT rootParameterIndex, uint32_t srvIndex) const {
+void SRVManager::SetGraphicsRootDescriptorTable(UINT _rootParameterIndex, uint32_t _srvIndex) const {
     adapter_->GetCommandList()->SetGraphicsRootDescriptorTable(rootParameterIndex, heap_->GetGPUHandle(srvIndex));
 }
 
@@ -87,12 +87,12 @@ ID3D12DescriptorHeap* SRVManager::GetDescriptorHeap() const {
 	return heap_->Get();
 }
 
-D3D12_CPU_DESCRIPTOR_HANDLE SRVManager::GetCPUHandle(uint32_t index) const {
+D3D12_CPU_DESCRIPTOR_HANDLE SRVManager::GetCPUHandle(uint32_t _index) const {
     assert(index <= useIndex_);
     return heap_->GetCPUHandle(index);
 }
 
-D3D12_GPU_DESCRIPTOR_HANDLE SRVManager::GetGPUHandle(uint32_t index) const {
+D3D12_GPU_DESCRIPTOR_HANDLE SRVManager::GetGPUHandle(uint32_t _index) const {
     assert(index <= useIndex_);
     return heap_->GetGPUHandle(index);
 }

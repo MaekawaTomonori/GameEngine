@@ -73,7 +73,7 @@ void Vignette::Modifier() {
     adapter_->GetCommandList()->SetGraphicsRootConstantBufferView(1, mr_->Get()->GetGPUVirtualAddress());
 }
 
-void Vignette::LoadPreset(const std::string& presetName) {
+void Vignette::LoadPreset(const std::string& _presetName) {
     std::string path = "./Assets/Data/PostEffect/Vignette/" + presetName + ".json";
 
     // ファイル不在時はデフォルト値
@@ -113,7 +113,7 @@ void Vignette::LoadPreset(const std::string& presetName) {
     // キーフレーム検証
     for (const auto& name : keyframeOrder_) {
         if (keyframes_.find(name) == keyframes_.end()) {
-            Log::Send(Log::Level::WARNING, std::format("Keyframe '{}' not found, using defaults", name));
+            Log::Send(Log::Level::WARNING, std::format("Keyframe '{}' not _found, using defaults", name));
             keyframes_.clear();
             keyframes_["Start"] = {0.0f, 1.0f, Vector4(0, 0, 0, 1)};
             keyframes_["End"] = {0.5f, 1.2f, Vector4(0.05f, 0.05f, 0.05f, 1.f)};
@@ -123,7 +123,7 @@ void Vignette::LoadPreset(const std::string& presetName) {
     }
 }
 
-void Vignette::UpdateAnimation(float t) {
+void Vignette::UpdateAnimation(float _t) {
     // Q43: 単一キーフレーム対応
     if (keyframeOrder_.size() == 1) {
         const auto& kf = keyframes_[keyframeOrder_[0]];
@@ -156,7 +156,7 @@ void Vignette::UpdateAnimation(float t) {
     material_->color = Vector4(color.x, color.y, color.z, material_->color.w);
 }
 
-void Vignette::SavePreset(const std::string& presetName) {
+void Vignette::SavePreset(const std::string& _presetName) {
     std::string path = "./Assets/Data/PostEffect/Vignette/" + presetName + ".json";
 
     // ディレクトリ作成

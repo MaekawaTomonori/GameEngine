@@ -63,7 +63,7 @@ void Model::Initialize(const std::string& _name) {
         Log::Send(Log::Level::INFO, "SkinCluster created for: " + _name);
     }
     else {
-        Log::Send(Log::Level::INFO, "No valid skinning data found, skipping SkinCluster creation for: " + _name);
+        Log::Send(Log::Level::INFO, "No valid skinning data _found, skipping SkinCluster creation for: " + _name);
     }
 
 
@@ -229,7 +229,7 @@ void Model::Debug() {
                 if (data_->skeleton.has_value()) {
                     Skeleton& skeleton = data_->skeleton.value();
                     ImGui::SeparatorText("Skeleton");
-                    std::function<void(int32_t)> Recursive = [&](int32_t index) {
+                    std::function<void(int32_t)> Recursive = [&](int32_t _index) {
                         Joint& joint = skeleton.joints[index];
                         if (ImGui::TreeNode(joint.name.c_str())) {
                             ImGui::Text("Joint: %s", joint.name.c_str());
@@ -307,7 +307,7 @@ void Model::CreateSkinCluster() {
     }
 
     if (!data_->skeleton.has_value() || data_->skinCluster.empty()) {
-        Log::Send(Log::Level::WARNING, "Model data does not contain valid skinning data, skipping skin cluster creation");
+        Log::Send(Log::Level::WARNING, "Model data does not contain valid skinning _data, skipping skin cluster creation");
         return;
     }
 
@@ -369,7 +369,7 @@ void Model::SetBindPose(Skeleton& _skeleton) {
 
 void Model::UpdateSkinCluster() {
     if (!data_->skeleton.has_value() || data_->skinCluster.empty()) {
-        Log::Send(Log::Level::WARNING, "Model data does not contain valid skinning data, skipping skin cluster update");
+        Log::Send(Log::Level::WARNING, "Model data does not contain valid skinning _data, skipping skin cluster update");
         return;
     }
 
@@ -387,12 +387,12 @@ void Model::UpdateSkinCluster() {
 
 void Model::UpdateSkeleton() const {
     if (!data_->skeleton.has_value() || data_->skinCluster.empty()) {
-        Log::Send(Log::Level::WARNING, "Model data does not contain valid skinning data, skipping skeleton update");
+        Log::Send(Log::Level::WARNING, "Model data does not contain valid skinning _data, skipping skeleton update");
         return;
     }
 
     Skeleton& skeleton = data_->skeleton.value();
-    std::function<void(int32_t)> RecursiveUpdate = [&](int32_t index) {
+    std::function<void(int32_t)> RecursiveUpdate = [&](int32_t _index) {
         Joint& joint = skeleton.joints[index];
         joint.local = MathUtils::Matrix::MakeAffineMatrix(joint.transform);
         if (joint.parent) {
@@ -428,7 +428,7 @@ void Model::UpdateAnimation() {
 
 void Model::ApplyAnimation() const {
     if (!data_->skeleton.has_value() || data_->skinCluster.empty()) {
-        Log::Send(Log::Level::WARNING, "Model data does not contain valid skinning data, skipping animation application");
+        Log::Send(Log::Level::WARNING, "Model data does not contain valid skinning _data, skipping animation application");
         return;
     }
     Skeleton& skeleton = data_->skeleton.value();
@@ -455,7 +455,7 @@ void Model::CreateLine() {
     line_.Clear();
 
     if (!data_->skeleton.has_value() || data_->skinCluster.empty()) {
-        Log::Send(Log::Level::WARNING, "Model data does not contain valid skinning data, skipping line creation");
+        Log::Send(Log::Level::WARNING, "Model data does not contain valid skinning _data, skipping line creation");
         return;
     }
     Skeleton& skeleton = data_->skeleton.value();

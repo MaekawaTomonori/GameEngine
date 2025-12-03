@@ -72,7 +72,7 @@ public:
     /** @brief ライトを追加
      ** @param type ライトタイプ
      **/
-    void Add(LightType type);
+    void Add(LightType _type);
 
     /** @brief ライトの参照座標を設定
      ** @param _ref 参照座標
@@ -88,4 +88,3 @@ private:
 };
 
 #endif // LIGHTMANAGER_HPP_
-

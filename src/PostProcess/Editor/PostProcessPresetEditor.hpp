@@ -125,15 +125,15 @@ private:
 
     /** @brief メンバー削除
      **/
-    void RemoveMember(int index);
+    void RemoveMember(int _index);
 
     /** @brief メンバーを上に移動
      **/
-    void MoveMemberUp(int index);
+    void MoveMemberUp(int _index);
 
     /** @brief メンバーを下に移動
      **/
-    void MoveMemberDown(int index);
+    void MoveMemberDown(int _index);
 
     /** @brief プリセットを複製
      **/
@@ -188,10 +188,10 @@ private:
     void SaveMemberKeyframes();   // editingKeyframes_ → JSON (一括保存)
     void PreviewCurrentPoint();   // 現在のポイントをエフェクトに適用
 
-    void AddKeyframePoint(const std::string& pointName);
-    void RemoveKeyframePoint(int pointIndex);
-    void MovePointUp(int pointIndex);
-    void MovePointDown(int pointIndex);
+    void AddKeyframePoint(const std::string& _pointName);
+    void RemoveKeyframePoint(int _pointIndex);
+    void MovePointUp(int _pointIndex);
+    void MovePointDown(int _pointIndex);
 
 }; // class PostProcessPresetEditor
 

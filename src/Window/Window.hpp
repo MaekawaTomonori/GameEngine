@@ -49,7 +49,7 @@ public:
      ** @param width 幅
      ** @param height 高さ
      **/
-    void SetSize(int width, int height) const;
+    void SetSize(int _width, int _height) const;
 
     /** @brief ウィンドウタイトルを設定
      ** @param _title タイトル文字列
@@ -65,7 +65,7 @@ public:
     bool IsBorderless() const { return isBorderless_; }
 
 private:
-    static LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+    static LRESULT CALLBACK WindowProc(HWND _hwnd, UINT _uMsg, WPARAM _wParam, LPARAM _lParam);
 
     /** @brief ボーダレスフルスクリーン化
      **/

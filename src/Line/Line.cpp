@@ -50,7 +50,7 @@ void Line::Draw() const {
     }, false);
 }
 
-void Line::AddLine(const Vector3& start, const Vector3& end) {
+void Line::AddLine(const Vector3& _start, const Vector3& _end) {
     if (positions_.size() >= MAX_LINES) {
         Utils::Alert("Line::AddLine: Maximum number of lines exceeded. Cannot add more lines.");
         return;
@@ -64,7 +64,7 @@ void Line::Clear() {
     positions_.clear();
 }
 
-void Line::SetColor(Vector4 color) const {
+void Line::SetColor(Vector4 _color) const {
     if (!materialData_){
         Utils::Alert("Line::SetColor: Material data is not initialized.");
         return;

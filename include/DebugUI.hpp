@@ -46,7 +46,7 @@ public:
      ** @param width 新しい幅
      ** @param height 新しい高さ
      **/
-    void UpdateDisplaySize(int width, int height);
+    void UpdateDisplaySize(int _width, int _height);
 
 private:
     /** @brief 登録されたコマンドを処理

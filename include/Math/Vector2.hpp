@@ -9,28 +9,28 @@
 struct Vector2{
     float x, y;
 
-    Vector2 operator+(const Vector2& v) const {
+    Vector2 operator+(const Vector2& _v) const {
         return { x + v.x, y + v.y };
     }
 
-    Vector2 operator-(const Vector2& v) const {
+    Vector2 operator-(const Vector2& _v) const {
         return { x - v.x, y - v.y };
     }
 
-    Vector2 operator*(const Vector2& v) const {
+    Vector2 operator*(const Vector2& _v) const {
 		return { x * v.x, y * v.y };
     }
 
-    Vector2 operator*(const float f) const {
+    Vector2 operator*(const float _f) const {
         return { x * f, y * f };
     }
 
-	void operator+=(const Vector2& v) {
+	void operator+=(const Vector2& _v) {
 		x += v.x;
 		y += v.y;
 	}
 
-    bool operator==(const Vector2& v) const {
+    bool operator==(const Vector2& _v) const {
         return x == v.x && y == v.y;
     }
 
@@ -49,4 +49,3 @@ struct Vector2{
 };
 
 #endif // VECTOR2_HPP_
-

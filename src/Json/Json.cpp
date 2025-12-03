@@ -4,7 +4,7 @@
 
 #include "Log.hpp"
 
-void Json::Register(const std::string& name) {
+void Json::Register(const std::string& _name) {
     if (datas_.contains(name))return;
 
     datas_[name];

@@ -48,19 +48,19 @@ public:
      ** @param level ログレベル
      ** @param message メッセージ
      **/
-    static void Send(Level level, const std::string& message = "");
+    static void Send(Level _level, const std::string& _message = "");
 
     /** @brief ログメッセージを送信(Debug)
      ** @param message メッセージ
      **/
-    static void Send(const std::string& message);
+    static void Send(const std::string& _message);
 
     /** @brief コンテキスト付きログメッセージを送信
      ** @param level ログレベル
      ** @param message メッセージ
      ** @param context コンテキスト情報
      **/
-    static void SendWithContext(Level level, const std::string& message, const std::string& context = "");
+    static void SendWithContext(Level _level, const std::string& _message, const std::string& _context = "");
 
     /** @brief 実行コンテキストをログに記録
      **/
@@ -72,12 +72,12 @@ public:
      ** @param success 成功したかどうか
      ** @param details 詳細情報
      **/
-    static void LogFileOperation(const std::string& operation, const std::string& filePath, bool success = true, const std::string& details = "");
+    static void LogFileOperation(const std::string& _operation, const std::string& _filePath, bool _success = true, const std::string& _details = "");
 
     /** @brief ログレベルを設定
      ** @param level ログレベル
      **/
-    static void SetLevel(Level level);
+    static void SetLevel(Level _level);
 
 private:
     /** @brief 実行コンテキストの初期化
@@ -102,14 +102,14 @@ private:
      ** @param targetPath 対象パス
      ** @param context コンテキスト
      **/
-    static void LogFileSystemDiagnostics(const std::string& targetPath, const std::string& context = "");
+    static void LogFileSystemDiagnostics(const std::string& _targetPath, const std::string& _context = "");
 
     /** @brief パス付きログメッセージを送信（レガシー互換性、削除予定）
      ** @param level ログレベル
      ** @param message メッセージ
      ** @param context コンテキスト
      **/
-    static void SendWithPath(Level level, const std::string& message, const std::string& context = "");
+    static void SendWithPath(Level _level, const std::string& _message, const std::string& _context = "");
 };
 
 #endif //LOG_HPP

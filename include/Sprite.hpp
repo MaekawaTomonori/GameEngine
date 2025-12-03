@@ -102,7 +102,7 @@ public:
     /** @brief 位置を設定
      ** @param p 位置ベクトル
      **/
-    void SetPosition(const Vector2& p);
+    void SetPosition(const Vector2& _p);
 
     /** @brief サイズを取得
      ** @return サイズベクトルへの参照
@@ -112,7 +112,7 @@ public:
     /** @brief サイズを設定
      ** @param s サイズベクトル
      **/
-    void SetSize(const Vector2& s);
+    void SetSize(const Vector2& _s);
 
     /** @brief 回転角度を取得
      ** @return 回転角度（ラジアン）
@@ -122,7 +122,7 @@ public:
     /** @brief 回転角度を設定
      ** @param r 回転角度（ラジアン）
      **/
-    void SetRotation(float r);
+    void SetRotation(float _r);
 
     /** @brief 色を取得
      ** @return 色ベクトルへの参照
@@ -132,7 +132,7 @@ public:
     /** @brief 色を設定
      ** @param color 色ベクトル
      **/
-    void SetColor(const Vector4& color) const;
+    void SetColor(const Vector4& _color) const;
 
     /** @brief アンカーポイントを取得
      ** @return アンカーポイントへの参照
@@ -142,7 +142,7 @@ public:
     /** @brief アンカーポイントを設定
      ** @param a アンカーポイント
      **/
-    void SetAnchorPoint(const Vector2& a);
+    void SetAnchorPoint(const Vector2& _a);
 
     /** @brief X軸反転の状態を取得
      ** @return 反転している場合true
@@ -152,7 +152,7 @@ public:
     /** @brief X軸反転を設定
      ** @param f 反転する場合true
      **/
-    void SetFlipX(bool f);
+    void SetFlipX(bool _f);
 
     /** @brief Y軸反転の状態を取得
      ** @return 反転している場合true
@@ -162,7 +162,7 @@ public:
     /** @brief Y軸反転を設定
      ** @param f 反転する場合true
      **/
-    void SetFlipY(bool f);
+    void SetFlipY(bool _f);
 
     /** @brief テクスチャの左上座標を取得
      ** @return 左上座標への参照

@@ -21,9 +21,9 @@ class Mesh {
         uint32_t lighting;       // 4 bytes
         float shininess;         // 4 bytes
         float coefficient;       // 4 bytes
-        float pad1;              // 4 bytes (padding to 16-byte boundary)
+        float pad1;              // 4 bytes (padding to 16-byte _boundary)
         Vector2 tilingMul;       // 8 bytes
-        Vector2 pad2;            // 8 bytes (padding to 16-byte boundary)
+        Vector2 pad2;            // 8 bytes (padding to 16-byte _boundary)
         Matrix4x4 uvTransform;   // 64 bytes (aligned)
     };
 

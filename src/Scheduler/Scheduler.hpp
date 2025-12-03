@@ -12,18 +12,18 @@ public:
     Scheduler();
     ~Scheduler();
 
-    void RunTaskLater(Task task, std::chrono::milliseconds delay);
-    void RunTaskTimer(Task task, std::chrono::milliseconds interval);
+    void RunTaskLater(Task _task, std::chrono::milliseconds _delay);
+    void RunTaskTimer(Task _task, std::chrono::milliseconds _interval);
 
 private:
     struct SchedulerTask {
         Task task;
         std::chrono::system_clock::time_point executionTime;
 
-        bool operator<(const SchedulerTask& other) const {
+        bool operator<(const SchedulerTask& _other) const {
             return executionTime < other.executionTime; // For priority queue
         }
-        bool operator>(const SchedulerTask& other) const {
+        bool operator>(const SchedulerTask& _other) const {
             return executionTime > other.executionTime; // For priority queue
         }
     };

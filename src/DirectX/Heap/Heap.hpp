@@ -31,13 +31,13 @@ public:
      ** @param index インデックス
      ** @return CPUディスクリプタハンドル
      **/
-    D3D12_CPU_DESCRIPTOR_HANDLE GetCPUHandle(uint32_t index) const;
+    D3D12_CPU_DESCRIPTOR_HANDLE GetCPUHandle(uint32_t _index) const;
 
     /** @brief GPUディスクリプタハンドルを取得
      ** @param index インデックス
      ** @return GPUディスクリプタハンドル
      **/
-    D3D12_GPU_DESCRIPTOR_HANDLE GetGPUHandle(uint32_t index) const;
+    D3D12_GPU_DESCRIPTOR_HANDLE GetGPUHandle(uint32_t _index) const;
 }; // class Heap
 
 #endif // Heap_HPP_

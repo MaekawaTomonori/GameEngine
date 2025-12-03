@@ -216,7 +216,7 @@ void LightManager::Draw() const {
     commandList_->SetGraphicsRootConstantBufferView(7, countResource_->Get()->GetGPUVirtualAddress());
 }
 
-void LightManager::Add(LightType type) {
+void LightManager::Add(LightType _type) {
     std::unique_ptr<RawDirectionalLight> directional;
     std::unique_ptr<RawPointLight> point;
     std::unique_ptr<RawSpotLight> spot;
@@ -261,4 +261,3 @@ void LightManager::Add(LightType type) {
 void LightManager::SetReference(Vector3& _ref) {
     ref_ = std::ref(_ref);
 }
-

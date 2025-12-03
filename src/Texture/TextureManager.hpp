@@ -54,7 +54,7 @@ public:
     /** @brief テクスチャを読み込み
      ** @param fileName ファイル名
      **/
-    bool Load(const std::string& fileName);
+    bool Load(const std::string& _fileName);
 
     /** @brief すべてのテクスチャをアンロード（クリア）
      **/
@@ -64,38 +64,37 @@ public:
      ** @param fileName ファイル名
      ** @return テクスチャメタデータへの参照
      **/
-    const DirectX::TexMetadata& GetTextureMetadata(const std::string& fileName);
+    const DirectX::TexMetadata& GetTextureMetadata(const std::string& _fileName);
 
     /** @brief SRVインデックスを取得
      ** @param fileName ファイル名
      ** @return SRVインデックス
      **/
-    uint32_t GetSrvIndex(const std::string& fileName);
+    uint32_t GetSrvIndex(const std::string& _fileName);
 
     /** @brief ファイルパスからテクスチャインデックスを取得
      ** @param path ファイルパス
      ** @return テクスチャインデックス
      **/
-    uint32_t GetTextureIndexByFilePath(const std::string& path) const;
+    uint32_t GetTextureIndexByFilePath(const std::string& _path) const;
 
     /** @brief GPUハンドルを取得（ファイル名指定）
      ** @param fileName ファイル名
      ** @return GPUディスクリプタハンドル
      **/
-    D3D12_GPU_DESCRIPTOR_HANDLE GetGPUHandle(const std::string& fileName);
+    D3D12_GPU_DESCRIPTOR_HANDLE GetGPUHandle(const std::string& _fileName);
 
     /** @brief GPUハンドルを取得（インデックス指定）
      ** @param index インデックス
      ** @return GPUディスクリプタハンドル
      **/
-    D3D12_GPU_DESCRIPTOR_HANDLE GetGPUHandle(const uint32_t index) const;
+    D3D12_GPU_DESCRIPTOR_HANDLE GetGPUHandle(const uint32_t _index) const;
 
 private: //Methods
-    DirectX::ScratchImage LoadTexture(const std::string& filename) const;
-    void UploadTextureData(DX12Resource* _texture, const DirectX::ScratchImage& mipImages) const;
+    DirectX::ScratchImage LoadTexture(const std::string& _filename) const;
+    void UploadTextureData(DX12Resource* _texture, const DirectX::ScratchImage& _mipImages) const;
 
     static DirectX::ScratchImage LoadDDS(const std::wstring& _path);
 };
 
 #endif // TEXTUREMANAGER_HPP_
-

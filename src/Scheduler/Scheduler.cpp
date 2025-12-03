@@ -10,7 +10,7 @@ Scheduler::~Scheduler() {
     Shutdown();
 }
 
-void Scheduler::RunTaskLater(Task task, std::chrono::milliseconds delay) {
+void Scheduler::RunTaskLater(Task _task, std::chrono::milliseconds _delay) {
 
     {
         const auto& executionTime = std::chrono::system_clock::now() + delay;
@@ -20,7 +20,7 @@ void Scheduler::RunTaskLater(Task task, std::chrono::milliseconds delay) {
     condition_.notify_one();
 }
 
-void Scheduler::RunTaskTimer(Task task, std::chrono::milliseconds interval) {
+void Scheduler::RunTaskTimer(Task _task, std::chrono::milliseconds _interval) {
     (void)task;
     (void)interval;
 }

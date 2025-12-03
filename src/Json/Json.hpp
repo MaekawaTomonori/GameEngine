@@ -40,7 +40,7 @@ class Json{
 public:
     void SetValue(const std::string& _path, const std::string& _group, const std::string& _key, const Value& _value);
     Group GetGroups(const std::string& _path);
-    Value GetValue(const std::string& _path, const std::string& group, const std::string& key) const;
+    Value GetValue(const std::string& _path, const std::string& _group, const std::string& _key) const;
     void RemoveGroup(const std::string& _path, const std::string& _group);
 
     bool Load(const std::string& _path, std::string _name = "");
@@ -52,4 +52,3 @@ private:
 };
 
 #endif // JSON_HPP_
-

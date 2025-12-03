@@ -81,7 +81,7 @@ public:
      ** @param start 始点座標
      ** @param end 終点座標
      **/
-    void AddLine(const Vector3& start, const Vector3& end);
+    void AddLine(const Vector3& _start, const Vector3& _end);
 
     /** @brief すべての線をクリア
      **/
@@ -90,7 +90,7 @@ public:
     /** @brief 色を設定
      ** @param color 色ベクトル
      **/
-    void SetColor(Vector4 color) const;
+    void SetColor(Vector4 _color) const;
 
 private:
     /** @brief 頂点バッファの生成

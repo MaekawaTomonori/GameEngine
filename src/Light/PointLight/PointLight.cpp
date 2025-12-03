@@ -13,7 +13,7 @@ void RawPointLight::DefaultSetting() {
 	light_.decay = 1;
 }
 
-void RawPointLight::Set(const std::string& uuid ,const PointLight& pl) {
+void RawPointLight::Set(const std::string& _uuid ,const PointLight& _pl) {
     uuid_ = uuid;
     light_ = pl;
 }

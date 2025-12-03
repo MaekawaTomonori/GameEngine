@@ -101,7 +101,7 @@ std::unique_ptr<DX12Resource> DirectXAdapter::CreateBufferResource(const size_t 
     return std::move(wrapper);
 }
 
-std::unique_ptr<DX12Resource> DirectXAdapter::CreateTextureResource(const DirectX::TexMetadata& metadata) const {
+std::unique_ptr<DX12Resource> DirectXAdapter::CreateTextureResource(const DirectX::TexMetadata& _metadata) const {
     /// FLOW  ///
     /// 1. Resource setting from metadata
     /// 2. Heap setting
@@ -612,7 +612,7 @@ void DirectXAdapter::UpdateWindowSize(size_t _width, size_t _height) {
 
     // サイズが変わらない場合は何もしない
     if (_width == windowSize_.first && _height == windowSize_.second) {
-        Log::Send(Log::Level::WARNING, "Window size unchanged, skipping resize");
+        Log::Send(Log::Level::WARNING, "Window size _unchanged, skipping resize");
         return;
     }
 

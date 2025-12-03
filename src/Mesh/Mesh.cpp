@@ -33,7 +33,7 @@ void Mesh::Initialize(DirectXAdapter* _adapter, const std::string &_name, const 
     material_->color = Vector4(1.0f, 1.0f, 1.0f, 1.0f);
     material_->lighting = 0; // Default lighting
     material_->shininess = 100.f;
-    material_->coefficient = 0.0f; // Environment mapping coefficient (disabled by default)
+    material_->coefficient = 0.0f; // Environment mapping coefficient (disabled by _default)
     material_->tilingMul = Vector2(1.0f, 1.0f);
     material_->uvTransform = MathUtils::Matrix::MakeIdentity();
 

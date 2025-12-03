@@ -82,22 +82,22 @@ public:
     /** @brief 視野角を設定
      ** @param fov 視野角（ラジアン）
      **/
-    void SetFov(float fov) { fov_ = fov; }
+    void SetFov(float _fov) { fov_ = fov; }
 
     /** @brief アスペクト比を設定
      ** @param aspectRatio アスペクト比
      **/
-    void SetAspectRatio(float aspectRatio) { aspectRatio_ = aspectRatio; }
+    void SetAspectRatio(float _aspectRatio) { aspectRatio_ = aspectRatio; }
 
     /** @brief ニアクリップ平面を設定
      ** @param nearPlane ニアクリップ距離
      **/
-    void SetNear(float nearPlane) { near_ = nearPlane; }
+    void SetNear(float _nearPlane) { near_ = nearPlane; }
 
     /** @brief ファークリップ平面を設定
      ** @param farPlane ファークリップ距離
      **/
-    void SetFar(float farPlane) { far_ = farPlane; }
+    void SetFar(float _farPlane) { far_ = farPlane; }
 }; // class Camera
 
 #endif // Camera_HPP_

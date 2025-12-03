@@ -16,7 +16,7 @@ public:
      ** @param sceneName シーン名
      ** @return 生成されたシーンのユニークポインタ
      **/
-    virtual std::unique_ptr<IScene> Create(const std::string& sceneName) = 0;
+    virtual std::unique_ptr<IScene> Create(const std::string& _sceneName) = 0;
 }; // class AbstractSceneFactory
 
 #endif // AbstractSceneFactory_HPP_

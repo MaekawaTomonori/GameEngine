@@ -4,11 +4,11 @@
 #include "Utils.hpp"
 #include "src/Json/Json.hpp"
 
-void CameraRepository::Initialize(float ratio) {
+void CameraRepository::Initialize(float _ratio) {
     ratio_ = ratio;
 }
 
-Camera* CameraRepository::Add(const std::string& name) {
+Camera* CameraRepository::Add(const std::string& _name) {
     std::string actualName = name.empty() ? GenerateUniqueName() : name;
 
     if (cameras_.contains(actualName)) {
@@ -20,18 +20,18 @@ Camera* CameraRepository::Add(const std::string& name) {
     return cameras_[actualName].get();
 }
 
-Camera* CameraRepository::Get(const std::string& name) {
+Camera* CameraRepository::Get(const std::string& _name) {
     if (!cameras_.contains(name)) {
         return nullptr;
     }
     return cameras_[name].get();
 }
 
-void CameraRepository::Remove(const std::string& name) {
+void CameraRepository::Remove(const std::string& _name) {
     cameras_.erase(name);
 }
 
-bool CameraRepository::Contains(const std::string& name) const {
+bool CameraRepository::Contains(const std::string& _name) const {
     return cameras_.contains(name);
 }
 

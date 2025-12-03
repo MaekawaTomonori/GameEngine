@@ -420,7 +420,7 @@ void PostProcessPresetEditor::RenderMembersList() {
         ImGui::TextColored(ImVec4(0.6f, 0.6f, 0.6f, 1.0f), "(?)");
         if (ImGui::IsItemHovered()) {
             ImGui::BeginTooltip();
-            ImGui::Text("If true, effect will be created automatically if it doesn't exist");
+            ImGui::Text("If _true, effect will be created automatically if it doesn't exist");
             ImGui::EndTooltip();
         }
     }
@@ -916,13 +916,13 @@ std::vector<std::string> PostProcessPresetEditor::GetFilteredAndSortedPresets() 
     if (strlen(searchBuffer_) > 0) {
         std::string searchLower = searchBuffer_;
         std::transform(searchLower.begin(), searchLower.end(), searchLower.begin(),
-            [](unsigned char c) { return static_cast<char>(std::tolower(c)); });
+            [](unsigned char _c) { return static_cast<char>(std::tolower(c)); });
 
         presets.erase(
-            std::remove_if(presets.begin(), presets.end(), [&](const std::string& name) {
+            std::remove_if(presets.begin(), presets.end(), [&](const std::string& _name) {
                 std::string nameLower = name;
                 std::transform(nameLower.begin(), nameLower.end(), nameLower.begin(),
-                    [](unsigned char c) { return static_cast<char>(std::tolower(c)); });
+                    [](unsigned char _c) { return static_cast<char>(std::tolower(c)); });
                 return nameLower.find(searchLower) == std::string::npos;
             }),
             presets.end()
@@ -932,14 +932,14 @@ std::vector<std::string> PostProcessPresetEditor::GetFilteredAndSortedPresets() 
     // Sort by selected mode
     if (sortMode_ == 1) {
         // Sort by duration
-        std::sort(presets.begin(), presets.end(), [this](const std::string& a, const std::string& b) {
+        std::sort(presets.begin(), presets.end(), [this](const std::string& _a, const std::string& _b) {
             auto infoA = GetPresetInfo(a);
             auto infoB = GetPresetInfo(b);
             return infoA.duration < infoB.duration;
         });
     } else if (sortMode_ == 2) {
         // Sort by member count
-        std::sort(presets.begin(), presets.end(), [this](const std::string& a, const std::string& b) {
+        std::sort(presets.begin(), presets.end(), [this](const std::string& _a, const std::string& _b) {
             auto infoA = GetPresetInfo(a);
             auto infoB = GetPresetInfo(b);
             return infoA.memberCount < infoB.memberCount;
@@ -1362,7 +1362,7 @@ void PostProcessPresetEditor::RenderPointParameters() {
     ImGui::PopStyleColor();
     ImGui::TextColored(ImVec4(0.6f, 0.6f, 0.6f, 1.0f), "Click to save current effect state to this keyframe point");
 }
-void PostProcessPresetEditor::AddKeyframePoint(const std::string& pointName) {
+void PostProcessPresetEditor::AddKeyframePoint(const std::string& _pointName) {
     if (pointName.empty()) return;
 
     // 既に存在するか確認
@@ -1385,7 +1385,7 @@ void PostProcessPresetEditor::AddKeyframePoint(const std::string& pointName) {
     Log::Send(Log::Level::INFO, std::format("Added keyframe point '{}'", pointName));
 }
 
-void PostProcessPresetEditor::RemoveKeyframePoint(int pointIndex) {
+void PostProcessPresetEditor::RemoveKeyframePoint(int _pointIndex) {
     if (pointIndex < 0 || pointIndex >= static_cast<int>(editingKeyframeOrder_.size())) {
         return;
     }
@@ -1411,7 +1411,7 @@ void PostProcessPresetEditor::RemoveKeyframePoint(int pointIndex) {
     Log::Send(Log::Level::INFO, std::format("Removed keyframe point '{}'", pointName));
 }
 
-void PostProcessPresetEditor::MovePointUp(int pointIndex) {
+void PostProcessPresetEditor::MovePointUp(int _pointIndex) {
     if (pointIndex <= 0 || pointIndex >= static_cast<int>(editingKeyframeOrder_.size())) {
         return;
     }
@@ -1427,7 +1427,7 @@ void PostProcessPresetEditor::MovePointUp(int pointIndex) {
     keyframesDirty_ = true;
 }
 
-void PostProcessPresetEditor::MovePointDown(int pointIndex) {
+void PostProcessPresetEditor::MovePointDown(int _pointIndex) {
     if (pointIndex < 0 || pointIndex >= static_cast<int>(editingKeyframeOrder_.size()) - 1) {
         return;
     }

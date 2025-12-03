@@ -74,9 +74,9 @@ void CameraDirector::Update() {
 
     // Find start and end points by name
     auto startIt = std::find_if(currentWork.points.begin(), currentWork.points.end(),
-        [&currentSegment](const Point& p) { return p.name == currentSegment.startPoint; });
+        [&currentSegment](const Point& _p) { return p.name == currentSegment.startPoint; });
     auto endIt = std::find_if(currentWork.points.begin(), currentWork.points.end(),
-        [&currentSegment](const Point& p) { return p.name == currentSegment.endPoint; });
+        [&currentSegment](const Point& _p) { return p.name == currentSegment.endPoint; });
 
     if (startIt == currentWork.points.end() || endIt == currentWork.points.end()) return;
 
@@ -404,24 +404,24 @@ void CameraDirector::OnComplete() {
     active_ = nullptr;
 }
 
-CameraDirector::Point CameraDirector::InterpolatePoint(const Point& start, const Point& end, float t) {
+CameraDirector::Point CameraDirector::InterpolatePoint(const Point& _start, const Point& _end, float _t) {
     Point result;
     result.position = MathUtils::Lerp(start.position, end.position, t);
     result.rotation = MathUtils::Lerp(start.rotation, end.rotation, t);
     return result;
 }
 
-CameraDirector::Point CameraDirector::InterpolatePointWithType(const Point& start, const Point& end, float t, InterpolationType type) {
+CameraDirector::Point CameraDirector::InterpolatePointWithType(const Point& _start, const Point& _end, float _t, InterpolationType _type) {
     // Legacy function: use same interpolation for both position and rotation
     return InterpolatePointWithSeparateTypes(start, end, t, type, type);
 }
 
-CameraDirector::Point CameraDirector::InterpolatePointWithSeparateTypes(const Point& start, const Point& end, float t, InterpolationType posType, InterpolationType rotType) {
+CameraDirector::Point CameraDirector::InterpolatePointWithSeparateTypes(const Point& _start, const Point& _end, float _t, InterpolationType _posType, InterpolationType _rotType) {
     Point result;
     result.name = start.name;
 
     // Lambda to select interpolation function based on type
-    auto interpolate = [t](const auto& a, const auto& b, InterpolationType type) {
+    auto interpolate = [t](const auto& _a, const auto& _b, InterpolationType _type) {
         switch (type) {
             case InterpolationType::EaseInQuad: return Ease::In::Quad(a, b, t);
             case InterpolationType::EaseOutQuad: return Ease::Out::Quad(a, b, t);
@@ -449,7 +449,7 @@ CameraDirector::Point CameraDirector::InterpolatePointWithSeparateTypes(const Po
     return result;
 }
 
-void CameraDirector::MigrateOrderToSegments(Work& work) {
+void CameraDirector::MigrateOrderToSegments(Work& _work) {
     // If segments already exist, no need to migrate
     if (!work.segments.empty()) return;
 
@@ -467,7 +467,7 @@ void CameraDirector::MigrateOrderToSegments(Work& work) {
     }
 }
 
-CameraDirector::InterpolationType CameraDirector::StringToInterpolationType(const std::string& typeStr) {
+CameraDirector::InterpolationType CameraDirector::StringToInterpolationType(const std::string& _typeStr) {
     if (Utils::EqualsIgnoreCase(typeStr, "Linear")) return InterpolationType::Linear;
     if (Utils::EqualsIgnoreCase(typeStr, "EaseInQuad")) return InterpolationType::EaseInQuad;
     if (Utils::EqualsIgnoreCase(typeStr, "EaseOutQuad")) return InterpolationType::EaseOutQuad;
@@ -478,7 +478,7 @@ CameraDirector::InterpolationType CameraDirector::StringToInterpolationType(cons
     return InterpolationType::Linear; // Default
 }
 
-std::string CameraDirector::InterpolationTypeToString(InterpolationType type) {
+std::string CameraDirector::InterpolationTypeToString(InterpolationType _type) {
     switch (type) {
         case InterpolationType::Linear: return "Linear";
         case InterpolationType::EaseInQuad: return "EaseInQuad";
@@ -491,7 +491,7 @@ std::string CameraDirector::InterpolationTypeToString(InterpolationType type) {
     }
 }
 
-Vector2 CameraDirector::CalculateLookAtRotation(const Vector3& position, const Vector3& target) {
+Vector2 CameraDirector::CalculateLookAtRotation(const Vector3& _position, const Vector3& _target) {
     // Calculate direction vector from camera to target
     Vector3 direction = target - position;
 

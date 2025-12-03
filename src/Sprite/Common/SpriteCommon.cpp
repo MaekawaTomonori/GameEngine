@@ -68,4 +68,3 @@ void SpriteCommon::Initialize(DirectXAdapter* _adapter, DebugUI* _debugUi) {
     .SetTopologyType(D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE)
     .Create();
 }
-

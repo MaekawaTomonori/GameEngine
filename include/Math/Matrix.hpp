@@ -15,7 +15,7 @@ struct Matrix3x3{
 struct Matrix4x4{
     float matrix[4][4];
 
-    Matrix4x4 operator+(const Matrix4x4& other) const {
+    Matrix4x4 operator+(const Matrix4x4& _other) const {
         return Matrix4x4 {
             matrix[0][0] + other.matrix[0][0],
             matrix[0][1] + other.matrix[0][1],
@@ -35,7 +35,7 @@ struct Matrix4x4{
             matrix[3][3] + other.matrix[3][3]
         };
     }
-    Matrix4x4 operator-(const Matrix4x4& other) const {
+    Matrix4x4 operator-(const Matrix4x4& _other) const {
         return Matrix4x4 {
             matrix[0][0] - other.matrix[0][0],
             matrix[0][1] - other.matrix[0][1],
@@ -55,7 +55,7 @@ struct Matrix4x4{
             matrix[3][3] - other.matrix[3][3]
         };
     }
-    Matrix4x4 operator*(const float& other) const {
+    Matrix4x4 operator*(const float& _other) const {
         return Matrix4x4 {
             matrix[0][0] * other,
             matrix[0][1] * other,
@@ -75,7 +75,7 @@ struct Matrix4x4{
             matrix[3][3] * other
         };
     }
-    Matrix4x4 operator*(const Matrix4x4& other) const {
+    Matrix4x4 operator*(const Matrix4x4& _other) const {
         Matrix4x4 m {};
         for (int i = 0; i < 4; ++i){
             for (int j = 0; j < 4; ++j){
@@ -86,7 +86,7 @@ struct Matrix4x4{
         }
         return m;
     }
-    Matrix4x4 operator/(const float& other) const {
+    Matrix4x4 operator/(const float& _other) const {
         return Matrix4x4 {
             matrix[0][0] / other,
             matrix[0][1] / other,

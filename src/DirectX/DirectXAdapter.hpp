@@ -91,10 +91,10 @@ public:
     std::unique_ptr<DX12Resource> CreateBufferResource(size_t _size) const;
 
     /** @brief テクスチャリソースを作成
-     ** @param metadata テクスチャメタデータ
+     ** @param _metadata テクスチャメタデータ
      ** @return 作成されたリソース
      **/
-    std::unique_ptr<DX12Resource> CreateTextureResource(const DirectX::TexMetadata& metadata) const;
+    std::unique_ptr<DX12Resource> CreateTextureResource(const DirectX::TexMetadata& _metadata) const;
 
     /** @brief 深度ステンシルリソースを作成
      ** @param _width 幅

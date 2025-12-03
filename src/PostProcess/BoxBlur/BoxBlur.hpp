@@ -18,10 +18,10 @@ protected:
     void Modifier() override;
 
 public:
-    void LoadPreset(const std::string& presetName) override;
-    void SavePreset(const std::string& presetName) override;
+    void LoadPreset(const std::string& _presetName) override;
+    void SavePreset(const std::string& _presetName) override;
     nlohmann::json SaveParameters() const override;
-    void UpdateAnimation(float t) override;
+    void UpdateAnimation(float _t) override;
 }; // class BoxBlur
 
 #endif // BoxBlur_HPP_

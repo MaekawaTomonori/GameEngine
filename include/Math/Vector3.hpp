@@ -11,42 +11,42 @@
 struct Vector3{
     float x = 0.f, y = 0.f, z = 0.f;
 
-    Vector3 operator+(const Vector3& v) const {
+    Vector3 operator+(const Vector3& _v) const {
         return {x + v.x, y + v.y, z + v.z};
     }
 
-	void operator+=(const Vector3& v) {
+	void operator+=(const Vector3& _v) {
 		x += v.x;
 		y += v.y;
 		z += v.z;
 	}
-	void operator+=(const Vector2& v) {
+	void operator+=(const Vector2& _v) {
 		x += v.x;
 		y += v.y;
 		z += 0;
 	}
 
-    Vector3 operator-(const Vector3& v) const {
+    Vector3 operator-(const Vector3& _v) const {
         return {x - v.x, y - v.y, z - v.z};
     }
 
-    Vector3 operator*(const float f) const {
+    Vector3 operator*(const float _f) const {
         return {x * f, y * f, z * f};
     }
 
-    void operator*=(const float f) {
+    void operator*=(const float _f) {
         x *= f;
         y *= f;
         z *= f;
     }
 
-    void operator*=(const Vector3& v) {
+    void operator*=(const Vector3& _v) {
         x *= v.x;
         y *= v.y;
         z *= v.z;
     }
 
-	Vector3 operator/(const float& f) const {
+	Vector3 operator/(const float& _f) const {
         return {x / f, y / f, z / f};
     }
 

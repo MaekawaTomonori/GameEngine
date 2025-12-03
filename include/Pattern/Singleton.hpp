@@ -13,7 +13,7 @@ class SingletonFinalizer{
     /** @brief ファイナライザーを追加
      ** @param finalizer 終了処理関数
      **/
-    static void AddFinalizer(Finalizer finalizer);
+    static void AddFinalizer(Finalizer _finalizer);
 
     /** @brief 全シングルトンを破棄
      **/

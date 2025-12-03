@@ -94,7 +94,7 @@ private:
      ** @param width 新しい幅
      ** @param height 新しい高さ
      **/
-    void HandleWindowResize(int width, int height) const;
+    void HandleWindowResize(int _width, int _height) const;
 }; // class Framework
 
 #endif // Framework_HPP_

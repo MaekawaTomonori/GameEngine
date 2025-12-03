@@ -45,7 +45,7 @@ public:
     /** @brief RTVハンドルを設定
      ** @param rtvHandle RTVハンドル
      **/
-    void SetRTVHandle(D3D12_CPU_DESCRIPTOR_HANDLE rtvHandle);
+    void SetRTVHandle(D3D12_CPU_DESCRIPTOR_HANDLE _rtvHandle);
 
     /** @brief デバッグ情報の表示（純粋仮想関数）
      **/
@@ -54,12 +54,12 @@ public:
     /** @brief プリセットからパラメータを読み込み
      ** @param presetName プリセット名
      **/
-    virtual void LoadPreset(const std::string& presetName) = 0;
+    virtual void LoadPreset(const std::string& _presetName) = 0;
 
     /** @brief 現在のパラメータをプリセットとして保存
      ** @param presetName プリセット名
      **/
-    virtual void SavePreset(const std::string& presetName) = 0;
+    virtual void SavePreset(const std::string& _presetName) = 0;
 
     /** @brief 現在のパラメータをJSONに変換
      ** @return パラメータのJSON表現
@@ -69,7 +69,7 @@ public:
     /** @brief アニメーション進行（tは0.0~1.0）
      ** @param t アニメーション進行度（0.0: 開始、1.0: 終了）
      **/
-    virtual void UpdateAnimation(float t) = 0;
+    virtual void UpdateAnimation(float _t) = 0;
 
     ///// <summary>
     ///// キーフレーム名リストを取得

@@ -64,7 +64,7 @@ void Log::Initialize() {
     LogExecutionContext();
 }
 
-void Log::Send(Level _level, const std::string& message) {
+void Log::Send(Level _level, const std::string& _message) {
     switch (_level) {
         case Level::TRACE:
             spdlog::trace(message);
@@ -87,7 +87,7 @@ void Log::Send(Level _level, const std::string& message) {
     }
 }
 
-void Log::Send(const std::string& message) {
+void Log::Send(const std::string& _message) {
     spdlog::debug(message);
 }
 
@@ -95,7 +95,7 @@ void Log::InitializeExecutionContext() {
     try {
         workingDirectory_ = GetCurrentWorkingDirectory();
         executablePath_ = GetExecutablePath();
-    } catch (const std::exception& e) {
+    } catch (const std::exception& _e) {
         workingDirectory_ = "Error: " + std::string(e.what());
         executablePath_ = "Error: " + std::string(e.what());
     }
@@ -104,7 +104,7 @@ void Log::InitializeExecutionContext() {
 std::string Log::GetCurrentWorkingDirectory() {
     try {
         return std::filesystem::current_path().string();
-    } catch (const std::exception& e) {
+    } catch (const std::exception& _e) {
         return "Error getting CWD: " + std::string(e.what());
     }
 }
@@ -121,12 +121,12 @@ std::string Log::GetExecutablePath() {
 #else
         return "Non-Windows platform";
 #endif
-    } catch (const std::exception& e) {
+    } catch (const std::exception& _e) {
         return "Error: " + std::string(e.what());
     }
 }
 
-void Log::SendWithContext(Level level, const std::string& message, const std::string& context) {
+void Log::SendWithContext(Level _level, const std::string& _message, const std::string& _context) {
     std::string contextPrefix = context.empty() ? "" : "[" + context + "] ";
     std::string enhancedMessage = contextPrefix + message;
     Send(level, enhancedMessage);
@@ -139,7 +139,7 @@ void Log::LogExecutionContext() {
     Send(Level::INFO, "=== End Context Information ===");
 }
 
-void Log::LogFileOperation(const std::string& operation, const std::string& filePath, bool success, const std::string& details) {
+void Log::LogFileOperation(const std::string& _operation, const std::string& _filePath, bool _success, const std::string& _details) {
     std::string status = success ? "SUCCESS" : "FAILED";
     std::string message = std::format("FILE_OP [{}] {} -> {}", status, operation, filePath);
 
@@ -155,7 +155,7 @@ void Log::LogFileOperation(const std::string& operation, const std::string& file
         } else {
             message += " [FILE_NOT_FOUND]";
         }
-    } catch (const std::exception& e) {
+    } catch (const std::exception& _e) {
         message += std::format(" [PATH_ERROR: {}]", e.what());
     }
 
@@ -164,7 +164,7 @@ void Log::LogFileOperation(const std::string& operation, const std::string& file
 }
 
 // Legacy compatibility functions
-void Log::SendWithPath(Level level, const std::string& message, const std::string& context) {
+void Log::SendWithPath(Level _level, const std::string& _message, const std::string& _context) {
     SendWithContext(level, message, context);
 }
 
@@ -172,13 +172,13 @@ void Log::LogWorkingDirectory() {
     LogExecutionContext();
 }
 
-void Log::LogFileSystemDiagnostics(const std::string& targetPath, const std::string& context) {
+void Log::LogFileSystemDiagnostics(const std::string& _targetPath, const std::string& _context) {
     std::string prefix = context.empty() ? "" : "[" + context + "] ";
     LogFileOperation("DIAGNOSTIC", targetPath, std::filesystem::exists(targetPath), prefix + "File system check");
 }
 
 
-void Log::SetLevel(Level level) {
+void Log::SetLevel(Level _level) {
     level_ = level;
     if (spdlog::get("Engine")) {
         spdlog::get("Engine")->set_level(static_cast<spdlog::level::level_enum>(static_cast<int>(level)));

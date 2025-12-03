@@ -84,7 +84,7 @@ void DebugUI::Process() {
         ImGui::EndMainMenuBar();
     }
 
-    std::ranges::sort(commands, [](const Command& a, const Command& b){
+    std::ranges::sort(commands, [](const Command& _a, const Command& _b){
         return a.id < b.id;
     });
 
@@ -112,7 +112,7 @@ void DebugUI::RegisterCommand(const std::string &_id, std::function<void()> _com
     commands_.push_back({.id= _id, .command= std::move(_command)});
 }
 
-void DebugUI::UpdateDisplaySize(int width, int height) {
+void DebugUI::UpdateDisplaySize(int _width, int _height) {
 #ifdef _DEBUG
     if (ImGui::GetCurrentContext()) {
         ImGuiIO& io = ImGui::GetIO();
@@ -204,5 +204,3 @@ void DebugUI::SetupModernStyle() {
     style.TabRounding       = 4;
 #endif
 }
-
-
