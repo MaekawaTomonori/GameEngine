@@ -140,27 +140,24 @@ void PostProcessExecutor::Draw() const {
     // PSO設定
     pso_->DrawCall();
 
-//#ifdef _DEBUG
-
+#ifdef _DEBUG
     //debugUI_->RegisterCommand("SceneRendering", [&]() {
     //    ImGui::Begin("Scene");
     //
     //    // RenderTextureをImGuiで表示
     //    if (srvHandle_.ptr != 0) {
-    //        ImTextureID textureID = srvHandle_.ptr;
     //        ImVec2 imageSize = ImVec2(static_cast<float>(adapter_->GetWidth()), static_cast<float>(adapter_->GetHeight()));
-    //        ImGui::Image(textureID, imageSize);
+    //        ImGui::Image(srvHandle_.ptr, imageSize);
     //    }
     //
     //    ImGui::End();
     //});
+#endif
 
-//#else
     adapter_->GetCommandList()->SetGraphicsRootDescriptorTable(0, srvHandle_);
 
     // フルスクリーンクワッドを三角形で描画
     adapter_->GetCommandList()->DrawInstanced(3, 1, 0, 0);
-//#endif
 }
 
 void PostProcessExecutor::SetActive(const std::string& _name, bool _enable) {

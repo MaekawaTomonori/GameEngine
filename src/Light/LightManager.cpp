@@ -221,7 +221,7 @@ void LightManager::Add(LightType _type) {
     std::unique_ptr<RawPointLight> point;
     std::unique_ptr<RawSpotLight> spot;
 
-    switch (type){
+    switch (_type){
     case LightType::Directional:
         if (MAX_COUNT.dlCount <= ++lightCount_->dlCount){
             return;

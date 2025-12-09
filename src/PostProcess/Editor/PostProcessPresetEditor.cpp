@@ -915,16 +915,16 @@ std::vector<std::string> PostProcessPresetEditor::GetFilteredAndSortedPresets() 
     // Filter by search text
     if (strlen(searchBuffer_) > 0) {
         std::string searchLower = searchBuffer_;
-        std::transform(searchLower.begin(), searchLower.end(), searchLower.begin(),
-            [](unsigned char _c) { return static_cast<char>(std::tolower(c)); });
+        std::ranges::transform(searchLower, searchLower.begin(),
+            [](unsigned char _c) { return static_cast<char>(std::tolower(_c)); });
 
         presets.erase(
-            std::remove_if(presets.begin(), presets.end(), [&](const std::string& _name) {
-                std::string nameLower = name;
-                std::transform(nameLower.begin(), nameLower.end(), nameLower.begin(),
-                    [](unsigned char _c) { return static_cast<char>(std::tolower(c)); });
+            std::ranges::remove_if(presets, [&](const std::string& _name) {
+                std::string nameLower = _name;
+                std::ranges::transform(nameLower, nameLower.begin(),
+                    [](unsigned char _c) { return static_cast<char>(std::tolower(_c)); });
                 return nameLower.find(searchLower) == std::string::npos;
-            }),
+            }).begin(),
             presets.end()
         );
     }
@@ -933,15 +933,15 @@ std::vector<std::string> PostProcessPresetEditor::GetFilteredAndSortedPresets() 
     if (sortMode_ == 1) {
         // Sort by duration
         std::sort(presets.begin(), presets.end(), [this](const std::string& _a, const std::string& _b) {
-            auto infoA = GetPresetInfo(a);
-            auto infoB = GetPresetInfo(b);
+            auto infoA = GetPresetInfo(_a);
+            auto infoB = GetPresetInfo(_b);
             return infoA.duration < infoB.duration;
         });
     } else if (sortMode_ == 2) {
         // Sort by member count
         std::sort(presets.begin(), presets.end(), [this](const std::string& _a, const std::string& _b) {
-            auto infoA = GetPresetInfo(a);
-            auto infoB = GetPresetInfo(b);
+            auto infoA = GetPresetInfo(_a);
+            auto infoB = GetPresetInfo(_b);
             return infoA.memberCount < infoB.memberCount;
         });
     } else {
@@ -1363,11 +1363,11 @@ void PostProcessPresetEditor::RenderPointParameters() {
     ImGui::TextColored(ImVec4(0.6f, 0.6f, 0.6f, 1.0f), "Click to save current effect state to this keyframe point");
 }
 void PostProcessPresetEditor::AddKeyframePoint(const std::string& _pointName) {
-    if (pointName.empty()) return;
+    if (_pointName.empty()) return;
 
     // 既に存在するか確認
-    if (editingKeyframes_.contains(pointName)) {
-        Log::Send(Log::Level::WARNING, std::format("Keyframe point '{}' already exists", pointName));
+    if (editingKeyframes_.contains(_pointName)) {
+        Log::Send(Log::Level::WARNING, std::format("Keyframe point '{}' already exists", _pointName));
         return;
     }
 
@@ -1377,29 +1377,29 @@ void PostProcessPresetEditor::AddKeyframePoint(const std::string& _pointName) {
     defaultParams["scale"] = 0.8f;
     defaultParams["color"] = {1.0f, 1.0f, 1.0f};
 
-    editingKeyframes_[pointName] = defaultParams;
-    editingKeyframeOrder_.push_back(pointName);
+    editingKeyframes_[_pointName] = defaultParams;
+    editingKeyframeOrder_.push_back(_pointName);
 
     keyframesDirty_ = true;
 
-    Log::Send(Log::Level::INFO, std::format("Added keyframe point '{}'", pointName));
+    Log::Send(Log::Level::INFO, std::format("Added keyframe point '{}'", _pointName));
 }
 
 void PostProcessPresetEditor::RemoveKeyframePoint(int _pointIndex) {
-    if (pointIndex < 0 || pointIndex >= static_cast<int>(editingKeyframeOrder_.size())) {
+    if (_pointIndex < 0 || _pointIndex >= static_cast<int>(editingKeyframeOrder_.size())) {
         return;
     }
 
-    const std::string& pointName = editingKeyframeOrder_[pointIndex];
+    const std::string& pointName = editingKeyframeOrder_[_pointIndex];
 
     // JSONから削除
     editingKeyframes_.erase(pointName);
 
     // 順序配列から削除
-    editingKeyframeOrder_.erase(editingKeyframeOrder_.begin() + pointIndex);
+    editingKeyframeOrder_.erase(editingKeyframeOrder_.begin() + _pointIndex);
 
     // 選択インデックスを調整
-    if (selectedPointIndex_ >= pointIndex) {
+    if (selectedPointIndex_ >= _pointIndex) {
         selectedPointIndex_--;
         if (selectedPointIndex_ < 0 && !editingKeyframeOrder_.empty()) {
             selectedPointIndex_ = 0;
@@ -1412,32 +1412,32 @@ void PostProcessPresetEditor::RemoveKeyframePoint(int _pointIndex) {
 }
 
 void PostProcessPresetEditor::MovePointUp(int _pointIndex) {
-    if (pointIndex <= 0 || pointIndex >= static_cast<int>(editingKeyframeOrder_.size())) {
+    if (_pointIndex <= 0 || std::cmp_greater_equal(_pointIndex, editingKeyframeOrder_.size())) {
         return;
     }
 
-    std::swap(editingKeyframeOrder_[pointIndex], editingKeyframeOrder_[pointIndex - 1]);
+    std::swap(editingKeyframeOrder_[_pointIndex], editingKeyframeOrder_[_pointIndex - 1]);
 
-    if (selectedPointIndex_ == pointIndex) {
-        selectedPointIndex_ = pointIndex - 1;
-    } else if (selectedPointIndex_ == pointIndex - 1) {
-        selectedPointIndex_ = pointIndex;
+    if (selectedPointIndex_ == _pointIndex) {
+        selectedPointIndex_ = _pointIndex - 1;
+    } else if (selectedPointIndex_ == _pointIndex - 1) {
+        selectedPointIndex_ = _pointIndex;
     }
 
     keyframesDirty_ = true;
 }
 
 void PostProcessPresetEditor::MovePointDown(int _pointIndex) {
-    if (pointIndex < 0 || pointIndex >= static_cast<int>(editingKeyframeOrder_.size()) - 1) {
+    if (_pointIndex < 0 || _pointIndex >= static_cast<int>(editingKeyframeOrder_.size()) - 1) {
         return;
     }
 
-    std::swap(editingKeyframeOrder_[pointIndex], editingKeyframeOrder_[pointIndex + 1]);
+    std::swap(editingKeyframeOrder_[_pointIndex], editingKeyframeOrder_[_pointIndex + 1]);
 
-    if (selectedPointIndex_ == pointIndex) {
-        selectedPointIndex_ = pointIndex + 1;
-    } else if (selectedPointIndex_ == pointIndex + 1) {
-        selectedPointIndex_ = pointIndex;
+    if (selectedPointIndex_ == _pointIndex) {
+        selectedPointIndex_ = _pointIndex + 1;
+    } else if (selectedPointIndex_ == _pointIndex + 1) {
+        selectedPointIndex_ = _pointIndex;
     }
 
     keyframesDirty_ = true;

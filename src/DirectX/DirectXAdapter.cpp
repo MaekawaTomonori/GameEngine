@@ -280,8 +280,9 @@ void DirectXAdapter::SetSwapChainRenderTarget() const {
 
     swapChainResources_[bbi]->ChangeState(cList_.Get(), D3D12_RESOURCE_STATE_RENDER_TARGET);
 
-    cList_->OMSetRenderTargets(1, &rtvHandles_[bbi], false, nullptr);
+    cList_->OMSetRenderTargets(1, &rtvHandles_[bbi], false, &dsvHandle_);
     cList_->ClearRenderTargetView(rtvHandles_[bbi], &back_.x, 0, nullptr);
+    cList_->ClearDepthStencilView(dsvHandle_, D3D12_CLEAR_FLAG_DEPTH, 1.f, 0, 0, nullptr);
 
     // デバッグ: 実際のSwapChainバッファサイズを確認
     static bool firstFrame = true;

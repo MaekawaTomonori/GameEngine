@@ -230,7 +230,7 @@ void Model::Debug() {
                     Skeleton& skeleton = data_->skeleton.value();
                     ImGui::SeparatorText("Skeleton");
                     std::function<void(int32_t)> Recursive = [&](int32_t _index) {
-                        Joint& joint = skeleton.joints[index];
+                        Joint& joint = skeleton.joints[_index];
                         if (ImGui::TreeNode(joint.name.c_str())) {
                             ImGui::Text("Joint: %s", joint.name.c_str());
                             ImGui::Text("Index: %d", joint.index);
@@ -393,7 +393,7 @@ void Model::UpdateSkeleton() const {
 
     Skeleton& skeleton = data_->skeleton.value();
     std::function<void(int32_t)> RecursiveUpdate = [&](int32_t _index) {
-        Joint& joint = skeleton.joints[index];
+        Joint& joint = skeleton.joints[_index];
         joint.local = MathUtils::Matrix::MakeAffineMatrix(joint.transform);
         if (joint.parent) {
             joint.space = joint.local * skeleton.joints[*joint.parent].space;

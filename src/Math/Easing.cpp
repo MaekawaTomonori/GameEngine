@@ -4,40 +4,40 @@ namespace Ease {
     namespace In {
         // ===== Quadratic Easing (x^2) =====
         Vector2 Quad(Vector2 _start, Vector2 _end, float _t) {
-            return start + (end - start) * t * t;
+            return _start + (_end - _start) * _t * _t;
         }
 
         Vector3 Quad(Vector3 _start, Vector3 _end, float _t) {
-            return start + (end - start) * t * t;
+            return _start + (_end - _start) * _t * _t;
         }
 
         // ===== Cubic Easing (x^3) =====
         Vector2 Cubic(Vector2 _start, Vector2 _end, float _t) {
-            return start + (end - start) * t * t * t;
+            return _start + (_end - _start) * _t * _t * _t;
         }
 
         Vector3 Cubic(Vector3 _start, Vector3 _end, float _t) {
-            return start + (end - start) * t * t * t;
+            return _start + (_end - _start) * _t * _t * _t;
         }
     }
 
     namespace Out {
         // ===== Quadratic Easing =====
         Vector2 Quad(Vector2 _start, Vector2 _end, float _t) {
-            return start + (end - start) * (1.0f - (1.0f - t) * (1.0f - t));
+            return _start + (_end - _start) * (1.0f - (1.0f - _t) * (1.0f - _t));
         }
 
         Vector3 Quad(Vector3 _start, Vector3 _end, float _t) {
-            return start + (end - start) * (1.0f - (1.0f - t) * (1.0f - t));
+            return _start + (_end - _start) * (1.0f - (1.0f - _t) * (1.0f - _t));
         }
 
         // ===== Cubic Easing =====
         Vector2 Cubic(Vector2 _start, Vector2 _end, float _t) {
-            return start + (end - start) * (1.0f - (1.0f - t) * (1.0f - t) * (1.0f - t));
+            return _start + (_end - _start) * (1.0f - (1.0f - _t) * (1.0f - _t) * (1.0f - _t));
         }
 
         Vector3 Cubic(Vector3 _start, Vector3 _end, float _t) {
-            return start + (end - start) * (1.0f - (1.0f - t) * (1.0f - t) * (1.0f - t));
+            return _start + (_end - _start) * (1.0f - (1.0f - _t) * (1.0f - _t) * (1.0f - _t));
         }
     }
 
@@ -45,43 +45,43 @@ namespace Ease {
         // ===== Quadratic Easing =====
         Vector2 Quad(Vector2 _start, Vector2 _end, float _t) {
             float easedT;
-            if (t < 0.5f)
-                easedT = 2.0f * t * t; // EaseIn for first half
+            if (_t < 0.5f)
+                easedT = 2.0f * _t * _t; // EaseIn for first half
             else
-                easedT = 1.0f - (-2.0f * t + 2.0f) * (-2.0f * t + 2.0f) / 2.0f; // EaseOut for second half
+                easedT = 1.0f - (-2.0f * _t + 2.0f) * (-2.0f * _t + 2.0f) / 2.0f; // EaseOut for second half
 
-            return start + (end - start) * easedT;
+            return _start + (_end - _start) * easedT;
         }
 
         Vector3 Quad(Vector3 _start, Vector3 _end, float _t) {
             float easedT;
-            if (t < 0.5f)
-                easedT = 2.0f * t * t;
+            if (_t < 0.5f)
+                easedT = 2.0f * _t * _t;
             else
-                easedT = 1.0f - (-2.0f * t + 2.0f) * (-2.0f * t + 2.0f) / 2.0f;
+                easedT = 1.0f - (-2.0f * _t + 2.0f) * (-2.0f * _t + 2.0f) / 2.0f;
 
-            return start + (end - start) * easedT;
+            return _start + (_end - _start) * easedT;
         }
 
         // ===== Cubic Easing =====
         Vector2 Cubic(Vector2 _start, Vector2 _end, float _t) {
             float easedT;
-            if (t < 0.5f)
-                easedT = 4.0f * t * t * t; // EaseIn for first half
+            if (_t < 0.5f)
+                easedT = 4.0f * _t * _t * _t; // EaseIn for first half
             else
-                easedT = 1.0f - (-2.0f * t + 2.0f) * (-2.0f * t + 2.0f) * (-2.0f * t + 2.0f) / 2.0f; // EaseOut for second half
+                easedT = 1.0f - (-2.0f * _t + 2.0f) * (-2.0f * _t + 2.0f) * (-2.0f * _t + 2.0f) / 2.0f; // EaseOut for second half
 
-            return start + (end - start) * easedT;
+            return _start + (_end - _start) * easedT;
         }
 
         Vector3 Cubic(Vector3 _start, Vector3 _end, float _t) {
             float easedT;
-            if (t < 0.5f)
-                easedT = 4.0f * t * t * t;
+            if (_t < 0.5f)
+                easedT = 4.0f * _t * _t * _t;
             else
-                easedT = 1.0f - (-2.0f * t + 2.0f) * (-2.0f * t + 2.0f) * (-2.0f * t + 2.0f) / 2.0f;
+                easedT = 1.0f - (-2.0f * _t + 2.0f) * (-2.0f * _t + 2.0f) * (-2.0f * _t + 2.0f) / 2.0f;
 
-            return start + (end - start) * easedT;
+            return _start + (_end - _start) * easedT;
         }
     }
 }

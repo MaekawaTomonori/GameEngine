@@ -162,7 +162,7 @@ const Vector2& Sprite::GetPosition() const {
 }
 
 void Sprite::SetPosition(const Vector2& _p) {
-    position_ = p;
+    position_ = _p;
 }
 
 const Vector2& Sprite::GetSize() const {
@@ -170,7 +170,7 @@ const Vector2& Sprite::GetSize() const {
 }
 
 void Sprite::SetSize(const Vector2& _s) {
-    size_ = s;
+    size_ = _s;
 }
 
 float Sprite::GetRotation() const {
@@ -178,7 +178,7 @@ float Sprite::GetRotation() const {
 }
 
 void Sprite::SetRotation(float _r) {
-    rotation_ = r;
+    rotation_ = _r;
 }
 
 const Vector4& Sprite::GetColor() const {
@@ -186,7 +186,7 @@ const Vector4& Sprite::GetColor() const {
 }
 
 void Sprite::SetColor(const Vector4& _color) const {
-    material_->color = color;
+    material_->color = _color;
 }
 
 const Vector2& Sprite::GetAnchorPoint() const {
@@ -194,7 +194,7 @@ const Vector2& Sprite::GetAnchorPoint() const {
 }
 
 void Sprite::SetAnchorPoint(const Vector2& _a) {
-    anchorPoint_ = a;
+    anchorPoint_ = _a;
 }
 
 bool Sprite::IsFlipX() const {
@@ -202,7 +202,7 @@ bool Sprite::IsFlipX() const {
 }
 
 void Sprite::SetFlipX(bool _f) {
-    flipX_ = f;
+    flipX_ = _f;
 }
 
 bool Sprite::IsFlipY() const {
@@ -210,7 +210,7 @@ bool Sprite::IsFlipY() const {
 }
 
 void Sprite::SetFlipY(bool _f) {
-    flipY_ = f;
+    flipY_ = _f;
 }
 
 const Vector2& Sprite::GetTextureLeftTop() const {

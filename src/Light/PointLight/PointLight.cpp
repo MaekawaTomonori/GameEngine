@@ -14,8 +14,8 @@ void RawPointLight::DefaultSetting() {
 }
 
 void RawPointLight::Set(const std::string& _uuid ,const PointLight& _pl) {
-    uuid_ = uuid;
-    light_ = pl;
+    uuid_ = _uuid;
+    light_ = _pl;
 }
 
 void RawPointLight::Save(std::string _path) {

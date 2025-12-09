@@ -43,7 +43,7 @@ void IPostEffect::CreateOutput() {
 }
 
 void IPostEffect::SetRTVHandle(D3D12_CPU_DESCRIPTOR_HANDLE _rtvHandle) {
-    rtvHandle_ = rtvHandle;
+    rtvHandle_ = _rtvHandle;
 
     D3D12_RENDER_TARGET_VIEW_DESC rtvDesc = {};
     rtvDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;

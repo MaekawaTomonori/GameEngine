@@ -28,26 +28,26 @@ Matrix4x4 MathUtils::Matrix::MakeTranslateMatrix(const Vector3& _velocity) {
         1, 0, 0, 0,
         0, 1, 0, 0,
         0, 0, 1, 0,
-        velocity.x, velocity.y, velocity.z, 1
+        _velocity.x, _velocity.y, _velocity.z, 1
     };
 }
 
 Matrix4x4 MathUtils::Matrix::MakeScaleMatrix(const Vector3& _scale) {
     return Matrix4x4 {
-        scale.x, 0, 0, 0,
-        0, scale.y, 0, 0,
-        0, 0, scale.z, 0,
+        _scale.x, 0, 0, 0,
+        0, _scale.y, 0, 0,
+        0, 0, _scale.z, 0,
         0, 0, 0, 1
     };
 }
 
 Vector3 MathUtils::Matrix::Transform(const Vector3& _vector, const Matrix4x4& _matrix) {
     Vector3 v = {
-        vector.x * matrix.matrix[0][0] + vector.y * matrix.matrix[1][0] + vector.z * matrix.matrix[2][0] + 1 * matrix.matrix[3][0],
-        vector.x * matrix.matrix[0][1] + vector.y * matrix.matrix[1][1] + vector.z * matrix.matrix[2][1] + 1 * matrix.matrix[3][1],
-        vector.x * matrix.matrix[0][2] + vector.y * matrix.matrix[1][2] + vector.z * matrix.matrix[2][2] + 1 * matrix.matrix[3][2]
+        _vector.x * _matrix.matrix[0][0] + _vector.y * _matrix.matrix[1][0] + _vector.z * _matrix.matrix[2][0] + 1 * _matrix.matrix[3][0],
+        _vector.x * _matrix.matrix[0][1] + _vector.y * _matrix.matrix[1][1] + _vector.z * _matrix.matrix[2][1] + 1 * _matrix.matrix[3][1],
+        _vector.x * _matrix.matrix[0][2] + _vector.y * _matrix.matrix[1][2] + _vector.z * _matrix.matrix[2][2] + 1 * _matrix.matrix[3][2]
     };
-    const float w = vector.x * matrix.matrix[0][3] + vector.y * matrix.matrix[1][3] + vector.z * matrix.matrix[2][3] + 1 * matrix.matrix[3][3];
+    const float w = _vector.x * _matrix.matrix[0][3] + _vector.y * _matrix.matrix[1][3] + _vector.z * _matrix.matrix[2][3] + 1 * _matrix.matrix[3][3];
     assert(w != 0);
     if (w != 1){
         v.x /= w;
@@ -59,10 +59,10 @@ Vector3 MathUtils::Matrix::Transform(const Vector3& _vector, const Matrix4x4& _m
 
 Vector4 MathUtils::Matrix::Transform(const Vector4& _vector, const Matrix4x4& _matrix) {
     Vector4 v = {
-        vector.x * matrix.matrix[0][0] + vector.y * matrix.matrix[1][0] + vector.z * matrix.matrix[2][0] + vector.w * matrix.matrix[3][0],
-        vector.x * matrix.matrix[0][1] + vector.y * matrix.matrix[1][1] + vector.z * matrix.matrix[2][1] + vector.w * matrix.matrix[3][1],
-        vector.x * matrix.matrix[0][2] + vector.y * matrix.matrix[1][2] + vector.z * matrix.matrix[2][2] + vector.w * matrix.matrix[3][2],
-        vector.x * matrix.matrix[0][3] + vector.y * matrix.matrix[1][3] + vector.z * matrix.matrix[2][3] + vector.w * matrix.matrix[3][3]
+        _vector.x * _matrix.matrix[0][0] + _vector.y * _matrix.matrix[1][0] + _vector.z * _matrix.matrix[2][0] + _vector.w * _matrix.matrix[3][0],
+        _vector.x * _matrix.matrix[0][1] + _vector.y * _matrix.matrix[1][1] + _vector.z * _matrix.matrix[2][1] + _vector.w * _matrix.matrix[3][1],
+        _vector.x * _matrix.matrix[0][2] + _vector.y * _matrix.matrix[1][2] + _vector.z * _matrix.matrix[2][2] + _vector.w * _matrix.matrix[3][2],
+        _vector.x * _matrix.matrix[0][3] + _vector.y * _matrix.matrix[1][3] + _vector.z * _matrix.matrix[2][3] + _vector.w * _matrix.matrix[3][3]
     };
     return v;
 }
@@ -70,40 +70,40 @@ Vector4 MathUtils::Matrix::Transform(const Vector4& _vector, const Matrix4x4& _m
 Matrix4x4 MathUtils::Matrix::MakeRotateX(const float _rad) {
     return {
         1, 0, 0, 0,
-        0, std::cosf(rad), std::sinf(rad), 0,
-        0, -std::sinf(rad), std::cosf(rad), 0,
+        0, std::cosf(_rad), std::sinf(_rad), 0,
+        0, -std::sinf(_rad), std::cosf(_rad), 0,
         0, 0, 0, 1
     };
 }
 
 Matrix4x4 MathUtils::Matrix::MakeRotateY(float _rad) {
     return Matrix4x4 {
-        std::cosf(rad), 0, -std::sinf(rad), 0,
+        std::cosf(_rad), 0, -std::sinf(_rad), 0,
         0, 1, 0, 0,
-        std::sinf(rad), 0, std::cosf(rad), 0,
+        std::sinf(_rad), 0, std::cosf(_rad), 0,
         0, 0, 0, 1
     };
 }
 
 Matrix4x4 MathUtils::Matrix::MakeRotateZ(const float _rad) {
     return Matrix4x4 {
-        std::cosf(rad), std::sinf(rad), 0, 0,
-        -std::sinf(rad), std::cosf(rad), 0, 0,
+        std::cosf(_rad), std::sinf(_rad), 0, 0,
+        -std::sinf(_rad), std::cosf(_rad), 0, 0,
         0, 0, 1, 0,
         0, 0, 0, 1
     };
 }
 
 Matrix4x4 MathUtils::Matrix::MakeRotate(const Quaternion& _rotate) {
-    float x2 = rotate.x * rotate.x;
-    float y2 = rotate.y * rotate.y;
-    float z2 = rotate.z * rotate.z;
-    float xy = rotate.x * rotate.y;
-    float xz = rotate.x * rotate.z;
-    float xw = rotate.x * rotate.w;
-    float yz = rotate.y * rotate.z;
-    float yw = rotate.y * rotate.w;
-    float zw = rotate.z * rotate.w;
+    float x2 = _rotate.x * _rotate.x;
+    float y2 = _rotate.y * _rotate.y;
+    float z2 = _rotate.z * _rotate.z;
+    float xy = _rotate.x * _rotate.y;
+    float xz = _rotate.x * _rotate.z;
+    float xw = _rotate.x * _rotate.w;
+    float yz = _rotate.y * _rotate.z;
+    float yw = _rotate.y * _rotate.w;
+    float zw = _rotate.z * _rotate.w;
     return {
         1.f - 2.f * (y2 + z2), 2.f * (xy + zw), 2.f * (xz - yw), 0.f,
         2.f * (xy - zw), 1.f - 2.f * (x2 + z2), 2.f * (yz + xw), 0.f,
@@ -113,50 +113,44 @@ Matrix4x4 MathUtils::Matrix::MakeRotate(const Quaternion& _rotate) {
 }
 
 Matrix4x4 MathUtils::Matrix::MakeAffineMatrix(const ::Transform& _transform) {
-    return std::holds_alternative<Vector3>(transform.rotate) ? MakeAffineMatrix(transform.scale, std::get<Vector3>(transform.rotate), transform.translate) : MakeAffineMatrix(transform.scale, std::get<Quaternion>(transform.rotate), transform.translate);
+    return std::holds_alternative<Vector3>(_transform.rotate) ? MakeAffineMatrix(_transform.scale, std::get<Vector3>(_transform.rotate), _transform.translate) : MakeAffineMatrix(_transform.scale, std::get<Quaternion>(_transform.rotate), _transform.translate);
 }
 
 Matrix4x4 MathUtils::Matrix::MakeAffineMatrix(const Vector3& _scale, const Vector3& _rotate, const Vector3& _translate) {
-    Matrix4x4 scaleMat = MakeScaleMatrix(scale);
-    Matrix4x4 rotateMatX = MakeRotateX(rotate.x);
-    Matrix4x4 rotateMatY = MakeRotateY(rotate.y);
-    Matrix4x4 rotateMatZ = MakeRotateZ(rotate.z);
+    Matrix4x4 scaleMat = MakeScaleMatrix(_scale);
+    Matrix4x4 rotateMatX = MakeRotateX(_rotate.x);
+    Matrix4x4 rotateMatY = MakeRotateY(_rotate.y);
+    Matrix4x4 rotateMatZ = MakeRotateZ(_rotate.z);
     Matrix4x4 rotateMat = rotateMatX * rotateMatY * rotateMatZ;
-    Matrix4x4 translateMat = MakeTranslateMatrix(translate);
+    Matrix4x4 translateMat = MakeTranslateMatrix(_translate);
     return scaleMat * rotateMat * translateMat;
 }
 
 Matrix4x4 MathUtils::Matrix::MakeAffineMatrix(const Vector3& _scale, const Quaternion& _rotate, const Vector3& _translate) {
-    Matrix4x4 scaleMat = MakeScaleMatrix(scale);
-    Matrix4x4 rotateMat = MakeRotate(rotate);
-    Matrix4x4 translateMat = MakeTranslateMatrix(translate);
+    Matrix4x4 scaleMat = MakeScaleMatrix(_scale);
+    Matrix4x4 rotateMat = MakeRotate(_rotate);
+    Matrix4x4 translateMat = MakeTranslateMatrix(_translate);
     return scaleMat * rotateMat * translateMat;
 }
 
 Matrix4x4 MathUtils::Matrix::MakeAffineMatrix(const Matrix4x4& _scale, const Matrix4x4& _rotate,
-    const Matrix4x4& translate) {
-    return scale * rotate * translate;
+    const Matrix4x4& _translate) {
+    return _scale * _rotate * _translate;
 }
 
 Matrix4x4 MathUtils::Matrix::MakeOrthogonalMatrix(float _left, float _right, float _top, float _bottom, float _znear, float _zfar) {
     return Matrix4x4 {
-        2 / (right - left), 0, 0, 0,
-        0, 2 / (top - bottom), 0, 0,
-        0, 0, 1 / (zfar - znear), 0,
-        (left + right) / (left - right), (top + bottom) / (bottom - top), znear / (znear - zfar), 1
+        2 / (_right - _left), 0, 0, 0,
+        0, 2 / (_top - _bottom), 0, 0,
+        0, 0, 1 / (_zfar - _znear), 0,
+        (_left + _right) / (_left - _right), (_top + _bottom) / (_bottom - _top), _znear / (_znear - _zfar), 1
     };
 }
 
 Matrix4x4 MathUtils::Matrix::MakePerspectiveFovMatrix(float _fovY, float _aspectRatio, float _nearClip, float _farClip) {
-    //return Matrix4x4 {
-    //    1 / aspectRatio * (1 / tanf(fovY / 2)), 0, 0, 0,
-    //    0, 1 / tanf(fovY / 2), 0, 0,
-    //    0,0, farClip / (farClip - nearClip), 1,
-    //    0, 0, -(nearClip * farClip) / (farClip - nearClip), 0,
-    //};
-    float halfFovY = tanf(fovY * 0.5f);
-    Vector3 scale = { (1.0f/halfFovY) / aspectRatio, 1.0f / halfFovY, farClip / (farClip - nearClip)};
-    float z = -(nearClip * farClip) / (farClip - nearClip);
+    float halfFovY = tanf(_fovY * 0.5f);
+    Vector3 scale = { (1.0f/halfFovY) / _aspectRatio, 1.0f / halfFovY, _farClip / (_farClip - _nearClip)};
+    float z = -(_nearClip * _farClip) / (_farClip - _nearClip);
 
     return Matrix4x4{
         scale.x, 0, 0, 0,
@@ -167,68 +161,68 @@ Matrix4x4 MathUtils::Matrix::MakePerspectiveFovMatrix(float _fovY, float _aspect
 }
 
 Matrix4x4 MathUtils::Matrix::MakeViewportMatrix(float _left, float _right, float _top, float _bottom, float _depthMax,
-                                                float depthMin) {
+                                                float _depthMin) {
     return Matrix4x4 {
-        (right - left) / 2, 0, 0, 0,
-        0, -(top - bottom) / 2, 0, 0,
-        0, 0, depthMax - depthMin, 0,
-        left + (right - left) / 2, bottom + (top - bottom) / 2, depthMin, 1
+        (_right - _left) / 2, 0, 0, 0,
+        0, -(_top - _bottom) / 2, 0, 0,
+        0, 0, _depthMax - _depthMin, 0,
+        _left + (_right - _left) / 2, _bottom + (_top - _bottom) / 2, _depthMin, 1
     };
 }
 
 float MathUtils::Random(float _min, float _max) {
-    return Singleton<RandomEngine>::GetInstance()->Get(min, max);
+    return Singleton<RandomEngine>::GetInstance()->Get(_min, _max);
 }
 
 float MathUtils::Lerp(const float& _a, const float& _b, float _t) {
-    return a + (b - a) * t;
+    return _a + (_b - _a) * _t;
 }
 
 Vector2 MathUtils::Lerp(const Vector2& _a, const Vector2& _b, float _t) {
     return Vector2{
-        Lerp(a.x, b.x, t),
-        Lerp(a.y, b.y, t)
+        Lerp(_a.x, _b.x, _t),
+        Lerp(_a.y, _b.y, _t)
     };
 }
 
 Vector3 MathUtils::Lerp(const Vector3& _a, const Vector3& _b, float _t) {
     return Vector3{
-        Lerp(a.x, b.x, t),
-        Lerp(a.y, b.y, t),
-        Lerp(a.z, b.z, t)
+        Lerp(_a.x, _b.x, _t),
+        Lerp(_a.y, _b.y, _t),
+        Lerp(_a.z, _b.z, _t)
     };
 }
 
 Vector4 MathUtils::Lerp(const Vector4& _a, const Vector4& _b, float _t) {
     return Vector4{
-        Lerp(a.x, b.x, t),
-        Lerp(a.y, b.y, t),
-        Lerp(a.z, b.z, t),
-        Lerp(a.w, b.w, t)
+        Lerp(_a.x, _b.x, _t),
+        Lerp(_a.y, _b.y, _t),
+        Lerp(_a.z, _b.z, _t),
+        Lerp(_a.w, _b.w, _t)
     };
 }
 
 Quaternion MathUtils::Slerp(const Quaternion& _a, const Quaternion& _b, const float _t) {
-    float dot = a.x * b.x + a.y * b.y + a.z * b.z + a.w * b.w;
+    float dot = _a.x * _b.x + _a.y * _b.y + _a.z * _b.z + _a.w * _b.w;
     float epsilon = 1e-6f;
 
-    Quaternion b_temp = b;
+    Quaternion b_temp = _b;
     if (dot < 0){
         dot = -dot;
-        b_temp = { -b.x, -b.y, -b.z, -b.w };
+        b_temp = { -_b.x, -_b.y, -_b.z, -_b.w };
     }
     if (1 - dot < epsilon){
-        return (a * (1.0f - t) + b_temp * t).Normalize();
+        return (_a * (1.0f - _t) + b_temp * _t).Normalize();
     }
     float theta = acosf(dot);
     float sinTheta = sinf(theta);
-    float s0 = sinf((1 - t) * theta) / sinTheta;
-    float s1 = sinf(t * theta) / sinTheta;
-    return (a * s0 + b_temp * s1).Normalize();
+    float s0 = sinf((1 - _t) * theta) / sinTheta;
+    float s1 = sinf(_t * theta) / sinTheta;
+    return (_a * s0 + b_temp * s1).Normalize();
 }
 
 float MathUtils::Distance(const Vector3& _a, const Vector3& _b) {
-    return std::sqrtf(std::powf(a.x - b.x, 2) + std::powf(a.y - b.y, 2) + std::powf(a.z - b.z, 2));
+    return std::sqrtf(std::powf(_a.x - _b.x, 2) + std::powf(_a.y - _b.y, 2) + std::powf(_a.z - _b.z, 2));
 }
 
 //Vector3 MathUtils::TransformNormal(const Vector3& v, const Transform& t) {

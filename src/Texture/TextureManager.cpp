@@ -13,7 +13,7 @@ TextureManager::~TextureManager() {
 
 DirectX::ScratchImage TextureManager::LoadTexture(const std::string& _filename) const {
     DirectX::ScratchImage image {};
-    std::string fullPath = folderPath_ + filename;
+    std::string fullPath = folderPath_ + _filename;
     std::wstring filePathW = Utils::Convert(fullPath);
 
     if (filePathW.ends_with(L".dds"))return LoadDDS(filePathW);
@@ -40,7 +40,7 @@ DirectX::ScratchImage TextureManager::LoadTexture(const std::string& _filename) 
 
 void TextureManager::UploadTextureData(DX12Resource* _texture, const DirectX::ScratchImage& _mipImages) const {
     std::vector<D3D12_SUBRESOURCE_DATA> subResources;
-    PrepareUpload(adapter_->GetDevice(), mipImages.GetImages(), mipImages.GetImageCount(), mipImages.GetMetadata(), subResources);
+    PrepareUpload(adapter_->GetDevice(), _mipImages.GetImages(), _mipImages.GetImageCount(), _mipImages.GetMetadata(), subResources);
     uint32_t intermediateSize = static_cast<uint32_t>(GetRequiredIntermediateSize(_texture->Get(), 0, static_cast<UINT>(subResources.size())));
     std::unique_ptr<DX12Resource> intermediateResource = adapter_->CreateBufferResource(intermediateSize);
 
@@ -134,7 +134,7 @@ bool TextureManager::Load(const std::string& _fileName) {
     std::lock_guard<std::mutex> lock(mutex_);
 
     //Remove FolderPath
-    std::string name = fileName;
+    std::string name = _fileName;
     size_t pos = 0;
     while((pos = name.find(folderPath_, pos)) != std::string::npos){
         name.erase(pos, folderPath_.length());
@@ -204,34 +204,34 @@ void TextureManager::Unload() {
 const DirectX::TexMetadata& TextureManager::GetTextureMetadata(const std::string& _fileName) {
     std::lock_guard<std::mutex> lock(mutex_);
 
-    if (textures_.contains(fileName)){
-        return textures_.at(fileName).metadata;
+    if (textures_.contains(_fileName)){
+        return textures_.at(_fileName).metadata;
     }
 
-    Load(fileName);
-    Log::Send(Log::Level::ERR, std::format("TextureManager::GetTextureMetadata: {} not found", fileName));
-    Utils::Alert(std::format("TextureManager::GetTextureMetadata: {} not found", fileName));
-    return textures_.at(fileName).metadata;
+    Load(_fileName);
+    Log::Send(Log::Level::ERR, std::format("TextureManager::GetTextureMetadata: {} not found", _fileName));
+    Utils::Alert(std::format("TextureManager::GetTextureMetadata: {} not found", _fileName));
+    return textures_.at(_fileName).metadata;
 }
 
 uint32_t TextureManager::GetSrvIndex(const std::string& _fileName) {
     std::lock_guard<std::mutex> lock(mutex_);
 
-    if (textures_.contains(fileName)){
-        return textures_.at(fileName).srvIndex;
+    if (textures_.contains(_fileName)){
+        return textures_.at(_fileName).srvIndex;
     }
 
-    Log::Send(Log::Level::ERR, std::format("TextureManager::GetSrvIndex: {} not found", fileName));
+    Log::Send(Log::Level::ERR, std::format("TextureManager::GetSrvIndex: {} not found", _fileName));
     assert(0);
     return 0;
 }
 
 uint32_t TextureManager::GetTextureIndexByFilePath(const std::string& _path) const {
-    if (textures_.contains(path)){
-        return textures_.at(path).srvIndex;
+    if (textures_.contains(_path)){
+        return textures_.at(_path).srvIndex;
     }
 
-    Log::Send(Log::Level::ERR, std::format("TextureManager::GetTextureIndexByFilePath: {} not found", path));
+    Log::Send(Log::Level::ERR, std::format("TextureManager::GetTextureIndexByFilePath: {} not found", _path));
     assert(0);
     return 0;
 }
@@ -239,7 +239,7 @@ uint32_t TextureManager::GetTextureIndexByFilePath(const std::string& _path) con
 D3D12_GPU_DESCRIPTOR_HANDLE TextureManager::GetGPUHandle(const std::string& _fileName) {
     std::lock_guard<std::mutex> lock(mutex_);
 
-    std::string name = fileName;
+    std::string name = _fileName;
     size_t pos = 0;
     while ((pos = name.find(folderPath_, pos)) != std::string::npos){
         name.erase(pos, folderPath_.length());
@@ -256,6 +256,6 @@ D3D12_GPU_DESCRIPTOR_HANDLE TextureManager::GetGPUHandle(const std::string& _fil
 
 D3D12_GPU_DESCRIPTOR_HANDLE TextureManager::GetGPUHandle(const uint32_t _index) const {
     assert(index <= textures_.size());
-    Log::Send(Log::Level::INFO, std::format("TextureManager::GetGPUHandle: index {}", index));
-    return srv_->GetGPUHandle(index);
+    Log::Send(Log::Level::INFO, std::format("TextureManager::GetGPUHandle: index {}", _index));
+    return srv_->GetGPUHandle(_index);
 }

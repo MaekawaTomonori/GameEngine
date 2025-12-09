@@ -21,10 +21,10 @@ private:
         std::chrono::system_clock::time_point executionTime;
 
         bool operator<(const SchedulerTask& _other) const {
-            return executionTime < other.executionTime; // For priority queue
+            return executionTime < _other.executionTime; // For priority queue
         }
         bool operator>(const SchedulerTask& _other) const {
-            return executionTime > other.executionTime; // For priority queue
+            return executionTime > _other.executionTime; // For priority queue
         }
     };
 

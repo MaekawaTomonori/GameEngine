@@ -34,6 +34,9 @@ ParticleSystem::GroupEditor& ParticleSystem::GroupEditor::AddEmitter(const Emitt
 
 ParticleSystem::GroupEditor& ParticleSystem::GroupEditor::SetPosition(const Vector3& _position) {
     group_->position = _position;
+    for (const auto& emitter : group_->emitters) {
+        emitter->SetPosition(group_->position);
+    }
     return *this;
 }
 

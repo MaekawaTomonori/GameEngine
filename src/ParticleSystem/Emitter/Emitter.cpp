@@ -214,5 +214,4 @@ void Emitter::RegisterGpu() {
         mapped_[actives_].color = particle->GetColor();
         ++actives_;
     }
-
 }

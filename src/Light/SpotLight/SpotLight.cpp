@@ -19,8 +19,8 @@ void RawSpotLight::DefaultSetting() {
 }
 
 void RawSpotLight::Set(const std::string& _uuid, const SpotLight& _sl) {
-    uuid_ = uuid;
-    light_ = sl;
+    uuid_ = _uuid;
+    light_ = _sl;
 }
 
 void RawSpotLight::Save(std::string _path) {

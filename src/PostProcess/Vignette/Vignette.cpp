@@ -74,7 +74,7 @@ void Vignette::Modifier() {
 }
 
 void Vignette::LoadPreset(const std::string& _presetName) {
-    std::string path = "./Assets/Data/PostEffect/Vignette/" + presetName + ".json";
+    std::string path = "./Assets/Data/PostEffect/Vignette/" + _presetName + ".json";
 
     // ファイル不在時はデフォルト値
     if (!std::filesystem::exists(path)) {
@@ -137,7 +137,7 @@ void Vignette::UpdateAnimation(float _t) {
 
     // セグメント計算
     float segmentCount = static_cast<float>(keyframeOrder_.size() - 1);
-    float segmentProgress = t * segmentCount;
+    float segmentProgress = _t * segmentCount;
     int currentSegment = static_cast<int>(segmentProgress);
     float segmentT = segmentProgress - currentSegment;
 
@@ -157,7 +157,7 @@ void Vignette::UpdateAnimation(float _t) {
 }
 
 void Vignette::SavePreset(const std::string& _presetName) {
-    std::string path = "./Assets/Data/PostEffect/Vignette/" + presetName + ".json";
+    std::string path = "./Assets/Data/PostEffect/Vignette/" + _presetName + ".json";
 
     // ディレクトリ作成
     std::filesystem::create_directories("./Assets/Data/PostEffect/Vignette");
@@ -166,7 +166,7 @@ void Vignette::SavePreset(const std::string& _presetName) {
 
     std::ofstream file(path);
     if (!file.is_open()) {
-        Log::Send(Log::Level::ERR, std::format("Failed to save preset '{}': {}", presetName, path));
+        Log::Send(Log::Level::ERR, std::format("Failed to save preset '{}': {}", _presetName, path));
         return;
     }
 

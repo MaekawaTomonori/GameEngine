@@ -13,16 +13,16 @@ Scheduler::~Scheduler() {
 void Scheduler::RunTaskLater(Task _task, std::chrono::milliseconds _delay) {
 
     {
-        const auto& executionTime = std::chrono::system_clock::now() + delay;
-        std::lock_guard<std::mutex> lock(mutex_);
-        taskQueue_.push({std::move(task), executionTime});
+        const auto& executionTime = std::chrono::system_clock::now() + _delay;
+        std::scoped_lock lock(mutex_);
+        taskQueue_.push({std::move(_task), executionTime});
     }
     condition_.notify_one();
 }
 
 void Scheduler::RunTaskTimer(Task _task, std::chrono::milliseconds _interval) {
-    (void)task;
-    (void)interval;
+    (void)_task;
+    (void)_interval;
 }
 
 void Scheduler::Work() {

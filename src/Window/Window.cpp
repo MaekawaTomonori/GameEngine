@@ -9,15 +9,15 @@ extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND _hWnd, UINT _m
 
 LRESULT Window::WindowProc(HWND _hwnd, UINT _uMsg, WPARAM _wParam, LPARAM _lParam) {
 #ifdef _DEBUG
-    if (ImGui_ImplWin32_WndProcHandler(hwnd, uMsg, wParam, lParam))return true;
+    if (ImGui_ImplWin32_WndProcHandler(_hwnd, _uMsg, _wParam, _lParam))return true;
 #endif
 
-    switch (uMsg){
+    switch (_uMsg){
         case WM_DESTROY:
             PostQuitMessage(0);
             return 0;
     }
-    return DefWindowProc(hwnd, uMsg, wParam, lParam);
+    return DefWindowProc(_hwnd, _uMsg, _wParam, _lParam);
 }
 
 bool Window::Create() {
@@ -172,7 +172,7 @@ HINSTANCE Window::GetInstanceHandle() const {
 
 void Window::SetSize(const int _width, const int _height) const {
     if (hWnd_){
-        RECT rect = {0, 0, width, height};
+        RECT rect = {0, 0, _width, _height};
 
         SetWindowPos(hWnd_, nullptr, 0, 0, rect.right - rect.left, rect.bottom - rect.top, SWP_NOMOVE | SWP_NOZORDER);
     }

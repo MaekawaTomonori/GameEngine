@@ -56,8 +56,8 @@ void Line::AddLine(const Vector3& _start, const Vector3& _end) {
         return;
     }
 
-    positions_.push_back({start.x, start.y, start.z, 1.f});
-    positions_.push_back({end.x, end.y, end.z, 1.f});
+    positions_.push_back({_start.x, _start.y, _start.z, 1.f});
+    positions_.push_back({_end.x, _end.y, _end.z, 1.f});
 }
 
 void Line::Clear() {
@@ -69,7 +69,7 @@ void Line::SetColor(Vector4 _color) const {
         Utils::Alert("Line::SetColor: Material data is not initialized.");
         return;
     }
-    materialData_->color = color;
+    materialData_->color = _color;
 }
 
 void Line::CreateVertexBuffer() {

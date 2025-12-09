@@ -45,7 +45,7 @@ HINSTANCE WinApp::GetInstanceHandle() const {
 
 void WinApp::SetWindowSize(const int _width, const int _height) const {
     if (window_){
-        window_->SetSize(width, height);
+        window_->SetSize(_width, _height);
     }
 }
 
@@ -61,13 +61,13 @@ void WinApp::ToggleBorderless() const {
 
 void WinApp::GetClientSize(int& _width, int& _height) const {
     if (!hWnd_) {
-        width = 1280;
-        height = 720;
+        _width = 1280;
+        _height = 720;
         return;
     }
 
     RECT clientRect;
     GetClientRect(hWnd_, &clientRect);
-    width = clientRect.right - clientRect.left;
-    height = clientRect.bottom - clientRect.top;
+    _width = clientRect.right - clientRect.left;
+    _height = clientRect.bottom - clientRect.top;
 }
