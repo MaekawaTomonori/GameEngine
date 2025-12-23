@@ -50,7 +50,7 @@ class LightManager final{
 
     std::string path = "Light";
 
-    std::optional<std::reference_wrapper<Vector3>> ref_;
+    std::optional<Vector3> ref_;
 
 public:
     ~LightManager();
@@ -61,6 +61,7 @@ public:
      **/
 	void Initialize(DirectXAdapter* _adapter, DebugUI* _debug);
 
+
     /** @brief ライトの更新処理
      **/
     void Update();
@@ -70,18 +71,21 @@ public:
     void Draw() const;
 
     /** @brief ライトを追加
-     ** @param type ライトタイプ
+     ** @param _type ライトタイプ
      **/
     void Add(LightType _type);
 
     /** @brief ライトの参照座標を設定
-     ** @param _ref 参照座標
+     ** @param _pos 参照座標
      **/
-    void SetReference(Vector3& _ref);
+    void SetPosition(Vector3 _pos);
+
+    void ClearRef();
 
 private:
     void Debug();
     void CheckState();
+    void UpdateLights() const;
 
     void Load();
     void Save() const;

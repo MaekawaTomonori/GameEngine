@@ -16,6 +16,8 @@ namespace MathUtils{
 
     float Random(float _min, float _max);
     Vector3 Random(Vector3 _min, Vector3 _max);
+    
+    float Deg2Rad(float _degree);
 
     float Lerp(const float& _a, const float& _b, float _t);
 

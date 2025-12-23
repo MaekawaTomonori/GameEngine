@@ -46,3 +46,7 @@ Matrix4x4 Camera::GetViewProjection() const {
 CameraForGpu Camera::GetCameraForGpu() const {
     return { transform_.translate };
 }
+
+float Camera::GetFov() const {
+    return fov_;
+}

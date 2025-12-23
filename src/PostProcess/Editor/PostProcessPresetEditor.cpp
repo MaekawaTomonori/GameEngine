@@ -74,7 +74,6 @@ void PostProcessPresetEditor::RenderAvailablePresetsSection() {
 
     // Preview indicator
     if (isPreviewingPreset_) {
-        ImGui::SameLine();
         ImGui::TextColored(ImVec4(0.2f, 0.8f, 0.2f, 1.0f), "[Previewing: %s]", previewingPresetName_.c_str());
         ImGui::SameLine();
         if (ImGui::SmallButton("Stop Preview")) {

@@ -4,6 +4,8 @@
 #include <dinput.h>
 #include <wrl/client.h>
 
+#include "Math/Vector2.hpp"
+
 /** @brief 入力処理クラス
  ** キーボード、マウス、ジョイスティックの入力を管理
  **/
@@ -19,6 +21,8 @@ class Input {
     BYTE preState_[256]{};
     DIMOUSESTATE mouseState_{};
     DIMOUSESTATE preMouseState_{};
+
+    Vector2 mousePosition_{};
 
     //EventSystem* eventSystem_ = nullptr;
 public:
@@ -39,9 +43,12 @@ public:
     bool IsPress(BYTE _key) const;
     bool IsTrigger(BYTE _key) const;
 
+    Vector2 GetMousePosition() const { return mousePosition_; }
+
     //void SetEventSystem(EventSystem* eventSystem) { /*eventSystem_ = eventSystem;*/ }
 private:
     void UpdateKeyboard();
+    void UpdateMouse();
 
 }; // class Input
 

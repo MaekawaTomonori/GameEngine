@@ -112,7 +112,7 @@ void DebugUI::RegisterCommand(const std::string &_id, std::function<void()> _com
     commands_.push_back({.id= _id, .command= std::move(_command)});
 }
 
-void DebugUI::UpdateDisplaySize(int _width, int _height) {
+void DebugUI::UpdateDisplaySize([[maybe_unused]]int _width, [[maybe_unused]]int _height) {
 #ifdef _DEBUG
     if (ImGui::GetCurrentContext()) {
         ImGuiIO& io = ImGui::GetIO();

@@ -26,7 +26,7 @@ public:
 private:
     std::unique_ptr<SceneFactory> factory_;
 
-    Context context_;
+    Context context_{};
 
     std::unique_ptr<IScene> scene_;
     std::unique_ptr<IScene> next_;

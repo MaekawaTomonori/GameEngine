@@ -79,6 +79,11 @@ public:
      **/
     CameraForGpu GetCameraForGpu() const;
 
+    /** @brief 視野角を取得
+     ** @return 視野角（ラジアン）
+     **/
+    float GetFov() const;
+
     /** @brief 視野角を設定
      ** @param _fov 視野角（ラジアン）
      **/

@@ -174,6 +174,10 @@ float MathUtils::Random(float _min, float _max) {
     return Singleton<RandomEngine>::GetInstance()->Get(_min, _max);
 }
 
+float MathUtils::Deg2Rad(float _degree) {
+    return _degree * (F_PI / 180.f);
+}
+
 float MathUtils::Lerp(const float& _a, const float& _b, float _t) {
     return _a + (_b - _a) * _t;
 }

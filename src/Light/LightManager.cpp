@@ -21,6 +21,7 @@ LightManager::~LightManager() {
 }
 
 void LightManager::Debug() {
+#ifdef _DEBUG
     debug_->RegisterCommand("LM", [&](){
         ImGui::Begin("Light");
         if (ImGui::BeginTabBar("Light")){
@@ -48,21 +49,22 @@ void LightManager::Debug() {
                 ImGui::EndTabItem();
             }
             if (ImGui::BeginTabItem("Directional")){
-                for (const auto& dl : rawDirectionalLights_){dl->Update();}
+                for (const auto& dl : rawDirectionalLights_){dl->ImGuiSetting();}
                 ImGui::EndTabItem();
             }
             if (ImGui::BeginTabItem("Point")){
-                for (const auto& pl : rawPointLights_){pl->Update();}
+                for (const auto& pl : rawPointLights_){pl->ImGuiSetting();}
                 ImGui::EndTabItem();
             }
             if (ImGui::BeginTabItem("Spot")){
-                for (const auto& sl : rawSpotLights_){sl->Update();}
+                for (const auto& sl : rawSpotLights_){sl->ImGuiSetting();}
                 ImGui::EndTabItem();
             }
             ImGui::EndTabBar();
         }
         ImGui::End();
     });
+#endif
 }
 
 void LightManager::CheckState() {
@@ -195,6 +197,7 @@ void LightManager::Initialize(DirectXAdapter* _adapter, DebugUI* _debug) {
 void LightManager::Update() {
     Debug();
     CheckState();
+    UpdateLights();
 
     // Apply to GPU (raw data -mapping-> gpu data)
     uint32_t index = 0;
@@ -258,6 +261,48 @@ void LightManager::Add(LightType _type) {
     }
 }
 
-void LightManager::SetReference(Vector3& _ref) {
-    ref_ = std::ref(_ref);
+void LightManager::SetPosition(Vector3 _pos) {
+    ref_ = _pos;
+
+    for (const auto& dl : rawDirectionalLights_) {
+        dl->SetReference(_pos);
+    }
+
+    for (const auto& pl : rawPointLights_) {
+        pl->SetReference(_pos);
+    }
+
+    for (const auto& sl : rawSpotLights_) {
+        sl->SetReference(_pos);
+    }
+}
+
+void LightManager::ClearRef() {
+    ref_.reset();
+
+    for (const auto& dl : rawDirectionalLights_) {
+        dl->ClearRef();
+    }
+
+    for (const auto& pl : rawPointLights_) {
+        pl->ClearRef();
+    }
+
+    for (const auto& sl : rawSpotLights_) {
+        sl->ClearRef();
+    }
+}
+
+void LightManager::UpdateLights() const {
+    for (const auto& dl : rawDirectionalLights_) {
+        dl->Update();
+    }
+
+    for (const auto& pl : rawPointLights_) {
+        pl->Update();
+    }
+
+    for (const auto& sl : rawSpotLights_) {
+        sl->Update();
+    }
 }
