@@ -50,9 +50,6 @@ void Fade::Update() {
 }
 
 void Fade::Draw() {
-    if (state_ == State::None) {
-        return;
-    }
     sprite_->Draw();
 }
 
@@ -66,6 +63,8 @@ void Fade::Start(State _state, float _duration) {
     } else if (_state == State::Out) {
         alpha_ = 0.0f;
     }
+    sprite_->SetColor({ 0.0f, 0.0f, 0.0f, alpha_ });
+    sprite_->Update();
 }
 
 void Fade::Stop() {
@@ -73,12 +72,14 @@ void Fade::Stop() {
 }
 
 bool Fade::IsFinished() const {
+    bool finished = false;
     switch (state_) {
         case State::In:
         case State::Out:
-            return time_ <= 0.0f;
+            finished = time_ <= 0.0f;
+            break;
         case State::None:
-            return true;
+            finished = true;
     }
-    return true;
+    return finished;
 }

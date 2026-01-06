@@ -40,6 +40,9 @@ void SceneSwitcher::Update() {
         scene_->Setup(this);
         scene_->Initialize();
 
+        // データ送信用に1フレーム進める
+        scene_->Update();
+
         transition_->Awake(scene_->GetEntryTransition(), ITransitionEffect::State::In, 1.f);
         return;
     }
@@ -50,9 +53,7 @@ void SceneSwitcher::Update() {
         scene_->Awake();
     }
 
-    if (scene_->IsProgress()){
-        scene_->Update();
-    }
+    scene_->Update();
 }
 
 void SceneSwitcher::Draw() {
