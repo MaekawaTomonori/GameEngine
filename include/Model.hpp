@@ -145,6 +145,8 @@ public:
 
     std::string GetUniqueId();
 
+    Mesh* GetMesh() const;
+
     /** @brief モデルデータを事前読み込み
      ** @param _name モデル名
      **/

@@ -1,6 +1,7 @@
 #ifndef IScene_HPP_
 #define IScene_HPP_
 #include <string>
+
 #include "src/ParticleSystem/ParticleSystem.hpp"
 #include "src/Scene/Transition/Transition.hpp"
 

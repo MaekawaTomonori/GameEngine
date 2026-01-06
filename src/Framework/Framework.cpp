@@ -160,9 +160,9 @@ void Framework::Draw() const {
 
     sky_->Draw(renderer_.get());
     model_->Draw(renderer_.get());
-    sprite_->Draw(renderer_.get());
-    line_->Draw(renderer_.get());
     particle_->Draw(renderer_.get());
+    line_->Draw(renderer_.get());
+    sprite_->Draw(renderer_.get());
 
     renderer_->Register([&] { level_->Draw(); });
     renderer_->Register([&] { debugUI_->Render(); });

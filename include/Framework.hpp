@@ -91,8 +91,8 @@ private:
     bool Check() const;
 
     /** @brief ウィンドウリサイズ処理（DRY原則に基づく抽出）
-     ** @param width 新しい幅
-     ** @param height 新しい高さ
+     ** @param _width 新しい幅
+     ** @param _height 新しい高さ
      **/
     void HandleWindowResize(int _width, int _height) const;
 }; // class Framework

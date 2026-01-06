@@ -190,6 +190,10 @@ std::string Model::GetUniqueId() {
     return uuid_;
 }
 
+Mesh* Model::GetMesh() const {
+    return mesh_.get();
+}
+
 void Model::Load(const std::string& _name) {
     std::unique_ptr<IModelLoader> loader;
     if (std::filesystem::exists("Assets/Resources/" + _name + "/" + _name + ".obj")) {

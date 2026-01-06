@@ -100,7 +100,7 @@ public:
     const Vector2& GetPosition() const;
 
     /** @brief 位置を設定
-     ** @param p 位置ベクトル
+     ** @param _p 位置ベクトル
      **/
     void SetPosition(const Vector2& _p);
 
@@ -110,7 +110,7 @@ public:
     const Vector2& GetSize() const;
 
     /** @brief サイズを設定
-     ** @param s サイズベクトル
+     ** @param _s サイズベクトル
      **/
     void SetSize(const Vector2& _s);
 
@@ -120,7 +120,7 @@ public:
     float GetRotation() const;
 
     /** @brief 回転角度を設定
-     ** @param r 回転角度（ラジアン）
+     ** @param _r 回転角度（ラジアン）
      **/
     void SetRotation(float _r);
 
@@ -130,7 +130,7 @@ public:
     const Vector4& GetColor() const;
 
     /** @brief 色を設定
-     ** @param color 色ベクトル
+     ** @param _color 色ベクトル
      **/
     void SetColor(const Vector4& _color) const;
 
@@ -140,7 +140,7 @@ public:
     const Vector2& GetAnchorPoint() const;
 
     /** @brief アンカーポイントを設定
-     ** @param a アンカーポイント
+     ** @param _a アンカーポイント
      **/
     void SetAnchorPoint(const Vector2& _a);
 
@@ -150,7 +150,7 @@ public:
     bool IsFlipX() const;
 
     /** @brief X軸反転を設定
-     ** @param f 反転する場合true
+     ** @param _f 反転する場合true
      **/
     void SetFlipX(bool _f);
 
@@ -160,7 +160,7 @@ public:
     bool IsFlipY() const;
 
     /** @brief Y軸反転を設定
-     ** @param f 反転する場合true
+     ** @param _f 反転する場合true
      **/
     void SetFlipY(bool _f);
 
