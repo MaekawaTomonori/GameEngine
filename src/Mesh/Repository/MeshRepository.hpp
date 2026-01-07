@@ -14,7 +14,7 @@ class MeshRepository {
 public:
     void Initialize(DirectXAdapter* _adapter);
 
-    void Add(const std::string &_name, MeshData _raw);
+    void Add(const std::string &_name, const MeshData& _raw);
     MeshData Get(const std::string& _name);
 }; // class MeshRepository
 

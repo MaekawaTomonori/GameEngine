@@ -1,36 +1,37 @@
-﻿#pragma once
+#ifndef VECTOR2_HPP_
+#define VECTOR2_HPP_
+
 #include <cmath>
 
-/// <summary>
-/// 2Dベクトル構造体
-/// 2D座標と基本的なベクトル演算を提供
-/// </summary>
+/** @brief 2Dベクトル構造体
+ ** 2D座標と基本的なベクトル演算を提供
+ **/
 struct Vector2{
     float x, y;
 
-    Vector2 operator+(const Vector2& v) const {
-        return { x + v.x, y + v.y };
+    Vector2 operator+(const Vector2& _v) const {
+        return { x + _v.x, y + _v.y };
     }
 
-    Vector2 operator-(const Vector2& v) const {
-        return { x - v.x, y - v.y };
+    Vector2 operator-(const Vector2& _v) const {
+        return { x - _v.x, y - _v.y };
     }
 
-    Vector2 operator*(const Vector2& v) const {
-		return { x * v.x, y * v.y };
+    Vector2 operator*(const Vector2& _v) const {
+		return { x * _v.x, y * _v.y };
     }
 
-    Vector2 operator*(const float f) const {
-        return { x * f, y * f };
+    Vector2 operator*(const float _f) const {
+        return { x * _f, y * _f };
     }
 
-	void operator+=(const Vector2& v) {
-		x += v.x;
-		y += v.y;
+	void operator+=(const Vector2& _v) {
+		x += _v.x;
+		y += _v.y;
 	}
 
-    bool operator==(const Vector2& v) const {
-        return x == v.x && y == v.y;
+    bool operator==(const Vector2& _v) const {
+        return x == _v.x && y == _v.y;
     }
 
     float Length() const {
@@ -47,3 +48,4 @@ struct Vector2{
     static Vector2 Random();
 };
 
+#endif // VECTOR2_HPP_

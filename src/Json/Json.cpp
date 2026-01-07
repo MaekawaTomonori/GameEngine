@@ -4,10 +4,10 @@
 
 #include "Log.hpp"
 
-void Json::Register(const std::string& name) {
-    if (datas_.contains(name))return;
+void Json::Register(const std::string& _name) {
+    if (datas_.contains(_name))return;
 
-    datas_[name];
+    datas_[_name];
 }
 
 void Json::LoadJson(const std::string& _path, std::string _name) {
@@ -15,7 +15,7 @@ void Json::LoadJson(const std::string& _path, std::string _name) {
     if (_name.empty()) {
         _name = _path;
     }
-    
+
     //Open File
     std::string path = PATH + _path + "/" + _name + ".json";
     std::ifstream file;
@@ -144,13 +144,13 @@ bool Json::Load(const std::string& _path, std::string _name) {
     Register(_path);
 
     Log::Send(Log::Level::INFO, _path + " loading");
-    
+
     // If _name is specified, load only that file
     if (!_name.empty()) {
         LoadJson(_path, _name);
         return true;
     }
-    
+
     // If _name is empty, load all JSON files in the directory
     std::filesystem::path dir(PATH + _path + "/");
     if (!exists(dir)){

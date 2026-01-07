@@ -13,9 +13,12 @@ Line::Line() {
     commandList_ = adapter_->GetCommandList();
     cameraManager_ = Singleton<CameraController>::GetInstance();
     uuid_ = Utils::GenerateUniqueId();
+    id_ = common_->AddCount();
 }
 
-Line::~Line() = default;
+Line::~Line() {
+    common_->Remove();
+}
 
 void Line::Initialize() {
     CreateVertexBuffer();
@@ -23,10 +26,16 @@ void Line::Initialize() {
     CreateTransformationBuffer();
 }
 
-void Line::Update() const {
-    common_->RegisterCommand(uuid_, [&] {
+void Line::Update() {
+    if (name_.empty()) name_ = "Line_" + std::to_string(id_);
+    common_->RegisterDebug(uuid_, [&] {
         ImGui::Begin("Line");
-        ImGui::ColorEdit4("color", &materialData_->color.x);
+        ImGui::PushID(uuid_.c_str());
+        if (ImGui::TreeNode(name_.c_str())) {
+            ImGui::ColorEdit4("color", &materialData_->color.x);
+            ImGui::TreePop();
+        }
+        ImGui::PopID();
         ImGui::End();
     });
 
@@ -39,37 +48,41 @@ void Line::Update() const {
 }
 
 void Line::Draw() const {
-    common_->Draw();
-    
-    commandList_->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_LINELIST);
-    commandList_->IASetVertexBuffers(0, 1, &vertexBufferView_);
-    
-    commandList_->SetGraphicsRootConstantBufferView(0, materialResource_->Get()->GetGPUVirtualAddress());
-    commandList_->SetGraphicsRootConstantBufferView(1, transformationResource_->Get()->GetGPUVirtualAddress());
-    
-    commandList_->DrawInstanced(static_cast<UINT>(positions_.size()), 1, 0, 0);
+    common_->RegisterDraw([this]() {
+        commandList_->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_LINELIST);
+        commandList_->IASetVertexBuffers(0, 1, &vertexBufferView_);
+
+        commandList_->SetGraphicsRootConstantBufferView(0, materialResource_->Get()->GetGPUVirtualAddress());
+        commandList_->SetGraphicsRootConstantBufferView(1, transformationResource_->Get()->GetGPUVirtualAddress());
+
+        commandList_->DrawInstanced(static_cast<UINT>(positions_.size()), 1, 0, 0);
+    }, false);
 }
 
-void Line::AddLine(const Vector3& start, const Vector3& end) {
+void Line::AddLine(const Vector3& _start, const Vector3& _end) {
     if (positions_.size() >= MAX_LINES) {
         Utils::Alert("Line::AddLine: Maximum number of lines exceeded. Cannot add more lines.");
         return;
     }
 
-    positions_.push_back({start.x, start.y, start.z, 1.f});
-    positions_.push_back({end.x, end.y, end.z, 1.f});
+    positions_.push_back({_start.x, _start.y, _start.z, 1.f});
+    positions_.push_back({_end.x, _end.y, _end.z, 1.f});
 }
 
 void Line::Clear() {
     positions_.clear();
 }
 
-void Line::SetColor(Vector4 color) const {
+void Line::SetColor(Vector4 _color) const {
     if (!materialData_){
         Utils::Alert("Line::SetColor: Material data is not initialized.");
         return;
     }
-    materialData_->color = color;
+    materialData_->color = _color;
+}
+
+void Line::SetName(const std::string& _name) {
+    name_ = _name;
 }
 
 void Line::CreateVertexBuffer() {

@@ -4,15 +4,13 @@
 #include <vector>
 #include "Math/Vector3.hpp"
 
-/// <summary>
-/// レベルデータ
-/// ステージ内のオブジェクト配置情報を保持
-/// </summary>
+/** @brief レベルデータ
+ ** ステージ内のオブジェクト配置情報を保持
+ **/
 struct LevelData {
-    /// <summary>
-    /// オブジェクトデータ
-    /// 個別オブジェクトの配置情報
-    /// </summary>
+    /** @brief オブジェクトデータ
+     ** 個別オブジェクトの配置情報
+     **/
     struct ObjectData {
         std::string name;
         std::string file;

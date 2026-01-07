@@ -42,11 +42,15 @@ class Skybox {
     Material* md_ = nullptr;
 
     Transform transform_ {};
-    
+
+    bool posteffect_ = true;
+
 public:
     void Initialize(const std::string& _texture);
     void Update();
     void Draw();
+
+    void SetColor(const Vector4& _color) const;
 
 private:
     void CreateVertex();

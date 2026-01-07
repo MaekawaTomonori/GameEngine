@@ -29,7 +29,7 @@ void Renderer::Render() {
         postProcessor_->EndFrame();
         postProcessor_->Execute();
 
-        ppFunc = ([this](){postProcessor_->Draw();}); 
+        ppFunc = ([this](){postProcessor_->Draw();});
     }
 
     if (!tasks_.empty()) {

@@ -10,7 +10,7 @@ void Grayscale::Initialize() {
         .RegisterSpace = 0,
         .OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND
     };
-    
+
     //Create PSO
     pso_ = std::make_unique<PipelineStateObject>(adapter_);
     pso_->SetRootSignature(
@@ -65,3 +65,8 @@ void Grayscale::Debug() {
 void Grayscale::Modifier() {
     adapter_->GetCommandList()->SetGraphicsRootConstantBufferView(1, mr_->Get()->GetGPUVirtualAddress());
 }
+
+void Grayscale::LoadPreset(const std::string& _presetName) { (void)_presetName;}
+void Grayscale::SavePreset(const std::string& _presetName) { (void)_presetName;}
+nlohmann::json Grayscale::SaveParameters() const { return nlohmann::json();}
+void Grayscale::UpdateAnimation(float _t) { (void)_t;}

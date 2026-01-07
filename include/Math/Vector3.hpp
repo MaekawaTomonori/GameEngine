@@ -1,52 +1,53 @@
-#pragma once
+#ifndef VECTOR3_HPP_
+#define VECTOR3_HPP_
+
 #include <cmath>
 
 #include "Vector2.hpp"
 
-/// <summary>
-/// 3Dベクトル構造体
-/// 3D座標と基本的なベクトル演算を提供
-/// </summary>
+/** @brief 3Dベクトル構造体
+ ** 3D座標と基本的なベクトル演算を提供
+ **/
 struct Vector3{
-    float x, y, z;
+    float x = 0.f, y = 0.f, z = 0.f;
 
-    Vector3 operator+(const Vector3& v) const {
-        return {x + v.x, y + v.y, z + v.z};
+    Vector3 operator+(const Vector3& _v) const {
+        return {x + _v.x, y + _v.y, z + _v.z};
     }
 
-	void operator+=(const Vector3& v) {
-		x += v.x;
-		y += v.y;
-		z += v.z;
+	void operator+=(const Vector3& _v) {
+		x += _v.x;
+		y += _v.y;
+		z += _v.z;
 	}
-	void operator+=(const Vector2& v) {
-		x += v.x;
-		y += v.y;
+	void operator+=(const Vector2& _v) {
+		x += _v.x;
+		y += _v.y;
 		z += 0;
 	}
 
-    Vector3 operator-(const Vector3& v) const {
-        return {x - v.x, y - v.y, z - v.z};
+    Vector3 operator-(const Vector3& _v) const {
+        return {x - _v.x, y - _v.y, z - _v.z};
     }
 
-    Vector3 operator*(const float f) const {
-        return {x * f, y * f, z * f};
+    Vector3 operator*(const float _f) const {
+        return {x * _f, y * _f, z * _f};
     }
 
-    void operator*=(const float f) {
-        x *= f;
-        y *= f;
-        z *= f;
+    void operator*=(const float _f) {
+        x *= _f;
+        y *= _f;
+        z *= _f;
     }
 
-    void operator*=(const Vector3& v) {
-        x *= v.x;
-        y *= v.y;
-        z *= v.z;
+    void operator*=(const Vector3& _v) {
+        x *= _v.x;
+        y *= _v.y;
+        z *= _v.z;
     }
 
-	Vector3 operator/(const float& f) const {
-        return {x / f, y / f, z / f};
+	Vector3 operator/(const float& _f) const {
+        return {x / _f, y / _f, z / _f};
     }
 
 	float Length() const {
@@ -66,3 +67,5 @@ struct Vector3{
 
 	static Vector3 Random();
 };
+
+#endif // VECTOR3_HPP_

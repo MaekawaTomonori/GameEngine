@@ -10,29 +10,25 @@
 
 class SpriteCommon;
 
-/// <summary>
-/// 2Dスプライトクラス
-/// テクスチャ付き2D四角形の描画を管理
-/// </summary>
+/** @brief 2Dスプライトクラス
+ ** テクスチャ付き2D四角形の描画を管理
+ **/
 class Sprite {
-    /// <summary>
-    /// スプライトのマテリアルデータ
-    /// </summary>
+    /** @brief スプライトのマテリアルデータ
+     **/
     struct Material {
         Vector4 color;
     };
 
-    /// <summary>
-    /// スプライトの頂点データ
-    /// </summary>
+    /** @brief スプライトの頂点データ
+     **/
     struct VertexData {
         Vector4 position;
         Vector2 uv;
     };
 
-    /// <summary>
-    /// スプライトの変換行列データ
-    /// </summary>
+    /** @brief スプライトの変換行列データ
+     **/
     struct Transformation {
         Matrix4x4 wvp;
         Matrix4x4 world;
@@ -80,143 +76,126 @@ class Sprite {
     Vector2 leftTop_{};
     Vector2 texSize_ = {100, 100};
 
+    bool posteffect_ = false;
 
 public:
     Sprite();
 
-    /// <summary>
-    /// スプライトを初期化
-    /// </summary>
-    /// <param name="_texture">テクスチャパス</param>
+    /** @brief スプライトを初期化
+     ** @param _texture テクスチャパス
+     **/
     void Initialize(const std::string&_texture);
 
-    /// <summary>
-    /// スプライトの更新処理
-    /// </summary>
+    /** @brief スプライトの更新処理
+     **/
     void Update();
 
-    /// <summary>
-    /// スプライトを描画
-    /// </summary>
+    /** @brief スプライトを描画
+     **/
     void Draw();
 
-    /// <summary>
-    /// 位置を取得
-    /// </summary>
-    /// <returns>位置ベクトルへの参照</returns>
+    /** @brief 位置を取得
+     ** @return 位置ベクトルへの参照
+     **/
     const Vector2& GetPosition() const;
 
-    /// <summary>
-    /// 位置を設定
-    /// </summary>
-    /// <param name="p">位置ベクトル</param>
-    void SetPosition(const Vector2& p);
+    /** @brief 位置を設定
+     ** @param _p 位置ベクトル
+     **/
+    void SetPosition(const Vector2& _p);
 
-    /// <summary>
-    /// サイズを取得
-    /// </summary>
-    /// <returns>サイズベクトルへの参照</returns>
+    /** @brief サイズを取得
+     ** @return サイズベクトルへの参照
+     **/
     const Vector2& GetSize() const;
 
-    /// <summary>
-    /// サイズを設定
-    /// </summary>
-    /// <param name="s">サイズベクトル</param>
-    void SetSize(const Vector2& s);
+    /** @brief サイズを設定
+     ** @param _s サイズベクトル
+     **/
+    void SetSize(const Vector2& _s);
 
-    /// <summary>
-    /// 回転角度を取得
-    /// </summary>
-    /// <returns>回転角度（ラジアン）</returns>
+    /** @brief 回転角度を取得
+     ** @return 回転角度（ラジアン）
+     **/
     float GetRotation() const;
 
-    /// <summary>
-    /// 回転角度を設定
-    /// </summary>
-    /// <param name="r">回転角度（ラジアン）</param>
-    void SetRotation(float r);
+    /** @brief 回転角度を設定
+     ** @param _r 回転角度（ラジアン）
+     **/
+    void SetRotation(float _r);
 
-    /// <summary>
-    /// 色を取得
-    /// </summary>
-    /// <returns>色ベクトルへの参照</returns>
+    /** @brief 色を取得
+     ** @return 色ベクトルへの参照
+     **/
     const Vector4& GetColor() const;
 
-    /// <summary>
-    /// 色を設定
-    /// </summary>
-    /// <param name="color">色ベクトル</param>
-    void SetColor(const Vector4& color) const;
+    /** @brief 色を設定
+     ** @param _color 色ベクトル
+     **/
+    void SetColor(const Vector4& _color) const;
 
-    /// <summary>
-    /// アンカーポイントを取得
-    /// </summary>
-    /// <returns>アンカーポイントへの参照</returns>
+    /** @brief アンカーポイントを取得
+     ** @return アンカーポイントへの参照
+     **/
     const Vector2& GetAnchorPoint() const;
 
-    /// <summary>
-    /// アンカーポイントを設定
-    /// </summary>
-    /// <param name="a">アンカーポイント</param>
-    void SetAnchorPoint(const Vector2& a);
+    /** @brief アンカーポイントを設定
+     ** @param _a アンカーポイント
+     **/
+    void SetAnchorPoint(const Vector2& _a);
 
-    /// <summary>
-    /// X軸反転の状態を取得
-    /// </summary>
-    /// <returns>反転している場合true</returns>
+    /** @brief X軸反転の状態を取得
+     ** @return 反転している場合true
+     **/
     bool IsFlipX() const;
 
-    /// <summary>
-    /// X軸反転を設定
-    /// </summary>
-    /// <param name="f">反転する場合true</param>
-    void SetFlipX(bool f);
+    /** @brief X軸反転を設定
+     ** @param _f 反転する場合true
+     **/
+    void SetFlipX(bool _f);
 
-    /// <summary>
-    /// Y軸反転の状態を取得
-    /// </summary>
-    /// <returns>反転している場合true</returns>
+    /** @brief Y軸反転の状態を取得
+     ** @return 反転している場合true
+     **/
     bool IsFlipY() const;
 
-    /// <summary>
-    /// Y軸反転を設定
-    /// </summary>
-    /// <param name="f">反転する場合true</param>
-    void SetFlipY(bool f);
+    /** @brief Y軸反転を設定
+     ** @param _f 反転する場合true
+     **/
+    void SetFlipY(bool _f);
 
-    /// <summary>
-    /// テクスチャの左上座標を取得
-    /// </summary>
-    /// <returns>左上座標への参照</returns>
+    /** @brief テクスチャの左上座標を取得
+     ** @return 左上座標への参照
+     **/
     const Vector2& GetTextureLeftTop() const;
 
-    /// <summary>
-    /// テクスチャの左上座標を設定
-    /// </summary>
-    /// <param name="textureLeftTop">左上座標</param>
-    void SetTextureLeftTop(const Vector2& textureLeftTop);
+    /** @brief テクスチャの左上座標を設定
+     ** @param _textureLeftTop 左上座標
+     **/
+    void SetTextureLeftTop(const Vector2& _textureLeftTop);
 
-    /// <summary>
-    /// テクスチャサイズを取得
-    /// </summary>
-    /// <returns>テクスチャサイズへの参照</returns>
+    /** @brief テクスチャサイズを取得
+     ** @return テクスチャサイズへの参照
+     **/
     const Vector2& GetTextureSize() const;
 
-    /// <summary>
-    /// テクスチャサイズを設定
-    /// </summary>
-    /// <param name="textureSize">テクスチャサイズ</param>
-    void SetTextureSize(const Vector2& textureSize);
+    /** @brief テクスチャサイズを設定
+     ** @param _textureSize テクスチャサイズ
+     **/
+    void SetTextureSize(const Vector2& _textureSize);
+
+    /** @brief ポストエフェクトを有効化/無効化
+     ** @param _active アクティブにする場合true
+     **/
+    void SetActivePostEffect(bool _active);
 
 private:
-    /// <summary>
-    /// テクスチャサイズの調整
-    /// </summary>
+    /** @brief テクスチャサイズの調整
+     **/
     void AdjustTextureSize();
 
-    /// <summary>
-    /// デバッグ情報の表示
-    /// </summary>
+    /** @brief デバッグ情報の表示
+     **/
     void Debug();
 }; // class Sprite
 

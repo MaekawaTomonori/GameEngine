@@ -19,7 +19,7 @@ Sprite::Sprite() {
 }
 
 void Sprite::Initialize(const std::string&_texture) {
-    texturePath_ = std::move(_texture);
+    texturePath_ = _texture;
     Singleton<TextureManager>::GetInstance()->Load(texturePath_);
 
     vr_ = adapter_->CreateBufferResource(sizeof(VertexData) * 4);
@@ -73,6 +73,7 @@ void Sprite::Initialize(const std::string&_texture) {
 
 void Sprite::Update() {
     Debug();
+
 #pragma region Vertex position
     float left = 0.f - anchorPoint_.x;
     float right = 1.f - anchorPoint_.x;
@@ -116,16 +117,16 @@ void Sprite::Update() {
 }
 
 void Sprite::Draw() {
-    common_->Draw();
+    common_->RegisterDraw([&]{
+        commandList_->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+        commandList_->IASetVertexBuffers(0, 1, &vbv_);
+        commandList_->IASetIndexBuffer(&ibv_);
+        commandList_->SetGraphicsRootConstantBufferView(0, mr_->Get()->GetGPUVirtualAddress());
+        commandList_->SetGraphicsRootConstantBufferView(1, wr_->Get()->GetGPUVirtualAddress());
+        commandList_->SetGraphicsRootDescriptorTable(2, Singleton<TextureManager>::GetInstance()->GetGPUHandle(texturePath_));
 
-    commandList_->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-    commandList_->IASetVertexBuffers(0, 1, &vbv_);
-    commandList_->IASetIndexBuffer(&ibv_);
-    commandList_->SetGraphicsRootConstantBufferView(0, mr_->Get()->GetGPUVirtualAddress());
-    commandList_->SetGraphicsRootConstantBufferView(1, wr_->Get()->GetGPUVirtualAddress());
-    commandList_->SetGraphicsRootDescriptorTable(2, Singleton<TextureManager>::GetInstance()->GetGPUHandle(texturePath_));
-
-    commandList_->DrawIndexedInstanced(6, 1, 0, 0, 0);
+        commandList_->DrawIndexedInstanced(6, 1, 0, 0, 0);
+    }, posteffect_);
 }
 
 void Sprite::AdjustTextureSize() {
@@ -135,18 +136,21 @@ void Sprite::AdjustTextureSize() {
 }
 
 void Sprite::Debug() {
-	common_->RegisterCommand(
+	common_->RegisterDebug(
 		uuid_,
         [this](){
 	        ImGui::Begin("Sprite");
 	        if (ImGui::CollapsingHeader(uuid_.c_str())){
+                ImGui::PushID(uuid_.c_str());
 		        ImGui::Text("Texture Path: %s", texturePath_.c_str());
-		        ImGui::DragFloat2("Position", &position_.x, 0.1f);
+		        ImGui::DragFloat2("Position", &position_.x, 1.f);
 		        ImGui::DragFloat2("Size", &size_.x, 1);
 		        ImGui::DragFloat("Rotation", &rotation_, 0.01f);
 		        ImGui::DragFloat2("Anchor Point", &anchorPoint_.x);
 		        ImGui::Checkbox("Flip X", &flipX_);
 		        ImGui::Checkbox("Flip Y", &flipY_);
+                ImGui::ColorEdit4("Color", &material_->color.x);
+                ImGui::PopID();
             }
 	        ImGui::End();
 		}
@@ -157,70 +161,74 @@ const Vector2& Sprite::GetPosition() const {
     return position_;
 }
 
-void Sprite::SetPosition(const Vector2& p) {
-    position_ = p;
+void Sprite::SetPosition(const Vector2& _p) {
+    position_ = _p;
 }
 
 const Vector2& Sprite::GetSize() const {
     return size_;
 }
 
-void Sprite::SetSize(const Vector2& s) {
-    size_ = s;
+void Sprite::SetSize(const Vector2& _s) {
+    size_ = _s;
 }
 
 float Sprite::GetRotation() const {
     return rotation_;
 }
 
-void Sprite::SetRotation(float r) {
-    rotation_ = r;
+void Sprite::SetRotation(float _r) {
+    rotation_ = _r;
 }
 
 const Vector4& Sprite::GetColor() const {
     return material_->color;
 }
 
-void Sprite::SetColor(const Vector4& color) const {
-    material_->color = color;
+void Sprite::SetColor(const Vector4& _color) const {
+    material_->color = _color;
 }
 
 const Vector2& Sprite::GetAnchorPoint() const {
     return anchorPoint_;
 }
 
-void Sprite::SetAnchorPoint(const Vector2& a) {
-    anchorPoint_ = a;
+void Sprite::SetAnchorPoint(const Vector2& _a) {
+    anchorPoint_ = _a;
 }
 
 bool Sprite::IsFlipX() const {
     return flipX_;
 }
 
-void Sprite::SetFlipX(bool f) {
-    flipX_ = f;
+void Sprite::SetFlipX(bool _f) {
+    flipX_ = _f;
 }
 
 bool Sprite::IsFlipY() const {
     return flipY_;
 }
 
-void Sprite::SetFlipY(bool f) {
-    flipY_ = f;
+void Sprite::SetFlipY(bool _f) {
+    flipY_ = _f;
 }
 
 const Vector2& Sprite::GetTextureLeftTop() const {
     return leftTop_;
 }
 
-void Sprite::SetTextureLeftTop(const Vector2& textureLeftTop) {
-    leftTop_ = textureLeftTop;
+void Sprite::SetTextureLeftTop(const Vector2& _textureLeftTop) {
+    leftTop_ = _textureLeftTop;
 }
 
 const Vector2& Sprite::GetTextureSize() const {
     return texSize_;
 }
 
-void Sprite::SetTextureSize(const Vector2& textureSize) {
-    texSize_ = textureSize;
+void Sprite::SetTextureSize(const Vector2& _textureSize) {
+    texSize_ = _textureSize;
+}
+
+void Sprite::SetActivePostEffect(const bool _active) {
+    posteffect_ = _active;
 }

@@ -11,7 +11,7 @@ class FrameRateLimiter{
     std::chrono::steady_clock::time_point pre_;
 
 public:
-    explicit FrameRateLimiter(uint16_t maxFps, bool useVsync = true);
+    explicit FrameRateLimiter(uint16_t _maxFps, bool _useVsync = true);
     void WaitForNextFrame();
 
     float GetCurrentFps() const;

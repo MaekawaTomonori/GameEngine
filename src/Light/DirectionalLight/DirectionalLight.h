@@ -28,7 +28,8 @@ public:
         light_ = _light;
     }
 
+    void ImGuiSetting() override;
 
 protected:
-    void ImGuiSetting() override;
+    void FollowRef() override;
 };

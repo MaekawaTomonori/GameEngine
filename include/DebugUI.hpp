@@ -6,16 +6,12 @@
 #include "src/DirectX/DirectXAdapter.hpp"
 #include "src/DirectX/Heap/Heap.hpp"
 
-struct ImDrawData;
-
-/// <summary>
-/// ImGuiアダプタークラス
-/// デバッグUIの描画とコマンド管理を提供
-/// </summary>
+/** @brief ImGuiアダプタークラス
+ ** デバッグUIの描画とコマンド管理を提供
+ **/
 class DebugUI {
-    /// <summary>
-    /// デバッグUIコマンド
-    /// </summary>
+    /** @brief デバッグUIコマンド
+     **/
     struct Command {
         std::string id;
         std::function<void()> command;
@@ -24,40 +20,41 @@ class DebugUI {
     std::mutex mutex_;
 
     std::unique_ptr<Heap> heap_;
-    ID3D12GraphicsCommandList* cList_ = nullptr;
+    const DirectXAdapter* adapter_ = nullptr;
 
     std::vector<Command> commands_;
 
 public:
     ~DebugUI();
 
-    /// <summary>
-    /// デバッグUIを初期化
-    /// </summary>
-    /// <param name="dx">DirectXアダプター</param>
-    void Initialize(const DirectXAdapter* dx);
+    /** @brief デバッグUIを初期化
+     ** @param _adapter DirectXアダプター
+     **/
+    void Initialize(const DirectXAdapter* _adapter);
 
-    /// <summary>
-    /// デバッグUIをレンダリング
-    /// </summary>
+    /** @brief デバッグUIをレンダリング
+     **/
     void Render();
 
-    /// <summary>
-    /// デバッグコマンドを登録
-    /// </summary>
-    /// <param name="_id">コマンドID</param>
-    /// <param name="_command">実行する関数</param>
+    /** @brief デバッグコマンドを登録
+     ** @param _id コマンドID
+     ** @param _command 実行する関数
+     **/
     void RegisterCommand(const std::string &_id, std::function<void()> _command);
 
+    /** @brief ImGuiディスプレイサイズを更新（ウィンドウリサイズ時）
+     ** @param width 新しい幅
+     ** @param height 新しい高さ
+     **/
+    void UpdateDisplaySize(int _width, int _height);
+
 private:
-    /// <summary>
-    /// 登録されたコマンドを処理
-    /// </summary>
+    /** @brief 登録されたコマンドを処理
+     **/
     void Process();
 
-    /// <summary>
-    /// モダンスタイルのセットアップ
-    /// </summary>
+    /** @brief モダンスタイルのセットアップ
+     **/
     void SetupModernStyle();
 }; // class DebugUI
 

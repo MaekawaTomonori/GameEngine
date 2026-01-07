@@ -13,9 +13,9 @@ void RawPointLight::DefaultSetting() {
 	light_.decay = 1;
 }
 
-void RawPointLight::Set(const std::string& uuid ,const PointLight& pl) {
-    uuid_ = uuid;
-    light_ = pl;
+void RawPointLight::Set(const std::string& _uuid ,const PointLight& _pl) {
+    uuid_ = _uuid;
+    light_ = _pl;
 }
 
 void RawPointLight::Save(std::string _path) {
@@ -40,5 +40,11 @@ void RawPointLight::ImGuiSetting() {
             enable_ = false;
         }
         ImGui::TreePop();
+    }
+}
+
+void RawPointLight::FollowRef() {
+    if (ref_.has_value()) {
+        light_.position = ref_.value();
     }
 }

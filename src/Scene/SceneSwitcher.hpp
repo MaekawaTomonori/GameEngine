@@ -4,20 +4,29 @@
 #include <string>
 
 #include "DebugUI.hpp"
+#include "src/PostProcess/Editor/PostProcessPresetEditor.hpp"
+#include "src/ParticleSystem/ParticleSystem.hpp"
+
 #include "IScene.hpp"
-#include "Factory/AbstractSceneFactory.hpp"
+#include "SceneFactory.hpp"
 
 class Transition;
 
-/// <summary>
-/// シーン切り替え管理クラス
-/// シーン遷移とトランジションエフェクトを管理
-/// </summary>
+/** @brief シーン切り替え管理クラス
+ ** シーン遷移とトランジションエフェクトを管理
+ **/
 class SceneSwitcher {
-	std::unique_ptr<AbstractSceneFactory> factory_;
+public:
+    struct Context {
+        PostProcessExecutor* ppe = nullptr;
+        DebugUI* debug = nullptr;
+        ParticleSystem* particle = nullptr;
+    };
 
-    PostProcessExecutor* ppe_ = nullptr;
-    DebugUI* debug_ = nullptr;
+private:
+    std::unique_ptr<SceneFactory> factory_;
+
+    Context context_{};
 
     std::unique_ptr<IScene> scene_;
     std::unique_ptr<IScene> next_;
@@ -25,39 +34,35 @@ class SceneSwitcher {
     std::unique_ptr<Transition> transition_;
 
 public:
-    /// <summary>
-    /// セットアップ
-    /// </summary>
-    /// <param name="_ppe">ポストプロセス実行管理</param>
-    /// <param name="_debug">デバッグUI</param>
-    void Setup(PostProcessExecutor* _ppe, DebugUI* _debug);
+    SceneSwitcher();
+    /** @brief セットアップ
+     ** @param _context コンテキスト
+     **/
+    void Setup(const Context& _context);
 
-    /// <summary>
-    /// 更新処理
-    /// </summary>
-	void Update();
+    /** @brief 更新処理
+     **/
+    void Update();
 
-    /// <summary>
-    /// 描画処理
-    /// </summary>
+    /** @brief 描画処理
+     **/
     void Draw();
 
-    /// <summary>
-    /// シーンファクトリーを設定
-    /// </summary>
-    /// <param name="_factory">シーンファクトリー</param>
-    void SetFactory(std::unique_ptr<AbstractSceneFactory> _factory);
+    /// @brief シーンを登録する
+    /// @param _name シーン名
+    /// @param _creator シーン生成関数
+    void RegisterScene(const std::string& _name, const std::function<std::unique_ptr<IScene>()>& _creator) const;
 
-    /// <summary>
-    /// シーンを変更
-    /// </summary>
-    /// <param name="_name">シーン名</param>
+    /** @brief シーンを変更
+     ** @param _name シーン名
+     **/
     void Change(const std::string& _name);
 
-    /// <summary>
-    /// デバッグ情報の表示
-    /// </summary>
+    /** @brief デバッグ情報の表示
+     **/
     void Debug();
+
+    const Context& GetContext() const;
 }; // class SceneSwitcher
 
 #endif // SceneSwitcher_HPP_

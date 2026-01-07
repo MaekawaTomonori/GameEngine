@@ -150,7 +150,7 @@ MeshData GltfLoader::LoadMesh(const aiScene* _scene, const std::string& _name, M
         LoadVertexData(mesh, data);
 
         LoadIndexData(mesh, data);
-        
+
         LoadBones(mesh, _model);
 
         for (uint32_t materialIndex = 0; materialIndex < _scene->mNumMaterials; ++materialIndex){

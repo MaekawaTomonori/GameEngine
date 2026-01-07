@@ -42,15 +42,15 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>$(SolutionDir)out\$(Platform)\$(Configuration)\$(ProjectName)\\</OutDir>
-    <IntDir>$(SolutionDir)out\$(Platform)\$(Configuration)\$(ProjectName)\immd\</IntDir>
+    <OutDir>$(SolutionDir)out\$(Platform)\$(Configuration)\$(ProjectName)\</OutDir>
+    <IntDir>$(SolutionDir)out\$(Platform)\$(Configuration)\$(ProjectName)\bin\</IntDir>
     <TargetName>Engine</TargetName>
     <TargetExt>.lib</TargetExt>
     <ExternalIncludePath>.;include;$(ExternalIncludePath)</ExternalIncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>$(SolutionDir)out\$(Platform)\$(Configuration)\$(ProjectName)\\</OutDir>
-    <IntDir>$(SolutionDir)out\$(Platform)\$(Configuration)\$(ProjectName)\immd\</IntDir>
+    <OutDir>$(SolutionDir)out\$(Platform)\$(Configuration)\$(ProjectName)\</OutDir>
+    <IntDir>$(SolutionDir)out\$(Platform)\$(Configuration)\$(ProjectName)\bin\</IntDir>
     <TargetName>Engine</TargetName>
     <TargetExt>.lib</TargetExt>
     <ExternalIncludePath>.;include;$(ExternalIncludePath)</ExternalIncludePath>
@@ -59,7 +59,7 @@
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level4</WarningLevel>
-      <PreprocessorDefinitions>_LIB;NDEBUG;DEBUG;_DEBUG;_WINDOWS;_UNICODE;UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_LIB;NDEBUG;DEBUG;_DEBUG;_WINDOWS;_UNICODE;UNICODE;_DBG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>vendor\assimp\include;vendor\imgui;vendor\DirectXTex;vendor\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
@@ -113,7 +113,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="include\DebugUI.hpp" />
-    <ClInclude Include="include\Factory\AbstractSceneFactory.hpp" />
+    <ClInclude Include="include\Factory\AbstractPostEffectFactory.hpp" />
+    <ClInclude Include="src\Scene\SceneFactory.hpp" />
     <ClInclude Include="include\Framework.hpp" />
     <ClInclude Include="include\IGame.hpp" />
     <ClInclude Include="include\IScene.hpp" />
@@ -145,12 +146,13 @@
     <ClInclude Include="src\Common\Common.hpp" />
     <ClInclude Include="src\Config\Config.hpp" />
     <ClInclude Include="src\Container\Material.hpp" />
+    <ClInclude Include="src\DirectX\Compute\ComputePipeline.hpp" />
     <ClInclude Include="src\DirectX\DirectXAdapter.hpp" />
     <ClInclude Include="src\DirectX\FrameRate\FrameRateLimiter.hpp" />
-    <ClInclude Include="src\DirectX\GraphicsPipeline\Object\BlendMode.hpp" />
-    <ClInclude Include="src\DirectX\GraphicsPipeline\Object\InputLayout.hpp" />
+    <ClInclude Include="src\DirectX\RootSignature\BlendMode.hpp" />
+    <ClInclude Include="src\DirectX\RootSignature\InputLayout.hpp" />
     <ClInclude Include="src\DirectX\GraphicsPipeline\Object\PipelineStateObject.hpp" />
-    <ClInclude Include="src\DirectX\GraphicsPipeline\Object\RootSignature.hpp" />
+    <ClInclude Include="src\DirectX\RootSignature\RootSignature.hpp" />
     <ClInclude Include="src\DirectX\Heap\Heap.hpp" />
     <ClInclude Include="src\DirectX\Heap\SRVManager.h" />
     <ClInclude Include="src\DirectX\LeakChecker\D3DResourceLeakChecker.hpp" />
@@ -175,12 +177,17 @@
     <ClInclude Include="src\Model\Node\Node.hpp" />
     <ClInclude Include="src\Model\Repository\ModelRepository.hpp" />
     <ClInclude Include="src\Model\Skeleton\Skeleton.hpp" />
+    <ClInclude Include="src\ParticleSystem\Emitter\Emitter.hpp" />
+    <ClInclude Include="src\ParticleSystem\ParticleSystem.hpp" />
+    <ClInclude Include="src\ParticleSystem\Particle\Particle.hpp" />
     <ClInclude Include="src\Platform\WinApp.hpp" />
     <ClInclude Include="src\PostProcess\BoxBlur\BoxBlur.hpp" />
+    <ClInclude Include="src\PostProcess\Editor\PostProcessPresetEditor.hpp" />
     <ClInclude Include="src\PostProcess\Executor\PostProcessExecutor.hpp" />
     <ClInclude Include="src\PostProcess\Grayscale\Grayscale.hpp" />
     <ClInclude Include="src\PostProcess\IPostEffect.hpp" />
     <ClInclude Include="src\PostProcess\Vignette\Vignette.hpp" />
+    <ClInclude Include="src\Random\RandomEngine.hpp" />
     <ClInclude Include="src\Renderer\Renderer.hpp" />
     <ClInclude Include="src\ResourceRepository\ResourceRepository.hpp" />
     <ClInclude Include="src\Scene\SceneSwitcher.hpp" />
@@ -208,14 +215,14 @@
     <ClCompile Include="src\Camera\Director\CameraDirector.cpp" />
     <ClCompile Include="src\Camera\Repository\CameraRepository.cpp" />
     <ClCompile Include="src\Common\Common.cpp" />
-    <ClCompile Include="src\Config\Config.cpp" />
     <ClCompile Include="src\Container\Material.cpp" />
     <ClCompile Include="src\Debug\DebugUI.cpp" />
+    <ClCompile Include="src\DirectX\Compute\ComputePipeline.cpp" />
     <ClCompile Include="src\DirectX\DirectXAdapter.cpp" />
     <ClCompile Include="src\DirectX\FrameRate\FrameRateLimiter.cpp" />
-    <ClCompile Include="src\DirectX\GraphicsPipeline\Object\InputLayout.cpp" />
+    <ClCompile Include="src\DirectX\RootSignature\InputLayout.cpp" />
     <ClCompile Include="src\DirectX\GraphicsPipeline\Object\PipelineStateObject.cpp" />
-    <ClCompile Include="src\DirectX\GraphicsPipeline\Object\RootSignature.cpp" />
+    <ClCompile Include="src\DirectX\RootSignature\RootSignature.cpp" />
     <ClCompile Include="src\DirectX\Heap\Heap.cpp" />
     <ClCompile Include="src\DirectX\Heap\SRVManager.cpp" />
     <ClCompile Include="src\DirectX\LeakChecker\D3DResourceLeakChecker.cpp" />
@@ -243,15 +250,21 @@
     <ClCompile Include="src\Model\Loader\ObjLoader.cpp" />
     <ClCompile Include="src\Model\Model.cpp" />
     <ClCompile Include="src\Model\Repository\ModelRepository.cpp" />
+    <ClCompile Include="src\ParticleSystem\Emitter\Emitter.cpp" />
+    <ClCompile Include="src\ParticleSystem\ParticleSystem.cpp" />
+    <ClCompile Include="src\ParticleSystem\Particle\Particle.cpp" />
     <ClCompile Include="src\Platform\WinApp.cpp" />
     <ClCompile Include="src\PostProcess\BoxBlur\BoxBlur.cpp" />
+    <ClCompile Include="src\PostProcess\Editor\PostProcessPresetEditor.cpp" />
     <ClCompile Include="src\PostProcess\Executor\PostProcessExecutor.cpp" />
     <ClCompile Include="src\PostProcess\Grayscale\Grayscale.cpp" />
     <ClCompile Include="src\PostProcess\IPostEffect.cpp" />
     <ClCompile Include="src\PostProcess\Vignette\Vignette.cpp" />
+    <ClCompile Include="src\Random\RandomEngine.cpp" />
     <ClCompile Include="src\Renderer\Renderer.cpp" />
     <ClCompile Include="src\ResourceRepository\ResourceRepository.cpp" />
     <ClCompile Include="src\Scene\IScene.cpp" />
+    <ClCompile Include="src\Scene\SceneFactory.cpp" />
     <ClCompile Include="src\Scene\SceneSwitcher.cpp" />
     <ClCompile Include="src\Scene\Transition\Transition.cpp" />
     <ClCompile Include="src\Scene\Transition\Fade.cpp" />

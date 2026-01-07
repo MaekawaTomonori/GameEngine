@@ -11,15 +11,15 @@ TextureManager::~TextureManager() {
     Unload();
 }
 
-DirectX::ScratchImage TextureManager::LoadTexture(const std::string& filename) const {
+DirectX::ScratchImage TextureManager::LoadTexture(const std::string& _filename) const {
     DirectX::ScratchImage image {};
-    std::string fullPath = folderPath_ + filename;
+    std::string fullPath = folderPath_ + _filename;
     std::wstring filePathW = Utils::Convert(fullPath);
 
     if (filePathW.ends_with(L".dds"))return LoadDDS(filePathW);
 
     [[maybe_unused]]HRESULT hr = LoadFromWICFile(filePathW.c_str(), DirectX::WIC_FLAGS_FORCE_SRGB, nullptr, image);
-    
+
     if (FAILED(hr)) {
         Log::Send(Log::Level::ERR, std::format("Failed to load texture file: {}", fullPath));
         Utils::Alert(std::format("Failed to load texture file: {}", fullPath));
@@ -38,9 +38,9 @@ DirectX::ScratchImage TextureManager::LoadTexture(const std::string& filename) c
     return mipImages;
 }
 
-void TextureManager::UploadTextureData(DX12Resource* _texture, const DirectX::ScratchImage& mipImages) const {
+void TextureManager::UploadTextureData(DX12Resource* _texture, const DirectX::ScratchImage& _mipImages) const {
     std::vector<D3D12_SUBRESOURCE_DATA> subResources;
-    PrepareUpload(adapter_->GetDevice(), mipImages.GetImages(), mipImages.GetImageCount(), mipImages.GetMetadata(), subResources);
+    PrepareUpload(adapter_->GetDevice(), _mipImages.GetImages(), _mipImages.GetImageCount(), _mipImages.GetMetadata(), subResources);
     uint32_t intermediateSize = static_cast<uint32_t>(GetRequiredIntermediateSize(_texture->Get(), 0, static_cast<UINT>(subResources.size())));
     std::unique_ptr<DX12Resource> intermediateResource = adapter_->CreateBufferResource(intermediateSize);
 
@@ -130,19 +130,19 @@ void TextureManager::Initialize(DirectXAdapter* _adapter, SRVManager* _srv) {
     Log::Send(Log::Level::INFO, "TextureManager Initialized");
 }
 
-void TextureManager::Load(const std::string& fileName) {
+bool TextureManager::Load(const std::string& _fileName) {
     std::lock_guard<std::mutex> lock(mutex_);
 
     //Remove FolderPath
-    std::string name = fileName;
+    std::string name = _fileName;
     size_t pos = 0;
     while((pos = name.find(folderPath_, pos)) != std::string::npos){
         name.erase(pos, folderPath_.length());
     }
-    
+
     //Check if texture is already loaded
     if (textures_.contains(name)){
-        return;
+        return true;
     }
 
     assert(!srv_->IsFull());
@@ -154,16 +154,26 @@ void TextureManager::Load(const std::string& fileName) {
     /// 4. Upload IntermediateResource to CPU
     /// 5. Stack Command (3 -> 2) to CommandList
     /// 6. Execute Using CommandQueue
-    /// 7. Wait 
+    /// 7. Wait
 
 
     //Load Texture
-    Texture& texture = textures_[name];
-
     DirectX::ScratchImage img = LoadTexture(name);
 
+    if (!img.GetImages() || img.GetImageCount() == 0) {
+        Log::Send(Log::Level::ERR, std::format("TextureManager::Load: Failed to load texture: {}", name));
+        return false;
+    }
+
+    Texture texture;
     texture.metadata = img.GetMetadata();
     texture.resource = adapter_->CreateTextureResource(img.GetMetadata());
+
+    if (!texture.resource) {
+        Log::Send(Log::Level::ERR, std::format("TextureManager::Load: Failed to create texture resource: {}", name));
+        return false;
+    }
+
     UploadTextureData(texture.resource.get(), img);
 
     texture.srvIndex = srv_->Allocate();
@@ -176,7 +186,10 @@ void TextureManager::Load(const std::string& fileName) {
         srv_->CreateSRVforTexture2D(texture.srvIndex, texture.resource->Get(), texture.metadata.format, static_cast<UINT>(texture.metadata.mipLevels));
     }
 
+    textures_[name] = std::move(texture);
+
     Log::Send(Log::Level::INFO, std::format("TextureManager::Load: {}", name));
+    return true;
 }
 
 void TextureManager::Unload() {
@@ -188,45 +201,45 @@ void TextureManager::Unload() {
     textures_.clear();
 }
 
-const DirectX::TexMetadata& TextureManager::GetTextureMetadata(const std::string& fileName) {
+const DirectX::TexMetadata& TextureManager::GetTextureMetadata(const std::string& _fileName) {
     std::lock_guard<std::mutex> lock(mutex_);
 
-    if (textures_.contains(fileName)){
-        return textures_.at(fileName).metadata;
+    if (textures_.contains(_fileName)){
+        return textures_.at(_fileName).metadata;
     }
 
-    Load(fileName);
-    Log::Send(Log::Level::ERR, std::format("TextureManager::GetTextureMetadata: {} not found", fileName));
-    Utils::Alert(std::format("TextureManager::GetTextureMetadata: {} not found", fileName));
-    return textures_.at(fileName).metadata;
+    Load(_fileName);
+    Log::Send(Log::Level::ERR, std::format("TextureManager::GetTextureMetadata: {} not found", _fileName));
+    Utils::Alert(std::format("TextureManager::GetTextureMetadata: {} not found", _fileName));
+    return textures_.at(_fileName).metadata;
 }
 
-uint32_t TextureManager::GetSrvIndex(const std::string& fileName) {
+uint32_t TextureManager::GetSrvIndex(const std::string& _fileName) {
     std::lock_guard<std::mutex> lock(mutex_);
 
-    if (textures_.contains(fileName)){
-        return textures_.at(fileName).srvIndex;
+    if (textures_.contains(_fileName)){
+        return textures_.at(_fileName).srvIndex;
     }
 
-    Log::Send(Log::Level::ERR, std::format("TextureManager::GetSrvIndex: {} not found", fileName));
+    Log::Send(Log::Level::ERR, std::format("TextureManager::GetSrvIndex: {} not found", _fileName));
     assert(0);
     return 0;
 }
 
-uint32_t TextureManager::GetTextureIndexByFilePath(const std::string& path) const {
-    if (textures_.contains(path)){
-        return textures_.at(path).srvIndex;
+uint32_t TextureManager::GetTextureIndexByFilePath(const std::string& _path) const {
+    if (textures_.contains(_path)){
+        return textures_.at(_path).srvIndex;
     }
 
-    Log::Send(Log::Level::ERR, std::format("TextureManager::GetTextureIndexByFilePath: {} not found", path));
+    Log::Send(Log::Level::ERR, std::format("TextureManager::GetTextureIndexByFilePath: {} not found", _path));
     assert(0);
     return 0;
 }
 
-D3D12_GPU_DESCRIPTOR_HANDLE TextureManager::GetGPUHandle(const std::string& fileName) {
+D3D12_GPU_DESCRIPTOR_HANDLE TextureManager::GetGPUHandle(const std::string& _fileName) {
     std::lock_guard<std::mutex> lock(mutex_);
 
-    std::string name = fileName;
+    std::string name = _fileName;
     size_t pos = 0;
     while ((pos = name.find(folderPath_, pos)) != std::string::npos){
         name.erase(pos, folderPath_.length());
@@ -241,8 +254,8 @@ D3D12_GPU_DESCRIPTOR_HANDLE TextureManager::GetGPUHandle(const std::string& file
     return {};
 }
 
-D3D12_GPU_DESCRIPTOR_HANDLE TextureManager::GetGPUHandle(const uint32_t index) const {
+D3D12_GPU_DESCRIPTOR_HANDLE TextureManager::GetGPUHandle(const uint32_t _index) const {
     assert(index <= textures_.size());
-    Log::Send(Log::Level::INFO, std::format("TextureManager::GetGPUHandle: index {}", index));
-    return srv_->GetGPUHandle(index);
+    Log::Send(Log::Level::INFO, std::format("TextureManager::GetGPUHandle: index {}", _index));
+    return srv_->GetGPUHandle(_index);
 }

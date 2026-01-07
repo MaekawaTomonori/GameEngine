@@ -3,10 +3,10 @@
 #include <d3d12.h>
 #include <wrl/client.h>
 
-#include "BlendMode.hpp"
-#include "InputLayout.hpp"
-#include "RootSignature.hpp"
 #include "src/DirectX/DirectXAdapter.hpp"
+#include "src/DirectX/RootSignature/BlendMode.hpp"
+#include "src/DirectX/RootSignature/InputLayout.hpp"
+#include "src/DirectX/RootSignature/RootSignature.hpp"
 #include "src/DirectX/Shader/Shader.h"
 
 class PipelineStateObject {

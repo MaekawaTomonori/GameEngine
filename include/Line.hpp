@@ -16,28 +16,24 @@ class LineCommon;
 class DirectXAdapter;
 class CameraController;
 
-/// <summary>
-/// 3Dラインレンダリングクラス
-/// デバッグ用の3D線分描画を提供
-/// </summary>
+/** @brief 3Dラインレンダリングクラス
+ ** デバッグ用の3D線分描画を提供
+ **/
 class Line {
-    /// <summary>
-    /// ラインの頂点データ
-    /// </summary>
+    /** @brief ラインの頂点データ
+     **/
     struct VertexData {
         Vector4 position;
     };
 
-    /// <summary>
-    /// ラインのマテリアルデータ
-    /// </summary>
+    /** @brief ラインのマテリアルデータ
+     **/
     struct Material {
         Vector4 color;
     };
 
-    /// <summary>
-    /// ラインの変換行列データ
-    /// </summary>
+    /** @brief ラインの変換行列データ
+     **/
     struct Transformation {
         Matrix4x4 WVP;
     };
@@ -65,57 +61,56 @@ class Line {
 
     std::vector<Vector4> positions_;
 
+    std::string name_;
+    uint32_t id_ = 0;
+
 public:
     Line();
     ~Line();
 
-    /// <summary>
-    /// ラインを初期化
-    /// </summary>
+    /** @brief ラインを初期化
+     **/
     void Initialize();
 
-    /// <summary>
-    /// ラインの更新処理
-    /// </summary>
-    void Update() const;
+    /** @brief ラインの更新処理
+     **/
+    void Update();
 
-    /// <summary>
-    /// ラインを描画
-    /// </summary>
+    /** @brief ラインを描画
+     **/
     void Draw() const;
 
-    /// <summary>
-    /// 線を追加
-    /// </summary>
-    /// <param name="start">始点座標</param>
-    /// <param name="end">終点座標</param>
-    void AddLine(const Vector3& start, const Vector3& end);
+    /** @brief 線を追加
+     ** @param _start 始点座標
+     ** @param _end 終点座標
+     **/
+    void AddLine(const Vector3& _start, const Vector3& _end);
 
-    /// <summary>
-    /// すべての線をクリア
-    /// </summary>
+    /** @brief すべての線をクリア
+     **/
     void Clear();
 
-    /// <summary>
-    /// 色を設定
-    /// </summary>
-    /// <param name="color">色ベクトル</param>
-    void SetColor(Vector4 color) const;
+    /** @brief 色を設定
+     ** @param _color 色ベクトル
+     **/
+    void SetColor(Vector4 _color) const;
+
+    /** @brief 名前を設定
+     ** @param _name 名前
+     **/
+    void SetName(const std::string& _name);
 
 private:
-    /// <summary>
-    /// 頂点バッファの生成
-    /// </summary>
+    /** @brief 頂点バッファの生成
+     **/
     void CreateVertexBuffer();
 
-    /// <summary>
-    /// マテリアルバッファの生成
-    /// </summary>
+    /** @brief マテリアルバッファの生成
+     **/
     void CreateMaterialBuffer();
 
-    /// <summary>
-    /// 変換バッファの生成
-    /// </summary>
+    /** @brief 変換バッファの生成
+     **/
     void CreateTransformationBuffer();
 };
 

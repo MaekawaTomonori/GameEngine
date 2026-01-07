@@ -19,6 +19,12 @@ public:
 
 protected:
     void Modifier() override;
+
+    public:
+    void LoadPreset(const std::string& _presetName) override;
+    void SavePreset(const std::string& _presetName) override;
+    nlohmann::json SaveParameters() const override;
+    void UpdateAnimation(float _t) override;
 }; // class Grayscale
 
 #endif // Grayscale_HPP_

@@ -43,9 +43,9 @@ HINSTANCE WinApp::GetInstanceHandle() const {
     return hInstance_;
 }
 
-void WinApp::SetWindowSize(const int width, const int height) const {
+void WinApp::SetWindowSize(const int _width, const int _height) const {
     if (window_){
-        window_->SetSize(width, height);
+        window_->SetSize(_width, _height);
     }
 }
 
@@ -53,4 +53,21 @@ void WinApp::SetTitle(const std::string& _title) const {
     window_->SetTitle(_title);
 }
 
+void WinApp::ToggleBorderless() const {
+    if (window_) {
+        window_->ToggleBorderless();
+    }
+}
 
+void WinApp::GetClientSize(int& _width, int& _height) const {
+    if (!hWnd_) {
+        _width = 1280;
+        _height = 720;
+        return;
+    }
+
+    RECT clientRect;
+    GetClientRect(hWnd_, &clientRect);
+    _width = clientRect.right - clientRect.left;
+    _height = clientRect.bottom - clientRect.top;
+}

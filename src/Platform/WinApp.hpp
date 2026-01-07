@@ -18,9 +18,13 @@ public:
 
     HINSTANCE GetInstanceHandle() const;
 
-    void SetWindowSize(int width, int height) const;
+    void SetWindowSize(int _width, int _height) const;
 
     void SetTitle(const std::string& _title) const;
+
+    void ToggleBorderless() const;
+
+    void GetClientSize(int& _width, int& _height) const;
 }; // class WinApp
 
 #endif // WinApp_HPP_

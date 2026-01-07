@@ -12,14 +12,35 @@ class Camera;
 class CameraDirector {
     const std::string FilePath = "Resources/Data/Camerawork/";
 
+    enum class InterpolationType {
+        Linear,
+        EaseInQuad,
+        EaseOutQuad,
+        EaseInOutQuad,
+        EaseInCubic,
+        EaseOutCubic,
+        EaseInOutCubic
+    };
+
     struct Point {
         std::string name;
         Vector3 position;
         Vector2 rotation; // x: yaw, y: pitch
+        bool useLookAt = false; // LookAt機能を使用するか
+        Vector3 lookAtTarget = Vector3(0.0f, 0.0f, 0.0f); // 注視点座標
     };
+
+    struct Segment {
+        std::string startPoint;
+        std::string endPoint;
+        InterpolationType positionInterpolationType = InterpolationType::Linear;
+        InterpolationType rotationInterpolationType = InterpolationType::Linear;
+    };
+
     struct Work {
         std::vector<Point> points;
-        std::vector<std::string> order; // Point name sequence for camerawork progression
+        std::vector<std::string> order; // Point name sequence for camerawork progression (legacy)
+        std::vector<Segment> segments; // New segment-based approach with interpolation types
         float duration;
     };
 
@@ -65,7 +86,13 @@ private:
     void LoadWorkList();
     void LoadWork(const std::string& _key);
     void OnComplete();
-    Point InterpolatePoint(const Point& start, const Point& end, float t);
+    Point InterpolatePoint(const Point& _start, const Point& _end, float _t);
+    Point InterpolatePointWithType(const Point& _start, const Point& _end, float _t, InterpolationType _type);
+    Point InterpolatePointWithSeparateTypes(const Point& _start, const Point& _end, float _t, InterpolationType _posType, InterpolationType _rotType);
+    void MigrateOrderToSegments(Work& _work);
+    InterpolationType StringToInterpolationType(const std::string& _typeStr);
+    std::string InterpolationTypeToString(InterpolationType _type);
+    Vector2 CalculateLookAtRotation(const Vector3& _position, const Vector3& _target);
 
     // Editor functions
     void ShowEditor();

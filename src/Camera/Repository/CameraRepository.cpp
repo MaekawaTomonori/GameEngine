@@ -4,35 +4,35 @@
 #include "Utils.hpp"
 #include "src/Json/Json.hpp"
 
-void CameraRepository::Initialize(float ratio) {
-    ratio_ = ratio;
+void CameraRepository::Initialize(float _ratio) {
+    ratio_ = _ratio;
 }
 
-Camera* CameraRepository::Add(const std::string& name) {
-    std::string actualName = name.empty() ? GenerateUniqueName() : name;
-    
+Camera* CameraRepository::Add(const std::string& _name) {
+    std::string actualName = _name.empty() ? GenerateUniqueName() : _name;
+
     if (cameras_.contains(actualName)) {
         return cameras_[actualName].get();
     }
-    
+
     cameras_[actualName] = std::make_unique<Camera>();
     cameras_[actualName]->Initialize(ratio_);
     return cameras_[actualName].get();
 }
 
-Camera* CameraRepository::Get(const std::string& name) {
-    if (!cameras_.contains(name)) {
+Camera* CameraRepository::Get(const std::string& _name) {
+    if (!cameras_.contains(_name)) {
         return nullptr;
     }
-    return cameras_[name].get();
+    return cameras_[_name].get();
 }
 
-void CameraRepository::Remove(const std::string& name) {
-    cameras_.erase(name);
+void CameraRepository::Remove(const std::string& _name) {
+    cameras_.erase(_name);
 }
 
-bool CameraRepository::Contains(const std::string& name) const {
-    return cameras_.contains(name);
+bool CameraRepository::Contains(const std::string& _name) const {
+    return cameras_.contains(_name);
 }
 
 bool CameraRepository::IsEmpty() const {
@@ -57,7 +57,7 @@ std::string CameraRepository::GetFirstName() const {
 
 void CameraRepository::LoadFromFile() {
     Clear();
-    
+
     Json* json = Singleton<Json>::GetInstance();
     if (!json->Load("Camera")) return;
 

@@ -1,16 +1,16 @@
 #include "SpriteCommon.hpp"
 
-#include "src/DirectX/GraphicsPipeline/Object/BlendMode.hpp"
-#include "src/DirectX/GraphicsPipeline/Object/InputLayout.hpp"
-#include "src/DirectX/GraphicsPipeline/Object/RootSignature.hpp"
+#include "src/DirectX/RootSignature/BlendMode.hpp"
+#include "src/DirectX/RootSignature/InputLayout.hpp"
+#include "src/DirectX/RootSignature/RootSignature.hpp"
 #include "src/DirectX/Shader/Shader.h"
 
 void SpriteCommon::Initialize(DirectXAdapter* _adapter, DebugUI* _debugUi) {
     Setup(_adapter, _debugUi);
-    
+
     // PipelineStateObjectの初期化
     pipeline_ = std::make_unique<PipelineStateObject>(_adapter);
-    
+
     D3D12_DESCRIPTOR_RANGE textureRange{
         .RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV,
         .NumDescriptors = 1,
@@ -18,7 +18,7 @@ void SpriteCommon::Initialize(DirectXAdapter* _adapter, DebugUI* _debugUi) {
         .RegisterSpace = 0,
         .OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND
     };
-    
+
     // PipelineStateObject作成 (Sprite用)
     pipeline_->SetRootSignature(
         RootSignature()
@@ -57,7 +57,7 @@ void SpriteCommon::Initialize(DirectXAdapter* _adapter, DebugUI* _debugUi) {
             .MaxLOD = D3D12_FLOAT32_MAX,
             .ShaderRegister = 0,
             .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL
-        })    
+        })
     )
     .SetInputLayout(InputLayout{}
         .SetElement({"POSITION", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, D3D12_APPEND_ALIGNED_ELEMENT, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0})
@@ -68,4 +68,3 @@ void SpriteCommon::Initialize(DirectXAdapter* _adapter, DebugUI* _debugUi) {
     .SetTopologyType(D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE)
     .Create();
 }
-

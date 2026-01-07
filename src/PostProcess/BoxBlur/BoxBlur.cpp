@@ -10,7 +10,7 @@ void BoxBlur::Initialize() {
         .RegisterSpace = 0,
         .OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND
     };
-    
+
     //Create PSO
     pso_ = std::make_unique<PipelineStateObject>(adapter_);
     pso_->SetRootSignature(
@@ -62,3 +62,8 @@ void BoxBlur::Debug() {
 void BoxBlur::Modifier() {
     adapter_->GetCommandList()->SetGraphicsRootConstantBufferView(1, mr_->Get()->GetGPUVirtualAddress());
 }
+
+void BoxBlur::LoadPreset(const std::string& _presetName) { (void)_presetName;}
+void BoxBlur::SavePreset(const std::string& _presetName) { (void)_presetName;}
+nlohmann::json BoxBlur::SaveParameters() const { return nlohmann::json(); }
+void BoxBlur::UpdateAnimation(const float _t) { (void)_t;}

@@ -18,14 +18,12 @@
 
 class DebugUI;
 
-/// <summary>
-/// DirectX12アダプタークラス
-/// DirectX12の初期化とデバイス管理を提供
-/// </summary>
+/** @brief DirectX12アダプタークラス
+ ** DirectX12の初期化とデバイス管理を提供
+ **/
 class DirectXAdapter {
-    /// <summary>
-    /// first = width, second = height
-    /// </summary>
+    /** @brief first = width, second = height
+     **/
     using WindowSize = std::pair<size_t, size_t>;
     WindowSize windowSize_ = {1280, 720};
     HWND hWnd_ = nullptr;
@@ -64,7 +62,7 @@ class DirectXAdapter {
     D3D12_CPU_DESCRIPTOR_HANDLE dsvHandle_;
 
     //Background color
-    Vector4 back = {0.2f, 0.2f, 0.2f, 1.0f}; // Black
+    Vector4 back_ = {0.2f, 0.2f, 0.2f, 1.0f}; // Black
 
     //Viewport
     D3D12_VIEWPORT viewport_ = {};
@@ -86,59 +84,58 @@ public:
     DirectXAdapter(HWND _hWnd, size_t _width, size_t _height);
     ~DirectXAdapter();
 
-    /// <summary>
-    /// バッファリソースを作成
-    /// </summary>
-    /// <param name="_size">バッファサイズ</param>
-    /// <returns>作成されたリソース</returns>
+    /** @brief バッファリソースを作成
+     ** @param _size バッファサイズ
+     ** @return 作成されたリソース
+     **/
     std::unique_ptr<DX12Resource> CreateBufferResource(size_t _size) const;
 
-    /// <summary>
-    /// テクスチャリソースを作成
-    /// </summary>
-    /// <param name="metadata">テクスチャメタデータ</param>
-    /// <returns>作成されたリソース</returns>
-    std::unique_ptr<DX12Resource> CreateTextureResource(const DirectX::TexMetadata& metadata) const;
+    /** @brief テクスチャリソースを作成
+     ** @param _metadata テクスチャメタデータ
+     ** @return 作成されたリソース
+     **/
+    std::unique_ptr<DX12Resource> CreateTextureResource(const DirectX::TexMetadata& _metadata) const;
 
-    /// <summary>
-    /// 深度ステンシルリソースを作成
-    /// </summary>
-    /// <param name="_width">幅</param>
-    /// <param name="_height">高さ</param>
-    /// <returns>作成されたリソース</returns>
+    /** @brief 深度ステンシルリソースを作成
+     ** @param _width 幅
+     ** @param _height 高さ
+     ** @return 作成されたリソース
+     **/
     std::unique_ptr<DX12Resource> CreateDepthStencilResource(int32_t _width, int32_t _height) const;
 
-    /// <summary>
-    /// レンダーテクスチャリソースを作成
-    /// </summary>
-    /// <param name="_width">幅</param>
-    /// <param name="_height">高さ</param>
-    /// <param name="_format">フォーマット</param>
-    /// <param name="_cc">クリアカラー</param>
-    /// <returns>作成されたリソース</returns>
-    std::unique_ptr<DX12Resource> CreateRenderTextureResource(uint32_t _width, uint32_t _height, DXGI_FORMAT _format,
-        const Vector4& _cc) const;
+    /** @brief レンダーテクスチャリソースを作成
+     ** @param _width 幅
+     ** @param _height 高さ
+     ** @param _format フォーマット
+     ** @param _cc クリアカラー
+     ** @return 作成されたリソース
+     **/
+    std::unique_ptr<DX12Resource> CreateRenderTextureResource(uint32_t _width, uint32_t _height, DXGI_FORMAT _format, const Vector4& _cc) const;
 
-    /// <summary>
-    /// プリプロセス処理
-    /// </summary>
+    std::unique_ptr<DX12Resource> CreateUnorderedAccessView() const;
+
+    /** @brief プリプロセス処理
+     **/
     void PreProcess() const;
 
-    /// <summary>
-    /// フレームの開始処理
-    /// </summary>
+    /** @brief フレームの開始処理
+     **/
     void BeginFrame();
 
-    /// <summary>
-    /// フレームの終了処理
-    /// </summary>
+    /** @brief フレームの終了処理
+     **/
     void EndFrame();
 
-    /// <summary>
-    /// FPSを表示
-    /// </summary>
-    /// <param name="_debug">デバッグUI</param>
+    /** @brief FPSを表示
+     ** @param _debug デバッグUI
+     **/
     void DisplayFPS(DebugUI* _debug) const;
+
+    /** @brief ウィンドウサイズを更新（ビューポートとシザー矩形も更新）
+     ** @param _width 新しい幅
+     ** @param _height 新しい高さ
+     **/
+    void UpdateWindowSize(size_t _width, size_t _height);
 
 private:
     void EnableDebugLayer();
@@ -156,77 +153,81 @@ private:
     void Present();
     void Wait();
 
+    /** @brief GPU同期を実行（RAII化のためのヘルパー）
+     **/
+    void SyncGPU();
+
+    /** @brief SwapChainリソースを安全に解放（RAII化のためのヘルパー）
+     **/
+    void ReleaseSwapChainResources();
+
+    /** @brief RTV記述子を作成（Single Responsibility）
+     **/
+    void CreateRTVDescriptors();
+
+    /** @brief DSV記述子を作成（Single Responsibility）
+     **/
+    void CreateDSVDescriptor();
+
 public: //Accessor
-    /// <summary>
-    /// ウィンドウハンドルを取得
-    /// </summary>
-    /// <returns>ウィンドウハンドル</returns>
+    /** @brief ウィンドウハンドルを取得
+     ** @return ウィンドウハンドル
+     **/
     [[nodiscard]] HWND GetWindowHandle() const;
 
-    /// <summary>
-    /// DirectX12デバイスを取得
-    /// </summary>
-    /// <returns>デバイスポインタ</returns>
+    /** @brief DirectX12デバイスを取得
+     ** @return デバイスポインタ
+     **/
     [[nodiscard]] ID3D12Device* GetDevice() const;
 
-    /// <summary>
-    /// コマンドリストを取得
-    /// </summary>
-    /// <returns>コマンドリストポインタ</returns>
+    /** @brief コマンドリストを取得
+     ** @return コマンドリストポインタ
+     **/
     [[nodiscard]] ID3D12GraphicsCommandList* GetCommandList() const;
 
-    /// <summary>
-    /// ウィンドウ幅を取得
-    /// </summary>
-    /// <returns>幅</returns>
+    /** @brief ウィンドウ幅を取得
+     ** @return 幅
+     **/
     size_t GetWidth() const;
 
-    /// <summary>
-    /// ウィンドウ高さを取得
-    /// </summary>
-    /// <returns>高さ</returns>
+    /** @brief ウィンドウ高さを取得
+     ** @return 高さ
+     **/
     size_t GetHeight() const;
 
-    /// <summary>
-    /// コマンドキューを取得
-    /// </summary>
-    /// <returns>コマンドキューポインタ</returns>
+    /** @brief コマンドキューを取得
+     ** @return コマンドキューポインタ
+     **/
     ID3D12CommandQueue* GetCommandQueue() const;
 
-    /// <summary>
-    /// コマンドアロケーターを取得
-    /// </summary>
-    /// <returns>コマンドアロケーターポインタ</returns>
+    /** @brief コマンドアロケーターを取得
+     ** @return コマンドアロケーターポインタ
+     **/
     ID3D12CommandAllocator* GetCommandAllocator() const;
 
-    /// <summary>
-    /// スワップチェーンを取得
-    /// </summary>
-    /// <returns>スワップチェーンポインタ</returns>
+    /** @brief スワップチェーンを取得
+     ** @return スワップチェーンポインタ
+     **/
     IDXGISwapChain4* GetSwapChain() const;
 
-    /// <summary>
-    /// フェンスを取得
-    /// </summary>
-    /// <returns>フェンスポインタ</returns>
+    /** @brief フェンスを取得
+     ** @return フェンスポインタ
+     **/
     ID3D12Fence* GetFence() const;
 
-    /// <summary>
-    /// DSVハンドルを取得
-    /// </summary>
-    /// <returns>DSVハンドル</returns>
+    /** @brief DSVハンドルを取得
+     ** @return DSVハンドル
+     **/
     D3D12_CPU_DESCRIPTOR_HANDLE GetDSVHandle() const;
 
-    /// <summary>
-    /// 次のフェンス値を取得
-    /// </summary>
-    /// <returns>フェンス値</returns>
+    /** @brief 次のフェンス値を取得
+     ** @return フェンス値
+     **/
     uint64_t GetNextFenceValue();
 
-    /// <summary>
-    /// フェンス値まで待機
-    /// </summary>
-    /// <param name="_fenceValue">待機するフェンス値</param>
+    /** @brief フェンス値まで待機
+     ** @param _fenceValue 待機するフェンス値
+     **/
     void WaitForFenceValue(uint64_t _fenceValue) const;
 }; // class DirectXAdapter
 

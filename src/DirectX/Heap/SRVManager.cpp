@@ -45,26 +45,26 @@ void SRVManager::PreDraw() const {
     adapter_->GetCommandList()->SetDescriptorHeaps(_countof(descriptorHeaps), descriptorHeaps);
 }
 
-void SRVManager::CreateSRVforTexture2D(uint32_t srvIndex, ID3D12Resource* pResource, DXGI_FORMAT format, UINT mipMap) {
+void SRVManager::CreateSRVforTexture2D(uint32_t _srvIndex, ID3D12Resource* _pResource, DXGI_FORMAT _format, UINT _mipMap) {
     D3D12_SHADER_RESOURCE_VIEW_DESC desc {};
-    desc.Format = format;
+    desc.Format = _format;
     desc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
     desc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
-    desc.Texture2D.MipLevels = mipMap;
+    desc.Texture2D.MipLevels = _mipMap;
 
-    adapter_->GetDevice()->CreateShaderResourceView(pResource, &desc, heap_->GetCPUHandle(srvIndex));
+    adapter_->GetDevice()->CreateShaderResourceView(_pResource, &desc, heap_->GetCPUHandle(_srvIndex));
 }
 
-void SRVManager::CreateSRVforStructuredBuffer(uint32_t srvIndex, ID3D12Resource* pResource, UINT numElements, UINT stride) {
+void SRVManager::CreateSRVforStructuredBuffer(uint32_t _srvIndex, ID3D12Resource* _pResource, UINT _numElements, UINT _stride) {
     D3D12_SHADER_RESOURCE_VIEW_DESC desc {};
     desc.Format = DXGI_FORMAT_UNKNOWN;
     desc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
     desc.ViewDimension = D3D12_SRV_DIMENSION_BUFFER;
     desc.Buffer.FirstElement = 0;
     desc.Buffer.Flags = D3D12_BUFFER_SRV_FLAG_NONE;
-    desc.Buffer.NumElements = numElements;
-    desc.Buffer.StructureByteStride = stride;
-    adapter_->GetDevice()->CreateShaderResourceView(pResource, &desc, heap_->GetCPUHandle(srvIndex));
+    desc.Buffer.NumElements = _numElements;
+    desc.Buffer.StructureByteStride = _stride;
+    adapter_->GetDevice()->CreateShaderResourceView(_pResource, &desc, heap_->GetCPUHandle(_srvIndex));
 }
 
 void SRVManager::CreateSRVforCubemap(uint32_t _srvIndex, ID3D12Resource* _pResource, DXGI_FORMAT _format) {
@@ -79,20 +79,20 @@ void SRVManager::CreateSRVforCubemap(uint32_t _srvIndex, ID3D12Resource* _pResou
     adapter_->GetDevice()->CreateShaderResourceView(_pResource, &desc, heap_->GetCPUHandle(_srvIndex));
 }
 
-void SRVManager::SetGraphicsRootDescriptorTable(UINT rootParameterIndex, uint32_t srvIndex) const {
-    adapter_->GetCommandList()->SetGraphicsRootDescriptorTable(rootParameterIndex, heap_->GetGPUHandle(srvIndex));
+void SRVManager::SetGraphicsRootDescriptorTable(UINT _rootParameterIndex, uint32_t _srvIndex) const {
+    adapter_->GetCommandList()->SetGraphicsRootDescriptorTable(_rootParameterIndex, heap_->GetGPUHandle(_srvIndex));
 }
 
 ID3D12DescriptorHeap* SRVManager::GetDescriptorHeap() const {
 	return heap_->Get();
 }
 
-D3D12_CPU_DESCRIPTOR_HANDLE SRVManager::GetCPUHandle(uint32_t index) const {
-    assert(index <= useIndex_);
-    return heap_->GetCPUHandle(index);
+D3D12_CPU_DESCRIPTOR_HANDLE SRVManager::GetCPUHandle(uint32_t _index) const {
+    assert(_index <= useIndex_);
+    return heap_->GetCPUHandle(_index);
 }
 
-D3D12_GPU_DESCRIPTOR_HANDLE SRVManager::GetGPUHandle(uint32_t index) const {
-    assert(index <= useIndex_);
-    return heap_->GetGPUHandle(index);
+D3D12_GPU_DESCRIPTOR_HANDLE SRVManager::GetGPUHandle(uint32_t _index) const {
+    assert(_index <= useIndex_);
+    return heap_->GetGPUHandle(_index);
 }

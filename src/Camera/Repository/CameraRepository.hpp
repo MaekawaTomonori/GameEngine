@@ -13,21 +13,21 @@ class CameraRepository {
     float ratio_ = 0.0f;
 
 public:
-    void Initialize(float ratio);
-    
-    Camera* Add(const std::string& name = "");
-    Camera* Get(const std::string& name);
-    void Remove(const std::string& name);
-    bool Contains(const std::string& name) const;
+    void Initialize(float _ratio);
+
+    Camera* Add(const std::string& _name = "");
+    Camera* Get(const std::string& _name);
+    void Remove(const std::string& _name);
+    bool Contains(const std::string& _name) const;
     bool IsEmpty() const;
-    
+
     std::vector<std::string> GetNames() const;
     std::string GetFirstName() const;
-    
+
     void LoadFromFile();
     void SaveToFile();
     void Clear();
-    
+
 private:
     std::string GenerateUniqueName();
 }; // class CameraRepository

@@ -1,4 +1,6 @@
-#pragma once
+#ifndef LIGHTMANAGER_HPP_
+#define LIGHTMANAGER_HPP_
+
 #include <d3d12.h>
 #include <memory>
 #include <vector>
@@ -13,14 +15,12 @@
 #include "PointLight/PointLight.h"
 #include "SpotLight/SpotLight.h"
 
-/// <summary>
-/// ライト管理クラス
-/// 指向性ライト、点光源、スポットライトを統合管理
-/// </summary>
+/** @brief ライト管理クラス
+ ** 指向性ライト、点光源、スポットライトを統合管理
+ **/
 class LightManager final{
-	/// <summary>
-	/// ライト数カウント
-	/// </summary>
+	/** @brief ライト数カウント
+	 **/
 	struct LightCount{
         uint32_t dlCount;
         uint32_t plCount;
@@ -50,37 +50,45 @@ class LightManager final{
 
     std::string path = "Light";
 
+    std::optional<Vector3> ref_;
+
 public:
     ~LightManager();
 
-    /// <summary>
-    /// ライトマネージャーを初期化
-    /// </summary>
-    /// <param name="_adapter">DirectXアダプター</param>
-    /// <param name="_debug">デバッグUI</param>
+    /** @brief ライトマネージャーを初期化
+     ** @param _adapter DirectXアダプター
+     ** @param _debug デバッグUI
+     **/
 	void Initialize(DirectXAdapter* _adapter, DebugUI* _debug);
 
-    /// <summary>
-    /// ライトの更新処理
-    /// </summary>
+
+    /** @brief ライトの更新処理
+     **/
     void Update();
 
-    /// <summary>
-    /// ライトを描画
-    /// </summary>
+    /** @brief ライトを描画
+     **/
     void Draw() const;
 
-    /// <summary>
-    /// ライトを追加
-    /// </summary>
-    /// <param name="type">ライトタイプ</param>
-    void Add(LightType type);
+    /** @brief ライトを追加
+     ** @param _type ライトタイプ
+     **/
+    void Add(LightType _type);
+
+    /** @brief ライトの参照座標を設定
+     ** @param _pos 参照座標
+     **/
+    void SetPosition(Vector3 _pos);
+
+    void ClearRef();
 
 private:
     void Debug();
     void CheckState();
+    void UpdateLights() const;
 
     void Load();
     void Save() const;
 };
 
+#endif // LIGHTMANAGER_HPP_

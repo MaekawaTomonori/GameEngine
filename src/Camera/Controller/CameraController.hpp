@@ -13,17 +13,17 @@ class CameraController {
     Camera* activeCamera_ = nullptr;
 
 public:
-    void Initialize(float ratio, DebugUI* debug);
+    void Initialize(float _ratio, DebugUI* _debug);
     void Update();
 
     Camera* GetActive() const;
-    Camera* Add(const std::string& name = "");
-    Camera* SetActive(const std::string& name);
+    Camera* Add(const std::string& _name = "") const;
+    Camera* SetActive(const std::string& _name);
 
 private:
     void Debug();
     void Load();
-    void Save();
+    void Save() const;
 }; // class CameraController
 
 #endif // CameraController_HPP_

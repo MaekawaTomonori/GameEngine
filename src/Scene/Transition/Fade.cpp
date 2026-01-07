@@ -1,7 +1,6 @@
 #define NOMINMAX
 #include "Fade.hpp"
 #include "Sprite.hpp"
-#include "src/Config/Config.hpp"
 #include <algorithm>
 
 Fade::Fade() {
@@ -11,9 +10,8 @@ Fade::Fade() {
 void Fade::Initialize() {
     sprite_->Initialize("BlackFilter.png");
 
-    auto* config = GameEngine::Config::Default();
-    float width = static_cast<float>(config->GetWidth());
-    float height = static_cast<float>(config->GetHeight());
+    float width = static_cast<float>(1920);
+    float height = static_cast<float>(720);
 
     sprite_->SetSize({width, height});
     sprite_->SetPosition({width * 0.5f, height * 0.5f});
@@ -52,9 +50,6 @@ void Fade::Update() {
 }
 
 void Fade::Draw() {
-    if (state_ == State::None) {
-        return;
-    }
     sprite_->Draw();
 }
 
@@ -68,6 +63,8 @@ void Fade::Start(State _state, float _duration) {
     } else if (_state == State::Out) {
         alpha_ = 0.0f;
     }
+    sprite_->SetColor({ 0.0f, 0.0f, 0.0f, alpha_ });
+    sprite_->Update();
 }
 
 void Fade::Stop() {
@@ -75,12 +72,14 @@ void Fade::Stop() {
 }
 
 bool Fade::IsFinished() const {
+    bool finished = false;
     switch (state_) {
         case State::In:
         case State::Out:
-            return time_ <= 0.0f;
+            finished = time_ <= 0.0f;
+            break;
         case State::None:
-            return true;
+            finished = true;
     }
-    return true;
+    return finished;
 }

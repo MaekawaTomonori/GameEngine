@@ -7,31 +7,40 @@
 #include "src/Config/Config.hpp"
 
 class AbstractSceneFactory;
+class AbstractPostEffectFactory;
 class PostProcessExecutor;
 
-/// <summary>
-/// ゲーム実装の基底インターフェース
-/// シーン管理と設定の統合を提供
-/// </summary>
+/** @brief ゲーム実装の基底インターフェース
+ ** シーン管理と設定の統合を提供
+ **/
 class IGame {
-    std::unique_ptr<GameEngine::Config> config_;
     std::unique_ptr<SceneSwitcher> scene_;
+    std::unique_ptr<AbstractPostEffectFactory> postEffectFactory_;
 
 public:
-    IGame(std::unique_ptr<AbstractSceneFactory> _factory, const std::string &_scene = "");
-    virtual ~IGame() = default;
+    IGame();
+    virtual ~IGame();
 
-    /// <summary>
-    /// 現在の設定を取得
-    /// </summary>
-    /// <returns>設定への参照</returns>
-    GameEngine::Config& GetCurrentConfig();
+    virtual void Initialize(GameEngine::Config& _config) = 0;
 
-    /// <summary>
-    /// シーン切り替え管理を取得
-    /// </summary>
-    /// <returns>シーン切り替え管理のポインタ</returns>
+    /** @brief シーン切り替え管理を取得
+     ** @return シーン切り替え管理のポインタ
+     **/
     SceneSwitcher* GetSceneSwitcher() const;
+
+    /** @brief PostEffectFactoryを設定
+     ** @param _factory PostEffectファクトリー
+     **/
+    void SetPostEffectFactory(std::unique_ptr<AbstractPostEffectFactory> _factory);
+
+    /** @brief PostEffectFactoryを取得
+     ** @return PostEffectファクトリーのポインタ
+     **/
+    AbstractPostEffectFactory* GetPostEffectFactory() const;
+
+protected:
+    void RegisterScene(const std::string& _name, const std::function<std::unique_ptr<IScene>()>& _creator) const;
+
 }; // class IGame
 
 #endif // IGame_HPP_

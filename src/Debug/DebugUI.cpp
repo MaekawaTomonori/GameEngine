@@ -3,28 +3,35 @@
 #include <algorithm>
 #include <mutex>
 
+#include "Log.hpp"
 #include "include/Utils.hpp"
 
+#ifdef _DEBUG
 #include "imgui.h"
 #include "imgui_internal.h"
 #include "imgui_impl_dx12.h"
 #include "imgui_impl_win32.h"
 #include "imnodes.h"
+#endif
 
 DebugUI::~DebugUI() {
+#ifdef _DEBUG
     ImNodes::DestroyContext();
     ImGui_ImplDX12_Shutdown();
     ImGui_ImplWin32_Shutdown();
     ImGui::DestroyContext();
+#endif
 }
 
-void DebugUI::Initialize(const DirectXAdapter *dx) {
-    if (!dx) {
+void DebugUI::Initialize(const DirectXAdapter *_adapter) {
+    if (!_adapter) {
         Utils::Alert("DirectXAdapter is null");
         return;
     }
+    adapter_ = _adapter;
+#ifdef _DEBUG
     heap_ = std::make_unique<Heap>();
-    if (!heap_->Create(dx->GetDevice(), D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV, 128, D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE)){
+    if (!heap_->Create(_adapter->GetDevice(), D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV, 128, D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE)){
         Utils::Alert("Failed to create ImGui Heap");
         return;
     }
@@ -33,27 +40,28 @@ void DebugUI::Initialize(const DirectXAdapter *dx) {
     SetupModernStyle();
 
     ImGui_ImplDX12_Init(
-        dx->GetDevice(), 
+        _adapter->GetDevice(),
         2,
-        DXGI_FORMAT_R8G8B8A8_UNORM_SRGB, 
-        heap_->Get(), 
-        heap_->Get()->GetCPUDescriptorHandleForHeapStart(), 
+        DXGI_FORMAT_R8G8B8A8_UNORM_SRGB,
+        heap_->Get(),
+        heap_->Get()->GetCPUDescriptorHandleForHeapStart(),
         heap_->Get()->GetGPUDescriptorHandleForHeapStart()
     );
 
-    ImGui_ImplWin32_Init(dx->GetWindowHandle());
+    ImGui_ImplWin32_Init(_adapter->GetWindowHandle());
 
     ImGuiIO& io = ImGui::GetIO();
     io.ConfigFlags |= ImGuiConfigFlags_DockingEnable; // Enable Docking
-    io.FontGlobalScale = 1.f / ImGui_ImplWin32_GetDpiScaleForHwnd(dx->GetWindowHandle());
-    io.IniFilename = "Assets\\Config\\imgui.ini"; 
+    io.FontGlobalScale = 1.f / ImGui_ImplWin32_GetDpiScaleForHwnd(_adapter->GetWindowHandle());
+    io.IniFilename = "Assets\\Config\\imgui.ini";
 
-    cList_ = dx->GetCommandList();
+#endif
 }
 
 void DebugUI::Process() {
+#ifdef _DEBUG
     std::vector<Command> commands = commands_;
-    commands_.clear(); 
+    commands_.clear();
 
     ImGui_ImplDX12_NewFrame();
     ImGui_ImplWin32_NewFrame();
@@ -67,43 +75,57 @@ void DebugUI::Process() {
         ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.85f, 0.85f, 0.85f, 1.0f));
         ImGui::Text("Game Engine Debug Interface");
         ImGui::PopStyleColor();
-        
+
         ImGui::SameLine(ImGui::GetWindowWidth() - 200);
         ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.8f, 0.4f, 0.4f, 1.0f));
         ImGui::Text("FPS: %.1f", ImGui::GetIO().Framerate);
         ImGui::PopStyleColor();
-        
+
         ImGui::EndMainMenuBar();
     }
 
-    ImGui::ShowDemoWindow();
-
-    std::ranges::sort(commands, [](const Command& a, const Command& b){
-        return a.id < b.id;
+    std::ranges::sort(commands, [](const Command& _a, const Command& _b){
+        return _a.id < _b.id;
     });
-    
+
     for (const auto &[id, command] : commands) {
         command();
     }
 
     ImGui::EndFrame();
     ImGui::Render();
+#endif
 }
 
 void DebugUI::Render() {
+#ifdef _DEBUG
     Process();
 
     ID3D12DescriptorHeap* heaps[] = {heap_->Get()};
-    cList_->SetDescriptorHeaps(_countof(heaps), heaps);
-    ImGui_ImplDX12_RenderDrawData(ImGui::GetDrawData(), cList_);
+    adapter_->GetCommandList()->SetDescriptorHeaps(_countof(heaps), heaps);
+    ImGui_ImplDX12_RenderDrawData(ImGui::GetDrawData(), adapter_->GetCommandList());
+#endif
 }
 
 void DebugUI::RegisterCommand(const std::string &_id, std::function<void()> _command) {
-    std::lock_guard<std::mutex> lock(mutex_);
+    std::lock_guard lock(mutex_);
     commands_.push_back({.id= _id, .command= std::move(_command)});
 }
 
+void DebugUI::UpdateDisplaySize([[maybe_unused]]int _width, [[maybe_unused]]int _height) {
+#ifdef _DEBUG
+    if (ImGui::GetCurrentContext()) {
+        ImGuiIO& io = ImGui::GetIO();
+        io.DisplaySize = ImVec2(static_cast<float>(_width), static_cast<float>(_height));
+        io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
+        io.FontGlobalScale = 1.f / ImGui_ImplWin32_GetDpiScaleForHwnd(adapter_->GetWindowHandle());
+        Log::Send(Log::Level::INFO, "ImGui display size updated: " + std::to_string(_width) + "x" + std::to_string(_height));
+    }
+#endif
+}
+
 void DebugUI::SetupModernStyle() {
+#ifdef _DEBUG
     ImGuiStyle& style = ImGui::GetStyle();
     ImVec4* colors = style.Colors;
 
@@ -180,6 +202,5 @@ void DebugUI::SetupModernStyle() {
     style.GrabRounding      = 3;
     style.LogSliderDeadzone = 4;
     style.TabRounding       = 4;
+#endif
 }
-
-

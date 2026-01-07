@@ -1,4 +1,5 @@
 #pragma once
+#include <optional>
 #include "LightType.hpp"
 #include "Utils.hpp"
 
@@ -7,6 +8,8 @@ protected:
     std::string uuid_;
 	LightType type_;
     bool enable_ = true;
+
+    std::optional<Vector3> ref_;
 
 public:
 	RawLight();
@@ -24,6 +27,15 @@ public:
         return *this;
     }
 
+    RawLight& SetReference(const Vector3& _ref) {
+        ref_ = _ref;
+        return *this;
+    }
+
+    void ClearRef() {
+        ref_.reset();
+    }
+
     std::string GetUUID() const {
         return uuid_;
     }
@@ -33,8 +45,10 @@ public:
     //ToJson
     virtual void Save(std::string _path) = 0;
 
-protected:
     virtual void ImGuiSetting() = 0;
+
+protected:
+    virtual void FollowRef() = 0;
 };
 
 inline RawLight::RawLight() {
@@ -43,9 +57,9 @@ inline RawLight::RawLight() {
 }
 
 inline void RawLight::Update() {
-#ifdef _DEBUG
-    ImGuiSetting();
-#endif
+    if (ref_) {
+        FollowRef();
+    }
 }
 
 inline bool RawLight::IsEnable() const {

@@ -24,7 +24,7 @@ namespace AnimationCurveFunction {
         if (_ac.keyframes.empty()) Utils::Alert("AnimationCurve::Calculate: No _ac.keyframes available");
 
         if (_ac.keyframes.size() == 1 || _time <= _ac.keyframes.front().time){
-            return _ac.keyframes.front().value; // Single keyframe, no interpolation needed
+            return _ac.keyframes.front().value; // Single _keyframe, no interpolation needed
         }
         for (size_t index = 0; index < _ac.keyframes.size() - 1; ++index){
             size_t next = index + 1;
@@ -40,7 +40,7 @@ namespace AnimationCurveFunction {
     inline Quaternion Calculate(AnimationCurve<Quaternion>& _ac, float _time) {
         if (_ac.keyframes.empty()) Utils::Alert("AnimationCurve::Calculate: No _ac.keyframes available");
         if (_ac.keyframes.size() == 1 || _time <= _ac.keyframes.front().time){
-            return _ac.keyframes.front().value; // Single keyframe, no interpolation needed
+            return _ac.keyframes.front().value; // Single _keyframe, no interpolation needed
         }
         for (size_t index = 0; index < _ac.keyframes.size() - 1; ++index){
             size_t next = index + 1;

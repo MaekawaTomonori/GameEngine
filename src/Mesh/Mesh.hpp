@@ -10,22 +10,20 @@
 #include "src/DirectX/DirectXAdapter.hpp"
 #include "src/DirectX/Resource/DX12Resource.hpp"
 
-/// <summary>
-/// メッシュクラス
-/// 頂点データ、インデックス、マテリアルを管理
-/// </summary>
+/** @brief メッシュクラス
+ ** 頂点データ、インデックス、マテリアルを管理
+ **/
 class Mesh {
-    /// <summary>
-    /// メッシュのマテリアルデータ
-    /// </summary>
+    /** @brief メッシュのマテリアルデータ
+     **/
     struct Material {
         Vector4 color;           // 16 bytes (aligned)
         uint32_t lighting;       // 4 bytes
-        float shininess;         // 4 bytes  
+        float shininess;         // 4 bytes
         float coefficient;       // 4 bytes
-        float pad1;              // 4 bytes (padding to 16-byte boundary)
+        float pad1;              // 4 bytes (padding to 16-byte _boundary)
         Vector2 tilingMul;       // 8 bytes
-        Vector2 pad2;            // 8 bytes (padding to 16-byte boundary)
+        Vector2 pad2;            // 8 bytes (padding to 16-byte _boundary)
         Matrix4x4 uvTransform;   // 64 bytes (aligned)
     };
 
@@ -68,46 +66,51 @@ class Mesh {
     float aspectRatio_ = 1.0f;
 
 public:
-    /// <summary>
-    /// メッシュを初期化
-    /// </summary>
-    /// <param name="_adapter">DirectXアダプター</param>
-    /// <param name="_name">メッシュ名</param>
-    /// <param name="_raw">メッシュデータ</param>
+    /** @brief メッシュを初期化
+     ** @param _adapter DirectXアダプター
+     ** @param _name メッシュ名
+     ** @param _raw メッシュデータ
+     **/
     void Initialize(DirectXAdapter* _adapter, const std::string &_name, const MeshData& _raw);
 
-    /// <summary>
-    /// メッシュの更新処理
-    /// </summary>
+    /** @brief メッシュの更新処理
+     **/
     void Update();
 
-    /// <summary>
-    /// メッシュを描画
-    /// </summary>
-    void Draw() const;
+    /** @brief メッシュを描画
+     **/
+    void Draw(uint16_t _instanceCount = 1) const;
 
-    /// <summary>
-    /// デバッグ情報の表示
-    /// </summary>
+    /** @brief デバッグ情報の表示
+     **/
     void Debug();
 
-    /// <summary>
-    /// 頂点バッファビューを設定
-    /// </summary>
-    /// <param name="_vbv">頂点バッファビュー</param>
+    /** @brief 頂点バッファビューを設定
+     ** @param _vbv 頂点バッファビュー
+     **/
     void SetVBV(D3D12_VERTEX_BUFFER_VIEW _vbv);
 
-    /// <summary>
-    /// メッシュデータを取得
-    /// </summary>
-    /// <returns>メッシュデータ</returns>
+    /** @brief メッシュデータを取得
+     ** @return メッシュデータ
+     **/
     MeshData GetData() const;
 
-    /// <summary>
-    /// テクスチャを設定
-    /// </summary>
-    /// <param name="_texturePath">テクスチャパス</param>
+    /** @brief テクスチャを設定
+     ** @param _texturePath テクスチャパス
+     **/
     void SetTexture(const std::string& _texturePath);
+
+    /** @brief テクスチャのサイズを設定
+     ** @param _tilingMul テクスチャのタイリング倍率
+     **/
+    void SetTextureSize(Vector2 _tilingMul) const;
+
+    /** @brief 色の設定
+     ** @param _color 変更後の色
+     **/
+    void SetColor(Vector4 _color) const;
+
+    void EnableLighting(bool _active);
 }; // class Mesh
 
 #endif // Mesh_HPP_

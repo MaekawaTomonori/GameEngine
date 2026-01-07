@@ -2,27 +2,29 @@
 #include <Windows.h>
 #include <chrono>
 
-namespace Utils {
-    std::string Convert(const std::wstring& str) {
-        if (str.empty())return {};
+#include "Log.hpp"
 
-        auto size_needed = WideCharToMultiByte(CP_UTF8,0,str.data(),static_cast<int>(str.size()),nullptr, 0, nullptr,nullptr);
+namespace Utils {
+    std::string Convert(const std::wstring& _str) {
+        if (_str.empty())return {};
+
+        auto size_needed = WideCharToMultiByte(CP_UTF8,0,_str.data(),static_cast<int>(_str.size()),nullptr, 0, nullptr,nullptr);
         if (size_needed == 0) return {};
 
         std::string result(size_needed, 0);
-        if (!WideCharToMultiByte(CP_UTF8,0, str.data(),static_cast<int>(str.size()),result.data(), size_needed,nullptr, nullptr))return {};
+        if (!WideCharToMultiByte(CP_UTF8,0, _str.data(),static_cast<int>(_str.size()),result.data(), size_needed,nullptr, nullptr))return {};
 
         return result;
     }
 
-    std::wstring Convert(const std::string& str) {
-        if (str.empty())return {};
+    std::wstring Convert(const std::string& _str) {
+        if (_str.empty())return {};
 
-        auto size_needed = MultiByteToWideChar(CP_UTF8, 0, str.data(),static_cast<int>(str.size()),nullptr, 0);
+        auto size_needed = MultiByteToWideChar(CP_UTF8, 0, _str.data(),static_cast<int>(_str.size()),nullptr, 0);
         if (size_needed == 0)return {};
 
         std::wstring result(size_needed, 0);
-        if (!MultiByteToWideChar(CP_UTF8, 0, str.data(),static_cast<int>(str.size()),result.data(), size_needed))return {};
+        if (!MultiByteToWideChar(CP_UTF8, 0, _str.data(),static_cast<int>(_str.size()),result.data(), size_needed))return {};
 
         return result;
     }
@@ -52,6 +54,7 @@ namespace Utils {
     }
 
     void Alert(const std::string &msg) {
+        Log::Send(Log::Level::WARNING, msg);
 #ifdef _WIN32
         MessageBoxA(nullptr, msg.c_str(), msg.c_str(), MB_ICONSTOP);
 #endif
@@ -95,9 +98,9 @@ namespace Utils {
         return reinterpret_cast<char*>(szUuid);
     }
 
-    bool EqualsIgnoreCase(std::string str1, std::string str2) {
-        return str1.size() == str2.size() && std::equal(str1.begin(), str1.end(), str2.begin(),
-                                                        [](char a, char b){ return tolower(a) == tolower(b); });
+    bool EqualsIgnoreCase(std::string _str1, std::string _str2) {
+        return _str1.size() == _str2.size() && std::equal(_str1.begin(), _str1.end(), _str2.begin(),
+                                                        [](char _a, char _b){ return tolower(_a) == tolower(_b); });
     }
 
     bool ConfirmDialog([[maybe_unused]]const std::string& _msg) {

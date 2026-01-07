@@ -2,6 +2,7 @@
 
 #include "Log.hpp"
 #include "Utils.hpp"
+#include "imgui.h"
 
 #pragma comment(lib, "dinput8.lib")
 #pragma comment(lib, "dxguid.lib")
@@ -33,9 +34,49 @@ void Input::Initialize(HWND _hWnd, HINSTANCE _hInstance) {
         Utils::Alert("Failed to set keyboard cooperative level.");
         return;
     }
+
+    // Mouse Setup
+    if (FAILED(directInput_->CreateDevice(GUID_SysMouse, &mouse_, NULL))) {
+        Log::Send(Log::Level::ERR, "Failed to create mouse device.");
+        Utils::Alert("Failed to create mouse device.");
+        return;
+    }
+
+    if (FAILED(mouse_->SetDataFormat(&c_dfDIMouse))) {
+        Log::Send(Log::Level::ERR, "Failed to set mouse data format.");
+        Utils::Alert("Failed to set mouse data format.");
+        return;
+    }
+
+    if (FAILED(mouse_->SetCooperativeLevel(hWnd_, DISCL_FOREGROUND | DISCL_NONEXCLUSIVE | DISCL_NOWINKEY))) {
+        Log::Send(Log::Level::ERR, "Failed to set mouse cooperative level.");
+        Utils::Alert("Failed to set mouse cooperative level.");
+        return;
+    }
 }
 
 void Input::Update() {
+#ifdef _DEBUG
+    const ImGuiIO& io = ImGui::GetIO();
+
+    // Keyboard update
+    if (!io.WantCaptureKeyboard)
+#endif
+        UpdateKeyboard();
+
+    // Mouse
+    UpdateMouse();
+}
+
+bool Input::IsPress(const BYTE _key) const {
+    return keyState_[_key];
+}
+
+bool Input::IsTrigger(const BYTE _key) const {
+    return keyState_[_key] && !preState_[_key];
+}
+
+void Input::UpdateKeyboard() {
     if (keyboard_) {
         keyboard_->Acquire();
         memcpy_s(preState_, sizeof(keyState_), keyState_, sizeof(keyState_));
@@ -43,6 +84,16 @@ void Input::Update() {
     }
 }
 
-bool Input::IsPress(BYTE _key) const {
-    return keyState_[_key];
+void Input::UpdateMouse() {
+    if (mouse_) {
+        mouse_->Acquire();
+        preMouseState_ = mouseState_;
+        mouse_->GetDeviceState(sizeof(mouseState_), &mouseState_);
+
+        // スクリーン座標を取得 (Windows API)
+        POINT point;
+        GetCursorPos(&point);
+        ScreenToClient(hWnd_, &point);
+        mousePosition_ = { static_cast<float>(point.x), static_cast<float>(point.y) };
+    }
 }

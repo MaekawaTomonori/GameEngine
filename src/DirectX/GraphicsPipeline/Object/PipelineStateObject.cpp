@@ -106,13 +106,13 @@ void PipelineStateObject::Create() {
     desc_.SampleDesc.Count = 1;
     desc_.SampleMask = D3D12_DEFAULT_SAMPLE_MASK;
     // Setting more options
-    
+
     HRESULT hr = adapter_->GetDevice()->CreateGraphicsPipelineState(&desc_, IID_PPV_ARGS(&pso_));
     if (FAILED(hr)){
         Log::Send(Log::Level::ERR, "Failed to create pipeline state object");
         Utils::Alert("Failed to create pipeline state object");
         return;
-    } 
+    }
     Log::Send(Log::Level::INFO, "Pipeline state object created successfully");
 }
 
@@ -121,7 +121,7 @@ void PipelineStateObject::DrawCall() const {
         Log::Send(Log::Level::ERR, "PipelineStateObject is not properly initialized");
         return;
     }
-    
+
     adapter_->GetCommandList()->SetGraphicsRootSignature(rootSignature_.Get());
     adapter_->GetCommandList()->SetPipelineState(pso_.Get());
 }

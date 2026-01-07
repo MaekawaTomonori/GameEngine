@@ -37,9 +37,9 @@ bool StageLoader::Load(const std::string& _path) const {
     nlohmann::json deserialized;
     try{
         file >> deserialized;
-    } catch (const nlohmann::json::parse_error& e){
-        Log::Send(Log::Level::ERR, "JSON parse error: " + std::string(e.what()));
-        Utils::Alert("JSON parse error: " + std::string(e.what()));
+    } catch (const nlohmann::json::parse_error& _e){
+        Log::Send(Log::Level::ERR, "JSON parse error: " + std::string(_e.what()));
+        Utils::Alert("JSON parse error: " + std::string(_e.what()));
         return false;
     }
 

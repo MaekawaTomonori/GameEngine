@@ -22,6 +22,8 @@ public:
 
     Shader* PSLoad(const std::wstring& _name);
 
+    IDxcBlob* CompileCS(const std::wstring& _name) const;
+
     IDxcBlob* GetVertexShader() const {
         return vertexShader_.Get();
     }

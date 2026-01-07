@@ -14,15 +14,13 @@ namespace spdlog {
     }
 }
 
-/// <summary>
-/// ロギングクラス
-/// spdlogを使用したログ出力とファイル管理を提供
-/// </summary>
+/** @brief ロギングクラス
+ ** spdlogを使用したログ出力とファイル管理を提供
+ **/
 class Log {
 public:
-    /// <summary>
-    /// ログレベル列挙型
-    /// </summary>
+    /** @brief ログレベル列挙型
+     **/
     enum class Level{
         TRACE = 0,
         DBG = 1,
@@ -42,83 +40,76 @@ private:
     static std::string workingDirectory_;
 
 public:
-    /// <summary>
-    /// ロギングシステムを初期化
-    /// </summary>
+    /** @brief ロギングシステムを初期化
+     **/
     static void Initialize();
 
-    /// <summary>
-    /// ログメッセージを送信
-    /// </summary>
-    /// <param name="level">ログレベル</param>
-    /// <param name="message">メッセージ</param>
-    static void Send(Level level, const std::string& message);
+    /** @brief ログメッセージを送信
+     ** @param level ログレベル
+     ** @param message メッセージ
+     **/
+    static void Send(Level _level, const std::string& _message = "");
 
-    /// <summary>
-    /// コンテキスト付きログメッセージを送信
-    /// </summary>
-    /// <param name="level">ログレベル</param>
-    /// <param name="message">メッセージ</param>
-    /// <param name="context">コンテキスト情報</param>
-    static void SendWithContext(Level level, const std::string& message, const std::string& context = "");
+    /** @brief ログメッセージを送信(Debug)
+     ** @param message メッセージ
+     **/
+    static void Send(const std::string& _message);
 
-    /// <summary>
-    /// 実行コンテキストをログに記録
-    /// </summary>
+    /** @brief コンテキスト付きログメッセージを送信
+     ** @param level ログレベル
+     ** @param message メッセージ
+     ** @param context コンテキスト情報
+     **/
+    static void SendWithContext(Level _level, const std::string& _message, const std::string& _context = "");
+
+    /** @brief 実行コンテキストをログに記録
+     **/
     static void LogExecutionContext();
 
-    /// <summary>
-    /// ファイル操作をログに記録
-    /// </summary>
-    /// <param name="operation">操作名</param>
-    /// <param name="filePath">ファイルパス</param>
-    /// <param name="success">成功したかどうか</param>
-    /// <param name="details">詳細情報</param>
-    static void LogFileOperation(const std::string& operation, const std::string& filePath, bool success = true, const std::string& details = "");
+    /** @brief ファイル操作をログに記録
+     ** @param operation 操作名
+     ** @param filePath ファイルパス
+     ** @param success 成功したかどうか
+     ** @param details 詳細情報
+     **/
+    static void LogFileOperation(const std::string& _operation, const std::string& _filePath, bool _success = true, const std::string& _details = "");
 
-    /// <summary>
-    /// ログレベルを設定
-    /// </summary>
-    /// <param name="level">ログレベル</param>
-    static void SetLevel(Level level);
+    /** @brief ログレベルを設定
+     ** @param level ログレベル
+     **/
+    static void SetLevel(Level _level);
 
 private:
-    /// <summary>
-    /// 実行コンテキストの初期化
-    /// </summary>
+    /** @brief 実行コンテキストの初期化
+     **/
     static void InitializeExecutionContext();
 
-    /// <summary>
-    /// 現在の作業ディレクトリを取得
-    /// </summary>
-    /// <returns>作業ディレクトリパス</returns>
+    /** @brief 現在の作業ディレクトリを取得
+     ** @return 作業ディレクトリパス
+     **/
     static std::string GetCurrentWorkingDirectory();
 
-    /// <summary>
-    /// 実行ファイルのパスを取得
-    /// </summary>
-    /// <returns>実行ファイルパス</returns>
+    /** @brief 実行ファイルのパスを取得
+     ** @return 実行ファイルパス
+     **/
     static std::string GetExecutablePath();
 
-    /// <summary>
-    /// 作業ディレクトリをログに記録（レガシー互換性、削除予定）
-    /// </summary>
+    /** @brief 作業ディレクトリをログに記録（レガシー互換性、削除予定）
+     **/
     static void LogWorkingDirectory();
 
-    /// <summary>
-    /// ファイルシステム診断情報をログに記録（レガシー互換性、削除予定）
-    /// </summary>
-    /// <param name="targetPath">対象パス</param>
-    /// <param name="context">コンテキスト</param>
-    static void LogFileSystemDiagnostics(const std::string& targetPath, const std::string& context = "");
+    /** @brief ファイルシステム診断情報をログに記録（レガシー互換性、削除予定）
+     ** @param targetPath 対象パス
+     ** @param context コンテキスト
+     **/
+    static void LogFileSystemDiagnostics(const std::string& _targetPath, const std::string& _context = "");
 
-    /// <summary>
-    /// パス付きログメッセージを送信（レガシー互換性、削除予定）
-    /// </summary>
-    /// <param name="level">ログレベル</param>
-    /// <param name="message">メッセージ</param>
-    /// <param name="context">コンテキスト</param>
-    static void SendWithPath(Level level, const std::string& message, const std::string& context = "");
+    /** @brief パス付きログメッセージを送信（レガシー互換性、削除予定）
+     ** @param level ログレベル
+     ** @param message メッセージ
+     ** @param context コンテキスト
+     **/
+    static void SendWithPath(Level _level, const std::string& _message, const std::string& _context = "");
 };
 
 #endif //LOG_HPP
