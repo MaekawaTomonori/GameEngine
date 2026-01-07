@@ -1,12 +1,12 @@
 var classTextureManager =
 [
     [ "~TextureManager", "classTextureManager.html#a001d6d74674961db79987e3222682576", null ],
-    [ "GetGPUHandle", "classTextureManager.html#a14c066ded008d4a25ab2bebe86ee5ed4", null ],
-    [ "GetGPUHandle", "classTextureManager.html#a776c0b4e0f6e2dad7e3aa102c8404141", null ],
-    [ "GetSrvIndex", "classTextureManager.html#a5fe0662a65b4f71b82e11e3b6e8aee32", null ],
-    [ "GetTextureIndexByFilePath", "classTextureManager.html#ae6633b0027479c0a3a207bd443c1351c", null ],
-    [ "GetTextureMetadata", "classTextureManager.html#a26d56e4ebb7cf36331cf1a0d31d701c1", null ],
+    [ "GetGPUHandle", "classTextureManager.html#ab10fdb00af3862499ba1f5e915ffe756", null ],
+    [ "GetGPUHandle", "classTextureManager.html#a24d93e12963f1de93cab40fa13833512", null ],
+    [ "GetSrvIndex", "classTextureManager.html#abb179cd1141b16276350c1489ac727db", null ],
+    [ "GetTextureIndexByFilePath", "classTextureManager.html#a8e806aaadf7d533d8951e874ddaba39a", null ],
+    [ "GetTextureMetadata", "classTextureManager.html#a3f3a61e562dad63752a8bf8150c6537e", null ],
     [ "Initialize", "classTextureManager.html#aa0b611b9efc8c6ad6483697908ca69d2", null ],
-    [ "Load", "classTextureManager.html#a1e4853f793cea9f4e929f21ec9be223f", null ],
+    [ "Load", "classTextureManager.html#ad7d3de3b18a76f2c0116321d6f91c332", null ],
     [ "Unload", "classTextureManager.html#ac1747fe5df0613980d545934904c949a", null ]
 ];

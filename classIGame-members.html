@@ -96,16 +96,19 @@ $(document).ready(function(){initNavTree('classIGame.html',''); initResizable();
 
 <p>継承メンバを含む <a class="el" href="classIGame.html">IGame</a> の全メンバ一覧です。</p>
 <table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="classIGame.html#a58de2b585ce2de54d41d0074add1343d">GetCurrentConfig</a>()</td><td class="entry"><a class="el" href="classIGame.html">IGame</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classIGame.html#a27f695d8d56c521fd27ee5f227f7dec5">GetPostEffectFactory</a>() const</td><td class="entry"><a class="el" href="classIGame.html">IGame</a></td><td class="entry"></td></tr>
   <tr class="odd"><td class="entry"><a class="el" href="classIGame.html#ab38f58665f28f32bc05963da39469578">GetSceneSwitcher</a>() const</td><td class="entry"><a class="el" href="classIGame.html">IGame</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classIGame.html#a8a709678e3936ea9330ac2009d75c05c">IGame</a>(std::unique_ptr&lt; AbstractSceneFactory &gt; _factory, const std::string &amp;_scene=&quot;&quot;)</td><td class="entry"><a class="el" href="classIGame.html">IGame</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="classIGame.html#a91b14c1b6019364120d5c5e4d4c64414">~IGame</a>()=default</td><td class="entry"><a class="el" href="classIGame.html">IGame</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classIGame.html#a20d6d1cc5e972feba895d2dedd2cb40e">IGame</a>()</td><td class="entry"><a class="el" href="classIGame.html">IGame</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classIGame.html#a788ce1a3bc21878487faef79532c0273">Initialize</a>(GameEngine::Config &amp;_config)=0</td><td class="entry"><a class="el" href="classIGame.html">IGame</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classIGame.html#ab26bd3e24ef61ebc577a1a9642af843f">RegisterScene</a>(const std::string &amp;_name, const std::function&lt; std::unique_ptr&lt; IScene &gt;()&gt; &amp;_creator) const</td><td class="entry"><a class="el" href="classIGame.html">IGame</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classIGame.html#a0bef264333ba4f348b3327caf21a39ab">SetPostEffectFactory</a>(std::unique_ptr&lt; AbstractPostEffectFactory &gt; _factory)</td><td class="entry"><a class="el" href="classIGame.html">IGame</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classIGame.html#ab8b4ffb842b701fc0fdd4623943e9b5a">~IGame</a>()</td><td class="entry"><a class="el" href="classIGame.html">IGame</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
 </table></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">2025年10月16日(木) 07時42分51秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年01月07日(水) 07時39分21秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

@@ -111,10 +111,14 @@ $(document).ready(function(){initNavTree('classWinApp.html',''); initResizable()
 <tr class="separator:a838e9835706bc65bff5ade91e0c96cd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac4b81bc3049c111780f29cfc816a71d8" id="r_ac4b81bc3049c111780f29cfc816a71d8"><td class="memItemLeft" align="right" valign="top">HINSTANCE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classWinApp.html#ac4b81bc3049c111780f29cfc816a71d8">GetInstanceHandle</a> () const</td></tr>
 <tr class="separator:ac4b81bc3049c111780f29cfc816a71d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aabd16128e2887080454f5e6e6b6559fb" id="r_aabd16128e2887080454f5e6e6b6559fb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classWinApp.html#aabd16128e2887080454f5e6e6b6559fb">SetWindowSize</a> (int width, int height) const</td></tr>
-<tr class="separator:aabd16128e2887080454f5e6e6b6559fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4abeb5bf541d9c06214c485a490dae43" id="r_a4abeb5bf541d9c06214c485a490dae43"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classWinApp.html#a4abeb5bf541d9c06214c485a490dae43">SetWindowSize</a> (int _width, int _height) const</td></tr>
+<tr class="separator:a4abeb5bf541d9c06214c485a490dae43"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ace26c4123a28f20240e9eb63f48a2082" id="r_ace26c4123a28f20240e9eb63f48a2082"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classWinApp.html#ace26c4123a28f20240e9eb63f48a2082">SetTitle</a> (const std::string &amp;_title) const</td></tr>
 <tr class="separator:ace26c4123a28f20240e9eb63f48a2082"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a283502ebe9357ae7733da4ab07369f39" id="r_a283502ebe9357ae7733da4ab07369f39"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classWinApp.html#a283502ebe9357ae7733da4ab07369f39">ToggleBorderless</a> () const</td></tr>
+<tr class="separator:a283502ebe9357ae7733da4ab07369f39"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a53591bb954bcad2ad9479ddf015a8775" id="r_a53591bb954bcad2ad9479ddf015a8775"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classWinApp.html#a53591bb954bcad2ad9479ddf015a8775">GetClientSize</a> (int &amp;_width, int &amp;_height) const</td></tr>
+<tr class="separator:a53591bb954bcad2ad9479ddf015a8775"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">詳解</h2>
 <div class="textblock">
@@ -146,6 +150,36 @@ $(document).ready(function(){initNavTree('classWinApp.html',''); initResizable()
 </div>
 </div>
 <h2 class="groupheader">関数詳解</h2>
+<a id="a53591bb954bcad2ad9479ddf015a8775" name="a53591bb954bcad2ad9479ddf015a8775"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a53591bb954bcad2ad9479ddf015a8775">&#9670;&#160;</a></span>GetClientSize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void WinApp::GetClientSize </td>
+          <td>(</td>
+          <td class="paramtype">int &amp;&#160;</td>
+          <td class="paramname"><em>_width</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int &amp;&#160;</td>
+          <td class="paramname"><em>_height</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="WinApp_8cpp_source.html">WinApp.cpp</a> の <a class="el" href="WinApp_8cpp_source.html#l00062">62</a> 行目に定義があります。</p>
+
+</div>
+</div>
 <a id="ac4b81bc3049c111780f29cfc816a71d8" name="ac4b81bc3049c111780f29cfc816a71d8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac4b81bc3049c111780f29cfc816a71d8">&#9670;&#160;</a></span>GetInstanceHandle()</h2>
 
@@ -201,7 +235,7 @@ $(document).ready(function(){initNavTree('classWinApp.html',''); initResizable()
 
 <p class="definition"> <a class="el" href="WinApp_8cpp_source.html">WinApp.cpp</a> の <a class="el" href="WinApp_8cpp_source.html#l00010">10</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="Utils_8cpp_source.html#l00030">Utils::DisplayLastErr()</a>, <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::ERR</a>, <a class="el" href="Log_8cpp_source.html#l00068">Log::Send()</a>.</p>
+<p class="reference">参照先 <a class="el" href="Utils_8cpp_source.html#l00032">Utils::DisplayLastErr()</a>, <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::ERR</a>, <a class="el" href="Log_8cpp_source.html#l00067">Log::Send()</a>.</p>
 
 </div>
 </div>
@@ -244,8 +278,8 @@ $(document).ready(function(){initNavTree('classWinApp.html',''); initResizable()
 
 </div>
 </div>
-<a id="aabd16128e2887080454f5e6e6b6559fb" name="aabd16128e2887080454f5e6e6b6559fb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aabd16128e2887080454f5e6e6b6559fb">&#9670;&#160;</a></span>SetWindowSize()</h2>
+<a id="a4abeb5bf541d9c06214c485a490dae43" name="a4abeb5bf541d9c06214c485a490dae43"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4abeb5bf541d9c06214c485a490dae43">&#9670;&#160;</a></span>SetWindowSize()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -254,13 +288,13 @@ $(document).ready(function(){initNavTree('classWinApp.html',''); initResizable()
           <td class="memname">void WinApp::SetWindowSize </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>width</em>, </td>
+          <td class="paramname"><em>_width</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>height</em>&#160;</td>
+          <td class="paramname"><em>_height</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -274,6 +308,25 @@ $(document).ready(function(){initNavTree('classWinApp.html',''); initResizable()
 
 </div>
 </div>
+<a id="a283502ebe9357ae7733da4ab07369f39" name="a283502ebe9357ae7733da4ab07369f39"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a283502ebe9357ae7733da4ab07369f39">&#9670;&#160;</a></span>ToggleBorderless()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void WinApp::ToggleBorderless </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="WinApp_8cpp_source.html">WinApp.cpp</a> の <a class="el" href="WinApp_8cpp_source.html#l00056">56</a> 行目に定義があります。</p>
+
+</div>
+</div>
 <hr/>このクラス詳解は次のファイルから抽出されました:<ul>
 <li>/home/runner/work/GameEngine/GameEngine/src/Platform/<a class="el" href="WinApp_8hpp_source.html">WinApp.hpp</a></li>
 <li>/home/runner/work/GameEngine/GameEngine/src/Platform/<a class="el" href="WinApp_8cpp_source.html">WinApp.cpp</a></li>
@@ -284,7 +337,7 @@ $(document).ready(function(){initNavTree('classWinApp.html',''); initResizable()
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classWinApp.html">WinApp</a></li>
-    <li class="footer">2025年10月16日(木) 07時42分51秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年01月07日(水) 07時39分21秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

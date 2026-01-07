@@ -6,7 +6,8 @@ var classDirectXAdapter =
     [ "CreateBufferResource", "classDirectXAdapter.html#ab4b4c251cdfee90870ce155e610c9500", null ],
     [ "CreateDepthStencilResource", "classDirectXAdapter.html#a84a4cb85ed76d714431374ba62fe5b10", null ],
     [ "CreateRenderTextureResource", "classDirectXAdapter.html#a6e8fa2518fe43611bc83625caa4884f9", null ],
-    [ "CreateTextureResource", "classDirectXAdapter.html#a14b9e65c4d9a927e95b7ddd5064ff6ca", null ],
+    [ "CreateTextureResource", "classDirectXAdapter.html#ab560a413b9a36c7ab838ff7e89bc55a2", null ],
+    [ "CreateUnorderedAccessView", "classDirectXAdapter.html#a85e48b1e8da92999e6c60a29f63e506c", null ],
     [ "DisplayFPS", "classDirectXAdapter.html#a4458d6697a5260036d10ae8e4490595c", null ],
     [ "EndFrame", "classDirectXAdapter.html#adc51732c509d008911e309337697aa97", null ],
     [ "GetCommandAllocator", "classDirectXAdapter.html#ac775788b343bb054d88bf1fb552aec29", null ],
@@ -21,5 +22,6 @@ var classDirectXAdapter =
     [ "GetWidth", "classDirectXAdapter.html#a0fba31180c1f84825e4b5da99fdc3371", null ],
     [ "GetWindowHandle", "classDirectXAdapter.html#a7dbec72fb7c4efcfc6cdda738aecafcb", null ],
     [ "PreProcess", "classDirectXAdapter.html#a5caa8b31df1102febe4016600a6c7fbd", null ],
+    [ "UpdateWindowSize", "classDirectXAdapter.html#a76807e209ac784429e5f7a3a47763b16", null ],
     [ "WaitForFenceValue", "classDirectXAdapter.html#a7793686074430b7c1cff3a7ee3cd2513", null ]
 ];

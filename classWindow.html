@@ -118,17 +118,23 @@ $(document).ready(function(){initNavTree('classWindow.html',''); initResizable()
 <tr class="memitem:ad81e6e18428c12d0dc36a39eb83dd714" id="r_ad81e6e18428c12d0dc36a39eb83dd714"><td class="memItemLeft" align="right" valign="top">HINSTANCE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classWindow.html#ad81e6e18428c12d0dc36a39eb83dd714">GetInstanceHandle</a> () const</td></tr>
 <tr class="memdesc:ad81e6e18428c12d0dc36a39eb83dd714"><td class="mdescLeft">&#160;</td><td class="mdescRight">インスタンスハンドルを取得  <br /></td></tr>
 <tr class="separator:ad81e6e18428c12d0dc36a39eb83dd714"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aadb6c83cd920009005d62636cd88c244" id="r_aadb6c83cd920009005d62636cd88c244"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classWindow.html#aadb6c83cd920009005d62636cd88c244">SetSize</a> (int width, int height) const</td></tr>
-<tr class="memdesc:aadb6c83cd920009005d62636cd88c244"><td class="mdescLeft">&#160;</td><td class="mdescRight">ウィンドウサイズを設定  <br /></td></tr>
-<tr class="separator:aadb6c83cd920009005d62636cd88c244"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac36121b926eea1809082557fc5400544" id="r_ac36121b926eea1809082557fc5400544"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classWindow.html#ac36121b926eea1809082557fc5400544">SetSize</a> (int _width, int _height) const</td></tr>
+<tr class="memdesc:ac36121b926eea1809082557fc5400544"><td class="mdescLeft">&#160;</td><td class="mdescRight">ウィンドウサイズを設定  <br /></td></tr>
+<tr class="separator:ac36121b926eea1809082557fc5400544"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab3743ef0e05f89f92ac739792ba3beac" id="r_ab3743ef0e05f89f92ac739792ba3beac"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classWindow.html#ab3743ef0e05f89f92ac739792ba3beac">SetTitle</a> (const std::string &amp;_title)</td></tr>
 <tr class="memdesc:ab3743ef0e05f89f92ac739792ba3beac"><td class="mdescLeft">&#160;</td><td class="mdescRight">ウィンドウタイトルを設定  <br /></td></tr>
 <tr class="separator:ab3743ef0e05f89f92ac739792ba3beac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f8f5b891ca1752c4ec7d61291189e4a" id="r_a0f8f5b891ca1752c4ec7d61291189e4a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classWindow.html#a0f8f5b891ca1752c4ec7d61291189e4a">ToggleBorderless</a> ()</td></tr>
+<tr class="memdesc:a0f8f5b891ca1752c4ec7d61291189e4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">ボーダレスウィンドウモードを切り替え  <br /></td></tr>
+<tr class="separator:a0f8f5b891ca1752c4ec7d61291189e4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f0e9ee0086b787436f99dddb80c6115" id="r_a4f0e9ee0086b787436f99dddb80c6115"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classWindow.html#a4f0e9ee0086b787436f99dddb80c6115">IsBorderless</a> () const</td></tr>
+<tr class="memdesc:a4f0e9ee0086b787436f99dddb80c6115"><td class="mdescLeft">&#160;</td><td class="mdescRight">ボーダレスモードかどうか  <br /></td></tr>
+<tr class="separator:a4f0e9ee0086b787436f99dddb80c6115"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">詳解</h2>
 <div class="textblock"><p>ウィンドウクラス Windowsウィンドウの生成と管理を提供 </p>
 
-<p class="definition"> <a class="el" href="Window_8hpp_source.html">Window.hpp</a> の <a class="el" href="Window_8hpp_source.html#l00015">15</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Window_8hpp_source.html">Window.hpp</a> の <a class="el" href="Window_8hpp_source.html#l00014">14</a> 行目に定義があります。</p>
 </div><h2 class="groupheader">構築子と解体子</h2>
 <a id="adc361d2d83c3531576b0d7bc1589cdfb" name="adc361d2d83c3531576b0d7bc1589cdfb"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#adc361d2d83c3531576b0d7bc1589cdfb">&#9670;&#160;</a></span>~Window()</h2>
@@ -172,11 +178,11 @@ $(document).ready(function(){initNavTree('classWindow.html',''); initResizable()
 </div><div class="memdoc">
 
 <p>ウィンドウを作成 </p>
-<dl class="section return"><dt>戻り値</dt><dd>成功した場合true</dd></dl>
+<dl class="section return"><dt>戻り値</dt><dd>成功した場合true </dd></dl>
 
-<p class="definition"> <a class="el" href="Window_8cpp_source.html">Window.cpp</a> の <a class="el" href="Window_8cpp_source.html#l00021">21</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Window_8cpp_source.html">Window.cpp</a> の <a class="el" href="Window_8cpp_source.html#l00023">23</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="Utils_8cpp_source.html#l00030">Utils::DisplayLastErr()</a>.</p>
+<p class="reference">参照先 <a class="el" href="Utils_8cpp_source.html#l00032">Utils::DisplayLastErr()</a>.</p>
 
 </div>
 </div>
@@ -196,9 +202,9 @@ $(document).ready(function(){initNavTree('classWindow.html',''); initResizable()
 </div><div class="memdoc">
 
 <p>インスタンスハンドルを取得 </p>
-<dl class="section return"><dt>戻り値</dt><dd>インスタンスハンドル</dd></dl>
+<dl class="section return"><dt>戻り値</dt><dd>インスタンスハンドル </dd></dl>
 
-<p class="definition"> <a class="el" href="Window_8cpp_source.html">Window.cpp</a> の <a class="el" href="Window_8cpp_source.html#l00085">85</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Window_8cpp_source.html">Window.cpp</a> の <a class="el" href="Window_8cpp_source.html#l00169">169</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -218,9 +224,39 @@ $(document).ready(function(){initNavTree('classWindow.html',''); initResizable()
 </div><div class="memdoc">
 
 <p>ウィンドウハンドルを取得 </p>
-<dl class="section return"><dt>戻り値</dt><dd>ウィンドウハンドル</dd></dl>
+<dl class="section return"><dt>戻り値</dt><dd>ウィンドウハンドル </dd></dl>
 
-<p class="definition"> <a class="el" href="Window_8cpp_source.html">Window.cpp</a> の <a class="el" href="Window_8cpp_source.html#l00081">81</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Window_8cpp_source.html">Window.cpp</a> の <a class="el" href="Window_8cpp_source.html#l00165">165</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="a4f0e9ee0086b787436f99dddb80c6115" name="a4f0e9ee0086b787436f99dddb80c6115"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4f0e9ee0086b787436f99dddb80c6115">&#9670;&#160;</a></span>IsBorderless()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Window::IsBorderless </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>ボーダレスモードかどうか </p>
+<dl class="section return"><dt>戻り値</dt><dd>ボーダレスモードの場合true </dd></dl>
+
+<p class="definition"> <a class="el" href="Window_8hpp_source.html">Window.hpp</a> の <a class="el" href="Window_8hpp_source.html#l00065">65</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -240,14 +276,14 @@ $(document).ready(function(){initNavTree('classWindow.html',''); initResizable()
 </div><div class="memdoc">
 
 <p>ウィンドウが有効かを判定 </p>
-<dl class="section return"><dt>戻り値</dt><dd>有効な場合true</dd></dl>
+<dl class="section return"><dt>戻り値</dt><dd>有効な場合true </dd></dl>
 
-<p class="definition"> <a class="el" href="Window_8cpp_source.html">Window.cpp</a> の <a class="el" href="Window_8cpp_source.html#l00068">68</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Window_8cpp_source.html">Window.cpp</a> の <a class="el" href="Window_8cpp_source.html#l00073">73</a> 行目に定義があります。</p>
 
 </div>
 </div>
-<a id="aadb6c83cd920009005d62636cd88c244" name="aadb6c83cd920009005d62636cd88c244"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aadb6c83cd920009005d62636cd88c244">&#9670;&#160;</a></span>SetSize()</h2>
+<a id="ac36121b926eea1809082557fc5400544" name="ac36121b926eea1809082557fc5400544"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac36121b926eea1809082557fc5400544">&#9670;&#160;</a></span>SetSize()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -256,13 +292,13 @@ $(document).ready(function(){initNavTree('classWindow.html',''); initResizable()
           <td class="memname">void Window::SetSize </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>width</em>, </td>
+          <td class="paramname"><em>_width</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>height</em>&#160;</td>
+          <td class="paramname"><em>_height</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -275,13 +311,13 @@ $(document).ready(function(){initNavTree('classWindow.html',''); initResizable()
 <p>ウィンドウサイズを設定 </p>
 <dl class="params"><dt>引数</dt><dd>
   <table class="params">
-    <tr><td class="paramname">width</td><td>幅</td></tr>
-    <tr><td class="paramname">height</td><td>高さ</td></tr>
+    <tr><td class="paramname">width</td><td>幅 </td></tr>
+    <tr><td class="paramname">height</td><td>高さ </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition"> <a class="el" href="Window_8cpp_source.html">Window.cpp</a> の <a class="el" href="Window_8cpp_source.html#l00089">89</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Window_8cpp_source.html">Window.cpp</a> の <a class="el" href="Window_8cpp_source.html#l00173">173</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -304,14 +340,35 @@ $(document).ready(function(){initNavTree('classWindow.html',''); initResizable()
 <p>ウィンドウタイトルを設定 </p>
 <dl class="params"><dt>引数</dt><dd>
   <table class="params">
-    <tr><td class="paramname">_title</td><td>タイトル文字列</td></tr>
+    <tr><td class="paramname">_title</td><td>タイトル文字列 </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition"> <a class="el" href="Window_8cpp_source.html">Window.cpp</a> の <a class="el" href="Window_8cpp_source.html#l00097">97</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Window_8cpp_source.html">Window.cpp</a> の <a class="el" href="Window_8cpp_source.html#l00181">181</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="Utils_8cpp_source.html#l00006">Utils::Convert()</a>.</p>
+<p class="reference">参照先 <a class="el" href="Utils_8cpp_source.html#l00008">Utils::Convert()</a>.</p>
+
+</div>
+</div>
+<a id="a0f8f5b891ca1752c4ec7d61291189e4a" name="a0f8f5b891ca1752c4ec7d61291189e4a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f8f5b891ca1752c4ec7d61291189e4a">&#9670;&#160;</a></span>ToggleBorderless()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Window::ToggleBorderless </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>ボーダレスウィンドウモードを切り替え </p>
+
+<p class="definition"> <a class="el" href="Window_8cpp_source.html">Window.cpp</a> の <a class="el" href="Window_8cpp_source.html#l00125">125</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -325,7 +382,7 @@ $(document).ready(function(){initNavTree('classWindow.html',''); initResizable()
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classWindow.html">Window</a></li>
-    <li class="footer">2025年10月16日(木) 07時42分51秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年01月07日(水) 07時39分21秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

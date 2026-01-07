@@ -114,7 +114,7 @@ $(document).ready(function(){initNavTree('SRVManager_8cpp_source.html',''); init
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    <span class="keyword">auto</span> dxc = adapter_;</div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <span class="keywordflow">if</span> (!dxc){</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>        <a class="code hl_function" href="classLog.html#a1a96849014a462fb22eb2247323cb2dc">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, <span class="stringliteral">&quot;SRVManager Initialize Failed&quot;</span>);</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>        <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, <span class="stringliteral">&quot;SRVManager Initialize Failed&quot;</span>);</div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>        <span class="keywordflow">return</span>;</div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    }</div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
@@ -124,7 +124,7 @@ $(document).ready(function(){initNavTree('SRVManager_8cpp_source.html',''); init
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    useIndex_ = 0;</div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <a class="code hl_function" href="classLog.html#a1a96849014a462fb22eb2247323cb2dc">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>, <span class="stringliteral">&quot;SRVManager Enabled&quot;</span>);</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>, <span class="stringliteral">&quot;SRVManager Enabled&quot;</span>);</div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>}</div>
 </div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
@@ -154,28 +154,28 @@ $(document).ready(function(){initNavTree('SRVManager_8cpp_source.html',''); init
 </div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
 <div class="foldopen" id="foldopen00048" data-start="{" data-end="}">
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="classSRVManager.html#a2cca745cb3489ce9ff676186348d9728">   48</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classSRVManager.html#a2cca745cb3489ce9ff676186348d9728">SRVManager::CreateSRVforTexture2D</a>(uint32_t srvIndex, ID3D12Resource* pResource, DXGI_FORMAT format, UINT mipMap) {</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="classSRVManager.html#a2cca745cb3489ce9ff676186348d9728">   48</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classSRVManager.html#a2cca745cb3489ce9ff676186348d9728">SRVManager::CreateSRVforTexture2D</a>(uint32_t _srvIndex, ID3D12Resource* _pResource, DXGI_FORMAT _format, UINT _mipMap) {</div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    D3D12_SHADER_RESOURCE_VIEW_DESC desc {};</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    desc.Format = format;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    desc.Format = _format;</div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    desc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;</div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    desc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    desc.Texture2D.MipLevels = mipMap;</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    desc.Texture2D.MipLevels = _mipMap;</div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    adapter_-&gt;<a class="code hl_function" href="classDirectXAdapter.html#a28fe87825525272f00fd06231a0c1632">GetDevice</a>()-&gt;CreateShaderResourceView(pResource, &amp;desc, heap_-&gt;GetCPUHandle(srvIndex));</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    adapter_-&gt;<a class="code hl_function" href="classDirectXAdapter.html#a28fe87825525272f00fd06231a0c1632">GetDevice</a>()-&gt;CreateShaderResourceView(_pResource, &amp;desc, heap_-&gt;GetCPUHandle(_srvIndex));</div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>}</div>
 </div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
 <div class="foldopen" id="foldopen00058" data-start="{" data-end="}">
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno"><a class="line" href="classSRVManager.html#a4a986bc26da72c5587ccde7c590477fe">   58</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classSRVManager.html#a4a986bc26da72c5587ccde7c590477fe">SRVManager::CreateSRVforStructuredBuffer</a>(uint32_t srvIndex, ID3D12Resource* pResource, UINT numElements, UINT stride) {</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno"><a class="line" href="classSRVManager.html#a4a986bc26da72c5587ccde7c590477fe">   58</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classSRVManager.html#a4a986bc26da72c5587ccde7c590477fe">SRVManager::CreateSRVforStructuredBuffer</a>(uint32_t _srvIndex, ID3D12Resource* _pResource, UINT _numElements, UINT _stride) {</div>
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    D3D12_SHADER_RESOURCE_VIEW_DESC desc {};</div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    desc.Format = DXGI_FORMAT_UNKNOWN;</div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    desc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;</div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    desc.ViewDimension = D3D12_SRV_DIMENSION_BUFFER;</div>
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    desc.Buffer.FirstElement = 0;</div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    desc.Buffer.Flags = D3D12_BUFFER_SRV_FLAG_NONE;</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    desc.Buffer.NumElements = numElements;</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    desc.Buffer.StructureByteStride = stride;</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    adapter_-&gt;<a class="code hl_function" href="classDirectXAdapter.html#a28fe87825525272f00fd06231a0c1632">GetDevice</a>()-&gt;CreateShaderResourceView(pResource, &amp;desc, heap_-&gt;GetCPUHandle(srvIndex));</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    desc.Buffer.NumElements = _numElements;</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    desc.Buffer.StructureByteStride = _stride;</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    adapter_-&gt;<a class="code hl_function" href="classDirectXAdapter.html#a28fe87825525272f00fd06231a0c1632">GetDevice</a>()-&gt;CreateShaderResourceView(_pResource, &amp;desc, heap_-&gt;GetCPUHandle(_srvIndex));</div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>}</div>
 </div>
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
@@ -194,8 +194,8 @@ $(document).ready(function(){initNavTree('SRVManager_8cpp_source.html',''); init
 </div>
 <div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
 <div class="foldopen" id="foldopen00082" data-start="{" data-end="}">
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno"><a class="line" href="classSRVManager.html#a52ddf3be00089eabb447cbfcff8e1a95">   82</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classSRVManager.html#a52ddf3be00089eabb447cbfcff8e1a95">SRVManager::SetGraphicsRootDescriptorTable</a>(UINT rootParameterIndex, uint32_t srvIndex)<span class="keyword"> const </span>{</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    adapter_-&gt;<a class="code hl_function" href="classDirectXAdapter.html#abc7797e145abbf8c6b66d89ce219adbf">GetCommandList</a>()-&gt;SetGraphicsRootDescriptorTable(rootParameterIndex, heap_-&gt;GetGPUHandle(srvIndex));</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno"><a class="line" href="classSRVManager.html#a52ddf3be00089eabb447cbfcff8e1a95">   82</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classSRVManager.html#a52ddf3be00089eabb447cbfcff8e1a95">SRVManager::SetGraphicsRootDescriptorTable</a>(UINT _rootParameterIndex, uint32_t _srvIndex)<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    adapter_-&gt;<a class="code hl_function" href="classDirectXAdapter.html#abc7797e145abbf8c6b66d89ce219adbf">GetCommandList</a>()-&gt;SetGraphicsRootDescriptorTable(_rootParameterIndex, heap_-&gt;GetGPUHandle(_srvIndex));</div>
 <div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>}</div>
 </div>
 <div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
@@ -206,25 +206,25 @@ $(document).ready(function(){initNavTree('SRVManager_8cpp_source.html',''); init
 </div>
 <div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
 <div class="foldopen" id="foldopen00090" data-start="{" data-end="}">
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno"><a class="line" href="classSRVManager.html#aa1cbbf7090b893d87a79bb4dfefb8c89">   90</a></span>D3D12_CPU_DESCRIPTOR_HANDLE <a class="code hl_function" href="classSRVManager.html#aa1cbbf7090b893d87a79bb4dfefb8c89">SRVManager::GetCPUHandle</a>(uint32_t index)<span class="keyword"> const </span>{</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    assert(index &lt;= useIndex_);</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    <span class="keywordflow">return</span> heap_-&gt;GetCPUHandle(index);</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno"><a class="line" href="classSRVManager.html#aa1cbbf7090b893d87a79bb4dfefb8c89">   90</a></span>D3D12_CPU_DESCRIPTOR_HANDLE <a class="code hl_function" href="classSRVManager.html#aa1cbbf7090b893d87a79bb4dfefb8c89">SRVManager::GetCPUHandle</a>(uint32_t _index)<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    assert(_index &lt;= useIndex_);</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    <span class="keywordflow">return</span> heap_-&gt;GetCPUHandle(_index);</div>
 <div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>}</div>
 </div>
 <div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span> </div>
 <div class="foldopen" id="foldopen00095" data-start="{" data-end="}">
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno"><a class="line" href="classSRVManager.html#a50f3a4b23df601f5f07eab1faaa21b2c">   95</a></span>D3D12_GPU_DESCRIPTOR_HANDLE <a class="code hl_function" href="classSRVManager.html#a50f3a4b23df601f5f07eab1faaa21b2c">SRVManager::GetGPUHandle</a>(uint32_t index)<span class="keyword"> const </span>{</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    assert(index &lt;= useIndex_);</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    <span class="keywordflow">return</span> heap_-&gt;GetGPUHandle(index);</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno"><a class="line" href="classSRVManager.html#a50f3a4b23df601f5f07eab1faaa21b2c">   95</a></span>D3D12_GPU_DESCRIPTOR_HANDLE <a class="code hl_function" href="classSRVManager.html#a50f3a4b23df601f5f07eab1faaa21b2c">SRVManager::GetGPUHandle</a>(uint32_t _index)<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    assert(_index &lt;= useIndex_);</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    <span class="keywordflow">return</span> heap_-&gt;GetGPUHandle(_index);</div>
 <div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>}</div>
 </div>
 <div class="ttc" id="aHeap_8hpp_html"><div class="ttname"><a href="Heap_8hpp.html">Heap.hpp</a></div></div>
 <div class="ttc" id="aLog_8hpp_html"><div class="ttname"><a href="Log_8hpp.html">Log.hpp</a></div></div>
 <div class="ttc" id="aSRVManager_8h_html"><div class="ttname"><a href="SRVManager_8h.html">SRVManager.h</a></div></div>
-<div class="ttc" id="aclassDirectXAdapter_html"><div class="ttname"><a href="classDirectXAdapter.html">DirectXAdapter</a></div><div class="ttdoc">DirectX12アダプタークラス DirectX12の初期化とデバイス管理を提供</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8hpp_source.html#l00025">DirectXAdapter.hpp:25</a></div></div>
-<div class="ttc" id="aclassDirectXAdapter_html_a28fe87825525272f00fd06231a0c1632"><div class="ttname"><a href="classDirectXAdapter.html#a28fe87825525272f00fd06231a0c1632">DirectXAdapter::GetDevice</a></div><div class="ttdeci">ID3D12Device * GetDevice() const</div><div class="ttdoc">DirectX12デバイスを取得</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8cpp_source.html#l00523">DirectXAdapter.cpp:523</a></div></div>
-<div class="ttc" id="aclassDirectXAdapter_html_abc7797e145abbf8c6b66d89ce219adbf"><div class="ttname"><a href="classDirectXAdapter.html#abc7797e145abbf8c6b66d89ce219adbf">DirectXAdapter::GetCommandList</a></div><div class="ttdeci">ID3D12GraphicsCommandList * GetCommandList() const</div><div class="ttdoc">コマンドリストを取得</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8cpp_source.html#l00527">DirectXAdapter.cpp:527</a></div></div>
-<div class="ttc" id="aclassLog_html_a1a96849014a462fb22eb2247323cb2dc"><div class="ttname"><a href="classLog.html#a1a96849014a462fb22eb2247323cb2dc">Log::Send</a></div><div class="ttdeci">static void Send(Level level, const std::string &amp;message)</div><div class="ttdoc">ログメッセージを送信</div><div class="ttdef"><b>Definition</b> <a href="Log_8cpp_source.html#l00068">Log.cpp:68</a></div></div>
+<div class="ttc" id="aclassDirectXAdapter_html"><div class="ttname"><a href="classDirectXAdapter.html">DirectXAdapter</a></div><div class="ttdoc">DirectX12アダプタークラス DirectX12の初期化とデバイス管理を提供</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8hpp_source.html#l00024">DirectXAdapter.hpp:24</a></div></div>
+<div class="ttc" id="aclassDirectXAdapter_html_a28fe87825525272f00fd06231a0c1632"><div class="ttname"><a href="classDirectXAdapter.html#a28fe87825525272f00fd06231a0c1632">DirectXAdapter::GetDevice</a></div><div class="ttdeci">ID3D12Device * GetDevice() const</div><div class="ttdoc">DirectX12デバイスを取得</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8cpp_source.html#l00700">DirectXAdapter.cpp:700</a></div></div>
+<div class="ttc" id="aclassDirectXAdapter_html_abc7797e145abbf8c6b66d89ce219adbf"><div class="ttname"><a href="classDirectXAdapter.html#abc7797e145abbf8c6b66d89ce219adbf">DirectXAdapter::GetCommandList</a></div><div class="ttdeci">ID3D12GraphicsCommandList * GetCommandList() const</div><div class="ttdoc">コマンドリストを取得</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8cpp_source.html#l00704">DirectXAdapter.cpp:704</a></div></div>
+<div class="ttc" id="aclassLog_html_af351e7d4bd43c85e7c90f52846b64bdb"><div class="ttname"><a href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a></div><div class="ttdeci">static void Send(Level _level, const std::string &amp;_message=&quot;&quot;)</div><div class="ttdoc">ログメッセージを送信</div><div class="ttdef"><b>Definition</b> <a href="Log_8cpp_source.html#l00067">Log.cpp:67</a></div></div>
 <div class="ttc" id="aclassLog_html_afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3"><div class="ttname"><a href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a></div><div class="ttdeci">@ INFO</div></div>
 <div class="ttc" id="aclassLog_html_afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482"><div class="ttname"><a href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a></div><div class="ttdeci">@ ERR</div></div>
 <div class="ttc" id="aclassSRVManager_html_a1713664e29361b62ed0b8f64d0a7d0f2"><div class="ttname"><a href="classSRVManager.html#a1713664e29361b62ed0b8f64d0a7d0f2">SRVManager::PreDraw</a></div><div class="ttdeci">void PreDraw() const</div><div class="ttdef"><b>Definition</b> <a href="SRVManager_8cpp_source.html#l00043">SRVManager.cpp:43</a></div></div>
@@ -244,7 +244,7 @@ $(document).ready(function(){initNavTree('SRVManager_8cpp_source.html',''); init
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_31399d34f22961890ce23f7132fb3e96.html">DirectX</a></li><li class="navelem"><a class="el" href="dir_80dcc2d4353adf1e5189343138795b39.html">Heap</a></li><li class="navelem"><a class="el" href="SRVManager_8cpp.html">SRVManager.cpp</a></li>
-    <li class="footer">2025年10月16日(木) 07時42分51秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年01月07日(水) 07時39分20秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

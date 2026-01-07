@@ -103,23 +103,23 @@ $(document).ready(function(){initNavTree('DX12Resource_8hpp_source.html',''); in
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;wrl/client.h&gt;</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;d3d12.h&gt;</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
-<div class="foldopen" id="foldopen00010" data-start="{" data-end="};">
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="classDX12Resource.html">   10</a></span><span class="keyword">class </span><a class="code hl_class" href="classDX12Resource.html">DX12Resource</a> {</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    Microsoft::WRL::ComPtr&lt;ID3D12Resource&gt; resource_;</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    D3D12_RESOURCE_STATES state_ = D3D12_RESOURCE_STATE_COMMON;</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classDX12Resource.html#ad72a4fefee65f8aaf6a95b8124c46d36">Create</a>(ID3D12Resource* _resource, D3D12_RESOURCE_STATES _state = D3D12_RESOURCE_STATE_COMMON);</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classDX12Resource.html#ad72a4fefee65f8aaf6a95b8124c46d36">Create</a>(<span class="keyword">const</span> Microsoft::WRL::ComPtr&lt;ID3D12Resource&gt;&amp; _resource, D3D12_RESOURCE_STATES _state = D3D12_RESOURCE_STATE_COMMON);</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classDX12Resource.html#ab449563ef728d837d81b333e9910aad8">ChangeState</a>(ID3D12GraphicsCommandList* _command, D3D12_RESOURCE_STATES _state);</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    ID3D12Resource* <a class="code hl_function" href="classDX12Resource.html#a7de5777515323fc496662e3e01c83a30">Get</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>}; <span class="comment">// class DX12Resource</span></div>
+<div class="foldopen" id="foldopen00009" data-start="{" data-end="};">
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno"><a class="line" href="classDX12Resource.html">    9</a></span><span class="keyword">class </span><a class="code hl_class" href="classDX12Resource.html">DX12Resource</a> {</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>    Microsoft::WRL::ComPtr&lt;ID3D12Resource&gt; resource_;</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    D3D12_RESOURCE_STATES state_ = D3D12_RESOURCE_STATE_COMMON;</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classDX12Resource.html#ad72a4fefee65f8aaf6a95b8124c46d36">Create</a>(ID3D12Resource* _resource, D3D12_RESOURCE_STATES _state = D3D12_RESOURCE_STATE_COMMON);</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classDX12Resource.html#ad72a4fefee65f8aaf6a95b8124c46d36">Create</a>(<span class="keyword">const</span> Microsoft::WRL::ComPtr&lt;ID3D12Resource&gt;&amp; _resource, D3D12_RESOURCE_STATES _state = D3D12_RESOURCE_STATE_COMMON);</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classDX12Resource.html#ab449563ef728d837d81b333e9910aad8">ChangeState</a>(ID3D12GraphicsCommandList* _command, D3D12_RESOURCE_STATES _state);</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    ID3D12Resource* <a class="code hl_function" href="classDX12Resource.html#a7de5777515323fc496662e3e01c83a30">Get</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>}; <span class="comment">// class DX12Resource</span></div>
 </div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="preprocessor">#endif </span><span class="comment">// DX12Resource_HPP_</span></div>
-<div class="ttc" id="aclassDX12Resource_html"><div class="ttname"><a href="classDX12Resource.html">DX12Resource</a></div><div class="ttdoc">DirectX12リソースラッパークラス リソース状態遷移を管理</div><div class="ttdef"><b>Definition</b> <a href="DX12Resource_8hpp_source.html#l00010">DX12Resource.hpp:10</a></div></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="preprocessor">#endif </span><span class="comment">// DX12Resource_HPP_</span></div>
+<div class="ttc" id="aclassDX12Resource_html"><div class="ttname"><a href="classDX12Resource.html">DX12Resource</a></div><div class="ttdoc">DirectX12リソースラッパークラス リソース状態遷移を管理</div><div class="ttdef"><b>Definition</b> <a href="DX12Resource_8hpp_source.html#l00009">DX12Resource.hpp:9</a></div></div>
 <div class="ttc" id="aclassDX12Resource_html_a7de5777515323fc496662e3e01c83a30"><div class="ttname"><a href="classDX12Resource.html#a7de5777515323fc496662e3e01c83a30">DX12Resource::Get</a></div><div class="ttdeci">ID3D12Resource * Get() const</div><div class="ttdoc">リソースを取得</div><div class="ttdef"><b>Definition</b> <a href="DX12Resource_8cpp_source.html#l00038">DX12Resource.cpp:38</a></div></div>
 <div class="ttc" id="aclassDX12Resource_html_ab449563ef728d837d81b333e9910aad8"><div class="ttname"><a href="classDX12Resource.html#ab449563ef728d837d81b333e9910aad8">DX12Resource::ChangeState</a></div><div class="ttdeci">void ChangeState(ID3D12GraphicsCommandList *_command, D3D12_RESOURCE_STATES _state)</div><div class="ttdoc">リソース状態を変更</div><div class="ttdef"><b>Definition</b> <a href="DX12Resource_8cpp_source.html#l00023">DX12Resource.cpp:23</a></div></div>
 <div class="ttc" id="aclassDX12Resource_html_ad72a4fefee65f8aaf6a95b8124c46d36"><div class="ttname"><a href="classDX12Resource.html#ad72a4fefee65f8aaf6a95b8124c46d36">DX12Resource::Create</a></div><div class="ttdeci">void Create(ID3D12Resource *_resource, D3D12_RESOURCE_STATES _state=D3D12_RESOURCE_STATE_COMMON)</div><div class="ttdoc">リソースを作成</div><div class="ttdef"><b>Definition</b> <a href="DX12Resource_8cpp_source.html#l00005">DX12Resource.cpp:5</a></div></div>
@@ -129,7 +129,7 @@ $(document).ready(function(){initNavTree('DX12Resource_8hpp_source.html',''); in
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_31399d34f22961890ce23f7132fb3e96.html">DirectX</a></li><li class="navelem"><a class="el" href="dir_48d78888f6f7cfcf82b3ac6d8a86d17c.html">Resource</a></li><li class="navelem"><a class="el" href="DX12Resource_8hpp.html">DX12Resource.hpp</a></li>
-    <li class="footer">2025年10月16日(木) 07時42分51秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年01月07日(水) 07時39分20秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

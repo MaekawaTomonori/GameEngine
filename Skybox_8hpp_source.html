@@ -143,32 +143,37 @@ $(document).ready(function(){initNavTree('Skybox_8hpp_source.html',''); initResi
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    Material* md_ = <span class="keyword">nullptr</span>;</div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <a class="code hl_struct" href="structTransform.html">Transform</a> transform_ {};</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    </div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classSkybox.html#a4169b42038e35350a017fd540a9fd872">Initialize</a>(<span class="keyword">const</span> std::string&amp; _texture);</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classSkybox.html#a07f9389e51ff7d429abe6dfe2402bd91">Update</a>();</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classSkybox.html#a8bf85652e4f0559530eb7a1f5ed87439">Draw</a>();</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <span class="keywordtype">void</span> CreateVertex();</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    <span class="keywordtype">void</span> CreateIndex();</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>}; <span class="comment">// class Skybox</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keywordtype">bool</span> posteffect_ = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classSkybox.html#a4169b42038e35350a017fd540a9fd872">Initialize</a>(<span class="keyword">const</span> std::string&amp; _texture);</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classSkybox.html#a07f9389e51ff7d429abe6dfe2402bd91">Update</a>();</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classSkybox.html#a8bf85652e4f0559530eb7a1f5ed87439">Draw</a>();</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classSkybox.html#af8b56738ddf0560ce1d2d50318ea7874">SetColor</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structVector4.html">Vector4</a>&amp; _color) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <span class="keywordtype">void</span> CreateVertex();</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    <span class="keywordtype">void</span> CreateIndex();</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>}; <span class="comment">// class Skybox</span></div>
 </div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="preprocessor">#endif </span><span class="comment">// Skybox_HPP_</span></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="preprocessor">#endif </span><span class="comment">// Skybox_HPP_</span></div>
 <div class="ttc" id="aDX12Resource_8hpp_html"><div class="ttname"><a href="DX12Resource_8hpp.html">DX12Resource.hpp</a></div></div>
 <div class="ttc" id="aMatrix_8hpp_html"><div class="ttname"><a href="Matrix_8hpp.html">Matrix.hpp</a></div></div>
 <div class="ttc" id="aSkyCommon_8hpp_html"><div class="ttname"><a href="SkyCommon_8hpp.html">SkyCommon.hpp</a></div></div>
 <div class="ttc" id="aTransform_8hpp_html"><div class="ttname"><a href="Transform_8hpp.html">Transform.hpp</a></div></div>
 <div class="ttc" id="aVector4_8hpp_html"><div class="ttname"><a href="Vector4_8hpp.html">Vector4.hpp</a></div></div>
-<div class="ttc" id="aclassDirectXAdapter_html"><div class="ttname"><a href="classDirectXAdapter.html">DirectXAdapter</a></div><div class="ttdoc">DirectX12アダプタークラス DirectX12の初期化とデバイス管理を提供</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8hpp_source.html#l00025">DirectXAdapter.hpp:25</a></div></div>
+<div class="ttc" id="aclassDirectXAdapter_html"><div class="ttname"><a href="classDirectXAdapter.html">DirectXAdapter</a></div><div class="ttdoc">DirectX12アダプタークラス DirectX12の初期化とデバイス管理を提供</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8hpp_source.html#l00024">DirectXAdapter.hpp:24</a></div></div>
 <div class="ttc" id="aclassSkyCommon_html"><div class="ttname"><a href="classSkyCommon.html">SkyCommon</a></div><div class="ttdef"><b>Definition</b> <a href="SkyCommon_8hpp_source.html#l00006">SkyCommon.hpp:6</a></div></div>
 <div class="ttc" id="aclassSkybox_html"><div class="ttname"><a href="classSkybox.html">Skybox</a></div><div class="ttdef"><b>Definition</b> <a href="Skybox_8hpp_source.html#l00012">Skybox.hpp:12</a></div></div>
 <div class="ttc" id="aclassSkybox_html_a07f9389e51ff7d429abe6dfe2402bd91"><div class="ttname"><a href="classSkybox.html#a07f9389e51ff7d429abe6dfe2402bd91">Skybox::Update</a></div><div class="ttdeci">void Update()</div><div class="ttdef"><b>Definition</b> <a href="Skybox_8cpp_source.html#l00039">Skybox.cpp:39</a></div></div>
 <div class="ttc" id="aclassSkybox_html_a4169b42038e35350a017fd540a9fd872"><div class="ttname"><a href="classSkybox.html#a4169b42038e35350a017fd540a9fd872">Skybox::Initialize</a></div><div class="ttdeci">void Initialize(const std::string &amp;_texture)</div><div class="ttdef"><b>Definition</b> <a href="Skybox_8cpp_source.html#l00009">Skybox.cpp:9</a></div></div>
 <div class="ttc" id="aclassSkybox_html_a8bf85652e4f0559530eb7a1f5ed87439"><div class="ttname"><a href="classSkybox.html#a8bf85652e4f0559530eb7a1f5ed87439">Skybox::Draw</a></div><div class="ttdeci">void Draw()</div><div class="ttdef"><b>Definition</b> <a href="Skybox_8cpp_source.html#l00052">Skybox.cpp:52</a></div></div>
+<div class="ttc" id="aclassSkybox_html_af8b56738ddf0560ce1d2d50318ea7874"><div class="ttname"><a href="classSkybox.html#af8b56738ddf0560ce1d2d50318ea7874">Skybox::SetColor</a></div><div class="ttdeci">void SetColor(const Vector4 &amp;_color) const</div><div class="ttdef"><b>Definition</b> <a href="Skybox_8cpp_source.html#l00070">Skybox.cpp:70</a></div></div>
 <div class="ttc" id="astructMatrix4x4_html"><div class="ttname"><a href="structMatrix4x4.html">Matrix4x4</a></div><div class="ttdoc">4x4行列構造体 3D変換と投影演算を提供</div><div class="ttdef"><b>Definition</b> <a href="Matrix_8hpp_source.html#l00015">Matrix.hpp:15</a></div></div>
-<div class="ttc" id="astructTransform_html"><div class="ttname"><a href="structTransform.html">Transform</a></div><div class="ttdoc">3D変換データ構造体 スケール、回転、平行移動を保持</div><div class="ttdef"><b>Definition</b> <a href="Transform_8hpp_source.html#l00012">Transform.hpp:12</a></div></div>
+<div class="ttc" id="astructTransform_html"><div class="ttname"><a href="structTransform.html">Transform</a></div><div class="ttdoc">3D変換データ構造体 スケール、回転、平行移動を保持</div><div class="ttdef"><b>Definition</b> <a href="Transform_8hpp_source.html#l00011">Transform.hpp:11</a></div></div>
 <div class="ttc" id="astructVector4_html"><div class="ttname"><a href="structVector4.html">Vector4</a></div><div class="ttdoc">4Dベクトル構造体 RGBA色や同次座標を表現</div><div class="ttdef"><b>Definition</b> <a href="Vector4_8hpp_source.html#l00007">Vector4.hpp:7</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
@@ -176,7 +181,7 @@ $(document).ready(function(){initNavTree('Skybox_8hpp_source.html',''); initResi
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_8716e6ea5d5c8b3c5facd10ca9f0db56.html">Sky</a></li><li class="navelem"><a class="el" href="Skybox_8hpp.html">Skybox.hpp</a></li>
-    <li class="footer">2025年10月16日(木) 07時42分51秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年01月07日(水) 07時39分20秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

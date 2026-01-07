@@ -109,10 +109,10 @@ $(document).ready(function(){initNavTree('Singleton_8cpp_source.html',''); initR
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>}</div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
 <div class="foldopen" id="foldopen00011" data-start="{" data-end="}">
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="classSingletonFinalizer.html#afeab8d77db9ebd3a6af59841a6535199">   11</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classSingletonFinalizer.html#afeab8d77db9ebd3a6af59841a6535199">SingletonFinalizer::AddFinalizer</a>(<a class="code hl_typedef" href="classSingletonFinalizer.html#a8d9e9542a58232910399d29613404d0d">Finalizer</a> finalizer) {</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="classSingletonFinalizer.html#ac4c7dbc144f5381c48ffda97f3269aa2">   11</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classSingletonFinalizer.html#ac4c7dbc144f5381c48ffda97f3269aa2">SingletonFinalizer::AddFinalizer</a>(<a class="code hl_typedef" href="classSingletonFinalizer.html#a8d9e9542a58232910399d29613404d0d">Finalizer</a> _finalizer) {</div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    std::lock_guard&lt;std::mutex&gt; lock(mutex);</div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    assert(finalizerSize &lt; MAX_FINALIZER_SIZE);</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    finalizers[finalizerSize++] = finalizer;</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    finalizers[finalizerSize++] = _finalizer;</div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>}</div>
 </div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
@@ -127,15 +127,15 @@ $(document).ready(function(){initNavTree('Singleton_8cpp_source.html',''); initR
 </div>
 <div class="ttc" id="aSingleton_8hpp_html"><div class="ttname"><a href="Singleton_8hpp.html">Singleton.hpp</a></div></div>
 <div class="ttc" id="aclassSingletonFinalizer_html_a62ec3475061563ba829120c8c8d259d1"><div class="ttname"><a href="classSingletonFinalizer.html#a62ec3475061563ba829120c8c8d259d1">SingletonFinalizer::Finalize</a></div><div class="ttdeci">static void Finalize()</div><div class="ttdoc">全シングルトンを破棄</div><div class="ttdef"><b>Definition</b> <a href="Singleton_8cpp_source.html#l00017">Singleton.cpp:17</a></div></div>
-<div class="ttc" id="aclassSingletonFinalizer_html_a8d9e9542a58232910399d29613404d0d"><div class="ttname"><a href="classSingletonFinalizer.html#a8d9e9542a58232910399d29613404d0d">SingletonFinalizer::Finalizer</a></div><div class="ttdeci">void(*)() Finalizer</div><div class="ttdef"><b>Definition</b> <a href="Singleton_8hpp_source.html#l00012">Singleton.hpp:12</a></div></div>
-<div class="ttc" id="aclassSingletonFinalizer_html_afeab8d77db9ebd3a6af59841a6535199"><div class="ttname"><a href="classSingletonFinalizer.html#afeab8d77db9ebd3a6af59841a6535199">SingletonFinalizer::AddFinalizer</a></div><div class="ttdeci">static void AddFinalizer(Finalizer finalizer)</div><div class="ttdoc">ファイナライザーを追加</div><div class="ttdef"><b>Definition</b> <a href="Singleton_8cpp_source.html#l00011">Singleton.cpp:11</a></div></div>
+<div class="ttc" id="aclassSingletonFinalizer_html_a8d9e9542a58232910399d29613404d0d"><div class="ttname"><a href="classSingletonFinalizer.html#a8d9e9542a58232910399d29613404d0d">SingletonFinalizer::Finalizer</a></div><div class="ttdeci">void(*)() Finalizer</div><div class="ttdef"><b>Definition</b> <a href="Singleton_8hpp_source.html#l00011">Singleton.hpp:11</a></div></div>
+<div class="ttc" id="aclassSingletonFinalizer_html_ac4c7dbc144f5381c48ffda97f3269aa2"><div class="ttname"><a href="classSingletonFinalizer.html#ac4c7dbc144f5381c48ffda97f3269aa2">SingletonFinalizer::AddFinalizer</a></div><div class="ttdeci">static void AddFinalizer(Finalizer _finalizer)</div><div class="ttdoc">ファイナライザーを追加</div><div class="ttdef"><b>Definition</b> <a href="Singleton_8cpp_source.html#l00011">Singleton.cpp:11</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_ef68f1e1f5148ff8ef7fb1c955106c3c.html">System</a></li><li class="navelem"><a class="el" href="dir_574493f2f7c3c3dacaa7940ff791fae1.html">Singleton</a></li><li class="navelem"><a class="el" href="Singleton_8cpp.html">Singleton.cpp</a></li>
-    <li class="footer">2025年10月16日(木) 07時42分51秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年01月07日(水) 07時39分20秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

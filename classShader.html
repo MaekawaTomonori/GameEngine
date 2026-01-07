@@ -109,6 +109,8 @@ $(document).ready(function(){initNavTree('classShader.html',''); initResizable()
 <tr class="separator:aef51eaa1eba9dfa19641df08c66367c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a093b9723d6078e4c571743b734579dce" id="r_a093b9723d6078e4c571743b734579dce"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classShader.html">Shader</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShader.html#a093b9723d6078e4c571743b734579dce">PSLoad</a> (const std::wstring &amp;_name)</td></tr>
 <tr class="separator:a093b9723d6078e4c571743b734579dce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22461c9e5346562fa1468614eb95449c" id="r_a22461c9e5346562fa1468614eb95449c"><td class="memItemLeft" align="right" valign="top">IDxcBlob *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShader.html#a22461c9e5346562fa1468614eb95449c">CompileCS</a> (const std::wstring &amp;_name) const</td></tr>
+<tr class="separator:a22461c9e5346562fa1468614eb95449c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a56c3f2468a38645b279b88bb9da7e268" id="r_a56c3f2468a38645b279b88bb9da7e268"><td class="memItemLeft" align="right" valign="top">IDxcBlob *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShader.html#a56c3f2468a38645b279b88bb9da7e268">GetVertexShader</a> () const</td></tr>
 <tr class="separator:a56c3f2468a38645b279b88bb9da7e268"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aded9a54c0095e825c72e856cfa487feb" id="r_aded9a54c0095e825c72e856cfa487feb"><td class="memItemLeft" align="right" valign="top">IDxcBlob *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShader.html#aded9a54c0095e825c72e856cfa487feb">GetPixelShader</a> () const</td></tr>
@@ -161,7 +163,7 @@ $(document).ready(function(){initNavTree('classShader.html',''); initResizable()
 
 <p class="definition"> <a class="el" href="Shader_8cpp_source.html">Shader.cpp</a> の <a class="el" href="Shader_8cpp_source.html#l00010">10</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="Utils_8cpp_source.html#l00054">Utils::Alert()</a>, <a class="el" href="Utils_8cpp_source.html#l00006">Utils::Convert()</a>, <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::ERR</a>, <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::INFO</a>, <a class="el" href="Log_8cpp_source.html#l00126">Log::SendWithContext()</a>.</p>
+<p class="reference">参照先 <a class="el" href="Utils_8cpp_source.html#l00056">Utils::Alert()</a>, <a class="el" href="Utils_8cpp_source.html#l00008">Utils::Convert()</a>, <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::ERR</a>, <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::INFO</a>, <a class="el" href="Log_8cpp_source.html#l00129">Log::SendWithContext()</a>.</p>
 
 </div>
 </div>
@@ -193,11 +195,33 @@ $(document).ready(function(){initNavTree('classShader.html',''); initResizable()
 
 <p class="definition"> <a class="el" href="Shader_8cpp_source.html">Shader.cpp</a> の <a class="el" href="Shader_8cpp_source.html#l00019">19</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="Utils_8cpp_source.html#l00054">Utils::Alert()</a>, <a class="el" href="Utils_8cpp_source.html#l00006">Utils::Convert()</a>, <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::ERR</a>, <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::INFO</a>, <a class="el" href="Log_8cpp_source.html#l00126">Log::SendWithContext()</a>.</p>
+<p class="reference">参照先 <a class="el" href="Utils_8cpp_source.html#l00056">Utils::Alert()</a>, <a class="el" href="Utils_8cpp_source.html#l00008">Utils::Convert()</a>, <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::ERR</a>, <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::INFO</a>, <a class="el" href="Log_8cpp_source.html#l00129">Log::SendWithContext()</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">関数詳解</h2>
+<a id="a22461c9e5346562fa1468614eb95449c" name="a22461c9e5346562fa1468614eb95449c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a22461c9e5346562fa1468614eb95449c">&#9670;&#160;</a></span>CompileCS()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">IDxcBlob * Shader::CompileCS </td>
+          <td>(</td>
+          <td class="paramtype">const std::wstring &amp;&#160;</td>
+          <td class="paramname"><em>_name</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="Shader_8cpp_source.html">Shader.cpp</a> の <a class="el" href="Shader_8cpp_source.html#l00077">77</a> 行目に定義があります。</p>
+
+<p class="reference">参照元 <a class="el" href="ComputePipeline_8cpp_source.html#l00012">ComputePipeline::Create()</a>.</p>
+
+</div>
+</div>
 <a id="aded9a54c0095e825c72e856cfa487feb" name="aded9a54c0095e825c72e856cfa487feb"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aded9a54c0095e825c72e856cfa487feb">&#9670;&#160;</a></span>GetPixelShader()</h2>
 
@@ -221,7 +245,7 @@ $(document).ready(function(){initNavTree('classShader.html',''); initResizable()
 </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="Shader_8h_source.html">Shader.h</a> の <a class="el" href="Shader_8h_source.html#l00028">28</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Shader_8h_source.html">Shader.h</a> の <a class="el" href="Shader_8h_source.html#l00030">30</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -248,7 +272,7 @@ $(document).ready(function(){initNavTree('classShader.html',''); initResizable()
 </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="Shader_8h_source.html">Shader.h</a> の <a class="el" href="Shader_8h_source.html#l00025">25</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Shader_8h_source.html">Shader.h</a> の <a class="el" href="Shader_8h_source.html#l00027">27</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -282,7 +306,7 @@ $(document).ready(function(){initNavTree('classShader.html',''); initResizable()
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classShader.html">Shader</a></li>
-    <li class="footer">2025年10月16日(木) 07時42分51秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年01月07日(水) 07時39分21秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

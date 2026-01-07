@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>PortfolioGame Engine: /home/runner/work/GameEngine/GameEngine/src/DirectX/GraphicsPipeline/Object/RootSignature.cpp ソースファイル</title>
+<title>PortfolioGame Engine: /home/runner/work/GameEngine/GameEngine/src/DirectX/RootSignature/RootSignature.cpp ソースファイル</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -120,8 +120,8 @@ $(document).ready(function(){initNavTree('RootSignature_8cpp_source.html',''); i
 <div class="foldopen" id="foldopen00016" data-start="{" data-end="}">
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="classRootSignature.html#aacca0a460cf7d27886497917cff3e5c9">   16</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classRootSignature.html#aacca0a460cf7d27886497917cff3e5c9">RootSignature::Create</a>(ID3D12Device* _device) {</div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="keywordflow">if</span> (!_device) {</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>        <a class="code hl_function" href="classLog.html#a1a96849014a462fb22eb2247323cb2dc">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, <span class="stringliteral">&quot;Device is null&quot;</span>);</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>        <a class="code hl_function" href="namespaceUtils.html#aa35c12cebe61c9d818df8944b3a66706">Utils::Alert</a>(<span class="stringliteral">&quot;Device is null&quot;</span>);</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>        <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, <span class="stringliteral">&quot;Device is null&quot;</span>);</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>        <a class="code hl_function" href="namespaceUtils.html#a7889f3d633f2e561e30dd11e6fc80af0">Utils::Alert</a>(<span class="stringliteral">&quot;Device is null&quot;</span>);</div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>        <span class="keywordflow">return</span>;</div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    }</div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
@@ -143,8 +143,8 @@ $(document).ready(function(){initNavTree('RootSignature_8cpp_source.html',''); i
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    );</div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keywordflow">if</span> (FAILED(hr)) {</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        <a class="code hl_function" href="classLog.html#a1a96849014a462fb22eb2247323cb2dc">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, <span class="stringliteral">&quot;Failed to serialize root signature&quot;</span>);</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        <a class="code hl_function" href="namespaceUtils.html#aa35c12cebe61c9d818df8944b3a66706">Utils::Alert</a>(<span class="stringliteral">&quot;Failed to serialize root signature&quot;</span>);</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, <span class="stringliteral">&quot;Failed to serialize root signature&quot;</span>);</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        <a class="code hl_function" href="namespaceUtils.html#a7889f3d633f2e561e30dd11e6fc80af0">Utils::Alert</a>(<span class="stringliteral">&quot;Failed to serialize root signature&quot;</span>);</div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        <span class="keywordflow">return</span>;</div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    }</div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
@@ -156,12 +156,12 @@ $(document).ready(function(){initNavTree('RootSignature_8cpp_source.html',''); i
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    );</div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    <span class="keywordflow">if</span> (FAILED(hr)) {</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        <a class="code hl_function" href="classLog.html#a1a96849014a462fb22eb2247323cb2dc">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, <span class="stringliteral">&quot;Failed to create root signature&quot;</span>);</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        <a class="code hl_function" href="namespaceUtils.html#aa35c12cebe61c9d818df8944b3a66706">Utils::Alert</a>(<span class="stringliteral">&quot;Failed to create root signature&quot;</span>);</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, <span class="stringliteral">&quot;Failed to create root signature&quot;</span>);</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        <a class="code hl_function" href="namespaceUtils.html#a7889f3d633f2e561e30dd11e6fc80af0">Utils::Alert</a>(<span class="stringliteral">&quot;Failed to create root signature&quot;</span>);</div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        <span class="keywordflow">return</span>;</div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    }</div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <a class="code hl_function" href="classLog.html#a1a96849014a462fb22eb2247323cb2dc">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>, <span class="stringliteral">&quot;Root signature created successfully&quot;</span>);</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>, <span class="stringliteral">&quot;Root signature created successfully&quot;</span>);</div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>}</div>
 </div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
@@ -173,7 +173,7 @@ $(document).ready(function(){initNavTree('RootSignature_8cpp_source.html',''); i
 <div class="ttc" id="aLog_8hpp_html"><div class="ttname"><a href="Log_8hpp.html">Log.hpp</a></div></div>
 <div class="ttc" id="aRootSignature_8hpp_html"><div class="ttname"><a href="RootSignature_8hpp.html">RootSignature.hpp</a></div></div>
 <div class="ttc" id="aUtils_8hpp_html"><div class="ttname"><a href="Utils_8hpp.html">Utils.hpp</a></div></div>
-<div class="ttc" id="aclassLog_html_a1a96849014a462fb22eb2247323cb2dc"><div class="ttname"><a href="classLog.html#a1a96849014a462fb22eb2247323cb2dc">Log::Send</a></div><div class="ttdeci">static void Send(Level level, const std::string &amp;message)</div><div class="ttdoc">ログメッセージを送信</div><div class="ttdef"><b>Definition</b> <a href="Log_8cpp_source.html#l00068">Log.cpp:68</a></div></div>
+<div class="ttc" id="aclassLog_html_af351e7d4bd43c85e7c90f52846b64bdb"><div class="ttname"><a href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a></div><div class="ttdeci">static void Send(Level _level, const std::string &amp;_message=&quot;&quot;)</div><div class="ttdoc">ログメッセージを送信</div><div class="ttdef"><b>Definition</b> <a href="Log_8cpp_source.html#l00067">Log.cpp:67</a></div></div>
 <div class="ttc" id="aclassLog_html_afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3"><div class="ttname"><a href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a></div><div class="ttdeci">@ INFO</div></div>
 <div class="ttc" id="aclassLog_html_afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482"><div class="ttname"><a href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a></div><div class="ttdeci">@ ERR</div></div>
 <div class="ttc" id="aclassRootSignature_html"><div class="ttname"><a href="classRootSignature.html">RootSignature</a></div><div class="ttdef"><b>Definition</b> <a href="RootSignature_8hpp_source.html#l00008">RootSignature.hpp:8</a></div></div>
@@ -181,14 +181,14 @@ $(document).ready(function(){initNavTree('RootSignature_8cpp_source.html',''); i
 <div class="ttc" id="aclassRootSignature_html_a1604250a85568942f6db38a3be911fe9"><div class="ttname"><a href="classRootSignature.html#a1604250a85568942f6db38a3be911fe9">RootSignature::Get</a></div><div class="ttdeci">ID3D12RootSignature * Get() const</div><div class="ttdef"><b>Definition</b> <a href="RootSignature_8cpp_source.html#l00062">RootSignature.cpp:62</a></div></div>
 <div class="ttc" id="aclassRootSignature_html_a6d6cd5a567816ca14e34f47841d98901"><div class="ttname"><a href="classRootSignature.html#a6d6cd5a567816ca14e34f47841d98901">RootSignature::AddParameter</a></div><div class="ttdeci">RootSignature &amp; AddParameter(const D3D12_ROOT_PARAMETER &amp;_parameter)</div><div class="ttdef"><b>Definition</b> <a href="RootSignature_8cpp_source.html#l00006">RootSignature.cpp:6</a></div></div>
 <div class="ttc" id="aclassRootSignature_html_aacca0a460cf7d27886497917cff3e5c9"><div class="ttname"><a href="classRootSignature.html#aacca0a460cf7d27886497917cff3e5c9">RootSignature::Create</a></div><div class="ttdeci">void Create(ID3D12Device *_device)</div><div class="ttdef"><b>Definition</b> <a href="RootSignature_8cpp_source.html#l00016">RootSignature.cpp:16</a></div></div>
-<div class="ttc" id="anamespaceUtils_html_aa35c12cebe61c9d818df8944b3a66706"><div class="ttname"><a href="namespaceUtils.html#aa35c12cebe61c9d818df8944b3a66706">Utils::Alert</a></div><div class="ttdeci">void Alert(const std::string &amp;msg)</div><div class="ttdef"><b>Definition</b> <a href="Utils_8cpp_source.html#l00054">Utils.cpp:54</a></div></div>
+<div class="ttc" id="anamespaceUtils_html_a7889f3d633f2e561e30dd11e6fc80af0"><div class="ttname"><a href="namespaceUtils.html#a7889f3d633f2e561e30dd11e6fc80af0">Utils::Alert</a></div><div class="ttdeci">void Alert(const std::string &amp;_msg)</div><div class="ttdef"><b>Definition</b> <a href="Utils_8cpp_source.html#l00056">Utils.cpp:56</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_31399d34f22961890ce23f7132fb3e96.html">DirectX</a></li><li class="navelem"><a class="el" href="dir_5e152dc6ce4833044bc05fc6d25a6808.html">GraphicsPipeline</a></li><li class="navelem"><a class="el" href="dir_e872fbfcf4dac2296573d0e1ccfba4a6.html">Object</a></li><li class="navelem"><a class="el" href="RootSignature_8cpp.html">RootSignature.cpp</a></li>
-    <li class="footer">2025年10月16日(木) 07時42分51秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_31399d34f22961890ce23f7132fb3e96.html">DirectX</a></li><li class="navelem"><a class="el" href="dir_e8e7861256057439b8155f8c643db6ab.html">RootSignature</a></li><li class="navelem"><a class="el" href="RootSignature_8cpp.html">RootSignature.cpp</a></li>
+    <li class="footer">2026年01月07日(水) 07時39分20秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

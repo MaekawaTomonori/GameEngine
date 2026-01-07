@@ -100,38 +100,132 @@ $(document).ready(function(){initNavTree('Easing_8cpp_source.html',''); initResi
 <div class="contents">
 <a href="Easing_8cpp.html">[詳解]</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#include &quot;<a class="code" href="Easing_8hpp.html">Math/Easing.hpp</a>&quot;</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
-<div class="foldopen" id="foldopen00003" data-start="{" data-end="}">
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno"><a class="line" href="Easing_8hpp.html#a4d385e74d12e45f01da9576920c74efe">    3</a></span><a class="code hl_struct" href="structVector2.html">Vector2</a> <a class="code hl_function" href="Easing_8cpp.html#a4d385e74d12e45f01da9576920c74efe">Lerp</a>(<a class="code hl_struct" href="structVector2.html">Vector2</a> start, <a class="code hl_struct" href="structVector2.html">Vector2</a> end, <span class="keywordtype">float</span> t)</div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span>{</div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span>    <span class="keywordflow">return</span> start + (end - start) * t;</div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span>}</div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceEase.html">Ease</a> {</div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span>    <span class="keyword">namespace </span>In {</div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span>        <span class="comment">// ===== Quadratic Easing (x^2) =====</span></div>
+<div class="foldopen" id="foldopen00006" data-start="{" data-end="}">
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno"><a class="line" href="namespaceEase_1_1In.html#ad0cad83a50ef640b94e3af18907c7855">    6</a></span>        <a class="code hl_struct" href="structVector2.html">Vector2</a> <a class="code hl_function" href="namespaceEase_1_1In.html#ad0cad83a50ef640b94e3af18907c7855">Quad</a>(<a class="code hl_struct" href="structVector2.html">Vector2</a> _start, <a class="code hl_struct" href="structVector2.html">Vector2</a> _end, <span class="keywordtype">float</span> _t) {</div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span>            <span class="keywordflow">return</span> _start + (_end - _start) * _t * _t;</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>        }</div>
 </div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
-<div class="foldopen" id="foldopen00008" data-start="{" data-end="}">
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno"><a class="line" href="Easing_8hpp.html#a0bb23d98bc56f5a1e8edefe6eea64d67">    8</a></span><a class="code hl_struct" href="structVector2.html">Vector2</a> <a class="code hl_function" href="Easing_8cpp.html#a0bb23d98bc56f5a1e8edefe6eea64d67">EaseIn</a>(<a class="code hl_struct" href="structVector2.html">Vector2</a> start, <a class="code hl_struct" href="structVector2.html">Vector2</a> end, <span class="keywordtype">float</span> t)</div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>{</div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>    <span class="keywordflow">return</span> start + (end - start) * t * t * t;</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>}</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="foldopen" id="foldopen00010" data-start="{" data-end="}">
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="namespaceEase_1_1In.html#a162b88a475910d574f56c4f36d20c87b">   10</a></span>        <a class="code hl_struct" href="structVector3.html">Vector3</a> <a class="code hl_function" href="namespaceEase_1_1In.html#ad0cad83a50ef640b94e3af18907c7855">Quad</a>(<a class="code hl_struct" href="structVector3.html">Vector3</a> _start, <a class="code hl_struct" href="structVector3.html">Vector3</a> _end, <span class="keywordtype">float</span> _t) {</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>            <span class="keywordflow">return</span> _start + (_end - _start) * _t * _t;</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>        }</div>
 </div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
-<div class="foldopen" id="foldopen00013" data-start="{" data-end="}">
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="Easing_8hpp.html#a882626389631c3cdad29610f03e43df3">   13</a></span><a class="code hl_struct" href="structVector2.html">Vector2</a> <a class="code hl_function" href="Easing_8cpp.html#a882626389631c3cdad29610f03e43df3">EaseOut</a>(<a class="code hl_struct" href="structVector2.html">Vector2</a> start, <a class="code hl_struct" href="structVector2.html">Vector2</a> end, <span class="keywordtype">float</span> t)</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>{</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <span class="keywordflow">return</span> start + (end - start) * (1.0f - (1.0f - t) * (1.0f - t) * (1.0f - t));</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>}</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>        <span class="comment">// ===== Cubic Easing (x^3) =====</span></div>
+<div class="foldopen" id="foldopen00015" data-start="{" data-end="}">
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="namespaceEase_1_1In.html#a4887489553cc1ea81e479f5cbeb2fa54">   15</a></span>        <a class="code hl_struct" href="structVector2.html">Vector2</a> <a class="code hl_function" href="namespaceEase_1_1In.html#a4887489553cc1ea81e479f5cbeb2fa54">Cubic</a>(<a class="code hl_struct" href="structVector2.html">Vector2</a> _start, <a class="code hl_struct" href="structVector2.html">Vector2</a> _end, <span class="keywordtype">float</span> _t) {</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>            <span class="keywordflow">return</span> _start + (_end - _start) * _t * _t * _t;</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>        }</div>
 </div>
-<div class="ttc" id="aEasing_8cpp_html_a0bb23d98bc56f5a1e8edefe6eea64d67"><div class="ttname"><a href="Easing_8cpp.html#a0bb23d98bc56f5a1e8edefe6eea64d67">EaseIn</a></div><div class="ttdeci">Vector2 EaseIn(Vector2 start, Vector2 end, float t)</div><div class="ttdef"><b>Definition</b> <a href="Easing_8cpp_source.html#l00008">Easing.cpp:8</a></div></div>
-<div class="ttc" id="aEasing_8cpp_html_a4d385e74d12e45f01da9576920c74efe"><div class="ttname"><a href="Easing_8cpp.html#a4d385e74d12e45f01da9576920c74efe">Lerp</a></div><div class="ttdeci">Vector2 Lerp(Vector2 start, Vector2 end, float t)</div><div class="ttdef"><b>Definition</b> <a href="Easing_8cpp_source.html#l00003">Easing.cpp:3</a></div></div>
-<div class="ttc" id="aEasing_8cpp_html_a882626389631c3cdad29610f03e43df3"><div class="ttname"><a href="Easing_8cpp.html#a882626389631c3cdad29610f03e43df3">EaseOut</a></div><div class="ttdeci">Vector2 EaseOut(Vector2 start, Vector2 end, float t)</div><div class="ttdef"><b>Definition</b> <a href="Easing_8cpp_source.html#l00013">Easing.cpp:13</a></div></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
+<div class="foldopen" id="foldopen00019" data-start="{" data-end="}">
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="namespaceEase_1_1In.html#ab0ec66a8b9aa35cc29dc102dee898c17">   19</a></span>        <a class="code hl_struct" href="structVector3.html">Vector3</a> <a class="code hl_function" href="namespaceEase_1_1In.html#a4887489553cc1ea81e479f5cbeb2fa54">Cubic</a>(<a class="code hl_struct" href="structVector3.html">Vector3</a> _start, <a class="code hl_struct" href="structVector3.html">Vector3</a> _end, <span class="keywordtype">float</span> _t) {</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>            <span class="keywordflow">return</span> _start + (_end - _start) * _t * _t * _t;</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>        }</div>
+</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    }</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <span class="keyword">namespace </span>Out {</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        <span class="comment">// ===== Quadratic Easing =====</span></div>
+<div class="foldopen" id="foldopen00026" data-start="{" data-end="}">
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="namespaceEase_1_1Out.html#ace0b0630ad39b426d4c159cb0d87da91">   26</a></span>        <a class="code hl_struct" href="structVector2.html">Vector2</a> <a class="code hl_function" href="namespaceEase_1_1Out.html#ace0b0630ad39b426d4c159cb0d87da91">Quad</a>(<a class="code hl_struct" href="structVector2.html">Vector2</a> _start, <a class="code hl_struct" href="structVector2.html">Vector2</a> _end, <span class="keywordtype">float</span> _t) {</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>            <span class="keywordflow">return</span> _start + (_end - _start) * (1.0f - (1.0f - _t) * (1.0f - _t));</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        }</div>
+</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="foldopen" id="foldopen00030" data-start="{" data-end="}">
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="namespaceEase_1_1Out.html#a7d52f3a64e9648a3d502ccb5e1a723b6">   30</a></span>        <a class="code hl_struct" href="structVector3.html">Vector3</a> <a class="code hl_function" href="namespaceEase_1_1Out.html#ace0b0630ad39b426d4c159cb0d87da91">Quad</a>(<a class="code hl_struct" href="structVector3.html">Vector3</a> _start, <a class="code hl_struct" href="structVector3.html">Vector3</a> _end, <span class="keywordtype">float</span> _t) {</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>            <span class="keywordflow">return</span> _start + (_end - _start) * (1.0f - (1.0f - _t) * (1.0f - _t));</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>        }</div>
+</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        <span class="comment">// ===== Cubic Easing =====</span></div>
+<div class="foldopen" id="foldopen00035" data-start="{" data-end="}">
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="namespaceEase_1_1Out.html#a5df7a2ee3698d97434b91b80bfd2e6da">   35</a></span>        <a class="code hl_struct" href="structVector2.html">Vector2</a> <a class="code hl_function" href="namespaceEase_1_1Out.html#a5df7a2ee3698d97434b91b80bfd2e6da">Cubic</a>(<a class="code hl_struct" href="structVector2.html">Vector2</a> _start, <a class="code hl_struct" href="structVector2.html">Vector2</a> _end, <span class="keywordtype">float</span> _t) {</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>            <span class="keywordflow">return</span> _start + (_end - _start) * (1.0f - (1.0f - _t) * (1.0f - _t) * (1.0f - _t));</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        }</div>
+</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="foldopen" id="foldopen00039" data-start="{" data-end="}">
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="namespaceEase_1_1Out.html#a748ab1f585473a557d93b44b1b6fd043">   39</a></span>        <a class="code hl_struct" href="structVector3.html">Vector3</a> <a class="code hl_function" href="namespaceEase_1_1Out.html#a5df7a2ee3698d97434b91b80bfd2e6da">Cubic</a>(<a class="code hl_struct" href="structVector3.html">Vector3</a> _start, <a class="code hl_struct" href="structVector3.html">Vector3</a> _end, <span class="keywordtype">float</span> _t) {</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>            <span class="keywordflow">return</span> _start + (_end - _start) * (1.0f - (1.0f - _t) * (1.0f - _t) * (1.0f - _t));</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        }</div>
+</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    }</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keyword">namespace </span>InOut {</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        <span class="comment">// ===== Quadratic Easing =====</span></div>
+<div class="foldopen" id="foldopen00046" data-start="{" data-end="}">
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="namespaceEase_1_1InOut.html#adc54f145549a3caed74245b295cc5d4d">   46</a></span>        <a class="code hl_struct" href="structVector2.html">Vector2</a> <a class="code hl_function" href="namespaceEase_1_1InOut.html#adc54f145549a3caed74245b295cc5d4d">Quad</a>(<a class="code hl_struct" href="structVector2.html">Vector2</a> _start, <a class="code hl_struct" href="structVector2.html">Vector2</a> _end, <span class="keywordtype">float</span> _t) {</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>            <span class="keywordtype">float</span> easedT;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>            <span class="keywordflow">if</span> (_t &lt; 0.5f)</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>                easedT = 2.0f * _t * _t; <span class="comment">// EaseIn for first half</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>            <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>                easedT = 1.0f - (-2.0f * _t + 2.0f) * (-2.0f * _t + 2.0f) / 2.0f; <span class="comment">// EaseOut for second half</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>            <span class="keywordflow">return</span> _start + (_end - _start) * easedT;</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        }</div>
+</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
+<div class="foldopen" id="foldopen00056" data-start="{" data-end="}">
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno"><a class="line" href="namespaceEase_1_1InOut.html#ad13475da4b95e6e656fcf1e8347b0f03">   56</a></span>        <a class="code hl_struct" href="structVector3.html">Vector3</a> <a class="code hl_function" href="namespaceEase_1_1InOut.html#adc54f145549a3caed74245b295cc5d4d">Quad</a>(<a class="code hl_struct" href="structVector3.html">Vector3</a> _start, <a class="code hl_struct" href="structVector3.html">Vector3</a> _end, <span class="keywordtype">float</span> _t) {</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>            <span class="keywordtype">float</span> easedT;</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>            <span class="keywordflow">if</span> (_t &lt; 0.5f)</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>                easedT = 2.0f * _t * _t;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>            <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>                easedT = 1.0f - (-2.0f * _t + 2.0f) * (-2.0f * _t + 2.0f) / 2.0f;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>            <span class="keywordflow">return</span> _start + (_end - _start) * easedT;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        }</div>
+</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>        <span class="comment">// ===== Cubic Easing =====</span></div>
+<div class="foldopen" id="foldopen00067" data-start="{" data-end="}">
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno"><a class="line" href="namespaceEase_1_1InOut.html#aab3c16664b559d17346071980e7e102f">   67</a></span>        <a class="code hl_struct" href="structVector2.html">Vector2</a> <a class="code hl_function" href="namespaceEase_1_1InOut.html#aab3c16664b559d17346071980e7e102f">Cubic</a>(<a class="code hl_struct" href="structVector2.html">Vector2</a> _start, <a class="code hl_struct" href="structVector2.html">Vector2</a> _end, <span class="keywordtype">float</span> _t) {</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>            <span class="keywordtype">float</span> easedT;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>            <span class="keywordflow">if</span> (_t &lt; 0.5f)</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>                easedT = 4.0f * _t * _t * _t; <span class="comment">// EaseIn for first half</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>            <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>                easedT = 1.0f - (-2.0f * _t + 2.0f) * (-2.0f * _t + 2.0f) * (-2.0f * _t + 2.0f) / 2.0f; <span class="comment">// EaseOut for second half</span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>            <span class="keywordflow">return</span> _start + (_end - _start) * easedT;</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>        }</div>
+</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
+<div class="foldopen" id="foldopen00077" data-start="{" data-end="}">
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno"><a class="line" href="namespaceEase_1_1InOut.html#acabb92a820b8d70e5d383e2f15c6b274">   77</a></span>        <a class="code hl_struct" href="structVector3.html">Vector3</a> <a class="code hl_function" href="namespaceEase_1_1InOut.html#aab3c16664b559d17346071980e7e102f">Cubic</a>(<a class="code hl_struct" href="structVector3.html">Vector3</a> _start, <a class="code hl_struct" href="structVector3.html">Vector3</a> _end, <span class="keywordtype">float</span> _t) {</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>            <span class="keywordtype">float</span> easedT;</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>            <span class="keywordflow">if</span> (_t &lt; 0.5f)</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>                easedT = 4.0f * _t * _t * _t;</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>            <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>                easedT = 1.0f - (-2.0f * _t + 2.0f) * (-2.0f * _t + 2.0f) * (-2.0f * _t + 2.0f) / 2.0f;</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span> </div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>            <span class="keywordflow">return</span> _start + (_end - _start) * easedT;</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>        }</div>
+</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    }</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>}</div>
 <div class="ttc" id="aEasing_8hpp_html"><div class="ttname"><a href="Easing_8hpp.html">Easing.hpp</a></div></div>
-<div class="ttc" id="astructVector2_html"><div class="ttname"><a href="structVector2.html">Vector2</a></div><div class="ttdoc">2Dベクトル構造体 2D座標と基本的なベクトル演算を提供</div><div class="ttdef"><b>Definition</b> <a href="Vector2_8hpp_source.html#l00008">Vector2.hpp:8</a></div></div>
+<div class="ttc" id="anamespaceEase_1_1InOut_html_aab3c16664b559d17346071980e7e102f"><div class="ttname"><a href="namespaceEase_1_1InOut.html#aab3c16664b559d17346071980e7e102f">Ease::InOut::Cubic</a></div><div class="ttdeci">Vector2 Cubic(Vector2 _start, Vector2 _end, float _t)</div><div class="ttdef"><b>Definition</b> <a href="Easing_8cpp_source.html#l00067">Easing.cpp:67</a></div></div>
+<div class="ttc" id="anamespaceEase_1_1InOut_html_adc54f145549a3caed74245b295cc5d4d"><div class="ttname"><a href="namespaceEase_1_1InOut.html#adc54f145549a3caed74245b295cc5d4d">Ease::InOut::Quad</a></div><div class="ttdeci">Vector2 Quad(Vector2 _start, Vector2 _end, float _t)</div><div class="ttdef"><b>Definition</b> <a href="Easing_8cpp_source.html#l00046">Easing.cpp:46</a></div></div>
+<div class="ttc" id="anamespaceEase_1_1In_html_a4887489553cc1ea81e479f5cbeb2fa54"><div class="ttname"><a href="namespaceEase_1_1In.html#a4887489553cc1ea81e479f5cbeb2fa54">Ease::In::Cubic</a></div><div class="ttdeci">Vector2 Cubic(Vector2 _start, Vector2 _end, float _t)</div><div class="ttdef"><b>Definition</b> <a href="Easing_8cpp_source.html#l00015">Easing.cpp:15</a></div></div>
+<div class="ttc" id="anamespaceEase_1_1In_html_ad0cad83a50ef640b94e3af18907c7855"><div class="ttname"><a href="namespaceEase_1_1In.html#ad0cad83a50ef640b94e3af18907c7855">Ease::In::Quad</a></div><div class="ttdeci">Vector2 Quad(Vector2 _start, Vector2 _end, float _t)</div><div class="ttdef"><b>Definition</b> <a href="Easing_8cpp_source.html#l00006">Easing.cpp:6</a></div></div>
+<div class="ttc" id="anamespaceEase_1_1Out_html_a5df7a2ee3698d97434b91b80bfd2e6da"><div class="ttname"><a href="namespaceEase_1_1Out.html#a5df7a2ee3698d97434b91b80bfd2e6da">Ease::Out::Cubic</a></div><div class="ttdeci">Vector2 Cubic(Vector2 _start, Vector2 _end, float _t)</div><div class="ttdef"><b>Definition</b> <a href="Easing_8cpp_source.html#l00035">Easing.cpp:35</a></div></div>
+<div class="ttc" id="anamespaceEase_1_1Out_html_ace0b0630ad39b426d4c159cb0d87da91"><div class="ttname"><a href="namespaceEase_1_1Out.html#ace0b0630ad39b426d4c159cb0d87da91">Ease::Out::Quad</a></div><div class="ttdeci">Vector2 Quad(Vector2 _start, Vector2 _end, float _t)</div><div class="ttdef"><b>Definition</b> <a href="Easing_8cpp_source.html#l00026">Easing.cpp:26</a></div></div>
+<div class="ttc" id="anamespaceEase_html"><div class="ttname"><a href="namespaceEase.html">Ease</a></div><div class="ttdef"><b>Definition</b> <a href="Easing_8hpp_source.html#l00007">Easing.hpp:7</a></div></div>
+<div class="ttc" id="astructVector2_html"><div class="ttname"><a href="structVector2.html">Vector2</a></div><div class="ttdoc">2Dベクトル構造体 2D座標と基本的なベクトル演算を提供</div><div class="ttdef"><b>Definition</b> <a href="Vector2_8hpp_source.html#l00009">Vector2.hpp:9</a></div></div>
+<div class="ttc" id="astructVector3_html"><div class="ttname"><a href="structVector3.html">Vector3</a></div><div class="ttdoc">3Dベクトル構造体 3D座標と基本的なベクトル演算を提供</div><div class="ttdef"><b>Definition</b> <a href="Vector3_8hpp_source.html#l00011">Vector3.hpp:11</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_3813464283bee2267f39dcf080a84d74.html">Math</a></li><li class="navelem"><a class="el" href="Easing_8cpp.html">Easing.cpp</a></li>
-    <li class="footer">2025年10月16日(木) 07時42分51秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年01月07日(水) 07時39分20秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

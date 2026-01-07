@@ -1,7 +1,10 @@
 var classIGame =
 [
-    [ "IGame", "classIGame.html#a8a709678e3936ea9330ac2009d75c05c", null ],
-    [ "~IGame", "classIGame.html#a91b14c1b6019364120d5c5e4d4c64414", null ],
-    [ "GetCurrentConfig", "classIGame.html#a58de2b585ce2de54d41d0074add1343d", null ],
-    [ "GetSceneSwitcher", "classIGame.html#ab38f58665f28f32bc05963da39469578", null ]
+    [ "IGame", "classIGame.html#a20d6d1cc5e972feba895d2dedd2cb40e", null ],
+    [ "~IGame", "classIGame.html#ab8b4ffb842b701fc0fdd4623943e9b5a", null ],
+    [ "GetPostEffectFactory", "classIGame.html#a27f695d8d56c521fd27ee5f227f7dec5", null ],
+    [ "GetSceneSwitcher", "classIGame.html#ab38f58665f28f32bc05963da39469578", null ],
+    [ "Initialize", "classIGame.html#a788ce1a3bc21878487faef79532c0273", null ],
+    [ "RegisterScene", "classIGame.html#ab26bd3e24ef61ebc577a1a9642af843f", null ],
+    [ "SetPostEffectFactory", "classIGame.html#a0bef264333ba4f348b3327caf21a39ab", null ]
 ];

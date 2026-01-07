@@ -100,18 +100,18 @@ $(document).ready(function(){initNavTree('SpriteCommon_8cpp_source.html',''); in
 <div class="contents">
 <a href="SpriteCommon_8cpp.html">[詳解]</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#include &quot;<a class="code" href="SpriteCommon_8hpp.html">SpriteCommon.hpp</a>&quot;</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;<a class="code" href="BlendMode_8hpp.html">src/DirectX/GraphicsPipeline/Object/BlendMode.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="InputLayout_8hpp.html">src/DirectX/GraphicsPipeline/Object/InputLayout.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;<a class="code" href="RootSignature_8hpp.html">src/DirectX/GraphicsPipeline/Object/RootSignature.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;<a class="code" href="BlendMode_8hpp.html">src/DirectX/RootSignature/BlendMode.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="InputLayout_8hpp.html">src/DirectX/RootSignature/InputLayout.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;<a class="code" href="RootSignature_8hpp.html">src/DirectX/RootSignature/RootSignature.hpp</a>&quot;</span></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;<a class="code" href="Shader_8h.html">src/DirectX/Shader/Shader.h</a>&quot;</span></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
 <div class="foldopen" id="foldopen00008" data-start="{" data-end="}">
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno"><a class="line" href="classSpriteCommon.html#a20418d30dff7afcb1e0acaa41f25ea4a">    8</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classSpriteCommon.html#a20418d30dff7afcb1e0acaa41f25ea4a">SpriteCommon::Initialize</a>(<a class="code hl_class" href="classDirectXAdapter.html">DirectXAdapter</a>* _adapter, <a class="code hl_class" href="classDebugUI.html">DebugUI</a>* _debugUi) {</div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>    <a class="code hl_function" href="classCommon.html#aec7be1d29837ac9454da288b29f2f294">Setup</a>(_adapter, _debugUi);</div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>    </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    <span class="comment">// PipelineStateObjectの初期化</span></div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    <a class="code hl_variable" href="classCommon.html#a56791becb6f297b823111b69ce45398d">pipeline_</a> = std::make_unique&lt;PipelineStateObject&gt;(_adapter);</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    D3D12_DESCRIPTOR_RANGE textureRange{</div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>        .RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV,</div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>        .NumDescriptors = 1,</div>
@@ -119,7 +119,7 @@ $(document).ready(function(){initNavTree('SpriteCommon_8cpp_source.html',''); in
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>        .RegisterSpace = 0,</div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>        .OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND</div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    };</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    </div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <span class="comment">// PipelineStateObject作成 (Sprite用)</span></div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <a class="code hl_variable" href="classCommon.html#a56791becb6f297b823111b69ce45398d">pipeline_</a>-&gt;SetRootSignature(</div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>        <a class="code hl_class" href="classRootSignature.html">RootSignature</a>()</div>
@@ -158,7 +158,7 @@ $(document).ready(function(){initNavTree('SpriteCommon_8cpp_source.html',''); in
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>            .MaxLOD = D3D12_FLOAT32_MAX,</div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>            .ShaderRegister = 0,</div>
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>            .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        })    </div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        })</div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    )</div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    .SetInputLayout(<a class="code hl_class" href="classInputLayout.html">InputLayout</a>{}</div>
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        .<a class="code hl_function" href="classInputLayout.html#a7c8232ab0bd4c9830db907c6da5887cb">SetElement</a>({<span class="stringliteral">&quot;POSITION&quot;</span>, 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, D3D12_APPEND_ALIGNED_ELEMENT, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0})</div>
@@ -170,17 +170,16 @@ $(document).ready(function(){initNavTree('SpriteCommon_8cpp_source.html',''); in
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    .Create();</div>
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>}</div>
 </div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
 <div class="ttc" id="aBlendMode_8hpp_html"><div class="ttname"><a href="BlendMode_8hpp.html">BlendMode.hpp</a></div></div>
 <div class="ttc" id="aBlendMode_8hpp_html_a30323fa90e24ca484998b9fba6c40e85a002101f8725e5c78d9f30d87f3fa4c87"><div class="ttname"><a href="BlendMode_8hpp.html#a30323fa90e24ca484998b9fba6c40e85a002101f8725e5c78d9f30d87f3fa4c87">BlendMode::ALPHA</a></div><div class="ttdeci">@ ALPHA</div></div>
 <div class="ttc" id="aInputLayout_8hpp_html"><div class="ttname"><a href="InputLayout_8hpp.html">InputLayout.hpp</a></div></div>
 <div class="ttc" id="aRootSignature_8hpp_html"><div class="ttname"><a href="RootSignature_8hpp.html">RootSignature.hpp</a></div></div>
 <div class="ttc" id="aShader_8h_html"><div class="ttname"><a href="Shader_8h.html">Shader.h</a></div></div>
 <div class="ttc" id="aSpriteCommon_8hpp_html"><div class="ttname"><a href="SpriteCommon_8hpp.html">SpriteCommon.hpp</a></div></div>
-<div class="ttc" id="aclassCommon_html_a56791becb6f297b823111b69ce45398d"><div class="ttname"><a href="classCommon.html#a56791becb6f297b823111b69ce45398d">Common::pipeline_</a></div><div class="ttdeci">std::unique_ptr&lt; PipelineStateObject &gt; pipeline_</div><div class="ttdef"><b>Definition</b> <a href="Common_8hpp_source.html#l00016">Common.hpp:16</a></div></div>
-<div class="ttc" id="aclassCommon_html_aec7be1d29837ac9454da288b29f2f294"><div class="ttname"><a href="classCommon.html#aec7be1d29837ac9454da288b29f2f294">Common::Setup</a></div><div class="ttdeci">void Setup(DirectXAdapter *_adapter, DebugUI *_debugUi)</div><div class="ttdef"><b>Definition</b> <a href="Common_8cpp_source.html#l00003">Common.cpp:3</a></div></div>
-<div class="ttc" id="aclassDebugUI_html"><div class="ttname"><a href="classDebugUI.html">DebugUI</a></div><div class="ttdoc">ImGuiアダプタークラス デバッグUIの描画とコマンド管理を提供</div><div class="ttdef"><b>Definition</b> <a href="DebugUI_8hpp_source.html#l00015">DebugUI.hpp:15</a></div></div>
-<div class="ttc" id="aclassDirectXAdapter_html"><div class="ttname"><a href="classDirectXAdapter.html">DirectXAdapter</a></div><div class="ttdoc">DirectX12アダプタークラス DirectX12の初期化とデバイス管理を提供</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8hpp_source.html#l00025">DirectXAdapter.hpp:25</a></div></div>
+<div class="ttc" id="aclassCommon_html_a56791becb6f297b823111b69ce45398d"><div class="ttname"><a href="classCommon.html#a56791becb6f297b823111b69ce45398d">Common::pipeline_</a></div><div class="ttdeci">std::unique_ptr&lt; PipelineStateObject &gt; pipeline_</div><div class="ttdef"><b>Definition</b> <a href="Common_8hpp_source.html#l00024">Common.hpp:24</a></div></div>
+<div class="ttc" id="aclassCommon_html_aec7be1d29837ac9454da288b29f2f294"><div class="ttname"><a href="classCommon.html#aec7be1d29837ac9454da288b29f2f294">Common::Setup</a></div><div class="ttdeci">void Setup(DirectXAdapter *_adapter, DebugUI *_debugUi)</div><div class="ttdef"><b>Definition</b> <a href="Common_8cpp_source.html#l00005">Common.cpp:5</a></div></div>
+<div class="ttc" id="aclassDebugUI_html"><div class="ttname"><a href="classDebugUI.html">DebugUI</a></div><div class="ttdoc">ImGuiアダプタークラス デバッグUIの描画とコマンド管理を提供</div><div class="ttdef"><b>Definition</b> <a href="DebugUI_8hpp_source.html#l00012">DebugUI.hpp:12</a></div></div>
+<div class="ttc" id="aclassDirectXAdapter_html"><div class="ttname"><a href="classDirectXAdapter.html">DirectXAdapter</a></div><div class="ttdoc">DirectX12アダプタークラス DirectX12の初期化とデバイス管理を提供</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8hpp_source.html#l00024">DirectXAdapter.hpp:24</a></div></div>
 <div class="ttc" id="aclassInputLayout_html"><div class="ttname"><a href="classInputLayout.html">InputLayout</a></div><div class="ttdef"><b>Definition</b> <a href="InputLayout_8hpp_source.html#l00006">InputLayout.hpp:6</a></div></div>
 <div class="ttc" id="aclassInputLayout_html_a7c8232ab0bd4c9830db907c6da5887cb"><div class="ttname"><a href="classInputLayout.html#a7c8232ab0bd4c9830db907c6da5887cb">InputLayout::SetElement</a></div><div class="ttdeci">InputLayout &amp; SetElement(const D3D12_INPUT_ELEMENT_DESC &amp;_element)</div><div class="ttdef"><b>Definition</b> <a href="InputLayout_8cpp_source.html#l00003">InputLayout.cpp:3</a></div></div>
 <div class="ttc" id="aclassRootSignature_html"><div class="ttname"><a href="classRootSignature.html">RootSignature</a></div><div class="ttdef"><b>Definition</b> <a href="RootSignature_8hpp_source.html#l00008">RootSignature.hpp:8</a></div></div>
@@ -191,7 +190,7 @@ $(document).ready(function(){initNavTree('SpriteCommon_8cpp_source.html',''); in
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_909c286288939002c1b25213a067bdba.html">Sprite</a></li><li class="navelem"><a class="el" href="dir_c27cb4f1352f494a0d00cb2d05d35956.html">Common</a></li><li class="navelem"><a class="el" href="SpriteCommon_8cpp.html">SpriteCommon.cpp</a></li>
-    <li class="footer">2025年10月16日(木) 07時42分51秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年01月07日(水) 07時39分20秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

@@ -106,14 +106,14 @@ $(document).ready(function(){initNavTree('classAbstractSceneFactory.html',''); i
 公開メンバ関数</h2></td></tr>
 <tr class="memitem:a8bb710dc2ffeaeae2d70bef52e1e8240" id="r_a8bb710dc2ffeaeae2d70bef52e1e8240"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAbstractSceneFactory.html#a8bb710dc2ffeaeae2d70bef52e1e8240">~AbstractSceneFactory</a> ()=default</td></tr>
 <tr class="separator:a8bb710dc2ffeaeae2d70bef52e1e8240"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aed6907e5a37fc75aa49748ab2588862d" id="r_aed6907e5a37fc75aa49748ab2588862d"><td class="memItemLeft" align="right" valign="top">virtual std::unique_ptr&lt; <a class="el" href="classIScene.html">IScene</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAbstractSceneFactory.html#aed6907e5a37fc75aa49748ab2588862d">Create</a> (const std::string &amp;sceneName)=0</td></tr>
-<tr class="memdesc:aed6907e5a37fc75aa49748ab2588862d"><td class="mdescLeft">&#160;</td><td class="mdescRight">シーンを生成（純粋仮想関数）  <br /></td></tr>
-<tr class="separator:aed6907e5a37fc75aa49748ab2588862d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4eccfafe8c2d3f5883ca6be81c3159d" id="r_ad4eccfafe8c2d3f5883ca6be81c3159d"><td class="memItemLeft" align="right" valign="top">virtual std::unique_ptr&lt; <a class="el" href="classIScene.html">IScene</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAbstractSceneFactory.html#ad4eccfafe8c2d3f5883ca6be81c3159d">Create</a> (const std::string &amp;_sceneName)=0</td></tr>
+<tr class="memdesc:ad4eccfafe8c2d3f5883ca6be81c3159d"><td class="mdescLeft">&#160;</td><td class="mdescRight">シーンを生成（純粋仮想関数）  <br /></td></tr>
+<tr class="separator:ad4eccfafe8c2d3f5883ca6be81c3159d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">詳解</h2>
 <div class="textblock"><p>シーンファクトリーの抽象基底クラス ゲーム固有のシーン生成を実装するためのインターフェース </p>
 
-<p class="definition"> <a class="el" href="AbstractSceneFactory_8hpp_source.html">AbstractSceneFactory.hpp</a> の <a class="el" href="AbstractSceneFactory_8hpp_source.html#l00012">12</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="AbstractSceneFactory_8hpp_source.html">AbstractSceneFactory.hpp</a> の <a class="el" href="AbstractSceneFactory_8hpp_source.html#l00011">11</a> 行目に定義があります。</p>
 </div><h2 class="groupheader">構築子と解体子</h2>
 <a id="a8bb710dc2ffeaeae2d70bef52e1e8240" name="a8bb710dc2ffeaeae2d70bef52e1e8240"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8bb710dc2ffeaeae2d70bef52e1e8240">&#9670;&#160;</a></span>~AbstractSceneFactory()</h2>
@@ -141,8 +141,8 @@ $(document).ready(function(){initNavTree('classAbstractSceneFactory.html',''); i
 </div>
 </div>
 <h2 class="groupheader">関数詳解</h2>
-<a id="aed6907e5a37fc75aa49748ab2588862d" name="aed6907e5a37fc75aa49748ab2588862d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aed6907e5a37fc75aa49748ab2588862d">&#9670;&#160;</a></span>Create()</h2>
+<a id="ad4eccfafe8c2d3f5883ca6be81c3159d" name="ad4eccfafe8c2d3f5883ca6be81c3159d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad4eccfafe8c2d3f5883ca6be81c3159d">&#9670;&#160;</a></span>Create()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -154,7 +154,7 @@ $(document).ready(function(){initNavTree('classAbstractSceneFactory.html',''); i
           <td class="memname">virtual std::unique_ptr&lt; <a class="el" href="classIScene.html">IScene</a> &gt; AbstractSceneFactory::Create </td>
           <td>(</td>
           <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>sceneName</em></td><td>)</td>
+          <td class="paramname"><em>_sceneName</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -168,11 +168,11 @@ $(document).ready(function(){initNavTree('classAbstractSceneFactory.html',''); i
 <p>シーンを生成（純粋仮想関数） </p>
 <dl class="params"><dt>引数</dt><dd>
   <table class="params">
-    <tr><td class="paramname">sceneName</td><td>シーン名</td></tr>
+    <tr><td class="paramname">sceneName</td><td>シーン名 </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>戻り値</dt><dd>生成されたシーンのユニークポインタ</dd></dl>
+<dl class="section return"><dt>戻り値</dt><dd>生成されたシーンのユニークポインタ </dd></dl>
 
 </div>
 </div>
@@ -185,7 +185,7 @@ $(document).ready(function(){initNavTree('classAbstractSceneFactory.html',''); i
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classAbstractSceneFactory.html">AbstractSceneFactory</a></li>
-    <li class="footer">2025年10月16日(木) 07時42分51秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年01月07日(水) 07時39分21秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

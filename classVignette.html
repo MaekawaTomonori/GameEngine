@@ -118,6 +118,18 @@ Vignette の継承関係図</div>
 <tr class="memitem:a738704cd88ac0149b7f5c40aee475d04" id="r_a738704cd88ac0149b7f5c40aee475d04"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVignette.html#a738704cd88ac0149b7f5c40aee475d04">Debug</a> () override</td></tr>
 <tr class="memdesc:a738704cd88ac0149b7f5c40aee475d04"><td class="mdescLeft">&#160;</td><td class="mdescRight">デバッグ情報の表示（純粋仮想関数）  <br /></td></tr>
 <tr class="separator:a738704cd88ac0149b7f5c40aee475d04"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b83f2b09cf94c745d658ce23b0cbeb2" id="r_a2b83f2b09cf94c745d658ce23b0cbeb2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVignette.html#a2b83f2b09cf94c745d658ce23b0cbeb2">LoadPreset</a> (const std::string &amp;_presetName) override</td></tr>
+<tr class="memdesc:a2b83f2b09cf94c745d658ce23b0cbeb2"><td class="mdescLeft">&#160;</td><td class="mdescRight">プリセットからパラメータを読み込み  <br /></td></tr>
+<tr class="separator:a2b83f2b09cf94c745d658ce23b0cbeb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa77f630cfbd8d167aa94f8ff1fa005b2" id="r_aa77f630cfbd8d167aa94f8ff1fa005b2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVignette.html#aa77f630cfbd8d167aa94f8ff1fa005b2">SavePreset</a> (const std::string &amp;_presetName) override</td></tr>
+<tr class="memdesc:aa77f630cfbd8d167aa94f8ff1fa005b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">現在のパラメータをプリセットとして保存  <br /></td></tr>
+<tr class="separator:aa77f630cfbd8d167aa94f8ff1fa005b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5555514987eeec54915583f0c02898f8" id="r_a5555514987eeec54915583f0c02898f8"><td class="memItemLeft" align="right" valign="top">nlohmann::json&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVignette.html#a5555514987eeec54915583f0c02898f8">SaveParameters</a> () const override</td></tr>
+<tr class="memdesc:a5555514987eeec54915583f0c02898f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">現在のパラメータをJSONに変換  <br /></td></tr>
+<tr class="separator:a5555514987eeec54915583f0c02898f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a546d80e5d21d1804a21a919ba2f34855" id="r_a546d80e5d21d1804a21a919ba2f34855"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVignette.html#a546d80e5d21d1804a21a919ba2f34855">UpdateAnimation</a> (float _t) override</td></tr>
+<tr class="memdesc:a546d80e5d21d1804a21a919ba2f34855"><td class="mdescLeft">&#160;</td><td class="mdescRight">アニメーション進行（tは0.0~1.0）  <br /></td></tr>
+<tr class="separator:a546d80e5d21d1804a21a919ba2f34855"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classIPostEffect"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classIPostEffect')"><img src="closed.png" alt="-"/>&#160;基底クラス <a class="el" href="classIPostEffect.html">IPostEffect</a> に属する継承公開メンバ関数</td></tr>
 <tr class="memitem:a74aee36fc8d995e104765a99a1e49f49 inherit pub_methods_classIPostEffect" id="r_a74aee36fc8d995e104765a99a1e49f49"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIPostEffect.html#a74aee36fc8d995e104765a99a1e49f49">~IPostEffect</a> ()=default</td></tr>
 <tr class="separator:a74aee36fc8d995e104765a99a1e49f49 inherit pub_methods_classIPostEffect"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -127,9 +139,9 @@ Vignette の継承関係図</div>
 <tr class="memitem:a92340d8f3785eaf52501ac02866c549a inherit pub_methods_classIPostEffect" id="r_a92340d8f3785eaf52501ac02866c549a"><td class="memItemLeft" align="right" valign="top">D3D12_GPU_DESCRIPTOR_HANDLE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIPostEffect.html#a92340d8f3785eaf52501ac02866c549a">Apply</a> (D3D12_GPU_DESCRIPTOR_HANDLE _handle)</td></tr>
 <tr class="memdesc:a92340d8f3785eaf52501ac02866c549a inherit pub_methods_classIPostEffect"><td class="mdescLeft">&#160;</td><td class="mdescRight">ポストエフェクトを適用  <br /></td></tr>
 <tr class="separator:a92340d8f3785eaf52501ac02866c549a inherit pub_methods_classIPostEffect"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a76f8e5a7dde283d4dff591e2e11d282a inherit pub_methods_classIPostEffect" id="r_a76f8e5a7dde283d4dff591e2e11d282a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIPostEffect.html#a76f8e5a7dde283d4dff591e2e11d282a">SetRTVHandle</a> (D3D12_CPU_DESCRIPTOR_HANDLE rtvHandle)</td></tr>
-<tr class="memdesc:a76f8e5a7dde283d4dff591e2e11d282a inherit pub_methods_classIPostEffect"><td class="mdescLeft">&#160;</td><td class="mdescRight">RTVハンドルを設定  <br /></td></tr>
-<tr class="separator:a76f8e5a7dde283d4dff591e2e11d282a inherit pub_methods_classIPostEffect"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d0e0b0c528df87d6cbeb9cd914f3c6a inherit pub_methods_classIPostEffect" id="r_a2d0e0b0c528df87d6cbeb9cd914f3c6a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIPostEffect.html#a2d0e0b0c528df87d6cbeb9cd914f3c6a">SetRTVHandle</a> (D3D12_CPU_DESCRIPTOR_HANDLE _rtvHandle)</td></tr>
+<tr class="memdesc:a2d0e0b0c528df87d6cbeb9cd914f3c6a inherit pub_methods_classIPostEffect"><td class="mdescLeft">&#160;</td><td class="mdescRight">RTVハンドルを設定  <br /></td></tr>
+<tr class="separator:a2d0e0b0c528df87d6cbeb9cd914f3c6a inherit pub_methods_classIPostEffect"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 限定公開メンバ関数</h2></td></tr>
@@ -161,7 +173,7 @@ Vignette の継承関係図</div>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">詳解</h2>
 <div class="textblock">
-<p class="definition"> <a class="el" href="Vignette_8hpp_source.html">Vignette.hpp</a> の <a class="el" href="Vignette_8hpp_source.html#l00005">5</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Vignette_8hpp_source.html">Vignette.hpp</a> の <a class="el" href="Vignette_8hpp_source.html#l00008">8</a> 行目に定義があります。</p>
 </div><h2 class="groupheader">関数詳解</h2>
 <a id="a738704cd88ac0149b7f5c40aee475d04" name="a738704cd88ac0149b7f5c40aee475d04"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a738704cd88ac0149b7f5c40aee475d04">&#9670;&#160;</a></span>Debug()</h2>
@@ -190,7 +202,7 @@ Vignette の継承関係図</div>
 
 <p><a class="el" href="classIPostEffect.html#a3124729a71608533d70a77d8bf268879">IPostEffect</a>を実装しています。</p>
 
-<p class="definition"> <a class="el" href="Vignette_8cpp_source.html">Vignette.cpp</a> の <a class="el" href="Vignette_8cpp_source.html#l00057">57</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Vignette_8cpp_source.html">Vignette.cpp</a> の <a class="el" href="Vignette_8cpp_source.html#l00065">65</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -221,9 +233,49 @@ Vignette の継承関係図</div>
 
 <p><a class="el" href="classIPostEffect.html#a27bb874a8d60dd891aa9a7687e2b9c53">IPostEffect</a>を実装しています。</p>
 
-<p class="definition"> <a class="el" href="Vignette_8cpp_source.html">Vignette.cpp</a> の <a class="el" href="Vignette_8cpp_source.html#l00005">5</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Vignette_8cpp_source.html">Vignette.cpp</a> の <a class="el" href="Vignette_8cpp_source.html#l00013">13</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="IPostEffect_8hpp_source.html#l00015">IPostEffect::adapter_</a>, <a class="el" href="BlendMode_8hpp.html#a30323fa90e24ca484998b9fba6c40e85a002101f8725e5c78d9f30d87f3fa4c87">ALPHA</a>, <a class="el" href="DirectXAdapter_8cpp_source.html#l00070">DirectXAdapter::CreateBufferResource()</a>, <a class="el" href="IPostEffect_8hpp_source.html#l00018">IPostEffect::pso_</a>.</p>
+<p class="reference">参照先 <a class="el" href="IPostEffect_8hpp_source.html#l00015">IPostEffect::adapter_</a>, <a class="el" href="BlendMode_8hpp.html#a30323fa90e24ca484998b9fba6c40e85a002101f8725e5c78d9f30d87f3fa4c87">ALPHA</a>, <a class="el" href="DirectXAdapter_8cpp_source.html#l00074">DirectXAdapter::CreateBufferResource()</a>, <a class="el" href="IPostEffect_8hpp_source.html#l00018">IPostEffect::pso_</a>.</p>
+
+</div>
+</div>
+<a id="a2b83f2b09cf94c745d658ce23b0cbeb2" name="a2b83f2b09cf94c745d658ce23b0cbeb2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b83f2b09cf94c745d658ce23b0cbeb2">&#9670;&#160;</a></span>LoadPreset()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Vignette::LoadPreset </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>_presetName</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>プリセットからパラメータを読み込み </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">presetName</td><td>プリセット名 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p><a class="el" href="classIPostEffect.html#a69ac2ac44055c03e456c6ee0dca92adb">IPostEffect</a>を実装しています。</p>
+
+<p class="definition"> <a class="el" href="Vignette_8cpp_source.html">Vignette.cpp</a> の <a class="el" href="Vignette_8cpp_source.html#l00076">76</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="Log_8cpp_source.html#l00067">Log::Send()</a>, <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531ea059e9861e0400dfbe05c98a841f3f96b">Log::WARNING</a>.</p>
 
 </div>
 </div>
@@ -252,9 +304,123 @@ Vignette の継承関係図</div>
 
 <p><a class="el" href="classIPostEffect.html#a714a743aff95fad87356f280810dd286">IPostEffect</a>を実装しています。</p>
 
-<p class="definition"> <a class="el" href="Vignette_8cpp_source.html">Vignette.cpp</a> の <a class="el" href="Vignette_8cpp_source.html#l00067">67</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Vignette_8cpp_source.html">Vignette.cpp</a> の <a class="el" href="Vignette_8cpp_source.html#l00072">72</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="IPostEffect_8hpp_source.html#l00015">IPostEffect::adapter_</a>, <a class="el" href="DirectXAdapter_8cpp_source.html#l00527">DirectXAdapter::GetCommandList()</a>.</p>
+<p class="reference">参照先 <a class="el" href="IPostEffect_8hpp_source.html#l00015">IPostEffect::adapter_</a>, <a class="el" href="DirectXAdapter_8cpp_source.html#l00704">DirectXAdapter::GetCommandList()</a>.</p>
+
+</div>
+</div>
+<a id="a5555514987eeec54915583f0c02898f8" name="a5555514987eeec54915583f0c02898f8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5555514987eeec54915583f0c02898f8">&#9670;&#160;</a></span>SaveParameters()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">nlohmann::json Vignette::SaveParameters </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>現在のパラメータをJSONに変換 </p>
+<dl class="section return"><dt>戻り値</dt><dd>パラメータのJSON表現 </dd></dl>
+
+<p><a class="el" href="classIPostEffect.html#a33e6d8f724d663306c0fe86b83758dcb">IPostEffect</a>を実装しています。</p>
+
+<p class="definition"> <a class="el" href="Vignette_8cpp_source.html">Vignette.cpp</a> の <a class="el" href="Vignette_8cpp_source.html#l00177">177</a> 行目に定義があります。</p>
+
+<p class="reference">参照元 <a class="el" href="Vignette_8cpp_source.html#l00159">SavePreset()</a>.</p>
+
+</div>
+</div>
+<a id="aa77f630cfbd8d167aa94f8ff1fa005b2" name="aa77f630cfbd8d167aa94f8ff1fa005b2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa77f630cfbd8d167aa94f8ff1fa005b2">&#9670;&#160;</a></span>SavePreset()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Vignette::SavePreset </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>_presetName</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>現在のパラメータをプリセットとして保存 </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">presetName</td><td>プリセット名 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p><a class="el" href="classIPostEffect.html#a263ae7d55f311c0fbc3fc0af5db4675e">IPostEffect</a>を実装しています。</p>
+
+<p class="definition"> <a class="el" href="Vignette_8cpp_source.html">Vignette.cpp</a> の <a class="el" href="Vignette_8cpp_source.html#l00159">159</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::ERR</a>, <a class="el" href="Vignette_8cpp_source.html#l00177">SaveParameters()</a>, <a class="el" href="Log_8cpp_source.html#l00067">Log::Send()</a>.</p>
+
+</div>
+</div>
+<a id="a546d80e5d21d1804a21a919ba2f34855" name="a546d80e5d21d1804a21a919ba2f34855"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a546d80e5d21d1804a21a919ba2f34855">&#9670;&#160;</a></span>UpdateAnimation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Vignette::UpdateAnimation </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>_t</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>アニメーション進行（tは0.0~1.0） </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">t</td><td>アニメーション進行度（0.0: 開始、1.0: 終了） </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p><a class="el" href="classIPostEffect.html#a6646b9d42682d20f9fde8aa44d42a82e">IPostEffect</a>を実装しています。</p>
+
+<p class="definition"> <a class="el" href="Vignette_8cpp_source.html">Vignette.cpp</a> の <a class="el" href="Vignette_8cpp_source.html#l00126">126</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="MathUtils_8cpp_source.html#l00181">MathUtils::Lerp()</a>, <a class="el" href="Vector4_8hpp_source.html#l00008">Vector4::x</a>, <a class="el" href="Vector4_8hpp_source.html#l00008">Vector4::y</a>, <a class="el" href="Vector4_8hpp_source.html#l00008">Vector4::z</a>.</p>
 
 </div>
 </div>
@@ -268,7 +434,7 @@ Vignette の継承関係図</div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classVignette.html">Vignette</a></li>
-    <li class="footer">2025年10月16日(木) 07時42分51秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年01月07日(水) 07時39分21秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

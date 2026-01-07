@@ -98,7 +98,7 @@ $(document).ready(function(){initNavTree('classIScene.html',''); initResizable()
 <table class="directory">
   <tr class="even"><td class="entry"><a class="el" href="classIScene.html#a4074b2200747d160b993fc3ac7f428ce">Awake</a>()</td><td class="entry"><a class="el" href="classIScene.html">IScene</a></td><td class="entry"></td></tr>
   <tr class="odd"><td class="entry"><a class="el" href="classIScene.html#ade036cc2b8e260b5302328eb980d5cac">Change</a>()</td><td class="entry"><a class="el" href="classIScene.html">IScene</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classIScene.html#a2749fddb5107bfed7dfd630f2e650d3c">debug_</a></td><td class="entry"><a class="el" href="classIScene.html">IScene</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classIScene.html#a6fe93519ed7280454e238be310b7ebb7">Debug</a>()</td><td class="entry"><a class="el" href="classIScene.html">IScene</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
   <tr class="odd"><td class="entry"><a class="el" href="classIScene.html#a4c397df63828cd944e48441c25b6a02b">Draw</a>()=0</td><td class="entry"><a class="el" href="classIScene.html">IScene</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classIScene.html#a3fcac30ea7958c649184f90e7ab44aa7">entryTransition_</a></td><td class="entry"><a class="el" href="classIScene.html">IScene</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
   <tr class="odd"><td class="entry"><a class="el" href="classIScene.html#a34d454017f503f7ea1a06b321ebc2567">exitTransition_</a></td><td class="entry"><a class="el" href="classIScene.html">IScene</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
@@ -110,16 +110,17 @@ $(document).ready(function(){initNavTree('classIScene.html',''); initResizable()
   <tr class="odd"><td class="entry"><a class="el" href="classIScene.html#a393ca5105619b7e73f2f35770cc0677a">IsProgress</a>() const</td><td class="entry"><a class="el" href="classIScene.html">IScene</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classIScene.html#aebe8fbddf4f36579a1fac42c88904e98">name_</a></td><td class="entry"><a class="el" href="classIScene.html">IScene</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
   <tr class="odd"><td class="entry"><a class="el" href="classIScene.html#aac6de08e79fc847b2f1feeb450aa4f09">next_</a></td><td class="entry"><a class="el" href="classIScene.html">IScene</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classIScene.html#a2ee191a11554668a7f7a1b7b894e3af0">postEffects_</a></td><td class="entry"><a class="el" href="classIScene.html">IScene</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="classIScene.html#acae837e0849ec573ad5b4f01f03ca300">Setup</a>(SceneSwitcher *_switcher, PostProcessExecutor *_ppe, DebugUI *_debug)</td><td class="entry"><a class="el" href="classIScene.html">IScene</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classIScene.html#a8ade50056bb72005e04efefab1408f37">Update</a>()=0</td><td class="entry"><a class="el" href="classIScene.html">IScene</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="classIScene.html#a146b1101069efb7a46b3bb6e419bc2bc">~IScene</a>()=default</td><td class="entry"><a class="el" href="classIScene.html">IScene</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classIScene.html#a6aa758514e0cd7563413c71f26aeddbb">Particle</a>() const</td><td class="entry"><a class="el" href="classIScene.html">IScene</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classIScene.html#a4c682401f3a7045ea7edabfe352fa399">PostEffect</a>() const</td><td class="entry"><a class="el" href="classIScene.html">IScene</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classIScene.html#a6b0a12ac2c9dcc379af0b83f71a360c5">Setup</a>(SceneSwitcher *_switcher)</td><td class="entry"><a class="el" href="classIScene.html">IScene</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classIScene.html#a8ade50056bb72005e04efefab1408f37">Update</a>()=0</td><td class="entry"><a class="el" href="classIScene.html">IScene</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classIScene.html#a146b1101069efb7a46b3bb6e419bc2bc">~IScene</a>()=default</td><td class="entry"><a class="el" href="classIScene.html">IScene</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
 </table></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">2025年10月16日(木) 07時42分51秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年01月07日(水) 07時39分21秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

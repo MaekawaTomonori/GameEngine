@@ -103,8 +103,8 @@ $(document).ready(function(){initNavTree('classMeshRepository.html',''); initRes
 公開メンバ関数</h2></td></tr>
 <tr class="memitem:a7a0828012eddacdc261b1a1e7560f6b6" id="r_a7a0828012eddacdc261b1a1e7560f6b6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMeshRepository.html#a7a0828012eddacdc261b1a1e7560f6b6">Initialize</a> (<a class="el" href="classDirectXAdapter.html">DirectXAdapter</a> *_adapter)</td></tr>
 <tr class="separator:a7a0828012eddacdc261b1a1e7560f6b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a290fdef08bf90e66c00c6c9c5e0f2492" id="r_a290fdef08bf90e66c00c6c9c5e0f2492"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMeshRepository.html#a290fdef08bf90e66c00c6c9c5e0f2492">Add</a> (const std::string &amp;_name, <a class="el" href="structMeshData.html">MeshData</a> _raw)</td></tr>
-<tr class="separator:a290fdef08bf90e66c00c6c9c5e0f2492"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a330bb2912dac8930faf1b0a6f202c0c4" id="r_a330bb2912dac8930faf1b0a6f202c0c4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMeshRepository.html#a330bb2912dac8930faf1b0a6f202c0c4">Add</a> (const std::string &amp;_name, const <a class="el" href="structMeshData.html">MeshData</a> &amp;_raw)</td></tr>
+<tr class="separator:a330bb2912dac8930faf1b0a6f202c0c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acaa3bda01dd49e91a3422beccc410c78" id="r_acaa3bda01dd49e91a3422beccc410c78"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structMeshData.html">MeshData</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMeshRepository.html#acaa3bda01dd49e91a3422beccc410c78">Get</a> (const std::string &amp;_name)</td></tr>
 <tr class="separator:acaa3bda01dd49e91a3422beccc410c78"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -112,8 +112,8 @@ $(document).ready(function(){initNavTree('classMeshRepository.html',''); initRes
 <div class="textblock">
 <p class="definition"> <a class="el" href="MeshRepository_8hpp_source.html">MeshRepository.hpp</a> の <a class="el" href="MeshRepository_8hpp_source.html#l00009">9</a> 行目に定義があります。</p>
 </div><h2 class="groupheader">関数詳解</h2>
-<a id="a290fdef08bf90e66c00c6c9c5e0f2492" name="a290fdef08bf90e66c00c6c9c5e0f2492"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a290fdef08bf90e66c00c6c9c5e0f2492">&#9670;&#160;</a></span>Add()</h2>
+<a id="a330bb2912dac8930faf1b0a6f202c0c4" name="a330bb2912dac8930faf1b0a6f202c0c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a330bb2912dac8930faf1b0a6f202c0c4">&#9670;&#160;</a></span>Add()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -127,7 +127,7 @@ $(document).ready(function(){initNavTree('classMeshRepository.html',''); initRes
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structMeshData.html">MeshData</a>&#160;</td>
+          <td class="paramtype">const <a class="el" href="structMeshData.html">MeshData</a> &amp;&#160;</td>
           <td class="paramname"><em>_raw</em>&#160;</td>
         </tr>
         <tr>
@@ -138,7 +138,7 @@ $(document).ready(function(){initNavTree('classMeshRepository.html',''); initRes
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="MeshRepository_8cpp_source.html">MeshRepository.cpp</a> の <a class="el" href="MeshRepository_8cpp_source.html#l00007">7</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="MeshRepository_8cpp_source.html">MeshRepository.cpp</a> の <a class="el" href="MeshRepository_8cpp_source.html#l00011">11</a> 行目に定義があります。</p>
 
 <p class="reference">参照元 <a class="el" href="ObjLoader_8cpp_source.html#l00009">ObjLoader::LoadModel()</a>.</p>
 
@@ -160,9 +160,11 @@ $(document).ready(function(){initNavTree('classMeshRepository.html',''); initRes
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="MeshRepository_8cpp_source.html">MeshRepository.cpp</a> の <a class="el" href="MeshRepository_8cpp_source.html#l00012">12</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="MeshRepository_8cpp_source.html">MeshRepository.cpp</a> の <a class="el" href="MeshRepository_8cpp_source.html#l00016">16</a> 行目に定義があります。</p>
 
-<p class="reference">参照元 <a class="el" href="Model_8cpp_source.html#l00023">Model::Initialize()</a>.</p>
+<p class="reference">参照先 <a class="el" href="Utils_8cpp_source.html#l00056">Utils::Alert()</a>, <a class="el" href="Model_8cpp_source.html#l00197">Model::Load()</a>.</p>
+
+<p class="reference">参照元 <a class="el" href="ParticleSystem_8cpp_source.html#l00019">ParticleSystem::GroupEditor::AddEmitter()</a>, <a class="el" href="Model_8cpp_source.html#l00023">Model::Initialize()</a>.</p>
 
 </div>
 </div>
@@ -182,7 +184,7 @@ $(document).ready(function(){initNavTree('classMeshRepository.html',''); initRes
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="MeshRepository_8cpp_source.html">MeshRepository.cpp</a> の <a class="el" href="MeshRepository_8cpp_source.html#l00003">3</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="MeshRepository_8cpp_source.html">MeshRepository.cpp</a> の <a class="el" href="MeshRepository_8cpp_source.html#l00007">7</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -196,7 +198,7 @@ $(document).ready(function(){initNavTree('classMeshRepository.html',''); initRes
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classMeshRepository.html">MeshRepository</a></li>
-    <li class="footer">2025年10月16日(木) 07時42分51秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年01月07日(水) 07時39分21秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

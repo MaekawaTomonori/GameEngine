@@ -98,12 +98,14 @@ $(document).ready(function(){initNavTree('classSpriteCommon.html',''); initResiz
 <table class="directory">
   <tr class="even"><td class="entry"><a class="el" href="classCommon.html#a642f6834fbb63978b129a4394c447952">adapter_</a></td><td class="entry"><a class="el" href="classCommon.html">Common</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
   <tr class="odd"><td class="entry"><a class="el" href="classCommon.html#add9f8c6db3e1528f3b5e80df03a669e7">debugUI_</a></td><td class="entry"><a class="el" href="classCommon.html">Common</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classCommon.html#a84a1efbee3ab266e3f3b4c4caf9e0872">Draw</a>()</td><td class="entry"><a class="el" href="classCommon.html">Common</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="classCommon.html#af76821d28439133bfde8bedcd657e645">GetAdapter</a>() const</td><td class="entry"><a class="el" href="classCommon.html">Common</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classSpriteCommon.html#a20418d30dff7afcb1e0acaa41f25ea4a">Initialize</a>(DirectXAdapter *_adapter, DebugUI *_debugUi) override</td><td class="entry"><a class="el" href="classSpriteCommon.html">SpriteCommon</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="classCommon.html#a0e67c3b7f994e47e54d72108e91c9ada">mutex_</a></td><td class="entry"><a class="el" href="classCommon.html">Common</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classCommon.html#a56791becb6f297b823111b69ce45398d">pipeline_</a></td><td class="entry"><a class="el" href="classCommon.html">Common</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="classCommon.html#a5f92731eaef40e999428d4d35e6ed421">RegisterCommand</a>(const std::string &amp;_id, const std::function&lt; void()&gt; &amp;_command)</td><td class="entry"><a class="el" href="classCommon.html">Common</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classCommon.html#a24a9aa7c0ce1b85fa15471c3386d04cf">Draw</a>(Renderer *_renderer)</td><td class="entry"><a class="el" href="classCommon.html">Common</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classCommon.html#a06218b42051cb18b344e03f44b3e250a">drawFunctions_</a></td><td class="entry"><a class="el" href="classCommon.html">Common</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classCommon.html#af76821d28439133bfde8bedcd657e645">GetAdapter</a>() const</td><td class="entry"><a class="el" href="classCommon.html">Common</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classSpriteCommon.html#a20418d30dff7afcb1e0acaa41f25ea4a">Initialize</a>(DirectXAdapter *_adapter, DebugUI *_debugUi) override</td><td class="entry"><a class="el" href="classSpriteCommon.html">SpriteCommon</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classCommon.html#a0e67c3b7f994e47e54d72108e91c9ada">mutex_</a></td><td class="entry"><a class="el" href="classCommon.html">Common</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classCommon.html#a56791becb6f297b823111b69ce45398d">pipeline_</a></td><td class="entry"><a class="el" href="classCommon.html">Common</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classCommon.html#a4ee372def646bfb254db5de45bb7f5d8">RegisterDebug</a>(const std::string &amp;_id, const std::function&lt; void()&gt; &amp;_command)</td><td class="entry"><a class="el" href="classCommon.html">Common</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classCommon.html#ae93c4bd439c1a6d360c5ba68d13a6d4f">RegisterDraw</a>(const std::function&lt; void()&gt; &amp;_command, bool _isApplyPostEffect=true)</td><td class="entry"><a class="el" href="classCommon.html">Common</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classCommon.html#aec7be1d29837ac9454da288b29f2f294">Setup</a>(DirectXAdapter *_adapter, DebugUI *_debugUi)</td><td class="entry"><a class="el" href="classCommon.html">Common</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
   <tr class="odd"><td class="entry"><a class="el" href="classCommon.html#a731fbced46f3c3dbc3cf8234dc0f0eb0">~Common</a>()=default</td><td class="entry"><a class="el" href="classCommon.html">Common</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
 </table></div><!-- contents -->
@@ -111,7 +113,7 @@ $(document).ready(function(){initNavTree('classSpriteCommon.html',''); initResiz
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">2025年10月16日(木) 07時42分51秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年01月07日(水) 07時39分21秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

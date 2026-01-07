@@ -110,17 +110,17 @@ $(document).ready(function(){initNavTree('classHeap.html',''); initResizable(); 
 <tr class="memitem:aea3ea1db8ed4ce3e8f7b3b538006cf8b" id="r_aea3ea1db8ed4ce3e8f7b3b538006cf8b"><td class="memItemLeft" align="right" valign="top">ID3D12DescriptorHeap *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHeap.html#aea3ea1db8ed4ce3e8f7b3b538006cf8b">Get</a> () const</td></tr>
 <tr class="memdesc:aea3ea1db8ed4ce3e8f7b3b538006cf8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">ディスクリプタヒープを取得  <br /></td></tr>
 <tr class="separator:aea3ea1db8ed4ce3e8f7b3b538006cf8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa92fbabf7f345b59c9fc46281435335c" id="r_aa92fbabf7f345b59c9fc46281435335c"><td class="memItemLeft" align="right" valign="top">D3D12_CPU_DESCRIPTOR_HANDLE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHeap.html#aa92fbabf7f345b59c9fc46281435335c">GetCPUHandle</a> (uint32_t index) const</td></tr>
-<tr class="memdesc:aa92fbabf7f345b59c9fc46281435335c"><td class="mdescLeft">&#160;</td><td class="mdescRight">CPUディスクリプタハンドルを取得  <br /></td></tr>
-<tr class="separator:aa92fbabf7f345b59c9fc46281435335c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4eceea7fe352c5b3330e8da45fd729fa" id="r_a4eceea7fe352c5b3330e8da45fd729fa"><td class="memItemLeft" align="right" valign="top">D3D12_GPU_DESCRIPTOR_HANDLE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHeap.html#a4eceea7fe352c5b3330e8da45fd729fa">GetGPUHandle</a> (uint32_t index) const</td></tr>
-<tr class="memdesc:a4eceea7fe352c5b3330e8da45fd729fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">GPUディスクリプタハンドルを取得  <br /></td></tr>
-<tr class="separator:a4eceea7fe352c5b3330e8da45fd729fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a15f416966072d7b932cc4339ea77ac6f" id="r_a15f416966072d7b932cc4339ea77ac6f"><td class="memItemLeft" align="right" valign="top">D3D12_CPU_DESCRIPTOR_HANDLE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHeap.html#a15f416966072d7b932cc4339ea77ac6f">GetCPUHandle</a> (uint32_t _index) const</td></tr>
+<tr class="memdesc:a15f416966072d7b932cc4339ea77ac6f"><td class="mdescLeft">&#160;</td><td class="mdescRight">CPUディスクリプタハンドルを取得  <br /></td></tr>
+<tr class="separator:a15f416966072d7b932cc4339ea77ac6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af26cde511522fdde3ca02529275109c1" id="r_af26cde511522fdde3ca02529275109c1"><td class="memItemLeft" align="right" valign="top">D3D12_GPU_DESCRIPTOR_HANDLE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHeap.html#af26cde511522fdde3ca02529275109c1">GetGPUHandle</a> (uint32_t _index) const</td></tr>
+<tr class="memdesc:af26cde511522fdde3ca02529275109c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">GPUディスクリプタハンドルを取得  <br /></td></tr>
+<tr class="separator:af26cde511522fdde3ca02529275109c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">詳解</h2>
 <div class="textblock"><p>ディスクリプタヒープクラス DirectX12のディスクリプタヒープを管理 </p>
 
-<p class="definition"> <a class="el" href="Heap_8hpp_source.html">Heap.hpp</a> の <a class="el" href="Heap_8hpp_source.html#l00011">11</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Heap_8hpp_source.html">Heap.hpp</a> の <a class="el" href="Heap_8hpp_source.html#l00010">10</a> 行目に定義があります。</p>
 </div><h2 class="groupheader">関数詳解</h2>
 <a id="a7542b6d8d537068c8f30aa84385db638" name="a7542b6d8d537068c8f30aa84385db638"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7542b6d8d537068c8f30aa84385db638">&#9670;&#160;</a></span>Create()</h2>
@@ -163,18 +163,18 @@ $(document).ready(function(){initNavTree('classHeap.html',''); initResizable(); 
 <p>ディスクリプタヒープを作成 </p>
 <dl class="params"><dt>引数</dt><dd>
   <table class="params">
-    <tr><td class="paramname">_device</td><td>デバイス</td></tr>
-    <tr><td class="paramname">_type</td><td>ヒープタイプ</td></tr>
-    <tr><td class="paramname">_numDescriptors</td><td>ディスクリプタ数</td></tr>
-    <tr><td class="paramname">_flags</td><td>フラグ</td></tr>
+    <tr><td class="paramname">_device</td><td>デバイス </td></tr>
+    <tr><td class="paramname">_type</td><td>ヒープタイプ </td></tr>
+    <tr><td class="paramname">_numDescriptors</td><td>ディスクリプタ数 </td></tr>
+    <tr><td class="paramname">_flags</td><td>フラグ </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>戻り値</dt><dd>成功した場合true</dd></dl>
+<dl class="section return"><dt>戻り値</dt><dd>成功した場合true </dd></dl>
 
 <p class="definition"> <a class="el" href="Heap_8cpp_source.html">Heap.cpp</a> の <a class="el" href="Heap_8cpp_source.html#l00005">5</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="Utils_8cpp_source.html#l00054">Utils::Alert()</a>.</p>
+<p class="reference">参照先 <a class="el" href="Utils_8cpp_source.html#l00056">Utils::Alert()</a>.</p>
 
 </div>
 </div>
@@ -194,14 +194,14 @@ $(document).ready(function(){initNavTree('classHeap.html',''); initResizable(); 
 </div><div class="memdoc">
 
 <p>ディスクリプタヒープを取得 </p>
-<dl class="section return"><dt>戻り値</dt><dd>ディスクリプタヒープポインタ</dd></dl>
+<dl class="section return"><dt>戻り値</dt><dd>ディスクリプタヒープポインタ </dd></dl>
 
 <p class="definition"> <a class="el" href="Heap_8cpp_source.html">Heap.cpp</a> の <a class="el" href="Heap_8cpp_source.html#l00021">21</a> 行目に定義があります。</p>
 
 </div>
 </div>
-<a id="aa92fbabf7f345b59c9fc46281435335c" name="aa92fbabf7f345b59c9fc46281435335c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa92fbabf7f345b59c9fc46281435335c">&#9670;&#160;</a></span>GetCPUHandle()</h2>
+<a id="a15f416966072d7b932cc4339ea77ac6f" name="a15f416966072d7b932cc4339ea77ac6f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a15f416966072d7b932cc4339ea77ac6f">&#9670;&#160;</a></span>GetCPUHandle()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -210,7 +210,7 @@ $(document).ready(function(){initNavTree('classHeap.html',''); initResizable(); 
           <td class="memname">D3D12_CPU_DESCRIPTOR_HANDLE Heap::GetCPUHandle </td>
           <td>(</td>
           <td class="paramtype">uint32_t&#160;</td>
-          <td class="paramname"><em>index</em></td><td>)</td>
+          <td class="paramname"><em>_index</em></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
@@ -219,18 +219,18 @@ $(document).ready(function(){initNavTree('classHeap.html',''); initResizable(); 
 <p>CPUディスクリプタハンドルを取得 </p>
 <dl class="params"><dt>引数</dt><dd>
   <table class="params">
-    <tr><td class="paramname">index</td><td>インデックス</td></tr>
+    <tr><td class="paramname">index</td><td>インデックス </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>戻り値</dt><dd>CPUディスクリプタハンドル</dd></dl>
+<dl class="section return"><dt>戻り値</dt><dd>CPUディスクリプタハンドル </dd></dl>
 
 <p class="definition"> <a class="el" href="Heap_8cpp_source.html">Heap.cpp</a> の <a class="el" href="Heap_8cpp_source.html#l00025">25</a> 行目に定義があります。</p>
 
 </div>
 </div>
-<a id="a4eceea7fe352c5b3330e8da45fd729fa" name="a4eceea7fe352c5b3330e8da45fd729fa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4eceea7fe352c5b3330e8da45fd729fa">&#9670;&#160;</a></span>GetGPUHandle()</h2>
+<a id="af26cde511522fdde3ca02529275109c1" name="af26cde511522fdde3ca02529275109c1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af26cde511522fdde3ca02529275109c1">&#9670;&#160;</a></span>GetGPUHandle()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -239,7 +239,7 @@ $(document).ready(function(){initNavTree('classHeap.html',''); initResizable(); 
           <td class="memname">D3D12_GPU_DESCRIPTOR_HANDLE Heap::GetGPUHandle </td>
           <td>(</td>
           <td class="paramtype">uint32_t&#160;</td>
-          <td class="paramname"><em>index</em></td><td>)</td>
+          <td class="paramname"><em>_index</em></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
@@ -248,11 +248,11 @@ $(document).ready(function(){initNavTree('classHeap.html',''); initResizable(); 
 <p>GPUディスクリプタハンドルを取得 </p>
 <dl class="params"><dt>引数</dt><dd>
   <table class="params">
-    <tr><td class="paramname">index</td><td>インデックス</td></tr>
+    <tr><td class="paramname">index</td><td>インデックス </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>戻り値</dt><dd>GPUディスクリプタハンドル</dd></dl>
+<dl class="section return"><dt>戻り値</dt><dd>GPUディスクリプタハンドル </dd></dl>
 
 <p class="definition"> <a class="el" href="Heap_8cpp_source.html">Heap.cpp</a> の <a class="el" href="Heap_8cpp_source.html#l00031">31</a> 行目に定義があります。</p>
 
@@ -268,7 +268,7 @@ $(document).ready(function(){initNavTree('classHeap.html',''); initResizable(); 
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classHeap.html">Heap</a></li>
-    <li class="footer">2025年10月16日(木) 07時42分51秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年01月07日(水) 07時39分21秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

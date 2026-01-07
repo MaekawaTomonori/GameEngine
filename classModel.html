@@ -132,6 +132,15 @@ $(document).ready(function(){initNavTree('classModel.html',''); initResizable();
 <tr class="memitem:ac02ef8d4c5375b8501e1a6806eace580" id="r_ac02ef8d4c5375b8501e1a6806eace580"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classModel.html">Model</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModel.html#ac02ef8d4c5375b8501e1a6806eace580">SetTexture</a> (const std::string &amp;_texture)</td></tr>
 <tr class="memdesc:ac02ef8d4c5375b8501e1a6806eace580"><td class="mdescLeft">&#160;</td><td class="mdescRight">テクスチャを設定  <br /></td></tr>
 <tr class="separator:ac02ef8d4c5375b8501e1a6806eace580"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4192cb6b6bd46e384f9b36cb892b959c" id="r_a4192cb6b6bd46e384f9b36cb892b959c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classModel.html">Model</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModel.html#a4192cb6b6bd46e384f9b36cb892b959c">SetTilingMultiply</a> (<a class="el" href="structVector2.html">Vector2</a> _mul)</td></tr>
+<tr class="memdesc:a4192cb6b6bd46e384f9b36cb892b959c"><td class="mdescLeft">&#160;</td><td class="mdescRight">テクスチャのタイリング倍率を設定  <br /></td></tr>
+<tr class="separator:a4192cb6b6bd46e384f9b36cb892b959c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01d41caf838a11712827222915da6e42" id="r_a01d41caf838a11712827222915da6e42"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classModel.html">Model</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModel.html#a01d41caf838a11712827222915da6e42">SetColor</a> (<a class="el" href="structVector4.html">Vector4</a> _color)</td></tr>
+<tr class="separator:a01d41caf838a11712827222915da6e42"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa235e5c01560834bee958787e099b19f" id="r_aa235e5c01560834bee958787e099b19f"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModel.html#aa235e5c01560834bee958787e099b19f">GetUniqueId</a> ()</td></tr>
+<tr class="separator:aa235e5c01560834bee958787e099b19f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a258ce8b2aac1f42ef3cfed78a3cecb70" id="r_a258ce8b2aac1f42ef3cfed78a3cecb70"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classMesh.html">Mesh</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModel.html#a258ce8b2aac1f42ef3cfed78a3cecb70">GetMesh</a> () const</td></tr>
+<tr class="separator:a258ce8b2aac1f42ef3cfed78a3cecb70"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 静的公開メンバ関数</h2></td></tr>
@@ -142,7 +151,7 @@ $(document).ready(function(){initNavTree('classModel.html',''); initResizable();
 <a name="details" id="details"></a><h2 class="groupheader">詳解</h2>
 <div class="textblock"><p>3Dモデルクラス メッシュ、テクスチャ、アニメーション、スキニングを管理 </p>
 
-<p class="definition"> <a class="el" href="Model_8hpp_source.html">Model.hpp</a> の <a class="el" href="Model_8hpp_source.html#l00020">20</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Model_8hpp_source.html">Model.hpp</a> の <a class="el" href="Model_8hpp_source.html#l00019">19</a> 行目に定義があります。</p>
 </div><h2 class="groupheader">構築子と解体子</h2>
 <a id="ae3b375de5f6df4faf74a95d64748e048" name="ae3b375de5f6df4faf74a95d64748e048"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae3b375de5f6df4faf74a95d64748e048">&#9670;&#160;</a></span>Model()</h2>
@@ -181,9 +190,47 @@ $(document).ready(function(){initNavTree('classModel.html',''); initResizable();
 
 <p>モデルを描画 </p>
 
-<p class="definition"> <a class="el" href="Model_8cpp_source.html">Model.cpp</a> の <a class="el" href="Model_8cpp_source.html#l00106">106</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Model_8cpp_source.html">Model.cpp</a> の <a class="el" href="Model_8cpp_source.html#l00108">108</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="ModelCommon_8cpp_source.html#l00287">ModelCommon::DrawSkinning()</a>, <a class="el" href="ModelCommon_8cpp_source.html#l00291">ModelCommon::DrawStatic()</a>, <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::ERR</a>, <a class="el" href="TextureManager_8cpp_source.html#l00226">TextureManager::GetGPUHandle()</a>, <a class="el" href="Singleton_8hpp_source.html#l00043">Singleton&lt; T &gt;::GetInstance()</a>, <a class="el" href="Log_8cpp_source.html#l00068">Log::Send()</a>, <a class="el" href="ModelData_8hpp_source.html#l00033">ModelData::skeleton</a>, <a class="el" href="ModelData_8hpp_source.html#l00028">ModelData::skinCluster</a>.</p>
+<p class="reference">参照先 <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::ERR</a>, <a class="el" href="TextureManager_8cpp_source.html#l00239">TextureManager::GetGPUHandle()</a>, <a class="el" href="Singleton_8hpp_source.html#l00038">Singleton&lt; T &gt;::GetInstance()</a>, <a class="el" href="ModelCommon_8cpp_source.html#l00304">ModelCommon::RegisterSkinningDraw()</a>, <a class="el" href="ModelCommon_8cpp_source.html#l00299">ModelCommon::RegisterStaticDraw()</a>, <a class="el" href="Log_8cpp_source.html#l00067">Log::Send()</a>, <a class="el" href="ModelData_8hpp_source.html#l00030">ModelData::skeleton</a>, <a class="el" href="ModelData_8hpp_source.html#l00025">ModelData::skinCluster</a>.</p>
+
+</div>
+</div>
+<a id="a258ce8b2aac1f42ef3cfed78a3cecb70" name="a258ce8b2aac1f42ef3cfed78a3cecb70"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a258ce8b2aac1f42ef3cfed78a3cecb70">&#9670;&#160;</a></span>GetMesh()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classMesh.html">Mesh</a> * Model::GetMesh </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="Model_8cpp_source.html">Model.cpp</a> の <a class="el" href="Model_8cpp_source.html#l00193">193</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="aa235e5c01560834bee958787e099b19f" name="aa235e5c01560834bee958787e099b19f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa235e5c01560834bee958787e099b19f">&#9670;&#160;</a></span>GetUniqueId()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string Model::GetUniqueId </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="Model_8cpp_source.html">Model.cpp</a> の <a class="el" href="Model_8cpp_source.html#l00189">189</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -206,14 +253,14 @@ $(document).ready(function(){initNavTree('classModel.html',''); initResizable();
 <p>モデルを初期化 </p>
 <dl class="params"><dt>引数</dt><dd>
   <table class="params">
-    <tr><td class="paramname">_name</td><td>モデル名</td></tr>
+    <tr><td class="paramname">_name</td><td>モデル名 </td></tr>
   </table>
   </dd>
 </dl>
 
 <p class="definition"> <a class="el" href="Model_8cpp_source.html">Model.cpp</a> の <a class="el" href="Model_8cpp_source.html#l00023">23</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="Utils_8cpp_source.html#l00054">Utils::Alert()</a>, <a class="el" href="DirectXAdapter_8cpp_source.html#l00070">DirectXAdapter::CreateBufferResource()</a>, <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::ERR</a>, <a class="el" href="MeshRepository_8cpp_source.html#l00012">MeshRepository::Get()</a>, <a class="el" href="ModelRepository_8cpp_source.html#l00007">ModelRepository::Get()</a>, <a class="el" href="ResourceRepository_8cpp_source.html#l00012">ResourceRepository::GetMeshRepository()</a>, <a class="el" href="ResourceRepository_8cpp_source.html#l00008">ResourceRepository::GetModelRepository()</a>, <a class="el" href="ModelCommon_8hpp_source.html#l00024">ModelCommon::GetResourceRepository()</a>, <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::INFO</a>, <a class="el" href="Line_8cpp_source.html#l00020">Line::Initialize()</a>, <a class="el" href="Model_8cpp_source.html#l00167">Load()</a>, <a class="el" href="MathUtils_8cpp_source.html#l00016">MathUtils::Matrix::MakeIdentity()</a>, <a class="el" href="ModelData_8hpp_source.html#l00030">ModelData::mesh</a>, <a class="el" href="Log_8cpp_source.html#l00068">Log::Send()</a>, <a class="el" href="ModelData_8hpp_source.html#l00033">ModelData::skeleton</a>, <a class="el" href="ModelData_8hpp_source.html#l00028">ModelData::skinCluster</a> (計16項目).</p>
+<p class="reference">参照先 <a class="el" href="Utils_8cpp_source.html#l00056">Utils::Alert()</a>, <a class="el" href="DirectXAdapter_8cpp_source.html#l00074">DirectXAdapter::CreateBufferResource()</a>, <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::ERR</a>, <a class="el" href="MeshRepository_8cpp_source.html#l00016">MeshRepository::Get()</a>, <a class="el" href="ModelRepository_8cpp_source.html#l00007">ModelRepository::Get()</a>, <a class="el" href="Singleton_8hpp_source.html#l00038">Singleton&lt; T &gt;::GetInstance()</a>, <a class="el" href="ResourceRepository_8cpp_source.html#l00012">ResourceRepository::GetMeshRepository()</a>, <a class="el" href="ResourceRepository_8cpp_source.html#l00008">ResourceRepository::GetModelRepository()</a>, <a class="el" href="ModelCommon_8hpp_source.html#l00032">ModelCommon::GetResourceRepository()</a>, <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::INFO</a>, <a class="el" href="Line_8cpp_source.html#l00023">Line::Initialize()</a>, <a class="el" href="Model_8cpp_source.html#l00197">Load()</a>, <a class="el" href="MathUtils_8cpp_source.html#l00018">MathUtils::Matrix::MakeIdentity()</a>, <a class="el" href="ModelData_8hpp_source.html#l00027">ModelData::mesh</a>, <a class="el" href="Log_8cpp_source.html#l00067">Log::Send()</a>, <a class="el" href="ModelData_8hpp_source.html#l00030">ModelData::skeleton</a>, <a class="el" href="ModelData_8hpp_source.html#l00025">ModelData::skinCluster</a> (計17項目).</p>
 
 </div>
 </div>
@@ -244,16 +291,36 @@ $(document).ready(function(){initNavTree('classModel.html',''); initResizable();
 <p>モデルデータを事前読み込み </p>
 <dl class="params"><dt>引数</dt><dd>
   <table class="params">
-    <tr><td class="paramname">_name</td><td>モデル名</td></tr>
+    <tr><td class="paramname">_name</td><td>モデル名 </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition"> <a class="el" href="Model_8cpp_source.html">Model.cpp</a> の <a class="el" href="Model_8cpp_source.html#l00167">167</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Model_8cpp_source.html">Model.cpp</a> の <a class="el" href="Model_8cpp_source.html#l00197">197</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="Utils_8cpp_source.html#l00054">Utils::Alert()</a>, <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::ERR</a>, <a class="el" href="Log_8cpp_source.html#l00068">Log::Send()</a>.</p>
+<p class="reference">参照先 <a class="el" href="Utils_8cpp_source.html#l00056">Utils::Alert()</a>, <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::ERR</a>, <a class="el" href="Log_8cpp_source.html#l00067">Log::Send()</a>.</p>
 
-<p class="reference">参照元 <a class="el" href="Model_8cpp_source.html#l00023">Initialize()</a>.</p>
+<p class="reference">参照元 <a class="el" href="MeshRepository_8cpp_source.html#l00016">MeshRepository::Get()</a>, <a class="el" href="Model_8cpp_source.html#l00023">Initialize()</a>.</p>
+
+</div>
+</div>
+<a id="a01d41caf838a11712827222915da6e42" name="a01d41caf838a11712827222915da6e42"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a01d41caf838a11712827222915da6e42">&#9670;&#160;</a></span>SetColor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classModel.html">Model</a> &amp; Model::SetColor </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structVector4.html">Vector4</a>&#160;</td>
+          <td class="paramname"><em>_color</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="Model_8cpp_source.html">Model.cpp</a> の <a class="el" href="Model_8cpp_source.html#l00182">182</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -276,15 +343,15 @@ $(document).ready(function(){initNavTree('classModel.html',''); initResizable();
 <p>環境マッピング用テクスチャを設定 </p>
 <dl class="params"><dt>引数</dt><dd>
   <table class="params">
-    <tr><td class="paramname">_texture</td><td>テクスチャパス</td></tr>
+    <tr><td class="paramname">_texture</td><td>テクスチャパス </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>戻り値</dt><dd>メソッドチェーン用の自身への参照</dd></dl>
+<dl class="section return"><dt>戻り値</dt><dd>メソッドチェーン用の自身への参照 </dd></dl>
 
-<p class="definition"> <a class="el" href="Model_8cpp_source.html">Model.cpp</a> の <a class="el" href="Model_8cpp_source.html#l00149">149</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Model_8cpp_source.html">Model.cpp</a> の <a class="el" href="Model_8cpp_source.html#l00153">153</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="Singleton_8hpp_source.html#l00043">Singleton&lt; T &gt;::GetInstance()</a>, <a class="el" href="TextureManager_8cpp_source.html#l00133">TextureManager::Load()</a>.</p>
+<p class="reference">参照先 <a class="el" href="Singleton_8hpp_source.html#l00038">Singleton&lt; T &gt;::GetInstance()</a>, <a class="el" href="TextureManager_8cpp_source.html#l00133">TextureManager::Load()</a>.</p>
 
 </div>
 </div>
@@ -307,15 +374,15 @@ $(document).ready(function(){initNavTree('classModel.html',''); initResizable();
 <p>回転を設定 </p>
 <dl class="params"><dt>引数</dt><dd>
   <table class="params">
-    <tr><td class="paramname">_rotate</td><td>回転ベクトル</td></tr>
+    <tr><td class="paramname">_rotate</td><td>回転ベクトル </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>戻り値</dt><dd>メソッドチェーン用の自身への参照</dd></dl>
+<dl class="section return"><dt>戻り値</dt><dd>メソッドチェーン用の自身への参照 </dd></dl>
 
-<p class="definition"> <a class="el" href="Model_8cpp_source.html">Model.cpp</a> の <a class="el" href="Model_8cpp_source.html#l00139">139</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Model_8cpp_source.html">Model.cpp</a> の <a class="el" href="Model_8cpp_source.html#l00143">143</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="Transform_8hpp_source.html#l00014">Transform::rotate</a>.</p>
+<p class="reference">参照先 <a class="el" href="Transform_8hpp_source.html#l00013">Transform::rotate</a>.</p>
 
 </div>
 </div>
@@ -338,15 +405,15 @@ $(document).ready(function(){initNavTree('classModel.html',''); initResizable();
 <p>スケールを設定 </p>
 <dl class="params"><dt>引数</dt><dd>
   <table class="params">
-    <tr><td class="paramname">_scale</td><td>スケールベクトル</td></tr>
+    <tr><td class="paramname">_scale</td><td>スケールベクトル </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>戻り値</dt><dd>メソッドチェーン用の自身への参照</dd></dl>
+<dl class="section return"><dt>戻り値</dt><dd>メソッドチェーン用の自身への参照 </dd></dl>
 
-<p class="definition"> <a class="el" href="Model_8cpp_source.html">Model.cpp</a> の <a class="el" href="Model_8cpp_source.html#l00144">144</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Model_8cpp_source.html">Model.cpp</a> の <a class="el" href="Model_8cpp_source.html#l00148">148</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="Transform_8hpp_source.html#l00013">Transform::scale</a>.</p>
+<p class="reference">参照先 <a class="el" href="Transform_8hpp_source.html#l00012">Transform::scale</a>.</p>
 
 </div>
 </div>
@@ -369,15 +436,46 @@ $(document).ready(function(){initNavTree('classModel.html',''); initResizable();
 <p>テクスチャを設定 </p>
 <dl class="params"><dt>引数</dt><dd>
   <table class="params">
-    <tr><td class="paramname">_texture</td><td>テクスチャパス</td></tr>
+    <tr><td class="paramname">_texture</td><td>テクスチャパス </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>戻り値</dt><dd>メソッドチェーン用の自身への参照</dd></dl>
+<dl class="section return"><dt>戻り値</dt><dd>メソッドチェーン用の自身への参照 </dd></dl>
 
-<p class="definition"> <a class="el" href="Model_8cpp_source.html">Model.cpp</a> の <a class="el" href="Model_8cpp_source.html#l00158">158</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Model_8cpp_source.html">Model.cpp</a> の <a class="el" href="Model_8cpp_source.html#l00162">162</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="Log_8cpp_source.html#l00068">Log::Send()</a>, <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531ea059e9861e0400dfbe05c98a841f3f96b">Log::WARNING</a>.</p>
+<p class="reference">参照先 <a class="el" href="Log_8cpp_source.html#l00067">Log::Send()</a>, <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531ea059e9861e0400dfbe05c98a841f3f96b">Log::WARNING</a>.</p>
+
+</div>
+</div>
+<a id="a4192cb6b6bd46e384f9b36cb892b959c" name="a4192cb6b6bd46e384f9b36cb892b959c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4192cb6b6bd46e384f9b36cb892b959c">&#9670;&#160;</a></span>SetTilingMultiply()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classModel.html">Model</a> &amp; Model::SetTilingMultiply </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structVector2.html">Vector2</a>&#160;</td>
+          <td class="paramname"><em>_mul</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>テクスチャのタイリング倍率を設定 </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_mul</td><td>タイリング倍率 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>戻り値</dt><dd>メソッドチェーン用の自身への参照 </dd></dl>
+
+<p class="definition"> <a class="el" href="Model_8cpp_source.html">Model.cpp</a> の <a class="el" href="Model_8cpp_source.html#l00172">172</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="Log_8cpp_source.html#l00067">Log::Send()</a>, <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531ea059e9861e0400dfbe05c98a841f3f96b">Log::WARNING</a>.</p>
 
 </div>
 </div>
@@ -400,15 +498,15 @@ $(document).ready(function(){initNavTree('classModel.html',''); initResizable();
 <p>平行移動を設定 </p>
 <dl class="params"><dt>引数</dt><dd>
   <table class="params">
-    <tr><td class="paramname">_translate</td><td>平行移動ベクトル</td></tr>
+    <tr><td class="paramname">_translate</td><td>平行移動ベクトル </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>戻り値</dt><dd>メソッドチェーン用の自身への参照</dd></dl>
+<dl class="section return"><dt>戻り値</dt><dd>メソッドチェーン用の自身への参照 </dd></dl>
 
-<p class="definition"> <a class="el" href="Model_8cpp_source.html">Model.cpp</a> の <a class="el" href="Model_8cpp_source.html#l00134">134</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Model_8cpp_source.html">Model.cpp</a> の <a class="el" href="Model_8cpp_source.html#l00138">138</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="Transform_8hpp_source.html#l00015">Transform::translate</a>.</p>
+<p class="reference">参照先 <a class="el" href="Transform_8hpp_source.html#l00014">Transform::translate</a>.</p>
 
 </div>
 </div>
@@ -429,9 +527,9 @@ $(document).ready(function(){initNavTree('classModel.html',''); initResizable();
 
 <p>モデルの更新処理 </p>
 
-<p class="definition"> <a class="el" href="Model_8cpp_source.html">Model.cpp</a> の <a class="el" href="Model_8cpp_source.html#l00083">83</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Model_8cpp_source.html">Model.cpp</a> の <a class="el" href="Model_8cpp_source.html#l00085">85</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="Singleton_8hpp_source.html#l00043">Singleton&lt; T &gt;::GetInstance()</a>, <a class="el" href="ModelData_8hpp_source.html#l00033">ModelData::skeleton</a>, <a class="el" href="ModelData_8hpp_source.html#l00028">ModelData::skinCluster</a>.</p>
+<p class="reference">参照先 <a class="el" href="Singleton_8hpp_source.html#l00038">Singleton&lt; T &gt;::GetInstance()</a>, <a class="el" href="ModelData_8hpp_source.html#l00030">ModelData::skeleton</a>, <a class="el" href="ModelData_8hpp_source.html#l00025">ModelData::skinCluster</a>.</p>
 
 </div>
 </div>
@@ -445,7 +543,7 @@ $(document).ready(function(){initNavTree('classModel.html',''); initResizable();
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classModel.html">Model</a></li>
-    <li class="footer">2025年10月16日(木) 07時42分51秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年01月07日(水) 07時39分21秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

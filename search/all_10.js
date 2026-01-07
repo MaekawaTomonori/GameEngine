@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['quaternion_0',['Quaternion',['../structQuaternion.html',1,'']]],
-  ['quaternion_2ehpp_1',['Quaternion.hpp',['../Quaternion_8hpp.html',1,'']]]
+  ['quad_0',['quad',['../namespaceEase_1_1In.html#ad0cad83a50ef640b94e3af18907c7855',1,'Ease::In::Quad(Vector2 _start, Vector2 _end, float _t)'],['../namespaceEase_1_1In.html#a162b88a475910d574f56c4f36d20c87b',1,'Ease::In::Quad(Vector3 _start, Vector3 _end, float _t)'],['../namespaceEase_1_1Out.html#ace0b0630ad39b426d4c159cb0d87da91',1,'Ease::Out::Quad(Vector2 _start, Vector2 _end, float _t)'],['../namespaceEase_1_1Out.html#a7d52f3a64e9648a3d502ccb5e1a723b6',1,'Ease::Out::Quad(Vector3 _start, Vector3 _end, float _t)'],['../namespaceEase_1_1InOut.html#adc54f145549a3caed74245b295cc5d4d',1,'Ease::InOut::Quad(Vector2 _start, Vector2 _end, float _t)'],['../namespaceEase_1_1InOut.html#ad13475da4b95e6e656fcf1e8347b0f03',1,'Ease::InOut::Quad(Vector3 _start, Vector3 _end, float _t)']]],
+  ['quaternion_1',['Quaternion',['../structQuaternion.html',1,'']]],
+  ['quaternion_2ehpp_2',['Quaternion.hpp',['../Quaternion_8hpp.html',1,'']]]
 ];

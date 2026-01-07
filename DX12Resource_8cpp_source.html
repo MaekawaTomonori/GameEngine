@@ -106,7 +106,7 @@ $(document).ready(function(){initNavTree('DX12Resource_8cpp_source.html',''); in
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno"><a class="line" href="classDX12Resource.html#ad72a4fefee65f8aaf6a95b8124c46d36">    5</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classDX12Resource.html#ad72a4fefee65f8aaf6a95b8124c46d36">DX12Resource::Create</a>(ID3D12Resource* _resource, D3D12_RESOURCE_STATES _state) {</div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span>    resource_.Attach(_resource);</div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span>    <span class="keywordflow">if</span> (!resource_){</div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>        <a class="code hl_function" href="namespaceUtils.html#aa35c12cebe61c9d818df8944b3a66706">Utils::Alert</a>(<span class="stringliteral">&quot;Failed to create DX12 Resource&quot;</span>);</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>        <a class="code hl_function" href="namespaceUtils.html#a7889f3d633f2e561e30dd11e6fc80af0">Utils::Alert</a>(<span class="stringliteral">&quot;Failed to create DX12 Resource&quot;</span>);</div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>        <span class="keywordflow">return</span>;</div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>    }</div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    state_ = _state;</div>
@@ -117,7 +117,7 @@ $(document).ready(function(){initNavTree('DX12Resource_8cpp_source.html',''); in
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="classDX12Resource.html#af993a8d4835b85eefaaecb2168935ee4">   14</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classDX12Resource.html#ad72a4fefee65f8aaf6a95b8124c46d36">DX12Resource::Create</a>(<span class="keyword">const</span> Microsoft::WRL::ComPtr&lt;ID3D12Resource&gt;&amp; _resource, D3D12_RESOURCE_STATES _state) {</div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    resource_ = _resource;</div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <span class="keywordflow">if</span> (!resource_){</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>        <a class="code hl_function" href="namespaceUtils.html#aa35c12cebe61c9d818df8944b3a66706">Utils::Alert</a>(<span class="stringliteral">&quot;Failed to create DX12 Resource&quot;</span>);</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>        <a class="code hl_function" href="namespaceUtils.html#a7889f3d633f2e561e30dd11e6fc80af0">Utils::Alert</a>(<span class="stringliteral">&quot;Failed to create DX12 Resource&quot;</span>);</div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>        <span class="keywordflow">return</span>;</div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    }</div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    state_ = _state;</div>
@@ -151,14 +151,14 @@ $(document).ready(function(){initNavTree('DX12Resource_8cpp_source.html',''); in
 <div class="ttc" id="aclassDX12Resource_html_a7de5777515323fc496662e3e01c83a30"><div class="ttname"><a href="classDX12Resource.html#a7de5777515323fc496662e3e01c83a30">DX12Resource::Get</a></div><div class="ttdeci">ID3D12Resource * Get() const</div><div class="ttdoc">リソースを取得</div><div class="ttdef"><b>Definition</b> <a href="DX12Resource_8cpp_source.html#l00038">DX12Resource.cpp:38</a></div></div>
 <div class="ttc" id="aclassDX12Resource_html_ab449563ef728d837d81b333e9910aad8"><div class="ttname"><a href="classDX12Resource.html#ab449563ef728d837d81b333e9910aad8">DX12Resource::ChangeState</a></div><div class="ttdeci">void ChangeState(ID3D12GraphicsCommandList *_command, D3D12_RESOURCE_STATES _state)</div><div class="ttdoc">リソース状態を変更</div><div class="ttdef"><b>Definition</b> <a href="DX12Resource_8cpp_source.html#l00023">DX12Resource.cpp:23</a></div></div>
 <div class="ttc" id="aclassDX12Resource_html_ad72a4fefee65f8aaf6a95b8124c46d36"><div class="ttname"><a href="classDX12Resource.html#ad72a4fefee65f8aaf6a95b8124c46d36">DX12Resource::Create</a></div><div class="ttdeci">void Create(ID3D12Resource *_resource, D3D12_RESOURCE_STATES _state=D3D12_RESOURCE_STATE_COMMON)</div><div class="ttdoc">リソースを作成</div><div class="ttdef"><b>Definition</b> <a href="DX12Resource_8cpp_source.html#l00005">DX12Resource.cpp:5</a></div></div>
-<div class="ttc" id="anamespaceUtils_html_aa35c12cebe61c9d818df8944b3a66706"><div class="ttname"><a href="namespaceUtils.html#aa35c12cebe61c9d818df8944b3a66706">Utils::Alert</a></div><div class="ttdeci">void Alert(const std::string &amp;msg)</div><div class="ttdef"><b>Definition</b> <a href="Utils_8cpp_source.html#l00054">Utils.cpp:54</a></div></div>
+<div class="ttc" id="anamespaceUtils_html_a7889f3d633f2e561e30dd11e6fc80af0"><div class="ttname"><a href="namespaceUtils.html#a7889f3d633f2e561e30dd11e6fc80af0">Utils::Alert</a></div><div class="ttdeci">void Alert(const std::string &amp;_msg)</div><div class="ttdef"><b>Definition</b> <a href="Utils_8cpp_source.html#l00056">Utils.cpp:56</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_31399d34f22961890ce23f7132fb3e96.html">DirectX</a></li><li class="navelem"><a class="el" href="dir_48d78888f6f7cfcf82b3ac6d8a86d17c.html">Resource</a></li><li class="navelem"><a class="el" href="DX12Resource_8cpp.html">DX12Resource.cpp</a></li>
-    <li class="footer">2025年10月16日(木) 07時42分51秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年01月07日(水) 07時39分20秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

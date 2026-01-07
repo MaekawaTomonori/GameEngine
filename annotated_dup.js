@@ -1,8 +1,9 @@
 var annotated_dup =
 [
     [ "GameEngine", "namespaceGameEngine.html", [
-      [ "Config", "classGameEngine_1_1Config.html", "classGameEngine_1_1Config" ]
+      [ "Config", "structGameEngine_1_1Config.html", "structGameEngine_1_1Config" ]
     ] ],
+    [ "AbstractPostEffectFactory", "classAbstractPostEffectFactory.html", "classAbstractPostEffectFactory" ],
     [ "AbstractSceneFactory", "classAbstractSceneFactory.html", "classAbstractSceneFactory" ],
     [ "Animation", "structAnimation.html", "structAnimation" ],
     [ "AnimationCurve", "structAnimationCurve.html", "structAnimationCurve" ],
@@ -13,11 +14,13 @@ var annotated_dup =
     [ "CameraForGpu", "structCameraForGpu.html", "structCameraForGpu" ],
     [ "CameraRepository", "classCameraRepository.html", "classCameraRepository" ],
     [ "Common", "classCommon.html", "classCommon" ],
+    [ "ComputePipeline", "classComputePipeline.html", "classComputePipeline" ],
     [ "D3DResourceLeakChecker", "classD3DResourceLeakChecker.html", "classD3DResourceLeakChecker" ],
     [ "DebugUI", "classDebugUI.html", "classDebugUI" ],
     [ "DirectionalLight", "structDirectionalLight.html", "structDirectionalLight" ],
     [ "DirectXAdapter", "classDirectXAdapter.html", "classDirectXAdapter" ],
     [ "DX12Resource", "classDX12Resource.html", "classDX12Resource" ],
+    [ "Emitter", "classEmitter.html", "classEmitter" ],
     [ "Fade", "classFade.html", "classFade" ],
     [ "FrameRateLimiter", "classFrameRateLimiter.html", "classFrameRateLimiter" ],
     [ "Framework", "classFramework.html", "classFramework" ],
@@ -54,10 +57,14 @@ var annotated_dup =
     [ "Node", "structNode.html", "structNode" ],
     [ "NodeAnimation", "structNodeAnimation.html", "structNodeAnimation" ],
     [ "ObjLoader", "classObjLoader.html", "classObjLoader" ],
+    [ "Particle", "classParticle.html", "classParticle" ],
+    [ "ParticleSystem", "classParticleSystem.html", "classParticleSystem" ],
     [ "PipelineStateObject", "classPipelineStateObject.html", "classPipelineStateObject" ],
     [ "PointLight", "structPointLight.html", "structPointLight" ],
     [ "PostProcessExecutor", "classPostProcessExecutor.html", "classPostProcessExecutor" ],
+    [ "PostProcessPresetEditor", "classPostProcessPresetEditor.html", "classPostProcessPresetEditor" ],
     [ "Quaternion", "structQuaternion.html", "structQuaternion" ],
+    [ "RandomEngine", "classRandomEngine.html", "classRandomEngine" ],
     [ "RawDirectionalLight", "classRawDirectionalLight.html", "classRawDirectionalLight" ],
     [ "RawLight", "classRawLight.html", "classRawLight" ],
     [ "RawPointLight", "classRawPointLight.html", "classRawPointLight" ],
@@ -65,6 +72,7 @@ var annotated_dup =
     [ "Renderer", "classRenderer.html", "classRenderer" ],
     [ "ResourceRepository", "classResourceRepository.html", "classResourceRepository" ],
     [ "RootSignature", "classRootSignature.html", "classRootSignature" ],
+    [ "SceneFactory", "classSceneFactory.html", "classSceneFactory" ],
     [ "SceneSwitcher", "classSceneSwitcher.html", "classSceneSwitcher" ],
     [ "Scheduler", "classScheduler.html", "classScheduler" ],
     [ "Shader", "classShader.html", "classShader" ],

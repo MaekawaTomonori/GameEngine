@@ -10,8 +10,9 @@ var classLog =
     ] ],
     [ "Initialize", "classLog.html#ac9340bbc2812222f9950ec8448fff93d", null ],
     [ "LogExecutionContext", "classLog.html#adcac000ca73087b359ddd65317940c49", null ],
-    [ "LogFileOperation", "classLog.html#a59e8a969b60a64aac1411df445fe67ac", null ],
-    [ "Send", "classLog.html#a1a96849014a462fb22eb2247323cb2dc", null ],
-    [ "SendWithContext", "classLog.html#a9d31b9d4a2d37eee10ba977114f81c70", null ],
-    [ "SetLevel", "classLog.html#a1b6ae8345ea62ad1532444fa36accafe", null ]
+    [ "LogFileOperation", "classLog.html#aba142db3e5b0adc35ea2e5d747a89f00", null ],
+    [ "Send", "classLog.html#a38711a422954084bb4f076db6dbd9a09", null ],
+    [ "Send", "classLog.html#af351e7d4bd43c85e7c90f52846b64bdb", null ],
+    [ "SendWithContext", "classLog.html#a17d1ed5986ac2552f31034bad03f9abd", null ],
+    [ "SetLevel", "classLog.html#a5a8af17605be387d507992eadb50db0a", null ]
 ];

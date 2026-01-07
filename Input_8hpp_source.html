@@ -104,45 +104,59 @@ $(document).ready(function(){initNavTree('Input_8hpp_source.html',''); initResiz
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;dinput.h&gt;</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;wrl/client.h&gt;</span></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
-<div class="foldopen" id="foldopen00011" data-start="{" data-end="};">
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="classInput.html">   11</a></span><span class="keyword">class </span><a class="code hl_class" href="classInput.html">Input</a> {</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    HINSTANCE hInstance_{};</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    HWND hWnd_{};</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    Microsoft::WRL::ComPtr&lt;IDirectInput8&gt; directInput_;</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    Microsoft::WRL::ComPtr&lt;IDirectInputDevice8&gt; keyboard_;</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    Microsoft::WRL::ComPtr&lt;IDirectInputDevice8&gt; mouse_;</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    Microsoft::WRL::ComPtr&lt;IDirectInputDevice8&gt; joystick_;</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    BYTE keyState_[256]{};</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    BYTE preState_[256]{};</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    DIMOUSESTATE mouseState_{};</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    DIMOUSESTATE preMouseState_{};</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <span class="comment">//EventSystem* eventSystem_ = nullptr;</span></div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classInput.html#a085d22dee41ac5d8c5b4508ab4f0d7bb">Initialize</a>(HWND _hWnd, HINSTANCE _hInstance);</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classInput.html#af80dcfde6dbfe39bf3bc0345c75595ce">Update</a>();</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;<a class="code" href="Vector2_8hpp.html">Math/Vector2.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="foldopen" id="foldopen00012" data-start="{" data-end="};">
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="classInput.html">   12</a></span><span class="keyword">class </span><a class="code hl_class" href="classInput.html">Input</a> {</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    HINSTANCE hInstance_{};</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    HWND hWnd_{};</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    Microsoft::WRL::ComPtr&lt;IDirectInput8&gt; directInput_;</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    Microsoft::WRL::ComPtr&lt;IDirectInputDevice8&gt; keyboard_;</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    Microsoft::WRL::ComPtr&lt;IDirectInputDevice8&gt; mouse_;</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    Microsoft::WRL::ComPtr&lt;IDirectInputDevice8&gt; joystick_;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    BYTE keyState_[256]{};</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    BYTE preState_[256]{};</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    DIMOUSESTATE mouseState_{};</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    DIMOUSESTATE preMouseState_{};</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <a class="code hl_struct" href="structVector2.html">Vector2</a> mousePosition_{};</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="comment">//EventSystem* eventSystem_ = nullptr;</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classInput.html#a085d22dee41ac5d8c5b4508ab4f0d7bb">Initialize</a>(HWND _hWnd, HINSTANCE _hInstance);</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classInput.html#af80dcfde6dbfe39bf3bc0345c75595ce">Update</a>();</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classInput.html#aa62420b1c165482b43a24c17f1830501">IsPress</a>(BYTE _key) <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <span class="comment">//void SetEventSystem(EventSystem* eventSystem) { /*eventSystem_ = eventSystem;*/ }</span></div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>}; <span class="comment">// class Input</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classInput.html#a70db939e1efea6bfa41b8f9f1144bf13">IsTrigger</a>(BYTE _key) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="classInput.html#a757b437fbd14550fb5b6713b71127788">   46</a></span>    <a class="code hl_struct" href="structVector2.html">Vector2</a> <a class="code hl_function" href="classInput.html#a757b437fbd14550fb5b6713b71127788">GetMousePosition</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> mousePosition_; }</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="comment">//void SetEventSystem(EventSystem* eventSystem) { /*eventSystem_ = eventSystem;*/ }</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <span class="keywordtype">void</span> UpdateKeyboard();</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <span class="keywordtype">void</span> UpdateMouse();</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>}; <span class="comment">// class Input</span></div>
 </div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="preprocessor">#endif </span><span class="comment">// Input_HPP_</span></div>
-<div class="ttc" id="aclassInput_html"><div class="ttname"><a href="classInput.html">Input</a></div><div class="ttdoc">入力処理クラス キーボード、マウス、ジョイスティックの入力を管理</div><div class="ttdef"><b>Definition</b> <a href="Input_8hpp_source.html#l00011">Input.hpp:11</a></div></div>
-<div class="ttc" id="aclassInput_html_a085d22dee41ac5d8c5b4508ab4f0d7bb"><div class="ttname"><a href="classInput.html#a085d22dee41ac5d8c5b4508ab4f0d7bb">Input::Initialize</a></div><div class="ttdeci">void Initialize(HWND _hWnd, HINSTANCE _hInstance)</div><div class="ttdoc">入力システムを初期化</div><div class="ttdef"><b>Definition</b> <a href="Input_8cpp_source.html#l00009">Input.cpp:9</a></div></div>
-<div class="ttc" id="aclassInput_html_aa62420b1c165482b43a24c17f1830501"><div class="ttname"><a href="classInput.html#aa62420b1c165482b43a24c17f1830501">Input::IsPress</a></div><div class="ttdeci">bool IsPress(BYTE _key) const</div><div class="ttdoc">キーが押されているかを判定</div><div class="ttdef"><b>Definition</b> <a href="Input_8cpp_source.html#l00046">Input.cpp:46</a></div></div>
-<div class="ttc" id="aclassInput_html_af80dcfde6dbfe39bf3bc0345c75595ce"><div class="ttname"><a href="classInput.html#af80dcfde6dbfe39bf3bc0345c75595ce">Input::Update</a></div><div class="ttdeci">void Update()</div><div class="ttdoc">入力状態を更新</div><div class="ttdef"><b>Definition</b> <a href="Input_8cpp_source.html#l00038">Input.cpp:38</a></div></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="preprocessor">#endif </span><span class="comment">// Input_HPP_</span></div>
+<div class="ttc" id="aVector2_8hpp_html"><div class="ttname"><a href="Vector2_8hpp.html">Vector2.hpp</a></div></div>
+<div class="ttc" id="aclassInput_html"><div class="ttname"><a href="classInput.html">Input</a></div><div class="ttdoc">入力処理クラス キーボード、マウス、ジョイスティックの入力を管理</div><div class="ttdef"><b>Definition</b> <a href="Input_8hpp_source.html#l00012">Input.hpp:12</a></div></div>
+<div class="ttc" id="aclassInput_html_a085d22dee41ac5d8c5b4508ab4f0d7bb"><div class="ttname"><a href="classInput.html#a085d22dee41ac5d8c5b4508ab4f0d7bb">Input::Initialize</a></div><div class="ttdeci">void Initialize(HWND _hWnd, HINSTANCE _hInstance)</div><div class="ttdoc">入力システムを初期化</div><div class="ttdef"><b>Definition</b> <a href="Input_8cpp_source.html#l00010">Input.cpp:10</a></div></div>
+<div class="ttc" id="aclassInput_html_a70db939e1efea6bfa41b8f9f1144bf13"><div class="ttname"><a href="classInput.html#a70db939e1efea6bfa41b8f9f1144bf13">Input::IsTrigger</a></div><div class="ttdeci">bool IsTrigger(BYTE _key) const</div><div class="ttdef"><b>Definition</b> <a href="Input_8cpp_source.html#l00075">Input.cpp:75</a></div></div>
+<div class="ttc" id="aclassInput_html_a757b437fbd14550fb5b6713b71127788"><div class="ttname"><a href="classInput.html#a757b437fbd14550fb5b6713b71127788">Input::GetMousePosition</a></div><div class="ttdeci">Vector2 GetMousePosition() const</div><div class="ttdef"><b>Definition</b> <a href="Input_8hpp_source.html#l00046">Input.hpp:46</a></div></div>
+<div class="ttc" id="aclassInput_html_aa62420b1c165482b43a24c17f1830501"><div class="ttname"><a href="classInput.html#aa62420b1c165482b43a24c17f1830501">Input::IsPress</a></div><div class="ttdeci">bool IsPress(BYTE _key) const</div><div class="ttdoc">キーが押されているかを判定</div><div class="ttdef"><b>Definition</b> <a href="Input_8cpp_source.html#l00071">Input.cpp:71</a></div></div>
+<div class="ttc" id="aclassInput_html_af80dcfde6dbfe39bf3bc0345c75595ce"><div class="ttname"><a href="classInput.html#af80dcfde6dbfe39bf3bc0345c75595ce">Input::Update</a></div><div class="ttdeci">void Update()</div><div class="ttdoc">入力状態を更新</div><div class="ttdef"><b>Definition</b> <a href="Input_8cpp_source.html#l00058">Input.cpp:58</a></div></div>
+<div class="ttc" id="astructVector2_html"><div class="ttname"><a href="structVector2.html">Vector2</a></div><div class="ttdoc">2Dベクトル構造体 2D座標と基本的なベクトル演算を提供</div><div class="ttdef"><b>Definition</b> <a href="Vector2_8hpp_source.html#l00009">Vector2.hpp:9</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="Input_8hpp.html">Input.hpp</a></li>
-    <li class="footer">2025年10月16日(木) 07時42分51秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年01月07日(水) 07時39分20秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

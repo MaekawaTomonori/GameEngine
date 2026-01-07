@@ -105,8 +105,8 @@ $(document).ready(function(){initNavTree('classJson.html',''); initResizable(); 
 <tr class="separator:a3377cae8926277335f63308afd5ad8d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae68795b324f280b96746f967ac1811eb" id="r_ae68795b324f280b96746f967ac1811eb"><td class="memItemLeft" align="right" valign="top">Group&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJson.html#ae68795b324f280b96746f967ac1811eb">GetGroups</a> (const std::string &amp;_path)</td></tr>
 <tr class="separator:ae68795b324f280b96746f967ac1811eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acbde557ae087a18132e93640f8a42be6" id="r_acbde557ae087a18132e93640f8a42be6"><td class="memItemLeft" align="right" valign="top">Value&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJson.html#acbde557ae087a18132e93640f8a42be6">GetValue</a> (const std::string &amp;_path, const std::string &amp;group, const std::string &amp;key) const</td></tr>
-<tr class="separator:acbde557ae087a18132e93640f8a42be6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf71d2cd6c4de6312a6d3adad768efde" id="r_abf71d2cd6c4de6312a6d3adad768efde"><td class="memItemLeft" align="right" valign="top">Value&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJson.html#abf71d2cd6c4de6312a6d3adad768efde">GetValue</a> (const std::string &amp;_path, const std::string &amp;_group, const std::string &amp;_key) const</td></tr>
+<tr class="separator:abf71d2cd6c4de6312a6d3adad768efde"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac905c69289a9083101666916b5bb0639" id="r_ac905c69289a9083101666916b5bb0639"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJson.html#ac905c69289a9083101666916b5bb0639">RemoveGroup</a> (const std::string &amp;_path, const std::string &amp;_group)</td></tr>
 <tr class="separator:ac905c69289a9083101666916b5bb0639"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a45b724e62a51171aa619bcf2444d2bb3" id="r_a45b724e62a51171aa619bcf2444d2bb3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classJson.html#a45b724e62a51171aa619bcf2444d2bb3">Load</a> (const std::string &amp;_path, std::string _name=&quot;&quot;)</td></tr>
@@ -116,7 +116,7 @@ $(document).ready(function(){initNavTree('classJson.html',''); initResizable(); 
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">詳解</h2>
 <div class="textblock">
-<p class="definition"> <a class="el" href="Json_8hpp_source.html">Json.hpp</a> の <a class="el" href="Json_8hpp_source.html#l00011">11</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Json_8hpp_source.html">Json.hpp</a> の <a class="el" href="Json_8hpp_source.html#l00013">13</a> 行目に定義があります。</p>
 </div><h2 class="groupheader">関数詳解</h2>
 <a id="ae68795b324f280b96746f967ac1811eb" name="ae68795b324f280b96746f967ac1811eb"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae68795b324f280b96746f967ac1811eb">&#9670;&#160;</a></span>GetGroups()</h2>
@@ -136,12 +136,10 @@ $(document).ready(function(){initNavTree('classJson.html',''); initResizable(); 
 
 <p class="definition"> <a class="el" href="Json_8cpp_source.html">Json.cpp</a> の <a class="el" href="Json_8cpp_source.html#l00113">113</a> 行目に定義があります。</p>
 
-<p class="reference">参照元 <a class="el" href="CameraRepository_8cpp_source.html#l00058">CameraRepository::LoadFromFile()</a>.</p>
-
 </div>
 </div>
-<a id="acbde557ae087a18132e93640f8a42be6" name="acbde557ae087a18132e93640f8a42be6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acbde557ae087a18132e93640f8a42be6">&#9670;&#160;</a></span>GetValue()</h2>
+<a id="abf71d2cd6c4de6312a6d3adad768efde" name="abf71d2cd6c4de6312a6d3adad768efde"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf71d2cd6c4de6312a6d3adad768efde">&#9670;&#160;</a></span>GetValue()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -156,13 +154,13 @@ $(document).ready(function(){initNavTree('classJson.html',''); initResizable(); 
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>group</em>, </td>
+          <td class="paramname"><em>_group</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>key</em>&#160;</td>
+          <td class="paramname"><em>_key</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -204,9 +202,7 @@ $(document).ready(function(){initNavTree('classJson.html',''); initResizable(); 
 
 <p class="definition"> <a class="el" href="Json_8cpp_source.html">Json.cpp</a> の <a class="el" href="Json_8cpp_source.html#l00143">143</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::INFO</a>, <a class="el" href="Log_8cpp_source.html#l00068">Log::Send()</a>.</p>
-
-<p class="reference">参照元 <a class="el" href="CameraRepository_8cpp_source.html#l00058">CameraRepository::LoadFromFile()</a>.</p>
+<p class="reference">参照先 <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::INFO</a>, <a class="el" href="Log_8cpp_source.html#l00067">Log::Send()</a>.</p>
 
 </div>
 </div>
@@ -268,9 +264,7 @@ $(document).ready(function(){initNavTree('classJson.html',''); initResizable(); 
 
 <p class="definition"> <a class="el" href="Json_8cpp_source.html">Json.cpp</a> の <a class="el" href="Json_8cpp_source.html#l00174">174</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::ERR</a>, <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::INFO</a>, <a class="el" href="Log_8cpp_source.html#l00068">Log::Send()</a>, <a class="el" href="Vector4_8hpp_source.html#l00008">Vector4::w</a>, <a class="el" href="Vector2_8hpp_source.html#l00009">Vector2::x</a>, <a class="el" href="Vector3_8hpp_source.html#l00011">Vector3::x</a>, <a class="el" href="Vector4_8hpp_source.html#l00008">Vector4::x</a>, <a class="el" href="Vector2_8hpp_source.html#l00009">Vector2::y</a>, <a class="el" href="Vector3_8hpp_source.html#l00011">Vector3::y</a>, <a class="el" href="Vector4_8hpp_source.html#l00008">Vector4::y</a>, <a class="el" href="Vector3_8hpp_source.html#l00011">Vector3::z</a>, <a class="el" href="Vector4_8hpp_source.html#l00008">Vector4::z</a>.</p>
-
-<p class="reference">参照元 <a class="el" href="CameraRepository_8cpp_source.html#l00075">CameraRepository::SaveToFile()</a>.</p>
+<p class="reference">参照先 <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::ERR</a>, <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::INFO</a>, <a class="el" href="Log_8cpp_source.html#l00067">Log::Send()</a>, <a class="el" href="Vector4_8hpp_source.html#l00008">Vector4::w</a>, <a class="el" href="Vector2_8hpp_source.html#l00010">Vector2::x</a>, <a class="el" href="Vector3_8hpp_source.html#l00012">Vector3::x</a>, <a class="el" href="Vector4_8hpp_source.html#l00008">Vector4::x</a>, <a class="el" href="Vector2_8hpp_source.html#l00010">Vector2::y</a>, <a class="el" href="Vector3_8hpp_source.html#l00012">Vector3::y</a>, <a class="el" href="Vector4_8hpp_source.html#l00008">Vector4::y</a>, <a class="el" href="Vector3_8hpp_source.html#l00012">Vector3::z</a>, <a class="el" href="Vector4_8hpp_source.html#l00008">Vector4::z</a>.</p>
 
 </div>
 </div>
@@ -314,8 +308,6 @@ $(document).ready(function(){initNavTree('classJson.html',''); initResizable(); 
 
 <p class="definition"> <a class="el" href="Json_8cpp_source.html">Json.cpp</a> の <a class="el" href="Json_8cpp_source.html#l00104">104</a> 行目に定義があります。</p>
 
-<p class="reference">参照元 <a class="el" href="DirectionalLight_8cpp_source.html#l00015">RawDirectionalLight::Save()</a>, <a class="el" href="PointLight_8cpp_source.html#l00021">RawPointLight::Save()</a>, <a class="el" href="SpotLight_8cpp_source.html#l00026">RawSpotLight::Save()</a>, <a class="el" href="CameraRepository_8cpp_source.html#l00075">CameraRepository::SaveToFile()</a>.</p>
-
 </div>
 </div>
 <hr/>このクラス詳解は次のファイルから抽出されました:<ul>
@@ -328,7 +320,7 @@ $(document).ready(function(){initNavTree('classJson.html',''); initResizable(); 
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classJson.html">Json</a></li>
-    <li class="footer">2025年10月16日(木) 07時42分51秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年01月07日(水) 07時39分21秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

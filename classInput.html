@@ -113,12 +113,43 @@ $(document).ready(function(){initNavTree('classInput.html',''); initResizable();
 <tr class="memitem:aa62420b1c165482b43a24c17f1830501" id="r_aa62420b1c165482b43a24c17f1830501"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInput.html#aa62420b1c165482b43a24c17f1830501">IsPress</a> (BYTE _key) const</td></tr>
 <tr class="memdesc:aa62420b1c165482b43a24c17f1830501"><td class="mdescLeft">&#160;</td><td class="mdescRight">キーが押されているかを判定  <br /></td></tr>
 <tr class="separator:aa62420b1c165482b43a24c17f1830501"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a70db939e1efea6bfa41b8f9f1144bf13" id="r_a70db939e1efea6bfa41b8f9f1144bf13"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInput.html#a70db939e1efea6bfa41b8f9f1144bf13">IsTrigger</a> (BYTE _key) const</td></tr>
+<tr class="separator:a70db939e1efea6bfa41b8f9f1144bf13"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a757b437fbd14550fb5b6713b71127788" id="r_a757b437fbd14550fb5b6713b71127788"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structVector2.html">Vector2</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInput.html#a757b437fbd14550fb5b6713b71127788">GetMousePosition</a> () const</td></tr>
+<tr class="separator:a757b437fbd14550fb5b6713b71127788"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">詳解</h2>
 <div class="textblock"><p>入力処理クラス キーボード、マウス、ジョイスティックの入力を管理 </p>
 
-<p class="definition"> <a class="el" href="Input_8hpp_source.html">Input.hpp</a> の <a class="el" href="Input_8hpp_source.html#l00011">11</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Input_8hpp_source.html">Input.hpp</a> の <a class="el" href="Input_8hpp_source.html#l00012">12</a> 行目に定義があります。</p>
 </div><h2 class="groupheader">関数詳解</h2>
+<a id="a757b437fbd14550fb5b6713b71127788" name="a757b437fbd14550fb5b6713b71127788"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a757b437fbd14550fb5b6713b71127788">&#9670;&#160;</a></span>GetMousePosition()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structVector2.html">Vector2</a> Input::GetMousePosition </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="Input_8hpp_source.html">Input.hpp</a> の <a class="el" href="Input_8hpp_source.html#l00046">46</a> 行目に定義があります。</p>
+
+</div>
+</div>
 <a id="a085d22dee41ac5d8c5b4508ab4f0d7bb" name="a085d22dee41ac5d8c5b4508ab4f0d7bb"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a085d22dee41ac5d8c5b4508ab4f0d7bb">&#9670;&#160;</a></span>Initialize()</h2>
 
@@ -148,17 +179,17 @@ $(document).ready(function(){initNavTree('classInput.html',''); initResizable();
 <p>入力システムを初期化 </p>
 <dl class="params"><dt>引数</dt><dd>
   <table class="params">
-    <tr><td class="paramname">_hWnd</td><td>ウィンドウハンドル</td></tr>
-    <tr><td class="paramname">_hInstance</td><td>インスタンスハンドル</td></tr>
+    <tr><td class="paramname">_hWnd</td><td>ウィンドウハンドル </td></tr>
+    <tr><td class="paramname">_hInstance</td><td>インスタンスハンドル </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition"> <a class="el" href="Input_8cpp_source.html">Input.cpp</a> の <a class="el" href="Input_8cpp_source.html#l00009">9</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Input_8cpp_source.html">Input.cpp</a> の <a class="el" href="Input_8cpp_source.html#l00010">10</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="Utils_8cpp_source.html#l00054">Utils::Alert()</a>, <a class="el" href="Input_8hpp_source.html#l00003">DIRECTINPUT_VERSION</a>, <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::ERR</a>, <a class="el" href="Log_8cpp_source.html#l00068">Log::Send()</a>.</p>
+<p class="reference">参照先 <a class="el" href="Utils_8cpp_source.html#l00056">Utils::Alert()</a>, <a class="el" href="Input_8hpp_source.html#l00003">DIRECTINPUT_VERSION</a>, <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::ERR</a>, <a class="el" href="Log_8cpp_source.html#l00067">Log::Send()</a>.</p>
 
-<p class="reference">参照元 <a class="el" href="Framework_8cpp_source.html#l00010">Framework::Framework()</a>.</p>
+<p class="reference">参照元 <a class="el" href="Framework_8cpp_source.html#l00008">Framework::Framework()</a>.</p>
 
 </div>
 </div>
@@ -181,13 +212,33 @@ $(document).ready(function(){initNavTree('classInput.html',''); initResizable();
 <p>キーが押されているかを判定 </p>
 <dl class="params"><dt>引数</dt><dd>
   <table class="params">
-    <tr><td class="paramname">_key</td><td>キーコード</td></tr>
+    <tr><td class="paramname">_key</td><td>キーコード </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>戻り値</dt><dd>押されている場合true</dd></dl>
+<dl class="section return"><dt>戻り値</dt><dd>押されている場合true </dd></dl>
 
-<p class="definition"> <a class="el" href="Input_8cpp_source.html">Input.cpp</a> の <a class="el" href="Input_8cpp_source.html#l00046">46</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Input_8cpp_source.html">Input.cpp</a> の <a class="el" href="Input_8cpp_source.html#l00071">71</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="a70db939e1efea6bfa41b8f9f1144bf13" name="a70db939e1efea6bfa41b8f9f1144bf13"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a70db939e1efea6bfa41b8f9f1144bf13">&#9670;&#160;</a></span>IsTrigger()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Input::IsTrigger </td>
+          <td>(</td>
+          <td class="paramtype">BYTE&#160;</td>
+          <td class="paramname"><em>_key</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="Input_8cpp_source.html">Input.cpp</a> の <a class="el" href="Input_8cpp_source.html#l00075">75</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -208,7 +259,7 @@ $(document).ready(function(){initNavTree('classInput.html',''); initResizable();
 
 <p>入力状態を更新 </p>
 
-<p class="definition"> <a class="el" href="Input_8cpp_source.html">Input.cpp</a> の <a class="el" href="Input_8cpp_source.html#l00038">38</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Input_8cpp_source.html">Input.cpp</a> の <a class="el" href="Input_8cpp_source.html#l00058">58</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -222,7 +273,7 @@ $(document).ready(function(){initNavTree('classInput.html',''); initResizable();
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classInput.html">Input</a></li>
-    <li class="footer">2025年10月16日(木) 07時42分51秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年01月07日(水) 07時39分21秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

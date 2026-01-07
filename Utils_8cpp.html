@@ -99,6 +99,7 @@ $(document).ready(function(){initNavTree('Utils_8cpp.html',''); initResizable();
 <div class="textblock"><code>#include &quot;<a class="el" href="Utils_8hpp_source.html">include/Utils.hpp</a>&quot;</code><br />
 <code>#include &lt;Windows.h&gt;</code><br />
 <code>#include &lt;chrono&gt;</code><br />
+<code>#include &quot;<a class="el" href="Log_8hpp_source.html">Log.hpp</a>&quot;</code><br />
 <code>#include &lt;rpc.h&gt;</code><br />
 </div>
 <p><a href="Utils_8cpp_source.html">[ソースコード]</a></p>
@@ -110,20 +111,20 @@ $(document).ready(function(){initNavTree('Utils_8cpp.html',''); initResizable();
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 関数</h2></td></tr>
-<tr class="memitem:a20bb7174d9771f217b7c1c2e206fa6c9" id="r_a20bb7174d9771f217b7c1c2e206fa6c9"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceUtils.html#a20bb7174d9771f217b7c1c2e206fa6c9">Utils::Convert</a> (const std::wstring &amp;str)</td></tr>
-<tr class="separator:a20bb7174d9771f217b7c1c2e206fa6c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a22e0efc3cf280419ee104e92fb8bd9c2" id="r_a22e0efc3cf280419ee104e92fb8bd9c2"><td class="memItemLeft" align="right" valign="top">std::wstring&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceUtils.html#a22e0efc3cf280419ee104e92fb8bd9c2">Utils::Convert</a> (const std::string &amp;str)</td></tr>
-<tr class="separator:a22e0efc3cf280419ee104e92fb8bd9c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e40c85f374a53894f1e990221c12c60" id="r_a2e40c85f374a53894f1e990221c12c60"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceUtils.html#a2e40c85f374a53894f1e990221c12c60">Utils::Convert</a> (const std::wstring &amp;_str)</td></tr>
+<tr class="separator:a2e40c85f374a53894f1e990221c12c60"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7bcc700698998558d5ba659cad4032d0" id="r_a7bcc700698998558d5ba659cad4032d0"><td class="memItemLeft" align="right" valign="top">std::wstring&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceUtils.html#a7bcc700698998558d5ba659cad4032d0">Utils::Convert</a> (const std::string &amp;_str)</td></tr>
+<tr class="separator:a7bcc700698998558d5ba659cad4032d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a16fe049b1a0a87909d3bdb1e9fce3724" id="r_a16fe049b1a0a87909d3bdb1e9fce3724"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceUtils.html#a16fe049b1a0a87909d3bdb1e9fce3724">Utils::DisplayLastErr</a> ()</td></tr>
 <tr class="separator:a16fe049b1a0a87909d3bdb1e9fce3724"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa35c12cebe61c9d818df8944b3a66706" id="r_aa35c12cebe61c9d818df8944b3a66706"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceUtils.html#aa35c12cebe61c9d818df8944b3a66706">Utils::Alert</a> (const std::string &amp;msg)</td></tr>
-<tr class="separator:aa35c12cebe61c9d818df8944b3a66706"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7889f3d633f2e561e30dd11e6fc80af0" id="r_a7889f3d633f2e561e30dd11e6fc80af0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceUtils.html#a7889f3d633f2e561e30dd11e6fc80af0">Utils::Alert</a> (const std::string &amp;_msg)</td></tr>
+<tr class="separator:a7889f3d633f2e561e30dd11e6fc80af0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adac71d388adb7993fe94c75d985c8fc7" id="r_adac71d388adb7993fe94c75d985c8fc7"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceUtils.html#adac71d388adb7993fe94c75d985c8fc7">Utils::DateToString</a> ()</td></tr>
 <tr class="separator:adac71d388adb7993fe94c75d985c8fc7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ada99389f4602daf6d5bf5246cca33854" id="r_ada99389f4602daf6d5bf5246cca33854"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceUtils.html#ada99389f4602daf6d5bf5246cca33854">Utils::GenerateUniqueId</a> ()</td></tr>
 <tr class="separator:ada99389f4602daf6d5bf5246cca33854"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2f9991ff62715ba5e21f57915dc15816" id="r_a2f9991ff62715ba5e21f57915dc15816"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceUtils.html#a2f9991ff62715ba5e21f57915dc15816">Utils::EqualsIgnoreCase</a> (std::string str1, std::string str2)</td></tr>
-<tr class="separator:a2f9991ff62715ba5e21f57915dc15816"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a93a3d7c010e69a368113c0932b23869d" id="r_a93a3d7c010e69a368113c0932b23869d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceUtils.html#a93a3d7c010e69a368113c0932b23869d">Utils::EqualsIgnoreCase</a> (std::string _str1, std::string _str2)</td></tr>
+<tr class="separator:a93a3d7c010e69a368113c0932b23869d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a58938c684ad3eadc5359260b6d3b0f2b" id="r_a58938c684ad3eadc5359260b6d3b0f2b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceUtils.html#a58938c684ad3eadc5359260b6d3b0f2b">Utils::ConfirmDialog</a> (const std::string &amp;_msg)</td></tr>
 <tr class="separator:a58938c684ad3eadc5359260b6d3b0f2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -133,7 +134,7 @@ $(document).ready(function(){initNavTree('Utils_8cpp.html',''); initResizable();
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_a7363e98f9e0bdd87618633653859815.html">Utils</a></li><li class="navelem"><a class="el" href="Utils_8cpp.html">Utils.cpp</a></li>
-    <li class="footer">2025年10月16日(木) 07時42分51秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年01月07日(水) 07時39分21秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

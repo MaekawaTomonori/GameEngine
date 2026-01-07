@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['fade_0',['Fade',['../classFade.html',1,'']]],
-  ['frameratelimiter_1',['FrameRateLimiter',['../classFrameRateLimiter.html',1,'']]],
-  ['framework_2',['Framework',['../classFramework.html',1,'']]]
+  ['emitter_0',['Emitter',['../classEmitter.html',1,'']]],
+  ['emitterconfig_1',['EmitterConfig',['../structParticleSystem_1_1EmitterConfig.html',1,'ParticleSystem']]]
 ];

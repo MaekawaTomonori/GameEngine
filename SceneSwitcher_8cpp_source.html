@@ -106,134 +106,210 @@ $(document).ready(function(){initNavTree('SceneSwitcher_8cpp_source.html',''); i
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;<a class="code" href="Transition_8hpp.html">src/Scene/Transition/Transition.hpp</a>&quot;</span></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
 <div class="foldopen" id="foldopen00008" data-start="{" data-end="}">
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno"><a class="line" href="classSceneSwitcher.html#a87ed2c5193016dd5bdbf36de86e0c8e8">    8</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classSceneSwitcher.html#a87ed2c5193016dd5bdbf36de86e0c8e8">SceneSwitcher::Setup</a>(<a class="code hl_class" href="classPostProcessExecutor.html">PostProcessExecutor</a>* _ppe, <a class="code hl_class" href="classDebugUI.html">DebugUI</a>* _debug) {</div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>    ppe_ = _ppe;</div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>    debug_ = _debug;</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    transition_ = std::make_unique&lt;Transition&gt;();</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    transition_-&gt;Initialize();</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>}</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno"><a class="line" href="classSceneSwitcher.html#a8b7612606b39268795b45e9b61fcce06">    8</a></span><a class="code hl_function" href="classSceneSwitcher.html#a8b7612606b39268795b45e9b61fcce06">SceneSwitcher::SceneSwitcher</a>() {</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>    factory_ = std::make_unique&lt;SceneFactory&gt;();</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>}</div>
 </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="foldopen" id="foldopen00012" data-start="{" data-end="}">
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="classSceneSwitcher.html#a7a13fd574dbdf54bb8524e389866c34f">   12</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classSceneSwitcher.html#a7a13fd574dbdf54bb8524e389866c34f">SceneSwitcher::Setup</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structSceneSwitcher_1_1Context.html">Context</a>&amp; _context) {</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    context_ = _context;</div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
-<div class="foldopen" id="foldopen00015" data-start="{" data-end="}">
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="classSceneSwitcher.html#ae789040ffcff5bf41c9b098f902c4b47">   15</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classSceneSwitcher.html#ae789040ffcff5bf41c9b098f902c4b47">SceneSwitcher::Update</a>() {</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <a class="code hl_function" href="classSceneSwitcher.html#a4ec925fd7848bb9a7e8e4a9f446417f8">Debug</a>();</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <span class="comment">// Scene Change/ in Transition process</span></div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <span class="comment">// Transition in/out</span></div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <span class="keywordflow">if</span> (transition_-&gt;InProgress()){</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>        transition_-&gt;Update();</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    }</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <span class="keywordflow">if</span> (next_){</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        <span class="keywordflow">if</span> (scene_){</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>            scene_-&gt;Finalize();</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>            scene_.reset();</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>            scene_ = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>            <a class="code hl_function" href="classSingleton.html#a7b90075f8e4471743fd3596be874e5d1">Singleton&lt;CameraDirector&gt;::GetInstance</a>()-&gt;Stop();</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>        }</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>        scene_ = std::move(next_);</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        next_.reset();</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>        next_ = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        scene_-&gt;Setup(<span class="keyword">this</span>, ppe_, debug_);</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        scene_-&gt;Initialize();</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        transition_-&gt;Awake(scene_-&gt;GetEntryTransition(), <a class="code hl_enumvalue" href="classITransitionEffect.html#a86868f632ccdf014543bbf471096227baefeb369cccbd560588a756610865664c">ITransitionEffect::State::In</a>, 1.f);</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    }</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    transition_ = std::make_unique&lt;Transition&gt;();</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    transition_-&gt;Initialize();</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>}</div>
+</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
+<div class="foldopen" id="foldopen00019" data-start="{" data-end="}">
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="classSceneSwitcher.html#ae789040ffcff5bf41c9b098f902c4b47">   19</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classSceneSwitcher.html#ae789040ffcff5bf41c9b098f902c4b47">SceneSwitcher::Update</a>() {</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <a class="code hl_function" href="classSceneSwitcher.html#a4ec925fd7848bb9a7e8e4a9f446417f8">Debug</a>();</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <span class="comment">// Scene Change/ in Transition process</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <span class="comment">// Transition in/out</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <span class="keywordflow">if</span> (transition_-&gt;InProgress()){</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        transition_-&gt;Update();</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    }</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="keywordflow">if</span> (next_){</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>        <span class="keywordflow">if</span> (scene_){</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>            scene_-&gt;Finalize();</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>            scene_.reset();</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>            scene_ = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>            <a class="code hl_function" href="classSingleton.html#a7b90075f8e4471743fd3596be874e5d1">Singleton&lt;CameraDirector&gt;::GetInstance</a>()-&gt;Stop();</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>        }</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        scene_ = std::move(next_);</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>        next_.reset();</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        next_ = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        scene_-&gt;Setup(<span class="keyword">this</span>);</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        scene_-&gt;Initialize();</div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="keywordflow">if</span> (!scene_)<span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <span class="keywordflow">if</span> (!scene_-&gt;IsProgress()){</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        scene_-&gt;Awake();</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    }</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <span class="keywordflow">if</span> (scene_-&gt;IsProgress()){</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        scene_-&gt;Update();</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    }</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>}</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        <span class="comment">// データ送信用に1フレーム進める</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        scene_-&gt;Update();</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        transition_-&gt;Awake(scene_-&gt;GetEntryTransition(), <a class="code hl_enumvalue" href="classITransitionEffect.html#a86868f632ccdf014543bbf471096227baefeb369cccbd560588a756610865664c">ITransitionEffect::State::In</a>, 1.f);</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    }</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <span class="keywordflow">if</span> (!scene_)<span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <span class="keywordflow">if</span> (!scene_-&gt;IsProgress()){</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        scene_-&gt;Awake();</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    }</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    scene_-&gt;Update();</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>}</div>
 </div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
-<div class="foldopen" id="foldopen00054" data-start="{" data-end="}">
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="classSceneSwitcher.html#aaa2f2d6b4d8bcf3daeaa0a53b4c40226">   54</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classSceneSwitcher.html#aaa2f2d6b4d8bcf3daeaa0a53b4c40226">SceneSwitcher::Draw</a>() {</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <span class="keywordflow">if</span> (scene_){</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        scene_-&gt;Draw();</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    }</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <span class="keywordflow">if</span> (transition_) {</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>        transition_-&gt;Draw();</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    }</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>}</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
+<div class="foldopen" id="foldopen00059" data-start="{" data-end="}">
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno"><a class="line" href="classSceneSwitcher.html#aaa2f2d6b4d8bcf3daeaa0a53b4c40226">   59</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classSceneSwitcher.html#aaa2f2d6b4d8bcf3daeaa0a53b4c40226">SceneSwitcher::Draw</a>() {</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <span class="keywordflow">if</span> (scene_){</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>        scene_-&gt;Draw();</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    }</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    <span class="keywordflow">if</span> (transition_) {</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        transition_-&gt;Draw();</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    }</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>}</div>
 </div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
-<div class="foldopen" id="foldopen00063" data-start="{" data-end="}">
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno"><a class="line" href="classSceneSwitcher.html#a4ec925fd7848bb9a7e8e4a9f446417f8">   63</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classSceneSwitcher.html#a4ec925fd7848bb9a7e8e4a9f446417f8">SceneSwitcher::Debug</a>() {</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    debug_-&gt;<a class="code hl_function" href="classDebugUI.html#a6367814777960cab7c04db03744447c7">RegisterCommand</a>(<span class="stringliteral">&quot;SceneSwitcher&quot;</span>, [<span class="keyword">this</span>]() {</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        ImGui::Begin(<span class="stringliteral">&quot;SceneSwitcher&quot;</span>);</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>        <span class="keywordflow">if</span> (scene_) {</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>            ImGui::Text(<span class="stringliteral">&quot;Current Scene: %s&quot;</span>, scene_-&gt;GetName().c_str());</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>            ImGui::Text(<span class="stringliteral">&quot;No active scene&quot;</span>);</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>        }</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>        ImGui::Separator();</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>        </div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>        <span class="keyword">static</span> <span class="keywordtype">char</span> sceneName[128] = <span class="stringliteral">&quot;&quot;</span>;</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>        ImGui::InputText(<span class="stringliteral">&quot;Scene Name&quot;</span>, sceneName, <span class="keyword">sizeof</span>(sceneName));</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>        <span class="keywordflow">if</span> (ImGui::Button(<span class="stringliteral">&quot;Change Scene&quot;</span>)) {</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>            <span class="keywordflow">if</span> (strlen(sceneName) &gt; 0) {</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>                <a class="code hl_function" href="classSceneSwitcher.html#a4528a1be76f6925038254e0e8e0fc06d">Change</a>(sceneName);</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>            }</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>        }</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>        ImGui::End();</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    });</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>}</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
+<div class="foldopen" id="foldopen00068" data-start="{" data-end="}">
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno"><a class="line" href="classSceneSwitcher.html#a66fca08d6a530d882453f74f74e0914e">   68</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classSceneSwitcher.html#a66fca08d6a530d882453f74f74e0914e">SceneSwitcher::RegisterScene</a>(<span class="keyword">const</span> std::string&amp; _name, <span class="keyword">const</span> std::function&lt;std::unique_ptr&lt;IScene&gt;()&gt;&amp; _creator)<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <span class="keywordflow">if</span> (!factory_) <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    factory_-&gt;Register(_name, _creator);</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>}</div>
 </div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span> </div>
-<div class="foldopen" id="foldopen00084" data-start="{" data-end="}">
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno"><a class="line" href="classSceneSwitcher.html#a560809f29f9c02cc1246ec06e48e372a">   84</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classSceneSwitcher.html#a560809f29f9c02cc1246ec06e48e372a">SceneSwitcher::SetFactory</a>(std::unique_ptr&lt;AbstractSceneFactory&gt; _factory) {</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    factory_ = std::move(_factory);</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>}</div>
-</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> </div>
-<div class="foldopen" id="foldopen00088" data-start="{" data-end="}">
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno"><a class="line" href="classSceneSwitcher.html#a4528a1be76f6925038254e0e8e0fc06d">   88</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classSceneSwitcher.html#a4528a1be76f6925038254e0e8e0fc06d">SceneSwitcher::Change</a>(<span class="keyword">const</span> std::string &amp;_name) {</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    <span class="keywordflow">if</span> (!factory_) <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    <span class="comment">// Already Registered</span></div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    <span class="keywordflow">if</span> (next_) <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span> </div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    next_ = factory_-&gt;Create(_name);</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    <span class="comment">// Already Destroyed</span></div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    <span class="keywordflow">if</span> (!scene_) <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
+<div class="foldopen" id="foldopen00073" data-start="{" data-end="}">
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno"><a class="line" href="classSceneSwitcher.html#a4ec925fd7848bb9a7e8e4a9f446417f8">   73</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classSceneSwitcher.html#a4ec925fd7848bb9a7e8e4a9f446417f8">SceneSwitcher::Debug</a>() {</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    context_.<a class="code hl_variable" href="structSceneSwitcher_1_1Context.html#a1db5f37f9e36d89ec8cdb732538ac7e6">debug</a>-&gt;<a class="code hl_function" href="classDebugUI.html#a6367814777960cab7c04db03744447c7">RegisterCommand</a>(<span class="stringliteral">&quot;SceneSwitcher&quot;</span>, [<span class="keyword">this</span>]() {</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>        <span class="keyword">static</span> <span class="keywordtype">int</span> selectedIndex = 0;</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>        <span class="keyword">static</span> std::string selectedScene;</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>        ImGui::Begin(<span class="stringliteral">&quot;SceneSwitcher&quot;</span>);</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>        <span class="comment">// 現在のシーン表示</span></div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>        <span class="keywordflow">if</span> (scene_) {</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>            ImGui::Text(<span class="stringliteral">&quot;Current Scene: %s&quot;</span>, scene_-&gt;GetName().c_str());</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>            ImGui::Text(<span class="stringliteral">&quot;No active scene&quot;</span>);</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>        }</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>        ImGui::Separator();</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>        <span class="comment">// 登録されているシーン一覧を取得</span></div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>        <span class="keywordflow">if</span> (factory_) {</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>            <span class="keyword">auto</span> registeredScenes = factory_-&gt;GetRegisteredScenes();</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span> </div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>            <span class="keywordflow">if</span> (!registeredScenes.empty()) {</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>                <span class="comment">// コンボボックス用のプレビュー文字列</span></div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>                <span class="keyword">const</span> <span class="keywordtype">char</span>* previewValue = selectedIndex &lt; registeredScenes.size()</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>                    ? registeredScenes[selectedIndex].c_str()</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>                    : <span class="stringliteral">&quot;Select Scene&quot;</span>;</div>
 <div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    <span class="comment">// Scene Change Transition</span></div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    transition_-&gt;Awake(scene_-&gt;GetExitTransition(), <a class="code hl_enumvalue" href="classITransitionEffect.html#a86868f632ccdf014543bbf471096227ba7c147cda9e49590f6abe83d118b7353b">ITransitionEffect::State::Out</a>);</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>}</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>                <span class="keywordflow">if</span> (ImGui::BeginCombo(<span class="stringliteral">&quot;##Scene List&quot;</span>, previewValue)) {</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>                    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; registeredScenes.size(); ++i) {</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>                        <span class="keyword">const</span> <span class="keywordtype">bool</span> isSelected = (selectedIndex == i);</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>                        <span class="keywordflow">if</span> (ImGui::Selectable(registeredScenes[i].c_str(), isSelected)) {</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>                            selectedIndex = i;</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>                            selectedScene = registeredScenes[i];</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>                        }</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span> </div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>                        <span class="comment">// 選択中の項目にフォーカス</span></div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>                        <span class="keywordflow">if</span> (isSelected) {</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>                            ImGui::SetItemDefaultFocus();</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>                        }</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>                    }</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>                    ImGui::EndCombo();</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>                }</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span> </div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>                ImGui::SameLine();</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span> </div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>                <span class="comment">// シーン変更ボタン</span></div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>                <span class="keywordtype">bool</span> isCurrent = scene_ &amp;&amp; scene_-&gt;GetName() == selectedScene;</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>                <span class="keywordflow">if</span> (isCurrent) {</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>                    ImGui::BeginDisabled();</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>                }</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span> </div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>                <span class="keywordflow">if</span> (ImGui::Button(<span class="stringliteral">&quot;Change Scene&quot;</span>)) {</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>                    <span class="keywordflow">if</span> (!selectedScene.empty() &amp;&amp; !isCurrent) {</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>                        <a class="code hl_function" href="classSceneSwitcher.html#a4528a1be76f6925038254e0e8e0fc06d">Change</a>(selectedScene);</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>                    }</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>                }</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span> </div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>                <span class="comment">// 現在のシーンの場合はツールチップを表示</span></div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>                <span class="keywordflow">if</span> (isCurrent) {</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>                    <span class="keywordflow">if</span> (ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenDisabled)) {</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>                        ImGui::BeginTooltip();</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>                        ImGui::TextColored(ImVec4(0.f, 1.f, 0.f, 1.f), <span class="stringliteral">&quot;This scene is currently active&quot;</span>);</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>                        ImGui::EndTooltip();</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>                    }</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>                    ImGui::EndDisabled();</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>                }</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>            } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>                ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), <span class="stringliteral">&quot;No scenes registered&quot;</span>);</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>            }</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>            ImGui::TextColored(ImVec4(1.0f, 0.0f, 0.0f, 1.0f), <span class="stringliteral">&quot;Factory not initialized&quot;</span>);</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>        }</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span> </div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>        ImGui::End();</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>    });</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span> </div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>    <span class="keywordflow">if</span> (!scene_)<span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>    context_.<a class="code hl_variable" href="structSceneSwitcher_1_1Context.html#a1db5f37f9e36d89ec8cdb732538ac7e6">debug</a>-&gt;<a class="code hl_function" href="classDebugUI.html#a6367814777960cab7c04db03744447c7">RegisterCommand</a>(<span class="stringliteral">&quot;Game&quot;</span>, [<span class="keyword">this</span>]() {</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>        scene_-&gt;Debug();</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>    });</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>}</div>
+</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span> </div>
+<div class="foldopen" id="foldopen00154" data-start="{" data-end="}">
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno"><a class="line" href="classSceneSwitcher.html#a6490cc72d977cc953493fe7e1c7c5fd3">  154</a></span><span class="keyword">const</span> <a class="code hl_struct" href="structSceneSwitcher_1_1Context.html">SceneSwitcher::Context</a>&amp; <a class="code hl_function" href="classSceneSwitcher.html#a6490cc72d977cc953493fe7e1c7c5fd3">SceneSwitcher::GetContext</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>    <span class="keywordflow">return</span> context_;</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>}</div>
+</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span> </div>
+<div class="foldopen" id="foldopen00158" data-start="{" data-end="}">
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno"><a class="line" href="classSceneSwitcher.html#a4528a1be76f6925038254e0e8e0fc06d">  158</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classSceneSwitcher.html#a4528a1be76f6925038254e0e8e0fc06d">SceneSwitcher::Change</a>(<span class="keyword">const</span> std::string &amp;_name) {</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>    <span class="keywordflow">if</span> (!factory_) <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span> </div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>    <span class="comment">// Already Registered</span></div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>    <span class="keywordflow">if</span> (next_) <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span> </div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>    next_ = factory_-&gt;Create(_name);</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span> </div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>    <span class="comment">// Already Destroyed</span></div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>    <span class="keywordflow">if</span> (!scene_) <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span> </div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>    <span class="comment">// Scene Change Transition</span></div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>    transition_-&gt;Awake(scene_-&gt;GetExitTransition(), <a class="code hl_enumvalue" href="classITransitionEffect.html#a86868f632ccdf014543bbf471096227ba7c147cda9e49590f6abe83d118b7353b">ITransitionEffect::State::Out</a>);</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>}</div>
 </div>
 <div class="ttc" id="aCameraDirector_8hpp_html"><div class="ttname"><a href="CameraDirector_8hpp.html">CameraDirector.hpp</a></div></div>
 <div class="ttc" id="aSceneSwitcher_8hpp_html"><div class="ttname"><a href="SceneSwitcher_8hpp.html">SceneSwitcher.hpp</a></div></div>
 <div class="ttc" id="aSingleton_8hpp_html"><div class="ttname"><a href="Singleton_8hpp.html">Singleton.hpp</a></div></div>
 <div class="ttc" id="aTransition_8hpp_html"><div class="ttname"><a href="Transition_8hpp.html">Transition.hpp</a></div></div>
-<div class="ttc" id="aclassDebugUI_html"><div class="ttname"><a href="classDebugUI.html">DebugUI</a></div><div class="ttdoc">ImGuiアダプタークラス デバッグUIの描画とコマンド管理を提供</div><div class="ttdef"><b>Definition</b> <a href="DebugUI_8hpp_source.html#l00015">DebugUI.hpp:15</a></div></div>
-<div class="ttc" id="aclassDebugUI_html_a6367814777960cab7c04db03744447c7"><div class="ttname"><a href="classDebugUI.html#a6367814777960cab7c04db03744447c7">DebugUI::RegisterCommand</a></div><div class="ttdeci">void RegisterCommand(const std::string &amp;_id, std::function&lt; void()&gt; _command)</div><div class="ttdoc">デバッグコマンドを登録</div><div class="ttdef"><b>Definition</b> <a href="DebugUI_8cpp_source.html#l00101">DebugUI.cpp:101</a></div></div>
+<div class="ttc" id="aclassDebugUI_html_a6367814777960cab7c04db03744447c7"><div class="ttname"><a href="classDebugUI.html#a6367814777960cab7c04db03744447c7">DebugUI::RegisterCommand</a></div><div class="ttdeci">void RegisterCommand(const std::string &amp;_id, std::function&lt; void()&gt; _command)</div><div class="ttdoc">デバッグコマンドを登録</div><div class="ttdef"><b>Definition</b> <a href="DebugUI_8cpp_source.html#l00110">DebugUI.cpp:110</a></div></div>
 <div class="ttc" id="aclassITransitionEffect_html_a86868f632ccdf014543bbf471096227ba7c147cda9e49590f6abe83d118b7353b"><div class="ttname"><a href="classITransitionEffect.html#a86868f632ccdf014543bbf471096227ba7c147cda9e49590f6abe83d118b7353b">ITransitionEffect::State::Out</a></div><div class="ttdeci">@ Out</div></div>
 <div class="ttc" id="aclassITransitionEffect_html_a86868f632ccdf014543bbf471096227baefeb369cccbd560588a756610865664c"><div class="ttname"><a href="classITransitionEffect.html#a86868f632ccdf014543bbf471096227baefeb369cccbd560588a756610865664c">ITransitionEffect::State::In</a></div><div class="ttdeci">@ In</div></div>
-<div class="ttc" id="aclassPostProcessExecutor_html"><div class="ttname"><a href="classPostProcessExecutor.html">PostProcessExecutor</a></div><div class="ttdef"><b>Definition</b> <a href="PostProcessExecutor_8hpp_source.html#l00015">PostProcessExecutor.hpp:15</a></div></div>
-<div class="ttc" id="aclassSceneSwitcher_html_a4528a1be76f6925038254e0e8e0fc06d"><div class="ttname"><a href="classSceneSwitcher.html#a4528a1be76f6925038254e0e8e0fc06d">SceneSwitcher::Change</a></div><div class="ttdeci">void Change(const std::string &amp;_name)</div><div class="ttdoc">シーンを変更</div><div class="ttdef"><b>Definition</b> <a href="SceneSwitcher_8cpp_source.html#l00088">SceneSwitcher.cpp:88</a></div></div>
-<div class="ttc" id="aclassSceneSwitcher_html_a4ec925fd7848bb9a7e8e4a9f446417f8"><div class="ttname"><a href="classSceneSwitcher.html#a4ec925fd7848bb9a7e8e4a9f446417f8">SceneSwitcher::Debug</a></div><div class="ttdeci">void Debug()</div><div class="ttdoc">デバッグ情報の表示</div><div class="ttdef"><b>Definition</b> <a href="SceneSwitcher_8cpp_source.html#l00063">SceneSwitcher.cpp:63</a></div></div>
-<div class="ttc" id="aclassSceneSwitcher_html_a560809f29f9c02cc1246ec06e48e372a"><div class="ttname"><a href="classSceneSwitcher.html#a560809f29f9c02cc1246ec06e48e372a">SceneSwitcher::SetFactory</a></div><div class="ttdeci">void SetFactory(std::unique_ptr&lt; AbstractSceneFactory &gt; _factory)</div><div class="ttdoc">シーンファクトリーを設定</div><div class="ttdef"><b>Definition</b> <a href="SceneSwitcher_8cpp_source.html#l00084">SceneSwitcher.cpp:84</a></div></div>
-<div class="ttc" id="aclassSceneSwitcher_html_a87ed2c5193016dd5bdbf36de86e0c8e8"><div class="ttname"><a href="classSceneSwitcher.html#a87ed2c5193016dd5bdbf36de86e0c8e8">SceneSwitcher::Setup</a></div><div class="ttdeci">void Setup(PostProcessExecutor *_ppe, DebugUI *_debug)</div><div class="ttdoc">セットアップ</div><div class="ttdef"><b>Definition</b> <a href="SceneSwitcher_8cpp_source.html#l00008">SceneSwitcher.cpp:8</a></div></div>
-<div class="ttc" id="aclassSceneSwitcher_html_aaa2f2d6b4d8bcf3daeaa0a53b4c40226"><div class="ttname"><a href="classSceneSwitcher.html#aaa2f2d6b4d8bcf3daeaa0a53b4c40226">SceneSwitcher::Draw</a></div><div class="ttdeci">void Draw()</div><div class="ttdoc">描画処理</div><div class="ttdef"><b>Definition</b> <a href="SceneSwitcher_8cpp_source.html#l00054">SceneSwitcher.cpp:54</a></div></div>
-<div class="ttc" id="aclassSceneSwitcher_html_ae789040ffcff5bf41c9b098f902c4b47"><div class="ttname"><a href="classSceneSwitcher.html#ae789040ffcff5bf41c9b098f902c4b47">SceneSwitcher::Update</a></div><div class="ttdeci">void Update()</div><div class="ttdoc">更新処理</div><div class="ttdef"><b>Definition</b> <a href="SceneSwitcher_8cpp_source.html#l00015">SceneSwitcher.cpp:15</a></div></div>
-<div class="ttc" id="aclassSingleton_html_a7b90075f8e4471743fd3596be874e5d1"><div class="ttname"><a href="classSingleton.html#a7b90075f8e4471743fd3596be874e5d1">Singleton::GetInstance</a></div><div class="ttdeci">static T * GetInstance()</div><div class="ttdoc">シングルトンインスタンスを取得</div><div class="ttdef"><b>Definition</b> <a href="Singleton_8hpp_source.html#l00043">Singleton.hpp:43</a></div></div>
+<div class="ttc" id="aclassSceneSwitcher_html_a4528a1be76f6925038254e0e8e0fc06d"><div class="ttname"><a href="classSceneSwitcher.html#a4528a1be76f6925038254e0e8e0fc06d">SceneSwitcher::Change</a></div><div class="ttdeci">void Change(const std::string &amp;_name)</div><div class="ttdoc">シーンを変更</div><div class="ttdef"><b>Definition</b> <a href="SceneSwitcher_8cpp_source.html#l00158">SceneSwitcher.cpp:158</a></div></div>
+<div class="ttc" id="aclassSceneSwitcher_html_a4ec925fd7848bb9a7e8e4a9f446417f8"><div class="ttname"><a href="classSceneSwitcher.html#a4ec925fd7848bb9a7e8e4a9f446417f8">SceneSwitcher::Debug</a></div><div class="ttdeci">void Debug()</div><div class="ttdoc">デバッグ情報の表示</div><div class="ttdef"><b>Definition</b> <a href="SceneSwitcher_8cpp_source.html#l00073">SceneSwitcher.cpp:73</a></div></div>
+<div class="ttc" id="aclassSceneSwitcher_html_a6490cc72d977cc953493fe7e1c7c5fd3"><div class="ttname"><a href="classSceneSwitcher.html#a6490cc72d977cc953493fe7e1c7c5fd3">SceneSwitcher::GetContext</a></div><div class="ttdeci">const Context &amp; GetContext() const</div><div class="ttdef"><b>Definition</b> <a href="SceneSwitcher_8cpp_source.html#l00154">SceneSwitcher.cpp:154</a></div></div>
+<div class="ttc" id="aclassSceneSwitcher_html_a66fca08d6a530d882453f74f74e0914e"><div class="ttname"><a href="classSceneSwitcher.html#a66fca08d6a530d882453f74f74e0914e">SceneSwitcher::RegisterScene</a></div><div class="ttdeci">void RegisterScene(const std::string &amp;_name, const std::function&lt; std::unique_ptr&lt; IScene &gt;()&gt; &amp;_creator) const</div><div class="ttdoc">シーンを登録する</div><div class="ttdef"><b>Definition</b> <a href="SceneSwitcher_8cpp_source.html#l00068">SceneSwitcher.cpp:68</a></div></div>
+<div class="ttc" id="aclassSceneSwitcher_html_a7a13fd574dbdf54bb8524e389866c34f"><div class="ttname"><a href="classSceneSwitcher.html#a7a13fd574dbdf54bb8524e389866c34f">SceneSwitcher::Setup</a></div><div class="ttdeci">void Setup(const Context &amp;_context)</div><div class="ttdoc">セットアップ</div><div class="ttdef"><b>Definition</b> <a href="SceneSwitcher_8cpp_source.html#l00012">SceneSwitcher.cpp:12</a></div></div>
+<div class="ttc" id="aclassSceneSwitcher_html_a8b7612606b39268795b45e9b61fcce06"><div class="ttname"><a href="classSceneSwitcher.html#a8b7612606b39268795b45e9b61fcce06">SceneSwitcher::SceneSwitcher</a></div><div class="ttdeci">SceneSwitcher()</div><div class="ttdef"><b>Definition</b> <a href="SceneSwitcher_8cpp_source.html#l00008">SceneSwitcher.cpp:8</a></div></div>
+<div class="ttc" id="aclassSceneSwitcher_html_aaa2f2d6b4d8bcf3daeaa0a53b4c40226"><div class="ttname"><a href="classSceneSwitcher.html#aaa2f2d6b4d8bcf3daeaa0a53b4c40226">SceneSwitcher::Draw</a></div><div class="ttdeci">void Draw()</div><div class="ttdoc">描画処理</div><div class="ttdef"><b>Definition</b> <a href="SceneSwitcher_8cpp_source.html#l00059">SceneSwitcher.cpp:59</a></div></div>
+<div class="ttc" id="aclassSceneSwitcher_html_ae789040ffcff5bf41c9b098f902c4b47"><div class="ttname"><a href="classSceneSwitcher.html#ae789040ffcff5bf41c9b098f902c4b47">SceneSwitcher::Update</a></div><div class="ttdeci">void Update()</div><div class="ttdoc">更新処理</div><div class="ttdef"><b>Definition</b> <a href="SceneSwitcher_8cpp_source.html#l00019">SceneSwitcher.cpp:19</a></div></div>
+<div class="ttc" id="aclassSingleton_html_a7b90075f8e4471743fd3596be874e5d1"><div class="ttname"><a href="classSingleton.html#a7b90075f8e4471743fd3596be874e5d1">Singleton::GetInstance</a></div><div class="ttdeci">static T * GetInstance()</div><div class="ttdoc">シングルトンインスタンスを取得</div><div class="ttdef"><b>Definition</b> <a href="Singleton_8hpp_source.html#l00038">Singleton.hpp:38</a></div></div>
+<div class="ttc" id="astructSceneSwitcher_1_1Context_html"><div class="ttname"><a href="structSceneSwitcher_1_1Context.html">SceneSwitcher::Context</a></div><div class="ttdef"><b>Definition</b> <a href="SceneSwitcher_8hpp_source.html#l00020">SceneSwitcher.hpp:20</a></div></div>
+<div class="ttc" id="astructSceneSwitcher_1_1Context_html_a1db5f37f9e36d89ec8cdb732538ac7e6"><div class="ttname"><a href="structSceneSwitcher_1_1Context.html#a1db5f37f9e36d89ec8cdb732538ac7e6">SceneSwitcher::Context::debug</a></div><div class="ttdeci">DebugUI * debug</div><div class="ttdef"><b>Definition</b> <a href="SceneSwitcher_8hpp_source.html#l00022">SceneSwitcher.hpp:22</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_204260ac86670e69c647eaba8962e745.html">Scene</a></li><li class="navelem"><a class="el" href="SceneSwitcher_8cpp.html">SceneSwitcher.cpp</a></li>
-    <li class="footer">2025年10月16日(木) 07時42分51秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年01月07日(水) 07時39分20秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

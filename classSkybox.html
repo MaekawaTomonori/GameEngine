@@ -108,6 +108,8 @@ $(document).ready(function(){initNavTree('classSkybox.html',''); initResizable()
 <tr class="separator:a07f9389e51ff7d429abe6dfe2402bd91"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8bf85652e4f0559530eb7a1f5ed87439" id="r_a8bf85652e4f0559530eb7a1f5ed87439"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSkybox.html#a8bf85652e4f0559530eb7a1f5ed87439">Draw</a> ()</td></tr>
 <tr class="separator:a8bf85652e4f0559530eb7a1f5ed87439"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af8b56738ddf0560ce1d2d50318ea7874" id="r_af8b56738ddf0560ce1d2d50318ea7874"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSkybox.html#af8b56738ddf0560ce1d2d50318ea7874">SetColor</a> (const <a class="el" href="structVector4.html">Vector4</a> &amp;_color) const</td></tr>
+<tr class="separator:af8b56738ddf0560ce1d2d50318ea7874"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">詳解</h2>
 <div class="textblock">
@@ -130,7 +132,7 @@ $(document).ready(function(){initNavTree('classSkybox.html',''); initResizable()
 
 <p class="definition"> <a class="el" href="Skybox_8cpp_source.html">Skybox.cpp</a> の <a class="el" href="Skybox_8cpp_source.html#l00052">52</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="Common_8cpp_source.html#l00009">Common::Draw()</a>, <a class="el" href="DirectXAdapter_8cpp_source.html#l00527">DirectXAdapter::GetCommandList()</a>, <a class="el" href="TextureManager_8cpp_source.html#l00226">TextureManager::GetGPUHandle()</a>, <a class="el" href="Singleton_8hpp_source.html#l00043">Singleton&lt; T &gt;::GetInstance()</a>.</p>
+<p class="reference">参照先 <a class="el" href="DirectXAdapter_8cpp_source.html#l00704">DirectXAdapter::GetCommandList()</a>, <a class="el" href="TextureManager_8cpp_source.html#l00239">TextureManager::GetGPUHandle()</a>, <a class="el" href="Singleton_8hpp_source.html#l00038">Singleton&lt; T &gt;::GetInstance()</a>, <a class="el" href="Common_8cpp_source.html#l00054">Common::RegisterDraw()</a>.</p>
 
 </div>
 </div>
@@ -152,7 +154,27 @@ $(document).ready(function(){initNavTree('classSkybox.html',''); initResizable()
 
 <p class="definition"> <a class="el" href="Skybox_8cpp_source.html">Skybox.cpp</a> の <a class="el" href="Skybox_8cpp_source.html#l00009">9</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="DirectXAdapter_8cpp_source.html#l00070">DirectXAdapter::CreateBufferResource()</a>, <a class="el" href="Common_8hpp_source.html#l00025">Common::GetAdapter()</a>, <a class="el" href="Singleton_8hpp_source.html#l00043">Singleton&lt; T &gt;::GetInstance()</a>, <a class="el" href="TextureManager_8cpp_source.html#l00133">TextureManager::Load()</a>.</p>
+<p class="reference">参照先 <a class="el" href="DirectXAdapter_8cpp_source.html#l00074">DirectXAdapter::CreateBufferResource()</a>, <a class="el" href="Common_8hpp_source.html#l00036">Common::GetAdapter()</a>, <a class="el" href="Singleton_8hpp_source.html#l00038">Singleton&lt; T &gt;::GetInstance()</a>, <a class="el" href="TextureManager_8cpp_source.html#l00133">TextureManager::Load()</a>.</p>
+
+</div>
+</div>
+<a id="af8b56738ddf0560ce1d2d50318ea7874" name="af8b56738ddf0560ce1d2d50318ea7874"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af8b56738ddf0560ce1d2d50318ea7874">&#9670;&#160;</a></span>SetColor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Skybox::SetColor </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structVector4.html">Vector4</a> &amp;&#160;</td>
+          <td class="paramname"><em>_color</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="Skybox_8cpp_source.html">Skybox.cpp</a> の <a class="el" href="Skybox_8cpp_source.html#l00070">70</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -173,7 +195,7 @@ $(document).ready(function(){initNavTree('classSkybox.html',''); initResizable()
 
 <p class="definition"> <a class="el" href="Skybox_8cpp_source.html">Skybox.cpp</a> の <a class="el" href="Skybox_8cpp_source.html#l00039">39</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="Singleton_8hpp_source.html#l00043">Singleton&lt; T &gt;::GetInstance()</a>, <a class="el" href="MathUtils_8cpp_source.html#l00113">MathUtils::Matrix::MakeAffineMatrix()</a>, <a class="el" href="Common_8cpp_source.html#l00016">Common::RegisterCommand()</a>, <a class="el" href="Transform_8hpp_source.html#l00013">Transform::scale</a>, <a class="el" href="Vector3_8hpp_source.html#l00011">Vector3::x</a>.</p>
+<p class="reference">参照先 <a class="el" href="Singleton_8hpp_source.html#l00038">Singleton&lt; T &gt;::GetInstance()</a>, <a class="el" href="MathUtils_8cpp_source.html#l00115">MathUtils::Matrix::MakeAffineMatrix()</a>, <a class="el" href="Common_8cpp_source.html#l00047">Common::RegisterDebug()</a>, <a class="el" href="Transform_8hpp_source.html#l00012">Transform::scale</a>, <a class="el" href="Vector3_8hpp_source.html#l00012">Vector3::x</a>.</p>
 
 </div>
 </div>
@@ -187,7 +209,7 @@ $(document).ready(function(){initNavTree('classSkybox.html',''); initResizable()
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classSkybox.html">Skybox</a></li>
-    <li class="footer">2025年10月16日(木) 07時42分51秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年01月07日(水) 07時39分21秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

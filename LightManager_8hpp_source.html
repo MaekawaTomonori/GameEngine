@@ -98,23 +98,25 @@ $(document).ready(function(){initNavTree('LightManager_8hpp_source.html',''); in
   <div class="headertitle"><div class="title">LightManager.hpp</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="LightManager_8hpp.html">[詳解]</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
-<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#include &lt;d3d12.h&gt;</span></div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;memory&gt;</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;wrl/client.h&gt;</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;<a class="code" href="DebugUI_8hpp.html">DebugUI.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;<a class="code" href="DirectXAdapter_8hpp.html">src/DirectX/DirectXAdapter.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;<a class="code" href="DX12Resource_8hpp.html">src/DirectX/Resource/DX12Resource.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;<a class="code" href="LightType_8hpp.html">LightType.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;<a class="code" href="DirectionalLight_8h.html">DirectionalLight/DirectionalLight.h</a>&quot;</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="PointLight_8h.html">PointLight/PointLight.h</a>&quot;</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;<a class="code" href="SpotLight_8h.html">SpotLight/SpotLight.h</a>&quot;</span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
-<div class="foldopen" id="foldopen00020" data-start="{" data-end="};">
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="classLightManager.html">   20</a></span><span class="keyword">class </span><a class="code hl_class" href="classLightManager.html">LightManager</a> final{</div>
+<a href="LightManager_8hpp.html">[詳解]</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef LIGHTMANAGER_HPP_</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define LIGHTMANAGER_HPP_</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;d3d12.h&gt;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;memory&gt;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;wrl/client.h&gt;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;<a class="code" href="DebugUI_8hpp.html">DebugUI.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;<a class="code" href="DirectXAdapter_8hpp.html">src/DirectX/DirectXAdapter.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;<a class="code" href="DX12Resource_8hpp.html">src/DirectX/Resource/DX12Resource.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="LightType_8hpp.html">LightType.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;<a class="code" href="DirectionalLight_8h.html">DirectionalLight/DirectionalLight.h</a>&quot;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &quot;<a class="code" href="PointLight_8h.html">PointLight/PointLight.h</a>&quot;</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &quot;<a class="code" href="SpotLight_8h.html">SpotLight/SpotLight.h</a>&quot;</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
+<div class="foldopen" id="foldopen00021" data-start="{" data-end="};">
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="classLightManager.html">   21</a></span><span class="keyword">class </span><a class="code hl_class" href="classLightManager.html">LightManager</a> final{</div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <span class="keyword">struct </span>LightCount{</div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        uint32_t dlCount;</div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        uint32_t plCount;</div>
@@ -144,26 +146,35 @@ $(document).ready(function(){initNavTree('LightManager_8hpp_source.html',''); in
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    std::string path = <span class="stringliteral">&quot;Light&quot;</span>;</div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <a class="code hl_function" href="classLightManager.html#a07c7063f02e20a33c0984965991aa4af">~LightManager</a>();</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classLightManager.html#a1335fa78094bb17637bf5f787a4a4734">Initialize</a>(<a class="code hl_class" href="classDirectXAdapter.html">DirectXAdapter</a>* _adapter, <a class="code hl_class" href="classDebugUI.html">DebugUI</a>* _debug);</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classLightManager.html#a84028910a94635b5a011e05994953ca1">Update</a>();</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    std::optional&lt;Vector3&gt; ref_;</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <a class="code hl_function" href="classLightManager.html#a07c7063f02e20a33c0984965991aa4af">~LightManager</a>();</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classLightManager.html#a1335fa78094bb17637bf5f787a4a4734">Initialize</a>(<a class="code hl_class" href="classDirectXAdapter.html">DirectXAdapter</a>* _adapter, <a class="code hl_class" href="classDebugUI.html">DebugUI</a>* _debug);</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classLightManager.html#a84028910a94635b5a011e05994953ca1">Update</a>();</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classLightManager.html#a5e8b431b8a376f29d4b458885526cf62">Draw</a>() <span class="keyword">const</span>;</div>
 <div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classLightManager.html#ac8e008ea05788263b94b7b722b285afd">Add</a>(<a class="code hl_enumeration" href="LightType_8hpp.html#adc3ec8293e6a97ebe43f0196b9a7f638">LightType</a> type);</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    <span class="keywordtype">void</span> Debug();</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    <span class="keywordtype">void</span> CheckState();</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classLightManager.html#a1cf5a5081a0dfe8537200797fe1c4340">Add</a>(<a class="code hl_enumeration" href="LightType_8hpp.html#adc3ec8293e6a97ebe43f0196b9a7f638">LightType</a> _type);</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classLightManager.html#af1e218e68b00dff11b67759e27ef409e">SetPosition</a>(<a class="code hl_struct" href="structVector3.html">Vector3</a> _pos);</div>
 <div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    <span class="keywordtype">void</span> Load();</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    <span class="keywordtype">void</span> Save() <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>};</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classLightManager.html#a23646e79e7b43996337b393dd588a58e">ClearRef</a>();</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    <span class="keywordtype">void</span> Debug();</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    <span class="keywordtype">void</span> CheckState();</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    <span class="keywordtype">void</span> UpdateLights() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    <span class="keywordtype">void</span> Load();</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    <span class="keywordtype">void</span> Save() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>};</div>
 </div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span> </div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="preprocessor">#endif </span><span class="comment">// LIGHTMANAGER_HPP_</span></div>
 <div class="ttc" id="aDX12Resource_8hpp_html"><div class="ttname"><a href="DX12Resource_8hpp.html">DX12Resource.hpp</a></div></div>
 <div class="ttc" id="aDebugUI_8hpp_html"><div class="ttname"><a href="DebugUI_8hpp.html">DebugUI.hpp</a></div></div>
 <div class="ttc" id="aDirectXAdapter_8hpp_html"><div class="ttname"><a href="DirectXAdapter_8hpp.html">DirectXAdapter.hpp</a></div></div>
@@ -172,24 +183,27 @@ $(document).ready(function(){initNavTree('LightManager_8hpp_source.html',''); in
 <div class="ttc" id="aLightType_8hpp_html_adc3ec8293e6a97ebe43f0196b9a7f638"><div class="ttname"><a href="LightType_8hpp.html#adc3ec8293e6a97ebe43f0196b9a7f638">LightType</a></div><div class="ttdeci">LightType</div><div class="ttdef"><b>Definition</b> <a href="LightType_8hpp_source.html#l00004">LightType.hpp:4</a></div></div>
 <div class="ttc" id="aPointLight_8h_html"><div class="ttname"><a href="PointLight_8h.html">PointLight.h</a></div></div>
 <div class="ttc" id="aSpotLight_8h_html"><div class="ttname"><a href="SpotLight_8h.html">SpotLight.h</a></div></div>
-<div class="ttc" id="aclassDebugUI_html"><div class="ttname"><a href="classDebugUI.html">DebugUI</a></div><div class="ttdoc">ImGuiアダプタークラス デバッグUIの描画とコマンド管理を提供</div><div class="ttdef"><b>Definition</b> <a href="DebugUI_8hpp_source.html#l00015">DebugUI.hpp:15</a></div></div>
-<div class="ttc" id="aclassDirectXAdapter_html"><div class="ttname"><a href="classDirectXAdapter.html">DirectXAdapter</a></div><div class="ttdoc">DirectX12アダプタークラス DirectX12の初期化とデバイス管理を提供</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8hpp_source.html#l00025">DirectXAdapter.hpp:25</a></div></div>
-<div class="ttc" id="aclassLightManager_html"><div class="ttname"><a href="classLightManager.html">LightManager</a></div><div class="ttdoc">ライト管理クラス 指向性ライト、点光源、スポットライトを統合管理</div><div class="ttdef"><b>Definition</b> <a href="LightManager_8hpp_source.html#l00020">LightManager.hpp:20</a></div></div>
+<div class="ttc" id="aclassDebugUI_html"><div class="ttname"><a href="classDebugUI.html">DebugUI</a></div><div class="ttdoc">ImGuiアダプタークラス デバッグUIの描画とコマンド管理を提供</div><div class="ttdef"><b>Definition</b> <a href="DebugUI_8hpp_source.html#l00012">DebugUI.hpp:12</a></div></div>
+<div class="ttc" id="aclassDirectXAdapter_html"><div class="ttname"><a href="classDirectXAdapter.html">DirectXAdapter</a></div><div class="ttdoc">DirectX12アダプタークラス DirectX12の初期化とデバイス管理を提供</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8hpp_source.html#l00024">DirectXAdapter.hpp:24</a></div></div>
+<div class="ttc" id="aclassLightManager_html"><div class="ttname"><a href="classLightManager.html">LightManager</a></div><div class="ttdoc">ライト管理クラス 指向性ライト、点光源、スポットライトを統合管理</div><div class="ttdef"><b>Definition</b> <a href="LightManager_8hpp_source.html#l00021">LightManager.hpp:21</a></div></div>
 <div class="ttc" id="aclassLightManager_html_a07c7063f02e20a33c0984965991aa4af"><div class="ttname"><a href="classLightManager.html#a07c7063f02e20a33c0984965991aa4af">LightManager::~LightManager</a></div><div class="ttdeci">~LightManager()</div><div class="ttdef"><b>Definition</b> <a href="LightManager_8cpp_source.html#l00011">LightManager.cpp:11</a></div></div>
-<div class="ttc" id="aclassLightManager_html_a1335fa78094bb17637bf5f787a4a4734"><div class="ttname"><a href="classLightManager.html#a1335fa78094bb17637bf5f787a4a4734">LightManager::Initialize</a></div><div class="ttdeci">void Initialize(DirectXAdapter *_adapter, DebugUI *_debug)</div><div class="ttdoc">ライトマネージャーを初期化</div><div class="ttdef"><b>Definition</b> <a href="LightManager_8cpp_source.html#l00161">LightManager.cpp:161</a></div></div>
-<div class="ttc" id="aclassLightManager_html_a5e8b431b8a376f29d4b458885526cf62"><div class="ttname"><a href="classLightManager.html#a5e8b431b8a376f29d4b458885526cf62">LightManager::Draw</a></div><div class="ttdeci">void Draw() const</div><div class="ttdoc">ライトを描画</div><div class="ttdef"><b>Definition</b> <a href="LightManager_8cpp_source.html#l00212">LightManager.cpp:212</a></div></div>
-<div class="ttc" id="aclassLightManager_html_a84028910a94635b5a011e05994953ca1"><div class="ttname"><a href="classLightManager.html#a84028910a94635b5a011e05994953ca1">LightManager::Update</a></div><div class="ttdeci">void Update()</div><div class="ttdoc">ライトの更新処理</div><div class="ttdef"><b>Definition</b> <a href="LightManager_8cpp_source.html#l00195">LightManager.cpp:195</a></div></div>
-<div class="ttc" id="aclassLightManager_html_ac8e008ea05788263b94b7b722b285afd"><div class="ttname"><a href="classLightManager.html#ac8e008ea05788263b94b7b722b285afd">LightManager::Add</a></div><div class="ttdeci">void Add(LightType type)</div><div class="ttdoc">ライトを追加</div><div class="ttdef"><b>Definition</b> <a href="LightManager_8cpp_source.html#l00219">LightManager.cpp:219</a></div></div>
+<div class="ttc" id="aclassLightManager_html_a1335fa78094bb17637bf5f787a4a4734"><div class="ttname"><a href="classLightManager.html#a1335fa78094bb17637bf5f787a4a4734">LightManager::Initialize</a></div><div class="ttdeci">void Initialize(DirectXAdapter *_adapter, DebugUI *_debug)</div><div class="ttdoc">ライトマネージャーを初期化</div><div class="ttdef"><b>Definition</b> <a href="LightManager_8cpp_source.html#l00163">LightManager.cpp:163</a></div></div>
+<div class="ttc" id="aclassLightManager_html_a1cf5a5081a0dfe8537200797fe1c4340"><div class="ttname"><a href="classLightManager.html#a1cf5a5081a0dfe8537200797fe1c4340">LightManager::Add</a></div><div class="ttdeci">void Add(LightType _type)</div><div class="ttdoc">ライトを追加</div><div class="ttdef"><b>Definition</b> <a href="LightManager_8cpp_source.html#l00222">LightManager.cpp:222</a></div></div>
+<div class="ttc" id="aclassLightManager_html_a23646e79e7b43996337b393dd588a58e"><div class="ttname"><a href="classLightManager.html#a23646e79e7b43996337b393dd588a58e">LightManager::ClearRef</a></div><div class="ttdeci">void ClearRef()</div><div class="ttdef"><b>Definition</b> <a href="LightManager_8cpp_source.html#l00280">LightManager.cpp:280</a></div></div>
+<div class="ttc" id="aclassLightManager_html_a5e8b431b8a376f29d4b458885526cf62"><div class="ttname"><a href="classLightManager.html#a5e8b431b8a376f29d4b458885526cf62">LightManager::Draw</a></div><div class="ttdeci">void Draw() const</div><div class="ttdoc">ライトを描画</div><div class="ttdef"><b>Definition</b> <a href="LightManager_8cpp_source.html#l00215">LightManager.cpp:215</a></div></div>
+<div class="ttc" id="aclassLightManager_html_a84028910a94635b5a011e05994953ca1"><div class="ttname"><a href="classLightManager.html#a84028910a94635b5a011e05994953ca1">LightManager::Update</a></div><div class="ttdeci">void Update()</div><div class="ttdoc">ライトの更新処理</div><div class="ttdef"><b>Definition</b> <a href="LightManager_8cpp_source.html#l00197">LightManager.cpp:197</a></div></div>
+<div class="ttc" id="aclassLightManager_html_af1e218e68b00dff11b67759e27ef409e"><div class="ttname"><a href="classLightManager.html#af1e218e68b00dff11b67759e27ef409e">LightManager::SetPosition</a></div><div class="ttdeci">void SetPosition(Vector3 _pos)</div><div class="ttdoc">ライトの参照座標を設定</div><div class="ttdef"><b>Definition</b> <a href="LightManager_8cpp_source.html#l00264">LightManager.cpp:264</a></div></div>
 <div class="ttc" id="astructDirectionalLight_html"><div class="ttname"><a href="structDirectionalLight.html">DirectionalLight</a></div><div class="ttdef"><b>Definition</b> <a href="DirectionalLight_8h_source.html#l00008">DirectionalLight.h:8</a></div></div>
 <div class="ttc" id="astructPointLight_html"><div class="ttname"><a href="structPointLight.html">PointLight</a></div><div class="ttdef"><b>Definition</b> <a href="PointLight_8h_source.html#l00006">PointLight.h:6</a></div></div>
 <div class="ttc" id="astructSpotLight_html"><div class="ttname"><a href="structSpotLight.html">SpotLight</a></div><div class="ttdef"><b>Definition</b> <a href="SpotLight_8h_source.html#l00006">SpotLight.h:6</a></div></div>
+<div class="ttc" id="astructVector3_html"><div class="ttname"><a href="structVector3.html">Vector3</a></div><div class="ttdoc">3Dベクトル構造体 3D座標と基本的なベクトル演算を提供</div><div class="ttdef"><b>Definition</b> <a href="Vector3_8hpp_source.html#l00011">Vector3.hpp:11</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_0bea4804a055a8738b8ad450a8ea4ec1.html">Light</a></li><li class="navelem"><a class="el" href="LightManager_8hpp.html">LightManager.hpp</a></li>
-    <li class="footer">2025年10月16日(木) 07時42分51秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年01月07日(水) 07時39分20秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>
