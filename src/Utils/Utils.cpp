@@ -115,4 +115,31 @@ namespace Utils {
         return false;
 #endif
     }
+
+    std::string OpenFileDialog(const std::string& _filter) {
+        OPENFILENAMEA ofn;
+        char szFile[260] = { 0 };
+
+        ZeroMemory(&ofn, sizeof(ofn));
+        ofn.lStructSize = sizeof(ofn);
+        ofn.hwndOwner = NULL;
+        ofn.lpstrFile = szFile;
+        ofn.nMaxFile = sizeof(szFile);
+        ofn.lpstrFilter = _filter.c_str();
+        ofn.nFilterIndex = 1;
+        ofn.lpstrFileTitle = NULL;
+        ofn.nMaxFileTitle = 0;
+
+        std::filesystem::path initialDir = std::filesystem::current_path() / "Assets" / "Resources";
+        std::string initialDirStr = initialDir.string();
+        ofn.lpstrInitialDir = initialDirStr.c_str();
+
+        ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST | OFN_NOCHANGEDIR;
+
+        if (GetOpenFileNameA(&ofn) == TRUE) {
+            return std::string(ofn.lpstrFile);
+        }
+
+        return "";
+    }
 }

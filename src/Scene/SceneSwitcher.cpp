@@ -3,6 +3,7 @@
 #include "imgui.h"
 #include "Pattern/Singleton.hpp"
 #include "src/Camera/Director/CameraDirector.hpp"
+#include "src/Light/LightManager.hpp"
 #include "src/Scene/Transition/Transition.hpp"
 
 SceneSwitcher::SceneSwitcher() {
@@ -32,6 +33,7 @@ void SceneSwitcher::Update() {
             scene_.reset();
             scene_ = nullptr;
             Singleton<CameraDirector>::GetInstance()->Stop();
+            Singleton<LightManager>::GetInstance()->ClearRef();
         }
         scene_ = std::move(next_);
 
@@ -39,9 +41,6 @@ void SceneSwitcher::Update() {
         next_ = nullptr;
         scene_->Setup(this);
         scene_->Initialize();
-
-        // データ送信用に1フレーム進める
-        scene_->Update();
 
         transition_->Awake(scene_->GetEntryTransition(), ITransitionEffect::State::In, 1.f);
         return;

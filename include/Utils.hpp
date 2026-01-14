@@ -11,6 +11,7 @@ namespace Utils {
     std::string GenerateUniqueId();
     bool EqualsIgnoreCase(std::string _str1, std::string _str2);
     bool ConfirmDialog(const std::string& _msg);
+    std::string OpenFileDialog(const std::string& _filter = "All Files\0*.*\0");
 };
 
 #endif //UTILS_HPP

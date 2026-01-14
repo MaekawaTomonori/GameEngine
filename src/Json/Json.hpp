@@ -17,33 +17,32 @@ class Json{
     using Group = std::map<std::string, Object>; // group
 
     const std::string PATH = "Assets/Data/";
-    std::map<std::string, Group> datas_; // FileName, Data Groups
+    std::map<std::string, Group> datas_; // Data Key, Data Groups
 
-    //{
-    //  "Data Key": {
-    //      "Group" : {
-    //              "Object Key" : "Value"
-    //     },
-    //     "Group" : {
-    //              "Object Key" : "Value"
-    //      }
-    //  }
-    //}
-
-    // resume
+    // JSON File Structure:
     // {
-    //     "FILE NAME" : {
-    //          "KEY" : VALUE
+    //     "Data Key": {
+    //         "Group1": {
+    //             "key1": value1,
+    //             "key2": value2
+    //         },
+    //         "Group2": {
+    //             "key3": value3
+    //         }
     //     }
     // }
+    //
+    // Usage:
+    // Load("directory", "filename") -> datas_["filename"] stores data from "Assets/Data/directory/filename.json"
+    // Load("directory") -> loads all JSON files in directory, each stored with its filename as key
 
 public:
-    void SetValue(const std::string& _path, const std::string& _group, const std::string& _key, const Value& _value);
-    Group GetGroups(const std::string& _path);
-    Value GetValue(const std::string& _path, const std::string& _group, const std::string& _key) const;
-    void RemoveGroup(const std::string& _path, const std::string& _group);
+    void SetValue(const std::string& _name, const std::string& _group, const std::string& _key, const Value& _value);
+    Group GetGroups(const std::string& _name);
+    Value GetValue(const std::string& _name, const std::string& _group, const std::string& _key) const;
+    void RemoveGroup(const std::string& _name, const std::string& _group);
 
-    bool Load(const std::string& _path, std::string _name = "");
+    bool Load(const std::string& _path, const std::string& _name = "");
     void Save(const std::string& _path, std::string _name = "");
 
 private:

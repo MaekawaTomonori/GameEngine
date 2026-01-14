@@ -31,7 +31,7 @@ void Json::LoadJson(const std::string& _path, std::string _name) {
     file.close();
 
     // Load Data
-    auto data = root.find(_path);
+    auto data = root.find(_name);
     assert(data != root.end());
 
     for (auto group = data->begin(); group != data->end(); ++group){
@@ -43,22 +43,22 @@ void Json::LoadJson(const std::string& _path, std::string _name) {
 
             if (object->is_number_integer()){
                 int32_t value = object->get<int32_t>();
-                SetValue(_path, groupKey, key, value);
+                SetValue(_name, groupKey, key, value);
             } else if (object->is_number_float()){
                 float value = object->get<float>();
-                SetValue(_path, groupKey, key,value);
+                SetValue(_name, groupKey, key,value);
             } else if (object->is_array()){
                 if (!object->at(0).is_array()){
                     // Array [v1, v2, ...]
                     if (object->size() == 2){
                         Vector2 value = {object->at(0).get<float>(), object->at(1).get<float>()};
-                        SetValue(_path, groupKey, key, value);
+                        SetValue(_name, groupKey, key, value);
                     } else if (object->size() == 3){
                         Vector3 value = {object->at(0).get<float>(), object->at(1).get<float>(), object->at(2).get<float>()};
-                        SetValue(_path, groupKey, key, value);
+                        SetValue(_name, groupKey, key, value);
                     } else if (object->size() == 4){
                         Vector4 value = {object->at(0).get<float>(), object->at(1).get<float>(), object->at(2).get<float>(), object->at(3).get<float>()};
-                        SetValue(_path, groupKey, key, value);
+                        SetValue(_name, groupKey, key, value);
                     }
                 }else {
                     // Array of arrays [[v1,v2,...], [v1,v2,...], ...]
@@ -71,7 +71,7 @@ void Json::LoadJson(const std::string& _path, std::string _name) {
                                 floatArray.push_back(item.get<float>());
                             }
                         }
-                        SetValue(_path, groupKey, key, floatArray);
+                        SetValue(_name, groupKey, key, floatArray);
                     } else if (array.is_array() && array.size() == 2){
                         // Array of Vector2
                         std::vector<Vector2> vectorArray;
@@ -80,7 +80,7 @@ void Json::LoadJson(const std::string& _path, std::string _name) {
                                 vectorArray.push_back({ item[0].get<float>(), item[1].get<float>() });
                             }
                         }
-                        SetValue(_path, groupKey, key, vectorArray);
+                        SetValue(_name, groupKey, key, vectorArray);
                     } else if (array.is_array() && array.size() == 3) {
                         // Array of Vector3
                         std::vector<Vector3> vectorArray;
@@ -89,36 +89,36 @@ void Json::LoadJson(const std::string& _path, std::string _name) {
                                 vectorArray.push_back({item[0].get<float>(), item[1].get<float>(), item[2].get<float>()});
                             }
                         }
-                        SetValue(_path, groupKey, key, vectorArray);
+                        SetValue(_name, groupKey, key, vectorArray);
                     }
                 }
             } else if (object->is_string()) {
                 std::string value = object->get<std::string>();
-                SetValue(_path, groupKey, key, value);
+                SetValue(_name, groupKey, key, value);
             }
         }
     }
-    Log::Send(Log::Level::INFO, "Loaded " + _path + ".json");
+    Log::Send(Log::Level::INFO, "Loaded " + _name + ".json");
 }
 
-void Json::SetValue(const std::string& _path, const std::string& _group, const std::string& _key, const Value& _value) {
-    Register(_path);
+void Json::SetValue(const std::string& _name, const std::string& _group, const std::string& _key, const Value& _value) {
+    Register(_name);
 
-    auto& data = datas_[_path];
+    auto& data = datas_[_name];
 
     Object& object = data[_group];
     object[_key] = _value;
 }
 
-Json::Group Json::GetGroups(const std::string& _path) {
-    auto data = datas_.find(_path);
+Json::Group Json::GetGroups(const std::string& _name) {
+    auto data = datas_.find(_name);
     assert(data != datas_.end());
     return data->second;
 }
 
-Json::Value Json::GetValue(const std::string& _path, const std::string& _group, const std::string& _key) const {
-    if (!datas_.contains(_path)) return {};
-    auto data = datas_.find(_path);
+Json::Value Json::GetValue(const std::string& _name, const std::string& _group, const std::string& _key) const {
+    if (!datas_.contains(_name)) return {};
+    auto data = datas_.find(_name);
     assert(data != datas_.end());
 
     auto group = data->second.find(_group);
@@ -131,18 +131,16 @@ Json::Value Json::GetValue(const std::string& _path, const std::string& _group, 
     return value;
 }
 
-void Json::RemoveGroup(const std::string& _path, const std::string& _group) {
-    if (!datas_.contains(_path)) return;
-    auto data = datas_.find(_path);
+void Json::RemoveGroup(const std::string& _name, const std::string& _group) {
+    if (!datas_.contains(_name)) return;
+    auto data = datas_.find(_name);
     assert(data != datas_.end());
     auto group = data->second.find(_group);
     assert(group != data->second.end());
     data->second.erase(group);
 }
 
-bool Json::Load(const std::string& _path, std::string _name) {
-    Register(_path);
-
+bool Json::Load(const std::string& _path, const std::string& _name) {
     Log::Send(Log::Level::INFO, _path + " loading");
 
     // If _name is specified, load only that file
@@ -172,15 +170,17 @@ bool Json::Load(const std::string& _path, std::string _name) {
 }
 
 void Json::Save(const std::string& _path, std::string _name) {
-    auto group = datas_.find(_path);
+    if (_name.empty()) _name = _path;
+
+    auto group = datas_.find(_name);
     assert(group != datas_.end());
 
     json root = json::object();
-    root[_path] = json::object();
+    root[_name] = json::object();
 
     for (auto& [groupKey, groupData] : group->second){
-        root[_path][groupKey] = json::object();
-        json& item = root[_path][groupKey];
+        root[_name][groupKey] = json::object();
+        json& item = root[_name][groupKey];
 
         for (auto [key, value] : groupData){
             item[key] = json::object();
@@ -223,8 +223,6 @@ void Json::Save(const std::string& _path, std::string _name) {
         create_directories(dir);
     }
 
-    if (_name.empty()) _name = _path;
-
     std::string path = dir.string() + _name + ".json";
     std::ofstream file(path, std::ios::trunc);
 
@@ -236,7 +234,7 @@ void Json::Save(const std::string& _path, std::string _name) {
     file << root.dump(4) << '\n';
     file.close();
 
-    datas_.erase(_path);
+    datas_.erase(_name);
 
-    Log::Send(Log::Level::INFO, "Saved " + _path);
+    Log::Send(Log::Level::INFO, "Saved " + _name);
 }
