@@ -180,4 +180,7 @@ void Window::SetSize(const int _width, const int _height) const {
 
 void Window::SetTitle(const std::string& _title) {
     title_ = Utils::Convert(_title);
+    if (hWnd_){
+        SetWindowText(hWnd_, title_.c_str());
+    }
 }

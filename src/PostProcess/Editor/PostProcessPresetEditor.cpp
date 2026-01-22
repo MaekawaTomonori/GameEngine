@@ -17,10 +17,9 @@ void PostProcessPresetEditor::Initialize(DebugUI* _debug, PostProcessExecutor* _
 
 void PostProcessPresetEditor::ShowEditor() {
     if (!debug_) return;
+    if (!showEditor_) return;
 
     debug_->RegisterCommand("PostEffect Preset Editor", [this](){
-        if (!showEditor_) return;
-
         ImGui::SetNextWindowSize(ImVec2(900, 750), ImGuiCond_FirstUseEver);
         ImGui::Begin("PostEffect Preset Editor", &showEditor_);
 
