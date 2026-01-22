@@ -6,6 +6,11 @@
 # output folder
 out/
 
+# claude
+.claude/
+
+# Premake exe
+premake/
 
 # DirectXTex
 vendor/DirectXTex/Shaders/Compiled/*
@@ -15,3 +20,6 @@ Docs/html/
 Docs/latex/
 Docs/xml/
 Docs/rtf/
+
+# pdb
+*.pdb
