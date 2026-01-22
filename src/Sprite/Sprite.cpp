@@ -232,3 +232,9 @@ void Sprite::SetTextureSize(const Vector2& _textureSize) {
 void Sprite::SetActivePostEffect(const bool _active) {
     posteffect_ = _active;
 }
+
+void Sprite::SetTexture(const std::string& _texture) {
+    texturePath_ = _texture;
+    Singleton<TextureManager>::GetInstance()->Load(texturePath_);
+    AdjustTextureSize();
+}

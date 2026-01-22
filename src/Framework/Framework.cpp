@@ -103,6 +103,7 @@ void Framework::Execute(std::unique_ptr<IGame> _game) {
 void Framework::Initialize() {
     if (!game_) return;
     game_->Initialize(config_);
+    windows_->SetTitle(config_.title);
     scene_ = game_->GetSceneSwitcher();
     scene_->Setup({ postProcessor_.get(), debugUI_.get(), particle_.get() });
     scene_->Change(config_.defaultScene);

@@ -45,7 +45,7 @@ void Common::Draw(Renderer* _renderer) {
 }
 
 void Common::RegisterDebug(const std::string &_id, const std::function<void()> &_command) {
-    std::lock_guard<std::mutex> lock(mutex_);
+    std::lock_guard lock(mutex_);
     if (debugUI_){
         debugUI_->RegisterCommand(_id, _command);
     }

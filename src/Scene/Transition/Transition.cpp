@@ -22,7 +22,10 @@ void Transition::Awake(const Type _type, const ITransitionEffect::State _state) 
 }
 
 void Transition::Awake(const Type _type, const ITransitionEffect::State _state, const float _duration) {
-    if (_type == Type::None)return;
+    if (_type == Type::None){
+        effect_.reset();
+        return;
+    }
     if (type_ != _type){
         type_ = _type;
         CreateEffect(_type);

@@ -189,6 +189,11 @@ public:
      **/
     void SetActivePostEffect(bool _active);
 
+    /** @brief テクスチャを設定
+     ** @param _texture テクスチャパス
+     **/
+    void SetTexture(const std::string& _texture);
+
 private:
     /** @brief テクスチャサイズの調整
      **/
