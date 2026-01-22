@@ -16,6 +16,7 @@ var namespaces_dup =
       [ "DateToString", "namespaceUtils.html#adac71d388adb7993fe94c75d985c8fc7", null ],
       [ "DisplayLastErr", "namespaceUtils.html#a16fe049b1a0a87909d3bdb1e9fce3724", null ],
       [ "EqualsIgnoreCase", "namespaceUtils.html#a93a3d7c010e69a368113c0932b23869d", null ],
-      [ "GenerateUniqueId", "namespaceUtils.html#ada99389f4602daf6d5bf5246cca33854", null ]
+      [ "GenerateUniqueId", "namespaceUtils.html#ada99389f4602daf6d5bf5246cca33854", null ],
+      [ "OpenFileDialog", "namespaceUtils.html#a815373c0ed0d9aac89707d231a01c714", null ]
     ] ]
 ];

@@ -378,6 +378,14 @@ $(document).ready(function(){initNavTree('Sprite_8cpp_source.html',''); initResi
 <div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>    posteffect_ = _active;</div>
 <div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>}</div>
 </div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span> </div>
+<div class="foldopen" id="foldopen00236" data-start="{" data-end="}">
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno"><a class="line" href="classSprite.html#a3a1898798f07eaefdfb500f18a56678e">  236</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classSprite.html#a3a1898798f07eaefdfb500f18a56678e">Sprite::SetTexture</a>(<span class="keyword">const</span> std::string&amp; _texture) {</div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>    texturePath_ = _texture;</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>    <a class="code hl_function" href="classSingleton.html#a7b90075f8e4471743fd3596be874e5d1">Singleton&lt;TextureManager&gt;::GetInstance</a>()-&gt;Load(texturePath_);</div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>    AdjustTextureSize();</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>}</div>
+</div>
 <div class="ttc" id="aMathUtils_8hpp_html"><div class="ttname"><a href="MathUtils_8hpp.html">MathUtils.hpp</a></div></div>
 <div class="ttc" id="aSingleton_8hpp_html"><div class="ttname"><a href="Singleton_8hpp.html">Singleton.hpp</a></div></div>
 <div class="ttc" id="aSpriteCommon_8hpp_html"><div class="ttname"><a href="SpriteCommon_8hpp.html">SpriteCommon.hpp</a></div></div>
@@ -400,6 +408,7 @@ $(document).ready(function(){initNavTree('Sprite_8cpp_source.html',''); initResi
 <div class="ttc" id="aclassSprite_html_a12cba3ac1868418add3c4d95ce87e615"><div class="ttname"><a href="classSprite.html#a12cba3ac1868418add3c4d95ce87e615">Sprite::Sprite</a></div><div class="ttdeci">Sprite()</div><div class="ttdef"><b>Definition</b> <a href="Sprite_8cpp_source.html#l00013">Sprite.cpp:13</a></div></div>
 <div class="ttc" id="aclassSprite_html_a16ed1c935326cf777f14c3ed82c3001c"><div class="ttname"><a href="classSprite.html#a16ed1c935326cf777f14c3ed82c3001c">Sprite::SetPosition</a></div><div class="ttdeci">void SetPosition(const Vector2 &amp;_p)</div><div class="ttdoc">位置を設定</div><div class="ttdef"><b>Definition</b> <a href="Sprite_8cpp_source.html#l00164">Sprite.cpp:164</a></div></div>
 <div class="ttc" id="aclassSprite_html_a31202ac855810107f97b1ce627a1771c"><div class="ttname"><a href="classSprite.html#a31202ac855810107f97b1ce627a1771c">Sprite::GetColor</a></div><div class="ttdeci">const Vector4 &amp; GetColor() const</div><div class="ttdoc">色を取得</div><div class="ttdef"><b>Definition</b> <a href="Sprite_8cpp_source.html#l00184">Sprite.cpp:184</a></div></div>
+<div class="ttc" id="aclassSprite_html_a3a1898798f07eaefdfb500f18a56678e"><div class="ttname"><a href="classSprite.html#a3a1898798f07eaefdfb500f18a56678e">Sprite::SetTexture</a></div><div class="ttdeci">void SetTexture(const std::string &amp;_texture)</div><div class="ttdoc">テクスチャを設定</div><div class="ttdef"><b>Definition</b> <a href="Sprite_8cpp_source.html#l00236">Sprite.cpp:236</a></div></div>
 <div class="ttc" id="aclassSprite_html_a3b5121a3f9d726a70ba817cefdc9969d"><div class="ttname"><a href="classSprite.html#a3b5121a3f9d726a70ba817cefdc9969d">Sprite::GetTextureLeftTop</a></div><div class="ttdeci">const Vector2 &amp; GetTextureLeftTop() const</div><div class="ttdoc">テクスチャの左上座標を取得</div><div class="ttdef"><b>Definition</b> <a href="Sprite_8cpp_source.html#l00216">Sprite.cpp:216</a></div></div>
 <div class="ttc" id="aclassSprite_html_a3c4c7d54444c311da2b4baa2d605e399"><div class="ttname"><a href="classSprite.html#a3c4c7d54444c311da2b4baa2d605e399">Sprite::GetAnchorPoint</a></div><div class="ttdeci">const Vector2 &amp; GetAnchorPoint() const</div><div class="ttdoc">アンカーポイントを取得</div><div class="ttdef"><b>Definition</b> <a href="Sprite_8cpp_source.html#l00192">Sprite.cpp:192</a></div></div>
 <div class="ttc" id="aclassSprite_html_a3c9969ef9d1ab5fa4bfee27e2aa9d7dc"><div class="ttname"><a href="classSprite.html#a3c9969ef9d1ab5fa4bfee27e2aa9d7dc">Sprite::SetTextureLeftTop</a></div><div class="ttdeci">void SetTextureLeftTop(const Vector2 &amp;_textureLeftTop)</div><div class="ttdoc">テクスチャの左上座標を設定</div><div class="ttdef"><b>Definition</b> <a href="Sprite_8cpp_source.html#l00220">Sprite.cpp:220</a></div></div>
@@ -432,7 +441,7 @@ $(document).ready(function(){initNavTree('Sprite_8cpp_source.html',''); initResi
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_909c286288939002c1b25213a067bdba.html">Sprite</a></li><li class="navelem"><a class="el" href="Sprite_8cpp.html">Sprite.cpp</a></li>
-    <li class="footer">2026年01月07日(水) 07時39分20秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年01月22日(木) 05時47分47秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

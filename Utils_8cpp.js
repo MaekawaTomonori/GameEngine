@@ -7,5 +7,6 @@ var Utils_8cpp =
     [ "DateToString", "Utils_8cpp.html#adac71d388adb7993fe94c75d985c8fc7", null ],
     [ "DisplayLastErr", "Utils_8cpp.html#a16fe049b1a0a87909d3bdb1e9fce3724", null ],
     [ "EqualsIgnoreCase", "Utils_8cpp.html#a93a3d7c010e69a368113c0932b23869d", null ],
-    [ "GenerateUniqueId", "Utils_8cpp.html#ada99389f4602daf6d5bf5246cca33854", null ]
+    [ "GenerateUniqueId", "Utils_8cpp.html#ada99389f4602daf6d5bf5246cca33854", null ],
+    [ "OpenFileDialog", "Utils_8cpp.html#a815373c0ed0d9aac89707d231a01c714", null ]
 ];

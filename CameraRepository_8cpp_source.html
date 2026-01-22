@@ -155,8 +155,8 @@ $(document).ready(function(){initNavTree('CameraRepository_8cpp_source.html','')
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="classCameraRepository.html#a6c185b358e1b58259ab80173cf600a19">   42</a></span>std::vector&lt;std::string&gt; <a class="code hl_function" href="classCameraRepository.html#a6c185b358e1b58259ab80173cf600a19">CameraRepository::GetNames</a>()<span class="keyword"> const </span>{</div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    std::vector&lt;std::string&gt; names;</div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    names.reserve(cameras_.size());</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; name : cameras_ | std::views::keys) {</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        names.push_back(name);</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; <a class="code hl_variable" href="Input_8hpp.html#a8f8f80d37794cde9472343e4487ba3eb">name</a> : cameras_ | std::views::keys) {</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        names.push_back(<a class="code hl_variable" href="Input_8hpp.html#a8f8f80d37794cde9472343e4487ba3eb">name</a>);</div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    }</div>
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="keywordflow">return</span> names;</div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>}</div>
@@ -193,9 +193,9 @@ $(document).ready(function(){initNavTree('CameraRepository_8cpp_source.html','')
 <div class="foldopen" id="foldopen00075" data-start="{" data-end="}">
 <div class="line"><a id="l00075" name="l00075"></a><span class="lineno"><a class="line" href="classCameraRepository.html#a7ab54d59d6bf81e728298ccf243de4cd">   75</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classCameraRepository.html#a7ab54d59d6bf81e728298ccf243de4cd">CameraRepository::SaveToFile</a>() {</div>
 <div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    <a class="code hl_class" href="classJson.html">Json</a>* <a class="code hl_typedef" href="PostProcessExecutor_8cpp.html#ab701e3ac61a85b337ec5c1abaad6742d">json</a> = <a class="code hl_function" href="classSingleton.html#a7b90075f8e4471743fd3596be874e5d1">Singleton&lt;Json&gt;::GetInstance</a>();</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; [name, camera] : cameras_) {</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>        <a class="code hl_typedef" href="PostProcessExecutor_8cpp.html#ab701e3ac61a85b337ec5c1abaad6742d">json</a>-&gt;SetValue(<span class="stringliteral">&quot;Camera&quot;</span>, name, <span class="stringliteral">&quot;Position&quot;</span>, camera-&gt;transform_.translate);</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>        <a class="code hl_typedef" href="PostProcessExecutor_8cpp.html#ab701e3ac61a85b337ec5c1abaad6742d">json</a>-&gt;SetValue(<span class="stringliteral">&quot;Camera&quot;</span>, name, <span class="stringliteral">&quot;Rotate&quot;</span>, std::get&lt;Vector3&gt;(camera-&gt;transform_.rotate));</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; [<a class="code hl_variable" href="Input_8hpp.html#a8f8f80d37794cde9472343e4487ba3eb">name</a>, camera] : cameras_) {</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>        <a class="code hl_typedef" href="PostProcessExecutor_8cpp.html#ab701e3ac61a85b337ec5c1abaad6742d">json</a>-&gt;SetValue(<span class="stringliteral">&quot;Camera&quot;</span>, <a class="code hl_variable" href="Input_8hpp.html#a8f8f80d37794cde9472343e4487ba3eb">name</a>, <span class="stringliteral">&quot;Position&quot;</span>, camera-&gt;transform_.translate);</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>        <a class="code hl_typedef" href="PostProcessExecutor_8cpp.html#ab701e3ac61a85b337ec5c1abaad6742d">json</a>-&gt;SetValue(<span class="stringliteral">&quot;Camera&quot;</span>, <a class="code hl_variable" href="Input_8hpp.html#a8f8f80d37794cde9472343e4487ba3eb">name</a>, <span class="stringliteral">&quot;Rotate&quot;</span>, std::get&lt;Vector3&gt;(camera-&gt;transform_.rotate));</div>
 <div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    }</div>
 <div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    <a class="code hl_typedef" href="PostProcessExecutor_8cpp.html#ab701e3ac61a85b337ec5c1abaad6742d">json</a>-&gt;Save(<span class="stringliteral">&quot;Camera&quot;</span>);</div>
 <div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>}</div>
@@ -212,6 +212,7 @@ $(document).ready(function(){initNavTree('CameraRepository_8cpp_source.html','')
 <div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    <span class="keywordflow">return</span> <span class="stringliteral">&quot;noname&quot;</span> + std::to_string(nonameCount_++);</div>
 <div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>}</div>
 <div class="ttc" id="aCameraRepository_8hpp_html"><div class="ttname"><a href="CameraRepository_8hpp.html">CameraRepository.hpp</a></div></div>
+<div class="ttc" id="aInput_8hpp_html_a8f8f80d37794cde9472343e4487ba3eb"><div class="ttname"><a href="Input_8hpp.html#a8f8f80d37794cde9472343e4487ba3eb">name</a></div><div class="ttdeci">const char * name</div><div class="ttdef"><b>Definition</b> <a href="Input_8hpp_source.html#l00058">Input.hpp:58</a></div></div>
 <div class="ttc" id="aJson_8hpp_html"><div class="ttname"><a href="Json_8hpp.html">Json.hpp</a></div></div>
 <div class="ttc" id="aPostProcessExecutor_8cpp_html_ab701e3ac61a85b337ec5c1abaad6742d"><div class="ttname"><a href="PostProcessExecutor_8cpp.html#ab701e3ac61a85b337ec5c1abaad6742d">json</a></div><div class="ttdeci">nlohmann::json json</div><div class="ttdef"><b>Definition</b> <a href="PostProcessExecutor_8cpp_source.html#l00018">PostProcessExecutor.cpp:18</a></div></div>
 <div class="ttc" id="aSingleton_8hpp_html"><div class="ttname"><a href="Singleton_8hpp.html">Singleton.hpp</a></div></div>
@@ -237,7 +238,7 @@ $(document).ready(function(){initNavTree('CameraRepository_8cpp_source.html','')
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_a316e9605cf2e65295ae387cbf599266.html">Camera</a></li><li class="navelem"><a class="el" href="dir_c97a572bbc8f755e278f6656d71e367e.html">Repository</a></li><li class="navelem"><a class="el" href="CameraRepository_8cpp.html">CameraRepository.cpp</a></li>
-    <li class="footer">2026年01月07日(水) 07時39分20秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年01月22日(木) 05時47分47秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

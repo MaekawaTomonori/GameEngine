@@ -131,54 +131,57 @@ $(document).ready(function(){initNavTree('Transition_8cpp_source.html',''); init
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
 <div class="foldopen" id="foldopen00024" data-start="{" data-end="}">
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="classTransition.html#a00b54bae79f74cfbe98fd98a8b303c79">   24</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classTransition.html#ac07725de59e8c6520741b7a9d3bec8fd">Transition::Awake</a>(<span class="keyword">const</span> <a class="code hl_enumeration" href="classTransition.html#aca03fd04a22c40b5315f79e6f1122253">Type</a> _type, <span class="keyword">const</span> <a class="code hl_enumeration" href="classITransitionEffect.html#a86868f632ccdf014543bbf471096227b">ITransitionEffect::State</a> _state, <span class="keyword">const</span> <span class="keywordtype">float</span> _duration) {</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <span class="keywordflow">if</span> (_type == <a class="code hl_enumvalue" href="classTransition.html#aca03fd04a22c40b5315f79e6f1122253a6adf97f83acf6453d4a6a4b1070f3754">Type::None</a>)<span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="keywordflow">if</span> (type_ != _type){</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>        type_ = _type;</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        CreateEffect(_type);</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>        effect_-&gt;Initialize();</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    }</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="keywordflow">if</span> (effect_) {</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>        effect_-&gt;Start(_state, _duration);</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <span class="keywordflow">if</span> (_type == <a class="code hl_enumvalue" href="classTransition.html#aca03fd04a22c40b5315f79e6f1122253a6adf97f83acf6453d4a6a4b1070f3754">Type::None</a>){</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        effect_.reset();</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    }</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="keywordflow">if</span> (type_ != _type){</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>        type_ = _type;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>        CreateEffect(_type);</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>        effect_-&gt;Initialize();</div>
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    }</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>}</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="keywordflow">if</span> (effect_) {</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>        effect_-&gt;Start(_state, _duration);</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    }</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>}</div>
 </div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
-<div class="foldopen" id="foldopen00036" data-start="{" data-end="}">
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="classTransition.html#a71d505de85fbe2b4a6ff8492ab59a3bc">   36</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="classTransition.html#a71d505de85fbe2b4a6ff8492ab59a3bc">Transition::InProgress</a>()<span class="keyword"> const </span>{</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="keywordflow">if</span> (!effect_) {</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    }</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keywordflow">return</span> !effect_-&gt;IsFinished();</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>}</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="foldopen" id="foldopen00039" data-start="{" data-end="}">
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="classTransition.html#a71d505de85fbe2b4a6ff8492ab59a3bc">   39</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="classTransition.html#a71d505de85fbe2b4a6ff8492ab59a3bc">Transition::InProgress</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keywordflow">if</span> (!effect_) {</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    }</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="keywordflow">return</span> !effect_-&gt;IsFinished();</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>}</div>
 </div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
-<div class="foldopen" id="foldopen00043" data-start="{" data-end="}">
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="classTransition.html#a02c269f065786034782a6a4e73ea8ddb">   43</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classTransition.html#a02c269f065786034782a6a4e73ea8ddb">Transition::SetDefaultDuration</a>(<span class="keyword">const</span> <span class="keywordtype">float</span> _duration) {</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    defaultDuration_ = _duration;</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>}</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
+<div class="foldopen" id="foldopen00046" data-start="{" data-end="}">
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="classTransition.html#a02c269f065786034782a6a4e73ea8ddb">   46</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classTransition.html#a02c269f065786034782a6a4e73ea8ddb">Transition::SetDefaultDuration</a>(<span class="keyword">const</span> <span class="keywordtype">float</span> _duration) {</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    defaultDuration_ = _duration;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>}</div>
 </div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="keywordtype">void</span> Transition::CreateEffect(<span class="keyword">const</span> Type _type) {</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    std::unique_ptr&lt;ITransitionEffect&gt; _effect = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <span class="keywordflow">switch</span> (_type) {</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="classTransition.html#aca03fd04a22c40b5315f79e6f1122253a04e0385c10aefee8e4681617d2f3ef40">Type::Fade</a>:</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>            _effect = std::make_unique&lt;Fade&gt;();</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="classTransition.html#aca03fd04a22c40b5315f79e6f1122253a6160a53ece50ce6d4f5ef4452549835e">Type::Slide</a>:</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="classTransition.html#aca03fd04a22c40b5315f79e6f1122253a6adf97f83acf6453d4a6a4b1070f3754">Type::None</a>:</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        <span class="keywordflow">default</span>: ;</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    }</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <span class="keywordflow">if</span> (effect_)effect_.reset();</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    effect_ = std::move(_effect);</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>}</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="keywordtype">void</span> Transition::CreateEffect(<span class="keyword">const</span> Type _type) {</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    std::unique_ptr&lt;ITransitionEffect&gt; _effect = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <span class="keywordflow">switch</span> (_type) {</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="classTransition.html#aca03fd04a22c40b5315f79e6f1122253a04e0385c10aefee8e4681617d2f3ef40">Type::Fade</a>:</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>            _effect = std::make_unique&lt;Fade&gt;();</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="classTransition.html#aca03fd04a22c40b5315f79e6f1122253a6160a53ece50ce6d4f5ef4452549835e">Type::Slide</a>:</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="classTransition.html#aca03fd04a22c40b5315f79e6f1122253a6adf97f83acf6453d4a6a4b1070f3754">Type::None</a>:</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        <span class="keywordflow">default</span>: ;</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    }</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <span class="keywordflow">if</span> (effect_)effect_.reset();</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    effect_ = std::move(_effect);</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>}</div>
 <div class="ttc" id="aFade_8hpp_html"><div class="ttname"><a href="Fade_8hpp.html">Fade.hpp</a></div></div>
 <div class="ttc" id="aTransition_8hpp_html"><div class="ttname"><a href="Transition_8hpp.html">Transition.hpp</a></div></div>
 <div class="ttc" id="aclassITransitionEffect_html_a86868f632ccdf014543bbf471096227b"><div class="ttname"><a href="classITransitionEffect.html#a86868f632ccdf014543bbf471096227b">ITransitionEffect::State</a></div><div class="ttdeci">State</div><div class="ttdoc">トランジション状態</div><div class="ttdef"><b>Definition</b> <a href="ITransitionEffect_8hpp_source.html#l00011">ITransitionEffect.hpp:11</a></div></div>
-<div class="ttc" id="aclassTransition_html_a02c269f065786034782a6a4e73ea8ddb"><div class="ttname"><a href="classTransition.html#a02c269f065786034782a6a4e73ea8ddb">Transition::SetDefaultDuration</a></div><div class="ttdeci">void SetDefaultDuration(float _duration)</div><div class="ttdef"><b>Definition</b> <a href="Transition_8cpp_source.html#l00043">Transition.cpp:43</a></div></div>
+<div class="ttc" id="aclassTransition_html_a02c269f065786034782a6a4e73ea8ddb"><div class="ttname"><a href="classTransition.html#a02c269f065786034782a6a4e73ea8ddb">Transition::SetDefaultDuration</a></div><div class="ttdeci">void SetDefaultDuration(float _duration)</div><div class="ttdef"><b>Definition</b> <a href="Transition_8cpp_source.html#l00046">Transition.cpp:46</a></div></div>
 <div class="ttc" id="aclassTransition_html_a17a6957f9533e3a6b90c9e3288863eef"><div class="ttname"><a href="classTransition.html#a17a6957f9533e3a6b90c9e3288863eef">Transition::Initialize</a></div><div class="ttdeci">void Initialize()</div><div class="ttdef"><b>Definition</b> <a href="Transition_8cpp_source.html#l00004">Transition.cpp:4</a></div></div>
-<div class="ttc" id="aclassTransition_html_a71d505de85fbe2b4a6ff8492ab59a3bc"><div class="ttname"><a href="classTransition.html#a71d505de85fbe2b4a6ff8492ab59a3bc">Transition::InProgress</a></div><div class="ttdeci">bool InProgress() const</div><div class="ttdef"><b>Definition</b> <a href="Transition_8cpp_source.html#l00036">Transition.cpp:36</a></div></div>
+<div class="ttc" id="aclassTransition_html_a71d505de85fbe2b4a6ff8492ab59a3bc"><div class="ttname"><a href="classTransition.html#a71d505de85fbe2b4a6ff8492ab59a3bc">Transition::InProgress</a></div><div class="ttdeci">bool InProgress() const</div><div class="ttdef"><b>Definition</b> <a href="Transition_8cpp_source.html#l00039">Transition.cpp:39</a></div></div>
 <div class="ttc" id="aclassTransition_html_a8488355d46a27a9209fc5c0960d2c859"><div class="ttname"><a href="classTransition.html#a8488355d46a27a9209fc5c0960d2c859">Transition::Draw</a></div><div class="ttdeci">void Draw()</div><div class="ttdef"><b>Definition</b> <a href="Transition_8cpp_source.html#l00013">Transition.cpp:13</a></div></div>
 <div class="ttc" id="aclassTransition_html_ac07725de59e8c6520741b7a9d3bec8fd"><div class="ttname"><a href="classTransition.html#ac07725de59e8c6520741b7a9d3bec8fd">Transition::Awake</a></div><div class="ttdeci">void Awake(Type _type, ITransitionEffect::State _state)</div><div class="ttdef"><b>Definition</b> <a href="Transition_8cpp_source.html#l00019">Transition.cpp:19</a></div></div>
 <div class="ttc" id="aclassTransition_html_aca03fd04a22c40b5315f79e6f1122253"><div class="ttname"><a href="classTransition.html#aca03fd04a22c40b5315f79e6f1122253">Transition::Type</a></div><div class="ttdeci">Type</div><div class="ttdef"><b>Definition</b> <a href="Transition_8hpp_source.html#l00008">Transition.hpp:8</a></div></div>
@@ -192,7 +195,7 @@ $(document).ready(function(){initNavTree('Transition_8cpp_source.html',''); init
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_204260ac86670e69c647eaba8962e745.html">Scene</a></li><li class="navelem"><a class="el" href="dir_9fd60d063c7ef37fb5763a5cee8cab3b.html">Transition</a></li><li class="navelem"><a class="el" href="Transition_8cpp.html">Transition.cpp</a></li>
-    <li class="footer">2026年01月07日(水) 07時39分20秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年01月22日(木) 05時47分47秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

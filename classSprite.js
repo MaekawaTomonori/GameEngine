@@ -20,6 +20,7 @@ var classSprite =
     [ "SetPosition", "classSprite.html#a16ed1c935326cf777f14c3ed82c3001c", null ],
     [ "SetRotation", "classSprite.html#a8334eb3d6f16149b169b57d47d961a2a", null ],
     [ "SetSize", "classSprite.html#a0795a3e6168f4b7f87d2d2785ffb824f", null ],
+    [ "SetTexture", "classSprite.html#a3a1898798f07eaefdfb500f18a56678e", null ],
     [ "SetTextureLeftTop", "classSprite.html#a3c9969ef9d1ab5fa4bfee27e2aa9d7dc", null ],
     [ "SetTextureSize", "classSprite.html#ae94f1ed298e6160bac55e606980cfc2f", null ],
     [ "Update", "classSprite.html#aee0a7bfb6597fb08458f3b116cf1b17f", null ]

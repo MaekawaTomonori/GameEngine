@@ -1,5 +1,10 @@
 var NAVTREEINDEX3 =
 {
+"classModelCommon.html#a62676bc803883466bb245d434668d06f":[1,0,49,7],
+"classModelCommon.html#ac4a5effbc142ca70380a06bfec0369b2":[1,0,49,3],
+"classModelCommon.html#ade04bb612cfb76cfe3351ec73c628009":[1,0,49,1],
+"classModelRepository.html":[1,0,51],
+"classModelRepository.html#a6589af22e55d9d33f969909e62e89c9c":[1,0,51,1],
 "classModelRepository.html#af9f26431792428a60332cfc6b653a911":[1,0,51,0],
 "classObjLoader.html":[1,0,54],
 "classObjLoader.html#ac55267ff49758e8a58456fe01f64fdae":[1,0,54,0],
@@ -199,9 +204,10 @@ var NAVTREEINDEX3 =
 "classSprite.html#a12cba3ac1868418add3c4d95ce87e615":[1,0,80,0],
 "classSprite.html#a16ed1c935326cf777f14c3ed82c3001c":[1,0,80,17],
 "classSprite.html#a31202ac855810107f97b1ce627a1771c":[1,0,80,3],
+"classSprite.html#a3a1898798f07eaefdfb500f18a56678e":[1,0,80,20],
 "classSprite.html#a3b5121a3f9d726a70ba817cefdc9969d":[1,0,80,7],
 "classSprite.html#a3c4c7d54444c311da2b4baa2d605e399":[1,0,80,2],
-"classSprite.html#a3c9969ef9d1ab5fa4bfee27e2aa9d7dc":[1,0,80,20],
+"classSprite.html#a3c9969ef9d1ab5fa4bfee27e2aa9d7dc":[1,0,80,21],
 "classSprite.html#a3d48c99484539f768e6b33092d8e8cf7":[1,0,80,14],
 "classSprite.html#a431a8d5512646518384ff8e677a7b174":[1,0,80,9],
 "classSprite.html#a4a737c8991739ef16e54a2989d6fabd6":[1,0,80,6],
@@ -213,8 +219,8 @@ var NAVTREEINDEX3 =
 "classSprite.html#a93c88ecde8bf8ffce86ccd6c23e7805c":[1,0,80,10],
 "classSprite.html#a9b527aea02ba0d7fb7fc1f5cf94a6721":[1,0,80,15],
 "classSprite.html#ab344a3b431b82c0350dab59c076eec8c":[1,0,80,5],
-"classSprite.html#ae94f1ed298e6160bac55e606980cfc2f":[1,0,80,21],
-"classSprite.html#aee0a7bfb6597fb08458f3b116cf1b17f":[1,0,80,22],
+"classSprite.html#ae94f1ed298e6160bac55e606980cfc2f":[1,0,80,22],
+"classSprite.html#aee0a7bfb6597fb08458f3b116cf1b17f":[1,0,80,23],
 "classSpriteCommon.html":[1,0,81],
 "classSpriteCommon.html#a20418d30dff7afcb1e0acaa41f25ea4a":[1,0,81,0],
 "classStageLoader.html":[1,0,83],
@@ -243,11 +249,5 @@ var NAVTREEINDEX3 =
 "classTimer.html#af2af567ef7614921b05507611129697b":[1,0,86,1],
 "classTimer.html#afdf79e6fabd1b87637599ed936aadae1":[1,0,86,0],
 "classTransition.html":[1,0,88],
-"classTransition.html#a00b54bae79f74cfbe98fd98a8b303c79":[1,0,88,4],
-"classTransition.html#a02c269f065786034782a6a4e73ea8ddb":[1,0,88,8],
-"classTransition.html#a17a6957f9533e3a6b90c9e3288863eef":[1,0,88,6],
-"classTransition.html#a71d505de85fbe2b4a6ff8492ab59a3bc":[1,0,88,7],
-"classTransition.html#a8188371835c70df89e30274994ee9cf5":[1,0,88,2],
-"classTransition.html#a8488355d46a27a9209fc5c0960d2c859":[1,0,88,5],
-"classTransition.html#ab34e061640134781d5f522ec54bb75cd":[1,0,88,1]
+"classTransition.html#a00b54bae79f74cfbe98fd98a8b303c79":[1,0,88,4]
 };

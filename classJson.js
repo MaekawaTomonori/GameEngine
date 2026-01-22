@@ -1,9 +1,9 @@
 var classJson =
 [
-    [ "GetGroups", "classJson.html#ae68795b324f280b96746f967ac1811eb", null ],
-    [ "GetValue", "classJson.html#abf71d2cd6c4de6312a6d3adad768efde", null ],
-    [ "Load", "classJson.html#a45b724e62a51171aa619bcf2444d2bb3", null ],
-    [ "RemoveGroup", "classJson.html#ac905c69289a9083101666916b5bb0639", null ],
+    [ "GetGroups", "classJson.html#a1da17397fdfaa3a625db9d3e1167b856", null ],
+    [ "GetValue", "classJson.html#a1efcc88a29118ed68fd9cf47f61c6b3e", null ],
+    [ "Load", "classJson.html#a9b2c7e95b4f06b92944cf93a9c31a431", null ],
+    [ "RemoveGroup", "classJson.html#af5217af0931934e595b4546947055dce", null ],
     [ "Save", "classJson.html#afdae6e9357e30dc3a4c95e6bd65bba34", null ],
-    [ "SetValue", "classJson.html#a3377cae8926277335f63308afd5ad8d2", null ]
+    [ "SetValue", "classJson.html#a80cc442b850c0b17314e3268bd9de7de", null ]
 ];

@@ -239,14 +239,14 @@ $(document).ready(function(){initNavTree('TextureManager_8cpp_source.html',''); 
 <div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>    std::lock_guard&lt;std::mutex&gt; lock(mutex_);</div>
 <div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span> </div>
 <div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>    <span class="comment">//Remove FolderPath</span></div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>    std::string name = _fileName;</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>    std::string <a class="code hl_variable" href="Input_8hpp.html#a8f8f80d37794cde9472343e4487ba3eb">name</a> = _fileName;</div>
 <div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>    <span class="keywordtype">size_t</span> pos = 0;</div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>    <span class="keywordflow">while</span>((pos = name.find(folderPath_, pos)) != std::string::npos){</div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>        name.erase(pos, folderPath_.length());</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>    <span class="keywordflow">while</span>((pos = <a class="code hl_variable" href="Input_8hpp.html#a8f8f80d37794cde9472343e4487ba3eb">name</a>.find(folderPath_, pos)) != std::string::npos){</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>        <a class="code hl_variable" href="Input_8hpp.html#a8f8f80d37794cde9472343e4487ba3eb">name</a>.erase(pos, folderPath_.length());</div>
 <div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>    }</div>
 <div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span> </div>
 <div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>    <span class="comment">//Check if texture is already loaded</span></div>
-<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>    <span class="keywordflow">if</span> (textures_.contains(name)){</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>    <span class="keywordflow">if</span> (textures_.contains(<a class="code hl_variable" href="Input_8hpp.html#a8f8f80d37794cde9472343e4487ba3eb">name</a>)){</div>
 <div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>    }</div>
 <div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span> </div>
@@ -255,10 +255,10 @@ $(document).ready(function(){initNavTree('TextureManager_8cpp_source.html',''); 
 <div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span> </div>
 <div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span> </div>
 <div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>    <span class="comment">//Load Texture</span></div>
-<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>    DirectX::ScratchImage img = LoadTexture(name);</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>    DirectX::ScratchImage img = LoadTexture(<a class="code hl_variable" href="Input_8hpp.html#a8f8f80d37794cde9472343e4487ba3eb">name</a>);</div>
 <div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span> </div>
 <div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>    <span class="keywordflow">if</span> (!img.GetImages() || img.GetImageCount() == 0) {</div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>        <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, std::format(<span class="stringliteral">&quot;TextureManager::Load: Failed to load texture: {}&quot;</span>, name));</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>        <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, std::format(<span class="stringliteral">&quot;TextureManager::Load: Failed to load texture: {}&quot;</span>, <a class="code hl_variable" href="Input_8hpp.html#a8f8f80d37794cde9472343e4487ba3eb">name</a>));</div>
 <div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>    }</div>
 <div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span> </div>
@@ -267,7 +267,7 @@ $(document).ready(function(){initNavTree('TextureManager_8cpp_source.html',''); 
 <div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>    texture.resource = adapter_-&gt;<a class="code hl_function" href="classDirectXAdapter.html#ab560a413b9a36c7ab838ff7e89bc55a2">CreateTextureResource</a>(img.GetMetadata());</div>
 <div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span> </div>
 <div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>    <span class="keywordflow">if</span> (!texture.resource) {</div>
-<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>        <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, std::format(<span class="stringliteral">&quot;TextureManager::Load: Failed to create texture resource: {}&quot;</span>, name));</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>        <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, std::format(<span class="stringliteral">&quot;TextureManager::Load: Failed to create texture resource: {}&quot;</span>, <a class="code hl_variable" href="Input_8hpp.html#a8f8f80d37794cde9472343e4487ba3eb">name</a>));</div>
 <div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>    }</div>
 <div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span> </div>
@@ -283,9 +283,9 @@ $(document).ready(function(){initNavTree('TextureManager_8cpp_source.html',''); 
 <div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>        srv_-&gt;<a class="code hl_function" href="classSRVManager.html#a2cca745cb3489ce9ff676186348d9728">CreateSRVforTexture2D</a>(texture.srvIndex, texture.resource-&gt;Get(), texture.metadata.format, <span class="keyword">static_cast&lt;</span>UINT<span class="keyword">&gt;</span>(texture.metadata.mipLevels));</div>
 <div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>    }</div>
 <div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span> </div>
-<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>    textures_[name] = std::move(texture);</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>    textures_[<a class="code hl_variable" href="Input_8hpp.html#a8f8f80d37794cde9472343e4487ba3eb">name</a>] = std::move(texture);</div>
 <div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span> </div>
-<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>    <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>, std::format(<span class="stringliteral">&quot;TextureManager::Load: {}&quot;</span>, name));</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>    <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>, std::format(<span class="stringliteral">&quot;TextureManager::Load: {}&quot;</span>, <a class="code hl_variable" href="Input_8hpp.html#a8f8f80d37794cde9472343e4487ba3eb">name</a>));</div>
 <div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>}</div>
 </div>
@@ -346,17 +346,17 @@ $(document).ready(function(){initNavTree('TextureManager_8cpp_source.html',''); 
 <div class="line"><a id="l00239" name="l00239"></a><span class="lineno"><a class="line" href="classTextureManager.html#ab10fdb00af3862499ba1f5e915ffe756">  239</a></span>D3D12_GPU_DESCRIPTOR_HANDLE <a class="code hl_function" href="classTextureManager.html#ab10fdb00af3862499ba1f5e915ffe756">TextureManager::GetGPUHandle</a>(<span class="keyword">const</span> std::string&amp; _fileName) {</div>
 <div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>    std::lock_guard&lt;std::mutex&gt; lock(mutex_);</div>
 <div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span> </div>
-<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>    std::string name = _fileName;</div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>    std::string <a class="code hl_variable" href="Input_8hpp.html#a8f8f80d37794cde9472343e4487ba3eb">name</a> = _fileName;</div>
 <div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>    <span class="keywordtype">size_t</span> pos = 0;</div>
-<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>    <span class="keywordflow">while</span> ((pos = name.find(folderPath_, pos)) != std::string::npos){</div>
-<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>        name.erase(pos, folderPath_.length());</div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>    <span class="keywordflow">while</span> ((pos = <a class="code hl_variable" href="Input_8hpp.html#a8f8f80d37794cde9472343e4487ba3eb">name</a>.find(folderPath_, pos)) != std::string::npos){</div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>        <a class="code hl_variable" href="Input_8hpp.html#a8f8f80d37794cde9472343e4487ba3eb">name</a>.erase(pos, folderPath_.length());</div>
 <div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>    }</div>
 <div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span> </div>
-<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>    <span class="keywordflow">if</span> (textures_.contains(name)){</div>
-<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>        <span class="keywordflow">return</span> textures_.at(name).gpuHandle;</div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>    <span class="keywordflow">if</span> (textures_.contains(<a class="code hl_variable" href="Input_8hpp.html#a8f8f80d37794cde9472343e4487ba3eb">name</a>)){</div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>        <span class="keywordflow">return</span> textures_.at(<a class="code hl_variable" href="Input_8hpp.html#a8f8f80d37794cde9472343e4487ba3eb">name</a>).gpuHandle;</div>
 <div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>    }</div>
 <div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span> </div>
-<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>    <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, std::format(<span class="stringliteral">&quot;TextureManager::GetGPUHandle: {} not found&quot;</span>, name));</div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>    <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, std::format(<span class="stringliteral">&quot;TextureManager::GetGPUHandle: {} not found&quot;</span>, <a class="code hl_variable" href="Input_8hpp.html#a8f8f80d37794cde9472343e4487ba3eb">name</a>));</div>
 <div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>    assert(0);</div>
 <div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>    <span class="keywordflow">return</span> {};</div>
 <div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>}</div>
@@ -369,6 +369,7 @@ $(document).ready(function(){initNavTree('TextureManager_8cpp_source.html',''); 
 <div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>    <span class="keywordflow">return</span> srv_-&gt;<a class="code hl_function" href="classSRVManager.html#a50f3a4b23df601f5f07eab1faaa21b2c">GetGPUHandle</a>(_index);</div>
 <div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>}</div>
 </div>
+<div class="ttc" id="aInput_8hpp_html_a8f8f80d37794cde9472343e4487ba3eb"><div class="ttname"><a href="Input_8hpp.html#a8f8f80d37794cde9472343e4487ba3eb">name</a></div><div class="ttdeci">const char * name</div><div class="ttdef"><b>Definition</b> <a href="Input_8hpp_source.html#l00058">Input.hpp:58</a></div></div>
 <div class="ttc" id="aLog_8hpp_html"><div class="ttname"><a href="Log_8hpp.html">Log.hpp</a></div></div>
 <div class="ttc" id="aTextureManager_8hpp_html"><div class="ttname"><a href="TextureManager_8hpp.html">TextureManager.hpp</a></div></div>
 <div class="ttc" id="aUtils_8hpp_html"><div class="ttname"><a href="Utils_8hpp.html">Utils.hpp</a></div></div>
@@ -409,7 +410,7 @@ $(document).ready(function(){initNavTree('TextureManager_8cpp_source.html',''); 
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_64cece8721923da8192b70f373152c4b.html">Texture</a></li><li class="navelem"><a class="el" href="TextureManager_8cpp.html">TextureManager.cpp</a></li>
-    <li class="footer">2026年01月07日(水) 07時39分20秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年01月22日(木) 05時47分47秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

@@ -214,9 +214,9 @@ $(document).ready(function(){initNavTree('ParticleSystem_8cpp_source.html',''); 
 <div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="keywordtype">void</span> ParticleSystem::Debug() {</div>
 <div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    debugUI_-&gt;<a class="code hl_function" href="classDebugUI.html#a6367814777960cab7c04db03744447c7">RegisterCommand</a>(<span class="stringliteral">&quot;ParticleSystemDebug&quot;</span>, [&amp;] {</div>
 <div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>        ImGui::Begin(<span class="stringliteral">&quot;Particle System Debug&quot;</span>);</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>        <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; [name, group] : groups_) {</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>            ImGui::PushID(name.c_str());</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>            <span class="keywordflow">if</span> (ImGui::CollapsingHeader(name.c_str())) {</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>        <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; [<a class="code hl_variable" href="Input_8hpp.html#a8f8f80d37794cde9472343e4487ba3eb">name</a>, group] : groups_) {</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>            ImGui::PushID(<a class="code hl_variable" href="Input_8hpp.html#a8f8f80d37794cde9472343e4487ba3eb">name</a>.c_str());</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>            <span class="keywordflow">if</span> (ImGui::CollapsingHeader(<a class="code hl_variable" href="Input_8hpp.html#a8f8f80d37794cde9472343e4487ba3eb">name</a>.c_str())) {</div>
 <div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>                <span class="comment">// Enable/Disable Toggle Button</span></div>
 <div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>                <span class="keywordflow">if</span> (group-&gt;enable) {</div>
 <div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>                    ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(1.0f, 0.0f, 0.0f, 1.0f));  <span class="comment">// Red</span></div>
@@ -389,6 +389,7 @@ $(document).ready(function(){initNavTree('ParticleSystem_8cpp_source.html',''); 
 <div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>}</div>
 <div class="ttc" id="aBlendMode_8hpp_html_a30323fa90e24ca484998b9fba6c40e85a9eeb52badb613229884838847294b90d"><div class="ttname"><a href="BlendMode_8hpp.html#a30323fa90e24ca484998b9fba6c40e85a9eeb52badb613229884838847294b90d">BlendMode::ADD</a></div><div class="ttdeci">@ ADD</div></div>
 <div class="ttc" id="aDebugUI_8hpp_html"><div class="ttname"><a href="DebugUI_8hpp.html">DebugUI.hpp</a></div></div>
+<div class="ttc" id="aInput_8hpp_html_a8f8f80d37794cde9472343e4487ba3eb"><div class="ttname"><a href="Input_8hpp.html#a8f8f80d37794cde9472343e4487ba3eb">name</a></div><div class="ttdeci">const char * name</div><div class="ttdef"><b>Definition</b> <a href="Input_8hpp_source.html#l00058">Input.hpp:58</a></div></div>
 <div class="ttc" id="aLog_8hpp_html"><div class="ttname"><a href="Log_8hpp.html">Log.hpp</a></div></div>
 <div class="ttc" id="aParticleSystem_8hpp_html"><div class="ttname"><a href="ParticleSystem_8hpp.html">ParticleSystem.hpp</a></div></div>
 <div class="ttc" id="aUtils_8hpp_html"><div class="ttname"><a href="Utils_8hpp.html">Utils.hpp</a></div></div>
@@ -441,7 +442,7 @@ $(document).ready(function(){initNavTree('ParticleSystem_8cpp_source.html',''); 
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_df328ebff461bc1e23583455c21900d5.html">ParticleSystem</a></li><li class="navelem"><a class="el" href="ParticleSystem_8cpp.html">ParticleSystem.cpp</a></li>
-    <li class="footer">2026年01月07日(水) 07時39分20秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年01月22日(木) 05時47分47秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

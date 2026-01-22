@@ -118,59 +118,58 @@ $(document).ready(function(){initNavTree('Json_8hpp_source.html',''); initResiza
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="keyword">using </span>Group = std::map&lt;std::string, Object&gt;; <span class="comment">// group</span></div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <span class="keyword">const</span> std::string PATH = <span class="stringliteral">&quot;Assets/Data/&quot;</span>;</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    std::map&lt;std::string, Group&gt; datas_; <span class="comment">// FileName, Data Groups</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    std::map&lt;std::string, Group&gt; datas_; <span class="comment">// Data Key, Data Groups</span></div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <span class="comment">//{</span></div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <span class="comment">//  &quot;Data Key&quot;: {</span></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <span class="comment">//      &quot;Group&quot; : {</span></div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <span class="comment">//              &quot;Object Key&quot; : &quot;Value&quot;</span></div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="comment">//     },</span></div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="comment">//     &quot;Group&quot; : {</span></div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <span class="comment">//              &quot;Object Key&quot; : &quot;Value&quot;</span></div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="comment">//      }</span></div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="comment">//  }</span></div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="comment">//}</span></div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <span class="comment">// resume</span></div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="comment">// {</span></div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <span class="comment">//     &quot;FILE NAME&quot; : {</span></div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="comment">//          &quot;KEY&quot; : VALUE</span></div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="comment">//     }</span></div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="comment">// }</span></div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classJson.html#a3377cae8926277335f63308afd5ad8d2">SetValue</a>(<span class="keyword">const</span> std::string&amp; _path, <span class="keyword">const</span> std::string&amp; _group, <span class="keyword">const</span> std::string&amp; _key, <span class="keyword">const</span> Value&amp; _value);</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    Group <a class="code hl_function" href="classJson.html#ae68795b324f280b96746f967ac1811eb">GetGroups</a>(<span class="keyword">const</span> std::string&amp; _path);</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    Value <a class="code hl_function" href="classJson.html#abf71d2cd6c4de6312a6d3adad768efde">GetValue</a>(<span class="keyword">const</span> std::string&amp; _path, <span class="keyword">const</span> std::string&amp; _group, <span class="keyword">const</span> std::string&amp; _key) <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classJson.html#ac905c69289a9083101666916b5bb0639">RemoveGroup</a>(<span class="keyword">const</span> std::string&amp; _path, <span class="keyword">const</span> std::string&amp; _group);</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classJson.html#a45b724e62a51171aa619bcf2444d2bb3">Load</a>(<span class="keyword">const</span> std::string&amp; _path, std::string _name = <span class="stringliteral">&quot;&quot;</span>);</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classJson.html#afdae6e9357e30dc3a4c95e6bd65bba34">Save</a>(<span class="keyword">const</span> std::string&amp; _path, std::string _name = <span class="stringliteral">&quot;&quot;</span>);</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <span class="keywordtype">void</span> Register(<span class="keyword">const</span> std::string&amp; _name);</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <span class="keywordtype">void</span> LoadJson(<span class="keyword">const</span> std::string&amp; _path, std::string _name);</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>};</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <span class="comment">// JSON File Structure:</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <span class="comment">// {</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <span class="comment">//     &quot;Data Key&quot;: {</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <span class="comment">//         &quot;Group1&quot;: {</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="comment">//             &quot;key1&quot;: value1,</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="comment">//             &quot;key2&quot;: value2</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <span class="comment">//         },</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="comment">//         &quot;Group2&quot;: {</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="comment">//             &quot;key3&quot;: value3</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="comment">//         }</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <span class="comment">//     }</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <span class="comment">// }</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="comment">//</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <span class="comment">// Usage:</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="comment">// Load(&quot;directory&quot;, &quot;filename&quot;) -&gt; datas_[&quot;filename&quot;] stores data from &quot;Assets/Data/directory/filename.json&quot;</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="comment">// Load(&quot;directory&quot;) -&gt; loads all JSON files in directory, each stored with its filename as key</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classJson.html#a80cc442b850c0b17314e3268bd9de7de">SetValue</a>(<span class="keyword">const</span> std::string&amp; _name, <span class="keyword">const</span> std::string&amp; _group, <span class="keyword">const</span> std::string&amp; _key, <span class="keyword">const</span> Value&amp; _value);</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    Group <a class="code hl_function" href="classJson.html#a1da17397fdfaa3a625db9d3e1167b856">GetGroups</a>(<span class="keyword">const</span> std::string&amp; _name);</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    Value <a class="code hl_function" href="classJson.html#a1efcc88a29118ed68fd9cf47f61c6b3e">GetValue</a>(<span class="keyword">const</span> std::string&amp; _name, <span class="keyword">const</span> std::string&amp; _group, <span class="keyword">const</span> std::string&amp; _key) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classJson.html#af5217af0931934e595b4546947055dce">RemoveGroup</a>(<span class="keyword">const</span> std::string&amp; _name, <span class="keyword">const</span> std::string&amp; _group);</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classJson.html#a9b2c7e95b4f06b92944cf93a9c31a431">Load</a>(<span class="keyword">const</span> std::string&amp; _path, <span class="keyword">const</span> std::string&amp; _name = <span class="stringliteral">&quot;&quot;</span>);</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classJson.html#afdae6e9357e30dc3a4c95e6bd65bba34">Save</a>(<span class="keyword">const</span> std::string&amp; _path, std::string _name = <span class="stringliteral">&quot;&quot;</span>);</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <span class="keywordtype">void</span> Register(<span class="keyword">const</span> std::string&amp; _name);</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <span class="keywordtype">void</span> LoadJson(<span class="keyword">const</span> std::string&amp; _path, std::string _name);</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>};</div>
 </div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="preprocessor">#endif </span><span class="comment">// JSON_HPP_</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="preprocessor">#endif </span><span class="comment">// JSON_HPP_</span></div>
 <div class="ttc" id="aVector2_8hpp_html"><div class="ttname"><a href="Vector2_8hpp.html">Vector2.hpp</a></div></div>
 <div class="ttc" id="aVector3_8hpp_html"><div class="ttname"><a href="Vector3_8hpp.html">Vector3.hpp</a></div></div>
 <div class="ttc" id="aVector4_8hpp_html"><div class="ttname"><a href="Vector4_8hpp.html">Vector4.hpp</a></div></div>
 <div class="ttc" id="aclassJson_html"><div class="ttname"><a href="classJson.html">Json</a></div><div class="ttdef"><b>Definition</b> <a href="Json_8hpp_source.html#l00013">Json.hpp:13</a></div></div>
-<div class="ttc" id="aclassJson_html_a3377cae8926277335f63308afd5ad8d2"><div class="ttname"><a href="classJson.html#a3377cae8926277335f63308afd5ad8d2">Json::SetValue</a></div><div class="ttdeci">void SetValue(const std::string &amp;_path, const std::string &amp;_group, const std::string &amp;_key, const Value &amp;_value)</div><div class="ttdef"><b>Definition</b> <a href="Json_8cpp_source.html#l00104">Json.cpp:104</a></div></div>
-<div class="ttc" id="aclassJson_html_a45b724e62a51171aa619bcf2444d2bb3"><div class="ttname"><a href="classJson.html#a45b724e62a51171aa619bcf2444d2bb3">Json::Load</a></div><div class="ttdeci">bool Load(const std::string &amp;_path, std::string _name=&quot;&quot;)</div><div class="ttdef"><b>Definition</b> <a href="Json_8cpp_source.html#l00143">Json.cpp:143</a></div></div>
-<div class="ttc" id="aclassJson_html_abf71d2cd6c4de6312a6d3adad768efde"><div class="ttname"><a href="classJson.html#abf71d2cd6c4de6312a6d3adad768efde">Json::GetValue</a></div><div class="ttdeci">Value GetValue(const std::string &amp;_path, const std::string &amp;_group, const std::string &amp;_key) const</div><div class="ttdef"><b>Definition</b> <a href="Json_8cpp_source.html#l00119">Json.cpp:119</a></div></div>
-<div class="ttc" id="aclassJson_html_ac905c69289a9083101666916b5bb0639"><div class="ttname"><a href="classJson.html#ac905c69289a9083101666916b5bb0639">Json::RemoveGroup</a></div><div class="ttdeci">void RemoveGroup(const std::string &amp;_path, const std::string &amp;_group)</div><div class="ttdef"><b>Definition</b> <a href="Json_8cpp_source.html#l00134">Json.cpp:134</a></div></div>
-<div class="ttc" id="aclassJson_html_ae68795b324f280b96746f967ac1811eb"><div class="ttname"><a href="classJson.html#ae68795b324f280b96746f967ac1811eb">Json::GetGroups</a></div><div class="ttdeci">Group GetGroups(const std::string &amp;_path)</div><div class="ttdef"><b>Definition</b> <a href="Json_8cpp_source.html#l00113">Json.cpp:113</a></div></div>
-<div class="ttc" id="aclassJson_html_afdae6e9357e30dc3a4c95e6bd65bba34"><div class="ttname"><a href="classJson.html#afdae6e9357e30dc3a4c95e6bd65bba34">Json::Save</a></div><div class="ttdeci">void Save(const std::string &amp;_path, std::string _name=&quot;&quot;)</div><div class="ttdef"><b>Definition</b> <a href="Json_8cpp_source.html#l00174">Json.cpp:174</a></div></div>
+<div class="ttc" id="aclassJson_html_a1da17397fdfaa3a625db9d3e1167b856"><div class="ttname"><a href="classJson.html#a1da17397fdfaa3a625db9d3e1167b856">Json::GetGroups</a></div><div class="ttdeci">Group GetGroups(const std::string &amp;_name)</div><div class="ttdef"><b>Definition</b> <a href="Json_8cpp_source.html#l00113">Json.cpp:113</a></div></div>
+<div class="ttc" id="aclassJson_html_a1efcc88a29118ed68fd9cf47f61c6b3e"><div class="ttname"><a href="classJson.html#a1efcc88a29118ed68fd9cf47f61c6b3e">Json::GetValue</a></div><div class="ttdeci">Value GetValue(const std::string &amp;_name, const std::string &amp;_group, const std::string &amp;_key) const</div><div class="ttdef"><b>Definition</b> <a href="Json_8cpp_source.html#l00119">Json.cpp:119</a></div></div>
+<div class="ttc" id="aclassJson_html_a80cc442b850c0b17314e3268bd9de7de"><div class="ttname"><a href="classJson.html#a80cc442b850c0b17314e3268bd9de7de">Json::SetValue</a></div><div class="ttdeci">void SetValue(const std::string &amp;_name, const std::string &amp;_group, const std::string &amp;_key, const Value &amp;_value)</div><div class="ttdef"><b>Definition</b> <a href="Json_8cpp_source.html#l00104">Json.cpp:104</a></div></div>
+<div class="ttc" id="aclassJson_html_a9b2c7e95b4f06b92944cf93a9c31a431"><div class="ttname"><a href="classJson.html#a9b2c7e95b4f06b92944cf93a9c31a431">Json::Load</a></div><div class="ttdeci">bool Load(const std::string &amp;_path, const std::string &amp;_name=&quot;&quot;)</div><div class="ttdef"><b>Definition</b> <a href="Json_8cpp_source.html#l00143">Json.cpp:143</a></div></div>
+<div class="ttc" id="aclassJson_html_af5217af0931934e595b4546947055dce"><div class="ttname"><a href="classJson.html#af5217af0931934e595b4546947055dce">Json::RemoveGroup</a></div><div class="ttdeci">void RemoveGroup(const std::string &amp;_name, const std::string &amp;_group)</div><div class="ttdef"><b>Definition</b> <a href="Json_8cpp_source.html#l00134">Json.cpp:134</a></div></div>
+<div class="ttc" id="aclassJson_html_afdae6e9357e30dc3a4c95e6bd65bba34"><div class="ttname"><a href="classJson.html#afdae6e9357e30dc3a4c95e6bd65bba34">Json::Save</a></div><div class="ttdeci">void Save(const std::string &amp;_path, std::string _name=&quot;&quot;)</div><div class="ttdef"><b>Definition</b> <a href="Json_8cpp_source.html#l00172">Json.cpp:172</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_78b37e50879113152c091ad5503adf85.html">Json</a></li><li class="navelem"><a class="el" href="Json_8hpp.html">Json.hpp</a></li>
-    <li class="footer">2026年01月07日(水) 07時39分20秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年01月22日(木) 05時47分47秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>
