@@ -3,7 +3,7 @@
 #include <string>
 
 #include "src/Stage/StageRepository.hpp"
-#include "vendor/json/json.hpp"
+#include "externals/json/json.hpp"
 
 
 class StageLoader {

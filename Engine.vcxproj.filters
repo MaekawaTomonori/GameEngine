@@ -190,22 +190,22 @@
     <Filter Include="src\Window">
       <UniqueIdentifier>{74C3D837-607B-1A85-C982-F3E0B559B575}</UniqueIdentifier>
     </Filter>
-    <Filter Include="vendor">
+    <Filter Include="externals">
       <UniqueIdentifier>{B3738122-9F15-ACF8-88D0-BF4C74113349}</UniqueIdentifier>
     </Filter>
-    <Filter Include="vendor\MagicEnum">
+    <Filter Include="externals\MagicEnum">
       <UniqueIdentifier>{388A131E-2483-3270-4DB5-17F5390D127C}</UniqueIdentifier>
     </Filter>
-    <Filter Include="vendor\assimp">
+    <Filter Include="externals\assimp">
       <UniqueIdentifier>{6F57A1F8-DB17-1D2F-A452-66AC10D2610B}</UniqueIdentifier>
     </Filter>
-    <Filter Include="vendor\assimp\include">
+    <Filter Include="externals\assimp\include">
       <UniqueIdentifier>{E27D8AD0-4EEA-45CB-17DE-DD2883096833}</UniqueIdentifier>
     </Filter>
-    <Filter Include="vendor\assimp\include\assimp">
+    <Filter Include="externals\assimp\include\assimp">
       <UniqueIdentifier>{BE36F154-AAF1-E000-53A9-594B3F432B91}</UniqueIdentifier>
     </Filter>
-    <Filter Include="vendor\json">
+    <Filter Include="externals\json">
       <UniqueIdentifier>{5C537BC1-C808-F4B6-51FD-ED8DBDB1EABA}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -447,14 +447,14 @@
     <ClInclude Include="src\Window\Window.hpp">
       <Filter>src\Window</Filter>
     </ClInclude>
-    <ClInclude Include="vendor\MagicEnum\magic_enum.hpp">
-      <Filter>vendor\MagicEnum</Filter>
+    <ClInclude Include="externals\MagicEnum\magic_enum.hpp">
+      <Filter>externals\MagicEnum</Filter>
     </ClInclude>
-    <ClInclude Include="vendor\assimp\include\assimp\AssertHandler.h">
-      <Filter>vendor\assimp\include\assimp</Filter>
+    <ClInclude Include="externals\assimp\include\assimp\AssertHandler.h">
+      <Filter>externals\assimp\include\assimp</Filter>
     </ClInclude>
-    <ClInclude Include="vendor\json\json.hpp">
-      <Filter>vendor\json</Filter>
+    <ClInclude Include="externals\json\json.hpp">
+      <Filter>externals\json</Filter>
     </ClInclude>
     <ClInclude Include="src\Camera\Repository\CameraRepository.hpp" />
     <ClInclude Include="src\Camera\Controller\CameraController.hpp" />

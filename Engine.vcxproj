@@ -60,7 +60,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level4</WarningLevel>
       <PreprocessorDefinitions>_LIB;NDEBUG;DEBUG;_DEBUG;_WINDOWS;_UNICODE;UNICODE;_DBG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>vendor\assimp\include;vendor\imgui;vendor\DirectXTex;vendor\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>externals\assimp\include;externals\imgui;externals\DirectXTex;externals\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -77,7 +77,7 @@
     </Link>
     <Lib>
       <AdditionalDependencies>assimp-vc143-mtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>vendor\assimp\lib\Debug;$(SolutionDir)out\$(Platform)\$(Configuration)\DirectXTex;$(SolutionDir)out\$(Platform)\$(Configuration)\imgui;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>externals\assimp\lib\Debug;$(SolutionDir)out\$(Platform)\$(Configuration)\DirectXTex;$(SolutionDir)out\$(Platform)\$(Configuration)\imgui;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -85,7 +85,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level4</WarningLevel>
       <PreprocessorDefinitions>_LIB;NDEBUG;_WINDOWS;_UNICODE;UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>vendor\assimp\include;vendor\imgui;vendor\DirectXTex;vendor\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>externals\assimp\include;externals\imgui;externals\DirectXTex;externals\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>MinSpace</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -108,7 +108,7 @@
     </Link>
     <Lib>
       <AdditionalDependencies>assimp-vc143-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>vendor\assimp\lib\Release;$(SolutionDir)out\$(Platform)\$(Configuration)\DirectXTex;$(SolutionDir)out\$(Platform)\$(Configuration)\imgui;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>externals\assimp\lib\Release;$(SolutionDir)out\$(Platform)\$(Configuration)\DirectXTex;$(SolutionDir)out\$(Platform)\$(Configuration)\imgui;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -205,9 +205,9 @@
     <ClInclude Include="src\Texture\TextureManager.hpp" />
     <ClInclude Include="src\Timer\Timer.hpp" />
     <ClInclude Include="src\Window\Window.hpp" />
-    <ClInclude Include="vendor\MagicEnum\magic_enum.hpp" />
-    <ClInclude Include="vendor\assimp\include\assimp\AssertHandler.h" />
-    <ClInclude Include="vendor\json\json.hpp" />
+    <ClInclude Include="externals\MagicEnum\magic_enum.hpp" />
+    <ClInclude Include="externals\assimp\include\assimp\AssertHandler.h" />
+    <ClInclude Include="externals\json\json.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Camera\Camera.cpp" />
@@ -287,10 +287,10 @@
     <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="vendor\DirectXTex\DirectXTex_Desktop_2022_Win10.vcxproj">
+    <ProjectReference Include="externals\DirectXTex\DirectXTex_Desktop_2022_Win10.vcxproj">
       <Project>{371B9FA9-4C90-4AC6-A123-ACED756D6C77}</Project>
     </ProjectReference>
-    <ProjectReference Include="vendor\imgui\imgui.vcxproj">
+    <ProjectReference Include="externals\imgui\imgui.vcxproj">
       <Project>{05A9737C-E682-451F-A307-4B01DEB9D44B}</Project>
     </ProjectReference>
   </ItemGroup>

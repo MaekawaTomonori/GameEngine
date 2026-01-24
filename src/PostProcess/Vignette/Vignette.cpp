@@ -6,7 +6,7 @@
 #include <fstream>
 
 #include "Math/MathUtils.hpp"
-#include "vendor/json/json.hpp"
+#include "externals/json/json.hpp"
 
 using json = nlohmann::json;
 

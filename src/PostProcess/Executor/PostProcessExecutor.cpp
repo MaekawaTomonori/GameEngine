@@ -11,7 +11,7 @@
 #include "src/PostProcess/IPostEffect.hpp"
 #include "src/PostProcess/Editor/PostProcessPresetEditor.hpp"
 #include "Factory/AbstractPostEffectFactory.hpp"
-#include "vendor/json/json.hpp"
+#include "externals/json/json.hpp"
 #include <fstream>
 #include <filesystem>
 

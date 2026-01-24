@@ -5,7 +5,7 @@
 #include "Log.hpp"
 #include "Model.hpp"
 #include "Utils.hpp"
-#include "vendor/json/json.hpp"
+#include "externals/json/json.hpp"
 
 void StageLoader::Initialize(StageRepository* _repository) {
     repository_ = _repository;
