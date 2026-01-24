@@ -4,7 +4,6 @@
 #include <string>
 #include <vector>
 #include <memory>
-#include <filesystem>
 
 // Forward declarations
 namespace spdlog {
@@ -45,20 +44,20 @@ public:
     static void Initialize();
 
     /** @brief ログメッセージを送信
-     ** @param level ログレベル
-     ** @param message メッセージ
+     ** @param _level ログレベル
+     ** @param _message メッセージ
      **/
     static void Send(Level _level, const std::string& _message = "");
 
     /** @brief ログメッセージを送信(Debug)
-     ** @param message メッセージ
+     ** @param _message メッセージ
      **/
     static void Send(const std::string& _message);
 
     /** @brief コンテキスト付きログメッセージを送信
-     ** @param level ログレベル
-     ** @param message メッセージ
-     ** @param context コンテキスト情報
+     ** @param _level ログレベル
+     ** @param _message メッセージ
+     ** @param _context コンテキスト情報
      **/
     static void SendWithContext(Level _level, const std::string& _message, const std::string& _context = "");
 
@@ -67,15 +66,15 @@ public:
     static void LogExecutionContext();
 
     /** @brief ファイル操作をログに記録
-     ** @param operation 操作名
-     ** @param filePath ファイルパス
-     ** @param success 成功したかどうか
-     ** @param details 詳細情報
+     ** @param _operation 操作名
+     ** @param _filePath ファイルパス
+     ** @param _success 成功したかどうか
+     ** @param _details 詳細情報
      **/
     static void LogFileOperation(const std::string& _operation, const std::string& _filePath, bool _success = true, const std::string& _details = "");
 
     /** @brief ログレベルを設定
-     ** @param level ログレベル
+     ** @param _level ログレベル
      **/
     static void SetLevel(Level _level);
 
@@ -99,15 +98,15 @@ private:
     static void LogWorkingDirectory();
 
     /** @brief ファイルシステム診断情報をログに記録（レガシー互換性、削除予定）
-     ** @param targetPath 対象パス
-     ** @param context コンテキスト
+     ** @param _targetPath 対象パス
+     ** @param _context コンテキスト
      **/
     static void LogFileSystemDiagnostics(const std::string& _targetPath, const std::string& _context = "");
 
     /** @brief パス付きログメッセージを送信（レガシー互換性、削除予定）
-     ** @param level ログレベル
-     ** @param message メッセージ
-     ** @param context コンテキスト
+     ** @param _level ログレベル
+     ** @param _message メッセージ
+     ** @param _context コンテキスト
      **/
     static void SendWithPath(Level _level, const std::string& _message, const std::string& _context = "");
 };
