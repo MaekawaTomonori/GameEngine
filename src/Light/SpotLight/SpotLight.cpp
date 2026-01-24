@@ -4,7 +4,7 @@
 #include "imgui.h"
 #include "Math/MathUtils.hpp"
 #include "src/Json/Json.hpp"
-#include "vendor/MagicEnum/magic_enum.hpp"
+#include "externals/MagicEnum/magic_enum.hpp"
 
 void RawSpotLight::DefaultSetting() {
     type_ = LightType::Spot;

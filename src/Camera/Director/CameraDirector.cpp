@@ -13,7 +13,7 @@
 #include "Pattern/Singleton.hpp"
 #include "src/Camera/Camera.hpp"
 #include "src/Camera/Controller/CameraController.hpp"
-#include "vendor/json/json.hpp"
+#include "externals/json/json.hpp"
 
 void CameraDirector::Initialize(DebugUI* _debug) {
     debug_ = _debug;

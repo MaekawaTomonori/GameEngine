@@ -14,7 +14,7 @@
 #include "Heap/Heap.hpp"
 #include "Math/Vector4.hpp"
 #include "Resource/DX12Resource.hpp"
-#include "vendor/DirectXTex/DirectXTex.h"
+#include "externals/DirectXTex/DirectXTex.h"
 
 class DebugUI;
 

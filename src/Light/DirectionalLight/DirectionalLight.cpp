@@ -3,7 +3,7 @@
 #include "Pattern/Singleton.hpp"
 #include "imgui.h"
 #include "src/Json/Json.hpp"
-#include "vendor/MagicEnum/magic_enum.hpp"
+#include "externals/MagicEnum/magic_enum.hpp"
 
 void RawDirectionalLight::DefaultSetting() {
     type_ = LightType::Directional;

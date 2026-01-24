@@ -3,7 +3,7 @@
 
 #include <string>
 #include <vector>
-#include "vendor/json/json.hpp"
+#include "externals/json/json.hpp"
 
 class DebugUI;
 class PostProcessExecutor;

@@ -8,7 +8,7 @@
 #include "Math/Vector2.hpp"
 #include "Math/Vector3.hpp"
 #include "Math/Vector4.hpp"
-#include "vendor/json/json.hpp"
+#include "externals/json/json.hpp"
 
 class Json{
     using json = nlohmann::json;

@@ -5,7 +5,7 @@
 
 #include "Log.hpp"
 #include "Utils.hpp"
-#include "vendor/DirectXTex/d3dx12.h"
+#include "externals/DirectXTex/d3dx12.h"
 
 TextureManager::~TextureManager() {
     Unload();

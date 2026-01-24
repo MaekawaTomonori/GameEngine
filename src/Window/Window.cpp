@@ -3,7 +3,7 @@
 #include <stdexcept>
 
 #include "include/Utils.hpp"
-#include "vendor/imgui/imgui.h"
+#include "externals/imgui/imgui.h"
 
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND _hWnd, UINT _msg, WPARAM _wParam, LPARAM _lParam);
 
