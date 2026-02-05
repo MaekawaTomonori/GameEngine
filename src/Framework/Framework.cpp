@@ -18,6 +18,7 @@ Framework::Framework() {
     //windows_->SetWindowSize(static_cast<int>(config_->GetWidth()), static_cast<int>(config_->GetHeight()));
 
     dxAdapter_ = std::make_unique<DirectXAdapter>(windows_->GetWindowHandle(), config_.width, config_.height);
+    dxAdapter_->Initialize();
 
     srv_ = std::make_unique<SRVManager>();
     srv_->Initialize(dxAdapter_.get());

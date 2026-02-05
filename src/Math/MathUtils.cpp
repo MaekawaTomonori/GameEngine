@@ -178,18 +178,18 @@ float MathUtils::Deg2Rad(float _degree) {
     return _degree * (F_PI / 180.f);
 }
 
-float MathUtils::Lerp(const float& _a, const float& _b, float _t) {
+float MathUtils::Lerp(const float& _a, const float& _b, const float _t) {
     return _a + (_b - _a) * _t;
 }
 
-Vector2 MathUtils::Lerp(const Vector2& _a, const Vector2& _b, float _t) {
+Vector2 MathUtils::Lerp(const Vector2& _a, const Vector2& _b, const float _t) {
     return Vector2{
         Lerp(_a.x, _b.x, _t),
         Lerp(_a.y, _b.y, _t)
     };
 }
 
-Vector3 MathUtils::Lerp(const Vector3& _a, const Vector3& _b, float _t) {
+Vector3 MathUtils::Lerp(const Vector3& _a, const Vector3& _b, const float _t) {
     return Vector3{
         Lerp(_a.x, _b.x, _t),
         Lerp(_a.y, _b.y, _t),
@@ -197,7 +197,7 @@ Vector3 MathUtils::Lerp(const Vector3& _a, const Vector3& _b, float _t) {
     };
 }
 
-Vector4 MathUtils::Lerp(const Vector4& _a, const Vector4& _b, float _t) {
+Vector4 MathUtils::Lerp(const Vector4& _a, const Vector4& _b, const float _t) {
     return Vector4{
         Lerp(_a.x, _b.x, _t),
         Lerp(_a.y, _b.y, _t),
@@ -228,12 +228,3 @@ Quaternion MathUtils::Slerp(const Quaternion& _a, const Quaternion& _b, const fl
 float MathUtils::Distance(const Vector3& _a, const Vector3& _b) {
     return std::sqrtf(std::powf(_a.x - _b.x, 2) + std::powf(_a.y - _b.y, 2) + std::powf(_a.z - _b.z, 2));
 }
-
-//Vector3 MathUtils::TransformNormal(const Vector3& v, const Transform& t) {
-//    Matrix4x4 m = Matrix::MakeAffineMatrix(t);
-//    return {
-//        v.x * m.matrix[0][0] + v.y * m.matrix[1][0] + v.z * m.matrix[2][0],
-//        v.x * m.matrix[0][1] + v.y * m.matrix[1][1] + v.z * m.matrix[2][1],
-//        v.x * m.matrix[0][2] + v.y * m.matrix[1][2] + v.z * m.matrix[2][2],
-//    };
-//}

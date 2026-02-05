@@ -39,8 +39,8 @@ public:
     AbstractPostEffectFactory* GetPostEffectFactory() const;
 
 protected:
-    void RegisterScene(const std::string& _name, const std::function<std::unique_ptr<IScene>()>& _creator) const;
-
+    template<typename T>
+    void RegisterScene(const std::string& _name);
 }; // class IGame
 
 #endif // IGame_HPP_

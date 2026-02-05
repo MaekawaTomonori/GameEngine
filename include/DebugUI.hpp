@@ -23,6 +23,7 @@ class DebugUI {
     const DirectXAdapter* adapter_ = nullptr;
 
     std::vector<Command> commands_;
+    bool showMenuBar_ = false;
 
 public:
     ~DebugUI();
@@ -43,8 +44,8 @@ public:
     void RegisterCommand(const std::string &_id, std::function<void()> _command);
 
     /** @brief ImGuiディスプレイサイズを更新（ウィンドウリサイズ時）
-     ** @param width 新しい幅
-     ** @param height 新しい高さ
+     ** @param _width 新しい幅
+     ** @param _height 新しい高さ
      **/
     void UpdateDisplaySize(int _width, int _height);
 

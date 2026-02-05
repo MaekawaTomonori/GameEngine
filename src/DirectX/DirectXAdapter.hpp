@@ -84,6 +84,11 @@ public:
     DirectXAdapter(HWND _hWnd, size_t _width, size_t _height);
     ~DirectXAdapter();
 
+    /**
+     ** @brief 初期化処理
+     **/
+    void Initialize();
+
     /** @brief バッファリソースを作成
      ** @param _size バッファサイズ
      ** @return 作成されたリソース

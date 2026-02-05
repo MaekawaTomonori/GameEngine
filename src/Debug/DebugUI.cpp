@@ -28,8 +28,8 @@ void DebugUI::Initialize(const DirectXAdapter *_adapter) {
         Utils::Alert("DirectXAdapter is null");
         return;
     }
-    adapter_ = _adapter;
 #ifdef _DEBUG
+    adapter_ = _adapter;
     heap_ = std::make_unique<Heap>();
     if (!heap_->Create(_adapter->GetDevice(), D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV, 128, D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE)){
         Utils::Alert("Failed to create ImGui Heap");
@@ -55,6 +55,7 @@ void DebugUI::Initialize(const DirectXAdapter *_adapter) {
     io.FontGlobalScale = 1.f / ImGui_ImplWin32_GetDpiScaleForHwnd(_adapter->GetWindowHandle());
     io.IniFilename = "Assets\\Config\\imgui.ini";
 
+    showMenuBar_ = true;
 #endif
 }
 
@@ -70,8 +71,11 @@ void DebugUI::Process() {
     // DockSpace - keeping original configuration
     ImGui::DockSpaceOverViewport(ImGui::GetID(""), ImGui::GetMainViewport(), ImGuiDockNodeFlags_PassthruCentralNode);
 
-    // Custom menu bar with FPS display
-    if (ImGui::BeginMainMenuBar()) {
+    if (showMenuBar_ && ImGui::BeginMainMenuBar()) {
+        if (ImGui::SmallButton("x")) {
+            showMenuBar_ = false;
+        }
+
         ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.85f, 0.85f, 0.85f, 1.0f));
         ImGui::Text("Game Engine Debug Interface");
         ImGui::PopStyleColor();

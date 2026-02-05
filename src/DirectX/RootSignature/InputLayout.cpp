@@ -11,7 +11,3 @@ D3D12_INPUT_LAYOUT_DESC InputLayout::Get() const {
     result.NumElements = static_cast<UINT>(elements_.size());
     return result;
 }
-
-//InputLayout InputLayout::SetElement(InputElement _element) {
-//    return *this;
-//}

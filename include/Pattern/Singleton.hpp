@@ -2,6 +2,7 @@
 #define Singleton_HPP_
 #include <mutex>
 #include <cassert>
+#include <memory>
 
 /** @brief シングルトンファイナライザークラス
  ** シングルトンインスタンスの破棄を管理
@@ -11,7 +12,7 @@ class SingletonFinalizer{
     using Finalizer = void(*)();
 
     /** @brief ファイナライザーを追加
-     ** @param finalizer 終了処理関数
+     ** @param _finalizer 終了処理関数
      **/
     static void AddFinalizer(Finalizer _finalizer);
 
@@ -25,7 +26,7 @@ class SingletonFinalizer{
  **/
 template <typename T>
 class Singleton {
-    static T* instance_;
+    static std::unique_ptr<T> instance_;
     static std::once_flag flag_;
 
 public:
@@ -38,7 +39,7 @@ public:
     static T* GetInstance() {
         std::call_once(flag_, Create);
         assert(instance_);
-        return instance_;
+        return instance_.get();
     }
 
 private:
@@ -46,15 +47,14 @@ private:
     ~Singleton() = default;
 
     static void Create() {
-        instance_ = new T();
+        instance_ = std::make_unique<T>();
         SingletonFinalizer::AddFinalizer(Destroy);
     }
     static void Destroy() {
-        delete instance_;
-        instance_ = nullptr;
+        instance_.reset();
     }
 };
 
-template <typename T> inline T* Singleton<T>::instance_ = nullptr;
+template <typename T> inline std::unique_ptr<T> Singleton<T>::instance_ = nullptr;
 template <typename T> inline std::once_flag Singleton<T>::flag_;
 #endif // Singleton_HPP_
