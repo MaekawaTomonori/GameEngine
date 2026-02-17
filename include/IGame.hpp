@@ -40,7 +40,10 @@ public:
 
 protected:
     template<typename T>
-    void RegisterScene(const std::string& _name);
+    void RegisterScene(const std::string& _name) {
+        static_assert(std::is_base_of_v<IScene, T>, "T must be derived from IScene");
+        scene_->RegisterScene(_name, [] { return std::make_unique<T>(); });
+    }
 }; // class IGame
 
 #endif // IGame_HPP_
