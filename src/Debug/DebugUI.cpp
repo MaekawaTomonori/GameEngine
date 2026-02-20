@@ -59,6 +59,7 @@ void DebugUI::Initialize(const DirectXAdapter *_adapter) {
 
     ImFont* font = io.Fonts->AddFontFromFileTTF(
         "Assets\\Fonts\\MPLUS1p-Medium.ttf",
+        //"Assets\\Fonts\\Satoshi-Variable.ttf",
         18.f, nullptr, io.Fonts->GetGlyphRangesJapanese()
     );
 

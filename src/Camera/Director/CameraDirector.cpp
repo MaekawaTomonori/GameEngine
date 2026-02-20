@@ -1,228 +1,108 @@
 #define NOMINMAX
 #include "CameraDirector.hpp"
 
+#include <algorithm>
 #include <filesystem>
 #include <fstream>
-#include <utility>
-#include <algorithm>
 
 #include "Utils.hpp"
 #include "imgui.h"
 #include "Math/MathUtils.hpp"
-#include "Math/Easing.hpp"
 #include "Pattern/Singleton.hpp"
 #include "src/Camera/Camera.hpp"
 #include "src/Camera/Controller/CameraController.hpp"
 #include "externals/json/json.hpp"
 
+// ---------------------------------------------------------------------------
+// Public interface
+// ---------------------------------------------------------------------------
+
 void CameraDirector::Initialize(DebugUI* _debug) {
     debug_ = _debug;
+
+    controlPointModel_ = std::make_unique<Model>();
+    controlPointModel_->Initialize("AnimatedCube");
+    controlPointModel_->SetScale(Vector3(0.15f, 0.15f, 0.15f));
+    controlPointModel_->SetColor(Vector4{1.0f, 0.84f, 0.0f, 1.0f}); // gold
+
     LoadWorkList();
 }
 
 void CameraDirector::Update() {
     if (showEditor_) {
         ShowEditor();
-
-        // If editor window was closed by user, stop editing
-        if (!showEditor_ && isEditingWork_) {
-            StopEditingWork();
-        }
     }
 
     Debug();
 
-    // Update camera to point position only in preview mode
-    if (isEditingWork_ && isPreviewingPoint_ && active_ && selectedPointIndex_ >= 0 && selectedPointIndex_ < static_cast<int>(editingWork_.points.size())) {
-        Point& point = editingWork_.points[selectedPointIndex_];
-        active_->transform_.translate = point.position;
-        active_->transform_.rotate = Vector3(point.rotation.y, point.rotation.x, 0.0f);
+    // Control point visualizer: update position when a Bezier keyframe is selected
+    if (controlPointModel_ && isEditingWork_ &&
+        selectedKeyframeIndex_ >= 0 &&
+        selectedKeyframeIndex_ < static_cast<int>(editingWork_.keyframes.size())) {
+        const Keyframe& kf = editingWork_.keyframes[selectedKeyframeIndex_];
+        if (kf.pathType == PathType::Bezier) {
+            controlPointModel_->SetTranslate(ToWorld(kf.controlPoint));
+            controlPointModel_->Update();
+        }
+    }
+
+    // Preview: lock the active camera to the selected keyframe position
+    if (isEditingWork_ && isPreviewingKeyframe_ && active_ &&
+        selectedKeyframeIndex_ >= 0 &&
+        selectedKeyframeIndex_ < static_cast<int>(editingWork_.keyframes.size())) {
+        const Keyframe& kf      = editingWork_.keyframes[selectedKeyframeIndex_];
+        Vector3         worldPos = ToWorld(kf.position);
+        Vector2         rot      = kf.useLookAt
+                                 ? CalculateLookAtRotation(worldPos, ToWorld(kf.lookAtTarget))
+                                 : kf.rotation;
+        active_->transform_.translate = worldPos;
+        active_->transform_.rotate    = Vector3(rot.y, rot.x, 0.0f);
     }
 
     if (!isProgress_ || !active_) return;
 
-    Work& currentWork = works_[currentWorkKey_];
-    timer_ += 1.0f / 60.0f; // Assuming 60 FPS
+    Work& current = works_[currentWorkKey_];
+    timer_ += 1.0f / 60.0f;
 
-    float progress = timer_ / currentWork.duration;
-
-    if (progress >= 1.0f) {
+    if (timer_ / current.duration >= 1.0f) {
         if (isLoop_) {
-            timer_ = 0.0f; // Reset timer for loop
+            timer_ = 0.0f;
         } else {
             OnComplete();
             return;
         }
     }
 
-    // Migrate legacy order array to segments if needed
-    MigrateOrderToSegments(currentWork);
+    int numKeyframes = static_cast<int>(current.keyframes.size());
+    if (numKeyframes < 2) return;
 
-    // Use segments for interpolation
-    if (currentWork.segments.size() < 1) return;
+    int   numSegments     = numKeyframes - 1;
+    float segmentDuration = current.duration / static_cast<float>(numSegments);
+    int   segIdx          = static_cast<int>(timer_ / segmentDuration);
+    segIdx = std::min(segIdx, numSegments - 1);
 
-    // Find points by name from segments array
-    float segmentDuration = currentWork.duration / currentWork.segments.size();
-    int segmentIndex = static_cast<int>(timer_ / segmentDuration);
-    segmentIndex = std::min(segmentIndex, static_cast<int>(currentWork.segments.size() - 1));
+    float segProgress = (timer_ - segIdx * segmentDuration) / segmentDuration;
+    segProgress = std::clamp(segProgress, 0.0f, 1.0f);
 
-    float segmentProgress = (timer_ - segmentIndex * segmentDuration) / segmentDuration;
-    segmentProgress = std::clamp(segmentProgress, 0.0f, 1.0f);
+    const Keyframe& kfA = current.keyframes[segIdx];
+    const Keyframe& kfB = current.keyframes[segIdx + 1];
 
-    // Get current segment
-    const Segment& currentSegment = currentWork.segments[segmentIndex];
+    Vector3 worldPos = InterpolatePosition(kfA, kfB, segProgress);
+    Vector2 rot      = InterpolateRotation(kfA, kfB, segProgress, worldPos);
 
-    // Find start and end points by name
-    auto startIt = std::find_if(currentWork.points.begin(), currentWork.points.end(),
-        [&currentSegment](const Point& _p) { return _p.name == currentSegment.startPoint; });
-    auto endIt = std::find_if(currentWork.points.begin(), currentWork.points.end(),
-        [&currentSegment](const Point& _p) { return _p.name == currentSegment.endPoint; });
-
-    if (startIt == currentWork.points.end() || endIt == currentWork.points.end()) return;
-
-    // Interpolate between current and next point with separate interpolation types for position and rotation
-    Point interpolatedPoint = InterpolatePointWithSeparateTypes(*startIt, *endIt, segmentProgress,
-        currentSegment.positionInterpolationType, currentSegment.rotationInterpolationType);
-
-    // Apply to camera
-    active_->transform_.translate = interpolatedPoint.position;
-    active_->transform_.rotate = Vector3(interpolatedPoint.rotation.y, interpolatedPoint.rotation.x, 0.0f);
+    active_->transform_.translate = worldPos;
+    active_->transform_.rotate    = Vector3(rot.y, rot.x, 0.0f);
 }
 
-void CameraDirector::Debug() {
-    if (!debug_) return;
+void CameraDirector::Draw() {
+    if (!controlPointModel_ || !isEditingWork_) return;
+    if (selectedKeyframeIndex_ < 0 ||
+        selectedKeyframeIndex_ >= static_cast<int>(editingWork_.keyframes.size())) return;
 
-    debug_->RegisterCommand("CameraDirector", [this]() {
-        ImGui::Begin("CameraDirector");
+    const Keyframe& kf = editingWork_.keyframes[selectedKeyframeIndex_];
+    if (kf.pathType != PathType::Bezier) return;
 
-        // Available works section
-        if (ImGui::CollapsingHeader("Available Works", ImGuiTreeNodeFlags_DefaultOpen)) {
-            ImGui::Text("Count: %zu", availableWorks_.size());
-
-            ImGui::SameLine();
-            if (ImGui::Button("Refresh")) {
-                LoadWorkList();
-            }
-
-            ImGui::Separator();
-
-            for (auto& item : availableWorks_) {
-                ImGui::PushID(item.key.c_str());
-
-                bool isPlaying = (isProgress_ && currentWorkKey_ == item.key);
-                bool isCurrentlyEditing = (isEditingWork_ && editingWorkKey_ == item.key);
-
-                // Status indicator (fixed width to prevent layout shift)
-                if (isPlaying) {
-                    ImGui::TextColored(ImVec4(0.2f, 0.8f, 0.2f, 1.0f), "[Play]");
-                } else if (isCurrentlyEditing) {
-                    ImGui::TextColored(ImVec4(0.8f, 0.6f, 0.2f, 1.0f), "[Edit]");
-                } else {
-                    ImGui::Text("      "); // Empty space to maintain layout
-                }
-
-                ImGui::SameLine();
-
-                // Work name
-                ImGui::Text("%s", item.key.c_str());
-
-                ImGui::SameLine();
-
-                // Play/Stop button (toggles based on playing state)
-                if (isPlaying) {
-                    // Stop button (red text)
-                    ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.0f, 0.3f, 0.3f, 1.0f));
-                    if (ImGui::Button("Stop")) {
-                        Stop();
-                    }
-                    ImGui::PopStyleColor();
-                } else {
-                    // Play button
-                    if (ImGui::Button("Play")) {
-                        Run(item.key, item.loop);
-                    }
-                }
-
-                ImGui::SameLine();
-
-                // Loop checkbox (always in same position)
-                if (ImGui::Checkbox("Loop", &item.loop)) {
-                    // If currently playing this work, update the active loop state
-                    if (isPlaying) {
-                        isLoop_ = item.loop;
-                    }
-                }
-
-                ImGui::SameLine();
-
-                // Edit button
-                if (ImGui::Button("Edit")) {
-                    if (!isEditingWork_) {
-                        LoadWork(item.key);
-                        if (works_.contains(item.key)) {
-                            StartEditingWork(item.key);
-                            showEditor_ = true;
-                        }
-                    }
-                }
-
-                ImGui::SameLine();
-
-                // Delete button
-                if (ImGui::Button("Delete")) {
-                    if (!isCurrentlyEditing) {
-                        DeleteWork(item.key);
-                    }
-                }
-
-                ImGui::PopID();
-            }
-        }
-
-        ImGui::Separator();
-
-        // Create new work section
-        static char nameBuffer[256] = "";
-        ImGui::InputText("Name", nameBuffer, sizeof(nameBuffer));
-
-        ImGui::SameLine();
-
-        if (ImGui::Button("Create")) {
-            if (strlen(nameBuffer) > 0 && !isEditingWork_) {
-                std::string newName = nameBuffer;
-                StartEditingWork(newName);
-                showEditor_ = true;
-                nameBuffer[0] = '\0';
-            }
-        }
-
-        ImGui::Separator();
-
-        // Status section at the bottom
-        ImGui::Text("Status: %s", isProgress_ ? "Playing" : "Idle");
-
-        // Details section (collapsible)
-        static bool showDetails = false;
-        if (ImGui::Button(showDetails ? "Hide Details" : "Show Details")) {
-            showDetails = !showDetails;
-        }
-
-        if (showDetails && isProgress_) {
-            ImGui::Indent();
-            ImGui::Text("Current Work: %s", currentWorkKey_.c_str());
-            ImGui::Text("Timer: %.2f / %.2f", timer_, works_[currentWorkKey_].duration);
-            ImGui::Text("Loop: %s", isLoop_ ? "ON" : "OFF");
-            ImGui::ProgressBar(timer_ / works_[currentWorkKey_].duration);
-
-            // Stop button in details
-            if (ImGui::Button("Stop Playback")) {
-                Stop();
-            }
-            ImGui::Unindent();
-        }
-
-        ImGui::End();
-    });
+    controlPointModel_->Draw();
 }
 
 void CameraDirector::Load(const std::string& _key) {
@@ -232,32 +112,23 @@ void CameraDirector::Load(const std::string& _key) {
 void CameraDirector::Run(const std::string& _key, bool _loop) {
     if (isProgress_ || isEditingWork_) return;
 
-    // Load work if not already loaded
     if (!works_.contains(_key)) {
-        // Try to load directly from file first
         LoadWork(_key);
     }
+    if (!works_.contains(_key)) return;
 
-    if (!works_.contains(_key)) {
-        // If still not found, return silently
-        return;
-    }
+    isLoop_         = _loop;
+    isProgress_     = true;
+    timer_          = 0.0f;
+    currentWorkKey_ = _key;
+    active_         = Singleton<CameraController>::GetInstance()->GetActive();
 
-    // Set loop flag
-    isLoop_ = _loop;
-
-    // Update availableWorks_ item loop state to sync with UI
     for (auto& item : availableWorks_) {
-        if (Utils::EqualsIgnoreCase(_key, item.key)){
+        if (Utils::EqualsIgnoreCase(_key, item.key)) {
             item.loop = _loop;
             break;
         }
     }
-
-    isProgress_ = true;
-    timer_ = 0;
-    currentWorkKey_ = _key;
-    active_ = Singleton<CameraController>::GetInstance()->GetActive();
 
     if (active_) {
         originalTransform_ = active_->transform_;
@@ -269,22 +140,21 @@ void CameraDirector::Stop() {
     OnComplete();
 }
 
+// ---------------------------------------------------------------------------
+// Private: loading / saving
+// ---------------------------------------------------------------------------
+
 void CameraDirector::LoadWorkList() {
     availableWorks_.clear();
     works_.clear();
 
-    const std::string cameraworkDir = "Assets/Data/Camerawork/";
+    const std::string dir = "Assets/Data/Camerawork/";
+    if (!std::filesystem::exists(dir)) return;
 
-    if (!std::filesystem::exists(cameraworkDir)) {
-        return;
-    }
-
-    // Scan directory for JSON files
-    for (const auto& entry : std::filesystem::directory_iterator(cameraworkDir)) {
+    for (const auto& entry : std::filesystem::directory_iterator(dir)) {
         if (entry.is_regular_file() && entry.path().extension() == ".json") {
-            std::string filename = entry.path().stem().string();
             Item item;
-            item.key = filename;
+            item.key  = entry.path().stem().string();
             item.loop = false;
             availableWorks_.push_back(item);
         }
@@ -292,7 +162,7 @@ void CameraDirector::LoadWorkList() {
 }
 
 void CameraDirector::LoadWork(const std::string& _key) {
-    std::string path = "Assets/Data/Camerawork/" + _key + ".json";
+    std::string   path = "Assets/Data/Camerawork/" + _key + ".json";
     std::ifstream file(path);
     if (!file.is_open()) return;
 
@@ -300,574 +170,616 @@ void CameraDirector::LoadWork(const std::string& _key) {
     file >> root;
     file.close();
 
-    if (!root.contains("Camerawork")) return;
-    auto& cameraworkData = root["Camerawork"];
-    if (!cameraworkData.contains(_key)) return;
-
-    auto& workData = cameraworkData[_key];
     Work work{};
 
-    // Extract duration
-    if (workData.contains("duration")) {
-        work.duration = workData["duration"].get<float>();
+    // ---- v2 format -------------------------------------------------------
+    if (root.contains("version") && root["version"].get<int>() == 2) {
+        work.duration = root.value("duration", 5.0f);
+
+        if (root.contains("keyframes") && root["keyframes"].is_array()) {
+            for (const auto& kfData : root["keyframes"]) {
+                Keyframe kf;
+                kf.name = kfData.value("name", "");
+
+                if (kfData.contains("position") &&
+                    kfData["position"].is_array() && kfData["position"].size() >= 3) {
+                    kf.position = Vector3(
+                        kfData["position"][0].get<float>(),
+                        kfData["position"][1].get<float>(),
+                        kfData["position"][2].get<float>());
+                }
+
+                if (kfData.contains("rotation") &&
+                    kfData["rotation"].is_array() && kfData["rotation"].size() >= 2) {
+                    kf.rotation = Vector2(
+                        kfData["rotation"][0].get<float>(),
+                        kfData["rotation"][1].get<float>());
+                }
+
+                kf.useLookAt = kfData.value("useLookAt", false);
+
+                if (kfData.contains("lookAtTarget") &&
+                    kfData["lookAtTarget"].is_array() && kfData["lookAtTarget"].size() >= 3) {
+                    kf.lookAtTarget = Vector3(
+                        kfData["lookAtTarget"][0].get<float>(),
+                        kfData["lookAtTarget"][1].get<float>(),
+                        kfData["lookAtTarget"][2].get<float>());
+                }
+
+                kf.pathType   = StringToPathType(kfData.value("pathType",   "Linear"));
+                kf.timeEasing = StringToTimeEasing(kfData.value("timeEasing", "Linear"));
+
+                if (kfData.contains("controlPoint") &&
+                    kfData["controlPoint"].is_array() && kfData["controlPoint"].size() >= 3) {
+                    kf.controlPoint = Vector3(
+                        kfData["controlPoint"][0].get<float>(),
+                        kfData["controlPoint"][1].get<float>(),
+                        kfData["controlPoint"][2].get<float>());
+                }
+
+                work.keyframes.push_back(kf);
+            }
+        }
+
+        works_[_key] = work;
+        return;
     }
 
-    // Extract order array (legacy format)
-    if (workData.contains("order")) {
-        work.order = workData["order"].get<std::vector<std::string>>();
-    }
+    // ---- v1 format (legacy migration) ------------------------------------
+    if (!root.contains("Camerawork")) return;
+    auto& cwData = root["Camerawork"];
+    if (!cwData.contains(_key)) return;
+    auto& workData = cwData[_key];
 
-    // Extract segments array
-    if (workData.contains("segments")) {
-        for (const auto& segmentData : workData["segments"]) {
-            Segment segment;
+    work.duration = workData.value("duration", 5.0f);
 
-            // Load start and end points (default to empty string if missing)
-            segment.startPoint = segmentData.value("start", "");
-            segment.endPoint = segmentData.value("end", "");
+    struct V1Point {
+        std::string name;
+        Vector3 position{};
+        Vector2 rotation{};
+        bool useLookAt = false;
+        Vector3 lookAtTarget{};
+    };
+    std::vector<V1Point> pointPool;
 
-            // Load separate interpolation types (default to Linear if missing)
-            if (segmentData.contains("positionType")) {
-                segment.positionInterpolationType = StringToInterpolationType(segmentData["positionType"].get<std::string>());
-            } else {
-                segment.positionInterpolationType = InterpolationType::Linear;
+    if (workData.contains("points")) {
+        for (const auto& pData : workData["points"]) {
+            V1Point p;
+            p.name = pData.value("name", "");
+
+            if (pData.contains("position") &&
+                pData["position"].is_array() && pData["position"].size() >= 3) {
+                p.position = Vector3(
+                    pData["position"][0].get<float>(),
+                    pData["position"][1].get<float>(),
+                    pData["position"][2].get<float>());
             }
 
-            if (segmentData.contains("rotationType")) {
-                segment.rotationInterpolationType = StringToInterpolationType(segmentData["rotationType"].get<std::string>());
-            } else {
-                segment.rotationInterpolationType = InterpolationType::Linear;
+            if (pData.contains("rotation") &&
+                pData["rotation"].is_array() && pData["rotation"].size() >= 2) {
+                p.rotation = Vector2(
+                    pData["rotation"][0].get<float>(),
+                    pData["rotation"][1].get<float>());
             }
 
-            work.segments.push_back(segment);
+            p.useLookAt = pData.value("useLookAt", false);
+
+            if (pData.contains("lookAtTarget") &&
+                pData["lookAtTarget"].is_array() && pData["lookAtTarget"].size() >= 3) {
+                p.lookAtTarget = Vector3(
+                    pData["lookAtTarget"][0].get<float>(),
+                    pData["lookAtTarget"][1].get<float>(),
+                    pData["lookAtTarget"][2].get<float>());
+            }
+
+            pointPool.push_back(p);
         }
     }
 
-    // Extract points array
-    if (workData.contains("points")) {
-        for (const auto& pointData : workData["points"]) {
-            Point point;
+    auto findV1Point = [&](const std::string& _name) -> const V1Point* {
+        for (const auto& p : pointPool) {
+            if (p.name == _name) return &p;
+        }
+        return nullptr;
+    };
 
-            // Load name (default to empty string)
-            point.name = pointData.value("name", "");
+    auto toKeyframe = [](const V1Point& _p, TimeEasing _easing = TimeEasing::Linear) -> Keyframe {
+        Keyframe kf;
+        kf.name         = _p.name;
+        kf.position     = _p.position;
+        kf.rotation     = _p.rotation;
+        kf.useLookAt    = _p.useLookAt;
+        kf.lookAtTarget = _p.lookAtTarget;
+        kf.pathType     = PathType::Linear;
+        kf.timeEasing   = _easing;
+        return kf;
+    };
 
-            // Load position (default to zero vector)
-            if (pointData.contains("position") && pointData["position"].is_array() && pointData["position"].size() == 3) {
-                point.position = Vector3(
-                    pointData["position"][0].get<float>(),
-                    pointData["position"][1].get<float>(),
-                    pointData["position"][2].get<float>()
-                );
-            } else {
-                point.position = Vector3(0.0f, 0.0f, 0.0f);
+    if (workData.contains("segments") &&
+        workData["segments"].is_array() && !workData["segments"].empty()) {
+        // Build ordered sequence from segment chain
+        bool firstAdded = false;
+        for (const auto& seg : workData["segments"]) {
+            std::string startName = seg.value("start", "");
+            std::string endName   = seg.value("end",   "");
+            TimeEasing  easing    = StringToTimeEasing(seg.value("positionType", "Linear"));
+
+            if (!firstAdded) {
+                if (const V1Point* p = findV1Point(startName)) {
+                    work.keyframes.push_back(toKeyframe(*p, easing));
+                }
+                firstAdded = true;
             }
 
-            // Load rotation (default to zero)
-            if (pointData.contains("rotation") && pointData["rotation"].is_array() && pointData["rotation"].size() >= 2) {
-                point.rotation = Vector2(
-                    pointData["rotation"][0].get<float>(),
-                    pointData["rotation"][1].get<float>()
-                );
-            } else {
-                point.rotation = Vector2(0.0f, 0.0f);
+            if (const V1Point* p = findV1Point(endName)) {
+                // End keyframe easing comes from the next segment (simplified: Linear)
+                work.keyframes.push_back(toKeyframe(*p, TimeEasing::Linear));
             }
-
-            // Load LookAt data (default to false and zero vector)
-            point.useLookAt = pointData.value("useLookAt", false);
-
-            if (pointData.contains("lookAtTarget") && pointData["lookAtTarget"].is_array() && pointData["lookAtTarget"].size() == 3) {
-                point.lookAtTarget = Vector3(
-                    pointData["lookAtTarget"][0].get<float>(),
-                    pointData["lookAtTarget"][1].get<float>(),
-                    pointData["lookAtTarget"][2].get<float>()
-                );
-            } else {
-                point.lookAtTarget = Vector3(0.0f, 0.0f, 0.0f);
+        }
+    } else if (workData.contains("order") && workData["order"].is_array()) {
+        for (const auto& nameVal : workData["order"]) {
+            std::string name = nameVal.get<std::string>();
+            if (const V1Point* p = findV1Point(name)) {
+                work.keyframes.push_back(toKeyframe(*p));
             }
-
-            work.points.push_back(point);
+        }
+    } else {
+        for (const auto& p : pointPool) {
+            work.keyframes.push_back(toKeyframe(p));
         }
     }
 
     works_[_key] = work;
 }
 
-void CameraDirector::OnComplete() {
-    if (active_) {
-        active_->transform_ = originalTransform_;
-    }
-
-    isProgress_ = false;
-    isLoop_ = false;
-    timer_ = 0;
-    currentWorkKey_.clear();
-    active_ = nullptr;
-}
-
-CameraDirector::Point CameraDirector::InterpolatePoint(const Point& _start, const Point& _end, float _t) {
-    Point result;
-    result.position = MathUtils::Lerp(_start.position, _end.position, _t);
-    result.rotation = MathUtils::Lerp(_start.rotation, _end.rotation, _t);
-    return result;
-}
-
-CameraDirector::Point CameraDirector::InterpolatePointWithType(const Point& _start, const Point& _end, float _t, InterpolationType _type) {
-    // Legacy function: use same interpolation for both position and rotation
-    return InterpolatePointWithSeparateTypes(_start, _end, _t, _type, _type);
-}
-
-CameraDirector::Point CameraDirector::InterpolatePointWithSeparateTypes(const Point& _start, const Point& _end, float _t, InterpolationType _posType, InterpolationType _rotType) {
-    Point result;
-    result.name = _start.name;
-
-    // Lambda to select interpolation function based on type
-    auto interpolate = [_t](const auto& _a, const auto& _b, InterpolationType _type) {
-        switch (_type) {
-            case InterpolationType::EaseInQuad: return Ease::In::Quad(_a, _b, _t);
-            case InterpolationType::EaseOutQuad: return Ease::Out::Quad(_a, _b, _t);
-            case InterpolationType::EaseInOutQuad: return Ease::InOut::Quad(_a, _b, _t);
-            case InterpolationType::EaseInCubic: return Ease::In::Cubic(_a, _b, _t);
-            case InterpolationType::EaseOutCubic: return Ease::Out::Cubic(_a, _b, _t);
-            case InterpolationType::EaseInOutCubic: return Ease::InOut::Cubic(_a, _b, _t);
-            default: return MathUtils::Lerp(_a, _b, _t);
-        }
-    };
-
-    // Interpolate position with position interpolation type
-    result.position = interpolate(_start.position, _end.position, _posType);
-
-    // Handle LookAt or rotation with rotation interpolation type
-    if (_start.useLookAt && _end.useLookAt) {
-        result.useLookAt = true;
-        result.lookAtTarget = interpolate(_start.lookAtTarget, _end.lookAtTarget, _posType);
-        result.rotation = CalculateLookAtRotation(result.position, result.lookAtTarget);
-    } else {
-        result.useLookAt = false;
-        result.rotation = interpolate(_start.rotation, _end.rotation, _rotType);
-    }
-
-    return result;
-}
-
-void CameraDirector::MigrateOrderToSegments(Work& _work) {
-    // If segments already exist, no need to migrate
-    if (!_work.segments.empty()) return;
-
-    // If order array doesn't exist or has less than 2 elements, nothing to migrate
-    if (_work.order.size() < 2) return;
-
-    // Convert order array to segments with Linear interpolation
-    for (size_t i = 0; i < _work.order.size() - 1; ++i) {
-        Segment segment;
-        segment.startPoint = _work.order[i];
-        segment.endPoint = _work.order[i + 1];
-        segment.positionInterpolationType = InterpolationType::Linear;
-        segment.rotationInterpolationType = InterpolationType::Linear;
-        _work.segments.push_back(segment);
-    }
-}
-
-CameraDirector::InterpolationType CameraDirector::StringToInterpolationType(const std::string& _typeStr) {
-    if (Utils::EqualsIgnoreCase(_typeStr, "Linear")) return InterpolationType::Linear;
-    if (Utils::EqualsIgnoreCase(_typeStr, "EaseInQuad")) return InterpolationType::EaseInQuad;
-    if (Utils::EqualsIgnoreCase(_typeStr, "EaseOutQuad")) return InterpolationType::EaseOutQuad;
-    if (Utils::EqualsIgnoreCase(_typeStr, "EaseInOutQuad")) return InterpolationType::EaseInOutQuad;
-    if (Utils::EqualsIgnoreCase(_typeStr, "EaseInCubic")) return InterpolationType::EaseInCubic;
-    if (Utils::EqualsIgnoreCase(_typeStr, "EaseOutCubic")) return InterpolationType::EaseOutCubic;
-    if (Utils::EqualsIgnoreCase(_typeStr, "EaseInOutCubic")) return InterpolationType::EaseInOutCubic;
-    return InterpolationType::Linear; // Default
-}
-
-std::string CameraDirector::InterpolationTypeToString(InterpolationType _type) {
-    switch (_type) {
-        case InterpolationType::Linear: return "Linear";
-        case InterpolationType::EaseInQuad: return "EaseInQuad";
-        case InterpolationType::EaseOutQuad: return "EaseOutQuad";
-        case InterpolationType::EaseInOutQuad: return "EaseInOutQuad";
-        case InterpolationType::EaseInCubic: return "EaseInCubic";
-        case InterpolationType::EaseOutCubic: return "EaseOutCubic";
-        case InterpolationType::EaseInOutCubic: return "EaseInOutCubic";
-        default: return "Linear";
-    }
-}
-
-Vector2 CameraDirector::CalculateLookAtRotation(const Vector3& _position, const Vector3& _target) {
-    // Calculate direction vector from camera to target
-    Vector3 direction = _target - _position;
-
-    // Calculate horizontal distance
-    float horizontalDistance = std::sqrt(direction.x * direction.x + direction.z * direction.z);
-
-    // Safety check: if camera and target are too close horizontally, return neutral rotation
-    const float epsilon = 1e-4f;
-    if (horizontalDistance < epsilon) {
-        // Camera is directly above or below target - return neutral yaw and appropriate pitch
-        return Vector2(0.0f, 0.0f);
-    }
-
-    // Calculate yaw (horizontal rotation around Y axis)
-    float yaw = std::atan2(direction.x, direction.z);
-
-    // Calculate pitch (vertical rotation)
-    float pitch = std::atan2(direction.y, horizontalDistance);
-
-    // Return as Vector2 (yaw, pitch)
-    return Vector2(yaw, pitch);
-}
-
-void CameraDirector::ShowEditor() {
-    if (!debug_) return;
-
-    debug_->RegisterCommand("Camerawork Editor", [this]() {
-        bool isEditorOpen = showEditor_;
-        ImGui::Begin("Camerawork Editor", &showEditor_);
-
-        // If window was closed by X button, stop editing
-        if (isEditorOpen && !showEditor_ && isEditingWork_) {
-            StopEditingWork();
-        }
-
-        // Only show editor if a work is being edited
-        if (!editingWorkKey_.empty() && isEditingWork_) {
-            ImGui::Text("Editing: %s", editingWorkKey_.c_str());
-
-            ImGui::SameLine();
-            if (ImGui::Button("Save")) {
-                SaveWork(editingWorkKey_, editingWork_);
-            }
-            ImGui::SameLine();
-
-            if (ImGui::Button("Cancel")) {
-                StopEditingWork();
-            }
-
-
-            ImGui::Separator();
-
-            ImGui::DragFloat("Duration", &editingWork_.duration, 0.1f, 0.1f, 60.0f);
-
-            // Points list
-            ImGui::Text("Points (%zu)", editingWork_.points.size());
-            ImGui::SameLine();
-            if (ImGui::Button("Add Empty Point")) {
-                AddPoint();
-            }
-            ImGui::SameLine();
-            if (ImGui::Button("Capture Current Camera")) {
-                CaptureCurrentCameraAsPoint();
-            }
-
-            for (size_t i = 0; i < editingWork_.points.size(); ++i) {
-                ImGui::PushID(static_cast<int>(i));
-
-                bool isSelected = (std::cmp_equal(selectedPointIndex_, i));
-                if (ImGui::Selectable(editingWork_.points[i].name.c_str(), isSelected)) {
-                    selectedPointIndex_ = static_cast<int>(i);
-                }
-
-                if (isSelected) {
-                    ImGui::Indent();
-
-                    Point& point = editingWork_.points[i];
-
-                    // Point name input
-                    char nameBuffer[256];
-                    strncpy_s(nameBuffer, point.name.c_str(), sizeof(nameBuffer) - 1);
-                    nameBuffer[sizeof(nameBuffer) - 1] = '\0';
-                    if (ImGui::InputText("Name", nameBuffer, sizeof(nameBuffer))) {
-                        point.name = nameBuffer;
-                    }
-
-                    if (!isPreviewingPoint_) {
-                        if (ImGui::Button("Preview")) {
-                            PreviewPoint(static_cast<int>(i));
-                        }
-                    } else {
-                        if (ImGui::Button("Stop Preview")) {
-                            StopPreview();
-                        }
-                    }
-
-                    ImGui::SameLine();
-                    if (ImGui::Button("Update from Camera")) {
-                        if (Camera* camera = Singleton<CameraController>::GetInstance()->GetActive()) {
-                            point.position = camera->transform_.translate;
-                            point.rotation = Vector2(std::get<Vector3>(camera->transform_.rotate).y, std::get<Vector3>(camera->transform_.rotate).x);
-                        }
-                    }
-
-                    ImGui::SameLine();
-                    if (ImGui::Button("Remove")) {
-                        RemovePoint(static_cast<int>(i));
-                    }
-
-                    ImGui::DragFloat3("Position", &point.position.x, 0.1f);
-
-                    // LookAt settings
-                    ImGui::Checkbox("Use LookAt", &point.useLookAt);
-                    if (point.useLookAt) {
-                        ImGui::Indent();
-                        ImGui::DragFloat3("LookAt Target", &point.lookAtTarget.x, 0.1f);
-                        ImGui::Unindent();
-                    } else {
-                        ImGui::DragFloat2("Rotation (Yaw, Pitch)", &point.rotation.x, 0.01f);
-                    }
-
-                    ImGui::Unindent();
-                }
-
-                ImGui::PopID();
-            }
-
-            ImGui::Separator();
-
-            // Segment Editor
-            if (ImGui::CollapsingHeader("Segment Editor", ImGuiTreeNodeFlags_DefaultOpen)) {
-                // Migrate from order to segments if needed
-                if (!editingWork_.order.empty() && editingWork_.segments.empty()) {
-                    if (ImGui::Button("Migrate Order to Segments")) {
-                        MigrateOrderToSegments(editingWork_);
-                        editingWork_.order.clear();
-                    }
-                    ImGui::SameLine();
-                    ImGui::TextColored(ImVec4(1, 0.8f, 0, 1), "Legacy order format detected");
-                }
-
-                ImGui::Text("Points: %zu, Segments: %zu", editingWork_.points.size(), editingWork_.segments.size());
-
-                // Add new segment
-                static int startPointIndex = 0;
-                static int endPointIndex = 0;
-                if (editingWork_.points.size() < 2) {
-                    ImGui::TextColored(ImVec4(1, 0, 0, 1), "Add at least 2 points first!");
-                } else {
-                    ImGui::Text("Add Segment:");
-
-                    // Start point combo
-                    ImGui::SetNextItemWidth(150);
-                    if (ImGui::BeginCombo("##StartPoint", editingWork_.points[startPointIndex].name.c_str())) {
-                        for (size_t i = 0; i < editingWork_.points.size(); ++i) {
-                            bool isSelected = (startPointIndex == static_cast<int>(i));
-                            if (ImGui::Selectable(editingWork_.points[i].name.c_str(), isSelected)) {
-                                startPointIndex = static_cast<int>(i);
-                            }
-                            if (isSelected) ImGui::SetItemDefaultFocus();
-                        }
-                        ImGui::EndCombo();
-                    }
-
-                    ImGui::SameLine();
-                    ImGui::Text("->");
-                    ImGui::SameLine();
-
-                    // End point combo
-                    ImGui::SetNextItemWidth(150);
-                    if (ImGui::BeginCombo("##EndPoint", editingWork_.points[endPointIndex].name.c_str())) {
-                        for (size_t i = 0; i < editingWork_.points.size(); ++i) {
-                            bool isSelected = (endPointIndex == static_cast<int>(i));
-                            if (ImGui::Selectable(editingWork_.points[i].name.c_str(), isSelected)) {
-                                endPointIndex = static_cast<int>(i);
-                            }
-                            if (isSelected) ImGui::SetItemDefaultFocus();
-                        }
-                        ImGui::EndCombo();
-                    }
-
-                    ImGui::SameLine();
-                    if (ImGui::Button("Add Segment")) {
-                        Segment newSegment;
-                        newSegment.startPoint = editingWork_.points[startPointIndex].name;
-                        newSegment.endPoint = editingWork_.points[endPointIndex].name;
-                        newSegment.positionInterpolationType = InterpolationType::Linear;
-                        newSegment.rotationInterpolationType = InterpolationType::Linear;
-                        editingWork_.segments.push_back(newSegment);
-                    }
-                }
-
-                ImGui::Separator();
-
-                // Segment List
-                if (ImGui::BeginChild("SegmentList", ImVec2(0, 250), true)) {
-                    ImGui::Text("Camera Path Segments:");
-                    ImGui::Separator();
-
-                    if (editingWork_.segments.empty()) {
-                        ImGui::TextColored(ImVec4(0.7f, 0.7f, 0.7f, 1), "No segments. Add segments above.");
-                    } else {
-                        for (size_t i = 0; i < editingWork_.segments.size(); ++i) {
-                            ImGui::PushID(static_cast<int>(i));
-
-                            Segment& segment = editingWork_.segments[i];
-
-                            // Segment display
-                            ImGui::Text("%zu: %s -> %s", i + 1, segment.startPoint.c_str(), segment.endPoint.c_str());
-
-                            // Position interpolation type combo
-                            ImGui::Text("  Position:");
-                            ImGui::SameLine();
-                            ImGui::SetNextItemWidth(140);
-                            std::string posTypeStr = InterpolationTypeToString(segment.positionInterpolationType);
-                            if (ImGui::BeginCombo("##PosInterpType", posTypeStr.c_str())) {
-                                const char* types[] = {"Linear", "EaseInQuad", "EaseOutQuad", "EaseInOutQuad", "EaseInCubic", "EaseOutCubic", "EaseInOutCubic"};
-                                for (int t = 0; t < 7; ++t) {
-                                    bool isSelected = (posTypeStr == types[t]);
-                                    if (ImGui::Selectable(types[t], isSelected)) {
-                                        segment.positionInterpolationType = StringToInterpolationType(types[t]);
-                                    }
-                                    if (isSelected) ImGui::SetItemDefaultFocus();
-                                }
-                                ImGui::EndCombo();
-                            }
-
-                            // Rotation interpolation type combo
-                            ImGui::SameLine();
-                            ImGui::Text("Rotation:");
-                            ImGui::SameLine();
-                            ImGui::SetNextItemWidth(140);
-                            std::string rotTypeStr = InterpolationTypeToString(segment.rotationInterpolationType);
-                            if (ImGui::BeginCombo("##RotInterpType", rotTypeStr.c_str())) {
-                                const char* types[] = {"Linear", "EaseInQuad", "EaseOutQuad", "EaseInOutQuad", "EaseInCubic", "EaseOutCubic", "EaseInOutCubic"};
-                                for (int t = 0; t < 7; ++t) {
-                                    bool isSelected = (rotTypeStr == types[t]);
-                                    if (ImGui::Selectable(types[t], isSelected)) {
-                                        segment.rotationInterpolationType = StringToInterpolationType(types[t]);
-                                    }
-                                    if (isSelected) ImGui::SetItemDefaultFocus();
-                                }
-                                ImGui::EndCombo();
-                            }
-
-                            // Delete button
-                            ImGui::SameLine();
-                            if (ImGui::Button("Delete")) {
-                                editingWork_.segments.erase(editingWork_.segments.begin() + i);
-                                ImGui::PopID();
-                                break;
-                            }
-
-                            ImGui::Separator();
-
-                            ImGui::PopID();
-                        }
-                    }
-                }
-                ImGui::EndChild();
-
-                ImGui::Separator();
-
-                if (ImGui::Button("Clear All Segments")) {
-                    editingWork_.segments.clear();
-                }
-            }
-        } else {
-            // If no work is being edited, close the editor window
-            showEditor_ = false;
-        }
-        ImGui::End();
-    });
-}
-
 void CameraDirector::SaveWork(const std::string& _key, const Work& _work) {
     if (_key.empty()) return;
 
     nlohmann::json root;
+    root["version"]  = 2;
+    root["duration"] = _work.duration;
 
-    // Read existing file if it exists to preserve other works
-    std::string path = "Assets/Data/Camerawork/" + _key + ".json";
-    std::ifstream inFile(path);
-    if (inFile.is_open()) {
-        inFile >> root;
-        inFile.close();
+    nlohmann::json kfArray = nlohmann::json::array();
+    for (const auto& kf : _work.keyframes) {
+        nlohmann::json kfObj;
+        kfObj["name"]         = kf.name;
+        kfObj["position"]     = {kf.position.x,     kf.position.y,     kf.position.z};
+        kfObj["rotation"]     = {kf.rotation.x,     kf.rotation.y};
+        kfObj["useLookAt"]    = kf.useLookAt;
+        kfObj["lookAtTarget"] = {kf.lookAtTarget.x, kf.lookAtTarget.y, kf.lookAtTarget.z};
+        kfObj["pathType"]     = PathTypeToString(kf.pathType);
+        kfObj["controlPoint"] = {kf.controlPoint.x, kf.controlPoint.y, kf.controlPoint.z};
+        kfObj["timeEasing"]   = TimeEasingToString(kf.timeEasing);
+        kfArray.push_back(kfObj);
     }
+    root["keyframes"] = kfArray;
 
-    // Create Camerawork root if it doesn't exist
-    if (!root.contains("Camerawork")) {
-        root["Camerawork"] = nlohmann::json::object();
-    }
-
-    // Build work data
-    nlohmann::json workData;
-    workData["duration"] = _work.duration;
-
-    // Save segments (new format) or order (legacy format)
-    if (!_work.segments.empty()) {
-        nlohmann::json segmentsArray = nlohmann::json::array();
-        for (const auto& segment : _work.segments) {
-            nlohmann::json segmentObj;
-            segmentObj["start"] = segment.startPoint;
-            segmentObj["end"] = segment.endPoint;
-            segmentObj["positionType"] = InterpolationTypeToString(segment.positionInterpolationType);
-            segmentObj["rotationType"] = InterpolationTypeToString(segment.rotationInterpolationType);
-            segmentsArray.push_back(segmentObj);
-        }
-        workData["segments"] = segmentsArray;
-    } else {
-        workData["order"] = _work.order;
-    }
-
-    // Build points array
-    nlohmann::json pointsArray = nlohmann::json::array();
-    for (const auto& point : _work.points) {
-        nlohmann::json pointObj;
-        pointObj["name"] = point.name;
-        pointObj["position"] = {point.position.x, point.position.y, point.position.z};
-        pointObj["rotation"] = {point.rotation.x, point.rotation.y, 0.0f}; // Add roll as 0
-
-        // Save LookAt data
-        pointObj["useLookAt"] = point.useLookAt;
-        if (point.useLookAt) {
-            pointObj["lookAtTarget"] = {point.lookAtTarget.x, point.lookAtTarget.y, point.lookAtTarget.z};
-        }
-
-        pointsArray.push_back(pointObj);
-    }
-    workData["points"] = pointsArray;
-
-    // Set work data
-    root["Camerawork"][_key] = workData;
-
-    // Ensure directory exists
     std::filesystem::path dirPath = "Assets/Data/Camerawork/";
     if (!std::filesystem::exists(dirPath)) {
         std::filesystem::create_directories(dirPath);
     }
 
-    // Write to file
+    std::string   path = "Assets/Data/Camerawork/" + _key + ".json";
     std::ofstream outFile(path, std::ios::trunc);
-    if (!outFile.is_open()) {
-        return;
-    }
+    if (!outFile.is_open()) return;
 
     outFile << root.dump(4) << '\n';
     outFile.close();
 
-    // Update cache
     works_[_key] = _work;
-
-    // Refresh work list
     LoadWorkList();
-
-    // Stop editing after save
     StopEditingWork();
 }
+
+// ---------------------------------------------------------------------------
+// Private: playback helpers
+// ---------------------------------------------------------------------------
+
+void CameraDirector::OnComplete() {
+    if (active_) {
+        active_->transform_ = originalTransform_;
+    }
+    isProgress_    = false;
+    isLoop_        = false;
+    timer_         = 0.0f;
+    currentWorkKey_.clear();
+    active_        = nullptr;
+}
+
+Vector3 CameraDirector::ToWorld(const Vector3& _local) const {
+    return anchor_ ? *anchor_ + _local : _local;
+}
+
+float CameraDirector::ApplyEasing(float _t, TimeEasing _easing) const {
+    switch (_easing) {
+    case TimeEasing::EaseInQuad:     return _t * _t;
+    case TimeEasing::EaseOutQuad:    return _t * (2.0f - _t);
+    case TimeEasing::EaseInOutQuad:  return _t < 0.5f ? 2.0f * _t * _t
+                                                       : -1.0f + (4.0f - 2.0f * _t) * _t;
+    case TimeEasing::EaseInCubic:    return _t * _t * _t;
+    case TimeEasing::EaseOutCubic:   { float f = _t - 1.0f; return f * f * f + 1.0f; }
+    case TimeEasing::EaseInOutCubic: return _t < 0.5f ? 4.0f * _t * _t * _t
+                                                       : (_t - 1.0f) * (2.0f * _t - 2.0f) * (2.0f * _t - 2.0f) + 1.0f;
+    default:                         return _t;
+    }
+}
+
+Vector3 CameraDirector::InterpolatePosition(const Keyframe& _a, const Keyframe& _b, float _t) const {
+    float   easedT = ApplyEasing(_t, _a.timeEasing);
+    Vector3 worldA = ToWorld(_a.position);
+    Vector3 worldB = ToWorld(_b.position);
+
+    if (_a.pathType == PathType::Bezier) {
+        // Quadratic Bezier: B(t) = (1-t)²·P₀ + 2(1-t)t·CP + t²·P₁
+        Vector3 cp = ToWorld(_a.controlPoint);
+        float   u  = 1.0f - easedT;
+        return worldA * (u * u) + cp * (2.0f * u * easedT) + worldB * (easedT * easedT);
+    }
+
+    return MathUtils::Lerp(worldA, worldB, easedT);
+}
+
+Vector2 CameraDirector::InterpolateRotation(const Keyframe& _a, const Keyframe& _b,
+                                            float _t, const Vector3& _worldPos) const {
+    float easedT = ApplyEasing(_t, _a.timeEasing);
+
+    if (_a.useLookAt && _b.useLookAt) {
+        Vector3 lerpedTarget = MathUtils::Lerp(
+            ToWorld(_a.lookAtTarget), ToWorld(_b.lookAtTarget), easedT);
+        return CalculateLookAtRotation(_worldPos, lerpedTarget);
+    }
+
+    Vector2 rotA = _a.useLookAt
+                 ? CalculateLookAtRotation(_worldPos, ToWorld(_a.lookAtTarget))
+                 : _a.rotation;
+    Vector2 rotB = _b.useLookAt
+                 ? CalculateLookAtRotation(_worldPos, ToWorld(_b.lookAtTarget))
+                 : _b.rotation;
+    return MathUtils::Lerp(rotA, rotB, easedT);
+}
+
+Vector2 CameraDirector::CalculateLookAtRotation(const Vector3& _position,
+                                                 const Vector3& _target) const {
+    Vector3 dir   = _target - _position;
+    float   hDist = std::sqrt(dir.x * dir.x + dir.z * dir.z);
+    if (hDist < 1e-4f) return Vector2(0.0f, 0.0f);
+
+    float yaw   = std::atan2(dir.x, dir.z);
+    float pitch = std::atan2(dir.y, hDist);
+    return Vector2(yaw, pitch);
+}
+
+// ---------------------------------------------------------------------------
+// Private: enum <-> string converters
+// ---------------------------------------------------------------------------
+
+CameraDirector::PathType CameraDirector::StringToPathType(const std::string& _str) const {
+    if (Utils::EqualsIgnoreCase(_str, "Bezier")) return PathType::Bezier;
+    return PathType::Linear;
+}
+
+std::string CameraDirector::PathTypeToString(PathType _type) const {
+    return (_type == PathType::Bezier) ? "Bezier" : "Linear";
+}
+
+CameraDirector::TimeEasing CameraDirector::StringToTimeEasing(const std::string& _str) const {
+    if (Utils::EqualsIgnoreCase(_str, "EaseInQuad"))     return TimeEasing::EaseInQuad;
+    if (Utils::EqualsIgnoreCase(_str, "EaseOutQuad"))    return TimeEasing::EaseOutQuad;
+    if (Utils::EqualsIgnoreCase(_str, "EaseInOutQuad"))  return TimeEasing::EaseInOutQuad;
+    if (Utils::EqualsIgnoreCase(_str, "EaseInCubic"))    return TimeEasing::EaseInCubic;
+    if (Utils::EqualsIgnoreCase(_str, "EaseOutCubic"))   return TimeEasing::EaseOutCubic;
+    if (Utils::EqualsIgnoreCase(_str, "EaseInOutCubic")) return TimeEasing::EaseInOutCubic;
+    return TimeEasing::Linear;
+}
+
+std::string CameraDirector::TimeEasingToString(TimeEasing _type) const {
+    switch (_type) {
+    case TimeEasing::EaseInQuad:     return "EaseInQuad";
+    case TimeEasing::EaseOutQuad:    return "EaseOutQuad";
+    case TimeEasing::EaseInOutQuad:  return "EaseInOutQuad";
+    case TimeEasing::EaseInCubic:    return "EaseInCubic";
+    case TimeEasing::EaseOutCubic:   return "EaseOutCubic";
+    case TimeEasing::EaseInOutCubic: return "EaseInOutCubic";
+    default:                         return "Linear";
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Private: Debug UI (main window)
+// ---------------------------------------------------------------------------
+
+void CameraDirector::Debug() {
+    if (!debug_) return;
+
+    debug_->RegisterCommand("CameraDirector", [this]() {
+        ImGui::Begin("CameraDirector");
+
+        // ---- Playback status bar ----
+        if (isProgress_ && works_.contains(currentWorkKey_)) {
+            const Work& w    = works_[currentWorkKey_];
+            float       frac = (w.duration > 0.0f) ? timer_ / w.duration : 0.0f;
+
+            ImGui::TextColored(ImVec4(0.2f, 0.8f, 0.2f, 1.0f),
+                               "● PLAYING: %s", currentWorkKey_.c_str());
+            ImGui::SameLine();
+            if (ImGui::Button("Stop")) { Stop(); }
+
+            char progStr[64];
+            snprintf(progStr, sizeof(progStr), "%.1f / %.1f s", timer_, w.duration);
+            ImGui::ProgressBar(frac, ImVec2(-1.0f, 0.0f), progStr);
+        } else {
+            ImGui::TextDisabled("Idle");
+        }
+
+        ImGui::Separator();
+
+        // ---- Works list ----
+        ImGui::Text("Works (%zu)", availableWorks_.size());
+        ImGui::SameLine();
+        if (ImGui::Button("Refresh")) { LoadWorkList(); }
+
+        ImGui::Separator();
+
+        for (auto& item : availableWorks_) {
+            ImGui::PushID(item.key.c_str());
+
+            bool isPlaying  = (isProgress_     && currentWorkKey_  == item.key);
+            bool isEditing  = (isEditingWork_  && editingWorkKey_  == item.key);
+
+            if (isPlaying)      ImGui::TextColored(ImVec4(0.2f, 0.8f, 0.2f, 1.0f), "[>]");
+            else if (isEditing) ImGui::TextColored(ImVec4(0.8f, 0.6f, 0.2f, 1.0f), "[E]");
+            else                ImGui::TextDisabled("   ");
+
+            ImGui::SameLine();
+            ImGui::Text("%s", item.key.c_str());
+            ImGui::SameLine();
+
+            if (isPlaying) {
+                ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.0f, 0.3f, 0.3f, 1.0f));
+                if (ImGui::Button("Stop")) { Stop(); }
+                ImGui::PopStyleColor();
+            } else {
+                if (ImGui::Button("Play")) { Run(item.key, item.loop); }
+            }
+
+            ImGui::SameLine();
+            if (ImGui::Checkbox("Loop", &item.loop) && isPlaying) {
+                isLoop_ = item.loop;
+            }
+
+            ImGui::SameLine();
+            if (!isEditing) {
+                if (ImGui::Button("Edit")) {
+                    if (!isEditingWork_) {
+                        LoadWork(item.key);
+                        if (works_.contains(item.key)) {
+                            StartEditingWork(item.key);
+                            showEditor_ = true;
+                        }
+                    }
+                }
+            }
+
+            ImGui::SameLine();
+            if (ImGui::Button("X")) {
+                if (!isEditing) { DeleteWork(item.key); }
+            }
+
+            ImGui::PopID();
+        }
+
+        ImGui::Separator();
+
+        // ---- Create new work ----
+        static char nameBuffer[256] = "";
+        ImGui::SetNextItemWidth(150.0f);
+        ImGui::InputText("##NewWorkName", nameBuffer, sizeof(nameBuffer));
+        ImGui::SameLine();
+        if (ImGui::Button("+ Create")) {
+            if (strlen(nameBuffer) > 0 && !isEditingWork_) {
+                StartEditingWork(nameBuffer);
+                showEditor_ = true;
+                nameBuffer[0] = '\0';
+            }
+        }
+
+        ImGui::End();
+    });
+}
+
+// ---------------------------------------------------------------------------
+// Private: Editor UI (editor window)
+// ---------------------------------------------------------------------------
+
+void CameraDirector::ShowEditor() {
+    if (!debug_) return;
+
+    debug_->RegisterCommand("Camerawork Editor", [this]() {
+        bool isOpen = showEditor_;
+        ImGui::Begin("Camerawork Editor", &showEditor_);
+
+        // Window closed via X button
+        if (isOpen && !showEditor_ && isEditingWork_) {
+            StopEditingWork();
+        }
+
+        if (!isEditingWork_ || editingWorkKey_.empty()) {
+            showEditor_ = false;
+            ImGui::End();
+            return;
+        }
+
+        // ---- Header ----
+        ImGui::Text("Editing: %s", editingWorkKey_.c_str());
+        ImGui::SameLine();
+        if (ImGui::Button("Save"))   { SaveWork(editingWorkKey_, editingWork_); }
+        ImGui::SameLine();
+        if (ImGui::Button("Cancel")) { StopEditingWork(); }
+
+        ImGui::Separator();
+        ImGui::DragFloat("Duration (s)", &editingWork_.duration, 0.1f, 0.1f, 300.0f);
+        ImGui::Separator();
+
+        // ---- Keyframe list ----
+        ImGui::Text("Keyframes (%zu)", editingWork_.keyframes.size());
+        ImGui::SameLine();
+        if (ImGui::Button("+ Add"))   { AddKeyframe(); }
+        ImGui::SameLine();
+        if (ImGui::Button("Capture")) { CaptureCurrentCameraAsKeyframe(); }
+
+        for (int i = 0; i < static_cast<int>(editingWork_.keyframes.size()); ++i) {
+            ImGui::PushID(i);
+
+            const Keyframe& kf         = editingWork_.keyframes[i];
+            bool            isSelected = (i == selectedKeyframeIndex_);
+
+            char label[256];
+            if (kf.pathType == PathType::Bezier) {
+                snprintf(label, sizeof(label), "%d: %s  (%.1f, %.1f, %.1f) [Bezier]",
+                         i, kf.name.c_str(),
+                         kf.position.x, kf.position.y, kf.position.z);
+            } else {
+                snprintf(label, sizeof(label), "%d: %s  (%.1f, %.1f, %.1f)",
+                         i, kf.name.c_str(),
+                         kf.position.x, kf.position.y, kf.position.z);
+            }
+
+            if (ImGui::Selectable(label, isSelected)) {
+                if (isPreviewingKeyframe_) StopPreview();
+                selectedKeyframeIndex_ = i;
+            }
+
+            ImGui::PopID();
+        }
+
+        ImGui::Separator();
+
+        // ---- Selected keyframe detail ----
+        if (selectedKeyframeIndex_ < 0 ||
+            selectedKeyframeIndex_ >= static_cast<int>(editingWork_.keyframes.size())) {
+            ImGui::End();
+            return;
+        }
+
+        Keyframe& kf = editingWork_.keyframes[selectedKeyframeIndex_];
+
+        ImGui::Text("Keyframe: \"%s\"", kf.name.c_str());
+
+        // Name
+        char nameBuffer[256];
+        strncpy_s(nameBuffer, kf.name.c_str(), sizeof(nameBuffer) - 1);
+        nameBuffer[sizeof(nameBuffer) - 1] = '\0';
+        ImGui::SetNextItemWidth(200.0f);
+        if (ImGui::InputText("Name", nameBuffer, sizeof(nameBuffer))) {
+            kf.name = nameBuffer;
+        }
+
+        // Position
+        ImGui::DragFloat3("Position", &kf.position.x, 0.1f);
+
+        // Rotation mode toggle
+        ImGui::Text("Rotation:");
+        ImGui::SameLine();
+        if (ImGui::Button(kf.useLookAt ? "[LookAt]" : "[Manual]")) {
+            kf.useLookAt = !kf.useLookAt;
+        }
+
+        if (kf.useLookAt) {
+            ImGui::Indent();
+            ImGui::DragFloat3("LookAt Target", &kf.lookAtTarget.x, 0.1f);
+            ImGui::Unindent();
+        } else {
+            ImGui::Indent();
+            ImGui::DragFloat("Yaw",   &kf.rotation.x, 0.01f);
+            ImGui::DragFloat("Pitch", &kf.rotation.y, 0.01f);
+            ImGui::Unindent();
+        }
+
+        // Path to next (irrelevant for last keyframe)
+        if (selectedKeyframeIndex_ < static_cast<int>(editingWork_.keyframes.size()) - 1) {
+            ImGui::Text("Path to next:");
+            ImGui::SameLine();
+
+            bool isLinear = (kf.pathType == PathType::Linear);
+            bool isBezier = (kf.pathType == PathType::Bezier);
+
+            if (isLinear) ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.35f, 0.6f, 0.35f, 1.0f));
+            if (ImGui::Button("Linear")) { kf.pathType = PathType::Linear; }
+            if (isLinear) ImGui::PopStyleColor();
+
+            ImGui::SameLine();
+
+            if (isBezier) ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.35f, 0.35f, 0.75f, 1.0f));
+            if (ImGui::Button("Bezier")) { kf.pathType = PathType::Bezier; }
+            if (isBezier) ImGui::PopStyleColor();
+
+            if (kf.pathType == PathType::Bezier) {
+                ImGui::Indent();
+                ImGui::DragFloat3("Control Point", &kf.controlPoint.x, 0.1f);
+                ImGui::Unindent();
+            }
+
+            // Easing combo
+            const char* easingNames[] = {
+                "Linear", "EaseInQuad", "EaseOutQuad", "EaseInOutQuad",
+                "EaseInCubic", "EaseOutCubic", "EaseInOutCubic"
+            };
+            int currentEasing = static_cast<int>(kf.timeEasing);
+            ImGui::SetNextItemWidth(180.0f);
+            if (ImGui::Combo("Easing", &currentEasing, easingNames, 7)) {
+                kf.timeEasing = static_cast<TimeEasing>(currentEasing);
+            }
+        }
+
+        // Action buttons
+        ImGui::Separator();
+
+        if (!isPreviewingKeyframe_) {
+            if (ImGui::Button("Preview")) { PreviewKeyframe(selectedKeyframeIndex_); }
+        } else {
+            if (ImGui::Button("Stop Preview")) { StopPreview(); }
+        }
+
+        ImGui::SameLine();
+
+        if (ImGui::Button("From Camera")) {
+            if (Camera* camera = Singleton<CameraController>::GetInstance()->GetActive()) {
+                Vector3 worldPos = camera->transform_.translate;
+                kf.position      = anchor_ ? worldPos - *anchor_ : worldPos;
+                kf.rotation      = Vector2(
+                    std::get<Vector3>(camera->transform_.rotate).y,
+                    std::get<Vector3>(camera->transform_.rotate).x);
+            }
+        }
+
+        ImGui::SameLine();
+        if (ImGui::Button("Remove")) {
+            RemoveKeyframe(selectedKeyframeIndex_);
+        }
+
+        ImGui::End();
+    });
+}
+
+// ---------------------------------------------------------------------------
+// Private: editor operations
+// ---------------------------------------------------------------------------
 
 void CameraDirector::StartEditingWork(const std::string& _key) {
     if (_key.empty() || isEditingWork_) return;
 
     editingWorkKey_ = _key;
 
-    // Load existing work or create new
     if (works_.contains(_key)) {
         editingWork_ = works_[_key];
     } else {
-        editingWork_ = Work{};
+        editingWork_          = Work{};
         editingWork_.duration = 5.0f;
     }
 
-    selectedPointIndex_ = -1;
-    isEditingWork_ = true;
+    selectedKeyframeIndex_ = -1;
+    isEditingWork_         = true;
 
-    // Capture active camera
     active_ = Singleton<CameraController>::GetInstance()->GetActive();
     if (active_) {
         originalTransform_ = active_->transform_;
@@ -877,26 +789,22 @@ void CameraDirector::StartEditingWork(const std::string& _key) {
 void CameraDirector::StopEditingWork() {
     if (!isEditingWork_) return;
 
-    // Stop preview if active
-    if (isPreviewingPoint_) {
-        StopPreview();
-    }
+    if (isPreviewingKeyframe_) StopPreview();
 
-    // Restore original camera transform
     if (active_) {
         active_->transform_ = originalTransform_;
     }
 
     editingWorkKey_.clear();
-    editingWork_ = Work{};
-    selectedPointIndex_ = -1;
-    isEditingWork_ = false;
-    active_ = nullptr;
+    editingWork_           = Work{};
+    selectedKeyframeIndex_ = -1;
+    isEditingWork_         = false;
+    showEditor_            = false;
+    active_                = nullptr;
 }
 
 void CameraDirector::DeleteWork(const std::string& _key) {
     std::string filePath = "Assets/Data/Camerawork/" + _key + ".json";
-
     if (std::filesystem::exists(filePath)) {
         std::filesystem::remove(filePath);
     }
@@ -910,72 +818,61 @@ void CameraDirector::DeleteWork(const std::string& _key) {
     LoadWorkList();
 }
 
-void CameraDirector::AddPoint() {
-    Point newPoint{};
-    newPoint.name = "Point" + std::to_string(editingWork_.points.size());
-    newPoint.position = Vector3(0.0f, 0.0f, 0.0f);
-    newPoint.rotation = Vector2(0.0f, 0.0f);
-    editingWork_.points.push_back(newPoint);
-    selectedPointIndex_ = static_cast<int>(editingWork_.points.size() - 1);
+void CameraDirector::AddKeyframe() {
+    Keyframe kf;
+    kf.name = "Keyframe" + std::to_string(editingWork_.keyframes.size());
+    editingWork_.keyframes.push_back(kf);
+    selectedKeyframeIndex_ = static_cast<int>(editingWork_.keyframes.size() - 1);
 }
 
-void CameraDirector::RemovePoint(int _index) {
-    if (_index >= 0 && _index < static_cast<int>(editingWork_.points.size())) {
-        // Get the name of the point being removed
-        std::string removedPointName = editingWork_.points[_index].name;
+void CameraDirector::RemoveKeyframe(int _index) {
+    if (_index < 0 || _index >= static_cast<int>(editingWork_.keyframes.size())) return;
 
-        // Remove the point
-        editingWork_.points.erase(editingWork_.points.begin() + _index);
+    if (isPreviewingKeyframe_) StopPreview();
 
-        // Remove all segments that reference this point
-        auto it = editingWork_.segments.begin();
-        while (it != editingWork_.segments.end()) {
-            if (it->startPoint == removedPointName || it->endPoint == removedPointName) {
-                it = editingWork_.segments.erase(it);
-            } else {
-                ++it;
-            }
-        }
-
-        if (isPreviewingPoint_) {
-            StopPreview();
-        }
-
-        selectedPointIndex_ = -1;
-    }
+    editingWork_.keyframes.erase(editingWork_.keyframes.begin() + _index);
+    selectedKeyframeIndex_ = -1;
 }
 
-void CameraDirector::CaptureCurrentCameraAsPoint() {
+void CameraDirector::CaptureCurrentCameraAsKeyframe() {
     if (!isEditingWork_) return;
 
     Camera* camera = Singleton<CameraController>::GetInstance()->GetActive();
     if (!camera) return;
 
-    Point newPoint{};
-    newPoint.name = "Point" + std::to_string(editingWork_.points.size());
-    newPoint.position = camera->transform_.translate;
-    newPoint.rotation = Vector2(std::get<Vector3>(camera->transform_.rotate).y, std::get<Vector3>(camera->transform_.rotate).x);
+    Keyframe kf;
+    kf.name          = "Keyframe" + std::to_string(editingWork_.keyframes.size());
+    Vector3 worldPos = camera->transform_.translate;
+    kf.position      = anchor_ ? worldPos - *anchor_ : worldPos;
+    kf.rotation      = Vector2(
+        std::get<Vector3>(camera->transform_.rotate).y,
+        std::get<Vector3>(camera->transform_.rotate).x);
 
-    editingWork_.points.push_back(newPoint);
-    selectedPointIndex_ = static_cast<int>(editingWork_.points.size() - 1);
+    editingWork_.keyframes.push_back(kf);
+    selectedKeyframeIndex_ = static_cast<int>(editingWork_.keyframes.size() - 1);
 }
 
-void CameraDirector::PreviewPoint(int _index) {
-    if (!isEditingWork_ || _index < 0 || _index >= static_cast<int>(editingWork_.points.size())) return;
+void CameraDirector::PreviewKeyframe(int _index) {
+    if (!isEditingWork_ || _index < 0 ||
+        _index >= static_cast<int>(editingWork_.keyframes.size())) return;
 
-    isPreviewingPoint_ = true;
-    selectedPointIndex_ = _index;
+    isPreviewingKeyframe_  = true;
+    selectedKeyframeIndex_ = _index;
 
-    const Point& point = editingWork_.points[_index];
-    if (active_) {
-        active_->transform_.translate = point.position;
-        active_->transform_.rotate = Vector3(point.rotation.y, point.rotation.x, 0.0f);
-    }
+    if (!active_) return;
+
+    const Keyframe& kf      = editingWork_.keyframes[_index];
+    Vector3         worldPos = ToWorld(kf.position);
+    Vector2         rot      = kf.useLookAt
+                             ? CalculateLookAtRotation(worldPos, ToWorld(kf.lookAtTarget))
+                             : kf.rotation;
+    active_->transform_.translate = worldPos;
+    active_->transform_.rotate    = Vector3(rot.y, rot.x, 0.0f);
 }
 
 void CameraDirector::StopPreview() {
     if (!isEditingWork_ || !active_) return;
 
-    isPreviewingPoint_ = false;
-    active_->transform_ = originalTransform_;
+    isPreviewingKeyframe_ = false;
+    active_->transform_   = originalTransform_;
 }

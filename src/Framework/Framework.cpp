@@ -159,6 +159,7 @@ void Framework::Draw() const {
 
     srv_->PreDraw();
 
+    cameraDirector_->Draw();
     scene_->Draw();
 
     sky_->Draw(renderer_.get());
