@@ -38,7 +38,7 @@ void IPostEffect::CreateOutput() {
     output_ = adapter_->CreateRenderTextureResource(static_cast<uint32_t>(adapter_->GetWidth()), static_cast<uint32_t>(adapter_->GetHeight()), DXGI_FORMAT_R8G8B8A8_UNORM_SRGB, CLEAR_COLOR);
 
     index_ = srv_->Allocate();
-    srv_->CreateSRVforTexture2D(index_, output_->Get(), DXGI_FORMAT_R8G8B8A8_UNORM_SRGB, 1);
+    srv_->CreateSRVForTexture2D(index_, output_->Get(), DXGI_FORMAT_R8G8B8A8_UNORM_SRGB, 1);
     handle_ = srv_->GetGPUHandle(index_);
 }
 

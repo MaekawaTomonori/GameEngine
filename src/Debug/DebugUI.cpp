@@ -55,6 +55,24 @@ void DebugUI::Initialize(const DirectXAdapter *_adapter) {
     io.FontGlobalScale = 1.f / ImGui_ImplWin32_GetDpiScaleForHwnd(_adapter->GetWindowHandle());
     io.IniFilename = "Assets\\Config\\imgui.ini";
 
+    io.Fonts->Clear();
+
+    ImFont* font = io.Fonts->AddFontFromFileTTF(
+        "Assets\\Fonts\\MPLUS1p-Medium.ttf",
+        18.f, nullptr, io.Fonts->GetGlyphRangesJapanese()
+    );
+
+    if (font == nullptr) {
+        Log::Send(Log::Level::WARNING, "Failed to load Jp font. Using Default Font.");
+
+        io.Fonts->AddFontDefault();
+        io.Fonts->GetGlyphRangesJapanese();
+    }else {
+        Log::Send(Log::Level::INFO, "Successfully loaded Jp Font.");
+    }
+
+    io.Fonts->Build();
+
     showMenuBar_ = true;
 #endif
 }
@@ -72,18 +90,29 @@ void DebugUI::Process() {
     ImGui::DockSpaceOverViewport(ImGui::GetID(""), ImGui::GetMainViewport(), ImGuiDockNodeFlags_PassthruCentralNode);
 
     if (showMenuBar_ && ImGui::BeginMainMenuBar()) {
+        // 左: Windows メニュー
+        if (!windowStates_.empty() && ImGui::BeginMenu("Windows")) {
+            for (auto& [label, visible] : windowStates_) {
+                ImGui::MenuItem(label.c_str(), nullptr, &visible);
+            }
+            ImGui::EndMenu();
+        }
+
+        // 中央: タイトル（控えめ）
+        ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.45f, 0.45f, 0.45f, 1.0f));
+        ImGui::Text("  Game Engine Debug");
+        ImGui::PopStyleColor();
+
+        // 右: FPS + 閉じるボタン
+        const float rightStart = ImGui::GetWindowWidth() - 130.f;
+        ImGui::SameLine(rightStart);
+        ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.4f, 0.8f, 0.4f, 1.0f));
+        ImGui::Text("FPS: %.1f", ImGui::GetIO().Framerate);
+        ImGui::PopStyleColor();
+        ImGui::SameLine();
         if (ImGui::SmallButton("x")) {
             showMenuBar_ = false;
         }
-
-        ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.85f, 0.85f, 0.85f, 1.0f));
-        ImGui::Text("Game Engine Debug Interface");
-        ImGui::PopStyleColor();
-
-        ImGui::SameLine(ImGui::GetWindowWidth() - 200);
-        ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.8f, 0.4f, 0.4f, 1.0f));
-        ImGui::Text("FPS: %.1f", ImGui::GetIO().Framerate);
-        ImGui::PopStyleColor();
 
         ImGui::EndMainMenuBar();
     }
@@ -93,6 +122,10 @@ void DebugUI::Process() {
     });
 
     for (const auto &[id, command] : commands) {
+        if (windowStates_.contains(id) && !windowStates_[id]) {
+            continue;
+        }
+
         command();
     }
 
@@ -116,7 +149,28 @@ void DebugUI::RegisterCommand(const std::string &_id, std::function<void()> _com
     commands_.push_back({.id= _id, .command= std::move(_command)});
 }
 
-void DebugUI::UpdateDisplaySize([[maybe_unused]]int _width, [[maybe_unused]]int _height) {
+void DebugUI::RegisterMenuButton(const std::string& _key, const bool _flag) { 
+#ifdef _DEBUG
+    std::lock_guard lock(mutex_);
+    if (!windowStates_.contains(_key)) {
+        windowStates_[_key] = _flag;
+    }
+#endif
+}
+
+void DebugUI::ToggleMenu(const std::string& _key) {
+#ifdef _DEBUG
+    if (!windowStates_.contains(_key)) return;
+
+    windowStates_[_key] = !windowStates_[_key];
+#endif
+}
+
+bool& DebugUI::IsVisible(const std::string& _key) {
+    return windowStates_[_key];
+}
+
+void DebugUI::UpdateDisplaySize([[maybe_unused]]int _width, [[maybe_unused]]int _height) const {
 #ifdef _DEBUG
     if (ImGui::GetCurrentContext()) {
         ImGuiIO& io = ImGui::GetIO();

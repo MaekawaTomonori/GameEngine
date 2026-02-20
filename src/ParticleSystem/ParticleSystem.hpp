@@ -1,66 +1,67 @@
 #ifndef ParticleSystem_HPP_
 #define ParticleSystem_HPP_
+#include <functional>
 #include <memory>
 #include <string>
 #include <unordered_map>
+#include <vector>
 
 #include "Emitter/Emitter.hpp"
 #include "Math/Vector3.hpp"
+#include "Math/Vector4.hpp"
 #include "src/DirectX/DirectXAdapter.hpp"
 #include "src/DirectX/GraphicsPipeline/Object/PipelineStateObject.hpp"
 #include "src/Mesh/Repository/MeshRepository.hpp"
 #include "src/Renderer/Renderer.hpp"
 
 class ParticleSystem {
-    struct Group {
-        bool enable = false;
-        Vector3 position;
-        std::vector<std::unique_ptr<Emitter>> emitters;
-
-        explicit Group(const Vector3 _position) :
-            position(_position) {
-        }
-    };
-
 public:
+    using UpdateFunc = std::function<void(float, const Vector3&, Vector3&, Vector3&, Vector4&)>;
+    using SpawnFunc  = std::function<void(const Vector3&, Vector3&, Vector3&)>;
+
     struct EmitterConfig {
         std::string texture = "white_x16.png";
-        bool active = false;
-        float frequency = 1.0f;
+        float frequency = 0.f;
         float duration = 1.f;
         uint16_t spawnCount = 1;
         Vector3 size = {1.f, 1.f, 1.f};
         Vector3 velocity = {0.f, 0.f, 0.f};
-        Vector4 color = { 1.f, 1.f, 1.f, 1.f };
-        // float time, Vector3& current velocity, Vector4& current color
-        std::function<void(float, Vector3&, Vector4&)> updateFunc;
+        Vector4 color = {1.f, 1.f, 1.f, 1.f};
+        std::string updateFuncKey;
+        UpdateFunc updateFunc;
+        std::string spawnFuncKey;
+        SpawnFunc spawnFunc;
     };
 
-    class GroupEditor {
-        std::string name_;
-        Group* group_;
+    struct Template {
+        std::vector<EmitterConfig> emitters;
+    };
 
-        DirectXAdapter* adapter_ = nullptr;
-        SRVManager* srv_ = nullptr;
-        MeshRepository* mesh_ = nullptr;
+    class TemplateEditor {
+        Template* template_ = nullptr;
 
     public:
-        GroupEditor(std::string _name, Group* _group, DirectXAdapter* _adapter, SRVManager* _srv, MeshRepository* _mesh);
-        GroupEditor& AddEmitter(const EmitterConfig& _config);
-        GroupEditor& SetPosition(const Vector3& _position);
-        GroupEditor& SetEnable(bool _enable);
-        GroupEditor& ClearEmitters();
-        GroupEditor& Emit();
+        explicit TemplateEditor(Template* _template);
+        TemplateEditor& AddEmitter(const EmitterConfig& _config);
     };
 
 private:
+    static constexpr uint16_t POOL_SIZE = 64;
+
     DirectXAdapter* adapter_ = nullptr;
     SRVManager* srv_ = nullptr;
     MeshRepository* mesh_ = nullptr;
     DebugUI* debugUI_ = nullptr;
 
-    std::unordered_map<std::string, std::unique_ptr<Group>> groups_;
+    std::unordered_map<std::string, Template> templates_;
+    std::unordered_map<std::string, UpdateFunc> updateFuncs_;
+    std::unordered_map<std::string, SpawnFunc>  spawnFuncs_;
 
+    std::vector<std::unique_ptr<Emitter>> pool_;
+    std::vector<Emitter*> available_;
+    std::vector<Emitter*> active_;
+
+    bool poolInitialized_ = false;
     std::unique_ptr<PipelineStateObject> pso_ = nullptr;
 
 public:
@@ -70,22 +71,59 @@ public:
     void Update();
     void Draw(Renderer* _renderer);
 
-    GroupEditor Register(const std::string& _name, Vector3 _position = Vector3{ 0.f, 0.f, 0.f });
-    GroupEditor Edit(const std::string& _name) const;
-    void Enable(const std::string& _name) const;
-    void Delete(const std::string& _name);
+    /** @brief 更新関数を文字列キーで登録
+     ** @param _key 関数を識別するキー
+     ** @param _func 更新関数
+     **/
+    void RegisterUpdateFunc(const std::string& _key, UpdateFunc _func);
 
-    void Emit(const std::string& _name);
+    /** @brief スポーン関数を文字列キーで登録
+     ** @param _key 関数を識別するキー
+     ** @param _func スポーン関数 (emitterCenter, outPos, outVel)
+     **/
+    void RegisterSpawnFunc(const std::string& _key, SpawnFunc _func);
 
-    /// @brief Registers a new particle group from a JSON string.
-    /// @param _json The JSON string containing the group data.
-    /// @param _name The name of the group (optional).
-    //void RegisterFromJson(const std::string& _json, const std::string& _name = "");
-    //void ExportToJson(const std::string& _name) const;
+    /** @brief テンプレートを登録（空のテンプレートを作成しEditorを返す）
+     ** @param _name テンプレート名
+     ** @return TemplateEditor
+     **/
+    TemplateEditor Register(const std::string& _name);
+
+    /** @brief テンプレートを登録（既存のTemplateをコピー）
+     ** @param _name テンプレート名
+     ** @param _template テンプレートデータ
+     ** @return TemplateEditor
+     **/
+    TemplateEditor Register(const std::string& _name, const Template& _template);
+
+    /** @brief JSONファイルからテンプレートを読み込み
+     ** @param _name ファイル名（Assets/Data/Particle/<name>.json）
+     **/
+    void LoadTemplate(const std::string& _name);
+
+    /** @brief テンプレートをJSONファイルに保存
+     ** @param _name テンプレート名
+     **/
+    void SaveTemplate(const std::string& _name) const;
+
+    /** @brief テンプレートからInstanceを生成してパーティクルを発射
+     ** @param _templateName テンプレート名
+     ** @param _position 発射位置
+     **/
+    void Emit(const std::string& _templateName, const Vector3& _position);
+
+    /** @brief テンプレートを削除
+     ** @param _name テンプレート名
+     **/
+    void DeleteTemplate(const std::string& _name);
+
 
 private:
     void SetupPSO();
+    void InitializePool();
     void Debug();
+    UpdateFunc ResolveUpdateFunc(const EmitterConfig& _config) const;
+    SpawnFunc  ResolveSpawnFunc(const EmitterConfig& _config) const;
 }; // class ParticleSystem
 
 #endif // ParticleSystem_HPP_

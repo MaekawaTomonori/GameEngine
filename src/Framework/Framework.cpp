@@ -74,6 +74,7 @@ Framework::Framework() {
 
 Framework::~Framework() {
     texture_->Unload();
+    particle_.reset();
     level_.reset();
     postProcessor_.reset();
     renderer_.reset();

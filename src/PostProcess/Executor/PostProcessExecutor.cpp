@@ -264,7 +264,7 @@ void PostProcessExecutor::CreateRenderTextureViews() {
     adapter_->GetDevice()->CreateRenderTargetView(renderTexture_->Get(), &rtvDesc, rtvHandle_);
 
     // SRVを作成（または更新）
-    srv_->CreateSRVforTexture2D(srvIndex_, renderTexture_->Get(), DXGI_FORMAT_R8G8B8A8_UNORM_SRGB, 1);
+    srv_->CreateSRVForTexture2D(srvIndex_, renderTexture_->Get(), DXGI_FORMAT_R8G8B8A8_UNORM_SRGB, 1);
     srvHandle_ = srv_->GetGPUHandle(srvIndex_);
 }
 

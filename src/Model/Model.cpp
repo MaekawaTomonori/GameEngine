@@ -327,7 +327,7 @@ void Model::CreateSkinCluster() {
     skinCluster_.mappedPalette = { mappedPalette, jointSize };
     skinCluster_.srvIndex = srv->Allocate();
     skinCluster_.paletteHandle = { srv->GetCPUHandle(skinCluster_.srvIndex), srv->GetGPUHandle(skinCluster_.srvIndex) };
-    srv->CreateSRVforStructuredBuffer(skinCluster_.srvIndex, skinCluster_.paletteResource->Get(), static_cast<UINT>(jointSize), sizeof(WellForGpu));
+    srv->CreateSRVForStructuredBuffer(skinCluster_.srvIndex, skinCluster_.paletteResource->Get(), static_cast<UINT>(jointSize), sizeof(WellForGpu));
 
     //Influenc
     VertexInfluence* mappedInfluence = nullptr;

@@ -6,10 +6,11 @@
 #include "Math/Vector4.hpp"
 
 class Particle {
-    std::function<void(float, Vector3&, Vector4&)> update_;
+    std::function<void(float, const Vector3&, Vector3&, Vector3&, Vector4&)> update_;
 
     std::string uuid_;
 
+    Vector3 origin_{};
     Vector3 position_{};
     Vector3 scale_{ 1.f, 1.f, 1.f };
     Vector3 velocity_ {};
@@ -29,6 +30,7 @@ public:
     Vector3 GetScale() const;
     Vector4 GetColor() const;
 
+    Particle& SetOrigin(const Vector3& _origin);
     Particle& SetPosition(const Vector3& _position);
     Particle& SetScale(const Vector3& _scale);
     Particle& SetVelocity(const Vector3& _velocity);
@@ -39,10 +41,10 @@ public:
     Particle& RandomizeVelocity(const Vector3& _min = { -1.f, -1.f, -1.f }, const Vector3& _max = { 1.f, 1.f, 1.f });
     Particle& RandomizeColor(const Vector4& _min = { 0.f, 0.f, 0.f, 0.f }, const Vector4& _max = { 1.f, 1.f, 1.f, 1.f });
 
-    // float _t
-    // Vector3& _velocity
-    // Vector4& _color
-    Particle& SetUpdateFunction(const std::function<void(float, Vector3&, Vector4&)>& _func);
+    /** @brief パーティクル更新関数を設定
+     ** @param _func <float(time)>, <const Vector3&(origin)>, <Vector3&(position)>, <Vector3&(velocity)>, <Vector4&(color)>
+     **/
+    Particle& SetUpdateFunction(const std::function<void(float, const Vector3&, Vector3&, Vector3&, Vector4&)>& _func);
 
 private:
 
