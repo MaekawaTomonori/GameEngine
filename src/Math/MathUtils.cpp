@@ -2,6 +2,7 @@
 
 #include <cassert>
 #include <random>
+#include <vector>
 
 #include "Math/Transform.hpp"
 #include "Pattern/Singleton.hpp"
@@ -227,4 +228,38 @@ Quaternion MathUtils::Slerp(const Quaternion& _a, const Quaternion& _b, const fl
 
 float MathUtils::Distance(const Vector3& _a, const Vector3& _b) {
     return std::sqrtf(std::powf(_a.x - _b.x, 2) + std::powf(_a.y - _b.y, 2) + std::powf(_a.z - _b.z, 2));
+}
+
+Vector3 MathUtils::QuadBezier(const Vector3& _p0, const Vector3& _cp, const Vector3& _p1, float _t) {
+    float u = 1.0f - _t;
+    return _p0 * (u * u) + _cp * (2.0f * u * _t) + _p1 * (_t * _t);
+}
+
+float MathUtils::QuadBezierArcLengthT(const Vector3& _p0, const Vector3& _cp, const Vector3& _p1,
+                                       float _s, int _steps) {
+    // 弧長テーブルを構築
+    std::vector<float> cumLen(_steps + 1);
+    cumLen[0] = 0.0f;
+    Vector3 prev = _p0;
+    for (int i = 1; i <= _steps; ++i) {
+        float   ti  = static_cast<float>(i) / static_cast<float>(_steps);
+        Vector3 cur = QuadBezier(_p0, _cp, _p1, ti);
+        Vector3 d   = cur - prev;
+        cumLen[i]   = cumLen[i - 1] + std::sqrt(d.x*d.x + d.y*d.y + d.z*d.z);
+        prev = cur;
+    }
+
+    float totalLen = cumLen[_steps];
+    if (totalLen < 1e-6f) return _s;
+
+    float target = std::clamp(_s, 0.0f, 1.0f) * totalLen;
+    for (int i = 1; i <= _steps; ++i) {
+        if (cumLen[i] >= target) {
+            float frac = (cumLen[i] > cumLen[i - 1])
+                       ? (target - cumLen[i - 1]) / (cumLen[i] - cumLen[i - 1])
+                       : 0.0f;
+            return (static_cast<float>(i - 1) + frac) / static_cast<float>(_steps);
+        }
+    }
+    return 1.0f;
 }

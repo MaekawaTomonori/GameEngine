@@ -47,16 +47,25 @@ void CameraDirector::Update() {
     }
 
     // Preview: lock the active camera to the selected keyframe position
-    if (isEditingWork_ && isPreviewingKeyframe_ && active_ &&
+    if (isEditingWork_ && isPreviewingKeyframe_ &&
         selectedKeyframeIndex_ >= 0 &&
         selectedKeyframeIndex_ < static_cast<int>(editingWork_.keyframes.size())) {
-        const Keyframe& kf      = editingWork_.keyframes[selectedKeyframeIndex_];
-        Vector3         worldPos = ToWorld(kf.position);
-        Vector2         rot      = kf.useLookAt
-                                 ? CalculateLookAtRotation(worldPos, ToWorld(kf.lookAtTarget))
-                                 : kf.rotation;
-        active_->transform_.translate = worldPos;
-        active_->transform_.rotate    = Vector3(rot.y, rot.x, 0.0f);
+        // active_ が null の場合は再取得を試みる
+        if (!active_) {
+            active_ = Singleton<CameraController>::GetInstance()->GetActive();
+            if (active_) {
+                originalTransform_ = active_->transform_;
+            }
+        }
+        if (active_) {
+            const Keyframe& kf      = editingWork_.keyframes[selectedKeyframeIndex_];
+            Vector3         worldPos = ToWorld(kf.position);
+            Vector2         rot      = kf.useLookAt
+                                     ? CalculateLookAtRotation(worldPos, ToWorld(kf.lookAtTarget))
+                                     : kf.rotation;
+            active_->transform_.translate = worldPos;
+            active_->transform_.rotate    = Vector3(rot.y, rot.x, 0.0f);
+        }
     }
 
     if (!isProgress_ || !active_) return;
@@ -387,7 +396,7 @@ void CameraDirector::OnComplete() {
 }
 
 Vector3 CameraDirector::ToWorld(const Vector3& _local) const {
-    return anchor_ ? *anchor_ + _local : _local;
+    return anchor_ + _local;
 }
 
 float CameraDirector::ApplyEasing(float _t, TimeEasing _easing) const {
@@ -410,10 +419,10 @@ Vector3 CameraDirector::InterpolatePosition(const Keyframe& _a, const Keyframe& 
     Vector3 worldB = ToWorld(_b.position);
 
     if (_a.pathType == PathType::Bezier) {
-        // Quadratic Bezier: B(t) = (1-t)²·P₀ + 2(1-t)t·CP + t²·P₁
-        Vector3 cp = ToWorld(_a.controlPoint);
-        float   u  = 1.0f - easedT;
-        return worldA * (u * u) + cp * (2.0f * u * easedT) + worldB * (easedT * easedT);
+        // 弧長再パラメータ化で均一速度を実現
+        Vector3 cp   = ToWorld(_a.controlPoint);
+        float   arcT = MathUtils::QuadBezierArcLengthT(worldA, cp, worldB, easedT);
+        return MathUtils::QuadBezier(worldA, cp, worldB, arcT);
     }
 
     return MathUtils::Lerp(worldA, worldB, easedT);
@@ -444,8 +453,10 @@ Vector2 CameraDirector::CalculateLookAtRotation(const Vector3& _position,
     float   hDist = std::sqrt(dir.x * dir.x + dir.z * dir.z);
     if (hDist < 1e-4f) return Vector2(0.0f, 0.0f);
 
-    float yaw   = std::atan2(dir.x, dir.z);
-    float pitch = std::atan2(dir.y, hDist);
+    float yaw = std::atan2(dir.x, dir.z);
+    // MakeRotateX(pitch) ではローカル +Z の Y 成分が -sin(pitch) になるため
+    // ターゲットが上方 (dir.y > 0) のときは負の pitch が必要
+    float pitch = -std::atan2(dir.y, hDist);
     return Vector2(yaw, pitch);
 }
 
@@ -510,6 +521,15 @@ void CameraDirector::Debug() {
         } else {
             ImGui::TextDisabled("Idle");
         }
+
+        ImGui::Separator();
+
+        // ---- Anchor ----
+        ImGui::Text("Anchor:");
+        ImGui::SameLine();
+        if (ImGui::Button("Reset##Anchor")) { anchor_ = Vector3{}; }
+        ImGui::DragFloat3("##Anchor", &anchor_.x, 0.1f);
+        ImGui::TextDisabled("Keyframe positions/LookAt are relative to this point.");
 
         ImGui::Separator();
 
@@ -645,8 +665,12 @@ void CameraDirector::ShowEditor() {
             }
 
             if (ImGui::Selectable(label, isSelected)) {
-                if (isPreviewingKeyframe_) StopPreview();
-                selectedKeyframeIndex_ = i;
+                if (isPreviewingKeyframe_) {
+                    // プレビュー中は停止せずカメラを新しいキーフレームに即時移動
+                    PreviewKeyframe(i);
+                } else {
+                    selectedKeyframeIndex_ = i;
+                }
             }
 
             ImGui::PopID();
@@ -745,7 +769,7 @@ void CameraDirector::ShowEditor() {
         if (ImGui::Button("From Camera")) {
             if (Camera* camera = Singleton<CameraController>::GetInstance()->GetActive()) {
                 Vector3 worldPos = camera->transform_.translate;
-                kf.position      = anchor_ ? worldPos - *anchor_ : worldPos;
+                kf.position      = worldPos - anchor_;
                 kf.rotation      = Vector2(
                     std::get<Vector3>(camera->transform_.rotate).y,
                     std::get<Vector3>(camera->transform_.rotate).x);
@@ -843,7 +867,7 @@ void CameraDirector::CaptureCurrentCameraAsKeyframe() {
     Keyframe kf;
     kf.name          = "Keyframe" + std::to_string(editingWork_.keyframes.size());
     Vector3 worldPos = camera->transform_.translate;
-    kf.position      = anchor_ ? worldPos - *anchor_ : worldPos;
+    kf.position      = worldPos - anchor_;
     kf.rotation      = Vector2(
         std::get<Vector3>(camera->transform_.rotate).y,
         std::get<Vector3>(camera->transform_.rotate).x);
@@ -856,8 +880,16 @@ void CameraDirector::PreviewKeyframe(int _index) {
     if (!isEditingWork_ || _index < 0 ||
         _index >= static_cast<int>(editingWork_.keyframes.size())) return;
 
-    isPreviewingKeyframe_  = true;
+    // active_ が未取得の場合は再試行（エディタ開始後にカメラが切り替わった場合等）
+    if (!active_) {
+        active_ = Singleton<CameraController>::GetInstance()->GetActive();
+        if (active_) {
+            originalTransform_ = active_->transform_;
+        }
+    }
+
     selectedKeyframeIndex_ = _index;
+    isPreviewingKeyframe_  = true;
 
     if (!active_) return;
 

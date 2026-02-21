@@ -57,8 +57,9 @@ class CameraDirector {
     Transform  originalTransform_{};
     std::string currentWorkKey_;
 
-    // Runtime anchor: not saved to JSON
-    const Vector3* anchor_ = nullptr;
+    // Anchor: world-space reference point. Position/LookAt in keyframes are relative to this.
+    // Not saved to JSON. Editable from the main debug UI.
+    Vector3 anchor_{};
 
     // Editor state
     bool        showEditor_            = false;
@@ -82,11 +83,9 @@ public:
     bool               IsPlaying()      const { return isProgress_; }
     const std::string& GetCurrentWork() const { return currentWorkKey_; }
 
-    /** @brief アンカー座標ポインタを設定。再生中・プレビュー中にオフセット基準として使用される
-     ** @param _anchor 追従対象の座標ポインタ。nullptrで無効化
-     **/
-    void SetAnchor(const Vector3* _anchor) { anchor_ = _anchor; }
-    void ClearAnchor()                     { anchor_ = nullptr;  }
+    /** @brief アンカー（相対座標の基準点）を設定する **/
+    void SetAnchor(const Vector3& _anchor) { anchor_ = _anchor; }
+    void ClearAnchor()                     { anchor_ = Vector3{}; }
 
 private:
     Vector3 ToWorld(const Vector3& _local) const;
