@@ -13,10 +13,6 @@
 #include "src/Camera/Controller/CameraController.hpp"
 #include "externals/json/json.hpp"
 
-// ---------------------------------------------------------------------------
-// Public interface
-// ---------------------------------------------------------------------------
-
 void CameraDirector::Initialize(DebugUI* _debug) {
     debug_ = _debug;
 
@@ -34,6 +30,7 @@ void CameraDirector::Initialize(DebugUI* _debug) {
 
 void CameraDirector::Update() {
     if (showEditor_) {
+        if (!debug_->IsVisible("CameraDirector")){ StopEditingWork(); }
         ShowEditor();
     }
 
@@ -672,9 +669,12 @@ void CameraDirector::StartEditingWork(const std::string& _key) {
     selectedKeyframeIndex_ = -1;
     isEditingWork_         = true;
 
-    active_ = Singleton<CameraController>::GetInstance()->GetActive();
-    if (active_) {
-        originalTransform_ = active_->transform_;
+    // プレイ中は Run() が設定した active_/originalTransform_ をそのまま使う
+    if (!isProgress_) {
+        active_ = Singleton<CameraController>::GetInstance()->GetActive();
+        if (active_) {
+            originalTransform_ = active_->transform_;
+        }
     }
 }
 
@@ -683,8 +683,13 @@ void CameraDirector::StopEditingWork() {
 
     if (isPreviewingKeyframe_) StopPreview();
 
-    if (active_) {
-        active_->transform_ = originalTransform_;
+    // プレイ中でない場合のみカメラ状態を復元・active_ をクリア
+    // プレイ中は playback ループがカメラを引き続き制御する
+    if (!isProgress_) {
+        if (active_) {
+            active_->transform_ = originalTransform_;
+        }
+        active_ = nullptr;
     }
 
     editingWorkKey_.clear();
@@ -692,7 +697,6 @@ void CameraDirector::StopEditingWork() {
     selectedKeyframeIndex_ = -1;
     isEditingWork_         = false;
     showEditor_            = false;
-    active_                = nullptr;
 }
 
 void CameraDirector::DeleteWork(const std::string& _key) {
