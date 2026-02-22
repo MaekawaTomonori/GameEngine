@@ -26,6 +26,10 @@ void CameraDirector::Initialize(DebugUI* _debug) {
     controlPointModel_->SetColor(Vector4{1.0f, 0.84f, 0.0f, 1.0f}); // gold
 
     LoadWorkList();
+
+    if (debug_) {
+        debug_->RegisterMenuButton("CameraDirector");
+    }
 }
 
 void CameraDirector::Update() {
@@ -149,10 +153,6 @@ void CameraDirector::Stop() {
     OnComplete();
 }
 
-// ---------------------------------------------------------------------------
-// Private: loading / saving
-// ---------------------------------------------------------------------------
-
 void CameraDirector::LoadWorkList() {
     availableWorks_.clear();
     works_.clear();
@@ -171,171 +171,40 @@ void CameraDirector::LoadWorkList() {
 }
 
 void CameraDirector::LoadWork(const std::string& _key) {
-    std::string   path = "Assets/Data/Camerawork/" + _key + ".json";
-    std::ifstream file(path);
+    std::ifstream file("Assets/Data/Camerawork/" + _key + ".json");
     if (!file.is_open()) return;
 
     nlohmann::json root;
     file >> root;
-    file.close();
+
+    // 3要素配列からVector3、2要素配列からVector2を読む。存在しない場合はデフォルト値
+    auto readVec3 = [](const nlohmann::json& _j, const char* _key) -> Vector3 {
+        if (!_j.contains(_key)) return {};
+        const auto& a = _j[_key];
+        if (!a.is_array() || a.size() < 3) return {};
+        return Vector3(a[0].get<float>(), a[1].get<float>(), a[2].get<float>());
+    };
+    auto readVec2 = [](const nlohmann::json& _j, const char* _key) -> Vector2 {
+        if (!_j.contains(_key)) return {};
+        const auto& a = _j[_key];
+        if (!a.is_array() || a.size() < 2) return {};
+        return Vector2(a[0].get<float>(), a[1].get<float>());
+    };
 
     Work work{};
+    work.duration = root.value("duration", 5.0f);
 
-    // ---- v2 format -------------------------------------------------------
-    if (root.contains("version") && root["version"].get<int>() == 2) {
-        work.duration = root.value("duration", 5.0f);
-
-        if (root.contains("keyframes") && root["keyframes"].is_array()) {
-            for (const auto& kfData : root["keyframes"]) {
-                Keyframe kf;
-                kf.name = kfData.value("name", "");
-
-                if (kfData.contains("position") &&
-                    kfData["position"].is_array() && kfData["position"].size() >= 3) {
-                    kf.position = Vector3(
-                        kfData["position"][0].get<float>(),
-                        kfData["position"][1].get<float>(),
-                        kfData["position"][2].get<float>());
-                }
-
-                if (kfData.contains("rotation") &&
-                    kfData["rotation"].is_array() && kfData["rotation"].size() >= 2) {
-                    kf.rotation = Vector2(
-                        kfData["rotation"][0].get<float>(),
-                        kfData["rotation"][1].get<float>());
-                }
-
-                kf.useLookAt = kfData.value("useLookAt", false);
-
-                if (kfData.contains("lookAtTarget") &&
-                    kfData["lookAtTarget"].is_array() && kfData["lookAtTarget"].size() >= 3) {
-                    kf.lookAtTarget = Vector3(
-                        kfData["lookAtTarget"][0].get<float>(),
-                        kfData["lookAtTarget"][1].get<float>(),
-                        kfData["lookAtTarget"][2].get<float>());
-                }
-
-                kf.pathType   = StringToPathType(kfData.value("pathType",   "Linear"));
-                kf.timeEasing = StringToTimeEasing(kfData.value("timeEasing", "Linear"));
-
-                if (kfData.contains("controlPoint") &&
-                    kfData["controlPoint"].is_array() && kfData["controlPoint"].size() >= 3) {
-                    kf.controlPoint = Vector3(
-                        kfData["controlPoint"][0].get<float>(),
-                        kfData["controlPoint"][1].get<float>(),
-                        kfData["controlPoint"][2].get<float>());
-                }
-
-                work.keyframes.push_back(kf);
-            }
-        }
-
-        works_[_key] = work;
-        return;
-    }
-
-    // ---- v1 format (legacy migration) ------------------------------------
-    if (!root.contains("Camerawork")) return;
-    auto& cwData = root["Camerawork"];
-    if (!cwData.contains(_key)) return;
-    auto& workData = cwData[_key];
-
-    work.duration = workData.value("duration", 5.0f);
-
-    struct V1Point {
-        std::string name;
-        Vector3 position{};
-        Vector2 rotation{};
-        bool useLookAt = false;
-        Vector3 lookAtTarget{};
-    };
-    std::vector<V1Point> pointPool;
-
-    if (workData.contains("points")) {
-        for (const auto& pData : workData["points"]) {
-            V1Point p;
-            p.name = pData.value("name", "");
-
-            if (pData.contains("position") &&
-                pData["position"].is_array() && pData["position"].size() >= 3) {
-                p.position = Vector3(
-                    pData["position"][0].get<float>(),
-                    pData["position"][1].get<float>(),
-                    pData["position"][2].get<float>());
-            }
-
-            if (pData.contains("rotation") &&
-                pData["rotation"].is_array() && pData["rotation"].size() >= 2) {
-                p.rotation = Vector2(
-                    pData["rotation"][0].get<float>(),
-                    pData["rotation"][1].get<float>());
-            }
-
-            p.useLookAt = pData.value("useLookAt", false);
-
-            if (pData.contains("lookAtTarget") &&
-                pData["lookAtTarget"].is_array() && pData["lookAtTarget"].size() >= 3) {
-                p.lookAtTarget = Vector3(
-                    pData["lookAtTarget"][0].get<float>(),
-                    pData["lookAtTarget"][1].get<float>(),
-                    pData["lookAtTarget"][2].get<float>());
-            }
-
-            pointPool.push_back(p);
-        }
-    }
-
-    auto findV1Point = [&](const std::string& _name) -> const V1Point* {
-        for (const auto& p : pointPool) {
-            if (p.name == _name) return &p;
-        }
-        return nullptr;
-    };
-
-    auto toKeyframe = [](const V1Point& _p, TimeEasing _easing = TimeEasing::Linear) -> Keyframe {
+    for (const auto& kfData : root.value("keyframes", nlohmann::json::array())) {
         Keyframe kf;
-        kf.name         = _p.name;
-        kf.position     = _p.position;
-        kf.rotation     = _p.rotation;
-        kf.useLookAt    = _p.useLookAt;
-        kf.lookAtTarget = _p.lookAtTarget;
-        kf.pathType     = PathType::Linear;
-        kf.timeEasing   = _easing;
-        return kf;
-    };
-
-    if (workData.contains("segments") &&
-        workData["segments"].is_array() && !workData["segments"].empty()) {
-        // Build ordered sequence from segment chain
-        bool firstAdded = false;
-        for (const auto& seg : workData["segments"]) {
-            std::string startName = seg.value("start", "");
-            std::string endName   = seg.value("end",   "");
-            TimeEasing  easing    = StringToTimeEasing(seg.value("positionType", "Linear"));
-
-            if (!firstAdded) {
-                if (const V1Point* p = findV1Point(startName)) {
-                    work.keyframes.push_back(toKeyframe(*p, easing));
-                }
-                firstAdded = true;
-            }
-
-            if (const V1Point* p = findV1Point(endName)) {
-                // End keyframe easing comes from the next segment (simplified: Linear)
-                work.keyframes.push_back(toKeyframe(*p, TimeEasing::Linear));
-            }
-        }
-    } else if (workData.contains("order") && workData["order"].is_array()) {
-        for (const auto& nameVal : workData["order"]) {
-            std::string name = nameVal.get<std::string>();
-            if (const V1Point* p = findV1Point(name)) {
-                work.keyframes.push_back(toKeyframe(*p));
-            }
-        }
-    } else {
-        for (const auto& p : pointPool) {
-            work.keyframes.push_back(toKeyframe(p));
-        }
+        kf.name         = kfData.value("name",      std::string{});
+        kf.position     = readVec3(kfData, "position");
+        kf.rotation     = readVec2(kfData, "rotation");
+        kf.useLookAt    = kfData.value("useLookAt",  false);
+        kf.lookAtTarget = readVec3(kfData, "lookAtTarget");
+        kf.pathType     = StringToPathType(kfData.value("pathType",    std::string{"Linear"}));
+        kf.timeEasing   = StringToTimeEasing(kfData.value("timeEasing", std::string{"Linear"}));
+        kf.controlPoint = readVec3(kfData, "controlPoint");
+        work.keyframes.push_back(kf);
     }
 
     works_[_key] = work;
@@ -345,7 +214,6 @@ void CameraDirector::SaveWork(const std::string& _key, const Work& _work) {
     if (_key.empty()) return;
 
     nlohmann::json root;
-    root["version"]  = 2;
     root["duration"] = _work.duration;
 
     nlohmann::json kfArray = nlohmann::json::array();
@@ -503,7 +371,7 @@ void CameraDirector::Debug() {
     if (!debug_) return;
 
     debug_->RegisterCommand("CameraDirector", [this]() {
-        ImGui::Begin("CameraDirector");
+        ImGui::Begin("CameraDirector", &debug_->IsVisible("CameraDirector"));
 
         // ---- Playback status bar ----
         if (isProgress_ && works_.contains(currentWorkKey_)) {
