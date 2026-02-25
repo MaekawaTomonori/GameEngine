@@ -1,9 +1,14 @@
 #ifndef LOG_HPP
 #define LOG_HPP
 
+#include <array>
+#include <deque>
+#include <memory>
+#include <mutex>
 #include <string>
 #include <vector>
-#include <memory>
+
+#include "DebugUI.hpp"
 
 // Forward declarations
 namespace spdlog {
@@ -29,6 +34,14 @@ public:
         FATAL = 5,
     };
 
+    /** @brief ImGui表示用ログエントリ
+     **/
+    struct LogEntry {
+        Level       level;
+        std::string message;
+        std::string timestamp;
+    };
+
 private:
     static std::vector<std::shared_ptr<spdlog::sinks::sink>> sinks_;
     static Level level_;
@@ -37,6 +50,13 @@ private:
     static std::string logFileExt_;
     static std::string executablePath_;
     static std::string workingDirectory_;
+
+    static std::deque<LogEntry> entries_;
+    static std::mutex           entriesMutex_;
+    static constexpr size_t     kMaxEntries = 500;
+
+    static std::array<char, 256>  buffer_;
+    static int                    panelLevel_;
 
 public:
     /** @brief ロギングシステムを初期化
@@ -78,6 +98,8 @@ public:
      **/
     static void SetLevel(Level _level);
 
+    static void Debug(DebugUI* _debug);
+
 private:
     /** @brief 実行コンテキストの初期化
      **/
@@ -109,6 +131,8 @@ private:
      ** @param _context コンテキスト
      **/
     static void SendWithPath(Level _level, const std::string& _message, const std::string& _context = "");
+
+    static bool SendFromPanel();
 };
 
 #endif //LOG_HPP
