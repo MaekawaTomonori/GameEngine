@@ -157,6 +157,8 @@ void Framework::Draw() const {
     dxAdapter_->DisplayFPS(debugUI_.get());
     postProcessor_->Debug();
 
+    Log::Debug(debugUI_.get());
+
     srv_->PreDraw();
 
     cameraDirector_->Draw();
