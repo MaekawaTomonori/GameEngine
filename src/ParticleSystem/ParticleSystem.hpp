@@ -47,6 +47,7 @@ public:
 
 private:
     static constexpr uint16_t POOL_SIZE = 64;
+    const std::string PATH = "Assets/Data/Particle/";
 
     DirectXAdapter* adapter_ = nullptr;
     SRVManager* srv_ = nullptr;
@@ -92,9 +93,9 @@ public:
     /** @brief テンプレートを登録（既存のTemplateをコピー）
      ** @param _name テンプレート名
      ** @param _template テンプレートデータ
-     ** @return TemplateEditor
+     ** @param _overwrite @return TemplateEditor
      **/
-    TemplateEditor Register(const std::string& _name, const Template& _template);
+    TemplateEditor Register(const std::string& _name, const Template& _template, bool _overwrite = false);
 
     /** @brief JSONファイルからテンプレートを読み込み
      ** @param _name ファイル名（Assets/Data/Particle/<name>.json）
@@ -121,6 +122,7 @@ public:
 private:
     void SetupPSO();
     void InitializePool();
+    void LoadTemplates();
     void Debug();
     UpdateFunc ResolveUpdateFunc(const EmitterConfig& _config) const;
     SpawnFunc  ResolveSpawnFunc(const EmitterConfig& _config) const;

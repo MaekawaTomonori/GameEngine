@@ -143,4 +143,19 @@ namespace Utils {
 
         return "";
     }
+
+    std::vector<std::string> GetFileNames(const std::string& _directory, const std::string& _extension, bool _includeExtension) {
+        std::vector<std::string> files;
+
+        for (const auto& entry : std::filesystem::recursive_directory_iterator(_directory)) {
+            if (!entry.is_regular_file()) continue;
+            if (!_extension.empty() && entry.path().extension() != _extension) continue;
+
+            std::string file = _includeExtension ? entry.path().filename().string() 
+                : entry.path().stem().string();
+
+            files.push_back(file);
+        }
+        return files;
+    }
 }

@@ -145,12 +145,14 @@ void DebugUI::Render() {
 #endif
 }
 
-void DebugUI::RegisterCommand(const std::string &_id, std::function<void()> _command) {
+void DebugUI::RegisterCommand([[maybe_unused]] const std::string &_id, [[maybe_unused]] std::function<void()> _command) {
+#ifdef _DEBUG
     std::lock_guard lock(mutex_);
     commands_.push_back({.id= _id, .command= std::move(_command)});
+#endif
 }
 
-void DebugUI::RegisterMenuButton(const std::string& _key, const bool _flag) { 
+void DebugUI::RegisterMenuButton([[maybe_unused]] const std::string& _key, [[maybe_unused]] const bool _flag) {
 #ifdef _DEBUG
     std::lock_guard lock(mutex_);
     if (!windowStates_.contains(_key)) {
@@ -159,7 +161,7 @@ void DebugUI::RegisterMenuButton(const std::string& _key, const bool _flag) {
 #endif
 }
 
-void DebugUI::ToggleMenu(const std::string& _key) {
+void DebugUI::ToggleMenu([[maybe_unused]] const std::string& _key) {
 #ifdef _DEBUG
     if (!windowStates_.contains(_key)) return;
 

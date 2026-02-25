@@ -1,10 +1,12 @@
 #include "ParticleSystem.hpp"
 
+#include <filesystem>
 #include <fstream>
 #include <ranges>
 
 #include "DebugUI.hpp"
 #include "Log.hpp"
+#include "Utils.hpp"
 #include "imgui_internal.h"
 #include "externals/json/json.hpp"
 
@@ -23,6 +25,7 @@ ParticleSystem::ParticleSystem(DirectXAdapter* _adapter, SRVManager* _srv, MeshR
 
 void ParticleSystem::Initialize() {
     SetupPSO();
+    LoadTemplates();
     debugUI_->RegisterMenuButton("Particle");
 }
 
@@ -70,16 +73,17 @@ ParticleSystem::TemplateEditor ParticleSystem::Register(const std::string& _name
     return TemplateEditor(&templates_[_name]);
 }
 
-ParticleSystem::TemplateEditor ParticleSystem::Register(const std::string& _name, const Template& _template) {
-    if (templates_.contains(_name)) {
-        Log::Send(Log::Level::WARNING, "Template already exists, overwriting: " + _name);
+ParticleSystem::TemplateEditor ParticleSystem::Register(const std::string& _name, const Template& _template, bool _overwrite) {
+    if (!_overwrite && templates_.contains(_name)) {
+        Log::Send(Log::Level::WARNING, "Template already exists. About : " + _name);
+        return TemplateEditor(&templates_[_name]);
     }
     templates_[_name] = _template;
     return TemplateEditor(&templates_[_name]);
 }
 
 void ParticleSystem::LoadTemplate(const std::string& _name) {
-    std::string path = "Assets/Data/Particle/" + _name + ".json";
+    std::string path = PATH + _name + ".json";
     std::ifstream file(path);
     if (!file.is_open()) {
         Log::Send(Log::Level::WARNING, "Failed to open particle template: " + path);
@@ -109,6 +113,7 @@ void ParticleSystem::LoadTemplate(const std::string& _name) {
             }
 
             config.updateFuncKey = emitterData.value("UpdateFunc", "");
+            config.spawnFuncKey  = emitterData.value("SpawnFunc",  "");
             tmpl.emitters.push_back(config);
         }
     }
@@ -139,12 +144,16 @@ void ParticleSystem::SaveTemplate(const std::string& _name) const {
         if (!config.updateFuncKey.empty()) {
             emitterData["UpdateFunc"] = config.updateFuncKey;
         }
+        if (!config.spawnFuncKey.empty()) {
+            emitterData["SpawnFunc"] = config.spawnFuncKey;
+        }
         emittersJson.push_back(emitterData);
     }
 
     root["Emitters"] = emittersJson;
 
-    std::string path = "Assets/Data/Particle/" + _name + ".json";
+    std::filesystem::create_directories("Assets/Data/Particle/");
+    std::string path = PATH + _name + ".json";
     std::ofstream file(path);
     if (!file.is_open()) {
         Log::Send(Log::Level::WARNING, "Failed to save particle template: " + path);
@@ -243,6 +252,14 @@ void ParticleSystem::InitializePool() {
         pool_.push_back(std::move(emitter));
     }
     poolInitialized_ = true;
+}
+
+void ParticleSystem::LoadTemplates() {
+    std::vector<std::string> files = Utils::GetFileNames(PATH, ".json");
+
+    for (const auto& file : files) {
+        LoadTemplate(file);
+    }
 }
 
 void ParticleSystem::Debug() {
