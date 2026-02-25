@@ -118,6 +118,11 @@ public:
      **/
     void DeleteTemplate(const std::string& _name);
 
+    /** @brief アクティブなEmitterを全てプールに返却する
+     ** シーン切り替え時に呼び出し、前シーンのEmitterが残存するのを防ぐ
+     **/
+    void ClearActive();
+
 
 private:
     void SetupPSO();

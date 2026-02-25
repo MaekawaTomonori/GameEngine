@@ -34,6 +34,9 @@ void SceneSwitcher::Update() {
             scene_ = nullptr;
             Singleton<CameraDirector>::GetInstance()->Stop();
             Singleton<LightManager>::GetInstance()->ClearRef();
+            if (context_.particle) {
+                context_.particle->ClearActive();
+            }
         }
         scene_ = std::move(next_);
 

@@ -11,3 +11,7 @@ ModelData* ModelRepository::Get(const std::string& _name) {
     }
     return nullptr;
 }
+
+bool ModelRepository::Contains(const std::string& _name) const {
+    return models_.contains(_name);
+}

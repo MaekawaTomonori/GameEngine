@@ -213,6 +213,14 @@ void ParticleSystem::DeleteTemplate(const std::string& _name) {
     templates_.erase(_name);
 }
 
+void ParticleSystem::ClearActive() {
+    for (auto* emitter : active_) {
+        emitter->Reset();
+        available_.push_back(emitter);
+    }
+    active_.clear();
+}
+
 
 ParticleSystem::UpdateFunc ParticleSystem::ResolveUpdateFunc(const EmitterConfig& _config) const {
     if (_config.updateFunc) {

@@ -23,6 +23,8 @@ public:
      ** @return モデルデータポインタ（存在しない場合nullptr）
      **/
     ModelData* Get(const std::string& _name);
+
+    bool Contains(const std::string& _name) const;
 }; // class ModelRepository
 
 #endif // ModelRepository_HPP_

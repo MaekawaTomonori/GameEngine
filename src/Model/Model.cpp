@@ -25,27 +25,27 @@ void Model::Initialize(const std::string& _name) {
         Log::Send(Log::Level::ERR, "Adapter is null");
         return;
     }
-    Log::Send(Log::Level::INFO, "Model::Initialize: " + _name);
+    Log::Send(Log::Level::INFO, "[Model] Initialize: " + _name);
 
     Load(_name);
 
-    Log::Send(Log::Level::INFO, "Model data loaded: " + _name);
+    Log::Send(Log::Level::INFO, "[Model] data loaded: " + _name);
 
     data_ = common_->GetResourceRepository()->GetModelRepository()->Get(_name);
 
     // IsNull
     if (!data_) {
-        Log::Send(Log::Level::ERR, "Model data is null for: " + _name);
+        Log::Send(Log::Level::ERR, "[Model] data is null for: " + _name);
         Utils::Alert("Model data is null for: " + _name);
         return;
     }
 
-    Log::Send(Log::Level::INFO, "Creating Mesh: " + _name);
+    Log::Send(Log::Level::INFO, "[Model] Creating Mesh: " + _name);
 
     mesh_ = std::make_unique<Mesh>();
     mesh_->Initialize(adapter_, _name, common_->GetResourceRepository()->GetMeshRepository()->Get(data_->mesh));
 
-    Log::Send(Log::Level::INFO, "Mesh created: " + _name);
+    Log::Send(Log::Level::INFO, "[Model] Mesh created: " + _name);
 
     wr_ = (adapter_->CreateBufferResource(sizeof(Transformation)));
     wr_->Get()->Map(0, nullptr, reinterpret_cast<void**>(&wd_));
@@ -58,12 +58,12 @@ void Model::Initialize(const std::string& _name) {
 
     // Create SkinCluster only if skeleton exists and skinCluster data is available
     if (data_->skeleton.has_value() && !data_->skinCluster.empty()) {
-        Log::Send(Log::Level::INFO, "Creating SkinCluster for: " + _name);
+        Log::Send(Log::Level::TRACE, "Creating SkinCluster for: " + _name);
         CreateSkinCluster();
-        Log::Send(Log::Level::INFO, "SkinCluster created for: " + _name);
+        Log::Send(Log::Level::TRACE, "SkinCluster created for: " + _name);
     }
     else {
-        Log::Send(Log::Level::INFO, "No valid skinning data _found, skipping SkinCluster creation for: " + _name);
+        Log::Send(Log::Level::TRACE, "No valid skinning data found, skipping SkinCluster creation for: " + _name);
     }
 
 

@@ -16,6 +16,7 @@ public:
 
     void Add(const std::string &_name, const MeshData& _raw);
     MeshData Get(const std::string& _name);
+    bool Contains(const std::string& _name) const;
 }; // class MeshRepository
 
 #endif // MeshLoader_HPP_
