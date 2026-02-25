@@ -14,11 +14,6 @@ void GltfLoader::LoadModel(const std::string& _name, ResourceRepository* _reposi
 }
 
 void GltfLoader::LoadGltf(const std::string& _directory, const std::string& _name, const ResourceRepository* _repository) const {
-    if (_repository->GetModelRepository()->Contains(_name)) {
-        Log::Send(Log::Level::TRACE, "[GLTF Loader] Already loaded model : " + _name);
-        return;
-    }
-
     Assimp::Importer importer;
     std::string path = _directory + _name + "/" + _name + ".gltf";
     const aiScene* scene = importer.ReadFile(path, aiProcess_FlipWindingOrder | aiProcess_FlipUVs | aiProcess_Triangulate);

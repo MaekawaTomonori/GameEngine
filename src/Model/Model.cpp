@@ -195,6 +195,11 @@ Mesh* Model::GetMesh() const {
 }
 
 void Model::Load(const std::string& _name) {
+    auto repo = Singleton<ModelCommon>::GetInstance()->GetResourceRepository();
+    if (repo->GetModelRepository()->Contains(_name)){
+        Log::Send(Log::Level::WARNING, "Already Loaded Model : " + _name);
+    }
+
     std::unique_ptr<IModelLoader> loader;
     if (std::filesystem::exists("Assets/Resources/" + _name + "/" + _name + ".obj")) {
         loader = std::make_unique<ObjLoader>();
@@ -207,7 +212,7 @@ void Model::Load(const std::string& _name) {
         Utils::Alert("Model not found: " + _name);
         return;
     }
-    loader->LoadModel(_name, Singleton<ModelCommon>::GetInstance()->GetResourceRepository());
+    loader->LoadModel(_name, repo);
 }
 
 void Model::Debug() {
