@@ -66,6 +66,8 @@ class Model {
     std::unique_ptr<Mesh> mesh_;
     Camera* camera_ = nullptr;
 
+    std::optional<Skeleton> pose_;
+
     bool animationEnable_ = true;
     bool animationTimerLock_ = true;
     float animationTime_ = 0.0f;
@@ -176,7 +178,7 @@ private:
 
     /** @brief スケルトンの更新
      **/
-    void UpdateSkeleton() const;
+    void UpdateSkeleton();
 
     /** @brief アニメーションの更新
      **/
@@ -184,7 +186,7 @@ private:
 
     /** @brief アニメーションの適用
      **/
-    void ApplyAnimation() const;
+    void ApplyAnimation();
 
     /** @brief デバッグ用ラインの生成
      **/

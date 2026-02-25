@@ -56,8 +56,13 @@ void Model::Initialize(const std::string& _name) {
     cr_ = (adapter_->CreateBufferResource(sizeof(CameraForGpu)));
     cr_->Get()->Map(0, nullptr, reinterpret_cast<void**>(&cd_));
 
+    // Copy skeleton as per-instance pose
+    if (data_->skeleton.has_value()) {
+        pose_ = data_->skeleton.value();
+    }
+
     // Create SkinCluster only if skeleton exists and skinCluster data is available
-    if (data_->skeleton.has_value() && !data_->skinCluster.empty()) {
+    if (pose_.has_value() && !data_->skinCluster.empty()) {
         Log::Send(Log::Level::TRACE, "Creating SkinCluster for: " + _name);
         CreateSkinCluster();
         Log::Send(Log::Level::TRACE, "SkinCluster created for: " + _name);
@@ -88,7 +93,7 @@ void Model::Update() {
     Debug();
 
     // Update Animation, Skeleton, and SkinCluster only if valid skinning data exists
-    if (data_->skeleton.has_value() && !data_->skinCluster.empty()) {
+    if (pose_.has_value() && !data_->skinCluster.empty()) {
         UpdateAnimation();
         UpdateSkeleton();
         UpdateSkinCluster();
@@ -97,7 +102,7 @@ void Model::Update() {
     UpdateMapData();
 
     // Joint to Line (only if valid skinning data exists)
-    if (data_->skeleton.has_value() && !data_->skinCluster.empty()) {
+    if (pose_.has_value() && !data_->skinCluster.empty()) {
         CreateLine();
     }
 
@@ -112,7 +117,7 @@ void Model::Draw() const {
     }
 
     TextureManager* tm = Singleton<TextureManager>::GetInstance();
-    bool useSkinning = data_->skeleton.has_value() && !data_->skinCluster.empty();
+    bool useSkinning = pose_.has_value() && !data_->skinCluster.empty();
 
     if (useSkinning) {
         common_->RegisterSkinningDraw([this, tm]() {
@@ -198,6 +203,7 @@ void Model::Load(const std::string& _name) {
     auto repo = Singleton<ModelCommon>::GetInstance()->GetResourceRepository();
     if (repo->GetModelRepository()->Contains(_name)){
         Log::Send(Log::Level::WARNING, "Already Loaded Model : " + _name);
+        return;
     }
 
     std::unique_ptr<IModelLoader> loader;
@@ -235,8 +241,8 @@ void Model::Debug() {
                     }
                     ImGui::TreePop();
                 }
-                if (data_->skeleton.has_value()) {
-                    Skeleton& skeleton = data_->skeleton.value();
+                if (pose_.has_value()) {
+                    Skeleton& skeleton = pose_.value();
                     ImGui::SeparatorText("Skeleton");
                     std::function<void(int32_t)> Recursive = [&](int32_t _index) {
                         Joint& joint = skeleton.joints[_index];
@@ -315,12 +321,12 @@ void Model::CreateSkinCluster() {
         return;
     }
 
-    if (!data_->skeleton.has_value() || data_->skinCluster.empty()) {
+    if (!pose_.has_value() || data_->skinCluster.empty()) {
         Log::Send(Log::Level::WARNING, "Model data does not contain valid skinning _data, skipping skin cluster creation");
         return;
     }
 
-    Skeleton& skeleton = data_->skeleton.value();
+    Skeleton& skeleton = pose_.value();
 
     size_t jointSize = skeleton.joints.size();
     size_t verticesSize = mesh_->GetData().vertices.size();
@@ -377,12 +383,12 @@ void Model::SetBindPose(Skeleton& _skeleton) {
 }
 
 void Model::UpdateSkinCluster() {
-    if (!data_->skeleton.has_value() || data_->skinCluster.empty()) {
+    if (!pose_.has_value() || data_->skinCluster.empty()) {
         Log::Send(Log::Level::WARNING, "Model data does not contain valid skinning _data, skipping skin cluster update");
         return;
     }
 
-    Skeleton& skeleton = data_->skeleton.value();
+    Skeleton& skeleton = pose_.value();
     for (size_t jointIndex = 0; jointIndex < skeleton.joints.size(); ++jointIndex) {
         if (skinCluster_.inverseBindPoses.size() <= jointIndex) {
             Utils::Alert("Joint index out of bounds in skin cluster update");
@@ -394,13 +400,13 @@ void Model::UpdateSkinCluster() {
     }
 }
 
-void Model::UpdateSkeleton() const {
-    if (!data_->skeleton.has_value() || data_->skinCluster.empty()) {
+void Model::UpdateSkeleton() {
+    if (!pose_.has_value() || data_->skinCluster.empty()) {
         Log::Send(Log::Level::WARNING, "Model data does not contain valid skinning _data, skipping skeleton update");
         return;
     }
 
-    Skeleton& skeleton = data_->skeleton.value();
+    Skeleton& skeleton = pose_.value();
     std::function<void(int32_t)> RecursiveUpdate = [&](int32_t _index) {
         Joint& joint = skeleton.joints[_index];
         joint.local = MathUtils::Matrix::MakeAffineMatrix(joint.transform);
@@ -435,12 +441,12 @@ void Model::UpdateAnimation() {
     ApplyAnimation();
 }
 
-void Model::ApplyAnimation() const {
-    if (!data_->skeleton.has_value() || data_->skinCluster.empty()) {
+void Model::ApplyAnimation() {
+    if (!pose_.has_value() || data_->skinCluster.empty()) {
         Log::Send(Log::Level::WARNING, "Model data does not contain valid skinning _data, skipping animation application");
         return;
     }
-    Skeleton& skeleton = data_->skeleton.value();
+    Skeleton& skeleton = pose_.value();
 
     if (!data_->animation.has_value()) {
         Log::Send(Log::Level::ERR, "Model data does not contain an animation");
@@ -463,11 +469,11 @@ void Model::ApplyAnimation() const {
 void Model::CreateLine() {
     line_.Clear();
 
-    if (!data_->skeleton.has_value() || data_->skinCluster.empty()) {
+    if (!pose_.has_value() || data_->skinCluster.empty()) {
         Log::Send(Log::Level::WARNING, "Model data does not contain valid skinning _data, skipping line creation");
         return;
     }
-    Skeleton& skeleton = data_->skeleton.value();
+    Skeleton& skeleton = pose_.value();
 
     for (auto& joint : skeleton.joints) {
         if (joint.parent.has_value()) {
