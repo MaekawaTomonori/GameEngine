@@ -26,6 +26,11 @@ Framework::Framework() {
     debugUI_ = std::make_unique<DebugUI>();
     debugUI_->Initialize(dxAdapter_.get());
 
+#ifdef _DEBUG
+    frameDebugger_ = std::make_unique<FrameDebugger>();
+    frameDebugger_->Initialize(debugUI_.get());
+#endif
+
     postProcessor_ = std::make_unique<PostProcessExecutor>();
     postProcessor_->Initialize(dxAdapter_.get(), srv_.get(), debugUI_.get());
 
@@ -68,25 +73,10 @@ Framework::Framework() {
     light_->Initialize(dxAdapter_.get(), debugUI_.get());
 
     Singleton<RandomEngine>::GetInstance()->Initialize();
-
-    //level_->Initialize("Level");
 }
 
 Framework::~Framework() {
-    texture_->Unload();
-    particle_.reset();
-    level_.reset();
-    postProcessor_.reset();
-    renderer_.reset();
-
-    resources_.reset();
-    debugUI_.reset();
-
-    srv_->Finalize();
-    srv_.reset();
-
     SingletonFinalizer::Finalize();
-
     CoUninitialize();
 }
 
@@ -138,17 +128,24 @@ void Framework::Update() const {
         HandleWindowResize(width, height);
     }
 
-    cameraDirector_->Update();
-    camera_->Update();
-    light_->Update();
-    level_->Update();
-    particle_->Update();
+#ifdef _DEBUG
+    scene_->Debug();
+    if (frameDebugger_->ShouldUpdate()) {
+#endif
+        cameraDirector_->Update();
+        camera_->Update();
+        light_->Update();
+        level_->Update();
+        particle_->Update();
 
-    // PostEffect animation update
-    const float deltaTime = 1.0f / static_cast<float>(config_.fps);
-    postProcessor_->Update(deltaTime);
+        // PostEffect animation update
+        const float deltaTime = 1.0f / static_cast<float>(config_.fps);
+        postProcessor_->Update(deltaTime);
 
-    scene_->Update();
+        scene_->Update();
+#ifdef _DEBUG
+    }
+#endif
 }
 
 void Framework::Draw() const {
@@ -157,7 +154,12 @@ void Framework::Draw() const {
     dxAdapter_->DisplayFPS(debugUI_.get());
     postProcessor_->Debug();
 
+#ifdef _DEBUG
+    frameDebugger_->Debug();
+#endif
+
     Log::Debug(debugUI_.get());
+
 
     srv_->PreDraw();
 
@@ -179,6 +181,22 @@ void Framework::Shutdown() {
     if (game_) {
         game_.reset();
     }
+
+#ifdef _DEBUG
+    frameDebugger_.reset();
+#endif
+
+    texture_->Unload();
+    particle_.reset();
+    level_.reset();
+    postProcessor_.reset();
+    renderer_.reset();
+
+    resources_.reset();
+    debugUI_.reset();
+
+    srv_->Finalize();
+    srv_.reset();
 }
 
 bool Framework::Check() const {

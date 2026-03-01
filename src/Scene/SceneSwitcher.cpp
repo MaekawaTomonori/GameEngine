@@ -18,8 +18,6 @@ void SceneSwitcher::Setup(const Context& _context) {
 }
 
 void SceneSwitcher::Update() {
-    Debug();
-
     // Scene Change/ in Transition process
     // Transition in/out
     if (transition_->InProgress()){

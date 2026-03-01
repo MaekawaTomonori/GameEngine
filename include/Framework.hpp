@@ -5,6 +5,7 @@
 
 #include "Input.hpp"
 #include "DebugUI.hpp"
+#include "src/Debug/FrameDebugger.hpp"
 #include "src/Camera/Controller/CameraController.hpp"
 #include "src/Camera/Director/CameraDirector.hpp"
 #include "src/Platform/WinApp.hpp"
@@ -42,6 +43,7 @@ class Framework {
     std::unique_ptr<SRVManager> srv_;
     std::unique_ptr<LevelEditor> level_;
     std::unique_ptr<ParticleSystem> particle_;
+    std::unique_ptr<FrameDebugger> frameDebugger_;
 
     Input* input_ = nullptr;
     TextureManager* texture_ = nullptr;
