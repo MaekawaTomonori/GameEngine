@@ -21,6 +21,16 @@ void IScene::Change() {
 	progress_ = false;
 }
 
+void IScene::PlayTransition(Transition::Type _outType, Transition::Type _inType, std::function<void()> _onMidpoint) {
+    if (!switcher_) return;
+    switcher_->PlayTransition(_outType, _inType, std::move(_onMidpoint));
+}
+
+void IScene::PlayTransition(Transition::Type _type, std::function<void()> _onMidpoint) {
+    if (!switcher_) return;
+    switcher_->PlayTransition(_type, std::move(_onMidpoint));
+}
+
 PostProcessExecutor* IScene::PostEffect() const {
     return switcher_->GetContext().ppe;
 }

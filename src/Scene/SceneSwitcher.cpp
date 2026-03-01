@@ -27,7 +27,16 @@ void SceneSwitcher::Update() {
         return;
     }
 
+    // Intra-scene transition: Out完了 → コールバック発火 → In開始
+    if (midpointCallback_) {
+        midpointCallback_();
+        midpointCallback_ = nullptr;
+        transition_->Awake(intraInType_, ITransitionEffect::State::In);
+        return;
+    }
+
     if (next_){
+        midpointCallback_ = nullptr;
         if (scene_){
             scene_->Finalize();
             scene_.reset();
@@ -45,7 +54,7 @@ void SceneSwitcher::Update() {
         scene_->Setup(this);
         scene_->Initialize();
 
-        transition_->Awake(scene_->GetEntryTransition(), ITransitionEffect::State::In, 1.f);
+        transition_->Awake(scene_->GetEntryTransition(), ITransitionEffect::State::In);
         return;
     }
 
@@ -144,6 +153,10 @@ void SceneSwitcher::Debug() {
             ImGui::TextColored(ImVec4(1.0f, 0.0f, 0.0f, 1.0f), "Factory not initialized");
         }
 
+        // Transition状態
+        transition_->Debug();
+        ImGui::Text("Callback Pending: %s", midpointCallback_ ? "Yes" : "No");
+
         ImGui::End();
     });
 
@@ -155,6 +168,18 @@ void SceneSwitcher::Debug() {
 
 const SceneSwitcher::Context& SceneSwitcher::GetContext() const {
     return context_;
+}
+
+void SceneSwitcher::PlayTransition(Transition::Type _outType, Transition::Type _inType, std::function<void()> _onMidpoint) {
+    if (transition_->InProgress()) return;
+    intraOutType_ = _outType;
+    intraInType_  = _inType;
+    midpointCallback_ = std::move(_onMidpoint);
+    transition_->Awake(_outType, ITransitionEffect::State::Out);
+}
+
+void SceneSwitcher::PlayTransition(Transition::Type _type, std::function<void()> _onMidpoint) {
+    PlayTransition(_type, _type, std::move(_onMidpoint));
 }
 
 void SceneSwitcher::Change(const std::string &_name) {

@@ -24,9 +24,8 @@ void Fade::Update() {
     }
 
     time_ -= speed_;
-    if (time_ <= 0.f) {
+    if (time_ < 0.f) {
         time_ = 0.f;
-        state_ = State::None;
     }
 
     float percentage = std::clamp(time_ / duration_, 0.0f, 1.0f);
@@ -41,6 +40,10 @@ void Fade::Update() {
         case State::In:
             alpha_ = percentage;
             break;
+    }
+
+    if (time_ <= 0.f) {
+        state_ = State::None;
     }
 
     alpha_ = std::clamp(alpha_, 0.0f, 1.0f);

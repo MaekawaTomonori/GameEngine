@@ -43,6 +43,15 @@ public:
      **/
     virtual bool IsFinished() const = 0;
 
+    /** @brief 現在のステートを取得（純粋仮想関数）
+     **/
+    virtual State GetCurrentState() const = 0;
+
+    /** @brief 現在の進行度を取得（純粋仮想関数）
+     ** @return 0.0（透明）〜 1.0（黒）
+     **/
+    virtual float GetProgress() const = 0;
+
 }; // class ITransitionEffect
 
 #endif // ITransitionEffect_HPP_

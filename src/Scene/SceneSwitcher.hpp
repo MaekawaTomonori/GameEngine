@@ -1,5 +1,6 @@
 #ifndef SceneSwitcher_HPP_
 #define SceneSwitcher_HPP_
+#include <functional>
 #include <memory>
 #include <string>
 
@@ -32,6 +33,9 @@ private:
     std::unique_ptr<IScene> next_;
 
     std::unique_ptr<Transition> transition_;
+    std::function<void()> midpointCallback_;
+    Transition::Type intraOutType_ = Transition::Type::None;
+    Transition::Type intraInType_  = Transition::Type::None;
 
 public:
     SceneSwitcher();
@@ -57,6 +61,19 @@ public:
      ** @param _name シーン名
      **/
     void Change(const std::string& _name);
+
+    /** @brief トランジションを再生（Out→callback→In）
+     ** @param _outType アウト演出種別
+     ** @param _inType  イン演出種別
+     ** @param _onMidpoint 暗転しきった中点で呼ばれるコールバック（省略可）
+     **/
+    void PlayTransition(Transition::Type _outType, Transition::Type _inType, std::function<void()> _onMidpoint = {});
+
+    /** @brief トランジションを再生（Out/Inを同一タイプで実行）
+     ** @param _type 演出種別（Out・In 両方に適用）
+     ** @param _onMidpoint 暗転しきった中点で呼ばれるコールバック（省略可）
+     **/
+    void PlayTransition(Transition::Type _type, std::function<void()> _onMidpoint = {});
 
     /** @brief デバッグ情報の表示
      **/

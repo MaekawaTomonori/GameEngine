@@ -145,7 +145,7 @@ void Framework::Update() const {
     particle_->Update();
 
     // PostEffect animation update
-    float deltaTime = 1.0f / static_cast<float>(config_.fps);
+    const float deltaTime = 1.0f / static_cast<float>(config_.fps);
     postProcessor_->Update(deltaTime);
 
     scene_->Update();
