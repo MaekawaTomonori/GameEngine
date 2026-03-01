@@ -2,43 +2,62 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## プロジェクト概要
+## Purpose
 
-これはC++20 DirectX12ベースのゲームエンジンです。Engineディレクトリには、レンダリング、入力処理、シーン管理、リソース読み込みなどの主要なゲームエンジン機能を提供する静的ライブラリ（.lib）が含まれています。
+ This project is a modular C++20 DirectX12-based game engine framework.
+ It is currently built as a static lib used by the Game project.
+ The dependency direction is : Game -> Engine.
 
-## ディレクトリ構造
+ Engine must remain independent from game.
+ The architecture should allow future transition where Engine becomes the entry point.
 
-- `include/` - 特にゲームで使うことを想定したクラスのヘッダ
-- `src/` - クラス
-- `externals` - 外部ライブラリ
+ ## Dependency Rules (Critical)
 
+- Engine must never depend on Game.
+- Engine must not include Game headers.
+- Engine must not assume Game-specific logic.
+- All communication must occur through public Engine APIs.
 
-### 外部ライブラリ
-- **assimp**: 3Dモデル読み込み（BuildLib.batでビルド）
-- **imgui**: デバッグUIシステム
-- **DirectXTex**: テクスチャ処理
-- **json**: JSON解析（nlohmann/json）
-- **MagicEnum**: 列挙型リフレクションユーティリティ
+## Architectural Boundaries
 
-### Windows SDK
-- **DirectX 12**: コアグラフィックスAPI
-- **DXGI**: グラフィックスインフラストラクチャ
-- **D3D12**: Direct3D 12 API
-- **DirectXShaderCompiler**: ランタイムシェーダーコンパイル
+- Internal subsystems must remain encapsulated.
+- Public APIs must remain minimal and stable.
+- Do not expose internal implementation details.
+- Engine must not expose raw DirectX12 objects (e.g., ID3D12Device, ID3D12Resource) through public APIs unless explicitly required.
 
-## ビルド/テスト 
+## Core Design Principles
 
-ビルドや起動テストはユーザーが行うためテストまで行う必要はない
-編集・提案の終了をもって、ユーザーが実行確認を行うものとする
+- Prioritize usability for Engine users.
+- Ensure safety even if internal complexity increases.
+- Follow SOLID, DRY, KISS, YAGNI principles.
+- Avoid exceptions. Use return values for error handling.
+- Prefer composition over inheritance.
 
-## パフォーマンスに関する考慮事項
+## AI Behavior Guidelines
 
-- GPUデータには構造体アライメントを使用（`StructMemberAlignment>16Bytes`）
-- 頻繁に作成/破棄されるオブジェクトにはオブジェクトプールを実装
-- 冗長な読み込みを避けるためにリポジトリパターンでアセットをキャッシュ
-- より高速なビルドのためにマルチプロセッサコンパイル（`/MP`）を使用
+- Do not refactor unrelated systems.
+- Do not redesign architecture unless explicitly instructed.
+- Preserve existing patterns and naming conventions.
+- Ask before introducing structural changes.
+- Do not optimize unless performance is explicitly requested.
 
-## 詳細ドキュメント
-  
-- 設計思想 : `@docs/design-philosophy.md`
-- コードルール : `@docs/coderule.md`
+## Priority Order
+
+1. Maintain architectural integrity
+2. Preserve dependency direction
+3. Maintain abstraction boundaries
+4. Ensure correctness and safety
+5. Follow coding style rules
+6. Optimize performance (only if requested)
+
+## Coding Rules
+
+Follow the rules defined in:
+- @docs/Coderule.md
+- @docs/design-philosophy.md
+
+## Build / Execution
+
+Do not attempt to build or run the project.
+The user will handle compilation and validation.
+
