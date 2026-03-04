@@ -20,6 +20,10 @@ Model::Model() :
     uuid_(Utils::GenerateUniqueId()), transform_() {
 }
 
+Model::~Model() {
+    common_->Unregister(uuid_);
+}
+
 void Model::Initialize(const std::string& _name) {
     if (!adapter_) {
         Log::Send(Log::Level::ERR, "Adapter is null");
@@ -85,21 +89,18 @@ void Model::Initialize(const std::string& _name) {
     }
 
     line_.Initialize();
+
+    common_->RegisterUpdate(uuid_, [this](){ UpdateMapData(); });
+    common_->RegisterDebug(uuid_, [this](){ Debug(); });
 }
 
 void Model::Update() {
-    camera_ = Singleton<CameraController>::GetInstance()->GetActive();
-
-    Debug();
-
     // Update Animation, Skeleton, and SkinCluster only if valid skinning data exists
     if (pose_.has_value() && !data_->skinCluster.empty()) {
         UpdateAnimation();
         UpdateSkeleton();
         UpdateSkinCluster();
     }
-
-    UpdateMapData();
 
     // Joint to Line (only if valid skinning data exists)
     if (pose_.has_value() && !data_->skinCluster.empty()) {
@@ -138,6 +139,11 @@ void Model::Draw() const {
     }
 
     DrawLine();
+}
+
+Model& Model::SetName(const std::string& _name) {
+    name_ = _name;
+    return *this;
 }
 
 Model& Model::SetTranslate(const Vector3 _translate) {
@@ -222,89 +228,87 @@ void Model::Load(const std::string& _name) {
 }
 
 void Model::Debug() {
-    common_->RegisterDebug(
-        uuid_, [&]() {
-            ImGui::Begin("Model");
-            ImGui::PushID(uuid_.c_str());
-            if (ImGui::CollapsingHeader(uuid_.c_str())) {
-                ImGui::SeparatorText("Model Info");
-                if (ImGui::TreeNode("Transform")) {
-                    ImGui::DragFloat3("Scale", &transform_.scale.x, 0.1f);
-                    ImGui::DragFloat3("Rotate", &std::get<Vector3>(transform_.rotate).x, 0.1f);
-                    ImGui::DragFloat3("Position", &transform_.translate.x, 0.1f);
-                    if (ImGui::Button("Reset Transform")) {
-                        transform_ = Transform{
-                            {1, 1, 1},
-                            Vector3{0, 0, 0},
-                            {0, 0, 0},
-                        };
-                    }
-                    ImGui::TreePop();
-                }
-                if (pose_.has_value()) {
-                    Skeleton& skeleton = pose_.value();
-                    ImGui::SeparatorText("Skeleton");
-                    std::function<void(int32_t)> Recursive = [&](int32_t _index) {
-                        Joint& joint = skeleton.joints[_index];
-                        if (ImGui::TreeNode(joint.name.c_str())) {
-                            ImGui::Text("Joint: %s", joint.name.c_str());
-                            ImGui::Text("Index: %d", joint.index);
-                            ImGui::Text("Parent: %s", joint.parent.has_value() ? skeleton.joints[joint.parent.value()].name.c_str() : "None");
-                            ImGui::Text("Children: %zu", joint.children.size());
-                            ImGui::Spacing();
-                            ImGui::Text("Transform: ");
-                            ImGui::Text("  Scale: (%.2f, %.2f, %.2f)", joint.transform.scale.x, joint.transform.scale.y, joint.transform.scale.z);
-                            if (std::holds_alternative<Quaternion>(joint.transform.rotate)) {
-                                Quaternion rotate = std::get<Quaternion>(joint.transform.rotate);
-                                ImGui::Text("  Rotate: (%.2f, %.2f, %.2f, %2f)", rotate.x, rotate.y, rotate.z, rotate.w);
-                            }
-                            else {
-                                Vector3 rotate = std::get<Vector3>(joint.transform.rotate);
-                                ImGui::Text("  Rotate: (%.2f, %.2f, %.2f)", rotate.x, rotate.y, rotate.z);
-                            }
-                            ImGui::Text("  Translate: (%.2f, %.2f, %.2f)", joint.transform.translate.x, joint.transform.translate.y, joint.transform.translate.z);
-
-                            for (int32_t childIndex : joint.children) {
-                                ImGui::Spacing();
-                                Recursive(childIndex);
-                            }
-                            ImGui::TreePop();
-                        }
-                        };
-                    Recursive(skeleton.root);
-                }
-
-                if (data_->animation.has_value()) {
-                    ImGui::SeparatorText("Animation");
-                    if (ImGui::TreeNode("Details")) {
-                        ImGui::Checkbox("Enable", &animationEnable_);
-                        ImGui::SameLine();
-                        ImGui::Checkbox("TimerLock", &animationTimerLock_);
-                        if (animationTimerLock_)ImGui::Text("Timer : %f", animationTime_);
-                        else ImGui::DragFloat("Anime Timer", &animationTime_);
-                        ImGui::TreePop();
-                    }
-                }
-
-                ImGui::SeparatorText("Mesh");
-
-                if (ImGui::TreeNode("Mesh")) {
-                    mesh_->Debug();
-                    ImGui::TreePop();
-                }
+    const std::string& label = name_.empty() ? data_->name : name_;
+    ImGui::PushID(uuid_.c_str());
+    if (ImGui::CollapsingHeader(label.c_str())) {
+        ImGui::SeparatorText("Model Info");
+        if (ImGui::TreeNode("Transform")) {
+            ImGui::DragFloat3("Scale", &transform_.scale.x, 0.1f);
+            ImGui::DragFloat3("Rotate", &std::get<Vector3>(transform_.rotate).x, 0.1f);
+            ImGui::DragFloat3("Position", &transform_.translate.x, 0.1f);
+            if (ImGui::Button("Reset Transform")) {
+                transform_ = Transform{
+                    {1, 1, 1},
+                    Vector3{0, 0, 0},
+                    {0, 0, 0},
+                };
             }
-            ImGui::PopID();
-            ImGui::End();
+            ImGui::TreePop();
         }
-    );
+        if (pose_.has_value()) {
+            ImGui::PushID(("skeleton_" + uuid_).c_str());
+            Skeleton& skeleton = pose_.value();
+            ImGui::SeparatorText("Skeleton");
+            std::function<void(int32_t)> Recursive = [&](int32_t _index) {
+                Joint& joint = skeleton.joints[_index];
+                if (ImGui::TreeNode(joint.name.c_str())) {
+                    ImGui::Text("Joint: %s", joint.name.c_str());
+                    ImGui::Text("Index: %d", joint.index);
+                    ImGui::Text("Parent: %s", joint.parent.has_value() ? skeleton.joints[joint.parent.value()].name.c_str() : "None");
+                    ImGui::Text("Children: %zu", joint.children.size());
+                    ImGui::Spacing();
+                    ImGui::Text("Transform: ");
+                    ImGui::Text("  Scale: (%.2f, %.2f, %.2f)", joint.transform.scale.x, joint.transform.scale.y, joint.transform.scale.z);
+                    if (std::holds_alternative<Quaternion>(joint.transform.rotate)) {
+                        Quaternion rotate = std::get<Quaternion>(joint.transform.rotate);
+                        ImGui::Text("  Rotate: (%.2f, %.2f, %.2f, %2f)", rotate.x, rotate.y, rotate.z, rotate.w);
+                    }
+                    else {
+                        Vector3 rotate = std::get<Vector3>(joint.transform.rotate);
+                        ImGui::Text("  Rotate: (%.2f, %.2f, %.2f)", rotate.x, rotate.y, rotate.z);
+                    }
+                    ImGui::Text("  Translate: (%.2f, %.2f, %.2f)", joint.transform.translate.x, joint.transform.translate.y, joint.transform.translate.z);
+
+                    for (int32_t childIndex : joint.children) {
+                        ImGui::Spacing();
+                        Recursive(childIndex);
+                    }
+                    ImGui::TreePop();
+                }
+                };
+            Recursive(skeleton.root);
+            ImGui::PopID();
+        }
+
+        if (data_->animation.has_value()) {
+            ImGui::SeparatorText("Animation");
+            if (ImGui::TreeNode("Details")) {
+                ImGui::Checkbox("Enable", &animationEnable_);
+                ImGui::SameLine();
+                ImGui::Checkbox("TimerLock", &animationTimerLock_);
+                if (animationTimerLock_)ImGui::Text("Timer : %f", animationTime_);
+                else ImGui::DragFloat("Anime Timer", &animationTime_);
+                ImGui::TreePop();
+            }
+        }
+
+        ImGui::SeparatorText("Mesh");
+        if (ImGui::TreeNode("Mesh")) {
+            mesh_->Debug();
+            ImGui::TreePop();
+        }
+    }
+    ImGui::PopID();
 }
 
 void Model::UpdateMapData() const {
+    auto camera = Singleton<CameraController>::GetInstance()->GetActive();
+
     wd_->world = MathUtils::Matrix::MakeAffineMatrix(transform_.scale, std::get<Vector3>(transform_.rotate), transform_.translate);
-    wd_->wvp = wd_->world * camera_->GetViewProjection();
+    wd_->wvp = wd_->world * camera->GetViewProjection();
     wd_->inverse = wd_->world.Inverse().Transpose();
 
-    *cd_ = camera_->GetCameraForGpu();
+    *cd_ = camera->GetCameraForGpu();
 }
 
 void Model::CreateSkinCluster() {

@@ -30,8 +30,6 @@ void ParticleSystem::Initialize() {
 }
 
 void ParticleSystem::Update() {
-    Debug();
-
     for (auto* emitter : active_) {
         emitter->Update();
     }

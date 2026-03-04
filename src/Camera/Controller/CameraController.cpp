@@ -13,13 +13,13 @@ void CameraController::Initialize(const float _ratio, DebugUI* _debug) {
     Load();
 
     if (repository_->IsEmpty()) {
-        Add("Default");
-        SetActive("Default");
+        activeCamera_ = Add("Default");
     }
+
+    debug_->RegisterMenuButton("Camera");
 }
 
-void CameraController::Update() {
-    Debug();
+void CameraController::Update() const {
     if (activeCamera_) {
         activeCamera_->Update();
     }
@@ -53,8 +53,8 @@ Camera* CameraController::SetActive(const std::string& _name) {
 }
 
 void CameraController::Debug() {
-    debug_->RegisterCommand("CM", [&](){
-        ImGui::Begin("Camera");
+    debug_->RegisterCommand("Camera", [&](){
+        ImGui::Begin("Camera", &debug_->IsVisible("Camera"));
 
         if (ImGui::BeginTabBar("Camera")){
             if (ImGui::BeginTabItem("General")){

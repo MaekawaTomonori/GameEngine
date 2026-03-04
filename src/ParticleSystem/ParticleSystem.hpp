@@ -123,12 +123,12 @@ public:
      **/
     void ClearActive();
 
+    void Debug();
 
 private:
     void SetupPSO();
     void InitializePool();
     void LoadTemplates();
-    void Debug();
     UpdateFunc ResolveUpdateFunc(const EmitterConfig& _config) const;
     SpawnFunc  ResolveSpawnFunc(const EmitterConfig& _config) const;
 }; // class ParticleSystem

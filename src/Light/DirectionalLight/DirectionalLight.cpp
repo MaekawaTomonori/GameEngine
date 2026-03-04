@@ -21,17 +21,14 @@ void RawDirectionalLight::Save(std::string _path) {
     json->SetValue(_path, uuid_, "intensity", light_.intensity);
 }
 
-void RawDirectionalLight::ImGuiSetting() {
+void RawDirectionalLight::ImGuiSetting(int _index) {
     ImGui::PushID(uuid_.c_str());
-    if (ImGui::TreeNode(uuid_.c_str())){
+    const std::string label = "Directional " + std::to_string(_index);
+    if (ImGui::TreeNode(label.c_str())) {
         ImGui::ColorEdit4("Color", &light_.color.x);
-        ImGui::DragFloat3("Direction", &light_.direction.x, 0.1f);
-        ImGui::DragFloat("Intensity", &light_.intensity, 0.01f, 0, 1);
-
-
-        if (ImGui::Button("Delete")){
-            enable_ = false;
-        }
+        ImGui::DragFloat3("Direction", &light_.direction.x, 0.01f, -1.f, 1.f);
+        ImGui::DragFloat("Intensity", &light_.intensity, 0.01f, 0.f, 10.f);
+        if (ImGui::Button("Delete")) { enable_ = false; }
         ImGui::TreePop();
     }
     ImGui::PopID();

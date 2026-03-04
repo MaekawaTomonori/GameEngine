@@ -80,6 +80,7 @@ class Sprite {
 
 public:
     Sprite();
+    ~Sprite();
 
     /** @brief スプライトを初期化
      ** @param _texture テクスチャパス
@@ -198,6 +199,10 @@ private:
     /** @brief テクスチャサイズの調整
      **/
     void AdjustTextureSize();
+
+    /** @brief マップデータの更新（頂点・WVP行列）
+     **/
+    void UpdateMapData() const;
 
     /** @brief デバッグ情報の表示
      **/

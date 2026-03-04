@@ -29,13 +29,6 @@ void CameraDirector::Initialize(DebugUI* _debug) {
 }
 
 void CameraDirector::Update() {
-    if (showEditor_) {
-        if (!debug_->IsVisible("CameraDirector")){ StopEditingWork(); }
-        ShowEditor();
-    }
-
-    Debug();
-
     // Control point visualizer: update position when a Bezier keyframe is selected
     if (controlPointModel_ && isEditingWork_ &&
         selectedKeyframeIndex_ >= 0 &&
@@ -119,7 +112,7 @@ void CameraDirector::Load(const std::string& _key) {
     LoadWork(_key);
 }
 
-void CameraDirector::Run(const std::string& _key, bool _loop) {
+void CameraDirector::Run(const std::string& _key, bool _loop, bool _overwriteOnComplete) {
     if (isProgress_ || isEditingWork_) return;
 
     if (!works_.contains(_key)) {
@@ -127,11 +120,12 @@ void CameraDirector::Run(const std::string& _key, bool _loop) {
     }
     if (!works_.contains(_key)) return;
 
-    isLoop_         = _loop;
-    isProgress_     = true;
-    timer_          = 0.0f;
-    currentWorkKey_ = _key;
-    active_         = Singleton<CameraController>::GetInstance()->GetActive();
+    isLoop_              = _loop;
+    overwriteOnComplete_ = _overwriteOnComplete;
+    isProgress_          = true;
+    timer_               = 0.0f;
+    currentWorkKey_      = _key;
+    active_              = Singleton<CameraController>::GetInstance()->GetActive();
 
     for (auto& item : availableWorks_) {
         if (Utils::EqualsIgnoreCase(_key, item.key)) {
@@ -251,13 +245,29 @@ void CameraDirector::SaveWork(const std::string& _key, const Work& _work) {
 
 void CameraDirector::OnComplete() {
     if (active_) {
-        active_->transform_ = originalTransform_;
+        if (overwriteOnComplete_ && works_.contains(currentWorkKey_)) {
+            const Work& w = works_[currentWorkKey_];
+            if (!w.keyframes.empty()) {
+                const Keyframe& lastKf   = w.keyframes.back();
+                Vector3         worldPos = ToWorld(lastKf.position);
+                Vector2         rot      = lastKf.useLookAt
+                                         ? CalculateLookAtRotation(worldPos, ToWorld(lastKf.lookAtTarget))
+                                         : lastKf.rotation;
+                active_->transform_.translate = worldPos;
+                active_->transform_.rotate    = Vector3(rot.y, rot.x, 0.0f);
+            } else {
+                active_->transform_ = originalTransform_;
+            }
+        } else {
+            active_->transform_ = originalTransform_;
+        }
     }
-    isProgress_    = false;
-    isLoop_        = false;
-    timer_         = 0.0f;
+    isProgress_          = false;
+    isLoop_              = false;
+    overwriteOnComplete_ = false;
+    timer_               = 0.0f;
     currentWorkKey_.clear();
-    active_        = nullptr;
+    active_              = nullptr;
 }
 
 Vector3 CameraDirector::ToWorld(const Vector3& _local) const {
@@ -325,10 +335,6 @@ Vector2 CameraDirector::CalculateLookAtRotation(const Vector3& _position,
     return Vector2(yaw, pitch);
 }
 
-// ---------------------------------------------------------------------------
-// Private: enum <-> string converters
-// ---------------------------------------------------------------------------
-
 CameraDirector::PathType CameraDirector::StringToPathType(const std::string& _str) const {
     if (Utils::EqualsIgnoreCase(_str, "Bezier")) return PathType::Bezier;
     return PathType::Linear;
@@ -360,17 +366,17 @@ std::string CameraDirector::TimeEasingToString(TimeEasing _type) const {
     }
 }
 
-// ---------------------------------------------------------------------------
-// Private: Debug UI (main window)
-// ---------------------------------------------------------------------------
-
 void CameraDirector::Debug() {
     if (!debug_) return;
-
+    
+    if (showEditor_) {
+        if (!debug_->IsVisible("CameraDirector")) { StopEditingWork(); }
+        ShowEditor();
+    }
+    
     debug_->RegisterCommand("CameraDirector", [this]() {
         ImGui::Begin("CameraDirector", &debug_->IsVisible("CameraDirector"));
 
-        // ---- Playback status bar ----
         if (isProgress_ && works_.contains(currentWorkKey_)) {
             const Work& w    = works_[currentWorkKey_];
             float       frac = (w.duration > 0.0f) ? timer_ / w.duration : 0.0f;
@@ -389,7 +395,6 @@ void CameraDirector::Debug() {
 
         ImGui::Separator();
 
-        // ---- Anchor ----
         ImGui::Text("Anchor:");
         ImGui::SameLine();
         if (ImGui::Button("Reset##Anchor")) { anchor_ = Vector3{}; }
@@ -455,7 +460,6 @@ void CameraDirector::Debug() {
 
         ImGui::Separator();
 
-        // ---- Create new work ----
         static char nameBuffer[256] = "";
         ImGui::SetNextItemWidth(150.0f);
         ImGui::InputText("##NewWorkName", nameBuffer, sizeof(nameBuffer));
@@ -471,10 +475,6 @@ void CameraDirector::Debug() {
         ImGui::End();
     });
 }
-
-// ---------------------------------------------------------------------------
-// Private: Editor UI (editor window)
-// ---------------------------------------------------------------------------
 
 void CameraDirector::ShowEditor() {
     if (!debug_) return;
@@ -494,7 +494,6 @@ void CameraDirector::ShowEditor() {
             return;
         }
 
-        // ---- Header ----
         ImGui::Text("Editing: %s", editingWorkKey_.c_str());
         ImGui::SameLine();
         if (ImGui::Button("Save"))   { SaveWork(editingWorkKey_, editingWork_); }
@@ -505,7 +504,6 @@ void CameraDirector::ShowEditor() {
         ImGui::DragFloat("Duration (s)", &editingWork_.duration, 0.1f, 0.1f, 300.0f);
         ImGui::Separator();
 
-        // ---- Keyframe list ----
         ImGui::Text("Keyframes (%zu)", editingWork_.keyframes.size());
         ImGui::SameLine();
         if (ImGui::Button("+ Add"))   { AddKeyframe(); }
@@ -543,7 +541,6 @@ void CameraDirector::ShowEditor() {
 
         ImGui::Separator();
 
-        // ---- Selected keyframe detail ----
         if (selectedKeyframeIndex_ < 0 ||
             selectedKeyframeIndex_ >= static_cast<int>(editingWork_.keyframes.size())) {
             ImGui::End();
@@ -649,10 +646,6 @@ void CameraDirector::ShowEditor() {
         ImGui::End();
     });
 }
-
-// ---------------------------------------------------------------------------
-// Private: editor operations
-// ---------------------------------------------------------------------------
 
 void CameraDirector::StartEditingWork(const std::string& _key) {
     if (_key.empty() || isEditingWork_) return;

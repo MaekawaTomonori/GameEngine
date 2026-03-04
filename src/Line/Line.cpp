@@ -29,14 +29,12 @@ void Line::Initialize() {
 void Line::Update() {
     if (name_.empty()) name_ = "Line_" + std::to_string(id_);
     common_->RegisterDebug(uuid_, [&] {
-        ImGui::Begin("Line");
         ImGui::PushID(uuid_.c_str());
         if (ImGui::TreeNode(name_.c_str())) {
             ImGui::ColorEdit4("color", &materialData_->color.x);
             ImGui::TreePop();
         }
         ImGui::PopID();
-        ImGui::End();
     });
 
     // Update vertex data with positions

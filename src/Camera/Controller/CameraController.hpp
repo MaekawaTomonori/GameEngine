@@ -14,14 +14,14 @@ class CameraController {
 
 public:
     void Initialize(float _ratio, DebugUI* _debug);
-    void Update();
+    void Update() const;
+    void Debug();
 
     Camera* GetActive() const;
     Camera* Add(const std::string& _name = "") const;
     Camera* SetActive(const std::string& _name);
 
 private:
-    void Debug();
     void Load();
     void Save() const;
 }; // class CameraController

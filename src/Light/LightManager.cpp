@@ -22,42 +22,74 @@ LightManager::~LightManager() {
 
 void LightManager::Debug() {
 #ifdef _DEBUG
-    debug_->RegisterCommand("LM", [&](){
-        ImGui::Begin("Light");
-        if (ImGui::BeginTabBar("Light")){
+    debug_->RegisterCommand("LightManager", [&](){
+        ImGui::Begin("Light", &debug_->IsVisible("LightManager"));
+        if (ImGui::BeginTabBar("LightTabs")){
             if (ImGui::BeginTabItem("General")){
-                if(ImGui::CollapsingHeader("Files")){
-                    if(ImGui::Button("Load / Reload")){Load();} ImGui::SameLine(); if(ImGui::Button("Save")){Save();}
+                // ファイル操作
+                if (ImGui::Button("Load/Reload")) { Load(); }
+                ImGui::SameLine();
+                if (ImGui::Button("Save")) { Save(); }
+
+                ImGui::Separator();
+
+                // Ref 制御
+                const bool hasRef = ref_.has_value();
+                if (!hasRef) ImGui::BeginDisabled();
+                ImGui::Checkbox("Follow Ref", &refEnabled_);
+                if (!hasRef) {
+                    ImGui::EndDisabled();
+                    ImGui::SameLine();
+                    ImGui::TextDisabled("(no ref set)");
                 }
-                if (ImGui::CollapsingHeader("Count")){
-                    ImGui::Text("Directional: %d", static_cast<int>(lightCount_->dlCount));
-                    ImGui::Text("Point: %d", static_cast<int>(lightCount_->plCount));
-                    ImGui::Text("Spot: %d", static_cast<int>(lightCount_->slCount));
+
+                if (ImGui::Button("Clear Ref")) {
+                    ClearRef();
                 }
-                ImGui::PushID("Directional");
-                ImGui::SeparatorText("Directional");
-                if (ImGui::Button("Add")){Add(LightType::Directional);}
-                ImGui::PopID();
-                ImGui::PushID("Point");
-                ImGui::SeparatorText("Point");
-                if (ImGui::Button("Add")){Add(LightType::Point);}
-                ImGui::PopID();
-                ImGui::PushID("Spot");
-                ImGui::SeparatorText("Spot");
-                if (ImGui::Button("Add")){Add(LightType::Spot);}
-                ImGui::PopID();
+
+                ImGui::Separator();
+
+                // ライト数と追加ボタン
+                const bool dlFull = lightCount_->dlCount >= MAX_COUNT.dlCount;
+                const bool plFull = lightCount_->plCount >= MAX_COUNT.plCount;
+                const bool slFull = lightCount_->slCount >= MAX_COUNT.slCount;
+
+                ImGui::Text("Directional : %u / %u", lightCount_->dlCount, MAX_COUNT.dlCount);
+                ImGui::SameLine();
+                if (dlFull) ImGui::BeginDisabled();
+                if (ImGui::SmallButton("+ DL")) { Add(LightType::Directional); }
+                if (dlFull) ImGui::EndDisabled();
+
+                ImGui::Text("Point       : %u / %u", lightCount_->plCount, MAX_COUNT.plCount);
+                ImGui::SameLine();
+                if (plFull) ImGui::BeginDisabled();
+                if (ImGui::SmallButton("+ PL")) { Add(LightType::Point); }
+                if (plFull) ImGui::EndDisabled();
+
+                ImGui::Text("Spot        : %u / %u", lightCount_->slCount, MAX_COUNT.slCount);
+                ImGui::SameLine();
+                if (slFull) ImGui::BeginDisabled();
+                if (ImGui::SmallButton("+ SL")) { Add(LightType::Spot); }
+                if (slFull) ImGui::EndDisabled();
+
                 ImGui::EndTabItem();
             }
             if (ImGui::BeginTabItem("Directional")){
-                for (const auto& dl : rawDirectionalLights_){dl->ImGuiSetting();}
+                for (int i = 0; i < static_cast<int>(rawDirectionalLights_.size()); ++i) {
+                    rawDirectionalLights_[i]->ImGuiSetting(i);
+                }
                 ImGui::EndTabItem();
             }
             if (ImGui::BeginTabItem("Point")){
-                for (const auto& pl : rawPointLights_){pl->ImGuiSetting();}
+                for (int i = 0; i < static_cast<int>(rawPointLights_.size()); ++i) {
+                    rawPointLights_[i]->ImGuiSetting(i);
+                }
                 ImGui::EndTabItem();
             }
             if (ImGui::BeginTabItem("Spot")){
-                for (const auto& sl : rawSpotLights_){sl->ImGuiSetting();}
+                for (int i = 0; i < static_cast<int>(rawSpotLights_.size()); ++i) {
+                    rawSpotLights_[i]->ImGuiSetting(i);
+                }
                 ImGui::EndTabItem();
             }
             ImGui::EndTabBar();
@@ -191,11 +223,12 @@ void LightManager::Initialize(DirectXAdapter* _adapter, DebugUI* _debug) {
 
     Load();
 
+    debug_->RegisterMenuButton("LightManager");
+
     Log::Send(Log::Level::INFO, "Light Enabled");
 }
 
 void LightManager::Update() {
-    Debug();
     CheckState();
     UpdateLights();
 
@@ -293,7 +326,9 @@ void LightManager::ClearRef() {
     }
 }
 
-void LightManager::UpdateLights() const {
+void LightManager::UpdateLights() {
+    if (!refEnabled_) return;
+
     for (const auto& dl : rawDirectionalLights_) {
         dl->Update();
     }

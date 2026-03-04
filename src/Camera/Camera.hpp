@@ -103,6 +103,8 @@ public:
      ** @param _farPlane ファークリップ距離
      **/
     void SetFar(const float _farPlane) { far_ = _farPlane; }
+
+    void LookAt(const Vector3& _position);
 }; // class Camera
 
 #endif // Camera_HPP_

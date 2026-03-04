@@ -51,6 +51,7 @@ class LightManager final{
     std::string path = "Light";
 
     std::optional<Vector3> ref_;
+    bool refEnabled_ = true;
 
 public:
     ~LightManager();
@@ -82,10 +83,11 @@ public:
 
     void ClearRef();
 
-private:
     void Debug();
+
+private:
     void CheckState();
-    void UpdateLights() const;
+    void UpdateLights();
 
     void Load();
     void Save() const;

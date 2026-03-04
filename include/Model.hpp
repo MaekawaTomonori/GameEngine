@@ -60,11 +60,11 @@ class Model {
 
     Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> commandList_ = nullptr;
 
+    std::string name_;
     std::string uuid_;
     Transform transform_;
     ModelData* data_ = nullptr;
     std::unique_ptr<Mesh> mesh_;
-    Camera* camera_ = nullptr;
 
     std::optional<Skeleton> pose_;
 
@@ -91,6 +91,7 @@ class Model {
 
 public:
     Model();
+    ~Model();
 
     /** @brief モデルを初期化
      ** @param _name モデル名
@@ -101,9 +102,19 @@ public:
      **/
     void Update();
 
+    /** @brief マップデータの更新
+     **/
+    void UpdateMapData() const;
+
     /** @brief モデルを描画
      **/
     void Draw() const;
+
+    /** @brief 名前を設定
+     ** @param _name 
+     ** @return メソッドチェーン用の自身への参照
+     */
+    Model& SetName(const std::string& _name);
 
     /** @brief 平行移動を設定
      ** @param _translate 平行移動ベクトル
@@ -158,10 +169,6 @@ private:
     /** @brief デバッグ情報の表示
      **/
     void Debug();
-
-    /** @brief マップデータの更新
-     **/
-    void UpdateMapData() const;
 
     /** @brief スキンクラスターの生成
      **/

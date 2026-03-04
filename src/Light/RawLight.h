@@ -45,7 +45,9 @@ public:
     //ToJson
     virtual void Save(std::string _path) = 0;
 
-    virtual void ImGuiSetting() = 0;
+    bool HasRef() const { return ref_.has_value(); }
+
+    virtual void ImGuiSetting(int _index) = 0;
 
 protected:
     virtual void FollowRef() = 0;

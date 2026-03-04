@@ -37,35 +37,40 @@ void RawSpotLight::Save(std::string _path) {
     json->SetValue(_path, uuid_, "falloffStart", light_.falloffStart);
 }
 
-void RawSpotLight::ImGuiSetting() {
+void RawSpotLight::ImGuiSetting(int _index) {
     ImGui::PushID(uuid_.c_str());
-    if (ImGui::TreeNode(uuid_.c_str())){
+    const std::string label = "Spot " + std::to_string(_index);
+    if (ImGui::TreeNode(label.c_str())) {
         ImGui::ColorEdit4("Color", &light_.color.x);
-        ImGui::DragFloat3("Position", &light_.position.x, 0.1f);
-        ImGui::DragFloat3("Direction", &light_.direction.x, 0.1f);
-        ImGui::DragFloat("Distance", &light_.distance, 0.1f, 0.f);
-        ImGui::DragFloat("Intensity", &light_.intensity, 0.01f, 0.f, 10.f);
-        ImGui::DragFloat("decay", &light_.decay, 0.01f, 0.f);
-        ImGui::DragFloat("cosAngle", &light_.cosAngle, 0.01f, light_.falloffStart);
-        ImGui::DragFloat("falloffStart", &light_.falloffStart, 0.01f, 0.f);
 
-	    if (ImGui::Button("Delete")){
-	        enable_ = false;
-	    }
+        if (HasRef()) {
+            ImGui::BeginDisabled();
+            ImGui::DragFloat3("Position (ref)", &light_.position.x, 0.1f);
+            ImGui::EndDisabled();
+        } else {
+            ImGui::DragFloat3("Position", &light_.position.x, 0.1f);
+        }
+
+        ImGui::DragFloat3("Direction", &light_.direction.x, 0.01f, -1.f, 1.f);
+        ImGui::DragFloat("Intensity",  &light_.intensity, 0.01f, 0.f, 10.f);
+        ImGui::DragFloat("Distance",   &light_.distance,  0.1f,  0.f);
+        ImGui::DragFloat("Decay",      &light_.decay,     0.01f, 0.f);
+
+        // cosAngle / falloffStart を度数表示に変換して操作
+        float coneAngleDeg = std::acos(std::clamp(light_.cosAngle,     -1.f, 1.f)) * 180.f / MathUtils::F_PI;
+        float falloffDeg   = std::acos(std::clamp(light_.falloffStart,  -1.f, 1.f)) * 180.f / MathUtils::F_PI;
+
+        if (ImGui::DragFloat("Cone Angle (deg)",    &coneAngleDeg, 0.5f, 1.f, 89.f)) {
+            light_.cosAngle = std::cos(coneAngleDeg * MathUtils::F_PI / 180.f);
+        }
+        if (ImGui::DragFloat("Falloff Start (deg)", &falloffDeg, 0.5f, 0.f, coneAngleDeg - 0.5f)) {
+            light_.falloffStart = std::cos(falloffDeg * MathUtils::F_PI / 180.f);
+        }
+
+        if (ImGui::Button("Delete")) { enable_ = false; }
         ImGui::TreePop();
     }
     ImGui::PopID();
-
-    if ((MathUtils::F_PI * 2.f) <= light_.cosAngle){
-        light_.cosAngle -= MathUtils::F_PI * 2.f;
-    }
-    if ((MathUtils::F_PI * 2.f) <= light_.falloffStart){
-        light_.falloffStart -= MathUtils::F_PI * 2.f;
-    }
-
-    if (light_.falloffStart < light_.cosAngle){
-        light_.falloffStart = light_.cosAngle + std::cos(MathUtils::F_PI / 10.f);
-    }
 
     light_.direction = light_.direction.Normalize();
 }

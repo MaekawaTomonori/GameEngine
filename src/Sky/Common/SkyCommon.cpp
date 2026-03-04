@@ -6,7 +6,7 @@
 #include "src/DirectX/Shader/Shader.h"
 
 void SkyCommon::Initialize(DirectXAdapter* _adapter, DebugUI* _debugUi) {
-    Setup(_adapter, _debugUi);
+    Setup(_adapter, _debugUi, "Skybox");
 
     // PipelineStateObjectの初期化
     pipeline_ = std::make_unique<PipelineStateObject>(_adapter);

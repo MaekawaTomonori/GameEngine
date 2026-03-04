@@ -49,9 +49,10 @@ class CameraDirector {
 
     DebugUI* debug_ = nullptr;
 
-    bool  isProgress_ = false;
-    bool  isLoop_     = false;
-    float timer_      = 0.0f;
+    bool  isProgress_          = false;
+    bool  isLoop_              = false;
+    bool  overwriteOnComplete_ = false;
+    float timer_               = 0.0f;
 
     Camera*    active_            = nullptr;
     Transform  originalTransform_{};
@@ -77,7 +78,7 @@ public:
     void Update();
     void Draw();
     void Load(const std::string& _key);
-    void Run(const std::string& _key, bool _loop = false);
+    void Run(const std::string& _key, bool _loop = false, bool _overwriteOnComplete = false);
     void Stop();
 
     bool               IsPlaying()      const { return isProgress_; }
@@ -87,10 +88,11 @@ public:
     void SetAnchor(const Vector3& _anchor) { anchor_ = _anchor; }
     void ClearAnchor()                     { anchor_ = Vector3{}; }
 
+    void Debug();
+
 private:
     Vector3 ToWorld(const Vector3& _local) const;
 
-    void Debug();
     void LoadWorkList();
     void LoadWork(const std::string& _key);
     void OnComplete();

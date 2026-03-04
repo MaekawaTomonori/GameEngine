@@ -43,6 +43,7 @@ public:
      **/
     virtual void Finalize() {}
 
+
     /** @brief シーンが進行中かを判定
      ** @return 進行中の場合true
      **/
@@ -96,6 +97,10 @@ protected:
 
     PostProcessExecutor* PostEffect() const;
     ParticleSystem* Particle() const;
+
+private:
+    virtual void OnEnable() {}
+
 }; // class IScene
 
 #endif // IScene_HPP_
