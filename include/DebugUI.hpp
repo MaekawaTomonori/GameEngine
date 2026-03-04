@@ -27,6 +27,8 @@ class DebugUI {
     std::vector<Command> commands_;
     std::unordered_map<std::string, bool> windowStates_;
     bool showMenuBar_ = false;
+    bool showWindowsPanel_ = false;
+    bool panelJustOpened_ = false;
 
 public:
     ~DebugUI();
@@ -65,9 +67,13 @@ private:
      **/
     void Process();
 
+    /** @brief メインメニューバーを描画
+     **/
+    void RenderMainMenuBar();
+
     /** @brief モダンスタイルのセットアップ
      **/
-    void SetupModernStyle();
+    void SetupStyle();
 }; // class DebugUI
 
 #endif // DebugUI_HPP_

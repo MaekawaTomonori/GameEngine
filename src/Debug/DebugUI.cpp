@@ -37,7 +37,35 @@ void DebugUI::Initialize(const DirectXAdapter *_adapter) {
     }
     ImGui::CreateContext();
     ImNodes::CreateContext();
-    SetupModernStyle();
+    SetupStyle();
+
+    // windowStates_ の表示状態を imgui.ini に永続化する
+    {
+        ImGuiSettingsHandler handler{};
+        handler.TypeName = "WindowStates";
+        handler.TypeHash = ImHashStr("WindowStates");
+        handler.UserData = this;
+        handler.ReadOpenFn = [](ImGuiContext*, ImGuiSettingsHandler*, const char*) -> void* {
+            return reinterpret_cast<void*>(1);
+        };
+        handler.ReadLineFn = [](ImGuiContext*, ImGuiSettingsHandler* h, void*, const char* line) {
+            auto* self = static_cast<DebugUI*>(h->UserData);
+            char key[256];
+            int  val;
+            if (sscanf_s(line, "%255[^=]=%d", key, static_cast<unsigned>(sizeof(key)), &val) == 2) {
+                self->windowStates_[key] = (val != 0);
+            }
+        };
+        handler.WriteAllFn = [](ImGuiContext*, ImGuiSettingsHandler* h, ImGuiTextBuffer* buf) {
+            const auto* self = static_cast<const DebugUI*>(h->UserData);
+            buf->appendf("[%s][Data]\n", h->TypeName);
+            for (const auto& [key, visible] : self->windowStates_) {
+                buf->appendf("%s=%d\n", key.c_str(), visible ? 1 : 0);
+            }
+            buf->appendf("\n");
+        };
+        ImGui::AddSettingsHandler(&handler);
+    }
 
     ImGui_ImplDX12_Init(
         _adapter->GetDevice(),
@@ -90,33 +118,7 @@ void DebugUI::Process() {
     // DockSpace - keeping original configuration
     ImGui::DockSpaceOverViewport(ImGui::GetID(""), ImGui::GetMainViewport(), ImGuiDockNodeFlags_PassthruCentralNode);
 
-    if (showMenuBar_ && ImGui::BeginMainMenuBar()) {
-        // 左: Windows メニュー
-        if (!windowStates_.empty() && ImGui::BeginMenu("Windows")) {
-            for (auto& [label, visible] : windowStates_) {
-                ImGui::MenuItem(label.c_str(), nullptr, &visible);
-            }
-            ImGui::EndMenu();
-        }
-
-        // 中央: タイトル（控えめ）
-        ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.45f, 0.45f, 0.45f, 1.0f));
-        ImGui::Text("  Game Engine Debug");
-        ImGui::PopStyleColor();
-
-        // 右: FPS + 閉じるボタン
-        const float rightStart = ImGui::GetWindowWidth() - 130.f;
-        ImGui::SameLine(rightStart);
-        ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.4f, 0.8f, 0.4f, 1.0f));
-        ImGui::Text("FPS: %.1f", ImGui::GetIO().Framerate);
-        ImGui::PopStyleColor();
-        ImGui::SameLine();
-        if (ImGui::SmallButton("x")) {
-            showMenuBar_ = false;
-        }
-
-        ImGui::EndMainMenuBar();
-    }
+    RenderMainMenuBar();
 
     std::ranges::sort(commands, [](const Command& _a, const Command& _b){
         return _a.id < _b.id;
@@ -185,7 +187,78 @@ void DebugUI::UpdateDisplaySize([[maybe_unused]]int _width, [[maybe_unused]]int 
 #endif
 }
 
-void DebugUI::SetupModernStyle() {
+void DebugUI::RenderMainMenuBar() {
+#ifdef _DEBUG
+    if (!showMenuBar_ || !ImGui::BeginMainMenuBar()) return;
+
+    // 左: Windows トグルボタン（ポップアップではなく専用パネルを開閉）
+    if (!windowStates_.empty()) {
+        const bool panelWasOpen = showWindowsPanel_;
+        if (panelWasOpen) {
+            ImGui::PushStyleColor(ImGuiCol_Button, ImGui::GetStyleColorVec4(ImGuiCol_ButtonActive));
+        }
+        if (ImGui::Button("Window")) {
+            showWindowsPanel_ = !showWindowsPanel_;
+            if (showWindowsPanel_) panelJustOpened_ = true;
+        }
+        if (panelWasOpen) {
+            ImGui::PopStyleColor();
+        }
+    }
+
+    // 中央: タイトル（控えめ）
+    ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.45f, 0.45f, 0.45f, 1.0f));
+    ImGui::Text("  Game Engine Debug");
+    ImGui::PopStyleColor();
+
+    // 右: FPS + 閉じるボタン
+    const float rightStart = ImGui::GetWindowWidth() - 130.f;
+    ImGui::SameLine(rightStart);
+    ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.4f, 0.8f, 0.4f, 1.0f));
+    ImGui::Text("FPS: %.1f", ImGui::GetIO().Framerate);
+    ImGui::PopStyleColor();
+    ImGui::SameLine();
+    if (ImGui::SmallButton("x")) {
+        showMenuBar_ = false;
+    }
+
+    ImGui::EndMainMenuBar();
+
+    // Windowsパネル: メニューバーの直下に固定配置
+    if (showWindowsPanel_) {
+        const ImGuiViewport* vp = ImGui::GetMainViewport();
+        const float menuBarHeight = ImGui::GetFrameHeight();
+        ImGui::SetNextWindowPos(ImVec2(vp->Pos.x, vp->Pos.y + menuBarHeight), ImGuiCond_Always);
+        ImGui::SetNextWindowSizeConstraints(ImVec2(160, 0), ImVec2(300, FLT_MAX));
+        ImGui::Begin("##WindowsPanel", &showWindowsPanel_,
+            ImGuiWindowFlags_NoTitleBar |
+            ImGuiWindowFlags_NoResize   |
+            ImGuiWindowFlags_NoMove     |
+            ImGuiWindowFlags_NoSavedSettings);
+        for (auto& [label, visible] : windowStates_) {
+            ImGui::Checkbox(label.c_str(), &visible);
+        }
+        const ImVec2 panelPos  = ImGui::GetWindowPos();
+        const ImVec2 panelSize = ImGui::GetWindowSize();
+        ImGui::End();
+
+        // パネル外クリックで閉じる
+        // 開いた直後のフレームはボタン位置がパネル外になるためスキップ
+        if (panelJustOpened_) {
+            panelJustOpened_ = false;
+        } else if (ImGui::IsMouseReleased(ImGuiMouseButton_Left)) {
+            const ImVec2 m = ImGui::GetMousePos();
+            const bool inPanel = m.x >= panelPos.x && m.x <= panelPos.x + panelSize.x
+                              && m.y >= panelPos.y && m.y <= panelPos.y + panelSize.y;
+            if (!inPanel) {
+                showWindowsPanel_ = false;
+            }
+        }
+    }
+#endif
+}
+
+void DebugUI::SetupStyle() {
 #ifdef _DEBUG
     ImGuiStyle& style = ImGui::GetStyle();
     ImVec4* colors = style.Colors;

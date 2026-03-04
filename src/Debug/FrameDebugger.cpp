@@ -2,8 +2,8 @@
 
 #ifdef _DEBUG
 #include "imgui.h"
-#include "DebugUI.hpp"
 #endif
+#include "DebugUI.hpp"
 
 void FrameDebugger::Initialize(DebugUI* _debugUi) {
     if (!_debugUi) return;

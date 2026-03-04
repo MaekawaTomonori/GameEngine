@@ -36,6 +36,9 @@ std::array<char, 256>     Log::buffer_{};
 int                       Log::panelLevel_ = static_cast<int>(Log::Level::INFO);
 
 namespace {
+    float FilterWidth = 90.f;
+    bool  SettingsHandlerRegistered = false;
+
     const char* GetLevelLabel(Log::Level _level) {
         switch (_level) {
             case Log::Level::TRACE:   return "TRACE";
@@ -273,6 +276,29 @@ void Log::SetLevel(Level _level) {
 }
 
 void Log::Debug(DebugUI* _debug) {
+#ifdef _DEBUG
+    if (!SettingsHandlerRegistered) {
+        SettingsHandlerRegistered = true;
+        ImGuiSettingsHandler handler{};
+        handler.TypeName = "LoggerFilter";
+        handler.TypeHash = ImHashStr("LoggerFilter");
+        handler.ReadOpenFn = [](ImGuiContext*, ImGuiSettingsHandler*, const char*) -> void* {
+            return reinterpret_cast<void*>(1);
+        };
+        handler.ReadLineFn = [](ImGuiContext*, ImGuiSettingsHandler*, void*, const char* line) {
+            float val;
+            if (sscanf_s(line, "FilterWidth=%f", &val) == 1) {
+                FilterWidth = std::clamp(val, 60.f, 300.f);
+            }
+        };
+        handler.WriteAllFn = [](ImGuiContext*, ImGuiSettingsHandler* h, ImGuiTextBuffer* buf) {
+            buf->appendf("[%s][Data]\n", h->TypeName);
+            buf->appendf("FilterWidth=%f\n", FilterWidth);
+        };
+        ImGui::AddSettingsHandler(&handler);
+    }
+#endif
+
     _debug->RegisterMenuButton("Logger", true);
     _debug->RegisterCommand("Logger",
         [_debug] {
@@ -280,13 +306,12 @@ void Log::Debug(DebugUI* _debug) {
 
             static bool  filters[6]  = {true, true, true, true, true, true};
             static bool  autoScroll  = false;
-            static float filterWidth = 90.f;
 
             // --- 2カラムレイアウト ---
             const float panelHeight = std::max(1.f, ImGui::GetContentRegionAvail().y);
 
             // 左: フィルター＋コントロールパネル
-            ImGui::BeginChild("##filter_panel", ImVec2(filterWidth, panelHeight), true);
+            ImGui::BeginChild("##filter_panel", ImVec2(FilterWidth, panelHeight), true);
 
             ImGui::TextDisabled("Filter");
             ImGui::Separator();
@@ -316,9 +341,9 @@ void Log::Debug(DebugUI* _debug) {
                 ImGui::SetMouseCursor(ImGuiMouseCursor_ResizeEW);
             }
             if (ImGui::IsItemActive()) {
-                filterWidth += ImGui::GetIO().MouseDelta.x;
-                filterWidth = std::max(filterWidth, 60.f);
-                filterWidth = std::min(filterWidth, 300.f);
+                FilterWidth += ImGui::GetIO().MouseDelta.x;
+                FilterWidth = std::max(FilterWidth, 60.f);
+                FilterWidth = std::min(FilterWidth, 300.f);
             }
 
             ImGui::SameLine();
