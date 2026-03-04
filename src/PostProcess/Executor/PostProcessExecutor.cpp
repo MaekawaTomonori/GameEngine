@@ -22,6 +22,8 @@ void PostProcessExecutor::Initialize(DirectXAdapter* _adapter, SRVManager* _srv,
     srv_ = _srv;
     debugUI_ = _debug;
 
+    debugUI_->RegisterMenuButton("PostEffect");
+
     if (!adapter_) {
         Log::Send(Log::Level::ERR, "DirectXAdapter is not initialized");
         return;
@@ -170,18 +172,15 @@ void PostProcessExecutor::SetActive(const std::string& _name, bool _enable) {
 }
 
 void PostProcessExecutor::Debug() {
-    static char presetNameBuf[128] = "MyPreset";
-    static char loadPresetBuf[128] = "PresetName";
+    debugUI_->RegisterCommand("PostEffect", [this](){
+        bool& visible = debugUI_->IsVisible("PostEffect");
+        ImGui::Begin("PostEffect", &visible);
 
-    debugUI_->RegisterCommand("PostEffect", [&](){
-        ImGui::Begin("PostEffect");
-
-        // Open Preset Editor button
         if (ImGui::Button("Open Preset Editor", ImVec2(-1, 30))) {
             OpenPresetEditor();
         }
 
-        if (ImGui::BeginTabBar("PostEffect")){
+        if (ImGui::BeginTabBar("##PostEffectTabs")) {
             if (ImGui::BeginTabItem("List")) {
                 for (auto& effect : effects_) {
                     ImGui::Checkbox(effect.name.c_str(), &effect.enabled);
@@ -189,10 +188,10 @@ void PostProcessExecutor::Debug() {
                 ImGui::EndTabItem();
             }
 
-            if (ImGui::BeginTabItem("Details")){
+            if (ImGui::BeginTabItem("Details")) {
                 for (auto& effect : effects_) {
                     ImGui::PushID(effect.name.c_str());
-                    if (ImGui::TreeNode(effect.name.c_str())){
+                    if (ImGui::TreeNode(effect.name.c_str())) {
                         effect.effect->Debug();
                         ImGui::TreePop();
                     }
@@ -203,10 +202,15 @@ void PostProcessExecutor::Debug() {
 
             ImGui::EndTabBar();
         }
+
         ImGui::End();
+
+        // PostEffect ウィンドウを閉じたら PresetEditor も連動して閉じる
+        if (!visible && presetEditor_) {
+            presetEditor_->CloseEditor();
+        }
     });
 
-    // Show preset editor if open
     if (presetEditor_ && presetEditor_->IsOpen()) {
         presetEditor_->ShowEditor();
     }

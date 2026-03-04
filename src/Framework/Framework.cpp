@@ -40,7 +40,7 @@ Framework::Framework() {
     resources_ = std::make_unique<ResourceRepository>();
     resources_->Initialize();
 
-    level_ = std::make_unique<LevelEditor>(debugUI_.get());
+    //level_ = std::make_unique<LevelEditor>(debugUI_.get());
 
     particle_ = std::make_unique<ParticleSystem>(dxAdapter_.get(), srv_.get(), resources_->GetMeshRepository(), debugUI_.get());
     particle_->Initialize();
@@ -129,13 +129,21 @@ void Framework::Update() const {
     }
 
 #ifdef _DEBUG
+    dxAdapter_->DisplayFPS(debugUI_.get());
+    cameraDirector_->Debug();
+    camera_->Debug();
+    light_->Debug();
+    particle_->Debug();
+    postProcessor_->Debug();
+    frameDebugger_->Debug();
+    model_->Debug();
+    sprite_->Debug();
+
     scene_->Debug();
     if (frameDebugger_->ShouldUpdate()) {
 #endif
+
         cameraDirector_->Update();
-        camera_->Update();
-        light_->Update();
-        level_->Update();
         particle_->Update();
 
         // PostEffect animation update
@@ -146,20 +154,17 @@ void Framework::Update() const {
 #ifdef _DEBUG
     }
 #endif
+
+    camera_->Update();
+    light_->Update();
+    model_->Update();
+    sprite_->Update();
 }
 
 void Framework::Draw() const {
     if (!Check())return;
 
-    dxAdapter_->DisplayFPS(debugUI_.get());
-    postProcessor_->Debug();
-
-#ifdef _DEBUG
-    frameDebugger_->Debug();
-#endif
-
     Log::Debug(debugUI_.get());
-
 
     srv_->PreDraw();
 
@@ -172,7 +177,7 @@ void Framework::Draw() const {
     line_->Draw(renderer_.get());
     sprite_->Draw(renderer_.get());
 
-    renderer_->Register([&] { level_->Draw(); });
+    //renderer_->Register([&] { level_->Draw(); });
     renderer_->Register([&] { debugUI_->Render(); });
     renderer_->Render();
 }
@@ -188,7 +193,7 @@ void Framework::Shutdown() {
 
     texture_->Unload();
     particle_.reset();
-    level_.reset();
+    //level_.reset();
     postProcessor_.reset();
     renderer_.reset();
 

@@ -41,7 +41,7 @@ class Framework {
     std::unique_ptr<ResourceRepository> resources_;
     std::unique_ptr<DebugUI> debugUI_;
     std::unique_ptr<SRVManager> srv_;
-    std::unique_ptr<LevelEditor> level_;
+    //std::unique_ptr<LevelEditor> level_;
     std::unique_ptr<ParticleSystem> particle_;
     std::unique_ptr<FrameDebugger> frameDebugger_;
 
