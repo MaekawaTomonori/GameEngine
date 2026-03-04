@@ -8,6 +8,7 @@ bool IScene::IsProgress() const {
 
 void IScene::Awake() {
     progress_ = true;
+    OnEnable();
 }
 
 void IScene::Setup(SceneSwitcher* _switcher) {

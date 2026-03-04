@@ -45,10 +45,16 @@ void Transition::Awake(const Type _type, const ITransitionEffect::State _state, 
     }
 }
 
-bool Transition::InProgress() const {
+bool Transition::InProgress() {
+    if (awakePending_) {
+        awakePending_ = false;
+        Awake(pendingType_, pendingState_);
+    }
+    
     if (!effect_) {
         return false;
     }
+
     return !effect_->IsFinished();
 }
 
@@ -80,6 +86,55 @@ void Transition::Debug() {
         ImGui::ProgressBar(progress, ImVec2(-1.f, 0.f));
         ImGui::Text("Alpha : %.3f", progress);
     }
+
+    ImGui::SeparatorText("Debug Trigger");
+
+    static int debugTypeIdx  = 1; // 0=None はスキップ、初期値 Fade
+    static int debugStateIdx = 1; // 0=None はスキップ、初期値 In
+
+    constexpr auto typeValues  = magic_enum::enum_values<Type>();
+    constexpr auto stateValues = magic_enum::enum_values<ITransitionEffect::State>();
+
+    // Type コンボ（None を除く index 1 以降）
+    const char* typePreview = magic_enum::enum_name(typeValues[debugTypeIdx]).data();
+    ImGui::SetNextItemWidth(80.f);
+    if (ImGui::BeginCombo("##type", typePreview)) {
+        for (int i = 1; i < static_cast<int>(typeValues.size()); ++i) {
+            const bool selected = (debugTypeIdx == i);
+            if (ImGui::Selectable(magic_enum::enum_name(typeValues[i]).data(), selected)) {
+                debugTypeIdx = i;
+            }
+            if (selected) ImGui::SetItemDefaultFocus();
+        }
+        ImGui::EndCombo();
+    }
+
+    ImGui::SameLine();
+
+    // State コンボ（None を除く index 1 以降）
+    const char* statePreview = magic_enum::enum_name(stateValues[debugStateIdx]).data();
+    ImGui::SetNextItemWidth(70.f);
+    if (ImGui::BeginCombo("##state", statePreview)) {
+        for (int i = 1; i < static_cast<int>(stateValues.size()); ++i) {
+            const bool selected = (debugStateIdx == i);
+            if (ImGui::Selectable(magic_enum::enum_name(stateValues[i]).data(), selected)) {
+                debugStateIdx = i;
+            }
+            if (selected) ImGui::SetItemDefaultFocus();
+        }
+        ImGui::EndCombo();
+    }
+
+    ImGui::SameLine();
+
+    const bool inProgress = InProgress();
+    if (inProgress) ImGui::BeginDisabled();
+    if (ImGui::Button("Play##dbg")) {
+        pendingType_  = typeValues[debugTypeIdx];
+        pendingState_ = stateValues[debugStateIdx];
+        awakePending_ = true;
+    }
+    if (inProgress) ImGui::EndDisabled();
 }
 
 void Transition::CreateEffect(const Type _type) {

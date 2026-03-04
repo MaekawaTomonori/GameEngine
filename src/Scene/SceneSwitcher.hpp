@@ -36,6 +36,7 @@ private:
     std::function<void()> midpointCallback_;
     Transition::Type intraOutType_ = Transition::Type::None;
     Transition::Type intraInType_  = Transition::Type::None;
+    bool midpointPending_ = false;
 
 public:
     SceneSwitcher();
