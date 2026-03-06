@@ -12,7 +12,8 @@ protected:
     struct RenderingCommand {
         std::function<void()> func;
         bool applyPostEffects;
-        // Add PostEffect Mask later
+        /** Add PostEffect Mask later
+         */
     };
 
     DirectXAdapter* adapter_ = nullptr;

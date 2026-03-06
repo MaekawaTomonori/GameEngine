@@ -36,7 +36,7 @@ public:
     void SetDefaultDuration(float _duration);
 
     /** @brief ImGui上でトランジション状態を表示（ウィンドウ内に埋め込む形で呼ぶ）
-     **/
+     */
     void Debug();
 
     Type GetType() const { return type_; }

@@ -19,22 +19,23 @@ class JsonParams{
     const std::string PATH = "Assets/Data/";
     std::map<std::string, Group> datas_; // Data Key, Data Groups
 
-    // JSON File Structure:
-    // {
-    //     "Data Key": {
-    //         "Group1": {
-    //             "key1": value1,
-    //             "key2": value2
-    //         },
-    //         "Group2": {
-    //             "key3": value3
-    //         }
-    //     }
-    // }
-    //
-    // Usage:
-    // Load("directory", "filename") -> datas_["filename"] stores data from "Assets/Data/directory/filename.json"
-    // Load("directory") -> loads all JSON files in directory, each stored with its filename as key
+    /** JSON File Structure:
+     * {
+     *     "Data Key": {
+     *         "Group1": {
+     *             "key1": value1,
+     *             "key2": value2
+     *         },
+     *         "Group2": {
+     *             "key3": value3
+     *         }
+     *     }
+     * }
+     *
+     * Usage:
+     * Load("directory", "filename") -> datas_["filename"] stores data from "Assets/Data/directory/filename.json"
+     * Load("directory") -> loads all JSON files in directory, each stored with its filename as key
+     */
 
 public:
     void SetValue(const std::string& _name, const std::string& _group, const std::string& _key, const Value& _value);

@@ -11,8 +11,8 @@ class AbstractPostEffectFactory;
 class PostProcessExecutor;
 
 /** @brief ゲーム実装の基底インターフェース
- ** シーン管理と設定の統合を提供
- **/
+ * シーン管理と設定の統合を提供
+ */
 class IGame {
     std::unique_ptr<SceneSwitcher> scene_;
     std::unique_ptr<AbstractPostEffectFactory> postEffectFactory_;
@@ -24,13 +24,13 @@ public:
     virtual void Initialize(GameEngine::Config& _config) = 0;
 
     /** @brief シーン切り替え管理を取得
-     ** @return シーン切り替え管理のポインタ
-     **/
+     * @return シーン切り替え管理のポインタ
+     */
     SceneSwitcher* GetSceneSwitcher() const;
 
     /** @brief PostEffectFactoryを取得
-     ** @return PostEffectファクトリーのポインタ
-     **/
+     * @return PostEffectファクトリーのポインタ
+     */
     AbstractPostEffectFactory* GetPostEffectFactory() const;
 
 protected:
@@ -41,8 +41,8 @@ protected:
     }
 
     /** @brief PostEffectFactoryを設定
-     ** @param _factory PostEffectファクトリー
-     **/
+     * @param _factory PostEffectファクトリー
+     */
     void SetPostEffectFactory(std::unique_ptr<AbstractPostEffectFactory> _factory);
 }; // class IGame
 

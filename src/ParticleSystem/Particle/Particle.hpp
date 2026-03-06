@@ -42,8 +42,8 @@ public:
     Particle& RandomizeColor(const Vector4& _min = { 0.f, 0.f, 0.f, 0.f }, const Vector4& _max = { 1.f, 1.f, 1.f, 1.f });
 
     /** @brief パーティクル更新関数を設定
-     ** @param _func <float(time)>, <const Vector3&(origin)>, <Vector3&(position)>, <Vector3&(velocity)>, <Vector4&(color)>
-     **/
+     * @param _func <float(time)>, <const Vector3&(origin)>, <Vector3&(position)>, <Vector3&(velocity)>, <Vector4&(color)>
+     */
     Particle& SetUpdateFunction(const std::function<void(float, const Vector3&, Vector3&, Vector3&, Vector4&)>& _func);
 
 private:

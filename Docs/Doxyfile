@@ -11,6 +11,7 @@ PROJECT_BRIEF          = "C++20 DirectX12 Game Engine"
 OUTPUT_DIRECTORY       = .
 CREATE_SUBDIRS         = NO
 OUTPUT_LANGUAGE        = Japanese
+JAVADOC_AUTOBRIEF      = NO
 
 #---------------------------------------------------------------------------
 # Build related configuration options

@@ -204,8 +204,14 @@
     <ClInclude Include="src\Window\Window.hpp" />
     <ClInclude Include="externals\MagicEnum\magic_enum.hpp" />
     <ClInclude Include="externals\assimp\include\assimp\AssertHandler.h" />
+    <ClInclude Include="include\Ui\EventSystem.hpp" />
+    <ClInclude Include="include\Ui\Element.hpp" />
+    <ClInclude Include="include\Ui\UserInterface.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Ui\EventSystem.cpp" />
+    <ClCompile Include="src\Ui\Element.cpp" />
+    <ClCompile Include="src\Ui\UserInterface.cpp" />
     <ClCompile Include="src\Camera\Camera.cpp" />
     <ClCompile Include="src\Camera\Controller\CameraController.cpp" />
     <ClCompile Include="src\Camera\Director\CameraDirector.cpp" />

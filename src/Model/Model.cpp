@@ -195,8 +195,8 @@ Model& Model::SetColor(const Vector4 _color) {
     return *this;
 }
 
-std::string Model::GetUniqueId() {
-    return uuid_;
+const std::string& Model::GetName() const {
+    return name_;
 }
 
 Mesh* Model::GetMesh() const {

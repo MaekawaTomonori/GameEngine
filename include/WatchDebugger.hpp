@@ -20,16 +20,16 @@ class DebugUI;
 class JsonParams;
 
 /** @brief 変数ウォッチデバッガー
- ** ENGINE_WATCH / ENGINE_WATCH_EDIT でリアルタイム表示・編集、
- ** ENGINE_WATCH_GROUP_BEGIN / END でグループ化する
- **
- **   ENGINE_WATCH_GROUP_BEGIN("Player");
- **   ENGINE_WATCH     ("HP",    &hp_);
- **   ENGINE_WATCH_EDIT("Speed", &speed_);                   // 編集のみ
- **   ENGINE_WATCH_EDIT("Speed", &speed_, "enemy");           // 終了時に Assets/Data/enemy.json へ保存
- **   ENGINE_WATCH_EDIT("Speed", &speed_, "enemy", "spd");    // キー名を明示
- **   ENGINE_WATCH_GROUP_END();
- **/
+ * ENGINE_WATCH / ENGINE_WATCH_EDIT でリアルタイム表示・編集、
+ * ENGINE_WATCH_GROUP_BEGIN / END でグループ化する
+ *
+ *   ENGINE_WATCH_GROUP_BEGIN("Player");
+ *   ENGINE_WATCH     ("HP",    &hp_);
+ *   ENGINE_WATCH_EDIT("Speed", &speed_);                   // 編集のみ
+ *   ENGINE_WATCH_EDIT("Speed", &speed_, "enemy");           // 終了時に Assets/Data/enemy.json へ保存
+ *   ENGINE_WATCH_EDIT("Speed", &speed_, "enemy", "spd");    // キー名を明示
+ *   ENGINE_WATCH_GROUP_END();
+ */
 class WatchDebugger {
 public:
     enum class EditType { Float, Int, Uint16, Uint32, Bool, Vec2, Vec3, Vec4 };
@@ -99,21 +99,21 @@ private:
 
 public:
     /** @brief 初期化
-     ** @param _debug DebugUI
-     **/
+     * @param _debug DebugUI
+     */
     void Initialize(DebugUI* _debug);
 
     /** @brief jsonFile 付きエントリを JSON に書き出す
-     **/
+     */
     void Finalize();
 
     /** @brief ImGui ウィンドウを登録する
-     **/
+     */
     void Debug();
 
     /** @brief グループ開始
-     ** @param _label グループラベル
-     **/
+     * @param _label グループラベル
+     */
     static void BeginGroup(const std::string& _label) {
         auto* inst = Singleton<WatchDebugger>::GetInstance();
         inst->currentGroup_ = { true, _label, nullptr, "", "" };
@@ -121,11 +121,11 @@ public:
     }
 
     /** @brief グループ開始（JSON 書き込みあり）
-     ** @param _label グループラベル
-     ** @param _json   JsonParams インスタンス
-     ** @param _name   JSON ファイル名
-     ** @param _group  JSON グループキー
-     **/
+     * @param _label グループラベル
+     * @param _json   JsonParams インスタンス
+     * @param _name   JSON ファイル名
+     * @param _group  JSON グループキー
+     */
     static void BeginGroup(const std::string& _label, JsonParams* _json, const std::string& _name, const std::string& _group) {
         auto* inst = Singleton<WatchDebugger>::GetInstance();
         inst->currentGroup_ = { true, _label, _json, _name, _group };
@@ -133,7 +133,7 @@ public:
     }
 
     /** @brief グループ終了 
-     **/
+     */
     static void EndGroup() {
         auto* inst = Singleton<WatchDebugger>::GetInstance();
         inst->currentGroup_.active = false;
@@ -141,9 +141,9 @@ public:
     }
 
     /** @brief 読み取り専用ウォッチ
-     ** @param _label ラベル
-     ** @param _ptr   ポインタ
-     **/
+     * @param _label ラベル
+     * @param _ptr   ポインタ
+     */
     template<typename T>
     static void Watch(const std::string& _label, const T* _ptr) {
         Singleton<WatchDebugger>::GetInstance()->AddReadOnly(_label, [_ptr]() -> std::string {
@@ -164,24 +164,24 @@ public:
     }
 
     /** @brief 編集可能ウォッチ
-     ** @param _label ラベル
-     ** @tparam T 対応型（float, int32_t, uint16_t, uint32_t, bool, Vector2, Vector3, Vector4 のいずれか）
-     ** @param _ptr 
-     ** @param _jsonFile 保存先ファイル
-     ** @param _jsonKey JSON キー
-     **/
+     * @param _label ラベル
+     * @tparam T 対応型（float, int32_t, uint16_t, uint32_t, bool, Vector2, Vector3, Vector4 のいずれか）
+     * @param _ptr 
+     * @param _jsonFile 保存先ファイル
+     * @param _jsonKey JSON キー
+     */
     template<typename T>
     static void Watch(const std::string& _label, T* _ptr, const std::string& _jsonFile = "", const std::string& _jsonKey  = "") {
         WatchEdit(_label, _ptr, _jsonFile, _jsonKey);
     }
 
     /** @brief 編集可能ウォッチ
-     ** @param _label ラベル
-     ** @tparam T 対応型（float, int32_t, uint16_t, uint32_t, bool, Vector2, Vector3, Vector4 のいずれか）
-     ** @param _ptr 
-     ** @param _jsonFile 保存先ファイル
-     ** @param _jsonKey JSON キー
-     **/
+     * @param _label ラベル
+     * @tparam T 対応型（float, int32_t, uint16_t, uint32_t, bool, Vector2, Vector3, Vector4 のいずれか）
+     * @param _ptr 
+     * @param _jsonFile 保存先ファイル
+     * @param _jsonKey JSON キー
+     */
     template<typename T>
     static void WatchEdit(const std::string& _label, T* _ptr, const std::string& _jsonFile = "", const std::string& _jsonKey  = "") {
         static_assert(

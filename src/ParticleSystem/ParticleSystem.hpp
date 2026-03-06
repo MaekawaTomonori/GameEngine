@@ -73,54 +73,54 @@ public:
     void Draw(Renderer* _renderer);
 
     /** @brief 更新関数を文字列キーで登録
-     ** @param _key 関数を識別するキー
-     ** @param _func 更新関数
-     **/
+     * @param _key 関数を識別するキー
+     * @param _func 更新関数
+     */
     void RegisterUpdateFunc(const std::string& _key, UpdateFunc _func);
 
     /** @brief スポーン関数を文字列キーで登録
-     ** @param _key 関数を識別するキー
-     ** @param _func スポーン関数 (emitterCenter, outPos, outVel)
-     **/
+     * @param _key 関数を識別するキー
+     * @param _func スポーン関数 (emitterCenter, outPos, outVel)
+     */
     void RegisterSpawnFunc(const std::string& _key, SpawnFunc _func);
 
     /** @brief テンプレートを登録（空のテンプレートを作成しEditorを返す）
-     ** @param _name テンプレート名
-     ** @return TemplateEditor
-     **/
+     * @param _name テンプレート名
+     * @return TemplateEditor
+     */
     TemplateEditor Register(const std::string& _name);
 
     /** @brief テンプレートを登録（既存のTemplateをコピー）
-     ** @param _name テンプレート名
-     ** @param _template テンプレートデータ
-     ** @param _overwrite @return TemplateEditor
-     **/
+     * @param _name テンプレート名
+     * @param _template テンプレートデータ
+     * @param _overwrite @return TemplateEditor
+     */
     TemplateEditor Register(const std::string& _name, const Template& _template, bool _overwrite = false);
 
     /** @brief JSONファイルからテンプレートを読み込み
-     ** @param _name ファイル名（Assets/Data/Particle/<name>.json）
-     **/
+     * @param _name ファイル名（Assets/Data/Particle/<name>.json）
+     */
     void LoadTemplate(const std::string& _name);
 
     /** @brief テンプレートをJSONファイルに保存
-     ** @param _name テンプレート名
-     **/
+     * @param _name テンプレート名
+     */
     void SaveTemplate(const std::string& _name) const;
 
     /** @brief テンプレートからInstanceを生成してパーティクルを発射
-     ** @param _templateName テンプレート名
-     ** @param _position 発射位置
-     **/
+     * @param _templateName テンプレート名
+     * @param _position 発射位置
+     */
     void Emit(const std::string& _templateName, const Vector3& _position);
 
     /** @brief テンプレートを削除
-     ** @param _name テンプレート名
-     **/
+     * @param _name テンプレート名
+     */
     void DeleteTemplate(const std::string& _name);
 
     /** @brief アクティブなEmitterを全てプールに返却する
-     ** シーン切り替え時に呼び出し、前シーンのEmitterが残存するのを防ぐ
-     **/
+     * シーン切り替え時に呼び出し、前シーンのEmitterが残存するのを防ぐ
+     */
     void ClearActive();
 
     void Debug();

@@ -15,11 +15,11 @@
 #include "DirectXTex.h"
 
 /** @brief テクスチャ管理クラス
- ** テクスチャの読み込み、キャッシュ、GPUアップロードを管理
- **/
+ * テクスチャの読み込み、キャッシュ、GPUアップロードを管理
+ */
 class TextureManager{
     /** @brief テクスチャデータ
-     **/
+     */
     struct Texture{
         uint32_t srvIndex;
         DirectX::TexMetadata metadata;
@@ -32,7 +32,8 @@ private: //Variables
     DirectXAdapter* adapter_ = nullptr;
     SRVManager* srv_ = nullptr;
 
-    // テクスチャアップロード専用のコマンドオブジェクト
+    /** テクスチャアップロード専用のコマンドオブジェクト
+     */
     Microsoft::WRL::ComPtr<ID3D12CommandAllocator> uploadCommandAllocator_;
     Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> uploadCommandList_;
 
@@ -46,48 +47,48 @@ public:
     ~TextureManager();
 
     /** @brief テクスチャマネージャーを初期化
-     ** @param _adapter DirectXアダプター
-     ** @param _srv SRVマネージャー
-     **/
+     * @param _adapter DirectXアダプター
+     * @param _srv SRVマネージャー
+     */
     void Initialize(DirectXAdapter* _adapter, SRVManager* _srv);
 
     /** @brief テクスチャを読み込み
-     ** @param fileName ファイル名
-     **/
+     * @param fileName ファイル名
+     */
     bool Load(const std::string& _fileName);
 
     /** @brief すべてのテクスチャをアンロード（クリア）
-     **/
+     */
     void Unload();
 
     /** @brief テクスチャメタデータを取得
-     ** @param fileName ファイル名
-     ** @return テクスチャメタデータへの参照
-     **/
+     * @param fileName ファイル名
+     * @return テクスチャメタデータへの参照
+     */
     const DirectX::TexMetadata& GetTextureMetadata(const std::string& _fileName);
 
     /** @brief SRVインデックスを取得
-     ** @param fileName ファイル名
-     ** @return SRVインデックス
-     **/
+     * @param fileName ファイル名
+     * @return SRVインデックス
+     */
     uint32_t GetSrvIndex(const std::string& _fileName);
 
     /** @brief ファイルパスからテクスチャインデックスを取得
-     ** @param path ファイルパス
-     ** @return テクスチャインデックス
-     **/
+     * @param path ファイルパス
+     * @return テクスチャインデックス
+     */
     uint32_t GetTextureIndexByFilePath(const std::string& _path) const;
 
     /** @brief GPUハンドルを取得（ファイル名指定）
-     ** @param fileName ファイル名
-     ** @return GPUディスクリプタハンドル
-     **/
+     * @param fileName ファイル名
+     * @return GPUディスクリプタハンドル
+     */
     D3D12_GPU_DESCRIPTOR_HANDLE GetGPUHandle(const std::string& _fileName);
 
     /** @brief GPUハンドルを取得（インデックス指定）
-     ** @param index インデックス
-     ** @return GPUディスクリプタハンドル
-     **/
+     * @param index インデックス
+     * @return GPUディスクリプタハンドル
+     */
     D3D12_GPU_DESCRIPTOR_HANDLE GetGPUHandle(const uint32_t _index) const;
 
 private: //Methods

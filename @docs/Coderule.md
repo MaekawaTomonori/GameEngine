@@ -198,9 +198,9 @@ transform.SetPosition({10, 200, 0})
 
 // ✅ 推奨（新しい形式）
 /** @brief テクスチャを読み込む
- ** @param _filePath テクスチャファイルのパス
- ** @return 読み込み成功時true
- **/
+ * @param _filePath テクスチャファイルのパス
+ * @return 読み込み成功時true
+ */
 bool LoadTexture(const std::string& _filePath);
 ```
 

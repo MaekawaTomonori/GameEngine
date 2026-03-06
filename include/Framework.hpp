@@ -28,8 +28,8 @@
 class IGame;
 
 /** @brief メインアプリケーションフレームワーククラス
- ** ゲームループの実行とシステムコーディネーションを管理
- **/
+ * ゲームループの実行とシステムコーディネーションを管理
+ */
 class Framework {
     GameEngine::Config config_{};
 
@@ -65,41 +65,41 @@ public:
     ~Framework();
 
     /** @brief ゲームを実行
-     ** @param _game 実行するゲームインスタンス
-     **/
+     * @param _game 実行するゲームインスタンス
+     */
     void Execute(std::unique_ptr<IGame> _game);
 
 private:
     /** @brief フレームワークの初期化
-     **/
+     */
     void Initialize();
 
     /** @brief メインループの実行
-     ** @return ループを継続する場合true
-     **/
+     * @return ループを継続する場合true
+     */
     bool Loop() const;
 
     /** @brief 更新処理
-     **/
+     */
     void Update() const;
 
     /** @brief 描画処理
-     **/
+     */
     void Draw() const;
 
     /** @brief シャットダウン処理
-     **/
+     */
     void Shutdown();
 
     /** @brief システム状態のチェック
-     ** @return 正常な場合true
-     **/
+     * @return 正常な場合true
+     */
     bool Check() const;
 
     /** @brief ウィンドウリサイズ処理（DRY原則に基づく抽出）
-     ** @param _width 新しい幅
-     ** @param _height 新しい高さ
-     **/
+     * @param _width 新しい幅
+     * @param _height 新しい高さ
+     */
     void HandleWindowResize(int _width, int _height) const;
 }; // class Framework
 

@@ -40,9 +40,11 @@ public:
         return uuid_;
     }
 
-    //DefaultAdd
+    /** DefaultAdd
+     */
 	virtual void DefaultSetting() = 0;
-    //ToJson
+    /** ToJson
+     */
     virtual void Save(std::string _path) = 0;
 
     bool HasRef() const { return ref_.has_value(); }

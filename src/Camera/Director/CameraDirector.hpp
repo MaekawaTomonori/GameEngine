@@ -28,7 +28,8 @@ class CameraDirector {
         Vector2     rotation{};         // (yaw, pitch)
         bool        useLookAt = false;
         Vector3     lookAtTarget{};
-        // path settings to NEXT keyframe (ignored for last keyframe)
+        /** path settings to NEXT keyframe (ignored for last keyframe)
+         */
         PathType    pathType   = PathType::Linear;
         Vector3     controlPoint{};     // Bezier control point (anchor-relative)
         TimeEasing  timeEasing = TimeEasing::Linear;
@@ -58,11 +59,13 @@ class CameraDirector {
     Transform  originalTransform_{};
     std::string currentWorkKey_;
 
-    // Anchor: world-space reference point. Position/LookAt in keyframes are relative to this.
-    // Not saved to JSON. Editable from the main debug UI.
+    /** Anchor: world-space reference point. Position/LookAt in keyframes are relative to this.
+     * Not saved to JSON. Editable from the main debug UI.
+     */
     Vector3 anchor_{};
 
-    // Editor state
+    /** Editor state
+     */
     bool        showEditor_            = false;
     Work        editingWork_;
     std::string editingWorkKey_;
@@ -70,7 +73,8 @@ class CameraDirector {
     bool        isEditingWork_         = false;
     bool        isPreviewingKeyframe_  = false;
 
-    // Control point visualizer shown when editing a Bezier keyframe
+    /** Control point visualizer shown when editing a Bezier keyframe
+     */
     std::unique_ptr<Model> controlPointModel_;
 
 public:
@@ -84,7 +88,8 @@ public:
     bool               IsPlaying()      const { return isProgress_; }
     const std::string& GetCurrentWork() const { return currentWorkKey_; }
 
-    /** @brief アンカー（相対座標の基準点）を設定する **/
+    /** @brief アンカー（相対座標の基準点）を設定する
+     */
     void SetAnchor(const Vector3& _anchor) { anchor_ = _anchor; }
     void ClearAnchor()                     { anchor_ = Vector3{}; }
 
@@ -107,7 +112,8 @@ private:
     TimeEasing  StringToTimeEasing(const std::string& _str) const;
     std::string TimeEasingToString(TimeEasing _type)         const;
 
-    // Editor
+    /** Editor
+     */
     void ShowEditor();
     void SaveWork(const std::string& _key, const Work& _work);
     void StartEditingWork(const std::string& _key);
