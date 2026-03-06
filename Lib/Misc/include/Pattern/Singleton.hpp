@@ -42,6 +42,12 @@ public:
         return instance_.get();
     }
 
+    /** @brief GetInstance の alias (後方互換)
+     **/
+    static T* Get() {
+        return GetInstance();
+    }
+
 private:
     Singleton() = default;
     ~Singleton() = default;

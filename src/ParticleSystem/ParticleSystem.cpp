@@ -8,7 +8,7 @@
 #include "Log.hpp"
 #include "Utils.hpp"
 #include "imgui_internal.h"
-#include "externals/json/json.hpp"
+#include "json.hpp"
 
 ParticleSystem::TemplateEditor::TemplateEditor(Template* _template)
     : template_(_template) {

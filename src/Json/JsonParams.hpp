@@ -8,9 +8,9 @@
 #include "Math/Vector2.hpp"
 #include "Math/Vector3.hpp"
 #include "Math/Vector4.hpp"
-#include "externals/json/json.hpp"
+#include "json.hpp"
 
-class Json{
+class JsonParams{
     using json = nlohmann::json;
     using Value = std::variant<int32_t, float, Vector2, Vector3, Vector4,std::vector<float>, std::vector<Vector2>, std::vector<Vector3>, std::string>;
     using Object = std::map<std::string, Value>; //  key , value || key : [{ key, value }] // Item

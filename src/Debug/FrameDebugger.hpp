@@ -14,6 +14,11 @@ class FrameDebugger {
     bool stepRequested_ = false;
     uint64_t frameCount_ = 0;
 
+    // >| ボタン長押し加速用
+    int maxSpeedInterval_ = 20;  // 最大速度時のフレーム間隔（0-60、0=毎フレーム）
+    int holdFrames_       = 0;   // >| ボタンの連続押下フレーム数
+    int lastStepFrame_    = -1;  // 最後に step を発生させた holdFrames_ の値
+
 public:
 
     void Initialize(DebugUI* _debugUi);

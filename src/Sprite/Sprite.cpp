@@ -8,7 +8,7 @@
 
 #include "src/Texture/TextureManager.hpp"
 
-#include "externals/DirectXTex/DirectXTex.h"
+#include "DirectXTex.h"
 
 Sprite::Sprite() {
     common_ = Singleton<SpriteCommon>::GetInstance();

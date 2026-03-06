@@ -3,7 +3,7 @@
 #include "src/DirectX/DirectXAdapter.hpp"
 #include "src/DirectX/Heap/SRVManager.h"
 #include "src/DirectX/GraphicsPipeline/Object/PipelineStateObject.hpp"
-#include "externals/json/json.hpp"
+#include "json.hpp"
 
 /** @brief ポストエフェクト基底インターフェース
  ** シェーダーベースのポストプロセス効果を実装するための基底クラス

@@ -190,22 +190,22 @@
     <Filter Include="src\Window">
       <UniqueIdentifier>{74C3D837-607B-1A85-C982-F3E0B559B575}</UniqueIdentifier>
     </Filter>
-    <Filter Include="externals">
+    <Filter Include="vendor">
       <UniqueIdentifier>{B3738122-9F15-ACF8-88D0-BF4C74113349}</UniqueIdentifier>
     </Filter>
-    <Filter Include="externals\MagicEnum">
+    <Filter Include="vendor\MagicEnum">
       <UniqueIdentifier>{388A131E-2483-3270-4DB5-17F5390D127C}</UniqueIdentifier>
     </Filter>
-    <Filter Include="externals\assimp">
+    <Filter Include="vendor\assimp">
       <UniqueIdentifier>{6F57A1F8-DB17-1D2F-A452-66AC10D2610B}</UniqueIdentifier>
     </Filter>
-    <Filter Include="externals\assimp\include">
+    <Filter Include="vendor\assimp\include">
       <UniqueIdentifier>{E27D8AD0-4EEA-45CB-17DE-DD2883096833}</UniqueIdentifier>
     </Filter>
-    <Filter Include="externals\assimp\include\assimp">
+    <Filter Include="vendor\assimp\include\assimp">
       <UniqueIdentifier>{BE36F154-AAF1-E000-53A9-594B3F432B91}</UniqueIdentifier>
     </Filter>
-    <Filter Include="externals\json">
+    <Filter Include="vendor\json">
       <UniqueIdentifier>{5C537BC1-C808-F4B6-51FD-ED8DBDB1EABA}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -234,46 +234,16 @@
     <ClInclude Include="include\Math\Easing.h">
       <Filter>include\Math</Filter>
     </ClInclude>
-    <ClInclude Include="include\Math\Easing.hpp">
-      <Filter>include\Math</Filter>
-    </ClInclude>
     <ClInclude Include="include\Math\MathUtils.h">
-      <Filter>include\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Math\MathUtils.hpp">
       <Filter>include\Math</Filter>
     </ClInclude>
     <ClInclude Include="include\Math\Matrix.h">
       <Filter>include\Math</Filter>
     </ClInclude>
-    <ClInclude Include="include\Math\Matrix.hpp">
-      <Filter>include\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Math\Quaternion.hpp">
-      <Filter>include\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Math\Transform.hpp">
-      <Filter>include\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Math\Vector2.hpp">
-      <Filter>include\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Math\Vector3.hpp">
-      <Filter>include\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Math\Vector4.hpp">
-      <Filter>include\Math</Filter>
-    </ClInclude>
     <ClInclude Include="include\Model.hpp">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\Pattern\Singleton.hpp">
-      <Filter>include\Pattern</Filter>
-    </ClInclude>
     <ClInclude Include="include\Sprite.hpp">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Utils.hpp">
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="src\Animation\Animation.hpp">
@@ -303,16 +273,7 @@
     <ClInclude Include="src\DirectX\FrameRate\FrameRateLimiter.hpp">
       <Filter>src\DirectX\FrameRate</Filter>
     </ClInclude>
-    <ClInclude Include="src\DirectX\RootSignature\BlendMode.hpp">
-      <Filter>src\DirectX\GraphicsPipeline\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="src\DirectX\RootSignature\InputLayout.hpp">
-      <Filter>src\DirectX\GraphicsPipeline\Object</Filter>
-    </ClInclude>
     <ClInclude Include="src\DirectX\GraphicsPipeline\Object\PipelineStateObject.hpp">
-      <Filter>src\DirectX\GraphicsPipeline\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="src\DirectX\RootSignature\RootSignature.hpp">
       <Filter>src\DirectX\GraphicsPipeline\Object</Filter>
     </ClInclude>
     <ClInclude Include="src\DirectX\Heap\Heap.hpp">
@@ -330,7 +291,7 @@
     <ClInclude Include="src\DirectX\Shader\Shader.h">
       <Filter>src\DirectX\Shader</Filter>
     </ClInclude>
-    <ClInclude Include="src\Json\Json.hpp">
+    <ClInclude Include="src\Json\JsonParams.hpp">
       <Filter>src\Json</Filter>
     </ClInclude>
     <ClInclude Include="src\Light\DirectionalLight\DirectionalLight.h">
@@ -447,31 +408,30 @@
     <ClInclude Include="src\Window\Window.hpp">
       <Filter>src\Window</Filter>
     </ClInclude>
-    <ClInclude Include="externals\MagicEnum\magic_enum.hpp">
-      <Filter>externals\MagicEnum</Filter>
-    </ClInclude>
-    <ClInclude Include="externals\assimp\include\assimp\AssertHandler.h">
-      <Filter>externals\assimp\include\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="externals\json\json.hpp">
-      <Filter>externals\json</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Camera\Repository\CameraRepository.hpp" />
+    <ClInclude Include="src\Debug\FrameDebugger.hpp" />
+    <ClInclude Include="include\Factory\AbstractPostEffectFactory.hpp" />
+    <ClInclude Include="src\Scene\SceneFactory.hpp" />
     <ClInclude Include="src\Camera\Controller\CameraController.hpp" />
     <ClInclude Include="src\Camera\Director\CameraDirector.hpp" />
+    <ClInclude Include="src\Camera\Repository\CameraRepository.hpp" />
+    <ClInclude Include="src\DirectX\Compute\ComputePipeline.hpp" />
+    <ClInclude Include="src\DirectX\RootSignature\BlendMode.hpp" />
+    <ClInclude Include="src\DirectX\RootSignature\InputLayout.hpp" />
+    <ClInclude Include="src\DirectX\RootSignature\RootSignature.hpp" />
+    <ClInclude Include="src\ParticleSystem\Emitter\Emitter.hpp" />
+    <ClInclude Include="src\ParticleSystem\ParticleSystem.hpp" />
+    <ClInclude Include="src\ParticleSystem\Particle\Particle.hpp" />
+    <ClInclude Include="src\PostProcess\Editor\PostProcessPresetEditor.hpp" />
     <ClInclude Include="src\Scene\Transition\ITransitionEffect.hpp" />
     <ClInclude Include="src\Scene\Transition\Transition.hpp" />
     <ClInclude Include="src\Scene\Transition\Fade.hpp" />
-    <ClInclude Include="include\Factory\AbstractPostEffectFactory.hpp" />
-    <ClInclude Include="src\PostProcess\Editor\PostProcessPresetEditor.hpp" />
-    <ClInclude Include="src\ParticleSystem\ParticleSystem.hpp" />
-    <ClInclude Include="src\ParticleSystem\Emitter\Emitter.hpp" />
-    <ClInclude Include="src\ParticleSystem\Particle\Particle.hpp" />
-    <ClInclude Include="src\DirectX\Compute\ComputePipeline.hpp" />
-    <ClInclude Include="src\Random\RandomEngine.hpp" />
-    <ClInclude Include="src\Scene\SceneFactory.hpp">
-      <Filter>include\Factory</Filter>
-    </ClInclude>
+    <ClInclude Include="externals\MagicEnum\magic_enum.hpp" />
+    <ClInclude Include="externals\assimp\include\assimp\AssertHandler.h" />
+    <ClInclude Include="src\Debug\Debugger.hpp" />
+    <ClInclude Include="src\Collision\CollisionManager.hpp" />
+    <ClInclude Include="include\PerformanceProfiler.hpp" />
+    <ClInclude Include="include\WatchDebugger.hpp" />
+    <ClInclude Include="externals\json\json.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Camera\Camera.cpp">
@@ -492,13 +452,7 @@
     <ClCompile Include="src\DirectX\FrameRate\FrameRateLimiter.cpp">
       <Filter>src\DirectX\FrameRate</Filter>
     </ClCompile>
-    <ClCompile Include="src\DirectX\RootSignature\InputLayout.cpp">
-      <Filter>src\DirectX\GraphicsPipeline\Object</Filter>
-    </ClCompile>
     <ClCompile Include="src\DirectX\GraphicsPipeline\Object\PipelineStateObject.cpp">
-      <Filter>src\DirectX\GraphicsPipeline\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="src\DirectX\RootSignature\RootSignature.cpp">
       <Filter>src\DirectX\GraphicsPipeline\Object</Filter>
     </ClCompile>
     <ClCompile Include="src\DirectX\Heap\Heap.cpp">
@@ -525,7 +479,7 @@
     <ClCompile Include="src\Input\Input.cpp">
       <Filter>src\Input</Filter>
     </ClCompile>
-    <ClCompile Include="src\Json\Json.cpp">
+    <ClCompile Include="src\Json\JsonParams.cpp">
       <Filter>src\Json</Filter>
     </ClCompile>
     <ClCompile Include="src\Light\DirectionalLight\DirectionalLight.cpp">
@@ -545,18 +499,6 @@
     </ClCompile>
     <ClCompile Include="src\Line\Line.cpp">
       <Filter>src\Line</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Math\Easing.cpp">
-      <Filter>src\Math</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Math\MathUtils.cpp">
-      <Filter>src\Math</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Math\Vector2.cpp">
-      <Filter>src\Math</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Math\Vector3.cpp">
-      <Filter>src\Math</Filter>
     </ClCompile>
     <ClCompile Include="src\Mesh\Mesh.cpp">
       <Filter>src\Mesh</Filter>
@@ -639,33 +581,33 @@
     <ClCompile Include="src\System\Log.cpp">
       <Filter>src\System</Filter>
     </ClCompile>
-    <ClCompile Include="src\System\Singleton\Singleton.cpp">
-      <Filter>src\System\Singleton</Filter>
-    </ClCompile>
     <ClCompile Include="src\Texture\TextureManager.cpp">
       <Filter>src\Texture</Filter>
     </ClCompile>
     <ClCompile Include="src\Timer\Timer.cpp">
       <Filter>src\Timer</Filter>
     </ClCompile>
-    <ClCompile Include="src\Utils\Utils.cpp">
-      <Filter>src\Utils</Filter>
-    </ClCompile>
     <ClCompile Include="src\Window\Window.cpp">
       <Filter>src\Window</Filter>
     </ClCompile>
-    <ClCompile Include="src\Camera\Repository\CameraRepository.cpp" />
     <ClCompile Include="src\Camera\Controller\CameraController.cpp" />
     <ClCompile Include="src\Camera\Director\CameraDirector.cpp" />
+    <ClCompile Include="src\Camera\Repository\CameraRepository.cpp" />
+    <ClCompile Include="src\Debug\FrameDebugger.cpp" />
+    <ClCompile Include="src\DirectX\Compute\ComputePipeline.cpp" />
+    <ClCompile Include="src\DirectX\RootSignature\InputLayout.cpp" />
+    <ClCompile Include="src\DirectX\RootSignature\RootSignature.cpp" />
+    <ClCompile Include="src\ParticleSystem\Emitter\Emitter.cpp" />
+    <ClCompile Include="src\ParticleSystem\ParticleSystem.cpp" />
+    <ClCompile Include="src\ParticleSystem\Particle\Particle.cpp" />
+    <ClCompile Include="src\PostProcess\Editor\PostProcessPresetEditor.cpp" />
+    <ClCompile Include="src\Scene\SceneFactory.cpp" />
     <ClCompile Include="src\Scene\Transition\Transition.cpp" />
     <ClCompile Include="src\Scene\Transition\Fade.cpp" />
-    <ClCompile Include="src\PostProcess\Editor\PostProcessPresetEditor.cpp" />
-    <ClCompile Include="src\ParticleSystem\ParticleSystem.cpp" />
-    <ClCompile Include="src\ParticleSystem\Emitter\Emitter.cpp" />
-    <ClCompile Include="src\ParticleSystem\Particle\Particle.cpp" />
-    <ClCompile Include="src\DirectX\Compute\ComputePipeline.cpp" />
-    <ClCompile Include="src\Random\RandomEngine.cpp" />
-    <ClCompile Include="src\Scene\SceneFactory.cpp" />
+    <ClCompile Include="src\Debug\Debugger.cpp" />
+    <ClCompile Include="src\Debug\PerformanceProfiler.cpp" />
+    <ClCompile Include="src\Debug\WatchDebugger.cpp" />
+    <ClCompile Include="src\Collision\CollisionManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

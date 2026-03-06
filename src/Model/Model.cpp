@@ -118,9 +118,8 @@ void Model::Draw() const {
     }
 
     TextureManager* tm = Singleton<TextureManager>::GetInstance();
-    bool useSkinning = pose_.has_value() && !data_->skinCluster.empty();
 
-    if (useSkinning) {
+    if (pose_.has_value() && !data_->skinCluster.empty()) {
         common_->RegisterSkinningDraw([this, tm]() {
             commandList_->SetGraphicsRootConstantBufferView(1, wr_->Get()->GetGPUVirtualAddress());
             commandList_->SetGraphicsRootConstantBufferView(4, cr_->Get()->GetGPUVirtualAddress());
@@ -128,8 +127,7 @@ void Model::Draw() const {
             commandList_->SetGraphicsRootDescriptorTable(9, skinCluster_.paletteHandle.second);
             mesh_->Draw();
             }, posteffect_);
-    }
-    else {
+    }else {
         common_->RegisterStaticDraw([this, tm]() {
             commandList_->SetGraphicsRootConstantBufferView(1, wr_->Get()->GetGPUVirtualAddress());
             commandList_->SetGraphicsRootConstantBufferView(4, cr_->Get()->GetGPUVirtualAddress());

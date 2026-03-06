@@ -74,7 +74,7 @@ class Model {
 
     Line line_;
 
-    ///GPU RESOURCES
+    // GPU RESOURCES
     // world transform
     std::unique_ptr<DX12Resource> wr_;
     Transformation* wd_ = nullptr;
@@ -152,12 +152,14 @@ public:
      **/
     Model& SetTilingMultiply(Vector2 _mul);
 
-    ///
-    ///
+    /** @brief 色の設定
+     ** @return メソッドチェーン用の自身への参照
+     **/
     Model& SetColor(Vector4 _color);
 
-    std::string GetUniqueId();
-
+    /** @brief メッシュの取得
+     ** @return メッシュへのポインタ
+     **/
     Mesh* GetMesh() const;
 
     /** @brief モデルデータを事前読み込み

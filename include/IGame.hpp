@@ -28,11 +28,6 @@ public:
      **/
     SceneSwitcher* GetSceneSwitcher() const;
 
-    /** @brief PostEffectFactoryを設定
-     ** @param _factory PostEffectファクトリー
-     **/
-    void SetPostEffectFactory(std::unique_ptr<AbstractPostEffectFactory> _factory);
-
     /** @brief PostEffectFactoryを取得
      ** @return PostEffectファクトリーのポインタ
      **/
@@ -44,6 +39,11 @@ protected:
         static_assert(std::is_base_of_v<IScene, T>, "T must be derived from IScene");
         scene_->RegisterScene(_name, [] { return std::make_unique<T>(); });
     }
+
+    /** @brief PostEffectFactoryを設定
+     ** @param _factory PostEffectファクトリー
+     **/
+    void SetPostEffectFactory(std::unique_ptr<AbstractPostEffectFactory> _factory);
 }; // class IGame
 
 #endif // IGame_HPP_

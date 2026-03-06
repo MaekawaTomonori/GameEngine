@@ -71,6 +71,12 @@ class PostProcessExecutor {
     // Preset editor
     std::unique_ptr<PostProcessPresetEditor> presetEditor_;
 
+    // ImGui シーンビュー用 GPU テクスチャ ID（DebugUI ヒープのスロット1に対応）
+    uint64_t sceneImGuiTextureId_ = 0;
+
+    // シーンビューの表示スケール（displaySize / renderSize）
+    float sceneViewScale_ = 1.0f;
+
 public:
     /** @brief 初期化処理
      ** <param name=_adapter"> DirectXアダプター</param>
@@ -135,6 +141,14 @@ public:
     /** @brief レンダーテクスチャをリサイズ（ウィンドウリサイズ時に呼び出し）
      **/
     void ResizeRenderTextures();
+
+    /** @brief Scene ウィンドウが表示中かを返す（Renderer のキャプチャモード判定用）
+     **/
+    bool IsSceneViewActive();
+
+    /** @brief 現在のシーンビュー表示スケールを返す（表示サイズ / レンダーサイズ）
+     **/
+    float GetSceneViewScale() const { return sceneViewScale_; }
 
 private:
     void CreateSceneRenderTexture();

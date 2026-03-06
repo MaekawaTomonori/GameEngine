@@ -6,7 +6,7 @@
 
 #include "Math/Transform.hpp"
 #include "Pattern/Singleton.hpp"
-#include "src/Random/RandomEngine.hpp"
+#include "Random/RandomEngine.hpp"
 
 Matrix3x3 MathUtils::Matrix::MakeIdentity3x3() {
     return Matrix3x3 {
@@ -175,6 +175,14 @@ float MathUtils::Random(float _min, float _max) {
     return Singleton<RandomEngine>::GetInstance()->Get(_min, _max);
 }
 
+Vector3 MathUtils::Random(Vector3 _min, Vector3 _max) {
+    return {
+        Random(_min.x, _max.x),
+        Random(_min.y, _max.y),
+        Random(_min.z, _max.z)
+    };
+}
+
 float MathUtils::Deg2Rad(float _degree) {
     return _degree * (F_PI / 180.f);
 }
@@ -237,7 +245,6 @@ Vector3 MathUtils::QuadBezier(const Vector3& _p0, const Vector3& _cp, const Vect
 
 float MathUtils::QuadBezierArcLengthT(const Vector3& _p0, const Vector3& _cp, const Vector3& _p1,
                                        float _s, int _steps) {
-    // 弧長テーブルを構築
     std::vector<float> cumLen(_steps + 1);
     cumLen[0] = 0.0f;
     Vector3 prev = _p0;

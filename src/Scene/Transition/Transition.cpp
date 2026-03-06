@@ -3,7 +3,7 @@
 
 #include "imgui.h"
 #include "Log.hpp"
-#include "externals/MagicEnum/magic_enum.hpp"
+#include "MagicEnum/magic_enum.hpp"
 
 void Transition::Initialize() {
     type_ = Type::None;

@@ -4,8 +4,9 @@
 #include <memory>
 
 #include "Input.hpp"
-#include "DebugUI.hpp"
-#include "src/Debug/FrameDebugger.hpp"
+#ifdef _DEBUG
+#include "src/Debug/Debugger.hpp"
+#endif
 #include "src/Camera/Controller/CameraController.hpp"
 #include "src/Camera/Director/CameraDirector.hpp"
 #include "src/Platform/WinApp.hpp"
@@ -17,6 +18,7 @@
 #include "src/Sprite/Common/SpriteCommon.hpp"
 #include "src/Line/Common/LineCommon.hpp"
 #include "src/ParticleSystem/ParticleSystem.hpp"
+#include "src/Collision/CollisionManager.hpp"
 #include "src/PostProcess/Executor/PostProcessExecutor.hpp"
 #include "src/Renderer/Renderer.hpp"
 #include "src/Sky/Common/SkyCommon.hpp"
@@ -36,14 +38,16 @@ class Framework {
 
     std::unique_ptr<WinApp> windows_;
     std::unique_ptr<DirectXAdapter> dxAdapter_;
+    std::unique_ptr<CollisionManager> collision_;
     std::unique_ptr<PostProcessExecutor> postProcessor_;
     std::unique_ptr<Renderer> renderer_;
     std::unique_ptr<ResourceRepository> resources_;
-    std::unique_ptr<DebugUI> debugUI_;
+#ifdef _DEBUG
+    std::unique_ptr<Debugger> debugger_;
+#endif
     std::unique_ptr<SRVManager> srv_;
     //std::unique_ptr<LevelEditor> level_;
     std::unique_ptr<ParticleSystem> particle_;
-    std::unique_ptr<FrameDebugger> frameDebugger_;
 
     Input* input_ = nullptr;
     TextureManager* texture_ = nullptr;

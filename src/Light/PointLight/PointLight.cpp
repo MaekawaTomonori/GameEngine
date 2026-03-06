@@ -1,8 +1,8 @@
 #include "PointLight.h"
 #include "Pattern/Singleton.hpp"
 #include "imgui.h"
-#include "src/Json/Json.hpp"
-#include "externals/MagicEnum/magic_enum.hpp"
+#include "src/Json/JsonParams.hpp"
+#include "MagicEnum/magic_enum.hpp"
 
 void RawPointLight::DefaultSetting() {
     type_ = LightType::Point;
@@ -19,7 +19,7 @@ void RawPointLight::Set(const std::string& _uuid ,const PointLight& _pl) {
 }
 
 void RawPointLight::Save(std::string _path) {
-	Json* json = Singleton<Json>::GetInstance();
+	JsonParams* json = Singleton<JsonParams>::GetInstance();
 	json->SetValue(_path, uuid_, "type", magic_enum::enum_integer(type_));
 	json->SetValue(_path, uuid_, "color", light_.color);
 	json->SetValue(_path, uuid_, "position", light_.position);

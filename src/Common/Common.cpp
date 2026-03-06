@@ -13,6 +13,8 @@ void Common::Setup(DirectXAdapter* _adapter, DebugUI* _debugUi, const std::strin
     adapter_ = _adapter;
     debugUI_ = _debugUi;
     windowName_ = _windowName;
+
+    debugUI_->RegisterMenuButton(windowName_, false, "ObjectCommons");
 }
 
 void Common::Update() {
@@ -28,7 +30,7 @@ void Common::Debug() {
 
     debugUI_->RegisterCommand(windowName_, [this]() {
 #ifdef _DEBUG
-        ImGui::Begin(windowName_.c_str());
+        ImGui::Begin(windowName_.c_str(), &debugUI_->IsVisible(windowName_));
         for (const auto& func : debugCommands_ | std::views::values) {
             func();
         }

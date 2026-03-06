@@ -1,4 +1,4 @@
-﻿#ifndef VECTOR4_HPP_
+#ifndef VECTOR4_HPP_
 #define VECTOR4_HPP_
 
 /** @brief 4Dベクトル構造体

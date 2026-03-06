@@ -54,6 +54,7 @@ private:
     static std::deque<LogEntry> entries_;
     static std::mutex           entriesMutex_;
     static constexpr size_t     kMaxEntries = 500;
+    static size_t               totalSent_;   // 送信済みエントリ総数（新規ログ検出用）
 
     static std::array<char, 256>  buffer_;
     static int                    panelLevel_;

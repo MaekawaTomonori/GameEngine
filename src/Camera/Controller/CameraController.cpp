@@ -3,7 +3,7 @@
 #include "DebugUI.hpp"
 #include "Utils.hpp"
 #include "imgui.h"
-#include "src/Json/Json.hpp"
+#include "src/Json/JsonParams.hpp"
 
 void CameraController::Initialize(const float _ratio, DebugUI* _debug) {
     debug_ = _debug;

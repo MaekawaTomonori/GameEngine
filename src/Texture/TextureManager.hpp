@@ -12,7 +12,7 @@
 #include "src/DirectX/Heap/SRVManager.h"
 #include "src/DirectX/Resource/DX12Resource.hpp"
 
-#include "externals/DirectXTex/DirectXTex.h"
+#include "DirectXTex.h"
 
 /** @brief テクスチャ管理クラス
  ** テクスチャの読み込み、キャッシュ、GPUアップロードを管理

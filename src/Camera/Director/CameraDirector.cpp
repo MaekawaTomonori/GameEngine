@@ -1,4 +1,3 @@
-#define NOMINMAX
 #include "CameraDirector.hpp"
 
 #include <algorithm>
@@ -11,7 +10,10 @@
 #include "Pattern/Singleton.hpp"
 #include "src/Camera/Camera.hpp"
 #include "src/Camera/Controller/CameraController.hpp"
-#include "externals/json/json.hpp"
+#include "json.hpp"
+
+#undef min
+#undef max
 
 void CameraDirector::Initialize(DebugUI* _debug) {
     debug_ = _debug;

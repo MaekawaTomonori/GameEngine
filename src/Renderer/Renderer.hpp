@@ -16,8 +16,10 @@ class Renderer {
 
     // PostProcessを適応するタスク
     std::queue<std::function<void()>> pp_;
-    // PostProcessを適用しないタスク
+    // PostProcessを適用しないゲームオブジェクトのタスク
     std::queue<std::function<void()>> tasks_;
+    // UIタスク（常にスワップチェーンへ描画：ImGui等）
+    std::queue<std::function<void()>> uiTasks_;
 
 public:
     /** @brief レンダラーを初期化
@@ -31,6 +33,11 @@ public:
      ** @param _applyPostEffect ポストエフェクトを適用するか
      **/
     void Register(const std::function<void()>& _task, bool _applyPostEffect = false);
+
+    /** @brief UIタスクを登録（常にスワップチェーンへ描画）
+     ** @param _task 描画タスク（ImGui等）
+     **/
+    void RegisterUI(const std::function<void()>& _task);
 
     /** @brief 登録されたタスクをレンダリング
      **/

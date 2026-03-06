@@ -1,10 +1,12 @@
 #include "DebugUI.hpp"
 
 #include <algorithm>
+#include <map>
 #include <mutex>
+#include <ranges>
 
 #include "Log.hpp"
-#include "include/Utils.hpp"
+#include "Utils.hpp"
 
 #ifdef _DEBUG
 #include "imgui.h"
@@ -59,8 +61,8 @@ void DebugUI::Initialize(const DirectXAdapter *_adapter) {
         handler.WriteAllFn = [](ImGuiContext*, ImGuiSettingsHandler* h, ImGuiTextBuffer* buf) {
             const auto* self = static_cast<const DebugUI*>(h->UserData);
             buf->appendf("[%s][Data]\n", h->TypeName);
-            for (const auto& [key, visible] : self->windowStates_) {
-                buf->appendf("%s=%d\n", key.c_str(), visible ? 1 : 0);
+            for (const auto& [key, state] : self->windowStates_) {
+                buf->appendf("%s=%d\n", key.c_str(), state.visible ? 1 : 0);
             }
             buf->appendf("\n");
         };
@@ -125,7 +127,7 @@ void DebugUI::Process() {
     });
 
     for (const auto &[id, command] : commands) {
-        if (windowStates_.contains(id) && !windowStates_[id]) {
+        if (windowStates_.contains(id) && !windowStates_[id].visible) {
             continue;
         }
 
@@ -154,25 +156,39 @@ void DebugUI::RegisterCommand([[maybe_unused]] const std::string &_id, [[maybe_u
 #endif
 }
 
-void DebugUI::RegisterMenuButton([[maybe_unused]] const std::string& _key, [[maybe_unused]] const bool _flag) {
+
+void DebugUI::RegisterMenuButton([[maybe_unused]] const std::string& _key, [[maybe_unused]] const bool _flag, [[maybe_unused]]const std::string& _group) {
 #ifdef _DEBUG
     std::lock_guard lock(mutex_);
     if (!windowStates_.contains(_key)) {
-        windowStates_[_key] = _flag;
+        windowStates_[_key].visible = _flag;
+        windowStates_[_key].group = _group;
     }
 #endif
 }
 
-void DebugUI::ToggleMenu([[maybe_unused]] const std::string& _key) {
-#ifdef _DEBUG
-    if (!windowStates_.contains(_key)) return;
-
-    windowStates_[_key] = !windowStates_[_key];
-#endif
+bool& DebugUI::IsVisible(const std::string& _key) {
+    return windowStates_[_key].visible;
 }
 
-bool& DebugUI::IsVisible(const std::string& _key) {
-    return windowStates_[_key];
+uint64_t DebugUI::RegisterTexture([[maybe_unused]] ID3D12Resource* _resource, [[maybe_unused]] DXGI_FORMAT _format) {
+#ifdef _DEBUG
+    if (!_resource || !adapter_) return 0;
+
+    // スロット0 = ImGuiフォント、スロット1 = シーンテクスチャ
+    constexpr uint32_t kSceneSlot = 1;
+
+    D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc = {};
+    srvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
+    srvDesc.Format = _format;
+    srvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
+    srvDesc.Texture2D.MipLevels = 1;
+
+    adapter_->GetDevice()->CreateShaderResourceView(_resource, &srvDesc, heap_->GetCPUHandle(kSceneSlot));
+    return heap_->GetGPUHandle(kSceneSlot).ptr;
+#else
+    return 0;
+#endif
 }
 
 void DebugUI::UpdateDisplaySize([[maybe_unused]]int _width, [[maybe_unused]]int _height) const {
@@ -226,33 +242,82 @@ void DebugUI::RenderMainMenuBar() {
 
     // Windowsパネル: メニューバーの直下に固定配置
     if (showWindowsPanel_) {
-        const ImGuiViewport* vp = ImGui::GetMainViewport();
-        const float menuBarHeight = ImGui::GetFrameHeight();
-        ImGui::SetNextWindowPos(ImVec2(vp->Pos.x, vp->Pos.y + menuBarHeight), ImGuiCond_Always);
-        ImGui::SetNextWindowSizeConstraints(ImVec2(160, 0), ImVec2(300, FLT_MAX));
-        ImGui::Begin("##WindowsPanel", &showWindowsPanel_,
-            ImGuiWindowFlags_NoTitleBar |
-            ImGuiWindowFlags_NoResize   |
-            ImGuiWindowFlags_NoMove     |
-            ImGuiWindowFlags_NoSavedSettings);
-        for (auto& [label, visible] : windowStates_) {
-            ImGui::Checkbox(label.c_str(), &visible);
-        }
-        const ImVec2 panelPos  = ImGui::GetWindowPos();
-        const ImVec2 panelSize = ImGui::GetWindowSize();
-        ImGui::End();
+        MenuBar();
+    }
+#endif
+}
 
-        // パネル外クリックで閉じる
-        // 開いた直後のフレームはボタン位置がパネル外になるためスキップ
-        if (panelJustOpened_) {
-            panelJustOpened_ = false;
-        } else if (ImGui::IsMouseReleased(ImGuiMouseButton_Left)) {
-            const ImVec2 m = ImGui::GetMousePos();
-            const bool inPanel = m.x >= panelPos.x && m.x <= panelPos.x + panelSize.x
-                              && m.y >= panelPos.y && m.y <= panelPos.y + panelSize.y;
-            if (!inPanel) {
-                showWindowsPanel_ = false;
+void DebugUI::MenuBar() {
+#ifdef _DEBUG
+    const ImGuiViewport* vp = ImGui::GetMainViewport();
+    const float menuBarHeight = ImGui::GetFrameHeight();
+    ImGui::SetNextWindowPos(ImVec2(vp->Pos.x, vp->Pos.y + menuBarHeight), ImGuiCond_Always);
+    ImGui::SetNextWindowSizeConstraints(ImVec2(160, 0), ImVec2(300, FLT_MAX));
+    ImGui::Begin("##WindowsPanel", &showWindowsPanel_,
+        ImGuiWindowFlags_NoTitleBar |
+        ImGuiWindowFlags_NoResize |
+        ImGuiWindowFlags_NoMove |
+        ImGuiWindowFlags_AlwaysAutoResize |
+        ImGuiWindowFlags_NoSavedSettings);
+
+    bool belong = false;
+    for (auto& state : windowStates_ | std::views::values) {
+        if (state.group.empty()) continue;
+
+        belong = true;
+        break;
+    }
+
+    if (belong) {
+        std::map<std::string, std::vector<std::pair<const std::string*, WindowState*>>> groups;
+        std::vector<std::pair<const std::string*, WindowState*>> others;
+        for (auto& [label, state] : windowStates_) {
+            if (state.group.empty()) {
+                others.emplace_back(&label, &state);
+            } else {
+                groups[state.group].emplace_back(&label, &state);
             }
+        }
+
+        for (auto& [groupName, items] : groups) {
+            if (ImGui::CollapsingHeader(groupName.c_str())) {
+                for (auto& [label, state] : items) {
+                    ImGui::Checkbox(label->c_str(), &state->visible);
+                }
+            }
+        }
+
+        if (!others.empty()) {
+            if (!groups.empty()) {
+                ImGui::Separator();
+            }
+            if (ImGui::CollapsingHeader("Others")) {
+                for (auto& [label, state] : others) {
+                    ImGui::Checkbox(label->c_str(), &state->visible);
+                }
+            }
+        }
+    } else {
+        for (auto& [label, state] : windowStates_) {
+            ImGui::Checkbox(label.c_str(), &state.visible);
+        }
+    }
+    
+    const ImVec2 panelPos = ImGui::GetWindowPos();
+    const ImVec2 panelSize = ImGui::GetWindowSize();
+    ImGui::End();
+
+    // パネル外クリックで閉じる
+    // 開いた直後のフレームはボタン位置がパネル外になるためスキップ
+    if (panelJustOpened_) {
+        panelJustOpened_ = false;
+    }
+    else if (ImGui::IsMouseReleased(ImGuiMouseButton_Left)) {
+        const ImVec2 m = ImGui::GetMousePos();
+        const bool inPanel = m.x >= panelPos.x && m.x <= panelPos.x + panelSize.x
+            && m.y >= panelPos.y && m.y <= panelPos.y + panelSize.y;
+        if (!inPanel) {
+            showWindowsPanel_ = false;
         }
     }
 #endif

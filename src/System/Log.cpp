@@ -32,6 +32,7 @@ std::string Log::executablePath_;
 std::string Log::workingDirectory_;
 std::deque<Log::LogEntry> Log::entries_;
 std::mutex                Log::entriesMutex_;
+size_t                    Log::totalSent_ = 0;
 std::array<char, 256>     Log::buffer_{};
 int                       Log::panelLevel_ = static_cast<int>(Log::Level::INFO);
 
@@ -137,6 +138,7 @@ void Log::Send(Level _level, const std::string& _message) {
     if (entries_.size() > kMaxEntries) {
         entries_.pop_front();
     }
+    ++totalSent_;
 }
 
 void Log::Send(const std::string& _message) {
@@ -304,8 +306,9 @@ void Log::Debug(DebugUI* _debug) {
         [_debug] {
             ImGui::Begin("Logger", &_debug->IsVisible("Logger"));
 
-            static bool  filters[6]  = {true, true, true, true, true, true};
-            static bool  autoScroll  = false;
+            static bool   filters[6]    = {true, true, true, true, true, true};
+            static bool   autoScroll    = true;
+            static size_t prevTotalSent = 0;
 
             // --- 2カラムレイアウト ---
             const float panelHeight = std::max(1.f, ImGui::GetContentRegionAvail().y);
@@ -356,9 +359,11 @@ void Log::Debug(DebugUI* _debug) {
             ImGui::BeginChild("##log_scroll", ImVec2(0, -inputRowHeight), false, ImGuiWindowFlags_HorizontalScrollbar);
 
             std::vector<Log::LogEntry> snapshot;
+            size_t currentTotalSent;
             {
                 std::lock_guard lock(Log::entriesMutex_);
                 snapshot = {Log::entries_.begin(), Log::entries_.end()};
+                currentTotalSent = Log::totalSent_;
             }
 
             for (const auto& entry : snapshot) {
@@ -372,9 +377,12 @@ void Log::Debug(DebugUI* _debug) {
                 ImGui::PopStyleColor();
             }
 
-            if (autoScroll) {
+            // 新しいログが追加された時だけ最下部へスクロール
+            // チェックが付いていても手動スクロールで遡ることができる
+            if (autoScroll && currentTotalSent != prevTotalSent) {
                 ImGui::SetScrollHereY(1.0f);
             }
+            prevTotalSent = currentTotalSent;
 
             ImGui::EndChild(); // ##log_scroll
 

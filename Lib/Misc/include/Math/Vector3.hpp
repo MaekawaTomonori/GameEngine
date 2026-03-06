@@ -50,6 +50,10 @@ struct Vector3{
         return {x / _f, y / _f, z / _f};
     }
 
+    Vector3 operator/(const Vector3& _v) const {
+        return {x / _v.x, y / _v.y, z / _v.z};
+    }
+
 	float Length() const {
 		return sqrtf(x * x + y * y + z * z);
 	}

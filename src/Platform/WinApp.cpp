@@ -3,7 +3,7 @@
 #include <stdexcept>
 
 #include "Log.hpp"
-#include "include/Utils.hpp"
+#include "Utils.hpp"
 
 #pragma comment(lib, "winmm.lib")
 

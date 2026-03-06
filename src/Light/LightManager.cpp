@@ -4,9 +4,9 @@
 
 #include "Log.hpp"
 #include "Pattern/Singleton.hpp"
+#include "src/Json/JsonParams.hpp"
 #include "imgui.h"
-#include "src/Json/Json.hpp"
-#include "externals/MagicEnum/magic_enum.hpp"
+#include "MagicEnum/magic_enum.hpp"
 
 LightManager::~LightManager() {
     // Explicitly clear all resources
@@ -100,7 +100,7 @@ void LightManager::Debug() {
 }
 
 void LightManager::CheckState() {
-    Json* json = Singleton<Json>::GetInstance();
+    JsonParams* json = Singleton<JsonParams>::GetInstance();
     std::erase_if(rawDirectionalLights_, [&](const std::unique_ptr<RawDirectionalLight>& _dl){
         if (!_dl->IsEnable()){
             lightCount_->dlCount--;
@@ -128,7 +128,7 @@ void LightManager::CheckState() {
 }
 
 void LightManager::Load() {
-    Json* json = Singleton<Json>::GetInstance();
+    JsonParams* json = Singleton<JsonParams>::GetInstance();
     json->Load(path);
 
     rawDirectionalLights_.clear();
@@ -189,7 +189,7 @@ void LightManager::Save() const {
         sl->Save(path);
     }
 
-    Singleton<Json>::GetInstance()->Save(path);
+    Singleton<JsonParams>::GetInstance()->Save(path);
 }
 
 void LightManager::Initialize(DirectXAdapter* _adapter, DebugUI* _debug) {
