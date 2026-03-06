@@ -12,9 +12,9 @@
 #include "imgui.h"
 #endif
 
-void CollisionManager::Initialize(DebugUI* _debugUI) {
+void CollisionManager::Initialize([[maybe_unused]]DebugUI* _debugUI) {
     manager_ = Singleton<Collision::Manager>::GetInstance();
-
+#ifdef _DEBUG
     debugUI_ = _debugUI;
     if (!debugUI_) {
         Utils::Alert("CollisionManager: DebugUI not registered");
@@ -27,6 +27,7 @@ void CollisionManager::Initialize(DebugUI* _debugUI) {
     debugLine_->Initialize();
     debugLine_->SetName("CollisionDebug");
     debugLine_->SetColor({0.2f, 1.0f, 0.2f, 1.0f});
+#endif
 }
 
 
