@@ -72,7 +72,7 @@ Framework::Framework() {
     Singleton<RandomEngine>::GetInstance()->Initialize();
 
     collision_ = std::make_unique<CollisionManager>();
-    collision_->Initialize(debugger_->GetUI());
+    collision_->Initialize(dbg);
 
 #ifdef _DEBUG
     Debugger::WatchGroup("Engine")
