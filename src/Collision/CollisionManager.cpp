@@ -1,6 +1,5 @@
 #include "CollisionManager.hpp"
 
-#include <cmath>
 #include <variant>
 
 #include "Log.hpp"
