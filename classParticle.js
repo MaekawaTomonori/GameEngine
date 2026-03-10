@@ -11,9 +11,10 @@ var classParticle =
     [ "RandomizeScale", "classParticle.html#ad63df131600556021a0de192ca78e92c", null ],
     [ "RandomizeVelocity", "classParticle.html#aee73a8334451514fa0af1535070e8e9f", null ],
     [ "SetColor", "classParticle.html#aecde5aed663a3cb3a73a76051500c4cf", null ],
+    [ "SetOrigin", "classParticle.html#a71ccc40c7d220cfc6a7bc97e03f76c8b", null ],
     [ "SetPosition", "classParticle.html#ae19910de9cba3be9ce9cd258dbaf4927", null ],
     [ "SetScale", "classParticle.html#aae8773234e782b8bfdfdaaa3e1624fb7", null ],
-    [ "SetUpdateFunction", "classParticle.html#aac46dfe610f38ecc860615bc4aff1d7e", null ],
+    [ "SetUpdateFunction", "classParticle.html#a2f8fa67f2cfe78472091651d35ecefe7", null ],
     [ "SetVelocity", "classParticle.html#a64a89784a0d0f8cf113511c0faef1cac", null ],
     [ "Update", "classParticle.html#a9ff98679ed52065d043d29a5af7a8980", null ]
 ];

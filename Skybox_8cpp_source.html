@@ -101,8 +101,8 @@ $(document).ready(function(){initNavTree('Skybox_8cpp_source.html',''); initResi
 <a href="Skybox_8cpp.html">[詳解]</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#include &quot;<a class="code" href="Skybox_8hpp.html">Skybox.hpp</a>&quot;</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;imgui.h&quot;</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="MathUtils_8hpp.html">Math/MathUtils.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;<a class="code" href="Singleton_8hpp.html">Pattern/Singleton.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;Math/MathUtils.hpp&quot;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;Pattern/Singleton.hpp&quot;</span></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;<a class="code" href="TextureManager_8hpp.html">src/Texture/TextureManager.hpp</a>&quot;</span></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;<a class="code" href="CameraController_8hpp.html">src/Camera/Controller/CameraController.hpp</a>&quot;</span></div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
@@ -110,10 +110,10 @@ $(document).ready(function(){initNavTree('Skybox_8cpp_source.html',''); initResi
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno"><a class="line" href="classSkybox.html#a4169b42038e35350a017fd540a9fd872">    9</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classSkybox.html#a4169b42038e35350a017fd540a9fd872">Skybox::Initialize</a>(<span class="keyword">const</span> std::string&amp; _texture) {</div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>    texture_ = _texture;</div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    <a class="code hl_class" href="classTextureManager.html">TextureManager</a>* tm = <a class="code hl_function" href="classSingleton.html#a7b90075f8e4471743fd3596be874e5d1">Singleton&lt;TextureManager&gt;::GetInstance</a>();</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    <a class="code hl_class" href="classTextureManager.html">TextureManager</a>* tm = Singleton&lt;TextureManager&gt;::GetInstance();</div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    tm-&gt;<a class="code hl_function" href="classTextureManager.html#ad7d3de3b18a76f2c0116321d6f91c332">Load</a>(texture_);</div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    common_ = <a class="code hl_function" href="classSingleton.html#a7b90075f8e4471743fd3596be874e5d1">Singleton&lt;SkyCommon&gt;::GetInstance</a>();</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    common_ = Singleton&lt;SkyCommon&gt;::GetInstance();</div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    adapter_ = common_-&gt;<a class="code hl_function" href="classCommon.html#af76821d28439133bfde8bedcd657e645">GetAdapter</a>();</div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    CreateVertex();</div>
@@ -132,7 +132,7 @@ $(document).ready(function(){initNavTree('Skybox_8cpp_source.html',''); initResi
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    transform_ = {</div>
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>        {200.f, 200.f, 200.f},</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        <a class="code hl_struct" href="structVector3.html">Vector3</a>{0.f, 0.f, 0.f},</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        Vector3{0.f, 0.f, 0.f},</div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>        {0.f, 0.f, 0.f}</div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    };</div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>}</div>
@@ -140,146 +140,136 @@ $(document).ready(function(){initNavTree('Skybox_8cpp_source.html',''); initResi
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
 <div class="foldopen" id="foldopen00039" data-start="{" data-end="}">
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="classSkybox.html#a07f9389e51ff7d429abe6dfe2402bd91">   39</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classSkybox.html#a07f9389e51ff7d429abe6dfe2402bd91">Skybox::Update</a>() {</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keywordtype">float</span>&amp; scale = transform_.<a class="code hl_variable" href="structTransform.html#a2b4006024b283c6af2813e78e7092364">scale</a>.<a class="code hl_variable" href="structVector3.html#a7e2d3237b29a2f29d7b3d8b2934e35f2">x</a>;</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    common_-&gt;<a class="code hl_function" href="classCommon.html#a4ee372def646bfb254db5de45bb7f5d8">RegisterDebug</a>(<span class="stringliteral">&quot;Skybox&quot;</span>, [&amp;]{</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        ImGui::Begin(<span class="stringliteral">&quot;Skybox&quot;</span>);</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        ImGui::DragFloat(<span class="stringliteral">&quot;Scale&quot;</span>, &amp;scale, 0.1f);</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        ImGui::End();</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    });</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keywordtype">float</span>&amp; scale = transform_.scale.x;</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    common_-&gt;<a class="code hl_function" href="classCommon.html#a9ee5c7c05e387bc2bda4cdba171740bc">RegisterDebug</a>(<span class="stringliteral">&quot;Skybox&quot;</span>, [&amp;]{</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        ImGui::DragFloat(<span class="stringliteral">&quot;Scale&quot;</span>, &amp;scale, 0.1f);</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    });</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    transform_.scale = {scale, scale, scale};</div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    transform_.<a class="code hl_variable" href="structTransform.html#a2b4006024b283c6af2813e78e7092364">scale</a> = {scale, scale, scale};</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    wd_-&gt;wvp = <a class="code hl_function" href="namespaceMathUtils_1_1Matrix.html#a8fa2d3ee433614ddc87db04661ad391d">MathUtils::Matrix::MakeAffineMatrix</a>(transform_) * <a class="code hl_function" href="classSingleton.html#a7b90075f8e4471743fd3596be874e5d1">Singleton&lt;CameraController&gt;::GetInstance</a>()-&gt;GetActive()-&gt;GetViewProjection();</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>}</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    wd_-&gt;wvp = MathUtils::Matrix::MakeAffineMatrix(transform_) * Singleton&lt;CameraController&gt;::GetInstance()-&gt;GetActive()-&gt;GetViewProjection();</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>}</div>
 </div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
-<div class="foldopen" id="foldopen00052" data-start="{" data-end="}">
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno"><a class="line" href="classSkybox.html#a8bf85652e4f0559530eb7a1f5ed87439">   52</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classSkybox.html#a8bf85652e4f0559530eb7a1f5ed87439">Skybox::Draw</a>() {</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    common_-&gt;<a class="code hl_function" href="classCommon.html#ae93c4bd439c1a6d360c5ba68d13a6d4f">RegisterDraw</a>([<span class="keyword">this</span>]() {</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        <a class="code hl_class" href="classTextureManager.html">TextureManager</a>* tm = <a class="code hl_function" href="classSingleton.html#a7b90075f8e4471743fd3596be874e5d1">Singleton&lt;TextureManager&gt;::GetInstance</a>();</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        ID3D12GraphicsCommandList* commandList = adapter_-&gt;<a class="code hl_function" href="classDirectXAdapter.html#abc7797e145abbf8c6b66d89ce219adbf">GetCommandList</a>();</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        commandList-&gt;IASetVertexBuffers(0, 1, &amp;vbv_);</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        commandList-&gt;IASetIndexBuffer(&amp;ibv_);</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>        commandList-&gt;IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>        commandList-&gt;SetGraphicsRootConstantBufferView(0, mr_-&gt;Get()-&gt;GetGPUVirtualAddress());</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        commandList-&gt;SetGraphicsRootConstantBufferView(1, wr_-&gt;Get()-&gt;GetGPUVirtualAddress());</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
+<div class="foldopen" id="foldopen00050" data-start="{" data-end="}">
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="classSkybox.html#a8bf85652e4f0559530eb7a1f5ed87439">   50</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classSkybox.html#a8bf85652e4f0559530eb7a1f5ed87439">Skybox::Draw</a>() {</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    common_-&gt;<a class="code hl_function" href="classCommon.html#ae93c4bd439c1a6d360c5ba68d13a6d4f">RegisterDraw</a>([<span class="keyword">this</span>]() {</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        <a class="code hl_class" href="classTextureManager.html">TextureManager</a>* tm = Singleton&lt;TextureManager&gt;::GetInstance();</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        ID3D12GraphicsCommandList* commandList = adapter_-&gt;<a class="code hl_function" href="classDirectXAdapter.html#abc7797e145abbf8c6b66d89ce219adbf">GetCommandList</a>();</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        commandList-&gt;IASetVertexBuffers(0, 1, &amp;vbv_);</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        commandList-&gt;IASetIndexBuffer(&amp;ibv_);</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        commandList-&gt;IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>        commandList-&gt;SetGraphicsRootConstantBufferView(0, mr_-&gt;Get()-&gt;GetGPUVirtualAddress());</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        commandList-&gt;SetGraphicsRootConstantBufferView(1, wr_-&gt;Get()-&gt;GetGPUVirtualAddress());</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        commandList-&gt;SetGraphicsRootDescriptorTable(2, tm-&gt;<a class="code hl_function" href="classTextureManager.html#ab10fdb00af3862499ba1f5e915ffe756">GetGPUHandle</a>(texture_));</div>
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        commandList-&gt;SetGraphicsRootDescriptorTable(2, tm-&gt;<a class="code hl_function" href="classTextureManager.html#ab10fdb00af3862499ba1f5e915ffe756">GetGPUHandle</a>(texture_));</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>        commandList-&gt;DrawIndexedInstanced(36, 1, 0, 0, 0);</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    }, posteffect_);</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>}</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        commandList-&gt;DrawIndexedInstanced(36, 1, 0, 0, 0);</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    }, posteffect_);</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>}</div>
 </div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
-<div class="foldopen" id="foldopen00070" data-start="{" data-end="}">
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno"><a class="line" href="classSkybox.html#af8b56738ddf0560ce1d2d50318ea7874">   70</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classSkybox.html#af8b56738ddf0560ce1d2d50318ea7874">Skybox::SetColor</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structVector4.html">Vector4</a>&amp; _color)<span class="keyword"> const </span>{</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    md_-&gt;color = _color;</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>}</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
+<div class="foldopen" id="foldopen00068" data-start="{" data-end="}">
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno"><a class="line" href="classSkybox.html#af8b56738ddf0560ce1d2d50318ea7874">   68</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classSkybox.html#af8b56738ddf0560ce1d2d50318ea7874">Skybox::SetColor</a>(<span class="keyword">const</span> Vector4&amp; _color)<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    md_-&gt;color = _color;</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>}</div>
 </div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="keywordtype">void</span> Skybox::CreateVertex() {</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    vr_ = adapter_-&gt;<a class="code hl_function" href="classDirectXAdapter.html#ab4b4c251cdfee90870ce155e610c9500">CreateBufferResource</a>(<span class="keyword">sizeof</span>(VertexData) * 24);</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    vbv_.BufferLocation = vr_-&gt;Get()-&gt;GetGPUVirtualAddress();</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    vbv_.SizeInBytes = <span class="keyword">sizeof</span>(VertexData) * 24;</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    vbv_.StrideInBytes = <span class="keyword">sizeof</span>(VertexData);</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="keywordtype">void</span> Skybox::CreateVertex() {</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    vr_ = adapter_-&gt;<a class="code hl_function" href="classDirectXAdapter.html#ab4b4c251cdfee90870ce155e610c9500">CreateBufferResource</a>(<span class="keyword">sizeof</span>(VertexData) * 24);</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    vbv_.BufferLocation = vr_-&gt;Get()-&gt;GetGPUVirtualAddress();</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    vbv_.SizeInBytes = <span class="keyword">sizeof</span>(VertexData) * 24;</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    vbv_.StrideInBytes = <span class="keyword">sizeof</span>(VertexData);</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    vr_-&gt;Get()-&gt;Map(0, <span class="keyword">nullptr</span>, <span class="keyword">reinterpret_cast&lt;</span><span class="keywordtype">void</span>**<span class="keyword">&gt;</span>(&amp;vd_));</div>
 <div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    vr_-&gt;Get()-&gt;Map(0, <span class="keyword">nullptr</span>, <span class="keyword">reinterpret_cast&lt;</span><span class="keywordtype">void</span>**<span class="keyword">&gt;</span>(&amp;vd_));</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    vd_[0].position = { 1.f, 1.f, 1.f, 1.f };</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    vd_[1].position = { 1.f, 1.f, -1.f, 1.f };</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    vd_[2].position = { 1.f, -1.f, 1.f, 1.f };</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    vd_[3].position = { 1.f, -1.f, -1.f, 1.f };</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    vd_[4].position = { -1.f, 1.f, 1.f, 1.f };</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    vd_[5].position = { -1.f, 1.f, -1.f, 1.f };</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    vd_[6].position = { -1.f, -1.f, 1.f, 1.f };</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    vd_[7].position = { -1.f, -1.f, -1.f, 1.f };</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    vd_[8].position = { -1.f, 1.f, 1.f, 1.f };</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    vd_[9].position = { 1.f, 1.f, 1.f, 1.f };</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    vd_[10].position = { -1.f, -1.f, 1.f, 1.f };</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    vd_[11].position = { 1.f, -1.f, 1.f, 1.f };</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span> </div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    vd_[12].position = { -1.f, 1.f, -1.f, 1.f };</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    vd_[13].position = { 1.f, 1.f, -1.f, 1.f };</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    vd_[14].position = { -1.f, -1.f, -1.f, 1.f };</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    vd_[15].position = { 1.f, -1.f, -1.f, 1.f };</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span> </div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    vd_[16].position = { -1.f, 1.f, -1.f, 1.f };</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    vd_[17].position = { 1.f, 1.f, -1.f, 1.f };</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    vd_[18].position = { -1.f, 1.f, 1.f, 1.f };</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    vd_[19].position = { 1.f, 1.f, 1.f, 1.f };</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span> </div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    vd_[20].position = { -1.f, -1.f, 1.f, 1.f };</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    vd_[21].position = { 1.f, -1.f, 1.f, 1.f };</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    vd_[22].position = { -1.f, -1.f, -1.f, 1.f };</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    vd_[23].position = { 1.f, -1.f, -1.f, 1.f };</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>}</div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span> </div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span><span class="keywordtype">void</span> Skybox::CreateIndex() {</div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    ir_ = adapter_-&gt;<a class="code hl_function" href="classDirectXAdapter.html#ab4b4c251cdfee90870ce155e610c9500">CreateBufferResource</a>(<span class="keyword">sizeof</span>(uint32_t) * 36);</div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    ibv_.BufferLocation = ir_-&gt;Get()-&gt;GetGPUVirtualAddress();</div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    ibv_.SizeInBytes = <span class="keyword">sizeof</span>(uint32_t) * 36;</div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    ibv_.Format = DXGI_FORMAT_R32_UINT;</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    vd_[0].position = { 1.f, 1.f, 1.f, 1.f };</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    vd_[1].position = { 1.f, 1.f, -1.f, 1.f };</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    vd_[2].position = { 1.f, -1.f, 1.f, 1.f };</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    vd_[3].position = { 1.f, -1.f, -1.f, 1.f };</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    vd_[4].position = { -1.f, 1.f, 1.f, 1.f };</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    vd_[5].position = { -1.f, 1.f, -1.f, 1.f };</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    vd_[6].position = { -1.f, -1.f, 1.f, 1.f };</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    vd_[7].position = { -1.f, -1.f, -1.f, 1.f };</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    vd_[8].position = { -1.f, 1.f, 1.f, 1.f };</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    vd_[9].position = { 1.f, 1.f, 1.f, 1.f };</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    vd_[10].position = { -1.f, -1.f, 1.f, 1.f };</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    vd_[11].position = { 1.f, -1.f, 1.f, 1.f };</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span> </div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    vd_[12].position = { -1.f, 1.f, -1.f, 1.f };</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    vd_[13].position = { 1.f, 1.f, -1.f, 1.f };</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    vd_[14].position = { -1.f, -1.f, -1.f, 1.f };</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    vd_[15].position = { 1.f, -1.f, -1.f, 1.f };</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span> </div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    vd_[16].position = { -1.f, 1.f, -1.f, 1.f };</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    vd_[17].position = { 1.f, 1.f, -1.f, 1.f };</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    vd_[18].position = { -1.f, 1.f, 1.f, 1.f };</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    vd_[19].position = { 1.f, 1.f, 1.f, 1.f };</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    vd_[20].position = { -1.f, -1.f, 1.f, 1.f };</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    vd_[21].position = { 1.f, -1.f, 1.f, 1.f };</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    vd_[22].position = { -1.f, -1.f, -1.f, 1.f };</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    vd_[23].position = { 1.f, -1.f, -1.f, 1.f };</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>}</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span> </div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span><span class="keywordtype">void</span> Skybox::CreateIndex() {</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    ir_ = adapter_-&gt;<a class="code hl_function" href="classDirectXAdapter.html#ab4b4c251cdfee90870ce155e610c9500">CreateBufferResource</a>(<span class="keyword">sizeof</span>(uint32_t) * 36);</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    ibv_.BufferLocation = ir_-&gt;Get()-&gt;GetGPUVirtualAddress();</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    ibv_.SizeInBytes = <span class="keyword">sizeof</span>(uint32_t) * 36;</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    ibv_.Format = DXGI_FORMAT_R32_UINT;</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span> </div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    ir_-&gt;Get()-&gt;Map(0, <span class="keyword">nullptr</span>, <span class="keyword">reinterpret_cast&lt;</span><span class="keywordtype">void</span>**<span class="keyword">&gt;</span>(&amp;id_));</div>
 <div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span> </div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    ir_-&gt;Get()-&gt;Map(0, <span class="keyword">nullptr</span>, <span class="keyword">reinterpret_cast&lt;</span><span class="keywordtype">void</span>**<span class="keyword">&gt;</span>(&amp;id_));</div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span> </div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    <span class="comment">// Right face (0-3)</span></div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    id_[0] = 0; id_[1] = 1; id_[2] = 2;</div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    id_[3] = 1; id_[4] = 3; id_[5] = 2;</div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span> </div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    <span class="comment">// Left face (4-7)</span></div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    id_[6] = 4; id_[7] = 5; id_[8] = 6;</div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    id_[9] = 5; id_[10] = 7; id_[11] = 6;</div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span> </div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>    <span class="comment">// Front face (8-11)</span></div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>    id_[12] = 8; id_[13] = 9; id_[14] = 10;</div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    id_[15] = 9; id_[16] = 11; id_[17] = 10;</div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span> </div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>    <span class="comment">// Back face (12-15)</span></div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>    id_[18] = 12; id_[19] = 13; id_[20] = 14;</div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    id_[21] = 13; id_[22] = 15; id_[23] = 14;</div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span> </div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>    <span class="comment">// Top face (16-19)</span></div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>    id_[24] = 16; id_[25] = 17; id_[26] = 18;</div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>    id_[27] = 17; id_[28] = 19; id_[29] = 18;</div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span> </div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>    <span class="comment">// Bottom face (20-23)</span></div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>    id_[30] = 20; id_[31] = 21; id_[32] = 22;</div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>    id_[33] = 21; id_[34] = 23; id_[35] = 22;</div>
-<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>}</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    <span class="comment">// Right face (0-3)</span></div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>    id_[0] = 0; id_[1] = 1; id_[2] = 2;</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    id_[3] = 1; id_[4] = 3; id_[5] = 2;</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span> </div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    <span class="comment">// Left face (4-7)</span></div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    id_[6] = 4; id_[7] = 5; id_[8] = 6;</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    id_[9] = 5; id_[10] = 7; id_[11] = 6;</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span> </div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    <span class="comment">// Front face (8-11)</span></div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    id_[12] = 8; id_[13] = 9; id_[14] = 10;</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>    id_[15] = 9; id_[16] = 11; id_[17] = 10;</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span> </div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    <span class="comment">// Back face (12-15)</span></div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    id_[18] = 12; id_[19] = 13; id_[20] = 14;</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>    id_[21] = 13; id_[22] = 15; id_[23] = 14;</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span> </div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    <span class="comment">// Top face (16-19)</span></div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>    id_[24] = 16; id_[25] = 17; id_[26] = 18;</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>    id_[27] = 17; id_[28] = 19; id_[29] = 18;</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span> </div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>    <span class="comment">// Bottom face (20-23)</span></div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>    id_[30] = 20; id_[31] = 21; id_[32] = 22;</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>    id_[33] = 21; id_[34] = 23; id_[35] = 22;</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>}</div>
 <div class="ttc" id="aCameraController_8hpp_html"><div class="ttname"><a href="CameraController_8hpp.html">CameraController.hpp</a></div></div>
-<div class="ttc" id="aMathUtils_8hpp_html"><div class="ttname"><a href="MathUtils_8hpp.html">MathUtils.hpp</a></div></div>
-<div class="ttc" id="aSingleton_8hpp_html"><div class="ttname"><a href="Singleton_8hpp.html">Singleton.hpp</a></div></div>
 <div class="ttc" id="aSkybox_8hpp_html"><div class="ttname"><a href="Skybox_8hpp.html">Skybox.hpp</a></div></div>
 <div class="ttc" id="aTextureManager_8hpp_html"><div class="ttname"><a href="TextureManager_8hpp.html">TextureManager.hpp</a></div></div>
-<div class="ttc" id="aclassCommon_html_a4ee372def646bfb254db5de45bb7f5d8"><div class="ttname"><a href="classCommon.html#a4ee372def646bfb254db5de45bb7f5d8">Common::RegisterDebug</a></div><div class="ttdeci">void RegisterDebug(const std::string &amp;_id, const std::function&lt; void()&gt; &amp;_command)</div><div class="ttdef"><b>Definition</b> <a href="Common_8cpp_source.html#l00047">Common.cpp:47</a></div></div>
-<div class="ttc" id="aclassCommon_html_ae93c4bd439c1a6d360c5ba68d13a6d4f"><div class="ttname"><a href="classCommon.html#ae93c4bd439c1a6d360c5ba68d13a6d4f">Common::RegisterDraw</a></div><div class="ttdeci">void RegisterDraw(const std::function&lt; void()&gt; &amp;_command, bool _isApplyPostEffect=true)</div><div class="ttdef"><b>Definition</b> <a href="Common_8cpp_source.html#l00054">Common.cpp:54</a></div></div>
-<div class="ttc" id="aclassCommon_html_af76821d28439133bfde8bedcd657e645"><div class="ttname"><a href="classCommon.html#af76821d28439133bfde8bedcd657e645">Common::GetAdapter</a></div><div class="ttdeci">DirectXAdapter * GetAdapter() const</div><div class="ttdef"><b>Definition</b> <a href="Common_8hpp_source.html#l00036">Common.hpp:36</a></div></div>
-<div class="ttc" id="aclassDirectXAdapter_html_ab4b4c251cdfee90870ce155e610c9500"><div class="ttname"><a href="classDirectXAdapter.html#ab4b4c251cdfee90870ce155e610c9500">DirectXAdapter::CreateBufferResource</a></div><div class="ttdeci">std::unique_ptr&lt; DX12Resource &gt; CreateBufferResource(size_t _size) const</div><div class="ttdoc">バッファリソースを作成</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8cpp_source.html#l00074">DirectXAdapter.cpp:74</a></div></div>
-<div class="ttc" id="aclassDirectXAdapter_html_abc7797e145abbf8c6b66d89ce219adbf"><div class="ttname"><a href="classDirectXAdapter.html#abc7797e145abbf8c6b66d89ce219adbf">DirectXAdapter::GetCommandList</a></div><div class="ttdeci">ID3D12GraphicsCommandList * GetCommandList() const</div><div class="ttdoc">コマンドリストを取得</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8cpp_source.html#l00704">DirectXAdapter.cpp:704</a></div></div>
-<div class="ttc" id="aclassSingleton_html_a7b90075f8e4471743fd3596be874e5d1"><div class="ttname"><a href="classSingleton.html#a7b90075f8e4471743fd3596be874e5d1">Singleton::GetInstance</a></div><div class="ttdeci">static T * GetInstance()</div><div class="ttdoc">シングルトンインスタンスを取得</div><div class="ttdef"><b>Definition</b> <a href="Singleton_8hpp_source.html#l00038">Singleton.hpp:38</a></div></div>
+<div class="ttc" id="aclassCommon_html_a9ee5c7c05e387bc2bda4cdba171740bc"><div class="ttname"><a href="classCommon.html#a9ee5c7c05e387bc2bda4cdba171740bc">Common::RegisterDebug</a></div><div class="ttdeci">void RegisterDebug(const std::string &amp;_id, const std::function&lt; void()&gt; &amp;_func)</div><div class="ttdef"><b>Definition</b> <a href="Common_8cpp_source.html#l00078">Common.cpp:78</a></div></div>
+<div class="ttc" id="aclassCommon_html_ae93c4bd439c1a6d360c5ba68d13a6d4f"><div class="ttname"><a href="classCommon.html#ae93c4bd439c1a6d360c5ba68d13a6d4f">Common::RegisterDraw</a></div><div class="ttdeci">void RegisterDraw(const std::function&lt; void()&gt; &amp;_command, bool _isApplyPostEffect=true)</div><div class="ttdef"><b>Definition</b> <a href="Common_8cpp_source.html#l00090">Common.cpp:90</a></div></div>
+<div class="ttc" id="aclassCommon_html_af76821d28439133bfde8bedcd657e645"><div class="ttname"><a href="classCommon.html#af76821d28439133bfde8bedcd657e645">Common::GetAdapter</a></div><div class="ttdeci">DirectXAdapter * GetAdapter() const</div><div class="ttdef"><b>Definition</b> <a href="Common_8hpp_source.html#l00045">Common.hpp:45</a></div></div>
+<div class="ttc" id="aclassDirectXAdapter_html_ab4b4c251cdfee90870ce155e610c9500"><div class="ttname"><a href="classDirectXAdapter.html#ab4b4c251cdfee90870ce155e610c9500">DirectXAdapter::CreateBufferResource</a></div><div class="ttdeci">std::unique_ptr&lt; DX12Resource &gt; CreateBufferResource(size_t _size) const</div><div class="ttdoc">バッファリソースを作成</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8cpp_source.html#l00079">DirectXAdapter.cpp:79</a></div></div>
+<div class="ttc" id="aclassDirectXAdapter_html_abc7797e145abbf8c6b66d89ce219adbf"><div class="ttname"><a href="classDirectXAdapter.html#abc7797e145abbf8c6b66d89ce219adbf">DirectXAdapter::GetCommandList</a></div><div class="ttdeci">ID3D12GraphicsCommandList * GetCommandList() const</div><div class="ttdoc">コマンドリストを取得</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8cpp_source.html#l00709">DirectXAdapter.cpp:709</a></div></div>
 <div class="ttc" id="aclassSkybox_html_a07f9389e51ff7d429abe6dfe2402bd91"><div class="ttname"><a href="classSkybox.html#a07f9389e51ff7d429abe6dfe2402bd91">Skybox::Update</a></div><div class="ttdeci">void Update()</div><div class="ttdef"><b>Definition</b> <a href="Skybox_8cpp_source.html#l00039">Skybox.cpp:39</a></div></div>
 <div class="ttc" id="aclassSkybox_html_a4169b42038e35350a017fd540a9fd872"><div class="ttname"><a href="classSkybox.html#a4169b42038e35350a017fd540a9fd872">Skybox::Initialize</a></div><div class="ttdeci">void Initialize(const std::string &amp;_texture)</div><div class="ttdef"><b>Definition</b> <a href="Skybox_8cpp_source.html#l00009">Skybox.cpp:9</a></div></div>
-<div class="ttc" id="aclassSkybox_html_a8bf85652e4f0559530eb7a1f5ed87439"><div class="ttname"><a href="classSkybox.html#a8bf85652e4f0559530eb7a1f5ed87439">Skybox::Draw</a></div><div class="ttdeci">void Draw()</div><div class="ttdef"><b>Definition</b> <a href="Skybox_8cpp_source.html#l00052">Skybox.cpp:52</a></div></div>
-<div class="ttc" id="aclassSkybox_html_af8b56738ddf0560ce1d2d50318ea7874"><div class="ttname"><a href="classSkybox.html#af8b56738ddf0560ce1d2d50318ea7874">Skybox::SetColor</a></div><div class="ttdeci">void SetColor(const Vector4 &amp;_color) const</div><div class="ttdef"><b>Definition</b> <a href="Skybox_8cpp_source.html#l00070">Skybox.cpp:70</a></div></div>
+<div class="ttc" id="aclassSkybox_html_a8bf85652e4f0559530eb7a1f5ed87439"><div class="ttname"><a href="classSkybox.html#a8bf85652e4f0559530eb7a1f5ed87439">Skybox::Draw</a></div><div class="ttdeci">void Draw()</div><div class="ttdef"><b>Definition</b> <a href="Skybox_8cpp_source.html#l00050">Skybox.cpp:50</a></div></div>
+<div class="ttc" id="aclassSkybox_html_af8b56738ddf0560ce1d2d50318ea7874"><div class="ttname"><a href="classSkybox.html#af8b56738ddf0560ce1d2d50318ea7874">Skybox::SetColor</a></div><div class="ttdeci">void SetColor(const Vector4 &amp;_color) const</div><div class="ttdef"><b>Definition</b> <a href="Skybox_8cpp_source.html#l00068">Skybox.cpp:68</a></div></div>
 <div class="ttc" id="aclassTextureManager_html"><div class="ttname"><a href="classTextureManager.html">TextureManager</a></div><div class="ttdoc">テクスチャ管理クラス テクスチャの読み込み、キャッシュ、GPUアップロードを管理</div><div class="ttdef"><b>Definition</b> <a href="TextureManager_8hpp_source.html#l00020">TextureManager.hpp:20</a></div></div>
 <div class="ttc" id="aclassTextureManager_html_ab10fdb00af3862499ba1f5e915ffe756"><div class="ttname"><a href="classTextureManager.html#ab10fdb00af3862499ba1f5e915ffe756">TextureManager::GetGPUHandle</a></div><div class="ttdeci">D3D12_GPU_DESCRIPTOR_HANDLE GetGPUHandle(const std::string &amp;_fileName)</div><div class="ttdoc">GPUハンドルを取得（ファイル名指定）</div><div class="ttdef"><b>Definition</b> <a href="TextureManager_8cpp_source.html#l00239">TextureManager.cpp:239</a></div></div>
 <div class="ttc" id="aclassTextureManager_html_ad7d3de3b18a76f2c0116321d6f91c332"><div class="ttname"><a href="classTextureManager.html#ad7d3de3b18a76f2c0116321d6f91c332">TextureManager::Load</a></div><div class="ttdeci">bool Load(const std::string &amp;_fileName)</div><div class="ttdoc">テクスチャを読み込み</div><div class="ttdef"><b>Definition</b> <a href="TextureManager_8cpp_source.html#l00133">TextureManager.cpp:133</a></div></div>
-<div class="ttc" id="anamespaceMathUtils_1_1Matrix_html_a8fa2d3ee433614ddc87db04661ad391d"><div class="ttname"><a href="namespaceMathUtils_1_1Matrix.html#a8fa2d3ee433614ddc87db04661ad391d">MathUtils::Matrix::MakeAffineMatrix</a></div><div class="ttdeci">Matrix4x4 MakeAffineMatrix(const ::Transform &amp;_transform)</div><div class="ttdef"><b>Definition</b> <a href="MathUtils_8cpp_source.html#l00115">MathUtils.cpp:115</a></div></div>
-<div class="ttc" id="astructTransform_html_a2b4006024b283c6af2813e78e7092364"><div class="ttname"><a href="structTransform.html#a2b4006024b283c6af2813e78e7092364">Transform::scale</a></div><div class="ttdeci">Vector3 scale</div><div class="ttdef"><b>Definition</b> <a href="Transform_8hpp_source.html#l00012">Transform.hpp:12</a></div></div>
-<div class="ttc" id="astructVector3_html"><div class="ttname"><a href="structVector3.html">Vector3</a></div><div class="ttdoc">3Dベクトル構造体 3D座標と基本的なベクトル演算を提供</div><div class="ttdef"><b>Definition</b> <a href="Vector3_8hpp_source.html#l00011">Vector3.hpp:11</a></div></div>
-<div class="ttc" id="astructVector3_html_a7e2d3237b29a2f29d7b3d8b2934e35f2"><div class="ttname"><a href="structVector3.html#a7e2d3237b29a2f29d7b3d8b2934e35f2">Vector3::x</a></div><div class="ttdeci">float x</div><div class="ttdef"><b>Definition</b> <a href="Vector3_8hpp_source.html#l00012">Vector3.hpp:12</a></div></div>
-<div class="ttc" id="astructVector4_html"><div class="ttname"><a href="structVector4.html">Vector4</a></div><div class="ttdoc">4Dベクトル構造体 RGBA色や同次座標を表現</div><div class="ttdef"><b>Definition</b> <a href="Vector4_8hpp_source.html#l00007">Vector4.hpp:7</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_8716e6ea5d5c8b3c5facd10ca9f0db56.html">Sky</a></li><li class="navelem"><a class="el" href="Skybox_8cpp.html">Skybox.cpp</a></li>
-    <li class="footer">2026年01月24日(土) 13時46分46秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年03月10日(火) 05時02分34秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

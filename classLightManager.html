@@ -119,11 +119,13 @@ $(document).ready(function(){initNavTree('classLightManager.html',''); initResiz
 <tr class="memitem:a1cf5a5081a0dfe8537200797fe1c4340" id="r_a1cf5a5081a0dfe8537200797fe1c4340"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLightManager.html#a1cf5a5081a0dfe8537200797fe1c4340">Add</a> (<a class="el" href="LightType_8hpp.html#adc3ec8293e6a97ebe43f0196b9a7f638">LightType</a> _type)</td></tr>
 <tr class="memdesc:a1cf5a5081a0dfe8537200797fe1c4340"><td class="mdescLeft">&#160;</td><td class="mdescRight">ライトを追加  <br /></td></tr>
 <tr class="separator:a1cf5a5081a0dfe8537200797fe1c4340"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af1e218e68b00dff11b67759e27ef409e" id="r_af1e218e68b00dff11b67759e27ef409e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLightManager.html#af1e218e68b00dff11b67759e27ef409e">SetPosition</a> (<a class="el" href="structVector3.html">Vector3</a> _pos)</td></tr>
+<tr class="memitem:af1e218e68b00dff11b67759e27ef409e" id="r_af1e218e68b00dff11b67759e27ef409e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLightManager.html#af1e218e68b00dff11b67759e27ef409e">SetPosition</a> (Vector3 _pos)</td></tr>
 <tr class="memdesc:af1e218e68b00dff11b67759e27ef409e"><td class="mdescLeft">&#160;</td><td class="mdescRight">ライトの参照座標を設定  <br /></td></tr>
 <tr class="separator:af1e218e68b00dff11b67759e27ef409e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a23646e79e7b43996337b393dd588a58e" id="r_a23646e79e7b43996337b393dd588a58e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLightManager.html#a23646e79e7b43996337b393dd588a58e">ClearRef</a> ()</td></tr>
 <tr class="separator:a23646e79e7b43996337b393dd588a58e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afda303d28ee98410cfb5ccf0ade55a47" id="r_afda303d28ee98410cfb5ccf0ade55a47"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLightManager.html#afda303d28ee98410cfb5ccf0ade55a47">Debug</a> ()</td></tr>
+<tr class="separator:afda303d28ee98410cfb5ccf0ade55a47"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">詳解</h2>
 <div class="textblock"><p>ライト管理クラス 指向性ライト、点光源、スポットライトを統合管理 </p>
@@ -174,9 +176,11 @@ $(document).ready(function(){initNavTree('classLightManager.html',''); initResiz
   </dd>
 </dl>
 
-<p class="definition"> <a class="el" href="LightManager_8cpp_source.html">LightManager.cpp</a> の <a class="el" href="LightManager_8cpp_source.html#l00222">222</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="LightManager_8cpp_source.html">LightManager.cpp</a> の <a class="el" href="LightManager_8cpp_source.html#l00255">255</a> 行目に定義があります。</p>
 
 <p class="reference">参照先 <a class="el" href="LightType_8hpp.html#adc3ec8293e6a97ebe43f0196b9a7f638ab04a8341537fac392bfd17776491d03c">Directional</a>, <a class="el" href="LightType_8hpp.html#adc3ec8293e6a97ebe43f0196b9a7f638a2a3cd5946cfd317eb99c3d32e35e2d4c">Point</a>, <a class="el" href="LightType_8hpp.html#adc3ec8293e6a97ebe43f0196b9a7f638a6c9d6b8aea6f3d16847bdebe05878a2d">Spot</a>.</p>
+
+<p class="reference">参照元 <a class="el" href="LightManager_8cpp_source.html#l00023">Debug()</a>.</p>
 
 </div>
 </div>
@@ -195,7 +199,30 @@ $(document).ready(function(){initNavTree('classLightManager.html',''); initResiz
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="LightManager_8cpp_source.html">LightManager.cpp</a> の <a class="el" href="LightManager_8cpp_source.html#l00280">280</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="LightManager_8cpp_source.html">LightManager.cpp</a> の <a class="el" href="LightManager_8cpp_source.html#l00313">313</a> 行目に定義があります。</p>
+
+<p class="reference">参照元 <a class="el" href="LightManager_8cpp_source.html#l00023">Debug()</a>.</p>
+
+</div>
+</div>
+<a id="afda303d28ee98410cfb5ccf0ade55a47" name="afda303d28ee98410cfb5ccf0ade55a47"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afda303d28ee98410cfb5ccf0ade55a47">&#9670;&#160;</a></span>Debug()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void LightManager::Debug </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="LightManager_8cpp_source.html">LightManager.cpp</a> の <a class="el" href="LightManager_8cpp_source.html#l00023">23</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="LightManager_8cpp_source.html#l00255">Add()</a>, <a class="el" href="LightManager_8cpp_source.html#l00313">ClearRef()</a>, <a class="el" href="LightType_8hpp.html#adc3ec8293e6a97ebe43f0196b9a7f638ab04a8341537fac392bfd17776491d03c">Directional</a>, <a class="el" href="DebugUI_8cpp_source.html#l00170">DebugUI::IsVisible()</a>, <a class="el" href="LightType_8hpp.html#adc3ec8293e6a97ebe43f0196b9a7f638a2a3cd5946cfd317eb99c3d32e35e2d4c">Point</a>, <a class="el" href="DebugUI_8cpp_source.html#l00152">DebugUI::RegisterCommand()</a>, <a class="el" href="LightType_8hpp.html#adc3ec8293e6a97ebe43f0196b9a7f638a6c9d6b8aea6f3d16847bdebe05878a2d">Spot</a>.</p>
 
 </div>
 </div>
@@ -216,7 +243,7 @@ $(document).ready(function(){initNavTree('classLightManager.html',''); initResiz
 
 <p>ライトを描画 </p>
 
-<p class="definition"> <a class="el" href="LightManager_8cpp_source.html">LightManager.cpp</a> の <a class="el" href="LightManager_8cpp_source.html#l00215">215</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="LightManager_8cpp_source.html">LightManager.cpp</a> の <a class="el" href="LightManager_8cpp_source.html#l00248">248</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -255,11 +282,11 @@ $(document).ready(function(){initNavTree('classLightManager.html',''); initResiz
   </dd>
 </dl>
 
-<p class="definition"> <a class="el" href="LightManager_8cpp_source.html">LightManager.cpp</a> の <a class="el" href="LightManager_8cpp_source.html#l00163">163</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="LightManager_8cpp_source.html">LightManager.cpp</a> の <a class="el" href="LightManager_8cpp_source.html#l00195">195</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="DirectXAdapter_8cpp_source.html#l00074">DirectXAdapter::CreateBufferResource()</a>, <a class="el" href="DirectXAdapter_8cpp_source.html#l00704">DirectXAdapter::GetCommandList()</a>, <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::INFO</a>, <a class="el" href="Log_8cpp_source.html#l00067">Log::Send()</a>.</p>
+<p class="reference">参照先 <a class="el" href="DirectXAdapter_8cpp_source.html#l00079">DirectXAdapter::CreateBufferResource()</a>, <a class="el" href="DirectXAdapter_8cpp_source.html#l00709">DirectXAdapter::GetCommandList()</a>, <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::INFO</a>, <a class="el" href="DebugUI_8cpp_source.html#l00160">DebugUI::RegisterMenuButton()</a>, <a class="el" href="Log_8cpp_source.html#l00108">Log::Send()</a>.</p>
 
-<p class="reference">参照元 <a class="el" href="Framework_8cpp_source.html#l00008">Framework::Framework()</a>.</p>
+<p class="reference">参照元 <a class="el" href="Framework_8cpp_source.html#l00009">Framework::Framework()</a>.</p>
 
 </div>
 </div>
@@ -272,7 +299,7 @@ $(document).ready(function(){initNavTree('classLightManager.html',''); initResiz
         <tr>
           <td class="memname">void LightManager::SetPosition </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structVector3.html">Vector3</a>&#160;</td>
+          <td class="paramtype">Vector3&#160;</td>
           <td class="paramname"><em>_pos</em></td><td>)</td>
           <td></td>
         </tr>
@@ -287,7 +314,7 @@ $(document).ready(function(){initNavTree('classLightManager.html',''); initResiz
   </dd>
 </dl>
 
-<p class="definition"> <a class="el" href="LightManager_8cpp_source.html">LightManager.cpp</a> の <a class="el" href="LightManager_8cpp_source.html#l00264">264</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="LightManager_8cpp_source.html">LightManager.cpp</a> の <a class="el" href="LightManager_8cpp_source.html#l00297">297</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -308,7 +335,7 @@ $(document).ready(function(){initNavTree('classLightManager.html',''); initResiz
 
 <p>ライトの更新処理 </p>
 
-<p class="definition"> <a class="el" href="LightManager_8cpp_source.html">LightManager.cpp</a> の <a class="el" href="LightManager_8cpp_source.html#l00197">197</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="LightManager_8cpp_source.html">LightManager.cpp</a> の <a class="el" href="LightManager_8cpp_source.html#l00231">231</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -322,7 +349,7 @@ $(document).ready(function(){initNavTree('classLightManager.html',''); initResiz
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classLightManager.html">LightManager</a></li>
-    <li class="footer">2026年01月24日(土) 13時46分46秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年03月10日(火) 05時02分34秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

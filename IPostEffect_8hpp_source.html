@@ -103,12 +103,12 @@ $(document).ready(function(){initNavTree('IPostEffect_8hpp_source.html',''); ini
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;<a class="code" href="DirectXAdapter_8hpp.html">src/DirectX/DirectXAdapter.hpp</a>&quot;</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="SRVManager_8h.html">src/DirectX/Heap/SRVManager.h</a>&quot;</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;<a class="code" href="PipelineStateObject_8hpp.html">src/DirectX/GraphicsPipeline/Object/PipelineStateObject.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;externals/json/json.hpp&quot;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;json.hpp&quot;</span></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
 <div class="foldopen" id="foldopen00011" data-start="{" data-end="};">
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="classIPostEffect.html">   11</a></span><span class="keyword">class </span><a class="code hl_class" href="classIPostEffect.html">IPostEffect</a> {</div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">protected</span>:</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="classIPostEffect.html#ae0dc01028757f721f28df7ba30cdd48e">   13</a></span>    <span class="keyword">const</span> <a class="code hl_struct" href="structVector4.html">Vector4</a> <a class="code hl_variable" href="classIPostEffect.html#ae0dc01028757f721f28df7ba30cdd48e">CLEAR_COLOR</a> = { 0.2f, 0.2f, 0.2f, 1.0f };</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="classIPostEffect.html#ae0dc01028757f721f28df7ba30cdd48e">   13</a></span>    <span class="keyword">const</span> Vector4 <a class="code hl_variable" href="classIPostEffect.html#ae0dc01028757f721f28df7ba30cdd48e">CLEAR_COLOR</a> = { 0.2f, 0.2f, 0.2f, 1.0f };</div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="classIPostEffect.html#af243e74d5ae3c7c51202d7d75ca87873">   15</a></span>    <a class="code hl_class" href="classDirectXAdapter.html">DirectXAdapter</a>* <a class="code hl_variable" href="classIPostEffect.html#af243e74d5ae3c7c51202d7d75ca87873">adapter_</a> = <span class="keyword">nullptr</span>;</div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="classIPostEffect.html#aebebf521e696773487be1412f9d8a509">   16</a></span>    <a class="code hl_class" href="classSRVManager.html">SRVManager</a>* <a class="code hl_variable" href="classIPostEffect.html#aebebf521e696773487be1412f9d8a509">srv_</a> = <span class="keyword">nullptr</span>;</div>
@@ -142,31 +142,14 @@ $(document).ready(function(){initNavTree('IPostEffect_8hpp_source.html',''); ini
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
 <div class="line"><a id="l00072" name="l00072"></a><span class="lineno"><a class="line" href="classIPostEffect.html#a6646b9d42682d20f9fde8aa44d42a82e">   72</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classIPostEffect.html#a6646b9d42682d20f9fde8aa44d42a82e">UpdateAnimation</a>(<span class="keywordtype">float</span> _t) = 0;</div>
 <div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    <span class="comment">//virtual std::vector&lt;std::string&gt; GetKeyframeNames() const = 0;</span></div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    <span class="comment">//</span></div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    <span class="comment">//virtual std::vector&lt;std::string&gt; GetKeyframeOrder() const = 0;</span></div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    <span class="comment">//</span></div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    <span class="comment">//virtual void SetKeyframeOrder(const std::vector&lt;std::string&gt;&amp; order) = 0;</span></div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    <span class="comment">//</span></div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    <span class="comment">//virtual bool AddKeyframe(const std::string&amp; name) = 0;</span></div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    <span class="comment">//</span></div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    <span class="comment">//virtual bool RemoveKeyframe(const std::string&amp; name) = 0;</span></div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    <span class="comment">//</span></div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    <span class="comment">//virtual bool RenameKeyframe(const std::string&amp; oldName, const std::string&amp; newName) = 0;</span></div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    <span class="comment">//</span></div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    <span class="comment">//virtual void EditKeyframe(const std::string&amp; keyframeName) = 0;</span></div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    <span class="comment">//</span></div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    <span class="comment">//virtual void ApplyKeyframe(const std::string&amp; keyframeName) = 0;</span></div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    <span class="comment">//</span></div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>    <span class="comment">//virtual void CaptureCurrentStateAsKeyframe(const std::string&amp; keyframeName) = 0;</span></div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span> </div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span><span class="keyword">protected</span>:</div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classIPostEffect.html#aca73455bd632277bf5cc476313c83217">CreateOutput</a>();</div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno"><a class="line" href="classIPostEffect.html#a714a743aff95fad87356f280810dd286">  134</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classIPostEffect.html#a714a743aff95fad87356f280810dd286">Modifier</a>() = 0;</div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>}; <span class="comment">// class IPostEffect</span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="keyword">protected</span>:</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classIPostEffect.html#aca73455bd632277bf5cc476313c83217">CreateOutput</a>();</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno"><a class="line" href="classIPostEffect.html#a714a743aff95fad87356f280810dd286">   79</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classIPostEffect.html#a714a743aff95fad87356f280810dd286">Modifier</a>() = 0;</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>}; <span class="comment">// class IPostEffect</span></div>
 </div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span> </div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span><span class="preprocessor">#endif </span><span class="comment">// IPostEffect_HPP_</span></div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="preprocessor">#endif </span><span class="comment">// IPostEffect_HPP_</span></div>
 <div class="ttc" id="aDirectXAdapter_8hpp_html"><div class="ttname"><a href="DirectXAdapter_8hpp.html">DirectXAdapter.hpp</a></div></div>
 <div class="ttc" id="aPipelineStateObject_8hpp_html"><div class="ttname"><a href="PipelineStateObject_8hpp.html">PipelineStateObject.hpp</a></div></div>
 <div class="ttc" id="aSRVManager_8h_html"><div class="ttname"><a href="SRVManager_8h.html">SRVManager.h</a></div></div>
@@ -186,21 +169,20 @@ $(document).ready(function(){initNavTree('IPostEffect_8hpp_source.html',''); ini
 <div class="ttc" id="aclassIPostEffect_html_a714a743aff95fad87356f280810dd286"><div class="ttname"><a href="classIPostEffect.html#a714a743aff95fad87356f280810dd286">IPostEffect::Modifier</a></div><div class="ttdeci">virtual void Modifier()=0</div></div>
 <div class="ttc" id="aclassIPostEffect_html_a74aee36fc8d995e104765a99a1e49f49"><div class="ttname"><a href="classIPostEffect.html#a74aee36fc8d995e104765a99a1e49f49">IPostEffect::~IPostEffect</a></div><div class="ttdeci">virtual ~IPostEffect()=default</div></div>
 <div class="ttc" id="aclassIPostEffect_html_a92340d8f3785eaf52501ac02866c549a"><div class="ttname"><a href="classIPostEffect.html#a92340d8f3785eaf52501ac02866c549a">IPostEffect::Apply</a></div><div class="ttdeci">D3D12_GPU_DESCRIPTOR_HANDLE Apply(D3D12_GPU_DESCRIPTOR_HANDLE _handle)</div><div class="ttdoc">ポストエフェクトを適用</div><div class="ttdef"><b>Definition</b> <a href="IPostEffect_8cpp_source.html#l00014">IPostEffect.cpp:14</a></div></div>
-<div class="ttc" id="aclassIPostEffect_html_aca73455bd632277bf5cc476313c83217"><div class="ttname"><a href="classIPostEffect.html#aca73455bd632277bf5cc476313c83217">IPostEffect::CreateOutput</a></div><div class="ttdeci">void CreateOutput()</div><div class="ttdef"><b>Definition</b> <a href="IPostEffect_8cpp_source.html#l00037">IPostEffect.cpp:37</a></div></div>
+<div class="ttc" id="aclassIPostEffect_html_aca73455bd632277bf5cc476313c83217"><div class="ttname"><a href="classIPostEffect.html#aca73455bd632277bf5cc476313c83217">IPostEffect::CreateOutput</a></div><div class="ttdeci">void CreateOutput()</div><div class="ttdoc">出力リソースの作成</div><div class="ttdef"><b>Definition</b> <a href="IPostEffect_8cpp_source.html#l00037">IPostEffect.cpp:37</a></div></div>
 <div class="ttc" id="aclassIPostEffect_html_ad5b0aba2047a34e79d563f1ee0fe008f"><div class="ttname"><a href="classIPostEffect.html#ad5b0aba2047a34e79d563f1ee0fe008f">IPostEffect::pso_</a></div><div class="ttdeci">std::unique_ptr&lt; PipelineStateObject &gt; pso_</div><div class="ttdef"><b>Definition</b> <a href="IPostEffect_8hpp_source.html#l00018">IPostEffect.hpp:18</a></div></div>
 <div class="ttc" id="aclassIPostEffect_html_add903b173582345e40decf67fde5ee2f"><div class="ttname"><a href="classIPostEffect.html#add903b173582345e40decf67fde5ee2f">IPostEffect::handle_</a></div><div class="ttdeci">D3D12_GPU_DESCRIPTOR_HANDLE handle_</div><div class="ttdef"><b>Definition</b> <a href="IPostEffect_8hpp_source.html#l00024">IPostEffect.hpp:24</a></div></div>
 <div class="ttc" id="aclassIPostEffect_html_ae0dc01028757f721f28df7ba30cdd48e"><div class="ttname"><a href="classIPostEffect.html#ae0dc01028757f721f28df7ba30cdd48e">IPostEffect::CLEAR_COLOR</a></div><div class="ttdeci">const Vector4 CLEAR_COLOR</div><div class="ttdef"><b>Definition</b> <a href="IPostEffect_8hpp_source.html#l00013">IPostEffect.hpp:13</a></div></div>
 <div class="ttc" id="aclassIPostEffect_html_aebebf521e696773487be1412f9d8a509"><div class="ttname"><a href="classIPostEffect.html#aebebf521e696773487be1412f9d8a509">IPostEffect::srv_</a></div><div class="ttdeci">SRVManager * srv_</div><div class="ttdef"><b>Definition</b> <a href="IPostEffect_8hpp_source.html#l00016">IPostEffect.hpp:16</a></div></div>
 <div class="ttc" id="aclassIPostEffect_html_af243e74d5ae3c7c51202d7d75ca87873"><div class="ttname"><a href="classIPostEffect.html#af243e74d5ae3c7c51202d7d75ca87873">IPostEffect::adapter_</a></div><div class="ttdeci">DirectXAdapter * adapter_</div><div class="ttdef"><b>Definition</b> <a href="IPostEffect_8hpp_source.html#l00015">IPostEffect.hpp:15</a></div></div>
 <div class="ttc" id="aclassSRVManager_html"><div class="ttname"><a href="classSRVManager.html">SRVManager</a></div><div class="ttdef"><b>Definition</b> <a href="SRVManager_8h_source.html#l00010">SRVManager.h:10</a></div></div>
-<div class="ttc" id="astructVector4_html"><div class="ttname"><a href="structVector4.html">Vector4</a></div><div class="ttdoc">4Dベクトル構造体 RGBA色や同次座標を表現</div><div class="ttdef"><b>Definition</b> <a href="Vector4_8hpp_source.html#l00007">Vector4.hpp:7</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_0aad7dfa151619e6dfb72b346155edbe.html">PostProcess</a></li><li class="navelem"><a class="el" href="IPostEffect_8hpp.html">IPostEffect.hpp</a></li>
-    <li class="footer">2026年01月24日(土) 13時46分46秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年03月10日(火) 05時02分34秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

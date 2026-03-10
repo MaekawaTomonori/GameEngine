@@ -1,6 +1,7 @@
 var classSprite =
 [
     [ "Sprite", "classSprite.html#a12cba3ac1868418add3c4d95ce87e615", null ],
+    [ "~Sprite", "classSprite.html#a8accab430f9d90ae5117b57d67e32b84", null ],
     [ "Draw", "classSprite.html#a054a4c340c14c3d218b99e484bf83d21", null ],
     [ "GetAnchorPoint", "classSprite.html#a3c4c7d54444c311da2b4baa2d605e399", null ],
     [ "GetColor", "classSprite.html#a31202ac855810107f97b1ce627a1771c", null ],

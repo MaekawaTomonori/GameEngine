@@ -1,14 +1,22 @@
 var classParticleSystem =
 [
     [ "EmitterConfig", "structParticleSystem_1_1EmitterConfig.html", "structParticleSystem_1_1EmitterConfig" ],
-    [ "GroupEditor", "classParticleSystem_1_1GroupEditor.html", "classParticleSystem_1_1GroupEditor" ],
+    [ "Template", "structParticleSystem_1_1Template.html", "structParticleSystem_1_1Template" ],
+    [ "TemplateEditor", "classParticleSystem_1_1TemplateEditor.html", "classParticleSystem_1_1TemplateEditor" ],
+    [ "SpawnFunc", "classParticleSystem.html#a51b5f16dd713454699d433f767e741ba", null ],
+    [ "UpdateFunc", "classParticleSystem.html#ac60924e91a2ab7daeb0becb3befcd5ff", null ],
     [ "ParticleSystem", "classParticleSystem.html#a3d651451d4d86b109d54b8ce11a56f49", null ],
-    [ "Delete", "classParticleSystem.html#abda7865c5a246517aef5a0462f946578", null ],
+    [ "ClearActive", "classParticleSystem.html#a3e49cce419af6e16f331bc7fa3fe4666", null ],
+    [ "Debug", "classParticleSystem.html#ac1acbb946e972d60c3c19837077cac4e", null ],
+    [ "DeleteTemplate", "classParticleSystem.html#addc81e7079a8fe7f7b5967a21641f287", null ],
     [ "Draw", "classParticleSystem.html#af4ff722847f80477a37a3b24a9237568", null ],
-    [ "Edit", "classParticleSystem.html#ae73864156f57357d232a07c8b9e9e0a5", null ],
-    [ "Emit", "classParticleSystem.html#a898b3cd177eb2492305e0b9220fab360", null ],
-    [ "Enable", "classParticleSystem.html#acecf0eb3c63704c5e0d8a541fd9e4997", null ],
+    [ "Emit", "classParticleSystem.html#a42fdb6b7f9f940aca1feeeec4d5ab384", null ],
     [ "Initialize", "classParticleSystem.html#a582067f4beec2abe2320ab1378be9fca", null ],
-    [ "Register", "classParticleSystem.html#a0f58f02d748ef02b5d28285abe0c1275", null ],
+    [ "LoadTemplate", "classParticleSystem.html#a484987c7c3b6df13923e492a969d54c7", null ],
+    [ "Register", "classParticleSystem.html#a94125e0be2fd21a7a7e0707f7440bea6", null ],
+    [ "Register", "classParticleSystem.html#a029f815cbfdbe687f91cf9bfa72c7131", null ],
+    [ "RegisterSpawnFunc", "classParticleSystem.html#a965e45c694b5c949d83d622c7247d650", null ],
+    [ "RegisterUpdateFunc", "classParticleSystem.html#a416ddf7b359420456fc349735eeb9542", null ],
+    [ "SaveTemplate", "classParticleSystem.html#a4b536a4b5ac3b36f1c56207f782bed1b", null ],
     [ "Update", "classParticleSystem.html#a219f527d3fc6a502adbdeeb6d5efb72b", null ]
 ];

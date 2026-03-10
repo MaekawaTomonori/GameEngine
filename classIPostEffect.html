@@ -150,13 +150,14 @@ IPostEffect の継承関係図</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 限定公開メンバ関数</h2></td></tr>
 <tr class="memitem:aca73455bd632277bf5cc476313c83217" id="r_aca73455bd632277bf5cc476313c83217"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIPostEffect.html#aca73455bd632277bf5cc476313c83217">CreateOutput</a> ()</td></tr>
+<tr class="memdesc:aca73455bd632277bf5cc476313c83217"><td class="mdescLeft">&#160;</td><td class="mdescRight">出力リソースの作成  <br /></td></tr>
 <tr class="separator:aca73455bd632277bf5cc476313c83217"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a714a743aff95fad87356f280810dd286" id="r_a714a743aff95fad87356f280810dd286"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIPostEffect.html#a714a743aff95fad87356f280810dd286">Modifier</a> ()=0</td></tr>
 <tr class="separator:a714a743aff95fad87356f280810dd286"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 限定公開変数類</h2></td></tr>
-<tr class="memitem:ae0dc01028757f721f28df7ba30cdd48e" id="r_ae0dc01028757f721f28df7ba30cdd48e"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structVector4.html">Vector4</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIPostEffect.html#ae0dc01028757f721f28df7ba30cdd48e">CLEAR_COLOR</a> = { 0.2f, 0.2f, 0.2f, 1.0f }</td></tr>
+<tr class="memitem:ae0dc01028757f721f28df7ba30cdd48e" id="r_ae0dc01028757f721f28df7ba30cdd48e"><td class="memItemLeft" align="right" valign="top">const Vector4&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIPostEffect.html#ae0dc01028757f721f28df7ba30cdd48e">CLEAR_COLOR</a> = { 0.2f, 0.2f, 0.2f, 1.0f }</td></tr>
 <tr class="separator:ae0dc01028757f721f28df7ba30cdd48e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af243e74d5ae3c7c51202d7d75ca87873" id="r_af243e74d5ae3c7c51202d7d75ca87873"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classDirectXAdapter.html">DirectXAdapter</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIPostEffect.html#af243e74d5ae3c7c51202d7d75ca87873">adapter_</a> = nullptr</td></tr>
 <tr class="separator:af243e74d5ae3c7c51202d7d75ca87873"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -231,7 +232,7 @@ IPostEffect の継承関係図</div>
 
 <p class="definition"> <a class="el" href="IPostEffect_8cpp_source.html">IPostEffect.cpp</a> の <a class="el" href="IPostEffect_8cpp_source.html#l00014">14</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="IPostEffect_8hpp_source.html#l00015">adapter_</a>, <a class="el" href="Utils_8cpp_source.html#l00057">Utils::Alert()</a>, <a class="el" href="IPostEffect_8hpp_source.html#l00013">CLEAR_COLOR</a>, <a class="el" href="DirectXAdapter_8cpp_source.html#l00704">DirectXAdapter::GetCommandList()</a>, <a class="el" href="SRVManager_8cpp_source.html#l00095">SRVManager::GetGPUHandle()</a>, <a class="el" href="IPostEffect_8hpp_source.html#l00023">index_</a>, <a class="el" href="classIPostEffect.html#a714a743aff95fad87356f280810dd286">Modifier()</a>, <a class="el" href="IPostEffect_8hpp_source.html#l00019">output_</a>, <a class="el" href="IPostEffect_8hpp_source.html#l00018">pso_</a>, <a class="el" href="IPostEffect_8hpp_source.html#l00021">rtvHandle_</a>, <a class="el" href="IPostEffect_8hpp_source.html#l00016">srv_</a>, <a class="el" href="Vector4_8hpp_source.html#l00008">Vector4::x</a>.</p>
+<p class="reference">参照先 <a class="el" href="IPostEffect_8hpp_source.html#l00015">adapter_</a>, <a class="el" href="IPostEffect_8hpp_source.html#l00013">CLEAR_COLOR</a>, <a class="el" href="DirectXAdapter_8cpp_source.html#l00709">DirectXAdapter::GetCommandList()</a>, <a class="el" href="SRVManager_8cpp_source.html#l00095">SRVManager::GetGPUHandle()</a>, <a class="el" href="IPostEffect_8hpp_source.html#l00023">index_</a>, <a class="el" href="classIPostEffect.html#a714a743aff95fad87356f280810dd286">Modifier()</a>, <a class="el" href="IPostEffect_8hpp_source.html#l00019">output_</a>, <a class="el" href="IPostEffect_8hpp_source.html#l00018">pso_</a>, <a class="el" href="IPostEffect_8hpp_source.html#l00021">rtvHandle_</a>, <a class="el" href="IPostEffect_8hpp_source.html#l00016">srv_</a>.</p>
 
 </div>
 </div>
@@ -258,9 +259,11 @@ IPostEffect の継承関係図</div>
 </table>
 </div><div class="memdoc">
 
+<p>出力リソースの作成 </p>
+
 <p class="definition"> <a class="el" href="IPostEffect_8cpp_source.html">IPostEffect.cpp</a> の <a class="el" href="IPostEffect_8cpp_source.html#l00037">37</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="IPostEffect_8hpp_source.html#l00015">adapter_</a>, <a class="el" href="SRVManager_8cpp_source.html#l00033">SRVManager::Allocate()</a>, <a class="el" href="IPostEffect_8hpp_source.html#l00013">CLEAR_COLOR</a>, <a class="el" href="DirectXAdapter_8cpp_source.html#l00186">DirectXAdapter::CreateRenderTextureResource()</a>, <a class="el" href="SRVManager_8cpp_source.html#l00048">SRVManager::CreateSRVforTexture2D()</a>, <a class="el" href="SRVManager_8cpp_source.html#l00095">SRVManager::GetGPUHandle()</a>, <a class="el" href="DirectXAdapter_8cpp_source.html#l00712">DirectXAdapter::GetHeight()</a>, <a class="el" href="DirectXAdapter_8cpp_source.html#l00708">DirectXAdapter::GetWidth()</a>, <a class="el" href="IPostEffect_8hpp_source.html#l00024">handle_</a>, <a class="el" href="IPostEffect_8hpp_source.html#l00023">index_</a>, <a class="el" href="IPostEffect_8hpp_source.html#l00019">output_</a>, <a class="el" href="IPostEffect_8hpp_source.html#l00016">srv_</a>.</p>
+<p class="reference">参照先 <a class="el" href="IPostEffect_8hpp_source.html#l00015">adapter_</a>, <a class="el" href="SRVManager_8cpp_source.html#l00033">SRVManager::Allocate()</a>, <a class="el" href="IPostEffect_8hpp_source.html#l00013">CLEAR_COLOR</a>, <a class="el" href="DirectXAdapter_8cpp_source.html#l00191">DirectXAdapter::CreateRenderTextureResource()</a>, <a class="el" href="SRVManager_8cpp_source.html#l00048">SRVManager::CreateSRVForTexture2D()</a>, <a class="el" href="SRVManager_8cpp_source.html#l00095">SRVManager::GetGPUHandle()</a>, <a class="el" href="DirectXAdapter_8cpp_source.html#l00717">DirectXAdapter::GetHeight()</a>, <a class="el" href="DirectXAdapter_8cpp_source.html#l00713">DirectXAdapter::GetWidth()</a>, <a class="el" href="IPostEffect_8hpp_source.html#l00024">handle_</a>, <a class="el" href="IPostEffect_8hpp_source.html#l00023">index_</a>, <a class="el" href="IPostEffect_8hpp_source.html#l00019">output_</a>, <a class="el" href="IPostEffect_8hpp_source.html#l00016">srv_</a>.</p>
 
 <p class="reference">参照元 <a class="el" href="IPostEffect_8cpp_source.html#l00007">SetUp()</a>.</p>
 
@@ -351,14 +354,14 @@ IPostEffect の継承関係図</div>
 <p>プリセットからパラメータを読み込み </p>
 <dl class="params"><dt>引数</dt><dd>
   <table class="params">
-    <tr><td class="paramname">presetName</td><td>プリセット名 </td></tr>
+    <tr><td class="paramname">_presetName</td><td>プリセット名 </td></tr>
   </table>
   </dd>
 </dl>
 
 <p><a class="el" href="classBoxBlur.html#a102748b48272258d006574b049c78b00">BoxBlur</a>, <a class="el" href="classGrayscale.html#a9af04511f5580904093dafaed9601871">Grayscale</a>, <a class="el" href="classVignette.html#a2b83f2b09cf94c745d658ce23b0cbeb2">Vignette</a>で実装されています。</p>
 
-<p class="reference">参照元 <a class="el" href="PostProcessExecutor_8cpp_source.html#l00341">PostProcessExecutor::ApplyPreset()</a>.</p>
+<p class="reference">参照元 <a class="el" href="PostProcessExecutor_8cpp_source.html#l00400">PostProcessExecutor::ApplyPreset()</a>.</p>
 
 </div>
 </div>
@@ -448,7 +451,7 @@ IPostEffect の継承関係図</div>
 <p>現在のパラメータをプリセットとして保存 </p>
 <dl class="params"><dt>引数</dt><dd>
   <table class="params">
-    <tr><td class="paramname">presetName</td><td>プリセット名 </td></tr>
+    <tr><td class="paramname">_presetName</td><td>プリセット名 </td></tr>
   </table>
   </dd>
 </dl>
@@ -476,14 +479,14 @@ IPostEffect の継承関係図</div>
 <p>RTVハンドルを設定 </p>
 <dl class="params"><dt>引数</dt><dd>
   <table class="params">
-    <tr><td class="paramname">rtvHandle</td><td>RTVハンドル </td></tr>
+    <tr><td class="paramname">_rtvHandle</td><td>RTVハンドル </td></tr>
   </table>
   </dd>
 </dl>
 
 <p class="definition"> <a class="el" href="IPostEffect_8cpp_source.html">IPostEffect.cpp</a> の <a class="el" href="IPostEffect_8cpp_source.html#l00045">45</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="IPostEffect_8hpp_source.html#l00015">adapter_</a>, <a class="el" href="DirectXAdapter_8cpp_source.html#l00700">DirectXAdapter::GetDevice()</a>, <a class="el" href="IPostEffect_8hpp_source.html#l00019">output_</a>, <a class="el" href="IPostEffect_8hpp_source.html#l00021">rtvHandle_</a>.</p>
+<p class="reference">参照先 <a class="el" href="IPostEffect_8hpp_source.html#l00015">adapter_</a>, <a class="el" href="DirectXAdapter_8cpp_source.html#l00705">DirectXAdapter::GetDevice()</a>, <a class="el" href="IPostEffect_8hpp_source.html#l00019">output_</a>, <a class="el" href="IPostEffect_8hpp_source.html#l00021">rtvHandle_</a>.</p>
 
 </div>
 </div>
@@ -555,7 +558,7 @@ IPostEffect の継承関係図</div>
 <p>アニメーション進行（tは0.0~1.0） </p>
 <dl class="params"><dt>引数</dt><dd>
   <table class="params">
-    <tr><td class="paramname">t</td><td>アニメーション進行度（0.0: 開始、1.0: 終了） </td></tr>
+    <tr><td class="paramname">_t</td><td>アニメーション進行度（0.0: 開始、1.0: 終了） </td></tr>
   </table>
   </dd>
 </dl>
@@ -601,7 +604,7 @@ IPostEffect の継承関係図</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const <a class="el" href="structVector4.html">Vector4</a> IPostEffect::CLEAR_COLOR = { 0.2f, 0.2f, 0.2f, 1.0f }</td>
+          <td class="memname">const Vector4 IPostEffect::CLEAR_COLOR = { 0.2f, 0.2f, 0.2f, 1.0f }</td>
         </tr>
       </table>
   </td>
@@ -783,7 +786,7 @@ IPostEffect の継承関係図</div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classIPostEffect.html">IPostEffect</a></li>
-    <li class="footer">2026年01月24日(土) 13時46分46秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年03月10日(火) 05時02分34秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

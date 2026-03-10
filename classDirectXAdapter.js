@@ -21,6 +21,7 @@ var classDirectXAdapter =
     [ "GetSwapChain", "classDirectXAdapter.html#aa2dd5421a95bb06f49d6cda5d8222fa5", null ],
     [ "GetWidth", "classDirectXAdapter.html#a0fba31180c1f84825e4b5da99fdc3371", null ],
     [ "GetWindowHandle", "classDirectXAdapter.html#a7dbec72fb7c4efcfc6cdda738aecafcb", null ],
+    [ "Initialize", "classDirectXAdapter.html#a0d43436aa69fd3a5fb2f462b47b74600", null ],
     [ "PreProcess", "classDirectXAdapter.html#a5caa8b31df1102febe4016600a6c7fbd", null ],
     [ "UpdateWindowSize", "classDirectXAdapter.html#a76807e209ac784429e5f7a3a47763b16", null ],
     [ "WaitForFenceValue", "classDirectXAdapter.html#a7793686074430b7c1cff3a7ee3cd2513", null ]

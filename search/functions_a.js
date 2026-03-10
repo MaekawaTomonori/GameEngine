@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['norm_0',['Norm',['../structQuaternion.html#ab11a4f9fbf353d5d2eda3234e9bba8ff',1,'Quaternion']]],
-  ['normalize_1',['normalize',['../structQuaternion.html#a16841b42b0aa39e8b95dc1a089405424',1,'Quaternion::Normalize()'],['../structVector2.html#a3b597b3bfeb114dd9e157b86330e087d',1,'Vector2::Normalize()'],['../structVector3.html#a6f95af15a3f75b78de506f3eb6baa6fc',1,'Vector3::Normalize()']]]
+  ['model_0',['Model',['../classModel.html#ae3b375de5f6df4faf74a95d64748e048',1,'Model']]],
+  ['modifier_1',['modifier',['../classBoxBlur.html#a46a6e5b5244d72b9ec5e56cce20bf19f',1,'BoxBlur::Modifier()'],['../classGrayscale.html#a1da256e18d825b92a0570883fe29fdab',1,'Grayscale::Modifier()'],['../classIPostEffect.html#a714a743aff95fad87356f280810dd286',1,'IPostEffect::Modifier()'],['../classVignette.html#a49055542d8d230abc9e01cd6a062f551',1,'Vignette::Modifier()']]]
 ];

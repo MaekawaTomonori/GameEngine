@@ -105,7 +105,7 @@ $(document).ready(function(){initNavTree('SceneFactory_8cpp_source.html',''); in
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;<a class="code" href="IScene_8hpp.html">IScene.hpp</a>&quot;</span></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;<a class="code" href="Log_8hpp.html">Log.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;<a class="code" href="Utils_8hpp.html">Utils.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;Utils.hpp&quot;</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
 <div class="foldopen" id="foldopen00010" data-start="{" data-end="}">
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="classSceneFactory.html#a3a0bda92952a96dd9210fc34b31c6ea3">   10</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classSceneFactory.html#a3a0bda92952a96dd9210fc34b31c6ea3">SceneFactory::Register</a>(<span class="keyword">const</span> std::string&amp; _name, <span class="keyword">const</span> CreateFunc&amp; _creator) {</div>
@@ -120,7 +120,7 @@ $(document).ready(function(){initNavTree('SceneFactory_8cpp_source.html',''); in
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>        <span class="keywordflow">return</span> creators_[_name]();</div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    }</div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <a class="code hl_function" href="namespaceUtils.html#a7889f3d633f2e561e30dd11e6fc80af0">Utils::Alert</a>(<span class="stringliteral">&quot;Scene not found: &quot;</span> + _name);</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    Utils::Alert(<span class="stringliteral">&quot;Scene not found: &quot;</span> + _name);</div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <span class="keywordflow">throw</span> std::runtime_error(<span class="stringliteral">&quot;Scene not found: &quot;</span> + _name);</div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>}</div>
 </div>
@@ -136,23 +136,21 @@ $(document).ready(function(){initNavTree('SceneFactory_8cpp_source.html',''); in
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>}</div>
 </div>
 <div class="ttc" id="aIScene_8hpp_html"><div class="ttname"><a href="IScene_8hpp.html">IScene.hpp</a></div></div>
-<div class="ttc" id="aInput_8hpp_html_a8f8f80d37794cde9472343e4487ba3eb"><div class="ttname"><a href="Input_8hpp.html#a8f8f80d37794cde9472343e4487ba3eb">name</a></div><div class="ttdeci">const char * name</div><div class="ttdef"><b>Definition</b> <a href="Input_8hpp_source.html#l00058">Input.hpp:58</a></div></div>
+<div class="ttc" id="aInput_8hpp_html_a8f8f80d37794cde9472343e4487ba3eb"><div class="ttname"><a href="Input_8hpp.html#a8f8f80d37794cde9472343e4487ba3eb">name</a></div><div class="ttdeci">const char * name</div><div class="ttdef"><b>Definition</b> <a href="Input_8hpp_source.html#l00094">Input.hpp:94</a></div></div>
 <div class="ttc" id="aLog_8hpp_html"><div class="ttname"><a href="Log_8hpp.html">Log.hpp</a></div></div>
 <div class="ttc" id="aSceneFactory_8hpp_html"><div class="ttname"><a href="SceneFactory_8hpp.html">SceneFactory.hpp</a></div></div>
-<div class="ttc" id="aUtils_8hpp_html"><div class="ttname"><a href="Utils_8hpp.html">Utils.hpp</a></div></div>
-<div class="ttc" id="aclassLog_html_af351e7d4bd43c85e7c90f52846b64bdb"><div class="ttname"><a href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a></div><div class="ttdeci">static void Send(Level _level, const std::string &amp;_message=&quot;&quot;)</div><div class="ttdoc">ログメッセージを送信</div><div class="ttdef"><b>Definition</b> <a href="Log_8cpp_source.html#l00067">Log.cpp:67</a></div></div>
+<div class="ttc" id="aclassLog_html_af351e7d4bd43c85e7c90f52846b64bdb"><div class="ttname"><a href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a></div><div class="ttdeci">static void Send(Level _level, const std::string &amp;_message=&quot;&quot;)</div><div class="ttdoc">ログメッセージを送信</div><div class="ttdef"><b>Definition</b> <a href="Log_8cpp_source.html#l00108">Log.cpp:108</a></div></div>
 <div class="ttc" id="aclassLog_html_afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3"><div class="ttname"><a href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a></div><div class="ttdeci">@ INFO</div></div>
 <div class="ttc" id="aclassSceneFactory_html_a3a0bda92952a96dd9210fc34b31c6ea3"><div class="ttname"><a href="classSceneFactory.html#a3a0bda92952a96dd9210fc34b31c6ea3">SceneFactory::Register</a></div><div class="ttdeci">void Register(const std::string &amp;_name, const CreateFunc &amp;_creator)</div><div class="ttdoc">シーンを登録する</div><div class="ttdef"><b>Definition</b> <a href="SceneFactory_8cpp_source.html#l00010">SceneFactory.cpp:10</a></div></div>
 <div class="ttc" id="aclassSceneFactory_html_abfbf3b135bd5502097da799b33fabb73"><div class="ttname"><a href="classSceneFactory.html#abfbf3b135bd5502097da799b33fabb73">SceneFactory::GetRegisteredScenes</a></div><div class="ttdeci">std::vector&lt; std::string &gt; GetRegisteredScenes() const</div><div class="ttdoc">登録されているシーン名の一覧を取得</div><div class="ttdef"><b>Definition</b> <a href="SceneFactory_8cpp_source.html#l00024">SceneFactory.cpp:24</a></div></div>
 <div class="ttc" id="aclassSceneFactory_html_aec3ef6e03b42bf6ce26b70159955d918"><div class="ttname"><a href="classSceneFactory.html#aec3ef6e03b42bf6ce26b70159955d918">SceneFactory::Create</a></div><div class="ttdeci">std::unique_ptr&lt; IScene &gt; Create(const std::string &amp;_name)</div><div class="ttdoc">シーンを生成（純粋仮想関数）</div><div class="ttdef"><b>Definition</b> <a href="SceneFactory_8cpp_source.html#l00015">SceneFactory.cpp:15</a></div></div>
-<div class="ttc" id="anamespaceUtils_html_a7889f3d633f2e561e30dd11e6fc80af0"><div class="ttname"><a href="namespaceUtils.html#a7889f3d633f2e561e30dd11e6fc80af0">Utils::Alert</a></div><div class="ttdeci">void Alert(const std::string &amp;_msg)</div><div class="ttdef"><b>Definition</b> <a href="Utils_8cpp_source.html#l00057">Utils.cpp:57</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_204260ac86670e69c647eaba8962e745.html">Scene</a></li><li class="navelem"><a class="el" href="SceneFactory_8cpp.html">SceneFactory.cpp</a></li>
-    <li class="footer">2026年01月24日(土) 13時46分46秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年03月10日(火) 05時02分34秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

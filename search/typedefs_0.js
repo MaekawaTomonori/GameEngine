@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['finalizer_0',['Finalizer',['../classSingletonFinalizer.html#a8d9e9542a58232910399d29613404d0d',1,'SingletonFinalizer']]]
+  ['json_0',['json',['../PostProcessExecutor_8cpp.html#ab701e3ac61a85b337ec5c1abaad6742d',1,'json:&#160;PostProcessExecutor.cpp'],['../Vignette_8cpp.html#ab701e3ac61a85b337ec5c1abaad6742d',1,'json:&#160;Vignette.cpp']]]
 ];

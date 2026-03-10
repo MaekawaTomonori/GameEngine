@@ -114,17 +114,18 @@ $(document).ready(function(){initNavTree('classIGame.html',''); initResizable();
 <tr class="memitem:ab38f58665f28f32bc05963da39469578" id="r_ab38f58665f28f32bc05963da39469578"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSceneSwitcher.html">SceneSwitcher</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIGame.html#ab38f58665f28f32bc05963da39469578">GetSceneSwitcher</a> () const</td></tr>
 <tr class="memdesc:ab38f58665f28f32bc05963da39469578"><td class="mdescLeft">&#160;</td><td class="mdescRight">シーン切り替え管理を取得  <br /></td></tr>
 <tr class="separator:ab38f58665f28f32bc05963da39469578"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0bef264333ba4f348b3327caf21a39ab" id="r_a0bef264333ba4f348b3327caf21a39ab"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIGame.html#a0bef264333ba4f348b3327caf21a39ab">SetPostEffectFactory</a> (std::unique_ptr&lt; <a class="el" href="classAbstractPostEffectFactory.html">AbstractPostEffectFactory</a> &gt; _factory)</td></tr>
-<tr class="memdesc:a0bef264333ba4f348b3327caf21a39ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">PostEffectFactoryを設定  <br /></td></tr>
-<tr class="separator:a0bef264333ba4f348b3327caf21a39ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a27f695d8d56c521fd27ee5f227f7dec5" id="r_a27f695d8d56c521fd27ee5f227f7dec5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classAbstractPostEffectFactory.html">AbstractPostEffectFactory</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIGame.html#a27f695d8d56c521fd27ee5f227f7dec5">GetPostEffectFactory</a> () const</td></tr>
 <tr class="memdesc:a27f695d8d56c521fd27ee5f227f7dec5"><td class="mdescLeft">&#160;</td><td class="mdescRight">PostEffectFactoryを取得  <br /></td></tr>
 <tr class="separator:a27f695d8d56c521fd27ee5f227f7dec5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 限定公開メンバ関数</h2></td></tr>
-<tr class="memitem:ab26bd3e24ef61ebc577a1a9642af843f" id="r_ab26bd3e24ef61ebc577a1a9642af843f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIGame.html#ab26bd3e24ef61ebc577a1a9642af843f">RegisterScene</a> (const std::string &amp;_name, const std::function&lt; std::unique_ptr&lt; <a class="el" href="classIScene.html">IScene</a> &gt;()&gt; &amp;_creator) const</td></tr>
-<tr class="separator:ab26bd3e24ef61ebc577a1a9642af843f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a2385ce3901b2ba2a5ce858c7fb9406" id="r_a8a2385ce3901b2ba2a5ce858c7fb9406"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a8a2385ce3901b2ba2a5ce858c7fb9406"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classIGame.html#a8a2385ce3901b2ba2a5ce858c7fb9406">RegisterScene</a> (const std::string &amp;_name)</td></tr>
+<tr class="separator:a8a2385ce3901b2ba2a5ce858c7fb9406"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0bef264333ba4f348b3327caf21a39ab" id="r_a0bef264333ba4f348b3327caf21a39ab"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIGame.html#a0bef264333ba4f348b3327caf21a39ab">SetPostEffectFactory</a> (std::unique_ptr&lt; <a class="el" href="classAbstractPostEffectFactory.html">AbstractPostEffectFactory</a> &gt; _factory)</td></tr>
+<tr class="memdesc:a0bef264333ba4f348b3327caf21a39ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">PostEffectFactoryを設定  <br /></td></tr>
+<tr class="separator:a0bef264333ba4f348b3327caf21a39ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">詳解</h2>
 <div class="textblock"><p>ゲーム実装の基底インターフェース シーン管理と設定の統合を提供 </p>
@@ -246,11 +247,13 @@ $(document).ready(function(){initNavTree('classIGame.html',''); initResizable();
 
 </div>
 </div>
-<a id="ab26bd3e24ef61ebc577a1a9642af843f" name="ab26bd3e24ef61ebc577a1a9642af843f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab26bd3e24ef61ebc577a1a9642af843f">&#9670;&#160;</a></span>RegisterScene()</h2>
+<a id="a8a2385ce3901b2ba2a5ce858c7fb9406" name="a8a2385ce3901b2ba2a5ce858c7fb9406"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8a2385ce3901b2ba2a5ce858c7fb9406">&#9670;&#160;</a></span>RegisterScene()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -259,28 +262,18 @@ $(document).ready(function(){initNavTree('classIGame.html',''); initResizable();
           <td class="memname">void IGame::RegisterScene </td>
           <td>(</td>
           <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>_name</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramname"><em>_name</em></td><td>)</td>
           <td></td>
-          <td class="paramtype">const std::function&lt; std::unique_ptr&lt; <a class="el" href="classIScene.html">IScene</a> &gt;()&gt; &amp;&#160;</td>
-          <td class="paramname"><em>_creator</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="IGame_8cpp_source.html">IGame.cpp</a> の <a class="el" href="IGame_8cpp_source.html#l00022">22</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="IGame_8hpp_source.html">IGame.hpp</a> の <a class="el" href="IGame_8hpp_source.html#l00038">38</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -289,6 +282,9 @@ $(document).ready(function(){initNavTree('classIGame.html',''); initResizable();
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void IGame::SetPostEffectFactory </td>
@@ -298,6 +294,11 @@ $(document).ready(function(){initNavTree('classIGame.html',''); initResizable();
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>PostEffectFactoryを設定 </p>
@@ -322,7 +323,7 @@ $(document).ready(function(){initNavTree('classIGame.html',''); initResizable();
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classIGame.html">IGame</a></li>
-    <li class="footer">2026年01月24日(土) 13時46分46秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年03月10日(火) 05時02分34秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

@@ -108,7 +108,7 @@ $(document).ready(function(){initNavTree('Vignette_8hpp_source.html',''); initRe
 <div class="foldopen" id="foldopen00008" data-start="{" data-end="};">
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno"><a class="line" href="classVignette.html">    8</a></span><span class="keyword">class </span><a class="code hl_class" href="classVignette.html">Vignette</a> : <span class="keyword">public</span> <a class="code hl_class" href="classIPostEffect.html">IPostEffect</a>{</div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>    <span class="keyword">struct </span>Material {</div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>        <a class="code hl_struct" href="structVector4.html">Vector4</a> color;</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>        Vector4 color;</div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>        <span class="keywordtype">float</span> intensity;</div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>        <span class="keywordtype">float</span> scale;</div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>        <span class="keywordtype">float</span> pad[2];</div>
@@ -117,50 +117,47 @@ $(document).ready(function(){initNavTree('Vignette_8hpp_source.html',''); initRe
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <span class="keyword">struct </span>KeyframeData {</div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>        <span class="keywordtype">float</span> intensity;</div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>        <span class="keywordtype">float</span> scale;</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>        <a class="code hl_struct" href="structVector4.html">Vector4</a> color;</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>        Vector4 color;</div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    };</div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    std::unique_ptr&lt;DX12Resource&gt; mr_;</div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    Material* material_ = <span class="keyword">nullptr</span>;</div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <span class="comment">// キーフレームデータ</span></div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    std::unordered_map&lt;std::string, KeyframeData&gt; keyframes_;</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    std::vector&lt;std::string&gt; keyframeOrder_;</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classVignette.html#a5e68bdb30ed18087d5b0c964550f1409">Initialize</a>() <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classVignette.html#a738704cd88ac0149b7f5c40aee475d04">Debug</a>() <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <span class="comment">// プリセットシステム</span></div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classVignette.html#a2b83f2b09cf94c745d658ce23b0cbeb2">LoadPreset</a>(<span class="keyword">const</span> std::string&amp; _presetName) <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classVignette.html#aa77f630cfbd8d167aa94f8ff1fa005b2">SavePreset</a>(<span class="keyword">const</span> std::string&amp; _presetName) <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    nlohmann::json <a class="code hl_function" href="classVignette.html#a5555514987eeec54915583f0c02898f8">SaveParameters</a>() <span class="keyword">const override</span>;</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classVignette.html#a546d80e5d21d1804a21a919ba2f34855">UpdateAnimation</a>(<span class="keywordtype">float</span> _t) <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="keyword">protected</span>:</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classVignette.html#a49055542d8d230abc9e01cd6a062f551">Modifier</a>() <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>}; <span class="comment">// class Vignette</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    std::unordered_map&lt;std::string, KeyframeData&gt; keyframes_;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    std::vector&lt;std::string&gt; keyframeOrder_;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classVignette.html#a5e68bdb30ed18087d5b0c964550f1409">Initialize</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classVignette.html#a738704cd88ac0149b7f5c40aee475d04">Debug</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classVignette.html#a2b83f2b09cf94c745d658ce23b0cbeb2">LoadPreset</a>(<span class="keyword">const</span> std::string&amp; _presetName) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classVignette.html#aa77f630cfbd8d167aa94f8ff1fa005b2">SavePreset</a>(<span class="keyword">const</span> std::string&amp; _presetName) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    nlohmann::json <a class="code hl_function" href="classVignette.html#a5555514987eeec54915583f0c02898f8">SaveParameters</a>() <span class="keyword">const override</span>;</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classVignette.html#a546d80e5d21d1804a21a919ba2f34855">UpdateAnimation</a>(<span class="keywordtype">float</span> _t) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="keyword">protected</span>:</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classVignette.html#a49055542d8d230abc9e01cd6a062f551">Modifier</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>}; <span class="comment">// class Vignette</span></div>
 </div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="preprocessor">#endif </span><span class="comment">// Vignette_HPP_</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="preprocessor">#endif </span><span class="comment">// Vignette_HPP_</span></div>
 <div class="ttc" id="aIPostEffect_8hpp_html"><div class="ttname"><a href="IPostEffect_8hpp.html">IPostEffect.hpp</a></div></div>
 <div class="ttc" id="aclassIPostEffect_html"><div class="ttname"><a href="classIPostEffect.html">IPostEffect</a></div><div class="ttdoc">ポストエフェクト基底インターフェース シェーダーベースのポストプロセス効果を実装するための基底クラス</div><div class="ttdef"><b>Definition</b> <a href="IPostEffect_8hpp_source.html#l00011">IPostEffect.hpp:11</a></div></div>
 <div class="ttc" id="aclassVignette_html"><div class="ttname"><a href="classVignette.html">Vignette</a></div><div class="ttdef"><b>Definition</b> <a href="Vignette_8hpp_source.html#l00008">Vignette.hpp:8</a></div></div>
-<div class="ttc" id="aclassVignette_html_a2b83f2b09cf94c745d658ce23b0cbeb2"><div class="ttname"><a href="classVignette.html#a2b83f2b09cf94c745d658ce23b0cbeb2">Vignette::LoadPreset</a></div><div class="ttdeci">void LoadPreset(const std::string &amp;_presetName) override</div><div class="ttdoc">プリセットからパラメータを読み込み</div><div class="ttdef"><b>Definition</b> <a href="Vignette_8cpp_source.html#l00076">Vignette.cpp:76</a></div></div>
+<div class="ttc" id="aclassVignette_html_a2b83f2b09cf94c745d658ce23b0cbeb2"><div class="ttname"><a href="classVignette.html#a2b83f2b09cf94c745d658ce23b0cbeb2">Vignette::LoadPreset</a></div><div class="ttdeci">void LoadPreset(const std::string &amp;_presetName) override</div><div class="ttdef"><b>Definition</b> <a href="Vignette_8cpp_source.html#l00076">Vignette.cpp:76</a></div></div>
 <div class="ttc" id="aclassVignette_html_a49055542d8d230abc9e01cd6a062f551"><div class="ttname"><a href="classVignette.html#a49055542d8d230abc9e01cd6a062f551">Vignette::Modifier</a></div><div class="ttdeci">void Modifier() override</div><div class="ttdef"><b>Definition</b> <a href="Vignette_8cpp_source.html#l00072">Vignette.cpp:72</a></div></div>
 <div class="ttc" id="aclassVignette_html_a546d80e5d21d1804a21a919ba2f34855"><div class="ttname"><a href="classVignette.html#a546d80e5d21d1804a21a919ba2f34855">Vignette::UpdateAnimation</a></div><div class="ttdeci">void UpdateAnimation(float _t) override</div><div class="ttdoc">アニメーション進行（tは0.0~1.0）</div><div class="ttdef"><b>Definition</b> <a href="Vignette_8cpp_source.html#l00126">Vignette.cpp:126</a></div></div>
 <div class="ttc" id="aclassVignette_html_a5555514987eeec54915583f0c02898f8"><div class="ttname"><a href="classVignette.html#a5555514987eeec54915583f0c02898f8">Vignette::SaveParameters</a></div><div class="ttdeci">nlohmann::json SaveParameters() const override</div><div class="ttdoc">現在のパラメータをJSONに変換</div><div class="ttdef"><b>Definition</b> <a href="Vignette_8cpp_source.html#l00177">Vignette.cpp:177</a></div></div>
 <div class="ttc" id="aclassVignette_html_a5e68bdb30ed18087d5b0c964550f1409"><div class="ttname"><a href="classVignette.html#a5e68bdb30ed18087d5b0c964550f1409">Vignette::Initialize</a></div><div class="ttdeci">void Initialize() override</div><div class="ttdoc">初期化処理（純粋仮想関数）</div><div class="ttdef"><b>Definition</b> <a href="Vignette_8cpp_source.html#l00013">Vignette.cpp:13</a></div></div>
 <div class="ttc" id="aclassVignette_html_a738704cd88ac0149b7f5c40aee475d04"><div class="ttname"><a href="classVignette.html#a738704cd88ac0149b7f5c40aee475d04">Vignette::Debug</a></div><div class="ttdeci">void Debug() override</div><div class="ttdoc">デバッグ情報の表示（純粋仮想関数）</div><div class="ttdef"><b>Definition</b> <a href="Vignette_8cpp_source.html#l00065">Vignette.cpp:65</a></div></div>
 <div class="ttc" id="aclassVignette_html_aa77f630cfbd8d167aa94f8ff1fa005b2"><div class="ttname"><a href="classVignette.html#aa77f630cfbd8d167aa94f8ff1fa005b2">Vignette::SavePreset</a></div><div class="ttdeci">void SavePreset(const std::string &amp;_presetName) override</div><div class="ttdoc">現在のパラメータをプリセットとして保存</div><div class="ttdef"><b>Definition</b> <a href="Vignette_8cpp_source.html#l00159">Vignette.cpp:159</a></div></div>
-<div class="ttc" id="astructVector4_html"><div class="ttname"><a href="structVector4.html">Vector4</a></div><div class="ttdoc">4Dベクトル構造体 RGBA色や同次座標を表現</div><div class="ttdef"><b>Definition</b> <a href="Vector4_8hpp_source.html#l00007">Vector4.hpp:7</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_0aad7dfa151619e6dfb72b346155edbe.html">PostProcess</a></li><li class="navelem"><a class="el" href="dir_a7594c29b96b0187ff8200dc240e13ab.html">Vignette</a></li><li class="navelem"><a class="el" href="Vignette_8hpp.html">Vignette.hpp</a></li>
-    <li class="footer">2026年01月24日(土) 13時46分46秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年03月10日(火) 05時02分34秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

@@ -143,6 +143,12 @@ ITransitionEffect の継承関係図</div>
 <tr class="memitem:a0ff17f30b070137b34ef5484097c8da0" id="r_a0ff17f30b070137b34ef5484097c8da0"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classITransitionEffect.html#a0ff17f30b070137b34ef5484097c8da0">IsFinished</a> () const =0</td></tr>
 <tr class="memdesc:a0ff17f30b070137b34ef5484097c8da0"><td class="mdescLeft">&#160;</td><td class="mdescRight">トランジションが完了したかを判定（純粋仮想関数）  <br /></td></tr>
 <tr class="separator:a0ff17f30b070137b34ef5484097c8da0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a867f0851e4db61f6f4e82855f57d27aa" id="r_a867f0851e4db61f6f4e82855f57d27aa"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classITransitionEffect.html#a86868f632ccdf014543bbf471096227b">State</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classITransitionEffect.html#a867f0851e4db61f6f4e82855f57d27aa">GetCurrentState</a> () const =0</td></tr>
+<tr class="memdesc:a867f0851e4db61f6f4e82855f57d27aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">現在のステートを取得（純粋仮想関数）  <br /></td></tr>
+<tr class="separator:a867f0851e4db61f6f4e82855f57d27aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afaacf23661afc879ebc8b2c93207ca0c" id="r_afaacf23661afc879ebc8b2c93207ca0c"><td class="memItemLeft" align="right" valign="top">virtual float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classITransitionEffect.html#afaacf23661afc879ebc8b2c93207ca0c">GetProgress</a> () const =0</td></tr>
+<tr class="memdesc:afaacf23661afc879ebc8b2c93207ca0c"><td class="mdescLeft">&#160;</td><td class="mdescRight">現在の進行度を取得（純粋仮想関数）  <br /></td></tr>
+<tr class="separator:afaacf23661afc879ebc8b2c93207ca0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">詳解</h2>
 <div class="textblock"><p>トランジションエフェクト基底インターフェース シーン遷移時のエフェクトを実装するための基底クラス </p>
@@ -233,6 +239,65 @@ ITransitionEffect の継承関係図</div>
 <p>描画処理（純粋仮想関数） </p>
 
 <p><a class="el" href="classFade.html#a00518228e2892a2adefbb3ee51fd218a">Fade</a>で実装されています。</p>
+
+</div>
+</div>
+<a id="a867f0851e4db61f6f4e82855f57d27aa" name="a867f0851e4db61f6f4e82855f57d27aa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a867f0851e4db61f6f4e82855f57d27aa">&#9670;&#160;</a></span>GetCurrentState()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="classITransitionEffect.html#a86868f632ccdf014543bbf471096227b">State</a> ITransitionEffect::GetCurrentState </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>現在のステートを取得（純粋仮想関数） </p>
+
+<p><a class="el" href="classFade.html#a33913fc68b1403093a7bf3b41e88009c">Fade</a>で実装されています。</p>
+
+</div>
+</div>
+<a id="afaacf23661afc879ebc8b2c93207ca0c" name="afaacf23661afc879ebc8b2c93207ca0c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afaacf23661afc879ebc8b2c93207ca0c">&#9670;&#160;</a></span>GetProgress()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual float ITransitionEffect::GetProgress </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>現在の進行度を取得（純粋仮想関数） </p>
+<dl class="section return"><dt>戻り値</dt><dd>0.0（透明）〜 1.0（黒） </dd></dl>
+
+<p><a class="el" href="classFade.html#aa5d9b709bd5bb977e52cf87c9a24d117">Fade</a>で実装されています。</p>
 
 </div>
 </div>
@@ -409,7 +474,7 @@ ITransitionEffect の継承関係図</div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classITransitionEffect.html">ITransitionEffect</a></li>
-    <li class="footer">2026年01月24日(土) 13時46分46秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年03月10日(火) 05時02分34秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

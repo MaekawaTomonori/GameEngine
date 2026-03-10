@@ -105,11 +105,11 @@ $(document).ready(function(){initNavTree('Grayscale_8hpp_source.html',''); initR
 <div class="foldopen" id="foldopen00005" data-start="{" data-end="};">
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno"><a class="line" href="classGrayscale.html">    5</a></span><span class="keyword">class </span><a class="code hl_class" href="classGrayscale.html">Grayscale</a> : <span class="keyword">public</span> <a class="code hl_class" href="classIPostEffect.html">IPostEffect</a>{</div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span>    <span class="keyword">struct </span>Material {</div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span>        <a class="code hl_struct" href="structVector4.html">Vector4</a> color;</div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span>        Vector4 color;</div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>    };</div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>    <span class="keyword">const</span> <a class="code hl_struct" href="structVector4.html">Vector4</a> GRAY = { 0.2125f, 0.7154f, 0.0721f, 1.0f };</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    <span class="keyword">const</span> <a class="code hl_struct" href="structVector4.html">Vector4</a> SEPIA = { 1.f, 74.f / 107.f, 43.f / 107.f, 1.0f };</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>    <span class="keyword">const</span> Vector4 GRAY = { 0.2125f, 0.7154f, 0.0721f, 1.0f };</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    <span class="keyword">const</span> Vector4 SEPIA = { 1.f, 74.f / 107.f, 43.f / 107.f, 1.0f };</div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    std::unique_ptr&lt;DX12Resource&gt; mr_;</div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    Material* material_ = <span class="keyword">nullptr</span>;</div>
@@ -140,14 +140,13 @@ $(document).ready(function(){initNavTree('Grayscale_8hpp_source.html',''); initR
 <div class="ttc" id="aclassGrayscale_html_aad0c3aa5ab24a899eef1e50f7a960057"><div class="ttname"><a href="classGrayscale.html#aad0c3aa5ab24a899eef1e50f7a960057">Grayscale::Initialize</a></div><div class="ttdeci">void Initialize() override</div><div class="ttdoc">初期化処理（純粋仮想関数）</div><div class="ttdef"><b>Definition</b> <a href="Grayscale_8cpp_source.html#l00005">Grayscale.cpp:5</a></div></div>
 <div class="ttc" id="aclassGrayscale_html_af55675ffed17015380b877c476eb452b"><div class="ttname"><a href="classGrayscale.html#af55675ffed17015380b877c476eb452b">Grayscale::SaveParameters</a></div><div class="ttdeci">nlohmann::json SaveParameters() const override</div><div class="ttdoc">現在のパラメータをJSONに変換</div><div class="ttdef"><b>Definition</b> <a href="Grayscale_8cpp_source.html#l00071">Grayscale.cpp:71</a></div></div>
 <div class="ttc" id="aclassIPostEffect_html"><div class="ttname"><a href="classIPostEffect.html">IPostEffect</a></div><div class="ttdoc">ポストエフェクト基底インターフェース シェーダーベースのポストプロセス効果を実装するための基底クラス</div><div class="ttdef"><b>Definition</b> <a href="IPostEffect_8hpp_source.html#l00011">IPostEffect.hpp:11</a></div></div>
-<div class="ttc" id="astructVector4_html"><div class="ttname"><a href="structVector4.html">Vector4</a></div><div class="ttdoc">4Dベクトル構造体 RGBA色や同次座標を表現</div><div class="ttdef"><b>Definition</b> <a href="Vector4_8hpp_source.html#l00007">Vector4.hpp:7</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_0aad7dfa151619e6dfb72b346155edbe.html">PostProcess</a></li><li class="navelem"><a class="el" href="dir_564e41b2c7a98322ed4c95fc249a12eb.html">Grayscale</a></li><li class="navelem"><a class="el" href="Grayscale_8hpp.html">Grayscale.hpp</a></li>
-    <li class="footer">2026年01月24日(土) 13時46分46秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年03月10日(火) 05時02分34秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

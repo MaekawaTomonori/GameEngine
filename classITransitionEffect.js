@@ -7,6 +7,8 @@ var classITransitionEffect =
     ] ],
     [ "~ITransitionEffect", "classITransitionEffect.html#ae98699e1c162b8cd4be6e77cbf30f730", null ],
     [ "Draw", "classITransitionEffect.html#a29885ceb927475e3ba1b1241dd8fb7ce", null ],
+    [ "GetCurrentState", "classITransitionEffect.html#a867f0851e4db61f6f4e82855f57d27aa", null ],
+    [ "GetProgress", "classITransitionEffect.html#afaacf23661afc879ebc8b2c93207ca0c", null ],
     [ "Initialize", "classITransitionEffect.html#a4a3bc4334d4eab7f5a7b266c17c4ed90", null ],
     [ "IsFinished", "classITransitionEffect.html#a0ff17f30b070137b34ef5484097c8da0", null ],
     [ "Start", "classITransitionEffect.html#ad54658ab82607e397441faf55e64be64", null ],

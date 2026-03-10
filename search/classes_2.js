@@ -5,8 +5,10 @@ var searchData=
   ['cameradirector_2',['CameraDirector',['../classCameraDirector.html',1,'']]],
   ['cameraforgpu_3',['CameraForGpu',['../structCameraForGpu.html',1,'']]],
   ['camerarepository_4',['CameraRepository',['../classCameraRepository.html',1,'']]],
-  ['common_5',['Common',['../classCommon.html',1,'']]],
-  ['computepipeline_6',['ComputePipeline',['../classComputePipeline.html',1,'']]],
-  ['config_7',['Config',['../structGameEngine_1_1Config.html',1,'GameEngine']]],
-  ['context_8',['Context',['../structSceneSwitcher_1_1Context.html',1,'SceneSwitcher']]]
+  ['canvas_5',['Canvas',['../classUi_1_1Canvas.html',1,'Ui']]],
+  ['collisionmanager_6',['CollisionManager',['../classCollisionManager.html',1,'']]],
+  ['common_7',['Common',['../classCommon.html',1,'']]],
+  ['computepipeline_8',['ComputePipeline',['../classComputePipeline.html',1,'']]],
+  ['config_9',['Config',['../structGameEngine_1_1Config.html',1,'GameEngine']]],
+  ['context_10',['Context',['../structSceneSwitcher_1_1Context.html',1,'SceneSwitcher']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['trace_0',['TRACE',['../classLog.html#afb5d4c945d835d194a295461d752531ea2d3e4144aa384b18849ab9a8abad74d6',1,'Log']]]
+  ['point_0',['Point',['../LightType_8hpp.html#adc3ec8293e6a97ebe43f0196b9a7f638a2a3cd5946cfd317eb99c3d32e35e2d4c',1,'LightType.hpp']]]
 ];

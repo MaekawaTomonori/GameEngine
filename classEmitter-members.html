@@ -102,6 +102,8 @@ $(document).ready(function(){initNavTree('classEmitter.html',''); initResizable(
   <tr class="odd"><td class="entry"><a class="el" href="classEmitter.html#ade89f82a8db08880833a0786ed8f812f">Emitter</a>(DirectXAdapter *_adapter, SRVManager *_srv)</td><td class="entry"><a class="el" href="classEmitter.html">Emitter</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classEmitter.html#a15dfb67ed3eee79e5160770747dc18b2">Enable</a>(bool _active=true)</td><td class="entry"><a class="el" href="classEmitter.html">Emitter</a></td><td class="entry"></td></tr>
   <tr class="odd"><td class="entry"><a class="el" href="classEmitter.html#aca523935cb30696904d953e0f8193b9a">Initialize</a>(const MeshData &amp;_mesh)</td><td class="entry"><a class="el" href="classEmitter.html">Emitter</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classEmitter.html#a32cd672a9952510f7c6edb57d600e4d5">IsFinished</a>() const</td><td class="entry"><a class="el" href="classEmitter.html">Emitter</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classEmitter.html#a75b599d0f0986459cd1346ea8fd9068e">Reset</a>()</td><td class="entry"><a class="el" href="classEmitter.html">Emitter</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classEmitter.html#af3723d6f82e61f1f999cbee7989c32f1">SetColor</a>(const Vector4 &amp;_color)</td><td class="entry"><a class="el" href="classEmitter.html">Emitter</a></td><td class="entry"></td></tr>
   <tr class="odd"><td class="entry"><a class="el" href="classEmitter.html#a3da27ca5ddd18d5724d36f0114268b90">SetDuration</a>(const float &amp;_duration)</td><td class="entry"><a class="el" href="classEmitter.html">Emitter</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classEmitter.html#ae21fe745d7375257ee5c6b405ecd7f34">SetFrequency</a>(const float &amp;_frequency)</td><td class="entry"><a class="el" href="classEmitter.html">Emitter</a></td><td class="entry"></td></tr>
@@ -109,16 +111,17 @@ $(document).ready(function(){initNavTree('classEmitter.html',''); initResizable(
   <tr class="even"><td class="entry"><a class="el" href="classEmitter.html#ae8cc5409733765eac82c3002a59377cf">SetSize</a>(const float &amp;_size)</td><td class="entry"><a class="el" href="classEmitter.html">Emitter</a></td><td class="entry"></td></tr>
   <tr class="odd"><td class="entry"><a class="el" href="classEmitter.html#a7a2bb4c1974bab313ae69f9dc3766ce7">SetSize</a>(const Vector3 &amp;_size)</td><td class="entry"><a class="el" href="classEmitter.html">Emitter</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classEmitter.html#a909a63b866dd041e6f58a60ea97229d1">SetSpawnCount</a>(const uint16_t &amp;_count)</td><td class="entry"><a class="el" href="classEmitter.html">Emitter</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="classEmitter.html#aa1e83b59fe416e1b5a1d4349af252846">SetTexture</a>(const std::string &amp;_texture)</td><td class="entry"><a class="el" href="classEmitter.html">Emitter</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classEmitter.html#a46ba224fef81fbc1341b54bfe3f40612">SetUpdateFunction</a>(const std::function&lt; void(float, Vector3 &amp;, Vector4 &amp;)&gt; &amp;_func)</td><td class="entry"><a class="el" href="classEmitter.html">Emitter</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="classEmitter.html#a48ba66b2e247cf590106b542b2d2dd7c">SetVelocity</a>(const Vector3 &amp;_velocity)</td><td class="entry"><a class="el" href="classEmitter.html">Emitter</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classEmitter.html#a92aadafc647cca2fcb8be5185fbf7104">Update</a>()</td><td class="entry"><a class="el" href="classEmitter.html">Emitter</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classEmitter.html#ac60b2b75d585dff8356d2f13f464a0d7">SetSpawnFunction</a>(const std::function&lt; void(const Vector3 &amp;, Vector3 &amp;, Vector3 &amp;)&gt; &amp;_func)</td><td class="entry"><a class="el" href="classEmitter.html">Emitter</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classEmitter.html#aa1e83b59fe416e1b5a1d4349af252846">SetTexture</a>(const std::string &amp;_texture)</td><td class="entry"><a class="el" href="classEmitter.html">Emitter</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classEmitter.html#a29d5e63a07da34e87d77c0668c70e65c">SetUpdateFunction</a>(const std::function&lt; void(float, const Vector3 &amp;, Vector3 &amp;, Vector3 &amp;, Vector4 &amp;)&gt; &amp;_func)</td><td class="entry"><a class="el" href="classEmitter.html">Emitter</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classEmitter.html#a48ba66b2e247cf590106b542b2d2dd7c">SetVelocity</a>(const Vector3 &amp;_velocity)</td><td class="entry"><a class="el" href="classEmitter.html">Emitter</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classEmitter.html#a92aadafc647cca2fcb8be5185fbf7104">Update</a>()</td><td class="entry"><a class="el" href="classEmitter.html">Emitter</a></td><td class="entry"></td></tr>
 </table></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">2026年01月24日(土) 13時46分46秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年03月10日(火) 05時02分34秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

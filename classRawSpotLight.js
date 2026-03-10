@@ -5,7 +5,7 @@ var classRawSpotLight =
     [ "DefaultSetting", "classRawSpotLight.html#ae43da13372af13cdbb82ba96ae401e6a", null ],
     [ "FollowRef", "classRawSpotLight.html#a4c864268b8b8e54382d4fa97bb011699", null ],
     [ "GetLight", "classRawSpotLight.html#a22b23cb2840d2a9bd0888fafed006b46", null ],
-    [ "ImGuiSetting", "classRawSpotLight.html#a2f41bc7db88ad96286cdbaa06a3393e4", null ],
+    [ "ImGuiSetting", "classRawSpotLight.html#a037cf0c51041dac8034e6cd6ac8a070c", null ],
     [ "operator=", "classRawSpotLight.html#a3cc9c2c50b44d0584a532f82ec4e6d8f", null ],
     [ "Save", "classRawSpotLight.html#ada2a1b9af3a0addb5b7ad062319fc7d5", null ],
     [ "Set", "classRawSpotLight.html#ae5575db217809b846a6095722aad5f95", null ]

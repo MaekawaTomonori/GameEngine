@@ -1,5 +1,5 @@
 var dir_78b37e50879113152c091ad5503adf85 =
 [
-    [ "Json.cpp", "Json_8cpp.html", null ],
-    [ "Json.hpp", "Json_8hpp.html", "Json_8hpp" ]
+    [ "JsonParams.cpp", "JsonParams_8cpp.html", null ],
+    [ "JsonParams.hpp", "JsonParams_8hpp.html", "JsonParams_8hpp" ]
 ];

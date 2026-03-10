@@ -10,6 +10,7 @@ var classCamera =
     [ "GetView", "classCamera.html#a6cfafc9c68216a33095d42a611c65899", null ],
     [ "GetViewProjection", "classCamera.html#ab13862402e8a1078d99f7f28da68ddc9", null ],
     [ "Initialize", "classCamera.html#ababe951f44ed4af55c403e5f87441a27", null ],
+    [ "LookAt", "classCamera.html#a30d81b6b8944ec6a2560ba3b1e2189ed", null ],
     [ "SetAspectRatio", "classCamera.html#a88a1bb9b9540e6937b0694f2d4cfb23b", null ],
     [ "SetFar", "classCamera.html#a2912bde2b3b3755723ca37774c43b282", null ],
     [ "SetFov", "classCamera.html#a73453edea301b435e0b5f598d52f270e", null ],

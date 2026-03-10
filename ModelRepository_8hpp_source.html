@@ -113,13 +113,16 @@ $(document).ready(function(){initNavTree('ModelRepository_8hpp_source.html','');
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classModelRepository.html#af9f26431792428a60332cfc6b653a911">Add</a>(<span class="keyword">const</span> std::string&amp; _name, std::unique_ptr&lt;ModelData&gt; _model);</div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <a class="code hl_struct" href="structModelData.html">ModelData</a>* <a class="code hl_function" href="classModelRepository.html#a6589af22e55d9d33f969909e62e89c9c">Get</a>(<span class="keyword">const</span> std::string&amp; _name);</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>}; <span class="comment">// class ModelRepository</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classModelRepository.html#ad3ba45499b3a5a8a12ccb0715adb93ca">Contains</a>(<span class="keyword">const</span> std::string&amp; _name) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>}; <span class="comment">// class ModelRepository</span></div>
 </div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#endif </span><span class="comment">// ModelRepository_HPP_</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">#endif </span><span class="comment">// ModelRepository_HPP_</span></div>
 <div class="ttc" id="aModelData_8hpp_html"><div class="ttname"><a href="ModelData_8hpp.html">ModelData.hpp</a></div></div>
 <div class="ttc" id="aclassModelRepository_html"><div class="ttname"><a href="classModelRepository.html">ModelRepository</a></div><div class="ttdoc">モデルリポジトリクラス モデルデータのキャッシュと管理を提供</div><div class="ttdef"><b>Definition</b> <a href="ModelRepository_8hpp_source.html#l00012">ModelRepository.hpp:12</a></div></div>
 <div class="ttc" id="aclassModelRepository_html_a6589af22e55d9d33f969909e62e89c9c"><div class="ttname"><a href="classModelRepository.html#a6589af22e55d9d33f969909e62e89c9c">ModelRepository::Get</a></div><div class="ttdeci">ModelData * Get(const std::string &amp;_name)</div><div class="ttdoc">モデルデータを取得（Nullable）</div><div class="ttdef"><b>Definition</b> <a href="ModelRepository_8cpp_source.html#l00007">ModelRepository.cpp:7</a></div></div>
+<div class="ttc" id="aclassModelRepository_html_ad3ba45499b3a5a8a12ccb0715adb93ca"><div class="ttname"><a href="classModelRepository.html#ad3ba45499b3a5a8a12ccb0715adb93ca">ModelRepository::Contains</a></div><div class="ttdeci">bool Contains(const std::string &amp;_name) const</div><div class="ttdef"><b>Definition</b> <a href="ModelRepository_8cpp_source.html#l00015">ModelRepository.cpp:15</a></div></div>
 <div class="ttc" id="aclassModelRepository_html_af9f26431792428a60332cfc6b653a911"><div class="ttname"><a href="classModelRepository.html#af9f26431792428a60332cfc6b653a911">ModelRepository::Add</a></div><div class="ttdeci">void Add(const std::string &amp;_name, std::unique_ptr&lt; ModelData &gt; _model)</div><div class="ttdoc">モデルデータを追加</div><div class="ttdef"><b>Definition</b> <a href="ModelRepository_8cpp_source.html#l00003">ModelRepository.cpp:3</a></div></div>
 <div class="ttc" id="astructModelData_html"><div class="ttname"><a href="structModelData.html">ModelData</a></div><div class="ttdoc">モデルデータ メッシュ、アニメーション、スケルトン情報を保持</div><div class="ttdef"><b>Definition</b> <a href="ModelData_8hpp_source.html#l00024">ModelData.hpp:24</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
@@ -128,7 +131,7 @@ $(document).ready(function(){initNavTree('ModelRepository_8hpp_source.html','');
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_32e188284d239da8bb14ec1dabb0c35f.html">Model</a></li><li class="navelem"><a class="el" href="dir_36451068af2da8b4be760cdcffe7ca19.html">Repository</a></li><li class="navelem"><a class="el" href="ModelRepository_8hpp.html">ModelRepository.hpp</a></li>
-    <li class="footer">2026年01月24日(土) 13時46分46秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年03月10日(火) 05時02分34秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

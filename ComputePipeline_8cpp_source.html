@@ -101,7 +101,7 @@ $(document).ready(function(){initNavTree('ComputePipeline_8cpp_source.html','');
 <a href="ComputePipeline_8cpp.html">[詳解]</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#include &quot;<a class="code" href="ComputePipeline_8hpp.html">ComputePipeline.hpp</a>&quot;</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;<a class="code" href="Log_8hpp.html">Log.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="Utils_8hpp.html">Utils.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;Utils.hpp&quot;</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;<a class="code" href="Shader_8h.html">src/DirectX/Shader/Shader.h</a>&quot;</span></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
 <div class="foldopen" id="foldopen00007" data-start="{" data-end="}">
@@ -114,7 +114,7 @@ $(document).ready(function(){initNavTree('ComputePipeline_8cpp_source.html','');
 <div class="foldopen" id="foldopen00012" data-start="{" data-end="}">
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="classComputePipeline.html#a809c97be7702aad02d8336ee989a96a8">   12</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classComputePipeline.html#a809c97be7702aad02d8336ee989a96a8">ComputePipeline::Create</a>(<span class="keyword">const</span> std::string&amp; _name) {</div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    <a class="code hl_class" href="classShader.html">Shader</a> shader;</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    shader_.Attach(shader.<a class="code hl_function" href="classShader.html#a22461c9e5346562fa1468614eb95449c">CompileCS</a>(<a class="code hl_function" href="namespaceUtils.html#a2e40c85f374a53894f1e990221c12c60">Utils::Convert</a>(_name)));</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    shader_.Attach(shader.<a class="code hl_function" href="classShader.html#a22461c9e5346562fa1468614eb95449c">CompileCS</a>(Utils::Convert(_name)));</div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    D3D12_COMPUTE_PIPELINE_STATE_DESC desc{};</div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    desc.pRootSignature = rootSignature_.<a class="code hl_function" href="classRootSignature.html#a1604250a85568942f6db38a3be911fe9">Get</a>();</div>
@@ -125,13 +125,13 @@ $(document).ready(function(){initNavTree('ComputePipeline_8cpp_source.html','');
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <span class="keywordflow">if</span> (!adapter_.has_value()) {</div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>        <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, <span class="stringliteral">&quot;DirectXAdapter is not set&quot;</span>);</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        <a class="code hl_function" href="namespaceUtils.html#a7889f3d633f2e561e30dd11e6fc80af0">Utils::Alert</a>(<span class="stringliteral">&quot;DirectXAdapter is not set&quot;</span>);</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        Utils::Alert(<span class="stringliteral">&quot;DirectXAdapter is not set&quot;</span>);</div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        <span class="keywordflow">throw</span> std::runtime_error(<span class="stringliteral">&quot;DirectXAdapter is not set&quot;</span>);</div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    }</div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    HRESULT hr = adapter_-&gt;get().GetDevice()-&gt;CreateComputePipelineState(&amp;desc, IID_PPV_ARGS(&amp;state_));</div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="keywordflow">if</span> (FAILED(hr)) {</div>
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>        <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, <span class="stringliteral">&quot;Failed to create compute pipeline state&quot;</span>);</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>        <a class="code hl_function" href="namespaceUtils.html#a7889f3d633f2e561e30dd11e6fc80af0">Utils::Alert</a>(<span class="stringliteral">&quot;Failed to create compute pipeline state&quot;</span>);</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>        Utils::Alert(<span class="stringliteral">&quot;Failed to create compute pipeline state&quot;</span>);</div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>        <span class="keywordflow">throw</span> std::runtime_error(<span class="stringliteral">&quot;Failed to create compute pipeline state&quot;</span>);</div>
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    }</div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
@@ -140,25 +140,22 @@ $(document).ready(function(){initNavTree('ComputePipeline_8cpp_source.html','');
 <div class="ttc" id="aComputePipeline_8hpp_html"><div class="ttname"><a href="ComputePipeline_8hpp.html">ComputePipeline.hpp</a></div></div>
 <div class="ttc" id="aLog_8hpp_html"><div class="ttname"><a href="Log_8hpp.html">Log.hpp</a></div></div>
 <div class="ttc" id="aShader_8h_html"><div class="ttname"><a href="Shader_8h.html">Shader.h</a></div></div>
-<div class="ttc" id="aUtils_8hpp_html"><div class="ttname"><a href="Utils_8hpp.html">Utils.hpp</a></div></div>
 <div class="ttc" id="aclassComputePipeline_html"><div class="ttname"><a href="classComputePipeline.html">ComputePipeline</a></div><div class="ttdef"><b>Definition</b> <a href="ComputePipeline_8hpp_source.html#l00011">ComputePipeline.hpp:11</a></div></div>
 <div class="ttc" id="aclassComputePipeline_html_a4875c458cab64f6325494bbd6388d132"><div class="ttname"><a href="classComputePipeline.html#a4875c458cab64f6325494bbd6388d132">ComputePipeline::SetRootSignature</a></div><div class="ttdeci">ComputePipeline &amp; SetRootSignature(const RootSignature &amp;_rootSignature)</div><div class="ttdef"><b>Definition</b> <a href="ComputePipeline_8cpp_source.html#l00007">ComputePipeline.cpp:7</a></div></div>
 <div class="ttc" id="aclassComputePipeline_html_a809c97be7702aad02d8336ee989a96a8"><div class="ttname"><a href="classComputePipeline.html#a809c97be7702aad02d8336ee989a96a8">ComputePipeline::Create</a></div><div class="ttdeci">void Create(const std::string &amp;_name)</div><div class="ttdef"><b>Definition</b> <a href="ComputePipeline_8cpp_source.html#l00012">ComputePipeline.cpp:12</a></div></div>
-<div class="ttc" id="aclassLog_html_af351e7d4bd43c85e7c90f52846b64bdb"><div class="ttname"><a href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a></div><div class="ttdeci">static void Send(Level _level, const std::string &amp;_message=&quot;&quot;)</div><div class="ttdoc">ログメッセージを送信</div><div class="ttdef"><b>Definition</b> <a href="Log_8cpp_source.html#l00067">Log.cpp:67</a></div></div>
+<div class="ttc" id="aclassLog_html_af351e7d4bd43c85e7c90f52846b64bdb"><div class="ttname"><a href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a></div><div class="ttdeci">static void Send(Level _level, const std::string &amp;_message=&quot;&quot;)</div><div class="ttdoc">ログメッセージを送信</div><div class="ttdef"><b>Definition</b> <a href="Log_8cpp_source.html#l00108">Log.cpp:108</a></div></div>
 <div class="ttc" id="aclassLog_html_afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482"><div class="ttname"><a href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a></div><div class="ttdeci">@ ERR</div></div>
 <div class="ttc" id="aclassRootSignature_html"><div class="ttname"><a href="classRootSignature.html">RootSignature</a></div><div class="ttdef"><b>Definition</b> <a href="RootSignature_8hpp_source.html#l00008">RootSignature.hpp:8</a></div></div>
 <div class="ttc" id="aclassRootSignature_html_a1604250a85568942f6db38a3be911fe9"><div class="ttname"><a href="classRootSignature.html#a1604250a85568942f6db38a3be911fe9">RootSignature::Get</a></div><div class="ttdeci">ID3D12RootSignature * Get() const</div><div class="ttdef"><b>Definition</b> <a href="RootSignature_8cpp_source.html#l00062">RootSignature.cpp:62</a></div></div>
 <div class="ttc" id="aclassShader_html"><div class="ttname"><a href="classShader.html">Shader</a></div><div class="ttdef"><b>Definition</b> <a href="Shader_8h_source.html#l00006">Shader.h:6</a></div></div>
 <div class="ttc" id="aclassShader_html_a22461c9e5346562fa1468614eb95449c"><div class="ttname"><a href="classShader.html#a22461c9e5346562fa1468614eb95449c">Shader::CompileCS</a></div><div class="ttdeci">IDxcBlob * CompileCS(const std::wstring &amp;_name) const</div><div class="ttdef"><b>Definition</b> <a href="Shader_8cpp_source.html#l00077">Shader.cpp:77</a></div></div>
-<div class="ttc" id="anamespaceUtils_html_a2e40c85f374a53894f1e990221c12c60"><div class="ttname"><a href="namespaceUtils.html#a2e40c85f374a53894f1e990221c12c60">Utils::Convert</a></div><div class="ttdeci">std::string Convert(const std::wstring &amp;_str)</div><div class="ttdef"><b>Definition</b> <a href="Utils_8cpp_source.html#l00009">Utils.cpp:9</a></div></div>
-<div class="ttc" id="anamespaceUtils_html_a7889f3d633f2e561e30dd11e6fc80af0"><div class="ttname"><a href="namespaceUtils.html#a7889f3d633f2e561e30dd11e6fc80af0">Utils::Alert</a></div><div class="ttdeci">void Alert(const std::string &amp;_msg)</div><div class="ttdef"><b>Definition</b> <a href="Utils_8cpp_source.html#l00057">Utils.cpp:57</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_31399d34f22961890ce23f7132fb3e96.html">DirectX</a></li><li class="navelem"><a class="el" href="dir_8fe4c1c3a24b490ad3dec2f644a87ca5.html">Compute</a></li><li class="navelem"><a class="el" href="ComputePipeline_8cpp.html">ComputePipeline.cpp</a></li>
-    <li class="footer">2026年01月24日(土) 13時46分46秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年03月10日(火) 05時02分34秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

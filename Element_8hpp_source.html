@@ -1,0 +1,215 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>PortfolioGame Engine: /home/runner/work/GameEngine/GameEngine/include/Ui/Element.hpp ソースファイル</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">PortfolioGame Engine<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">C++20 DirectX12 Game Engine</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','検索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function() { init_codefold(0); });
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('Element_8hpp_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">読み取り中…</div>
+<div class="SRStatus" id="Searching">検索中…</div>
+<div class="SRStatus" id="NoMatches">一致する文字列を見つけられません</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Element.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="Element_8hpp.html">[詳解]</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef UiElement_HPP_</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define UiElement_HPP_</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;array&gt;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;memory&gt;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;unordered_map&gt;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;<a class="code" href="Sprite_8hpp.html">Sprite.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;<a class="code" href="EventSystem_8hpp.html">Ui/EventSystem.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="foldopen" id="foldopen00011" data-start="{" data-end="}">
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="namespaceUi.html">   11</a></span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceUi.html">Ui</a>{</div>
+<div class="foldopen" id="foldopen00012" data-start="{" data-end="};">
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="classUi_1_1Element.html">   12</a></span>    <span class="keyword">class </span><a class="code hl_class" href="classUi_1_1Element.html">Element</a> {</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    <span class="keyword">public</span>:</div>
+<div class="foldopen" id="foldopen00014" data-start="{" data-end="};">
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="structUi_1_1Element_1_1Data.html">   14</a></span>        <span class="keyword">struct </span><a class="code hl_struct" href="structUi_1_1Element_1_1Data.html">Data</a>{</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="structUi_1_1Element_1_1Data.html#afe91868eace568e242fa754139c9b2b8">   15</a></span>            std::string <a class="code hl_variable" href="structUi_1_1Element_1_1Data.html#afe91868eace568e242fa754139c9b2b8">texture</a> = <span class="stringliteral">&quot;white_x16.png&quot;</span>;</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="structUi_1_1Element_1_1Data.html#af7f8382a081cb6356da0bd55750b24b8">   16</a></span>            <span class="keywordtype">bool</span> <a class="code hl_variable" href="structUi_1_1Element_1_1Data.html#af7f8382a081cb6356da0bd55750b24b8">visible</a> = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="structUi_1_1Element_1_1Data.html#acbd7933d4055466acc9331f3a827fd02">   17</a></span>            Vector2 <a class="code hl_variable" href="structUi_1_1Element_1_1Data.html#acbd7933d4055466acc9331f3a827fd02">position</a> {};</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="structUi_1_1Element_1_1Data.html#a58a1bc7d355a6ca0c0230e1b0e91f218">   18</a></span>            Vector2 <a class="code hl_variable" href="structUi_1_1Element_1_1Data.html#a58a1bc7d355a6ca0c0230e1b0e91f218">size</a>{64.f, 64.f};</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="structUi_1_1Element_1_1Data.html#ad68223d27f51b69ef435f6880be4b8f5">   19</a></span>            Vector4 <a class="code hl_variable" href="structUi_1_1Element_1_1Data.html#ad68223d27f51b69ef435f6880be4b8f5">color</a>{1.f, 1.f, 1.f, 1.f};</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="structUi_1_1Element_1_1Data.html#a019f9a94fbf9c0c25114b2a4bf8c2c8a">   20</a></span>            Vector2 <a class="code hl_variable" href="structUi_1_1Element_1_1Data.html#a019f9a94fbf9c0c25114b2a4bf8c2c8a">textureLeftTop</a>{};</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="structUi_1_1Element_1_1Data.html#a41a416a2137c93966756de95dbc18fef">   21</a></span>            Vector2 <a class="code hl_variable" href="structUi_1_1Element_1_1Data.html#a41a416a2137c93966756de95dbc18fef">textureSize</a>{};</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        };</div>
+</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        std::string uuid_;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        std::string name_;</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        std::unique_ptr&lt;Sprite&gt; sprite_ = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>        Vector2 parent_ {};</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>        Data data_{};</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        std::unordered_map&lt;EventKey, std::string&gt; events_;</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        <span class="keywordtype">bool</span> isOpen_ = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        <span class="keywordtype">bool</span> aspectLock_ = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>        <span class="keywordtype">bool</span> changeName_ = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        std::array&lt;char, 256&gt; nameBuff_ = {};</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        std::array&lt;char, 256&gt; textureBuff_ = {};</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classUi_1_1Element.html#af5d7196a5ade3dcd8f2cf2d20d501cb3">Initialize</a>();</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classUi_1_1Element.html#a43cb6f2da4b664af1cd8915808d31877">Update</a>();</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classUi_1_1Element.html#a443267d4be1410272a119e862a5386cd">Draw</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classUi_1_1Element.html#a6b7bd7573f9621cbff04d5d0ce3a36df">Debug</a>(<span class="keyword">const</span> std::vector&lt;std::string&gt;&amp; _availableActions = {});</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        <span class="keywordtype">bool</span> <a class="code hl_function" href="classUi_1_1Element.html#a0121dd3d21ccbfb501b9d5a71120f416">IsVisible</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        std::string <a class="code hl_function" href="classUi_1_1Element.html#a12c6d25dfa517fa877499b9cd4a1ef7f">GetName</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classUi_1_1Element.html#a6600be7b9d38999d3f09e32bf80e8d53">SetName</a>(<span class="keyword">const</span> std::string&amp; _name);</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        std::string <a class="code hl_function" href="classUi_1_1Element.html#ab496763d0ebcf32bac0ed1d43eb6771a">GetUUID</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        <span class="keywordtype">bool</span>&amp; <a class="code hl_function" href="classUi_1_1Element.html#a386177a2c9f266db154f2c915eee3242">IsOpen</a>();</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        Data <a class="code hl_function" href="classUi_1_1Element.html#a65d695803819b62970c6cb1268247d25">GetData</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classUi_1_1Element.html#a8d96f0d43036736116007bdbb758d225">SetData</a>(<span class="keyword">const</span> Data&amp; _data);</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classUi_1_1Element.html#a695b7d78c07a0ee40db904d5bd9a8994">SetEvent</a>(<a class="code hl_enumeration" href="namespaceUi.html#ab96ee237a5d278a7b0bc25c02e349242">EventKey</a> _event, <span class="keyword">const</span> std::string&amp; _actionKey);</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>        <span class="keyword">const</span> std::string&amp; <a class="code hl_function" href="classUi_1_1Element.html#ae513485442071fd4cf0cb4deb36b5884">GetActionKey</a>(<a class="code hl_enumeration" href="namespaceUi.html#ab96ee237a5d278a7b0bc25c02e349242">EventKey</a> _event) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        <span class="keywordtype">bool</span> <a class="code hl_function" href="classUi_1_1Element.html#a82b66699dfe1cb957aef8176718d1e03">HasEvent</a>(<a class="code hl_enumeration" href="namespaceUi.html#ab96ee237a5d278a7b0bc25c02e349242">EventKey</a> _event) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>        <span class="keywordtype">bool</span> <a class="code hl_function" href="classUi_1_1Element.html#a6c4b634e9421532aa59323d81fb4e018">HasAnyEvent</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        <span class="keyword">const</span> std::unordered_map&lt;EventKey, std::string&gt;&amp; <a class="code hl_function" href="classUi_1_1Element.html#a8acbcc9fd64fa3f0cf34a3c4dd116419">GetEvents</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classUi_1_1Element.html#a7e99e4d1b147fcb5dbe1979c5dba132e">SetParent</a>(<span class="keyword">const</span> Vector2&amp; _pos);</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    }; <span class="comment">// class Element</span></div>
+</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>} <span class="comment">// namespace Ui</span></div>
+</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="preprocessor">#endif </span><span class="comment">// UiElement_HPP_</span></div>
+<div class="ttc" id="aEventSystem_8hpp_html"><div class="ttname"><a href="EventSystem_8hpp.html">EventSystem.hpp</a></div></div>
+<div class="ttc" id="aSprite_8hpp_html"><div class="ttname"><a href="Sprite_8hpp.html">Sprite.hpp</a></div></div>
+<div class="ttc" id="aclassUi_1_1Element_html"><div class="ttname"><a href="classUi_1_1Element.html">Ui::Element</a></div><div class="ttdef"><b>Definition</b> <a href="Element_8hpp_source.html#l00012">Element.hpp:12</a></div></div>
+<div class="ttc" id="aclassUi_1_1Element_html_a0121dd3d21ccbfb501b9d5a71120f416"><div class="ttname"><a href="classUi_1_1Element.html#a0121dd3d21ccbfb501b9d5a71120f416">Ui::Element::IsVisible</a></div><div class="ttdeci">bool IsVisible() const</div><div class="ttdef"><b>Definition</b> <a href="Element_8cpp_source.html#l00159">Element.cpp:159</a></div></div>
+<div class="ttc" id="aclassUi_1_1Element_html_a12c6d25dfa517fa877499b9cd4a1ef7f"><div class="ttname"><a href="classUi_1_1Element.html#a12c6d25dfa517fa877499b9cd4a1ef7f">Ui::Element::GetName</a></div><div class="ttdeci">std::string GetName() const</div><div class="ttdef"><b>Definition</b> <a href="Element_8cpp_source.html#l00163">Element.cpp:163</a></div></div>
+<div class="ttc" id="aclassUi_1_1Element_html_a386177a2c9f266db154f2c915eee3242"><div class="ttname"><a href="classUi_1_1Element.html#a386177a2c9f266db154f2c915eee3242">Ui::Element::IsOpen</a></div><div class="ttdeci">bool &amp; IsOpen()</div><div class="ttdef"><b>Definition</b> <a href="Element_8cpp_source.html#l00178">Element.cpp:178</a></div></div>
+<div class="ttc" id="aclassUi_1_1Element_html_a43cb6f2da4b664af1cd8915808d31877"><div class="ttname"><a href="classUi_1_1Element.html#a43cb6f2da4b664af1cd8915808d31877">Ui::Element::Update</a></div><div class="ttdeci">void Update()</div><div class="ttdef"><b>Definition</b> <a href="Element_8cpp_source.html#l00031">Element.cpp:31</a></div></div>
+<div class="ttc" id="aclassUi_1_1Element_html_a443267d4be1410272a119e862a5386cd"><div class="ttname"><a href="classUi_1_1Element.html#a443267d4be1410272a119e862a5386cd">Ui::Element::Draw</a></div><div class="ttdeci">void Draw() const</div><div class="ttdef"><b>Definition</b> <a href="Element_8cpp_source.html#l00050">Element.cpp:50</a></div></div>
+<div class="ttc" id="aclassUi_1_1Element_html_a65d695803819b62970c6cb1268247d25"><div class="ttname"><a href="classUi_1_1Element.html#a65d695803819b62970c6cb1268247d25">Ui::Element::GetData</a></div><div class="ttdeci">Data GetData() const</div><div class="ttdef"><b>Definition</b> <a href="Element_8cpp_source.html#l00182">Element.cpp:182</a></div></div>
+<div class="ttc" id="aclassUi_1_1Element_html_a6600be7b9d38999d3f09e32bf80e8d53"><div class="ttname"><a href="classUi_1_1Element.html#a6600be7b9d38999d3f09e32bf80e8d53">Ui::Element::SetName</a></div><div class="ttdeci">void SetName(const std::string &amp;_name)</div><div class="ttdef"><b>Definition</b> <a href="Element_8cpp_source.html#l00167">Element.cpp:167</a></div></div>
+<div class="ttc" id="aclassUi_1_1Element_html_a695b7d78c07a0ee40db904d5bd9a8994"><div class="ttname"><a href="classUi_1_1Element.html#a695b7d78c07a0ee40db904d5bd9a8994">Ui::Element::SetEvent</a></div><div class="ttdeci">void SetEvent(EventKey _event, const std::string &amp;_actionKey)</div><div class="ttdef"><b>Definition</b> <a href="Element_8cpp_source.html#l00190">Element.cpp:190</a></div></div>
+<div class="ttc" id="aclassUi_1_1Element_html_a6b7bd7573f9621cbff04d5d0ce3a36df"><div class="ttname"><a href="classUi_1_1Element.html#a6b7bd7573f9621cbff04d5d0ce3a36df">Ui::Element::Debug</a></div><div class="ttdeci">void Debug(const std::vector&lt; std::string &gt; &amp;_availableActions={})</div><div class="ttdef"><b>Definition</b> <a href="Element_8cpp_source.html#l00056">Element.cpp:56</a></div></div>
+<div class="ttc" id="aclassUi_1_1Element_html_a6c4b634e9421532aa59323d81fb4e018"><div class="ttname"><a href="classUi_1_1Element.html#a6c4b634e9421532aa59323d81fb4e018">Ui::Element::HasAnyEvent</a></div><div class="ttdeci">bool HasAnyEvent() const</div><div class="ttdef"><b>Definition</b> <a href="Element_8cpp_source.html#l00212">Element.cpp:212</a></div></div>
+<div class="ttc" id="aclassUi_1_1Element_html_a7e99e4d1b147fcb5dbe1979c5dba132e"><div class="ttname"><a href="classUi_1_1Element.html#a7e99e4d1b147fcb5dbe1979c5dba132e">Ui::Element::SetParent</a></div><div class="ttdeci">void SetParent(const Vector2 &amp;_pos)</div><div class="ttdef"><b>Definition</b> <a href="Element_8cpp_source.html#l00220">Element.cpp:220</a></div></div>
+<div class="ttc" id="aclassUi_1_1Element_html_a82b66699dfe1cb957aef8176718d1e03"><div class="ttname"><a href="classUi_1_1Element.html#a82b66699dfe1cb957aef8176718d1e03">Ui::Element::HasEvent</a></div><div class="ttdeci">bool HasEvent(EventKey _event) const</div><div class="ttdef"><b>Definition</b> <a href="Element_8cpp_source.html#l00208">Element.cpp:208</a></div></div>
+<div class="ttc" id="aclassUi_1_1Element_html_a8acbcc9fd64fa3f0cf34a3c4dd116419"><div class="ttname"><a href="classUi_1_1Element.html#a8acbcc9fd64fa3f0cf34a3c4dd116419">Ui::Element::GetEvents</a></div><div class="ttdeci">const std::unordered_map&lt; EventKey, std::string &gt; &amp; GetEvents() const</div><div class="ttdef"><b>Definition</b> <a href="Element_8cpp_source.html#l00216">Element.cpp:216</a></div></div>
+<div class="ttc" id="aclassUi_1_1Element_html_a8d96f0d43036736116007bdbb758d225"><div class="ttname"><a href="classUi_1_1Element.html#a8d96f0d43036736116007bdbb758d225">Ui::Element::SetData</a></div><div class="ttdeci">void SetData(const Data &amp;_data)</div><div class="ttdef"><b>Definition</b> <a href="Element_8cpp_source.html#l00186">Element.cpp:186</a></div></div>
+<div class="ttc" id="aclassUi_1_1Element_html_ab496763d0ebcf32bac0ed1d43eb6771a"><div class="ttname"><a href="classUi_1_1Element.html#ab496763d0ebcf32bac0ed1d43eb6771a">Ui::Element::GetUUID</a></div><div class="ttdeci">std::string GetUUID() const</div><div class="ttdef"><b>Definition</b> <a href="Element_8cpp_source.html#l00174">Element.cpp:174</a></div></div>
+<div class="ttc" id="aclassUi_1_1Element_html_ae513485442071fd4cf0cb4deb36b5884"><div class="ttname"><a href="classUi_1_1Element.html#ae513485442071fd4cf0cb4deb36b5884">Ui::Element::GetActionKey</a></div><div class="ttdeci">const std::string &amp; GetActionKey(EventKey _event) const</div><div class="ttdef"><b>Definition</b> <a href="Element_8cpp_source.html#l00200">Element.cpp:200</a></div></div>
+<div class="ttc" id="aclassUi_1_1Element_html_af5d7196a5ade3dcd8f2cf2d20d501cb3"><div class="ttname"><a href="classUi_1_1Element.html#af5d7196a5ade3dcd8f2cf2d20d501cb3">Ui::Element::Initialize</a></div><div class="ttdeci">void Initialize()</div><div class="ttdef"><b>Definition</b> <a href="Element_8cpp_source.html#l00010">Element.cpp:10</a></div></div>
+<div class="ttc" id="anamespaceUi_html"><div class="ttname"><a href="namespaceUi.html">Ui</a></div><div class="ttdef"><b>Definition</b> <a href="Element_8hpp_source.html#l00011">Element.hpp:11</a></div></div>
+<div class="ttc" id="anamespaceUi_html_ab96ee237a5d278a7b0bc25c02e349242"><div class="ttname"><a href="namespaceUi.html#ab96ee237a5d278a7b0bc25c02e349242">Ui::EventKey</a></div><div class="ttdeci">EventKey</div><div class="ttdef"><b>Definition</b> <a href="EventSystem_8hpp_source.html#l00010">EventSystem.hpp:10</a></div></div>
+<div class="ttc" id="astructUi_1_1Element_1_1Data_html"><div class="ttname"><a href="structUi_1_1Element_1_1Data.html">Ui::Element::Data</a></div><div class="ttdef"><b>Definition</b> <a href="Element_8hpp_source.html#l00014">Element.hpp:14</a></div></div>
+<div class="ttc" id="astructUi_1_1Element_1_1Data_html_a019f9a94fbf9c0c25114b2a4bf8c2c8a"><div class="ttname"><a href="structUi_1_1Element_1_1Data.html#a019f9a94fbf9c0c25114b2a4bf8c2c8a">Ui::Element::Data::textureLeftTop</a></div><div class="ttdeci">Vector2 textureLeftTop</div><div class="ttdef"><b>Definition</b> <a href="Element_8hpp_source.html#l00020">Element.hpp:20</a></div></div>
+<div class="ttc" id="astructUi_1_1Element_1_1Data_html_a41a416a2137c93966756de95dbc18fef"><div class="ttname"><a href="structUi_1_1Element_1_1Data.html#a41a416a2137c93966756de95dbc18fef">Ui::Element::Data::textureSize</a></div><div class="ttdeci">Vector2 textureSize</div><div class="ttdef"><b>Definition</b> <a href="Element_8hpp_source.html#l00021">Element.hpp:21</a></div></div>
+<div class="ttc" id="astructUi_1_1Element_1_1Data_html_a58a1bc7d355a6ca0c0230e1b0e91f218"><div class="ttname"><a href="structUi_1_1Element_1_1Data.html#a58a1bc7d355a6ca0c0230e1b0e91f218">Ui::Element::Data::size</a></div><div class="ttdeci">Vector2 size</div><div class="ttdef"><b>Definition</b> <a href="Element_8hpp_source.html#l00018">Element.hpp:18</a></div></div>
+<div class="ttc" id="astructUi_1_1Element_1_1Data_html_acbd7933d4055466acc9331f3a827fd02"><div class="ttname"><a href="structUi_1_1Element_1_1Data.html#acbd7933d4055466acc9331f3a827fd02">Ui::Element::Data::position</a></div><div class="ttdeci">Vector2 position</div><div class="ttdef"><b>Definition</b> <a href="Element_8hpp_source.html#l00017">Element.hpp:17</a></div></div>
+<div class="ttc" id="astructUi_1_1Element_1_1Data_html_ad68223d27f51b69ef435f6880be4b8f5"><div class="ttname"><a href="structUi_1_1Element_1_1Data.html#ad68223d27f51b69ef435f6880be4b8f5">Ui::Element::Data::color</a></div><div class="ttdeci">Vector4 color</div><div class="ttdef"><b>Definition</b> <a href="Element_8hpp_source.html#l00019">Element.hpp:19</a></div></div>
+<div class="ttc" id="astructUi_1_1Element_1_1Data_html_af7f8382a081cb6356da0bd55750b24b8"><div class="ttname"><a href="structUi_1_1Element_1_1Data.html#af7f8382a081cb6356da0bd55750b24b8">Ui::Element::Data::visible</a></div><div class="ttdeci">bool visible</div><div class="ttdef"><b>Definition</b> <a href="Element_8hpp_source.html#l00016">Element.hpp:16</a></div></div>
+<div class="ttc" id="astructUi_1_1Element_1_1Data_html_afe91868eace568e242fa754139c9b2b8"><div class="ttname"><a href="structUi_1_1Element_1_1Data.html#afe91868eace568e242fa754139c9b2b8">Ui::Element::Data::texture</a></div><div class="ttdeci">std::string texture</div><div class="ttdef"><b>Definition</b> <a href="Element_8hpp_source.html#l00015">Element.hpp:15</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_6ba165bb2e09366e887108d984d89e5c.html">Ui</a></li><li class="navelem"><a class="el" href="Element_8hpp.html">Element.hpp</a></li>
+    <li class="footer">2026年03月10日(火) 05時02分34秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+  </ul>
+</div>
+</body>
+</html>

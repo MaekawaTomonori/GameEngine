@@ -1,9 +1,9 @@
 var classSRVManager =
 [
     [ "Allocate", "classSRVManager.html#a1e7a23d2422f4228cc6a9436ad1de225", null ],
-    [ "CreateSRVforCubemap", "classSRVManager.html#a6442a36e1331a9f366e2a2f06d37f2fc", null ],
-    [ "CreateSRVforStructuredBuffer", "classSRVManager.html#a4a986bc26da72c5587ccde7c590477fe", null ],
-    [ "CreateSRVforTexture2D", "classSRVManager.html#a2cca745cb3489ce9ff676186348d9728", null ],
+    [ "CreateSRVForCubeMap", "classSRVManager.html#a22c6c456ddc0efa04782a82e512214f1", null ],
+    [ "CreateSRVForStructuredBuffer", "classSRVManager.html#adaf071e964bb2627bcd2bb08cff6270c", null ],
+    [ "CreateSRVForTexture2D", "classSRVManager.html#a32125910a69daf0aa5ca99d981f58e5a", null ],
     [ "Finalize", "classSRVManager.html#a28b1560dc9426e358de05a75b4699d4d", null ],
     [ "GetCPUHandle", "classSRVManager.html#aa1cbbf7090b893d87a79bb4dfefb8c89", null ],
     [ "GetDescriptorHeap", "classSRVManager.html#abdd7c0c257ce051bb384397aff374deb", null ],

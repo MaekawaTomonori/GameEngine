@@ -103,7 +103,7 @@ $(document).ready(function(){initNavTree('WinApp_8cpp_source.html',''); initResi
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;stdexcept&gt;</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;<a class="code" href="Log_8hpp.html">Log.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;<a class="code" href="Utils_8hpp.html">include/Utils.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;Utils.hpp&quot;</span></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#pragma comment(lib, &quot;winmm.lib&quot;)</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
@@ -120,14 +120,14 @@ $(document).ready(function(){initNavTree('WinApp_8cpp_source.html',''); initResi
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    hWnd_ = window_-&gt;GetWindowHandle();</div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <span class="keywordflow">if</span> (!hWnd_){</div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>        <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, <span class="stringliteral">&quot;Failed to get window handle&quot;</span>);</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        <a class="code hl_function" href="namespaceUtils.html#a16fe049b1a0a87909d3bdb1e9fce3724">Utils::DisplayLastErr</a>();</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        Utils::DisplayLastErr();</div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>        <span class="keywordflow">throw</span> std::runtime_error(<span class="stringliteral">&quot;Failed to get window handle&quot;</span>);</div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    }</div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    hInstance_ = window_-&gt;GetInstanceHandle();</div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="keywordflow">if</span> (!hInstance_){</div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, <span class="stringliteral">&quot;Failed to get instance handle&quot;</span>);</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>        <a class="code hl_function" href="namespaceUtils.html#a16fe049b1a0a87909d3bdb1e9fce3724">Utils::DisplayLastErr</a>();</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>        Utils::DisplayLastErr();</div>
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>        <span class="keywordflow">throw</span> std::runtime_error(<span class="stringliteral">&quot;Failed to get instance handle&quot;</span>);</div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    }</div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>}</div>
@@ -188,9 +188,8 @@ $(document).ready(function(){initNavTree('WinApp_8cpp_source.html',''); initResi
 <div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>}</div>
 </div>
 <div class="ttc" id="aLog_8hpp_html"><div class="ttname"><a href="Log_8hpp.html">Log.hpp</a></div></div>
-<div class="ttc" id="aUtils_8hpp_html"><div class="ttname"><a href="Utils_8hpp.html">Utils.hpp</a></div></div>
 <div class="ttc" id="aWinApp_8hpp_html"><div class="ttname"><a href="WinApp_8hpp.html">WinApp.hpp</a></div></div>
-<div class="ttc" id="aclassLog_html_af351e7d4bd43c85e7c90f52846b64bdb"><div class="ttname"><a href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a></div><div class="ttdeci">static void Send(Level _level, const std::string &amp;_message=&quot;&quot;)</div><div class="ttdoc">ログメッセージを送信</div><div class="ttdef"><b>Definition</b> <a href="Log_8cpp_source.html#l00067">Log.cpp:67</a></div></div>
+<div class="ttc" id="aclassLog_html_af351e7d4bd43c85e7c90f52846b64bdb"><div class="ttname"><a href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a></div><div class="ttdeci">static void Send(Level _level, const std::string &amp;_message=&quot;&quot;)</div><div class="ttdoc">ログメッセージを送信</div><div class="ttdef"><b>Definition</b> <a href="Log_8cpp_source.html#l00108">Log.cpp:108</a></div></div>
 <div class="ttc" id="aclassLog_html_afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482"><div class="ttname"><a href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a></div><div class="ttdeci">@ ERR</div></div>
 <div class="ttc" id="aclassWinApp_html_a26b247ac407999f6c45df6ac67599d75"><div class="ttname"><a href="classWinApp.html#a26b247ac407999f6c45df6ac67599d75">WinApp::Initialize</a></div><div class="ttdeci">void Initialize()</div><div class="ttdef"><b>Definition</b> <a href="WinApp_8cpp_source.html#l00010">WinApp.cpp:10</a></div></div>
 <div class="ttc" id="aclassWinApp_html_a283502ebe9357ae7733da4ab07369f39"><div class="ttname"><a href="classWinApp.html#a283502ebe9357ae7733da4ab07369f39">WinApp::ToggleBorderless</a></div><div class="ttdeci">void ToggleBorderless() const</div><div class="ttdef"><b>Definition</b> <a href="WinApp_8cpp_source.html#l00056">WinApp.cpp:56</a></div></div>
@@ -200,14 +199,13 @@ $(document).ready(function(){initNavTree('WinApp_8cpp_source.html',''); initResi
 <div class="ttc" id="aclassWinApp_html_ac4b81bc3049c111780f29cfc816a71d8"><div class="ttname"><a href="classWinApp.html#ac4b81bc3049c111780f29cfc816a71d8">WinApp::GetInstanceHandle</a></div><div class="ttdeci">HINSTANCE GetInstanceHandle() const</div><div class="ttdef"><b>Definition</b> <a href="WinApp_8cpp_source.html#l00042">WinApp.cpp:42</a></div></div>
 <div class="ttc" id="aclassWinApp_html_ac83fe0e4dfb59df38783f8f511f85c86"><div class="ttname"><a href="classWinApp.html#ac83fe0e4dfb59df38783f8f511f85c86">WinApp::IsEnabled</a></div><div class="ttdeci">bool IsEnabled() const</div><div class="ttdef"><b>Definition</b> <a href="WinApp_8cpp_source.html#l00034">WinApp.cpp:34</a></div></div>
 <div class="ttc" id="aclassWinApp_html_ace26c4123a28f20240e9eb63f48a2082"><div class="ttname"><a href="classWinApp.html#ace26c4123a28f20240e9eb63f48a2082">WinApp::SetTitle</a></div><div class="ttdeci">void SetTitle(const std::string &amp;_title) const</div><div class="ttdef"><b>Definition</b> <a href="WinApp_8cpp_source.html#l00052">WinApp.cpp:52</a></div></div>
-<div class="ttc" id="anamespaceUtils_html_a16fe049b1a0a87909d3bdb1e9fce3724"><div class="ttname"><a href="namespaceUtils.html#a16fe049b1a0a87909d3bdb1e9fce3724">Utils::DisplayLastErr</a></div><div class="ttdeci">void DisplayLastErr()</div><div class="ttdef"><b>Definition</b> <a href="Utils_8cpp_source.html#l00033">Utils.cpp:33</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_6d0941966393c11bd90ec42cc10d3b81.html">Platform</a></li><li class="navelem"><a class="el" href="WinApp_8cpp.html">WinApp.cpp</a></li>
-    <li class="footer">2026年01月24日(土) 13時46分46秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年03月10日(火) 05時02分34秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

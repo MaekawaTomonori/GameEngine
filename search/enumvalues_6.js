@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['none_0',['none',['../classITransitionEffect.html#a86868f632ccdf014543bbf471096227ba6adf97f83acf6453d4a6a4b1070f3754',1,'ITransitionEffect::None'],['../classTransition.html#aca03fd04a22c40b5315f79e6f1122253a6adf97f83acf6453d4a6a4b1070f3754',1,'Transition::None'],['../BlendMode_8hpp.html#a30323fa90e24ca484998b9fba6c40e85ab50339a10e1de285ac99d4c3990b8693',1,'NONE:&#160;BlendMode.hpp']]]
+  ['in_0',['In',['../classITransitionEffect.html#a86868f632ccdf014543bbf471096227baefeb369cccbd560588a756610865664c',1,'ITransitionEffect']]],
+  ['info_1',['INFO',['../classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3',1,'Log']]]
 ];

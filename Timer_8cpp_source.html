@@ -100,7 +100,7 @@ $(document).ready(function(){initNavTree('Timer_8cpp_source.html',''); initResiz
 <div class="contents">
 <a href="Timer_8cpp.html">[詳解]</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#include &quot;<a class="code" href="Timer_8hpp.html">Timer.hpp</a>&quot;</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;<a class="code" href="Utils_8hpp.html">include/Utils.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;Utils.hpp&quot;</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
 <div class="foldopen" id="foldopen00005" data-start="{" data-end="}">
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno"><a class="line" href="classTimer.html#afdf79e6fabd1b87637599ed936aadae1">    5</a></span><a class="code hl_function" href="classTimer.html#afdf79e6fabd1b87637599ed936aadae1">Timer::Timer</a>(std::chrono::milliseconds _duration) :duration_(_duration), isStarted_(false){</div>
@@ -110,7 +110,7 @@ $(document).ready(function(){initNavTree('Timer_8cpp_source.html',''); initResiz
 <div class="foldopen" id="foldopen00008" data-start="{" data-end="}">
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno"><a class="line" href="classTimer.html#a4e607b129b392c11adddd9641a320436">    8</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classTimer.html#a4e607b129b392c11adddd9641a320436">Timer::Start</a>() {</div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>    <span class="keywordflow">if</span> (isStarted_){</div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>        <a class="code hl_function" href="namespaceUtils.html#a7889f3d633f2e561e30dd11e6fc80af0">Utils::Alert</a>(<span class="stringliteral">&quot;Timer already started&quot;</span>);</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>        Utils::Alert(<span class="stringliteral">&quot;Timer already started&quot;</span>);</div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>        <span class="keywordflow">return</span>; <span class="comment">// Already started</span></div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    }</div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    start_ = std::chrono::system_clock::now();</div>
@@ -149,7 +149,7 @@ $(document).ready(function(){initNavTree('Timer_8cpp_source.html',''); initResiz
 <div class="foldopen" id="foldopen00039" data-start="{" data-end="}">
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="classTimer.html#af2af567ef7614921b05507611129697b">   39</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="classTimer.html#af2af567ef7614921b05507611129697b">Timer::Check</a>() {</div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keywordflow">if</span> (!isStarted_){</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        <a class="code hl_function" href="namespaceUtils.html#a7889f3d633f2e561e30dd11e6fc80af0">Utils::Alert</a>(<span class="stringliteral">&quot;Timer not started&quot;</span>);</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        Utils::Alert(<span class="stringliteral">&quot;Timer not started&quot;</span>);</div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>; <span class="comment">// Not started</span></div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    }</div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keyword">auto</span> now = std::chrono::system_clock::now();</div>
@@ -168,7 +168,6 @@ $(document).ready(function(){initNavTree('Timer_8cpp_source.html',''); initResiz
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>}</div>
 </div>
 <div class="ttc" id="aTimer_8hpp_html"><div class="ttname"><a href="Timer_8hpp.html">Timer.hpp</a></div></div>
-<div class="ttc" id="aUtils_8hpp_html"><div class="ttname"><a href="Utils_8hpp.html">Utils.hpp</a></div></div>
 <div class="ttc" id="aclassTimer_html_a44a5a286f0086968f0b079c089befbd2"><div class="ttname"><a href="classTimer.html#a44a5a286f0086968f0b079c089befbd2">Timer::Restart</a></div><div class="ttdeci">void Restart()</div><div class="ttdef"><b>Definition</b> <a href="Timer_8cpp_source.html#l00034">Timer.cpp:34</a></div></div>
 <div class="ttc" id="aclassTimer_html_a4e607b129b392c11adddd9641a320436"><div class="ttname"><a href="classTimer.html#a4e607b129b392c11adddd9641a320436">Timer::Start</a></div><div class="ttdeci">void Start()</div><div class="ttdef"><b>Definition</b> <a href="Timer_8cpp_source.html#l00008">Timer.cpp:8</a></div></div>
 <div class="ttc" id="aclassTimer_html_a6379e797f968aaee6ac3bb12dc6b81c5"><div class="ttname"><a href="classTimer.html#a6379e797f968aaee6ac3bb12dc6b81c5">Timer::Stop</a></div><div class="ttdeci">void Stop()</div><div class="ttdef"><b>Definition</b> <a href="Timer_8cpp_source.html#l00017">Timer.cpp:17</a></div></div>
@@ -176,14 +175,13 @@ $(document).ready(function(){initNavTree('Timer_8cpp_source.html',''); initResiz
 <div class="ttc" id="aclassTimer_html_ae7c0c1e7d12de4b8a6e7c64e451cdd2a"><div class="ttname"><a href="classTimer.html#ae7c0c1e7d12de4b8a6e7c64e451cdd2a">Timer::Reset</a></div><div class="ttdeci">void Reset()</div><div class="ttdef"><b>Definition</b> <a href="Timer_8cpp_source.html#l00030">Timer.cpp:30</a></div></div>
 <div class="ttc" id="aclassTimer_html_af2af567ef7614921b05507611129697b"><div class="ttname"><a href="classTimer.html#af2af567ef7614921b05507611129697b">Timer::Check</a></div><div class="ttdeci">bool Check()</div><div class="ttdef"><b>Definition</b> <a href="Timer_8cpp_source.html#l00039">Timer.cpp:39</a></div></div>
 <div class="ttc" id="aclassTimer_html_afdf79e6fabd1b87637599ed936aadae1"><div class="ttname"><a href="classTimer.html#afdf79e6fabd1b87637599ed936aadae1">Timer::Timer</a></div><div class="ttdeci">Timer(std::chrono::milliseconds _duration)</div><div class="ttdef"><b>Definition</b> <a href="Timer_8cpp_source.html#l00005">Timer.cpp:5</a></div></div>
-<div class="ttc" id="anamespaceUtils_html_a7889f3d633f2e561e30dd11e6fc80af0"><div class="ttname"><a href="namespaceUtils.html#a7889f3d633f2e561e30dd11e6fc80af0">Utils::Alert</a></div><div class="ttdeci">void Alert(const std::string &amp;_msg)</div><div class="ttdef"><b>Definition</b> <a href="Utils_8cpp_source.html#l00057">Utils.cpp:57</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_6acd24eea7f3fe579df422711269a2fc.html">Timer</a></li><li class="navelem"><a class="el" href="Timer_8cpp.html">Timer.cpp</a></li>
-    <li class="footer">2026年01月24日(土) 13時46分46秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年03月10日(火) 05時02分34秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

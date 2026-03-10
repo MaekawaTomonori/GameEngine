@@ -12,6 +12,8 @@ var classIScene =
     [ "Initialize", "classIScene.html#a34c44718cdcdd0d5cf981b26786e216a", null ],
     [ "IsProgress", "classIScene.html#a393ca5105619b7e73f2f35770cc0677a", null ],
     [ "Particle", "classIScene.html#a6aa758514e0cd7563413c71f26aeddbb", null ],
+    [ "PlayTransition", "classIScene.html#acf606edba61355cfda7c513106364c98", null ],
+    [ "PlayTransition", "classIScene.html#a1168ec5383dd6f0c377df86517346263", null ],
     [ "PostEffect", "classIScene.html#a4c682401f3a7045ea7edabfe352fa399", null ],
     [ "Setup", "classIScene.html#a6b0a12ac2c9dcc379af0b83f71a360c5", null ],
     [ "Update", "classIScene.html#a8ade50056bb72005e04efefab1408f37", null ],

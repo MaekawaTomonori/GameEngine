@@ -149,12 +149,13 @@ BoxBlur の継承関係図</div>
 <tr class="separator:a46a6e5b5244d72b9ec5e56cce20bf19f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_methods_classIPostEffect"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classIPostEffect')"><img src="closed.png" alt="-"/>&#160;基底クラス <a class="el" href="classIPostEffect.html">IPostEffect</a> に属する継承限定公開メンバ関数</td></tr>
 <tr class="memitem:aca73455bd632277bf5cc476313c83217 inherit pro_methods_classIPostEffect" id="r_aca73455bd632277bf5cc476313c83217"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIPostEffect.html#aca73455bd632277bf5cc476313c83217">CreateOutput</a> ()</td></tr>
+<tr class="memdesc:aca73455bd632277bf5cc476313c83217 inherit pro_methods_classIPostEffect"><td class="mdescLeft">&#160;</td><td class="mdescRight">出力リソースの作成  <br /></td></tr>
 <tr class="separator:aca73455bd632277bf5cc476313c83217 inherit pro_methods_classIPostEffect"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
 その他の継承メンバ</h2></td></tr>
 <tr class="inherit_header pro_attribs_classIPostEffect"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classIPostEffect')"><img src="closed.png" alt="-"/>&#160;基底クラス <a class="el" href="classIPostEffect.html">IPostEffect</a> に属する継承限定公開変数類</td></tr>
-<tr class="memitem:ae0dc01028757f721f28df7ba30cdd48e inherit pro_attribs_classIPostEffect" id="r_ae0dc01028757f721f28df7ba30cdd48e"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structVector4.html">Vector4</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIPostEffect.html#ae0dc01028757f721f28df7ba30cdd48e">CLEAR_COLOR</a> = { 0.2f, 0.2f, 0.2f, 1.0f }</td></tr>
+<tr class="memitem:ae0dc01028757f721f28df7ba30cdd48e inherit pro_attribs_classIPostEffect" id="r_ae0dc01028757f721f28df7ba30cdd48e"><td class="memItemLeft" align="right" valign="top">const Vector4&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIPostEffect.html#ae0dc01028757f721f28df7ba30cdd48e">CLEAR_COLOR</a> = { 0.2f, 0.2f, 0.2f, 1.0f }</td></tr>
 <tr class="separator:ae0dc01028757f721f28df7ba30cdd48e inherit pro_attribs_classIPostEffect"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af243e74d5ae3c7c51202d7d75ca87873 inherit pro_attribs_classIPostEffect" id="r_af243e74d5ae3c7c51202d7d75ca87873"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classDirectXAdapter.html">DirectXAdapter</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIPostEffect.html#af243e74d5ae3c7c51202d7d75ca87873">adapter_</a> = nullptr</td></tr>
 <tr class="separator:af243e74d5ae3c7c51202d7d75ca87873 inherit pro_attribs_classIPostEffect"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -235,7 +236,7 @@ BoxBlur の継承関係図</div>
 
 <p class="definition"> <a class="el" href="BoxBlur_8cpp_source.html">BoxBlur.cpp</a> の <a class="el" href="BoxBlur_8cpp_source.html#l00005">5</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="IPostEffect_8hpp_source.html#l00015">IPostEffect::adapter_</a>, <a class="el" href="BlendMode_8hpp.html#a30323fa90e24ca484998b9fba6c40e85a002101f8725e5c78d9f30d87f3fa4c87">ALPHA</a>, <a class="el" href="DirectXAdapter_8cpp_source.html#l00074">DirectXAdapter::CreateBufferResource()</a>, <a class="el" href="IPostEffect_8hpp_source.html#l00018">IPostEffect::pso_</a>.</p>
+<p class="reference">参照先 <a class="el" href="IPostEffect_8hpp_source.html#l00015">IPostEffect::adapter_</a>, <a class="el" href="BlendMode_8hpp.html#a30323fa90e24ca484998b9fba6c40e85a002101f8725e5c78d9f30d87f3fa4c87">ALPHA</a>, <a class="el" href="DirectXAdapter_8cpp_source.html#l00079">DirectXAdapter::CreateBufferResource()</a>, <a class="el" href="IPostEffect_8hpp_source.html#l00018">IPostEffect::pso_</a>.</p>
 
 </div>
 </div>
@@ -266,7 +267,7 @@ BoxBlur の継承関係図</div>
 <p>プリセットからパラメータを読み込み </p>
 <dl class="params"><dt>引数</dt><dd>
   <table class="params">
-    <tr><td class="paramname">presetName</td><td>プリセット名 </td></tr>
+    <tr><td class="paramname">_presetName</td><td>プリセット名 </td></tr>
   </table>
   </dd>
 </dl>
@@ -304,7 +305,7 @@ BoxBlur の継承関係図</div>
 
 <p class="definition"> <a class="el" href="BoxBlur_8cpp_source.html">BoxBlur.cpp</a> の <a class="el" href="BoxBlur_8cpp_source.html#l00062">62</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="IPostEffect_8hpp_source.html#l00015">IPostEffect::adapter_</a>, <a class="el" href="DirectXAdapter_8cpp_source.html#l00704">DirectXAdapter::GetCommandList()</a>.</p>
+<p class="reference">参照先 <a class="el" href="IPostEffect_8hpp_source.html#l00015">IPostEffect::adapter_</a>, <a class="el" href="DirectXAdapter_8cpp_source.html#l00709">DirectXAdapter::GetCommandList()</a>.</p>
 
 </div>
 </div>
@@ -367,7 +368,7 @@ BoxBlur の継承関係図</div>
 <p>現在のパラメータをプリセットとして保存 </p>
 <dl class="params"><dt>引数</dt><dd>
   <table class="params">
-    <tr><td class="paramname">presetName</td><td>プリセット名 </td></tr>
+    <tr><td class="paramname">_presetName</td><td>プリセット名 </td></tr>
   </table>
   </dd>
 </dl>
@@ -405,7 +406,7 @@ BoxBlur の継承関係図</div>
 <p>アニメーション進行（tは0.0~1.0） </p>
 <dl class="params"><dt>引数</dt><dd>
   <table class="params">
-    <tr><td class="paramname">t</td><td>アニメーション進行度（0.0: 開始、1.0: 終了） </td></tr>
+    <tr><td class="paramname">_t</td><td>アニメーション進行度（0.0: 開始、1.0: 終了） </td></tr>
   </table>
   </dd>
 </dl>
@@ -426,7 +427,7 @@ BoxBlur の継承関係図</div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classBoxBlur.html">BoxBlur</a></li>
-    <li class="footer">2026年01月24日(土) 13時46分46秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年03月10日(火) 05時02分34秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

@@ -91,6 +91,7 @@ $(document).ready(function(){initNavTree('classInput.html',''); initResizable();
 
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">クラス</a> &#124;
 <a href="#pub-methods">公開メンバ関数</a> &#124;
 <a href="classInput-members.html">全メンバ一覧</a>  </div>
   <div class="headertitle"><div class="title">Input クラス</div></div>
@@ -115,38 +116,64 @@ $(document).ready(function(){initNavTree('classInput.html',''); initResizable();
 <tr class="separator:aa62420b1c165482b43a24c17f1830501"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a70db939e1efea6bfa41b8f9f1144bf13" id="r_a70db939e1efea6bfa41b8f9f1144bf13"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInput.html#a70db939e1efea6bfa41b8f9f1144bf13">IsTrigger</a> (BYTE _key) const</td></tr>
 <tr class="separator:a70db939e1efea6bfa41b8f9f1144bf13"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a757b437fbd14550fb5b6713b71127788" id="r_a757b437fbd14550fb5b6713b71127788"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structVector2.html">Vector2</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInput.html#a757b437fbd14550fb5b6713b71127788">GetMousePosition</a> () const</td></tr>
+<tr class="memitem:a757b437fbd14550fb5b6713b71127788" id="r_a757b437fbd14550fb5b6713b71127788"><td class="memItemLeft" align="right" valign="top">Vector2&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInput.html#a757b437fbd14550fb5b6713b71127788">GetMousePosition</a> () const</td></tr>
+<tr class="memdesc:a757b437fbd14550fb5b6713b71127788"><td class="mdescLeft">&#160;</td><td class="mdescRight">マウス座標を取得 Scene ウィンドウが有効な場合はゲーム空間座標に変換して返す  <br /></td></tr>
 <tr class="separator:a757b437fbd14550fb5b6713b71127788"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1cd403fea4382c5ba3eda9969c5e2809" id="r_a1cd403fea4382c5ba3eda9969c5e2809"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInput.html#a1cd403fea4382c5ba3eda9969c5e2809">SetSceneViewTransform</a> (bool _active, Vector2 _imagePos, Vector2 _imageSize, Vector2 _gameSize)</td></tr>
+<tr class="memdesc:a1cd403fea4382c5ba3eda9969c5e2809"><td class="mdescLeft">&#160;</td><td class="mdescRight">Scene ウィンドウ用のマウス座標変換を設定  <br /></td></tr>
+<tr class="separator:a1cd403fea4382c5ba3eda9969c5e2809"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae702d40cfd7ad3ea48bf74a38f6e424e" id="r_ae702d40cfd7ad3ea48bf74a38f6e424e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInput.html#ae702d40cfd7ad3ea48bf74a38f6e424e">SetCursorVisible</a> (bool _visible)</td></tr>
+<tr class="memdesc:ae702d40cfd7ad3ea48bf74a38f6e424e"><td class="mdescLeft">&#160;</td><td class="mdescRight">カーソルの表示/非表示を設定  <br /></td></tr>
+<tr class="separator:ae702d40cfd7ad3ea48bf74a38f6e424e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f6f6ae51b56fec3cb2e49b3d9ed5824" id="r_a1f6f6ae51b56fec3cb2e49b3d9ed5824"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInput.html#a1f6f6ae51b56fec3cb2e49b3d9ed5824">ApplyCursorVisibility</a> ()</td></tr>
+<tr class="memdesc:a1f6f6ae51b56fec3cb2e49b3d9ed5824"><td class="mdescLeft">&#160;</td><td class="mdescRight">カーソル表示状態を即時反映  <br /></td></tr>
+<tr class="separator:a1f6f6ae51b56fec3cb2e49b3d9ed5824"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">詳解</h2>
 <div class="textblock"><p>入力処理クラス キーボード、マウス、ジョイスティックの入力を管理 </p>
 
 <p class="definition"> <a class="el" href="Input_8hpp_source.html">Input.hpp</a> の <a class="el" href="Input_8hpp_source.html#l00012">12</a> 行目に定義があります。</p>
 </div><h2 class="groupheader">関数詳解</h2>
+<a id="a1f6f6ae51b56fec3cb2e49b3d9ed5824" name="a1f6f6ae51b56fec3cb2e49b3d9ed5824"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f6f6ae51b56fec3cb2e49b3d9ed5824">&#9670;&#160;</a></span>ApplyCursorVisibility()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Input::ApplyCursorVisibility </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>カーソル表示状態を即時反映 </p>
+<dl class="section note"><dt>覚え書き</dt><dd>Framework::Draw() の renderer_-&gt;Render() 後に呼ぶこと (SceneView の矩形情報は ImGui レンダリング後に確定するため) </dd></dl>
+
+<p class="definition"> <a class="el" href="Input_8cpp_source.html">Input.cpp</a> の <a class="el" href="Input_8cpp_source.html#l00128">128</a> 行目に定義があります。</p>
+
+</div>
+</div>
 <a id="a757b437fbd14550fb5b6713b71127788" name="a757b437fbd14550fb5b6713b71127788"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a757b437fbd14550fb5b6713b71127788">&#9670;&#160;</a></span>GetMousePosition()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structVector2.html">Vector2</a> Input::GetMousePosition </td>
+          <td class="memname">Vector2 Input::GetMousePosition </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="Input_8hpp_source.html">Input.hpp</a> の <a class="el" href="Input_8hpp_source.html#l00046">46</a> 行目に定義があります。</p>
+<p>マウス座標を取得 Scene ウィンドウが有効な場合はゲーム空間座標に変換して返す </p>
+
+<p class="definition"> <a class="el" href="Input_8cpp_source.html">Input.cpp</a> の <a class="el" href="Input_8cpp_source.html#l00101">101</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -187,9 +214,9 @@ $(document).ready(function(){initNavTree('classInput.html',''); initResizable();
 
 <p class="definition"> <a class="el" href="Input_8cpp_source.html">Input.cpp</a> の <a class="el" href="Input_8cpp_source.html#l00010">10</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="Utils_8cpp_source.html#l00057">Utils::Alert()</a>, <a class="el" href="Input_8hpp_source.html#l00003">DIRECTINPUT_VERSION</a>, <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::ERR</a>, <a class="el" href="Log_8cpp_source.html#l00067">Log::Send()</a>.</p>
+<p class="reference">参照先 <a class="el" href="Input_8hpp_source.html#l00003">DIRECTINPUT_VERSION</a>, <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::ERR</a>, <a class="el" href="Log_8cpp_source.html#l00108">Log::Send()</a>.</p>
 
-<p class="reference">参照元 <a class="el" href="Framework_8cpp_source.html#l00008">Framework::Framework()</a>.</p>
+<p class="reference">参照元 <a class="el" href="Framework_8cpp_source.html#l00009">Framework::Framework()</a>.</p>
 
 </div>
 </div>
@@ -242,6 +269,88 @@ $(document).ready(function(){initNavTree('classInput.html',''); initResizable();
 
 </div>
 </div>
+<a id="ae702d40cfd7ad3ea48bf74a38f6e424e" name="ae702d40cfd7ad3ea48bf74a38f6e424e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae702d40cfd7ad3ea48bf74a38f6e424e">&#9670;&#160;</a></span>SetCursorVisible()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Input::SetCursorVisible </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>_visible</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>カーソルの表示/非表示を設定 </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_visible</td><td>true で表示、false で非表示 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>覚え書き</dt><dd>Debug ビルドでは非表示時も SceneView 外ではカーソルを表示する </dd></dl>
+
+<p class="definition"> <a class="el" href="Input_8cpp_source.html">Input.cpp</a> の <a class="el" href="Input_8cpp_source.html#l00124">124</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="a1cd403fea4382c5ba3eda9969c5e2809" name="a1cd403fea4382c5ba3eda9969c5e2809"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1cd403fea4382c5ba3eda9969c5e2809">&#9670;&#160;</a></span>SetSceneViewTransform()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Input::SetSceneViewTransform </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>_active</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector2&#160;</td>
+          <td class="paramname"><em>_imagePos</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector2&#160;</td>
+          <td class="paramname"><em>_imageSize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector2&#160;</td>
+          <td class="paramname"><em>_gameSize</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Scene ウィンドウ用のマウス座標変換を設定 </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_active</td><td>変換を有効にするか </td></tr>
+    <tr><td class="paramname">_imagePos</td><td>ImGui画像のスクリーン座標（左上） </td></tr>
+    <tr><td class="paramname">_imageSize</td><td>ImGui画像のサイズ </td></tr>
+    <tr><td class="paramname">_gameSize</td><td>ゲーム解像度 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition"> <a class="el" href="Input_8cpp_source.html">Input.cpp</a> の <a class="el" href="Input_8cpp_source.html#l00120">120</a> 行目に定義があります。</p>
+
+</div>
+</div>
 <a id="af80dcfde6dbfe39bf3bc0345c75595ce" name="af80dcfde6dbfe39bf3bc0345c75595ce"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af80dcfde6dbfe39bf3bc0345c75595ce">&#9670;&#160;</a></span>Update()</h2>
 
@@ -273,7 +382,7 @@ $(document).ready(function(){initNavTree('classInput.html',''); initResizable();
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classInput.html">Input</a></li>
-    <li class="footer">2026年01月24日(土) 13時46分46秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年03月10日(火) 05時02分34秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

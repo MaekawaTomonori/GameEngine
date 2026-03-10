@@ -124,10 +124,19 @@ $(document).ready(function(){initNavTree('classTransition.html',''); initResizab
 <tr class="separator:ac07725de59e8c6520741b7a9d3bec8fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a00b54bae79f74cfbe98fd98a8b303c79" id="r_a00b54bae79f74cfbe98fd98a8b303c79"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTransition.html#a00b54bae79f74cfbe98fd98a8b303c79">Awake</a> (<a class="el" href="classTransition.html#aca03fd04a22c40b5315f79e6f1122253">Type</a> _type, <a class="el" href="classITransitionEffect.html#a86868f632ccdf014543bbf471096227b">ITransitionEffect::State</a> _state, float _duration)</td></tr>
 <tr class="separator:a00b54bae79f74cfbe98fd98a8b303c79"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a71d505de85fbe2b4a6ff8492ab59a3bc" id="r_a71d505de85fbe2b4a6ff8492ab59a3bc"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTransition.html#a71d505de85fbe2b4a6ff8492ab59a3bc">InProgress</a> () const</td></tr>
-<tr class="separator:a71d505de85fbe2b4a6ff8492ab59a3bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22d55f19e21fc47bc0992766ab7601a2" id="r_a22d55f19e21fc47bc0992766ab7601a2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTransition.html#a22d55f19e21fc47bc0992766ab7601a2">InProgress</a> ()</td></tr>
+<tr class="separator:a22d55f19e21fc47bc0992766ab7601a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a02c269f065786034782a6a4e73ea8ddb" id="r_a02c269f065786034782a6a4e73ea8ddb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTransition.html#a02c269f065786034782a6a4e73ea8ddb">SetDefaultDuration</a> (float _duration)</td></tr>
 <tr class="separator:a02c269f065786034782a6a4e73ea8ddb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af1d28b83a2d43b8077c7b400e25d52e5" id="r_af1d28b83a2d43b8077c7b400e25d52e5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTransition.html#af1d28b83a2d43b8077c7b400e25d52e5">Debug</a> ()</td></tr>
+<tr class="memdesc:af1d28b83a2d43b8077c7b400e25d52e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">ImGui上でトランジション状態を表示（ウィンドウ内に埋め込む形で呼ぶ）  <br /></td></tr>
+<tr class="separator:af1d28b83a2d43b8077c7b400e25d52e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a43a82ebbba862822c1962db6bace9e50" id="r_a43a82ebbba862822c1962db6bace9e50"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classTransition.html#aca03fd04a22c40b5315f79e6f1122253">Type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTransition.html#a43a82ebbba862822c1962db6bace9e50">GetType</a> () const</td></tr>
+<tr class="separator:a43a82ebbba862822c1962db6bace9e50"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae830b9326ef78d7d1a6af9f38d0d27bc" id="r_ae830b9326ef78d7d1a6af9f38d0d27bc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classITransitionEffect.html#a86868f632ccdf014543bbf471096227b">ITransitionEffect::State</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTransition.html#ae830b9326ef78d7d1a6af9f38d0d27bc">GetCurrentState</a> () const</td></tr>
+<tr class="separator:ae830b9326ef78d7d1a6af9f38d0d27bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf83b5812e79c6c905b1c28b16e3f60a" id="r_abf83b5812e79c6c905b1c28b16e3f60a"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTransition.html#abf83b5812e79c6c905b1c28b16e3f60a">GetProgress</a> () const</td></tr>
+<tr class="separator:abf83b5812e79c6c905b1c28b16e3f60a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">詳解</h2>
 <div class="textblock">
@@ -240,11 +249,11 @@ $(document).ready(function(){initNavTree('classTransition.html',''); initResizab
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="Transition_8cpp_source.html">Transition.cpp</a> の <a class="el" href="Transition_8cpp_source.html#l00019">19</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Transition_8cpp_source.html">Transition.cpp</a> の <a class="el" href="Transition_8cpp_source.html#l00023">23</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="Transition_8cpp_source.html#l00019">Awake()</a>, <a class="el" href="classTransition.html#aca03fd04a22c40b5315f79e6f1122253a6adf97f83acf6453d4a6a4b1070f3754">None</a>.</p>
+<p class="reference">参照先 <a class="el" href="Transition_8cpp_source.html#l00023">Awake()</a>, <a class="el" href="classTransition.html#aca03fd04a22c40b5315f79e6f1122253a6adf97f83acf6453d4a6a4b1070f3754">None</a>.</p>
 
-<p class="reference">参照元 <a class="el" href="Transition_8cpp_source.html#l00019">Awake()</a>.</p>
+<p class="reference">参照元 <a class="el" href="Transition_8cpp_source.html#l00023">Awake()</a>, <a class="el" href="Transition_8cpp_source.html#l00048">InProgress()</a>.</p>
 
 </div>
 </div>
@@ -280,9 +289,32 @@ $(document).ready(function(){initNavTree('classTransition.html',''); initResizab
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="Transition_8cpp_source.html">Transition.cpp</a> の <a class="el" href="Transition_8cpp_source.html#l00024">24</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Transition_8cpp_source.html">Transition.cpp</a> の <a class="el" href="Transition_8cpp_source.html#l00028">28</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="classTransition.html#aca03fd04a22c40b5315f79e6f1122253a6adf97f83acf6453d4a6a4b1070f3754">None</a>.</p>
+<p class="reference">参照先 <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::INFO</a>, <a class="el" href="classTransition.html#aca03fd04a22c40b5315f79e6f1122253a6adf97f83acf6453d4a6a4b1070f3754">None</a>, <a class="el" href="Log_8cpp_source.html#l00108">Log::Send()</a>.</p>
+
+</div>
+</div>
+<a id="af1d28b83a2d43b8077c7b400e25d52e5" name="af1d28b83a2d43b8077c7b400e25d52e5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af1d28b83a2d43b8077c7b400e25d52e5">&#9670;&#160;</a></span>Debug()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Transition::Debug </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>ImGui上でトランジション状態を表示（ウィンドウ内に埋め込む形で呼ぶ） </p>
+
+<p class="definition"> <a class="el" href="Transition_8cpp_source.html">Transition.cpp</a> の <a class="el" href="Transition_8cpp_source.html#l00075">75</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="Transition_8cpp_source.html#l00065">GetCurrentState()</a>, <a class="el" href="Transition_8cpp_source.html#l00070">GetProgress()</a>, <a class="el" href="Transition_8cpp_source.html#l00048">InProgress()</a>.</p>
 
 </div>
 </div>
@@ -301,7 +333,78 @@ $(document).ready(function(){initNavTree('classTransition.html',''); initResizab
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="Transition_8cpp_source.html">Transition.cpp</a> の <a class="el" href="Transition_8cpp_source.html#l00013">13</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Transition_8cpp_source.html">Transition.cpp</a> の <a class="el" href="Transition_8cpp_source.html#l00017">17</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="ae830b9326ef78d7d1a6af9f38d0d27bc" name="ae830b9326ef78d7d1a6af9f38d0d27bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae830b9326ef78d7d1a6af9f38d0d27bc">&#9670;&#160;</a></span>GetCurrentState()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classITransitionEffect.html#a86868f632ccdf014543bbf471096227b">ITransitionEffect::State</a> Transition::GetCurrentState </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="Transition_8cpp_source.html">Transition.cpp</a> の <a class="el" href="Transition_8cpp_source.html#l00065">65</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="classITransitionEffect.html#a86868f632ccdf014543bbf471096227ba6adf97f83acf6453d4a6a4b1070f3754">ITransitionEffect::None</a>.</p>
+
+<p class="reference">参照元 <a class="el" href="Transition_8cpp_source.html#l00075">Debug()</a>.</p>
+
+</div>
+</div>
+<a id="abf83b5812e79c6c905b1c28b16e3f60a" name="abf83b5812e79c6c905b1c28b16e3f60a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf83b5812e79c6c905b1c28b16e3f60a">&#9670;&#160;</a></span>GetProgress()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Transition::GetProgress </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="Transition_8cpp_source.html">Transition.cpp</a> の <a class="el" href="Transition_8cpp_source.html#l00070">70</a> 行目に定義があります。</p>
+
+<p class="reference">参照元 <a class="el" href="Transition_8cpp_source.html#l00075">Debug()</a>.</p>
+
+</div>
+</div>
+<a id="a43a82ebbba862822c1962db6bace9e50" name="a43a82ebbba862822c1962db6bace9e50"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a43a82ebbba862822c1962db6bace9e50">&#9670;&#160;</a></span>GetType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classTransition.html#aca03fd04a22c40b5315f79e6f1122253">Type</a> Transition::GetType </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="Transition_8hpp_source.html">Transition.hpp</a> の <a class="el" href="Transition_8hpp_source.html#l00042">42</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -320,14 +423,14 @@ $(document).ready(function(){initNavTree('classTransition.html',''); initResizab
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="Transition_8cpp_source.html">Transition.cpp</a> の <a class="el" href="Transition_8cpp_source.html#l00004">4</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Transition_8cpp_source.html">Transition.cpp</a> の <a class="el" href="Transition_8cpp_source.html#l00008">8</a> 行目に定義があります。</p>
 
 <p class="reference">参照先 <a class="el" href="classTransition.html#aca03fd04a22c40b5315f79e6f1122253a6adf97f83acf6453d4a6a4b1070f3754">None</a>.</p>
 
 </div>
 </div>
-<a id="a71d505de85fbe2b4a6ff8492ab59a3bc" name="a71d505de85fbe2b4a6ff8492ab59a3bc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a71d505de85fbe2b4a6ff8492ab59a3bc">&#9670;&#160;</a></span>InProgress()</h2>
+<a id="a22d55f19e21fc47bc0992766ab7601a2" name="a22d55f19e21fc47bc0992766ab7601a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a22d55f19e21fc47bc0992766ab7601a2">&#9670;&#160;</a></span>InProgress()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -336,12 +439,16 @@ $(document).ready(function(){initNavTree('classTransition.html',''); initResizab
           <td class="memname">bool Transition::InProgress </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td> const</td>
+          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="Transition_8cpp_source.html">Transition.cpp</a> の <a class="el" href="Transition_8cpp_source.html#l00039">39</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Transition_8cpp_source.html">Transition.cpp</a> の <a class="el" href="Transition_8cpp_source.html#l00048">48</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="Transition_8cpp_source.html#l00023">Awake()</a>.</p>
+
+<p class="reference">参照元 <a class="el" href="Transition_8cpp_source.html#l00075">Debug()</a>.</p>
 
 </div>
 </div>
@@ -361,7 +468,7 @@ $(document).ready(function(){initNavTree('classTransition.html',''); initResizab
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="Transition_8cpp_source.html">Transition.cpp</a> の <a class="el" href="Transition_8cpp_source.html#l00046">46</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Transition_8cpp_source.html">Transition.cpp</a> の <a class="el" href="Transition_8cpp_source.html#l00061">61</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -380,7 +487,7 @@ $(document).ready(function(){initNavTree('classTransition.html',''); initResizab
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="Transition_8cpp_source.html">Transition.cpp</a> の <a class="el" href="Transition_8cpp_source.html#l00008">8</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Transition_8cpp_source.html">Transition.cpp</a> の <a class="el" href="Transition_8cpp_source.html#l00012">12</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -394,7 +501,7 @@ $(document).ready(function(){initNavTree('classTransition.html',''); initResizab
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classTransition.html">Transition</a></li>
-    <li class="footer">2026年01月24日(土) 13時46分46秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年03月10日(火) 05時02分34秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>
