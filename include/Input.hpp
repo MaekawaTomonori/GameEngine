@@ -7,8 +7,8 @@
 #include "Math/Vector2.hpp"
 
 /** @brief 入力処理クラス
- ** キーボード、マウス、ジョイスティックの入力を管理
- **/
+ * キーボード、マウス、ジョイスティックの入力を管理
+ */
 class Input {
     HINSTANCE hInstance_{};
     HWND hWnd_{};
@@ -24,26 +24,61 @@ class Input {
 
     Vector2 mousePosition_{};
 
+    bool cursorVisible_ = true;
+    bool appliedCursorVisible_ = true;
+
+    /** Scene ウィンドウ表示時のマウス座標変換データ
+     */
+    struct SceneViewTransform {
+        bool active = false;
+        Vector2 imagePos{};   // ImGui画像のスクリーン座標（左上）
+        Vector2 imageSize{};  // ImGui画像のサイズ
+        Vector2 gameSize{};   // ゲーム解像度
+    } sceneViewTransform_{};
+
     //EventSystem* eventSystem_ = nullptr;
 public:
     /** @brief 入力システムを初期化
-     ** @param _hWnd ウィンドウハンドル
-     ** @param _hInstance インスタンスハンドル
-     **/
+     * @param _hWnd ウィンドウハンドル
+     * @param _hInstance インスタンスハンドル
+     */
     void Initialize(HWND _hWnd, HINSTANCE _hInstance);
 
     /** @brief 入力状態を更新
-     **/
+     */
     void Update();
 
     /** @brief キーが押されているかを判定
-     ** @param _key キーコード
-     ** @return 押されている場合true
-     **/
+     * @param _key キーコード
+     * @return 押されている場合true
+     */
     bool IsPress(BYTE _key) const;
     bool IsTrigger(BYTE _key) const;
 
-    Vector2 GetMousePosition() const { return mousePosition_; }
+    /** @brief マウス座標を取得
+     * Scene ウィンドウが有効な場合はゲーム空間座標に変換して返す
+     */
+    Vector2 GetMousePosition() const;
+
+    /** @brief Scene ウィンドウ用のマウス座標変換を設定
+     * @param _active 変換を有効にするか
+     * @param _imagePos ImGui画像のスクリーン座標（左上）
+     * @param _imageSize ImGui画像のサイズ
+     * @param _gameSize ゲーム解像度
+     */
+    void SetSceneViewTransform(bool _active, Vector2 _imagePos, Vector2 _imageSize, Vector2 _gameSize);
+
+    /** @brief カーソルの表示/非表示を設定
+     * @param _visible true で表示、false で非表示
+     * @note Debug ビルドでは非表示時も SceneView 外ではカーソルを表示する
+     */
+    void SetCursorVisible(bool _visible);
+
+    /** @brief カーソル表示状態を即時反映
+     * @note Framework::Draw() の renderer_->Render() 後に呼ぶこと
+     *       (SceneView の矩形情報は ImGui レンダリング後に確定するため)
+     */
+    void ApplyCursorVisibility();
 
     //void SetEventSystem(EventSystem* eventSystem) { /*eventSystem_ = eventSystem;*/ }
 private:
@@ -52,7 +87,8 @@ private:
 
 }; // class Input
 
-// DirectInputキーコードマッピング
+/** DirectInputキーコードマッピング
+ */
 static const struct {
     BYTE code;
     const char* name;

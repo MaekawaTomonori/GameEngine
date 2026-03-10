@@ -18,8 +18,3 @@ void IGame::SetPostEffectFactory(std::unique_ptr<AbstractPostEffectFactory> _fac
 AbstractPostEffectFactory* IGame::GetPostEffectFactory() const {
     return postEffectFactory_.get();
 }
-
-void IGame::RegisterScene(const std::string& _name, const std::function<std::unique_ptr<IScene>()>& _creator) const {
-    if (!scene_) return;
-    scene_->RegisterScene(_name, _creator);
-}

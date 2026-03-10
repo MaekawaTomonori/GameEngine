@@ -7,8 +7,8 @@
 #include "Math/Transform.hpp"
 
 /** @brief ノードデータ
- ** モデルの階層構造を表現
- **/
+ * モデルの階層構造を表現
+ */
 struct Node {
     std::string name;
     Transform transform;

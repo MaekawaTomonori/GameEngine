@@ -50,3 +50,8 @@ CameraForGpu Camera::GetCameraForGpu() const {
 float Camera::GetFov() const {
     return fov_;
 }
+
+void Camera::LookAt(const Vector3& _position) {
+    Vector3 dir = _position - transform_.translate.Normalize();
+    transform_.rotate = Vector3{ std::atan2(dir.x, dir.z), std::atan2(-dir.y, std::sqrtf(dir.x * dir.x + dir.z * dir.z)), 0.f};
+}

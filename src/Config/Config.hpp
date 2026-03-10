@@ -10,6 +10,7 @@ namespace GameEngine {
         size_t width = 1280;
         size_t height = 720;
         uint16_t fps = 60;
+        bool showCursor = true;
     };
 }
 

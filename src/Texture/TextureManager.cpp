@@ -5,7 +5,7 @@
 
 #include "Log.hpp"
 #include "Utils.hpp"
-#include "externals/DirectXTex/d3dx12.h"
+#include "d3dx12.h"
 
 TextureManager::~TextureManager() {
     Unload();
@@ -181,9 +181,9 @@ bool TextureManager::Load(const std::string& _fileName) {
     texture.gpuHandle = srv_->GetGPUHandle(texture.srvIndex);
 
     if (texture.metadata.IsCubemap()) {
-        srv_->CreateSRVforCubemap(texture.srvIndex, texture.resource->Get(), texture.metadata.format);
+        srv_->CreateSRVForCubeMap(texture.srvIndex, texture.resource->Get(), texture.metadata.format);
     }else{
-        srv_->CreateSRVforTexture2D(texture.srvIndex, texture.resource->Get(), texture.metadata.format, static_cast<UINT>(texture.metadata.mipLevels));
+        srv_->CreateSRVForTexture2D(texture.srvIndex, texture.resource->Get(), texture.metadata.format, static_cast<UINT>(texture.metadata.mipLevels));
     }
 
     textures_[name] = std::move(texture);

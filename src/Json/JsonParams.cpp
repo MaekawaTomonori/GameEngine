@@ -1,16 +1,16 @@
-#include "Json.hpp"
+#include "JsonParams.hpp"
 
 #include <fstream>
 
 #include "Log.hpp"
 
-void Json::Register(const std::string& _name) {
+void JsonParams::Register(const std::string& _name) {
     if (datas_.contains(_name))return;
 
     datas_[_name];
 }
 
-void Json::LoadJson(const std::string& _path, std::string _name) {
+void JsonParams::LoadJson(const std::string& _path, std::string _name) {
     // Use _path as filename if _name is empty
     if (_name.empty()) {
         _name = _path;
@@ -101,7 +101,7 @@ void Json::LoadJson(const std::string& _path, std::string _name) {
     Log::Send(Log::Level::INFO, "Loaded " + _name + ".json");
 }
 
-void Json::SetValue(const std::string& _name, const std::string& _group, const std::string& _key, const Value& _value) {
+void JsonParams::SetValue(const std::string& _name, const std::string& _group, const std::string& _key, const Value& _value) {
     Register(_name);
 
     auto& data = datas_[_name];
@@ -110,13 +110,13 @@ void Json::SetValue(const std::string& _name, const std::string& _group, const s
     object[_key] = _value;
 }
 
-Json::Group Json::GetGroups(const std::string& _name) {
+JsonParams::Group JsonParams::GetGroups(const std::string& _name) {
     auto data = datas_.find(_name);
     assert(data != datas_.end());
     return data->second;
 }
 
-Json::Value Json::GetValue(const std::string& _name, const std::string& _group, const std::string& _key) const {
+JsonParams::Value JsonParams::GetValue(const std::string& _name, const std::string& _group, const std::string& _key) const {
     if (!datas_.contains(_name)) return {};
     auto data = datas_.find(_name);
     assert(data != datas_.end());
@@ -131,7 +131,7 @@ Json::Value Json::GetValue(const std::string& _name, const std::string& _group, 
     return value;
 }
 
-void Json::RemoveGroup(const std::string& _name, const std::string& _group) {
+void JsonParams::RemoveGroup(const std::string& _name, const std::string& _group) {
     if (!datas_.contains(_name)) return;
     auto data = datas_.find(_name);
     assert(data != datas_.end());
@@ -140,7 +140,7 @@ void Json::RemoveGroup(const std::string& _name, const std::string& _group) {
     data->second.erase(group);
 }
 
-bool Json::Load(const std::string& _path, const std::string& _name) {
+bool JsonParams::Load(const std::string& _path, const std::string& _name) {
     Log::Send(Log::Level::INFO, _path + " loading");
 
     // If _name is specified, load only that file
@@ -169,7 +169,7 @@ bool Json::Load(const std::string& _path, const std::string& _name) {
     return true;
 }
 
-void Json::Save(const std::string& _path, std::string _name) {
+void JsonParams::Save(const std::string& _path, std::string _name) {
     if (_name.empty()) _name = _path;
 
     auto group = datas_.find(_name);

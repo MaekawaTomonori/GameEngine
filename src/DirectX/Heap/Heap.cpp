@@ -1,6 +1,6 @@
 #include "Heap.hpp"
 
-#include "include/Utils.hpp"
+#include "Utils.hpp"
 
 bool Heap::Create(ID3D12Device* _device, D3D12_DESCRIPTOR_HEAP_TYPE _type, UINT _numDescriptors, D3D12_DESCRIPTOR_HEAP_FLAGS _flags) {
     device_ = _device;

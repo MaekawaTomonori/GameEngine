@@ -15,11 +15,14 @@ void SceneSwitcher::Setup(const Context& _context) {
 
     transition_ = std::make_unique<Transition>();
     transition_->Initialize();
+
+    if (context_.debug) {
+        context_.debug->RegisterMenuButton("SceneSwitcher");
+        context_.debug->RegisterMenuButton("Transition");
+    }
 }
 
 void SceneSwitcher::Update() {
-    Debug();
-
     // Scene Change/ in Transition process
     // Transition in/out
     if (transition_->InProgress()){
@@ -27,13 +30,29 @@ void SceneSwitcher::Update() {
         return;
     }
 
+    // Intra-scene transition: Out完了 → コールバック発火 → In開始
+    if (midpointPending_) {
+        midpointPending_ = false;
+        if (midpointCallback_) {
+            midpointCallback_();
+            midpointCallback_ = nullptr;
+        }
+        transition_->Awake(intraInType_, ITransitionEffect::State::In);
+        transition_->Update();
+        return;
+    }
+
     if (next_){
+        midpointCallback_ = nullptr;
         if (scene_){
             scene_->Finalize();
             scene_.reset();
             scene_ = nullptr;
             Singleton<CameraDirector>::GetInstance()->Stop();
             Singleton<LightManager>::GetInstance()->ClearRef();
+            if (context_.particle) {
+                context_.particle->ClearActive();
+            }
         }
         scene_ = std::move(next_);
 
@@ -42,7 +61,8 @@ void SceneSwitcher::Update() {
         scene_->Setup(this);
         scene_->Initialize();
 
-        transition_->Awake(scene_->GetEntryTransition(), ITransitionEffect::State::In, 1.f);
+        transition_->Awake(scene_->GetEntryTransition(), ITransitionEffect::State::In);
+        transition_->Update();
         return;
     }
 
@@ -71,10 +91,10 @@ void SceneSwitcher::RegisterScene(const std::string& _name, const std::function<
 
 void SceneSwitcher::Debug() {
     context_.debug->RegisterCommand("SceneSwitcher", [this]() {
-        static int selectedIndex = 0;
+        static int selectedIndex = -1;
         static std::string selectedScene;
 
-        ImGui::Begin("SceneSwitcher");
+        ImGui::Begin("SceneSwitcher", &context_.debug->IsVisible("SceneSwitcher"));
 
         // 現在のシーン表示
         if (scene_) {
@@ -90,13 +110,26 @@ void SceneSwitcher::Debug() {
             auto registeredScenes = factory_->GetRegisteredScenes();
 
             if (!registeredScenes.empty()) {
+                // 初回のみ: 現在のシーンにselectedIndexを合わせる
+                if (selectedIndex < 0) {
+                    const std::string currentName = scene_ ? scene_->GetName() : std::string{};
+                    selectedIndex = 0;
+                    for (int i = 0; i < static_cast<int>(registeredScenes.size()); ++i) {
+                        if (registeredScenes[i] == currentName) {
+                            selectedIndex = i;
+                            selectedScene = currentName;
+                            break;
+                        }
+                    }
+                }
+
                 // コンボボックス用のプレビュー文字列
-                const char* previewValue = selectedIndex < registeredScenes.size()
+                const char* previewValue = selectedIndex < static_cast<int>(registeredScenes.size())
                     ? registeredScenes[selectedIndex].c_str()
                     : "Select Scene";
 
                 if (ImGui::BeginCombo("##Scene List", previewValue)) {
-                    for (int i = 0; i < registeredScenes.size(); ++i) {
+                    for (int i = 0; i < static_cast<int>(registeredScenes.size()); ++i) {
                         const bool isSelected = (selectedIndex == i);
                         if (ImGui::Selectable(registeredScenes[i].c_str(), isSelected)) {
                             selectedIndex = i;
@@ -144,6 +177,13 @@ void SceneSwitcher::Debug() {
         ImGui::End();
     });
 
+    context_.debug->RegisterCommand("Transition", [this]() {
+        ImGui::Begin("Transition", &context_.debug->IsVisible("Transition"));
+        transition_->Debug();
+        ImGui::Text("Callback Pending: %s", midpointPending_ ? "Yes" : "No");
+        ImGui::End();
+    });
+
     if (!scene_)return;
     context_.debug->RegisterCommand("Game", [this]() {
         scene_->Debug();
@@ -152,6 +192,20 @@ void SceneSwitcher::Debug() {
 
 const SceneSwitcher::Context& SceneSwitcher::GetContext() const {
     return context_;
+}
+
+void SceneSwitcher::PlayTransition(Transition::Type _outType, Transition::Type _inType, std::function<void()> _onMidpoint) {
+    if (transition_->InProgress()) return;
+    intraOutType_ = _outType;
+    intraInType_  = _inType;
+    midpointCallback_ = std::move(_onMidpoint);
+    midpointPending_ = true;
+    transition_->Awake(_outType, ITransitionEffect::State::Out);
+    transition_->Update(); 
+}
+
+void SceneSwitcher::PlayTransition(Transition::Type _type, std::function<void()> _onMidpoint) {
+    PlayTransition(_type, _type, std::move(_onMidpoint));
 }
 
 void SceneSwitcher::Change(const std::string &_name) {

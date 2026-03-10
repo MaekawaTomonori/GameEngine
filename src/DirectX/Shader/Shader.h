@@ -4,12 +4,14 @@
 #include <string>
 
 class Shader{
-    //DXC
+    /** DXC
+     */
     Microsoft::WRL::ComPtr<IDxcUtils> dxcUtils_;
     Microsoft::WRL::ComPtr<IDxcCompiler3> dxcCompiler_;
     Microsoft::WRL::ComPtr<IDxcIncludeHandler> includeHandler_;
 
-    //Shader
+    /** Shader
+     */
     std::wstring name_;
     Microsoft::WRL::ComPtr<IDxcBlob> vertexShader_;
     Microsoft::WRL::ComPtr<IDxcBlob> pixelShader_;

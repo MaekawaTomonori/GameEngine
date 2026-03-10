@@ -8,7 +8,8 @@
 #include "src/DirectX/Shader/Shader.h"
 
 void ModelCommon::Initialize(DirectXAdapter *_adapter, DebugUI *_debugUi) {
-	Setup(_adapter, _debugUi);
+	Setup(_adapter, _debugUi, "Model");
+	debugUI_->RegisterMenuButton("Model");
 
 	// PipelineStateObjectの初期化 (Skinning用)
 	pipeline_ = std::make_unique<PipelineStateObject>(_adapter);

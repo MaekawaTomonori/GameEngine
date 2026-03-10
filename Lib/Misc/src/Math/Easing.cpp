@@ -46,9 +46,9 @@ namespace Ease {
         Vector2 Quad(Vector2 _start, Vector2 _end, float _t) {
             float easedT;
             if (_t < 0.5f)
-                easedT = 2.0f * _t * _t; // EaseIn for first half
+                easedT = 2.0f * _t * _t;
             else
-                easedT = 1.0f - (-2.0f * _t + 2.0f) * (-2.0f * _t + 2.0f) / 2.0f; // EaseOut for second half
+                easedT = 1.0f - (-2.0f * _t + 2.0f) * (-2.0f * _t + 2.0f) / 2.0f;
 
             return _start + (_end - _start) * easedT;
         }
@@ -67,9 +67,9 @@ namespace Ease {
         Vector2 Cubic(Vector2 _start, Vector2 _end, float _t) {
             float easedT;
             if (_t < 0.5f)
-                easedT = 4.0f * _t * _t * _t; // EaseIn for first half
+                easedT = 4.0f * _t * _t * _t;
             else
-                easedT = 1.0f - (-2.0f * _t + 2.0f) * (-2.0f * _t + 2.0f) * (-2.0f * _t + 2.0f) / 2.0f; // EaseOut for second half
+                easedT = 1.0f - (-2.0f * _t + 2.0f) * (-2.0f * _t + 2.0f) * (-2.0f * _t + 2.0f) / 2.0f;
 
             return _start + (_end - _start) * easedT;
         }

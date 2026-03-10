@@ -5,8 +5,8 @@
 #include <wrl/client.h>
 
 /** @brief ディスクリプタヒープクラス
- ** DirectX12のディスクリプタヒープを管理
- **/
+ * DirectX12のディスクリプタヒープを管理
+ */
 class Heap {
     ID3D12Device* device_ = nullptr; // Assume this is set elsewhere, or pass it in the constructor
     Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> heap_;
@@ -14,29 +14,29 @@ class Heap {
 
 public:
     /** @brief ディスクリプタヒープを作成
-     ** @param _device デバイス
-     ** @param _type ヒープタイプ
-     ** @param _numDescriptors ディスクリプタ数
-     ** @param _flags フラグ
-     ** @return 成功した場合true
-     **/
+     * @param _device デバイス
+     * @param _type ヒープタイプ
+     * @param _numDescriptors ディスクリプタ数
+     * @param _flags フラグ
+     * @return 成功した場合true
+     */
     bool Create(ID3D12Device* _device, D3D12_DESCRIPTOR_HEAP_TYPE _type, UINT _numDescriptors, D3D12_DESCRIPTOR_HEAP_FLAGS _flags = D3D12_DESCRIPTOR_HEAP_FLAG_NONE);
 
     /** @brief ディスクリプタヒープを取得
-     ** @return ディスクリプタヒープポインタ
-     **/
+     * @return ディスクリプタヒープポインタ
+     */
     ID3D12DescriptorHeap* Get() const;
 
     /** @brief CPUディスクリプタハンドルを取得
-     ** @param index インデックス
-     ** @return CPUディスクリプタハンドル
-     **/
+     * @param index インデックス
+     * @return CPUディスクリプタハンドル
+     */
     D3D12_CPU_DESCRIPTOR_HANDLE GetCPUHandle(uint32_t _index) const;
 
     /** @brief GPUディスクリプタハンドルを取得
-     ** @param index インデックス
-     ** @return GPUディスクリプタハンドル
-     **/
+     * @param index インデックス
+     * @return GPUディスクリプタハンドル
+     */
     D3D12_GPU_DESCRIPTOR_HANDLE GetGPUHandle(uint32_t _index) const;
 }; // class Heap
 

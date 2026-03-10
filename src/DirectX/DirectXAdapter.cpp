@@ -21,19 +21,9 @@
 #pragma comment(lib, "dxguid.lib")
 #pragma comment(lib, "dxcompiler.lib")
 
-DirectXAdapter::DirectXAdapter(const HWND _hWnd, size_t _width, size_t _height) :windowSize_(_width, _height), hWnd_(_hWnd) {
-    EnableDebugLayer();
-    if (!CreateDXGI())Utils::Alert("Failed to create DXGI");
-    if (!InfoQueue()) Utils::Alert("Failed to create InfoQueue");
-    if (!CreateCommand())Utils::Alert("Failed to create Command");
-    if (!CreateSwapChain()) Utils::Alert("Failed to create SwapChain");
-    if (!CreateFence()) Utils::Alert("Failed to create Fence");
-    if (!CreateRTV()) Utils::Alert("Failed to create RTV");
-    if (!CreateDSV()) Utils::Alert("Failed to create DSV");
-    if (!CreateViewportAndScissor()) Utils::Alert("Failed to create Viewport and Scissor");
-    if (!CreateLimiter()) Utils::Alert("Failed to create FrameRateLimiter");
-
-    Log::Send(Log::Level::INFO, "DirectXAdapter Initialized");
+DirectXAdapter::DirectXAdapter(const HWND _hWnd, size_t _width, size_t _height) :
+    windowSize_(_width, _height), hWnd_(_hWnd), dsvHandle_() {
+    Log::Send(Log::Level::INFO, "DirectXAdapter Created");
 }
 
 DirectXAdapter::~DirectXAdapter() {
@@ -69,6 +59,21 @@ DirectXAdapter::~DirectXAdapter() {
     debugLayer_.Reset();
 
     D3DResourceLeakChecker _lc;
+}
+
+void DirectXAdapter::Initialize() {
+    EnableDebugLayer();
+    if (!CreateDXGI())Utils::Alert("Failed to create DXGI");
+    if (!InfoQueue()) Utils::Alert("Failed to create InfoQueue");
+    if (!CreateCommand())Utils::Alert("Failed to create Command");
+    if (!CreateSwapChain()) Utils::Alert("Failed to create SwapChain");
+    if (!CreateFence()) Utils::Alert("Failed to create Fence");
+    if (!CreateRTV()) Utils::Alert("Failed to create RTV");
+    if (!CreateDSV()) Utils::Alert("Failed to create DSV");
+    if (!CreateViewportAndScissor()) Utils::Alert("Failed to create Viewport and Scissor");
+    if (!CreateLimiter()) Utils::Alert("Failed to create FrameRateLimiter");
+
+    Log::Send(Log::Level::INFO, "DirectXAdapter Initialized");
 }
 
 std::unique_ptr<DX12Resource> DirectXAdapter::CreateBufferResource(const size_t _size) const {

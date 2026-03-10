@@ -97,3 +97,60 @@ void Input::UpdateMouse() {
         mousePosition_ = { static_cast<float>(point.x), static_cast<float>(point.y) };
     }
 }
+
+Vector2 Input::GetMousePosition() const {
+#ifdef _DEBUG
+    if (sceneViewTransform_.active
+        && sceneViewTransform_.imageSize.x > 0.f
+        && sceneViewTransform_.imageSize.y > 0.f) {
+        // ImGui画像内の相対位置をゲーム解像度にマッピング
+        const Vector2 relative = {
+            mousePosition_.x - sceneViewTransform_.imagePos.x,
+            mousePosition_.y - sceneViewTransform_.imagePos.y
+        };
+        return {
+            relative.x * sceneViewTransform_.gameSize.x / sceneViewTransform_.imageSize.x,
+            relative.y * sceneViewTransform_.gameSize.y / sceneViewTransform_.imageSize.y
+        };
+    }
+#endif
+    return mousePosition_;
+}
+
+void Input::SetSceneViewTransform(bool _active, Vector2 _imagePos, Vector2 _imageSize, Vector2 _gameSize) {
+    sceneViewTransform_ = { _active, _imagePos, _imageSize, _gameSize };
+}
+
+void Input::SetCursorVisible(const bool _visible) {
+    cursorVisible_ = _visible;
+}
+
+void Input::ApplyCursorVisibility() {
+    bool shouldShow = cursorVisible_;
+
+#ifdef _DEBUG
+    if (!cursorVisible_) {
+        if (sceneViewTransform_.active
+            && sceneViewTransform_.imageSize.x > 0.f
+            && sceneViewTransform_.imageSize.y > 0.f) {
+            // スクリーン座標で SceneView ヒットテスト（imagePos は GetItemRectMin() 由来）
+            POINT pt;
+            GetCursorPos(&pt);
+            ScreenToClient(hWnd_, &pt);
+            const float px = static_cast<float>(pt.x);
+            const float py = static_cast<float>(pt.y);
+            const bool insideScene =
+                px >= sceneViewTransform_.imagePos.x &&
+                px <  sceneViewTransform_.imagePos.x + sceneViewTransform_.imageSize.x &&
+                py >= sceneViewTransform_.imagePos.y &&
+                py <  sceneViewTransform_.imagePos.y + sceneViewTransform_.imageSize.y;
+            shouldShow = !insideScene;
+        }
+    }
+#endif
+
+    if (shouldShow != appliedCursorVisible_) {
+        ShowCursor(shouldShow ? TRUE : FALSE);
+        appliedCursorVisible_ = shouldShow;
+    }
+}

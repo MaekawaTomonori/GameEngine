@@ -1,6 +1,6 @@
 #include "Timer.hpp"
 
-#include "include/Utils.hpp"
+#include "Utils.hpp"
 
 Timer::Timer(std::chrono::milliseconds _duration) :duration_(_duration), isStarted_(false){
 }

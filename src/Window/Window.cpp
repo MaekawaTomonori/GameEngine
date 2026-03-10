@@ -2,8 +2,8 @@
 
 #include <stdexcept>
 
-#include "include/Utils.hpp"
-#include "externals/imgui/imgui.h"
+#include "Utils.hpp"
+#include "imgui.h"
 
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND _hWnd, UINT _msg, WPARAM _wParam, LPARAM _lParam);
 

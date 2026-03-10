@@ -1,9 +1,7 @@
-#include "include/Utils.hpp"
+#include "Utils.hpp"
 #include <Windows.h>
 #include <chrono>
 #include <filesystem>
-
-#include "Log.hpp"
 
 namespace Utils {
     std::string Convert(const std::wstring& _str) {
@@ -55,7 +53,6 @@ namespace Utils {
     }
 
     void Alert(const std::string &msg) {
-        Log::Send(Log::Level::WARNING, msg);
 #ifdef _WIN32
         MessageBoxA(nullptr, msg.c_str(), msg.c_str(), MB_ICONSTOP);
 #endif
@@ -69,10 +66,8 @@ namespace Utils {
 
         std::tm tm_snapshot;
         #if defined(_WIN32) || defined(_WIN64)
-        // Use localtime_s for Windows/MSVC
         localtime_s(&tm_snapshot, &now_time_t);
         #else
-        // Use localtime_r for Linux/macOS
         localtime_r(&now_time_t, &tm_snapshot);
         #endif
 
@@ -142,5 +137,20 @@ namespace Utils {
         }
 
         return "";
+    }
+
+    std::vector<std::string> GetFileNames(const std::string& _directory, const std::string& _extension, bool _includeExtension) {
+        std::vector<std::string> files;
+
+        for (const auto& entry : std::filesystem::recursive_directory_iterator(_directory)) {
+            if (!entry.is_regular_file()) continue;
+            if (!_extension.empty() && entry.path().extension() != _extension) continue;
+
+            std::string file = _includeExtension ? entry.path().filename().string()
+                : entry.path().stem().string();
+
+            files.push_back(file);
+        }
+        return files;
     }
 }

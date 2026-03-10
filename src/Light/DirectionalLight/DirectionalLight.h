@@ -28,7 +28,7 @@ public:
         light_ = _light;
     }
 
-    void ImGuiSetting() override;
+    void ImGuiSetting(int _index) override;
 
 protected:
     void FollowRef() override;

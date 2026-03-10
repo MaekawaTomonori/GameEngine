@@ -6,7 +6,8 @@
 #include "src/DirectX/Shader/Shader.h"
 
 void SpriteCommon::Initialize(DirectXAdapter* _adapter, DebugUI* _debugUi) {
-    Setup(_adapter, _debugUi);
+    Setup(_adapter, _debugUi, "Sprite");
+    debugUI_->RegisterMenuButton("Sprite");
 
     // PipelineStateObjectの初期化
     pipeline_ = std::make_unique<PipelineStateObject>(_adapter);

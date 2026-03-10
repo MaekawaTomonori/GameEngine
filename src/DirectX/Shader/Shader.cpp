@@ -139,6 +139,7 @@ IDxcBlob* Shader::Compile(const std::wstring& _directoryPath, const std::wstring
     assert(SUCCEEDED(hResult));
 
     Log::SendWithContext(Log::Level::INFO, Utils::Convert(std::format(L"Compile Succeed, Path : {}, Profile : {}", _filePath, _profile)), "SHADER");
+    if (shaderError) { shaderError->Release(); }
     shaderSource->Release();
     shaderResult->Release();
 

@@ -6,7 +6,7 @@
 #include "src/DirectX/Shader/Shader.h"
 
 void LineCommon::Initialize(DirectXAdapter* _adapter, DebugUI* _debugUi) {
-    Setup(_adapter, _debugUi);
+    Setup(_adapter, _debugUi, "Line");
 
     // PipelineStateObjectの初期化
     pipeline_ = std::make_unique<PipelineStateObject>(_adapter);

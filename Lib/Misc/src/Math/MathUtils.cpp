@@ -2,10 +2,11 @@
 
 #include <cassert>
 #include <random>
+#include <vector>
 
 #include "Math/Transform.hpp"
 #include "Pattern/Singleton.hpp"
-#include "src/Random/RandomEngine.hpp"
+#include "Random/RandomEngine.hpp"
 
 Matrix3x3 MathUtils::Matrix::MakeIdentity3x3() {
     return Matrix3x3 {
@@ -174,22 +175,30 @@ float MathUtils::Random(float _min, float _max) {
     return Singleton<RandomEngine>::GetInstance()->Get(_min, _max);
 }
 
+Vector3 MathUtils::Random(Vector3 _min, Vector3 _max) {
+    return {
+        Random(_min.x, _max.x),
+        Random(_min.y, _max.y),
+        Random(_min.z, _max.z)
+    };
+}
+
 float MathUtils::Deg2Rad(float _degree) {
     return _degree * (F_PI / 180.f);
 }
 
-float MathUtils::Lerp(const float& _a, const float& _b, float _t) {
+float MathUtils::Lerp(const float& _a, const float& _b, const float _t) {
     return _a + (_b - _a) * _t;
 }
 
-Vector2 MathUtils::Lerp(const Vector2& _a, const Vector2& _b, float _t) {
+Vector2 MathUtils::Lerp(const Vector2& _a, const Vector2& _b, const float _t) {
     return Vector2{
         Lerp(_a.x, _b.x, _t),
         Lerp(_a.y, _b.y, _t)
     };
 }
 
-Vector3 MathUtils::Lerp(const Vector3& _a, const Vector3& _b, float _t) {
+Vector3 MathUtils::Lerp(const Vector3& _a, const Vector3& _b, const float _t) {
     return Vector3{
         Lerp(_a.x, _b.x, _t),
         Lerp(_a.y, _b.y, _t),
@@ -197,7 +206,7 @@ Vector3 MathUtils::Lerp(const Vector3& _a, const Vector3& _b, float _t) {
     };
 }
 
-Vector4 MathUtils::Lerp(const Vector4& _a, const Vector4& _b, float _t) {
+Vector4 MathUtils::Lerp(const Vector4& _a, const Vector4& _b, const float _t) {
     return Vector4{
         Lerp(_a.x, _b.x, _t),
         Lerp(_a.y, _b.y, _t),
@@ -229,11 +238,35 @@ float MathUtils::Distance(const Vector3& _a, const Vector3& _b) {
     return std::sqrtf(std::powf(_a.x - _b.x, 2) + std::powf(_a.y - _b.y, 2) + std::powf(_a.z - _b.z, 2));
 }
 
-//Vector3 MathUtils::TransformNormal(const Vector3& v, const Transform& t) {
-//    Matrix4x4 m = Matrix::MakeAffineMatrix(t);
-//    return {
-//        v.x * m.matrix[0][0] + v.y * m.matrix[1][0] + v.z * m.matrix[2][0],
-//        v.x * m.matrix[0][1] + v.y * m.matrix[1][1] + v.z * m.matrix[2][1],
-//        v.x * m.matrix[0][2] + v.y * m.matrix[1][2] + v.z * m.matrix[2][2],
-//    };
-//}
+Vector3 MathUtils::QuadBezier(const Vector3& _p0, const Vector3& _cp, const Vector3& _p1, float _t) {
+    float u = 1.0f - _t;
+    return _p0 * (u * u) + _cp * (2.0f * u * _t) + _p1 * (_t * _t);
+}
+
+float MathUtils::QuadBezierArcLengthT(const Vector3& _p0, const Vector3& _cp, const Vector3& _p1,
+                                       float _s, int _steps) {
+    std::vector<float> cumLen(_steps + 1);
+    cumLen[0] = 0.0f;
+    Vector3 prev = _p0;
+    for (int i = 1; i <= _steps; ++i) {
+        float   ti  = static_cast<float>(i) / static_cast<float>(_steps);
+        Vector3 cur = QuadBezier(_p0, _cp, _p1, ti);
+        Vector3 d   = cur - prev;
+        cumLen[i]   = cumLen[i - 1] + std::sqrt(d.x*d.x + d.y*d.y + d.z*d.z);
+        prev = cur;
+    }
+
+    float totalLen = cumLen[_steps];
+    if (totalLen < 1e-6f) return _s;
+
+    float target = std::clamp(_s, 0.0f, 1.0f) * totalLen;
+    for (int i = 1; i <= _steps; ++i) {
+        if (cumLen[i] >= target) {
+            float frac = (cumLen[i] > cumLen[i - 1])
+                       ? (target - cumLen[i - 1]) / (cumLen[i] - cumLen[i - 1])
+                       : 0.0f;
+            return (static_cast<float>(i - 1) + frac) / static_cast<float>(_steps);
+        }
+    }
+    return 1.0f;
+}

@@ -24,9 +24,9 @@ public:
     uint32_t Allocate();
     void PreDraw() const;
 
-    void CreateSRVforTexture2D(uint32_t srvIndex, ID3D12Resource* pResource, DXGI_FORMAT format, UINT mipMap);
-    void CreateSRVforStructuredBuffer(uint32_t srvIndex, ID3D12Resource* pResource, UINT numElements, UINT stride);
-    void CreateSRVforCubemap(uint32_t _srvIndex, ID3D12Resource* _pResource, DXGI_FORMAT _format);
+    void CreateSRVForTexture2D(uint32_t srvIndex, ID3D12Resource* pResource, DXGI_FORMAT format, UINT mipMap) const;
+    void CreateSRVForStructuredBuffer(uint32_t srvIndex, ID3D12Resource* pResource, UINT numElements, UINT stride) const;
+    void CreateSRVForCubeMap(uint32_t _srvIndex, ID3D12Resource* _pResource, DXGI_FORMAT _format) const;
 
     void SetGraphicsRootDescriptorTable(UINT rootParameterIndex, uint32_t srvIndex) const;
 

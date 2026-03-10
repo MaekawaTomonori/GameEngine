@@ -9,8 +9,8 @@
 #include "Math/Transform.hpp"
 
 /** @brief ジョイント（ボーン）データ
- ** スケルトンアニメーション用の変換情報を保持
- **/
+ * スケルトンアニメーション用の変換情報を保持
+ */
 struct Joint {
     Transform transform;
     Matrix4x4 local;
@@ -22,8 +22,8 @@ struct Joint {
 };
 
 /** @brief スケルトンデータ
- ** ジョイント階層とマッピング情報を保持
- **/
+ * ジョイント階層とマッピング情報を保持
+ */
 struct Skeleton{
     int32_t root;
     std::map<std::string, int32_t> map;

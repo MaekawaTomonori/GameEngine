@@ -8,7 +8,7 @@
 
 #include "src/Texture/TextureManager.hpp"
 
-#include "externals/DirectXTex/DirectXTex.h"
+#include "DirectXTex.h"
 
 Sprite::Sprite() {
     common_ = Singleton<SpriteCommon>::GetInstance();
@@ -69,11 +69,22 @@ void Sprite::Initialize(const std::string&_texture) {
     size_ = {100, 100};
 
     AdjustTextureSize();
+
+    common_->RegisterUpdate(uuid_, [this]() { UpdateMapData(); });
+    common_->RegisterDebug(uuid_,  [this]() { Debug(); });
+}
+
+Sprite::~Sprite() {
+    if (common_) {
+        common_->Unregister(uuid_);
+    }
 }
 
 void Sprite::Update() {
-    Debug();
+    UpdateMapData();
+}
 
+void Sprite::UpdateMapData() const {
 #pragma region Vertex position
     float left = 0.f - anchorPoint_.x;
     float right = 1.f - anchorPoint_.x;
@@ -136,25 +147,18 @@ void Sprite::AdjustTextureSize() {
 }
 
 void Sprite::Debug() {
-	common_->RegisterDebug(
-		uuid_,
-        [this](){
-	        ImGui::Begin("Sprite");
-	        if (ImGui::CollapsingHeader(uuid_.c_str())){
-                ImGui::PushID(uuid_.c_str());
-		        ImGui::Text("Texture Path: %s", texturePath_.c_str());
-		        ImGui::DragFloat2("Position", &position_.x, 1.f);
-		        ImGui::DragFloat2("Size", &size_.x, 1);
-		        ImGui::DragFloat("Rotation", &rotation_, 0.01f);
-		        ImGui::DragFloat2("Anchor Point", &anchorPoint_.x);
-		        ImGui::Checkbox("Flip X", &flipX_);
-		        ImGui::Checkbox("Flip Y", &flipY_);
-                ImGui::ColorEdit4("Color", &material_->color.x);
-                ImGui::PopID();
-            }
-	        ImGui::End();
-		}
-    );
+    ImGui::PushID(uuid_.c_str());
+    if (ImGui::CollapsingHeader(texturePath_.c_str())){
+        ImGui::Text("Texture Path: %s", texturePath_.c_str());
+        ImGui::DragFloat2("Position", &position_.x, 1.f);
+        ImGui::DragFloat2("Size", &size_.x, 1);
+        ImGui::DragFloat("Rotation", &rotation_, 0.01f);
+        ImGui::DragFloat2("Anchor Point", &anchorPoint_.x);
+        ImGui::Checkbox("Flip X", &flipX_);
+        ImGui::Checkbox("Flip Y", &flipY_);
+        ImGui::ColorEdit4("Color", &material_->color.x);
+    }
+    ImGui::PopID();
 }
 
 const Vector2& Sprite::GetPosition() const {

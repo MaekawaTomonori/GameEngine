@@ -44,7 +44,9 @@ class Emitter {
     Vector3 velocity_ {};
     Vector4 color_{ 1.f, 1.f, 1.f, 1.f };
     float timer_ = 0.f;
-    std::function<void(float, Vector3&, Vector4&)> particleFunc_;
+
+    std::function<void(const Vector3&, Vector3&, Vector3&)> spawnFunc_;
+    std::function<void(float, const Vector3&, Vector3&, Vector3&, Vector4&)> updateFunc_;
 
     std::vector<std::unique_ptr<Particle>> particles_;
 
@@ -79,6 +81,12 @@ public:
 
     void Debug();
 
+    /** @brief パーティクルをクリアしタイマーをリセットして再利用可能状態にする（GPUリソースは保持） */
+    void Reset();
+
+    /** @brief 全パーティクルが死亡し、追加スポーンもない場合trueを返す */
+    bool IsFinished() const;
+
     Emitter& Enable(bool _active = true);
 
     Emitter& SetPosition(const Vector3& _position);
@@ -99,7 +107,15 @@ public:
 
     Emitter& SetVelocity(const Vector3& _velocity);
 
-    Emitter& SetUpdateFunction(const std::function<void(float, Vector3&, Vector4&)>& _func);
+    /** @brief パーティクル更新関数を設定
+     * @param _func <float(time)>, <const Vector3&(origin)>, <Vector3&(position)>, <Vector3&(velocity)>, <Vector4&(color)>
+     */
+    Emitter& SetUpdateFunction(const std::function<void(float, const Vector3&, Vector3&, Vector3&, Vector4&)>& _func);
+
+    /** @brief パーティクルスポーン関数を設定（スポーン時の初期位置・速度をカスタマイズ）
+     * @param _func <const Vector3&(emitterCenter)>, <Vector3&(outPos)>, <Vector3&(outVel)>
+     */
+    Emitter& SetSpawnFunction(const std::function<void(const Vector3&, Vector3&, Vector3&)>& _func);
 
 private:
     void FrequencyUpdate();

@@ -11,7 +11,7 @@ void Particle::Initialize(float _duration) {
 
 void Particle::Update() {
     if (update_) {
-        update_(now_ / duration_, velocity_, color_);
+        update_(now_ / duration_, origin_, position_, velocity_, color_);
     }
 
     static constexpr float DT = 1.f / 60.f;
@@ -45,6 +45,11 @@ Vector3 Particle::GetScale() const {
 
 Vector4 Particle::GetColor() const {
     return color_;
+}
+
+Particle& Particle::SetOrigin(const Vector3& _origin) {
+    origin_ = _origin;
+    return *this;
 }
 
 Particle& Particle::SetPosition(const Vector3& _position) {
@@ -104,7 +109,7 @@ Particle& Particle::RandomizeVelocity(const Vector3& _min, const Vector3& _max) 
     return *this;
 }
 
-Particle& Particle::SetUpdateFunction(const std::function<void(float, Vector3&, Vector4&)>& _func) {
+Particle& Particle::SetUpdateFunction(const std::function<void(float, const Vector3&, Vector3&, Vector3&, Vector4&)>& _func) {
     update_ = _func;
     return *this;
 }

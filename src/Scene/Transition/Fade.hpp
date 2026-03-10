@@ -27,6 +27,8 @@ public:
     void Stop() override;
 
     bool IsFinished() const override;
+    State GetCurrentState() const override { return state_; }
+    float GetProgress() const override { return alpha_; }
 
 }; // class Fade
 

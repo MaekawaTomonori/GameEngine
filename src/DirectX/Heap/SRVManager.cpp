@@ -45,7 +45,7 @@ void SRVManager::PreDraw() const {
     adapter_->GetCommandList()->SetDescriptorHeaps(_countof(descriptorHeaps), descriptorHeaps);
 }
 
-void SRVManager::CreateSRVforTexture2D(uint32_t _srvIndex, ID3D12Resource* _pResource, DXGI_FORMAT _format, UINT _mipMap) {
+void SRVManager::CreateSRVForTexture2D(uint32_t _srvIndex, ID3D12Resource* _pResource, DXGI_FORMAT _format, UINT _mipMap) const {
     D3D12_SHADER_RESOURCE_VIEW_DESC desc {};
     desc.Format = _format;
     desc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
@@ -55,7 +55,7 @@ void SRVManager::CreateSRVforTexture2D(uint32_t _srvIndex, ID3D12Resource* _pRes
     adapter_->GetDevice()->CreateShaderResourceView(_pResource, &desc, heap_->GetCPUHandle(_srvIndex));
 }
 
-void SRVManager::CreateSRVforStructuredBuffer(uint32_t _srvIndex, ID3D12Resource* _pResource, UINT _numElements, UINT _stride) {
+void SRVManager::CreateSRVForStructuredBuffer(uint32_t _srvIndex, ID3D12Resource* _pResource, UINT _numElements, UINT _stride) const {
     D3D12_SHADER_RESOURCE_VIEW_DESC desc {};
     desc.Format = DXGI_FORMAT_UNKNOWN;
     desc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
@@ -67,7 +67,7 @@ void SRVManager::CreateSRVforStructuredBuffer(uint32_t _srvIndex, ID3D12Resource
     adapter_->GetDevice()->CreateShaderResourceView(_pResource, &desc, heap_->GetCPUHandle(_srvIndex));
 }
 
-void SRVManager::CreateSRVforCubemap(uint32_t _srvIndex, ID3D12Resource* _pResource, DXGI_FORMAT _format) {
+void SRVManager::CreateSRVForCubeMap(uint32_t _srvIndex, ID3D12Resource* _pResource, DXGI_FORMAT _format) const {
     D3D12_SHADER_RESOURCE_VIEW_DESC desc{};
     desc.Format = _format;
     desc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;

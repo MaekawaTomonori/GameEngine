@@ -2,31 +2,36 @@
 
 #include "Log.hpp"
 #include "IGame.hpp"
+#include "PerformanceProfiler.hpp"
 #include "Pattern/Singleton.hpp"
-#include "src/Random/RandomEngine.hpp"
+#include "Random/RandomEngine.hpp"
 
 Framework::Framework() {
     Log::Initialize();
 
-    // Log startup diagnostics
     Log::SendWithContext(Log::Level::INFO, "Framework initialization started", "FRAMEWORK");
-    Log::LogFileOperation("STARTUP_CHECK", "Assets", std::filesystem::exists("Assets"), "Checking assets directory");
+    Log::LogFileOperation("STARTUP_CHECK", "Assets",         std::filesystem::exists("Assets"),         "Checking assets directory");
     Log::LogFileOperation("STARTUP_CHECK", "Assets/Shaders", std::filesystem::exists("Assets/Shaders"), "Checking shaders directory");
 
     windows_ = std::make_unique<WinApp>();
     windows_->Initialize();
-    //windows_->SetWindowSize(static_cast<int>(config_->GetWidth()), static_cast<int>(config_->GetHeight()));
 
     dxAdapter_ = std::make_unique<DirectXAdapter>(windows_->GetWindowHandle(), config_.width, config_.height);
+    dxAdapter_->Initialize();
 
     srv_ = std::make_unique<SRVManager>();
     srv_->Initialize(dxAdapter_.get());
 
-    debugUI_ = std::make_unique<DebugUI>();
-    debugUI_->Initialize(dxAdapter_.get());
+#ifdef _DEBUG
+    debugger_ = std::make_unique<Debugger>();
+    debugger_->Initialize(dxAdapter_.get());
+    DebugUI* const dbg = debugger_->GetUI();
+#else
+    DebugUI* const dbg = nullptr;
+#endif
 
     postProcessor_ = std::make_unique<PostProcessExecutor>();
-    postProcessor_->Initialize(dxAdapter_.get(), srv_.get(), debugUI_.get());
+    postProcessor_->Initialize(dxAdapter_.get(), srv_.get(), dbg);
 
     renderer_ = std::make_unique<Renderer>();
     renderer_->Initialize(dxAdapter_.get(), postProcessor_.get());
@@ -34,9 +39,7 @@ Framework::Framework() {
     resources_ = std::make_unique<ResourceRepository>();
     resources_->Initialize();
 
-    level_ = std::make_unique<LevelEditor>(debugUI_.get());
-
-    particle_ = std::make_unique<ParticleSystem>(dxAdapter_.get(), srv_.get(), resources_->GetMeshRepository(), debugUI_.get());
+    particle_ = std::make_unique<ParticleSystem>(dxAdapter_.get(), srv_.get(), resources_->GetMeshRepository(), dbg);
     particle_->Initialize();
 
     input_ = Singleton<Input>::GetInstance();
@@ -46,45 +49,40 @@ Framework::Framework() {
     texture_->Initialize(dxAdapter_.get(), srv_.get());
 
     sprite_ = Singleton<SpriteCommon>::GetInstance();
-    sprite_->Initialize(dxAdapter_.get(), debugUI_.get());
+    sprite_->Initialize(dxAdapter_.get(), dbg);
 
     model_ = Singleton<ModelCommon>::GetInstance();
-    model_->Initialize(dxAdapter_.get(), debugUI_.get(), resources_.get(), srv_.get());
+    model_->Initialize(dxAdapter_.get(), dbg, resources_.get(), srv_.get());
 
     line_ = Singleton<LineCommon>::GetInstance();
-    line_->Initialize(dxAdapter_.get(), debugUI_.get(), srv_.get());
+    line_->Initialize(dxAdapter_.get(), dbg, srv_.get());
 
     sky_ = Singleton<SkyCommon>::GetInstance();
-    sky_->Initialize(dxAdapter_.get(), debugUI_.get());
+    sky_->Initialize(dxAdapter_.get(), dbg);
 
     camera_ = Singleton<CameraController>::GetInstance();
-    camera_->Initialize(static_cast<float>(config_.width) / static_cast<float>(config_.height), debugUI_.get());
+    camera_->Initialize(static_cast<float>(config_.width) / static_cast<float>(config_.height), dbg);
 
     cameraDirector_ = Singleton<CameraDirector>::GetInstance();
-    cameraDirector_->Initialize(debugUI_.get());
+    cameraDirector_->Initialize(dbg);
 
     light_ = Singleton<LightManager>::GetInstance();
-    light_->Initialize(dxAdapter_.get(), debugUI_.get());
+    light_->Initialize(dxAdapter_.get(), dbg);
 
     Singleton<RandomEngine>::GetInstance()->Initialize();
 
-    //level_->Initialize("Level");
+    collision_ = std::make_unique<CollisionManager>();
+    collision_->Initialize(dbg);
+
+#ifdef _DEBUG
+    Debugger::WatchGroup("Engine")
+        .Watch("FPS", &config_.fps)
+        .Watch("ShowCursor", &config_.showCursor);
+#endif
 }
 
 Framework::~Framework() {
-    texture_->Unload();
-    level_.reset();
-    postProcessor_.reset();
-    renderer_.reset();
-
-    resources_.reset();
-    debugUI_.reset();
-
-    srv_->Finalize();
-    srv_.reset();
-
     SingletonFinalizer::Finalize();
-
     CoUninitialize();
 }
 
@@ -105,25 +103,32 @@ void Framework::Initialize() {
     game_->Initialize(config_);
     windows_->SetTitle(config_.title);
     scene_ = game_->GetSceneSwitcher();
-    scene_->Setup({ postProcessor_.get(), debugUI_.get(), particle_.get() });
+
+#ifdef _DEBUG
+    DebugUI* const dbg = debugger_->GetUI();
+#else
+    DebugUI* const dbg = nullptr;
+#endif
+
+    scene_->Setup({ postProcessor_.get(), dbg, particle_.get() });
     scene_->Change(config_.defaultScene);
 
-    // PostEffectFactoryを設定
     if (const auto& peFac = game_->GetPostEffectFactory()) {
         postProcessor_->SetFactory(peFac);
     }
 
     windows_->SetTitle(config_.title);
+    input_->SetCursorVisible(config_.showCursor);
     Log::Send(Log::Level::INFO, "Game Initialized");
 }
 
 bool Framework::Loop() const {
-    if (!Check())return false;
+    if (!Check()) return false;
     return windows_->IsEnabled();
 }
 
 void Framework::Update() const {
-    if (!Check())return;
+    if (!Check()) return;
 
     input_->Update();
 
@@ -136,71 +141,113 @@ void Framework::Update() const {
         HandleWindowResize(width, height);
     }
 
-    cameraDirector_->Update();
-    camera_->Update();
-    light_->Update();
-    level_->Update();
-    particle_->Update();
+#ifdef _DEBUG
+    dxAdapter_->DisplayFPS(debugger_->GetUI());
+    cameraDirector_->Debug();
+    camera_->Debug();
+    light_->Debug();
+    particle_->Debug();
+    postProcessor_->Debug();
+    collision_->Debug();
+    debugger_->Debug();
+    model_->Debug();
+    sprite_->Debug();
 
-    // PostEffect animation update
-    float deltaTime = 1.0f / static_cast<float>(config_.fps);
-    postProcessor_->Update(deltaTime);
+    scene_->Debug();
+    if (debugger_->ShouldUpdate()) {
+#endif
 
-    scene_->Update();
+        { PROFILE_SCOPE("CameraDirector"); cameraDirector_->Update(); }
+        { PROFILE_SCOPE("Particle");       particle_->Update(); }
+
+        const float deltaTime = 1.0f / static_cast<float>(config_.fps);
+        postProcessor_->Update(deltaTime);
+
+        { PROFILE_SCOPE("Scene");          scene_->Update(); }
+        { PROFILE_SCOPE("Collision");      collision_->Update(); }
+
+#ifdef _DEBUG
+    }
+#endif
+
+    { PROFILE_SCOPE("Camera");  camera_->Update(); }
+    { PROFILE_SCOPE("Light");   light_->Update(); }
+    { PROFILE_SCOPE("Model");   model_->Update(); }
+    { PROFILE_SCOPE("Sprite");  sprite_->Update(); }
 }
 
 void Framework::Draw() const {
-    if (!Check())return;
+    if (!Check()) return;
 
-    dxAdapter_->DisplayFPS(debugUI_.get());
-    postProcessor_->Debug();
+#ifdef _DEBUG
+    Log::Debug(debugger_->GetUI());
+#endif
 
     srv_->PreDraw();
 
+    cameraDirector_->Draw();
     scene_->Draw();
 
     sky_->Draw(renderer_.get());
     model_->Draw(renderer_.get());
     particle_->Draw(renderer_.get());
+    collision_->DrawDebug();
     line_->Draw(renderer_.get());
     sprite_->Draw(renderer_.get());
 
-    renderer_->Register([&] { level_->Draw(); });
-    renderer_->Register([&] { debugUI_->Render(); });
+#ifdef _DEBUG
+    renderer_->RegisterUI([&] { debugger_->Render(); });
+#endif
     renderer_->Render();
+
+    // SceneView の矩形は ImGui レンダリング後に確定するため、ここでカーソル表示を反映
+    input_->ApplyCursorVisibility();
 }
 
 void Framework::Shutdown() {
     if (game_) {
         game_.reset();
     }
+
+    collision_.reset();
+    texture_->Unload();
+    particle_.reset();
+    postProcessor_.reset();
+    renderer_.reset();
+    resources_.reset();
+
+#ifdef _DEBUG
+    debugger_.reset();
+#endif
+
+    srv_->Finalize();
+    srv_.reset();
 }
 
 bool Framework::Check() const {
-    if (!game_)return false;
-    if (!scene_)return false;
-    if (!windows_)return false;
-    if (!dxAdapter_)return false;
-    if (!debugUI_)return false;
-    if (!srv_)return false;
-    if (!input_)return false;
-    if (!texture_)return false;
-    if (!sprite_)return false;
+    if (!game_)    return false;
+    if (!scene_)   return false;
+    if (!windows_) return false;
+    if (!dxAdapter_) return false;
+#ifdef _DEBUG
+    if (!debugger_) return false;
+#endif
+    if (!srv_)     return false;
+    if (!input_)   return false;
+    if (!texture_) return false;
+    if (!sprite_)  return false;
 
     return true;
 }
 
 void Framework::HandleWindowResize(int _width, int _height) const {
-    // DirectXリソースのリサイズ
     dxAdapter_->UpdateWindowSize(static_cast<size_t>(_width), static_cast<size_t>(_height));
-
-    // ポストプロセッサのレンダーテクスチャをリサイズ
     postProcessor_->ResizeRenderTextures();
 
-    // ImGuiのディスプレイサイズを更新
-    debugUI_->UpdateDisplaySize(_width, _height);
+#ifdef _DEBUG
+    debugger_->UpdateDisplaySize(_width, _height);
+#endif
 
-    // カメラのアスペクト比を更新
     float aspectRatio = static_cast<float>(_width) / static_cast<float>(_height);
     if (camera_ && camera_->GetActive()) {
         camera_->GetActive()->SetAspectRatio(aspectRatio);

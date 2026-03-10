@@ -20,32 +20,36 @@ Model::Model() :
     uuid_(Utils::GenerateUniqueId()), transform_() {
 }
 
+Model::~Model() {
+    common_->Unregister(uuid_);
+}
+
 void Model::Initialize(const std::string& _name) {
     if (!adapter_) {
         Log::Send(Log::Level::ERR, "Adapter is null");
         return;
     }
-    Log::Send(Log::Level::INFO, "Model::Initialize: " + _name);
+    Log::Send(Log::Level::INFO, "[Model] Initialize: " + _name);
 
     Load(_name);
 
-    Log::Send(Log::Level::INFO, "Model data loaded: " + _name);
+    Log::Send(Log::Level::INFO, "[Model] data loaded: " + _name);
 
     data_ = common_->GetResourceRepository()->GetModelRepository()->Get(_name);
 
     // IsNull
     if (!data_) {
-        Log::Send(Log::Level::ERR, "Model data is null for: " + _name);
+        Log::Send(Log::Level::ERR, "[Model] data is null for: " + _name);
         Utils::Alert("Model data is null for: " + _name);
         return;
     }
 
-    Log::Send(Log::Level::INFO, "Creating Mesh: " + _name);
+    Log::Send(Log::Level::INFO, "[Model] Creating Mesh: " + _name);
 
     mesh_ = std::make_unique<Mesh>();
     mesh_->Initialize(adapter_, _name, common_->GetResourceRepository()->GetMeshRepository()->Get(data_->mesh));
 
-    Log::Send(Log::Level::INFO, "Mesh created: " + _name);
+    Log::Send(Log::Level::INFO, "[Model] Mesh created: " + _name);
 
     wr_ = (adapter_->CreateBufferResource(sizeof(Transformation)));
     wr_->Get()->Map(0, nullptr, reinterpret_cast<void**>(&wd_));
@@ -56,14 +60,19 @@ void Model::Initialize(const std::string& _name) {
     cr_ = (adapter_->CreateBufferResource(sizeof(CameraForGpu)));
     cr_->Get()->Map(0, nullptr, reinterpret_cast<void**>(&cd_));
 
+    // Copy skeleton as per-instance pose
+    if (data_->skeleton.has_value()) {
+        pose_ = data_->skeleton.value();
+    }
+
     // Create SkinCluster only if skeleton exists and skinCluster data is available
-    if (data_->skeleton.has_value() && !data_->skinCluster.empty()) {
-        Log::Send(Log::Level::INFO, "Creating SkinCluster for: " + _name);
+    if (pose_.has_value() && !data_->skinCluster.empty()) {
+        Log::Send(Log::Level::TRACE, "Creating SkinCluster for: " + _name);
         CreateSkinCluster();
-        Log::Send(Log::Level::INFO, "SkinCluster created for: " + _name);
+        Log::Send(Log::Level::TRACE, "SkinCluster created for: " + _name);
     }
     else {
-        Log::Send(Log::Level::INFO, "No valid skinning data _found, skipping SkinCluster creation for: " + _name);
+        Log::Send(Log::Level::TRACE, "No valid skinning data found, skipping SkinCluster creation for: " + _name);
     }
 
 
@@ -80,24 +89,21 @@ void Model::Initialize(const std::string& _name) {
     }
 
     line_.Initialize();
+
+    common_->RegisterUpdate(uuid_, [this](){ UpdateMapData(); });
+    common_->RegisterDebug(uuid_, [this](){ Debug(); });
 }
 
 void Model::Update() {
-    camera_ = Singleton<CameraController>::GetInstance()->GetActive();
-
-    Debug();
-
     // Update Animation, Skeleton, and SkinCluster only if valid skinning data exists
-    if (data_->skeleton.has_value() && !data_->skinCluster.empty()) {
+    if (pose_.has_value() && !data_->skinCluster.empty()) {
         UpdateAnimation();
         UpdateSkeleton();
         UpdateSkinCluster();
     }
 
-    UpdateMapData();
-
     // Joint to Line (only if valid skinning data exists)
-    if (data_->skeleton.has_value() && !data_->skinCluster.empty()) {
+    if (pose_.has_value() && !data_->skinCluster.empty()) {
         CreateLine();
     }
 
@@ -112,9 +118,8 @@ void Model::Draw() const {
     }
 
     TextureManager* tm = Singleton<TextureManager>::GetInstance();
-    bool useSkinning = data_->skeleton.has_value() && !data_->skinCluster.empty();
 
-    if (useSkinning) {
+    if (pose_.has_value() && !data_->skinCluster.empty()) {
         common_->RegisterSkinningDraw([this, tm]() {
             commandList_->SetGraphicsRootConstantBufferView(1, wr_->Get()->GetGPUVirtualAddress());
             commandList_->SetGraphicsRootConstantBufferView(4, cr_->Get()->GetGPUVirtualAddress());
@@ -122,8 +127,7 @@ void Model::Draw() const {
             commandList_->SetGraphicsRootDescriptorTable(9, skinCluster_.paletteHandle.second);
             mesh_->Draw();
             }, posteffect_);
-    }
-    else {
+    }else {
         common_->RegisterStaticDraw([this, tm]() {
             commandList_->SetGraphicsRootConstantBufferView(1, wr_->Get()->GetGPUVirtualAddress());
             commandList_->SetGraphicsRootConstantBufferView(4, cr_->Get()->GetGPUVirtualAddress());
@@ -133,6 +137,11 @@ void Model::Draw() const {
     }
 
     DrawLine();
+}
+
+Model& Model::SetName(const std::string& _name) {
+    name_ = _name;
+    return *this;
 }
 
 Model& Model::SetTranslate(const Vector3 _translate) {
@@ -186,8 +195,8 @@ Model& Model::SetColor(const Vector4 _color) {
     return *this;
 }
 
-std::string Model::GetUniqueId() {
-    return uuid_;
+const std::string& Model::GetName() const {
+    return name_;
 }
 
 Mesh* Model::GetMesh() const {
@@ -195,6 +204,12 @@ Mesh* Model::GetMesh() const {
 }
 
 void Model::Load(const std::string& _name) {
+    auto repo = Singleton<ModelCommon>::GetInstance()->GetResourceRepository();
+    if (repo->GetModelRepository()->Contains(_name)){
+        Log::Send(Log::Level::WARNING, "Already Loaded Model : " + _name);
+        return;
+    }
+
     std::unique_ptr<IModelLoader> loader;
     if (std::filesystem::exists("Assets/Resources/" + _name + "/" + _name + ".obj")) {
         loader = std::make_unique<ObjLoader>();
@@ -207,93 +222,91 @@ void Model::Load(const std::string& _name) {
         Utils::Alert("Model not found: " + _name);
         return;
     }
-    loader->LoadModel(_name, Singleton<ModelCommon>::GetInstance()->GetResourceRepository());
+    loader->LoadModel(_name, repo);
 }
 
 void Model::Debug() {
-    common_->RegisterDebug(
-        uuid_, [&]() {
-            ImGui::Begin("Model");
-            ImGui::PushID(uuid_.c_str());
-            if (ImGui::CollapsingHeader(uuid_.c_str())) {
-                ImGui::SeparatorText("Model Info");
-                if (ImGui::TreeNode("Transform")) {
-                    ImGui::DragFloat3("Scale", &transform_.scale.x, 0.1f);
-                    ImGui::DragFloat3("Rotate", &std::get<Vector3>(transform_.rotate).x, 0.1f);
-                    ImGui::DragFloat3("Position", &transform_.translate.x, 0.1f);
-                    if (ImGui::Button("Reset Transform")) {
-                        transform_ = Transform{
-                            {1, 1, 1},
-                            Vector3{0, 0, 0},
-                            {0, 0, 0},
-                        };
-                    }
-                    ImGui::TreePop();
-                }
-                if (data_->skeleton.has_value()) {
-                    Skeleton& skeleton = data_->skeleton.value();
-                    ImGui::SeparatorText("Skeleton");
-                    std::function<void(int32_t)> Recursive = [&](int32_t _index) {
-                        Joint& joint = skeleton.joints[_index];
-                        if (ImGui::TreeNode(joint.name.c_str())) {
-                            ImGui::Text("Joint: %s", joint.name.c_str());
-                            ImGui::Text("Index: %d", joint.index);
-                            ImGui::Text("Parent: %s", joint.parent.has_value() ? skeleton.joints[joint.parent.value()].name.c_str() : "None");
-                            ImGui::Text("Children: %zu", joint.children.size());
-                            ImGui::Spacing();
-                            ImGui::Text("Transform: ");
-                            ImGui::Text("  Scale: (%.2f, %.2f, %.2f)", joint.transform.scale.x, joint.transform.scale.y, joint.transform.scale.z);
-                            if (std::holds_alternative<Quaternion>(joint.transform.rotate)) {
-                                Quaternion rotate = std::get<Quaternion>(joint.transform.rotate);
-                                ImGui::Text("  Rotate: (%.2f, %.2f, %.2f, %2f)", rotate.x, rotate.y, rotate.z, rotate.w);
-                            }
-                            else {
-                                Vector3 rotate = std::get<Vector3>(joint.transform.rotate);
-                                ImGui::Text("  Rotate: (%.2f, %.2f, %.2f)", rotate.x, rotate.y, rotate.z);
-                            }
-                            ImGui::Text("  Translate: (%.2f, %.2f, %.2f)", joint.transform.translate.x, joint.transform.translate.y, joint.transform.translate.z);
-
-                            for (int32_t childIndex : joint.children) {
-                                ImGui::Spacing();
-                                Recursive(childIndex);
-                            }
-                            ImGui::TreePop();
-                        }
-                        };
-                    Recursive(skeleton.root);
-                }
-
-                if (data_->animation.has_value()) {
-                    ImGui::SeparatorText("Animation");
-                    if (ImGui::TreeNode("Details")) {
-                        ImGui::Checkbox("Enable", &animationEnable_);
-                        ImGui::SameLine();
-                        ImGui::Checkbox("TimerLock", &animationTimerLock_);
-                        if (animationTimerLock_)ImGui::Text("Timer : %f", animationTime_);
-                        else ImGui::DragFloat("Anime Timer", &animationTime_);
-                        ImGui::TreePop();
-                    }
-                }
-
-                ImGui::SeparatorText("Mesh");
-
-                if (ImGui::TreeNode("Mesh")) {
-                    mesh_->Debug();
-                    ImGui::TreePop();
-                }
+    const std::string& label = name_.empty() ? data_->name : name_;
+    ImGui::PushID(uuid_.c_str());
+    if (ImGui::CollapsingHeader(label.c_str())) {
+        ImGui::SeparatorText("Model Info");
+        if (ImGui::TreeNode("Transform")) {
+            ImGui::DragFloat3("Scale", &transform_.scale.x, 0.1f);
+            ImGui::DragFloat3("Rotate", &std::get<Vector3>(transform_.rotate).x, 0.1f);
+            ImGui::DragFloat3("Position", &transform_.translate.x, 0.1f);
+            if (ImGui::Button("Reset Transform")) {
+                transform_ = Transform{
+                    {1, 1, 1},
+                    Vector3{0, 0, 0},
+                    {0, 0, 0},
+                };
             }
-            ImGui::PopID();
-            ImGui::End();
+            ImGui::TreePop();
         }
-    );
+        if (pose_.has_value()) {
+            ImGui::PushID(("skeleton_" + uuid_).c_str());
+            Skeleton& skeleton = pose_.value();
+            ImGui::SeparatorText("Skeleton");
+            std::function<void(int32_t)> Recursive = [&](int32_t _index) {
+                Joint& joint = skeleton.joints[_index];
+                if (ImGui::TreeNode(joint.name.c_str())) {
+                    ImGui::Text("Joint: %s", joint.name.c_str());
+                    ImGui::Text("Index: %d", joint.index);
+                    ImGui::Text("Parent: %s", joint.parent.has_value() ? skeleton.joints[joint.parent.value()].name.c_str() : "None");
+                    ImGui::Text("Children: %zu", joint.children.size());
+                    ImGui::Spacing();
+                    ImGui::Text("Transform: ");
+                    ImGui::Text("  Scale: (%.2f, %.2f, %.2f)", joint.transform.scale.x, joint.transform.scale.y, joint.transform.scale.z);
+                    if (std::holds_alternative<Quaternion>(joint.transform.rotate)) {
+                        Quaternion rotate = std::get<Quaternion>(joint.transform.rotate);
+                        ImGui::Text("  Rotate: (%.2f, %.2f, %.2f, %2f)", rotate.x, rotate.y, rotate.z, rotate.w);
+                    }
+                    else {
+                        Vector3 rotate = std::get<Vector3>(joint.transform.rotate);
+                        ImGui::Text("  Rotate: (%.2f, %.2f, %.2f)", rotate.x, rotate.y, rotate.z);
+                    }
+                    ImGui::Text("  Translate: (%.2f, %.2f, %.2f)", joint.transform.translate.x, joint.transform.translate.y, joint.transform.translate.z);
+
+                    for (int32_t childIndex : joint.children) {
+                        ImGui::Spacing();
+                        Recursive(childIndex);
+                    }
+                    ImGui::TreePop();
+                }
+                };
+            Recursive(skeleton.root);
+            ImGui::PopID();
+        }
+
+        if (data_->animation.has_value()) {
+            ImGui::SeparatorText("Animation");
+            if (ImGui::TreeNode("Details")) {
+                ImGui::Checkbox("Enable", &animationEnable_);
+                ImGui::SameLine();
+                ImGui::Checkbox("TimerLock", &animationTimerLock_);
+                if (animationTimerLock_)ImGui::Text("Timer : %f", animationTime_);
+                else ImGui::DragFloat("Anime Timer", &animationTime_);
+                ImGui::TreePop();
+            }
+        }
+
+        ImGui::SeparatorText("Mesh");
+        if (ImGui::TreeNode("Mesh")) {
+            mesh_->Debug();
+            ImGui::TreePop();
+        }
+    }
+    ImGui::PopID();
 }
 
 void Model::UpdateMapData() const {
+    auto camera = Singleton<CameraController>::GetInstance()->GetActive();
+
     wd_->world = MathUtils::Matrix::MakeAffineMatrix(transform_.scale, std::get<Vector3>(transform_.rotate), transform_.translate);
-    wd_->wvp = wd_->world * camera_->GetViewProjection();
+    wd_->wvp = wd_->world * camera->GetViewProjection();
     wd_->inverse = wd_->world.Inverse().Transpose();
 
-    *cd_ = camera_->GetCameraForGpu();
+    *cd_ = camera->GetCameraForGpu();
 }
 
 void Model::CreateSkinCluster() {
@@ -310,12 +323,12 @@ void Model::CreateSkinCluster() {
         return;
     }
 
-    if (!data_->skeleton.has_value() || data_->skinCluster.empty()) {
+    if (!pose_.has_value() || data_->skinCluster.empty()) {
         Log::Send(Log::Level::WARNING, "Model data does not contain valid skinning _data, skipping skin cluster creation");
         return;
     }
 
-    Skeleton& skeleton = data_->skeleton.value();
+    Skeleton& skeleton = pose_.value();
 
     size_t jointSize = skeleton.joints.size();
     size_t verticesSize = mesh_->GetData().vertices.size();
@@ -327,7 +340,7 @@ void Model::CreateSkinCluster() {
     skinCluster_.mappedPalette = { mappedPalette, jointSize };
     skinCluster_.srvIndex = srv->Allocate();
     skinCluster_.paletteHandle = { srv->GetCPUHandle(skinCluster_.srvIndex), srv->GetGPUHandle(skinCluster_.srvIndex) };
-    srv->CreateSRVforStructuredBuffer(skinCluster_.srvIndex, skinCluster_.paletteResource->Get(), static_cast<UINT>(jointSize), sizeof(WellForGpu));
+    srv->CreateSRVForStructuredBuffer(skinCluster_.srvIndex, skinCluster_.paletteResource->Get(), static_cast<UINT>(jointSize), sizeof(WellForGpu));
 
     //Influenc
     VertexInfluence* mappedInfluence = nullptr;
@@ -372,12 +385,12 @@ void Model::SetBindPose(Skeleton& _skeleton) {
 }
 
 void Model::UpdateSkinCluster() {
-    if (!data_->skeleton.has_value() || data_->skinCluster.empty()) {
+    if (!pose_.has_value() || data_->skinCluster.empty()) {
         Log::Send(Log::Level::WARNING, "Model data does not contain valid skinning _data, skipping skin cluster update");
         return;
     }
 
-    Skeleton& skeleton = data_->skeleton.value();
+    Skeleton& skeleton = pose_.value();
     for (size_t jointIndex = 0; jointIndex < skeleton.joints.size(); ++jointIndex) {
         if (skinCluster_.inverseBindPoses.size() <= jointIndex) {
             Utils::Alert("Joint index out of bounds in skin cluster update");
@@ -389,13 +402,13 @@ void Model::UpdateSkinCluster() {
     }
 }
 
-void Model::UpdateSkeleton() const {
-    if (!data_->skeleton.has_value() || data_->skinCluster.empty()) {
+void Model::UpdateSkeleton() {
+    if (!pose_.has_value() || data_->skinCluster.empty()) {
         Log::Send(Log::Level::WARNING, "Model data does not contain valid skinning _data, skipping skeleton update");
         return;
     }
 
-    Skeleton& skeleton = data_->skeleton.value();
+    Skeleton& skeleton = pose_.value();
     std::function<void(int32_t)> RecursiveUpdate = [&](int32_t _index) {
         Joint& joint = skeleton.joints[_index];
         joint.local = MathUtils::Matrix::MakeAffineMatrix(joint.transform);
@@ -430,12 +443,12 @@ void Model::UpdateAnimation() {
     ApplyAnimation();
 }
 
-void Model::ApplyAnimation() const {
-    if (!data_->skeleton.has_value() || data_->skinCluster.empty()) {
+void Model::ApplyAnimation() {
+    if (!pose_.has_value() || data_->skinCluster.empty()) {
         Log::Send(Log::Level::WARNING, "Model data does not contain valid skinning _data, skipping animation application");
         return;
     }
-    Skeleton& skeleton = data_->skeleton.value();
+    Skeleton& skeleton = pose_.value();
 
     if (!data_->animation.has_value()) {
         Log::Send(Log::Level::ERR, "Model data does not contain an animation");
@@ -458,11 +471,11 @@ void Model::ApplyAnimation() const {
 void Model::CreateLine() {
     line_.Clear();
 
-    if (!data_->skeleton.has_value() || data_->skinCluster.empty()) {
+    if (!pose_.has_value() || data_->skinCluster.empty()) {
         Log::Send(Log::Level::WARNING, "Model data does not contain valid skinning _data, skipping line creation");
         return;
     }
-    Skeleton& skeleton = data_->skeleton.value();
+    Skeleton& skeleton = pose_.value();
 
     for (auto& joint : skeleton.joints) {
         if (joint.parent.has_value()) {

@@ -1,8 +1,8 @@
 #include "PointLight.h"
 #include "Pattern/Singleton.hpp"
 #include "imgui.h"
-#include "src/Json/Json.hpp"
-#include "externals/MagicEnum/magic_enum.hpp"
+#include "src/Json/JsonParams.hpp"
+#include "MagicEnum/magic_enum.hpp"
 
 void RawPointLight::DefaultSetting() {
     type_ = LightType::Point;
@@ -19,7 +19,7 @@ void RawPointLight::Set(const std::string& _uuid ,const PointLight& _pl) {
 }
 
 void RawPointLight::Save(std::string _path) {
-	Json* json = Singleton<Json>::GetInstance();
+	JsonParams* json = Singleton<JsonParams>::GetInstance();
 	json->SetValue(_path, uuid_, "type", magic_enum::enum_integer(type_));
 	json->SetValue(_path, uuid_, "color", light_.color);
 	json->SetValue(_path, uuid_, "position", light_.position);
@@ -28,19 +28,27 @@ void RawPointLight::Save(std::string _path) {
 	json->SetValue(_path, uuid_, "decay", light_.decay);
 }
 
-void RawPointLight::ImGuiSetting() {
-	if (ImGui::TreeNode(uuid_.c_str())){
-	    ImGui::ColorEdit4("Color", &light_.color.x);
-	    ImGui::DragFloat3("Position", &light_.position.x, 0.1f);
-	    ImGui::DragFloat("Intensity", &light_.intensity, 0.01f, 0, 1);
-	    ImGui::DragFloat("radius", &light_.radius, 0.01f);
-	    ImGui::DragFloat("decay", &light_.decay, 0.01f);
+void RawPointLight::ImGuiSetting(int _index) {
+    ImGui::PushID(uuid_.c_str());
+    const std::string label = "Point " + std::to_string(_index);
+    if (ImGui::TreeNode(label.c_str())) {
+        ImGui::ColorEdit4("Color", &light_.color.x);
 
-        if (ImGui::Button("Delete")){
-            enable_ = false;
+        if (HasRef()) {
+            ImGui::BeginDisabled();
+            ImGui::DragFloat3("Position (ref)", &light_.position.x, 0.1f);
+            ImGui::EndDisabled();
+        } else {
+            ImGui::DragFloat3("Position", &light_.position.x, 0.1f);
         }
+
+        ImGui::DragFloat("Intensity", &light_.intensity, 0.01f, 0.f, 10.f);
+        ImGui::DragFloat("Radius",    &light_.radius,    0.1f,  0.f);
+        ImGui::DragFloat("Decay",     &light_.decay,     0.01f, 0.f);
+        if (ImGui::Button("Delete")) { enable_ = false; }
         ImGui::TreePop();
     }
+    ImGui::PopID();
 }
 
 void RawPointLight::FollowRef() {

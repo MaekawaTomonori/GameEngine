@@ -6,8 +6,8 @@
 #include "NodeAnimation.hpp"
 
 /** @brief アニメーションデータ
- ** ノードアニメーションのコレクションと再生時間を保持
- **/
+ * ノードアニメーションのコレクションと再生時間を保持
+ */
 struct Animation {
     float duration;
     std::map<std::string, NodeAnimation> nodeAnimations;

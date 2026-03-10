@@ -16,11 +16,11 @@
 #include "SpotLight/SpotLight.h"
 
 /** @brief ライト管理クラス
- ** 指向性ライト、点光源、スポットライトを統合管理
- **/
+ * 指向性ライト、点光源、スポットライトを統合管理
+ */
 class LightManager final{
 	/** @brief ライト数カウント
-	 **/
+	 */
 	struct LightCount{
         uint32_t dlCount;
         uint32_t plCount;
@@ -51,41 +51,43 @@ class LightManager final{
     std::string path = "Light";
 
     std::optional<Vector3> ref_;
+    bool refEnabled_ = true;
 
 public:
     ~LightManager();
 
     /** @brief ライトマネージャーを初期化
-     ** @param _adapter DirectXアダプター
-     ** @param _debug デバッグUI
-     **/
+     * @param _adapter DirectXアダプター
+     * @param _debug デバッグUI
+     */
 	void Initialize(DirectXAdapter* _adapter, DebugUI* _debug);
 
 
     /** @brief ライトの更新処理
-     **/
+     */
     void Update();
 
     /** @brief ライトを描画
-     **/
+     */
     void Draw() const;
 
     /** @brief ライトを追加
-     ** @param _type ライトタイプ
-     **/
+     * @param _type ライトタイプ
+     */
     void Add(LightType _type);
 
     /** @brief ライトの参照座標を設定
-     ** @param _pos 参照座標
-     **/
+     * @param _pos 参照座標
+     */
     void SetPosition(Vector3 _pos);
 
     void ClearRef();
 
-private:
     void Debug();
+
+private:
     void CheckState();
-    void UpdateLights() const;
+    void UpdateLights();
 
     void Load();
     void Save() const;

@@ -41,6 +41,14 @@ namespace MathUtils{
     float Distance(const Vector3& _a, const Vector3& _b);
     //Vector3 TransformNormal(const Vector3& v, const Transform& t);
 
+    /** @brief 2次ベジェ曲線をパラメータ t で評価する **/
+    Vector3 QuadBezier(const Vector3& _p0, const Vector3& _cp, const Vector3& _p1, float _t);
+
+    /** @brief 弧長再パラメータ化：距離割合 _s ∈ [0,1] に対応するベジェパラメータ t を返す
+     ** @param _steps 弧長テーブルの分割数（精度）。デフォルト 32
+     **/
+    float QuadBezierArcLengthT(const Vector3& _p0, const Vector3& _cp, const Vector3& _p1, float _s, int _steps = 32);
+
     namespace Matrix {
         Matrix3x3 MakeIdentity3x3();
 

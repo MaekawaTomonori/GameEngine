@@ -1,3 +1,6 @@
 [submodule "externals/spdlog"]
 	path = externals/spdlog
 	url = https://github.com/gabime/spdlog.git
+[submodule "Lib/Collision"]
+	path = Lib/Collision
+	url = https://github.com/MaekawaTomonori/CollisionLib.git

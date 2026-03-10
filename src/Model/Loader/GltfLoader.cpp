@@ -13,7 +13,7 @@ void GltfLoader::LoadModel(const std::string& _name, ResourceRepository* _reposi
     LoadGltf(ASSETS_FOLDER, _name, _repository);
 }
 
-void GltfLoader::LoadGltf(const std::string& _directory, const std::string& _name, const ResourceRepository* _repository) {
+void GltfLoader::LoadGltf(const std::string& _directory, const std::string& _name, const ResourceRepository* _repository) const {
     Assimp::Importer importer;
     std::string path = _directory + _name + "/" + _name + ".gltf";
     const aiScene* scene = importer.ReadFile(path, aiProcess_FlipWindingOrder | aiProcess_FlipUVs | aiProcess_Triangulate);

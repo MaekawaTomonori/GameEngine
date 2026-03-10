@@ -1,6 +1,5 @@
 #include "MeshRepository.hpp"
 
-#include "Log.hpp"
 #include "Model.hpp"
 #include "Utils.hpp"
 
@@ -21,4 +20,8 @@ MeshData MeshRepository::Get(const std::string& _name) {
     Utils::Alert("MeshRepository: Mesh not found: " + _name);
 
     return {};
+}
+
+bool MeshRepository::Contains(const std::string& _name) const {
+    return data_.contains(_name);
 }

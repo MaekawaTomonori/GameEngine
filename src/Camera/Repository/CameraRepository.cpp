@@ -2,7 +2,7 @@
 
 #include "Pattern/Singleton.hpp"
 #include "Utils.hpp"
-#include "src/Json/Json.hpp"
+#include "src/Json/JsonParams.hpp"
 
 void CameraRepository::Initialize(float _ratio) {
     ratio_ = _ratio;
@@ -58,7 +58,7 @@ std::string CameraRepository::GetFirstName() const {
 void CameraRepository::LoadFromFile() {
     Clear();
 
-    Json* json = Singleton<Json>::GetInstance();
+    JsonParams* json = Singleton<JsonParams>::GetInstance();
     if (!json->Load("Camera")) return;
 
     auto group = json->GetGroups("Camera");
@@ -73,7 +73,7 @@ void CameraRepository::LoadFromFile() {
 }
 
 void CameraRepository::SaveToFile() {
-    Json* json = Singleton<Json>::GetInstance();
+    JsonParams* json = Singleton<JsonParams>::GetInstance();
     for (auto& [name, camera] : cameras_) {
         json->SetValue("Camera", name, "Position", camera->transform_.translate);
         json->SetValue("Camera", name, "Rotate", std::get<Vector3>(camera->transform_.rotate));

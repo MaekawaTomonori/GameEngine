@@ -54,7 +54,7 @@ void Emitter::Initialize(const MeshData& _mesh) {
 
     index_ = srv_->Allocate();
     handle_ = srv_->GetGPUHandle(index_);
-    srv_->CreateSRVforStructuredBuffer(index_, resource_->Get(), MAX, sizeof(ForGpu));
+    srv_->CreateSRVForStructuredBuffer(index_, resource_->Get(), MAX, sizeof(ForGpu));
 
     Singleton<TextureManager>::GetInstance()->Load(texture_);
 }
@@ -87,6 +87,19 @@ void Emitter::Draw() {
 
 void Emitter::Emit() {
     Spawn(spawnCount_);
+}
+
+void Emitter::Reset() {
+    particles_.clear();
+    timer_ = 0.f;
+    actives_ = 0;
+    active_ = false;
+    updateFunc_ = nullptr;
+    spawnFunc_ = nullptr;
+}
+
+bool Emitter::IsFinished() const {
+    return particles_.empty() && !active_;
 }
 
 void Emitter::Debug() {
@@ -150,8 +163,13 @@ Emitter& Emitter::SetVelocity(const Vector3& _velocity) {
     return *this;
 }
 
-Emitter& Emitter::SetUpdateFunction(const std::function<void(float, Vector3&, Vector4&)>& _func) {
-    particleFunc_ = _func;
+Emitter& Emitter::SetUpdateFunction(const std::function<void(float, const Vector3&, Vector3&, Vector3&, Vector4&)>& _func) {
+    updateFunc_ = _func;
+    return *this;
+}
+
+Emitter& Emitter::SetSpawnFunction(const std::function<void(const Vector3&, Vector3&, Vector3&)>& _func) {
+    spawnFunc_ = _func;
     return *this;
 }
 
@@ -180,12 +198,19 @@ void Emitter::FrequencyUpdate() {
 
 void Emitter::Spawn(const uint16_t& _count) {
     for (uint16_t i = 0; i < _count; ++i) {
+        Vector3 spawnPos = position_;
+        Vector3 spawnVel = velocity_;
+        if (spawnFunc_) {
+            spawnFunc_(position_, spawnPos, spawnVel);
+        }
+
         std::unique_ptr<Particle> particle = std::make_unique<Particle>();
-        particle->SetPosition(position_)
+        particle->SetOrigin(position_)
+            .SetPosition(spawnPos)
             .SetScale(size_)
             .SetColor(color_)
-            .SetVelocity(velocity_)
-            .SetUpdateFunction(particleFunc_)
+            .SetVelocity(spawnVel)
+            .SetUpdateFunction(updateFunc_)
             .Initialize(3.f);
         particles_.emplace_back(std::move(particle));
     }
