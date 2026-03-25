@@ -29,7 +29,6 @@ void CollisionManager::Initialize([[maybe_unused]]DebugUI* _debugUI) {
 #endif
 }
 
-
 void CollisionManager::Update() {
     manager_->Detect();
     manager_->ProcessEvent();

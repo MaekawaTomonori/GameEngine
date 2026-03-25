@@ -22,8 +22,9 @@
 #include "src/PostProcess/Executor/PostProcessExecutor.hpp"
 #include "src/Renderer/Renderer.hpp"
 #include "src/Sky/Common/SkyCommon.hpp"
-#include "src/Stage/LevelEditor.hpp"
 #include "src/Texture/TextureManager.hpp"
+
+#include "AudioLib.hpp"
 
 class IGame;
 

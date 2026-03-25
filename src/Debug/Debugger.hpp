@@ -55,9 +55,13 @@ public:
      */
     void UpdateDisplaySize(int _width, int _height);
 
-    /** @brief DebugUI ポインタを返す 
+    /** @brief DebugUI ポインタを返す
      */
     DebugUI* GetUI() const { return ui_.get(); }
+
+    /** @brief FrameDebugger ポインタを返す
+     */
+    FrameDebugger* GetFrame() const { return frame_.get(); }
 
     /** @brief 読み取り専用ウォッチ（const ポインタ）
      */

@@ -432,6 +432,10 @@
     <ClInclude Include="include\PerformanceProfiler.hpp" />
     <ClInclude Include="include\WatchDebugger.hpp" />
     <ClInclude Include="externals\json\json.hpp" />
+    <ClInclude Include="include\Ui\EventSystem.hpp" />
+    <ClInclude Include="include\Ui\Element.hpp" />
+    <ClInclude Include="include\Ui\UserInterface.hpp" />
+    <ClInclude Include="src\Scene\Sample\SampleScene.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Camera\Camera.cpp">
@@ -608,6 +612,10 @@
     <ClCompile Include="src\Debug\PerformanceProfiler.cpp" />
     <ClCompile Include="src\Debug\WatchDebugger.cpp" />
     <ClCompile Include="src\Collision\CollisionManager.cpp" />
+    <ClCompile Include="src\Ui\EventSystem.cpp" />
+    <ClCompile Include="src\Ui\Element.cpp" />
+    <ClCompile Include="src\Ui\UserInterface.cpp" />
+    <ClCompile Include="src\Scene\Sample\SampleScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

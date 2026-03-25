@@ -125,6 +125,10 @@ void Input::SetCursorVisible(const bool _visible) {
     cursorVisible_ = _visible;
 }
 
+void Input::SetDebugUIHovered(const bool _hovered) {
+    debugUIHovered_ = _hovered;
+}
+
 void Input::ApplyCursorVisibility() {
     bool shouldShow = cursorVisible_;
 
@@ -144,7 +148,8 @@ void Input::ApplyCursorVisibility() {
                 px <  sceneViewTransform_.imagePos.x + sceneViewTransform_.imageSize.x &&
                 py >= sceneViewTransform_.imagePos.y &&
                 py <  sceneViewTransform_.imagePos.y + sceneViewTransform_.imageSize.y;
-            shouldShow = !insideScene;
+            // SceneView 画像内でも DebugUI パネルが手前にある場合はカーソルを表示する
+            shouldShow = !insideScene || debugUIHovered_;
         }
     }
 #endif

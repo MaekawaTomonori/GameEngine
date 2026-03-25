@@ -72,6 +72,9 @@ void Fade::Start(State _state, float _duration) {
 
 void Fade::Stop() {
     state_ = State::None;
+    alpha_ = 0.0f;
+    sprite_->SetColor({0.0f, 0.0f, 0.0f, alpha_});
+    sprite_->Update();
 }
 
 bool Fade::IsFinished() const {

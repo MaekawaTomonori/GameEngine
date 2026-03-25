@@ -15,6 +15,10 @@ void IScene::Setup(SceneSwitcher* _switcher) {
     switcher_ = _switcher;
 }
 
+void IScene::SetName(const std::string& _name) {
+    name_ = _name;
+}
+
 void IScene::Change() {
 	if (!switcher_) return;
     if (next_.empty()) return;

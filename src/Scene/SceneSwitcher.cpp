@@ -3,8 +3,12 @@
 #include "imgui.h"
 #include "Pattern/Singleton.hpp"
 #include "src/Camera/Director/CameraDirector.hpp"
+#include "src/Debug/FrameDebugger.hpp"
 #include "src/Light/LightManager.hpp"
 #include "src/Scene/Transition/Transition.hpp"
+
+#undef min
+#undef max
 
 SceneSwitcher::SceneSwitcher() {
     factory_ = std::make_unique<SceneFactory>();
@@ -16,10 +20,14 @@ void SceneSwitcher::Setup(const Context& _context) {
     transition_ = std::make_unique<Transition>();
     transition_->Initialize();
 
+#ifdef _DEBUG
     if (context_.debug) {
         context_.debug->RegisterMenuButton("SceneSwitcher");
         context_.debug->RegisterMenuButton("Transition");
     }
+
+    Change("sample");
+#endif
 }
 
 void SceneSwitcher::Update() {
@@ -60,6 +68,15 @@ void SceneSwitcher::Update() {
         next_ = nullptr;
         scene_->Setup(this);
         scene_->Initialize();
+
+        // Break on Load: シーン初期化直後に一時停止
+        if (pendingBreak_ && context_.frame) {
+            context_.frame->Pause();
+#ifdef _DEBUG
+            debugRunState_ = RunState::Paused;
+#endif
+        }
+        pendingBreak_ = false;
 
         transition_->Awake(scene_->GetEntryTransition(), ITransitionEffect::State::In);
         transition_->Update();
@@ -188,6 +205,16 @@ void SceneSwitcher::Debug() {
     context_.debug->RegisterCommand("Game", [this]() {
         scene_->Debug();
     });
+
+    LocalDebugger();
+}
+
+void SceneSwitcher::SkipTransition() {
+    if (transition_) {
+        transition_->Skip();
+    }
+    midpointPending_  = false;
+    midpointCallback_ = nullptr;
 }
 
 const SceneSwitcher::Context& SceneSwitcher::GetContext() const {
@@ -215,10 +242,154 @@ void SceneSwitcher::Change(const std::string &_name) {
     if (next_) return;
 
     next_ = factory_->Create(_name);
+    next_->SetName(_name);
+
+#ifdef _DEBUG
+    debugRunState_ =  Utils::EqualsIgnoreCase(homeScene_, _name) ? RunState::Stopped : RunState::Running;
+#endif
 
     // Already Destroyed
     if (!scene_) return;
 
     // Scene Change Transition
     transition_->Awake(scene_->GetExitTransition(), ITransitionEffect::State::Out);
+}
+
+void SceneSwitcher::LocalDebugger() {
+#ifdef _DEBUG
+    if (!context_.debug) return;
+
+    context_.debug->RegisterCommand("FrameDebugger", [this]() {
+        if (!ImGui::Begin("LocalDebugger", &context_.debug->IsVisible("FrameDebugger"))) {
+            ImGui::End();
+            return;
+        }
+
+        // homeScene を除外した起動候補リスト
+        const auto allScenes = factory_ ? factory_->GetRegisteredScenes() : std::vector<std::string>{};
+        std::vector<std::string> scenes;
+        for (const auto& s : allScenes) {
+            if (!Utils::EqualsIgnoreCase(s, homeScene_)) scenes.push_back(s);
+        }
+
+        static int  selectedIndex = -1;
+        static bool breakOnLoad   = false;
+
+        if (selectedIndex < 0 && !scenes.empty()) {
+            const std::string cur = scene_ ? scene_->GetName() : std::string{};
+            selectedIndex = 0;
+            for (int i = 0; i < static_cast<int>(scenes.size()); ++i) {
+                if (Utils::EqualsIgnoreCase(scenes[i], cur)) { selectedIndex = i; break; }
+            }
+        }
+        selectedIndex = std::min(selectedIndex, static_cast<int>(scenes.size()) - 1);
+
+        if (!scenes.empty()) {
+            // コンボ: 停止中のみ有効
+            if (debugRunState_ != RunState::Stopped) ImGui::BeginDisabled();
+            ImGui::SetNextItemWidth(150.f);
+            const char* preview = selectedIndex >= 0 ? scenes[selectedIndex].c_str() : "---";
+            if (ImGui::BeginCombo("##Launch", preview)) {
+                for (int i = 0; i < static_cast<int>(scenes.size()); ++i) {
+                    if (ImGui::Selectable(scenes[i].c_str(), selectedIndex == i))
+                        selectedIndex = i;
+                    if (selectedIndex == i) ImGui::SetItemDefaultFocus();
+                }
+                ImGui::EndCombo();
+            }
+            if (debugRunState_ != RunState::Stopped) ImGui::EndDisabled();
+
+            ImGui::SameLine();
+
+            switch (debugRunState_) {
+            case RunState::Stopped:
+                ImGui::PushStyleColor(ImGuiCol_Button,        ImVec4(0.15f, 0.50f, 0.15f, 1.0f));
+                ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(0.20f, 0.65f, 0.20f, 1.0f));
+                if (selectedIndex >= 0 && ImGui::Button("> ##Launch")) {
+                    SkipTransition();
+                    if (context_.frame) context_.frame->Resume();
+                    pendingBreak_ = breakOnLoad;
+                    Change(scenes[selectedIndex]);
+                }
+                ImGui::PopStyleColor(2);
+                if (ImGui::IsItemHovered()) { ImGui::SetTooltip("Launch"); }
+
+                ImGui::SameLine();
+
+                ImGui::Checkbox("##breakOnLoad", &breakOnLoad);
+                if (ImGui::IsItemHovered()) { ImGui::SetTooltip("Break on Scene Start"); }
+
+                break;
+
+            case RunState::Running:
+                ImGui::PushStyleColor(ImGuiCol_Button,        ImVec4(0.55f, 0.08f, 0.08f, 1.0f));
+                ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(0.75f, 0.12f, 0.12f, 1.0f));
+                if (ImGui::Button("||##Pause")) {
+                    debugRunState_ = RunState::Paused;
+                    if (context_.frame) context_.frame->Pause();
+                }
+                ImGui::PopStyleColor(2);
+                if (ImGui::IsItemHovered()) { ImGui::SetTooltip("Pause"); }
+                break;
+
+            case RunState::Paused:
+                ImGui::PushStyleColor(ImGuiCol_Button,        ImVec4(0.20f, 0.50f, 0.12f, 1.0f));
+                ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(0.28f, 0.65f, 0.18f, 1.0f));
+                if (ImGui::Button("> ##Resume")) {
+                    debugRunState_ = RunState::Running;
+                    if (context_.frame) context_.frame->Resume();
+                }
+                ImGui::PopStyleColor(2);
+                ImGui::SameLine();
+                if (context_.frame) context_.frame->RenderStepButton();
+                break;
+            }
+        }
+
+        const bool isHome = !homeScene_.empty() && scene_ && scene_->GetName() == homeScene_;
+
+        ImGui::SameLine();
+
+        if (isHome) ImGui::BeginDisabled();
+
+        ImGui::PushStyleColor(ImGuiCol_Button,        ImVec4(0.50f, 0.12f, 0.12f, 1.0f));
+        ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(0.68f, 0.16f, 0.16f, 1.0f));
+        if (ImGui::Button("##Stop", ImVec2(22.f, 0.f))) {
+            debugRunState_ = RunState::Stopped;
+            SkipTransition();
+            if (context_.frame) context_.frame->Resume();
+            Change(homeScene_);
+        }
+        ImGui::PopStyleColor(2);
+
+        {
+            constexpr float kPad = 5.f;
+            const ImVec2 bMin = ImGui::GetItemRectMin();
+            const ImVec2 bMax = ImGui::GetItemRectMax();
+            ImGui::GetWindowDrawList()->AddRectFilled(
+                { bMin.x + kPad, bMin.y + kPad },
+                { bMax.x - kPad, bMax.y - kPad },
+                IM_COL32(220, 220, 220, 220)
+            );
+        }
+
+        if (isHome) {
+            if (ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenDisabled)) {
+                ImGui::SetTooltip("Already at home scene");
+            }
+            ImGui::EndDisabled();
+        }
+
+        ImGui::SameLine();
+
+        if (ImGui::Button("Re")) {
+            debugRunState_ = RunState::Running;
+            SkipTransition();
+            if (context_.frame) context_.frame->Resume();
+            pendingBreak_ = breakOnLoad;
+            if (scene_) Change(scene_->GetName());
+        }
+        ImGui::End();
+    });
+#endif
 }

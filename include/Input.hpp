@@ -26,6 +26,7 @@ class Input {
 
     bool cursorVisible_ = true;
     bool appliedCursorVisible_ = true;
+    bool debugUIHovered_ = false;
 
     /** Scene ウィンドウ表示時のマウス座標変換データ
      */
@@ -73,6 +74,12 @@ public:
      * @note Debug ビルドでは非表示時も SceneView 外ではカーソルを表示する
      */
     void SetCursorVisible(bool _visible);
+
+    /** @brief デバッグUI上にマウスがあるかを設定
+     * @param _hovered デバッグUIにホバー中なら true
+     * @note DebugUI::IsMouseOverDebugUI() の結果を ApplyCursorVisibility() 前に渡す
+     */
+    void SetDebugUIHovered(bool _hovered);
 
     /** @brief カーソル表示状態を即時反映
      * @note Framework::Draw() の renderer_->Render() 後に呼ぶこと

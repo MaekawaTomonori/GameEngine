@@ -80,6 +80,12 @@ public:
      */
     void UpdateDisplaySize(int _width, int _height) const;
 
+    /** @brief マウスがデバッグUI上にあるか判定
+     * Scene ウィンドウ以外の ImGui ウィンドウにホバー中の場合 true
+     * カーソル非表示時にデバッグUIパネル上ではカーソルを表示するために使用
+     */
+    bool IsMouseOverDebugUI() const;
+
     /** @brief ImGui表示用テクスチャを登録し ImTextureID として使用可能なGPUハンドルを返す
      * ImGuiヒープのスロット1にSRVを作成する（スロット0はフォント用）
      * @param _resource テクスチャリソース

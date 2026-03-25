@@ -5,33 +5,47 @@
 
 class DebugUI;
 
-/** @brief フレーム単位デバッガー
- * デバッグビルド時のみSceneのUpdateをフレーム単位で制御する
+/** @brief フレームステップ制御（一時停止・ステップ実行）
  */
 class FrameDebugger {
     DebugUI* debugUI_ = nullptr;
-    bool paused_ = false;
-    bool stepRequested_ = false;
-    uint64_t frameCount_ = 0;
+    bool paused_          = false;
+    bool stepRequested_   = false;
+    uint64_t frameCount_  = 0;
 
-    /** >| ボタン長押し加速用
-     */
-    int maxSpeedInterval_ = 20;  // 最大速度時のフレーム間隔（0-60、0=毎フレーム）
-    int holdFrames_       = 0;   // >| ボタンの連続押下フレーム数
-    int lastStepFrame_    = -1;  // 最後に step を発生させた holdFrames_ の値
+    // >| 長押し加速用
+    int maxSpeedInterval_ = 20;
+    int holdFrames_       = 0;
+    int lastStepFrame_    = -1;
 
 public:
-
     void Initialize(DebugUI* _debugUi);
 
-    /** @brief このフレームでSceneのUpdateを実行すべきか
-     * @return 実行すべき場合true。非デバッグビルドでは常にtrue
+    /** @brief 一時停止する
+     */
+    void Pause();
+
+    /** @brief 一時停止を解除する
+     */
+    void Resume();
+
+    /** @brief このフレームで Update を実行すべきか（Release では常に true）
      */
     bool ShouldUpdate();
 
-    /** @brief ImGuiウィンドウを登録
+    /** @brief メニューボタン等の登録。ウィンドウ内容は LocalDebugger が担当
      */
     void Debug();
+
+    /** @brief 一時停止中かどうかを返す
+     */
+    bool IsPaused() const { return paused_; }
+
+    /** @brief >| ステップボタンのみ描画（長押し加速あり）
+     * 一時停止中に LocalDebugger の Launch スロットからインライン呼び出し用
+     */
+    void RenderStepButton();
+
 }; // class FrameDebugger
 
 #endif // FrameDebugger_HPP_

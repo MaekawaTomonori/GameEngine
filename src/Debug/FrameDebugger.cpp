@@ -12,101 +12,69 @@ void FrameDebugger::Initialize([[maybe_unused]] DebugUI* _debugUi) {
 #ifdef _DEBUG
     if (!_debugUi) return;
     debugUI_ = _debugUi;
-    paused_ = false;
-    stepRequested_ = false;
-    frameCount_ = 0;
     debugUI_->RegisterMenuButton("FrameDebugger", false, "Debug");
+#endif
+}
+
+void FrameDebugger::Pause() {
+#ifdef _DEBUG
+    paused_ = true;
+#endif
+}
+
+void FrameDebugger::Resume() {
+#ifdef _DEBUG
+    paused_ = false;
 #endif
 }
 
 bool FrameDebugger::ShouldUpdate() {
 #ifdef _DEBUG
-    bool frag = !paused_ || stepRequested_;
-
-    if (stepRequested_) {
-        stepRequested_ = false;
-    }
-
-    return frag;
+    const bool run = !paused_ || stepRequested_;
+    stepRequested_ = false;
+    return run;
 #else
     return true;
 #endif
 }
 
 void FrameDebugger::Debug() {
+    // ウィンドウ内容は SceneSwitcher::LocalDebugger が描画する
+}
+
+void FrameDebugger::RenderStepButton() {
 #ifdef _DEBUG
-    if (!debugUI_) return;
+    // [>|(薄青)] → 1フレームステップ（長押しで加速）
+    ImGui::PushStyleColor(ImGuiCol_Button,        ImVec4(0.15f, 0.28f, 0.58f, 1.0f));
+    ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(0.20f, 0.38f, 0.72f, 1.0f));
+    ImGui::Button(">|");
+    ImGui::PopStyleColor(2);
 
-    debugUI_->RegisterCommand("FrameDebugger", [this]() {
-        ImGui::Begin("FrameStepDebugger", &debugUI_->IsVisible("FrameDebugger"));
+    if (ImGui::IsItemActive()) {
+        constexpr int kRampFrames = 120;
+        const int startInterval = std::max(30, maxSpeedInterval_);
+        const int minInterval   = std::max(1,  maxSpeedInterval_);
 
-        if (!paused_) {
-            if (ImGui::Button("||")) {
-                paused_ = true;
-            }
+        if (holdFrames_ == 0) {
+            stepRequested_ = true;
+            lastStepFrame_ = 0;
         } else {
-            ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.0f, 0.4f, 0.4f, 1.0f));
-            if (ImGui::Button("||")) {
-                paused_ = false;
-            }
-            ImGui::PopStyleColor();
-            ImGui::SameLine();
+            const int framesSinceStep = holdFrames_ - lastStepFrame_;
+            const int rampFrames      = holdFrames_ - startInterval;
+            int interval;
+            if      (rampFrames <= 0)           interval = startInterval;
+            else if (rampFrames >= kRampFrames) interval = minInterval;
+            else    interval = startInterval - (startInterval - minInterval) * rampFrames / kRampFrames;
 
-            // >| ボタン：押した瞬間に1フレーム進み、長押しで徐々に加速する
-            ImGui::Button(">|");
-
-            if (ImGui::IsItemActive()) {
-                // 長押し加速の定数
-                constexpr int kRampFrames = 120;  // 最大速度に到達するまでのフレーム数
-
-                // startInterval: maxSpeedInterval_ より遅い初期速度（最低30）
-                const int startInterval = std::max(30, maxSpeedInterval_);
-                // minInterval: maxSpeedInterval_ = 0 の場合でも1以上
-                const int minInterval   = std::max(1, maxSpeedInterval_);
-
-                if (holdFrames_ == 0) {
-                    // 最初のフレーム: 即座に1フレーム進む
-                    stepRequested_  = true;
-                    lastStepFrame_  = 0;
-                } else {
-                    const int framesSinceStep = holdFrames_ - lastStepFrame_;
-
-                    // holdFrames_ が startInterval を超えてから加速フェーズへ
-                    const int rampFrames = holdFrames_ - startInterval;
-                    int interval;
-                    if (rampFrames <= 0) {
-                        interval = startInterval;
-                    } else if (rampFrames >= kRampFrames) {
-                        interval = minInterval;
-                    } else {
-                        // startInterval → minInterval に線形補間
-                        interval = startInterval
-                            - (startInterval - minInterval) * rampFrames / kRampFrames;
-                    }
-                    interval = std::max(1, interval);
-
-                    if (framesSinceStep >= interval) {
-                        stepRequested_ = true;
-                        lastStepFrame_ = holdFrames_;
-                    }
-                }
-                ++holdFrames_;
-            } else {
-                // ボタンが離された: 状態リセット
-                holdFrames_    = 0;
-                lastStepFrame_ = -1;
-            }
-
-            // 最大速度スライダー (0 = 毎フレーム, 60 = 60フレームに1回)
-            ImGui::SameLine();
-            ImGui::SetNextItemWidth(120.f);
-            ImGui::SliderInt("Max interval", &maxSpeedInterval_, 0, 60);
-            if (ImGui::IsItemHovered()) {
-                ImGui::SetTooltip("0-60frame");
+            if (framesSinceStep >= std::max(1, interval)) {
+                stepRequested_ = true;
+                lastStepFrame_ = holdFrames_;
             }
         }
-
-        ImGui::End();
-    });
+        ++holdFrames_;
+    } else {
+        holdFrames_    = 0;
+        lastStepFrame_ = -1;
+    }
 #endif
 }

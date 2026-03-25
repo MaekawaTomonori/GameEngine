@@ -1,9 +1,12 @@
 #include "Window.hpp"
 
 #include <stdexcept>
+#include <dwmapi.h>
 
 #include "Utils.hpp"
 #include "imgui.h"
+
+#pragma comment(lib, "dwmapi.lib")
 
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND _hWnd, UINT _msg, WPARAM _wParam, LPARAM _lParam);
 
@@ -65,6 +68,20 @@ bool Window::Create() {
 
     ShowWindow(hWnd_, SW_SHOW);
     UpdateWindow(hWnd_);
+
+    // change titlebar color
+    COLORREF color = RGB(60, 60, 60);
+    HRESULT result = DwmSetWindowAttribute(
+        hWnd_,
+        DWMWA_CAPTION_COLOR,
+        &color,
+        sizeof(color)
+    );
+
+    if (FAILED(result)) {
+        Utils::Alert("title bar color change failed");
+        return false;
+    }
 
     return true;
 }

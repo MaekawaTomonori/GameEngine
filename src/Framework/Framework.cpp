@@ -5,6 +5,7 @@
 #include "PerformanceProfiler.hpp"
 #include "Pattern/Singleton.hpp"
 #include "Random/RandomEngine.hpp"
+#include "src/Scene/Sample/SampleScene.hpp"
 
 Framework::Framework() {
     Log::Initialize();
@@ -12,6 +13,8 @@ Framework::Framework() {
     Log::SendWithContext(Log::Level::INFO, "Framework initialization started", "FRAMEWORK");
     Log::LogFileOperation("STARTUP_CHECK", "Assets",         std::filesystem::exists("Assets"),         "Checking assets directory");
     Log::LogFileOperation("STARTUP_CHECK", "Assets/Shaders", std::filesystem::exists("Assets/Shaders"), "Checking shaders directory");
+
+    Audio::Initialize();
 
     windows_ = std::make_unique<WinApp>();
     windows_->Initialize();
@@ -82,6 +85,7 @@ Framework::Framework() {
 }
 
 Framework::~Framework() {
+    Audio::Shutdown();
     SingletonFinalizer::Finalize();
     CoUninitialize();
 }
@@ -104,13 +108,23 @@ void Framework::Initialize() {
     windows_->SetTitle(config_.title);
     scene_ = game_->GetSceneSwitcher();
 
+    if (!scene_) {
+        Utils::Alert("SceneSwitcher is Null");
+    }
+
 #ifdef _DEBUG
+    scene_->RegisterScene("sample", []{return std::make_unique<SampleScene>(); });
+
     DebugUI* const dbg = debugger_->GetUI();
 #else
     DebugUI* const dbg = nullptr;
 #endif
 
-    scene_->Setup({ postProcessor_.get(), dbg, particle_.get() });
+    SceneSwitcher::Context ctx{ postProcessor_.get(), particle_.get(), dbg };
+#ifdef _DEBUG
+    ctx.frame = debugger_->GetFrame();
+#endif
+    scene_->Setup(ctx);
     scene_->Change(config_.defaultScene);
 
     if (const auto& peFac = game_->GetPostEffectFactory()) {
@@ -201,6 +215,10 @@ void Framework::Draw() const {
     renderer_->Render();
 
     // SceneView の矩形は ImGui レンダリング後に確定するため、ここでカーソル表示を反映
+#ifdef _DEBUG
+    // DebugUI パネル上ではカーソルを強制表示（SceneView 上に重なった場合も含む）
+    input_->SetDebugUIHovered(debugger_->GetUI()->IsMouseOverDebugUI());
+#endif
     input_->ApplyCursorVisibility();
 }
 

@@ -33,6 +33,9 @@ public:
 
     bool InProgress();
 
+    /** @brief トランジションを即座に強制終了する */
+    void Skip();
+
     void SetDefaultDuration(float _duration);
 
     /** @brief ImGui上でトランジション状態を表示（ウィンドウ内に埋め込む形で呼ぶ）

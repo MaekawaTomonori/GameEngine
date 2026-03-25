@@ -203,6 +203,17 @@ void DebugUI::UpdateDisplaySize([[maybe_unused]]int _width, [[maybe_unused]]int 
 #endif
 }
 
+bool DebugUI::IsMouseOverDebugUI() const {
+#ifdef _DEBUG
+    const ImGuiContext* ctx = ImGui::GetCurrentContext();
+    if (!ctx || !ctx->HoveredWindow) return false;
+    // "Scene" ウィンドウ以外の ImGui ウィンドウにホバー中であれば true
+    return strcmp(ctx->HoveredWindow->Name, "Scene") != 0;
+#else
+    return false;
+#endif
+}
+
 void DebugUI::RenderMainMenuBar() {
 #ifdef _DEBUG
     if (!showMenuBar_ || !ImGui::BeginMainMenuBar()) return;

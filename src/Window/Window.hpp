@@ -20,7 +20,7 @@ class Window {
 
     RECT previousRect_{};
     RECT previousClient_{};
-    LONG previousStyle_ = 0;
+    DWORD previousStyle_ = 0;
 
 public:
     ~Window() = default;
