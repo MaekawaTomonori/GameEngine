@@ -81,6 +81,9 @@ Framework::Framework() {
     Debugger::WatchGroup("Engine")
         .Watch("FPS", &config_.fps)
         .Watch("ShowCursor", &config_.showCursor);
+
+    audioPanel_ = std::make_unique<AudioDebugPanel>();
+    audioPanel_->Initialize(debugger_->GetUI());
 #endif
 }
 
@@ -163,6 +166,7 @@ void Framework::Update() const {
     particle_->Debug();
     postProcessor_->Debug();
     collision_->Debug();
+    audioPanel_->Debug();
     debugger_->Debug();
     model_->Debug();
     sprite_->Debug();

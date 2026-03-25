@@ -6,6 +6,7 @@
 #include "Input.hpp"
 #ifdef _DEBUG
 #include "src/Debug/Debugger.hpp"
+#include "src/Audio/AudioDebugPanel.hpp"
 #endif
 #include "src/Camera/Controller/CameraController.hpp"
 #include "src/Camera/Director/CameraDirector.hpp"
@@ -23,8 +24,6 @@
 #include "src/Renderer/Renderer.hpp"
 #include "src/Sky/Common/SkyCommon.hpp"
 #include "src/Texture/TextureManager.hpp"
-
-#include "AudioLib.hpp"
 
 class IGame;
 
@@ -44,7 +43,8 @@ class Framework {
     std::unique_ptr<Renderer> renderer_;
     std::unique_ptr<ResourceRepository> resources_;
 #ifdef _DEBUG
-    std::unique_ptr<Debugger> debugger_;
+    std::unique_ptr<Debugger>        debugger_;
+    std::unique_ptr<AudioDebugPanel> audioPanel_;
 #endif
     std::unique_ptr<SRVManager> srv_;
     //std::unique_ptr<LevelEditor> level_;

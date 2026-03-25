@@ -47,7 +47,7 @@
     <TargetName>Engine</TargetName>
     <TargetExt>.lib</TargetExt>
     <ExternalIncludePath>.;include;$(ExternalIncludePath)</ExternalIncludePath>
-    <PublicIncludeDirectories>$(ProjectDir)include</PublicIncludeDirectories>
+    <PublicIncludeDirectories>$(ProjectDir)include;$(ProjectDir)Lib\Audio\include</PublicIncludeDirectories>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)out\$(Platform)\$(Configuration)\$(ProjectName)\</OutDir>
@@ -55,7 +55,7 @@
     <TargetName>Engine</TargetName>
     <TargetExt>.lib</TargetExt>
     <ExternalIncludePath>.;include;$(ExternalIncludePath)</ExternalIncludePath>
-    <PublicIncludeDirectories>$(ProjectDir)include</PublicIncludeDirectories>
+    <PublicIncludeDirectories>$(ProjectDir)include;$(ProjectDir)Lib\Audio\include</PublicIncludeDirectories>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -118,6 +118,7 @@
     <ClInclude Include="include\DebugUI.hpp" />
     <ClInclude Include="include\PerformanceProfiler.hpp" />
     <ClInclude Include="include\WatchDebugger.hpp" />
+    <ClInclude Include="src\Audio\AudioDebugPanel.hpp" />
     <ClInclude Include="src\Collision\CollisionManager.hpp" />
     <ClInclude Include="src\Debug\Debugger.hpp" />
     <ClInclude Include="src\Debug\FrameDebugger.hpp" />
@@ -218,6 +219,7 @@
     <ClCompile Include="src\Camera\Controller\CameraController.cpp" />
     <ClCompile Include="src\Camera\Director\CameraDirector.cpp" />
     <ClCompile Include="src\Camera\Repository\CameraRepository.cpp" />
+    <ClCompile Include="src\Audio\AudioDebugPanel.cpp" />
     <ClCompile Include="src\Collision\CollisionManager.cpp" />
     <ClCompile Include="src\Common\Common.cpp" />
     <ClCompile Include="src\Container\Material.cpp" />

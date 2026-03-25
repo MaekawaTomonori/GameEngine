@@ -34,6 +34,9 @@
     <Filter Include="src\Container">
       <UniqueIdentifier>{3F0F2748-ABCF-A27E-740A-ECFBE089E75A}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Audio">
+      <UniqueIdentifier>{A1B2C3D4-E5F6-7890-ABCD-EF1234567891}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\Debug">
       <UniqueIdentifier>{63A3C3B2-CF0D-7829-184C-29CF84F5557E}</UniqueIdentifier>
     </Filter>
@@ -428,6 +431,9 @@
     <ClInclude Include="externals\MagicEnum\magic_enum.hpp" />
     <ClInclude Include="externals\assimp\include\assimp\AssertHandler.h" />
     <ClInclude Include="src\Debug\Debugger.hpp" />
+    <ClInclude Include="src\Audio\AudioDebugPanel.hpp">
+      <Filter>src\Audio</Filter>
+    </ClInclude>
     <ClInclude Include="src\Collision\CollisionManager.hpp" />
     <ClInclude Include="include\PerformanceProfiler.hpp" />
     <ClInclude Include="include\WatchDebugger.hpp" />
@@ -611,6 +617,9 @@
     <ClCompile Include="src\Debug\Debugger.cpp" />
     <ClCompile Include="src\Debug\PerformanceProfiler.cpp" />
     <ClCompile Include="src\Debug\WatchDebugger.cpp" />
+    <ClCompile Include="src\Audio\AudioDebugPanel.cpp">
+      <Filter>src\Audio</Filter>
+    </ClCompile>
     <ClCompile Include="src\Collision\CollisionManager.cpp" />
     <ClCompile Include="src\Ui\EventSystem.cpp" />
     <ClCompile Include="src\Ui\Element.cpp" />
