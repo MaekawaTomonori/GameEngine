@@ -41,6 +41,7 @@ class DebugUI {
 
     std::unique_ptr<Heap> heap_;
     const DirectXAdapter* adapter_ = nullptr;
+    uint32_t nextSrvSlot_ = 0; // ImGui SRV アロケータ用カウンタ
 
     std::vector<Command> commands_;
     std::unordered_map<std::string, WindowState> windowStates_;

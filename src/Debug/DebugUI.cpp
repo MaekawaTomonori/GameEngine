@@ -69,19 +69,34 @@ void DebugUI::Initialize(const DirectXAdapter *_adapter) {
         ImGui::AddSettingsHandler(&handler);
     }
 
-    ImGui_ImplDX12_Init(
-        _adapter->GetDevice(),
-        2,
-        DXGI_FORMAT_R8G8B8A8_UNORM_SRGB,
-        heap_->Get(),
-        heap_->Get()->GetCPUDescriptorHandleForHeapStart(),
-        heap_->Get()->GetGPUDescriptorHandleForHeapStart()
-    );
+    // ConfigFlags は Init より前に設定する必要がある（ViewportsEnable は Init 内で参照される）
+    {
+        ImGuiIO& preIo = ImGui::GetIO();
+        preIo.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
+        // ImGuiConfigFlags_ViewportsEnable は UNORM_SRGB フォーマットのSwapChainが作れないため無効
+    }
+
+    ImGui_ImplDX12_InitInfo dx12Info{};
+    dx12Info.Device            = _adapter->GetDevice();
+    dx12Info.CommandQueue      = _adapter->GetCommandQueue();
+    dx12Info.NumFramesInFlight = 2;
+    dx12Info.RTVFormat         = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
+    dx12Info.DSVFormat         = DXGI_FORMAT_UNKNOWN;
+    dx12Info.SrvDescriptorHeap = heap_->Get();
+    dx12Info.UserData          = this;
+    dx12Info.SrvDescriptorAllocFn = [](ImGui_ImplDX12_InitInfo* info,
+        D3D12_CPU_DESCRIPTOR_HANDLE* out_cpu, D3D12_GPU_DESCRIPTOR_HANDLE* out_gpu) {
+        auto* ui = static_cast<DebugUI*>(info->UserData);
+        const uint32_t slot = ui->nextSrvSlot_++;
+        *out_cpu = ui->heap_->GetCPUHandle(slot);
+        *out_gpu = ui->heap_->GetGPUHandle(slot);
+    };
+    dx12Info.SrvDescriptorFreeFn = [](ImGui_ImplDX12_InitInfo*, D3D12_CPU_DESCRIPTOR_HANDLE, D3D12_GPU_DESCRIPTOR_HANDLE) {};
+    ImGui_ImplDX12_Init(&dx12Info);
 
     ImGui_ImplWin32_Init(_adapter->GetWindowHandle());
 
     ImGuiIO& io = ImGui::GetIO();
-    io.ConfigFlags |= ImGuiConfigFlags_DockingEnable; // Enable Docking
     io.FontGlobalScale = 1.f / ImGui_ImplWin32_GetDpiScaleForHwnd(_adapter->GetWindowHandle());
     io.IniFilename = "Assets\\Config\\imgui.ini";
 
@@ -146,6 +161,11 @@ void DebugUI::Render() {
     ID3D12DescriptorHeap* heaps[] = {heap_->Get()};
     adapter_->GetCommandList()->SetDescriptorHeaps(_countof(heaps), heaps);
     ImGui_ImplDX12_RenderDrawData(ImGui::GetDrawData(), adapter_->GetCommandList());
+
+    if (ImGui::GetIO().ConfigFlags & ImGuiConfigFlags_ViewportsEnable) {
+        ImGui::UpdatePlatformWindows();
+        ImGui::RenderPlatformWindowsDefault();
+    }
 #endif
 }
 
@@ -175,8 +195,8 @@ uint64_t DebugUI::RegisterTexture([[maybe_unused]] ID3D12Resource* _resource, [[
 #ifdef _DEBUG
     if (!_resource || !adapter_) return 0;
 
-    // スロット0 = ImGuiフォント、スロット1 = シーンテクスチャ
-    constexpr uint32_t kSceneSlot = 1;
+    // ヒープ末尾の固定スロットを使用（ImGui alloc コールバックが到達しない領域）
+    constexpr uint32_t kSceneSlot = 127;
 
     D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc = {};
     srvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
@@ -197,6 +217,7 @@ void DebugUI::UpdateDisplaySize([[maybe_unused]]int _width, [[maybe_unused]]int 
         ImGuiIO& io = ImGui::GetIO();
         io.DisplaySize = ImVec2(static_cast<float>(_width), static_cast<float>(_height));
         io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
+        io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
         io.FontGlobalScale = 1.f / ImGui_ImplWin32_GetDpiScaleForHwnd(adapter_->GetWindowHandle());
         Log::Send(Log::Level::INFO, "ImGui display size updated: " + std::to_string(_width) + "x" + std::to_string(_height));
     }

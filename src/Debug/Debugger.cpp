@@ -29,7 +29,6 @@ bool Debugger::ShouldUpdate() {
 }
 
 void Debugger::Debug() {
-    frame_->Debug();
     Singleton<PerformanceProfiler>::GetInstance()->Debug();
     Singleton<WatchDebugger>::GetInstance()->Debug();
 }

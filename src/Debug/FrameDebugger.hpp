@@ -33,10 +33,6 @@ public:
      */
     bool ShouldUpdate();
 
-    /** @brief メニューボタン等の登録。ウィンドウ内容は LocalDebugger が担当
-     */
-    void Debug();
-
     /** @brief 一時停止中かどうかを返す
      */
     bool IsPaused() const { return paused_; }

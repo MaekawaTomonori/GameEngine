@@ -38,10 +38,6 @@ bool FrameDebugger::ShouldUpdate() {
 #endif
 }
 
-void FrameDebugger::Debug() {
-    // ウィンドウ内容は SceneSwitcher::LocalDebugger が描画する
-}
-
 void FrameDebugger::RenderStepButton() {
 #ifdef _DEBUG
     // [>|(薄青)] → 1フレームステップ（長押しで加速）
