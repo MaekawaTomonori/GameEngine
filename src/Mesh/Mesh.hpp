@@ -99,7 +99,7 @@ public:
     /** @brief 頂点バッファビューを設定
      * @param _vbv 頂点バッファビュー
      */
-    void SetVBV(D3D12_VERTEX_BUFFER_VIEW _vbv);
+    void SetVBV(const D3D12_VERTEX_BUFFER_VIEW& _vbv);
 
     /** @brief メッシュデータを取得
      * @return メッシュデータ

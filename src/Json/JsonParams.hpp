@@ -44,11 +44,11 @@ public:
     void RemoveGroup(const std::string& _name, const std::string& _group);
 
     bool Load(const std::string& _path, const std::string& _name = "");
-    void Save(const std::string& _path, std::string _name = "");
+    void Save(const std::string& _path, const std::string& _name = "");
 
 private:
     void Register(const std::string& _name);
-    void LoadJson(const std::string& _path, std::string _name);
+    void LoadJson(const std::string& _path, const std::string& _name);
 };
 
 #endif // JSON_HPP_

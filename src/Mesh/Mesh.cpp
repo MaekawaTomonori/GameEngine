@@ -143,7 +143,7 @@ void Mesh::Debug() {
     }
 }
 
-void Mesh::SetVBV(const D3D12_VERTEX_BUFFER_VIEW _vbv) {
+void Mesh::SetVBV(const D3D12_VERTEX_BUFFER_VIEW& _vbv) {
     vbvs_.push_back(_vbv);
 }
 

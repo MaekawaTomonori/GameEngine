@@ -12,8 +12,8 @@ public:
     Scheduler();
     ~Scheduler();
 
-    void RunTaskLater(Task _task, std::chrono::milliseconds _delay);
-    void RunTaskTimer(Task _task, std::chrono::milliseconds _interval);
+    void RunTaskLater(const Task& _task, std::chrono::milliseconds _delay);
+    void RunTaskTimer(const Task& _task, std::chrono::milliseconds _interval);
 
 private:
     struct SchedulerTask {
