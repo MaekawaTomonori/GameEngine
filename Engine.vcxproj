@@ -120,6 +120,7 @@
     <ClInclude Include="include\WatchDebugger.hpp" />
     <ClInclude Include="src\Audio\AudioDebugPanel.hpp" />
     <ClInclude Include="src\Collision\CollisionManager.hpp" />
+    <ClInclude Include="src\Config\ConfigLoader.hpp" />
     <ClInclude Include="src\Debug\Debugger.hpp" />
     <ClInclude Include="src\Debug\FrameDebugger.hpp" />
     <ClInclude Include="include\Factory\AbstractPostEffectFactory.hpp" />
@@ -211,6 +212,7 @@
     <ClInclude Include="include\Ui\UserInterface.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Config\ConfigLoader.cpp" />
     <ClCompile Include="src\Scene\Sample\SampleScene.cpp" />
     <ClCompile Include="src\Ui\EventSystem.cpp" />
     <ClCompile Include="src\Ui\Element.cpp" />

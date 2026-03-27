@@ -6,9 +6,20 @@
 #include "Pattern/Singleton.hpp"
 #include "Random/RandomEngine.hpp"
 #include "src/Scene/Sample/SampleScene.hpp"
+#include "src/Config/ConfigLoader.hpp"
+
+namespace {
+    constexpr const char* APP_CONFIG_PATH = "Assets/Config/App.cnf";
+}
 
 Framework::Framework() {
     Log::Initialize();
+
+    // cnfファイルを先読みして、DirectX初期化前に解像度・FPS等を確定させる
+    // ファイルが存在しない場合は Config のデフォルト値を維持する
+    GameEngine::ConfigLoader::Load(APP_CONFIG_PATH, config_);
+    Log::LogFileOperation("STARTUP_CHECK", APP_CONFIG_PATH,
+        std::filesystem::exists(APP_CONFIG_PATH), "Loading app config");
 
     Log::SendWithContext(Log::Level::INFO, "Framework initialization started", "FRAMEWORK");
     Log::LogFileOperation("STARTUP_CHECK", "Assets",         std::filesystem::exists("Assets"),         "Checking assets directory");
@@ -18,6 +29,7 @@ Framework::Framework() {
 
     windows_ = std::make_unique<WinApp>();
     windows_->Initialize();
+    windows_->SetWindowSize(static_cast<int>(config_.width), static_cast<int>(config_.height));
 
     dxAdapter_ = std::make_unique<DirectXAdapter>(windows_->GetWindowHandle(), config_.width, config_.height);
     dxAdapter_->Initialize();
