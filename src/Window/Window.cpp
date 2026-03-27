@@ -190,7 +190,8 @@ HINSTANCE Window::GetInstanceHandle() const {
 void Window::SetSize(const int _width, const int _height) const {
     if (hWnd_){
         RECT rect = {0, 0, _width, _height};
-
+        DWORD windowStyle = static_cast<DWORD>(GetWindowLongPtr(hWnd_, GWL_STYLE));
+        AdjustWindowRect(&rect, windowStyle, FALSE);
         SetWindowPos(hWnd_, nullptr, 0, 0, rect.right - rect.left, rect.bottom - rect.top, SWP_NOMOVE | SWP_NOZORDER);
     }
 }
