@@ -15,7 +15,7 @@ namespace MathUtils{
 	constexpr double PI  = 3.14159265358979323846264338327950288;
 
     float Random(float _min, float _max);
-    Vector3 Random(Vector3 _min, Vector3 _max);
+    Vector3 Random(const Vector3& _min, const Vector3& _max);
     
     float Deg2Rad(float _degree);
 

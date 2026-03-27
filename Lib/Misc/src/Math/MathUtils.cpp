@@ -175,7 +175,7 @@ float MathUtils::Random(float _min, float _max) {
     return Singleton<RandomEngine>::GetInstance()->Get(_min, _max);
 }
 
-Vector3 MathUtils::Random(Vector3 _min, Vector3 _max) {
+Vector3 MathUtils::Random(const Vector3& _min, const Vector3& _max) {
     return {
         Random(_min.x, _max.x),
         Random(_min.y, _max.y),
