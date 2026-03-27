@@ -94,7 +94,7 @@ namespace Utils {
         return reinterpret_cast<char*>(szUuid);
     }
 
-    bool EqualsIgnoreCase(std::string _str1, std::string _str2) {
+    bool EqualsIgnoreCase(const std::string& _str1, const std::string& _str2) {
         return _str1.size() == _str2.size() && std::equal(_str1.begin(), _str1.end(), _str2.begin(),
                                                         [](char _a, char _b){ return tolower(_a) == tolower(_b); });
     }

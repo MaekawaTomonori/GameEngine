@@ -71,7 +71,7 @@ void Line::Clear() {
     positions_.clear();
 }
 
-void Line::SetColor(Vector4 _color) const {
+void Line::SetColor(const Vector4& _color) const {
     if (!materialData_){
         Utils::Alert("Line::SetColor: Material data is not initialized.");
         return;

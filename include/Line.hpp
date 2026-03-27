@@ -95,7 +95,7 @@ public:
     /** @brief 色を設定
      * @param _color 色ベクトル
      */
-    void SetColor(Vector4 _color) const;
+    void SetColor(const Vector4& _color) const;
 
     /** @brief 名前を設定
      * @param _name 名前

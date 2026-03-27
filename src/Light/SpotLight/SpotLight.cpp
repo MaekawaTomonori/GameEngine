@@ -23,7 +23,7 @@ void RawSpotLight::Set(const std::string& _uuid, const SpotLight& _sl) {
     light_ = _sl;
 }
 
-void RawSpotLight::Save(std::string _path) {
+void RawSpotLight::Save(const std::string& _path) {
     JsonParams* json = Singleton<JsonParams>::GetInstance();
 
     json->SetValue(_path, uuid_, "type", magic_enum::enum_integer(type_));

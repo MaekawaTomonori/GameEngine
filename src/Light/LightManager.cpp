@@ -294,7 +294,7 @@ void LightManager::Add(LightType _type) {
     }
 }
 
-void LightManager::SetPosition(Vector3 _pos) {
+void LightManager::SetPosition(const Vector3& _pos) {
     ref_ = _pos;
 
     for (const auto& dl : rawDirectionalLights_) {

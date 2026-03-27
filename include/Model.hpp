@@ -123,19 +123,19 @@ public:
      * @param _translate 平行移動ベクトル
      * @return メソッドチェーン用の自身への参照
      */
-    Model& SetTranslate(Vector3 _translate);
+    Model& SetTranslate(const Vector3& _translate);
 
     /** @brief 回転を設定
      * @param _rotate 回転ベクトル
      * @return メソッドチェーン用の自身への参照
      */
-    Model& SetRotate(Vector3 _rotate);
+    Model& SetRotate(const Vector3& _rotate);
 
     /** @brief スケールを設定
      * @param _scale スケールベクトル
      * @return メソッドチェーン用の自身への参照
      */
-    Model& SetScale(Vector3 _scale);
+    Model& SetScale(const Vector3& _scale);
 
     /** @brief 環境マッピング用テクスチャを設定
      * @param _texture テクスチャパス
@@ -158,7 +158,7 @@ public:
     /** @brief 色の設定
      * @return メソッドチェーン用の自身への参照
      */
-    Model& SetColor(Vector4 _color);
+    Model& SetColor(const Vector4& _color);
 
     /** @brief モデル名の取得
      * @return モデル名

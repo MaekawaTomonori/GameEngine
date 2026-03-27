@@ -144,17 +144,17 @@ Model& Model::SetName(const std::string& _name) {
     return *this;
 }
 
-Model& Model::SetTranslate(const Vector3 _translate) {
+Model& Model::SetTranslate(const Vector3& _translate) {
     transform_.translate = _translate;
     return *this;
 }
 
-Model& Model::SetRotate(const Vector3 _rotate) {
+Model& Model::SetRotate(const Vector3& _rotate) {
     transform_.rotate = _rotate;
     return *this;
 }
 
-Model& Model::SetScale(const Vector3 _scale) {
+Model& Model::SetScale(const Vector3& _scale) {
     transform_.scale = _scale;
     return *this;
 }
@@ -188,7 +188,7 @@ Model& Model::SetTilingMultiply(const Vector2 _mul) {
     return *this;
 }
 
-Model& Model::SetColor(const Vector4 _color) {
+Model& Model::SetColor(const Vector4& _color) {
     if (mesh_) {
         mesh_->SetColor(_color);
     }

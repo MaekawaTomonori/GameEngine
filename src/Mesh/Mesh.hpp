@@ -119,7 +119,7 @@ public:
     /** @brief 色の設定
      * @param _color 変更後の色
      */
-    void SetColor(Vector4 _color) const;
+    void SetColor(const Vector4& _color) const;
 
     void EnableLighting(bool _active);
 }; // class Mesh

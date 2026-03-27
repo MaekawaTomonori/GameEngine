@@ -45,7 +45,7 @@ public:
 	virtual void DefaultSetting() = 0;
     /** ToJson
      */
-    virtual void Save(std::string _path) = 0;
+    virtual void Save(const std::string& _path) = 0;
 
     bool HasRef() const { return ref_.has_value(); }
 

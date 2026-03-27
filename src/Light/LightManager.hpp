@@ -79,7 +79,7 @@ public:
     /** @brief ライトの参照座標を設定
      * @param _pos 参照座標
      */
-    void SetPosition(Vector3 _pos);
+    void SetPosition(const Vector3& _pos);
 
     void ClearRef();
 
