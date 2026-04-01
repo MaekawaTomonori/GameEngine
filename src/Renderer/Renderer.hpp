@@ -4,6 +4,8 @@
 #include <functional>
 #include <queue>
 
+#include "WeakPtr.hpp"
+
 class DirectXAdapter;
 class PostProcessExecutor;
 
@@ -11,8 +13,8 @@ class PostProcessExecutor;
  * 描画タスクの管理とポストプロセス適用を制御
  */
 class Renderer {
-    DirectXAdapter* adapter_ = nullptr;
-    PostProcessExecutor* postProcessor_ = nullptr;
+    GESTD::WeakPtr<DirectXAdapter> adapter_ = nullptr;
+    GESTD::WeakPtr<PostProcessExecutor> postProcessor_ = nullptr;
 
     /** PostProcessを適応するタスク
      */
@@ -29,7 +31,7 @@ public:
      * @param _adapter DirectXアダプター
      * @param _postProcessor ポストプロセス実行管理
      */
-    void Initialize(DirectXAdapter* _adapter, PostProcessExecutor* _postProcessor);
+    void Initialize(GESTD::WeakPtr<DirectXAdapter> _adapter, GESTD::WeakPtr<PostProcessExecutor> _postProcessor);
 
     /** @brief 描画タスクを登録
      * @param _task 描画タスク

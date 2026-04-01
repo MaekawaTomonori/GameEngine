@@ -8,7 +8,7 @@ class LineCommon : public Common {
     uint32_t count_ = 0;
 
 public:
-    void Initialize(DirectXAdapter* _adapter, DebugUI* _debugUi, SRVManager* _srv);
+    void Initialize(const GESTD::WeakPtr<DirectXAdapter>& _adapter, const GESTD::WeakPtr<DebugUI>& _debugUi, SRVManager* _srv);
 
     SRVManager* GetSRVManager() const {
         return srv_;
@@ -25,7 +25,7 @@ public:
     }
 
 private:
-    void Initialize(DirectXAdapter* _adapter, DebugUI* _debugUi) override;
+    void Initialize(const GESTD::WeakPtr<DirectXAdapter>& _adapter, const GESTD::WeakPtr<DebugUI>& _debugUi) override;
 };
 
 #endif // LineCommon_HPP_

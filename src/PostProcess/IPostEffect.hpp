@@ -12,8 +12,8 @@ class IPostEffect {
 protected:
     const Vector4 CLEAR_COLOR = { 0.2f, 0.2f, 0.2f, 1.0f };
 
-    DirectXAdapter* adapter_ = nullptr;
-    SRVManager* srv_ = nullptr;
+    GESTD::WeakPtr<DirectXAdapter> adapter_ = nullptr;
+    GESTD::WeakPtr<SRVManager> srv_ = nullptr;
 
     std::unique_ptr<PipelineStateObject> pso_;
     std::unique_ptr<DX12Resource> output_;
@@ -30,7 +30,7 @@ public:
      * @param _adapter DirectXアダプター
      * @param _srv SRVマネージャー
      */
-    void SetUp(DirectXAdapter* _adapter, SRVManager* _srv);
+    void SetUp(const GESTD::WeakPtr<DirectXAdapter>& _adapter, const GESTD::WeakPtr<SRVManager>& _srv);
 
     /** @brief 初期化処理（純粋仮想関数）
      */

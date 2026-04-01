@@ -7,6 +7,7 @@
 #include <wrl/client.h>
 
 #include "DebugUI.hpp"
+#include "WeakPtr.hpp"
 #include "src/DirectX/DirectXAdapter.hpp"
 #include "src/DirectX/Resource/DX12Resource.hpp"
 
@@ -26,8 +27,8 @@ class LightManager final{
         uint32_t plCount;
         uint32_t slCount;
 	};
-    DirectXAdapter* adapter_ = nullptr;
-    DebugUI* debug_ = nullptr;
+    GESTD::WeakPtr<DirectXAdapter> adapter_;
+    GESTD::WeakPtr<DebugUI> debug_;
     Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> commandList_;
 
     std::unique_ptr<DX12Resource> directionalResource_;
@@ -60,7 +61,7 @@ public:
      * @param _adapter DirectXアダプター
      * @param _debug デバッグUI
      */
-	void Initialize(DirectXAdapter* _adapter, DebugUI* _debug);
+	void Initialize(GESTD::WeakPtr<DirectXAdapter> _adapter, GESTD::WeakPtr<DebugUI> _debug);
 
 
     /** @brief ライトの更新処理

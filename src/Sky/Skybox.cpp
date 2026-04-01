@@ -9,7 +9,7 @@
 void Skybox::Initialize(const std::string& _texture) {
     texture_ = _texture;
 
-    TextureManager* tm = Singleton<TextureManager>::GetInstance();
+    const auto tm = Singleton<TextureManager>::GetInstance();
     tm->Load(texture_);
 
     common_ = Singleton<SkyCommon>::GetInstance();
@@ -49,7 +49,7 @@ void Skybox::Update() {
 
 void Skybox::Draw() {
     common_->RegisterDraw([this]() {
-        TextureManager* tm = Singleton<TextureManager>::GetInstance();
+        const auto tm = Singleton<TextureManager>::GetInstance();
         ID3D12GraphicsCommandList* commandList = adapter_->GetCommandList();
 
         commandList->IASetVertexBuffers(0, 1, &vbv_);

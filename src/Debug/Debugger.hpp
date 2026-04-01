@@ -8,6 +8,7 @@
 #include <string>
 
 #include "WatchDebugger.hpp"
+#include "WeakPtr.hpp"
 
 class DirectXAdapter;
 class DebugUI;
@@ -37,7 +38,7 @@ public:
     /** @brief 初期化
      * @param _adapter DirectXアダプター
      */
-    void Initialize(const DirectXAdapter* _adapter);
+    void Initialize(GESTD::WeakPtr<DirectXAdapter> _adapter);
 
     /*@brief 各デバッガーの ImGui ウィンドウを登録
      */
@@ -57,11 +58,11 @@ public:
 
     /** @brief DebugUI ポインタを返す
      */
-    DebugUI* GetUI() const { return ui_.get(); }
+    GESTD::WeakPtr<DebugUI> GetUI() const { return GESTD::WeakPtr<DebugUI>(ui_); }
 
     /** @brief FrameDebugger ポインタを返す
      */
-    FrameDebugger* GetFrame() const { return frame_.get(); }
+    GESTD::WeakPtr<FrameDebugger> GetFrame() const { return GESTD::WeakPtr<FrameDebugger>(frame_); }
 
     /** @brief 読み取り専用ウォッチ（const ポインタ）
      */

@@ -5,7 +5,7 @@
 
 class SkyCommon : public Common{
 public:
-    void Initialize(DirectXAdapter* _adapter, DebugUI* _debugUi) override;
+    void Initialize(const GESTD::WeakPtr<DirectXAdapter>& _adapter, const GESTD::WeakPtr<DebugUI>& _debugUi) override;
 }; // class SkyCommon
 
 #endif // SkyCommon_HPP_

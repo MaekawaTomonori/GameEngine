@@ -5,6 +5,7 @@
 #include <string>
 #include <unordered_map>
 
+#include "WeakPtr.hpp"
 #include "LevelData.hpp"
 
 /** @brief ステージリポジトリクラス
@@ -17,7 +18,7 @@ public:
      * @param _name レベル名
      * @return レベルデータポインタ
      */
-    LevelData* Get(const std::string& _name);
+    GESTD::WeakPtr<LevelData> Get(const std::string& _name);
 
     /** @brief レベルデータを追加
      * @param _name レベル名

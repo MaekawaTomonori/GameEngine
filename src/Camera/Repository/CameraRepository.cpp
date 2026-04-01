@@ -8,23 +8,22 @@ void CameraRepository::Initialize(float _ratio) {
     ratio_ = _ratio;
 }
 
-Camera* CameraRepository::Add(const std::string& _name) {
+GESTD::WeakPtr<Camera> CameraRepository::Add(const std::string& _name) {
     std::string actualName = _name.empty() ? GenerateUniqueName() : _name;
 
-    if (cameras_.contains(actualName)) {
-        return cameras_[actualName].get();
+    if (!cameras_.contains(actualName)) {
+        cameras_[actualName] = std::make_unique<Camera>();
+        cameras_[actualName]->Initialize(ratio_);
     }
 
-    cameras_[actualName] = std::make_unique<Camera>();
-    cameras_[actualName]->Initialize(ratio_);
-    return cameras_[actualName].get();
+    return GESTD::WeakPtr(cameras_[actualName]);
 }
 
-Camera* CameraRepository::Get(const std::string& _name) {
+GESTD::WeakPtr<Camera> CameraRepository::Get(const std::string& _name) {
     if (!cameras_.contains(_name)) {
         return nullptr;
     }
-    return cameras_[_name].get();
+    return GESTD::WeakPtr(cameras_[_name]);
 }
 
 void CameraRepository::Remove(const std::string& _name) {
@@ -58,12 +57,12 @@ std::string CameraRepository::GetFirstName() const {
 void CameraRepository::LoadFromFile() {
     Clear();
 
-    JsonParams* json = Singleton<JsonParams>::GetInstance();
+    auto json = Singleton<JsonParams>::GetInstance();
     if (!json->Load("Camera")) return;
 
     auto group = json->GetGroups("Camera");
     for (auto& [groupId, object] : group) {
-        Camera* camera = Add(groupId);
+        auto camera = Add(groupId);
         camera->transform_ = {
             {1,1,1},
             std::get<Vector3>(object["Rotate"]),
@@ -73,7 +72,7 @@ void CameraRepository::LoadFromFile() {
 }
 
 void CameraRepository::SaveToFile() {
-    JsonParams* json = Singleton<JsonParams>::GetInstance();
+    auto json = Singleton<JsonParams>::GetInstance();
     for (auto& [name, camera] : cameras_) {
         json->SetValue("Camera", name, "Position", camera->transform_.translate);
         json->SetValue("Camera", name, "Rotate", std::get<Vector3>(camera->transform_.rotate));

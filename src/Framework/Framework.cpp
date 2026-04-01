@@ -39,22 +39,22 @@ Framework::Framework() {
 
 #ifdef _DEBUG
     debugger_ = std::make_unique<Debugger>();
-    debugger_->Initialize(dxAdapter_.get());
-    DebugUI* const dbg = debugger_->GetUI();
+    debugger_->Initialize(GESTD::WeakPtr<DirectXAdapter>(dxAdapter_));
+    const auto dbg = debugger_->GetUI();
 #else
-    DebugUI* const dbg = nullptr;
+    const GESTD::WeakPtr<DebugUI> dbg = nullptr;
 #endif
 
     postProcessor_ = std::make_unique<PostProcessExecutor>();
-    postProcessor_->Initialize(dxAdapter_.get(), srv_.get(), dbg);
+    postProcessor_->Initialize(GESTD::WeakPtr(dxAdapter_), GESTD::WeakPtr(srv_), dbg);
 
     renderer_ = std::make_unique<Renderer>();
-    renderer_->Initialize(dxAdapter_.get(), postProcessor_.get());
+    renderer_->Initialize(GESTD::WeakPtr(dxAdapter_), GESTD::WeakPtr(postProcessor_));
 
     resources_ = std::make_unique<ResourceRepository>();
     resources_->Initialize();
 
-    particle_ = std::make_unique<ParticleSystem>(dxAdapter_.get(), srv_.get(), resources_->GetMeshRepository(), dbg);
+    particle_ = std::make_unique<ParticleSystem>(GESTD::WeakPtr(dxAdapter_), srv_.get(), resources_->GetMeshRepository(), dbg);
     particle_->Initialize();
 
     input_ = Singleton<Input>::GetInstance();
@@ -64,16 +64,16 @@ Framework::Framework() {
     texture_->Initialize(dxAdapter_.get(), srv_.get());
 
     sprite_ = Singleton<SpriteCommon>::GetInstance();
-    sprite_->Initialize(dxAdapter_.get(), dbg);
+    sprite_->Initialize(GESTD::WeakPtr(dxAdapter_), dbg);
 
     model_ = Singleton<ModelCommon>::GetInstance();
-    model_->Initialize(dxAdapter_.get(), dbg, resources_.get(), srv_.get());
+    model_->Initialize(GESTD::WeakPtr(dxAdapter_), dbg, GESTD::WeakPtr<ResourceRepository>(resources_), srv_.get());
 
     line_ = Singleton<LineCommon>::GetInstance();
-    line_->Initialize(dxAdapter_.get(), dbg, srv_.get());
+    line_->Initialize(GESTD::WeakPtr(dxAdapter_), dbg, srv_.get());
 
     sky_ = Singleton<SkyCommon>::GetInstance();
-    sky_->Initialize(dxAdapter_.get(), dbg);
+    sky_->Initialize(GESTD::WeakPtr(dxAdapter_), dbg);
 
     camera_ = Singleton<CameraController>::GetInstance();
     camera_->Initialize(static_cast<float>(config_.width) / static_cast<float>(config_.height), dbg);
@@ -82,7 +82,7 @@ Framework::Framework() {
     cameraDirector_->Initialize(dbg);
 
     light_ = Singleton<LightManager>::GetInstance();
-    light_->Initialize(dxAdapter_.get(), dbg);
+    light_->Initialize(GESTD::WeakPtr(dxAdapter_), dbg);
 
     Singleton<RandomEngine>::GetInstance()->Initialize();
 
@@ -130,12 +130,12 @@ void Framework::Initialize() {
 #ifdef _DEBUG
     scene_->RegisterScene("sample", []{return std::make_unique<SampleScene>(); });
 
-    DebugUI* const dbg = debugger_->GetUI();
+    const auto dbg = debugger_->GetUI();
 #else
-    DebugUI* const dbg = nullptr;
+    const GESTD::WeakPtr<DebugUI> dbg = nullptr;
 #endif
 
-    SceneSwitcher::Context ctx{ postProcessor_.get(), particle_.get(), dbg };
+    SceneSwitcher::Context ctx{ GESTD::WeakPtr<PostProcessExecutor>(postProcessor_), GESTD::WeakPtr<ParticleSystem>(particle_), dbg };
 #ifdef _DEBUG
     ctx.frame = debugger_->GetFrame();
 #endif

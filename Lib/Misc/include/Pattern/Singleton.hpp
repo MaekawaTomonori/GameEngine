@@ -4,6 +4,8 @@
 #include <cassert>
 #include <memory>
 
+#include "WeakPtr.hpp"
+
 /** @brief シングルトンファイナライザークラス
  ** シングルトンインスタンスの破棄を管理
  **/
@@ -36,10 +38,10 @@ public:
     /** @brief シングルトンインスタンスを取得
      ** @return インスタンスへのポインタ
      **/
-    static T* GetInstance() {
+    static GESTD::WeakPtr<T> GetInstance() {
         std::call_once(flag_, Create);
         assert(instance_);
-        return instance_.get();
+        return GESTD::WeakPtr<T>(instance_);
     }
 
 private:

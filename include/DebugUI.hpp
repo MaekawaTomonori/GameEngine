@@ -5,6 +5,7 @@
 #include <string>
 #include <unordered_map>
 
+#include "WeakPtr.hpp"
 #include "src/DirectX/DirectXAdapter.hpp"
 #include "src/DirectX/Heap/Heap.hpp"
 
@@ -40,7 +41,7 @@ class DebugUI {
     std::mutex mutex_;
 
     std::unique_ptr<Heap> heap_;
-    const DirectXAdapter* adapter_ = nullptr;
+    GESTD::WeakPtr<DirectXAdapter> adapter_ = nullptr;
     uint32_t nextSrvSlot_ = 0; // ImGui SRV アロケータ用カウンタ
 
     std::vector<Command> commands_;
@@ -55,7 +56,7 @@ public:
     /** @brief デバッグUIを初期化
      * @param _adapter DirectXアダプター
      */
-    void Initialize(const DirectXAdapter* _adapter);
+    void Initialize(const GESTD::WeakPtr<DirectXAdapter>& _adapter);
 
     /** @brief デバッグUIをレンダリング
      */
@@ -93,7 +94,7 @@ public:
      * @param _format テクスチャフォーマット
      * @return GPU ディスクリプタハンドルの ptr 値（ImTextureID としてキャスト可）。失敗時は0
      */
-    uint64_t RegisterTexture(ID3D12Resource* _resource, DXGI_FORMAT _format);
+    uint64_t RegisterTexture(ID3D12Resource* _resource, DXGI_FORMAT _format) const;
 
 private:
     /** @brief 登録されたコマンドを処理

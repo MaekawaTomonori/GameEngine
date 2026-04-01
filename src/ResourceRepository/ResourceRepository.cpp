@@ -5,10 +5,10 @@ void ResourceRepository::Initialize() {
     mesh_ = std::make_unique<MeshRepository>();
 }
 
-ModelRepository* ResourceRepository::GetModelRepository() const {
-    return model_.get();
+GESTD::WeakPtr<ModelRepository> ResourceRepository::GetModelRepository() const {
+    return GESTD::WeakPtr<ModelRepository>(model_);
 }
 
-MeshRepository* ResourceRepository::GetMeshRepository() const {
-    return mesh_.get();
+GESTD::WeakPtr<MeshRepository> ResourceRepository::GetMeshRepository() const {
+    return GESTD::WeakPtr<MeshRepository>(mesh_);
 }

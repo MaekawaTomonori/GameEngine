@@ -11,10 +11,10 @@
 #include "imgui.h"
 #endif
 
-void CollisionManager::Initialize([[maybe_unused]]DebugUI* _debugUI) {
+void CollisionManager::Initialize([[maybe_unused]] const GESTD::WeakPtr<DebugUI>& _debugUi) {
     manager_ = Singleton<Collision::Manager>::GetInstance();
 #ifdef _DEBUG
-    debugUI_ = _debugUI;
+    debugUI_ = _debugUi;
     if (!debugUI_) {
         Utils::Alert("CollisionManager: DebugUI not registered");
         return;

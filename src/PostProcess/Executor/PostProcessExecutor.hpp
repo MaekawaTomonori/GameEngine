@@ -5,6 +5,7 @@
 #include <functional>
 #include <d3d12.h>
 
+#include "WeakPtr.hpp"
 #include "src/DirectX/GraphicsPipeline/Object/PipelineStateObject.hpp"
 #include "src/DirectX/Heap/SRVManager.h"
 #include "src/PostProcess/IPostEffect.hpp"
@@ -36,15 +37,14 @@ class PostProcessExecutor {
         std::vector<std::string> ignore;
     };
 
-    DirectXAdapter* adapter_ = nullptr;
-    SRVManager* srv_ = nullptr;
-    DebugUI* debugUI_ = nullptr;
-    AbstractPostEffectFactory* factory_ = nullptr;  // PostEffectファクトリー
+    GESTD::WeakPtr<DirectXAdapter> adapter_;
+    GESTD::WeakPtr<SRVManager> srv_ = nullptr;
+    GESTD::WeakPtr<DebugUI> debugUI_;
+    GESTD::WeakPtr<AbstractPostEffectFactory> factory_ = nullptr;  // PostEffect factory
 
     std::vector<EffectData> effects_;
 
-    /** シーン描画用RenderTexture
-     */
+    /** シーン描画用 RenderTexture */
     std::unique_ptr<DX12Resource> renderTexture_;
     std::unique_ptr<Heap> rtvHeap_;
     D3D12_CPU_DESCRIPTOR_HANDLE rtvHandle_{};
@@ -62,75 +62,65 @@ class PostProcessExecutor {
     float duration_ = 0.f;
     std::string currentWork_ {};
 
-    /** Animation state
-     */
+    /** Animation state */
     bool isAnimating_ = false;
     float animationTimer_ = 0.f;
     float animationDuration_ = 0.f;
-    std::vector<std::string> animatingEffects_;  // エフェクト名リスト
-    std::function<void()> onAnimationComplete_;  // アニメーション完了コールバック
+    std::vector<std::string> animatingEffects_;  // animation target effect names
+    std::function<void()> onAnimationComplete_;  // animation completion callback
 
-    /** Preset editor
-     */
+    /** Preset editor */
     std::unique_ptr<PostProcessPresetEditor> presetEditor_;
 
-    /** ImGui シーンビュー用 GPU テクスチャ ID（DebugUI ヒープのスロット1に対応）
-     */
+    /** ImGui scene view 用 GPU texture ID */
     uint64_t sceneImGuiTextureId_ = 0;
 
-    /** シーンビューの表示スケール（displaySize / renderSize）
-     */
+    /** SceneView 表示スケール */
     float sceneViewScale_ = 1.0f;
 
 public:
-    /** @brief 初期化処理
-     * <param name=_adapter"> DirectXアダプター</param>
-     *  <param name=_srv"> SRVマネージャー</param>
-     * <param name=_debug"> デバッグUI</param>
+    /** @brief 初期化
+     * <param name=_adapter">DirectX adapter</param>
+     * <param name=_srv">SRV manager</param>
+     * <param name=_debug">Debug UI</param>
      */
-    void Initialize(DirectXAdapter* _adapter, SRVManager* _srv, DebugUI* _debug);
+    void Initialize(const GESTD::WeakPtr<DirectXAdapter>& _adapter, const GESTD::WeakPtr<SRVManager>& _srv, const GESTD::WeakPtr<DebugUI>& _debug);
 
-    /** @brief ポストエフェクトファクトリーの設定
-     */
-    void SetFactory(AbstractPostEffectFactory* _factory);
+    /** @brief PostEffect factory を設定 */
+    void SetFactory(GESTD::WeakPtr<AbstractPostEffectFactory> _factory);
 
-    /** @brief  エフェクトの追加
-     * @param _effect 追加するエフェクトのユニークポインタ
+    /** @brief エフェクトを追加
+     * @param _effect 追加するエフェクト
      * @param _name エフェクト名
      */
     void Add(std::unique_ptr<IPostEffect> _effect, const std::string& _name = "NoName");
 
-    /** @brief フレーム開始前の準備処理
-     */
+    /** @brief フレーム開始時の描画準備 */
     void BeginFrame() const;
 
-    /** @brief フレーム終了後のクリーンアップ処理
-     */
+    /** @brief フレーム終了時のクリーンアップ */
     void EndFrame() const;
 
-    /** @brief エフェクトの実行
-     */
+    /** @brief エフェクトを実行 */
     void Execute();
 
-    /** @brief エフェクトの描画
-     */
+    /** @brief エフェクト結果を描画 */
     void Draw() const;
 
-    /** @brief エフェクトの有効/無効を切り替え
+    /** @brief エフェクトの有効/無効を切り替える
      * @param _name エフェクト名
-     * @param _enable 有効/無効フラグ
+     * @param _enable 有効フラグ
      */
     void SetActive(const std::string& _name, bool _enable);
 
-    /** @brief エフェクトのデバッグ情報を表示
-     */
+    /** @brief デバッグ UI を表示 */
     void Debug();
 
-    /** @brief プリセットを適用（遅延初期化 + アニメーション開始）
-     * @param _presetName プリセット名（presets.jsonのキー）
-     * @param _mode "add"または"replace"
-     * @param _ignoreList 無視するエフェクト名リスト
-     * @param _onComplete アニメーション完了時のコールバック（オプション）
+    /** @brief preset を適用する
+     * @param _presetName preset 名
+     * @param _mode "add" または "replace"
+     * @param _ignoreList 無視する effect 名
+     * @param _onComplete 完了時コールバック
      */
     void ApplyPreset(
         const std::string& _presetName,
@@ -139,48 +129,43 @@ public:
         std::function<void()> _onComplete = nullptr
     );
 
-    /** @brief アニメーション更新（毎フレーム呼び出し）
-     * @param _deltaTime フレーム間時間
+    /** @brief アニメーションを更新
+     * @param _deltaTime 経過時間
      */
     void Update(float _deltaTime);
 
-    /** @brief 現在のアクティブエフェクトの状態をJSONに保存
-     * @param _presetName 保存先プリセット名
+    /** @brief 現在の active effect 構成を JSON に保存
+     * @param _presetName 保存する preset 名
      */
     void SavePreset(const std::string& _presetName);
 
-    /** @brief プリセットエディターを開く
-     * @param _presetName 編集するプリセット名（空なら新規作成）
+    /** @brief preset editor を開く
+     * @param _presetName 編集対象 preset 名
      */
     void OpenPresetEditor(const std::string& _presetName = "");
 
-    /** @brief エフェクトを検索、なければ生成
-    * @param _type エフェクトタイプ名
-    * @param _name エフェクトインスタンス名
-    * @param _create インスタンスが存在しない場合に生成するか
-    * @return エフェクトポインタ、生成失敗時はnullptr
-    */
+    /** @brief エフェクトを検索し、必要なら生成する
+     * @param _type effect type
+     * @param _name instance 名
+     * @param _create 見つからないときに生成するか
+     * @return effect instance。失敗時は nullptr
+     */
     IPostEffect* FindOrCreate(const std::string& _type, const std::string& _name, bool _create);
 
-    /** @brief レンダーテクスチャをリサイズ（ウィンドウリサイズ時に呼び出し）
-     */
+    /** @brief render texture をリサイズする */
     void ResizeRenderTextures();
 
-    /** @brief Scene ウィンドウが表示中かを返す（Renderer のキャプチャモード判定用）
-     */
+    /** @brief SceneView が表示中かどうか */
     bool IsSceneViewActive();
 
-    /** @brief 現在のシーンビュー表示スケールを返す（表示サイズ / レンダーサイズ）
-     */
+    /** @brief SceneView の表示スケールを取得 */
     float GetSceneViewScale() const { return sceneViewScale_; }
 
 private:
-    /** @brief シーン描画用のレンダーテクスチャを作成
-     */
+    /** @brief シーン描画用 render texture を作成 */
     void CreateSceneRenderTexture();
 
-    /** @brief RTV/SRV記述子を作成（DRY原則に基づく共通化）
-     */
+    /** @brief RTV/SRV を作成 */
     void CreateRenderTextureViews();
 }; // class PostProcessExecutor
 

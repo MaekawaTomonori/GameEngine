@@ -6,6 +6,7 @@
 #include <unordered_map>
 #include <vector>
 
+#include "WeakPtr.hpp"
 #include "Emitter/Emitter.hpp"
 #include "Math/Vector3.hpp"
 #include "Math/Vector4.hpp"
@@ -49,10 +50,10 @@ private:
     static constexpr uint16_t POOL_SIZE = 64;
     const std::string PATH = "Assets/Data/Particle/";
 
-    DirectXAdapter* adapter_ = nullptr;
+    GESTD::WeakPtr<DirectXAdapter> adapter_ = nullptr;
     SRVManager* srv_ = nullptr;
-    MeshRepository* mesh_ = nullptr;
-    DebugUI* debugUI_ = nullptr;
+    GESTD::WeakPtr<MeshRepository> mesh_ = nullptr;
+    GESTD::WeakPtr<DebugUI> debugUI_ = nullptr;
 
     std::unordered_map<std::string, Template> templates_;
     std::unordered_map<std::string, UpdateFunc> updateFuncs_;
@@ -66,7 +67,7 @@ private:
     std::unique_ptr<PipelineStateObject> pso_ = nullptr;
 
 public:
-    ParticleSystem(DirectXAdapter* _adapter, SRVManager* _srv, MeshRepository* _mesh, DebugUI* _debugUI);
+    ParticleSystem(GESTD::WeakPtr<DirectXAdapter> _adapter, SRVManager* _srv, GESTD::WeakPtr<MeshRepository> _mesh, GESTD::WeakPtr<DebugUI> _debugUI);
 
     void Initialize();
     void Update();

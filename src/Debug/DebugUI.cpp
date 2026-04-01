@@ -7,6 +7,7 @@
 
 #include "Log.hpp"
 #include "Utils.hpp"
+#include "WeakPtr.hpp"
 
 #ifdef _DEBUG
 #include "imgui.h"
@@ -25,7 +26,7 @@ DebugUI::~DebugUI() {
 #endif
 }
 
-void DebugUI::Initialize(const DirectXAdapter *_adapter) {
+void DebugUI::Initialize(const GESTD::WeakPtr<DirectXAdapter>& _adapter) {
     if (!_adapter) {
         Utils::Alert("DirectXAdapter is null");
         return;
@@ -191,7 +192,7 @@ bool& DebugUI::IsVisible(const std::string& _key) {
     return windowStates_[_key].visible;
 }
 
-uint64_t DebugUI::RegisterTexture([[maybe_unused]] ID3D12Resource* _resource, [[maybe_unused]] DXGI_FORMAT _format) {
+uint64_t DebugUI::RegisterTexture([[maybe_unused]] ID3D12Resource* _resource, [[maybe_unused]] DXGI_FORMAT _format) const {
 #ifdef _DEBUG
     if (!_resource || !adapter_) return 0;
 

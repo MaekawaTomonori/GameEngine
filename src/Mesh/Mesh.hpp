@@ -27,7 +27,7 @@ class Mesh {
         Matrix4x4 uvTransform;   // 64 bytes (aligned)
     };
 
-    DirectXAdapter* adapter_ = nullptr;
+    GESTD::WeakPtr<DirectXAdapter> adapter_ = nullptr;
 	Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> commandList_;
 
     std::string name_;
@@ -82,7 +82,7 @@ public:
      * @param _name メッシュ名
      * @param _raw メッシュデータ
      */
-    void Initialize(DirectXAdapter* _adapter, const std::string &_name, const MeshData& _raw);
+    void Initialize(const GESTD::WeakPtr<DirectXAdapter>& _adapter, const std::string& _name, const MeshData& _raw);
 
     /** @brief メッシュの更新処理
      */

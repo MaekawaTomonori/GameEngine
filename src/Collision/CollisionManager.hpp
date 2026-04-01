@@ -1,6 +1,7 @@
 #pragma once
 #include <memory>
 
+#include "WeakPtr.hpp"
 #include "DebugUI.hpp"
 #include "Line.hpp"
 #include "Collision/CollisionManager.h"
@@ -9,14 +10,15 @@
  * Collision::Manager の呼び出しとデバッグ可視化を担当
  */
 class CollisionManager {
-    Collision::Manager* manager_ = nullptr;
+    GESTD::WeakPtr<Collision::Manager> manager_;
 
-    DebugUI* debugUI_ = nullptr;
+    GESTD::WeakPtr<DebugUI> debugUI_;
 
     std::unique_ptr<Line> debugLine_;
     bool debugEnabled_ = false;
+
 public:
-    void Initialize(DebugUI* _debugUI);
+    void Initialize(const GESTD::WeakPtr<DebugUI>& _debugUi);
     void Update();
     void DrawDebug() const;
     void Debug();

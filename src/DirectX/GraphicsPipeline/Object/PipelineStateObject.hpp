@@ -10,7 +10,7 @@
 #include "src/DirectX/Shader/Shader.h"
 
 class PipelineStateObject {
-    DirectXAdapter* adapter_ = nullptr;
+    GESTD::WeakPtr<DirectXAdapter> adapter_ = nullptr;
 
     RootSignature rootSignature_;
     InputLayout inputLayout_;
@@ -33,7 +33,7 @@ class PipelineStateObject {
 
 public:
     PipelineStateObject() = delete;
-    PipelineStateObject(DirectXAdapter* _adapter);
+    PipelineStateObject(GESTD::WeakPtr<DirectXAdapter> _adapter);
     PipelineStateObject& SetRootSignature(const RootSignature& _rootSignature);
     PipelineStateObject& SetInputLayout(const InputLayout& _inputLayout);
     PipelineStateObject& SetBlend(const D3D12_BLEND_DESC& _blendDesc);

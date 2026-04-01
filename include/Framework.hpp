@@ -3,6 +3,7 @@
 
 #include <memory>
 
+#include "WeakPtr.hpp"
 #include "Input.hpp"
 #ifdef _DEBUG
 #include "src/Debug/Debugger.hpp"
@@ -34,7 +35,7 @@ class Framework {
     GameEngine::Config config_{};
 
     std::unique_ptr<IGame> game_;
-    SceneSwitcher* scene_ = nullptr;
+    GESTD::WeakPtr<SceneSwitcher> scene_ = nullptr;
 
     std::unique_ptr<WinApp> windows_;
     std::unique_ptr<DirectXAdapter> dxAdapter_;
@@ -50,16 +51,16 @@ class Framework {
     //std::unique_ptr<LevelEditor> level_;
     std::unique_ptr<ParticleSystem> particle_;
 
-    Input* input_ = nullptr;
-    TextureManager* texture_ = nullptr;
-    SpriteCommon* sprite_ = nullptr;
-    ModelCommon* model_ = nullptr;
-    LineCommon* line_ = nullptr;
-    SkyCommon* sky_ = nullptr;
-    LightManager* light_ = nullptr;
+    GESTD::WeakPtr<Input> input_;
+    GESTD::WeakPtr<TextureManager> texture_;
+    GESTD::WeakPtr<SpriteCommon> sprite_;
+    GESTD::WeakPtr<ModelCommon> model_;
+    GESTD::WeakPtr<LineCommon> line_;
+    GESTD::WeakPtr<SkyCommon> sky_;
+    GESTD::WeakPtr<LightManager> light_;
 
-    CameraController* camera_ = nullptr;
-    CameraDirector* cameraDirector_ = nullptr;
+    GESTD::WeakPtr<CameraController> camera_;
+    GESTD::WeakPtr<CameraDirector> cameraDirector_;
 
 public:
     Framework();

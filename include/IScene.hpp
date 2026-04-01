@@ -3,6 +3,7 @@
 #include <functional>
 #include <string>
 
+#include "WeakPtr.hpp"
 #include "src/ParticleSystem/ParticleSystem.hpp"
 #include "src/Scene/Transition/Transition.hpp"
 
@@ -100,8 +101,8 @@ protected:
      */
     void PlayTransition(Transition::Type _type, std::function<void()> _onMidpoint = {});
 
-    PostProcessExecutor* PostEffect() const;
-    ParticleSystem* Particle() const;
+    GESTD::WeakPtr<PostProcessExecutor> PostEffect() const;
+    GESTD::WeakPtr<ParticleSystem> Particle() const;
 
 private:
     virtual void OnEnable() {}

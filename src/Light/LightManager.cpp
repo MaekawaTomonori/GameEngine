@@ -100,7 +100,7 @@ void LightManager::Debug() {
 }
 
 void LightManager::CheckState() {
-    JsonParams* json = Singleton<JsonParams>::GetInstance();
+    auto json = Singleton<JsonParams>::GetInstance();
     std::erase_if(rawDirectionalLights_, [&](const std::unique_ptr<RawDirectionalLight>& _dl){
         if (!_dl->IsEnable()){
             lightCount_->dlCount--;
@@ -128,7 +128,7 @@ void LightManager::CheckState() {
 }
 
 void LightManager::Load() {
-    JsonParams* json = Singleton<JsonParams>::GetInstance();
+    auto json = Singleton<JsonParams>::GetInstance();
     json->Load(path);
 
     rawDirectionalLights_.clear();
@@ -192,7 +192,7 @@ void LightManager::Save() const {
     Singleton<JsonParams>::GetInstance()->Save(path);
 }
 
-void LightManager::Initialize(DirectXAdapter* _adapter, DebugUI* _debug) {
+void LightManager::Initialize(GESTD::WeakPtr<DirectXAdapter> _adapter, GESTD::WeakPtr<DebugUI> _debug) {
     adapter_ = _adapter;
     debug_ = _debug;
     commandList_ = adapter_->GetCommandList();

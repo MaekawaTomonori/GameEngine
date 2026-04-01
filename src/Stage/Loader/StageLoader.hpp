@@ -9,10 +9,10 @@
 class StageLoader {
     const std::string DIR = "Assets/Data/Stage/";
 
-    StageRepository* repository_ = nullptr;
+    GESTD::WeakPtr<StageRepository> repository_ = nullptr;
 
 public:
-    void Initialize(StageRepository* _repository);
+    void Initialize(GESTD::WeakPtr<StageRepository> _repository);
     bool Load(const std::string& _path) const;
 private:
     static std::unique_ptr<LevelData> Recursive(const nlohmann::json& _base);

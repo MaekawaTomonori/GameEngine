@@ -3,12 +3,14 @@
 
 #include <cstdint>
 
+#include "WeakPtr.hpp"
+
 class DebugUI;
 
 /** @brief フレームステップ制御（一時停止・ステップ実行）
  */
 class FrameDebugger {
-    DebugUI* debugUI_ = nullptr;
+    GESTD::WeakPtr<DebugUI> debugUI_;
     bool paused_          = false;
     bool stepRequested_   = false;
     uint64_t frameCount_  = 0;
@@ -19,7 +21,7 @@ class FrameDebugger {
     int lastStepFrame_    = -1;
 
 public:
-    void Initialize(DebugUI* _debugUi);
+    void Initialize(const GESTD::WeakPtr<DebugUI>& _debugUi);
 
     /** @brief 一時停止する
      */

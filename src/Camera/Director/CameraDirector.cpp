@@ -15,7 +15,7 @@
 #undef min
 #undef max
 
-void CameraDirector::Initialize(DebugUI* _debug) {
+void CameraDirector::Initialize(GESTD::WeakPtr<DebugUI> _debug) {
     debug_ = _debug;
 
     controlPointModel_ = std::make_unique<Model>();
@@ -631,7 +631,7 @@ void CameraDirector::ShowEditor() {
         ImGui::SameLine();
 
         if (ImGui::Button("From Camera")) {
-            if (Camera* camera = Singleton<CameraController>::GetInstance()->GetActive()) {
+            if (auto camera = Singleton<CameraController>::GetInstance()->GetActive()) {
                 Vector3 worldPos = camera->transform_.translate;
                 kf.position      = worldPos - anchor_;
                 kf.rotation      = Vector2(
@@ -728,7 +728,7 @@ void CameraDirector::RemoveKeyframe(int _index) {
 void CameraDirector::CaptureCurrentCameraAsKeyframe() {
     if (!isEditingWork_) return;
 
-    Camera* camera = Singleton<CameraController>::GetInstance()->GetActive();
+    auto camera = Singleton<CameraController>::GetInstance()->GetActive();
     if (!camera) return;
 
     Keyframe kf;

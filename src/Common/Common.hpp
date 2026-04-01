@@ -3,6 +3,7 @@
 #include <mutex>
 
 #include "DebugUI.hpp"
+#include "WeakPtr.hpp"
 #include "src/DirectX/DirectXAdapter.hpp"
 #include "src/DirectX/GraphicsPipeline/Object/PipelineStateObject.hpp"
 #include "src/Renderer/Renderer.hpp"
@@ -16,8 +17,8 @@ protected:
          */
     };
 
-    DirectXAdapter* adapter_ = nullptr;
-    DebugUI* debugUI_ = nullptr;
+    GESTD::WeakPtr<DirectXAdapter> adapter_;
+    GESTD::WeakPtr<DebugUI> debugUI_;
     std::string windowName_;
 
     std::mutex mutex_;
@@ -31,7 +32,7 @@ protected:
 
 public:
     virtual ~Common() = default;
-    virtual void Initialize(DirectXAdapter* _adapter, DebugUI* _debugUi) = 0;
+    virtual void Initialize(const GESTD::WeakPtr<DirectXAdapter>& _adapter, const GESTD::WeakPtr<DebugUI>& _debugUi) = 0;
     virtual void Update();
     virtual void Debug();
     virtual void Draw(Renderer* _renderer);
@@ -42,11 +43,11 @@ public:
 
     void Unregister(const std::string& _uuid);
 
-    DirectXAdapter* GetAdapter() const {
+    GESTD::WeakPtr<DirectXAdapter> GetAdapter() const {
         return adapter_;
     }
 protected:
-    void Setup(DirectXAdapter* _adapter, DebugUI* _debugUi, const std::string& _windowName);
+    void Setup(const GESTD::WeakPtr<DirectXAdapter>& _adapter, const GESTD::WeakPtr<DebugUI>& _debugUi, const std::string& _windowName);
 }; // class Common
 
 #endif // Common_HPP_

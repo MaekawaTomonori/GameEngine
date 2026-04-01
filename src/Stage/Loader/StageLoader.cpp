@@ -7,7 +7,7 @@
 #include "Utils.hpp"
 #include "json.hpp"
 
-void StageLoader::Initialize(StageRepository* _repository) {
+void StageLoader::Initialize(GESTD::WeakPtr<StageRepository> _repository) {
     repository_ = _repository;
 }
 

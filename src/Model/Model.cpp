@@ -117,7 +117,7 @@ void Model::Draw() const {
         return;
     }
 
-    TextureManager* tm = Singleton<TextureManager>::GetInstance();
+    const auto tm = Singleton<TextureManager>::GetInstance();
 
     if (pose_.has_value() && !data_->skinCluster.empty()) {
         common_->RegisterSkinningDraw([this, tm]() {
@@ -162,7 +162,7 @@ Model& Model::SetScale(const Vector3& _scale) {
 Model& Model::SetEnvironmentTexture(const std::string& _texture) {
     environmentTexture_ = _texture;
     if (!_texture.empty()) {
-        TextureManager* tm = Singleton<TextureManager>::GetInstance();
+        const auto tm = Singleton<TextureManager>::GetInstance();
         tm->Load(_texture);
     }
     return *this;
@@ -199,8 +199,8 @@ const std::string& Model::GetName() const {
     return name_;
 }
 
-Mesh* Model::GetMesh() const {
-    return mesh_.get();
+GESTD::WeakPtr<Mesh> Model::GetMesh() const {
+    return GESTD::WeakPtr<Mesh>(mesh_);
 }
 
 void Model::Load(const std::string& _name) {

@@ -2,6 +2,7 @@
 #define ResourceRepository_HPP_
 #include <memory>
 
+#include "WeakPtr.hpp"
 #include "src/Mesh/Repository/MeshRepository.hpp"
 #include "src/Model/Repository/ModelRepository.hpp"
 
@@ -19,12 +20,12 @@ public:
     /** @brief モデルリポジトリを取得
      * @return モデルリポジトリポインタ
      */
-    ModelRepository* GetModelRepository() const;
+    GESTD::WeakPtr<ModelRepository> GetModelRepository() const;
 
     /** @brief メッシュリポジトリを取得
      * @return メッシュリポジトリポインタ
      */
-    MeshRepository* GetMeshRepository() const;
+    GESTD::WeakPtr<MeshRepository> GetMeshRepository() const;
 }; // class ResourceRepository
 
 #endif // ResourceRepository_HPP_

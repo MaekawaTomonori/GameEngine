@@ -277,7 +277,7 @@ void Log::SetLevel(Level _level) {
     }
 }
 
-void Log::Debug(DebugUI* _debug) {
+void Log::Debug(const GESTD::WeakPtr<DebugUI>& _debug) {
 #ifdef _DEBUG
     if (!SettingsHandlerRegistered) {
         SettingsHandlerRegistered = true;

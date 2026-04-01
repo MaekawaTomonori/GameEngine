@@ -4,22 +4,23 @@
 #include <string>
 
 #include "DebugUI.hpp"
+#include "WeakPtr.hpp"
 #include "src/Camera/Camera.hpp"
 #include "src/Camera/Repository/CameraRepository.hpp"
 
 class CameraController {
-    DebugUI* debug_ = nullptr;
+    GESTD::WeakPtr<DebugUI> debug_;
     std::unique_ptr<CameraRepository> repository_;
-    Camera* activeCamera_ = nullptr;
+    GESTD::WeakPtr<Camera> activeCamera_ = nullptr;
 
 public:
-    void Initialize(float _ratio, DebugUI* _debug);
+    void Initialize(float _ratio, GESTD::WeakPtr<DebugUI> _debug);
     void Update() const;
     void Debug();
 
-    Camera* GetActive() const;
-    Camera* Add(const std::string& _name = "") const;
-    Camera* SetActive(const std::string& _name);
+    GESTD::WeakPtr<Camera> GetActive() const;
+    GESTD::WeakPtr<Camera> Add(const std::string& _name = "") const;
+    GESTD::WeakPtr<Camera> SetActive(const std::string& _name);
 
 private:
     void Load();

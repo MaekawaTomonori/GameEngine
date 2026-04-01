@@ -10,7 +10,7 @@
 #include "imgui.h"
 #include "src/PostProcess/Executor/PostProcessExecutor.hpp"
 
-void PostProcessPresetEditor::Initialize(DebugUI* _debug, PostProcessExecutor* _executor) {
+void PostProcessPresetEditor::Initialize(const GESTD::WeakPtr<DebugUI>& _debug, const GESTD::WeakPtr<PostProcessExecutor>& _executor) {
     debug_ = _debug;
     executor_ = _executor;
 }

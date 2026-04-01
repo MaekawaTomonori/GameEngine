@@ -6,7 +6,7 @@
 #include "src/ResourceRepository/ResourceRepository.hpp"
 
 class ModelCommon : public Common{
-    ResourceRepository* resource_ = nullptr;
+    GESTD::WeakPtr<ResourceRepository> resource_ = nullptr;
     SRVManager* srv_ = nullptr;
 
     std::unique_ptr<PipelineStateObject> staticPipeline_;
@@ -14,12 +14,12 @@ class ModelCommon : public Common{
     std::vector<RenderingCommand> staticDrawCommands_;
     std::vector<RenderingCommand> skinningDrawCommands_;
 
-    void Initialize(DirectXAdapter *_adapter, DebugUI *_debugUi) override;
+    void Initialize(const GESTD::WeakPtr<DirectXAdapter>& _adapter, const GESTD::WeakPtr<DebugUI>& _debugUi) override;
     void CreateSkinningPipeline() const;
     void CreateStaticPipeline() const;
 
 public:
-    void Initialize(DirectXAdapter* _adapter, DebugUI* _debugUi, ResourceRepository* _resource, SRVManager* _srv);
+    void Initialize(const GESTD::WeakPtr<DirectXAdapter>& _adapter, const GESTD::WeakPtr<DebugUI>& _debugUi, GESTD::WeakPtr<ResourceRepository> _resource, SRVManager* _srv);
 
     void RegisterStaticDraw(const std::function<void()>& _command, bool _isApplyPostEffect = true);
     void RegisterSkinningDraw(const std::function<void()>& _command, bool _isApplyPostEffect = true);
@@ -29,7 +29,7 @@ public:
     void DrawSkinning() const;
     void DrawStatic() const;
 
-    ResourceRepository* GetResourceRepository() const {
+    GESTD::WeakPtr<ResourceRepository> GetResourceRepository() const {
         return resource_;
     }
     SRVManager* GetSRVManager() const {

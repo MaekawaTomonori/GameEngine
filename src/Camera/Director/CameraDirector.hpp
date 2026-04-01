@@ -7,6 +7,7 @@
 #include <vector>
 
 #include "DebugUI.hpp"
+#include "WeakPtr.hpp"
 #include "Model.hpp"
 #include "Math/Transform.hpp"
 #include "Math/Vector2.hpp"
@@ -48,14 +49,14 @@ class CameraDirector {
     std::unordered_map<std::string, Work> works_;
     std::vector<Item> availableWorks_;
 
-    DebugUI* debug_ = nullptr;
+    GESTD::WeakPtr<DebugUI> debug_;
 
     bool  isProgress_          = false;
     bool  isLoop_              = false;
     bool  overwriteOnComplete_ = false;
     float timer_               = 0.0f;
 
-    Camera*    active_            = nullptr;
+    GESTD::WeakPtr<Camera>    active_            = nullptr;
     Transform  originalTransform_{};
     std::string currentWorkKey_;
 
@@ -78,7 +79,7 @@ class CameraDirector {
     std::unique_ptr<Model> controlPointModel_;
 
 public:
-    void Initialize(DebugUI* _debug);
+    void Initialize(GESTD::WeakPtr<DebugUI> _debug);
     void Update();
     void Draw();
     void Load(const std::string& _key);

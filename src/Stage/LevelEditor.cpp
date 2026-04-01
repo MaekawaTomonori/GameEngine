@@ -4,7 +4,7 @@
 #include "imgui_internal.h"
 
 LevelEditor::LevelEditor(DebugUI* _debug) :debug_(_debug), loader_(std::make_unique<StageLoader>()), repository_(std::make_unique<StageRepository>()){
-    loader_->Initialize(repository_.get());
+    loader_->Initialize(GESTD::WeakPtr<StageRepository>(repository_));
 }
 
 void LevelEditor::Initialize(const std::string& _name) {
@@ -49,7 +49,7 @@ void LevelEditor::Spawn() {
         Utils::Alert("Failed to load level: " + current_);
         return;
     }
-    LevelData* data = repository_->Get(current_);
+    auto data = repository_->Get(current_);
 
     std::vector<StageObject> newObjects;
     for (auto& object : data->objects) {

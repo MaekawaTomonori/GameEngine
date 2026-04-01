@@ -70,7 +70,7 @@ private:
 
     std::vector<Entry> entries_;
     GroupState currentGroup_;
-    DebugUI* debugUI_ = nullptr;
+    GESTD::WeakPtr<DebugUI> debugUI_ = nullptr;
 
     void AddReadOnly(const std::string& _label, std::function<std::string()> _getter);
     void AddEditable(const std::string& _label, void* _ptr, EditType _type, const std::string& _jsonFile, const std::string& _jsonKey);
@@ -101,7 +101,7 @@ public:
     /** @brief 初期化
      * @param _debug DebugUI
      */
-    void Initialize(DebugUI* _debug);
+    void Initialize(GESTD::WeakPtr<DebugUI> _debug);
 
     /** @brief jsonFile 付きエントリを JSON に書き出す
      */
@@ -115,7 +115,7 @@ public:
      * @param _label グループラベル
      */
     static void BeginGroup(const std::string& _label) {
-        auto* inst = Singleton<WatchDebugger>::GetInstance();
+        auto inst = Singleton<WatchDebugger>::GetInstance();
         inst->currentGroup_ = { true, _label, nullptr, "", "" };
         inst->AddGroupBegin(_label);
     }
@@ -127,7 +127,7 @@ public:
      * @param _group  JSON グループキー
      */
     static void BeginGroup(const std::string& _label, JsonParams* _json, const std::string& _name, const std::string& _group) {
-        auto* inst = Singleton<WatchDebugger>::GetInstance();
+        auto inst = Singleton<WatchDebugger>::GetInstance();
         inst->currentGroup_ = { true, _label, _json, _name, _group };
         inst->AddGroupBegin(_label);
     }
@@ -135,7 +135,7 @@ public:
     /** @brief グループ終了 
      */
     static void EndGroup() {
-        auto* inst = Singleton<WatchDebugger>::GetInstance();
+        auto inst = Singleton<WatchDebugger>::GetInstance();
         inst->currentGroup_.active = false;
         inst->AddGroupEnd();
     }

@@ -3,6 +3,7 @@
 
 #include <memory>
 
+#include "WeakPtr.hpp"
 #include "src/Scene/SceneSwitcher.hpp"
 #include "src/Config/Config.hpp"
 
@@ -26,12 +27,12 @@ public:
     /** @brief シーン切り替え管理を取得
      * @return シーン切り替え管理のポインタ
      */
-    SceneSwitcher* GetSceneSwitcher() const;
+    GESTD::WeakPtr<SceneSwitcher> GetSceneSwitcher() const;
 
     /** @brief PostEffectFactoryを取得
      * @return PostEffectファクトリーのポインタ
      */
-    AbstractPostEffectFactory* GetPostEffectFactory() const;
+    GESTD::WeakPtr<AbstractPostEffectFactory> GetPostEffectFactory() const;
 
 protected:
     template<typename T>

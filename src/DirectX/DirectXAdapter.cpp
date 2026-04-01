@@ -269,7 +269,7 @@ void DirectXAdapter::EndFrame() {
     isRunning_ = false;
 }
 
-void DirectXAdapter::DisplayFPS(DebugUI* _debug) const {
+void DirectXAdapter::DisplayFPS(const GESTD::WeakPtr<DebugUI>& _debug) const {
     _debug->RegisterCommand(
         "FPS",
         [this]() {
