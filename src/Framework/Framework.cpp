@@ -25,7 +25,7 @@ Framework::Framework() {
     Log::LogFileOperation("STARTUP_CHECK", "Assets",         std::filesystem::exists("Assets"),         "Checking assets directory");
     Log::LogFileOperation("STARTUP_CHECK", "Assets/Shaders", std::filesystem::exists("Assets/Shaders"), "Checking shaders directory");
 
-    Audio::Initialize();
+    // AUDIO_DISABLED: Audio::Initialize();
 
     windows_ = std::make_unique<WinApp>();
     windows_->Initialize();
@@ -94,13 +94,13 @@ Framework::Framework() {
         .Watch("FPS", &config_.fps)
         .Watch("ShowCursor", &config_.showCursor);
 
-    audioPanel_ = std::make_unique<AudioDebugPanel>();
-    audioPanel_->Initialize(debugger_->GetUI());
+    // AUDIO_DISABLED: audioPanel_ = std::make_unique<AudioDebugPanel>();
+    // AUDIO_DISABLED: audioPanel_->Initialize(debugger_->GetUI());
 #endif
 }
 
 Framework::~Framework() {
-    Audio::Shutdown();
+    // AUDIO_DISABLED: Audio::Shutdown();
     SingletonFinalizer::Finalize();
     CoUninitialize();
 }
@@ -178,7 +178,7 @@ void Framework::Update() const {
     particle_->Debug();
     postProcessor_->Debug();
     collision_->Debug();
-    audioPanel_->Debug();
+    // AUDIO_DISABLED: audioPanel_->Debug();
     debugger_->Debug();
     model_->Debug();
     sprite_->Debug();
