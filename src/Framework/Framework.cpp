@@ -39,22 +39,22 @@ Framework::Framework() {
 
 #ifdef _DEBUG
     debugger_ = std::make_unique<Debugger>();
-    debugger_->Initialize(GESTD::WeakPtr<DirectXAdapter>(dxAdapter_));
+    debugger_->Initialize(GESTD::ReferencePtr<DirectXAdapter>(dxAdapter_));
     const auto dbg = debugger_->GetUI();
 #else
-    const GESTD::WeakPtr<DebugUI> dbg = nullptr;
+    const GESTD::ReferencePtr<DebugUI> dbg = nullptr;
 #endif
 
     postProcessor_ = std::make_unique<PostProcessExecutor>();
-    postProcessor_->Initialize(GESTD::WeakPtr(dxAdapter_), GESTD::WeakPtr(srv_), dbg);
+    postProcessor_->Initialize(GESTD::ReferencePtr(dxAdapter_), GESTD::ReferencePtr(srv_), dbg);
 
     renderer_ = std::make_unique<Renderer>();
-    renderer_->Initialize(GESTD::WeakPtr(dxAdapter_), GESTD::WeakPtr(postProcessor_));
+    renderer_->Initialize(GESTD::ReferencePtr(dxAdapter_), GESTD::ReferencePtr(postProcessor_));
 
     resources_ = std::make_unique<ResourceRepository>();
     resources_->Initialize();
 
-    particle_ = std::make_unique<ParticleSystem>(GESTD::WeakPtr(dxAdapter_), srv_.get(), resources_->GetMeshRepository(), dbg);
+    particle_ = std::make_unique<ParticleSystem>(GESTD::ReferencePtr(dxAdapter_), srv_.get(), resources_->GetMeshRepository(), dbg);
     particle_->Initialize();
 
     input_ = Singleton<Input>::GetInstance();
@@ -64,16 +64,16 @@ Framework::Framework() {
     texture_->Initialize(dxAdapter_.get(), srv_.get());
 
     sprite_ = Singleton<SpriteCommon>::GetInstance();
-    sprite_->Initialize(GESTD::WeakPtr(dxAdapter_), dbg);
+    sprite_->Initialize(GESTD::ReferencePtr(dxAdapter_), dbg);
 
     model_ = Singleton<ModelCommon>::GetInstance();
-    model_->Initialize(GESTD::WeakPtr(dxAdapter_), dbg, GESTD::WeakPtr<ResourceRepository>(resources_), srv_.get());
+    model_->Initialize(GESTD::ReferencePtr(dxAdapter_), dbg, GESTD::ReferencePtr<ResourceRepository>(resources_), srv_.get());
 
     line_ = Singleton<LineCommon>::GetInstance();
-    line_->Initialize(GESTD::WeakPtr(dxAdapter_), dbg, srv_.get());
+    line_->Initialize(GESTD::ReferencePtr(dxAdapter_), dbg, srv_.get());
 
     sky_ = Singleton<SkyCommon>::GetInstance();
-    sky_->Initialize(GESTD::WeakPtr(dxAdapter_), dbg);
+    sky_->Initialize(GESTD::ReferencePtr(dxAdapter_), dbg);
 
     camera_ = Singleton<CameraController>::GetInstance();
     camera_->Initialize(static_cast<float>(config_.width) / static_cast<float>(config_.height), dbg);
@@ -82,7 +82,7 @@ Framework::Framework() {
     cameraDirector_->Initialize(dbg);
 
     light_ = Singleton<LightManager>::GetInstance();
-    light_->Initialize(GESTD::WeakPtr(dxAdapter_), dbg);
+    light_->Initialize(GESTD::ReferencePtr(dxAdapter_), dbg);
 
     Singleton<RandomEngine>::GetInstance()->Initialize();
 
@@ -132,10 +132,10 @@ void Framework::Initialize() {
 
     const auto dbg = debugger_->GetUI();
 #else
-    const GESTD::WeakPtr<DebugUI> dbg = nullptr;
+    const GESTD::ReferencePtr<DebugUI> dbg = nullptr;
 #endif
 
-    SceneSwitcher::Context ctx{ GESTD::WeakPtr<PostProcessExecutor>(postProcessor_), GESTD::WeakPtr<ParticleSystem>(particle_), dbg };
+    SceneSwitcher::Context ctx{ GESTD::ReferencePtr<PostProcessExecutor>(postProcessor_), GESTD::ReferencePtr<ParticleSystem>(particle_), dbg };
 #ifdef _DEBUG
     ctx.frame = debugger_->GetFrame();
 #endif

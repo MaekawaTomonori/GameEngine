@@ -1,6 +1,6 @@
 #ifndef Sprite_HPP_
 #define Sprite_HPP_
-#include "WeakPtr.hpp"
+#include "ReferencePtr.hpp"
 #include "Math/Matrix.hpp"
 #include "Math/Vector2.hpp"
 #include "Math/Vector4.hpp"
@@ -35,8 +35,8 @@ class Sprite {
         Matrix4x4 world;
     };
 
-    GESTD::WeakPtr<SpriteCommon> common_;
-    GESTD::WeakPtr<DirectXAdapter> adapter_ = nullptr;
+    GESTD::ReferencePtr<SpriteCommon> common_;
+    GESTD::ReferencePtr<DirectXAdapter> adapter_ = nullptr;
 
     Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> commandList_ = nullptr;
 

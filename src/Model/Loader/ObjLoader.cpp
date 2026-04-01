@@ -6,7 +6,7 @@
 
 #include "Utils.hpp"
 
-void ObjLoader::LoadModel(const std::string& _name, GESTD::WeakPtr<ResourceRepository> _repository) {
+void ObjLoader::LoadModel(const std::string& _name, GESTD::ReferencePtr<ResourceRepository> _repository) {
     std::unique_ptr<ModelData> data = std::make_unique<ModelData>();
     data->name = _name;
     data->mesh = _name;

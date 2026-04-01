@@ -6,7 +6,7 @@
 #include <vector>
 
 #include "DebugUI.hpp"
-#include "WeakPtr.hpp"
+#include "ReferencePtr.hpp"
 #include "src/PostProcess/Editor/PostProcessPresetEditor.hpp"
 #include "src/ParticleSystem/ParticleSystem.hpp"
 
@@ -22,10 +22,10 @@ class FrameDebugger;
 class SceneSwitcher {
 public:
     struct Context {
-        GESTD::WeakPtr<PostProcessExecutor> ppe = nullptr;
-        GESTD::WeakPtr<ParticleSystem> particle = nullptr;
-        GESTD::WeakPtr<DebugUI> debug;
-        GESTD::WeakPtr<FrameDebugger> frame;
+        GESTD::ReferencePtr<PostProcessExecutor> ppe = nullptr;
+        GESTD::ReferencePtr<ParticleSystem> particle = nullptr;
+        GESTD::ReferencePtr<DebugUI> debug;
+        GESTD::ReferencePtr<FrameDebugger> frame;
     };
 
 private:

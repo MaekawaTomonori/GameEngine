@@ -4,7 +4,7 @@
 #include <span>
 #include <memory>
 
-#include "WeakPtr.hpp"
+#include "ReferencePtr.hpp"
 
 #include "Line.hpp"
 #include "Math/Matrix.hpp"
@@ -57,15 +57,15 @@ class Model {
         Matrix4x4 inverse;
     };
 
-    GESTD::WeakPtr<ModelCommon> common_;
-    GESTD::WeakPtr<DirectXAdapter> adapter_ = nullptr;
+    GESTD::ReferencePtr<ModelCommon> common_;
+    GESTD::ReferencePtr<DirectXAdapter> adapter_ = nullptr;
 
     Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> commandList_ = nullptr;
 
     std::string name_;
     std::string uuid_;
     Transform transform_;
-    GESTD::WeakPtr<ModelData> data_ = nullptr;
+    GESTD::ReferencePtr<ModelData> data_ = nullptr;
     std::unique_ptr<Mesh> mesh_;
 
     std::optional<Skeleton> pose_;
@@ -170,7 +170,7 @@ public:
     /** @brief メッシュの取得
      * @return メッシュへのポインタ
      */
-    GESTD::WeakPtr<Mesh> GetMesh() const;
+    GESTD::ReferencePtr<Mesh> GetMesh() const;
 
     /** @brief モデルデータを事前読み込み
      * @param _name モデル名

@@ -15,7 +15,7 @@
 #include "Math/Vector4.hpp"
 #include "Resource/DX12Resource.hpp"
 #include "DirectXTex.h"
-#include "WeakPtr.hpp"
+#include "ReferencePtr.hpp"
 
 class DebugUI;
 
@@ -149,7 +149,7 @@ public:
     /** @brief FPSを表示
      * @param _debug デバッグUI
      */
-    void DisplayFPS(const GESTD::WeakPtr<DebugUI>& _debug) const;
+    void DisplayFPS(const GESTD::ReferencePtr<DebugUI>& _debug) const;
 
     /** @brief ウィンドウサイズを更新（ビューポートとシザー矩形も更新）
      * @param _width 新しい幅

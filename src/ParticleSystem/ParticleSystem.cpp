@@ -19,7 +19,7 @@ ParticleSystem::TemplateEditor& ParticleSystem::TemplateEditor::AddEmitter(const
     return *this;
 }
 
-ParticleSystem::ParticleSystem(GESTD::WeakPtr<DirectXAdapter> _adapter, SRVManager* _srv, GESTD::WeakPtr<MeshRepository> _mesh, GESTD::WeakPtr<DebugUI> _debugUI)
+ParticleSystem::ParticleSystem(GESTD::ReferencePtr<DirectXAdapter> _adapter, SRVManager* _srv, GESTD::ReferencePtr<MeshRepository> _mesh, GESTD::ReferencePtr<DebugUI> _debugUI)
     : adapter_(_adapter), srv_(_srv), mesh_(_mesh), debugUI_(_debugUI) {
 }
 

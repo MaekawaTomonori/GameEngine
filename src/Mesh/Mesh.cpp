@@ -10,7 +10,7 @@
 #include "src/Light/LightManager.hpp"
 #include "src/Texture/TextureManager.hpp"
 
-void Mesh::Initialize(const GESTD::WeakPtr<DirectXAdapter>& _adapter, const std::string &_name, const MeshData& _raw) {
+void Mesh::Initialize(const GESTD::ReferencePtr<DirectXAdapter>& _adapter, const std::string &_name, const MeshData& _raw) {
     adapter_ = _adapter;
     commandList_ = adapter_->GetCommandList();
     name_ = _name;

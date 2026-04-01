@@ -8,7 +8,7 @@
 #undef min
 #endif
 
-void FrameDebugger::Initialize([[maybe_unused]]const GESTD::WeakPtr<DebugUI>& _debugUi) {
+void FrameDebugger::Initialize([[maybe_unused]]const GESTD::ReferencePtr<DebugUI>& _debugUi) {
 #ifdef _DEBUG
     if (!_debugUi) return;
     debugUI_ = _debugUi;

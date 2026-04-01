@@ -5,7 +5,7 @@
 #include "src/DirectX/RootSignature/RootSignature.hpp"
 #include "src/DirectX/Shader/Shader.h"
 
-void SkyCommon::Initialize(const GESTD::WeakPtr<DirectXAdapter>& _adapter, const GESTD::WeakPtr<DebugUI>& _debugUi) {
+void SkyCommon::Initialize(const GESTD::ReferencePtr<DirectXAdapter>& _adapter, const GESTD::ReferencePtr<DebugUI>& _debugUi) {
     Setup(_adapter, _debugUi, "Skybox");
 
     // PipelineStateObjectの初期化

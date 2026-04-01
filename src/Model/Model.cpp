@@ -199,8 +199,8 @@ const std::string& Model::GetName() const {
     return name_;
 }
 
-GESTD::WeakPtr<Mesh> Model::GetMesh() const {
-    return GESTD::WeakPtr<Mesh>(mesh_);
+GESTD::ReferencePtr<Mesh> Model::GetMesh() const {
+    return GESTD::ReferencePtr<Mesh>(mesh_);
 }
 
 void Model::Load(const std::string& _name) {

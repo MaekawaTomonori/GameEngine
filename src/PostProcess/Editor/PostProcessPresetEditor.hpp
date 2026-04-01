@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 
-#include "WeakPtr.hpp"
+#include "ReferencePtr.hpp"
 #include "json.hpp"
 
 class DebugUI;
@@ -33,8 +33,8 @@ public:
     };
 
 private:
-    GESTD::WeakPtr<DebugUI> debug_ = nullptr;
-    GESTD::WeakPtr<PostProcessExecutor> executor_ = nullptr;
+    GESTD::ReferencePtr<DebugUI> debug_ = nullptr;
+    GESTD::ReferencePtr<PostProcessExecutor> executor_ = nullptr;
 
     bool showEditor_ = false;
     bool isEditingPreset_ = false;
@@ -71,7 +71,7 @@ public:
     ~PostProcessPresetEditor() = default;
 
     /** @brief 初期化 */
-    void Initialize(const GESTD::WeakPtr<DebugUI>& _debug, const GESTD::WeakPtr<PostProcessExecutor>& _executor);
+    void Initialize(const GESTD::ReferencePtr<DebugUI>& _debug, const GESTD::ReferencePtr<PostProcessExecutor>& _executor);
 
     /** @brief editor UI を表示 */
     void ShowEditor();

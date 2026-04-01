@@ -21,7 +21,7 @@
 
 using json = nlohmann::json;
 
-void PostProcessExecutor::Initialize(const GESTD::WeakPtr<DirectXAdapter>& _adapter, const GESTD::WeakPtr<SRVManager>& _srv, const GESTD::WeakPtr<DebugUI>& _debug) {
+void PostProcessExecutor::Initialize(const GESTD::ReferencePtr<DirectXAdapter>& _adapter, const GESTD::ReferencePtr<SRVManager>& _srv, const GESTD::ReferencePtr<DebugUI>& _debug) {
     adapter_ = _adapter;
     srv_ = _srv;
     debugUI_ = _debug;
@@ -78,10 +78,10 @@ void PostProcessExecutor::Initialize(const GESTD::WeakPtr<DirectXAdapter>& _adap
 
     // Preset editor を関連付ける。
     presetEditor_ = std::make_unique<PostProcessPresetEditor>();
-    presetEditor_->Initialize(debugUI_, GESTD::WeakPtr<PostProcessExecutor>(this));
+    presetEditor_->Initialize(debugUI_, GESTD::ReferencePtr<PostProcessExecutor>(this));
 }
 
-void PostProcessExecutor::SetFactory(GESTD::WeakPtr<AbstractPostEffectFactory> _factory) {
+void PostProcessExecutor::SetFactory(GESTD::ReferencePtr<AbstractPostEffectFactory> _factory) {
     factory_ = _factory;
 }
 

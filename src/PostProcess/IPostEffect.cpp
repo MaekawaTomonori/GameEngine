@@ -4,7 +4,7 @@
 
 #include "Utils.hpp"
 
-void IPostEffect::SetUp(const GESTD::WeakPtr<DirectXAdapter>& _adapter, const GESTD::WeakPtr<SRVManager>& _srv) {
+void IPostEffect::SetUp(const GESTD::ReferencePtr<DirectXAdapter>& _adapter, const GESTD::ReferencePtr<SRVManager>& _srv) {
     adapter_ = _adapter;
     srv_ = _srv;
     CreateOutput();

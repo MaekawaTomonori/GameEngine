@@ -5,7 +5,7 @@
 #include <functional>
 #include <d3d12.h>
 
-#include "WeakPtr.hpp"
+#include "ReferencePtr.hpp"
 #include "src/DirectX/GraphicsPipeline/Object/PipelineStateObject.hpp"
 #include "src/DirectX/Heap/SRVManager.h"
 #include "src/PostProcess/IPostEffect.hpp"
@@ -37,10 +37,10 @@ class PostProcessExecutor {
         std::vector<std::string> ignore;
     };
 
-    GESTD::WeakPtr<DirectXAdapter> adapter_;
-    GESTD::WeakPtr<SRVManager> srv_ = nullptr;
-    GESTD::WeakPtr<DebugUI> debugUI_;
-    GESTD::WeakPtr<AbstractPostEffectFactory> factory_ = nullptr;  // PostEffect factory
+    GESTD::ReferencePtr<DirectXAdapter> adapter_;
+    GESTD::ReferencePtr<SRVManager> srv_ = nullptr;
+    GESTD::ReferencePtr<DebugUI> debugUI_;
+    GESTD::ReferencePtr<AbstractPostEffectFactory> factory_ = nullptr;  // PostEffect factory
 
     std::vector<EffectData> effects_;
 
@@ -84,10 +84,10 @@ public:
      * <param name=_srv">SRV manager</param>
      * <param name=_debug">Debug UI</param>
      */
-    void Initialize(const GESTD::WeakPtr<DirectXAdapter>& _adapter, const GESTD::WeakPtr<SRVManager>& _srv, const GESTD::WeakPtr<DebugUI>& _debug);
+    void Initialize(const GESTD::ReferencePtr<DirectXAdapter>& _adapter, const GESTD::ReferencePtr<SRVManager>& _srv, const GESTD::ReferencePtr<DebugUI>& _debug);
 
     /** @brief PostEffect factory を設定 */
-    void SetFactory(GESTD::WeakPtr<AbstractPostEffectFactory> _factory);
+    void SetFactory(GESTD::ReferencePtr<AbstractPostEffectFactory> _factory);
 
     /** @brief エフェクトを追加
      * @param _effect 追加するエフェクト

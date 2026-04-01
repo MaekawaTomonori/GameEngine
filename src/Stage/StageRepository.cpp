@@ -1,9 +1,9 @@
 #include "StageRepository.hpp"
 
-GESTD::WeakPtr<LevelData> StageRepository::Get(const std::string& _name) {
+GESTD::ReferencePtr<LevelData> StageRepository::Get(const std::string& _name) {
     auto it = data_.find(_name);
     if (it != data_.end()){
-        return GESTD::WeakPtr<LevelData>(it->second);
+        return GESTD::ReferencePtr<LevelData>(it->second);
     }
     return nullptr;
 }

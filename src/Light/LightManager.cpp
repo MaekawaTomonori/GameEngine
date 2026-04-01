@@ -192,7 +192,7 @@ void LightManager::Save() const {
     Singleton<JsonParams>::GetInstance()->Save(path);
 }
 
-void LightManager::Initialize(GESTD::WeakPtr<DirectXAdapter> _adapter, GESTD::WeakPtr<DebugUI> _debug) {
+void LightManager::Initialize(GESTD::ReferencePtr<DirectXAdapter> _adapter, GESTD::ReferencePtr<DebugUI> _debug) {
     adapter_ = _adapter;
     debug_ = _debug;
     commandList_ = adapter_->GetCommandList();

@@ -106,7 +106,7 @@ void WatchDebugger::AddGroupEnd() {
     entries_.push_back(std::move(e));
 }
 
-void WatchDebugger::Initialize(const GESTD::WeakPtr<DebugUI> _debug) {
+void WatchDebugger::Initialize(const GESTD::ReferencePtr<DebugUI> _debug) {
     debugUI_ = _debug;
     if (debugUI_) {
         debugUI_->RegisterMenuButton("Watcher", false, "Debug");

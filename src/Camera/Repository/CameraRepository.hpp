@@ -5,7 +5,7 @@
 #include <unordered_map>
 #include <vector>
 
-#include "WeakPtr.hpp"
+#include "ReferencePtr.hpp"
 #include "src/Camera/Camera.hpp"
 
 class CameraRepository {
@@ -16,8 +16,8 @@ class CameraRepository {
 public:
     void Initialize(float _ratio);
 
-    GESTD::WeakPtr<Camera> Add(const std::string& _name = "");
-    GESTD::WeakPtr<Camera> Get(const std::string& _name);
+    GESTD::ReferencePtr<Camera> Add(const std::string& _name = "");
+    GESTD::ReferencePtr<Camera> Get(const std::string& _name);
     void Remove(const std::string& _name);
     bool Contains(const std::string& _name) const;
     bool IsEmpty() const;

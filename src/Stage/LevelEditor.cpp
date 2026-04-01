@@ -4,7 +4,7 @@
 #include "imgui_internal.h"
 
 LevelEditor::LevelEditor(DebugUI* _debug) :debug_(_debug), loader_(std::make_unique<StageLoader>()), repository_(std::make_unique<StageRepository>()){
-    loader_->Initialize(GESTD::WeakPtr<StageRepository>(repository_));
+    loader_->Initialize(GESTD::ReferencePtr<StageRepository>(repository_));
 }
 
 void LevelEditor::Initialize(const std::string& _name) {

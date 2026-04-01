@@ -70,7 +70,7 @@ private:
 
     std::vector<Entry> entries_;
     GroupState currentGroup_;
-    GESTD::WeakPtr<DebugUI> debugUI_ = nullptr;
+    GESTD::ReferencePtr<DebugUI> debugUI_ = nullptr;
 
     void AddReadOnly(const std::string& _label, std::function<std::string()> _getter);
     void AddEditable(const std::string& _label, void* _ptr, EditType _type, const std::string& _jsonFile, const std::string& _jsonKey);
@@ -101,7 +101,7 @@ public:
     /** @brief 初期化
      * @param _debug DebugUI
      */
-    void Initialize(GESTD::WeakPtr<DebugUI> _debug);
+    void Initialize(GESTD::ReferencePtr<DebugUI> _debug);
 
     /** @brief jsonFile 付きエントリを JSON に書き出す
      */

@@ -17,11 +17,11 @@ Debugger::~Debugger() {
     Singleton<WatchDebugger>::GetInstance()->Finalize();
 }
 
-void Debugger::Initialize(GESTD::WeakPtr<DirectXAdapter> _adapter) {
+void Debugger::Initialize(GESTD::ReferencePtr<DirectXAdapter> _adapter) {
     ui_->Initialize(_adapter);
-    frame_->Initialize(GESTD::WeakPtr<DebugUI>(ui_));
+    frame_->Initialize(GESTD::ReferencePtr<DebugUI>(ui_));
     Singleton<PerformanceProfiler>::GetInstance()->Initialize(ui_.get());
-    Singleton<WatchDebugger>::GetInstance()->Initialize(GESTD::WeakPtr<DebugUI>(ui_));
+    Singleton<WatchDebugger>::GetInstance()->Initialize(GESTD::ReferencePtr<DebugUI>(ui_));
 }
 
 bool Debugger::ShouldUpdate() {

@@ -7,7 +7,7 @@
 #include <string>
 #include <memory>
 
-#include "WeakPtr.hpp"
+#include "ReferencePtr.hpp"
 #include "Math/Matrix.hpp"
 #include "Math/Vector3.hpp"
 #include "Math/Vector4.hpp"
@@ -39,10 +39,10 @@ class Line {
         Matrix4x4 WVP;
     };
 
-    GESTD::WeakPtr<LineCommon> common_;
-    GESTD::WeakPtr<DirectXAdapter> adapter_ = nullptr;
+    GESTD::ReferencePtr<LineCommon> common_;
+    GESTD::ReferencePtr<DirectXAdapter> adapter_ = nullptr;
     Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> commandList_ = nullptr;
-    GESTD::WeakPtr<CameraController> cameraManager_;
+    GESTD::ReferencePtr<CameraController> cameraManager_;
 
     std::string uuid_;
 

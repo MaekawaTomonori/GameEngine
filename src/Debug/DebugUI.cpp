@@ -7,7 +7,7 @@
 
 #include "Log.hpp"
 #include "Utils.hpp"
-#include "WeakPtr.hpp"
+#include "ReferencePtr.hpp"
 
 #ifdef _DEBUG
 #include "imgui.h"
@@ -26,7 +26,7 @@ DebugUI::~DebugUI() {
 #endif
 }
 
-void DebugUI::Initialize(const GESTD::WeakPtr<DirectXAdapter>& _adapter) {
+void DebugUI::Initialize(const GESTD::ReferencePtr<DirectXAdapter>& _adapter) {
     if (!_adapter) {
         Utils::Alert("DirectXAdapter is null");
         return;
@@ -218,7 +218,7 @@ void DebugUI::UpdateDisplaySize([[maybe_unused]]int _width, [[maybe_unused]]int 
         ImGuiIO& io = ImGui::GetIO();
         io.DisplaySize = ImVec2(static_cast<float>(_width), static_cast<float>(_height));
         io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
-        io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
+        // ViewportsEnable は UNORM_SRGB フォーマットのSwapChainと非互換のため有効化しない
         io.FontGlobalScale = 1.f / ImGui_ImplWin32_GetDpiScaleForHwnd(adapter_->GetWindowHandle());
         Log::Send(Log::Level::INFO, "ImGui display size updated: " + std::to_string(_width) + "x" + std::to_string(_height));
     }

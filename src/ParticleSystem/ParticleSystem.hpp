@@ -6,7 +6,7 @@
 #include <unordered_map>
 #include <vector>
 
-#include "WeakPtr.hpp"
+#include "ReferencePtr.hpp"
 #include "Emitter/Emitter.hpp"
 #include "Math/Vector3.hpp"
 #include "Math/Vector4.hpp"
@@ -50,10 +50,10 @@ private:
     static constexpr uint16_t POOL_SIZE = 64;
     const std::string PATH = "Assets/Data/Particle/";
 
-    GESTD::WeakPtr<DirectXAdapter> adapter_ = nullptr;
+    GESTD::ReferencePtr<DirectXAdapter> adapter_ = nullptr;
     SRVManager* srv_ = nullptr;
-    GESTD::WeakPtr<MeshRepository> mesh_ = nullptr;
-    GESTD::WeakPtr<DebugUI> debugUI_ = nullptr;
+    GESTD::ReferencePtr<MeshRepository> mesh_ = nullptr;
+    GESTD::ReferencePtr<DebugUI> debugUI_ = nullptr;
 
     std::unordered_map<std::string, Template> templates_;
     std::unordered_map<std::string, UpdateFunc> updateFuncs_;
@@ -67,7 +67,7 @@ private:
     std::unique_ptr<PipelineStateObject> pso_ = nullptr;
 
 public:
-    ParticleSystem(GESTD::WeakPtr<DirectXAdapter> _adapter, SRVManager* _srv, GESTD::WeakPtr<MeshRepository> _mesh, GESTD::WeakPtr<DebugUI> _debugUI);
+    ParticleSystem(GESTD::ReferencePtr<DirectXAdapter> _adapter, SRVManager* _srv, GESTD::ReferencePtr<MeshRepository> _mesh, GESTD::ReferencePtr<DebugUI> _debugUI);
 
     void Initialize();
     void Update();

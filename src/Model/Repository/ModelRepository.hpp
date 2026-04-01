@@ -4,7 +4,7 @@
 #include <string>
 #include <unordered_map>
 
-#include "WeakPtr.hpp"
+#include "ReferencePtr.hpp"
 #include "src/Model/Data/ModelData.hpp"
 
 /** @brief モデルリポジトリクラス
@@ -23,7 +23,7 @@ public:
      * @param _name モデル名
      * @return モデルデータポインタ（存在しない場合nullptr）
      */
-    GESTD::WeakPtr<ModelData> Get(const std::string& _name);
+    GESTD::ReferencePtr<ModelData> Get(const std::string& _name);
 
     bool Contains(const std::string& _name) const;
 }; // class ModelRepository

@@ -8,7 +8,7 @@ void CameraRepository::Initialize(float _ratio) {
     ratio_ = _ratio;
 }
 
-GESTD::WeakPtr<Camera> CameraRepository::Add(const std::string& _name) {
+GESTD::ReferencePtr<Camera> CameraRepository::Add(const std::string& _name) {
     std::string actualName = _name.empty() ? GenerateUniqueName() : _name;
 
     if (!cameras_.contains(actualName)) {
@@ -16,14 +16,14 @@ GESTD::WeakPtr<Camera> CameraRepository::Add(const std::string& _name) {
         cameras_[actualName]->Initialize(ratio_);
     }
 
-    return GESTD::WeakPtr(cameras_[actualName]);
+    return GESTD::ReferencePtr(cameras_[actualName]);
 }
 
-GESTD::WeakPtr<Camera> CameraRepository::Get(const std::string& _name) {
+GESTD::ReferencePtr<Camera> CameraRepository::Get(const std::string& _name) {
     if (!cameras_.contains(_name)) {
         return nullptr;
     }
-    return GESTD::WeakPtr(cameras_[_name]);
+    return GESTD::ReferencePtr(cameras_[_name]);
 }
 
 void CameraRepository::Remove(const std::string& _name) {

@@ -5,7 +5,7 @@
 #include "Log.hpp"
 #include "Utils.hpp"
 
-PipelineStateObject::PipelineStateObject(GESTD::WeakPtr<DirectXAdapter> _adapter) :adapter_(_adapter){}
+PipelineStateObject::PipelineStateObject(GESTD::ReferencePtr<DirectXAdapter> _adapter) :adapter_(_adapter){}
 
 PipelineStateObject& PipelineStateObject::SetRootSignature(const RootSignature& _rootSignature) {
     rootSignature_ = std::move(_rootSignature);

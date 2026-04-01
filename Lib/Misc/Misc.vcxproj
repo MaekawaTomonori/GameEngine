@@ -22,7 +22,7 @@
     <ClInclude Include="include\Pattern\Singleton.hpp" />
     <ClInclude Include="include\Random\RandomEngine.hpp" />
     <ClInclude Include="include\Utils.hpp" />
-    <ClInclude Include="include\WeakPtr.hpp" />
+    <ClInclude Include="include\ReferencePtr.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Math\Easing.cpp" />

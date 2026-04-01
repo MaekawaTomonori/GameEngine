@@ -15,7 +15,7 @@
 #undef min
 #undef max
 
-void CameraDirector::Initialize(GESTD::WeakPtr<DebugUI> _debug) {
+void CameraDirector::Initialize(GESTD::ReferencePtr<DebugUI> _debug) {
     debug_ = _debug;
 
     controlPointModel_ = std::make_unique<Model>();

@@ -5,7 +5,7 @@
 #include <string>
 #include <unordered_map>
 
-#include "WeakPtr.hpp"
+#include "ReferencePtr.hpp"
 #include "src/DirectX/DirectXAdapter.hpp"
 #include "src/DirectX/Heap/Heap.hpp"
 
@@ -41,7 +41,7 @@ class DebugUI {
     std::mutex mutex_;
 
     std::unique_ptr<Heap> heap_;
-    GESTD::WeakPtr<DirectXAdapter> adapter_ = nullptr;
+    GESTD::ReferencePtr<DirectXAdapter> adapter_ = nullptr;
     uint32_t nextSrvSlot_ = 0; // ImGui SRV アロケータ用カウンタ
 
     std::vector<Command> commands_;
@@ -56,7 +56,7 @@ public:
     /** @brief デバッグUIを初期化
      * @param _adapter DirectXアダプター
      */
-    void Initialize(const GESTD::WeakPtr<DirectXAdapter>& _adapter);
+    void Initialize(const GESTD::ReferencePtr<DirectXAdapter>& _adapter);
 
     /** @brief デバッグUIをレンダリング
      */

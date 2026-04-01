@@ -11,7 +11,9 @@ namespace Utils {
         if (size_needed == 0) return {};
 
         std::string result(size_needed, 0);
-        if (!WideCharToMultiByte(CP_UTF8,0, _str.data(),static_cast<int>(_str.size()),result.data(), size_needed,nullptr, nullptr))return {};
+        if (!WideCharToMultiByte(CP_UTF8,0, _str.data(),static_cast<int>(_str.size()),result.data(), size_needed,nullptr, nullptr)) {
+            result.clear();
+        }
 
         return result;
     }
@@ -23,7 +25,9 @@ namespace Utils {
         if (size_needed == 0)return {};
 
         std::wstring result(size_needed, 0);
-        if (!MultiByteToWideChar(CP_UTF8, 0, _str.data(),static_cast<int>(_str.size()),result.data(), size_needed))return {};
+        if (!MultiByteToWideChar(CP_UTF8, 0, _str.data(),static_cast<int>(_str.size()),result.data(), size_needed)) {
+            result.clear();
+        }
 
         return result;
     }

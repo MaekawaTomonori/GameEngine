@@ -36,10 +36,10 @@ void IScene::PlayTransition(Transition::Type _type, std::function<void()> _onMid
     switcher_->PlayTransition(_type, std::move(_onMidpoint));
 }
 
-GESTD::WeakPtr<PostProcessExecutor> IScene::PostEffect() const {
+GESTD::ReferencePtr<PostProcessExecutor> IScene::PostEffect() const {
     return switcher_->GetContext().ppe;
 }
 
-GESTD::WeakPtr<ParticleSystem> IScene::Particle() const {
+GESTD::ReferencePtr<ParticleSystem> IScene::Particle() const {
     return switcher_->GetContext().particle;
 }

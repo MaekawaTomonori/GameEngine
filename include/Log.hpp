@@ -100,7 +100,7 @@ public:
      */
     static void SetLevel(Level _level);
 
-    static void Debug(const GESTD::WeakPtr<DebugUI>& _debug);
+    static void Debug(const GESTD::ReferencePtr<DebugUI>& _debug);
 
 private:
     /** @brief 実行コンテキストの初期化

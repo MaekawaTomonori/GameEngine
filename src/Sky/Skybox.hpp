@@ -3,7 +3,7 @@
 #include <memory>
 #include <string>
 
-#include "WeakPtr.hpp"
+#include "ReferencePtr.hpp"
 #include "Common/SkyCommon.hpp"
 #include "Math/Matrix.hpp"
 #include "Math/Transform.hpp"
@@ -23,8 +23,8 @@ class Skybox {
         Vector4 color;
     };
 
-    GESTD::WeakPtr<SkyCommon> common_;
-    GESTD::WeakPtr<DirectXAdapter> adapter_ = nullptr;
+    GESTD::ReferencePtr<SkyCommon> common_;
+    GESTD::ReferencePtr<DirectXAdapter> adapter_ = nullptr;
 
     std::string texture_;
 

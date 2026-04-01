@@ -5,7 +5,7 @@
 #include "src/DirectX/RootSignature/RootSignature.hpp"
 #include "src/DirectX/Shader/Shader.h"
 
-void LineCommon::Initialize(const GESTD::WeakPtr<DirectXAdapter>& _adapter, const GESTD::WeakPtr<DebugUI>& _debugUi) {
+void LineCommon::Initialize(const GESTD::ReferencePtr<DirectXAdapter>& _adapter, const GESTD::ReferencePtr<DebugUI>& _debugUi) {
     Setup(_adapter, _debugUi, "Line");
 
     // PipelineStateObjectの初期化
@@ -43,7 +43,7 @@ void LineCommon::Initialize(const GESTD::WeakPtr<DirectXAdapter>& _adapter, cons
     .Create();
 }
 
-void LineCommon::Initialize(const GESTD::WeakPtr<DirectXAdapter>& _adapter, const GESTD::WeakPtr<DebugUI>& _debugUi, SRVManager* _srv) {
+void LineCommon::Initialize(const GESTD::ReferencePtr<DirectXAdapter>& _adapter, const GESTD::ReferencePtr<DebugUI>& _debugUi, SRVManager* _srv) {
     srv_ = _srv;
     Initialize(_adapter, _debugUi);
 }

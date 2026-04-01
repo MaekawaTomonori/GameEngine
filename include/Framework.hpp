@@ -3,7 +3,7 @@
 
 #include <memory>
 
-#include "WeakPtr.hpp"
+#include "ReferencePtr.hpp"
 #include "Input.hpp"
 #ifdef _DEBUG
 #include "src/Debug/Debugger.hpp"
@@ -35,7 +35,7 @@ class Framework {
     GameEngine::Config config_{};
 
     std::unique_ptr<IGame> game_;
-    GESTD::WeakPtr<SceneSwitcher> scene_ = nullptr;
+    GESTD::ReferencePtr<SceneSwitcher> scene_ = nullptr;
 
     std::unique_ptr<WinApp> windows_;
     std::unique_ptr<DirectXAdapter> dxAdapter_;
@@ -51,16 +51,16 @@ class Framework {
     //std::unique_ptr<LevelEditor> level_;
     std::unique_ptr<ParticleSystem> particle_;
 
-    GESTD::WeakPtr<Input> input_;
-    GESTD::WeakPtr<TextureManager> texture_;
-    GESTD::WeakPtr<SpriteCommon> sprite_;
-    GESTD::WeakPtr<ModelCommon> model_;
-    GESTD::WeakPtr<LineCommon> line_;
-    GESTD::WeakPtr<SkyCommon> sky_;
-    GESTD::WeakPtr<LightManager> light_;
+    GESTD::ReferencePtr<Input> input_;
+    GESTD::ReferencePtr<TextureManager> texture_;
+    GESTD::ReferencePtr<SpriteCommon> sprite_;
+    GESTD::ReferencePtr<ModelCommon> model_;
+    GESTD::ReferencePtr<LineCommon> line_;
+    GESTD::ReferencePtr<SkyCommon> sky_;
+    GESTD::ReferencePtr<LightManager> light_;
 
-    GESTD::WeakPtr<CameraController> camera_;
-    GESTD::WeakPtr<CameraDirector> cameraDirector_;
+    GESTD::ReferencePtr<CameraController> camera_;
+    GESTD::ReferencePtr<CameraDirector> cameraDirector_;
 
 public:
     Framework();

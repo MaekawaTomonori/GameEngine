@@ -5,7 +5,7 @@
 #include "imgui.h"
 #include "src/Json/JsonParams.hpp"
 
-void CameraController::Initialize(const float _ratio, GESTD::WeakPtr<DebugUI> _debug) {
+void CameraController::Initialize(const float _ratio, GESTD::ReferencePtr<DebugUI> _debug) {
     debug_ = _debug;
     repository_ = std::make_unique<CameraRepository>();
     repository_->Initialize(_ratio);
@@ -25,15 +25,15 @@ void CameraController::Update() const {
     }
 }
 
-GESTD::WeakPtr<Camera> CameraController::GetActive() const {
+GESTD::ReferencePtr<Camera> CameraController::GetActive() const {
     return activeCamera_;
 }
 
-GESTD::WeakPtr<Camera> CameraController::Add(const std::string& _name) const {
+GESTD::ReferencePtr<Camera> CameraController::Add(const std::string& _name) const {
     return repository_->Add(_name);
 }
 
-GESTD::WeakPtr<Camera> CameraController::SetActive(const std::string& _name) {
+GESTD::ReferencePtr<Camera> CameraController::SetActive(const std::string& _name) {
     if (repository_->IsEmpty()) {
         Utils::Alert("CameraController::SetActive: No cameras available.");
         return nullptr;
