@@ -29,7 +29,7 @@ void Input::Initialize(HWND _hWnd, HINSTANCE _hInstance) {
         return;
     }
 
-    if (FAILED(keyboard_->SetCooperativeLevel(hWnd_, DISCL_FOREGROUND | DISCL_NONEXCLUSIVE | DISCL_NOWINKEY))) {
+    if (FAILED(keyboard_->SetCooperativeLevel(hWnd_, DISCL_FOREGROUND | DISCL_NONEXCLUSIVE))) {
         Log::Send(Log::Level::ERR, "Failed to set keyboard cooperative level.");
         Utils::Alert("Failed to set keyboard cooperative level.");
         return;
@@ -48,7 +48,7 @@ void Input::Initialize(HWND _hWnd, HINSTANCE _hInstance) {
         return;
     }
 
-    if (FAILED(mouse_->SetCooperativeLevel(hWnd_, DISCL_FOREGROUND | DISCL_NONEXCLUSIVE | DISCL_NOWINKEY))) {
+    if (FAILED(mouse_->SetCooperativeLevel(hWnd_, DISCL_FOREGROUND | DISCL_NONEXCLUSIVE))) {
         Log::Send(Log::Level::ERR, "Failed to set mouse cooperative level.");
         Utils::Alert("Failed to set mouse cooperative level.");
         return;
@@ -131,6 +131,24 @@ void Input::SetDebugUIHovered(const bool _hovered) {
 
 void Input::ApplyCursorVisibility() {
     bool shouldShow = cursorVisible_;
+
+    // タイトルバーなどのノンクライアント領域ではカーソルを常に表示する
+    if (!shouldShow) {
+        POINT ptScreen;
+        GetCursorPos(&ptScreen);
+        RECT clientRect;
+        GetClientRect(hWnd_, &clientRect);
+        POINT topLeft = { 0, 0 };
+        ClientToScreen(hWnd_, &topLeft);
+        const bool inClientArea =
+            ptScreen.x >= topLeft.x &&
+            ptScreen.x <  topLeft.x + clientRect.right &&
+            ptScreen.y >= topLeft.y &&
+            ptScreen.y <  topLeft.y + clientRect.bottom;
+        if (!inClientArea) {
+            shouldShow = true;
+        }
+    }
 
 #ifdef _DEBUG
     if (!cursorVisible_) {
