@@ -22,6 +22,7 @@
     <ClInclude Include="include\Pattern\Singleton.hpp" />
     <ClInclude Include="include\Random\RandomEngine.hpp" />
     <ClInclude Include="include\Utils.hpp" />
+    <ClInclude Include="src\LifetimeSentinel.hpp" />
     <ClInclude Include="include\ReferencePtr.hpp" />
   </ItemGroup>
   <ItemGroup>
