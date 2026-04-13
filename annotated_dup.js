@@ -1,15 +1,20 @@
 var annotated_dup =
 [
     [ "GameEngine", "namespaceGameEngine.html", [
-      [ "Config", "structGameEngine_1_1Config.html", "structGameEngine_1_1Config" ]
+      [ "Config", "structGameEngine_1_1Config.html", "structGameEngine_1_1Config" ],
+      [ "ConfigLoader", "classGameEngine_1_1ConfigLoader.html", "classGameEngine_1_1ConfigLoader" ]
     ] ],
     [ "std", null, [
       [ "hash< Ui::EventKey >", "structstd_1_1hash_3_01Ui_1_1EventKey_01_4.html", "structstd_1_1hash_3_01Ui_1_1EventKey_01_4" ]
     ] ],
     [ "Ui", "namespaceUi.html", [
+      [ "AnimSlot", "structUi_1_1AnimSlot.html", "structUi_1_1AnimSlot" ],
       [ "Canvas", "classUi_1_1Canvas.html", "classUi_1_1Canvas" ],
       [ "Element", "classUi_1_1Element.html", "classUi_1_1Element" ],
-      [ "EventSystem", "classUi_1_1EventSystem.html", "classUi_1_1EventSystem" ]
+      [ "EventSystem", "classUi_1_1EventSystem.html", "classUi_1_1EventSystem" ],
+      [ "Manager", "classUi_1_1Manager.html", "classUi_1_1Manager" ],
+      [ "SpriteElement", "classUi_1_1SpriteElement.html", "classUi_1_1SpriteElement" ],
+      [ "TextElement", "classUi_1_1TextElement.html", "classUi_1_1TextElement" ]
     ] ],
     [ "AbstractPostEffectFactory", "classAbstractPostEffectFactory.html", "classAbstractPostEffectFactory" ],
     [ "AbstractSceneFactory", "classAbstractSceneFactory.html", "classAbstractSceneFactory" ],
@@ -78,6 +83,7 @@ var annotated_dup =
     [ "Renderer", "classRenderer.html", "classRenderer" ],
     [ "ResourceRepository", "classResourceRepository.html", "classResourceRepository" ],
     [ "RootSignature", "classRootSignature.html", "classRootSignature" ],
+    [ "SampleScene", "classSampleScene.html", "classSampleScene" ],
     [ "SceneFactory", "classSceneFactory.html", "classSceneFactory" ],
     [ "SceneSwitcher", "classSceneSwitcher.html", "classSceneSwitcher" ],
     [ "Scheduler", "classScheduler.html", "classScheduler" ],
@@ -91,6 +97,8 @@ var annotated_dup =
     [ "SRVManager", "classSRVManager.html", "classSRVManager" ],
     [ "StageLoader", "classStageLoader.html", "classStageLoader" ],
     [ "StageRepository", "classStageRepository.html", "classStageRepository" ],
+    [ "Text", "classText.html", "classText" ],
+    [ "TextCommon", "classTextCommon.html", "classTextCommon" ],
     [ "TextureManager", "classTextureManager.html", "classTextureManager" ],
     [ "Timer", "classTimer.html", "classTimer" ],
     [ "Transition", "classTransition.html", "classTransition" ],

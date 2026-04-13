@@ -91,58 +91,124 @@ $(document).ready(function(){initNavTree('classFrameDebugger.html',''); initResi
 
 <div class="header">
   <div class="summary">
+<a href="#pub-types">公開型</a> &#124;
 <a href="#pub-methods">公開メンバ関数</a> &#124;
 <a href="classFrameDebugger-members.html">全メンバ一覧</a>  </div>
   <div class="headertitle"><div class="title">FrameDebugger クラス</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>フレーム単位デバッガー デバッグビルド時のみSceneのUpdateをフレーム単位で制御する  
+<p>フレームステップ制御（再生・一時停止・停止・ステップ実行）  
  <a href="classFrameDebugger.html#details">[詳解]</a></p>
 
 <p><code>#include &lt;<a class="el" href="FrameDebugger_8hpp_source.html">FrameDebugger.hpp</a>&gt;</code></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+公開型</h2></td></tr>
+<tr class="memitem:ad9c8e021d2325a98bce0b8900293fd95" id="r_ad9c8e021d2325a98bce0b8900293fd95"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFrameDebugger.html#ad9c8e021d2325a98bce0b8900293fd95">State</a> { <a class="el" href="classFrameDebugger.html#ad9c8e021d2325a98bce0b8900293fd95a5bda814c4aedb126839228f1a3d92f09">Running</a>
+, <a class="el" href="classFrameDebugger.html#ad9c8e021d2325a98bce0b8900293fd95ae99180abf47a8b3a856e0bcb2656990a">Paused</a>
+, <a class="el" href="classFrameDebugger.html#ad9c8e021d2325a98bce0b8900293fd95ac23e2b09ebe6bf4cb5e2a9abe85c0be2">Stopped</a>
+ }</td></tr>
+<tr class="separator:ad9c8e021d2325a98bce0b8900293fd95"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 公開メンバ関数</h2></td></tr>
-<tr class="memitem:aafae678306d19f205bc4e2ff05998863" id="r_aafae678306d19f205bc4e2ff05998863"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFrameDebugger.html#aafae678306d19f205bc4e2ff05998863">Initialize</a> (<a class="el" href="classDebugUI.html">DebugUI</a> *_debugUi)</td></tr>
-<tr class="separator:aafae678306d19f205bc4e2ff05998863"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4091c592c8c458921cde2623c755b5ef" id="r_a4091c592c8c458921cde2623c755b5ef"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFrameDebugger.html#a4091c592c8c458921cde2623c755b5ef">Initialize</a> (const GESTD::ReferencePtr&lt; <a class="el" href="classDebugUI.html">DebugUI</a> &gt; &amp;_debugUi)</td></tr>
+<tr class="separator:a4091c592c8c458921cde2623c755b5ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a326b2df80210e2eeb92df09ef863ecf7" id="r_a326b2df80210e2eeb92df09ef863ecf7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFrameDebugger.html#a326b2df80210e2eeb92df09ef863ecf7">Play</a> ()</td></tr>
+<tr class="memdesc:a326b2df80210e2eeb92df09ef863ecf7"><td class="mdescLeft">&#160;</td><td class="mdescRight">再生（Stopped / Paused → Running）  <br /></td></tr>
+<tr class="separator:a326b2df80210e2eeb92df09ef863ecf7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a289bb5cf27df2968bbffb5b98b6a6ee6" id="r_a289bb5cf27df2968bbffb5b98b6a6ee6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFrameDebugger.html#a289bb5cf27df2968bbffb5b98b6a6ee6">Pause</a> ()</td></tr>
+<tr class="memdesc:a289bb5cf27df2968bbffb5b98b6a6ee6"><td class="mdescLeft">&#160;</td><td class="mdescRight">一時停止（Running → Paused）  <br /></td></tr>
+<tr class="separator:a289bb5cf27df2968bbffb5b98b6a6ee6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac63091a2f7ed527a94a8284ddf69df15" id="r_ac63091a2f7ed527a94a8284ddf69df15"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFrameDebugger.html#ac63091a2f7ed527a94a8284ddf69df15">Stop</a> ()</td></tr>
+<tr class="memdesc:ac63091a2f7ed527a94a8284ddf69df15"><td class="mdescLeft">&#160;</td><td class="mdescRight">停止してシーンをリセット（Running / Paused → Stopped + onStop_ 呼び出し）  <br /></td></tr>
+<tr class="separator:ac63091a2f7ed527a94a8284ddf69df15"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a49170f76b2b40b0ba042d2b48764537c" id="r_a49170f76b2b40b0ba042d2b48764537c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFrameDebugger.html#a49170f76b2b40b0ba042d2b48764537c">Resume</a> ()</td></tr>
+<tr class="memdesc:a49170f76b2b40b0ba042d2b48764537c"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classFrameDebugger.html#a326b2df80210e2eeb92df09ef863ecf7" title="再生（Stopped / Paused → Running）">Play()</a> の別名（後方互換）  <br /></td></tr>
+<tr class="separator:a49170f76b2b40b0ba042d2b48764537c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33cb20d293e6b167736c76bdc4703dc6" id="r_a33cb20d293e6b167736c76bdc4703dc6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFrameDebugger.html#a33cb20d293e6b167736c76bdc4703dc6">SetStopCallback</a> (const std::function&lt; void()&gt; &amp;_cb)</td></tr>
+<tr class="memdesc:a33cb20d293e6b167736c76bdc4703dc6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stop 時に呼ぶコールバックを登録（シーン再起動など）  <br /></td></tr>
+<tr class="separator:a33cb20d293e6b167736c76bdc4703dc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:affb24700f7b2caf30f5b30bd9c3837fc" id="r_affb24700f7b2caf30f5b30bd9c3837fc"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFrameDebugger.html#affb24700f7b2caf30f5b30bd9c3837fc">ShouldUpdate</a> ()</td></tr>
-<tr class="memdesc:affb24700f7b2caf30f5b30bd9c3837fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">このフレームでSceneのUpdateを実行すべきか  <br /></td></tr>
+<tr class="memdesc:affb24700f7b2caf30f5b30bd9c3837fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">このフレームで Update を実行すべきか（Release では常に true）  <br /></td></tr>
 <tr class="separator:affb24700f7b2caf30f5b30bd9c3837fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a70fdd39147d814e207033e807aaea93f" id="r_a70fdd39147d814e207033e807aaea93f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFrameDebugger.html#a70fdd39147d814e207033e807aaea93f">Debug</a> ()</td></tr>
-<tr class="memdesc:a70fdd39147d814e207033e807aaea93f"><td class="mdescLeft">&#160;</td><td class="mdescRight">ImGuiウィンドウを登録  <br /></td></tr>
-<tr class="separator:a70fdd39147d814e207033e807aaea93f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab731708a9e39477f74e8685d8ada7b11" id="r_ab731708a9e39477f74e8685d8ada7b11"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classFrameDebugger.html#ad9c8e021d2325a98bce0b8900293fd95">State</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFrameDebugger.html#ab731708a9e39477f74e8685d8ada7b11">GetState</a> () const</td></tr>
+<tr class="separator:ab731708a9e39477f74e8685d8ada7b11"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8f13fca389ea0190fc60ec28820009c" id="r_aa8f13fca389ea0190fc60ec28820009c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFrameDebugger.html#aa8f13fca389ea0190fc60ec28820009c">IsRunning</a> () const</td></tr>
+<tr class="separator:aa8f13fca389ea0190fc60ec28820009c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2494eee3d1929d13cb47a2ec99efddd" id="r_aa2494eee3d1929d13cb47a2ec99efddd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFrameDebugger.html#aa2494eee3d1929d13cb47a2ec99efddd">IsPaused</a> () const</td></tr>
+<tr class="separator:aa2494eee3d1929d13cb47a2ec99efddd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a95e392c5838cdb4d91bebc489e5b132c" id="r_a95e392c5838cdb4d91bebc489e5b132c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFrameDebugger.html#a95e392c5838cdb4d91bebc489e5b132c">IsStopped</a> () const</td></tr>
+<tr class="separator:a95e392c5838cdb4d91bebc489e5b132c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef0dcf682b499f42da68339bdf79ca72" id="r_aef0dcf682b499f42da68339bdf79ca72"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFrameDebugger.html#aef0dcf682b499f42da68339bdf79ca72">RenderStepButton</a> ()</td></tr>
+<tr class="memdesc:aef0dcf682b499f42da68339bdf79ca72"><td class="mdescLeft">&#160;</td><td class="mdescRight">メニューバー用ツールバーを描画（Stop / Play / Pause / Step） SetToolbarContent 経由で DebugUI::RenderMainMenuBar から呼ばれる  <br /></td></tr>
+<tr class="separator:aef0dcf682b499f42da68339bdf79ca72"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">詳解</h2>
-<div class="textblock"><p>フレーム単位デバッガー デバッグビルド時のみSceneのUpdateをフレーム単位で制御する </p>
+<div class="textblock"><p>フレームステップ制御（再生・一時停止・停止・ステップ実行） </p>
 
-<p class="definition"> <a class="el" href="FrameDebugger_8hpp_source.html">FrameDebugger.hpp</a> の <a class="el" href="FrameDebugger_8hpp_source.html#l00011">11</a> 行目に定義があります。</p>
-</div><h2 class="groupheader">関数詳解</h2>
-<a id="a70fdd39147d814e207033e807aaea93f" name="a70fdd39147d814e207033e807aaea93f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a70fdd39147d814e207033e807aaea93f">&#9670;&#160;</a></span>Debug()</h2>
+<p class="definition"> <a class="el" href="FrameDebugger_8hpp_source.html">FrameDebugger.hpp</a> の <a class="el" href="FrameDebugger_8hpp_source.html#l00013">13</a> 行目に定義があります。</p>
+</div><h2 class="groupheader">列挙型メンバ詳解</h2>
+<a id="ad9c8e021d2325a98bce0b8900293fd95" name="ad9c8e021d2325a98bce0b8900293fd95"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9c8e021d2325a98bce0b8900293fd95">&#9670;&#160;</a></span>State</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void FrameDebugger::Debug </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td class="memname">enum class <a class="el" href="classFrameDebugger.html#ad9c8e021d2325a98bce0b8900293fd95">FrameDebugger::State</a></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">列挙値</th></tr><tr><td class="fieldname"><a id="ad9c8e021d2325a98bce0b8900293fd95a5bda814c4aedb126839228f1a3d92f09" name="ad9c8e021d2325a98bce0b8900293fd95a5bda814c4aedb126839228f1a3d92f09"></a>Running&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad9c8e021d2325a98bce0b8900293fd95ae99180abf47a8b3a856e0bcb2656990a" name="ad9c8e021d2325a98bce0b8900293fd95ae99180abf47a8b3a856e0bcb2656990a"></a>Paused&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad9c8e021d2325a98bce0b8900293fd95ac23e2b09ebe6bf4cb5e2a9abe85c0be2" name="ad9c8e021d2325a98bce0b8900293fd95ac23e2b09ebe6bf4cb5e2a9abe85c0be2"></a>Stopped&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+<p class="definition"> <a class="el" href="FrameDebugger_8hpp_source.html">FrameDebugger.hpp</a> の <a class="el" href="FrameDebugger_8hpp_source.html#l00015">15</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<h2 class="groupheader">関数詳解</h2>
+<a id="ab731708a9e39477f74e8685d8ada7b11" name="ab731708a9e39477f74e8685d8ada7b11"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab731708a9e39477f74e8685d8ada7b11">&#9670;&#160;</a></span>GetState()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classFrameDebugger.html#ad9c8e021d2325a98bce0b8900293fd95">State</a> FrameDebugger::GetState </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p>ImGuiウィンドウを登録 </p>
-
-<p class="definition"> <a class="el" href="FrameDebugger_8cpp_source.html">FrameDebugger.cpp</a> の <a class="el" href="FrameDebugger_8cpp_source.html#l00036">36</a> 行目に定義があります。</p>
-
-<p class="reference">参照先 <a class="el" href="DebugUI_8cpp_source.html#l00170">DebugUI::IsVisible()</a>, <a class="el" href="DebugUI_8cpp_source.html#l00152">DebugUI::RegisterCommand()</a>.</p>
+<p class="definition"> <a class="el" href="FrameDebugger_8hpp_source.html">FrameDebugger.hpp</a> の <a class="el" href="FrameDebugger_8hpp_source.html#l00057">57</a> 行目に定義があります。</p>
 
 </div>
 </div>
-<a id="aafae678306d19f205bc4e2ff05998863" name="aafae678306d19f205bc4e2ff05998863"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aafae678306d19f205bc4e2ff05998863">&#9670;&#160;</a></span>Initialize()</h2>
+<a id="a4091c592c8c458921cde2623c755b5ef" name="a4091c592c8c458921cde2623c755b5ef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4091c592c8c458921cde2623c755b5ef">&#9670;&#160;</a></span>Initialize()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -150,16 +216,224 @@ $(document).ready(function(){initNavTree('classFrameDebugger.html',''); initResi
         <tr>
           <td class="memname">void FrameDebugger::Initialize </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classDebugUI.html">DebugUI</a> *&#160;</td>
+          <td class="paramtype">const GESTD::ReferencePtr&lt; <a class="el" href="classDebugUI.html">DebugUI</a> &gt; &amp;&#160;</td>
           <td class="paramname"><em>_debugUi</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="FrameDebugger_8cpp_source.html">FrameDebugger.cpp</a> の <a class="el" href="FrameDebugger_8cpp_source.html#l00011">11</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="FrameDebugger_8cpp_source.html">FrameDebugger.cpp</a> の <a class="el" href="FrameDebugger_8cpp_source.html#l00013">13</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="DebugUI_8cpp_source.html#l00160">DebugUI::RegisterMenuButton()</a>.</p>
+</div>
+</div>
+<a id="aa2494eee3d1929d13cb47a2ec99efddd" name="aa2494eee3d1929d13cb47a2ec99efddd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa2494eee3d1929d13cb47a2ec99efddd">&#9670;&#160;</a></span>IsPaused()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool FrameDebugger::IsPaused </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="FrameDebugger_8hpp_source.html">FrameDebugger.hpp</a> の <a class="el" href="FrameDebugger_8hpp_source.html#l00059">59</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="classFrameDebugger.html#ad9c8e021d2325a98bce0b8900293fd95ae99180abf47a8b3a856e0bcb2656990a">Paused</a>.</p>
+
+</div>
+</div>
+<a id="aa8f13fca389ea0190fc60ec28820009c" name="aa8f13fca389ea0190fc60ec28820009c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa8f13fca389ea0190fc60ec28820009c">&#9670;&#160;</a></span>IsRunning()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool FrameDebugger::IsRunning </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="FrameDebugger_8hpp_source.html">FrameDebugger.hpp</a> の <a class="el" href="FrameDebugger_8hpp_source.html#l00058">58</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="classFrameDebugger.html#ad9c8e021d2325a98bce0b8900293fd95a5bda814c4aedb126839228f1a3d92f09">Running</a>.</p>
+
+</div>
+</div>
+<a id="a95e392c5838cdb4d91bebc489e5b132c" name="a95e392c5838cdb4d91bebc489e5b132c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a95e392c5838cdb4d91bebc489e5b132c">&#9670;&#160;</a></span>IsStopped()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool FrameDebugger::IsStopped </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="FrameDebugger_8hpp_source.html">FrameDebugger.hpp</a> の <a class="el" href="FrameDebugger_8hpp_source.html#l00060">60</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="classFrameDebugger.html#ad9c8e021d2325a98bce0b8900293fd95ac23e2b09ebe6bf4cb5e2a9abe85c0be2">Stopped</a>.</p>
+
+</div>
+</div>
+<a id="a289bb5cf27df2968bbffb5b98b6a6ee6" name="a289bb5cf27df2968bbffb5b98b6a6ee6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a289bb5cf27df2968bbffb5b98b6a6ee6">&#9670;&#160;</a></span>Pause()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void FrameDebugger::Pause </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>一時停止（Running → Paused） </p>
+
+<p class="definition"> <a class="el" href="FrameDebugger_8cpp_source.html">FrameDebugger.cpp</a> の <a class="el" href="FrameDebugger_8cpp_source.html#l00026">26</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="classFrameDebugger.html#ad9c8e021d2325a98bce0b8900293fd95ae99180abf47a8b3a856e0bcb2656990a">Paused</a>, <a class="el" href="classFrameDebugger.html#ad9c8e021d2325a98bce0b8900293fd95a5bda814c4aedb126839228f1a3d92f09">Running</a>.</p>
+
+</div>
+</div>
+<a id="a326b2df80210e2eeb92df09ef863ecf7" name="a326b2df80210e2eeb92df09ef863ecf7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a326b2df80210e2eeb92df09ef863ecf7">&#9670;&#160;</a></span>Play()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void FrameDebugger::Play </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>再生（Stopped / Paused → Running） </p>
+
+<p class="definition"> <a class="el" href="FrameDebugger_8cpp_source.html">FrameDebugger.cpp</a> の <a class="el" href="FrameDebugger_8cpp_source.html#l00020">20</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="classFrameDebugger.html#ad9c8e021d2325a98bce0b8900293fd95a5bda814c4aedb126839228f1a3d92f09">Running</a>.</p>
+
+<p class="reference">参照元 <a class="el" href="FrameDebugger_8hpp_source.html#l00047">Resume()</a>.</p>
+
+</div>
+</div>
+<a id="aef0dcf682b499f42da68339bdf79ca72" name="aef0dcf682b499f42da68339bdf79ca72"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aef0dcf682b499f42da68339bdf79ca72">&#9670;&#160;</a></span>RenderStepButton()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void FrameDebugger::RenderStepButton </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>メニューバー用ツールバーを描画（Stop / Play / Pause / Step） SetToolbarContent 経由で DebugUI::RenderMainMenuBar から呼ばれる </p>
+<p>&gt;| ステップボタンのみ描画（長押し加速あり） 一時停止中に LocalDebugger の Launch スロットからインライン呼び出し用 </p>
+
+<p class="definition"> <a class="el" href="FrameDebugger_8cpp_source.html">FrameDebugger.cpp</a> の <a class="el" href="FrameDebugger_8cpp_source.html#l00119">119</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="a49170f76b2b40b0ba042d2b48764537c" name="a49170f76b2b40b0ba042d2b48764537c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a49170f76b2b40b0ba042d2b48764537c">&#9670;&#160;</a></span>Resume()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void FrameDebugger::Resume </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p><a class="el" href="classFrameDebugger.html#a326b2df80210e2eeb92df09ef863ecf7" title="再生（Stopped / Paused → Running）">Play()</a> の別名（後方互換） </p>
+
+<p class="definition"> <a class="el" href="FrameDebugger_8hpp_source.html">FrameDebugger.hpp</a> の <a class="el" href="FrameDebugger_8hpp_source.html#l00047">47</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="FrameDebugger_8cpp_source.html#l00020">Play()</a>.</p>
+
+</div>
+</div>
+<a id="a33cb20d293e6b167736c76bdc4703dc6" name="a33cb20d293e6b167736c76bdc4703dc6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a33cb20d293e6b167736c76bdc4703dc6">&#9670;&#160;</a></span>SetStopCallback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void FrameDebugger::SetStopCallback </td>
+          <td>(</td>
+          <td class="paramtype">const std::function&lt; void()&gt; &amp;&#160;</td>
+          <td class="paramname"><em>_cb</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Stop 時に呼ぶコールバックを登録（シーン再起動など） </p>
+
+<p class="definition"> <a class="el" href="FrameDebugger_8cpp_source.html">FrameDebugger.cpp</a> の <a class="el" href="FrameDebugger_8cpp_source.html#l00040">40</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -178,10 +452,34 @@ $(document).ready(function(){initNavTree('classFrameDebugger.html',''); initResi
       </table>
 </div><div class="memdoc">
 
-<p>このフレームでSceneのUpdateを実行すべきか </p>
-<dl class="section return"><dt>戻り値</dt><dd>実行すべき場合true。非デバッグビルドでは常にtrue </dd></dl>
+<p>このフレームで Update を実行すべきか（Release では常に true） </p>
 
-<p class="definition"> <a class="el" href="FrameDebugger_8cpp_source.html">FrameDebugger.cpp</a> の <a class="el" href="FrameDebugger_8cpp_source.html#l00022">22</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="FrameDebugger_8cpp_source.html">FrameDebugger.cpp</a> の <a class="el" href="FrameDebugger_8cpp_source.html#l00099">99</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="classFrameDebugger.html#ad9c8e021d2325a98bce0b8900293fd95ae99180abf47a8b3a856e0bcb2656990a">Paused</a>, <a class="el" href="classFrameDebugger.html#ad9c8e021d2325a98bce0b8900293fd95a5bda814c4aedb126839228f1a3d92f09">Running</a>, <a class="el" href="classFrameDebugger.html#ad9c8e021d2325a98bce0b8900293fd95ac23e2b09ebe6bf4cb5e2a9abe85c0be2">Stopped</a>.</p>
+
+</div>
+</div>
+<a id="ac63091a2f7ed527a94a8284ddf69df15" name="ac63091a2f7ed527a94a8284ddf69df15"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac63091a2f7ed527a94a8284ddf69df15">&#9670;&#160;</a></span>Stop()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void FrameDebugger::Stop </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>停止してシーンをリセット（Running / Paused → Stopped + onStop_ 呼び出し） </p>
+
+<p class="definition"> <a class="el" href="FrameDebugger_8cpp_source.html">FrameDebugger.cpp</a> の <a class="el" href="FrameDebugger_8cpp_source.html#l00032">32</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="classFrameDebugger.html#ad9c8e021d2325a98bce0b8900293fd95ac23e2b09ebe6bf4cb5e2a9abe85c0be2">Stopped</a>.</p>
 
 </div>
 </div>
@@ -195,7 +493,7 @@ $(document).ready(function(){initNavTree('classFrameDebugger.html',''); initResi
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classFrameDebugger.html">FrameDebugger</a></li>
-    <li class="footer">2026年03月10日(火) 05時02分34秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年04月13日(月) 08時40分04秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

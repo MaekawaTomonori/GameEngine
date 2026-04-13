@@ -92,7 +92,10 @@ $(document).ready(function(){initNavTree('classUi_1_1Canvas.html',''); initResiz
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">クラス</a> &#124;
+<a href="#pub-types">公開型</a> &#124;
 <a href="#pub-methods">公開メンバ関数</a> &#124;
+<a href="#pub-static-methods">静的公開メンバ関数</a> &#124;
+<a href="#friends">フレンド</a> &#124;
 <a href="classUi_1_1Canvas-members.html">全メンバ一覧</a>  </div>
   <div class="headertitle"><div class="title">Ui::Canvas クラス</div></div>
 </div><!--header-->
@@ -105,26 +108,39 @@ $(document).ready(function(){initNavTree('classUi_1_1Canvas.html',''); initResiz
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUi_1_1Canvas_1_1ElementRect.html">ElementRect</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+公開型</h2></td></tr>
+<tr class="memitem:a84d5dd93e03a20dd5df3b64b8d7b3dc1" id="r_a84d5dd93e03a20dd5df3b64b8d7b3dc1"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUi_1_1Canvas.html#a84d5dd93e03a20dd5df3b64b8d7b3dc1">Phase</a> { <a class="el" href="classUi_1_1Canvas.html#a84d5dd93e03a20dd5df3b64b8d7b3dc1a3cab03c00dbd11bc3569afa0748013f0">Inactive</a>
+, <a class="el" href="classUi_1_1Canvas.html#a84d5dd93e03a20dd5df3b64b8d7b3dc1ab4e6101378d2a08d80df7e5da0625128">Showing</a>
+, <a class="el" href="classUi_1_1Canvas.html#a84d5dd93e03a20dd5df3b64b8d7b3dc1ae599161956d626eda4cb0a5ffb85271c">Idle</a>
+, <a class="el" href="classUi_1_1Canvas.html#a84d5dd93e03a20dd5df3b64b8d7b3dc1a891abfc8e08b549204d42bb0e4bb1a01">Hiding</a>
+ }</td></tr>
+<tr class="separator:a84d5dd93e03a20dd5df3b64b8d7b3dc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 公開メンバ関数</h2></td></tr>
 <tr class="memitem:a37445b75d2b63f5cbb9ae3d9565f903e" id="r_a37445b75d2b63f5cbb9ae3d9565f903e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUi_1_1Canvas.html#a37445b75d2b63f5cbb9ae3d9565f903e">Setup</a> (const std::string &amp;_name)</td></tr>
 <tr class="separator:a37445b75d2b63f5cbb9ae3d9565f903e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aec90ccb8698425fcf156bf0449eb4d19" id="r_aec90ccb8698425fcf156bf0449eb4d19"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUi_1_1Canvas.html#aec90ccb8698425fcf156bf0449eb4d19">Update</a> ()</td></tr>
-<tr class="separator:aec90ccb8698425fcf156bf0449eb4d19"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8a2a189c2deec33e90f1865569abb6c9" id="r_a8a2a189c2deec33e90f1865569abb6c9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUi_1_1Canvas.html#a8a2a189c2deec33e90f1865569abb6c9">Draw</a> () const</td></tr>
-<tr class="separator:a8a2a189c2deec33e90f1865569abb6c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1f3232f5943f3d0e66ef126a4210d603" id="r_a1f3232f5943f3d0e66ef126a4210d603"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUi_1_1Canvas.html#a1f3232f5943f3d0e66ef126a4210d603">StandaloneDebug</a> ()</td></tr>
-<tr class="separator:a1f3232f5943f3d0e66ef126a4210d603"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a082edda8b3c116bc4345a613498b3860" id="r_a082edda8b3c116bc4345a613498b3860"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUi_1_1Canvas.html#a082edda8b3c116bc4345a613498b3860">Debug</a> ()</td></tr>
-<tr class="separator:a082edda8b3c116bc4345a613498b3860"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a336b3022a64cf3c8381dd22c26c7c617" id="r_a336b3022a64cf3c8381dd22c26c7c617"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUi_1_1Canvas.html#a336b3022a64cf3c8381dd22c26c7c617">Editor</a> (bool *_open=nullptr)</td></tr>
+<tr class="separator:a336b3022a64cf3c8381dd22c26c7c617"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa20a17fadeb4d4060485960685755fb3" id="r_aa20a17fadeb4d4060485960685755fb3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUi_1_1Canvas.html#aa20a17fadeb4d4060485960685755fb3">RegisterAction</a> (const std::string &amp;_actionKey, const std::function&lt; void()&gt; &amp;_action)</td></tr>
 <tr class="separator:aa20a17fadeb4d4060485960685755fb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a802ec15dc4a386fca3ce78721a10c1e7" id="r_a802ec15dc4a386fca3ce78721a10c1e7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUi_1_1Canvas.html#a802ec15dc4a386fca3ce78721a10c1e7">RegisterAnimFunc</a> (const std::string &amp;_key, <a class="el" href="namespaceUi.html#a0fd75b2323cdd2adf5865d707c01ac14">AnimFunc</a> _func)</td></tr>
+<tr class="separator:a802ec15dc4a386fca3ce78721a10c1e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acfc94ff6b3b3b3d474932086f79e4167" id="r_acfc94ff6b3b3b3d474932086f79e4167"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUi_1_1Canvas.html#acfc94ff6b3b3b3d474932086f79e4167">SetActive</a> (bool _active)</td></tr>
 <tr class="separator:acfc94ff6b3b3b3d474932086f79e4167"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abc59dcd79a62bbb68bc3bcb538b80281" id="r_abc59dcd79a62bbb68bc3bcb538b80281"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUi_1_1Canvas.html#abc59dcd79a62bbb68bc3bcb538b80281">IsActive</a> () const</td></tr>
 <tr class="separator:abc59dcd79a62bbb68bc3bcb538b80281"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a058ade7e852c5d77ee5d1cd0e05d913d" id="r_a058ade7e852c5d77ee5d1cd0e05d913d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUi_1_1Canvas.html#a058ade7e852c5d77ee5d1cd0e05d913d">IsDirty</a> () const</td></tr>
 <tr class="separator:a058ade7e852c5d77ee5d1cd0e05d913d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a684400457f0a0b872f287cae85de13e3" id="r_a684400457f0a0b872f287cae85de13e3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classUi_1_1Canvas.html#a84d5dd93e03a20dd5df3b64b8d7b3dc1">Phase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUi_1_1Canvas.html#a684400457f0a0b872f287cae85de13e3">GetPhase</a> () const</td></tr>
+<tr class="separator:a684400457f0a0b872f287cae85de13e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf0877ecb9d6b28434b2179f23f7c720" id="r_adf0877ecb9d6b28434b2179f23f7c720"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classUi_1_1Element.html">Element</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUi_1_1Canvas.html#adf0877ecb9d6b28434b2179f23f7c720">FindElementByName</a> (const std::string &amp;_name) const</td></tr>
+<tr class="separator:adf0877ecb9d6b28434b2179f23f7c720"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afaca9f49564922852d7cdfdbd3d1e9a2" id="r_afaca9f49564922852d7cdfdbd3d1e9a2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classUi_1_1Element.html">Element</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUi_1_1Canvas.html#afaca9f49564922852d7cdfdbd3d1e9a2">GetElement</a> (size_t _index) const</td></tr>
+<tr class="separator:afaca9f49564922852d7cdfdbd3d1e9a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8759413e0205cd11b0de4a3e8f302c3" id="r_ac8759413e0205cd11b0de4a3e8f302c3"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUi_1_1Canvas.html#ac8759413e0205cd11b0de4a3e8f302c3">GetElementCount</a> () const</td></tr>
+<tr class="separator:ac8759413e0205cd11b0de4a3e8f302c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab339f8c05afde54a3a74516fcb44ef8d" id="r_ab339f8c05afde54a3a74516fcb44ef8d"><td class="memItemLeft" align="right" valign="top">std::vector&lt; size_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUi_1_1Canvas.html#ab339f8c05afde54a3a74516fcb44ef8d">GetIndicesWithEvent</a> (<a class="el" href="namespaceUi.html#ab96ee237a5d278a7b0bc25c02e349242">EventKey</a> _event) const</td></tr>
 <tr class="separator:ab339f8c05afde54a3a74516fcb44ef8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae498bf00f50a1d63c1df643d6012b4db" id="r_ae498bf00f50a1d63c1df643d6012b4db"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUi_1_1Canvas.html#ae498bf00f50a1d63c1df643d6012b4db">ExecuteAction</a> (const std::string &amp;_actionKey)</td></tr>
@@ -133,56 +149,79 @@ $(document).ready(function(){initNavTree('classUi_1_1Canvas.html',''); initResiz
 <tr class="separator:a55eedc4dc2a44f6e7026b97aae8e8479"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abdc741fd893499153e72bd11ea5dea1d" id="r_abdc741fd893499153e72bd11ea5dea1d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structUi_1_1Canvas_1_1ElementRect.html">ElementRect</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUi_1_1Canvas.html#abdc741fd893499153e72bd11ea5dea1d">GetElementRect</a> (size_t _elementIndex) const</td></tr>
 <tr class="separator:abdc741fd893499153e72bd11ea5dea1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c2b6eeeccdab0ef2594882e9c28b412" id="r_a2c2b6eeeccdab0ef2594882e9c28b412"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUi_1_1Canvas.html#a2c2b6eeeccdab0ef2594882e9c28b412">SetElementEvent</a> (const std::string &amp;_name, <a class="el" href="namespaceUi.html#ab96ee237a5d278a7b0bc25c02e349242">EventKey</a> _event, const std::string &amp;_actionKey)</td></tr>
+<tr class="memdesc:a2c2b6eeeccdab0ef2594882e9c28b412"><td class="mdescLeft">&#160;</td><td class="mdescRight">指定名の要素にアクションキーを紐づける  <br /></td></tr>
+<tr class="separator:a2c2b6eeeccdab0ef2594882e9c28b412"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4af64047aa7d40bf237eceb4743b8f4" id="r_aa4af64047aa7d40bf237eceb4743b8f4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUi_1_1Canvas.html#aa4af64047aa7d40bf237eceb4743b8f4">SetCustomDebug</a> (std::function&lt; void()&gt; _func)</td></tr>
+<tr class="memdesc:aa4af64047aa7d40bf237eceb4743b8f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Editor ウィンドウ末尾に追加描画するデバッグ関数を登録する  <br /></td></tr>
+<tr class="separator:aa4af64047aa7d40bf237eceb4743b8f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8412f84e79267dfab1569b1eb1b4f72d" id="r_a8412f84e79267dfab1569b1eb1b4f72d"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUi_1_1Canvas.html#a8412f84e79267dfab1569b1eb1b4f72d">GetActionKeys</a> () const</td></tr>
 <tr class="separator:a8412f84e79267dfab1569b1eb1b4f72d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3b1ef313287ec5a3cc85530f6b830367" id="r_a3b1ef313287ec5a3cc85530f6b830367"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classUi_1_1Element.html">Element</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUi_1_1Canvas.html#a3b1ef313287ec5a3cc85530f6b830367">FindElementByName</a> (const std::string &amp;_name)</td></tr>
-<tr class="separator:a3b1ef313287ec5a3cc85530f6b830367"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afaca9f49564922852d7cdfdbd3d1e9a2" id="r_afaca9f49564922852d7cdfdbd3d1e9a2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classUi_1_1Element.html">Element</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUi_1_1Canvas.html#afaca9f49564922852d7cdfdbd3d1e9a2">GetElement</a> (size_t _index) const</td></tr>
-<tr class="separator:afaca9f49564922852d7cdfdbd3d1e9a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac8759413e0205cd11b0de4a3e8f302c3" id="r_ac8759413e0205cd11b0de4a3e8f302c3"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUi_1_1Canvas.html#ac8759413e0205cd11b0de4a3e8f302c3">GetElementCount</a> () const</td></tr>
-<tr class="separator:ac8759413e0205cd11b0de4a3e8f302c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a70404f33396d52fedd337c8688f56157" id="r_a70404f33396d52fedd337c8688f56157"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUi_1_1Canvas.html#a70404f33396d52fedd337c8688f56157">GetAnimFuncKeys</a> () const</td></tr>
+<tr class="separator:a70404f33396d52fedd337c8688f56157"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+静的公開メンバ関数</h2></td></tr>
+<tr class="memitem:a6332e174fc38785acd5a55a76d7cf0f9" id="r_a6332e174fc38785acd5a55a76d7cf0f9"><td class="memItemLeft" align="right" valign="top">static GESTD::ReferencePtr&lt; <a class="el" href="classUi_1_1Canvas.html">Canvas</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUi_1_1Canvas.html#a6332e174fc38785acd5a55a76d7cf0f9">Find</a> (const std::string &amp;_name)</td></tr>
+<tr class="separator:a6332e174fc38785acd5a55a76d7cf0f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
+フレンド</h2></td></tr>
+<tr class="memitem:adddd5c43ff870a047aa66db4edf82a7e" id="r_adddd5c43ff870a047aa66db4edf82a7e"><td class="memItemLeft" align="right" valign="top">class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUi_1_1Canvas.html#adddd5c43ff870a047aa66db4edf82a7e">Manager</a></td></tr>
+<tr class="separator:adddd5c43ff870a047aa66db4edf82a7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">詳解</h2>
 <div class="textblock">
-<p class="definition"> <a class="el" href="UserInterface_8hpp_source.html">UserInterface.hpp</a> の <a class="el" href="UserInterface_8hpp_source.html#l00009">9</a> 行目に定義があります。</p>
-</div><h2 class="groupheader">関数詳解</h2>
-<a id="a082edda8b3c116bc4345a613498b3860" name="a082edda8b3c116bc4345a613498b3860"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a082edda8b3c116bc4345a613498b3860">&#9670;&#160;</a></span>Debug()</h2>
+<p class="definition"> <a class="el" href="UserInterface_8hpp_source.html">UserInterface.hpp</a> の <a class="el" href="UserInterface_8hpp_source.html#l00014">14</a> 行目に定義があります。</p>
+</div><h2 class="groupheader">列挙型メンバ詳解</h2>
+<a id="a84d5dd93e03a20dd5df3b64b8d7b3dc1" name="a84d5dd93e03a20dd5df3b64b8d7b3dc1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a84d5dd93e03a20dd5df3b64b8d7b3dc1">&#9670;&#160;</a></span>Phase</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum class <a class="el" href="classUi_1_1Canvas.html#a84d5dd93e03a20dd5df3b64b8d7b3dc1">Ui::Canvas::Phase</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">列挙値</th></tr><tr><td class="fieldname"><a id="a84d5dd93e03a20dd5df3b64b8d7b3dc1a3cab03c00dbd11bc3569afa0748013f0" name="a84d5dd93e03a20dd5df3b64b8d7b3dc1a3cab03c00dbd11bc3569afa0748013f0"></a>Inactive&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a84d5dd93e03a20dd5df3b64b8d7b3dc1ab4e6101378d2a08d80df7e5da0625128" name="a84d5dd93e03a20dd5df3b64b8d7b3dc1ab4e6101378d2a08d80df7e5da0625128"></a>Showing&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a84d5dd93e03a20dd5df3b64b8d7b3dc1ae599161956d626eda4cb0a5ffb85271c" name="a84d5dd93e03a20dd5df3b64b8d7b3dc1ae599161956d626eda4cb0a5ffb85271c"></a>Idle&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a84d5dd93e03a20dd5df3b64b8d7b3dc1a891abfc8e08b549204d42bb0e4bb1a01" name="a84d5dd93e03a20dd5df3b64b8d7b3dc1a891abfc8e08b549204d42bb0e4bb1a01"></a>Hiding&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+<p class="definition"> <a class="el" href="UserInterface_8hpp_source.html">UserInterface.hpp</a> の <a class="el" href="UserInterface_8hpp_source.html#l00019">19</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<h2 class="groupheader">関数詳解</h2>
+<a id="a336b3022a64cf3c8381dd22c26c7c617" name="a336b3022a64cf3c8381dd22c26c7c617"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a336b3022a64cf3c8381dd22c26c7c617">&#9670;&#160;</a></span>Editor()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void Ui::Canvas::Debug </td>
+          <td class="memname">void Ui::Canvas::Editor </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">bool *&#160;</td>
+          <td class="paramname"><em>_open</em> = <code>nullptr</code></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="UserInterface_8cpp_source.html">UserInterface.cpp</a> の <a class="el" href="UserInterface_8cpp_source.html#l00065">65</a> 行目に定義があります。</p>
-
-<p class="reference">参照元 <a class="el" href="UserInterface_8cpp_source.html#l00053">StandaloneDebug()</a>.</p>
-
-</div>
-</div>
-<a id="a8a2a189c2deec33e90f1865569abb6c9" name="a8a2a189c2deec33e90f1865569abb6c9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8a2a189c2deec33e90f1865569abb6c9">&#9670;&#160;</a></span>Draw()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Ui::Canvas::Draw </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition"> <a class="el" href="UserInterface_8cpp_source.html">UserInterface.cpp</a> の <a class="el" href="UserInterface_8cpp_source.html#l00044">44</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="UserInterface_8cpp_source.html">UserInterface.cpp</a> の <a class="el" href="UserInterface_8cpp_source.html#l00084">84</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -202,7 +241,7 @@ $(document).ready(function(){initNavTree('classUi_1_1Canvas.html',''); initResiz
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="UserInterface_8cpp_source.html">UserInterface.cpp</a> の <a class="el" href="UserInterface_8cpp_source.html#l00097">97</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="UserInterface_8cpp_source.html">UserInterface.cpp</a> の <a class="el" href="UserInterface_8cpp_source.html#l00169">169</a> 行目に定義があります。</p>
 
 <p class="reference">参照先 <a class="el" href="EventSystem_8cpp_source.html#l00012">Ui::EventSystem::Execute()</a>.</p>
 
@@ -234,14 +273,43 @@ $(document).ready(function(){initNavTree('classUi_1_1Canvas.html',''); initResiz
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="UserInterface_8cpp_source.html">UserInterface.cpp</a> の <a class="el" href="UserInterface_8cpp_source.html#l00101">101</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="UserInterface_8cpp_source.html">UserInterface.cpp</a> の <a class="el" href="UserInterface_8cpp_source.html#l00173">173</a> 行目に定義があります。</p>
 
 <p class="reference">参照先 <a class="el" href="EventSystem_8cpp_source.html#l00012">Ui::EventSystem::Execute()</a>.</p>
 
 </div>
 </div>
-<a id="a3b1ef313287ec5a3cc85530f6b830367" name="a3b1ef313287ec5a3cc85530f6b830367"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3b1ef313287ec5a3cc85530f6b830367">&#9670;&#160;</a></span>FindElementByName()</h2>
+<a id="a6332e174fc38785acd5a55a76d7cf0f9" name="a6332e174fc38785acd5a55a76d7cf0f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6332e174fc38785acd5a55a76d7cf0f9">&#9670;&#160;</a></span>Find()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">GESTD::ReferencePtr&lt; <a class="el" href="classUi_1_1Canvas.html">Canvas</a> &gt; Ui::Canvas::Find </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>_name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>登録済みの <a class="el" href="classUi_1_1Canvas.html">Canvas</a> を名前で取得する。未登録なら無効な ReferencePtr を返す </p>
+
+<p class="definition"> <a class="el" href="UserInterface_8cpp_source.html">UserInterface.cpp</a> の <a class="el" href="UserInterface_8cpp_source.html#l00080">80</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="adf0877ecb9d6b28434b2179f23f7c720" name="adf0877ecb9d6b28434b2179f23f7c720"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf0877ecb9d6b28434b2179f23f7c720">&#9670;&#160;</a></span>FindElementByName()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -251,12 +319,14 @@ $(document).ready(function(){initNavTree('classUi_1_1Canvas.html',''); initResiz
           <td>(</td>
           <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>_name</em></td><td>)</td>
-          <td></td>
+          <td> const</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="UserInterface_8cpp_source.html">UserInterface.cpp</a> の <a class="el" href="UserInterface_8cpp_source.html#l00121">121</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="UserInterface_8cpp_source.html">UserInterface.cpp</a> の <a class="el" href="UserInterface_8cpp_source.html#l00202">202</a> 行目に定義があります。</p>
+
+<p class="reference">参照元 <a class="el" href="UserInterface_8cpp_source.html#l00196">SetElementEvent()</a>.</p>
 
 </div>
 </div>
@@ -275,9 +345,28 @@ $(document).ready(function(){initNavTree('classUi_1_1Canvas.html',''); initResiz
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="UserInterface_8cpp_source.html">UserInterface.cpp</a> の <a class="el" href="UserInterface_8cpp_source.html#l00117">117</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="UserInterface_8cpp_source.html">UserInterface.cpp</a> の <a class="el" href="UserInterface_8cpp_source.html#l00185">185</a> 行目に定義があります。</p>
 
 <p class="reference">参照先 <a class="el" href="EventSystem_8cpp_source.html#l00023">Ui::EventSystem::GetActionKeys()</a>.</p>
+
+</div>
+</div>
+<a id="a70404f33396d52fedd337c8688f56157" name="a70404f33396d52fedd337c8688f56157"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a70404f33396d52fedd337c8688f56157">&#9670;&#160;</a></span>GetAnimFuncKeys()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; std::string &gt; Ui::Canvas::GetAnimFuncKeys </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="UserInterface_8cpp_source.html">UserInterface.cpp</a> の <a class="el" href="UserInterface_8cpp_source.html#l00189">189</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -297,7 +386,7 @@ $(document).ready(function(){initNavTree('classUi_1_1Canvas.html',''); initResiz
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="UserInterface_8cpp_source.html">UserInterface.cpp</a> の <a class="el" href="UserInterface_8cpp_source.html#l00130">130</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="UserInterface_8cpp_source.html">UserInterface.cpp</a> の <a class="el" href="UserInterface_8cpp_source.html#l00209">209</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -316,7 +405,7 @@ $(document).ready(function(){initNavTree('classUi_1_1Canvas.html',''); initResiz
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="UserInterface_8cpp_source.html">UserInterface.cpp</a> の <a class="el" href="UserInterface_8cpp_source.html#l00135">135</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="UserInterface_8cpp_source.html">UserInterface.cpp</a> の <a class="el" href="UserInterface_8cpp_source.html#l00214">214</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -336,7 +425,7 @@ $(document).ready(function(){initNavTree('classUi_1_1Canvas.html',''); initResiz
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="UserInterface_8cpp_source.html">UserInterface.cpp</a> の <a class="el" href="UserInterface_8cpp_source.html#l00109">109</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="UserInterface_8cpp_source.html">UserInterface.cpp</a> の <a class="el" href="UserInterface_8cpp_source.html#l00179">179</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -356,7 +445,26 @@ $(document).ready(function(){initNavTree('classUi_1_1Canvas.html',''); initResiz
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="UserInterface_8cpp_source.html">UserInterface.cpp</a> の <a class="el" href="UserInterface_8cpp_source.html#l00087">87</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="UserInterface_8cpp_source.html">UserInterface.cpp</a> の <a class="el" href="UserInterface_8cpp_source.html#l00161">161</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="a684400457f0a0b872f287cae85de13e3" name="a684400457f0a0b872f287cae85de13e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a684400457f0a0b872f287cae85de13e3">&#9670;&#160;</a></span>GetPhase()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classUi_1_1Canvas.html#a84d5dd93e03a20dd5df3b64b8d7b3dc1">Canvas::Phase</a> Ui::Canvas::GetPhase </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="UserInterface_8cpp_source.html">UserInterface.cpp</a> の <a class="el" href="UserInterface_8cpp_source.html#l00142">142</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -375,7 +483,9 @@ $(document).ready(function(){initNavTree('classUi_1_1Canvas.html',''); initResiz
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="UserInterface_8cpp_source.html">UserInterface.cpp</a> の <a class="el" href="UserInterface_8cpp_source.html#l00079">79</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="UserInterface_8cpp_source.html">UserInterface.cpp</a> の <a class="el" href="UserInterface_8cpp_source.html#l00140">140</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="classUi_1_1Canvas.html#a84d5dd93e03a20dd5df3b64b8d7b3dc1a3cab03c00dbd11bc3569afa0748013f0">Inactive</a>.</p>
 
 </div>
 </div>
@@ -394,7 +504,7 @@ $(document).ready(function(){initNavTree('classUi_1_1Canvas.html',''); initResiz
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="UserInterface_8cpp_source.html">UserInterface.cpp</a> の <a class="el" href="UserInterface_8cpp_source.html#l00083">83</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="UserInterface_8cpp_source.html">UserInterface.cpp</a> の <a class="el" href="UserInterface_8cpp_source.html#l00141">141</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -424,9 +534,39 @@ $(document).ready(function(){initNavTree('classUi_1_1Canvas.html',''); initResiz
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="UserInterface_8cpp_source.html">UserInterface.cpp</a> の <a class="el" href="UserInterface_8cpp_source.html#l00071">71</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="UserInterface_8cpp_source.html">UserInterface.cpp</a> の <a class="el" href="UserInterface_8cpp_source.html#l00106">106</a> 行目に定義があります。</p>
 
 <p class="reference">参照先 <a class="el" href="EventSystem_8cpp_source.html#l00006">Ui::EventSystem::Register()</a>.</p>
+
+</div>
+</div>
+<a id="a802ec15dc4a386fca3ce78721a10c1e7" name="a802ec15dc4a386fca3ce78721a10c1e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a802ec15dc4a386fca3ce78721a10c1e7">&#9670;&#160;</a></span>RegisterAnimFunc()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Ui::Canvas::RegisterAnimFunc </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>_key</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceUi.html#a0fd75b2323cdd2adf5865d707c01ac14">AnimFunc</a>&#160;</td>
+          <td class="paramname"><em>_func</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="UserInterface_8cpp_source.html">UserInterface.cpp</a> の <a class="el" href="UserInterface_8cpp_source.html#l00110">110</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -446,7 +586,79 @@ $(document).ready(function(){initNavTree('classUi_1_1Canvas.html',''); initResiz
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="UserInterface_8cpp_source.html">UserInterface.cpp</a> の <a class="el" href="UserInterface_8cpp_source.html#l00075">75</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="UserInterface_8cpp_source.html">UserInterface.cpp</a> の <a class="el" href="UserInterface_8cpp_source.html#l00114">114</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="classUi_1_1Canvas.html#a84d5dd93e03a20dd5df3b64b8d7b3dc1a891abfc8e08b549204d42bb0e4bb1a01">Hiding</a>, <a class="el" href="classUi_1_1Canvas.html#a84d5dd93e03a20dd5df3b64b8d7b3dc1ae599161956d626eda4cb0a5ffb85271c">Idle</a>, <a class="el" href="classUi_1_1Canvas.html#a84d5dd93e03a20dd5df3b64b8d7b3dc1a3cab03c00dbd11bc3569afa0748013f0">Inactive</a>, <a class="el" href="classUi_1_1Canvas.html#a84d5dd93e03a20dd5df3b64b8d7b3dc1ab4e6101378d2a08d80df7e5da0625128">Showing</a>.</p>
+
+</div>
+</div>
+<a id="aa4af64047aa7d40bf237eceb4743b8f4" name="aa4af64047aa7d40bf237eceb4743b8f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa4af64047aa7d40bf237eceb4743b8f4">&#9670;&#160;</a></span>SetCustomDebug()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Ui::Canvas::SetCustomDebug </td>
+          <td>(</td>
+          <td class="paramtype">std::function&lt; void()&gt;&#160;</td>
+          <td class="paramname"><em>_func</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Editor ウィンドウ末尾に追加描画するデバッグ関数を登録する </p>
+
+<p class="definition"> <a class="el" href="UserInterface_8cpp_source.html">UserInterface.cpp</a> の <a class="el" href="UserInterface_8cpp_source.html#l00100">100</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="a2c2b6eeeccdab0ef2594882e9c28b412" name="a2c2b6eeeccdab0ef2594882e9c28b412"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2c2b6eeeccdab0ef2594882e9c28b412">&#9670;&#160;</a></span>SetElementEvent()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Ui::Canvas::SetElementEvent </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>_name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceUi.html#ab96ee237a5d278a7b0bc25c02e349242">EventKey</a>&#160;</td>
+          <td class="paramname"><em>_event</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>_actionKey</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>指定名の要素にアクションキーを紐づける </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_name</td><td>要素名 </td></tr>
+    <tr><td class="paramname">_event</td><td>対象イベント </td></tr>
+    <tr><td class="paramname">_actionKey</td><td>空文字で解除 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition"> <a class="el" href="UserInterface_8cpp_source.html">UserInterface.cpp</a> の <a class="el" href="UserInterface_8cpp_source.html#l00196">196</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="UserInterface_8cpp_source.html#l00202">FindElementByName()</a>.</p>
 
 </div>
 </div>
@@ -466,47 +678,32 @@ $(document).ready(function(){initNavTree('classUi_1_1Canvas.html',''); initResiz
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="UserInterface_8cpp_source.html">UserInterface.cpp</a> の <a class="el" href="UserInterface_8cpp_source.html#l00014">14</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="UserInterface_8cpp_source.html">UserInterface.cpp</a> の <a class="el" href="UserInterface_8cpp_source.html#l00024">24</a> 行目に定義があります。</p>
 
 </div>
 </div>
-<a id="a1f3232f5943f3d0e66ef126a4210d603" name="a1f3232f5943f3d0e66ef126a4210d603"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1f3232f5943f3d0e66ef126a4210d603">&#9670;&#160;</a></span>StandaloneDebug()</h2>
+<h2 class="groupheader">フレンドと関連関数の詳解</h2>
+<a id="adddd5c43ff870a047aa66db4edf82a7e" name="adddd5c43ff870a047aa66db4edf82a7e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adddd5c43ff870a047aa66db4edf82a7e">&#9670;&#160;</a></span>Manager</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void Ui::Canvas::StandaloneDebug </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td class="memname">friend class <a class="el" href="classUi_1_1Manager.html">Manager</a></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="UserInterface_8cpp_source.html">UserInterface.cpp</a> の <a class="el" href="UserInterface_8cpp_source.html#l00053">53</a> 行目に定義があります。</p>
-
-<p class="reference">参照先 <a class="el" href="UserInterface_8cpp_source.html#l00065">Debug()</a>.</p>
-
-</div>
-</div>
-<a id="aec90ccb8698425fcf156bf0449eb4d19" name="aec90ccb8698425fcf156bf0449eb4d19"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aec90ccb8698425fcf156bf0449eb4d19">&#9670;&#160;</a></span>Update()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Ui::Canvas::Update </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition"> <a class="el" href="UserInterface_8cpp_source.html">UserInterface.cpp</a> の <a class="el" href="UserInterface_8cpp_source.html#l00028">28</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="UserInterface_8hpp_source.html">UserInterface.hpp</a> の <a class="el" href="UserInterface_8hpp_source.html#l00017">17</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -520,7 +717,7 @@ $(document).ready(function(){initNavTree('classUi_1_1Canvas.html',''); initResiz
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespaceUi.html">Ui</a></li><li class="navelem"><a class="el" href="classUi_1_1Canvas.html">Canvas</a></li>
-    <li class="footer">2026年03月10日(火) 05時02分34秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年04月13日(月) 08時40分04秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

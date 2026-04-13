@@ -31,6 +31,7 @@ var NAVTREE =
         [ "全て", "namespacemembers.html", null ],
         [ "関数", "namespacemembers_func.html", null ],
         [ "変数", "namespacemembers_vars.html", null ],
+        [ "型定義", "namespacemembers_type.html", null ],
         [ "列挙型", "namespacemembers_enum.html", null ]
       ] ]
     ] ],
@@ -43,7 +44,8 @@ var NAVTREE =
         [ "関数", "functions_func.html", "functions_func" ],
         [ "変数", "functions_vars.html", null ],
         [ "型定義", "functions_type.html", null ],
-        [ "列挙型", "functions_enum.html", null ]
+        [ "列挙型", "functions_enum.html", null ],
+        [ "関連関数", "functions_rela.html", null ]
       ] ]
     ] ],
     [ "ファイル", "files.html", [
@@ -63,11 +65,12 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "AbstractPostEffectFactory_8hpp.html",
-"PointLight_8h.html",
-"classEmitter.html#a29d5e63a07da34e87d77c0668c70e65c",
-"classParticle.html#add3c9ecb00172d8e82c7addded4fbdb8",
-"classUi_1_1Canvas.html#a1f3232f5943f3d0e66ef126a4210d603",
-"namespacespdlog_1_1sinks.html"
+"PerformanceProfiler_8cpp.html",
+"classDX12Resource.html#ab449563ef728d837d81b333e9910aad8",
+"classLog.html#afb5d4c945d835d194a295461d752531ea19da7170bea36556dde582519795f3fc",
+"classSprite.html#a04e10b224c20c9bea7e2a5062c6afc75",
+"classUi_1_1Element.html#ac67efe9f56612166d9653cf0d7469dc2",
+"globals_func.html"
 ];
 
 var SYNCONMSG = 'クリックで同期表示が無効になります';

@@ -101,45 +101,46 @@ $(document).ready(function(){initNavTree('CollisionManager_8hpp_source.html','')
 <a href="CollisionManager_8hpp.html">[詳解]</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#include &lt;memory&gt;</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="DebugUI_8hpp.html">DebugUI.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;<a class="code" href="Line_8hpp.html">Line.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;Collision/CollisionManager.h&quot;</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
-<div class="foldopen" id="foldopen00011" data-start="{" data-end="};">
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="classCollisionManager.html">   11</a></span><span class="keyword">class </span><a class="code hl_class" href="classCollisionManager.html">CollisionManager</a> {</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    Collision::Manager* manager_ = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    <a class="code hl_class" href="classDebugUI.html">DebugUI</a>* debugUI_ = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    std::unique_ptr&lt;Line&gt; debugLine_;</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="keywordtype">bool</span> debugEnabled_ = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classCollisionManager.html#a9cd85da405c08cb3dc176596d2d1edd8">Initialize</a>(<a class="code hl_class" href="classDebugUI.html">DebugUI</a>* _debugUI);</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classCollisionManager.html#a23c21d077dbfd7ca86e7c0649d775dfc">Update</a>();</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classCollisionManager.html#ad5911d413e15313c70f5eb1904d7dfd4">DrawDebug</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classCollisionManager.html#a53ced28ad907e1a78a6cb3ffbcee64da">Debug</a>();</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <span class="keywordtype">void</span> RebuildDebugLines();</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="keywordtype">void</span> DrawSphere(<span class="keyword">const</span> Vector3&amp; center, <span class="keywordtype">float</span> radius);</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="keywordtype">void</span> DrawAABB(<span class="keyword">const</span> Vector3&amp; center, <span class="keyword">const</span> Vector3&amp; half);</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>};</div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;ReferencePtr.hpp&quot;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;<a class="code" href="DebugUI_8hpp.html">DebugUI.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;<a class="code" href="Line_8hpp.html">Line.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;Collision/CollisionManager.h&quot;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="foldopen" id="foldopen00012" data-start="{" data-end="};">
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="classCollisionManager.html">   12</a></span><span class="keyword">class </span><a class="code hl_class" href="classCollisionManager.html">CollisionManager</a> {</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    GESTD::ReferencePtr&lt;Collision::Manager&gt; manager_;</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    GESTD::ReferencePtr&lt;DebugUI&gt; debugUI_;</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    std::unique_ptr&lt;Line&gt; debugLine_;</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <span class="keywordtype">bool</span> debugEnabled_ = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classCollisionManager.html#a4d5d6bbb8d9365f69e721da0ee218d99">Initialize</a>(<span class="keyword">const</span> GESTD::ReferencePtr&lt;DebugUI&gt;&amp; _debugUi);</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classCollisionManager.html#a23c21d077dbfd7ca86e7c0649d775dfc">Update</a>();</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classCollisionManager.html#ad5911d413e15313c70f5eb1904d7dfd4">DrawDebug</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classCollisionManager.html#a53ced28ad907e1a78a6cb3ffbcee64da">Debug</a>();</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="keywordtype">void</span> RebuildDebugLines();</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <span class="keywordtype">void</span> DrawSphere(<span class="keyword">const</span> Vector3&amp; center, <span class="keywordtype">float</span> radius);</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="keywordtype">void</span> DrawAABB(<span class="keyword">const</span> Vector3&amp; center, <span class="keyword">const</span> Vector3&amp; half);</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>};</div>
 </div>
 <div class="ttc" id="aDebugUI_8hpp_html"><div class="ttname"><a href="DebugUI_8hpp.html">DebugUI.hpp</a></div></div>
 <div class="ttc" id="aLine_8hpp_html"><div class="ttname"><a href="Line_8hpp.html">Line.hpp</a></div></div>
-<div class="ttc" id="aclassCollisionManager_html"><div class="ttname"><a href="classCollisionManager.html">CollisionManager</a></div><div class="ttdoc">Engine 側の衝突管理ラッパー Collision::Manager の呼び出しとデバッグ可視化を担当</div><div class="ttdef"><b>Definition</b> <a href="CollisionManager_8hpp_source.html#l00011">CollisionManager.hpp:11</a></div></div>
-<div class="ttc" id="aclassCollisionManager_html_a23c21d077dbfd7ca86e7c0649d775dfc"><div class="ttname"><a href="classCollisionManager.html#a23c21d077dbfd7ca86e7c0649d775dfc">CollisionManager::Update</a></div><div class="ttdeci">void Update()</div><div class="ttdef"><b>Definition</b> <a href="CollisionManager_8cpp_source.html#l00034">CollisionManager.cpp:34</a></div></div>
-<div class="ttc" id="aclassCollisionManager_html_a53ced28ad907e1a78a6cb3ffbcee64da"><div class="ttname"><a href="classCollisionManager.html#a53ced28ad907e1a78a6cb3ffbcee64da">CollisionManager::Debug</a></div><div class="ttdeci">void Debug()</div><div class="ttdef"><b>Definition</b> <a href="CollisionManager_8cpp_source.html#l00053">CollisionManager.cpp:53</a></div></div>
-<div class="ttc" id="aclassCollisionManager_html_a9cd85da405c08cb3dc176596d2d1edd8"><div class="ttname"><a href="classCollisionManager.html#a9cd85da405c08cb3dc176596d2d1edd8">CollisionManager::Initialize</a></div><div class="ttdeci">void Initialize(DebugUI *_debugUI)</div><div class="ttdef"><b>Definition</b> <a href="CollisionManager_8cpp_source.html#l00015">CollisionManager.cpp:15</a></div></div>
-<div class="ttc" id="aclassCollisionManager_html_ad5911d413e15313c70f5eb1904d7dfd4"><div class="ttname"><a href="classCollisionManager.html#ad5911d413e15313c70f5eb1904d7dfd4">CollisionManager::DrawDebug</a></div><div class="ttdeci">void DrawDebug() const</div><div class="ttdef"><b>Definition</b> <a href="CollisionManager_8cpp_source.html#l00045">CollisionManager.cpp:45</a></div></div>
-<div class="ttc" id="aclassDebugUI_html"><div class="ttname"><a href="classDebugUI.html">DebugUI</a></div><div class="ttdoc">ImGuiアダプタークラス デバッグUIの描画とコマンド管理を提供</div><div class="ttdef"><b>Definition</b> <a href="DebugUI_8hpp_source.html#l00014">DebugUI.hpp:14</a></div></div>
+<div class="ttc" id="aclassCollisionManager_html"><div class="ttname"><a href="classCollisionManager.html">CollisionManager</a></div><div class="ttdoc">Engine 側の衝突管理ラッパー Collision::Manager の呼び出しとデバッグ可視化を担当</div><div class="ttdef"><b>Definition</b> <a href="CollisionManager_8hpp_source.html#l00012">CollisionManager.hpp:12</a></div></div>
+<div class="ttc" id="aclassCollisionManager_html_a23c21d077dbfd7ca86e7c0649d775dfc"><div class="ttname"><a href="classCollisionManager.html#a23c21d077dbfd7ca86e7c0649d775dfc">CollisionManager::Update</a></div><div class="ttdeci">void Update()</div><div class="ttdef"><b>Definition</b> <a href="CollisionManager_8cpp_source.html#l00032">CollisionManager.cpp:32</a></div></div>
+<div class="ttc" id="aclassCollisionManager_html_a4d5d6bbb8d9365f69e721da0ee218d99"><div class="ttname"><a href="classCollisionManager.html#a4d5d6bbb8d9365f69e721da0ee218d99">CollisionManager::Initialize</a></div><div class="ttdeci">void Initialize(const GESTD::ReferencePtr&lt; DebugUI &gt; &amp;_debugUi)</div><div class="ttdef"><b>Definition</b> <a href="CollisionManager_8cpp_source.html#l00014">CollisionManager.cpp:14</a></div></div>
+<div class="ttc" id="aclassCollisionManager_html_a53ced28ad907e1a78a6cb3ffbcee64da"><div class="ttname"><a href="classCollisionManager.html#a53ced28ad907e1a78a6cb3ffbcee64da">CollisionManager::Debug</a></div><div class="ttdeci">void Debug()</div><div class="ttdef"><b>Definition</b> <a href="CollisionManager_8cpp_source.html#l00051">CollisionManager.cpp:51</a></div></div>
+<div class="ttc" id="aclassCollisionManager_html_ad5911d413e15313c70f5eb1904d7dfd4"><div class="ttname"><a href="classCollisionManager.html#ad5911d413e15313c70f5eb1904d7dfd4">CollisionManager::DrawDebug</a></div><div class="ttdeci">void DrawDebug() const</div><div class="ttdef"><b>Definition</b> <a href="CollisionManager_8cpp_source.html#l00043">CollisionManager.cpp:43</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_07ac6b5520035cd1f955fb320f8b574e.html">Collision</a></li><li class="navelem"><a class="el" href="CollisionManager_8hpp.html">CollisionManager.hpp</a></li>
-    <li class="footer">2026年03月10日(火) 05時02分34秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年04月13日(月) 08時40分04秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

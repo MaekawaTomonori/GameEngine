@@ -104,9 +104,9 @@ $(document).ready(function(){initNavTree('classRenderer.html',''); initResizable
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 公開メンバ関数</h2></td></tr>
-<tr class="memitem:abc4ce28d1180b4d4a9ce14a2da560895" id="r_abc4ce28d1180b4d4a9ce14a2da560895"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRenderer.html#abc4ce28d1180b4d4a9ce14a2da560895">Initialize</a> (<a class="el" href="classDirectXAdapter.html">DirectXAdapter</a> *_adapter, <a class="el" href="classPostProcessExecutor.html">PostProcessExecutor</a> *_postProcessor)</td></tr>
-<tr class="memdesc:abc4ce28d1180b4d4a9ce14a2da560895"><td class="mdescLeft">&#160;</td><td class="mdescRight">レンダラーを初期化  <br /></td></tr>
-<tr class="separator:abc4ce28d1180b4d4a9ce14a2da560895"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a402d95229ab6ad2d20a997928d3cc6bf" id="r_a402d95229ab6ad2d20a997928d3cc6bf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRenderer.html#a402d95229ab6ad2d20a997928d3cc6bf">Initialize</a> (GESTD::ReferencePtr&lt; <a class="el" href="classDirectXAdapter.html">DirectXAdapter</a> &gt; _adapter, GESTD::ReferencePtr&lt; <a class="el" href="classPostProcessExecutor.html">PostProcessExecutor</a> &gt; _postProcessor)</td></tr>
+<tr class="memdesc:a402d95229ab6ad2d20a997928d3cc6bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">レンダラーを初期化  <br /></td></tr>
+<tr class="separator:a402d95229ab6ad2d20a997928d3cc6bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acef003c7f24a4211a4b01976764184c4" id="r_acef003c7f24a4211a4b01976764184c4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRenderer.html#acef003c7f24a4211a4b01976764184c4">Register</a> (const std::function&lt; void()&gt; &amp;_task, bool _applyPostEffect=false)</td></tr>
 <tr class="memdesc:acef003c7f24a4211a4b01976764184c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">描画タスクを登録  <br /></td></tr>
 <tr class="separator:acef003c7f24a4211a4b01976764184c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -120,10 +120,10 @@ $(document).ready(function(){initNavTree('classRenderer.html',''); initResizable
 <a name="details" id="details"></a><h2 class="groupheader">詳解</h2>
 <div class="textblock"><p>レンダラークラス 描画タスクの管理とポストプロセス適用を制御 </p>
 
-<p class="definition"> <a class="el" href="Renderer_8hpp_source.html">Renderer.hpp</a> の <a class="el" href="Renderer_8hpp_source.html#l00013">13</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Renderer_8hpp_source.html">Renderer.hpp</a> の <a class="el" href="Renderer_8hpp_source.html#l00015">15</a> 行目に定義があります。</p>
 </div><h2 class="groupheader">関数詳解</h2>
-<a id="abc4ce28d1180b4d4a9ce14a2da560895" name="abc4ce28d1180b4d4a9ce14a2da560895"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abc4ce28d1180b4d4a9ce14a2da560895">&#9670;&#160;</a></span>Initialize()</h2>
+<a id="a402d95229ab6ad2d20a997928d3cc6bf" name="a402d95229ab6ad2d20a997928d3cc6bf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a402d95229ab6ad2d20a997928d3cc6bf">&#9670;&#160;</a></span>Initialize()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -131,13 +131,13 @@ $(document).ready(function(){initNavTree('classRenderer.html',''); initResizable
         <tr>
           <td class="memname">void Renderer::Initialize </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classDirectXAdapter.html">DirectXAdapter</a> *&#160;</td>
+          <td class="paramtype">GESTD::ReferencePtr&lt; <a class="el" href="classDirectXAdapter.html">DirectXAdapter</a> &gt;&#160;</td>
           <td class="paramname"><em>_adapter</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classPostProcessExecutor.html">PostProcessExecutor</a> *&#160;</td>
+          <td class="paramtype">GESTD::ReferencePtr&lt; <a class="el" href="classPostProcessExecutor.html">PostProcessExecutor</a> &gt;&#160;</td>
           <td class="paramname"><em>_postProcessor</em>&#160;</td>
         </tr>
         <tr>
@@ -198,7 +198,7 @@ $(document).ready(function(){initNavTree('classRenderer.html',''); initResizable
 
 <p class="definition"> <a class="el" href="Renderer_8cpp_source.html">Renderer.cpp</a> の <a class="el" href="Renderer_8cpp_source.html#l00011">11</a> 行目に定義があります。</p>
 
-<p class="reference">参照元 <a class="el" href="Common_8cpp_source.html#l00042">Common::Draw()</a>, <a class="el" href="ParticleSystem_8cpp_source.html#l00047">ParticleSystem::Draw()</a>, <a class="el" href="ModelCommon_8cpp_source.html#l00310">ModelCommon::Draw()</a>.</p>
+<p class="reference">参照元 <a class="el" href="Common_8cpp_source.html#l00042">Common::Draw()</a>, <a class="el" href="ParticleSystem_8cpp_source.html#l00062">ParticleSystem::Draw()</a>, <a class="el" href="ModelCommon_8cpp_source.html#l00310">ModelCommon::Draw()</a>, <a class="el" href="TextCommon_8cpp_source.html#l00379">TextCommon::Draw()</a>.</p>
 
 </div>
 </div>
@@ -249,8 +249,6 @@ $(document).ready(function(){initNavTree('classRenderer.html',''); initResizable
 
 <p class="definition"> <a class="el" href="Renderer_8cpp_source.html">Renderer.cpp</a> の <a class="el" href="Renderer_8cpp_source.html#l00023">23</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="DirectXAdapter_8cpp_source.html#l00262">DirectXAdapter::BeginFrame()</a>, <a class="el" href="PostProcessExecutor_8cpp_source.html#l00101">PostProcessExecutor::BeginFrame()</a>, <a class="el" href="PostProcessExecutor_8cpp_source.html#l00141">PostProcessExecutor::Draw()</a>, <a class="el" href="DirectXAdapter_8cpp_source.html#l00267">DirectXAdapter::EndFrame()</a>, <a class="el" href="PostProcessExecutor_8cpp_source.html#l00116">PostProcessExecutor::EndFrame()</a>, <a class="el" href="PostProcessExecutor_8cpp_source.html#l00124">PostProcessExecutor::Execute()</a>, <a class="el" href="PostProcessExecutor_8cpp_source.html#l00169">PostProcessExecutor::IsSceneViewActive()</a>.</p>
-
 </div>
 </div>
 <hr/>このクラス詳解は次のファイルから抽出されました:<ul>
@@ -263,7 +261,7 @@ $(document).ready(function(){initNavTree('classRenderer.html',''); initResizable
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classRenderer.html">Renderer</a></li>
-    <li class="footer">2026年03月10日(火) 05時02分34秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年04月13日(月) 08時40分04秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['in_0',['In',['../classITransitionEffect.html#a86868f632ccdf014543bbf471096227baefeb369cccbd560588a756610865664c',1,'ITransitionEffect']]],
-  ['info_1',['INFO',['../classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3',1,'Log']]]
+  ['hiding_0',['Hiding',['../classUi_1_1Canvas.html#a84d5dd93e03a20dd5df3b64b8d7b3dc1a891abfc8e08b549204d42bb0e4bb1a01',1,'Ui::Canvas']]],
+  ['hover_1',['Hover',['../namespaceUi.html#ab96ee237a5d278a7b0bc25c02e349242aeee0168be69b854c20621fc6f01cc3fc',1,'Ui']]]
 ];

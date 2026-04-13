@@ -6,7 +6,7 @@ var classLine =
     [ "Clear", "classLine.html#a2ce04139752c4917c2ccf63b82e3df83", null ],
     [ "Draw", "classLine.html#ae4f97bb029103dd93bc989ecbe49f02e", null ],
     [ "Initialize", "classLine.html#aa596fba48c72141176f5e10c9141315b", null ],
-    [ "SetColor", "classLine.html#a01ca3b02fa62d27eb5dfadd30e985f54", null ],
+    [ "SetColor", "classLine.html#aa70fa32af8c485acbe578866d44904d3", null ],
     [ "SetName", "classLine.html#a435b3ea29baad09fa23aaa4b866f3aba", null ],
     [ "Update", "classLine.html#a1a680ff0d19bf1bdf6e1c74cf628580c", null ]
 ];

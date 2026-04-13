@@ -1,9 +1,9 @@
 var classCameraController =
 [
-    [ "Add", "classCameraController.html#a2b0e0ccd970b2076eb352c0e6740bfbd", null ],
+    [ "Add", "classCameraController.html#a5cd4ad3fd80b301b3edd61172bb2fe69", null ],
     [ "Debug", "classCameraController.html#a4fbd99cbe70246996a7923bfdfe51221", null ],
-    [ "GetActive", "classCameraController.html#a80802f781968fd2f69197aba0c4747c8", null ],
-    [ "Initialize", "classCameraController.html#a1b9cdf518af6d466ba7ccef9e9b47139", null ],
-    [ "SetActive", "classCameraController.html#aaea83bfb7af7d9782b60ebef5deaec28", null ],
+    [ "GetActive", "classCameraController.html#a40b24e63622013df1d100004efd1ef46", null ],
+    [ "Initialize", "classCameraController.html#aadc8a5f11e00c55d22cc7d3caf84584c", null ],
+    [ "SetActive", "classCameraController.html#aa45c179f7c25009398abed701ee6a9a0", null ],
     [ "Update", "classCameraController.html#a622daef769ea306d46392452d1950c57", null ]
 ];

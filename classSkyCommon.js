@@ -1,4 +1,4 @@
 var classSkyCommon =
 [
-    [ "Initialize", "classSkyCommon.html#aad14a49e50a01596a68457a7edee391e", null ]
+    [ "Initialize", "classSkyCommon.html#af7fb114c4a0adacdb47f9c8a4977a1ab", null ]
 ];

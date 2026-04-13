@@ -1,6 +1,7 @@
 var dir_68267d1309a1af8e8297ef4c3efbcdba =
 [
     [ "Animation", "dir_d0530f5a118c67448463a7f9eabe8fdd.html", "dir_d0530f5a118c67448463a7f9eabe8fdd" ],
+    [ "Audio", "dir_c64386e93f356b78d4612c7b7741707c.html", "dir_c64386e93f356b78d4612c7b7741707c" ],
     [ "Camera", "dir_a316e9605cf2e65295ae387cbf599266.html", "dir_a316e9605cf2e65295ae387cbf599266" ],
     [ "Collision", "dir_07ac6b5520035cd1f955fb320f8b574e.html", "dir_07ac6b5520035cd1f955fb320f8b574e" ],
     [ "Common", "dir_ba210d1fa67db7bee1bb22e0a3c11d9f.html", "dir_ba210d1fa67db7bee1bb22e0a3c11d9f" ],
@@ -27,6 +28,7 @@ var dir_68267d1309a1af8e8297ef4c3efbcdba =
     [ "Sprite", "dir_909c286288939002c1b25213a067bdba.html", "dir_909c286288939002c1b25213a067bdba" ],
     [ "Stage", "dir_b662c5e6a8fdd2c97f5f9b92716f70f0.html", "dir_b662c5e6a8fdd2c97f5f9b92716f70f0" ],
     [ "System", "dir_ef68f1e1f5148ff8ef7fb1c955106c3c.html", "dir_ef68f1e1f5148ff8ef7fb1c955106c3c" ],
+    [ "Text", "dir_f23f8d8d203f062cf45ea93806d80b0f.html", "dir_f23f8d8d203f062cf45ea93806d80b0f" ],
     [ "Texture", "dir_64cece8721923da8192b70f373152c4b.html", "dir_64cece8721923da8192b70f373152c4b" ],
     [ "Timer", "dir_6acd24eea7f3fe579df422711269a2fc.html", "dir_6acd24eea7f3fe579df422711269a2fc" ],
     [ "Ui", "dir_e796c29efe043a3b967d81e1c9f5f281.html", "dir_e796c29efe043a3b967d81e1c9f5f281" ],

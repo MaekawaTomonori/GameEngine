@@ -1,4 +1,4 @@
 var classSpriteCommon =
 [
-    [ "Initialize", "classSpriteCommon.html#a20418d30dff7afcb1e0acaa41f25ea4a", null ]
+    [ "Initialize", "classSpriteCommon.html#a4cbb799be84dee947a2ac96a92891399", null ]
 ];

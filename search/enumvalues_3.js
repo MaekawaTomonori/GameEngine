@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['err_0',['ERR',['../classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482',1,'Log']]],
-  ['execute_1',['Execute',['../namespaceUi.html#ab96ee237a5d278a7b0bc25c02e349242a40cd014b7b6251e3a22e6a45a73a64e1',1,'Ui']]]
+  ['dbg_0',['DBG',['../classLog.html#afb5d4c945d835d194a295461d752531eaa642a85aab89544a289fb1f29eab689d',1,'Log']]],
+  ['directional_1',['Directional',['../LightType_8hpp.html#adc3ec8293e6a97ebe43f0196b9a7f638ab04a8341537fac392bfd17776491d03c',1,'LightType.hpp']]]
 ];

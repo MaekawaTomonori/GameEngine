@@ -8,7 +8,7 @@ var classDirectXAdapter =
     [ "CreateRenderTextureResource", "classDirectXAdapter.html#a6e8fa2518fe43611bc83625caa4884f9", null ],
     [ "CreateTextureResource", "classDirectXAdapter.html#ab560a413b9a36c7ab838ff7e89bc55a2", null ],
     [ "CreateUnorderedAccessView", "classDirectXAdapter.html#a85e48b1e8da92999e6c60a29f63e506c", null ],
-    [ "DisplayFPS", "classDirectXAdapter.html#a4458d6697a5260036d10ae8e4490595c", null ],
+    [ "DisplayFPS", "classDirectXAdapter.html#aea6c994c8bf3371a46ea09db47c6df5a", null ],
     [ "EndFrame", "classDirectXAdapter.html#adc51732c509d008911e309337697aa97", null ],
     [ "GetCommandAllocator", "classDirectXAdapter.html#ac775788b343bb054d88bf1fb552aec29", null ],
     [ "GetCommandList", "classDirectXAdapter.html#abc7797e145abbf8c6b66d89ce219adbf", null ],

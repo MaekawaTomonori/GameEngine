@@ -116,7 +116,7 @@ $(document).ready(function(){initNavTree('CameraDirector_8cpp_source.html',''); 
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#undef max</span></div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
 <div class="foldopen" id="foldopen00018" data-start="{" data-end="}">
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="classCameraDirector.html#a6f7642835a4d6883dda58e481b153c99">   18</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classCameraDirector.html#a6f7642835a4d6883dda58e481b153c99">CameraDirector::Initialize</a>(<a class="code hl_class" href="classDebugUI.html">DebugUI</a>* _debug) {</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="classCameraDirector.html#adacd6f95473e3c481dda8531c521aeb4">   18</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classCameraDirector.html#adacd6f95473e3c481dda8531c521aeb4">CameraDirector::Initialize</a>(GESTD::ReferencePtr&lt;DebugUI&gt; _debug) {</div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    debug_ = _debug;</div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    controlPointModel_ = std::make_unique&lt;Model&gt;();</div>
@@ -127,7 +127,7 @@ $(document).ready(function(){initNavTree('CameraDirector_8cpp_source.html',''); 
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    LoadWorkList();</div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <span class="keywordflow">if</span> (debug_) {</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>        debug_-&gt;<a class="code hl_function" href="classDebugUI.html#a6c6ca081b67e64d9a0b8a5ce98aa7d64">RegisterMenuButton</a>(<span class="stringliteral">&quot;CameraDirector&quot;</span>);</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>        debug_-&gt;RegisterMenuButton(<span class="stringliteral">&quot;CameraDirector&quot;</span>);</div>
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    }</div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>}</div>
 </div>
@@ -153,7 +153,7 @@ $(document).ready(function(){initNavTree('CameraDirector_8cpp_source.html',''); 
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        <span class="keywordflow">if</span> (!active_) {</div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>            active_ = Singleton&lt;CameraController&gt;::GetInstance()-&gt;GetActive();</div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>            <span class="keywordflow">if</span> (active_) {</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>                originalTransform_ = active_-&gt;<a class="code hl_variable" href="classCamera.html#a5080e65f5233788bd49544ccc1c6f8cd">transform_</a>;</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>                originalTransform_ = active_-&gt;transform_;</div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>            }</div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        }</div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        <span class="keywordflow">if</span> (active_) {</div>
@@ -162,8 +162,8 @@ $(document).ready(function(){initNavTree('CameraDirector_8cpp_source.html',''); 
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>            Vector2         rot      = kf.useLookAt</div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>                                     ? CalculateLookAtRotation(worldPos, ToWorld(kf.lookAtTarget))</div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>                                     : kf.rotation;</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>            active_-&gt;<a class="code hl_variable" href="classCamera.html#a5080e65f5233788bd49544ccc1c6f8cd">transform_</a>.translate = worldPos;</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>            active_-&gt;<a class="code hl_variable" href="classCamera.html#a5080e65f5233788bd49544ccc1c6f8cd">transform_</a>.rotate    = Vector3(rot.y, rot.x, 0.0f);</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>            active_-&gt;transform_.translate = worldPos;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>            active_-&gt;transform_.rotate    = Vector3(rot.y, rot.x, 0.0f);</div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        }</div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    }</div>
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
@@ -198,8 +198,8 @@ $(document).ready(function(){initNavTree('CameraDirector_8cpp_source.html',''); 
 <div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    Vector3 worldPos = InterpolatePosition(kfA, kfB, segProgress);</div>
 <div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    Vector2 rot      = InterpolateRotation(kfA, kfB, segProgress, worldPos);</div>
 <div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span> </div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    active_-&gt;<a class="code hl_variable" href="classCamera.html#a5080e65f5233788bd49544ccc1c6f8cd">transform_</a>.translate = worldPos;</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    active_-&gt;<a class="code hl_variable" href="classCamera.html#a5080e65f5233788bd49544ccc1c6f8cd">transform_</a>.rotate    = Vector3(rot.y, rot.x, 0.0f);</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    active_-&gt;transform_.translate = worldPos;</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    active_-&gt;transform_.rotate    = Vector3(rot.y, rot.x, 0.0f);</div>
 <div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>}</div>
 </div>
 <div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span> </div>
@@ -246,7 +246,7 @@ $(document).ready(function(){initNavTree('CameraDirector_8cpp_source.html',''); 
 <div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>    }</div>
 <div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span> </div>
 <div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>    <span class="keywordflow">if</span> (active_) {</div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>        originalTransform_ = active_-&gt;<a class="code hl_variable" href="classCamera.html#a5080e65f5233788bd49544ccc1c6f8cd">transform_</a>;</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>        originalTransform_ = active_-&gt;transform_;</div>
 <div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>    }</div>
 <div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>}</div>
 </div>
@@ -367,13 +367,13 @@ $(document).ready(function(){initNavTree('CameraDirector_8cpp_source.html',''); 
 <div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>                Vector2         rot      = lastKf.useLookAt</div>
 <div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>                                         ? CalculateLookAtRotation(worldPos, ToWorld(lastKf.lookAtTarget))</div>
 <div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>                                         : lastKf.rotation;</div>
-<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>                active_-&gt;<a class="code hl_variable" href="classCamera.html#a5080e65f5233788bd49544ccc1c6f8cd">transform_</a>.translate = worldPos;</div>
-<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>                active_-&gt;<a class="code hl_variable" href="classCamera.html#a5080e65f5233788bd49544ccc1c6f8cd">transform_</a>.rotate    = Vector3(rot.y, rot.x, 0.0f);</div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>                active_-&gt;transform_.translate = worldPos;</div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>                active_-&gt;transform_.rotate    = Vector3(rot.y, rot.x, 0.0f);</div>
 <div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>            } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>                active_-&gt;<a class="code hl_variable" href="classCamera.html#a5080e65f5233788bd49544ccc1c6f8cd">transform_</a> = originalTransform_;</div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>                active_-&gt;transform_ = originalTransform_;</div>
 <div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>            }</div>
 <div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>        } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>            active_-&gt;<a class="code hl_variable" href="classCamera.html#a5080e65f5233788bd49544ccc1c6f8cd">transform_</a> = originalTransform_;</div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>            active_-&gt;transform_ = originalTransform_;</div>
 <div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>        }</div>
 <div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>    }</div>
 <div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>    isProgress_          = <span class="keyword">false</span>;</div>
@@ -485,12 +485,12 @@ $(document).ready(function(){initNavTree('CameraDirector_8cpp_source.html',''); 
 <div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span>    <span class="keywordflow">if</span> (!debug_) <span class="keywordflow">return</span>;</div>
 <div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span>    </div>
 <div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span>    <span class="keywordflow">if</span> (showEditor_) {</div>
-<div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span>        <span class="keywordflow">if</span> (!debug_-&gt;<a class="code hl_function" href="classDebugUI.html#a20aa22ba8319a4a3dd25b1f1308fe472">IsVisible</a>(<span class="stringliteral">&quot;CameraDirector&quot;</span>)) { StopEditingWork(); }</div>
+<div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span>        <span class="keywordflow">if</span> (!debug_-&gt;IsVisible(<span class="stringliteral">&quot;CameraDirector&quot;</span>)) { StopEditingWork(); }</div>
 <div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span>        ShowEditor();</div>
 <div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span>    }</div>
 <div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span>    </div>
-<div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span>    debug_-&gt;<a class="code hl_function" href="classDebugUI.html#a6367814777960cab7c04db03744447c7">RegisterCommand</a>(<span class="stringliteral">&quot;CameraDirector&quot;</span>, [<span class="keyword">this</span>]() {</div>
-<div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span>        ImGui::Begin(<span class="stringliteral">&quot;CameraDirector&quot;</span>, &amp;debug_-&gt;<a class="code hl_function" href="classDebugUI.html#a20aa22ba8319a4a3dd25b1f1308fe472">IsVisible</a>(<span class="stringliteral">&quot;CameraDirector&quot;</span>));</div>
+<div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span>    debug_-&gt;RegisterCommand(<span class="stringliteral">&quot;CameraDirector&quot;</span>, [<span class="keyword">this</span>]() {</div>
+<div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span>        ImGui::Begin(<span class="stringliteral">&quot;CameraDirector&quot;</span>, &amp;debug_-&gt;IsVisible(<span class="stringliteral">&quot;CameraDirector&quot;</span>));</div>
 <div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span> </div>
 <div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span>        <span class="keywordflow">if</span> (isProgress_ &amp;&amp; works_.contains(currentWorkKey_)) {</div>
 <div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span>            <span class="keyword">const</span> Work&amp; w    = works_[currentWorkKey_];</div>
@@ -595,7 +595,7 @@ $(document).ready(function(){initNavTree('CameraDirector_8cpp_source.html',''); 
 <div class="line"><a id="l00481" name="l00481"></a><span class="lineno">  481</span><span class="keywordtype">void</span> CameraDirector::ShowEditor() {</div>
 <div class="line"><a id="l00482" name="l00482"></a><span class="lineno">  482</span>    <span class="keywordflow">if</span> (!debug_) <span class="keywordflow">return</span>;</div>
 <div class="line"><a id="l00483" name="l00483"></a><span class="lineno">  483</span> </div>
-<div class="line"><a id="l00484" name="l00484"></a><span class="lineno">  484</span>    debug_-&gt;<a class="code hl_function" href="classDebugUI.html#a6367814777960cab7c04db03744447c7">RegisterCommand</a>(<span class="stringliteral">&quot;Camerawork Editor&quot;</span>, [<span class="keyword">this</span>]() {</div>
+<div class="line"><a id="l00484" name="l00484"></a><span class="lineno">  484</span>    debug_-&gt;RegisterCommand(<span class="stringliteral">&quot;Camerawork Editor&quot;</span>, [<span class="keyword">this</span>]() {</div>
 <div class="line"><a id="l00485" name="l00485"></a><span class="lineno">  485</span>        <span class="keywordtype">bool</span> isOpen = showEditor_;</div>
 <div class="line"><a id="l00486" name="l00486"></a><span class="lineno">  486</span>        ImGui::Begin(<span class="stringliteral">&quot;Camerawork Editor&quot;</span>, &amp;showEditor_);</div>
 <div class="line"><a id="l00487" name="l00487"></a><span class="lineno">  487</span> </div>
@@ -745,7 +745,7 @@ $(document).ready(function(){initNavTree('CameraDirector_8cpp_source.html',''); 
 <div class="line"><a id="l00631" name="l00631"></a><span class="lineno">  631</span>        ImGui::SameLine();</div>
 <div class="line"><a id="l00632" name="l00632"></a><span class="lineno">  632</span> </div>
 <div class="line"><a id="l00633" name="l00633"></a><span class="lineno">  633</span>        <span class="keywordflow">if</span> (ImGui::Button(<span class="stringliteral">&quot;From Camera&quot;</span>)) {</div>
-<div class="line"><a id="l00634" name="l00634"></a><span class="lineno">  634</span>            <span class="keywordflow">if</span> (<a class="code hl_class" href="classCamera.html">Camera</a>* camera = Singleton&lt;CameraController&gt;::GetInstance()-&gt;GetActive()) {</div>
+<div class="line"><a id="l00634" name="l00634"></a><span class="lineno">  634</span>            <span class="keywordflow">if</span> (<span class="keyword">auto</span> camera = Singleton&lt;CameraController&gt;::GetInstance()-&gt;GetActive()) {</div>
 <div class="line"><a id="l00635" name="l00635"></a><span class="lineno">  635</span>                Vector3 worldPos = camera-&gt;transform_.translate;</div>
 <div class="line"><a id="l00636" name="l00636"></a><span class="lineno">  636</span>                kf.position      = worldPos - anchor_;</div>
 <div class="line"><a id="l00637" name="l00637"></a><span class="lineno">  637</span>                kf.rotation      = Vector2(</div>
@@ -782,7 +782,7 @@ $(document).ready(function(){initNavTree('CameraDirector_8cpp_source.html',''); 
 <div class="line"><a id="l00668" name="l00668"></a><span class="lineno">  668</span>    <span class="keywordflow">if</span> (!isProgress_) {</div>
 <div class="line"><a id="l00669" name="l00669"></a><span class="lineno">  669</span>        active_ = Singleton&lt;CameraController&gt;::GetInstance()-&gt;GetActive();</div>
 <div class="line"><a id="l00670" name="l00670"></a><span class="lineno">  670</span>        <span class="keywordflow">if</span> (active_) {</div>
-<div class="line"><a id="l00671" name="l00671"></a><span class="lineno">  671</span>            originalTransform_ = active_-&gt;<a class="code hl_variable" href="classCamera.html#a5080e65f5233788bd49544ccc1c6f8cd">transform_</a>;</div>
+<div class="line"><a id="l00671" name="l00671"></a><span class="lineno">  671</span>            originalTransform_ = active_-&gt;transform_;</div>
 <div class="line"><a id="l00672" name="l00672"></a><span class="lineno">  672</span>        }</div>
 <div class="line"><a id="l00673" name="l00673"></a><span class="lineno">  673</span>    }</div>
 <div class="line"><a id="l00674" name="l00674"></a><span class="lineno">  674</span>}</div>
@@ -796,7 +796,7 @@ $(document).ready(function(){initNavTree('CameraDirector_8cpp_source.html',''); 
 <div class="line"><a id="l00682" name="l00682"></a><span class="lineno">  682</span>    <span class="comment">// プレイ中は playback ループがカメラを引き続き制御する</span></div>
 <div class="line"><a id="l00683" name="l00683"></a><span class="lineno">  683</span>    <span class="keywordflow">if</span> (!isProgress_) {</div>
 <div class="line"><a id="l00684" name="l00684"></a><span class="lineno">  684</span>        <span class="keywordflow">if</span> (active_) {</div>
-<div class="line"><a id="l00685" name="l00685"></a><span class="lineno">  685</span>            active_-&gt;<a class="code hl_variable" href="classCamera.html#a5080e65f5233788bd49544ccc1c6f8cd">transform_</a> = originalTransform_;</div>
+<div class="line"><a id="l00685" name="l00685"></a><span class="lineno">  685</span>            active_-&gt;transform_ = originalTransform_;</div>
 <div class="line"><a id="l00686" name="l00686"></a><span class="lineno">  686</span>        }</div>
 <div class="line"><a id="l00687" name="l00687"></a><span class="lineno">  687</span>        active_ = <span class="keyword">nullptr</span>;</div>
 <div class="line"><a id="l00688" name="l00688"></a><span class="lineno">  688</span>    }</div>
@@ -842,16 +842,16 @@ $(document).ready(function(){initNavTree('CameraDirector_8cpp_source.html',''); 
 <div class="line"><a id="l00728" name="l00728"></a><span class="lineno">  728</span><span class="keywordtype">void</span> CameraDirector::CaptureCurrentCameraAsKeyframe() {</div>
 <div class="line"><a id="l00729" name="l00729"></a><span class="lineno">  729</span>    <span class="keywordflow">if</span> (!isEditingWork_) <span class="keywordflow">return</span>;</div>
 <div class="line"><a id="l00730" name="l00730"></a><span class="lineno">  730</span> </div>
-<div class="line"><a id="l00731" name="l00731"></a><span class="lineno">  731</span>    <a class="code hl_class" href="classCamera.html">Camera</a>* camera = Singleton&lt;CameraController&gt;::GetInstance()-&gt;GetActive();</div>
+<div class="line"><a id="l00731" name="l00731"></a><span class="lineno">  731</span>    <span class="keyword">auto</span> camera = Singleton&lt;CameraController&gt;::GetInstance()-&gt;GetActive();</div>
 <div class="line"><a id="l00732" name="l00732"></a><span class="lineno">  732</span>    <span class="keywordflow">if</span> (!camera) <span class="keywordflow">return</span>;</div>
 <div class="line"><a id="l00733" name="l00733"></a><span class="lineno">  733</span> </div>
 <div class="line"><a id="l00734" name="l00734"></a><span class="lineno">  734</span>    <a class="code hl_struct" href="structKeyframe.html">Keyframe</a> kf;</div>
 <div class="line"><a id="l00735" name="l00735"></a><span class="lineno">  735</span>    kf.name          = <span class="stringliteral">&quot;Keyframe&quot;</span> + std::to_string(editingWork_.keyframes.size());</div>
-<div class="line"><a id="l00736" name="l00736"></a><span class="lineno">  736</span>    Vector3 worldPos = camera-&gt;<a class="code hl_variable" href="classCamera.html#a5080e65f5233788bd49544ccc1c6f8cd">transform_</a>.translate;</div>
+<div class="line"><a id="l00736" name="l00736"></a><span class="lineno">  736</span>    Vector3 worldPos = camera-&gt;transform_.translate;</div>
 <div class="line"><a id="l00737" name="l00737"></a><span class="lineno">  737</span>    kf.position      = worldPos - anchor_;</div>
 <div class="line"><a id="l00738" name="l00738"></a><span class="lineno">  738</span>    kf.rotation      = Vector2(</div>
-<div class="line"><a id="l00739" name="l00739"></a><span class="lineno">  739</span>        std::get&lt;Vector3&gt;(camera-&gt;<a class="code hl_variable" href="classCamera.html#a5080e65f5233788bd49544ccc1c6f8cd">transform_</a>.rotate).y,</div>
-<div class="line"><a id="l00740" name="l00740"></a><span class="lineno">  740</span>        std::get&lt;Vector3&gt;(camera-&gt;<a class="code hl_variable" href="classCamera.html#a5080e65f5233788bd49544ccc1c6f8cd">transform_</a>.rotate).x);</div>
+<div class="line"><a id="l00739" name="l00739"></a><span class="lineno">  739</span>        std::get&lt;Vector3&gt;(camera-&gt;transform_.rotate).y,</div>
+<div class="line"><a id="l00740" name="l00740"></a><span class="lineno">  740</span>        std::get&lt;Vector3&gt;(camera-&gt;transform_.rotate).x);</div>
 <div class="line"><a id="l00741" name="l00741"></a><span class="lineno">  741</span> </div>
 <div class="line"><a id="l00742" name="l00742"></a><span class="lineno">  742</span>    editingWork_.keyframes.push_back(kf);</div>
 <div class="line"><a id="l00743" name="l00743"></a><span class="lineno">  743</span>    selectedKeyframeIndex_ = <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(editingWork_.keyframes.size() - 1);</div>
@@ -865,7 +865,7 @@ $(document).ready(function(){initNavTree('CameraDirector_8cpp_source.html',''); 
 <div class="line"><a id="l00751" name="l00751"></a><span class="lineno">  751</span>    <span class="keywordflow">if</span> (!active_) {</div>
 <div class="line"><a id="l00752" name="l00752"></a><span class="lineno">  752</span>        active_ = Singleton&lt;CameraController&gt;::GetInstance()-&gt;GetActive();</div>
 <div class="line"><a id="l00753" name="l00753"></a><span class="lineno">  753</span>        <span class="keywordflow">if</span> (active_) {</div>
-<div class="line"><a id="l00754" name="l00754"></a><span class="lineno">  754</span>            originalTransform_ = active_-&gt;<a class="code hl_variable" href="classCamera.html#a5080e65f5233788bd49544ccc1c6f8cd">transform_</a>;</div>
+<div class="line"><a id="l00754" name="l00754"></a><span class="lineno">  754</span>            originalTransform_ = active_-&gt;transform_;</div>
 <div class="line"><a id="l00755" name="l00755"></a><span class="lineno">  755</span>        }</div>
 <div class="line"><a id="l00756" name="l00756"></a><span class="lineno">  756</span>    }</div>
 <div class="line"><a id="l00757" name="l00757"></a><span class="lineno">  757</span> </div>
@@ -879,15 +879,15 @@ $(document).ready(function(){initNavTree('CameraDirector_8cpp_source.html',''); 
 <div class="line"><a id="l00765" name="l00765"></a><span class="lineno">  765</span>    Vector2         rot      = kf.useLookAt</div>
 <div class="line"><a id="l00766" name="l00766"></a><span class="lineno">  766</span>                             ? CalculateLookAtRotation(worldPos, ToWorld(kf.lookAtTarget))</div>
 <div class="line"><a id="l00767" name="l00767"></a><span class="lineno">  767</span>                             : kf.rotation;</div>
-<div class="line"><a id="l00768" name="l00768"></a><span class="lineno">  768</span>    active_-&gt;<a class="code hl_variable" href="classCamera.html#a5080e65f5233788bd49544ccc1c6f8cd">transform_</a>.translate = worldPos;</div>
-<div class="line"><a id="l00769" name="l00769"></a><span class="lineno">  769</span>    active_-&gt;<a class="code hl_variable" href="classCamera.html#a5080e65f5233788bd49544ccc1c6f8cd">transform_</a>.rotate    = Vector3(rot.y, rot.x, 0.0f);</div>
+<div class="line"><a id="l00768" name="l00768"></a><span class="lineno">  768</span>    active_-&gt;transform_.translate = worldPos;</div>
+<div class="line"><a id="l00769" name="l00769"></a><span class="lineno">  769</span>    active_-&gt;transform_.rotate    = Vector3(rot.y, rot.x, 0.0f);</div>
 <div class="line"><a id="l00770" name="l00770"></a><span class="lineno">  770</span>}</div>
 <div class="line"><a id="l00771" name="l00771"></a><span class="lineno">  771</span> </div>
 <div class="line"><a id="l00772" name="l00772"></a><span class="lineno">  772</span><span class="keywordtype">void</span> CameraDirector::StopPreview() {</div>
 <div class="line"><a id="l00773" name="l00773"></a><span class="lineno">  773</span>    <span class="keywordflow">if</span> (!isEditingWork_ || !active_) <span class="keywordflow">return</span>;</div>
 <div class="line"><a id="l00774" name="l00774"></a><span class="lineno">  774</span> </div>
 <div class="line"><a id="l00775" name="l00775"></a><span class="lineno">  775</span>    isPreviewingKeyframe_ = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00776" name="l00776"></a><span class="lineno">  776</span>    active_-&gt;<a class="code hl_variable" href="classCamera.html#a5080e65f5233788bd49544ccc1c6f8cd">transform_</a>   = originalTransform_;</div>
+<div class="line"><a id="l00776" name="l00776"></a><span class="lineno">  776</span>    active_-&gt;transform_   = originalTransform_;</div>
 <div class="line"><a id="l00777" name="l00777"></a><span class="lineno">  777</span>}</div>
 <div class="ttc" id="aCameraController_8hpp_html"><div class="ttname"><a href="CameraController_8hpp.html">CameraController.hpp</a></div></div>
 <div class="ttc" id="aCameraDirector_8hpp_html"><div class="ttname"><a href="CameraDirector_8hpp.html">CameraDirector.hpp</a></div></div>
@@ -897,15 +897,9 @@ $(document).ready(function(){initNavTree('CameraDirector_8cpp_source.html',''); 
 <div class="ttc" id="aclassCameraDirector_html_a32d621f12ccacdfea2f884772b902d2b"><div class="ttname"><a href="classCameraDirector.html#a32d621f12ccacdfea2f884772b902d2b">CameraDirector::Debug</a></div><div class="ttdeci">void Debug()</div><div class="ttdef"><b>Definition</b> <a href="CameraDirector_8cpp_source.html#l00371">CameraDirector.cpp:371</a></div></div>
 <div class="ttc" id="aclassCameraDirector_html_a33a42efffa2d957262df471fa9b55ea4"><div class="ttname"><a href="classCameraDirector.html#a33a42efffa2d957262df471fa9b55ea4">CameraDirector::Update</a></div><div class="ttdeci">void Update()</div><div class="ttdef"><b>Definition</b> <a href="CameraDirector_8cpp_source.html#l00033">CameraDirector.cpp:33</a></div></div>
 <div class="ttc" id="aclassCameraDirector_html_a4e1298d06f420ec7ac36c97ff652baae"><div class="ttname"><a href="classCameraDirector.html#a4e1298d06f420ec7ac36c97ff652baae">CameraDirector::Stop</a></div><div class="ttdeci">void Stop()</div><div class="ttdef"><b>Definition</b> <a href="CameraDirector_8cpp_source.html#l00144">CameraDirector.cpp:144</a></div></div>
-<div class="ttc" id="aclassCameraDirector_html_a6f7642835a4d6883dda58e481b153c99"><div class="ttname"><a href="classCameraDirector.html#a6f7642835a4d6883dda58e481b153c99">CameraDirector::Initialize</a></div><div class="ttdeci">void Initialize(DebugUI *_debug)</div><div class="ttdef"><b>Definition</b> <a href="CameraDirector_8cpp_source.html#l00018">CameraDirector.cpp:18</a></div></div>
 <div class="ttc" id="aclassCameraDirector_html_ada1fc07735ad6dfd0057f9ee79fba115"><div class="ttname"><a href="classCameraDirector.html#ada1fc07735ad6dfd0057f9ee79fba115">CameraDirector::Load</a></div><div class="ttdeci">void Load(const std::string &amp;_key)</div><div class="ttdef"><b>Definition</b> <a href="CameraDirector_8cpp_source.html#l00113">CameraDirector.cpp:113</a></div></div>
+<div class="ttc" id="aclassCameraDirector_html_adacd6f95473e3c481dda8531c521aeb4"><div class="ttname"><a href="classCameraDirector.html#adacd6f95473e3c481dda8531c521aeb4">CameraDirector::Initialize</a></div><div class="ttdeci">void Initialize(GESTD::ReferencePtr&lt; DebugUI &gt; _debug)</div><div class="ttdef"><b>Definition</b> <a href="CameraDirector_8cpp_source.html#l00018">CameraDirector.cpp:18</a></div></div>
 <div class="ttc" id="aclassCameraDirector_html_af348657948c0792003a51386f2fdeee0"><div class="ttname"><a href="classCameraDirector.html#af348657948c0792003a51386f2fdeee0">CameraDirector::Run</a></div><div class="ttdeci">void Run(const std::string &amp;_key, bool _loop=false, bool _overwriteOnComplete=false)</div><div class="ttdef"><b>Definition</b> <a href="CameraDirector_8cpp_source.html#l00117">CameraDirector.cpp:117</a></div></div>
-<div class="ttc" id="aclassCamera_html"><div class="ttname"><a href="classCamera.html">Camera</a></div><div class="ttdoc">カメラクラス ビュー行列と投影行列を管理</div><div class="ttdef"><b>Definition</b> <a href="Camera_8hpp_source.html#l00019">Camera.hpp:19</a></div></div>
-<div class="ttc" id="aclassCamera_html_a5080e65f5233788bd49544ccc1c6f8cd"><div class="ttname"><a href="classCamera.html#a5080e65f5233788bd49544ccc1c6f8cd">Camera::transform_</a></div><div class="ttdeci">Transform transform_</div><div class="ttdef"><b>Definition</b> <a href="Camera_8hpp_source.html#l00021">Camera.hpp:21</a></div></div>
-<div class="ttc" id="aclassDebugUI_html"><div class="ttname"><a href="classDebugUI.html">DebugUI</a></div><div class="ttdoc">ImGuiアダプタークラス デバッグUIの描画とコマンド管理を提供</div><div class="ttdef"><b>Definition</b> <a href="DebugUI_8hpp_source.html#l00014">DebugUI.hpp:14</a></div></div>
-<div class="ttc" id="aclassDebugUI_html_a20aa22ba8319a4a3dd25b1f1308fe472"><div class="ttname"><a href="classDebugUI.html#a20aa22ba8319a4a3dd25b1f1308fe472">DebugUI::IsVisible</a></div><div class="ttdeci">bool &amp; IsVisible(const std::string &amp;_key)</div><div class="ttdef"><b>Definition</b> <a href="DebugUI_8cpp_source.html#l00170">DebugUI.cpp:170</a></div></div>
-<div class="ttc" id="aclassDebugUI_html_a6367814777960cab7c04db03744447c7"><div class="ttname"><a href="classDebugUI.html#a6367814777960cab7c04db03744447c7">DebugUI::RegisterCommand</a></div><div class="ttdeci">void RegisterCommand(const std::string &amp;_id, std::function&lt; void()&gt; _command)</div><div class="ttdoc">デバッグコマンドを登録</div><div class="ttdef"><b>Definition</b> <a href="DebugUI_8cpp_source.html#l00152">DebugUI.cpp:152</a></div></div>
-<div class="ttc" id="aclassDebugUI_html_a6c6ca081b67e64d9a0b8a5ce98aa7d64"><div class="ttname"><a href="classDebugUI.html#a6c6ca081b67e64d9a0b8a5ce98aa7d64">DebugUI::RegisterMenuButton</a></div><div class="ttdeci">void RegisterMenuButton(const std::string &amp;_key, bool _flag=false, const std::string &amp;_group=&quot;&quot;)</div><div class="ttdoc">メニューバーにウィンドウトグル項目を登録</div><div class="ttdef"><b>Definition</b> <a href="DebugUI_8cpp_source.html#l00160">DebugUI.cpp:160</a></div></div>
 <div class="ttc" id="astructKeyframe_html"><div class="ttname"><a href="structKeyframe.html">Keyframe</a></div><div class="ttdef"><b>Definition</b> <a href="KeyFrame_8hpp_source.html#l00007">KeyFrame.hpp:7</a></div></div>
 <div class="ttc" id="astructKeyframe_html_ab0cd6a837157ff59b78c8f9ce04fd28e"><div class="ttname"><a href="structKeyframe.html#ab0cd6a837157ff59b78c8f9ce04fd28e">Keyframe::value</a></div><div class="ttdeci">T value</div><div class="ttdef"><b>Definition</b> <a href="KeyFrame_8hpp_source.html#l00008">KeyFrame.hpp:8</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
@@ -914,7 +908,7 @@ $(document).ready(function(){initNavTree('CameraDirector_8cpp_source.html',''); 
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_a316e9605cf2e65295ae387cbf599266.html">Camera</a></li><li class="navelem"><a class="el" href="dir_b154f99bb795be73f0358aa0becb0391.html">Director</a></li><li class="navelem"><a class="el" href="CameraDirector_8cpp.html">CameraDirector.cpp</a></li>
-    <li class="footer">2026年03月10日(火) 05時02分34秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年04月13日(月) 08時40分04秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

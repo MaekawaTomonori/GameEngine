@@ -98,7 +98,7 @@ $(document).ready(function(){initNavTree('classPostProcessPresetEditor.html','')
 </div><!--header-->
 <div class="contents">
 
-<p>PostProcessプリセット構成エディター presets.jsonの編集のみを担当（プリセット構成管理） キーフレーム編集は各Effectが担当  
+<p>PostProcess preset editor presets.json の編集と既存 preset の管理を行う。 キーフレーム編集にも対応する。  
  <a href="classPostProcessPresetEditor.html#details">[詳解]</a></p>
 
 <p><code>#include &lt;<a class="el" href="PostProcessPresetEditor_8hpp_source.html">PostProcessPresetEditor.hpp</a>&gt;</code></p>
@@ -106,10 +106,10 @@ $(document).ready(function(){initNavTree('classPostProcessPresetEditor.html','')
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 クラス</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structPostProcessPresetEditor_1_1PresetData.html">PresetData</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">プリセット構成データ  <a href="structPostProcessPresetEditor_1_1PresetData.html#details">[詳解]</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">preset 編集データ  <a href="structPostProcessPresetEditor_1_1PresetData.html#details">[詳解]</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structPostProcessPresetEditor_1_1PresetMember.html">PresetMember</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">プリセットメンバー（エフェクト構成）  <a href="structPostProcessPresetEditor_1_1PresetMember.html#details">[詳解]</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">preset を構成する effect 定義  <a href="structPostProcessPresetEditor_1_1PresetMember.html#details">[詳解]</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
@@ -118,26 +118,26 @@ $(document).ready(function(){initNavTree('classPostProcessPresetEditor.html','')
 <tr class="separator:a1fae526ba0207b4418ef24458825b3b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af0a8185410ded8c78685a56f4c1e7f6c" id="r_af0a8185410ded8c78685a56f4c1e7f6c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPostProcessPresetEditor.html#af0a8185410ded8c78685a56f4c1e7f6c">~PostProcessPresetEditor</a> ()=default</td></tr>
 <tr class="separator:af0a8185410ded8c78685a56f4c1e7f6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa3bab751875271d59d5e2c98906eef48" id="r_aa3bab751875271d59d5e2c98906eef48"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPostProcessPresetEditor.html#aa3bab751875271d59d5e2c98906eef48">Initialize</a> (<a class="el" href="classDebugUI.html">DebugUI</a> *_debug, <a class="el" href="classPostProcessExecutor.html">PostProcessExecutor</a> *_executor)</td></tr>
-<tr class="memdesc:aa3bab751875271d59d5e2c98906eef48"><td class="mdescLeft">&#160;</td><td class="mdescRight">初期化  <br /></td></tr>
-<tr class="separator:aa3bab751875271d59d5e2c98906eef48"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7fd81b0db31480e2709e21f5ed4f89d8" id="r_a7fd81b0db31480e2709e21f5ed4f89d8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPostProcessPresetEditor.html#a7fd81b0db31480e2709e21f5ed4f89d8">Initialize</a> (const GESTD::ReferencePtr&lt; <a class="el" href="classDebugUI.html">DebugUI</a> &gt; &amp;_debug, const GESTD::ReferencePtr&lt; <a class="el" href="classPostProcessExecutor.html">PostProcessExecutor</a> &gt; &amp;_executor)</td></tr>
+<tr class="memdesc:a7fd81b0db31480e2709e21f5ed4f89d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">初期化  <br /></td></tr>
+<tr class="separator:a7fd81b0db31480e2709e21f5ed4f89d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0ee5b54df82cc73b1618ee063d3d7037" id="r_a0ee5b54df82cc73b1618ee063d3d7037"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPostProcessPresetEditor.html#a0ee5b54df82cc73b1618ee063d3d7037">ShowEditor</a> ()</td></tr>
-<tr class="memdesc:a0ee5b54df82cc73b1618ee063d3d7037"><td class="mdescLeft">&#160;</td><td class="mdescRight">エディターウィンドウを表示  <br /></td></tr>
+<tr class="memdesc:a0ee5b54df82cc73b1618ee063d3d7037"><td class="mdescLeft">&#160;</td><td class="mdescRight">editor UI を表示  <br /></td></tr>
 <tr class="separator:a0ee5b54df82cc73b1618ee063d3d7037"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a61f659a3a084d7f6f194a67368e9a88e" id="r_a61f659a3a084d7f6f194a67368e9a88e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPostProcessPresetEditor.html#a61f659a3a084d7f6f194a67368e9a88e">OpenEditor</a> (const std::string &amp;_presetName=&quot;&quot;)</td></tr>
-<tr class="memdesc:a61f659a3a084d7f6f194a67368e9a88e"><td class="mdescLeft">&#160;</td><td class="mdescRight">エディターを開く  <br /></td></tr>
+<tr class="memdesc:a61f659a3a084d7f6f194a67368e9a88e"><td class="mdescLeft">&#160;</td><td class="mdescRight">editor を開く  <br /></td></tr>
 <tr class="separator:a61f659a3a084d7f6f194a67368e9a88e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0e1328493f114bbc1adacfc4db457548" id="r_a0e1328493f114bbc1adacfc4db457548"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPostProcessPresetEditor.html#a0e1328493f114bbc1adacfc4db457548">CloseEditor</a> ()</td></tr>
-<tr class="memdesc:a0e1328493f114bbc1adacfc4db457548"><td class="mdescLeft">&#160;</td><td class="mdescRight">エディターを閉じる  <br /></td></tr>
+<tr class="memdesc:a0e1328493f114bbc1adacfc4db457548"><td class="mdescLeft">&#160;</td><td class="mdescRight">editor を閉じる  <br /></td></tr>
 <tr class="separator:a0e1328493f114bbc1adacfc4db457548"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a02a03d2beeceec01e4c844ca58ecd4ba" id="r_a02a03d2beeceec01e4c844ca58ecd4ba"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPostProcessPresetEditor.html#a02a03d2beeceec01e4c844ca58ecd4ba">IsOpen</a> () const</td></tr>
-<tr class="memdesc:a02a03d2beeceec01e4c844ca58ecd4ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">エディターが開いているか  <br /></td></tr>
+<tr class="memdesc:a02a03d2beeceec01e4c844ca58ecd4ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">editor が開いているか  <br /></td></tr>
 <tr class="separator:a02a03d2beeceec01e4c844ca58ecd4ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">詳解</h2>
-<div class="textblock"><p>PostProcessプリセット構成エディター presets.jsonの編集のみを担当（プリセット構成管理） キーフレーム編集は各Effectが担当 </p>
+<div class="textblock"><p>PostProcess preset editor presets.json の編集と既存 preset の管理を行う。 キーフレーム編集にも対応する。 </p>
 
-<p class="definition"> <a class="el" href="PostProcessPresetEditor_8hpp_source.html">PostProcessPresetEditor.hpp</a> の <a class="el" href="PostProcessPresetEditor_8hpp_source.html#l00015">15</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="PostProcessPresetEditor_8hpp_source.html">PostProcessPresetEditor.hpp</a> の <a class="el" href="PostProcessPresetEditor_8hpp_source.html#l00017">17</a> 行目に定義があります。</p>
 </div><h2 class="groupheader">構築子と解体子</h2>
 <a id="a1fae526ba0207b4418ef24458825b3b4" name="a1fae526ba0207b4418ef24458825b3b4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1fae526ba0207b4418ef24458825b3b4">&#9670;&#160;</a></span>PostProcessPresetEditor()</h2>
@@ -205,14 +205,14 @@ $(document).ready(function(){initNavTree('classPostProcessPresetEditor.html','')
       </table>
 </div><div class="memdoc">
 
-<p>エディターを閉じる </p>
+<p>editor を閉じる </p>
 
 <p class="definition"> <a class="el" href="PostProcessPresetEditor_8cpp_source.html">PostProcessPresetEditor.cpp</a> の <a class="el" href="PostProcessPresetEditor_8cpp_source.html#l00567">567</a> 行目に定義があります。</p>
 
 </div>
 </div>
-<a id="aa3bab751875271d59d5e2c98906eef48" name="aa3bab751875271d59d5e2c98906eef48"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa3bab751875271d59d5e2c98906eef48">&#9670;&#160;</a></span>Initialize()</h2>
+<a id="a7fd81b0db31480e2709e21f5ed4f89d8" name="a7fd81b0db31480e2709e21f5ed4f89d8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7fd81b0db31480e2709e21f5ed4f89d8">&#9670;&#160;</a></span>Initialize()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -220,13 +220,13 @@ $(document).ready(function(){initNavTree('classPostProcessPresetEditor.html','')
         <tr>
           <td class="memname">void PostProcessPresetEditor::Initialize </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classDebugUI.html">DebugUI</a> *&#160;</td>
+          <td class="paramtype">const GESTD::ReferencePtr&lt; <a class="el" href="classDebugUI.html">DebugUI</a> &gt; &amp;&#160;</td>
           <td class="paramname"><em>_debug</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classPostProcessExecutor.html">PostProcessExecutor</a> *&#160;</td>
+          <td class="paramtype">const GESTD::ReferencePtr&lt; <a class="el" href="classPostProcessExecutor.html">PostProcessExecutor</a> &gt; &amp;&#160;</td>
           <td class="paramname"><em>_executor</em>&#160;</td>
         </tr>
         <tr>
@@ -266,9 +266,9 @@ $(document).ready(function(){initNavTree('classPostProcessPresetEditor.html','')
 </table>
 </div><div class="memdoc">
 
-<p>エディターが開いているか </p>
+<p>editor が開いているか </p>
 
-<p class="definition"> <a class="el" href="PostProcessPresetEditor_8hpp_source.html">PostProcessPresetEditor.hpp</a> の <a class="el" href="PostProcessPresetEditor_8hpp_source.html#l00097">97</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="PostProcessPresetEditor_8hpp_source.html">PostProcessPresetEditor.hpp</a> の <a class="el" href="PostProcessPresetEditor_8hpp_source.html#l00086">86</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -288,7 +288,7 @@ $(document).ready(function(){initNavTree('classPostProcessPresetEditor.html','')
       </table>
 </div><div class="memdoc">
 
-<p>エディターを開く </p>
+<p>editor を開く </p>
 
 <p class="definition"> <a class="el" href="PostProcessPresetEditor_8cpp_source.html">PostProcessPresetEditor.cpp</a> の <a class="el" href="PostProcessPresetEditor_8cpp_source.html#l00560">560</a> 行目に定義があります。</p>
 
@@ -309,11 +309,9 @@ $(document).ready(function(){initNavTree('classPostProcessPresetEditor.html','')
       </table>
 </div><div class="memdoc">
 
-<p>エディターウィンドウを表示 </p>
+<p>editor UI を表示 </p>
 
 <p class="definition"> <a class="el" href="PostProcessPresetEditor_8cpp_source.html">PostProcessPresetEditor.cpp</a> の <a class="el" href="PostProcessPresetEditor_8cpp_source.html#l00018">18</a> 行目に定義があります。</p>
-
-<p class="reference">参照先 <a class="el" href="DebugUI_8cpp_source.html#l00152">DebugUI::RegisterCommand()</a>.</p>
 
 </div>
 </div>
@@ -327,7 +325,7 @@ $(document).ready(function(){initNavTree('classPostProcessPresetEditor.html','')
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classPostProcessPresetEditor.html">PostProcessPresetEditor</a></li>
-    <li class="footer">2026年03月10日(火) 05時02分34秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年04月13日(月) 08時40分04秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

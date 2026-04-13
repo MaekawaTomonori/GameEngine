@@ -104,9 +104,9 @@ $(document).ready(function(){initNavTree('classStageRepository.html',''); initRe
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 公開メンバ関数</h2></td></tr>
-<tr class="memitem:a151c0614c5d2ca41abaa0872026dacaf" id="r_a151c0614c5d2ca41abaa0872026dacaf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structLevelData.html">LevelData</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStageRepository.html#a151c0614c5d2ca41abaa0872026dacaf">Get</a> (const std::string &amp;_name)</td></tr>
-<tr class="memdesc:a151c0614c5d2ca41abaa0872026dacaf"><td class="mdescLeft">&#160;</td><td class="mdescRight">レベルデータを取得  <br /></td></tr>
-<tr class="separator:a151c0614c5d2ca41abaa0872026dacaf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ce971d01562ac7ed7cdf748dde11250" id="r_a9ce971d01562ac7ed7cdf748dde11250"><td class="memItemLeft" align="right" valign="top">GESTD::ReferencePtr&lt; <a class="el" href="structLevelData.html">LevelData</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStageRepository.html#a9ce971d01562ac7ed7cdf748dde11250">Get</a> (const std::string &amp;_name)</td></tr>
+<tr class="memdesc:a9ce971d01562ac7ed7cdf748dde11250"><td class="mdescLeft">&#160;</td><td class="mdescRight">レベルデータを取得  <br /></td></tr>
+<tr class="separator:a9ce971d01562ac7ed7cdf748dde11250"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acd2c79a51cbbab7a6a29b501812af839" id="r_acd2c79a51cbbab7a6a29b501812af839"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStageRepository.html#acd2c79a51cbbab7a6a29b501812af839">Add</a> (const std::string &amp;_name, std::unique_ptr&lt; <a class="el" href="structLevelData.html">LevelData</a> &gt; _data)</td></tr>
 <tr class="memdesc:acd2c79a51cbbab7a6a29b501812af839"><td class="mdescLeft">&#160;</td><td class="mdescRight">レベルデータを追加  <br /></td></tr>
 <tr class="separator:acd2c79a51cbbab7a6a29b501812af839"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -117,7 +117,7 @@ $(document).ready(function(){initNavTree('classStageRepository.html',''); initRe
 <a name="details" id="details"></a><h2 class="groupheader">詳解</h2>
 <div class="textblock"><p>ステージリポジトリクラス レベルデータのキャッシュと管理を提供 </p>
 
-<p class="definition"> <a class="el" href="StageRepository_8hpp_source.html">StageRepository.hpp</a> の <a class="el" href="StageRepository_8hpp_source.html#l00013">13</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="StageRepository_8hpp_source.html">StageRepository.hpp</a> の <a class="el" href="StageRepository_8hpp_source.html#l00014">14</a> 行目に定義があります。</p>
 </div><h2 class="groupheader">関数詳解</h2>
 <a id="acd2c79a51cbbab7a6a29b501812af839" name="acd2c79a51cbbab7a6a29b501812af839"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#acd2c79a51cbbab7a6a29b501812af839">&#9670;&#160;</a></span>Add()</h2>
@@ -156,18 +156,16 @@ $(document).ready(function(){initNavTree('classStageRepository.html',''); initRe
 
 <p class="definition"> <a class="el" href="StageRepository_8cpp_source.html">StageRepository.cpp</a> の <a class="el" href="StageRepository_8cpp_source.html#l00011">11</a> 行目に定義があります。</p>
 
-<p class="reference">参照元 <a class="el" href="StageLoader_8cpp_source.html#l00014">StageLoader::Load()</a>.</p>
-
 </div>
 </div>
-<a id="a151c0614c5d2ca41abaa0872026dacaf" name="a151c0614c5d2ca41abaa0872026dacaf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a151c0614c5d2ca41abaa0872026dacaf">&#9670;&#160;</a></span>Get()</h2>
+<a id="a9ce971d01562ac7ed7cdf748dde11250" name="a9ce971d01562ac7ed7cdf748dde11250"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ce971d01562ac7ed7cdf748dde11250">&#9670;&#160;</a></span>Get()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structLevelData.html">LevelData</a> * StageRepository::Get </td>
+          <td class="memname">GESTD::ReferencePtr&lt; <a class="el" href="structLevelData.html">LevelData</a> &gt; StageRepository::Get </td>
           <td>(</td>
           <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>_name</em></td><td>)</td>
@@ -186,8 +184,6 @@ $(document).ready(function(){initNavTree('classStageRepository.html',''); initRe
 <dl class="section return"><dt>戻り値</dt><dd>レベルデータポインタ </dd></dl>
 
 <p class="definition"> <a class="el" href="StageRepository_8cpp_source.html">StageRepository.cpp</a> の <a class="el" href="StageRepository_8cpp_source.html#l00003">3</a> 行目に定義があります。</p>
-
-<p class="reference">参照元 <a class="el" href="StageLoader_8cpp_source.html#l00014">StageLoader::Load()</a>.</p>
 
 </div>
 </div>
@@ -217,8 +213,6 @@ $(document).ready(function(){initNavTree('classStageRepository.html',''); initRe
 
 <p class="definition"> <a class="el" href="StageRepository_8cpp_source.html">StageRepository.cpp</a> の <a class="el" href="StageRepository_8cpp_source.html#l00015">15</a> 行目に定義があります。</p>
 
-<p class="reference">参照元 <a class="el" href="StageLoader_8cpp_source.html#l00014">StageLoader::Load()</a>.</p>
-
 </div>
 </div>
 <hr/>このクラス詳解は次のファイルから抽出されました:<ul>
@@ -231,7 +225,7 @@ $(document).ready(function(){initNavTree('classStageRepository.html',''); initRe
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classStageRepository.html">StageRepository</a></li>
-    <li class="footer">2026年03月10日(火) 05時02分34秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年04月13日(月) 08時40分04秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

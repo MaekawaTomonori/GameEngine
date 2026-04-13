@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['type_0',['Type',['../classTransition.html#aca03fd04a22c40b5315f79e6f1122253',1,'Transition']]]
+  ['state_0',['state',['../classFrameDebugger.html#ad9c8e021d2325a98bce0b8900293fd95',1,'FrameDebugger::State'],['../classITransitionEffect.html#a86868f632ccdf014543bbf471096227b',1,'ITransitionEffect::State']]]
 ];

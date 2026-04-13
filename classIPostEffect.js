@@ -10,14 +10,14 @@ var classIPostEffect =
     [ "SaveParameters", "classIPostEffect.html#a33e6d8f724d663306c0fe86b83758dcb", null ],
     [ "SavePreset", "classIPostEffect.html#a263ae7d55f311c0fbc3fc0af5db4675e", null ],
     [ "SetRTVHandle", "classIPostEffect.html#a2d0e0b0c528df87d6cbeb9cd914f3c6a", null ],
-    [ "SetUp", "classIPostEffect.html#a02584365355c40bbb77d2a9558a92e4d", null ],
+    [ "SetUp", "classIPostEffect.html#ac96a28343304e4069fd38b21a8199d74", null ],
     [ "UpdateAnimation", "classIPostEffect.html#a6646b9d42682d20f9fde8aa44d42a82e", null ],
-    [ "adapter_", "classIPostEffect.html#af243e74d5ae3c7c51202d7d75ca87873", null ],
+    [ "adapter_", "classIPostEffect.html#abb5faf175b631fbedfe07987cc6a3fdb", null ],
     [ "CLEAR_COLOR", "classIPostEffect.html#ae0dc01028757f721f28df7ba30cdd48e", null ],
     [ "handle_", "classIPostEffect.html#add903b173582345e40decf67fde5ee2f", null ],
     [ "index_", "classIPostEffect.html#a264ad5a2434240dbb6482b9fe0f973a1", null ],
     [ "output_", "classIPostEffect.html#a030babb9fa7adc6f2898ed3b7fd653cc", null ],
     [ "pso_", "classIPostEffect.html#ad5b0aba2047a34e79d563f1ee0fe008f", null ],
     [ "rtvHandle_", "classIPostEffect.html#a023ba9eb932df36c3f0b04959806db87", null ],
-    [ "srv_", "classIPostEffect.html#aebebf521e696773487be1412f9d8a509", null ]
+    [ "srv_", "classIPostEffect.html#a6a0cc45315f9ab25efe9f84b645d7aa7", null ]
 ];

@@ -4,7 +4,7 @@ var classCameraDirector =
     [ "Debug", "classCameraDirector.html#a32d621f12ccacdfea2f884772b902d2b", null ],
     [ "Draw", "classCameraDirector.html#a0b4e8a43448d2e57daa478b0aed03cab", null ],
     [ "GetCurrentWork", "classCameraDirector.html#ab2d445e21a4c51daccc534c9017d5fd1", null ],
-    [ "Initialize", "classCameraDirector.html#a6f7642835a4d6883dda58e481b153c99", null ],
+    [ "Initialize", "classCameraDirector.html#adacd6f95473e3c481dda8531c521aeb4", null ],
     [ "IsPlaying", "classCameraDirector.html#a67478ab21c9cbf158b8dfa38e45fc2e8", null ],
     [ "Load", "classCameraDirector.html#ada1fc07735ad6dfd0057f9ee79fba115", null ],
     [ "Run", "classCameraDirector.html#af348657948c0792003a51386f2fdeee0", null ],

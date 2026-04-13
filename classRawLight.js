@@ -11,7 +11,7 @@ var classRawLight =
     [ "ImGuiSetting", "classRawLight.html#afa47ed5607b97c55f1b48363202aae6b", null ],
     [ "IsEnable", "classRawLight.html#aad2ca65c0c549c68ab386f22ca432db1", null ],
     [ "operator=", "classRawLight.html#a8be8572995bb02317ddbe74004b01b18", null ],
-    [ "Save", "classRawLight.html#ac5ec584e0ab220c6cfedc51a477309a2", null ],
+    [ "Save", "classRawLight.html#aa8e3266c61240c64c00a1ff84cfb8d5e", null ],
     [ "SetReference", "classRawLight.html#ae603ebe7b28d1f9371a7e822f334ee31", null ],
     [ "SetUUID", "classRawLight.html#aec395a05ca74d0b862728d43044a79f6", null ],
     [ "Update", "classRawLight.html#a21290be78fb74dee6c2a7835942f5706", null ],

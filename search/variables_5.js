@@ -1,5 +1,10 @@
 var searchData=
 [
-  ['handle_5f_0',['handle_',['../classIPostEffect.html#add903b173582345e40decf67fde5ee2f',1,'IPostEffect']]],
-  ['height_1',['height',['../structGameEngine_1_1Config.html#a148af25c1173410c991d7568393ded6a',1,'GameEngine::Config']]]
+  ['falloffstart_0',['falloffStart',['../structSpotLight.html#a91b79428174850c554cd71e2911b7e4a',1,'SpotLight']]],
+  ['file_1',['file',['../structLevelData_1_1ObjectData.html#a7b69bef5b18b8da3d87a4e35b1af7990',1,'LevelData::ObjectData']]],
+  ['fontsize_2',['fontSize',['../structUi_1_1TextElement_1_1Data.html#a4b82ff7f89e90da7c507408ad714fb9d',1,'Ui::TextElement::Data']]],
+  ['fps_3',['fps',['../structGameEngine_1_1Config.html#a71f058dc13c2ab32029bcff206963160',1,'GameEngine::Config']]],
+  ['frame_4',['frame',['../structSceneSwitcher_1_1Context.html#a698db973a9f1acc24ef08014c614af49',1,'SceneSwitcher::Context']]],
+  ['frequency_5',['frequency',['../structParticleSystem_1_1EmitterConfig.html#aef380ed9f570c0e0c96a08d4c5a0c0bc',1,'ParticleSystem::EmitterConfig']]],
+  ['func_6',['func',['../structUi_1_1AnimSlot.html#ab7ad3364e5c6b3aa5aa26b9257a417aa',1,'Ui::AnimSlot::func'],['../structCommon_1_1RenderingCommand.html#a308eb5e96576fd37306ea7c472eb8189',1,'Common::RenderingCommand::func']]]
 ];

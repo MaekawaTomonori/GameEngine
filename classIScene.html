@@ -103,6 +103,15 @@ $(document).ready(function(){initNavTree('classIScene.html',''); initResizable()
  <a href="classIScene.html#details">[詳解]</a></p>
 
 <p><code>#include &lt;<a class="el" href="IScene_8hpp_source.html">IScene.hpp</a>&gt;</code></p>
+<div class="dynheader">
+IScene の継承関係図</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classIScene.png" usemap="#IScene_map" alt=""/>
+  <map id="IScene_map" name="IScene_map">
+<area href="classSampleScene.html" alt="SampleScene" shape="rect" coords="0,56,89,80"/>
+  </map>
+</div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 公開メンバ関数</h2></td></tr>
@@ -120,6 +129,9 @@ $(document).ready(function(){initNavTree('classIScene.html',''); initResizable()
 <tr class="memitem:a5d82f06c208dbdd80a0a5d566468c185" id="r_a5d82f06c208dbdd80a0a5d566468c185"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIScene.html#a5d82f06c208dbdd80a0a5d566468c185">Finalize</a> ()</td></tr>
 <tr class="memdesc:a5d82f06c208dbdd80a0a5d566468c185"><td class="mdescLeft">&#160;</td><td class="mdescRight">終了処理  <br /></td></tr>
 <tr class="separator:a5d82f06c208dbdd80a0a5d566468c185"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6fe93519ed7280454e238be310b7ebb7" id="r_a6fe93519ed7280454e238be310b7ebb7"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIScene.html#a6fe93519ed7280454e238be310b7ebb7">Debug</a> ()</td></tr>
+<tr class="memdesc:a6fe93519ed7280454e238be310b7ebb7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Debug用 ImGuiはここで扱うようにする  <br /></td></tr>
+<tr class="separator:a6fe93519ed7280454e238be310b7ebb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a393ca5105619b7e73f2f35770cc0677a" id="r_a393ca5105619b7e73f2f35770cc0677a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIScene.html#a393ca5105619b7e73f2f35770cc0677a">IsProgress</a> () const</td></tr>
 <tr class="memdesc:a393ca5105619b7e73f2f35770cc0677a"><td class="mdescLeft">&#160;</td><td class="mdescRight">シーンが進行中かを判定  <br /></td></tr>
 <tr class="separator:a393ca5105619b7e73f2f35770cc0677a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -138,9 +150,9 @@ $(document).ready(function(){initNavTree('classIScene.html',''); initResizable()
 <tr class="memitem:a4b89a1a85035b9ff4987b3d475dd40e3" id="r_a4b89a1a85035b9ff4987b3d475dd40e3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classTransition.html#aca03fd04a22c40b5315f79e6f1122253">Transition::Type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIScene.html#a4b89a1a85035b9ff4987b3d475dd40e3">GetExitTransition</a> () const</td></tr>
 <tr class="memdesc:a4b89a1a85035b9ff4987b3d475dd40e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">退場トランジションタイプを取得  <br /></td></tr>
 <tr class="separator:a4b89a1a85035b9ff4987b3d475dd40e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6fe93519ed7280454e238be310b7ebb7" id="r_a6fe93519ed7280454e238be310b7ebb7"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIScene.html#a6fe93519ed7280454e238be310b7ebb7">Debug</a> ()</td></tr>
-<tr class="memdesc:a6fe93519ed7280454e238be310b7ebb7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Debug用 ImGuiはここで扱うようにする  <br /></td></tr>
-<tr class="separator:a6fe93519ed7280454e238be310b7ebb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36e4a540971c4d907c717eceeb33687b" id="r_a36e4a540971c4d907c717eceeb33687b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIScene.html#a36e4a540971c4d907c717eceeb33687b">SetName</a> (const std::string &amp;_name)</td></tr>
+<tr class="memdesc:a36e4a540971c4d907c717eceeb33687b"><td class="mdescLeft">&#160;</td><td class="mdescRight">シーンの名前を設定(登録時にSwitcherから設定する)  <br /></td></tr>
+<tr class="separator:a36e4a540971c4d907c717eceeb33687b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 限定公開メンバ関数</h2></td></tr>
@@ -153,15 +165,13 @@ $(document).ready(function(){initNavTree('classIScene.html',''); initResizable()
 <tr class="memitem:a1168ec5383dd6f0c377df86517346263" id="r_a1168ec5383dd6f0c377df86517346263"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIScene.html#a1168ec5383dd6f0c377df86517346263">PlayTransition</a> (<a class="el" href="classTransition.html#aca03fd04a22c40b5315f79e6f1122253">Transition::Type</a> _type, std::function&lt; void()&gt; _onMidpoint={})</td></tr>
 <tr class="memdesc:a1168ec5383dd6f0c377df86517346263"><td class="mdescLeft">&#160;</td><td class="mdescRight">トランジションを再生（Out/Inを同一タイプで実行）  <br /></td></tr>
 <tr class="separator:a1168ec5383dd6f0c377df86517346263"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4c682401f3a7045ea7edabfe352fa399" id="r_a4c682401f3a7045ea7edabfe352fa399"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classPostProcessExecutor.html">PostProcessExecutor</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIScene.html#a4c682401f3a7045ea7edabfe352fa399">PostEffect</a> () const</td></tr>
-<tr class="separator:a4c682401f3a7045ea7edabfe352fa399"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6aa758514e0cd7563413c71f26aeddbb" id="r_a6aa758514e0cd7563413c71f26aeddbb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classParticleSystem.html">ParticleSystem</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIScene.html#a6aa758514e0cd7563413c71f26aeddbb">Particle</a> () const</td></tr>
-<tr class="separator:a6aa758514e0cd7563413c71f26aeddbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6d8cd1a51d6e7b835feb9191e2a093f" id="r_af6d8cd1a51d6e7b835feb9191e2a093f"><td class="memItemLeft" align="right" valign="top">GESTD::ReferencePtr&lt; <a class="el" href="classPostProcessExecutor.html">PostProcessExecutor</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIScene.html#af6d8cd1a51d6e7b835feb9191e2a093f">PostEffect</a> () const</td></tr>
+<tr class="separator:af6d8cd1a51d6e7b835feb9191e2a093f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60e0d5ab487faa91cf3134395826292c" id="r_a60e0d5ab487faa91cf3134395826292c"><td class="memItemLeft" align="right" valign="top">GESTD::ReferencePtr&lt; <a class="el" href="classParticleSystem.html">ParticleSystem</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIScene.html#a60e0d5ab487faa91cf3134395826292c">Particle</a> () const</td></tr>
+<tr class="separator:a60e0d5ab487faa91cf3134395826292c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 限定公開変数類</h2></td></tr>
-<tr class="memitem:aebe8fbddf4f36579a1fac42c88904e98" id="r_aebe8fbddf4f36579a1fac42c88904e98"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIScene.html#aebe8fbddf4f36579a1fac42c88904e98">name_</a></td></tr>
-<tr class="separator:aebe8fbddf4f36579a1fac42c88904e98"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aac6de08e79fc847b2f1feeb450aa4f09" id="r_aac6de08e79fc847b2f1feeb450aa4f09"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIScene.html#aac6de08e79fc847b2f1feeb450aa4f09">next_</a></td></tr>
 <tr class="separator:aac6de08e79fc847b2f1feeb450aa4f09"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3fcac30ea7958c649184f90e7ab44aa7" id="r_a3fcac30ea7958c649184f90e7ab44aa7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classTransition.html#aca03fd04a22c40b5315f79e6f1122253">Transition::Type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIScene.html#a3fcac30ea7958c649184f90e7ab44aa7">entryTransition_</a> = <a class="el" href="classTransition.html#aca03fd04a22c40b5315f79e6f1122253a6adf97f83acf6453d4a6a4b1070f3754">Transition::Type::None</a></td></tr>
@@ -172,7 +182,7 @@ $(document).ready(function(){initNavTree('classIScene.html',''); initResizable()
 <a name="details" id="details"></a><h2 class="groupheader">詳解</h2>
 <div class="textblock"><p>ゲームシーンの基底インターフェース シーンのライフサイクル管理とトランジションを提供 </p>
 
-<p class="definition"> <a class="el" href="IScene_8hpp_source.html">IScene.hpp</a> の <a class="el" href="IScene_8hpp_source.html#l00016">16</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="IScene_8hpp_source.html">IScene.hpp</a> の <a class="el" href="IScene_8hpp_source.html#l00017">17</a> 行目に定義があります。</p>
 </div><h2 class="groupheader">構築子と解体子</h2>
 <a id="a146b1101069efb7a46b3bb6e419bc2bc" name="a146b1101069efb7a46b3bb6e419bc2bc"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a146b1101069efb7a46b3bb6e419bc2bc">&#9670;&#160;</a></span>~IScene()</h2>
@@ -246,9 +256,9 @@ $(document).ready(function(){initNavTree('classIScene.html',''); initResizable()
 
 <p>シーンをnext_に変更 </p>
 
-<p class="definition"> <a class="el" href="IScene_8cpp_source.html">IScene.cpp</a> の <a class="el" href="IScene_8cpp_source.html#l00018">18</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="IScene_8cpp_source.html">IScene.cpp</a> の <a class="el" href="IScene_8cpp_source.html#l00022">22</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="SceneSwitcher_8cpp_source.html#l00211">SceneSwitcher::Change()</a>, <a class="el" href="IScene_8hpp_source.html#l00022">next_</a>.</p>
+<p class="reference">参照先 <a class="el" href="SceneSwitcher_8cpp_source.html#l00238">SceneSwitcher::Change()</a>, <a class="el" href="IScene_8hpp_source.html#l00023">next_</a>.</p>
 
 </div>
 </div>
@@ -277,7 +287,9 @@ $(document).ready(function(){initNavTree('classIScene.html',''); initResizable()
 
 <p>Debug用 ImGuiはここで扱うようにする </p>
 
-<p class="definition"> <a class="el" href="IScene_8hpp_source.html">IScene.hpp</a> の <a class="el" href="IScene_8hpp_source.html#l00078">78</a> 行目に定義があります。</p>
+<p><a class="el" href="classSampleScene.html#a59833e9fc90a12376ce4b00e439415d8">SampleScene</a>で再実装されています。</p>
+
+<p class="definition"> <a class="el" href="IScene_8hpp_source.html">IScene.hpp</a> の <a class="el" href="IScene_8hpp_source.html#l00049">49</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -306,6 +318,8 @@ $(document).ready(function(){initNavTree('classIScene.html',''); initResizable()
 
 <p>描画処理（純粋仮想関数） </p>
 
+<p><a class="el" href="classSampleScene.html#ab1151b2c0bb9172fbab277b9a97e424b">SampleScene</a>で実装されています。</p>
+
 </div>
 </div>
 <a id="a5d82f06c208dbdd80a0a5d566468c185" name="a5d82f06c208dbdd80a0a5d566468c185"></a>
@@ -333,7 +347,7 @@ $(document).ready(function(){initNavTree('classIScene.html',''); initResizable()
 
 <p>終了処理 </p>
 
-<p class="definition"> <a class="el" href="IScene_8hpp_source.html">IScene.hpp</a> の <a class="el" href="IScene_8hpp_source.html#l00044">44</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="IScene_8hpp_source.html">IScene.hpp</a> の <a class="el" href="IScene_8hpp_source.html#l00045">45</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -363,9 +377,9 @@ $(document).ready(function(){initNavTree('classIScene.html',''); initResizable()
 <p>入場トランジションタイプを取得 </p>
 <dl class="section return"><dt>戻り値</dt><dd>トランジションタイプ </dd></dl>
 
-<p class="definition"> <a class="el" href="IScene_8hpp_source.html">IScene.hpp</a> の <a class="el" href="IScene_8hpp_source.html#l00069">69</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="IScene_8hpp_source.html">IScene.hpp</a> の <a class="el" href="IScene_8hpp_source.html#l00074">74</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="IScene_8hpp_source.html#l00024">entryTransition_</a>.</p>
+<p class="reference">参照先 <a class="el" href="IScene_8hpp_source.html#l00025">entryTransition_</a>.</p>
 
 </div>
 </div>
@@ -395,9 +409,9 @@ $(document).ready(function(){initNavTree('classIScene.html',''); initResizable()
 <p>退場トランジションタイプを取得 </p>
 <dl class="section return"><dt>戻り値</dt><dd>トランジションタイプ </dd></dl>
 
-<p class="definition"> <a class="el" href="IScene_8hpp_source.html">IScene.hpp</a> の <a class="el" href="IScene_8hpp_source.html#l00074">74</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="IScene_8hpp_source.html">IScene.hpp</a> の <a class="el" href="IScene_8hpp_source.html#l00079">79</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="IScene_8hpp_source.html#l00025">exitTransition_</a>.</p>
+<p class="reference">参照先 <a class="el" href="IScene_8hpp_source.html#l00026">exitTransition_</a>.</p>
 
 </div>
 </div>
@@ -427,9 +441,7 @@ $(document).ready(function(){initNavTree('classIScene.html',''); initResizable()
 <p>シーン名を取得 </p>
 <dl class="section return"><dt>戻り値</dt><dd>シーン名への参照 </dd></dl>
 
-<p class="definition"> <a class="el" href="IScene_8hpp_source.html">IScene.hpp</a> の <a class="el" href="IScene_8hpp_source.html#l00064">64</a> 行目に定義があります。</p>
-
-<p class="reference">参照先 <a class="el" href="IScene_8hpp_source.html#l00021">name_</a>.</p>
+<p class="definition"> <a class="el" href="IScene_8hpp_source.html">IScene.hpp</a> の <a class="el" href="IScene_8hpp_source.html#l00069">69</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -458,6 +470,8 @@ $(document).ready(function(){initNavTree('classIScene.html',''); initResizable()
 
 <p>初期化処理（純粋仮想関数） </p>
 
+<p><a class="el" href="classSampleScene.html#aae186be401040c6ad4aef71afd78f711">SampleScene</a>で実装されています。</p>
+
 </div>
 </div>
 <a id="a393ca5105619b7e73f2f35770cc0677a" name="a393ca5105619b7e73f2f35770cc0677a"></a>
@@ -482,8 +496,8 @@ $(document).ready(function(){initNavTree('classIScene.html',''); initResizable()
 
 </div>
 </div>
-<a id="a6aa758514e0cd7563413c71f26aeddbb" name="a6aa758514e0cd7563413c71f26aeddbb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6aa758514e0cd7563413c71f26aeddbb">&#9670;&#160;</a></span>Particle()</h2>
+<a id="a60e0d5ab487faa91cf3134395826292c" name="a60e0d5ab487faa91cf3134395826292c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a60e0d5ab487faa91cf3134395826292c">&#9670;&#160;</a></span>Particle()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -492,7 +506,7 @@ $(document).ready(function(){initNavTree('classIScene.html',''); initResizable()
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classParticleSystem.html">ParticleSystem</a> * IScene::Particle </td>
+          <td class="memname">GESTD::ReferencePtr&lt; <a class="el" href="classParticleSystem.html">ParticleSystem</a> &gt; IScene::Particle </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -505,9 +519,9 @@ $(document).ready(function(){initNavTree('classIScene.html',''); initResizable()
 </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="IScene_8cpp_source.html">IScene.cpp</a> の <a class="el" href="IScene_8cpp_source.html#l00039">39</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="IScene_8cpp_source.html">IScene.cpp</a> の <a class="el" href="IScene_8cpp_source.html#l00043">43</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="SceneSwitcher_8cpp_source.html#l00193">SceneSwitcher::GetContext()</a>, <a class="el" href="SceneSwitcher_8hpp_source.html#l00024">SceneSwitcher::Context::particle</a>.</p>
+<p class="reference">参照先 <a class="el" href="SceneSwitcher_8cpp_source.html#l00220">SceneSwitcher::GetContext()</a>, <a class="el" href="SceneSwitcher_8hpp_source.html#l00026">SceneSwitcher::Context::particle</a>.</p>
 
 </div>
 </div>
@@ -561,9 +575,9 @@ $(document).ready(function(){initNavTree('classIScene.html',''); initResizable()
   </dd>
 </dl>
 
-<p class="definition"> <a class="el" href="IScene_8cpp_source.html">IScene.cpp</a> の <a class="el" href="IScene_8cpp_source.html#l00025">25</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="IScene_8cpp_source.html">IScene.cpp</a> の <a class="el" href="IScene_8cpp_source.html#l00029">29</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="SceneSwitcher_8cpp_source.html#l00197">SceneSwitcher::PlayTransition()</a>.</p>
+<p class="reference">参照先 <a class="el" href="SceneSwitcher_8cpp_source.html#l00224">SceneSwitcher::PlayTransition()</a>.</p>
 
 </div>
 </div>
@@ -610,14 +624,14 @@ $(document).ready(function(){initNavTree('classIScene.html',''); initResizable()
   </dd>
 </dl>
 
-<p class="definition"> <a class="el" href="IScene_8cpp_source.html">IScene.cpp</a> の <a class="el" href="IScene_8cpp_source.html#l00030">30</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="IScene_8cpp_source.html">IScene.cpp</a> の <a class="el" href="IScene_8cpp_source.html#l00034">34</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="SceneSwitcher_8cpp_source.html#l00197">SceneSwitcher::PlayTransition()</a>.</p>
+<p class="reference">参照先 <a class="el" href="SceneSwitcher_8cpp_source.html#l00224">SceneSwitcher::PlayTransition()</a>.</p>
 
 </div>
 </div>
-<a id="a4c682401f3a7045ea7edabfe352fa399" name="a4c682401f3a7045ea7edabfe352fa399"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4c682401f3a7045ea7edabfe352fa399">&#9670;&#160;</a></span>PostEffect()</h2>
+<a id="af6d8cd1a51d6e7b835feb9191e2a093f" name="af6d8cd1a51d6e7b835feb9191e2a093f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af6d8cd1a51d6e7b835feb9191e2a093f">&#9670;&#160;</a></span>PostEffect()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -626,7 +640,7 @@ $(document).ready(function(){initNavTree('classIScene.html',''); initResizable()
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classPostProcessExecutor.html">PostProcessExecutor</a> * IScene::PostEffect </td>
+          <td class="memname">GESTD::ReferencePtr&lt; <a class="el" href="classPostProcessExecutor.html">PostProcessExecutor</a> &gt; IScene::PostEffect </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -639,9 +653,37 @@ $(document).ready(function(){initNavTree('classIScene.html',''); initResizable()
 </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="IScene_8cpp_source.html">IScene.cpp</a> の <a class="el" href="IScene_8cpp_source.html#l00035">35</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="IScene_8cpp_source.html">IScene.cpp</a> の <a class="el" href="IScene_8cpp_source.html#l00039">39</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="SceneSwitcher_8cpp_source.html#l00193">SceneSwitcher::GetContext()</a>, <a class="el" href="SceneSwitcher_8hpp_source.html#l00022">SceneSwitcher::Context::ppe</a>.</p>
+<p class="reference">参照先 <a class="el" href="SceneSwitcher_8cpp_source.html#l00220">SceneSwitcher::GetContext()</a>, <a class="el" href="SceneSwitcher_8hpp_source.html#l00025">SceneSwitcher::Context::ppe</a>.</p>
+
+</div>
+</div>
+<a id="a36e4a540971c4d907c717eceeb33687b" name="a36e4a540971c4d907c717eceeb33687b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a36e4a540971c4d907c717eceeb33687b">&#9670;&#160;</a></span>SetName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void IScene::SetName </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>_name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>シーンの名前を設定(登録時にSwitcherから設定する) </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_name</td><td>シーン名 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition"> <a class="el" href="IScene_8cpp_source.html">IScene.cpp</a> の <a class="el" href="IScene_8cpp_source.html#l00018">18</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -698,6 +740,8 @@ $(document).ready(function(){initNavTree('classIScene.html',''); initResizable()
 
 <p>更新処理（純粋仮想関数） </p>
 
+<p><a class="el" href="classSampleScene.html#a4ed69fb86200cf54053ca9cb9f2143bf">SampleScene</a>で実装されています。</p>
+
 </div>
 </div>
 <h2 class="groupheader">メンバ詳解</h2>
@@ -721,9 +765,9 @@ $(document).ready(function(){initNavTree('classIScene.html',''); initResizable()
 </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="IScene_8hpp_source.html">IScene.hpp</a> の <a class="el" href="IScene_8hpp_source.html#l00024">24</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="IScene_8hpp_source.html">IScene.hpp</a> の <a class="el" href="IScene_8hpp_source.html#l00025">25</a> 行目に定義があります。</p>
 
-<p class="reference">参照元 <a class="el" href="IScene_8hpp_source.html#l00069">GetEntryTransition()</a>.</p>
+<p class="reference">参照元 <a class="el" href="IScene_8hpp_source.html#l00074">GetEntryTransition()</a>.</p>
 
 </div>
 </div>
@@ -747,35 +791,9 @@ $(document).ready(function(){initNavTree('classIScene.html',''); initResizable()
 </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="IScene_8hpp_source.html">IScene.hpp</a> の <a class="el" href="IScene_8hpp_source.html#l00025">25</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="IScene_8hpp_source.html">IScene.hpp</a> の <a class="el" href="IScene_8hpp_source.html#l00026">26</a> 行目に定義があります。</p>
 
-<p class="reference">参照元 <a class="el" href="IScene_8hpp_source.html#l00074">GetExitTransition()</a>.</p>
-
-</div>
-</div>
-<a id="aebe8fbddf4f36579a1fac42c88904e98" name="aebe8fbddf4f36579a1fac42c88904e98"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aebe8fbddf4f36579a1fac42c88904e98">&#9670;&#160;</a></span>name_</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::string IScene::name_</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition"> <a class="el" href="IScene_8hpp_source.html">IScene.hpp</a> の <a class="el" href="IScene_8hpp_source.html#l00021">21</a> 行目に定義があります。</p>
-
-<p class="reference">参照元 <a class="el" href="IScene_8hpp_source.html#l00064">GetName()</a>.</p>
+<p class="reference">参照元 <a class="el" href="IScene_8hpp_source.html#l00079">GetExitTransition()</a>.</p>
 
 </div>
 </div>
@@ -799,9 +817,9 @@ $(document).ready(function(){initNavTree('classIScene.html',''); initResizable()
 </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="IScene_8hpp_source.html">IScene.hpp</a> の <a class="el" href="IScene_8hpp_source.html#l00022">22</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="IScene_8hpp_source.html">IScene.hpp</a> の <a class="el" href="IScene_8hpp_source.html#l00023">23</a> 行目に定義があります。</p>
 
-<p class="reference">参照元 <a class="el" href="IScene_8cpp_source.html#l00018">Change()</a>.</p>
+<p class="reference">参照元 <a class="el" href="IScene_8cpp_source.html#l00022">Change()</a>.</p>
 
 </div>
 </div>
@@ -815,7 +833,7 @@ $(document).ready(function(){initNavTree('classIScene.html',''); initResizable()
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classIScene.html">IScene</a></li>
-    <li class="footer">2026年03月10日(火) 05時02分34秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年04月13日(月) 08時40分04秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

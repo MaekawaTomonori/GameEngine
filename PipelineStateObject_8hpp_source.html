@@ -111,7 +111,7 @@ $(document).ready(function(){initNavTree('PipelineStateObject_8hpp_source.html',
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
 <div class="foldopen" id="foldopen00012" data-start="{" data-end="};">
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="classPipelineStateObject.html">   12</a></span><span class="keyword">class </span><a class="code hl_class" href="classPipelineStateObject.html">PipelineStateObject</a> {</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    <a class="code hl_class" href="classDirectXAdapter.html">DirectXAdapter</a>* adapter_ = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    GESTD::ReferencePtr&lt;DirectXAdapter&gt; adapter_ = <span class="keyword">nullptr</span>;</div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <a class="code hl_class" href="classRootSignature.html">RootSignature</a> rootSignature_;</div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <a class="code hl_class" href="classInputLayout.html">InputLayout</a> inputLayout_;</div>
@@ -134,7 +134,7 @@ $(document).ready(function(){initNavTree('PipelineStateObject_8hpp_source.html',
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="keyword">public</span>:</div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="classPipelineStateObject.html#a92ec46b68bbd6a7c635486af8abeeb70">   35</a></span>    <a class="code hl_function" href="classPipelineStateObject.html#a92ec46b68bbd6a7c635486af8abeeb70">PipelineStateObject</a>() = <span class="keyword">delete</span>;</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <a class="code hl_function" href="classPipelineStateObject.html#a92ec46b68bbd6a7c635486af8abeeb70">PipelineStateObject</a>(<a class="code hl_class" href="classDirectXAdapter.html">DirectXAdapter</a>* _adapter);</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <a class="code hl_function" href="classPipelineStateObject.html#a92ec46b68bbd6a7c635486af8abeeb70">PipelineStateObject</a>(GESTD::ReferencePtr&lt;DirectXAdapter&gt; _adapter);</div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <a class="code hl_class" href="classPipelineStateObject.html">PipelineStateObject</a>&amp; <a class="code hl_function" href="classPipelineStateObject.html#ace4d67541b8c88a53733ad677ced0239">SetRootSignature</a>(<span class="keyword">const</span> <a class="code hl_class" href="classRootSignature.html">RootSignature</a>&amp; _rootSignature);</div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <a class="code hl_class" href="classPipelineStateObject.html">PipelineStateObject</a>&amp; <a class="code hl_function" href="classPipelineStateObject.html#aa294986fcc503fd585d23057a5c73c5e">SetInputLayout</a>(<span class="keyword">const</span> <a class="code hl_class" href="classInputLayout.html">InputLayout</a>&amp; _inputLayout);</div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <a class="code hl_class" href="classPipelineStateObject.html">PipelineStateObject</a>&amp; <a class="code hl_function" href="classPipelineStateObject.html#a07a5c5ae4bde1b7d37f2fc43e2f68a33">SetBlend</a>(<span class="keyword">const</span> D3D12_BLEND_DESC&amp; _blendDesc);</div>
@@ -157,7 +157,6 @@ $(document).ready(function(){initNavTree('PipelineStateObject_8hpp_source.html',
 <div class="ttc" id="aInputLayout_8hpp_html"><div class="ttname"><a href="InputLayout_8hpp.html">InputLayout.hpp</a></div></div>
 <div class="ttc" id="aRootSignature_8hpp_html"><div class="ttname"><a href="RootSignature_8hpp.html">RootSignature.hpp</a></div></div>
 <div class="ttc" id="aShader_8h_html"><div class="ttname"><a href="Shader_8h.html">Shader.h</a></div></div>
-<div class="ttc" id="aclassDirectXAdapter_html"><div class="ttname"><a href="classDirectXAdapter.html">DirectXAdapter</a></div><div class="ttdoc">DirectX12アダプタークラス DirectX12の初期化とデバイス管理を提供</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8hpp_source.html#l00024">DirectXAdapter.hpp:24</a></div></div>
 <div class="ttc" id="aclassInputLayout_html"><div class="ttname"><a href="classInputLayout.html">InputLayout</a></div><div class="ttdef"><b>Definition</b> <a href="InputLayout_8hpp_source.html#l00006">InputLayout.hpp:6</a></div></div>
 <div class="ttc" id="aclassPipelineStateObject_html"><div class="ttname"><a href="classPipelineStateObject.html">PipelineStateObject</a></div><div class="ttdef"><b>Definition</b> <a href="PipelineStateObject_8hpp_source.html#l00012">PipelineStateObject.hpp:12</a></div></div>
 <div class="ttc" id="aclassPipelineStateObject_html_a01f1a21d8613479c9a8ca43b6f551768"><div class="ttname"><a href="classPipelineStateObject.html#a01f1a21d8613479c9a8ca43b6f551768">PipelineStateObject::SetRasterizer</a></div><div class="ttdeci">PipelineStateObject &amp; SetRasterizer(const D3D12_RASTERIZER_DESC _rasterizer)</div><div class="ttdef"><b>Definition</b> <a href="PipelineStateObject_8cpp_source.html#l00080">PipelineStateObject.cpp:80</a></div></div>
@@ -178,7 +177,7 @@ $(document).ready(function(){initNavTree('PipelineStateObject_8hpp_source.html',
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_31399d34f22961890ce23f7132fb3e96.html">DirectX</a></li><li class="navelem"><a class="el" href="dir_5e152dc6ce4833044bc05fc6d25a6808.html">GraphicsPipeline</a></li><li class="navelem"><a class="el" href="dir_e872fbfcf4dac2296573d0e1ccfba4a6.html">Object</a></li><li class="navelem"><a class="el" href="PipelineStateObject_8hpp.html">PipelineStateObject.hpp</a></li>
-    <li class="footer">2026年03月10日(火) 05時02分34秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年04月13日(月) 08時40分04秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

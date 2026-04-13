@@ -1,0 +1,186 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>PortfolioGame Engine: /home/runner/work/GameEngine/GameEngine/src/Ui/SpriteElement.hpp ソースファイル</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">PortfolioGame Engine<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">C++20 DirectX12 Game Engine</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','検索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function() { init_codefold(0); });
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('SpriteElement_8hpp_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">読み取り中…</div>
+<div class="SRStatus" id="Searching">検索中…</div>
+<div class="SRStatus" id="NoMatches">一致する文字列を見つけられません</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">SpriteElement.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="SpriteElement_8hpp.html">[詳解]</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef SpriteElement_HPP_</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define SpriteElement_HPP_</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;array&gt;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;memory&gt;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;<a class="code" href="Sprite_8hpp.html">Sprite.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;<a class="code" href="Element_8hpp.html">Ui/Element.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceUi.html">Ui</a> {</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="foldopen" id="foldopen00016" data-start="{" data-end="};">
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="classUi_1_1SpriteElement.html">   16</a></span>    <span class="keyword">class </span><a class="code hl_class" href="classUi_1_1SpriteElement.html">SpriteElement</a> final : <span class="keyword">public</span> <a class="code hl_class" href="classUi_1_1Element.html">Element</a> {</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="keyword">public</span>:</div>
+<div class="foldopen" id="foldopen00018" data-start="{" data-end="};">
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="structUi_1_1SpriteElement_1_1Data.html">   18</a></span>        <span class="keyword">struct </span><a class="code hl_struct" href="structUi_1_1SpriteElement_1_1Data.html">Data</a> {</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="structUi_1_1SpriteElement_1_1Data.html#a12f3d59343c00f1c8b94468803640bb6">   19</a></span>            std::string <a class="code hl_variable" href="structUi_1_1SpriteElement_1_1Data.html#a12f3d59343c00f1c8b94468803640bb6">texture</a>        = <span class="stringliteral">&quot;white_x16.png&quot;</span>;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="structUi_1_1SpriteElement_1_1Data.html#a6861296be77e7d219ab75ce8cdba363a">   20</a></span>            Vector2     <a class="code hl_variable" href="structUi_1_1SpriteElement_1_1Data.html#a6861296be77e7d219ab75ce8cdba363a">size</a>           {64.f, 64.f};</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="structUi_1_1SpriteElement_1_1Data.html#a5d596efd280cc43cc87007aca4e99280">   21</a></span>            Vector2     <a class="code hl_variable" href="structUi_1_1SpriteElement_1_1Data.html#a5d596efd280cc43cc87007aca4e99280">textureLeftTop</a> {};</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="structUi_1_1SpriteElement_1_1Data.html#a0b0c425c99b2cb2cf42558c55f4ced26">   22</a></span>            Vector2     <a class="code hl_variable" href="structUi_1_1SpriteElement_1_1Data.html#a0b0c425c99b2cb2cf42558c55f4ced26">textureSize</a>    {};</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>        };</div>
+</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        Data data_ {};</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>        std::unique_ptr&lt;Sprite&gt; sprite_ = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        <span class="keywordtype">bool</span> aspectLock_ = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>        std::array&lt;char, 256&gt; textureBuff_ = {};</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="classUi_1_1SpriteElement.html#a49c90f34e34319dab83d196765742410">   32</a></span>        std::string_view <a class="code hl_function" href="classUi_1_1SpriteElement.html#a49c90f34e34319dab83d196765742410">GetType</a>()<span class="keyword"> const override </span>{ <span class="keywordflow">return</span> <span class="stringliteral">&quot;Sprite&quot;</span>; }</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>        std::unique_ptr&lt;Element&gt; <a class="code hl_function" href="classUi_1_1SpriteElement.html#a5272c62b733e3269f0152fc7ed22c929">Clone</a>() <span class="keyword">const override</span>;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="classUi_1_1SpriteElement.html#a6026f7e74c47ee12d699ff5e4cbf9180">   34</a></span>        Vector2 <a class="code hl_function" href="classUi_1_1SpriteElement.html#a6026f7e74c47ee12d699ff5e4cbf9180">GetSize</a>()<span class="keyword"> const override </span>{ <span class="keywordflow">return</span> data_.<a class="code hl_variable" href="structUi_1_1SpriteElement_1_1Data.html#a6861296be77e7d219ab75ce8cdba363a">size</a>; }</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classUi_1_1SpriteElement.html#a2b2c6bcfd3a20227369674a54180751d">SetTexture</a>(<span class="keyword">const</span> std::string&amp; _tex) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classUi_1_1SpriteElement.html#ab66b93a9f3c2e334f883c3d9b7f444bb">SetTextureRegion</a>(<span class="keyword">const</span> Vector2&amp; _leftTop, <span class="keyword">const</span> Vector2&amp; _size) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classUi_1_1SpriteElement.html#ad4d9c3f59d980eee127d94722f06c7cc">SetSize</a>(<span class="keyword">const</span> Vector2&amp; _size) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        Data <a class="code hl_function" href="classUi_1_1SpriteElement.html#ad1f306da5183d7970001945066de675e">GetSpriteData</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classUi_1_1SpriteElement.html#ae6577af54cd3d4e1e384905b371548ea">SetSpriteData</a>(<span class="keyword">const</span> Data&amp; _data);</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <span class="keyword">protected</span>:</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classUi_1_1SpriteElement.html#a4ce07c74c16d15bffa355c92b18f9f96">OnInitialize</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classUi_1_1SpriteElement.html#a2d74957bc4fc2b880c510325d9e0a178">OnUpdate</a>(<span class="keywordtype">float</span> dt) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classUi_1_1SpriteElement.html#a7a102b6f1e9ffa2bb3e67843570cdaa1">OnDraw</a>() <span class="keyword">const override</span>;</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classUi_1_1SpriteElement.html#a6c79eb8f9383cfc0effd3fa6b9143eb2">DebugParams</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    };</div>
+</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>} <span class="comment">// namespace Ui</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="preprocessor">#endif </span><span class="comment">// SpriteElement_HPP_</span></div>
+<div class="ttc" id="aElement_8hpp_html"><div class="ttname"><a href="Element_8hpp.html">Element.hpp</a></div></div>
+<div class="ttc" id="aSprite_8hpp_html"><div class="ttname"><a href="Sprite_8hpp.html">Sprite.hpp</a></div></div>
+<div class="ttc" id="aclassUi_1_1Element_html"><div class="ttname"><a href="classUi_1_1Element.html">Ui::Element</a></div><div class="ttdoc">UI 要素の抽象基底クラス</div><div class="ttdef"><b>Definition</b> <a href="Element_8hpp_source.html#l00022">Element.hpp:22</a></div></div>
+<div class="ttc" id="aclassUi_1_1SpriteElement_html"><div class="ttname"><a href="classUi_1_1SpriteElement.html">Ui::SpriteElement</a></div><div class="ttdoc">スプライト表示 UI 要素</div><div class="ttdef"><b>Definition</b> <a href="SpriteElement_8hpp_source.html#l00016">SpriteElement.hpp:16</a></div></div>
+<div class="ttc" id="aclassUi_1_1SpriteElement_html_a2b2c6bcfd3a20227369674a54180751d"><div class="ttname"><a href="classUi_1_1SpriteElement.html#a2b2c6bcfd3a20227369674a54180751d">Ui::SpriteElement::SetTexture</a></div><div class="ttdeci">void SetTexture(const std::string &amp;_tex) override</div><div class="ttdef"><b>Definition</b> <a href="SpriteElement_8cpp_source.html#l00011">SpriteElement.cpp:11</a></div></div>
+<div class="ttc" id="aclassUi_1_1SpriteElement_html_a2d74957bc4fc2b880c510325d9e0a178"><div class="ttname"><a href="classUi_1_1SpriteElement.html#a2d74957bc4fc2b880c510325d9e0a178">Ui::SpriteElement::OnUpdate</a></div><div class="ttdeci">void OnUpdate(float dt) override</div><div class="ttdef"><b>Definition</b> <a href="SpriteElement_8cpp_source.html#l00048">SpriteElement.cpp:48</a></div></div>
+<div class="ttc" id="aclassUi_1_1SpriteElement_html_a49c90f34e34319dab83d196765742410"><div class="ttname"><a href="classUi_1_1SpriteElement.html#a49c90f34e34319dab83d196765742410">Ui::SpriteElement::GetType</a></div><div class="ttdeci">std::string_view GetType() const override</div><div class="ttdef"><b>Definition</b> <a href="SpriteElement_8hpp_source.html#l00032">SpriteElement.hpp:32</a></div></div>
+<div class="ttc" id="aclassUi_1_1SpriteElement_html_a4ce07c74c16d15bffa355c92b18f9f96"><div class="ttname"><a href="classUi_1_1SpriteElement.html#a4ce07c74c16d15bffa355c92b18f9f96">Ui::SpriteElement::OnInitialize</a></div><div class="ttdeci">void OnInitialize() override</div><div class="ttdef"><b>Definition</b> <a href="SpriteElement_8cpp_source.html#l00037">SpriteElement.cpp:37</a></div></div>
+<div class="ttc" id="aclassUi_1_1SpriteElement_html_a5272c62b733e3269f0152fc7ed22c929"><div class="ttname"><a href="classUi_1_1SpriteElement.html#a5272c62b733e3269f0152fc7ed22c929">Ui::SpriteElement::Clone</a></div><div class="ttdeci">std::unique_ptr&lt; Element &gt; Clone() const override</div><div class="ttdef"><b>Definition</b> <a href="SpriteElement_8cpp_source.html#l00096">SpriteElement.cpp:96</a></div></div>
+<div class="ttc" id="aclassUi_1_1SpriteElement_html_a6026f7e74c47ee12d699ff5e4cbf9180"><div class="ttname"><a href="classUi_1_1SpriteElement.html#a6026f7e74c47ee12d699ff5e4cbf9180">Ui::SpriteElement::GetSize</a></div><div class="ttdeci">Vector2 GetSize() const override</div><div class="ttdef"><b>Definition</b> <a href="SpriteElement_8hpp_source.html#l00034">SpriteElement.hpp:34</a></div></div>
+<div class="ttc" id="aclassUi_1_1SpriteElement_html_a6c79eb8f9383cfc0effd3fa6b9143eb2"><div class="ttname"><a href="classUi_1_1SpriteElement.html#a6c79eb8f9383cfc0effd3fa6b9143eb2">Ui::SpriteElement::DebugParams</a></div><div class="ttdeci">void DebugParams() override</div><div class="ttdef"><b>Definition</b> <a href="SpriteElement_8cpp_source.html#l00071">SpriteElement.cpp:71</a></div></div>
+<div class="ttc" id="aclassUi_1_1SpriteElement_html_a7a102b6f1e9ffa2bb3e67843570cdaa1"><div class="ttname"><a href="classUi_1_1SpriteElement.html#a7a102b6f1e9ffa2bb3e67843570cdaa1">Ui::SpriteElement::OnDraw</a></div><div class="ttdeci">void OnDraw() const override</div><div class="ttdef"><b>Definition</b> <a href="SpriteElement_8cpp_source.html#l00067">SpriteElement.cpp:67</a></div></div>
+<div class="ttc" id="aclassUi_1_1SpriteElement_html_ab66b93a9f3c2e334f883c3d9b7f444bb"><div class="ttname"><a href="classUi_1_1SpriteElement.html#ab66b93a9f3c2e334f883c3d9b7f444bb">Ui::SpriteElement::SetTextureRegion</a></div><div class="ttdeci">void SetTextureRegion(const Vector2 &amp;_leftTop, const Vector2 &amp;_size) override</div><div class="ttdoc">UV クリップ領域を設定する</div><div class="ttdef"><b>Definition</b> <a href="SpriteElement_8cpp_source.html#l00015">SpriteElement.cpp:15</a></div></div>
+<div class="ttc" id="aclassUi_1_1SpriteElement_html_ad1f306da5183d7970001945066de675e"><div class="ttname"><a href="classUi_1_1SpriteElement.html#ad1f306da5183d7970001945066de675e">Ui::SpriteElement::GetSpriteData</a></div><div class="ttdeci">Data GetSpriteData() const</div><div class="ttdef"><b>Definition</b> <a href="SpriteElement_8cpp_source.html#l00024">SpriteElement.cpp:24</a></div></div>
+<div class="ttc" id="aclassUi_1_1SpriteElement_html_ad4d9c3f59d980eee127d94722f06c7cc"><div class="ttname"><a href="classUi_1_1SpriteElement.html#ad4d9c3f59d980eee127d94722f06c7cc">Ui::SpriteElement::SetSize</a></div><div class="ttdeci">void SetSize(const Vector2 &amp;_size) override</div><div class="ttdoc">スクリーン上のサイズを設定する（SpriteElement で有効）</div><div class="ttdef"><b>Definition</b> <a href="SpriteElement_8cpp_source.html#l00020">SpriteElement.cpp:20</a></div></div>
+<div class="ttc" id="aclassUi_1_1SpriteElement_html_ae6577af54cd3d4e1e384905b371548ea"><div class="ttname"><a href="classUi_1_1SpriteElement.html#ae6577af54cd3d4e1e384905b371548ea">Ui::SpriteElement::SetSpriteData</a></div><div class="ttdeci">void SetSpriteData(const Data &amp;_data)</div><div class="ttdef"><b>Definition</b> <a href="SpriteElement_8cpp_source.html#l00026">SpriteElement.cpp:26</a></div></div>
+<div class="ttc" id="anamespaceUi_html"><div class="ttname"><a href="namespaceUi.html">Ui</a></div><div class="ttdef"><b>Definition</b> <a href="Element_8hpp_source.html#l00015">Element.hpp:15</a></div></div>
+<div class="ttc" id="astructUi_1_1SpriteElement_1_1Data_html"><div class="ttname"><a href="structUi_1_1SpriteElement_1_1Data.html">Ui::SpriteElement::Data</a></div><div class="ttdef"><b>Definition</b> <a href="SpriteElement_8hpp_source.html#l00018">SpriteElement.hpp:18</a></div></div>
+<div class="ttc" id="astructUi_1_1SpriteElement_1_1Data_html_a0b0c425c99b2cb2cf42558c55f4ced26"><div class="ttname"><a href="structUi_1_1SpriteElement_1_1Data.html#a0b0c425c99b2cb2cf42558c55f4ced26">Ui::SpriteElement::Data::textureSize</a></div><div class="ttdeci">Vector2 textureSize</div><div class="ttdef"><b>Definition</b> <a href="SpriteElement_8hpp_source.html#l00022">SpriteElement.hpp:22</a></div></div>
+<div class="ttc" id="astructUi_1_1SpriteElement_1_1Data_html_a12f3d59343c00f1c8b94468803640bb6"><div class="ttname"><a href="structUi_1_1SpriteElement_1_1Data.html#a12f3d59343c00f1c8b94468803640bb6">Ui::SpriteElement::Data::texture</a></div><div class="ttdeci">std::string texture</div><div class="ttdef"><b>Definition</b> <a href="SpriteElement_8hpp_source.html#l00019">SpriteElement.hpp:19</a></div></div>
+<div class="ttc" id="astructUi_1_1SpriteElement_1_1Data_html_a5d596efd280cc43cc87007aca4e99280"><div class="ttname"><a href="structUi_1_1SpriteElement_1_1Data.html#a5d596efd280cc43cc87007aca4e99280">Ui::SpriteElement::Data::textureLeftTop</a></div><div class="ttdeci">Vector2 textureLeftTop</div><div class="ttdef"><b>Definition</b> <a href="SpriteElement_8hpp_source.html#l00021">SpriteElement.hpp:21</a></div></div>
+<div class="ttc" id="astructUi_1_1SpriteElement_1_1Data_html_a6861296be77e7d219ab75ce8cdba363a"><div class="ttname"><a href="structUi_1_1SpriteElement_1_1Data.html#a6861296be77e7d219ab75ce8cdba363a">Ui::SpriteElement::Data::size</a></div><div class="ttdeci">Vector2 size</div><div class="ttdef"><b>Definition</b> <a href="SpriteElement_8hpp_source.html#l00020">SpriteElement.hpp:20</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_e796c29efe043a3b967d81e1c9f5f281.html">Ui</a></li><li class="navelem"><a class="el" href="SpriteElement_8hpp.html">SpriteElement.hpp</a></li>
+    <li class="footer">2026年04月13日(月) 08時40分04秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+  </ul>
+</div>
+</body>
+</html>

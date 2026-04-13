@@ -113,8 +113,8 @@ $(document).ready(function(){initNavTree('Sprite_8cpp_source.html',''); initResi
 <div class="foldopen" id="foldopen00013" data-start="{" data-end="}">
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="classSprite.html#a12cba3ac1868418add3c4d95ce87e615">   13</a></span><a class="code hl_function" href="classSprite.html#a12cba3ac1868418add3c4d95ce87e615">Sprite::Sprite</a>() {</div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    common_ = Singleton&lt;SpriteCommon&gt;::GetInstance();</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    adapter_ = common_-&gt;<a class="code hl_function" href="classCommon.html#af76821d28439133bfde8bedcd657e645">GetAdapter</a>();</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    commandList_ = adapter_-&gt;<a class="code hl_function" href="classDirectXAdapter.html#abc7797e145abbf8c6b66d89ce219adbf">GetCommandList</a>();</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    adapter_ = common_-&gt;GetAdapter();</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    commandList_ = adapter_-&gt;GetCommandList();</div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    uuid_ = Utils::GenerateUniqueId();</div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>}</div>
@@ -125,7 +125,7 @@ $(document).ready(function(){initNavTree('Sprite_8cpp_source.html',''); initResi
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    texturePath_ = _texture;</div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    Singleton&lt;TextureManager&gt;::GetInstance()-&gt;Load(texturePath_);</div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    vr_ = adapter_-&gt;<a class="code hl_function" href="classDirectXAdapter.html#ab4b4c251cdfee90870ce155e610c9500">CreateBufferResource</a>(<span class="keyword">sizeof</span>(VertexData) * 4);</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    vr_ = adapter_-&gt;CreateBufferResource(<span class="keyword">sizeof</span>(VertexData) * 4);</div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    vbv_.BufferLocation = vr_-&gt;Get()-&gt;GetGPUVirtualAddress();</div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    vbv_.SizeInBytes = <span class="keyword">sizeof</span>(VertexData) * 4;</div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    vbv_.StrideInBytes = <span class="keyword">sizeof</span>(VertexData);</div>
@@ -143,7 +143,7 @@ $(document).ready(function(){initNavTree('Sprite_8cpp_source.html',''); initResi
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    vd_[3].uv = {1, 0};</div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="comment">//IndexData</span></div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    ir_ = adapter_-&gt;<a class="code hl_function" href="classDirectXAdapter.html#ab4b4c251cdfee90870ce155e610c9500">CreateBufferResource</a>(<span class="keyword">sizeof</span>(uint32_t) * 6);</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    ir_ = adapter_-&gt;CreateBufferResource(<span class="keyword">sizeof</span>(uint32_t) * 6);</div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    ibv_.BufferLocation = ir_-&gt;Get()-&gt;GetGPUVirtualAddress();</div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    ibv_.SizeInBytes = <span class="keyword">sizeof</span>(uint32_t) * 6;</div>
@@ -159,12 +159,12 @@ $(document).ready(function(){initNavTree('Sprite_8cpp_source.html',''); initResi
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    index_[5] = 2;</div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <span class="comment">//MaterialData</span></div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    mr_ = adapter_-&gt;<a class="code hl_function" href="classDirectXAdapter.html#ab4b4c251cdfee90870ce155e610c9500">CreateBufferResource</a>(<span class="keyword">sizeof</span>(Material));</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    mr_ = adapter_-&gt;CreateBufferResource(<span class="keyword">sizeof</span>(Material));</div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    mr_-&gt;Get()-&gt;Map(0, <span class="keyword">nullptr</span>, <span class="keyword">reinterpret_cast&lt;</span><span class="keywordtype">void</span>**<span class="keyword">&gt;</span>(&amp;material_));</div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    material_-&gt;color = {1, 1, 1, 1};</div>
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    wr_ = adapter_-&gt;<a class="code hl_function" href="classDirectXAdapter.html#ab4b4c251cdfee90870ce155e610c9500">CreateBufferResource</a>(<span class="keyword">sizeof</span>(Transformation));</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    wr_ = adapter_-&gt;CreateBufferResource(<span class="keyword">sizeof</span>(Transformation));</div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    wr_-&gt;Get()-&gt;Map(0, <span class="keyword">nullptr</span>, <span class="keyword">reinterpret_cast&lt;</span><span class="keywordtype">void</span>**<span class="keyword">&gt;</span>(&amp;wd_));</div>
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    wd_-&gt;wvp = MathUtils::Matrix::MakeIdentity();</div>
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    wd_-&gt;world = MathUtils::Matrix::MakeIdentity();</div>
@@ -173,15 +173,15 @@ $(document).ready(function(){initNavTree('Sprite_8cpp_source.html',''); initResi
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    AdjustTextureSize();</div>
 <div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    common_-&gt;<a class="code hl_function" href="classCommon.html#aaccb5f6b151eed7f3297e67046668ff3">RegisterUpdate</a>(uuid_, [<span class="keyword">this</span>]() { UpdateMapData(); });</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    common_-&gt;<a class="code hl_function" href="classCommon.html#a9ee5c7c05e387bc2bda4cdba171740bc">RegisterDebug</a>(uuid_,  [<span class="keyword">this</span>]() { Debug(); });</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    common_-&gt;RegisterUpdate(uuid_, [<span class="keyword">this</span>]() { UpdateMapData(); });</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    common_-&gt;RegisterDebug(uuid_,  [<span class="keyword">this</span>]() { Debug(); });</div>
 <div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>}</div>
 </div>
 <div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
 <div class="foldopen" id="foldopen00077" data-start="{" data-end="}">
 <div class="line"><a id="l00077" name="l00077"></a><span class="lineno"><a class="line" href="classSprite.html#a8accab430f9d90ae5117b57d67e32b84">   77</a></span><a class="code hl_function" href="classSprite.html#a8accab430f9d90ae5117b57d67e32b84">Sprite::~Sprite</a>() {</div>
 <div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    <span class="keywordflow">if</span> (common_) {</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>        common_-&gt;<a class="code hl_function" href="classCommon.html#acf757da19ea43b691fcdd6f8a18dd922">Unregister</a>(uuid_);</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>        common_-&gt;Unregister(uuid_);</div>
 <div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    }</div>
 <div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>}</div>
 </div>
@@ -230,14 +230,14 @@ $(document).ready(function(){initNavTree('Sprite_8cpp_source.html',''); initResi
 <div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span><span class="preprocessor">#pragma endregion</span></div>
 <div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span> </div>
 <div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    wd_-&gt;world = MathUtils::Matrix::MakeAffineMatrix({size_.x, size_.y, 1}, Vector3{0, 0, rotation_}, {position_.x, position_.y, 0});</div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    Matrix4x4 viewProjection = MathUtils::Matrix::MakeIdentity() * MathUtils::Matrix::MakeOrthogonalMatrix(0, <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(adapter_-&gt;<a class="code hl_function" href="classDirectXAdapter.html#a0fba31180c1f84825e4b5da99fdc3371">GetWidth</a>()), 0, <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(adapter_-&gt;<a class="code hl_function" href="classDirectXAdapter.html#a73060803a4ebb0fc3be2ace3f93b5aef">GetHeight</a>()), 0, 100.f);</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    Matrix4x4 viewProjection = MathUtils::Matrix::MakeIdentity() * MathUtils::Matrix::MakeOrthogonalMatrix(0, <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(adapter_-&gt;GetWidth()), 0, <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(adapter_-&gt;GetHeight()), 0, 100.f);</div>
 <div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span> </div>
 <div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    wd_-&gt;wvp = (wd_-&gt;world * viewProjection);</div>
 <div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>}</div>
 <div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span> </div>
 <div class="foldopen" id="foldopen00130" data-start="{" data-end="}">
 <div class="line"><a id="l00130" name="l00130"></a><span class="lineno"><a class="line" href="classSprite.html#a054a4c340c14c3d218b99e484bf83d21">  130</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classSprite.html#a054a4c340c14c3d218b99e484bf83d21">Sprite::Draw</a>() {</div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    common_-&gt;<a class="code hl_function" href="classCommon.html#ae93c4bd439c1a6d360c5ba68d13a6d4f">RegisterDraw</a>([&amp;]{</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    common_-&gt;RegisterDraw([&amp;]{</div>
 <div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>        commandList_-&gt;IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);</div>
 <div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>        commandList_-&gt;IASetVertexBuffers(0, 1, &amp;vbv_);</div>
 <div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>        commandList_-&gt;IASetIndexBuffer(&amp;ibv_);</div>
@@ -395,15 +395,6 @@ $(document).ready(function(){initNavTree('Sprite_8cpp_source.html',''); initResi
 <div class="ttc" id="aSpriteCommon_8hpp_html"><div class="ttname"><a href="SpriteCommon_8hpp.html">SpriteCommon.hpp</a></div></div>
 <div class="ttc" id="aSprite_8hpp_html"><div class="ttname"><a href="Sprite_8hpp.html">Sprite.hpp</a></div></div>
 <div class="ttc" id="aTextureManager_8hpp_html"><div class="ttname"><a href="TextureManager_8hpp.html">TextureManager.hpp</a></div></div>
-<div class="ttc" id="aclassCommon_html_a9ee5c7c05e387bc2bda4cdba171740bc"><div class="ttname"><a href="classCommon.html#a9ee5c7c05e387bc2bda4cdba171740bc">Common::RegisterDebug</a></div><div class="ttdeci">void RegisterDebug(const std::string &amp;_id, const std::function&lt; void()&gt; &amp;_func)</div><div class="ttdef"><b>Definition</b> <a href="Common_8cpp_source.html#l00078">Common.cpp:78</a></div></div>
-<div class="ttc" id="aclassCommon_html_aaccb5f6b151eed7f3297e67046668ff3"><div class="ttname"><a href="classCommon.html#aaccb5f6b151eed7f3297e67046668ff3">Common::RegisterUpdate</a></div><div class="ttdeci">void RegisterUpdate(const std::string &amp;_id, const std::function&lt; void()&gt; &amp;_func)</div><div class="ttdef"><b>Definition</b> <a href="Common_8cpp_source.html#l00084">Common.cpp:84</a></div></div>
-<div class="ttc" id="aclassCommon_html_acf757da19ea43b691fcdd6f8a18dd922"><div class="ttname"><a href="classCommon.html#acf757da19ea43b691fcdd6f8a18dd922">Common::Unregister</a></div><div class="ttdeci">void Unregister(const std::string &amp;_uuid)</div><div class="ttdef"><b>Definition</b> <a href="Common_8cpp_source.html#l00094">Common.cpp:94</a></div></div>
-<div class="ttc" id="aclassCommon_html_ae93c4bd439c1a6d360c5ba68d13a6d4f"><div class="ttname"><a href="classCommon.html#ae93c4bd439c1a6d360c5ba68d13a6d4f">Common::RegisterDraw</a></div><div class="ttdeci">void RegisterDraw(const std::function&lt; void()&gt; &amp;_command, bool _isApplyPostEffect=true)</div><div class="ttdef"><b>Definition</b> <a href="Common_8cpp_source.html#l00090">Common.cpp:90</a></div></div>
-<div class="ttc" id="aclassCommon_html_af76821d28439133bfde8bedcd657e645"><div class="ttname"><a href="classCommon.html#af76821d28439133bfde8bedcd657e645">Common::GetAdapter</a></div><div class="ttdeci">DirectXAdapter * GetAdapter() const</div><div class="ttdef"><b>Definition</b> <a href="Common_8hpp_source.html#l00045">Common.hpp:45</a></div></div>
-<div class="ttc" id="aclassDirectXAdapter_html_a0fba31180c1f84825e4b5da99fdc3371"><div class="ttname"><a href="classDirectXAdapter.html#a0fba31180c1f84825e4b5da99fdc3371">DirectXAdapter::GetWidth</a></div><div class="ttdeci">size_t GetWidth() const</div><div class="ttdoc">ウィンドウ幅を取得</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8cpp_source.html#l00713">DirectXAdapter.cpp:713</a></div></div>
-<div class="ttc" id="aclassDirectXAdapter_html_a73060803a4ebb0fc3be2ace3f93b5aef"><div class="ttname"><a href="classDirectXAdapter.html#a73060803a4ebb0fc3be2ace3f93b5aef">DirectXAdapter::GetHeight</a></div><div class="ttdeci">size_t GetHeight() const</div><div class="ttdoc">ウィンドウ高さを取得</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8cpp_source.html#l00717">DirectXAdapter.cpp:717</a></div></div>
-<div class="ttc" id="aclassDirectXAdapter_html_ab4b4c251cdfee90870ce155e610c9500"><div class="ttname"><a href="classDirectXAdapter.html#ab4b4c251cdfee90870ce155e610c9500">DirectXAdapter::CreateBufferResource</a></div><div class="ttdeci">std::unique_ptr&lt; DX12Resource &gt; CreateBufferResource(size_t _size) const</div><div class="ttdoc">バッファリソースを作成</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8cpp_source.html#l00079">DirectXAdapter.cpp:79</a></div></div>
-<div class="ttc" id="aclassDirectXAdapter_html_abc7797e145abbf8c6b66d89ce219adbf"><div class="ttname"><a href="classDirectXAdapter.html#abc7797e145abbf8c6b66d89ce219adbf">DirectXAdapter::GetCommandList</a></div><div class="ttdeci">ID3D12GraphicsCommandList * GetCommandList() const</div><div class="ttdoc">コマンドリストを取得</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8cpp_source.html#l00709">DirectXAdapter.cpp:709</a></div></div>
 <div class="ttc" id="aclassSprite_html_a01dde3293edf3256aa18cf053c95d144"><div class="ttname"><a href="classSprite.html#a01dde3293edf3256aa18cf053c95d144">Sprite::IsFlipY</a></div><div class="ttdeci">bool IsFlipY() const</div><div class="ttdoc">Y軸反転の状態を取得</div><div class="ttdef"><b>Definition</b> <a href="Sprite_8cpp_source.html#l00212">Sprite.cpp:212</a></div></div>
 <div class="ttc" id="aclassSprite_html_a04e10b224c20c9bea7e2a5062c6afc75"><div class="ttname"><a href="classSprite.html#a04e10b224c20c9bea7e2a5062c6afc75">Sprite::SetAnchorPoint</a></div><div class="ttdeci">void SetAnchorPoint(const Vector2 &amp;_a)</div><div class="ttdoc">アンカーポイントを設定</div><div class="ttdef"><b>Definition</b> <a href="Sprite_8cpp_source.html#l00200">Sprite.cpp:200</a></div></div>
 <div class="ttc" id="aclassSprite_html_a054a4c340c14c3d218b99e484bf83d21"><div class="ttname"><a href="classSprite.html#a054a4c340c14c3d218b99e484bf83d21">Sprite::Draw</a></div><div class="ttdeci">void Draw()</div><div class="ttdoc">スプライトを描画</div><div class="ttdef"><b>Definition</b> <a href="Sprite_8cpp_source.html#l00130">Sprite.cpp:130</a></div></div>
@@ -435,7 +426,7 @@ $(document).ready(function(){initNavTree('Sprite_8cpp_source.html',''); initResi
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_909c286288939002c1b25213a067bdba.html">Sprite</a></li><li class="navelem"><a class="el" href="Sprite_8cpp.html">Sprite.cpp</a></li>
-    <li class="footer">2026年03月10日(火) 05時02分34秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年04月13日(月) 08時40分04秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

@@ -125,6 +125,9 @@ $(document).ready(function(){initNavTree('classInput.html',''); initResizable();
 <tr class="memitem:ae702d40cfd7ad3ea48bf74a38f6e424e" id="r_ae702d40cfd7ad3ea48bf74a38f6e424e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInput.html#ae702d40cfd7ad3ea48bf74a38f6e424e">SetCursorVisible</a> (bool _visible)</td></tr>
 <tr class="memdesc:ae702d40cfd7ad3ea48bf74a38f6e424e"><td class="mdescLeft">&#160;</td><td class="mdescRight">カーソルの表示/非表示を設定  <br /></td></tr>
 <tr class="separator:ae702d40cfd7ad3ea48bf74a38f6e424e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a602fd19ffab08846d7b85deee4d7385a" id="r_a602fd19ffab08846d7b85deee4d7385a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInput.html#a602fd19ffab08846d7b85deee4d7385a">SetDebugUIHovered</a> (bool _hovered)</td></tr>
+<tr class="memdesc:a602fd19ffab08846d7b85deee4d7385a"><td class="mdescLeft">&#160;</td><td class="mdescRight">デバッグUI上にマウスがあるかを設定  <br /></td></tr>
+<tr class="separator:a602fd19ffab08846d7b85deee4d7385a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1f6f6ae51b56fec3cb2e49b3d9ed5824" id="r_a1f6f6ae51b56fec3cb2e49b3d9ed5824"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInput.html#a1f6f6ae51b56fec3cb2e49b3d9ed5824">ApplyCursorVisibility</a> ()</td></tr>
 <tr class="memdesc:a1f6f6ae51b56fec3cb2e49b3d9ed5824"><td class="mdescLeft">&#160;</td><td class="mdescRight">カーソル表示状態を即時反映  <br /></td></tr>
 <tr class="separator:a1f6f6ae51b56fec3cb2e49b3d9ed5824"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -152,7 +155,7 @@ $(document).ready(function(){initNavTree('classInput.html',''); initResizable();
 <p>カーソル表示状態を即時反映 </p>
 <dl class="section note"><dt>覚え書き</dt><dd>Framework::Draw() の renderer_-&gt;Render() 後に呼ぶこと (SceneView の矩形情報は ImGui レンダリング後に確定するため) </dd></dl>
 
-<p class="definition"> <a class="el" href="Input_8cpp_source.html">Input.cpp</a> の <a class="el" href="Input_8cpp_source.html#l00128">128</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Input_8cpp_source.html">Input.cpp</a> の <a class="el" href="Input_8cpp_source.html#l00132">132</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -215,8 +218,6 @@ $(document).ready(function(){initNavTree('classInput.html',''); initResizable();
 <p class="definition"> <a class="el" href="Input_8cpp_source.html">Input.cpp</a> の <a class="el" href="Input_8cpp_source.html#l00010">10</a> 行目に定義があります。</p>
 
 <p class="reference">参照先 <a class="el" href="Input_8hpp_source.html#l00003">DIRECTINPUT_VERSION</a>, <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::ERR</a>, <a class="el" href="Log_8cpp_source.html#l00108">Log::Send()</a>.</p>
-
-<p class="reference">参照元 <a class="el" href="Framework_8cpp_source.html#l00009">Framework::Framework()</a>.</p>
 
 </div>
 </div>
@@ -295,6 +296,35 @@ $(document).ready(function(){initNavTree('classInput.html',''); initResizable();
 <dl class="section note"><dt>覚え書き</dt><dd>Debug ビルドでは非表示時も SceneView 外ではカーソルを表示する </dd></dl>
 
 <p class="definition"> <a class="el" href="Input_8cpp_source.html">Input.cpp</a> の <a class="el" href="Input_8cpp_source.html#l00124">124</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="a602fd19ffab08846d7b85deee4d7385a" name="a602fd19ffab08846d7b85deee4d7385a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a602fd19ffab08846d7b85deee4d7385a">&#9670;&#160;</a></span>SetDebugUIHovered()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Input::SetDebugUIHovered </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>_hovered</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>デバッグUI上にマウスがあるかを設定 </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_hovered</td><td>デバッグUIにホバー中なら true </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>覚え書き</dt><dd><a class="el" href="classDebugUI.html#af99b5b71548a60b7525f3920bc66d274" title="マウスがデバッグUI上にあるか判定 Scene ウィンドウ以外の ImGui ウィンドウにホバー中の場合 true カーソル非表示時にデバッグUIパネル上ではカーソルを表示するために使用">DebugUI::IsMouseOverDebugUI()</a> の結果を <a class="el" href="classInput.html#a1f6f6ae51b56fec3cb2e49b3d9ed5824" title="カーソル表示状態を即時反映">ApplyCursorVisibility()</a> 前に渡す </dd></dl>
+
+<p class="definition"> <a class="el" href="Input_8cpp_source.html">Input.cpp</a> の <a class="el" href="Input_8cpp_source.html#l00128">128</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -382,7 +412,7 @@ $(document).ready(function(){initNavTree('classInput.html',''); initResizable();
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classInput.html">Input</a></li>
-    <li class="footer">2026年03月10日(火) 05時02分34秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年04月13日(月) 08時40分04秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

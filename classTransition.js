@@ -17,5 +17,6 @@ var classTransition =
     [ "Initialize", "classTransition.html#a17a6957f9533e3a6b90c9e3288863eef", null ],
     [ "InProgress", "classTransition.html#a22d55f19e21fc47bc0992766ab7601a2", null ],
     [ "SetDefaultDuration", "classTransition.html#a02c269f065786034782a6a4e73ea8ddb", null ],
+    [ "Skip", "classTransition.html#ae32e88b4c0e6fdae310a866a9b6ead5a", null ],
     [ "Update", "classTransition.html#afa699138288c6a552aff575d50fe599b", null ]
 ];

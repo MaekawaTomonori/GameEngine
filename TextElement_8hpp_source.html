@@ -1,0 +1,173 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>PortfolioGame Engine: /home/runner/work/GameEngine/GameEngine/src/Ui/TextElement.hpp ソースファイル</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">PortfolioGame Engine<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">C++20 DirectX12 Game Engine</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','検索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function() { init_codefold(0); });
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('TextElement_8hpp_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">読み取り中…</div>
+<div class="SRStatus" id="Searching">検索中…</div>
+<div class="SRStatus" id="NoMatches">一致する文字列を見つけられません</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">TextElement.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="TextElement_8hpp.html">[詳解]</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef TextElement_HPP_</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define TextElement_HPP_</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="Element_8hpp.html">Ui/Element.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceUi.html">Ui</a> {</div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="foldopen" id="foldopen00013" data-start="{" data-end="};">
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="classUi_1_1TextElement.html">   13</a></span>    <span class="keyword">class </span><a class="code hl_class" href="classUi_1_1TextElement.html">TextElement</a> final : <span class="keyword">public</span> <a class="code hl_class" href="classUi_1_1Element.html">Element</a> {</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    <span class="keyword">public</span>:</div>
+<div class="foldopen" id="foldopen00015" data-start="{" data-end="};">
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="structUi_1_1TextElement_1_1Data.html">   15</a></span>        <span class="keyword">struct </span><a class="code hl_struct" href="structUi_1_1TextElement_1_1Data.html">Data</a> {</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="structUi_1_1TextElement_1_1Data.html#a727808e59ab863f95a6a531ed0ca7b63">   16</a></span>            std::string <a class="code hl_variable" href="structUi_1_1TextElement_1_1Data.html#a727808e59ab863f95a6a531ed0ca7b63">text</a>;</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="structUi_1_1TextElement_1_1Data.html#a4b82ff7f89e90da7c507408ad714fb9d">   17</a></span>            <span class="keywordtype">float</span>       <a class="code hl_variable" href="structUi_1_1TextElement_1_1Data.html#a4b82ff7f89e90da7c507408ad714fb9d">fontSize</a> = 32.f;</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>        };</div>
+</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>        <a class="code hl_struct" href="structUi_1_1TextElement_1_1Data.html">Data</a> data_ {};</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="classUi_1_1TextElement.html#aa3d61b4af856885c941838cd1a9f881e">   24</a></span>        std::string_view <a class="code hl_function" href="classUi_1_1TextElement.html#aa3d61b4af856885c941838cd1a9f881e">GetType</a>()<span class="keyword"> const override </span>{ <span class="keywordflow">return</span> <span class="stringliteral">&quot;Text&quot;</span>; }</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        std::unique_ptr&lt;Element&gt; <a class="code hl_function" href="classUi_1_1TextElement.html#af2fa505318fb86e66125b4c3b2fd7909">Clone</a>() <span class="keyword">const override</span>;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="classUi_1_1TextElement.html#a3a69bd1e655cbb6d630bd0a051dcae8d">   27</a></span>        <span class="keyword">const</span> std::string&amp; <a class="code hl_function" href="classUi_1_1TextElement.html#a3a69bd1e655cbb6d630bd0a051dcae8d">GetText</a>()<span class="keyword"> const override </span>{ <span class="keywordflow">return</span> data_.<a class="code hl_variable" href="structUi_1_1TextElement_1_1Data.html#a727808e59ab863f95a6a531ed0ca7b63">text</a>; }</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="classUi_1_1TextElement.html#a6f49543b9935f301c5ebcde0dd72f2d2">   28</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classUi_1_1TextElement.html#a6f49543b9935f301c5ebcde0dd72f2d2">SetText</a>(<span class="keyword">const</span> std::string&amp; _t)<span class="keyword"> override </span>{ data_.<a class="code hl_variable" href="structUi_1_1TextElement_1_1Data.html#a727808e59ab863f95a6a531ed0ca7b63">text</a> = _t; }</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="classUi_1_1TextElement.html#a5cedf14c1f4aef2cb7387355b4510bff">   29</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classUi_1_1TextElement.html#a5cedf14c1f4aef2cb7387355b4510bff">SetFontSize</a>(<span class="keywordtype">float</span> _sz)<span class="keyword"> override          </span>{ data_.<a class="code hl_variable" href="structUi_1_1TextElement_1_1Data.html#a4b82ff7f89e90da7c507408ad714fb9d">fontSize</a> = _sz; }</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="classUi_1_1TextElement.html#a2ee3267f4c7cacaf96498754fb4b8cec">   30</a></span>        <span class="keywordtype">float</span> <a class="code hl_function" href="classUi_1_1TextElement.html#a2ee3267f4c7cacaf96498754fb4b8cec">GetFontSize</a>()<span class="keyword"> const                     </span>{ <span class="keywordflow">return</span> data_.<a class="code hl_variable" href="structUi_1_1TextElement_1_1Data.html#a4b82ff7f89e90da7c507408ad714fb9d">fontSize</a>; }</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>        Data <a class="code hl_function" href="classUi_1_1TextElement.html#ad23fb18c59e73493465ff96e070e2947">GetTextData</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classUi_1_1TextElement.html#a3d67a03e4377b91881ba303f5500a311">SetTextData</a>(<span class="keyword">const</span> Data&amp; _data);</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <span class="keyword">protected</span>:</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classUi_1_1TextElement.html#a9411036448ec3bf9f8f1a142a203efb2">OnInitialize</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classUi_1_1TextElement.html#aa3e7477e8e89bffaf0c95b5e8ed2f696">OnUpdate</a>(<span class="keywordtype">float</span> dt) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classUi_1_1TextElement.html#abd94ed4d56a24973a0f97efc1e64869c">OnDraw</a>() <span class="keyword">const override</span>;</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classUi_1_1TextElement.html#aa842ad733b274e42d2a14b67a5605abe">DebugParams</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    };</div>
+</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>} <span class="comment">// namespace Ui</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="preprocessor">#endif </span><span class="comment">// TextElement_HPP_</span></div>
+<div class="ttc" id="aElement_8hpp_html"><div class="ttname"><a href="Element_8hpp.html">Element.hpp</a></div></div>
+<div class="ttc" id="aclassUi_1_1Element_html"><div class="ttname"><a href="classUi_1_1Element.html">Ui::Element</a></div><div class="ttdoc">UI 要素の抽象基底クラス</div><div class="ttdef"><b>Definition</b> <a href="Element_8hpp_source.html#l00022">Element.hpp:22</a></div></div>
+<div class="ttc" id="aclassUi_1_1TextElement_html"><div class="ttname"><a href="classUi_1_1TextElement.html">Ui::TextElement</a></div><div class="ttdoc">テキスト表示 UI 要素</div><div class="ttdef"><b>Definition</b> <a href="TextElement_8hpp_source.html#l00013">TextElement.hpp:13</a></div></div>
+<div class="ttc" id="aclassUi_1_1TextElement_html_a2ee3267f4c7cacaf96498754fb4b8cec"><div class="ttname"><a href="classUi_1_1TextElement.html#a2ee3267f4c7cacaf96498754fb4b8cec">Ui::TextElement::GetFontSize</a></div><div class="ttdeci">float GetFontSize() const</div><div class="ttdef"><b>Definition</b> <a href="TextElement_8hpp_source.html#l00030">TextElement.hpp:30</a></div></div>
+<div class="ttc" id="aclassUi_1_1TextElement_html_a3a69bd1e655cbb6d630bd0a051dcae8d"><div class="ttname"><a href="classUi_1_1TextElement.html#a3a69bd1e655cbb6d630bd0a051dcae8d">Ui::TextElement::GetText</a></div><div class="ttdeci">const std::string &amp; GetText() const override</div><div class="ttdoc">表示文字列を返す（TextElement 以外では空文字列）</div><div class="ttdef"><b>Definition</b> <a href="TextElement_8hpp_source.html#l00027">TextElement.hpp:27</a></div></div>
+<div class="ttc" id="aclassUi_1_1TextElement_html_a3d67a03e4377b91881ba303f5500a311"><div class="ttname"><a href="classUi_1_1TextElement.html#a3d67a03e4377b91881ba303f5500a311">Ui::TextElement::SetTextData</a></div><div class="ttdeci">void SetTextData(const Data &amp;_data)</div><div class="ttdef"><b>Definition</b> <a href="TextElement_8cpp_source.html#l00011">TextElement.cpp:11</a></div></div>
+<div class="ttc" id="aclassUi_1_1TextElement_html_a5cedf14c1f4aef2cb7387355b4510bff"><div class="ttname"><a href="classUi_1_1TextElement.html#a5cedf14c1f4aef2cb7387355b4510bff">Ui::TextElement::SetFontSize</a></div><div class="ttdeci">void SetFontSize(float _sz) override</div><div class="ttdef"><b>Definition</b> <a href="TextElement_8hpp_source.html#l00029">TextElement.hpp:29</a></div></div>
+<div class="ttc" id="aclassUi_1_1TextElement_html_a6f49543b9935f301c5ebcde0dd72f2d2"><div class="ttname"><a href="classUi_1_1TextElement.html#a6f49543b9935f301c5ebcde0dd72f2d2">Ui::TextElement::SetText</a></div><div class="ttdeci">void SetText(const std::string &amp;_t) override</div><div class="ttdef"><b>Definition</b> <a href="TextElement_8hpp_source.html#l00028">TextElement.hpp:28</a></div></div>
+<div class="ttc" id="aclassUi_1_1TextElement_html_a9411036448ec3bf9f8f1a142a203efb2"><div class="ttname"><a href="classUi_1_1TextElement.html#a9411036448ec3bf9f8f1a142a203efb2">Ui::TextElement::OnInitialize</a></div><div class="ttdeci">void OnInitialize() override</div><div class="ttdef"><b>Definition</b> <a href="TextElement_8cpp_source.html#l00015">TextElement.cpp:15</a></div></div>
+<div class="ttc" id="aclassUi_1_1TextElement_html_aa3d61b4af856885c941838cd1a9f881e"><div class="ttname"><a href="classUi_1_1TextElement.html#aa3d61b4af856885c941838cd1a9f881e">Ui::TextElement::GetType</a></div><div class="ttdeci">std::string_view GetType() const override</div><div class="ttdef"><b>Definition</b> <a href="TextElement_8hpp_source.html#l00024">TextElement.hpp:24</a></div></div>
+<div class="ttc" id="aclassUi_1_1TextElement_html_aa3e7477e8e89bffaf0c95b5e8ed2f696"><div class="ttname"><a href="classUi_1_1TextElement.html#aa3e7477e8e89bffaf0c95b5e8ed2f696">Ui::TextElement::OnUpdate</a></div><div class="ttdeci">void OnUpdate(float dt) override</div><div class="ttdef"><b>Definition</b> <a href="TextElement_8cpp_source.html#l00022">TextElement.cpp:22</a></div></div>
+<div class="ttc" id="aclassUi_1_1TextElement_html_aa842ad733b274e42d2a14b67a5605abe"><div class="ttname"><a href="classUi_1_1TextElement.html#aa842ad733b274e42d2a14b67a5605abe">Ui::TextElement::DebugParams</a></div><div class="ttdeci">void DebugParams() override</div><div class="ttdef"><b>Definition</b> <a href="TextElement_8cpp_source.html#l00040">TextElement.cpp:40</a></div></div>
+<div class="ttc" id="aclassUi_1_1TextElement_html_abd94ed4d56a24973a0f97efc1e64869c"><div class="ttname"><a href="classUi_1_1TextElement.html#abd94ed4d56a24973a0f97efc1e64869c">Ui::TextElement::OnDraw</a></div><div class="ttdeci">void OnDraw() const override</div><div class="ttdef"><b>Definition</b> <a href="TextElement_8cpp_source.html#l00026">TextElement.cpp:26</a></div></div>
+<div class="ttc" id="aclassUi_1_1TextElement_html_ad23fb18c59e73493465ff96e070e2947"><div class="ttname"><a href="classUi_1_1TextElement.html#ad23fb18c59e73493465ff96e070e2947">Ui::TextElement::GetTextData</a></div><div class="ttdeci">Data GetTextData() const</div><div class="ttdef"><b>Definition</b> <a href="TextElement_8cpp_source.html#l00009">TextElement.cpp:9</a></div></div>
+<div class="ttc" id="aclassUi_1_1TextElement_html_af2fa505318fb86e66125b4c3b2fd7909"><div class="ttname"><a href="classUi_1_1TextElement.html#af2fa505318fb86e66125b4c3b2fd7909">Ui::TextElement::Clone</a></div><div class="ttdeci">std::unique_ptr&lt; Element &gt; Clone() const override</div><div class="ttdef"><b>Definition</b> <a href="TextElement_8cpp_source.html#l00055">TextElement.cpp:55</a></div></div>
+<div class="ttc" id="anamespaceUi_html"><div class="ttname"><a href="namespaceUi.html">Ui</a></div><div class="ttdef"><b>Definition</b> <a href="Element_8hpp_source.html#l00015">Element.hpp:15</a></div></div>
+<div class="ttc" id="astructUi_1_1TextElement_1_1Data_html"><div class="ttname"><a href="structUi_1_1TextElement_1_1Data.html">Ui::TextElement::Data</a></div><div class="ttdef"><b>Definition</b> <a href="TextElement_8hpp_source.html#l00015">TextElement.hpp:15</a></div></div>
+<div class="ttc" id="astructUi_1_1TextElement_1_1Data_html_a4b82ff7f89e90da7c507408ad714fb9d"><div class="ttname"><a href="structUi_1_1TextElement_1_1Data.html#a4b82ff7f89e90da7c507408ad714fb9d">Ui::TextElement::Data::fontSize</a></div><div class="ttdeci">float fontSize</div><div class="ttdef"><b>Definition</b> <a href="TextElement_8hpp_source.html#l00017">TextElement.hpp:17</a></div></div>
+<div class="ttc" id="astructUi_1_1TextElement_1_1Data_html_a727808e59ab863f95a6a531ed0ca7b63"><div class="ttname"><a href="structUi_1_1TextElement_1_1Data.html#a727808e59ab863f95a6a531ed0ca7b63">Ui::TextElement::Data::text</a></div><div class="ttdeci">std::string text</div><div class="ttdef"><b>Definition</b> <a href="TextElement_8hpp_source.html#l00016">TextElement.hpp:16</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_e796c29efe043a3b967d81e1c9f5f281.html">Ui</a></li><li class="navelem"><a class="el" href="TextElement_8hpp.html">TextElement.hpp</a></li>
+    <li class="footer">2026年04月13日(月) 08時40分04秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+  </ul>
+</div>
+</body>
+</html>

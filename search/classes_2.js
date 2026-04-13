@@ -10,5 +10,6 @@ var searchData=
   ['common_7',['Common',['../classCommon.html',1,'']]],
   ['computepipeline_8',['ComputePipeline',['../classComputePipeline.html',1,'']]],
   ['config_9',['Config',['../structGameEngine_1_1Config.html',1,'GameEngine']]],
-  ['context_10',['Context',['../structSceneSwitcher_1_1Context.html',1,'SceneSwitcher']]]
+  ['configloader_10',['ConfigLoader',['../classGameEngine_1_1ConfigLoader.html',1,'GameEngine']]],
+  ['context_11',['Context',['../structSceneSwitcher_1_1Context.html',1,'SceneSwitcher']]]
 ];

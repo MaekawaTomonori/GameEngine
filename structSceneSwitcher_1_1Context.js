@@ -1,6 +1,7 @@
 var structSceneSwitcher_1_1Context =
 [
-    [ "debug", "structSceneSwitcher_1_1Context.html#a1db5f37f9e36d89ec8cdb732538ac7e6", null ],
-    [ "particle", "structSceneSwitcher_1_1Context.html#a47b7e360eefcec0d2480695f5973cfea", null ],
-    [ "ppe", "structSceneSwitcher_1_1Context.html#ace45fb656cd2fc034ee24a4a3901d8ad", null ]
+    [ "debug", "structSceneSwitcher_1_1Context.html#abc6fafebe96c029eed7b81de5863880c", null ],
+    [ "frame", "structSceneSwitcher_1_1Context.html#a698db973a9f1acc24ef08014c614af49", null ],
+    [ "particle", "structSceneSwitcher_1_1Context.html#a6adeee9a15541c62703ee57c028bdec8", null ],
+    [ "ppe", "structSceneSwitcher_1_1Context.html#ace2ead0866b5f189f613ee4cc61591d1", null ]
 ];

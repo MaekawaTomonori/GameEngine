@@ -9,12 +9,12 @@ var classPostProcessExecutor =
     [ "Execute", "classPostProcessExecutor.html#a8322f922ebe3f1444ee573ab3960d76d", null ],
     [ "FindOrCreate", "classPostProcessExecutor.html#ab44e68997e32b5c93fe38309dcf7158f", null ],
     [ "GetSceneViewScale", "classPostProcessExecutor.html#ac2c89d71b81091a30d43b81ec006bf9a", null ],
-    [ "Initialize", "classPostProcessExecutor.html#a6d8faf6f90fbaaba68671c4e1e8de2cd", null ],
+    [ "Initialize", "classPostProcessExecutor.html#ad97a026ca101640cf06810bfbdf46431", null ],
     [ "IsSceneViewActive", "classPostProcessExecutor.html#ad9c88965b82750169b5bdbf933c14c43", null ],
     [ "OpenPresetEditor", "classPostProcessExecutor.html#aa21de519d6c5cd112023a0dd60dce0f0", null ],
     [ "ResizeRenderTextures", "classPostProcessExecutor.html#a24d5f96db824fcae4164c856c8cff0e7", null ],
     [ "SavePreset", "classPostProcessExecutor.html#a736d0db2c58d37970bb34171e22b3bc7", null ],
     [ "SetActive", "classPostProcessExecutor.html#a59b510e45f46ad87308269fbc36836e1", null ],
-    [ "SetFactory", "classPostProcessExecutor.html#a9d1cbab51dcee034d44d62b6f77b8786", null ],
+    [ "SetFactory", "classPostProcessExecutor.html#a690d2db7b8e679f0eb12d82c730179e0", null ],
     [ "Update", "classPostProcessExecutor.html#a686899b0de87f0c418363b9b19e474d3", null ]
 ];

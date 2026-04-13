@@ -1,12 +1,10 @@
 var searchData=
 [
-  ['debug_0',['debug',['../structSceneSwitcher_1_1Context.html#a1db5f37f9e36d89ec8cdb732538ac7e6',1,'SceneSwitcher::Context']]],
-  ['debugcommands_5f_1',['debugCommands_',['../classCommon.html#a44f74978d1cfd1c2cdc6135d42f0a3fd',1,'Common']]],
-  ['debugui_5f_2',['debugUI_',['../classCommon.html#add9f8c6db3e1528f3b5e80df03a669e7',1,'Common']]],
-  ['decay_3',['decay',['../structPointLight.html#a6de0dd7088765e968bed1914fa6e851f',1,'PointLight::decay'],['../structSpotLight.html#a6c0c4795c9aae0dee1c73b8755ab5297',1,'SpotLight::decay']]],
-  ['defaultscene_4',['defaultScene',['../structGameEngine_1_1Config.html#a007c5eee8511bb489bee38b65bce1185',1,'GameEngine::Config']]],
-  ['direction_5',['direction',['../structDirectionalLight.html#a9d5d17335ecd6a191c65d8711ad8577a',1,'DirectionalLight::direction'],['../structSpotLight.html#a92ac8208bac56958f8019ded0c6932a4',1,'SpotLight::direction']]],
-  ['distance_6',['distance',['../structSpotLight.html#a6ab30f858f76186817f831f7c1b96b0d',1,'SpotLight']]],
-  ['drawfunctions_5f_7',['drawFunctions_',['../classCommon.html#a06218b42051cb18b344e03f44b3e250a',1,'Common']]],
-  ['duration_8',['duration',['../structAnimation.html#a66cc7333638f071b0401072ba95c55fd',1,'Animation::duration'],['../structParticleSystem_1_1EmitterConfig.html#a4457af19f9a804b4f6bf0020aa0e6428',1,'ParticleSystem::EmitterConfig::duration'],['../structPostProcessPresetEditor_1_1PresetData.html#a38390845bf2d27d23e85c00a226e16d7',1,'PostProcessPresetEditor::PresetData::duration']]]
+  ['canvas_0',['canvas',['../structUi_1_1Manager_1_1Entry.html#aadeb8afc2c19aabf9d9df01dfc13494a',1,'Ui::Manager::Entry']]],
+  ['children_1',['children',['../structNode.html#af7ddc81358470c3bf7a7819c8b77f53d',1,'Node::children'],['../structJoint.html#ae8bbd318a55662dc1fab4b7c571176f7',1,'Joint::children']]],
+  ['clear_5fcolor_2',['CLEAR_COLOR',['../classIPostEffect.html#ae0dc01028757f721f28df7ba30cdd48e',1,'IPostEffect']]],
+  ['code_3',['code',['../Input_8hpp.html#a4e3273e7667573e3b0b61df9d034fd40',1,'Input.hpp']]],
+  ['color_4',['color',['../structMaterial.html#adb84a919c3817e517b83204fef63221e',1,'Material::color'],['../structDirectionalLight.html#af7cec050b680e38218d207936671820b',1,'DirectionalLight::color'],['../structPointLight.html#abbefa0b6bed88de9049aaf72f9feb437',1,'PointLight::color'],['../structSpotLight.html#a66aff00aafa672a52aafab06dd1648ea',1,'SpotLight::color'],['../structParticleSystem_1_1EmitterConfig.html#a8e01733a6eafbf7e743d8e8fba05b676',1,'ParticleSystem::EmitterConfig::color']]],
+  ['color_5f_5',['color_',['../classUi_1_1Element.html#a68cd0a58f218e08030cba6a609cf6cfb',1,'Ui::Element']]],
+  ['cosangle_6',['cosAngle',['../structSpotLight.html#af34c60194528537d1a3c585e0a5af2f2',1,'SpotLight']]]
 ];

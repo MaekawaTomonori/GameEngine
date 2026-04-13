@@ -126,6 +126,9 @@ $(document).ready(function(){initNavTree('classTransition.html',''); initResizab
 <tr class="separator:a00b54bae79f74cfbe98fd98a8b303c79"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a22d55f19e21fc47bc0992766ab7601a2" id="r_a22d55f19e21fc47bc0992766ab7601a2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTransition.html#a22d55f19e21fc47bc0992766ab7601a2">InProgress</a> ()</td></tr>
 <tr class="separator:a22d55f19e21fc47bc0992766ab7601a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae32e88b4c0e6fdae310a866a9b6ead5a" id="r_ae32e88b4c0e6fdae310a866a9b6ead5a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTransition.html#ae32e88b4c0e6fdae310a866a9b6ead5a">Skip</a> ()</td></tr>
+<tr class="memdesc:ae32e88b4c0e6fdae310a866a9b6ead5a"><td class="mdescLeft">&#160;</td><td class="mdescRight">トランジションを即座に強制終了する  <br /></td></tr>
+<tr class="separator:ae32e88b4c0e6fdae310a866a9b6ead5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a02c269f065786034782a6a4e73ea8ddb" id="r_a02c269f065786034782a6a4e73ea8ddb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTransition.html#a02c269f065786034782a6a4e73ea8ddb">SetDefaultDuration</a> (float _duration)</td></tr>
 <tr class="separator:a02c269f065786034782a6a4e73ea8ddb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af1d28b83a2d43b8077c7b400e25d52e5" id="r_af1d28b83a2d43b8077c7b400e25d52e5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTransition.html#af1d28b83a2d43b8077c7b400e25d52e5">Debug</a> ()</td></tr>
@@ -251,9 +254,9 @@ $(document).ready(function(){initNavTree('classTransition.html',''); initResizab
 
 <p class="definition"> <a class="el" href="Transition_8cpp_source.html">Transition.cpp</a> の <a class="el" href="Transition_8cpp_source.html#l00023">23</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="Transition_8cpp_source.html#l00023">Awake()</a>, <a class="el" href="classTransition.html#aca03fd04a22c40b5315f79e6f1122253a6adf97f83acf6453d4a6a4b1070f3754">None</a>.</p>
+<p class="reference">参照先 <a class="el" href="Transition_8cpp_source.html#l00023">Awake()</a>, <a class="el" href="classITransitionEffect.html#a86868f632ccdf014543bbf471096227baefeb369cccbd560588a756610865664c">ITransitionEffect::In</a>, <a class="el" href="classTransition.html#aca03fd04a22c40b5315f79e6f1122253a6adf97f83acf6453d4a6a4b1070f3754">None</a>.</p>
 
-<p class="reference">参照元 <a class="el" href="Transition_8cpp_source.html#l00023">Awake()</a>, <a class="el" href="Transition_8cpp_source.html#l00048">InProgress()</a>.</p>
+<p class="reference">参照元 <a class="el" href="Transition_8cpp_source.html#l00023">Awake()</a>, <a class="el" href="Transition_8cpp_source.html#l00054">InProgress()</a>.</p>
 
 </div>
 </div>
@@ -289,7 +292,7 @@ $(document).ready(function(){initNavTree('classTransition.html',''); initResizab
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="Transition_8cpp_source.html">Transition.cpp</a> の <a class="el" href="Transition_8cpp_source.html#l00028">28</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Transition_8cpp_source.html">Transition.cpp</a> の <a class="el" href="Transition_8cpp_source.html#l00034">34</a> 行目に定義があります。</p>
 
 <p class="reference">参照先 <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::INFO</a>, <a class="el" href="classTransition.html#aca03fd04a22c40b5315f79e6f1122253a6adf97f83acf6453d4a6a4b1070f3754">None</a>, <a class="el" href="Log_8cpp_source.html#l00108">Log::Send()</a>.</p>
 
@@ -312,9 +315,9 @@ $(document).ready(function(){initNavTree('classTransition.html',''); initResizab
 
 <p>ImGui上でトランジション状態を表示（ウィンドウ内に埋め込む形で呼ぶ） </p>
 
-<p class="definition"> <a class="el" href="Transition_8cpp_source.html">Transition.cpp</a> の <a class="el" href="Transition_8cpp_source.html#l00075">75</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Transition_8cpp_source.html">Transition.cpp</a> の <a class="el" href="Transition_8cpp_source.html#l00088">88</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="Transition_8cpp_source.html#l00065">GetCurrentState()</a>, <a class="el" href="Transition_8cpp_source.html#l00070">GetProgress()</a>, <a class="el" href="Transition_8cpp_source.html#l00048">InProgress()</a>.</p>
+<p class="reference">参照先 <a class="el" href="Transition_8cpp_source.html#l00078">GetCurrentState()</a>, <a class="el" href="Transition_8cpp_source.html#l00083">GetProgress()</a>, <a class="el" href="Transition_8cpp_source.html#l00054">InProgress()</a>, <a class="el" href="Transition_8cpp_source.html#l00067">Skip()</a>.</p>
 
 </div>
 </div>
@@ -352,11 +355,11 @@ $(document).ready(function(){initNavTree('classTransition.html',''); initResizab
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="Transition_8cpp_source.html">Transition.cpp</a> の <a class="el" href="Transition_8cpp_source.html#l00065">65</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Transition_8cpp_source.html">Transition.cpp</a> の <a class="el" href="Transition_8cpp_source.html#l00078">78</a> 行目に定義があります。</p>
 
 <p class="reference">参照先 <a class="el" href="classITransitionEffect.html#a86868f632ccdf014543bbf471096227ba6adf97f83acf6453d4a6a4b1070f3754">ITransitionEffect::None</a>.</p>
 
-<p class="reference">参照元 <a class="el" href="Transition_8cpp_source.html#l00075">Debug()</a>.</p>
+<p class="reference">参照元 <a class="el" href="Transition_8cpp_source.html#l00088">Debug()</a>.</p>
 
 </div>
 </div>
@@ -375,9 +378,9 @@ $(document).ready(function(){initNavTree('classTransition.html',''); initResizab
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="Transition_8cpp_source.html">Transition.cpp</a> の <a class="el" href="Transition_8cpp_source.html#l00070">70</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Transition_8cpp_source.html">Transition.cpp</a> の <a class="el" href="Transition_8cpp_source.html#l00083">83</a> 行目に定義があります。</p>
 
-<p class="reference">参照元 <a class="el" href="Transition_8cpp_source.html#l00075">Debug()</a>.</p>
+<p class="reference">参照元 <a class="el" href="Transition_8cpp_source.html#l00088">Debug()</a>.</p>
 
 </div>
 </div>
@@ -404,7 +407,7 @@ $(document).ready(function(){initNavTree('classTransition.html',''); initResizab
 </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="Transition_8hpp_source.html">Transition.hpp</a> の <a class="el" href="Transition_8hpp_source.html#l00042">42</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Transition_8hpp_source.html">Transition.hpp</a> の <a class="el" href="Transition_8hpp_source.html#l00045">45</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -444,11 +447,11 @@ $(document).ready(function(){initNavTree('classTransition.html',''); initResizab
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="Transition_8cpp_source.html">Transition.cpp</a> の <a class="el" href="Transition_8cpp_source.html#l00048">48</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Transition_8cpp_source.html">Transition.cpp</a> の <a class="el" href="Transition_8cpp_source.html#l00054">54</a> 行目に定義があります。</p>
 
 <p class="reference">参照先 <a class="el" href="Transition_8cpp_source.html#l00023">Awake()</a>.</p>
 
-<p class="reference">参照元 <a class="el" href="Transition_8cpp_source.html#l00075">Debug()</a>.</p>
+<p class="reference">参照元 <a class="el" href="Transition_8cpp_source.html#l00088">Debug()</a>.</p>
 
 </div>
 </div>
@@ -468,7 +471,30 @@ $(document).ready(function(){initNavTree('classTransition.html',''); initResizab
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="Transition_8cpp_source.html">Transition.cpp</a> の <a class="el" href="Transition_8cpp_source.html#l00061">61</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Transition_8cpp_source.html">Transition.cpp</a> の <a class="el" href="Transition_8cpp_source.html#l00074">74</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="ae32e88b4c0e6fdae310a866a9b6ead5a" name="ae32e88b4c0e6fdae310a866a9b6ead5a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae32e88b4c0e6fdae310a866a9b6ead5a">&#9670;&#160;</a></span>Skip()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Transition::Skip </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>トランジションを即座に強制終了する </p>
+
+<p class="definition"> <a class="el" href="Transition_8cpp_source.html">Transition.cpp</a> の <a class="el" href="Transition_8cpp_source.html#l00067">67</a> 行目に定義があります。</p>
+
+<p class="reference">参照元 <a class="el" href="Transition_8cpp_source.html#l00088">Debug()</a>.</p>
 
 </div>
 </div>
@@ -501,7 +527,7 @@ $(document).ready(function(){initNavTree('classTransition.html',''); initResizab
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classTransition.html">Transition</a></li>
-    <li class="footer">2026年03月10日(火) 05時02分34秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年04月13日(月) 08時40分04秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

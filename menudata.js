@@ -30,6 +30,7 @@ var menudata={children:[
 {text:"全て",url:"namespacemembers.html"},
 {text:"関数",url:"namespacemembers_func.html"},
 {text:"変数",url:"namespacemembers_vars.html"},
+{text:"型定義",url:"namespacemembers_type.html"},
 {text:"列挙型",url:"namespacemembers_enum.html"}]}]},
 {text:"クラス",url:"annotated.html",children:[
 {text:"クラス一覧",url:"annotated.html"},
@@ -82,6 +83,7 @@ var menudata={children:[
 {text:"~",url:"functions_func_~.html#index__7E"}]},
 {text:"変数",url:"functions_vars.html",children:[
 {text:"a",url:"functions_vars.html#index_a"},
+{text:"b",url:"functions_vars.html#index_b"},
 {text:"c",url:"functions_vars.html#index_c"},
 {text:"d",url:"functions_vars.html#index_d"},
 {text:"e",url:"functions_vars.html#index_e"},
@@ -102,7 +104,8 @@ var menudata={children:[
 {text:"v",url:"functions_vars.html#index_v"},
 {text:"w",url:"functions_vars.html#index_w"}]},
 {text:"型定義",url:"functions_type.html"},
-{text:"列挙型",url:"functions_enum.html"}]}]},
+{text:"列挙型",url:"functions_enum.html"},
+{text:"関連関数",url:"functions_rela.html"}]}]},
 {text:"ファイル",url:"files.html",children:[
 {text:"ファイル一覧",url:"files.html"},
 {text:"ファイルメンバ",url:"globals.html",children:[

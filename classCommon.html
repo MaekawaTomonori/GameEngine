@@ -111,6 +111,7 @@ Common の継承関係図</div>
 <area href="classModelCommon.html" alt="ModelCommon" shape="rect" coords="105,56,200,80"/>
 <area href="classSkyCommon.html" alt="SkyCommon" shape="rect" coords="210,56,305,80"/>
 <area href="classSpriteCommon.html" alt="SpriteCommon" shape="rect" coords="315,56,410,80"/>
+<area href="classTextCommon.html" title="テキスト描画の内部システムクラス" alt="TextCommon" shape="rect" coords="420,56,515,80"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -123,8 +124,8 @@ Common の継承関係図</div>
 公開メンバ関数</h2></td></tr>
 <tr class="memitem:a731fbced46f3c3dbc3cf8234dc0f0eb0" id="r_a731fbced46f3c3dbc3cf8234dc0f0eb0"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCommon.html#a731fbced46f3c3dbc3cf8234dc0f0eb0">~Common</a> ()=default</td></tr>
 <tr class="separator:a731fbced46f3c3dbc3cf8234dc0f0eb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2562f6232b2f23b0f5b9a22ae91772f8" id="r_a2562f6232b2f23b0f5b9a22ae91772f8"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCommon.html#a2562f6232b2f23b0f5b9a22ae91772f8">Initialize</a> (<a class="el" href="classDirectXAdapter.html">DirectXAdapter</a> *_adapter, <a class="el" href="classDebugUI.html">DebugUI</a> *_debugUi)=0</td></tr>
-<tr class="separator:a2562f6232b2f23b0f5b9a22ae91772f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f881cf0d0b1ba4f6fc54d8ff35fc161" id="r_a7f881cf0d0b1ba4f6fc54d8ff35fc161"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCommon.html#a7f881cf0d0b1ba4f6fc54d8ff35fc161">Initialize</a> (const GESTD::ReferencePtr&lt; <a class="el" href="classDirectXAdapter.html">DirectXAdapter</a> &gt; &amp;_adapter, const GESTD::ReferencePtr&lt; <a class="el" href="classDebugUI.html">DebugUI</a> &gt; &amp;_debugUi)=0</td></tr>
+<tr class="separator:a7f881cf0d0b1ba4f6fc54d8ff35fc161"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acbf931d78122c852054360ed082c75f0" id="r_acbf931d78122c852054360ed082c75f0"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCommon.html#acbf931d78122c852054360ed082c75f0">Update</a> ()</td></tr>
 <tr class="separator:acbf931d78122c852054360ed082c75f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0478505cc256ef6830aa01820087e2a1" id="r_a0478505cc256ef6830aa01820087e2a1"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCommon.html#a0478505cc256ef6830aa01820087e2a1">Debug</a> ()</td></tr>
@@ -139,20 +140,20 @@ Common の継承関係図</div>
 <tr class="separator:ae93c4bd439c1a6d360c5ba68d13a6d4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acf757da19ea43b691fcdd6f8a18dd922" id="r_acf757da19ea43b691fcdd6f8a18dd922"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCommon.html#acf757da19ea43b691fcdd6f8a18dd922">Unregister</a> (const std::string &amp;_uuid)</td></tr>
 <tr class="separator:acf757da19ea43b691fcdd6f8a18dd922"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af76821d28439133bfde8bedcd657e645" id="r_af76821d28439133bfde8bedcd657e645"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classDirectXAdapter.html">DirectXAdapter</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCommon.html#af76821d28439133bfde8bedcd657e645">GetAdapter</a> () const</td></tr>
-<tr class="separator:af76821d28439133bfde8bedcd657e645"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22e116f89d995ae4180123e2be1608ca" id="r_a22e116f89d995ae4180123e2be1608ca"><td class="memItemLeft" align="right" valign="top">GESTD::ReferencePtr&lt; <a class="el" href="classDirectXAdapter.html">DirectXAdapter</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCommon.html#a22e116f89d995ae4180123e2be1608ca">GetAdapter</a> () const</td></tr>
+<tr class="separator:a22e116f89d995ae4180123e2be1608ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 限定公開メンバ関数</h2></td></tr>
-<tr class="memitem:a1c5e8e6d6f28463fe66dd55d3a897fb2" id="r_a1c5e8e6d6f28463fe66dd55d3a897fb2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCommon.html#a1c5e8e6d6f28463fe66dd55d3a897fb2">Setup</a> (<a class="el" href="classDirectXAdapter.html">DirectXAdapter</a> *_adapter, <a class="el" href="classDebugUI.html">DebugUI</a> *_debugUi, const std::string &amp;_windowName)</td></tr>
-<tr class="separator:a1c5e8e6d6f28463fe66dd55d3a897fb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6344b82bbc9c51f22b4ba6dd51c403a7" id="r_a6344b82bbc9c51f22b4ba6dd51c403a7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCommon.html#a6344b82bbc9c51f22b4ba6dd51c403a7">Setup</a> (const GESTD::ReferencePtr&lt; <a class="el" href="classDirectXAdapter.html">DirectXAdapter</a> &gt; &amp;_adapter, const GESTD::ReferencePtr&lt; <a class="el" href="classDebugUI.html">DebugUI</a> &gt; &amp;_debugUi, const std::string &amp;_windowName)</td></tr>
+<tr class="separator:a6344b82bbc9c51f22b4ba6dd51c403a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 限定公開変数類</h2></td></tr>
-<tr class="memitem:a642f6834fbb63978b129a4394c447952" id="r_a642f6834fbb63978b129a4394c447952"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classDirectXAdapter.html">DirectXAdapter</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCommon.html#a642f6834fbb63978b129a4394c447952">adapter_</a> = nullptr</td></tr>
-<tr class="separator:a642f6834fbb63978b129a4394c447952"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:add9f8c6db3e1528f3b5e80df03a669e7" id="r_add9f8c6db3e1528f3b5e80df03a669e7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classDebugUI.html">DebugUI</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCommon.html#add9f8c6db3e1528f3b5e80df03a669e7">debugUI_</a> = nullptr</td></tr>
-<tr class="separator:add9f8c6db3e1528f3b5e80df03a669e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3259ad3476b59131b551195fb1612732" id="r_a3259ad3476b59131b551195fb1612732"><td class="memItemLeft" align="right" valign="top">GESTD::ReferencePtr&lt; <a class="el" href="classDirectXAdapter.html">DirectXAdapter</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCommon.html#a3259ad3476b59131b551195fb1612732">adapter_</a></td></tr>
+<tr class="separator:a3259ad3476b59131b551195fb1612732"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4fead241d22b2c899a8deb284fdcd74" id="r_aa4fead241d22b2c899a8deb284fdcd74"><td class="memItemLeft" align="right" valign="top">GESTD::ReferencePtr&lt; <a class="el" href="classDebugUI.html">DebugUI</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCommon.html#aa4fead241d22b2c899a8deb284fdcd74">debugUI_</a></td></tr>
+<tr class="separator:aa4fead241d22b2c899a8deb284fdcd74"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6ecf3b59c1cff48343a0956b72d43e6a" id="r_a6ecf3b59c1cff48343a0956b72d43e6a"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCommon.html#a6ecf3b59c1cff48343a0956b72d43e6a">windowName_</a></td></tr>
 <tr class="separator:a6ecf3b59c1cff48343a0956b72d43e6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0e67c3b7f994e47e54d72108e91c9ada" id="r_a0e67c3b7f994e47e54d72108e91c9ada"><td class="memItemLeft" align="right" valign="top">std::mutex&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCommon.html#a0e67c3b7f994e47e54d72108e91c9ada">mutex_</a></td></tr>
@@ -168,7 +169,7 @@ Common の継承関係図</div>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">詳解</h2>
 <div class="textblock">
-<p class="definition"> <a class="el" href="Common_8hpp_source.html">Common.hpp</a> の <a class="el" href="Common_8hpp_source.html#l00010">10</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Common_8hpp_source.html">Common.hpp</a> の <a class="el" href="Common_8hpp_source.html#l00011">11</a> 行目に定義があります。</p>
 </div><h2 class="groupheader">構築子と解体子</h2>
 <a id="a731fbced46f3c3dbc3cf8234dc0f0eb0" name="a731fbced46f3c3dbc3cf8234dc0f0eb0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a731fbced46f3c3dbc3cf8234dc0f0eb0">&#9670;&#160;</a></span>~Common()</h2>
@@ -221,7 +222,7 @@ Common の継承関係図</div>
 
 <p class="definition"> <a class="el" href="Common_8cpp_source.html">Common.cpp</a> の <a class="el" href="Common_8cpp_source.html#l00028">28</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="Common_8hpp_source.html#l00027">debugCommands_</a>, <a class="el" href="Common_8hpp_source.html#l00020">debugUI_</a>, <a class="el" href="DebugUI_8cpp_source.html#l00170">DebugUI::IsVisible()</a>, <a class="el" href="DebugUI_8cpp_source.html#l00152">DebugUI::RegisterCommand()</a>, <a class="el" href="Common_8hpp_source.html#l00021">windowName_</a>.</p>
+<p class="reference">参照先 <a class="el" href="Common_8hpp_source.html#l00028">debugCommands_</a>, <a class="el" href="Common_8hpp_source.html#l00021">debugUI_</a>, <a class="el" href="Common_8hpp_source.html#l00022">windowName_</a>.</p>
 
 </div>
 </div>
@@ -249,16 +250,16 @@ Common の継承関係図</div>
 </table>
 </div><div class="memdoc">
 
-<p><a class="el" href="classModelCommon.html#a0d6ae38ec2b579e2447c342e77f41720">ModelCommon</a>で再実装されています。</p>
+<p><a class="el" href="classModelCommon.html#a0d6ae38ec2b579e2447c342e77f41720">ModelCommon</a>, <a class="el" href="classTextCommon.html#ab5c5964723a80ca36b616a322d1edf95">TextCommon</a>で再実装されています。</p>
 
 <p class="definition"> <a class="el" href="Common_8cpp_source.html">Common.cpp</a> の <a class="el" href="Common_8cpp_source.html#l00042">42</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="Common_8hpp_source.html#l00029">drawFunctions_</a>, <a class="el" href="Common_8hpp_source.html#l00025">pipeline_</a>, <a class="el" href="Renderer_8cpp_source.html#l00011">Renderer::Register()</a>.</p>
+<p class="reference">参照先 <a class="el" href="Common_8hpp_source.html#l00030">drawFunctions_</a>, <a class="el" href="Common_8hpp_source.html#l00026">pipeline_</a>, <a class="el" href="Renderer_8cpp_source.html#l00011">Renderer::Register()</a>.</p>
 
 </div>
 </div>
-<a id="af76821d28439133bfde8bedcd657e645" name="af76821d28439133bfde8bedcd657e645"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af76821d28439133bfde8bedcd657e645">&#9670;&#160;</a></span>GetAdapter()</h2>
+<a id="a22e116f89d995ae4180123e2be1608ca" name="a22e116f89d995ae4180123e2be1608ca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a22e116f89d995ae4180123e2be1608ca">&#9670;&#160;</a></span>GetAdapter()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -267,7 +268,7 @@ Common の継承関係図</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classDirectXAdapter.html">DirectXAdapter</a> * Common::GetAdapter </td>
+          <td class="memname">GESTD::ReferencePtr&lt; <a class="el" href="classDirectXAdapter.html">DirectXAdapter</a> &gt; Common::GetAdapter </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -280,16 +281,14 @@ Common の継承関係図</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="Common_8hpp_source.html">Common.hpp</a> の <a class="el" href="Common_8hpp_source.html#l00045">45</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Common_8hpp_source.html">Common.hpp</a> の <a class="el" href="Common_8hpp_source.html#l00046">46</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="Common_8hpp_source.html#l00019">adapter_</a>.</p>
-
-<p class="reference">参照元 <a class="el" href="Skybox_8cpp_source.html#l00009">Skybox::Initialize()</a>, <a class="el" href="Line_8cpp_source.html#l00010">Line::Line()</a>, <a class="el" href="Sprite_8cpp_source.html#l00013">Sprite::Sprite()</a>.</p>
+<p class="reference">参照先 <a class="el" href="Common_8hpp_source.html#l00020">adapter_</a>.</p>
 
 </div>
 </div>
-<a id="a2562f6232b2f23b0f5b9a22ae91772f8" name="a2562f6232b2f23b0f5b9a22ae91772f8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2562f6232b2f23b0f5b9a22ae91772f8">&#9670;&#160;</a></span>Initialize()</h2>
+<a id="a7f881cf0d0b1ba4f6fc54d8ff35fc161" name="a7f881cf0d0b1ba4f6fc54d8ff35fc161"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f881cf0d0b1ba4f6fc54d8ff35fc161">&#9670;&#160;</a></span>Initialize()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -300,13 +299,13 @@ Common の継承関係図</div>
         <tr>
           <td class="memname">virtual void Common::Initialize </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classDirectXAdapter.html">DirectXAdapter</a> *&#160;</td>
+          <td class="paramtype">const GESTD::ReferencePtr&lt; <a class="el" href="classDirectXAdapter.html">DirectXAdapter</a> &gt; &amp;&#160;</td>
           <td class="paramname"><em>_adapter</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classDebugUI.html">DebugUI</a> *&#160;</td>
+          <td class="paramtype">const GESTD::ReferencePtr&lt; <a class="el" href="classDebugUI.html">DebugUI</a> &gt; &amp;&#160;</td>
           <td class="paramname"><em>_debugUi</em>&#160;</td>
         </tr>
         <tr>
@@ -322,7 +321,7 @@ Common の継承関係図</div>
 </table>
 </div><div class="memdoc">
 
-<p><a class="el" href="classSkyCommon.html#aad14a49e50a01596a68457a7edee391e">SkyCommon</a>, <a class="el" href="classSpriteCommon.html#a20418d30dff7afcb1e0acaa41f25ea4a">SpriteCommon</a>で実装されています。</p>
+<p><a class="el" href="classSkyCommon.html#af7fb114c4a0adacdb47f9c8a4977a1ab">SkyCommon</a>, <a class="el" href="classSpriteCommon.html#a4cbb799be84dee947a2ac96a92891399">SpriteCommon</a>で実装されています。</p>
 
 </div>
 </div>
@@ -354,9 +353,9 @@ Common の継承関係図</div>
 
 <p class="definition"> <a class="el" href="Common_8cpp_source.html">Common.cpp</a> の <a class="el" href="Common_8cpp_source.html#l00078">78</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="Common_8hpp_source.html#l00027">debugCommands_</a>, <a class="el" href="Common_8hpp_source.html#l00023">mutex_</a>.</p>
+<p class="reference">参照先 <a class="el" href="Common_8hpp_source.html#l00028">debugCommands_</a>, <a class="el" href="Common_8hpp_source.html#l00024">mutex_</a>.</p>
 
-<p class="reference">参照元 <a class="el" href="Model_8cpp_source.html#l00027">Model::Initialize()</a>, <a class="el" href="Sprite_8cpp_source.html#l00021">Sprite::Initialize()</a>, <a class="el" href="Line_8cpp_source.html#l00029">Line::Update()</a>, <a class="el" href="Skybox_8cpp_source.html#l00039">Skybox::Update()</a>.</p>
+<p class="reference">参照元 <a class="el" href="TextCommon_8cpp_source.html#l00032">TextCommon::Initialize()</a>.</p>
 
 </div>
 </div>
@@ -388,9 +387,7 @@ Common の継承関係図</div>
 
 <p class="definition"> <a class="el" href="Common_8cpp_source.html">Common.cpp</a> の <a class="el" href="Common_8cpp_source.html#l00090">90</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="Common_8hpp_source.html#l00029">drawFunctions_</a>.</p>
-
-<p class="reference">参照元 <a class="el" href="Sprite_8cpp_source.html#l00130">Sprite::Draw()</a>, <a class="el" href="Skybox_8cpp_source.html#l00050">Skybox::Draw()</a>, <a class="el" href="Line_8cpp_source.html#l00048">Line::Draw()</a>.</p>
+<p class="reference">参照先 <a class="el" href="Common_8hpp_source.html#l00030">drawFunctions_</a>.</p>
 
 </div>
 </div>
@@ -422,14 +419,12 @@ Common の継承関係図</div>
 
 <p class="definition"> <a class="el" href="Common_8cpp_source.html">Common.cpp</a> の <a class="el" href="Common_8cpp_source.html#l00084">84</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="Common_8hpp_source.html#l00023">mutex_</a>, <a class="el" href="Common_8hpp_source.html#l00028">updateCommands_</a>.</p>
-
-<p class="reference">参照元 <a class="el" href="Model_8cpp_source.html#l00027">Model::Initialize()</a>, <a class="el" href="Sprite_8cpp_source.html#l00021">Sprite::Initialize()</a>.</p>
+<p class="reference">参照先 <a class="el" href="Common_8hpp_source.html#l00024">mutex_</a>, <a class="el" href="Common_8hpp_source.html#l00029">updateCommands_</a>.</p>
 
 </div>
 </div>
-<a id="a1c5e8e6d6f28463fe66dd55d3a897fb2" name="a1c5e8e6d6f28463fe66dd55d3a897fb2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1c5e8e6d6f28463fe66dd55d3a897fb2">&#9670;&#160;</a></span>Setup()</h2>
+<a id="a6344b82bbc9c51f22b4ba6dd51c403a7" name="a6344b82bbc9c51f22b4ba6dd51c403a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6344b82bbc9c51f22b4ba6dd51c403a7">&#9670;&#160;</a></span>Setup()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -440,13 +435,13 @@ Common の継承関係図</div>
         <tr>
           <td class="memname">void Common::Setup </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classDirectXAdapter.html">DirectXAdapter</a> *&#160;</td>
+          <td class="paramtype">const GESTD::ReferencePtr&lt; <a class="el" href="classDirectXAdapter.html">DirectXAdapter</a> &gt; &amp;&#160;</td>
           <td class="paramname"><em>_adapter</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classDebugUI.html">DebugUI</a> *&#160;</td>
+          <td class="paramtype">const GESTD::ReferencePtr&lt; <a class="el" href="classDebugUI.html">DebugUI</a> &gt; &amp;&#160;</td>
           <td class="paramname"><em>_debugUi</em>, </td>
         </tr>
         <tr>
@@ -470,9 +465,9 @@ Common の継承関係図</div>
 
 <p class="definition"> <a class="el" href="Common_8cpp_source.html">Common.cpp</a> の <a class="el" href="Common_8cpp_source.html#l00011">11</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="Common_8hpp_source.html#l00019">adapter_</a>, <a class="el" href="Common_8hpp_source.html#l00020">debugUI_</a>, <a class="el" href="Common_8hpp_source.html#l00023">mutex_</a>, <a class="el" href="DebugUI_8cpp_source.html#l00160">DebugUI::RegisterMenuButton()</a>, <a class="el" href="Common_8hpp_source.html#l00021">windowName_</a>.</p>
+<p class="reference">参照先 <a class="el" href="Common_8hpp_source.html#l00020">adapter_</a>, <a class="el" href="Common_8hpp_source.html#l00021">debugUI_</a>, <a class="el" href="Common_8hpp_source.html#l00024">mutex_</a>, <a class="el" href="Common_8hpp_source.html#l00022">windowName_</a>.</p>
 
-<p class="reference">参照元 <a class="el" href="SkyCommon_8cpp_source.html#l00008">SkyCommon::Initialize()</a>, <a class="el" href="SpriteCommon_8cpp_source.html#l00008">SpriteCommon::Initialize()</a>.</p>
+<p class="reference">参照元 <a class="el" href="SkyCommon_8cpp_source.html#l00008">SkyCommon::Initialize()</a>, <a class="el" href="SpriteCommon_8cpp_source.html#l00008">SpriteCommon::Initialize()</a>, <a class="el" href="TextCommon_8cpp_source.html#l00032">TextCommon::Initialize()</a>.</p>
 
 </div>
 </div>
@@ -494,9 +489,7 @@ Common の継承関係図</div>
 
 <p class="definition"> <a class="el" href="Common_8cpp_source.html">Common.cpp</a> の <a class="el" href="Common_8cpp_source.html#l00094">94</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="Common_8hpp_source.html#l00027">debugCommands_</a>, <a class="el" href="Common_8hpp_source.html#l00023">mutex_</a>, <a class="el" href="Common_8hpp_source.html#l00028">updateCommands_</a>.</p>
-
-<p class="reference">参照元 <a class="el" href="Model_8cpp_source.html#l00023">Model::~Model()</a>, <a class="el" href="Sprite_8cpp_source.html#l00077">Sprite::~Sprite()</a>.</p>
+<p class="reference">参照先 <a class="el" href="Common_8hpp_source.html#l00028">debugCommands_</a>, <a class="el" href="Common_8hpp_source.html#l00024">mutex_</a>, <a class="el" href="Common_8hpp_source.html#l00029">updateCommands_</a>.</p>
 
 </div>
 </div>
@@ -525,13 +518,13 @@ Common の継承関係図</div>
 
 <p class="definition"> <a class="el" href="Common_8cpp_source.html">Common.cpp</a> の <a class="el" href="Common_8cpp_source.html#l00020">20</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="Common_8hpp_source.html#l00028">updateCommands_</a>.</p>
+<p class="reference">参照先 <a class="el" href="Common_8hpp_source.html#l00029">updateCommands_</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">メンバ詳解</h2>
-<a id="a642f6834fbb63978b129a4394c447952" name="a642f6834fbb63978b129a4394c447952"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a642f6834fbb63978b129a4394c447952">&#9670;&#160;</a></span>adapter_</h2>
+<a id="a3259ad3476b59131b551195fb1612732" name="a3259ad3476b59131b551195fb1612732"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3259ad3476b59131b551195fb1612732">&#9670;&#160;</a></span>adapter_</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -540,7 +533,7 @@ Common の継承関係図</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classDirectXAdapter.html">DirectXAdapter</a>* Common::adapter_ = nullptr</td>
+          <td class="memname">GESTD::ReferencePtr&lt;<a class="el" href="classDirectXAdapter.html">DirectXAdapter</a>&gt; Common::adapter_</td>
         </tr>
       </table>
   </td>
@@ -550,9 +543,9 @@ Common の継承関係図</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="Common_8hpp_source.html">Common.hpp</a> の <a class="el" href="Common_8hpp_source.html#l00019">19</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Common_8hpp_source.html">Common.hpp</a> の <a class="el" href="Common_8hpp_source.html#l00020">20</a> 行目に定義があります。</p>
 
-<p class="reference">参照元 <a class="el" href="Common_8hpp_source.html#l00045">GetAdapter()</a>, <a class="el" href="Common_8cpp_source.html#l00011">Setup()</a>.</p>
+<p class="reference">参照元 <a class="el" href="TextCommon_8cpp_source.html#l00379">TextCommon::Draw()</a>, <a class="el" href="Common_8hpp_source.html#l00046">GetAdapter()</a>, <a class="el" href="TextCommon_8cpp_source.html#l00032">TextCommon::Initialize()</a>, <a class="el" href="Common_8cpp_source.html#l00011">Setup()</a>.</p>
 
 </div>
 </div>
@@ -576,14 +569,14 @@ Common の継承関係図</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="Common_8hpp_source.html">Common.hpp</a> の <a class="el" href="Common_8hpp_source.html#l00027">27</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Common_8hpp_source.html">Common.hpp</a> の <a class="el" href="Common_8hpp_source.html#l00028">28</a> 行目に定義があります。</p>
 
 <p class="reference">参照元 <a class="el" href="Common_8cpp_source.html#l00028">Debug()</a>, <a class="el" href="Common_8cpp_source.html#l00078">RegisterDebug()</a>, <a class="el" href="Common_8cpp_source.html#l00094">Unregister()</a>.</p>
 
 </div>
 </div>
-<a id="add9f8c6db3e1528f3b5e80df03a669e7" name="add9f8c6db3e1528f3b5e80df03a669e7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#add9f8c6db3e1528f3b5e80df03a669e7">&#9670;&#160;</a></span>debugUI_</h2>
+<a id="aa4fead241d22b2c899a8deb284fdcd74" name="aa4fead241d22b2c899a8deb284fdcd74"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa4fead241d22b2c899a8deb284fdcd74">&#9670;&#160;</a></span>debugUI_</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -592,7 +585,7 @@ Common の継承関係図</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classDebugUI.html">DebugUI</a>* Common::debugUI_ = nullptr</td>
+          <td class="memname">GESTD::ReferencePtr&lt;<a class="el" href="classDebugUI.html">DebugUI</a>&gt; Common::debugUI_</td>
         </tr>
       </table>
   </td>
@@ -602,7 +595,7 @@ Common の継承関係図</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="Common_8hpp_source.html">Common.hpp</a> の <a class="el" href="Common_8hpp_source.html#l00020">20</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Common_8hpp_source.html">Common.hpp</a> の <a class="el" href="Common_8hpp_source.html#l00021">21</a> 行目に定義があります。</p>
 
 <p class="reference">参照元 <a class="el" href="Common_8cpp_source.html#l00028">Debug()</a>, <a class="el" href="SpriteCommon_8cpp_source.html#l00008">SpriteCommon::Initialize()</a>, <a class="el" href="Common_8cpp_source.html#l00011">Setup()</a>.</p>
 
@@ -628,7 +621,7 @@ Common の継承関係図</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="Common_8hpp_source.html">Common.hpp</a> の <a class="el" href="Common_8hpp_source.html#l00029">29</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Common_8hpp_source.html">Common.hpp</a> の <a class="el" href="Common_8hpp_source.html#l00030">30</a> 行目に定義があります。</p>
 
 <p class="reference">参照元 <a class="el" href="Common_8cpp_source.html#l00042">Draw()</a>, <a class="el" href="Common_8cpp_source.html#l00090">RegisterDraw()</a>.</p>
 
@@ -654,9 +647,9 @@ Common の継承関係図</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="Common_8hpp_source.html">Common.hpp</a> の <a class="el" href="Common_8hpp_source.html#l00023">23</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Common_8hpp_source.html">Common.hpp</a> の <a class="el" href="Common_8hpp_source.html#l00024">24</a> 行目に定義があります。</p>
 
-<p class="reference">参照元 <a class="el" href="ModelCommon_8cpp_source.html#l00310">ModelCommon::Draw()</a>, <a class="el" href="Common_8cpp_source.html#l00078">RegisterDebug()</a>, <a class="el" href="ModelCommon_8cpp_source.html#l00305">ModelCommon::RegisterSkinningDraw()</a>, <a class="el" href="ModelCommon_8cpp_source.html#l00300">ModelCommon::RegisterStaticDraw()</a>, <a class="el" href="Common_8cpp_source.html#l00084">RegisterUpdate()</a>, <a class="el" href="Common_8cpp_source.html#l00011">Setup()</a>, <a class="el" href="Common_8cpp_source.html#l00094">Unregister()</a>.</p>
+<p class="reference">参照元 <a class="el" href="ModelCommon_8cpp_source.html#l00310">ModelCommon::Draw()</a>, <a class="el" href="Common_8cpp_source.html#l00078">RegisterDebug()</a>, <a class="el" href="ModelCommon_8cpp_source.html#l00305">ModelCommon::RegisterSkinningDraw()</a>, <a class="el" href="ModelCommon_8cpp_source.html#l00300">ModelCommon::RegisterStaticDraw()</a>, <a class="el" href="TextCommon_8cpp_source.html#l00332">TextCommon::RegisterText()</a>, <a class="el" href="Common_8cpp_source.html#l00084">RegisterUpdate()</a>, <a class="el" href="Common_8cpp_source.html#l00011">Setup()</a>, <a class="el" href="Common_8cpp_source.html#l00094">Unregister()</a>, <a class="el" href="TextCommon_8cpp_source.html#l00338">TextCommon::UnregisterText()</a>.</p>
 
 </div>
 </div>
@@ -680,9 +673,9 @@ Common の継承関係図</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="Common_8hpp_source.html">Common.hpp</a> の <a class="el" href="Common_8hpp_source.html#l00025">25</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Common_8hpp_source.html">Common.hpp</a> の <a class="el" href="Common_8hpp_source.html#l00026">26</a> 行目に定義があります。</p>
 
-<p class="reference">参照元 <a class="el" href="Common_8cpp_source.html#l00042">Draw()</a>, <a class="el" href="ModelCommon_8cpp_source.html#l00310">ModelCommon::Draw()</a>, <a class="el" href="ModelCommon_8cpp_source.html#l00383">ModelCommon::DrawSkinning()</a>, <a class="el" href="SkyCommon_8cpp_source.html#l00008">SkyCommon::Initialize()</a>, <a class="el" href="SpriteCommon_8cpp_source.html#l00008">SpriteCommon::Initialize()</a>.</p>
+<p class="reference">参照元 <a class="el" href="Common_8cpp_source.html#l00042">Draw()</a>, <a class="el" href="ModelCommon_8cpp_source.html#l00310">ModelCommon::Draw()</a>, <a class="el" href="TextCommon_8cpp_source.html#l00379">TextCommon::Draw()</a>, <a class="el" href="ModelCommon_8cpp_source.html#l00383">ModelCommon::DrawSkinning()</a>, <a class="el" href="SkyCommon_8cpp_source.html#l00008">SkyCommon::Initialize()</a>, <a class="el" href="SpriteCommon_8cpp_source.html#l00008">SpriteCommon::Initialize()</a>.</p>
 
 </div>
 </div>
@@ -706,7 +699,7 @@ Common の継承関係図</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="Common_8hpp_source.html">Common.hpp</a> の <a class="el" href="Common_8hpp_source.html#l00028">28</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Common_8hpp_source.html">Common.hpp</a> の <a class="el" href="Common_8hpp_source.html#l00029">29</a> 行目に定義があります。</p>
 
 <p class="reference">参照元 <a class="el" href="Common_8cpp_source.html#l00084">RegisterUpdate()</a>, <a class="el" href="Common_8cpp_source.html#l00094">Unregister()</a>, <a class="el" href="Common_8cpp_source.html#l00020">Update()</a>.</p>
 
@@ -732,7 +725,7 @@ Common の継承関係図</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="Common_8hpp_source.html">Common.hpp</a> の <a class="el" href="Common_8hpp_source.html#l00021">21</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Common_8hpp_source.html">Common.hpp</a> の <a class="el" href="Common_8hpp_source.html#l00022">22</a> 行目に定義があります。</p>
 
 <p class="reference">参照元 <a class="el" href="Common_8cpp_source.html#l00028">Debug()</a>, <a class="el" href="Common_8cpp_source.html#l00011">Setup()</a>.</p>
 
@@ -748,7 +741,7 @@ Common の継承関係図</div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classCommon.html">Common</a></li>
-    <li class="footer">2026年03月10日(火) 05時02分34秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年04月13日(月) 08時40分04秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

@@ -9,7 +9,7 @@ var classLog =
       [ "ERR", "classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482", null ],
       [ "FATAL", "classLog.html#afb5d4c945d835d194a295461d752531ea19da7170bea36556dde582519795f3fc", null ]
     ] ],
-    [ "Debug", "classLog.html#ad658f6b5d97c1370392170d190aa3948", null ],
+    [ "Debug", "classLog.html#a3972da88d3d095554c8bd2951e0f4001", null ],
     [ "Initialize", "classLog.html#ac9340bbc2812222f9950ec8448fff93d", null ],
     [ "LogExecutionContext", "classLog.html#adcac000ca73087b359ddd65317940c49", null ],
     [ "LogFileOperation", "classLog.html#aba142db3e5b0adc35ea2e5d747a89f00", null ],

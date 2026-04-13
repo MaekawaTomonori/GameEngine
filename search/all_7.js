@@ -10,5 +10,7 @@ var searchData=
   ['heap_2ecpp_7',['Heap.cpp',['../Heap_8cpp.html',1,'']]],
   ['heap_2ehpp_8',['Heap.hpp',['../Heap_8hpp.html',1,'']]],
   ['height_9',['height',['../structGameEngine_1_1Config.html#a148af25c1173410c991d7568393ded6a',1,'GameEngine::Config']]],
-  ['hover_10',['Hover',['../namespaceUi.html#ab96ee237a5d278a7b0bc25c02e349242aeee0168be69b854c20621fc6f01cc3fc',1,'Ui']]]
+  ['hideslot_5f_10',['hideSlot_',['../classUi_1_1Element.html#a361ae7b936f9167435a786ccea1641d3',1,'Ui::Element']]],
+  ['hiding_11',['Hiding',['../classUi_1_1Canvas.html#a84d5dd93e03a20dd5df3b64b8d7b3dc1a891abfc8e08b549204d42bb0e4bb1a01',1,'Ui::Canvas']]],
+  ['hover_12',['Hover',['../namespaceUi.html#ab96ee237a5d278a7b0bc25c02e349242aeee0168be69b854c20621fc6f01cc3fc',1,'Ui']]]
 ];

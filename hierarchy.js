@@ -6,6 +6,7 @@ var hierarchy =
     [ "AnimationCurve< T >", "structAnimationCurve.html", null ],
     [ "AnimationCurve< Quaternion >", "structAnimationCurve.html", null ],
     [ "AnimationCurve< Vector3 >", "structAnimationCurve.html", null ],
+    [ "Ui::AnimSlot", "structUi_1_1AnimSlot.html", null ],
     [ "Camera", "classCamera.html", null ],
     [ "CameraController", "classCameraController.html", null ],
     [ "CameraDirector", "classCameraDirector.html", null ],
@@ -17,21 +18,28 @@ var hierarchy =
       [ "LineCommon", "classLineCommon.html", null ],
       [ "ModelCommon", "classModelCommon.html", null ],
       [ "SkyCommon", "classSkyCommon.html", null ],
-      [ "SpriteCommon", "classSpriteCommon.html", null ]
+      [ "SpriteCommon", "classSpriteCommon.html", null ],
+      [ "TextCommon", "classTextCommon.html", null ]
     ] ],
     [ "ComputePipeline", "classComputePipeline.html", null ],
     [ "GameEngine::Config", "structGameEngine_1_1Config.html", null ],
+    [ "GameEngine::ConfigLoader", "classGameEngine_1_1ConfigLoader.html", null ],
     [ "SceneSwitcher::Context", "structSceneSwitcher_1_1Context.html", null ],
     [ "D3DResourceLeakChecker", "classD3DResourceLeakChecker.html", null ],
-    [ "Ui::Element::Data", "structUi_1_1Element_1_1Data.html", null ],
+    [ "Ui::SpriteElement::Data", "structUi_1_1SpriteElement_1_1Data.html", null ],
+    [ "Ui::TextElement::Data", "structUi_1_1TextElement_1_1Data.html", null ],
     [ "DebugUI", "classDebugUI.html", null ],
     [ "DirectionalLight", "structDirectionalLight.html", null ],
     [ "DirectXAdapter", "classDirectXAdapter.html", null ],
     [ "DX12Resource", "classDX12Resource.html", null ],
-    [ "Ui::Element", "classUi_1_1Element.html", null ],
+    [ "Ui::Element", "classUi_1_1Element.html", [
+      [ "Ui::SpriteElement", "classUi_1_1SpriteElement.html", null ],
+      [ "Ui::TextElement", "classUi_1_1TextElement.html", null ]
+    ] ],
     [ "Ui::Canvas::ElementRect", "structUi_1_1Canvas_1_1ElementRect.html", null ],
     [ "Emitter", "classEmitter.html", null ],
     [ "ParticleSystem::EmitterConfig", "structParticleSystem_1_1EmitterConfig.html", null ],
+    [ "Ui::Manager::Entry", "structUi_1_1Manager_1_1Entry.html", null ],
     [ "Ui::EventSystem", "classUi_1_1EventSystem.html", null ],
     [ "FrameDebugger", "classFrameDebugger.html", null ],
     [ "FrameRateLimiter", "classFrameRateLimiter.html", null ],
@@ -50,7 +58,9 @@ var hierarchy =
       [ "Grayscale", "classGrayscale.html", null ],
       [ "Vignette", "classVignette.html", null ]
     ] ],
-    [ "IScene", "classIScene.html", null ],
+    [ "IScene", "classIScene.html", [
+      [ "SampleScene", "classSampleScene.html", null ]
+    ] ],
     [ "ITransitionEffect", "classITransitionEffect.html", [
       [ "Fade", "classFade.html", null ]
     ] ],
@@ -64,6 +74,7 @@ var hierarchy =
     [ "Line", "classLine.html", null ],
     [ "Log", "classLog.html", null ],
     [ "Log::LogEntry", "structLog_1_1LogEntry.html", null ],
+    [ "Ui::Manager", "classUi_1_1Manager.html", null ],
     [ "Material", "structMaterial.html", null ],
     [ "PostProcessExecutor::Work::Member", "structPostProcessExecutor_1_1Work_1_1Member.html", null ],
     [ "Mesh", "classMesh.html", null ],
@@ -105,6 +116,7 @@ var hierarchy =
     [ "StageRepository", "classStageRepository.html", null ],
     [ "ParticleSystem::Template", "structParticleSystem_1_1Template.html", null ],
     [ "ParticleSystem::TemplateEditor", "classParticleSystem_1_1TemplateEditor.html", null ],
+    [ "Text", "classText.html", null ],
     [ "TextureManager", "classTextureManager.html", null ],
     [ "Timer", "classTimer.html", null ],
     [ "Transition", "classTransition.html", null ],

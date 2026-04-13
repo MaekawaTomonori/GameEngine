@@ -105,12 +105,12 @@ $(document).ready(function(){initNavTree('PipelineStateObject_8cpp_source.html',
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;<a class="code" href="Log_8hpp.html">Log.hpp</a>&quot;</span></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;Utils.hpp&quot;</span></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno"><a class="line" href="classPipelineStateObject.html#a3120d1be9343dc3ec4a76b37739e5d3d">    8</a></span><a class="code hl_function" href="classPipelineStateObject.html#a92ec46b68bbd6a7c635486af8abeeb70">PipelineStateObject::PipelineStateObject</a>(<a class="code hl_class" href="classDirectXAdapter.html">DirectXAdapter</a>* _adapter) :adapter_(_adapter){}</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno"><a class="line" href="classPipelineStateObject.html#ab45b50d855899902488488756f03c329">    8</a></span><a class="code hl_function" href="classPipelineStateObject.html#a92ec46b68bbd6a7c635486af8abeeb70">PipelineStateObject::PipelineStateObject</a>(GESTD::ReferencePtr&lt;DirectXAdapter&gt; _adapter) :adapter_(_adapter){}</div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
 <div class="foldopen" id="foldopen00010" data-start="{" data-end="}">
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="classPipelineStateObject.html#ace4d67541b8c88a53733ad677ced0239">   10</a></span><a class="code hl_class" href="classPipelineStateObject.html">PipelineStateObject</a>&amp; <a class="code hl_function" href="classPipelineStateObject.html#ace4d67541b8c88a53733ad677ced0239">PipelineStateObject::SetRootSignature</a>(<span class="keyword">const</span> <a class="code hl_class" href="classRootSignature.html">RootSignature</a>&amp; _rootSignature) {</div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    rootSignature_ = std::move(_rootSignature);</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    rootSignature_.<a class="code hl_function" href="classRootSignature.html#aacca0a460cf7d27886497917cff3e5c9">Create</a>(adapter_-&gt;<a class="code hl_function" href="classDirectXAdapter.html#a28fe87825525272f00fd06231a0c1632">GetDevice</a>());</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    rootSignature_.<a class="code hl_function" href="classRootSignature.html#aacca0a460cf7d27886497917cff3e5c9">Create</a>(adapter_-&gt;GetDevice());</div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>}</div>
 </div>
@@ -238,7 +238,7 @@ $(document).ready(function(){initNavTree('PipelineStateObject_8cpp_source.html',
 <div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    desc_.SampleMask = D3D12_DEFAULT_SAMPLE_MASK;</div>
 <div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>    <span class="comment">// Setting more options</span></div>
 <div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span> </div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    HRESULT hr = adapter_-&gt;<a class="code hl_function" href="classDirectXAdapter.html#a28fe87825525272f00fd06231a0c1632">GetDevice</a>()-&gt;CreateGraphicsPipelineState(&amp;desc_, IID_PPV_ARGS(&amp;pso_));</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    HRESULT hr = adapter_-&gt;GetDevice()-&gt;CreateGraphicsPipelineState(&amp;desc_, IID_PPV_ARGS(&amp;pso_));</div>
 <div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    <span class="keywordflow">if</span> (FAILED(hr)){</div>
 <div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>        <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, <span class="stringliteral">&quot;Failed to create pipeline state object&quot;</span>);</div>
 <div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>        Utils::Alert(<span class="stringliteral">&quot;Failed to create pipeline state object&quot;</span>);</div>
@@ -255,8 +255,8 @@ $(document).ready(function(){initNavTree('PipelineStateObject_8cpp_source.html',
 <div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>        <span class="keywordflow">return</span>;</div>
 <div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    }</div>
 <div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span> </div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>    adapter_-&gt;<a class="code hl_function" href="classDirectXAdapter.html#abc7797e145abbf8c6b66d89ce219adbf">GetCommandList</a>()-&gt;SetGraphicsRootSignature(rootSignature_.<a class="code hl_function" href="classRootSignature.html#a1604250a85568942f6db38a3be911fe9">Get</a>());</div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>    adapter_-&gt;<a class="code hl_function" href="classDirectXAdapter.html#abc7797e145abbf8c6b66d89ce219adbf">GetCommandList</a>()-&gt;SetPipelineState(pso_.Get());</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>    adapter_-&gt;GetCommandList()-&gt;SetGraphicsRootSignature(rootSignature_.<a class="code hl_function" href="classRootSignature.html#a1604250a85568942f6db38a3be911fe9">Get</a>());</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>    adapter_-&gt;GetCommandList()-&gt;SetPipelineState(pso_.Get());</div>
 <div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>}</div>
 </div>
 <div class="ttc" id="aBlendMode_8hpp_html_a30323fa90e24ca484998b9fba6c40e85"><div class="ttname"><a href="BlendMode_8hpp.html#a30323fa90e24ca484998b9fba6c40e85">BlendMode</a></div><div class="ttdeci">BlendMode</div><div class="ttdef"><b>Definition</b> <a href="BlendMode_8hpp_source.html#l00004">BlendMode.hpp:4</a></div></div>
@@ -268,9 +268,6 @@ $(document).ready(function(){initNavTree('PipelineStateObject_8cpp_source.html',
 <div class="ttc" id="aBlendMode_8hpp_html_a30323fa90e24ca484998b9fba6c40e85af26be970aac1b06fa62b87562bc73deb"><div class="ttname"><a href="BlendMode_8hpp.html#a30323fa90e24ca484998b9fba6c40e85af26be970aac1b06fa62b87562bc73deb">BlendMode::MULTI</a></div><div class="ttdeci">@ MULTI</div></div>
 <div class="ttc" id="aLog_8hpp_html"><div class="ttname"><a href="Log_8hpp.html">Log.hpp</a></div></div>
 <div class="ttc" id="aPipelineStateObject_8hpp_html"><div class="ttname"><a href="PipelineStateObject_8hpp.html">PipelineStateObject.hpp</a></div></div>
-<div class="ttc" id="aclassDirectXAdapter_html"><div class="ttname"><a href="classDirectXAdapter.html">DirectXAdapter</a></div><div class="ttdoc">DirectX12アダプタークラス DirectX12の初期化とデバイス管理を提供</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8hpp_source.html#l00024">DirectXAdapter.hpp:24</a></div></div>
-<div class="ttc" id="aclassDirectXAdapter_html_a28fe87825525272f00fd06231a0c1632"><div class="ttname"><a href="classDirectXAdapter.html#a28fe87825525272f00fd06231a0c1632">DirectXAdapter::GetDevice</a></div><div class="ttdeci">ID3D12Device * GetDevice() const</div><div class="ttdoc">DirectX12デバイスを取得</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8cpp_source.html#l00705">DirectXAdapter.cpp:705</a></div></div>
-<div class="ttc" id="aclassDirectXAdapter_html_abc7797e145abbf8c6b66d89ce219adbf"><div class="ttname"><a href="classDirectXAdapter.html#abc7797e145abbf8c6b66d89ce219adbf">DirectXAdapter::GetCommandList</a></div><div class="ttdeci">ID3D12GraphicsCommandList * GetCommandList() const</div><div class="ttdoc">コマンドリストを取得</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8cpp_source.html#l00709">DirectXAdapter.cpp:709</a></div></div>
 <div class="ttc" id="aclassInputLayout_html"><div class="ttname"><a href="classInputLayout.html">InputLayout</a></div><div class="ttdef"><b>Definition</b> <a href="InputLayout_8hpp_source.html#l00006">InputLayout.hpp:6</a></div></div>
 <div class="ttc" id="aclassInputLayout_html_aee3138e7fd5c1cbbd5d0c721d56545ac"><div class="ttname"><a href="classInputLayout.html#aee3138e7fd5c1cbbd5d0c721d56545ac">InputLayout::Get</a></div><div class="ttdeci">D3D12_INPUT_LAYOUT_DESC Get() const</div><div class="ttdef"><b>Definition</b> <a href="InputLayout_8cpp_source.html#l00008">InputLayout.cpp:8</a></div></div>
 <div class="ttc" id="aclassLog_html_af351e7d4bd43c85e7c90f52846b64bdb"><div class="ttname"><a href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a></div><div class="ttdeci">static void Send(Level _level, const std::string &amp;_message=&quot;&quot;)</div><div class="ttdoc">ログメッセージを送信</div><div class="ttdef"><b>Definition</b> <a href="Log_8cpp_source.html#l00108">Log.cpp:108</a></div></div>
@@ -297,7 +294,7 @@ $(document).ready(function(){initNavTree('PipelineStateObject_8cpp_source.html',
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_31399d34f22961890ce23f7132fb3e96.html">DirectX</a></li><li class="navelem"><a class="el" href="dir_5e152dc6ce4833044bc05fc6d25a6808.html">GraphicsPipeline</a></li><li class="navelem"><a class="el" href="dir_e872fbfcf4dac2296573d0e1ccfba4a6.html">Object</a></li><li class="navelem"><a class="el" href="PipelineStateObject_8cpp.html">PipelineStateObject.cpp</a></li>
-    <li class="footer">2026年03月10日(火) 05時02分34秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年04月13日(月) 08時40分04秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>
