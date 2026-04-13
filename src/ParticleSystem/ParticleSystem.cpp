@@ -10,6 +10,21 @@
 #include "imgui_internal.h"
 #include "json.hpp"
 
+namespace {
+    constexpr const char* kPrimitiveNames[] = { "Billboard", "Ring", "Cylinder", "Trail" };
+
+    std::string PrimitiveToString(PrimitiveType _type) {
+        return kPrimitiveNames[static_cast<int>(_type)];
+    }
+
+    PrimitiveType StringToPrimitive(const std::string& _str) {
+        for (int i = 0; i < static_cast<int>(std::size(kPrimitiveNames)); ++i) {
+            if (_str == kPrimitiveNames[i]) return static_cast<PrimitiveType>(i);
+        }
+        return PrimitiveType::Billboard;
+    }
+}
+
 ParticleSystem::TemplateEditor::TemplateEditor(Template* _template)
     : template_(_template) {
 }
@@ -112,6 +127,14 @@ void ParticleSystem::LoadTemplate(const std::string& _name) {
 
             config.updateFuncKey = emitterData.value("UpdateFunc", "");
             config.spawnFuncKey  = emitterData.value("SpawnFunc",  "");
+            config.primitive     = StringToPrimitive(emitterData.value("Primitive", "Billboard"));
+            config.billboard     = emitterData.value("Billboard", true);
+            if (emitterData.contains("Rotation") && emitterData["Rotation"].is_array() && emitterData["Rotation"].size() >= 3) {
+                config.rotation = {emitterData["Rotation"][0].get<float>(), emitterData["Rotation"][1].get<float>(), emitterData["Rotation"][2].get<float>()};
+            }
+            if (emitterData.contains("RotationVelocity") && emitterData["RotationVelocity"].is_array() && emitterData["RotationVelocity"].size() >= 3) {
+                config.rotationVelocity = {emitterData["RotationVelocity"][0].get<float>(), emitterData["RotationVelocity"][1].get<float>(), emitterData["RotationVelocity"][2].get<float>()};
+            }
             tmpl.emitters.push_back(config);
         }
     }
@@ -145,6 +168,10 @@ void ParticleSystem::SaveTemplate(const std::string& _name) const {
         if (!config.spawnFuncKey.empty()) {
             emitterData["SpawnFunc"] = config.spawnFuncKey;
         }
+        emitterData["Primitive"] = PrimitiveToString(config.primitive);
+        emitterData["Billboard"] = config.billboard;
+        emitterData["Rotation"] = {config.rotation.x, config.rotation.y, config.rotation.z};
+        emitterData["RotationVelocity"] = {config.rotationVelocity.x, config.rotationVelocity.y, config.rotationVelocity.z};
         emittersJson.push_back(emitterData);
     }
 
@@ -190,7 +217,11 @@ void ParticleSystem::Emit(const std::string& _templateName, const Vector3& _posi
             .SetSize(config.size)
             .SetVelocity(config.velocity)
             .SetColor(config.color)
-            .SetPosition(_position);
+            .SetPosition(_position)
+            .SetBillboard(config.billboard)
+            .SetPrimitive(config.primitive)
+            .SetRotation(config.rotation)
+            .SetRotationVelocity(config.rotationVelocity);
 
         UpdateFunc updateFunc = ResolveUpdateFunc(config);
         if (updateFunc) {
@@ -277,6 +308,15 @@ void ParticleSystem::Debug() {
                     ImGui::PushID(emitterIndex);
                     if (ImGui::TreeNode(("Emitter " + std::to_string(emitterIndex)).c_str())) {
                         ImGui::Text("Texture: %s", config.texture.c_str());
+                        {
+                            int current = static_cast<int>(config.primitive);
+                            if (ImGui::Combo("Primitive", &current, kPrimitiveNames, static_cast<int>(std::size(kPrimitiveNames)))) {
+                                config.primitive = static_cast<PrimitiveType>(current);
+                            }
+                        }
+                        ImGui::Checkbox("Billboard", &config.billboard);
+                        ImGui::DragFloat3("Rotation", &config.rotation.x, 0.01f);
+                        ImGui::DragFloat3("Rotation Velocity", &config.rotationVelocity.x, 0.01f);
                         ImGui::DragFloat("Frequency", &config.frequency, 0.01f, 0.f, 100.f);
                         ImGui::DragFloat("Duration", &config.duration, 0.01f, 0.01f, 100.f);
                         int spawnCount = static_cast<int>(config.spawnCount);
@@ -307,7 +347,11 @@ void ParticleSystem::Debug() {
                                     .SetSize(config.size)
                                     .SetVelocity(config.velocity)
                                     .SetColor(config.color)
-                                    .SetPosition({0.f, 1.f, 0.f});
+                                    .SetPosition({0.f, 1.f, 0.f})
+                                    .SetBillboard(config.billboard)
+                                    .SetPrimitive(config.primitive)
+                                    .SetRotation(config.rotation)
+                                    .SetRotationVelocity(config.rotationVelocity);
                                 UpdateFunc uf = ResolveUpdateFunc(config);
                                 if (uf) emitter->SetUpdateFunction(uf);
                                 SpawnFunc sf = ResolveSpawnFunc(config);

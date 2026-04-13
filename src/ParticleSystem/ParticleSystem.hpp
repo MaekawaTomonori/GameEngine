@@ -30,6 +30,10 @@ public:
         Vector4 color = {1.f, 1.f, 1.f, 1.f};
         std::string spawnFuncKey;
         std::string updateFuncKey;
+        PrimitiveType primitive = PrimitiveType::Billboard;
+        bool billboard = true;
+        Vector3 rotation = {0.f, 0.f, 0.f};
+        Vector3 rotationVelocity = {0.f, 0.f, 0.f};
     };
 
     struct Template {

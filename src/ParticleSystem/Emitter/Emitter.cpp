@@ -94,6 +94,10 @@ void Emitter::Reset() {
     timer_ = 0.f;
     actives_ = 0;
     active_ = false;
+    billboard_ = true;
+    primitive_ = PrimitiveType::Billboard;
+    rotation_ = {};
+    rotationVelocity_ = {};
     updateFunc_ = nullptr;
     spawnFunc_ = nullptr;
 }
@@ -106,7 +110,10 @@ void Emitter::Debug() {
     ImGui::PushID(uuid_.c_str());
     if (ImGui::TreeNode((name_ + " (" + uuid_ + ")").c_str())){
         ImGui::Text("Texture: %s", texture_.c_str());
+        ImGui::Checkbox("Billboard", &billboard_);
         ImGui::DragFloat3("Position", &position_.x, 0.1f);
+        ImGui::DragFloat3("Rotation", &rotation_.x, 0.01f);
+        ImGui::DragFloat3("Rotation Velocity", &rotationVelocity_.x, 0.01f);
         ImGui::DragInt("Spawn Count", reinterpret_cast<int*>(&spawnCount_), 1.f, 1, 1000);
         ImGui::DragFloat("Frequency", &frequency_, 0.01f, 0.f, 100.f);
         ImGui::DragFloat("Duration", &duration_, 0.01f, 0.f, 100.f);
@@ -163,6 +170,26 @@ Emitter& Emitter::SetVelocity(const Vector3& _velocity) {
     return *this;
 }
 
+Emitter& Emitter::SetBillboard(bool _billboard) {
+    billboard_ = _billboard;
+    return *this;
+}
+
+Emitter& Emitter::SetPrimitive(PrimitiveType _type) {
+    primitive_ = _type;
+    return *this;
+}
+
+Emitter& Emitter::SetRotation(const Vector3& _rotation) {
+    rotation_ = _rotation;
+    return *this;
+}
+
+Emitter& Emitter::SetRotationVelocity(const Vector3& _rotationVelocity) {
+    rotationVelocity_ = _rotationVelocity;
+    return *this;
+}
+
 Emitter& Emitter::SetUpdateFunction(const std::function<void(float, const Vector3&, Vector3&, Vector3&, Vector4&)>& _func) {
     updateFunc_ = _func;
     return *this;
@@ -210,6 +237,8 @@ void Emitter::Spawn(const uint16_t& _count) {
             .SetScale(size_)
             .SetColor(color_)
             .SetVelocity(spawnVel)
+            .SetRotation(rotation_)
+            .SetRotationVelocity(rotationVelocity_)
             .SetUpdateFunction(updateFunc_)
             .Initialize(3.f);
         particles_.emplace_back(std::move(particle));
@@ -218,21 +247,34 @@ void Emitter::Spawn(const uint16_t& _count) {
 
 void Emitter::RegisterGpu() {
     const auto& ac = Singleton<CameraController>::GetInstance()->GetActive();
-    Matrix4x4 billboard = BackToFront * ac->GetMatrix();
-    billboard.matrix[3][0] = 0.f;
-    billboard.matrix[3][1] = 0.f;
-    billboard.matrix[3][2] = 0.f;
+
+    Matrix4x4 rotation;
+    if (billboard_) {
+        rotation = BackToFront * ac->GetMatrix();
+        rotation.matrix[3][0] = 0.f;
+        rotation.matrix[3][1] = 0.f;
+        rotation.matrix[3][2] = 0.f;
+    } else {
+        rotation = MathUtils::Matrix::MakeIdentity();
+    }
+
     actives_ = 0;
 
     std::erase_if(particles_, [&](const auto& _p) { return _p->IsDead(); });
 
-    if (particles_.empty())return;
+    if (particles_.empty()) return;
 
     for (auto& particle : particles_) {
         particle->Update();
+
+        const Vector3 rot = particle->GetRotation();
+        const Matrix4x4 particleRot = MathUtils::Matrix::MakeRotateX(rot.x)
+                                    * MathUtils::Matrix::MakeRotateY(rot.y)
+                                    * MathUtils::Matrix::MakeRotateZ(rot.z);
+
         mapped_[actives_].world = MathUtils::Matrix::MakeAffineMatrix(
             MathUtils::Matrix::MakeScaleMatrix(particle->GetScale()),
-            billboard,
+            particleRot * rotation,
             MathUtils::Matrix::MakeTranslateMatrix(particle->GetPosition())
         );
         mapped_[actives_].wvp = mapped_[actives_].world * ac->GetViewProjection();
