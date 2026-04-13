@@ -221,9 +221,6 @@ void ParticleSystem::ClearActive() {
 
 
 ParticleSystem::UpdateFunc ParticleSystem::ResolveUpdateFunc(const EmitterConfig& _config) const {
-    if (_config.updateFunc) {
-        return _config.updateFunc;
-    }
     if (!_config.updateFuncKey.empty() && updateFuncs_.contains(_config.updateFuncKey)) {
         return updateFuncs_.at(_config.updateFuncKey);
     }
@@ -238,9 +235,6 @@ void ParticleSystem::RegisterSpawnFunc(const std::string& _key, SpawnFunc _func)
 }
 
 ParticleSystem::SpawnFunc ParticleSystem::ResolveSpawnFunc(const EmitterConfig& _config) const {
-    if (_config.spawnFunc) {
-        return _config.spawnFunc;
-    }
     if (!_config.spawnFuncKey.empty() && spawnFuncs_.contains(_config.spawnFuncKey)) {
         return spawnFuncs_.at(_config.spawnFuncKey);
     }

@@ -259,12 +259,7 @@ void SceneSwitcher::LocalDebugger() {
 #ifdef _DEBUG
     if (!context_.debug) return;
 
-    context_.debug->RegisterCommand("FrameDebugger", [this]() {
-        if (!ImGui::Begin("LocalDebugger", &context_.debug->IsVisible("FrameDebugger"))) {
-            ImGui::End();
-            return;
-        }
-
+    context_.debug->SetToolbarContent([this]() {
         // homeScene を除外した起動候補リスト
         const auto allScenes = factory_ ? factory_->GetRegisteredScenes() : std::vector<std::string>{};
         std::vector<std::string> scenes;
@@ -389,7 +384,6 @@ void SceneSwitcher::LocalDebugger() {
             pendingBreak_ = breakOnLoad;
             if (scene_) Change(scene_->GetName());
         }
-        ImGui::End();
     });
 #endif
 }

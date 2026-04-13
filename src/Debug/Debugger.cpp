@@ -24,6 +24,10 @@ void Debugger::Initialize(GESTD::ReferencePtr<DirectXAdapter> _adapter) {
     Singleton<WatchDebugger>::GetInstance()->Initialize(GESTD::ReferencePtr<DebugUI>(ui_));
 }
 
+void Debugger::SetStopCallback(std::function<void()> _cb) {
+    frame_->SetStopCallback(std::move(_cb));
+}
+
 bool Debugger::ShouldUpdate() {
     return frame_->ShouldUpdate();
 }

@@ -17,8 +17,8 @@
 
 class ParticleSystem {
 public:
-    using UpdateFunc = std::function<void(float, const Vector3&, Vector3&, Vector3&, Vector4&)>;
     using SpawnFunc  = std::function<void(const Vector3&, Vector3&, Vector3&)>;
+    using UpdateFunc = std::function<void(float, const Vector3&, Vector3&, Vector3&, Vector4&)>;
 
     struct EmitterConfig {
         std::string texture = "white_x16.png";
@@ -28,10 +28,8 @@ public:
         Vector3 size = {1.f, 1.f, 1.f};
         Vector3 velocity = {0.f, 0.f, 0.f};
         Vector4 color = {1.f, 1.f, 1.f, 1.f};
-        std::string updateFuncKey;
-        UpdateFunc updateFunc;
         std::string spawnFuncKey;
-        SpawnFunc spawnFunc;
+        std::string updateFuncKey;
     };
 
     struct Template {

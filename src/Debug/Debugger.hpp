@@ -56,6 +56,10 @@ public:
      */
     void UpdateDisplaySize(int _width, int _height);
 
+    /** @brief Stop 時に呼ぶコールバックを登録（シーン再起動など）
+     */
+    void SetStopCallback(std::function<void()> _cb);
+
     /** @brief DebugUI ポインタを返す
      */
     GESTD::ReferencePtr<DebugUI> GetUI() const { return GESTD::ReferencePtr<DebugUI>(ui_); }

@@ -33,7 +33,7 @@ class DebugUI {
 
         constexpr WindowState& operator=(const WindowState& _other) {
             visible = _other.visible;
-            group = _other.group;
+            group   = _other.group;
             return *this;
         }
     };
@@ -42,10 +42,12 @@ class DebugUI {
 
     std::unique_ptr<Heap> heap_;
     GESTD::ReferencePtr<DirectXAdapter> adapter_ = nullptr;
-    uint32_t nextSrvSlot_ = 0; // ImGui SRV アロケータ用カウンタ
+    uint32_t nextSrvSlot_ = 0;   // ImGui SRV アロケータ用カウンタ（低アドレスから昇順）
+    mutable uint32_t nextTexSlot_ = 127; // ゲームテクスチャ用スロット（高アドレスから降順）
 
     std::vector<Command> commands_;
     std::unordered_map<std::string, WindowState> windowStates_;
+    std::function<void()> toolbarContent_;
     bool showMenuBar_ = false;
     bool showWindowsPanel_ = false;
     bool panelJustOpened_ = false;
@@ -73,6 +75,11 @@ public:
      * @param _group 同一グループの項目は Windows パネルでまとめて表示
      */
     void RegisterMenuButton(const std::string& _key, bool _flag = false, const std::string& _group = "");
+
+    /** @brief メニューバー中央のツールバー描画コールバックを登録（初期化時に一度だけ呼ぶ）
+     * @param _content ツールバーを描画する関数
+     */
+    void SetToolbarContent(std::function<void()> _content);
 
     bool& IsVisible(const std::string& _key);
 

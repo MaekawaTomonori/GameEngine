@@ -63,6 +63,9 @@ Framework::Framework() {
     texture_ = Singleton<TextureManager>::GetInstance();
     texture_->Initialize(dxAdapter_.get(), srv_.get());
 
+    text_ = Singleton<TextCommon>::GetInstance();
+    text_->Initialize(GESTD::ReferencePtr(dxAdapter_), dbg, static_cast<TextureManager*>(texture_), srv_.get());
+
     sprite_ = Singleton<SpriteCommon>::GetInstance();
     sprite_->Initialize(GESTD::ReferencePtr(dxAdapter_), dbg);
 
@@ -88,6 +91,9 @@ Framework::Framework() {
 
     collision_ = std::make_unique<CollisionManager>();
     collision_->Initialize(dbg);
+
+    ui_ = Singleton<Ui::Manager>::GetInstance();
+    ui_->Setup(debugger_->GetUI());
 
 #ifdef _DEBUG
     Debugger::WatchGroup("Engine")
@@ -142,6 +148,12 @@ void Framework::Initialize() {
     scene_->Setup(ctx);
     scene_->Change(config_.defaultScene);
 
+#ifdef _DEBUG
+    debugger_->SetStopCallback([this]() {
+        if (scene_) scene_->Change(config_.defaultScene);
+    });
+#endif
+
     if (const auto& peFac = game_->GetPostEffectFactory()) {
         postProcessor_->SetFactory(peFac);
     }
@@ -182,6 +194,8 @@ void Framework::Update() const {
     debugger_->Debug();
     model_->Debug();
     sprite_->Debug();
+    ui_->Debug();
+    text_->Debug();
 
     scene_->Debug();
     if (debugger_->ShouldUpdate()) {
@@ -204,6 +218,8 @@ void Framework::Update() const {
     { PROFILE_SCOPE("Light");   light_->Update(); }
     { PROFILE_SCOPE("Model");   model_->Update(); }
     { PROFILE_SCOPE("Sprite");  sprite_->Update(); }
+    { PROFILE_SCOPE("UI");      ui_->Update(); }
+    text_->Update();
 }
 
 void Framework::Draw() const {
@@ -215,8 +231,12 @@ void Framework::Draw() const {
 
     srv_->PreDraw();
 
+#ifdef _DEBUG
     cameraDirector_->Draw();
+#endif
+
     scene_->Draw();
+    ui_->Draw();
 
     sky_->Draw(renderer_.get());
     model_->Draw(renderer_.get());
@@ -224,6 +244,7 @@ void Framework::Draw() const {
     collision_->DrawDebug();
     line_->Draw(renderer_.get());
     sprite_->Draw(renderer_.get());
+    text_->Draw(renderer_.get());
 
 #ifdef _DEBUG
     renderer_->RegisterUI([&] { debugger_->Render(); });
@@ -244,6 +265,7 @@ void Framework::Shutdown() {
     }
 
     collision_.reset();
+    text_.Reset();  // Singleton は SingletonFinalizer::Finalize() で破棄される
     texture_->Unload();
     particle_.reset();
     postProcessor_.reset();

@@ -192,6 +192,68 @@ bool TextureManager::Load(const std::string& _fileName) {
     return true;
 }
 
+bool TextureManager::LoadFromRawPixels(const std::string& _name, const uint8_t* _pixels, uint32_t _width, uint32_t _height, DXGI_FORMAT _format) {
+    std::lock_guard<std::mutex> lock(mutex_);
+
+    if (textures_.contains(_name)) {
+        return true;
+    }
+
+    assert(!srv_->IsFull());
+
+    // 2D テクスチャ用メタデータを手動構築（ミップなし）
+    DirectX::TexMetadata meta{};
+    meta.width     = _width;
+    meta.height    = _height;
+    meta.depth     = 1;
+    meta.arraySize = 1;
+    meta.mipLevels = 1;
+    meta.format    = _format;
+    meta.dimension = DirectX::TEX_DIMENSION_TEXTURE2D;
+
+    // ScratchImage を確保してピクセルをコピー
+    DirectX::ScratchImage img;
+    HRESULT hr = img.Initialize2D(_format, _width, _height, 1, 1);
+    if (FAILED(hr)) {
+        Log::Send(Log::Level::ERR, std::format("TextureManager::LoadFromRawPixels: ScratchImage init failed: {}", _name));
+        return false;
+    }
+
+    const DirectX::Image* imageSlice = img.GetImage(0, 0, 0);
+    if (!imageSlice) {
+        Log::Send(Log::Level::ERR, std::format("TextureManager::LoadFromRawPixels: internal ScratchImage error: {}", _name));
+        return false;
+    }
+
+    // rowPitch が GPU アライメントで広い場合に対応して行ごとにコピー
+    size_t srcRowPitch = static_cast<size_t>(_width) * DirectX::BitsPerPixel(_format) / 8;
+    for (uint32_t row = 0; row < _height; ++row) {
+        memcpy(imageSlice->pixels + row * imageSlice->rowPitch,
+               _pixels           + row * srcRowPitch,
+               srcRowPitch);
+    }
+
+    Texture texture;
+    texture.metadata = img.GetMetadata();
+    texture.resource = adapter_->CreateTextureResource(img.GetMetadata());
+
+    if (!texture.resource) {
+        Log::Send(Log::Level::ERR, std::format("TextureManager::LoadFromRawPixels: CreateTextureResource failed: {}", _name));
+        return false;
+    }
+
+    UploadTextureData(texture.resource.get(), img);
+
+    texture.srvIndex  = srv_->Allocate();
+    texture.cpuHandle = srv_->GetCPUHandle(texture.srvIndex);
+    texture.gpuHandle = srv_->GetGPUHandle(texture.srvIndex);
+    srv_->CreateSRVForTexture2D(texture.srvIndex, texture.resource->Get(), _format, 1);
+
+    textures_[_name] = std::move(texture);
+    Log::Send(Log::Level::INFO, std::format("TextureManager::LoadFromRawPixels: {}", _name));
+    return true;
+}
+
 void TextureManager::Unload() {
     for (auto itr = textures_.begin(); itr != textures_.end(); ){
         itr->second.resource.reset();
@@ -255,7 +317,14 @@ D3D12_GPU_DESCRIPTOR_HANDLE TextureManager::GetGPUHandle(const std::string& _fil
 }
 
 D3D12_GPU_DESCRIPTOR_HANDLE TextureManager::GetGPUHandle(const uint32_t _index) const {
-    assert(index <= textures_.size());
+    assert(_index <= textures_.size());
     Log::Send(Log::Level::INFO, std::format("TextureManager::GetGPUHandle: index {}", _index));
     return srv_->GetGPUHandle(_index);
+}
+
+ID3D12Resource* TextureManager::GetResource(const std::string& _name) const {
+    if (const auto it = textures_.find(_name); it != textures_.end()) {
+        return it->second.resource->Get();
+    }
+    return nullptr;
 }

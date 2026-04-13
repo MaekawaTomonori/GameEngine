@@ -9,6 +9,7 @@
 #include "src/Debug/Debugger.hpp"
 // AUDIO_DISABLED: #include "src/Audio/AudioDebugPanel.hpp"
 #endif
+#include "Ui/UiManager.hpp"
 #include "src/Camera/Controller/CameraController.hpp"
 #include "src/Camera/Director/CameraDirector.hpp"
 #include "src/Platform/WinApp.hpp"
@@ -25,6 +26,7 @@
 #include "src/Renderer/Renderer.hpp"
 #include "src/Sky/Common/SkyCommon.hpp"
 #include "src/Texture/TextureManager.hpp"
+#include "src/Text/TextCommon.hpp"
 
 class IGame;
 
@@ -49,7 +51,8 @@ class Framework {
 #endif
     std::unique_ptr<SRVManager> srv_;
     //std::unique_ptr<LevelEditor> level_;
-    std::unique_ptr<ParticleSystem> particle_;
+    std::unique_ptr<ParticleSystem>      particle_;
+    GESTD::ReferencePtr<TextCommon>      text_;
 
     GESTD::ReferencePtr<Input> input_;
     GESTD::ReferencePtr<TextureManager> texture_;
@@ -61,6 +64,8 @@ class Framework {
 
     GESTD::ReferencePtr<CameraController> camera_;
     GESTD::ReferencePtr<CameraDirector> cameraDirector_;
+
+    GESTD::ReferencePtr<Ui::Manager> ui_;
 
 public:
     Framework();

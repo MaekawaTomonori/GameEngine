@@ -270,14 +270,7 @@ void DirectXAdapter::EndFrame() {
 }
 
 void DirectXAdapter::DisplayFPS(const GESTD::ReferencePtr<DebugUI>& _debug) const {
-    _debug->RegisterCommand(
-        "FPS",
-        [this]() {
-            ImGui::Begin("FPS");
-            ImGui::ProgressBar(fpsLimiter_->GetCurrentFps() / fpsLimiter_->GetMaxFps());
-            ImGui::End();
-        }
-    );
+    (void)_debug;
 }
 
 void DirectXAdapter::SetSwapChainRenderTarget() const {
