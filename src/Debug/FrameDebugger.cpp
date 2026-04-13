@@ -37,7 +37,7 @@ void FrameDebugger::Stop() {
 #endif
 }
 
-void FrameDebugger::SetStopCallback(std::function<void()> _cb) {
+void FrameDebugger::SetStopCallback([[maybe_unused]] const std::function<void()>& _cb) {
 #ifdef _DEBUG
     onStop_ = std::move(_cb);
 #endif
