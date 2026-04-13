@@ -10,14 +10,12 @@ void JsonParams::Register(const std::string& _name) {
     datas_[_name];
 }
 
-void JsonParams::LoadJson(const std::string& _path, std::string _name) {
+void JsonParams::LoadJson(const std::string& _path, const std::string& _name) {
     // Use _path as filename if _name is empty
-    if (_name.empty()) {
-        _name = _path;
-    }
+    const std::string& name = _name.empty() ? _path : _name;
 
     //Open File
-    std::string path = PATH + _path + "/" + _name + ".json";
+    std::string path = PATH + _path + "/" + name + ".json";
     std::ifstream file;
     file.open(path);
     if (!file.is_open()){
@@ -31,7 +29,7 @@ void JsonParams::LoadJson(const std::string& _path, std::string _name) {
     file.close();
 
     // Load Data
-    auto data = root.find(_name);
+    auto data = root.find(name);
     assert(data != root.end());
 
     for (auto group = data->begin(); group != data->end(); ++group){
@@ -169,18 +167,18 @@ bool JsonParams::Load(const std::string& _path, const std::string& _name) {
     return true;
 }
 
-void JsonParams::Save(const std::string& _path, std::string _name) {
-    if (_name.empty()) _name = _path;
+void JsonParams::Save(const std::string& _path, const std::string& _name) {
+    const std::string& name = _name.empty() ? _path : _name;
 
-    auto group = datas_.find(_name);
+    auto group = datas_.find(name);
     assert(group != datas_.end());
 
     json root = json::object();
-    root[_name] = json::object();
+    root[name] = json::object();
 
     for (auto& [groupKey, groupData] : group->second){
-        root[_name][groupKey] = json::object();
-        json& item = root[_name][groupKey];
+        root[name][groupKey] = json::object();
+        json& item = root[name][groupKey];
 
         for (auto [key, value] : groupData){
             item[key] = json::object();
@@ -223,7 +221,7 @@ void JsonParams::Save(const std::string& _path, std::string _name) {
         create_directories(dir);
     }
 
-    std::string path = dir.string() + _name + ".json";
+    std::string path = dir.string() + name + ".json";
     std::ofstream file(path, std::ios::trunc);
 
     if (!file.is_open()){

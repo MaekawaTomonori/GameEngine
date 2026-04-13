@@ -41,16 +41,6 @@ static bool UpdateJsonNode(nlohmann::json& _node,
     return false;
 }
 
-void WatchDebugger::Finalize() {
-    SaveJsonFiles();
-}
-
-void WatchDebugger::Initialize(DebugUI* _debug) {
-    debugUI_ = _debug;
-    if (debugUI_) {
-        debugUI_->RegisterMenuButton("Watcher", false, "Debug");
-    }
-}
 
 void WatchDebugger::AddReadOnly(const std::string& _label, std::function<std::string()> _getter) {
     const std::string key = currentGroup_.active ? currentGroup_.label + "|" + _label : _label;
@@ -114,6 +104,17 @@ void WatchDebugger::AddGroupEnd() {
     Entry e;
     e.kind = EntryKind::GroupEnd;
     entries_.push_back(std::move(e));
+}
+
+void WatchDebugger::Initialize(const GESTD::ReferencePtr<DebugUI> _debug) {
+    debugUI_ = _debug;
+    if (debugUI_) {
+        debugUI_->RegisterMenuButton("Watcher", false, "Debug");
+    }
+}
+
+void WatchDebugger::Finalize() {
+    SaveJsonFiles();
 }
 
 // ─── Static helper ───────────────────────────────────────

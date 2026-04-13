@@ -3,10 +3,13 @@
 
 #include <memory>
 
+#include "ReferencePtr.hpp"
 #include "Input.hpp"
 #ifdef _DEBUG
 #include "src/Debug/Debugger.hpp"
+// AUDIO_DISABLED: #include "src/Audio/AudioDebugPanel.hpp"
 #endif
+#include "Ui/UiManager.hpp"
 #include "src/Camera/Controller/CameraController.hpp"
 #include "src/Camera/Director/CameraDirector.hpp"
 #include "src/Platform/WinApp.hpp"
@@ -22,8 +25,8 @@
 #include "src/PostProcess/Executor/PostProcessExecutor.hpp"
 #include "src/Renderer/Renderer.hpp"
 #include "src/Sky/Common/SkyCommon.hpp"
-#include "src/Stage/LevelEditor.hpp"
 #include "src/Texture/TextureManager.hpp"
+#include "src/Text/TextCommon.hpp"
 
 class IGame;
 
@@ -34,7 +37,7 @@ class Framework {
     GameEngine::Config config_{};
 
     std::unique_ptr<IGame> game_;
-    SceneSwitcher* scene_ = nullptr;
+    GESTD::ReferencePtr<SceneSwitcher> scene_ = nullptr;
 
     std::unique_ptr<WinApp> windows_;
     std::unique_ptr<DirectXAdapter> dxAdapter_;
@@ -43,22 +46,26 @@ class Framework {
     std::unique_ptr<Renderer> renderer_;
     std::unique_ptr<ResourceRepository> resources_;
 #ifdef _DEBUG
-    std::unique_ptr<Debugger> debugger_;
+    std::unique_ptr<Debugger>        debugger_;
+    // AUDIO_DISABLED: std::unique_ptr<AudioDebugPanel> audioPanel_;
 #endif
     std::unique_ptr<SRVManager> srv_;
     //std::unique_ptr<LevelEditor> level_;
-    std::unique_ptr<ParticleSystem> particle_;
+    std::unique_ptr<ParticleSystem>      particle_;
+    GESTD::ReferencePtr<TextCommon>      text_;
 
-    Input* input_ = nullptr;
-    TextureManager* texture_ = nullptr;
-    SpriteCommon* sprite_ = nullptr;
-    ModelCommon* model_ = nullptr;
-    LineCommon* line_ = nullptr;
-    SkyCommon* sky_ = nullptr;
-    LightManager* light_ = nullptr;
+    GESTD::ReferencePtr<Input> input_;
+    GESTD::ReferencePtr<TextureManager> texture_;
+    GESTD::ReferencePtr<SpriteCommon> sprite_;
+    GESTD::ReferencePtr<ModelCommon> model_;
+    GESTD::ReferencePtr<LineCommon> line_;
+    GESTD::ReferencePtr<SkyCommon> sky_;
+    GESTD::ReferencePtr<LightManager> light_;
 
-    CameraController* camera_ = nullptr;
-    CameraDirector* cameraDirector_ = nullptr;
+    GESTD::ReferencePtr<CameraController> camera_;
+    GESTD::ReferencePtr<CameraDirector> cameraDirector_;
+
+    GESTD::ReferencePtr<Ui::Manager> ui_;
 
 public:
     Framework();

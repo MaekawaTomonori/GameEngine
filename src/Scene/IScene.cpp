@@ -15,6 +15,10 @@ void IScene::Setup(SceneSwitcher* _switcher) {
     switcher_ = _switcher;
 }
 
+void IScene::SetName(const std::string& _name) {
+    name_ = _name;
+}
+
 void IScene::Change() {
 	if (!switcher_) return;
     if (next_.empty()) return;
@@ -32,10 +36,10 @@ void IScene::PlayTransition(Transition::Type _type, std::function<void()> _onMid
     switcher_->PlayTransition(_type, std::move(_onMidpoint));
 }
 
-PostProcessExecutor* IScene::PostEffect() const {
+GESTD::ReferencePtr<PostProcessExecutor> IScene::PostEffect() const {
     return switcher_->GetContext().ppe;
 }
 
-ParticleSystem* IScene::Particle() const {
+GESTD::ReferencePtr<ParticleSystem> IScene::Particle() const {
     return switcher_->GetContext().particle;
 }

@@ -21,7 +21,7 @@
 
 using json = nlohmann::json;
 
-void PostProcessExecutor::Initialize(DirectXAdapter* _adapter, SRVManager* _srv, DebugUI* _debug) {
+void PostProcessExecutor::Initialize(const GESTD::ReferencePtr<DirectXAdapter>& _adapter, const GESTD::ReferencePtr<SRVManager>& _srv, const GESTD::ReferencePtr<DebugUI>& _debug) {
     adapter_ = _adapter;
     srv_ = _srv;
     debugUI_ = _debug;
@@ -38,7 +38,7 @@ void PostProcessExecutor::Initialize(DirectXAdapter* _adapter, SRVManager* _srv,
         return;
     }
 
-    // 繧ｷ繝ｼ繝ｳ逕ｨRenderTexture繧剃ｽ懈・
+    // シーン描画用の RenderTexture を作成する。
     CreateSceneRenderTexture();
 
     D3D12_DESCRIPTOR_RANGE range{
@@ -49,7 +49,7 @@ void PostProcessExecutor::Initialize(DirectXAdapter* _adapter, SRVManager* _srv,
         .OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND
     };
 
-    //Create PSO
+    // ポストプロセス結果を画面へコピーするための PSO。
     pso_ = std::make_unique<PipelineStateObject>(adapter_);
     pso_->SetRootSignature(
         RootSignature().AddParameter({
@@ -76,24 +76,25 @@ void PostProcessExecutor::Initialize(DirectXAdapter* _adapter, SRVManager* _srv,
     .SetTopologyType(D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE)
     .Create();
 
-    // Initialize preset editor
+    // Preset editor を関連付ける。
     presetEditor_ = std::make_unique<PostProcessPresetEditor>();
-    presetEditor_->Initialize(debugUI_, this);
+    presetEditor_->Initialize(debugUI_, GESTD::ReferencePtr<PostProcessExecutor>(this));
 }
 
-void PostProcessExecutor::SetFactory(AbstractPostEffectFactory* _factory) {
+void PostProcessExecutor::SetFactory(GESTD::ReferencePtr<AbstractPostEffectFactory> _factory) {
     factory_ = _factory;
 }
 
 void PostProcessExecutor::Add(std::unique_ptr<IPostEffect> _effect, const std::string& _name) {
-    if (_effect){
+    if (_effect) {
         _effect->SetUp(adapter_, srv_);
-        // 繧ｨ繝輔ぉ繧ｯ繝育畑縺ｮRTV繝上Φ繝峨Ν繧貞牡繧雁ｽ薙※
+
+        // 各エフェクトに対応する RTV ハンドルを順番に割り当てる。
         auto rtvHandle = rtvHeap_->GetCPUHandle(static_cast<uint32_t>(effects_.size()) + 1);
         _effect->SetRTVHandle(rtvHandle);
         _effect->Initialize();
-        effects_.emplace_back(EffectData{std::move(_effect), _name, "", true});
-    } else{
+        effects_.emplace_back(EffectData{ std::move(_effect), _name, "", true });
+    } else {
         Log::Send(Log::Level::ERR, "Attempted to add a null post effect");
     }
 }
@@ -129,7 +130,7 @@ void PostProcessExecutor::Execute() {
 
     auto handle = srv_->GetGPUHandle(srvIndex_);
 
-    // 繧ｨ繝輔ぉ繧ｯ繝医メ繧ｧ繝ｼ繝ｳ蜃ｦ逅・
+    // 有効なエフェクトを追加順に適用する。
     for (const auto& effect : effects_) {
         if (!effect.enabled) continue;
         handle = effect.effect->Apply(handle);
@@ -148,12 +149,12 @@ void PostProcessExecutor::Draw() const {
     adapter_->PreProcess();
     adapter_->GetCommandList()->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
-    // PSO險ｭ螳・
+    // フルスクリーン描画用 PSO を適用する。
     pso_->DrawCall();
 
     adapter_->GetCommandList()->SetGraphicsRootDescriptorTable(0, srvHandle_);
 
-    // 繝輔Ν繧ｹ繧ｯ繝ｪ繝ｼ繝ｳ繧ｯ繝ｯ繝・ラ繧剃ｸ芽ｧ貞ｽ｢縺ｧ謠冗判
+    // フルスクリーントライアングルで結果テクスチャを描画する。
     adapter_->GetCommandList()->DrawInstanced(3, 1, 0, 0);
 }
 
@@ -173,12 +174,12 @@ bool PostProcessExecutor::IsSceneViewActive() {
 
 void PostProcessExecutor::Debug() {
 #ifdef _DEBUG
-    // Scene 縺碁撼陦ｨ遉ｺ縺ｮ蝣ｴ蜷医√・繧ｦ繧ｹ蠎ｧ讓吝､画鋤繧偵Μ繧ｻ繝・ヨ
+    // SceneView が閉じているときは入力座標変換を無効化する。
     if (!debugUI_->IsVisible("Scene")) {
         Singleton<Input>::GetInstance()->SetSceneViewTransform(false, {}, {}, {});
     }
 
-        debugUI_->RegisterCommand("Scene", [this]() {
+    debugUI_->RegisterCommand("Scene", [this]() {
         bool& visible = debugUI_->IsVisible("Scene");
         const bool beginResult = ImGui::Begin("Scene", &visible);
         bool hasSceneImage = false;
@@ -191,7 +192,7 @@ void PostProcessExecutor::Debug() {
             const float renderH = static_cast<float>(adapter_->GetHeight());
             const float scaleX = avail.x / renderW;
             const float scaleY = (avail.y > 0.f) ? (avail.y / renderH) : scaleX;
-            const float scale  = std::min(scaleX, scaleY);
+            const float scale = std::min(scaleX, scaleY);
             sceneViewScale_ = scale;
             const float displayW = renderW * scale;
             const float displayH = renderH * scale;
@@ -207,7 +208,7 @@ void PostProcessExecutor::Debug() {
         if (hasSceneImage) {
             Singleton<Input>::GetInstance()->SetSceneViewTransform(
                 true,
-                { imgMin.x,  imgMin.y  },
+                { imgMin.x, imgMin.y },
                 { imgSize.x, imgSize.y },
                 { static_cast<float>(adapter_->GetWidth()), static_cast<float>(adapter_->GetHeight()) }
             );
@@ -217,7 +218,7 @@ void PostProcessExecutor::Debug() {
     });
 #endif
 
-    debugUI_->RegisterCommand("PostEffect", [this](){
+    debugUI_->RegisterCommand("PostEffect", [this]() {
         bool& visible = debugUI_->IsVisible("PostEffect");
         ImGui::Begin("PostEffect", &visible);
 
@@ -250,7 +251,7 @@ void PostProcessExecutor::Debug() {
 
         ImGui::End();
 
-        // PostEffect 繧ｦ繧｣繝ｳ繝峨え繧帝哩縺倥◆繧・PresetEditor 繧る｣蜍輔＠縺ｦ髢峨§繧・
+        // PostEffect ウィンドウを閉じたら PresetEditor も閉じる。
         if (!visible && presetEditor_) {
             presetEditor_->CloseEditor();
         }
@@ -266,14 +267,14 @@ void PostProcessExecutor::CreateSceneRenderTexture() {
         return;
     }
 
-    // RTVHeap繧剃ｽ懈・・医す繝ｼ繝ｳ逕ｨ1縺､ + 繧ｨ繝輔ぉ繧ｯ繝育畑隍・焚・・
+    // Scene 用 1 枚と effect 用の RTV を格納する heap を作成する。
     rtvHeap_ = std::make_unique<Heap>();
     if (!rtvHeap_->Create(adapter_->GetDevice(), D3D12_DESCRIPTOR_HEAP_TYPE_RTV, 16, D3D12_DESCRIPTOR_HEAP_FLAG_NONE)) {
         Log::Send(Log::Level::ERR, "Failed to create RTV heap for PostProcessExecutor");
         return;
     }
 
-    // 逕ｻ髱｢繧ｵ繧､繧ｺ縺ｮRenderTexture繧剃ｽ懈・
+    // Scene 描画先の RenderTexture を生成する。
     renderTexture_ = adapter_->CreateRenderTextureResource(
         static_cast<uint32_t>(adapter_->GetWidth()),
         static_cast<uint32_t>(adapter_->GetHeight()),
@@ -288,13 +289,13 @@ void PostProcessExecutor::CreateSceneRenderTexture() {
         return;
     }
 
-    // SRV繧､繝ｳ繝・ャ繧ｯ繧ｹ繧貞牡繧雁ｽ薙※・亥・蝗槭・縺ｿ・・
+    // Scene texture 用の SRV index を確保する。
     srvIndex_ = srv_->Allocate();
 
-    // RTV/SRV險倩ｿｰ蟄舌ｒ菴懈・・亥・騾壼喧繝｡繧ｽ繝・ラ蜻ｼ縺ｳ蜃ｺ縺暦ｼ・
+    // RTV/SRV を作成する。
     CreateRenderTextureViews();
 
-    // ImGui 繧ｷ繝ｼ繝ｳ繝薙Η繝ｼ逕ｨ縺ｫ DebugUI 縺ｮ繝偵・繝励∈ SRV 繧堤匳骭ｲ
+    // DebugUI で SceneView 表示できるようにテクスチャを登録する。
     if (debugUI_) {
         sceneImGuiTextureId_ = debugUI_->RegisterTexture(renderTexture_->Get(), DXGI_FORMAT_R8G8B8A8_UNORM_SRGB);
     }
@@ -308,7 +309,7 @@ void PostProcessExecutor::CreateRenderTextureViews() {
         return;
     }
 
-    // RTV繧剃ｽ懈・
+    // RTV を作成する。
     rtvHandle_ = rtvHeap_->GetCPUHandle(0);
 
     D3D12_RENDER_TARGET_VIEW_DESC rtvDesc = {};
@@ -317,7 +318,7 @@ void PostProcessExecutor::CreateRenderTextureViews() {
 
     adapter_->GetDevice()->CreateRenderTargetView(renderTexture_->Get(), &rtvDesc, rtvHandle_);
 
-    // SRV繧剃ｽ懈・・医∪縺溘・譖ｴ譁ｰ・・
+    // SRV を作成する。
     srv_->CreateSRVForTexture2D(srvIndex_, renderTexture_->Get(), DXGI_FORMAT_R8G8B8A8_UNORM_SRGB, 1);
     srvHandle_ = srv_->GetGPUHandle(srvIndex_);
 }
@@ -331,12 +332,12 @@ void PostProcessExecutor::ResizeRenderTextures() {
         "PostProcessExecutor: Resizing render textures to " +
         std::to_string(adapter_->GetWidth()) + "x" + std::to_string(adapter_->GetHeight()));
 
-    // 譌｢蟄倥・繝ｬ繝ｳ繝繝ｼ繝・け繧ｹ繝√Ε繧定ｧ｣謾ｾ
+    // 旧 RenderTexture を破棄する。
     if (renderTexture_) {
         renderTexture_.reset();
     }
 
-    // 譁ｰ縺励＞繧ｵ繧､繧ｺ縺ｧ繝ｬ繝ｳ繝繝ｼ繝・け繧ｹ繝√Ε繧貞・菴懈・
+    // 新しいサイズで RenderTexture を再作成する。
     renderTexture_ = adapter_->CreateRenderTextureResource(
         static_cast<uint32_t>(adapter_->GetWidth()),
         static_cast<uint32_t>(adapter_->GetHeight()),
@@ -351,10 +352,10 @@ void PostProcessExecutor::ResizeRenderTextures() {
         return;
     }
 
-    // RTV/SRV險倩ｿｰ蟄舌ｒ蜀堺ｽ懈・・亥・騾壼喧繝｡繧ｽ繝・ラ蜻ｼ縺ｳ蜃ｺ縺暦ｼ・
+    // RTV/SRV を再作成する。
     CreateRenderTextureViews();
 
-    // ImGui 繧ｷ繝ｼ繝ｳ繝薙Η繝ｼ逕ｨ繝・け繧ｹ繝√Ε繧呈眠縺励＞繝ｪ繧ｽ繝ｼ繧ｹ縺ｧ譖ｴ譁ｰ
+    // DebugUI へ再登録する。
     if (debugUI_) {
         sceneImGuiTextureId_ = debugUI_->RegisterTexture(renderTexture_->Get(), DXGI_FORMAT_R8G8B8A8_UNORM_SRGB);
     }
@@ -363,47 +364,47 @@ void PostProcessExecutor::ResizeRenderTextures() {
 }
 
 IPostEffect* PostProcessExecutor::FindOrCreate(const std::string& _type, const std::string& _name, bool _create) {
-    // 譌｢蟄倥う繝ｳ繧ｹ繧ｿ繝ｳ繧ｹ讀懃ｴ｢
+    // 既存 instance を検索する。
     for (auto& effectData : effects_) {
         if (effectData.name == _name) {
             return effectData.effect.get();
         }
     }
 
-    // create縺掲alse縺ｪ繧臥函謌舌＠縺ｪ縺・
+    // 自動生成しない場合はここで終了。
     if (!_create) return nullptr;
 
-    // Factory縺瑚ｨｭ螳壹＆繧後※縺・↑縺・ｴ蜷・
+    // Factory が未設定なら生成できない。
     if (!factory_) {
         Log::Send(Log::Level::ERR, "PostEffectFactory is not set");
         return nullptr;
     }
 
-    // Factory縺ｧ繧ｨ繝輔ぉ繧ｯ繝育函謌・
+    // Factory から新しい effect を生成する。
     auto newEffect = factory_->Create(_type);
     if (!newEffect) {
         Log::Send(Log::Level::ERR, std::format("Failed to create effect type: {}", _type));
         return nullptr;
     }
 
-    // 繧ｨ繝輔ぉ繧ｯ繝医ｒ繧ｻ繝・ヨ繧｢繝・・
+    // effect を executor 配下へ組み込む。
     newEffect->SetUp(adapter_, srv_);
     auto rtvHandle = rtvHeap_->GetCPUHandle(static_cast<uint32_t>(effects_.size()) + 1);
     newEffect->SetRTVHandle(rtvHandle);
     newEffect->Initialize();
 
-    effects_.emplace_back(EffectData{std::move(newEffect), _name, _type, true});
+    effects_.emplace_back(EffectData{ std::move(newEffect), _name, _type, true });
 
     return effects_.back().effect.get();
 }
 
 void PostProcessExecutor::ApplyPreset(const std::string& _presetName, const std::string& _mode, const std::vector<std::string>& _ignoreList, std::function<void()> _onComplete) {
-    // 繧ｳ繝ｼ繝ｫ繝舌ャ繧ｯ繧剃ｿ晏ｭ・
+    // 完了時コールバックを保持する。
     onAnimationComplete_ = _onComplete;
 
     std::string path = "./Assets/Data/PostEffect/presets.json";
 
-    // 繝輔ぃ繧､繝ｫ縺悟ｭ伜惠縺励↑縺・ｴ蜷医・繧ｨ繝ｩ繝ｼ
+    // preset 定義ファイルの存在確認。
     if (!std::filesystem::exists(path)) {
         Log::Send(Log::Level::ERR, std::format("Preset file not found: {}", path));
         return;
@@ -419,7 +420,7 @@ void PostProcessExecutor::ApplyPreset(const std::string& _presetName, const std:
     file >> presetsJson;
     file.close();
 
-    // 繝励Μ繧ｻ繝・ヨ蜷阪′蟄伜惠縺吶ｋ縺狗｢ｺ隱・
+    // 指定 preset が存在するか確認する。
     if (!presetsJson.contains(_presetName)) {
         Log::Send(Log::Level::WARNING, std::format("Preset '{}' not found in presets.json", _presetName));
         return;
@@ -427,31 +428,32 @@ void PostProcessExecutor::ApplyPreset(const std::string& _presetName, const std:
 
     const auto& presetData = presetsJson[_presetName];
 
-    // duration蜿門ｾ暦ｼ・38・・
+    // アニメーション時間を読み取る。
     animationDuration_ = presetData.value("duration", 0.0f);
 
-    // Q35: replace繝｢繝ｼ繝峨↑繧画里蟄倥お繝輔ぉ繧ｯ繝医ｒ辟｡蜉ｹ蛹・
+    // replace モードでは既存 effect を一旦無効化する。
     if (_mode == "replace") {
         for (auto& effectData : effects_) {
             effectData.enabled = false;
         }
     }
 
-    // 繧｢繝九Γ繝ｼ繧ｷ繝ｧ繝ｳ蟇ｾ雎｡繧ｨ繝輔ぉ繧ｯ繝医Μ繧ｹ繝医ｒ繧ｯ繝ｪ繧｢
+    // 今回のアニメーション対象を初期化する。
     animatingEffects_.clear();
 
-    // effects驟榊・縺ｾ縺溘・members驟榊・繧貞・逅・ｼ亥ｾ梧婿莠呈鋤諤ｧ縺ｮ縺溘ａ荳｡譁ｹ蟇ｾ蠢懶ｼ・
+    // effects / members のどちらにも対応する。
     const char* arrayKey = presetData.contains("effects") ? "effects" : "members";
 
     if (presetData.contains(arrayKey)) {
         for (const auto& effectEntry : presetData[arrayKey]) {
             std::string type = effectEntry["type"];
             std::string name = effectEntry["name"];
-            // preset繧ｭ繝ｼ縺後↑縺・ｴ蜷医・繝励Μ繧ｻ繝・ヨ蜷阪→蜷後§繧ゅ・繧剃ｽｿ逕ｨ
+
+            // preset 名省略時は現在の preset 名を使う。
             std::string presetName = effectEntry.value("preset", _presetName);
             bool autoCreate = effectEntry.value("autoCreate", true);
 
-            // Q36: ignore繝ｪ繧ｹ繝医↓蜷ｫ縺ｾ繧後ｋ繧ｨ繝輔ぉ繧ｯ繝医・繧ｹ繧ｭ繝・・
+            // ignore list に含まれる effect はスキップする。
             bool shouldIgnore = false;
             for (const auto& ignoreName : _ignoreList) {
                 if (ignoreName == name) {
@@ -461,34 +463,33 @@ void PostProcessExecutor::ApplyPreset(const std::string& _presetName, const std:
             }
             if (shouldIgnore) continue;
 
-            // FindOrCreate縺ｧ驕・ｻｶ蛻晄悄蛹・
+            // effect を取得または生成する。
             IPostEffect* effect = FindOrCreate(type, name, autoCreate);
             if (!effect) {
                 Log::Send(Log::Level::WARNING, std::format("Failed to create effect: {} ({})", name, type));
                 continue;
             }
 
-            // 繝励Μ繧ｻ繝・ヨ隱ｭ縺ｿ霎ｼ縺ｿ
+            // preset を読み込み、有効化する。
             effect->LoadPreset(presetName);
             Log::Send(Log::Level::DBG, std::format("Loaded preset '{}' for effect '{}' ({})", presetName, name, type));
 
-            // 繧ｨ繝輔ぉ繧ｯ繝医ｒ譛牙柑蛹・
             SetActive(name, true);
             Log::Send(Log::Level::DBG, std::format("Enabled effect '{}' (enabled: {})", name, true));
 
-            // 繧｢繝九Γ繝ｼ繧ｷ繝ｧ繝ｳ蟇ｾ雎｡繝ｪ繧ｹ繝医↓霑ｽ蜉
+            // アニメーション対象として記録する。
             animatingEffects_.push_back(name);
         }
     }
 
-    // 繧｢繝九Γ繝ｼ繧ｷ繝ｧ繝ｳ髢句ｧ・
+    // アニメーションありの場合は更新ループへ移行する。
     if (animationDuration_ > 0.0f) {
         isAnimating_ = true;
         animationTimer_ = 0.0f;
         Log::Send(Log::Level::INFO, std::format("Started animation for preset '{}' (duration: {:.1f}s, effects: {})",
             _presetName, animationDuration_, animatingEffects_.size()));
     } else {
-        // Q42: duration=0縺ｪ繧牙叉蠎ｧ縺ｫ譛邨ら憾諷九ｒ驕ｩ逕ｨ
+        // duration が 0 の場合は即座に最終状態を適用する。
         for (const auto& effectName : animatingEffects_) {
             for (auto& effectData : effects_) {
                 if (effectData.name == effectName) {
@@ -500,7 +501,7 @@ void PostProcessExecutor::ApplyPreset(const std::string& _presetName, const std:
         isAnimating_ = false;
     }
 
-    // 繝・ヰ繝・げ: 蜈ｨ繧ｨ繝輔ぉ繧ｯ繝医・迥ｶ諷九ｒ蜃ｺ蜉・
+    // デバッグ出力。
     Log::Send(Log::Level::INFO, std::format("Total effects: {}", effects_.size()));
     for (const auto& effectData : effects_) {
         Log::Send(Log::Level::INFO, std::format("  Effect '{}' ({}): enabled={}",
@@ -516,7 +517,7 @@ void PostProcessExecutor::Update(float _deltaTime) {
     animationTimer_ += _deltaTime;
     float t = std::min(animationTimer_ / animationDuration_, 1.0f);
 
-    // 蜈ｨ縺ｦ縺ｮ繧｢繝九Γ繝ｼ繧ｷ繝ｧ繝ｳ蟇ｾ雎｡繧ｨ繝輔ぉ繧ｯ繝医ｒ譖ｴ譁ｰ
+    // アニメーション対象 effect を進行度 t で更新する。
     for (const auto& effectName : animatingEffects_) {
         for (auto& effectData : effects_) {
             if (effectData.name == effectName) {
@@ -526,18 +527,15 @@ void PostProcessExecutor::Update(float _deltaTime) {
         }
     }
 
-    // 繧｢繝九Γ繝ｼ繧ｷ繝ｧ繝ｳ螳御ｺ・メ繧ｧ繝・け
+    // 最後まで到達したら状態を片付ける。
     if (t >= 1.0f) {
         isAnimating_ = false;
 
-        // 繧｢繝九Γ繝ｼ繧ｷ繝ｧ繝ｳ螳御ｺ・ｾ後∬ｩｲ蠖薙お繝輔ぉ繧ｯ繝医ｒ繝・ヵ繧ｩ繝ｫ繝亥､縺ｫ謌ｻ縺励※辟｡蜉ｹ蛹・
+        // 一時的に使った effect を初期状態へ戻して無効化する。
         for (const auto& effectName : animatingEffects_) {
             for (auto& effectData : effects_) {
                 if (effectData.name == effectName) {
-                    // 繧ｨ繝輔ぉ繧ｯ繝医ｒ辟｡蜉ｹ蛹・
                     effectData.enabled = false;
-
-                    // 繝・ヵ繧ｩ繝ｫ繝亥､縺ｫ謌ｻ縺吶◆繧√！nitialize()繧貞・螳溯｡・
                     effectData.effect->Initialize();
 
                     Log::Send(Log::Level::INFO, std::format("Reset and disabled effect '{}'", effectName));
@@ -546,16 +544,16 @@ void PostProcessExecutor::Update(float _deltaTime) {
             }
         }
 
-        // 繧｢繝九Γ繝ｼ繧ｷ繝ｧ繝ｳ蟇ｾ雎｡繝ｪ繧ｹ繝医ｒ繧ｯ繝ｪ繧｢
+        // 対象一覧をクリアする。
         animatingEffects_.clear();
 
         Log::Send(Log::Level::INFO, "PostEffect animation completed and effects reset");
 
-        // 繧ｳ繝ｼ繝ｫ繝舌ャ繧ｯ縺瑚ｨｭ螳壹＆繧後※縺・ｋ蝣ｴ蜷医・蜻ｼ縺ｳ蜃ｺ縺・
+        // 完了コールバックがあれば呼び出す。
         if (onAnimationComplete_) {
             Log::Send(Log::Level::INFO, "Calling animation complete callback");
             onAnimationComplete_();
-            onAnimationComplete_ = nullptr;  // 繧ｳ繝ｼ繝ｫ繝舌ャ繧ｯ繧偵け繝ｪ繧｢
+            onAnimationComplete_ = nullptr;
         }
     }
 }
@@ -563,7 +561,7 @@ void PostProcessExecutor::Update(float _deltaTime) {
 void PostProcessExecutor::SavePreset(const std::string& _presetName) {
     json presetJson;
 
-    // 譛牙柑縺ｪ繧ｨ繝輔ぉ繧ｯ繝医・縺ｿ菫晏ｭ假ｼ・44・・
+    // 現在有効な effect だけを書き出す。
     for (const auto& effectData : effects_) {
         if (effectData.enabled) {
             json effectEntry;
@@ -574,19 +572,19 @@ void PostProcessExecutor::SavePreset(const std::string& _presetName) {
 
             presetJson["effects"].push_back(effectEntry);
 
-            // 蜷・お繝輔ぉ繧ｯ繝医・繝代Λ繝｡繝ｼ繧ｿ繧剃ｿ晏ｭ・
+            // 各 effect のパラメータも保存する。
             effectData.effect->SavePreset(_presetName);
         }
     }
 
-    // duration菫晏ｭ・
+    // duration を保存する。
     presetJson["duration"] = animationDuration_;
 
-    // presets.json縺ｫ菫晏ｭ・
+    // presets.json を更新する。
     std::string presetsPath = "./Assets/Data/PostEffect/presets.json";
     std::filesystem::create_directories("./Assets/Data/PostEffect");
 
-    // 譌｢蟄倥・presets.json繧定ｪｭ縺ｿ霎ｼ縺ｿ
+    // 既存ファイルがあれば読み込む。
     json allPresets;
     if (std::filesystem::exists(presetsPath)) {
         std::ifstream inFile(presetsPath);
@@ -596,10 +594,10 @@ void PostProcessExecutor::SavePreset(const std::string& _presetName) {
         }
     }
 
-    // 譁ｰ縺励＞繝励Μ繧ｻ繝・ヨ繧定ｿｽ蜉
+    // 新しい preset を上書きまたは追加する。
     allPresets[_presetName] = presetJson;
 
-    // 菫晏ｭ・
+    // ファイルへ書き戻す。
     std::ofstream outFile(presetsPath);
     if (!outFile.is_open()) {
         Log::Send(Log::Level::ERR, std::format("Failed to save preset to: {}", presetsPath));

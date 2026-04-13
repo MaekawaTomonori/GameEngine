@@ -3,8 +3,10 @@
 #include <functional>
 #include <memory>
 #include <string>
+#include <vector>
 
 #include "DebugUI.hpp"
+#include "ReferencePtr.hpp"
 #include "src/PostProcess/Editor/PostProcessPresetEditor.hpp"
 #include "src/ParticleSystem/ParticleSystem.hpp"
 
@@ -12,6 +14,7 @@
 #include "SceneFactory.hpp"
 
 class Transition;
+class FrameDebugger;
 
 /** @brief シーン切り替え管理クラス
  * シーン遷移とトランジションエフェクトを管理
@@ -19,9 +22,10 @@ class Transition;
 class SceneSwitcher {
 public:
     struct Context {
-        PostProcessExecutor* ppe = nullptr;
-        DebugUI* debug = nullptr;
-        ParticleSystem* particle = nullptr;
+        GESTD::ReferencePtr<PostProcessExecutor> ppe = nullptr;
+        GESTD::ReferencePtr<ParticleSystem> particle = nullptr;
+        GESTD::ReferencePtr<DebugUI> debug;
+        GESTD::ReferencePtr<FrameDebugger> frame;
     };
 
 private:
@@ -37,6 +41,14 @@ private:
     Transition::Type intraOutType_ = Transition::Type::None;
     Transition::Type intraInType_  = Transition::Type::None;
     bool midpointPending_ = false;
+
+    std::string homeScene_ = "sample";
+    bool pendingBreak_ = false;
+
+#ifdef _DEBUG
+    enum class RunState { Stopped, Running, Paused };
+    RunState debugRunState_ = RunState::Stopped;
+#endif
 
 public:
     SceneSwitcher();
@@ -82,6 +94,13 @@ public:
     void Debug();
 
     const Context& GetContext() const;
+
+private:
+    /** @brief トランジションを即座にスキップし、コールバック状態をリセットする */
+    void SkipTransition();
+
+    void LocalDebugger();
+
 }; // class SceneSwitcher
 
 #endif // SceneSwitcher_HPP_

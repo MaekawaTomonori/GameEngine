@@ -18,8 +18,8 @@ void RawPointLight::Set(const std::string& _uuid ,const PointLight& _pl) {
     light_ = _pl;
 }
 
-void RawPointLight::Save(std::string _path) {
-	JsonParams* json = Singleton<JsonParams>::GetInstance();
+void RawPointLight::Save(const std::string& _path) {
+	const auto json = Singleton<JsonParams>::GetInstance();
 	json->SetValue(_path, uuid_, "type", magic_enum::enum_integer(type_));
 	json->SetValue(_path, uuid_, "color", light_.color);
 	json->SetValue(_path, uuid_, "position", light_.position);

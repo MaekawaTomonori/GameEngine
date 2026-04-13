@@ -117,7 +117,7 @@ void Model::Draw() const {
         return;
     }
 
-    TextureManager* tm = Singleton<TextureManager>::GetInstance();
+    const auto tm = Singleton<TextureManager>::GetInstance();
 
     if (pose_.has_value() && !data_->skinCluster.empty()) {
         common_->RegisterSkinningDraw([this, tm]() {
@@ -144,17 +144,17 @@ Model& Model::SetName(const std::string& _name) {
     return *this;
 }
 
-Model& Model::SetTranslate(const Vector3 _translate) {
+Model& Model::SetTranslate(const Vector3& _translate) {
     transform_.translate = _translate;
     return *this;
 }
 
-Model& Model::SetRotate(const Vector3 _rotate) {
+Model& Model::SetRotate(const Vector3& _rotate) {
     transform_.rotate = _rotate;
     return *this;
 }
 
-Model& Model::SetScale(const Vector3 _scale) {
+Model& Model::SetScale(const Vector3& _scale) {
     transform_.scale = _scale;
     return *this;
 }
@@ -162,7 +162,7 @@ Model& Model::SetScale(const Vector3 _scale) {
 Model& Model::SetEnvironmentTexture(const std::string& _texture) {
     environmentTexture_ = _texture;
     if (!_texture.empty()) {
-        TextureManager* tm = Singleton<TextureManager>::GetInstance();
+        const auto tm = Singleton<TextureManager>::GetInstance();
         tm->Load(_texture);
     }
     return *this;
@@ -188,7 +188,7 @@ Model& Model::SetTilingMultiply(const Vector2 _mul) {
     return *this;
 }
 
-Model& Model::SetColor(const Vector4 _color) {
+Model& Model::SetColor(const Vector4& _color) {
     if (mesh_) {
         mesh_->SetColor(_color);
     }
@@ -199,8 +199,8 @@ const std::string& Model::GetName() const {
     return name_;
 }
 
-Mesh* Model::GetMesh() const {
-    return mesh_.get();
+GESTD::ReferencePtr<Mesh> Model::GetMesh() const {
+    return GESTD::ReferencePtr<Mesh>(mesh_);
 }
 
 void Model::Load(const std::string& _name) {

@@ -10,18 +10,15 @@
 #include "src/DirectX/Resource/DX12Resource.hpp"
 #include "src/Mesh/Data/MeshData.hpp"
 #include "src/ParticleSystem/Particle/Particle.hpp"
-//#include "src/DirectX/Compute/ComputePipeline.hpp"
+
+enum class PrimitiveType {
+    Billboard,
+    Ring,
+    Cylinder,
+    Trail,
+};
 
 class Emitter {
-    //struct ParticleForGpu {
-    //    Vector3 position;
-    //    Vector3 scale;
-    //    float lifetime;
-    //    Vector3 velocity;
-    //    float timer;
-    //    Vector4 color;
-    //};
-
     struct ForGpu {
         Matrix4x4 wvp;
         Matrix4x4 world;
@@ -35,6 +32,8 @@ class Emitter {
     SRVManager* srv_ = nullptr;
 
     bool active_ = false;
+    bool billboard_ = true;
+    PrimitiveType primitive_ = PrimitiveType::Billboard;
 
     Vector3 position_{};
     float duration_ = 1.f;
@@ -42,6 +41,8 @@ class Emitter {
     uint16_t spawnCount_ = 1;
     Vector3 size_{ 1.f, 1.f, 1.f };
     Vector3 velocity_ {};
+    Vector3 rotation_{};
+    Vector3 rotationVelocity_{};
     Vector4 color_{ 1.f, 1.f, 1.f, 1.f };
     float timer_ = 0.f;
 
@@ -106,6 +107,14 @@ public:
     Emitter& SetSize(const Vector3& _size);
 
     Emitter& SetVelocity(const Vector3& _velocity);
+
+    Emitter& SetBillboard(bool _billboard);
+
+    Emitter& SetPrimitive(PrimitiveType _type);
+
+    Emitter& SetRotation(const Vector3& _rotation);
+
+    Emitter& SetRotationVelocity(const Vector3& _rotationVelocity);
 
     /** @brief パーティクル更新関数を設定
      * @param _func <float(time)>, <const Vector3&(origin)>, <Vector3&(position)>, <Vector3&(velocity)>, <Vector4&(color)>

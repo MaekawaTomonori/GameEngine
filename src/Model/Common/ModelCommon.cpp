@@ -7,7 +7,7 @@
 #include "src/DirectX/RootSignature/RootSignature.hpp"
 #include "src/DirectX/Shader/Shader.h"
 
-void ModelCommon::Initialize(DirectXAdapter *_adapter, DebugUI *_debugUi) {
+void ModelCommon::Initialize(const GESTD::ReferencePtr<DirectXAdapter>& _adapter, const GESTD::ReferencePtr<DebugUI>& _debugUi) {
 	Setup(_adapter, _debugUi, "Model");
 	debugUI_->RegisterMenuButton("Model");
 
@@ -388,7 +388,7 @@ void ModelCommon::DrawStatic() const {
 	staticPipeline_->DrawCall();
 }
 
-void ModelCommon::Initialize(DirectXAdapter* _adapter, DebugUI* _debugUi, ResourceRepository* _resource, SRVManager* _srv) {
+void ModelCommon::Initialize(const GESTD::ReferencePtr<DirectXAdapter>& _adapter, const GESTD::ReferencePtr<DebugUI>& _debugUi, GESTD::ReferencePtr<ResourceRepository> _resource, SRVManager* _srv) {
     resource_ = _resource;
     srv_ = _srv;
     Initialize(_adapter, _debugUi);

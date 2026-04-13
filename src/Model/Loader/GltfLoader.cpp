@@ -9,11 +9,12 @@
 #include "Utils.hpp"
 #include "Math/MathUtils.hpp"
 
-void GltfLoader::LoadModel(const std::string& _name, ResourceRepository* _repository) {
+void GltfLoader::LoadModel(const std::string& _name, GESTD::ReferencePtr<ResourceRepository> _repository) { 
     LoadGltf(ASSETS_FOLDER, _name, _repository);
 }
 
-void GltfLoader::LoadGltf(const std::string& _directory, const std::string& _name, const ResourceRepository* _repository) const {
+
+void GltfLoader::LoadGltf(const std::string& _directory, const std::string& _name, const GESTD::ReferencePtr<ResourceRepository> _repository) const {
     Assimp::Importer importer;
     std::string path = _directory + _name + "/" + _name + ".gltf";
     const aiScene* scene = importer.ReadFile(path, aiProcess_FlipWindingOrder | aiProcess_FlipUVs | aiProcess_Triangulate);

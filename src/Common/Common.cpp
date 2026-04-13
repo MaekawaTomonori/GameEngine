@@ -8,7 +8,7 @@
 
 #include "src/Renderer/Renderer.hpp"
 
-void Common::Setup(DirectXAdapter* _adapter, DebugUI* _debugUi, const std::string& _windowName) {
+void Common::Setup(const GESTD::ReferencePtr<DirectXAdapter>& _adapter, const GESTD::ReferencePtr<DebugUI>& _debugUi, const std::string& _windowName) {
     std::scoped_lock lock(mutex_);
     adapter_ = _adapter;
     debugUI_ = _debugUi;

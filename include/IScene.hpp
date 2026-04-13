@@ -3,6 +3,7 @@
 #include <functional>
 #include <string>
 
+#include "ReferencePtr.hpp"
 #include "src/ParticleSystem/ParticleSystem.hpp"
 #include "src/Scene/Transition/Transition.hpp"
 
@@ -16,9 +17,9 @@ class PostProcessExecutor;
 class IScene {
     SceneSwitcher* switcher_ = nullptr;
     bool progress_ = false;
+    std::string name_;
 
 protected:
-    std::string name_;
     std::string next_;
 
     Transition::Type entryTransition_ = Transition::Type::None;
@@ -42,6 +43,10 @@ public:
     /** @brief 終了処理
      */
     virtual void Finalize() {}
+
+    /** @brief Debug用 ImGuiはここで扱うようにする
+     */
+    virtual void Debug() {}
 
 
     /** @brief シーンが進行中かを判定
@@ -73,9 +78,10 @@ public:
      */
     Transition::Type GetExitTransition() const { return exitTransition_; }
 
-    /** @brief Debug用 ImGuiはここで扱うようにする
+    /** @brief シーンの名前を設定(登録時にSwitcherから設定する)
+     * @param _name シーン名
      */
-    virtual void Debug() {}
+    void SetName(const std::string& _name);
 
 protected:
     /** @brief シーンをnext_に変更
@@ -95,8 +101,8 @@ protected:
      */
     void PlayTransition(Transition::Type _type, std::function<void()> _onMidpoint = {});
 
-    PostProcessExecutor* PostEffect() const;
-    ParticleSystem* Particle() const;
+    GESTD::ReferencePtr<PostProcessExecutor> PostEffect() const;
+    GESTD::ReferencePtr<ParticleSystem> Particle() const;
 
 private:
     virtual void OnEnable() {}

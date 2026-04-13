@@ -32,7 +32,7 @@ public:
 
     void DefaultSetting() override;
     void Set(const std::string& uuid, const SpotLight& sl);
-    void Save(std::string _path) override;
+    void Save(const std::string& _path) override;
     void ImGuiSetting(int _index) override;
 
 protected:

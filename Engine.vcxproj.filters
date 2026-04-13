@@ -34,6 +34,9 @@
     <Filter Include="src\Container">
       <UniqueIdentifier>{3F0F2748-ABCF-A27E-740A-ECFBE089E75A}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Audio">
+      <UniqueIdentifier>{A1B2C3D4-E5F6-7890-ABCD-EF1234567891}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\Debug">
       <UniqueIdentifier>{63A3C3B2-CF0D-7829-184C-29CF84F5557E}</UniqueIdentifier>
     </Filter>
@@ -177,6 +180,9 @@
     </Filter>
     <Filter Include="src\System\Singleton">
       <UniqueIdentifier>{23A88C69-0F37-1633-B855-2A2EA4C326D9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Text">
+      <UniqueIdentifier>{A1B2C3D4-E5F6-7890-ABCD-EF1234567891}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\Texture">
       <UniqueIdentifier>{8DAD6B43-F962-E438-8257-DE0FEE0BDB3C}</UniqueIdentifier>
@@ -399,6 +405,10 @@
     <ClInclude Include="src\Stage\StageRepository.hpp">
       <Filter>src\Stage</Filter>
     </ClInclude>
+    <ClInclude Include="include\Text\Text.hpp" />
+    <ClInclude Include="src\Text\TextCommon.hpp">
+      <Filter>src\Text</Filter>
+    </ClInclude>
     <ClInclude Include="src\Texture\TextureManager.hpp">
       <Filter>src\Texture</Filter>
     </ClInclude>
@@ -432,6 +442,16 @@
     <ClInclude Include="include\PerformanceProfiler.hpp" />
     <ClInclude Include="include\WatchDebugger.hpp" />
     <ClInclude Include="externals\json\json.hpp" />
+    <ClInclude Include="include\Ui\EventSystem.hpp" />
+    <ClInclude Include="include\Ui\Element.hpp" />
+    <ClInclude Include="src\Ui\SpriteElement.hpp" />
+    <ClInclude Include="src\Ui\TextElement.hpp" />
+    <ClInclude Include="include\Ui\UserInterface.hpp" />
+    <ClInclude Include="src\Scene\Sample\SampleScene.hpp" />
+    <ClInclude Include="src\Config\ConfigLoader.hpp" />
+    <ClInclude Include="include\Ui\UiAnimation.hpp" />
+    <ClInclude Include="include\Ui\UiManager.hpp" />
+    <ClInclude Include="externals\font\stb_truetype.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Camera\Camera.cpp">
@@ -581,6 +601,12 @@
     <ClCompile Include="src\System\Log.cpp">
       <Filter>src\System</Filter>
     </ClCompile>
+    <ClCompile Include="src\Text\Text.cpp">
+      <Filter>src\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Text\TextCommon.cpp">
+      <Filter>src\Text</Filter>
+    </ClCompile>
     <ClCompile Include="src\Texture\TextureManager.cpp">
       <Filter>src\Texture</Filter>
     </ClCompile>
@@ -608,8 +634,19 @@
     <ClCompile Include="src\Debug\PerformanceProfiler.cpp" />
     <ClCompile Include="src\Debug\WatchDebugger.cpp" />
     <ClCompile Include="src\Collision\CollisionManager.cpp" />
+    <ClCompile Include="src\Ui\EventSystem.cpp" />
+    <ClCompile Include="src\Ui\Element.cpp" />
+    <ClCompile Include="src\Ui\SpriteElement.cpp" />
+    <ClCompile Include="src\Ui\TextElement.cpp" />
+    <ClCompile Include="src\Ui\UserInterface.cpp" />
+    <ClCompile Include="src\Scene\Sample\SampleScene.cpp" />
+    <ClCompile Include="src\Config\ConfigLoader.cpp" />
+    <ClCompile Include="src\Ui\UiManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
+    <None Include="Assets\Shaders\Text.hlsli" />
+    <None Include="Assets\Shaders\Text.PS.hlsl" />
+    <None Include="Assets\Shaders\Text.VS.hlsl" />
   </ItemGroup>
 </Project>

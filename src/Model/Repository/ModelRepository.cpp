@@ -4,10 +4,10 @@ void ModelRepository::Add(const std::string& _name, std::unique_ptr<ModelData> _
     models_.emplace(_name, std::move(_model));
 }
 
-ModelData* ModelRepository::Get(const std::string& _name) {
+GESTD::ReferencePtr<ModelData> ModelRepository::Get(const std::string& _name) {
     auto it = models_.find(_name);
     if (it != models_.end()){
-        return it->second.get();
+        return GESTD::ReferencePtr<ModelData>(it->second);
     }
     return nullptr;
 }

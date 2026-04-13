@@ -8,10 +8,10 @@
 
 class GltfLoader : public IModelLoader{
 public:
-    void LoadModel(const std::string& _name, ResourceRepository* _repository) override;
+    void LoadModel(const std::string& _name, GESTD::ReferencePtr<ResourceRepository> _repository) override;
 
 private:
-    void LoadGltf(const std::string& _directory, const std::string& _name, const ResourceRepository* _repository) const;
+    void LoadGltf(const std::string& _directory, const std::string& _name, const GESTD::ReferencePtr<ResourceRepository> _repository) const;
 
     static Node LoadNode(const aiNode* _node);
 

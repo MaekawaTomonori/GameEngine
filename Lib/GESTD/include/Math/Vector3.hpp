@@ -11,6 +11,11 @@
 struct Vector3{
     float x = 0.f, y = 0.f, z = 0.f;
 
+    Vector3& operator=(const float _s) {
+        x = y = z = _s;
+        return *this;
+    }
+
     Vector3 operator+(const Vector3& _v) const {
         return {x + _v.x, y + _v.y, z + _v.z};
     }

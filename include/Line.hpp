@@ -7,6 +7,7 @@
 #include <string>
 #include <memory>
 
+#include "ReferencePtr.hpp"
 #include "Math/Matrix.hpp"
 #include "Math/Vector3.hpp"
 #include "Math/Vector4.hpp"
@@ -38,10 +39,10 @@ class Line {
         Matrix4x4 WVP;
     };
 
-    LineCommon* common_ = nullptr;
-    DirectXAdapter* adapter_ = nullptr;
+    GESTD::ReferencePtr<LineCommon> common_;
+    GESTD::ReferencePtr<DirectXAdapter> adapter_ = nullptr;
     Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> commandList_ = nullptr;
-    CameraController* cameraManager_ = nullptr;
+    GESTD::ReferencePtr<CameraController> cameraManager_;
 
     std::string uuid_;
 
@@ -95,7 +96,7 @@ public:
     /** @brief 色を設定
      * @param _color 色ベクトル
      */
-    void SetColor(Vector4 _color) const;
+    void SetColor(const Vector4& _color) const;
 
     /** @brief 名前を設定
      * @param _name 名前

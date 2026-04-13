@@ -3,6 +3,7 @@
 
 #include <memory>
 
+#include "ReferencePtr.hpp"
 #include "src/Scene/SceneSwitcher.hpp"
 #include "src/Config/Config.hpp"
 
@@ -26,12 +27,12 @@ public:
     /** @brief シーン切り替え管理を取得
      * @return シーン切り替え管理のポインタ
      */
-    SceneSwitcher* GetSceneSwitcher() const;
+    GESTD::ReferencePtr<SceneSwitcher> GetSceneSwitcher() const;
 
     /** @brief PostEffectFactoryを取得
      * @return PostEffectファクトリーのポインタ
      */
-    AbstractPostEffectFactory* GetPostEffectFactory() const;
+    GESTD::ReferencePtr<AbstractPostEffectFactory> GetPostEffectFactory() const;
 
 protected:
     template<typename T>

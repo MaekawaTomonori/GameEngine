@@ -4,6 +4,8 @@
 #include <cassert>
 #include <memory>
 
+#include "ReferencePtr.hpp"
+
 /** @brief シングルトンファイナライザークラス
  ** シングルトンインスタンスの破棄を管理
  **/
@@ -36,16 +38,10 @@ public:
     /** @brief シングルトンインスタンスを取得
      ** @return インスタンスへのポインタ
      **/
-    static T* GetInstance() {
+    static GESTD::ReferencePtr<T> GetInstance() {
         std::call_once(flag_, Create);
         assert(instance_);
-        return instance_.get();
-    }
-
-    /** @brief GetInstance の alias (後方互換)
-     **/
-    static T* Get() {
-        return GetInstance();
+        return GESTD::ReferencePtr<T>(instance_);
     }
 
 private:

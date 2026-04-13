@@ -5,6 +5,7 @@
 #include <unordered_map>
 #include <vector>
 
+#include "ReferencePtr.hpp"
 #include "src/Camera/Camera.hpp"
 
 class CameraRepository {
@@ -15,8 +16,8 @@ class CameraRepository {
 public:
     void Initialize(float _ratio);
 
-    Camera* Add(const std::string& _name = "");
-    Camera* Get(const std::string& _name);
+    GESTD::ReferencePtr<Camera> Add(const std::string& _name = "");
+    GESTD::ReferencePtr<Camera> Get(const std::string& _name);
     void Remove(const std::string& _name);
     bool Contains(const std::string& _name) const;
     bool IsEmpty() const;

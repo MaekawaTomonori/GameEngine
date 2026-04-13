@@ -4,3 +4,6 @@
 [submodule "Lib/Collision"]
 	path = Lib/Collision
 	url = https://github.com/MaekawaTomonori/CollisionLib.git
+[submodule "Lib/Audio"]
+	path = Lib/Audio
+	url = https://github.com/MaekawaTomonori/AudioLib.git

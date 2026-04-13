@@ -12,8 +12,8 @@ void RawDirectionalLight::DefaultSetting() {
     light_.intensity = 1.f;
 }
 
-void RawDirectionalLight::Save(std::string _path) {
-    JsonParams* json = Singleton<JsonParams>::GetInstance();
+void RawDirectionalLight::Save(const std::string& _path) {
+    const auto json = Singleton<JsonParams>::GetInstance();
 
     json->SetValue(_path, uuid_, "type", magic_enum::enum_integer(type_));
     json->SetValue(_path, uuid_, "color", light_.color);

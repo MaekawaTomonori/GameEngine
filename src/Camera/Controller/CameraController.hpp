@@ -4,22 +4,23 @@
 #include <string>
 
 #include "DebugUI.hpp"
+#include "ReferencePtr.hpp"
 #include "src/Camera/Camera.hpp"
 #include "src/Camera/Repository/CameraRepository.hpp"
 
 class CameraController {
-    DebugUI* debug_ = nullptr;
+    GESTD::ReferencePtr<DebugUI> debug_;
     std::unique_ptr<CameraRepository> repository_;
-    Camera* activeCamera_ = nullptr;
+    GESTD::ReferencePtr<Camera> activeCamera_ = nullptr;
 
 public:
-    void Initialize(float _ratio, DebugUI* _debug);
+    void Initialize(float _ratio, GESTD::ReferencePtr<DebugUI> _debug);
     void Update() const;
     void Debug();
 
-    Camera* GetActive() const;
-    Camera* Add(const std::string& _name = "") const;
-    Camera* SetActive(const std::string& _name);
+    GESTD::ReferencePtr<Camera> GetActive() const;
+    GESTD::ReferencePtr<Camera> Add(const std::string& _name = "") const;
+    GESTD::ReferencePtr<Camera> SetActive(const std::string& _name);
 
 private:
     void Load();

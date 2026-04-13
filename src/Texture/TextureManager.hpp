@@ -57,6 +57,18 @@ public:
      */
     bool Load(const std::string& _fileName);
 
+    /** @brief 生ピクセルデータからテクスチャを登録
+     * @param _name  テクスチャを識別するキー（ファイル名の代わり）
+     * @param _pixels ピクセルデータ（フォーマットに合うバイト列）
+     * @param _width  横幅
+     * @param _height 縦幅
+     * @param _format DXGI フォーマット（デフォルト RGBA8、SDF アトラスは R8_UNORM を指定）
+     * @return 成功なら true（既登録キーは true を返してスキップ）
+     */
+    bool LoadFromRawPixels(const std::string& _name, const uint8_t* _pixels,
+                           uint32_t _width, uint32_t _height,
+                           DXGI_FORMAT _format = DXGI_FORMAT_R8G8B8A8_UNORM);
+
     /** @brief すべてのテクスチャをアンロード（クリア）
      */
     void Unload();
@@ -90,6 +102,12 @@ public:
      * @return GPUディスクリプタハンドル
      */
     D3D12_GPU_DESCRIPTOR_HANDLE GetGPUHandle(const uint32_t _index) const;
+
+    /** @brief 生 DX12 リソースポインタを返す（デバッグ表示用）
+     * @param _name テクスチャキー
+     * @return リソースポインタ。未登録の場合 nullptr
+     */
+    ID3D12Resource* GetResource(const std::string& _name) const;
 
 private: //Methods
     DirectX::ScratchImage LoadTexture(const std::string& _filename) const;

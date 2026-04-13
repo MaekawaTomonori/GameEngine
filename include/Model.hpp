@@ -4,6 +4,8 @@
 #include <span>
 #include <memory>
 
+#include "ReferencePtr.hpp"
+
 #include "Line.hpp"
 #include "Math/Matrix.hpp"
 #include "src/Camera/Camera.hpp"
@@ -55,15 +57,15 @@ class Model {
         Matrix4x4 inverse;
     };
 
-    ModelCommon* common_ = nullptr;
-    DirectXAdapter* adapter_ = nullptr;
+    GESTD::ReferencePtr<ModelCommon> common_;
+    GESTD::ReferencePtr<DirectXAdapter> adapter_ = nullptr;
 
     Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> commandList_ = nullptr;
 
     std::string name_;
     std::string uuid_;
     Transform transform_;
-    ModelData* data_ = nullptr;
+    GESTD::ReferencePtr<ModelData> data_ = nullptr;
     std::unique_ptr<Mesh> mesh_;
 
     std::optional<Skeleton> pose_;
@@ -123,19 +125,19 @@ public:
      * @param _translate 平行移動ベクトル
      * @return メソッドチェーン用の自身への参照
      */
-    Model& SetTranslate(Vector3 _translate);
+    Model& SetTranslate(const Vector3& _translate);
 
     /** @brief 回転を設定
      * @param _rotate 回転ベクトル
      * @return メソッドチェーン用の自身への参照
      */
-    Model& SetRotate(Vector3 _rotate);
+    Model& SetRotate(const Vector3& _rotate);
 
     /** @brief スケールを設定
      * @param _scale スケールベクトル
      * @return メソッドチェーン用の自身への参照
      */
-    Model& SetScale(Vector3 _scale);
+    Model& SetScale(const Vector3& _scale);
 
     /** @brief 環境マッピング用テクスチャを設定
      * @param _texture テクスチャパス
@@ -158,7 +160,7 @@ public:
     /** @brief 色の設定
      * @return メソッドチェーン用の自身への参照
      */
-    Model& SetColor(Vector4 _color);
+    Model& SetColor(const Vector4& _color);
 
     /** @brief モデル名の取得
      * @return モデル名
@@ -168,7 +170,7 @@ public:
     /** @brief メッシュの取得
      * @return メッシュへのポインタ
      */
-    Mesh* GetMesh() const;
+    GESTD::ReferencePtr<Mesh> GetMesh() const;
 
     /** @brief モデルデータを事前読み込み
      * @param _name モデル名

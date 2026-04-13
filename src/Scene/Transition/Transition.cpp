@@ -21,7 +21,13 @@ void Transition::Draw() {
 }
 
 void Transition::Awake(const Type _type, const ITransitionEffect::State _state) {
-    if (_type==Type::None)return;
+    if (_type == Type::None) {
+        // In が None の場合: エフェクトを即時リセットしてαを0にする
+        if (_state == ITransitionEffect::State::In && effect_) {
+            effect_->Stop();
+        }
+        return;
+    }
     Awake(_type, _state, defaultDuration_);
 }
 
@@ -58,6 +64,13 @@ bool Transition::InProgress() {
     return !effect_->IsFinished();
 }
 
+void Transition::Skip() {
+    if (effect_) {
+        effect_->Stop();
+    }
+    awakePending_ = false;
+}
+
 void Transition::SetDefaultDuration(const float _duration) {
     defaultDuration_ = _duration;
 }
@@ -85,6 +98,8 @@ void Transition::Debug() {
         float progress = GetProgress();
         ImGui::ProgressBar(progress, ImVec2(-1.f, 0.f));
         ImGui::Text("Alpha : %.3f", progress);
+        ImGui::SameLine();
+        if (ImGui::Button("Skip")) { Skip(); }
     }
 
     ImGui::SeparatorText("Debug Trigger");

@@ -7,7 +7,7 @@ namespace Ease {
             return _start + (_end - _start) * _t * _t;
         }
 
-        Vector3 Quad(Vector3 _start, Vector3 _end, float _t) {
+        Vector3 Quad(const Vector3& _start, const Vector3& _end, float _t) {
             return _start + (_end - _start) * _t * _t;
         }
 
@@ -16,7 +16,7 @@ namespace Ease {
             return _start + (_end - _start) * _t * _t * _t;
         }
 
-        Vector3 Cubic(Vector3 _start, Vector3 _end, float _t) {
+        Vector3 Cubic(const Vector3& _start, const Vector3& _end, float _t) {
             return _start + (_end - _start) * _t * _t * _t;
         }
     }
@@ -27,7 +27,7 @@ namespace Ease {
             return _start + (_end - _start) * (1.0f - (1.0f - _t) * (1.0f - _t));
         }
 
-        Vector3 Quad(Vector3 _start, Vector3 _end, float _t) {
+        Vector3 Quad(const Vector3& _start, const Vector3& _end, float _t) {
             return _start + (_end - _start) * (1.0f - (1.0f - _t) * (1.0f - _t));
         }
 
@@ -36,7 +36,7 @@ namespace Ease {
             return _start + (_end - _start) * (1.0f - (1.0f - _t) * (1.0f - _t) * (1.0f - _t));
         }
 
-        Vector3 Cubic(Vector3 _start, Vector3 _end, float _t) {
+        Vector3 Cubic(const Vector3& _start, const Vector3& _end, float _t) {
             return _start + (_end - _start) * (1.0f - (1.0f - _t) * (1.0f - _t) * (1.0f - _t));
         }
     }
@@ -53,7 +53,7 @@ namespace Ease {
             return _start + (_end - _start) * easedT;
         }
 
-        Vector3 Quad(Vector3 _start, Vector3 _end, float _t) {
+        Vector3 Quad(const Vector3& _start, const Vector3& _end, float _t) {
             float easedT;
             if (_t < 0.5f)
                 easedT = 2.0f * _t * _t;
@@ -74,7 +74,7 @@ namespace Ease {
             return _start + (_end - _start) * easedT;
         }
 
-        Vector3 Cubic(Vector3 _start, Vector3 _end, float _t) {
+        Vector3 Cubic(const Vector3& _start, const Vector3& _end, float _t) {
             float easedT;
             if (_t < 0.5f)
                 easedT = 4.0f * _t * _t * _t;

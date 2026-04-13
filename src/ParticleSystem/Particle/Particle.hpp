@@ -14,6 +14,8 @@ class Particle {
     Vector3 position_{};
     Vector3 scale_{ 1.f, 1.f, 1.f };
     Vector3 velocity_ {};
+    Vector3 rotation_{};
+    Vector3 rotationVelocity_{};
     Vector4 color_{ 1.f, 1.f, 1.f, 1.f };
     float duration_ = 0.f;
     float now_ = 0.f;
@@ -28,12 +30,15 @@ public:
 
     Vector3 GetPosition() const;
     Vector3 GetScale() const;
+    Vector3 GetRotation() const;
     Vector4 GetColor() const;
 
     Particle& SetOrigin(const Vector3& _origin);
     Particle& SetPosition(const Vector3& _position);
     Particle& SetScale(const Vector3& _scale);
     Particle& SetVelocity(const Vector3& _velocity);
+    Particle& SetRotation(const Vector3& _rotation);
+    Particle& SetRotationVelocity(const Vector3& _rotationVelocity);
     Particle& SetColor(const Vector4& _color);
 
     Particle& RandomizePosition(const Vector3& _min = { -1.f, -1.f, -1.f }, const Vector3& _max = { 1.f, 1.f, 1.f });

@@ -5,16 +5,31 @@
 #include "PerformanceProfiler.hpp"
 #include "Pattern/Singleton.hpp"
 #include "Random/RandomEngine.hpp"
+#include "src/Scene/Sample/SampleScene.hpp"
+#include "src/Config/ConfigLoader.hpp"
+
+namespace {
+    constexpr const char* APP_CONFIG_PATH = "Assets/Config/App.cnf";
+}
 
 Framework::Framework() {
     Log::Initialize();
+
+    // cnfファイルを先読みして、DirectX初期化前に解像度・FPS等を確定させる
+    // ファイルが存在しない場合は Config のデフォルト値を維持する
+    GameEngine::ConfigLoader::Load(APP_CONFIG_PATH, config_);
+    Log::LogFileOperation("STARTUP_CHECK", APP_CONFIG_PATH,
+        std::filesystem::exists(APP_CONFIG_PATH), "Loading app config");
 
     Log::SendWithContext(Log::Level::INFO, "Framework initialization started", "FRAMEWORK");
     Log::LogFileOperation("STARTUP_CHECK", "Assets",         std::filesystem::exists("Assets"),         "Checking assets directory");
     Log::LogFileOperation("STARTUP_CHECK", "Assets/Shaders", std::filesystem::exists("Assets/Shaders"), "Checking shaders directory");
 
+    // AUDIO_DISABLED: Audio::Initialize();
+
     windows_ = std::make_unique<WinApp>();
     windows_->Initialize();
+    windows_->SetWindowSize(static_cast<int>(config_.width), static_cast<int>(config_.height));
 
     dxAdapter_ = std::make_unique<DirectXAdapter>(windows_->GetWindowHandle(), config_.width, config_.height);
     dxAdapter_->Initialize();
@@ -24,22 +39,22 @@ Framework::Framework() {
 
 #ifdef _DEBUG
     debugger_ = std::make_unique<Debugger>();
-    debugger_->Initialize(dxAdapter_.get());
-    DebugUI* const dbg = debugger_->GetUI();
+    debugger_->Initialize(GESTD::ReferencePtr<DirectXAdapter>(dxAdapter_));
+    const auto dbg = debugger_->GetUI();
 #else
-    DebugUI* const dbg = nullptr;
+    const GESTD::ReferencePtr<DebugUI> dbg = nullptr;
 #endif
 
     postProcessor_ = std::make_unique<PostProcessExecutor>();
-    postProcessor_->Initialize(dxAdapter_.get(), srv_.get(), dbg);
+    postProcessor_->Initialize(GESTD::ReferencePtr(dxAdapter_), GESTD::ReferencePtr(srv_), dbg);
 
     renderer_ = std::make_unique<Renderer>();
-    renderer_->Initialize(dxAdapter_.get(), postProcessor_.get());
+    renderer_->Initialize(GESTD::ReferencePtr(dxAdapter_), GESTD::ReferencePtr(postProcessor_));
 
     resources_ = std::make_unique<ResourceRepository>();
     resources_->Initialize();
 
-    particle_ = std::make_unique<ParticleSystem>(dxAdapter_.get(), srv_.get(), resources_->GetMeshRepository(), dbg);
+    particle_ = std::make_unique<ParticleSystem>(GESTD::ReferencePtr(dxAdapter_), srv_.get(), resources_->GetMeshRepository(), dbg);
     particle_->Initialize();
 
     input_ = Singleton<Input>::GetInstance();
@@ -48,17 +63,20 @@ Framework::Framework() {
     texture_ = Singleton<TextureManager>::GetInstance();
     texture_->Initialize(dxAdapter_.get(), srv_.get());
 
+    text_ = Singleton<TextCommon>::GetInstance();
+    text_->Initialize(GESTD::ReferencePtr(dxAdapter_), dbg, static_cast<TextureManager*>(texture_), srv_.get());
+
     sprite_ = Singleton<SpriteCommon>::GetInstance();
-    sprite_->Initialize(dxAdapter_.get(), dbg);
+    sprite_->Initialize(GESTD::ReferencePtr(dxAdapter_), dbg);
 
     model_ = Singleton<ModelCommon>::GetInstance();
-    model_->Initialize(dxAdapter_.get(), dbg, resources_.get(), srv_.get());
+    model_->Initialize(GESTD::ReferencePtr(dxAdapter_), dbg, GESTD::ReferencePtr<ResourceRepository>(resources_), srv_.get());
 
     line_ = Singleton<LineCommon>::GetInstance();
-    line_->Initialize(dxAdapter_.get(), dbg, srv_.get());
+    line_->Initialize(GESTD::ReferencePtr(dxAdapter_), dbg, srv_.get());
 
     sky_ = Singleton<SkyCommon>::GetInstance();
-    sky_->Initialize(dxAdapter_.get(), dbg);
+    sky_->Initialize(GESTD::ReferencePtr(dxAdapter_), dbg);
 
     camera_ = Singleton<CameraController>::GetInstance();
     camera_->Initialize(static_cast<float>(config_.width) / static_cast<float>(config_.height), dbg);
@@ -67,21 +85,28 @@ Framework::Framework() {
     cameraDirector_->Initialize(dbg);
 
     light_ = Singleton<LightManager>::GetInstance();
-    light_->Initialize(dxAdapter_.get(), dbg);
+    light_->Initialize(GESTD::ReferencePtr(dxAdapter_), dbg);
 
     Singleton<RandomEngine>::GetInstance()->Initialize();
 
     collision_ = std::make_unique<CollisionManager>();
     collision_->Initialize(dbg);
 
+    ui_ = Singleton<Ui::Manager>::GetInstance();
+    ui_->Setup(dbg);
+
 #ifdef _DEBUG
     Debugger::WatchGroup("Engine")
         .Watch("FPS", &config_.fps)
         .Watch("ShowCursor", &config_.showCursor);
+
+    // AUDIO_DISABLED: audioPanel_ = std::make_unique<AudioDebugPanel>();
+    // AUDIO_DISABLED: audioPanel_->Initialize(debugger_->GetUI());
 #endif
 }
 
 Framework::~Framework() {
+    // AUDIO_DISABLED: Audio::Shutdown();
     SingletonFinalizer::Finalize();
     CoUninitialize();
 }
@@ -104,14 +129,30 @@ void Framework::Initialize() {
     windows_->SetTitle(config_.title);
     scene_ = game_->GetSceneSwitcher();
 
+    if (!scene_) {
+        Utils::Alert("SceneSwitcher is Null");
+    }
+
 #ifdef _DEBUG
-    DebugUI* const dbg = debugger_->GetUI();
+    scene_->RegisterScene("sample", []{return std::make_unique<SampleScene>(); });
+
+    const auto dbg = debugger_->GetUI();
 #else
-    DebugUI* const dbg = nullptr;
+    const GESTD::ReferencePtr<DebugUI> dbg = nullptr;
 #endif
 
-    scene_->Setup({ postProcessor_.get(), dbg, particle_.get() });
+    SceneSwitcher::Context ctx{ GESTD::ReferencePtr<PostProcessExecutor>(postProcessor_), GESTD::ReferencePtr<ParticleSystem>(particle_), dbg };
+#ifdef _DEBUG
+    ctx.frame = debugger_->GetFrame();
+#endif
+    scene_->Setup(ctx);
     scene_->Change(config_.defaultScene);
+
+#ifdef _DEBUG
+    debugger_->SetStopCallback([this]() {
+        if (scene_) scene_->Change(config_.defaultScene);
+    });
+#endif
 
     if (const auto& peFac = game_->GetPostEffectFactory()) {
         postProcessor_->SetFactory(peFac);
@@ -149,9 +190,12 @@ void Framework::Update() const {
     particle_->Debug();
     postProcessor_->Debug();
     collision_->Debug();
+    // AUDIO_DISABLED: audioPanel_->Debug();
     debugger_->Debug();
     model_->Debug();
     sprite_->Debug();
+    ui_->Debug();
+    text_->Debug();
 
     scene_->Debug();
     if (debugger_->ShouldUpdate()) {
@@ -174,6 +218,8 @@ void Framework::Update() const {
     { PROFILE_SCOPE("Light");   light_->Update(); }
     { PROFILE_SCOPE("Model");   model_->Update(); }
     { PROFILE_SCOPE("Sprite");  sprite_->Update(); }
+    { PROFILE_SCOPE("UI");      ui_->Update(); }
+    text_->Update();
 }
 
 void Framework::Draw() const {
@@ -185,8 +231,12 @@ void Framework::Draw() const {
 
     srv_->PreDraw();
 
+#ifdef _DEBUG
     cameraDirector_->Draw();
+#endif
+
     scene_->Draw();
+    ui_->Draw();
 
     sky_->Draw(renderer_.get());
     model_->Draw(renderer_.get());
@@ -194,6 +244,7 @@ void Framework::Draw() const {
     collision_->DrawDebug();
     line_->Draw(renderer_.get());
     sprite_->Draw(renderer_.get());
+    text_->Draw(renderer_.get());
 
 #ifdef _DEBUG
     renderer_->RegisterUI([&] { debugger_->Render(); });
@@ -201,6 +252,10 @@ void Framework::Draw() const {
     renderer_->Render();
 
     // SceneView の矩形は ImGui レンダリング後に確定するため、ここでカーソル表示を反映
+#ifdef _DEBUG
+    // DebugUI パネル上ではカーソルを強制表示（SceneView 上に重なった場合も含む）
+    input_->SetDebugUIHovered(debugger_->GetUI()->IsMouseOverDebugUI());
+#endif
     input_->ApplyCursorVisibility();
 }
 
@@ -210,6 +265,7 @@ void Framework::Shutdown() {
     }
 
     collision_.reset();
+    text_.Reset();  // Singleton は SingletonFinalizer::Finalize() で破棄される
     texture_->Unload();
     particle_.reset();
     postProcessor_.reset();

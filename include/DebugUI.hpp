@@ -5,6 +5,7 @@
 #include <string>
 #include <unordered_map>
 
+#include "ReferencePtr.hpp"
 #include "src/DirectX/DirectXAdapter.hpp"
 #include "src/DirectX/Heap/Heap.hpp"
 
@@ -32,7 +33,7 @@ class DebugUI {
 
         constexpr WindowState& operator=(const WindowState& _other) {
             visible = _other.visible;
-            group = _other.group;
+            group   = _other.group;
             return *this;
         }
     };
@@ -40,10 +41,13 @@ class DebugUI {
     std::mutex mutex_;
 
     std::unique_ptr<Heap> heap_;
-    const DirectXAdapter* adapter_ = nullptr;
+    GESTD::ReferencePtr<DirectXAdapter> adapter_ = nullptr;
+    uint32_t nextSrvSlot_ = 0;   // ImGui SRV アロケータ用カウンタ（低アドレスから昇順）
+    mutable uint32_t nextTexSlot_ = 127; // ゲームテクスチャ用スロット（高アドレスから降順）
 
     std::vector<Command> commands_;
     std::unordered_map<std::string, WindowState> windowStates_;
+    std::function<void()> toolbarContent_;
     bool showMenuBar_ = false;
     bool showWindowsPanel_ = false;
     bool panelJustOpened_ = false;
@@ -54,7 +58,7 @@ public:
     /** @brief デバッグUIを初期化
      * @param _adapter DirectXアダプター
      */
-    void Initialize(const DirectXAdapter* _adapter);
+    void Initialize(const GESTD::ReferencePtr<DirectXAdapter>& _adapter);
 
     /** @brief デバッグUIをレンダリング
      */
@@ -72,6 +76,11 @@ public:
      */
     void RegisterMenuButton(const std::string& _key, bool _flag = false, const std::string& _group = "");
 
+    /** @brief メニューバー中央のツールバー描画コールバックを登録（初期化時に一度だけ呼ぶ）
+     * @param _content ツールバーを描画する関数
+     */
+    void SetToolbarContent(std::function<void()> _content);
+
     bool& IsVisible(const std::string& _key);
 
     /** @brief ImGuiディスプレイサイズを更新（ウィンドウリサイズ時）
@@ -80,13 +89,19 @@ public:
      */
     void UpdateDisplaySize(int _width, int _height) const;
 
+    /** @brief マウスがデバッグUI上にあるか判定
+     * Scene ウィンドウ以外の ImGui ウィンドウにホバー中の場合 true
+     * カーソル非表示時にデバッグUIパネル上ではカーソルを表示するために使用
+     */
+    bool IsMouseOverDebugUI() const;
+
     /** @brief ImGui表示用テクスチャを登録し ImTextureID として使用可能なGPUハンドルを返す
      * ImGuiヒープのスロット1にSRVを作成する（スロット0はフォント用）
      * @param _resource テクスチャリソース
      * @param _format テクスチャフォーマット
      * @return GPU ディスクリプタハンドルの ptr 値（ImTextureID としてキャスト可）。失敗時は0
      */
-    uint64_t RegisterTexture(ID3D12Resource* _resource, DXGI_FORMAT _format);
+    uint64_t RegisterTexture(ID3D12Resource* _resource, DXGI_FORMAT _format) const;
 
 private:
     /** @brief 登録されたコマンドを処理

@@ -7,14 +7,14 @@ IGame::IGame() {
 
 IGame::~IGame() = default;
 
-SceneSwitcher * IGame::GetSceneSwitcher() const {
-    return scene_.get();
+GESTD::ReferencePtr<SceneSwitcher> IGame::GetSceneSwitcher() const {
+    return GESTD::ReferencePtr<SceneSwitcher>(scene_);
 }
 
 void IGame::SetPostEffectFactory(std::unique_ptr<AbstractPostEffectFactory> _factory) {
     postEffectFactory_ = std::move(_factory);
 }
 
-AbstractPostEffectFactory* IGame::GetPostEffectFactory() const {
-    return postEffectFactory_.get();
+GESTD::ReferencePtr<AbstractPostEffectFactory> IGame::GetPostEffectFactory() const {
+    return GESTD::ReferencePtr<AbstractPostEffectFactory>(postEffectFactory_);
 }

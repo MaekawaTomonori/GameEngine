@@ -1,6 +1,5 @@
 #include "CollisionManager.hpp"
 
-#include <cmath>
 #include <variant>
 
 #include "Log.hpp"
@@ -12,10 +11,10 @@
 #include "imgui.h"
 #endif
 
-void CollisionManager::Initialize([[maybe_unused]]DebugUI* _debugUI) {
+void CollisionManager::Initialize([[maybe_unused]] const GESTD::ReferencePtr<DebugUI>& _debugUi) {
     manager_ = Singleton<Collision::Manager>::GetInstance();
 #ifdef _DEBUG
-    debugUI_ = _debugUI;
+    debugUI_ = _debugUi;
     if (!debugUI_) {
         Utils::Alert("CollisionManager: DebugUI not registered");
         return;
@@ -29,7 +28,6 @@ void CollisionManager::Initialize([[maybe_unused]]DebugUI* _debugUI) {
     debugLine_->SetColor({0.2f, 1.0f, 0.2f, 1.0f});
 #endif
 }
-
 
 void CollisionManager::Update() {
     manager_->Detect();

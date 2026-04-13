@@ -8,6 +8,7 @@
 #include <string>
 
 #include "WatchDebugger.hpp"
+#include "ReferencePtr.hpp"
 
 class DirectXAdapter;
 class DebugUI;
@@ -37,7 +38,7 @@ public:
     /** @brief 初期化
      * @param _adapter DirectXアダプター
      */
-    void Initialize(const DirectXAdapter* _adapter);
+    void Initialize(GESTD::ReferencePtr<DirectXAdapter> _adapter);
 
     /*@brief 各デバッガーの ImGui ウィンドウを登録
      */
@@ -55,9 +56,17 @@ public:
      */
     void UpdateDisplaySize(int _width, int _height);
 
-    /** @brief DebugUI ポインタを返す 
+    /** @brief Stop 時に呼ぶコールバックを登録（シーン再起動など）
      */
-    DebugUI* GetUI() const { return ui_.get(); }
+    void SetStopCallback(std::function<void()> _cb);
+
+    /** @brief DebugUI ポインタを返す
+     */
+    GESTD::ReferencePtr<DebugUI> GetUI() const { return GESTD::ReferencePtr<DebugUI>(ui_); }
+
+    /** @brief FrameDebugger ポインタを返す
+     */
+    GESTD::ReferencePtr<FrameDebugger> GetFrame() const { return GESTD::ReferencePtr<FrameDebugger>(frame_); }
 
     /** @brief 読み取り専用ウォッチ（const ポインタ）
      */

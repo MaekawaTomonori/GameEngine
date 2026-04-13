@@ -6,6 +6,7 @@
 #include <unordered_map>
 #include <vector>
 
+#include "ReferencePtr.hpp"
 #include "Emitter/Emitter.hpp"
 #include "Math/Vector3.hpp"
 #include "Math/Vector4.hpp"
@@ -16,8 +17,8 @@
 
 class ParticleSystem {
 public:
-    using UpdateFunc = std::function<void(float, const Vector3&, Vector3&, Vector3&, Vector4&)>;
     using SpawnFunc  = std::function<void(const Vector3&, Vector3&, Vector3&)>;
+    using UpdateFunc = std::function<void(float, const Vector3&, Vector3&, Vector3&, Vector4&)>;
 
     struct EmitterConfig {
         std::string texture = "white_x16.png";
@@ -27,10 +28,12 @@ public:
         Vector3 size = {1.f, 1.f, 1.f};
         Vector3 velocity = {0.f, 0.f, 0.f};
         Vector4 color = {1.f, 1.f, 1.f, 1.f};
-        std::string updateFuncKey;
-        UpdateFunc updateFunc;
         std::string spawnFuncKey;
-        SpawnFunc spawnFunc;
+        std::string updateFuncKey;
+        PrimitiveType primitive = PrimitiveType::Billboard;
+        bool billboard = true;
+        Vector3 rotation = {0.f, 0.f, 0.f};
+        Vector3 rotationVelocity = {0.f, 0.f, 0.f};
     };
 
     struct Template {
@@ -49,10 +52,10 @@ private:
     static constexpr uint16_t POOL_SIZE = 64;
     const std::string PATH = "Assets/Data/Particle/";
 
-    DirectXAdapter* adapter_ = nullptr;
+    GESTD::ReferencePtr<DirectXAdapter> adapter_ = nullptr;
     SRVManager* srv_ = nullptr;
-    MeshRepository* mesh_ = nullptr;
-    DebugUI* debugUI_ = nullptr;
+    GESTD::ReferencePtr<MeshRepository> mesh_ = nullptr;
+    GESTD::ReferencePtr<DebugUI> debugUI_ = nullptr;
 
     std::unordered_map<std::string, Template> templates_;
     std::unordered_map<std::string, UpdateFunc> updateFuncs_;
@@ -66,7 +69,7 @@ private:
     std::unique_ptr<PipelineStateObject> pso_ = nullptr;
 
 public:
-    ParticleSystem(DirectXAdapter* _adapter, SRVManager* _srv, MeshRepository* _mesh, DebugUI* _debugUI);
+    ParticleSystem(GESTD::ReferencePtr<DirectXAdapter> _adapter, SRVManager* _srv, GESTD::ReferencePtr<MeshRepository> _mesh, GESTD::ReferencePtr<DebugUI> _debugUI);
 
     void Initialize();
     void Update();

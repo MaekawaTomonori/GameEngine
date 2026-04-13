@@ -17,11 +17,15 @@ Debugger::~Debugger() {
     Singleton<WatchDebugger>::GetInstance()->Finalize();
 }
 
-void Debugger::Initialize(const DirectXAdapter* _adapter) {
+void Debugger::Initialize(GESTD::ReferencePtr<DirectXAdapter> _adapter) {
     ui_->Initialize(_adapter);
-    frame_->Initialize(ui_.get());
+    frame_->Initialize(GESTD::ReferencePtr<DebugUI>(ui_));
     Singleton<PerformanceProfiler>::GetInstance()->Initialize(ui_.get());
-    Singleton<WatchDebugger>::GetInstance()->Initialize(ui_.get());
+    Singleton<WatchDebugger>::GetInstance()->Initialize(GESTD::ReferencePtr<DebugUI>(ui_));
+}
+
+void Debugger::SetStopCallback(std::function<void()> _cb) {
+    frame_->SetStopCallback(std::move(_cb));
 }
 
 bool Debugger::ShouldUpdate() {
@@ -29,7 +33,6 @@ bool Debugger::ShouldUpdate() {
 }
 
 void Debugger::Debug() {
-    frame_->Debug();
     Singleton<PerformanceProfiler>::GetInstance()->Debug();
     Singleton<WatchDebugger>::GetInstance()->Debug();
 }

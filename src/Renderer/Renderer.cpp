@@ -3,7 +3,7 @@
 #include "src/DirectX/DirectXAdapter.hpp"
 #include "src/PostProcess/Executor/PostProcessExecutor.hpp"
 
-void Renderer::Initialize(DirectXAdapter* _adapter, PostProcessExecutor* _postProcessor) {
+void Renderer::Initialize(GESTD::ReferencePtr<DirectXAdapter> _adapter, GESTD::ReferencePtr<PostProcessExecutor> _postProcessor) {
     adapter_ = _adapter;
     postProcessor_ = _postProcessor;
 }

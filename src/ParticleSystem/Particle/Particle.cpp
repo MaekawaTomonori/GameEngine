@@ -17,15 +17,24 @@ void Particle::Update() {
     static constexpr float DT = 1.f / 60.f;
     now_ += DT;
     position_ += velocity_ * DT;
+    rotation_ += rotationVelocity_ * DT;
 }
 
 void Particle::Debug() {
     ImGui::PushID(uuid_.c_str());
     if (ImGui::TreeNode(uuid_.c_str())) {
-        ImGui::DragFloat3("Position", &position_.x, 0.1f);
-        ImGui::DragFloat3("Scale", &scale_.x, 0.1f);
-        ImGui::ColorEdit4("Color", &color_.x);
-        ImGui::DragFloat("Duration", &duration_, 0.01f, 0.f, 100.f);
+        ImGui::Text("Position");
+        ImGui::DragFloat3("##Position", &position_.x, 0.1f);
+        ImGui::Text("Scale");
+        ImGui::DragFloat3("##Scale", &scale_.x, 0.1f);
+        ImGui::Text("Rotation");
+        ImGui::DragFloat3("##Rotation", &rotation_.x, 0.01f);
+        ImGui::Text("RotVelocity");
+        ImGui::DragFloat3("##RotVelocity", &rotationVelocity_.x, 0.01f);
+        ImGui::Text("Color");
+        ImGui::ColorEdit4("##Color", &color_.x);
+        ImGui::Text("Duration");
+        ImGui::DragFloat("##Duration", &duration_, 0.01f, 0.f, 100.f);
         ImGui::TreePop();
     }
     ImGui::PopID();
@@ -41,6 +50,10 @@ Vector3 Particle::GetPosition() const {
 
 Vector3 Particle::GetScale() const {
     return scale_;
+}
+
+Vector3 Particle::GetRotation() const {
+    return rotation_;
 }
 
 Vector4 Particle::GetColor() const {
@@ -69,6 +82,16 @@ Particle& Particle::SetColor(const Vector4& _color) {
 
 Particle& Particle::SetVelocity(const Vector3& _velocity) {
     velocity_ = _velocity;
+    return *this;
+}
+
+Particle& Particle::SetRotation(const Vector3& _rotation) {
+    rotation_ = _rotation;
+    return *this;
+}
+
+Particle& Particle::SetRotationVelocity(const Vector3& _rotationVelocity) {
+    rotationVelocity_ = _rotationVelocity;
     return *this;
 }
 

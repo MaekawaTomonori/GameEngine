@@ -114,14 +114,18 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="externals\font\stb_truetype.h" />
     <ClInclude Include="externals\json\json.hpp" />
     <ClInclude Include="include\DebugUI.hpp" />
     <ClInclude Include="include\PerformanceProfiler.hpp" />
     <ClInclude Include="include\WatchDebugger.hpp" />
+    <!-- AUDIO_DISABLED: <ClInclude Include="src\Audio\AudioDebugPanel.hpp" /> -->
     <ClInclude Include="src\Collision\CollisionManager.hpp" />
+    <ClInclude Include="src\Config\ConfigLoader.hpp" />
     <ClInclude Include="src\Debug\Debugger.hpp" />
     <ClInclude Include="src\Debug\FrameDebugger.hpp" />
     <ClInclude Include="include\Factory\AbstractPostEffectFactory.hpp" />
+    <ClInclude Include="src\Scene\Sample\SampleScene.hpp" />
     <ClInclude Include="src\Scene\SceneFactory.hpp" />
     <ClInclude Include="include\Framework.hpp" />
     <ClInclude Include="include\IGame.hpp" />
@@ -199,6 +203,8 @@
     <ClInclude Include="src\Stage\LevelEditor.hpp" />
     <ClInclude Include="src\Stage\Loader\StageLoader.hpp" />
     <ClInclude Include="src\Stage\StageRepository.hpp" />
+    <ClInclude Include="include\Text\Text.hpp" />
+    <ClInclude Include="src\Text\TextCommon.hpp" />
     <ClInclude Include="src\Texture\TextureManager.hpp" />
     <ClInclude Include="src\Timer\Timer.hpp" />
     <ClInclude Include="src\Window\Window.hpp" />
@@ -206,16 +212,26 @@
     <ClInclude Include="externals\assimp\include\assimp\AssertHandler.h" />
     <ClInclude Include="include\Ui\EventSystem.hpp" />
     <ClInclude Include="include\Ui\Element.hpp" />
+    <ClInclude Include="src\Ui\SpriteElement.hpp" />
+    <ClInclude Include="src\Ui\TextElement.hpp" />
+    <ClInclude Include="include\Ui\UiAnimation.hpp" />
     <ClInclude Include="include\Ui\UserInterface.hpp" />
+    <ClInclude Include="include\Ui\UiManager.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Config\ConfigLoader.cpp" />
+    <ClCompile Include="src\Scene\Sample\SampleScene.cpp" />
     <ClCompile Include="src\Ui\EventSystem.cpp" />
     <ClCompile Include="src\Ui\Element.cpp" />
+    <ClCompile Include="src\Ui\SpriteElement.cpp" />
+    <ClCompile Include="src\Ui\TextElement.cpp" />
     <ClCompile Include="src\Ui\UserInterface.cpp" />
+    <ClCompile Include="src\Ui\UiManager.cpp" />
     <ClCompile Include="src\Camera\Camera.cpp" />
     <ClCompile Include="src\Camera\Controller\CameraController.cpp" />
     <ClCompile Include="src\Camera\Director\CameraDirector.cpp" />
     <ClCompile Include="src\Camera\Repository\CameraRepository.cpp" />
+    <!-- AUDIO_DISABLED: <ClCompile Include="src\Audio\AudioDebugPanel.cpp" /> -->
     <ClCompile Include="src\Collision\CollisionManager.cpp" />
     <ClCompile Include="src\Common\Common.cpp" />
     <ClCompile Include="src\Container\Material.cpp" />
@@ -279,11 +295,16 @@
     <ClCompile Include="src\Stage\Loader\StageLoader.cpp" />
     <ClCompile Include="src\Stage\StageRepository.cpp" />
     <ClCompile Include="src\System\Log.cpp" />
+    <ClCompile Include="src\Text\Text.cpp" />
+    <ClCompile Include="src\Text\TextCommon.cpp" />
     <ClCompile Include="src\Texture\TextureManager.cpp" />
     <ClCompile Include="src\Timer\Timer.cpp" />
     <ClCompile Include="src\Window\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Shaders\Text.hlsli" />
+    <None Include="Assets\Shaders\Text.PS.hlsl" />
+    <None Include="Assets\Shaders\Text.VS.hlsl" />
     <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <ItemGroup>
@@ -293,13 +314,18 @@
     <ProjectReference Include="externals\imgui\imgui.vcxproj">
       <Project>{05A9737C-E682-451F-A307-4B01DEB9D44B}</Project>
     </ProjectReference>
+    <!-- AUDIO_DISABLED:
+    <ProjectReference Include="Lib\Audio\Audio.vcxproj">
+      <Project>{4aa5fdee-80d9-4e30-8eff-d9435c7c4416}</Project>
+    </ProjectReference>
+    -->
     <ProjectReference Include="Lib\Collision\CollisionLib.vcxproj">
       <Project>{3b4663f4-d09b-4503-aeb0-b2477444918f}</Project>
     </ProjectReference>
-    <ProjectReference Include="Lib\Misc\Misc.vcxproj">
+    <ProjectReference Include="Lib\GESTD\GESTD.vcxproj">
       <Project>{a1b2c3d4-e5f6-7890-abcd-ef1234567890}</Project>
     </ProjectReference>
-  </ItemGroup>
+    </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

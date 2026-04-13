@@ -27,7 +27,7 @@ class Mesh {
         Matrix4x4 uvTransform;   // 64 bytes (aligned)
     };
 
-    DirectXAdapter* adapter_ = nullptr;
+    GESTD::ReferencePtr<DirectXAdapter> adapter_ = nullptr;
 	Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> commandList_;
 
     std::string name_;
@@ -82,7 +82,7 @@ public:
      * @param _name メッシュ名
      * @param _raw メッシュデータ
      */
-    void Initialize(DirectXAdapter* _adapter, const std::string &_name, const MeshData& _raw);
+    void Initialize(const GESTD::ReferencePtr<DirectXAdapter>& _adapter, const std::string& _name, const MeshData& _raw);
 
     /** @brief メッシュの更新処理
      */
@@ -99,7 +99,7 @@ public:
     /** @brief 頂点バッファビューを設定
      * @param _vbv 頂点バッファビュー
      */
-    void SetVBV(D3D12_VERTEX_BUFFER_VIEW _vbv);
+    void SetVBV(const D3D12_VERTEX_BUFFER_VIEW& _vbv);
 
     /** @brief メッシュデータを取得
      * @return メッシュデータ
@@ -119,7 +119,7 @@ public:
     /** @brief 色の設定
      * @param _color 変更後の色
      */
-    void SetColor(Vector4 _color) const;
+    void SetColor(const Vector4& _color) const;
 
     void EnableLighting(bool _active);
 }; // class Mesh

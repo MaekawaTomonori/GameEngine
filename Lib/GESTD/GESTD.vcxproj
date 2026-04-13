@@ -22,6 +22,8 @@
     <ClInclude Include="include\Pattern\Singleton.hpp" />
     <ClInclude Include="include\Random\RandomEngine.hpp" />
     <ClInclude Include="include\Utils.hpp" />
+    <ClInclude Include="src\LifetimeSentinel.hpp" />
+    <ClInclude Include="include\ReferencePtr.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Math\Easing.cpp" />
@@ -38,7 +40,7 @@
     <ProjectGuid>{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}</ProjectGuid>
     <RootNamespace>Misc</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>Misc</ProjectName>
+    <ProjectName>GESTD</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">

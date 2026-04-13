@@ -10,7 +10,7 @@
 #include "src/Light/LightManager.hpp"
 #include "src/Texture/TextureManager.hpp"
 
-void Mesh::Initialize(DirectXAdapter* _adapter, const std::string &_name, const MeshData& _raw) {
+void Mesh::Initialize(const GESTD::ReferencePtr<DirectXAdapter>& _adapter, const std::string &_name, const MeshData& _raw) {
     adapter_ = _adapter;
     commandList_ = adapter_->GetCommandList();
     name_ = _name;
@@ -143,7 +143,7 @@ void Mesh::Debug() {
     }
 }
 
-void Mesh::SetVBV(const D3D12_VERTEX_BUFFER_VIEW _vbv) {
+void Mesh::SetVBV(const D3D12_VERTEX_BUFFER_VIEW& _vbv) {
     vbvs_.push_back(_vbv);
 }
 
@@ -165,7 +165,7 @@ void Mesh::SetTextureSize(const Vector2 _tilingMul) const {
     }
 }
 
-void Mesh::SetColor(const Vector4 _color) const {
+void Mesh::SetColor(const Vector4& _color) const {
     material_->color = _color;
 }
 
