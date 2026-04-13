@@ -48,7 +48,7 @@ public:
 
     /** @brief Stop 時に呼ぶコールバックを登録（シーン再起動など）
      */
-    void SetStopCallback(std::function<void()> _cb);
+    void SetStopCallback(const std::function<void()>& _cb);
 
     /** @brief このフレームで Update を実行すべきか（Release では常に true）
      */

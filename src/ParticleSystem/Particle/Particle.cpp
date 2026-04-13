@@ -23,12 +23,18 @@ void Particle::Update() {
 void Particle::Debug() {
     ImGui::PushID(uuid_.c_str());
     if (ImGui::TreeNode(uuid_.c_str())) {
-        ImGui::DragFloat3("Position", &position_.x, 0.1f);
-        ImGui::DragFloat3("Scale", &scale_.x, 0.1f);
-        ImGui::DragFloat3("Rotation", &rotation_.x, 0.01f);
-        ImGui::DragFloat3("RotVelocity", &rotationVelocity_.x, 0.01f);
-        ImGui::ColorEdit4("Color", &color_.x);
-        ImGui::DragFloat("Duration", &duration_, 0.01f, 0.f, 100.f);
+        ImGui::Text("Position");
+        ImGui::DragFloat3("##Position", &position_.x, 0.1f);
+        ImGui::Text("Scale");
+        ImGui::DragFloat3("##Scale", &scale_.x, 0.1f);
+        ImGui::Text("Rotation");
+        ImGui::DragFloat3("##Rotation", &rotation_.x, 0.01f);
+        ImGui::Text("RotVelocity");
+        ImGui::DragFloat3("##RotVelocity", &rotationVelocity_.x, 0.01f);
+        ImGui::Text("Color");
+        ImGui::ColorEdit4("##Color", &color_.x);
+        ImGui::Text("Duration");
+        ImGui::DragFloat("##Duration", &duration_, 0.01f, 0.f, 100.f);
         ImGui::TreePop();
     }
     ImGui::PopID();

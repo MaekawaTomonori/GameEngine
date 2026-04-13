@@ -93,7 +93,7 @@ Framework::Framework() {
     collision_->Initialize(dbg);
 
     ui_ = Singleton<Ui::Manager>::GetInstance();
-    ui_->Setup(debugger_->GetUI());
+    ui_->Setup(dbg);
 
 #ifdef _DEBUG
     Debugger::WatchGroup("Engine")
