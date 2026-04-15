@@ -5,7 +5,7 @@ env:
   CONFIGURATION: Debug
 jobs:
   build:
-    runs-on: windows-2025
+    runs-on: [self-hosted, windows, x64]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
