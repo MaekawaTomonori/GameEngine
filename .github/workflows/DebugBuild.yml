@@ -15,17 +15,29 @@ jobs:
         with:
           submodules: recursive
 
-      - name: Diagnose environment
+      - name: Ensure MSBuild is available
         shell: powershell
         run: |
-          Write-Host "USERNAME=$env:USERNAME"
-          Write-Host "USERPROFILE=$env:USERPROFILE"
-          Write-Host "RUNNER_NAME=$env:RUNNER_NAME"
-          Write-Host "PATH=$env:PATH"
-          whoami
-          Get-Command msbuild -ErrorAction SilentlyContinue | Format-List *
+          $msbuildDir = 'E:\Dev\Program Files\Microsoft\Visual Studio\18\Insiders\MSBuild\Current\Bin'
+          $msbuildExe = Join-Path $msbuildDir 'MSBuild.exe'
+
+          $found = Get-Command msbuild -ErrorAction SilentlyContinue
+
+          if (-not $found) {
+            if (-not (Test-Path $msbuildExe)) {
+              Write-Error "MSBuild was not found in PATH, and fallback path does not exist: $msbuildExe"
+              exit 1
+            }
+
+            Add-Content -Path $env:GITHUB_PATH -Value $msbuildDir
+            $env:PATH = "$msbuildDir;$env:PATH"
+            Write-Host "MSBuild was not found. Added fallback directory to PATH: $msbuildDir"
+          }
+          else {
+            Write-Host "MSBuild already available at: $($found.Source)"
+          }
+
           where.exe msbuild
-          where.exe vswhere
 
       - name: Build
         shell: powershell
