@@ -1,16 +1,33 @@
 name: DebugBuild
 on: [pull_request]
+
 env:
   SOLUTION_FILE_PATH: Engine.vcxproj
   CONFIGURATION: Debug
+
 jobs:
   build:
     runs-on: [self-hosted, windows, x64]
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with: 
+        with:
           submodules: recursive
-      - name: Build
+
+      - name: Diagnose environment
+        shell: powershell
         run: |
-          msbuild ${{env.SOLUTION_FILE_PATH}} /p:Platform=x64,Configuration=${{env.CONFIGURATION}}
+          Write-Host "USERNAME=$env:USERNAME"
+          Write-Host "USERPROFILE=$env:USERPROFILE"
+          Write-Host "RUNNER_NAME=$env:RUNNER_NAME"
+          Write-Host "PATH=$env:PATH"
+          whoami
+          Get-Command msbuild -ErrorAction SilentlyContinue | Format-List *
+          where.exe msbuild
+          where.exe vswhere
+
+      - name: Build
+        shell: powershell
+        run: |
+          msbuild ${{ env.SOLUTION_FILE_PATH }} /p:Platform=x64 /p:Configuration=${{ env.CONFIGURATION }}
