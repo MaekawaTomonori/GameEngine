@@ -1,20 +1,45 @@
 name: DebugBuild
 on: [pull_request]
+
 env:
   SOLUTION_FILE_PATH: Engine.vcxproj
   CONFIGURATION: Debug
+
 jobs:
   build:
-    runs-on: windows-2025
+    runs-on: [self-hosted, windows, x64]
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with: 
-          submodules: recursive
-      - name: Add MSBuild to PATH
-        uses: microsoft/setup-msbuild@v2
         with:
-          msbuild-architecture: x64
-      - name: Build
+          submodules: recursive
+
+      - name: Ensure MSBuild is available
+        shell: powershell
         run: |
-          msbuild ${{env.SOLUTION_FILE_PATH}} /p:Platform=x64,Configuration=${{env.CONFIGURATION}}
+          $msbuildDir = 'E:\Dev\Program Files\Microsoft\Visual Studio\18\Insiders\MSBuild\Current\Bin'
+          $msbuildExe = Join-Path $msbuildDir 'MSBuild.exe'
+
+          $found = Get-Command msbuild -ErrorAction SilentlyContinue
+
+          if (-not $found) {
+            if (-not (Test-Path $msbuildExe)) {
+              Write-Error "MSBuild was not found in PATH, and fallback path does not exist: $msbuildExe"
+              exit 1
+            }
+
+            Add-Content -Path $env:GITHUB_PATH -Value $msbuildDir
+            $env:PATH = "$msbuildDir;$env:PATH"
+            Write-Host "MSBuild was not found. Added fallback directory to PATH: $msbuildDir"
+          }
+          else {
+            Write-Host "MSBuild already available at: $($found.Source)"
+          }
+
+          where.exe msbuild
+
+      - name: Build
+        shell: powershell
+        run: |
+          msbuild ${{ env.SOLUTION_FILE_PATH }} /p:Platform=x64 /p:Configuration=${{ env.CONFIGURATION }}
