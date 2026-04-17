@@ -65,6 +65,8 @@ void TextCommon::Initialize(const GESTD::ReferencePtr<DirectXAdapter>& _adapter,
     }
     screenParamsCb_->Get()->Map(0, nullptr, reinterpret_cast<void**>(&mappedScreenParams_));
 
+    LoadFont(DEFAULT_FONT);
+
 #ifdef _DEBUG
     RegisterDebug("font_section", [this]() {
         if (ImGui::CollapsingHeader("Font")) {
@@ -92,7 +94,6 @@ void TextCommon::Initialize(const GESTD::ReferencePtr<DirectXAdapter>& _adapter,
         }
 
         if (ImGui::CollapsingHeader("TextBoxes")) {
-            // ─── ヘッダー操作行 ───────────────────────────────────────
             ImGui::Text("Count: %zu", texts_.size() + entries_.size());
             ImGui::SameLine();
             if (ImGui::SmallButton("+ Add")) {
@@ -110,7 +111,6 @@ void TextCommon::Initialize(const GESTD::ReferencePtr<DirectXAdapter>& _adapter,
             }
             ImGui::Separator();
 
-            // ─── エディター管理エントリ ───────────────────────────────
             std::pair<std::string, std::string> pendingRename;
             for (size_t i = 0; i < entryOrder_.size(); ++i) {
                 const std::string& name = entryOrder_[i];
@@ -177,7 +177,6 @@ void TextCommon::Initialize(const GESTD::ReferencePtr<DirectXAdapter>& _adapter,
                 if (orderIt != entryOrder_.end()) *orderIt = pendingRename.second;
             }
 
-            // ─── ゲームコード管理 Text* ───────────────────────────────
             if (!texts_.empty()) {
                 ImGui::Separator();
                 ImGui::TextDisabled("Game Code");

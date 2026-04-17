@@ -84,7 +84,9 @@ class TextCommon : public Common {
     std::vector<std::string>                  entryOrder_;  ///< エディター管理エントリの挿入順
     std::unordered_map<std::string, TextData> entries_;     ///< エディター管理エントリ実体
 
-    char fontPathBuf_[256] = "Assets/Fonts/Satoshi-Variable.ttf";
+    char fontPathBuf_[256] = "Assets/Fonts/";
+
+    const std::string DEFAULT_FONT = "Assets/Fonts/Satoshi-Variable.ttf";
 
 public:
     ~TextCommon() override;
