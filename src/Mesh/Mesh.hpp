@@ -92,6 +92,11 @@ public:
      */
     void Draw(uint16_t _instanceCount = 1) const;
 
+    /** @brief ジオメトリのみを描画（シャドウパス用）
+     *  ルートパラメータを一切設定しない。呼び出し元が事前に設定すること。
+     */
+    void DrawGeometryOnly() const;
+
     /** @brief デバッグ情報の表示
      */
     void Debug();

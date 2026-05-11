@@ -28,6 +28,9 @@ class PipelineStateObject {
 
     D3D12_PRIMITIVE_TOPOLOGY_TYPE topologyType_ = D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE;
 
+    DXGI_FORMAT rtvFormat_ = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
+    UINT numRenderTargets_ = 1;
+
     D3D12_GRAPHICS_PIPELINE_STATE_DESC desc_{};
     Microsoft::WRL::ComPtr<ID3D12PipelineState> pso_;
 
@@ -43,6 +46,7 @@ public:
     PipelineStateObject& SetShader(std::unique_ptr<Shader> _shader);
     PipelineStateObject& SetTopologyType(D3D12_PRIMITIVE_TOPOLOGY_TYPE _topologyType);
     PipelineStateObject& SetDSVFormat(DXGI_FORMAT _format);
+    PipelineStateObject& SetRTVFormat(DXGI_FORMAT _format, UINT _numTargets = 1);
 
     void Create();
     void DrawCall() const;

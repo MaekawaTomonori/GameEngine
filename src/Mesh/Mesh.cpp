@@ -53,6 +53,20 @@ void Mesh::Initialize(const GESTD::ReferencePtr<DirectXAdapter>& _adapter, const
     lighting_ = true;
 }
 
+void Mesh::DrawGeometryOnly() const {
+    if (!commandList_) return;
+
+    commandList_->IASetPrimitiveTopology(D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+    commandList_->IASetVertexBuffers(0, static_cast<UINT>(vbvs_.size()), vbvs_.data());
+
+    if (!data_.indices.empty()) {
+        commandList_->IASetIndexBuffer(&ibv_);
+        commandList_->DrawIndexedInstanced(static_cast<UINT>(data_.indices.size()), 1, 0, 0, 0);
+    } else {
+        commandList_->DrawInstanced(static_cast<UINT>(data_.vertices.size()), 1, 0, 0);
+    }
+}
+
 void Mesh::Update() {
     if (material_) {
         material_->uvTransform = MathUtils::Matrix::MakeIdentity() * MathUtils::Matrix::MakeScaleMatrix({ material_->tilingMul.x, material_->tilingMul.y, 1.0f });

@@ -147,17 +147,23 @@ void LightManager::Load() {
                     std::get<float>(group.at("intensity"))
                 });
                 break;
-            case LightType::Point:
+            case LightType::Point: {
                 Add(LightType::Point);
-                rawPointLights_.back()->Set(itr.first, {
+                PointLight pl{
                     std::get<Vector4>(group.at("color")),
                     std::get<Vector3>(group.at("position")),
                     std::get<float>(group.at("intensity")),
                     std::get<float>(group.at("radius")),
                     std::get<float>(group.at("decay")),
-                    {0,0}
-                });
+                    0u,
+                    0.0f
+                };
+                if (group.count("castShadow")) {
+                    pl.castShadow = static_cast<uint32_t>(std::get<int32_t>(group.at("castShadow")));
+                }
+                rawPointLights_.back()->Set(itr.first, pl);
                 break;
+            }
             case LightType::Spot:
                 Add(LightType::Spot);
                 rawSpotLights_.back()->Set(itr.first, {
@@ -308,6 +314,15 @@ void LightManager::SetPosition(const Vector3& _pos) {
     for (const auto& sl : rawSpotLights_) {
         sl->SetReference(_pos);
     }
+}
+
+const PointLight* LightManager::GetShadowCastingPointLight() {
+    for (auto& pl : rawPointLights_) {
+        if (pl->GetLight().castShadow) {
+            return &pl->GetLight();
+        }
+    }
+    return nullptr;
 }
 
 void LightManager::ClearRef() {

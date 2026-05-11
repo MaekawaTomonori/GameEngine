@@ -84,6 +84,8 @@ public:
 
     void ClearRef();
 
+    const PointLight* GetShadowCastingPointLight();
+
     void Debug();
 
 private:

@@ -196,6 +196,8 @@
     <ClInclude Include="src\Scene\Transition\Transition.hpp" />
     <ClInclude Include="src\Scene\Transition\Fade.hpp" />
     <ClInclude Include="src\Scheduler\Scheduler.hpp" />
+    <ClInclude Include="src\Shadow\ShadowCubeMap.hpp" />
+    <ClInclude Include="src\Shadow\ShadowPass.hpp" />
     <ClInclude Include="src\Sky\Common\SkyCommon.hpp" />
     <ClInclude Include="src\Sky\Skybox.hpp" />
     <ClInclude Include="src\Sprite\Common\SpriteCommon.hpp" />
@@ -221,6 +223,8 @@
   <ItemGroup>
     <ClCompile Include="src\Config\ConfigLoader.cpp" />
     <ClCompile Include="src\Scene\Sample\SampleScene.cpp" />
+    <ClCompile Include="src\Shadow\ShadowCubeMap.cpp" />
+    <ClCompile Include="src\Shadow\ShadowPass.cpp" />
     <ClCompile Include="src\Ui\EventSystem.cpp" />
     <ClCompile Include="src\Ui\Element.cpp" />
     <ClCompile Include="src\Ui\SpriteElement.cpp" />
@@ -325,7 +329,7 @@
     <ProjectReference Include="Lib\GESTD\GESTD.vcxproj">
       <Project>{a1b2c3d4-e5f6-7890-abcd-ef1234567890}</Project>
     </ProjectReference>
-    </ItemGroup>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

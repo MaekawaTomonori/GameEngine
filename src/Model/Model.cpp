@@ -22,6 +22,7 @@ Model::Model() :
 
 Model::~Model() {
     common_->Unregister(uuid_);
+    common_->UnregisterShadowDraw(uuid_);
 }
 
 void Model::Initialize(const std::string& _name) {
@@ -92,6 +93,11 @@ void Model::Initialize(const std::string& _name) {
 
     common_->RegisterUpdate(uuid_, [this](){ UpdateMapData(); });
     common_->RegisterDebug(uuid_, [this](){ Debug(); });
+    common_->RegisterShadowDraw(uuid_, [this]() {
+        if (!castShadow_) return;
+        commandList_->SetGraphicsRootConstantBufferView(0, wr_->Get()->GetGPUVirtualAddress());
+        mesh_->DrawGeometryOnly();
+    });
 }
 
 void Model::Update() {
@@ -124,7 +130,7 @@ void Model::Draw() const {
             commandList_->SetGraphicsRootConstantBufferView(1, wr_->Get()->GetGPUVirtualAddress());
             commandList_->SetGraphicsRootConstantBufferView(4, cr_->Get()->GetGPUVirtualAddress());
             commandList_->SetGraphicsRootDescriptorTable(8, tm->GetGPUHandle(environmentTexture_));
-            commandList_->SetGraphicsRootDescriptorTable(9, skinCluster_.paletteHandle.second);
+            commandList_->SetGraphicsRootDescriptorTable(11, skinCluster_.paletteHandle.second);
             mesh_->Draw();
             }, posteffect_);
     }else {

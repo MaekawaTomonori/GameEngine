@@ -7,6 +7,7 @@
 
 class SampleScene final : public IScene{
     std::unique_ptr<Model> model_;
+    std::unique_ptr<Model> plane;
 
 public:
     void Initialize() override;

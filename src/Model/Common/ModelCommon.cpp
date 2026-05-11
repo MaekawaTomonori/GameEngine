@@ -1,5 +1,7 @@
 #include "ModelCommon.hpp"
 
+#include <ranges>
+
 #include "Log.hpp"
 #include "src/DirectX/Heap/SRVManager.h"
 #include "src/DirectX/RootSignature/BlendMode.hpp"
@@ -49,93 +51,89 @@ void ModelCommon::CreateSkinningPipeline() const {
         .OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND
     };
 
+    D3D12_DESCRIPTOR_RANGE shadowRange{
+        .RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV,
+        .NumDescriptors = 1,
+        .BaseShaderRegister = 6,
+        .RegisterSpace = 0,
+        .OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND
+    };
+
 	// PipelineStateObject作成 (Skinning用)
 	pipeline_->SetRootSignature(
         RootSignature()
-            // 1. Material CBV (Pixel Shader, register 0)
+            // root 0: Material CBV (b0, PS)
             .AddParameter({
                 .ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV,
-                .Descriptor = {
-                    .ShaderRegister = 0
-                },
+                .Descriptor = { .ShaderRegister = 0 },
                 .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL
             })
-            // 2. Transform CBV (Vertex Shader, register 0)
+            // root 1: Transform CBV (b0, VS)
             .AddParameter({
                 .ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV,
-                .Descriptor = {
-                    .ShaderRegister = 0
-                },
+                .Descriptor = { .ShaderRegister = 0 },
                 .ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX
             })
-            // 3. Texture SRV (Pixel Shader, Descriptor Table)
+            // root 2: Texture SRV (t0, PS)
             .AddParameter({
                 .ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE,
-                .DescriptorTable = {
-                    .NumDescriptorRanges = 1,
-                    .pDescriptorRanges = &textureRange
-                },
+                .DescriptorTable = { .NumDescriptorRanges = 1, .pDescriptorRanges = &textureRange },
                 .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL
             })
-            // 4. DirectionalLight SRV (Pixel Shader, register 1)
+            // root 3: DirectionalLight SRV (t1, PS)
             .AddParameter({
                 .ParameterType = D3D12_ROOT_PARAMETER_TYPE_SRV,
-                .Descriptor = {
-                    .ShaderRegister = 1
-                },
+                .Descriptor = { .ShaderRegister = 1 },
                 .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL
             })
-            // 5. Camera CBV (Pixel Shader, register 2)
+            // root 4: Camera CBV (b2, PS)
             .AddParameter({
                 .ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV,
-                .Descriptor = {
-                    .ShaderRegister = 2
-                },
+                .Descriptor = { .ShaderRegister = 2 },
                 .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL
             })
-            // 6. PointLight SRV (Pixel Shader, register 3)
+            // root 5: PointLight SRV (t3, PS)
             .AddParameter({
                 .ParameterType = D3D12_ROOT_PARAMETER_TYPE_SRV,
-                .Descriptor = {
-                    .ShaderRegister = 3
-                },
+                .Descriptor = { .ShaderRegister = 3 },
                 .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL
             })
-            // 7. SpotLight SRV (Pixel Shader, register 4)
+            // root 6: SpotLight SRV (t4, PS)
             .AddParameter({
                 .ParameterType = D3D12_ROOT_PARAMETER_TYPE_SRV,
-                .Descriptor = {
-                    .ShaderRegister = 4
-                },
+                .Descriptor = { .ShaderRegister = 4 },
                 .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL
             })
-            // 8. Light Count CBV (Pixel Shader, register 5)
+            // root 7: LightCount CBV (b5, PS)
             .AddParameter({
                 .ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV,
-                .Descriptor = {
-                    .ShaderRegister = 5
-                },
+                .Descriptor = { .ShaderRegister = 5 },
                 .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL
             })
-            // 9. Environment TextureCube SRV (Pixel Shader, Descriptor Table, register 5)
+            // root 8: Environment TextureCube SRV (t5, PS)
             .AddParameter({
                 .ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE,
-                .DescriptorTable = {
-                    .NumDescriptorRanges = 1,
-                    .pDescriptorRanges = &environmentRange
-                },
+                .DescriptorTable = { .NumDescriptorRanges = 1, .pDescriptorRanges = &environmentRange },
                 .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL
             })
-            // 10. Animation SRV (Vertex Shader, Descriptor Table)
+            // root 9: Shadow Cube SRV (t6, PS)
             .AddParameter({
                 .ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE,
-                .DescriptorTable = {
-                    .NumDescriptorRanges = 1,
-                    .pDescriptorRanges = &animationRange
-                },
+                .DescriptorTable = { .NumDescriptorRanges = 1, .pDescriptorRanges = &shadowRange },
+                .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL
+            })
+            // root 10: Shadow Data CBV (b6, PS)
+            .AddParameter({
+                .ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV,
+                .Descriptor = { .ShaderRegister = 6 },
+                .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL
+            })
+            // root 11: Animation SRV (t0, VS) — 旧 root 9
+            .AddParameter({
+                .ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE,
+                .DescriptorTable = { .NumDescriptorRanges = 1, .pDescriptorRanges = &animationRange },
                 .ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX
             })
-        // サンプラー設定
         .SetSampler({
             .Filter = D3D12_FILTER_MIN_MAG_MIP_LINEAR,
             .AddressU = D3D12_TEXTURE_ADDRESS_MODE_WRAP,
@@ -144,6 +142,16 @@ void ModelCommon::CreateSkinningPipeline() const {
             .ComparisonFunc = D3D12_COMPARISON_FUNC_NEVER,
             .MaxLOD = D3D12_FLOAT32_MAX,
             .ShaderRegister = 0,
+            .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL
+        })
+        .SetSampler({
+            .Filter = D3D12_FILTER_MIN_MAG_MIP_LINEAR,
+            .AddressU = D3D12_TEXTURE_ADDRESS_MODE_CLAMP,
+            .AddressV = D3D12_TEXTURE_ADDRESS_MODE_CLAMP,
+            .AddressW = D3D12_TEXTURE_ADDRESS_MODE_CLAMP,
+            .ComparisonFunc = D3D12_COMPARISON_FUNC_NEVER,
+            .MaxLOD = D3D12_FLOAT32_MAX,
+            .ShaderRegister = 1,
             .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL
         })
     )
@@ -187,84 +195,83 @@ void ModelCommon::CreateStaticPipeline() const {
         .OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND
     };
 
+    D3D12_DESCRIPTOR_RANGE shadowRange{
+        .RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV,
+        .NumDescriptors = 1,
+        .BaseShaderRegister = 6,
+        .RegisterSpace = 0,
+        .OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND
+    };
+
 	// PipelineStateObject作成 (Static用)
 	staticPipeline_->SetRootSignature(
         RootSignature()
-            // 1. Material CBV (Pixel Shader, register 0)
+            // root 0: Material CBV (b0, PS)
             .AddParameter({
                 .ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV,
-                .Descriptor = {
-                    .ShaderRegister = 0
-                },
+                .Descriptor = { .ShaderRegister = 0 },
                 .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL
             })
-            // 2. Transform CBV (Vertex Shader, register 0)
+            // root 1: Transform CBV (b0, VS)
             .AddParameter({
                 .ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV,
-                .Descriptor = {
-                    .ShaderRegister = 0
-                },
+                .Descriptor = { .ShaderRegister = 0 },
                 .ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX
             })
-            // 3. Texture SRV (Pixel Shader, Descriptor Table)
+            // root 2: Texture SRV (t0, PS)
             .AddParameter({
                 .ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE,
-                .DescriptorTable = {
-                    .NumDescriptorRanges = 1,
-                    .pDescriptorRanges = &textureRange
-                },
+                .DescriptorTable = { .NumDescriptorRanges = 1, .pDescriptorRanges = &textureRange },
                 .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL
             })
-            // 4. DirectionalLight SRV (Pixel Shader, register 1)
+            // root 3: DirectionalLight SRV (t1, PS)
             .AddParameter({
                 .ParameterType = D3D12_ROOT_PARAMETER_TYPE_SRV,
-                .Descriptor = {
-                    .ShaderRegister = 1
-                },
+                .Descriptor = { .ShaderRegister = 1 },
                 .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL
             })
-            // 5. Camera CBV (Pixel Shader, register 2)
+            // root 4: Camera CBV (b2, PS)
             .AddParameter({
                 .ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV,
-                .Descriptor = {
-                    .ShaderRegister = 2
-                },
+                .Descriptor = { .ShaderRegister = 2 },
                 .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL
             })
-            // 6. PointLight SRV (Pixel Shader, register 3)
+            // root 5: PointLight SRV (t3, PS)
             .AddParameter({
                 .ParameterType = D3D12_ROOT_PARAMETER_TYPE_SRV,
-                .Descriptor = {
-                    .ShaderRegister = 3
-                },
+                .Descriptor = { .ShaderRegister = 3 },
                 .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL
             })
-            // 7. SpotLight SRV (Pixel Shader, register 4)
+            // root 6: SpotLight SRV (t4, PS)
             .AddParameter({
                 .ParameterType = D3D12_ROOT_PARAMETER_TYPE_SRV,
-                .Descriptor = {
-                    .ShaderRegister = 4
-                },
+                .Descriptor = { .ShaderRegister = 4 },
                 .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL
             })
-            // 8. Light Count CBV (Pixel Shader, register 5)
+            // root 7: LightCount CBV (b5, PS)
             .AddParameter({
                 .ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV,
-                .Descriptor = {
-                    .ShaderRegister = 5
-                },
+                .Descriptor = { .ShaderRegister = 5 },
                 .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL
             })
-            // 9. Environment TextureCube SRV (Pixel Shader, Descriptor Table, register 5)
+            // root 8: Environment TextureCube SRV (t5, PS)
             .AddParameter({
                 .ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE,
-                .DescriptorTable = {
-                    .NumDescriptorRanges = 1,
-                    .pDescriptorRanges = &staticEnvironmentRange
-                },
+                .DescriptorTable = { .NumDescriptorRanges = 1, .pDescriptorRanges = &staticEnvironmentRange },
                 .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL
             })
-        // サンプラー設定
+            // root 9: Shadow Cube SRV (t6, PS)
+            .AddParameter({
+                .ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE,
+                .DescriptorTable = { .NumDescriptorRanges = 1, .pDescriptorRanges = &shadowRange },
+                .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL
+            })
+            // root 10: Shadow Data CBV (b6, PS)
+            .AddParameter({
+                .ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV,
+                .Descriptor = { .ShaderRegister = 6 },
+                .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL
+            })
         .SetSampler({
             .Filter = D3D12_FILTER_MIN_MAG_MIP_LINEAR,
             .AddressU = D3D12_TEXTURE_ADDRESS_MODE_WRAP,
@@ -273,6 +280,16 @@ void ModelCommon::CreateStaticPipeline() const {
             .ComparisonFunc = D3D12_COMPARISON_FUNC_NEVER,
             .MaxLOD = D3D12_FLOAT32_MAX,
             .ShaderRegister = 0,
+            .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL
+        })
+        .SetSampler({
+            .Filter = D3D12_FILTER_MIN_MAG_MIP_LINEAR,
+            .AddressU = D3D12_TEXTURE_ADDRESS_MODE_CLAMP,
+            .AddressV = D3D12_TEXTURE_ADDRESS_MODE_CLAMP,
+            .AddressW = D3D12_TEXTURE_ADDRESS_MODE_CLAMP,
+            .ComparisonFunc = D3D12_COMPARISON_FUNC_NEVER,
+            .MaxLOD = D3D12_FLOAT32_MAX,
+            .ShaderRegister = 1,
             .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL
         })
     )
@@ -307,6 +324,27 @@ void ModelCommon::RegisterSkinningDraw(const std::function<void()>& _command, bo
     skinningDrawCommands_.push_back({ _command, _isApplyPostEffect });
 }
 
+void ModelCommon::RegisterShadowDraw(const std::string& _id, const std::function<void()>& _func) {
+    std::lock_guard<std::mutex> lock(mutex_);
+    shadowCommands_[_id] = _func;
+}
+
+void ModelCommon::UnregisterShadowDraw(const std::string& _id) {
+    std::lock_guard<std::mutex> lock(mutex_);
+    shadowCommands_.erase(_id);
+}
+
+void ModelCommon::ExecuteShadowDraw() const {
+    for (const auto& func : shadowCommands_ | std::views::values) {
+        func();
+    }
+}
+
+void ModelCommon::SetShadowBinding(uint32_t _srvIndex, D3D12_GPU_VIRTUAL_ADDRESS _cbvAddress) {
+    shadowSrvIndex_ = _srvIndex;
+    shadowCbvAddress_ = _cbvAddress;
+}
+
 void ModelCommon::Draw(Renderer* _renderer) {
     std::vector<std::function<void()>> staticPostEffectTasks;
     std::vector<std::function<void()>> staticNoPostEffectTasks;
@@ -335,11 +373,19 @@ void ModelCommon::Draw(Renderer* _renderer) {
         skinningDrawCommands_.clear();
     }
 
+    auto bindShadow = [this]() {
+        if (shadowSrvIndex_ != UINT_MAX && srv_) {
+            srv_->SetGraphicsRootDescriptorTable(9, shadowSrvIndex_);
+            adapter_->GetCommandList()->SetGraphicsRootConstantBufferView(10, shadowCbvAddress_);
+        }
+    };
+
     if (!staticNoPostEffectTasks.empty()) {
-        _renderer->Register([this, staticNoPostEffectTasks]() {
+        _renderer->Register([this, staticNoPostEffectTasks, bindShadow]() {
             if (staticPipeline_) {
                 staticPipeline_->DrawCall();
             }
+            bindShadow();
             for (auto& task : staticNoPostEffectTasks) {
                 task();
             }
@@ -347,10 +393,11 @@ void ModelCommon::Draw(Renderer* _renderer) {
     }
 
     if (!staticPostEffectTasks.empty()) {
-        _renderer->Register([this, staticPostEffectTasks]() {
+        _renderer->Register([this, staticPostEffectTasks, bindShadow]() {
             if (staticPipeline_) {
                 staticPipeline_->DrawCall();
             }
+            bindShadow();
             for (auto& task : staticPostEffectTasks) {
                 task();
             }
@@ -358,10 +405,11 @@ void ModelCommon::Draw(Renderer* _renderer) {
     }
 
     if (!skinningNoPostEffectTasks.empty()) {
-        _renderer->Register([this, skinningNoPostEffectTasks]() {
+        _renderer->Register([this, skinningNoPostEffectTasks, bindShadow]() {
             if (pipeline_) {
                 pipeline_->DrawCall();
             }
+            bindShadow();
             for (auto& task : skinningNoPostEffectTasks) {
                 task();
             }
@@ -369,10 +417,11 @@ void ModelCommon::Draw(Renderer* _renderer) {
     }
 
     if (!skinningPostEffectTasks.empty()) {
-        _renderer->Register([this, skinningPostEffectTasks]() {
+        _renderer->Register([this, skinningPostEffectTasks, bindShadow]() {
             if (pipeline_) {
                 pipeline_->DrawCall();
             }
+            bindShadow();
             for (auto& task : skinningPostEffectTasks) {
                 task();
             }
