@@ -93,6 +93,7 @@ class Model {
     std::string environmentTexture_ = "";
 
     bool posteffect_ = true;
+    bool castShadow_ = true;
 
 public:
     Model();

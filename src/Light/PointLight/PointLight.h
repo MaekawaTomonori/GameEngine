@@ -11,7 +11,8 @@ struct PointLight{
 
 	float radius;
 	float decay;
-    float pad[2];
+    uint32_t castShadow; // 1 = このライトがシャドウを投影する
+    float pad;
 };
 
 class RawPointLight final : public RawLight{
