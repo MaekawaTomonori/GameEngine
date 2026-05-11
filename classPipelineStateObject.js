@@ -11,6 +11,7 @@ var classPipelineStateObject =
     [ "SetInputLayout", "classPipelineStateObject.html#aa294986fcc503fd585d23057a5c73c5e", null ],
     [ "SetRasterizer", "classPipelineStateObject.html#a01f1a21d8613479c9a8ca43b6f551768", null ],
     [ "SetRootSignature", "classPipelineStateObject.html#ace4d67541b8c88a53733ad677ced0239", null ],
+    [ "SetRTVFormat", "classPipelineStateObject.html#a82a4e509d890803b9f215a0650b11da1", null ],
     [ "SetShader", "classPipelineStateObject.html#ab87a69f4981ceef543b26eb592e4dfc8", null ],
     [ "SetTopologyType", "classPipelineStateObject.html#af5212fc8f88db65d9a303e8e8e0ac349", null ]
 ];

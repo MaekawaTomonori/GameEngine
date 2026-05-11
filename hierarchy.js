@@ -107,6 +107,8 @@ var hierarchy =
     [ "SceneSwitcher", "classSceneSwitcher.html", null ],
     [ "Scheduler", "classScheduler.html", null ],
     [ "Shader", "classShader.html", null ],
+    [ "ShadowCubeMap", "classShadowCubeMap.html", null ],
+    [ "ShadowPass", "classShadowPass.html", null ],
     [ "Skeleton", "structSkeleton.html", null ],
     [ "Skybox", "classSkybox.html", null ],
     [ "SpotLight", "structSpotLight.html", null ],

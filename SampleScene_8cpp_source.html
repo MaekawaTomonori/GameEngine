@@ -104,39 +104,48 @@ $(document).ready(function(){initNavTree('SampleScene_8cpp_source.html',''); ini
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno"><a class="line" href="classSampleScene.html#aae186be401040c6ad4aef71afd78f711">    3</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classSampleScene.html#aae186be401040c6ad4aef71afd78f711">SampleScene::Initialize</a>() {</div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span>    model_ = std::make_unique&lt;Model&gt;();</div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span>    model_-&gt;Initialize(<span class="stringliteral">&quot;animatedCube&quot;</span>);</div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span>    model_-&gt;SetTranslate({0.f, .5f, -5.f});</div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span>    model_-&gt;SetTranslate({0.f, .5f, 0.f});</div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span>    model_-&gt;SetScale({0.4f, 0.4f, 0.4f});</div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>}</div>
-</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>    </div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
-<div class="foldopen" id="foldopen00010" data-start="{" data-end="}">
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="classSampleScene.html#a4ed69fb86200cf54053ca9cb9f2143bf">   10</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classSampleScene.html#a4ed69fb86200cf54053ca9cb9f2143bf">SampleScene::Update</a>() {</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    model_-&gt;Update();</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>}</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>    plane = std::make_unique&lt;Model&gt;();</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    plane-&gt;Initialize(<span class="stringliteral">&quot;plane&quot;</span>);</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    plane-&gt;SetTranslate({0.f, -0.4f, 0.f});</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    plane-&gt;SetRotate({4.5f, 0.f, 0.f});</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    plane-&gt;SetScale({5.f, 5.f, 1.f});</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>}</div>
 </div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
-<div class="foldopen" id="foldopen00014" data-start="{" data-end="}">
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="classSampleScene.html#ab1151b2c0bb9172fbab277b9a97e424b">   14</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classSampleScene.html#ab1151b2c0bb9172fbab277b9a97e424b">SampleScene::Draw</a>() {</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    model_-&gt;Draw();</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>}</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="foldopen" id="foldopen00017" data-start="{" data-end="}">
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="classSampleScene.html#a4ed69fb86200cf54053ca9cb9f2143bf">   17</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classSampleScene.html#a4ed69fb86200cf54053ca9cb9f2143bf">SampleScene::Update</a>() {</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    model_-&gt;Update();</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    plane-&gt;Update();</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>}</div>
 </div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
-<div class="foldopen" id="foldopen00018" data-start="{" data-end="}">
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="classSampleScene.html#a59833e9fc90a12376ce4b00e439415d8">   18</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classSampleScene.html#a59833e9fc90a12376ce4b00e439415d8">SampleScene::Debug</a>() {</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>}</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="foldopen" id="foldopen00022" data-start="{" data-end="}">
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="classSampleScene.html#ab1151b2c0bb9172fbab277b9a97e424b">   22</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classSampleScene.html#ab1151b2c0bb9172fbab277b9a97e424b">SampleScene::Draw</a>() {</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    model_-&gt;Draw();</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    plane-&gt;Draw();</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>}</div>
+</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
+<div class="foldopen" id="foldopen00027" data-start="{" data-end="}">
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="classSampleScene.html#a59833e9fc90a12376ce4b00e439415d8">   27</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classSampleScene.html#a59833e9fc90a12376ce4b00e439415d8">SampleScene::Debug</a>() {</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>}</div>
 </div>
 <div class="ttc" id="aSampleScene_8hpp_html"><div class="ttname"><a href="SampleScene_8hpp.html">SampleScene.hpp</a></div></div>
-<div class="ttc" id="aclassSampleScene_html_a4ed69fb86200cf54053ca9cb9f2143bf"><div class="ttname"><a href="classSampleScene.html#a4ed69fb86200cf54053ca9cb9f2143bf">SampleScene::Update</a></div><div class="ttdeci">void Update() override</div><div class="ttdoc">更新処理（純粋仮想関数）</div><div class="ttdef"><b>Definition</b> <a href="SampleScene_8cpp_source.html#l00010">SampleScene.cpp:10</a></div></div>
-<div class="ttc" id="aclassSampleScene_html_a59833e9fc90a12376ce4b00e439415d8"><div class="ttname"><a href="classSampleScene.html#a59833e9fc90a12376ce4b00e439415d8">SampleScene::Debug</a></div><div class="ttdeci">void Debug() override</div><div class="ttdoc">Debug用 ImGuiはここで扱うようにする</div><div class="ttdef"><b>Definition</b> <a href="SampleScene_8cpp_source.html#l00018">SampleScene.cpp:18</a></div></div>
+<div class="ttc" id="aclassSampleScene_html_a4ed69fb86200cf54053ca9cb9f2143bf"><div class="ttname"><a href="classSampleScene.html#a4ed69fb86200cf54053ca9cb9f2143bf">SampleScene::Update</a></div><div class="ttdeci">void Update() override</div><div class="ttdoc">更新処理（純粋仮想関数）</div><div class="ttdef"><b>Definition</b> <a href="SampleScene_8cpp_source.html#l00017">SampleScene.cpp:17</a></div></div>
+<div class="ttc" id="aclassSampleScene_html_a59833e9fc90a12376ce4b00e439415d8"><div class="ttname"><a href="classSampleScene.html#a59833e9fc90a12376ce4b00e439415d8">SampleScene::Debug</a></div><div class="ttdeci">void Debug() override</div><div class="ttdoc">Debug用 ImGuiはここで扱うようにする</div><div class="ttdef"><b>Definition</b> <a href="SampleScene_8cpp_source.html#l00027">SampleScene.cpp:27</a></div></div>
 <div class="ttc" id="aclassSampleScene_html_aae186be401040c6ad4aef71afd78f711"><div class="ttname"><a href="classSampleScene.html#aae186be401040c6ad4aef71afd78f711">SampleScene::Initialize</a></div><div class="ttdeci">void Initialize() override</div><div class="ttdoc">初期化処理（純粋仮想関数）</div><div class="ttdef"><b>Definition</b> <a href="SampleScene_8cpp_source.html#l00003">SampleScene.cpp:3</a></div></div>
-<div class="ttc" id="aclassSampleScene_html_ab1151b2c0bb9172fbab277b9a97e424b"><div class="ttname"><a href="classSampleScene.html#ab1151b2c0bb9172fbab277b9a97e424b">SampleScene::Draw</a></div><div class="ttdeci">void Draw() override</div><div class="ttdoc">描画処理（純粋仮想関数）</div><div class="ttdef"><b>Definition</b> <a href="SampleScene_8cpp_source.html#l00014">SampleScene.cpp:14</a></div></div>
+<div class="ttc" id="aclassSampleScene_html_ab1151b2c0bb9172fbab277b9a97e424b"><div class="ttname"><a href="classSampleScene.html#ab1151b2c0bb9172fbab277b9a97e424b">SampleScene::Draw</a></div><div class="ttdeci">void Draw() override</div><div class="ttdoc">描画処理（純粋仮想関数）</div><div class="ttdef"><b>Definition</b> <a href="SampleScene_8cpp_source.html#l00022">SampleScene.cpp:22</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_204260ac86670e69c647eaba8962e745.html">Scene</a></li><li class="navelem"><a class="el" href="dir_bc3fa84afeb381e3e93e5b9b258065f8.html">Sample</a></li><li class="navelem"><a class="el" href="SampleScene_8cpp.html">SampleScene.cpp</a></li>
-    <li class="footer">2026年04月20日(月) 02時32分52秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年05月11日(月) 05時32分01秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

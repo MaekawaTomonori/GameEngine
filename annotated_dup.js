@@ -88,6 +88,8 @@ var annotated_dup =
     [ "SceneSwitcher", "classSceneSwitcher.html", "classSceneSwitcher" ],
     [ "Scheduler", "classScheduler.html", "classScheduler" ],
     [ "Shader", "classShader.html", "classShader" ],
+    [ "ShadowCubeMap", "classShadowCubeMap.html", "classShadowCubeMap" ],
+    [ "ShadowPass", "classShadowPass.html", "classShadowPass" ],
     [ "Skeleton", "structSkeleton.html", "structSkeleton" ],
     [ "Skybox", "classSkybox.html", "classSkybox" ],
     [ "SkyCommon", "classSkyCommon.html", "classSkyCommon" ],

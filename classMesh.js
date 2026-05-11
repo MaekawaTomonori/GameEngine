@@ -2,6 +2,7 @@ var classMesh =
 [
     [ "Debug", "classMesh.html#aa4273b914190bf357a8e5783f507dbf8", null ],
     [ "Draw", "classMesh.html#a79dd0da287abc9f71c6cc4280fbfccf4", null ],
+    [ "DrawGeometryOnly", "classMesh.html#a04e8dd4ed5bfdaedc456792833fc1d29", null ],
     [ "EnableLighting", "classMesh.html#aa5e7412bb054e7f56c2a6271b5eb881d", null ],
     [ "GetData", "classMesh.html#a45733c8b9432ef0becde4bb5fe6b7c39", null ],
     [ "Initialize", "classMesh.html#a01f85a2ee158cfa24e39dca292e6e2ef", null ],

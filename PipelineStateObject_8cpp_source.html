@@ -179,85 +179,94 @@ $(document).ready(function(){initNavTree('PipelineStateObject_8cpp_source.html',
 <div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>            <span class="keywordflow">break</span>;</div>
 <div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="BlendMode_8hpp.html#a30323fa90e24ca484998b9fba6c40e85ab50339a10e1de285ac99d4c3990b8693">BlendMode::NONE</a>:</div>
 <div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>            blendDesc_.RenderTarget[0].BlendEnable = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    }</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>}</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>            blendDesc_.RenderTarget[0].RenderTargetWriteMask = D3D12_COLOR_WRITE_ENABLE_ALL;</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    }</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>}</div>
 </div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
-<div class="foldopen" id="foldopen00080" data-start="{" data-end="}">
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno"><a class="line" href="classPipelineStateObject.html#a01f1a21d8613479c9a8ca43b6f551768">   80</a></span><a class="code hl_class" href="classPipelineStateObject.html">PipelineStateObject</a>&amp; <a class="code hl_function" href="classPipelineStateObject.html#a01f1a21d8613479c9a8ca43b6f551768">PipelineStateObject::SetRasterizer</a>(<span class="keyword">const</span> D3D12_RASTERIZER_DESC _rasterizer) {</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    rasterizer_ = _rasterizer;</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>}</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
+<div class="foldopen" id="foldopen00081" data-start="{" data-end="}">
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno"><a class="line" href="classPipelineStateObject.html#a01f1a21d8613479c9a8ca43b6f551768">   81</a></span><a class="code hl_class" href="classPipelineStateObject.html">PipelineStateObject</a>&amp; <a class="code hl_function" href="classPipelineStateObject.html#a01f1a21d8613479c9a8ca43b6f551768">PipelineStateObject::SetRasterizer</a>(<span class="keyword">const</span> D3D12_RASTERIZER_DESC _rasterizer) {</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    rasterizer_ = _rasterizer;</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>}</div>
 </div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
-<div class="foldopen" id="foldopen00085" data-start="{" data-end="}">
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno"><a class="line" href="classPipelineStateObject.html#a0e3db04b2a4f2e2fc8ec63b308186121">   85</a></span><a class="code hl_class" href="classPipelineStateObject.html">PipelineStateObject</a>&amp; <a class="code hl_function" href="classPipelineStateObject.html#a0e3db04b2a4f2e2fc8ec63b308186121">PipelineStateObject::SetDepthStencil</a>(<span class="keyword">const</span> D3D12_DEPTH_STENCIL_DESC&amp; _depthStencilDesc) {</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    depthStencilDesc_ = _depthStencilDesc;</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>}</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
+<div class="foldopen" id="foldopen00086" data-start="{" data-end="}">
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno"><a class="line" href="classPipelineStateObject.html#a0e3db04b2a4f2e2fc8ec63b308186121">   86</a></span><a class="code hl_class" href="classPipelineStateObject.html">PipelineStateObject</a>&amp; <a class="code hl_function" href="classPipelineStateObject.html#a0e3db04b2a4f2e2fc8ec63b308186121">PipelineStateObject::SetDepthStencil</a>(<span class="keyword">const</span> D3D12_DEPTH_STENCIL_DESC&amp; _depthStencilDesc) {</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    depthStencilDesc_ = _depthStencilDesc;</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>}</div>
 </div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
-<div class="foldopen" id="foldopen00090" data-start="{" data-end="}">
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno"><a class="line" href="classPipelineStateObject.html#ab87a69f4981ceef543b26eb592e4dfc8">   90</a></span><a class="code hl_class" href="classPipelineStateObject.html">PipelineStateObject</a>&amp; <a class="code hl_function" href="classPipelineStateObject.html#ab87a69f4981ceef543b26eb592e4dfc8">PipelineStateObject::SetShader</a>(std::unique_ptr&lt;Shader&gt; _shader) {</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    shader_ = std::move(_shader);</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>}</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
+<div class="foldopen" id="foldopen00091" data-start="{" data-end="}">
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno"><a class="line" href="classPipelineStateObject.html#ab87a69f4981ceef543b26eb592e4dfc8">   91</a></span><a class="code hl_class" href="classPipelineStateObject.html">PipelineStateObject</a>&amp; <a class="code hl_function" href="classPipelineStateObject.html#ab87a69f4981ceef543b26eb592e4dfc8">PipelineStateObject::SetShader</a>(std::unique_ptr&lt;Shader&gt; _shader) {</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    shader_ = std::move(_shader);</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>}</div>
 </div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span> </div>
-<div class="foldopen" id="foldopen00095" data-start="{" data-end="}">
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno"><a class="line" href="classPipelineStateObject.html#af5212fc8f88db65d9a303e8e8e0ac349">   95</a></span><a class="code hl_class" href="classPipelineStateObject.html">PipelineStateObject</a>&amp; <a class="code hl_function" href="classPipelineStateObject.html#af5212fc8f88db65d9a303e8e8e0ac349">PipelineStateObject::SetTopologyType</a>(<span class="keyword">const</span> D3D12_PRIMITIVE_TOPOLOGY_TYPE _topologyType) {</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    topologyType_ = _topologyType;</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>}</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
+<div class="foldopen" id="foldopen00096" data-start="{" data-end="}">
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno"><a class="line" href="classPipelineStateObject.html#af5212fc8f88db65d9a303e8e8e0ac349">   96</a></span><a class="code hl_class" href="classPipelineStateObject.html">PipelineStateObject</a>&amp; <a class="code hl_function" href="classPipelineStateObject.html#af5212fc8f88db65d9a303e8e8e0ac349">PipelineStateObject::SetTopologyType</a>(<span class="keyword">const</span> D3D12_PRIMITIVE_TOPOLOGY_TYPE _topologyType) {</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    topologyType_ = _topologyType;</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>}</div>
 </div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span> </div>
-<div class="foldopen" id="foldopen00100" data-start="{" data-end="}">
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno"><a class="line" href="classPipelineStateObject.html#ad55af72a3623f3baac68d90e0a83db96">  100</a></span><a class="code hl_class" href="classPipelineStateObject.html">PipelineStateObject</a>&amp; <a class="code hl_function" href="classPipelineStateObject.html#ad55af72a3623f3baac68d90e0a83db96">PipelineStateObject::SetDSVFormat</a>(DXGI_FORMAT _format) {</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    desc_.DSVFormat = _format;</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>}</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
+<div class="foldopen" id="foldopen00101" data-start="{" data-end="}">
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno"><a class="line" href="classPipelineStateObject.html#ad55af72a3623f3baac68d90e0a83db96">  101</a></span><a class="code hl_class" href="classPipelineStateObject.html">PipelineStateObject</a>&amp; <a class="code hl_function" href="classPipelineStateObject.html#ad55af72a3623f3baac68d90e0a83db96">PipelineStateObject::SetDSVFormat</a>(DXGI_FORMAT _format) {</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    desc_.DSVFormat = _format;</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>}</div>
 </div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
-<div class="foldopen" id="foldopen00105" data-start="{" data-end="}">
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno"><a class="line" href="classPipelineStateObject.html#a3b91de42c53a7aaa3fefa5e1f85b6e91">  105</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classPipelineStateObject.html#a3b91de42c53a7aaa3fefa5e1f85b6e91">PipelineStateObject::Create</a>() {</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    desc_.pRootSignature = rootSignature_.<a class="code hl_function" href="classRootSignature.html#a1604250a85568942f6db38a3be911fe9">Get</a>();</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    desc_.InputLayout = inputLayout_.<a class="code hl_function" href="classInputLayout.html#aee3138e7fd5c1cbbd5d0c721d56545ac">Get</a>();</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    desc_.BlendState = blendDesc_;</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    desc_.VS = { shader_-&gt;GetVertexShader()-&gt;GetBufferPointer(), shader_-&gt;GetVertexShader()-&gt;GetBufferSize() };</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    desc_.RasterizerState = rasterizer_;</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    desc_.PS = { shader_-&gt;GetPixelShader()-&gt;GetBufferPointer(), shader_-&gt;GetPixelShader()-&gt;GetBufferSize() };</div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    desc_.DepthStencilState = depthStencilDesc_;</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span> </div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    desc_.NumRenderTargets = 1;</div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    desc_.RTVFormats[0] = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;</div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span> </div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    desc_.PrimitiveTopologyType = topologyType_;</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    desc_.SampleDesc.Count = 1;</div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    desc_.SampleMask = D3D12_DEFAULT_SAMPLE_MASK;</div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>    <span class="comment">// Setting more options</span></div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span> </div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    HRESULT hr = adapter_-&gt;GetDevice()-&gt;CreateGraphicsPipelineState(&amp;desc_, IID_PPV_ARGS(&amp;pso_));</div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    <span class="keywordflow">if</span> (FAILED(hr)){</div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>        <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, <span class="stringliteral">&quot;Failed to create pipeline state object&quot;</span>);</div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>        Utils::Alert(<span class="stringliteral">&quot;Failed to create pipeline state object&quot;</span>);</div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>        <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    }</div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>, <span class="stringliteral">&quot;Pipeline state object created successfully&quot;</span>);</div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>}</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
+<div class="foldopen" id="foldopen00106" data-start="{" data-end="}">
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno"><a class="line" href="classPipelineStateObject.html#a82a4e509d890803b9f215a0650b11da1">  106</a></span><a class="code hl_class" href="classPipelineStateObject.html">PipelineStateObject</a>&amp; <a class="code hl_function" href="classPipelineStateObject.html#a82a4e509d890803b9f215a0650b11da1">PipelineStateObject::SetRTVFormat</a>(DXGI_FORMAT _format, UINT _numTargets) {</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    rtvFormat_ = _format;</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    numRenderTargets_ = _numTargets;</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>}</div>
 </div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span> </div>
-<div class="foldopen" id="foldopen00131" data-start="{" data-end="}">
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno"><a class="line" href="classPipelineStateObject.html#a3891084de2a3929eeb491ed042ed03ca">  131</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classPipelineStateObject.html#a3891084de2a3929eeb491ed042ed03ca">PipelineStateObject::DrawCall</a>()<span class="keyword"> const </span>{</div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    <span class="keywordflow">if</span> (!adapter_ || !pso_ || !rootSignature_.<a class="code hl_function" href="classRootSignature.html#a1604250a85568942f6db38a3be911fe9">Get</a>()) {</div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>        <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, <span class="stringliteral">&quot;PipelineStateObject is not properly initialized&quot;</span>);</div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>        <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    }</div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span> </div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>    adapter_-&gt;GetCommandList()-&gt;SetGraphicsRootSignature(rootSignature_.<a class="code hl_function" href="classRootSignature.html#a1604250a85568942f6db38a3be911fe9">Get</a>());</div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>    adapter_-&gt;GetCommandList()-&gt;SetPipelineState(pso_.Get());</div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>}</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span> </div>
+<div class="foldopen" id="foldopen00112" data-start="{" data-end="}">
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno"><a class="line" href="classPipelineStateObject.html#a3b91de42c53a7aaa3fefa5e1f85b6e91">  112</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classPipelineStateObject.html#a3b91de42c53a7aaa3fefa5e1f85b6e91">PipelineStateObject::Create</a>() {</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    desc_.pRootSignature = rootSignature_.<a class="code hl_function" href="classRootSignature.html#a1604250a85568942f6db38a3be911fe9">Get</a>();</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    desc_.InputLayout = inputLayout_.<a class="code hl_function" href="classInputLayout.html#aee3138e7fd5c1cbbd5d0c721d56545ac">Get</a>();</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    desc_.BlendState = blendDesc_;</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    desc_.VS = { shader_-&gt;GetVertexShader()-&gt;GetBufferPointer(), shader_-&gt;GetVertexShader()-&gt;GetBufferSize() };</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    desc_.RasterizerState = rasterizer_;</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    desc_.PS = { shader_-&gt;GetPixelShader()-&gt;GetBufferPointer(), shader_-&gt;GetPixelShader()-&gt;GetBufferSize() };</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    desc_.DepthStencilState = depthStencilDesc_;</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span> </div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    desc_.NumRenderTargets = numRenderTargets_;</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    desc_.RTVFormats[0] = (numRenderTargets_ &gt; 0) ? rtvFormat_ : DXGI_FORMAT_UNKNOWN;</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span> </div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    desc_.PrimitiveTopologyType = topologyType_;</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    desc_.SampleDesc.Count = 1;</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    desc_.SampleMask = D3D12_DEFAULT_SAMPLE_MASK;</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    <span class="comment">// Setting more options</span></div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span> </div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>    HRESULT hr = adapter_-&gt;GetDevice()-&gt;CreateGraphicsPipelineState(&amp;desc_, IID_PPV_ARGS(&amp;pso_));</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>    <span class="keywordflow">if</span> (FAILED(hr)){</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>        <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, <span class="stringliteral">&quot;Failed to create pipeline state object&quot;</span>);</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>        Utils::Alert(<span class="stringliteral">&quot;Failed to create pipeline state object&quot;</span>);</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>    }</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>, <span class="stringliteral">&quot;Pipeline state object created successfully&quot;</span>);</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>}</div>
+</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span> </div>
+<div class="foldopen" id="foldopen00138" data-start="{" data-end="}">
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno"><a class="line" href="classPipelineStateObject.html#a3891084de2a3929eeb491ed042ed03ca">  138</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classPipelineStateObject.html#a3891084de2a3929eeb491ed042ed03ca">PipelineStateObject::DrawCall</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>    <span class="keywordflow">if</span> (!adapter_ || !pso_ || !rootSignature_.<a class="code hl_function" href="classRootSignature.html#a1604250a85568942f6db38a3be911fe9">Get</a>()) {</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>        <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, <span class="stringliteral">&quot;PipelineStateObject is not properly initialized&quot;</span>);</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>    }</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span> </div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>    adapter_-&gt;GetCommandList()-&gt;SetGraphicsRootSignature(rootSignature_.<a class="code hl_function" href="classRootSignature.html#a1604250a85568942f6db38a3be911fe9">Get</a>());</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>    adapter_-&gt;GetCommandList()-&gt;SetPipelineState(pso_.Get());</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>}</div>
 </div>
 <div class="ttc" id="aBlendMode_8hpp_html_a30323fa90e24ca484998b9fba6c40e85"><div class="ttname"><a href="BlendMode_8hpp.html#a30323fa90e24ca484998b9fba6c40e85">BlendMode</a></div><div class="ttdeci">BlendMode</div><div class="ttdef"><b>Definition</b> <a href="BlendMode_8hpp_source.html#l00004">BlendMode.hpp:4</a></div></div>
 <div class="ttc" id="aBlendMode_8hpp_html_a30323fa90e24ca484998b9fba6c40e85a002101f8725e5c78d9f30d87f3fa4c87"><div class="ttname"><a href="BlendMode_8hpp.html#a30323fa90e24ca484998b9fba6c40e85a002101f8725e5c78d9f30d87f3fa4c87">BlendMode::ALPHA</a></div><div class="ttdeci">@ ALPHA</div></div>
@@ -274,17 +283,18 @@ $(document).ready(function(){initNavTree('PipelineStateObject_8cpp_source.html',
 <div class="ttc" id="aclassLog_html_afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3"><div class="ttname"><a href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a></div><div class="ttdeci">@ INFO</div></div>
 <div class="ttc" id="aclassLog_html_afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482"><div class="ttname"><a href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a></div><div class="ttdeci">@ ERR</div></div>
 <div class="ttc" id="aclassPipelineStateObject_html"><div class="ttname"><a href="classPipelineStateObject.html">PipelineStateObject</a></div><div class="ttdef"><b>Definition</b> <a href="PipelineStateObject_8hpp_source.html#l00012">PipelineStateObject.hpp:12</a></div></div>
-<div class="ttc" id="aclassPipelineStateObject_html_a01f1a21d8613479c9a8ca43b6f551768"><div class="ttname"><a href="classPipelineStateObject.html#a01f1a21d8613479c9a8ca43b6f551768">PipelineStateObject::SetRasterizer</a></div><div class="ttdeci">PipelineStateObject &amp; SetRasterizer(const D3D12_RASTERIZER_DESC _rasterizer)</div><div class="ttdef"><b>Definition</b> <a href="PipelineStateObject_8cpp_source.html#l00080">PipelineStateObject.cpp:80</a></div></div>
+<div class="ttc" id="aclassPipelineStateObject_html_a01f1a21d8613479c9a8ca43b6f551768"><div class="ttname"><a href="classPipelineStateObject.html#a01f1a21d8613479c9a8ca43b6f551768">PipelineStateObject::SetRasterizer</a></div><div class="ttdeci">PipelineStateObject &amp; SetRasterizer(const D3D12_RASTERIZER_DESC _rasterizer)</div><div class="ttdef"><b>Definition</b> <a href="PipelineStateObject_8cpp_source.html#l00081">PipelineStateObject.cpp:81</a></div></div>
 <div class="ttc" id="aclassPipelineStateObject_html_a07a5c5ae4bde1b7d37f2fc43e2f68a33"><div class="ttname"><a href="classPipelineStateObject.html#a07a5c5ae4bde1b7d37f2fc43e2f68a33">PipelineStateObject::SetBlend</a></div><div class="ttdeci">PipelineStateObject &amp; SetBlend(const D3D12_BLEND_DESC &amp;_blendDesc)</div><div class="ttdef"><b>Definition</b> <a href="PipelineStateObject_8cpp_source.html#l00021">PipelineStateObject.cpp:21</a></div></div>
-<div class="ttc" id="aclassPipelineStateObject_html_a0e3db04b2a4f2e2fc8ec63b308186121"><div class="ttname"><a href="classPipelineStateObject.html#a0e3db04b2a4f2e2fc8ec63b308186121">PipelineStateObject::SetDepthStencil</a></div><div class="ttdeci">PipelineStateObject &amp; SetDepthStencil(const D3D12_DEPTH_STENCIL_DESC &amp;_depthStencilDesc)</div><div class="ttdef"><b>Definition</b> <a href="PipelineStateObject_8cpp_source.html#l00085">PipelineStateObject.cpp:85</a></div></div>
-<div class="ttc" id="aclassPipelineStateObject_html_a3891084de2a3929eeb491ed042ed03ca"><div class="ttname"><a href="classPipelineStateObject.html#a3891084de2a3929eeb491ed042ed03ca">PipelineStateObject::DrawCall</a></div><div class="ttdeci">void DrawCall() const</div><div class="ttdef"><b>Definition</b> <a href="PipelineStateObject_8cpp_source.html#l00131">PipelineStateObject.cpp:131</a></div></div>
-<div class="ttc" id="aclassPipelineStateObject_html_a3b91de42c53a7aaa3fefa5e1f85b6e91"><div class="ttname"><a href="classPipelineStateObject.html#a3b91de42c53a7aaa3fefa5e1f85b6e91">PipelineStateObject::Create</a></div><div class="ttdeci">void Create()</div><div class="ttdef"><b>Definition</b> <a href="PipelineStateObject_8cpp_source.html#l00105">PipelineStateObject.cpp:105</a></div></div>
+<div class="ttc" id="aclassPipelineStateObject_html_a0e3db04b2a4f2e2fc8ec63b308186121"><div class="ttname"><a href="classPipelineStateObject.html#a0e3db04b2a4f2e2fc8ec63b308186121">PipelineStateObject::SetDepthStencil</a></div><div class="ttdeci">PipelineStateObject &amp; SetDepthStencil(const D3D12_DEPTH_STENCIL_DESC &amp;_depthStencilDesc)</div><div class="ttdef"><b>Definition</b> <a href="PipelineStateObject_8cpp_source.html#l00086">PipelineStateObject.cpp:86</a></div></div>
+<div class="ttc" id="aclassPipelineStateObject_html_a3891084de2a3929eeb491ed042ed03ca"><div class="ttname"><a href="classPipelineStateObject.html#a3891084de2a3929eeb491ed042ed03ca">PipelineStateObject::DrawCall</a></div><div class="ttdeci">void DrawCall() const</div><div class="ttdef"><b>Definition</b> <a href="PipelineStateObject_8cpp_source.html#l00138">PipelineStateObject.cpp:138</a></div></div>
+<div class="ttc" id="aclassPipelineStateObject_html_a3b91de42c53a7aaa3fefa5e1f85b6e91"><div class="ttname"><a href="classPipelineStateObject.html#a3b91de42c53a7aaa3fefa5e1f85b6e91">PipelineStateObject::Create</a></div><div class="ttdeci">void Create()</div><div class="ttdef"><b>Definition</b> <a href="PipelineStateObject_8cpp_source.html#l00112">PipelineStateObject.cpp:112</a></div></div>
+<div class="ttc" id="aclassPipelineStateObject_html_a82a4e509d890803b9f215a0650b11da1"><div class="ttname"><a href="classPipelineStateObject.html#a82a4e509d890803b9f215a0650b11da1">PipelineStateObject::SetRTVFormat</a></div><div class="ttdeci">PipelineStateObject &amp; SetRTVFormat(DXGI_FORMAT _format, UINT _numTargets=1)</div><div class="ttdef"><b>Definition</b> <a href="PipelineStateObject_8cpp_source.html#l00106">PipelineStateObject.cpp:106</a></div></div>
 <div class="ttc" id="aclassPipelineStateObject_html_a92ec46b68bbd6a7c635486af8abeeb70"><div class="ttname"><a href="classPipelineStateObject.html#a92ec46b68bbd6a7c635486af8abeeb70">PipelineStateObject::PipelineStateObject</a></div><div class="ttdeci">PipelineStateObject()=delete</div></div>
 <div class="ttc" id="aclassPipelineStateObject_html_aa294986fcc503fd585d23057a5c73c5e"><div class="ttname"><a href="classPipelineStateObject.html#aa294986fcc503fd585d23057a5c73c5e">PipelineStateObject::SetInputLayout</a></div><div class="ttdeci">PipelineStateObject &amp; SetInputLayout(const InputLayout &amp;_inputLayout)</div><div class="ttdef"><b>Definition</b> <a href="PipelineStateObject_8cpp_source.html#l00016">PipelineStateObject.cpp:16</a></div></div>
-<div class="ttc" id="aclassPipelineStateObject_html_ab87a69f4981ceef543b26eb592e4dfc8"><div class="ttname"><a href="classPipelineStateObject.html#ab87a69f4981ceef543b26eb592e4dfc8">PipelineStateObject::SetShader</a></div><div class="ttdeci">PipelineStateObject &amp; SetShader(std::unique_ptr&lt; Shader &gt; _shader)</div><div class="ttdef"><b>Definition</b> <a href="PipelineStateObject_8cpp_source.html#l00090">PipelineStateObject.cpp:90</a></div></div>
+<div class="ttc" id="aclassPipelineStateObject_html_ab87a69f4981ceef543b26eb592e4dfc8"><div class="ttname"><a href="classPipelineStateObject.html#ab87a69f4981ceef543b26eb592e4dfc8">PipelineStateObject::SetShader</a></div><div class="ttdeci">PipelineStateObject &amp; SetShader(std::unique_ptr&lt; Shader &gt; _shader)</div><div class="ttdef"><b>Definition</b> <a href="PipelineStateObject_8cpp_source.html#l00091">PipelineStateObject.cpp:91</a></div></div>
 <div class="ttc" id="aclassPipelineStateObject_html_ace4d67541b8c88a53733ad677ced0239"><div class="ttname"><a href="classPipelineStateObject.html#ace4d67541b8c88a53733ad677ced0239">PipelineStateObject::SetRootSignature</a></div><div class="ttdeci">PipelineStateObject &amp; SetRootSignature(const RootSignature &amp;_rootSignature)</div><div class="ttdef"><b>Definition</b> <a href="PipelineStateObject_8cpp_source.html#l00010">PipelineStateObject.cpp:10</a></div></div>
-<div class="ttc" id="aclassPipelineStateObject_html_ad55af72a3623f3baac68d90e0a83db96"><div class="ttname"><a href="classPipelineStateObject.html#ad55af72a3623f3baac68d90e0a83db96">PipelineStateObject::SetDSVFormat</a></div><div class="ttdeci">PipelineStateObject &amp; SetDSVFormat(DXGI_FORMAT _format)</div><div class="ttdef"><b>Definition</b> <a href="PipelineStateObject_8cpp_source.html#l00100">PipelineStateObject.cpp:100</a></div></div>
-<div class="ttc" id="aclassPipelineStateObject_html_af5212fc8f88db65d9a303e8e8e0ac349"><div class="ttname"><a href="classPipelineStateObject.html#af5212fc8f88db65d9a303e8e8e0ac349">PipelineStateObject::SetTopologyType</a></div><div class="ttdeci">PipelineStateObject &amp; SetTopologyType(D3D12_PRIMITIVE_TOPOLOGY_TYPE _topologyType)</div><div class="ttdef"><b>Definition</b> <a href="PipelineStateObject_8cpp_source.html#l00095">PipelineStateObject.cpp:95</a></div></div>
+<div class="ttc" id="aclassPipelineStateObject_html_ad55af72a3623f3baac68d90e0a83db96"><div class="ttname"><a href="classPipelineStateObject.html#ad55af72a3623f3baac68d90e0a83db96">PipelineStateObject::SetDSVFormat</a></div><div class="ttdeci">PipelineStateObject &amp; SetDSVFormat(DXGI_FORMAT _format)</div><div class="ttdef"><b>Definition</b> <a href="PipelineStateObject_8cpp_source.html#l00101">PipelineStateObject.cpp:101</a></div></div>
+<div class="ttc" id="aclassPipelineStateObject_html_af5212fc8f88db65d9a303e8e8e0ac349"><div class="ttname"><a href="classPipelineStateObject.html#af5212fc8f88db65d9a303e8e8e0ac349">PipelineStateObject::SetTopologyType</a></div><div class="ttdeci">PipelineStateObject &amp; SetTopologyType(D3D12_PRIMITIVE_TOPOLOGY_TYPE _topologyType)</div><div class="ttdef"><b>Definition</b> <a href="PipelineStateObject_8cpp_source.html#l00096">PipelineStateObject.cpp:96</a></div></div>
 <div class="ttc" id="aclassRootSignature_html"><div class="ttname"><a href="classRootSignature.html">RootSignature</a></div><div class="ttdef"><b>Definition</b> <a href="RootSignature_8hpp_source.html#l00008">RootSignature.hpp:8</a></div></div>
 <div class="ttc" id="aclassRootSignature_html_a1604250a85568942f6db38a3be911fe9"><div class="ttname"><a href="classRootSignature.html#a1604250a85568942f6db38a3be911fe9">RootSignature::Get</a></div><div class="ttdeci">ID3D12RootSignature * Get() const</div><div class="ttdef"><b>Definition</b> <a href="RootSignature_8cpp_source.html#l00062">RootSignature.cpp:62</a></div></div>
 <div class="ttc" id="aclassRootSignature_html_aacca0a460cf7d27886497917cff3e5c9"><div class="ttname"><a href="classRootSignature.html#aacca0a460cf7d27886497917cff3e5c9">RootSignature::Create</a></div><div class="ttdeci">void Create(ID3D12Device *_device)</div><div class="ttdef"><b>Definition</b> <a href="RootSignature_8cpp_source.html#l00016">RootSignature.cpp:16</a></div></div>
@@ -294,7 +304,7 @@ $(document).ready(function(){initNavTree('PipelineStateObject_8cpp_source.html',
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_31399d34f22961890ce23f7132fb3e96.html">DirectX</a></li><li class="navelem"><a class="el" href="dir_5e152dc6ce4833044bc05fc6d25a6808.html">GraphicsPipeline</a></li><li class="navelem"><a class="el" href="dir_e872fbfcf4dac2296573d0e1ccfba4a6.html">Object</a></li><li class="navelem"><a class="el" href="PipelineStateObject_8cpp.html">PipelineStateObject.cpp</a></li>
-    <li class="footer">2026年04月20日(月) 02時32分52秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年05月11日(月) 05時32分01秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

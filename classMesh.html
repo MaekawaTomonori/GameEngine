@@ -114,6 +114,9 @@ $(document).ready(function(){initNavTree('classMesh.html',''); initResizable(); 
 <tr class="memitem:a79dd0da287abc9f71c6cc4280fbfccf4" id="r_a79dd0da287abc9f71c6cc4280fbfccf4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMesh.html#a79dd0da287abc9f71c6cc4280fbfccf4">Draw</a> (uint16_t _instanceCount=1) const</td></tr>
 <tr class="memdesc:a79dd0da287abc9f71c6cc4280fbfccf4"><td class="mdescLeft">&#160;</td><td class="mdescRight">メッシュを描画  <br /></td></tr>
 <tr class="separator:a79dd0da287abc9f71c6cc4280fbfccf4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04e8dd4ed5bfdaedc456792833fc1d29" id="r_a04e8dd4ed5bfdaedc456792833fc1d29"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMesh.html#a04e8dd4ed5bfdaedc456792833fc1d29">DrawGeometryOnly</a> () const</td></tr>
+<tr class="memdesc:a04e8dd4ed5bfdaedc456792833fc1d29"><td class="mdescLeft">&#160;</td><td class="mdescRight">ジオメトリのみを描画（シャドウパス用） ルートパラメータを一切設定しない。呼び出し元が事前に設定すること。  <br /></td></tr>
+<tr class="separator:a04e8dd4ed5bfdaedc456792833fc1d29"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa4273b914190bf357a8e5783f507dbf8" id="r_aa4273b914190bf357a8e5783f507dbf8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMesh.html#aa4273b914190bf357a8e5783f507dbf8">Debug</a> ()</td></tr>
 <tr class="memdesc:aa4273b914190bf357a8e5783f507dbf8"><td class="mdescLeft">&#160;</td><td class="mdescRight">デバッグ情報の表示  <br /></td></tr>
 <tr class="separator:aa4273b914190bf357a8e5783f507dbf8"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -157,7 +160,7 @@ $(document).ready(function(){initNavTree('classMesh.html',''); initResizable(); 
 
 <p>デバッグ情報の表示 </p>
 
-<p class="definition"> <a class="el" href="Mesh_8cpp_source.html">Mesh.cpp</a> の <a class="el" href="Mesh_8cpp_source.html#l00082">82</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Mesh_8cpp_source.html">Mesh.cpp</a> の <a class="el" href="Mesh_8cpp_source.html#l00096">96</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -179,7 +182,30 @@ $(document).ready(function(){initNavTree('classMesh.html',''); initResizable(); 
 
 <p>メッシュを描画 </p>
 
-<p class="definition"> <a class="el" href="Mesh_8cpp_source.html">Mesh.cpp</a> の <a class="el" href="Mesh_8cpp_source.html#l00062">62</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Mesh_8cpp_source.html">Mesh.cpp</a> の <a class="el" href="Mesh_8cpp_source.html#l00076">76</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="MeshData_8hpp_source.html#l00018">MeshData::indices</a>, <a class="el" href="MeshData_8hpp_source.html#l00017">MeshData::vertices</a>.</p>
+
+</div>
+</div>
+<a id="a04e8dd4ed5bfdaedc456792833fc1d29" name="a04e8dd4ed5bfdaedc456792833fc1d29"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a04e8dd4ed5bfdaedc456792833fc1d29">&#9670;&#160;</a></span>DrawGeometryOnly()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Mesh::DrawGeometryOnly </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>ジオメトリのみを描画（シャドウパス用） ルートパラメータを一切設定しない。呼び出し元が事前に設定すること。 </p>
+
+<p class="definition"> <a class="el" href="Mesh_8cpp_source.html">Mesh.cpp</a> の <a class="el" href="Mesh_8cpp_source.html#l00056">56</a> 行目に定義があります。</p>
 
 <p class="reference">参照先 <a class="el" href="MeshData_8hpp_source.html#l00018">MeshData::indices</a>, <a class="el" href="MeshData_8hpp_source.html#l00017">MeshData::vertices</a>.</p>
 
@@ -201,7 +227,7 @@ $(document).ready(function(){initNavTree('classMesh.html',''); initResizable(); 
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="Mesh_8cpp_source.html">Mesh.cpp</a> の <a class="el" href="Mesh_8cpp_source.html#l00172">172</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Mesh_8cpp_source.html">Mesh.cpp</a> の <a class="el" href="Mesh_8cpp_source.html#l00186">186</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -223,7 +249,7 @@ $(document).ready(function(){initNavTree('classMesh.html',''); initResizable(); 
 <p>メッシュデータを取得 </p>
 <dl class="section return"><dt>戻り値</dt><dd>メッシュデータ </dd></dl>
 
-<p class="definition"> <a class="el" href="Mesh_8cpp_source.html">Mesh.cpp</a> の <a class="el" href="Mesh_8cpp_source.html#l00150">150</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Mesh_8cpp_source.html">Mesh.cpp</a> の <a class="el" href="Mesh_8cpp_source.html#l00164">164</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -299,7 +325,7 @@ $(document).ready(function(){initNavTree('classMesh.html',''); initResizable(); 
   </dd>
 </dl>
 
-<p class="definition"> <a class="el" href="Mesh_8cpp_source.html">Mesh.cpp</a> の <a class="el" href="Mesh_8cpp_source.html#l00168">168</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Mesh_8cpp_source.html">Mesh.cpp</a> の <a class="el" href="Mesh_8cpp_source.html#l00182">182</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -327,7 +353,7 @@ $(document).ready(function(){initNavTree('classMesh.html',''); initResizable(); 
   </dd>
 </dl>
 
-<p class="definition"> <a class="el" href="Mesh_8cpp_source.html">Mesh.cpp</a> の <a class="el" href="Mesh_8cpp_source.html#l00154">154</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Mesh_8cpp_source.html">Mesh.cpp</a> の <a class="el" href="Mesh_8cpp_source.html#l00168">168</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -355,7 +381,7 @@ $(document).ready(function(){initNavTree('classMesh.html',''); initResizable(); 
   </dd>
 </dl>
 
-<p class="definition"> <a class="el" href="Mesh_8cpp_source.html">Mesh.cpp</a> の <a class="el" href="Mesh_8cpp_source.html#l00162">162</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Mesh_8cpp_source.html">Mesh.cpp</a> の <a class="el" href="Mesh_8cpp_source.html#l00176">176</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -383,7 +409,7 @@ $(document).ready(function(){initNavTree('classMesh.html',''); initResizable(); 
   </dd>
 </dl>
 
-<p class="definition"> <a class="el" href="Mesh_8cpp_source.html">Mesh.cpp</a> の <a class="el" href="Mesh_8cpp_source.html#l00146">146</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Mesh_8cpp_source.html">Mesh.cpp</a> の <a class="el" href="Mesh_8cpp_source.html#l00160">160</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -404,7 +430,7 @@ $(document).ready(function(){initNavTree('classMesh.html',''); initResizable(); 
 
 <p>メッシュの更新処理 </p>
 
-<p class="definition"> <a class="el" href="Mesh_8cpp_source.html">Mesh.cpp</a> の <a class="el" href="Mesh_8cpp_source.html#l00056">56</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Mesh_8cpp_source.html">Mesh.cpp</a> の <a class="el" href="Mesh_8cpp_source.html#l00070">70</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -418,7 +444,7 @@ $(document).ready(function(){initNavTree('classMesh.html',''); initResizable(); 
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classMesh.html">Mesh</a></li>
-    <li class="footer">2026年04月20日(月) 02時32分52秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年05月11日(月) 05時32分01秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

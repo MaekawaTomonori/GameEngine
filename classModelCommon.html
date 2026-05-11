@@ -116,6 +116,14 @@ ModelCommon の継承関係図</div>
 <tr class="separator:a62676bc803883466bb245d434668d06f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4ad4834071e28461b02f11a0034ab960" id="r_a4ad4834071e28461b02f11a0034ab960"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelCommon.html#a4ad4834071e28461b02f11a0034ab960">RegisterSkinningDraw</a> (const std::function&lt; void()&gt; &amp;_command, bool _isApplyPostEffect=true)</td></tr>
 <tr class="separator:a4ad4834071e28461b02f11a0034ab960"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aefc8fca9de728eb26947da3e90c8f718" id="r_aefc8fca9de728eb26947da3e90c8f718"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelCommon.html#aefc8fca9de728eb26947da3e90c8f718">RegisterShadowDraw</a> (const std::string &amp;_id, const std::function&lt; void()&gt; &amp;_func)</td></tr>
+<tr class="separator:aefc8fca9de728eb26947da3e90c8f718"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb8f719d3e5c3e7a03944b07a63c1df1" id="r_abb8f719d3e5c3e7a03944b07a63c1df1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelCommon.html#abb8f719d3e5c3e7a03944b07a63c1df1">UnregisterShadowDraw</a> (const std::string &amp;_id)</td></tr>
+<tr class="separator:abb8f719d3e5c3e7a03944b07a63c1df1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a32e8662a3ef23d366bd4c41eebd60619" id="r_a32e8662a3ef23d366bd4c41eebd60619"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelCommon.html#a32e8662a3ef23d366bd4c41eebd60619">ExecuteShadowDraw</a> () const</td></tr>
+<tr class="separator:a32e8662a3ef23d366bd4c41eebd60619"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a616882a8ecd8c3fb0d8774111c732f5b" id="r_a616882a8ecd8c3fb0d8774111c732f5b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelCommon.html#a616882a8ecd8c3fb0d8774111c732f5b">SetShadowBinding</a> (uint32_t _srvIndex, D3D12_GPU_VIRTUAL_ADDRESS _cbvAddress)</td></tr>
+<tr class="separator:a616882a8ecd8c3fb0d8774111c732f5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0d6ae38ec2b579e2447c342e77f41720" id="r_a0d6ae38ec2b579e2447c342e77f41720"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelCommon.html#a0d6ae38ec2b579e2447c342e77f41720">Draw</a> (<a class="el" href="classRenderer.html">Renderer</a> *_renderer) override</td></tr>
 <tr class="separator:a0d6ae38ec2b579e2447c342e77f41720"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ade04bb612cfb76cfe3351ec73c628009" id="r_ade04bb612cfb76cfe3351ec73c628009"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelCommon.html#ade04bb612cfb76cfe3351ec73c628009">DrawSkinning</a> () const</td></tr>
@@ -197,9 +205,9 @@ ModelCommon の継承関係図</div>
 
 <p><a class="el" href="classCommon.html#a24a9aa7c0ce1b85fa15471c3386d04cf">Common</a>を再実装しています。</p>
 
-<p class="definition"> <a class="el" href="ModelCommon_8cpp_source.html">ModelCommon.cpp</a> の <a class="el" href="ModelCommon_8cpp_source.html#l00310">310</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="ModelCommon_8cpp_source.html">ModelCommon.cpp</a> の <a class="el" href="ModelCommon_8cpp_source.html#l00348">348</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="Common_8hpp_source.html#l00024">Common::mutex_</a>, <a class="el" href="Common_8hpp_source.html#l00026">Common::pipeline_</a>, <a class="el" href="Renderer_8cpp_source.html#l00011">Renderer::Register()</a>.</p>
+<p class="reference">参照先 <a class="el" href="Common_8hpp_source.html#l00020">Common::adapter_</a>, <a class="el" href="Common_8hpp_source.html#l00024">Common::mutex_</a>, <a class="el" href="Common_8hpp_source.html#l00026">Common::pipeline_</a>, <a class="el" href="Renderer_8cpp_source.html#l00011">Renderer::Register()</a>, <a class="el" href="SRVManager_8cpp_source.html#l00082">SRVManager::SetGraphicsRootDescriptorTable()</a>.</p>
 
 </div>
 </div>
@@ -218,7 +226,7 @@ ModelCommon の継承関係図</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="ModelCommon_8cpp_source.html">ModelCommon.cpp</a> の <a class="el" href="ModelCommon_8cpp_source.html#l00383">383</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="ModelCommon_8cpp_source.html">ModelCommon.cpp</a> の <a class="el" href="ModelCommon_8cpp_source.html#l00432">432</a> 行目に定義があります。</p>
 
 <p class="reference">参照先 <a class="el" href="Common_8hpp_source.html#l00026">Common::pipeline_</a>.</p>
 
@@ -239,7 +247,28 @@ ModelCommon の継承関係図</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="ModelCommon_8cpp_source.html">ModelCommon.cpp</a> の <a class="el" href="ModelCommon_8cpp_source.html#l00387">387</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="ModelCommon_8cpp_source.html">ModelCommon.cpp</a> の <a class="el" href="ModelCommon_8cpp_source.html#l00436">436</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="a32e8662a3ef23d366bd4c41eebd60619" name="a32e8662a3ef23d366bd4c41eebd60619"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a32e8662a3ef23d366bd4c41eebd60619">&#9670;&#160;</a></span>ExecuteShadowDraw()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ModelCommon::ExecuteShadowDraw </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="ModelCommon_8cpp_source.html">ModelCommon.cpp</a> の <a class="el" href="ModelCommon_8cpp_source.html#l00337">337</a> 行目に定義があります。</p>
+
+<p class="reference">参照元 <a class="el" href="ShadowPass_8cpp_source.html#l00066">ShadowPass::Execute()</a>.</p>
 
 </div>
 </div>
@@ -266,7 +295,7 @@ ModelCommon の継承関係図</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="ModelCommon_8hpp_source.html">ModelCommon.hpp</a> の <a class="el" href="ModelCommon_8hpp_source.html#l00032">32</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="ModelCommon_8hpp_source.html">ModelCommon.hpp</a> の <a class="el" href="ModelCommon_8hpp_source.html#l00042">42</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -293,7 +322,7 @@ ModelCommon の継承関係図</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="ModelCommon_8hpp_source.html">ModelCommon.hpp</a> の <a class="el" href="ModelCommon_8hpp_source.html#l00035">35</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="ModelCommon_8hpp_source.html">ModelCommon.hpp</a> の <a class="el" href="ModelCommon_8hpp_source.html#l00045">45</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -335,7 +364,39 @@ ModelCommon の継承関係図</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="ModelCommon_8cpp_source.html">ModelCommon.cpp</a> の <a class="el" href="ModelCommon_8cpp_source.html#l00391">391</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="ModelCommon_8cpp_source.html">ModelCommon.cpp</a> の <a class="el" href="ModelCommon_8cpp_source.html#l00440">440</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="aefc8fca9de728eb26947da3e90c8f718" name="aefc8fca9de728eb26947da3e90c8f718"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aefc8fca9de728eb26947da3e90c8f718">&#9670;&#160;</a></span>RegisterShadowDraw()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ModelCommon::RegisterShadowDraw </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::function&lt; void()&gt; &amp;&#160;</td>
+          <td class="paramname"><em>_func</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="ModelCommon_8cpp_source.html">ModelCommon.cpp</a> の <a class="el" href="ModelCommon_8cpp_source.html#l00327">327</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="Common_8hpp_source.html#l00024">Common::mutex_</a>.</p>
 
 </div>
 </div>
@@ -365,7 +426,7 @@ ModelCommon の継承関係図</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="ModelCommon_8cpp_source.html">ModelCommon.cpp</a> の <a class="el" href="ModelCommon_8cpp_source.html#l00305">305</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="ModelCommon_8cpp_source.html">ModelCommon.cpp</a> の <a class="el" href="ModelCommon_8cpp_source.html#l00322">322</a> 行目に定義があります。</p>
 
 <p class="reference">参照先 <a class="el" href="Common_8hpp_source.html#l00024">Common::mutex_</a>.</p>
 
@@ -397,7 +458,59 @@ ModelCommon の継承関係図</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="ModelCommon_8cpp_source.html">ModelCommon.cpp</a> の <a class="el" href="ModelCommon_8cpp_source.html#l00300">300</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="ModelCommon_8cpp_source.html">ModelCommon.cpp</a> の <a class="el" href="ModelCommon_8cpp_source.html#l00317">317</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="Common_8hpp_source.html#l00024">Common::mutex_</a>.</p>
+
+</div>
+</div>
+<a id="a616882a8ecd8c3fb0d8774111c732f5b" name="a616882a8ecd8c3fb0d8774111c732f5b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a616882a8ecd8c3fb0d8774111c732f5b">&#9670;&#160;</a></span>SetShadowBinding()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ModelCommon::SetShadowBinding </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>_srvIndex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">D3D12_GPU_VIRTUAL_ADDRESS&#160;</td>
+          <td class="paramname"><em>_cbvAddress</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="ModelCommon_8cpp_source.html">ModelCommon.cpp</a> の <a class="el" href="ModelCommon_8cpp_source.html#l00343">343</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="abb8f719d3e5c3e7a03944b07a63c1df1" name="abb8f719d3e5c3e7a03944b07a63c1df1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb8f719d3e5c3e7a03944b07a63c1df1">&#9670;&#160;</a></span>UnregisterShadowDraw()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ModelCommon::UnregisterShadowDraw </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>_id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="ModelCommon_8cpp_source.html">ModelCommon.cpp</a> の <a class="el" href="ModelCommon_8cpp_source.html#l00332">332</a> 行目に定義があります。</p>
 
 <p class="reference">参照先 <a class="el" href="Common_8hpp_source.html#l00024">Common::mutex_</a>.</p>
 
@@ -413,7 +526,7 @@ ModelCommon の継承関係図</div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classModelCommon.html">ModelCommon</a></li>
-    <li class="footer">2026年04月20日(月) 02時32分52秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年05月11日(月) 05時32分01秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>
