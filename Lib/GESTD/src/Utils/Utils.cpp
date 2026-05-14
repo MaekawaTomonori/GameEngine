@@ -56,9 +56,9 @@ namespace Utils {
 #endif
     }
 
-    void Alert(const std::string &msg) {
+    void Alert(const std::string &_msg) {
 #ifdef _WIN32
-        MessageBoxA(nullptr, msg.c_str(), msg.c_str(), MB_ICONSTOP);
+        MessageBoxA(nullptr, _msg.c_str(), _msg.c_str(), MB_ICONSTOP);
 #endif
     }
 
@@ -144,6 +144,10 @@ namespace Utils {
     }
 
     std::vector<std::string> GetFileNames(const std::string& _directory, const std::string& _extension, bool _includeExtension) {
+        if (!std::filesystem::exists(_directory) || !std::filesystem::is_directory(_directory)) {
+            return {};
+        }
+
         std::vector<std::string> files;
 
         for (const auto& entry : std::filesystem::recursive_directory_iterator(_directory)) {

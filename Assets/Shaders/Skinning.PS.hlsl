@@ -31,7 +31,8 @@ struct PointLight{
     float intensity;
     float radius;
     float decay;
-    float2 pad;
+    uint castShadow;
+    float pad;
 };
 StructuredBuffer<PointLight> gPointLight : register(t3);
 
@@ -56,6 +57,56 @@ struct LightCount{
 ConstantBuffer<LightCount> gLightCount : register(b5);
 
 TextureCube<float32_t4> gEnvironment : register(t5);
+
+TextureCube<float> gShadowMap : register(t6);
+SamplerState gShadowSampler : register(s1);
+
+struct ShadowData {
+    float3 lightPos;
+    float  farPlane;
+};
+ConstantBuffer<ShadowData> gShadowData : register(b6);
+
+float SampleShadowPCF(float3 worldPos, float3 normal) {
+    float3 lightDir    = normalize(gShadowData.lightPos - worldPos);
+    float  normalBias  = 0.05f * (1.0f - saturate(dot(normal, lightDir)));
+    float3 biasedPos   = worldPos + normal * normalBias;
+
+    float3 toLight      = biasedPos - gShadowData.lightPos;
+    float  currentDepth = length(toLight) / gShadowData.farPlane - 0.005f;
+    float3 dir          = normalize(toLight);
+
+    float3 up    = abs(dir.y) < 0.9f ? float3(0, 1, 0) : float3(1, 0, 0);
+    float3 right = normalize(cross(up, dir));
+    float3 fwd   = cross(dir, right);
+
+    float angle   = frac(sin(dot(worldPos.xz, float2(127.1f, 311.7f))) * 43758.5453f) * 6.2831f;
+    float2 jitter = float2(cos(angle), sin(angle));
+
+    float softness = 0.005f;
+    const float2 disk[8] = {
+        float2( 0.000f,  1.000f),
+        float2( 0.707f,  0.707f),
+        float2( 1.000f,  0.000f),
+        float2( 0.707f, -0.707f),
+        float2( 0.000f, -1.000f),
+        float2(-0.707f, -0.707f),
+        float2(-1.000f,  0.000f),
+        float2(-0.707f,  0.707f),
+    };
+
+    float lit = 0.0f;
+    [unroll]
+    for (int i = 0; i < 8; ++i) {
+        float2 rotated = float2(
+            disk[i].x * jitter.x - disk[i].y * jitter.y,
+            disk[i].x * jitter.y + disk[i].y * jitter.x
+        );
+        float3 offset = (right * rotated.x + fwd * rotated.y) * softness;
+        lit += currentDepth < gShadowMap.Sample(gShadowSampler, dir + offset) ? 1.0f : 0.0f;
+    }
+    return lit * (1.0f / 8.0f);
+}
 
 struct PixelShaderOutput{
     float32_t4 color : SV_TARGET0;
@@ -113,8 +164,7 @@ PixelShaderOutput main(VertexShaderOutput input)
 
         float invDist = rsqrt(max(distSq, 1.0e-4f));
         float32_t3 pointDirection = toLight * invDist;
-        float factor = saturate(1.0f - distSq / radiusSq);
-        factor *= factor;
+        float factor = pow(saturate(1.0f - distSq / radiusSq), gPointLight[j].decay);
 
         float cosP = pow(dot(normal, pointDirection) * 0.5f + 0.5f, 2.0f);
 
@@ -124,7 +174,11 @@ PixelShaderOutput main(VertexShaderOutput input)
         float32_t3 pointDiffuse = rgb * gPointLight[j].color.rgb * cosP * gPointLight[j].intensity * factor;
         float32_t3 pointSpecular = gPointLight[j].color.rgb * gPointLight[j].intensity * factor * specularPowP * float32_t3(1.f, 1.f, 1.f);
 
-        col += pointDiffuse + pointSpecular;
+        float shadowFactor = 1.0f;
+        if (gPointLight[j].castShadow != 0) {
+            shadowFactor = SampleShadowPCF(input.worldPosition, normal);
+        }
+        col += (pointDiffuse + pointSpecular) * lerp(0.3f, 1.0f, shadowFactor);
     }
 
     for (uint k = 0; k < gLightCount.slCount; ++k) {

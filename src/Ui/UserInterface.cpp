@@ -9,7 +9,6 @@
 #include "Log.hpp"
 #include "Utils.hpp"
 #include "Pattern/Singleton.hpp"
-#include "ScreenUnits.hpp"
 #include "SpriteElement.hpp"
 #include "TextElement.hpp"
 #include "Ui/Module/KeyboardModule.hpp"

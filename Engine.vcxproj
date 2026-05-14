@@ -201,6 +201,8 @@
     <ClInclude Include="src\Scene\Transition\Fade.hpp" />
     <ClInclude Include="src\Scheduler\Scheduler.hpp" />
     <ClInclude Include="src\Screen\Screen.hpp" />
+    <ClInclude Include="src\Shadow\ShadowCubeMap.hpp" />
+    <ClInclude Include="src\Shadow\ShadowPass.hpp" />
     <ClInclude Include="src\Sky\Common\SkyCommon.hpp" />
     <ClInclude Include="src\Sky\Skybox.hpp" />
     <ClInclude Include="src\Sprite\Common\SpriteCommon.hpp" />
@@ -227,6 +229,8 @@
     <ClCompile Include="src\Config\ConfigLoader.cpp" />
     <ClCompile Include="src\Scene\Sample\SampleScene.cpp" />
     <ClCompile Include="src\Screen\Screen.cpp" />
+    <ClCompile Include="src\Shadow\ShadowCubeMap.cpp" />
+    <ClCompile Include="src\Shadow\ShadowPass.cpp" />
     <ClCompile Include="src\Ui\EventSystem.cpp" />
     <ClCompile Include="src\Ui\Element.cpp" />
     <ClCompile Include="src\Ui\Module\KeyboardModule.cpp" />

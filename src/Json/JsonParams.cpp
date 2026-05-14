@@ -3,6 +3,7 @@
 #include <fstream>
 
 #include "Log.hpp"
+#include "Utils.hpp"
 
 void JsonParams::Register(const std::string& _name) {
     if (datas_.contains(_name))return;
@@ -19,8 +20,8 @@ void JsonParams::LoadJson(const std::string& _path, const std::string& _name) {
     std::ifstream file;
     file.open(path);
     if (!file.is_open()){
-        Log::Send(Log::Level::ERR, "Failed open file for read");
-        assert(false);
+        const std::string msg = "JsonParams: failed to open file: " + path;
+        Log::Send(Log::Level::WARNING, msg);
         return;
     }
 
@@ -30,7 +31,11 @@ void JsonParams::LoadJson(const std::string& _path, const std::string& _name) {
 
     // Load Data
     auto data = root.find(name);
-    assert(data != root.end());
+    if (data == root.end()){
+        const std::string msg = "JsonParams: root key not found in JSON: " + name;
+        Log::Send(Log::Level::WARNING, msg);
+        return;
+    }
 
     for (auto group = data->begin(); group != data->end(); ++group){
         //uuid
@@ -110,31 +115,46 @@ void JsonParams::SetValue(const std::string& _name, const std::string& _group, c
 
 JsonParams::Group JsonParams::GetGroups(const std::string& _name) {
     auto data = datas_.find(_name);
-    assert(data != datas_.end());
+    if (data == datas_.end()){
+        const std::string msg = "JsonParams: GetGroups - not found: " + _name;
+        Log::Send(Log::Level::WARNING, msg);
+        return {};
+    }
     return data->second;
 }
 
 JsonParams::Value JsonParams::GetValue(const std::string& _name, const std::string& _group, const std::string& _key) const {
-    if (!datas_.contains(_name)) return {};
     auto data = datas_.find(_name);
-    assert(data != datas_.end());
+    const std::string funcMsg = "JsonParams: GetValue - ";
+    if (data == datas_.end()){
+        Log::Send(Log::Level::WARNING, funcMsg + "name not found: " + _name);
+        return {};
+    }
 
     auto group = data->second.find(_group);
-    assert(group != data->second.end());
+    if (group == data->second.end()){
+        Log::Send(Log::Level::WARNING, funcMsg + "group not found: " + _group);
+        return {};
+    }
 
     auto item = group->second.find(_key);
-    assert(item != group->second.end());
+    if (item == group->second.end()){
+        Log::Send(Log::Level::WARNING, funcMsg + "key not found: " + _key);
+        return {};
+    }
 
-    Value value = item->second;
-    return value;
+    return item->second;
 }
 
 void JsonParams::RemoveGroup(const std::string& _name, const std::string& _group) {
     if (!datas_.contains(_name)) return;
     auto data = datas_.find(_name);
-    assert(data != datas_.end());
     auto group = data->second.find(_group);
-    assert(group != data->second.end());
+    if (group == data->second.end()){
+        const std::string msg = "JsonParams: RemoveGroup - group not found: " + _group;
+        Log::Send(Log::Level::WARNING, msg);
+        return;
+    }
     data->second.erase(group);
 }
 
@@ -171,7 +191,12 @@ void JsonParams::Save(const std::string& _path, const std::string& _name) {
     const std::string& name = _name.empty() ? _path : _name;
 
     auto group = datas_.find(name);
-    assert(group != datas_.end());
+    if (group == datas_.end()){
+        const std::string msg = "JsonParams: Save - not found: " + name;
+        Log::Send(Log::Level::WARNING, msg);
+        Utils::Alert(msg);
+        return;
+    }
 
     json root = json::object();
     root[name] = json::object();
@@ -225,7 +250,8 @@ void JsonParams::Save(const std::string& _path, const std::string& _name) {
     std::ofstream file(path, std::ios::trunc);
 
     if (!file.is_open()){
-        Log::Send(Log::Level::ERR, "Failed open file for write");
+        const std::string msg = "JsonParams: failed to open file for write: " + path;
+        Log::Send(Log::Level::WARNING, msg);
         return;
     }
 

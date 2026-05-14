@@ -26,6 +26,7 @@ void RawPointLight::Save(const std::string& _path) {
 	json->SetValue(_path, uuid_, "intensity", light_.intensity);
 	json->SetValue(_path, uuid_, "radius", light_.radius);
 	json->SetValue(_path, uuid_, "decay", light_.decay);
+	json->SetValue(_path, uuid_, "castShadow", static_cast<int32_t>(light_.castShadow));
 }
 
 void RawPointLight::ImGuiSetting(int _index) {
@@ -45,6 +46,10 @@ void RawPointLight::ImGuiSetting(int _index) {
         ImGui::DragFloat("Intensity", &light_.intensity, 0.01f, 0.f, 10.f);
         ImGui::DragFloat("Radius",    &light_.radius,    0.1f,  0.f);
         ImGui::DragFloat("Decay",     &light_.decay,     0.01f, 0.f);
+        bool castShadow = light_.castShadow != 0;
+        if (ImGui::Checkbox("Cast Shadow", &castShadow)) {
+            light_.castShadow = castShadow ? 1u : 0u;
+        }
         if (ImGui::Button("Delete")) { enable_ = false; }
         ImGui::TreePop();
     }
