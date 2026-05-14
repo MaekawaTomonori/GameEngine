@@ -33,6 +33,8 @@ namespace Ui {
 
         std::unordered_map<EventKey, std::string> events_;
 
+    bool selectable_ = false;
+
     protected:
         Vector2 position_ {};
         Vector4 color_    {1.f, 1.f, 1.f, 1.f};
@@ -62,9 +64,11 @@ namespace Ui {
         void Update(float dt = 1.f / 60.f);
         void Draw() const;
         void Debug(const std::vector<std::string>& _availableActions = {},
-                   const std::vector<std::string>& _availableAnimKeys = {});
+                   const std::vector<std::string>& _availableAnimKeys = {},
+                   const std::function<void()>& _selectableExtra = {});
 
-        bool           IsVisible()   const;
+        bool           IsVisible()    const;
+        bool           IsSelectable() const;
         std::string    GetName()     const;
         std::string    GetUUID()     const;
         Vector2        GetPosition() const;
@@ -72,6 +76,7 @@ namespace Ui {
         virtual Vector2 GetSize()    const { return {}; }
 
         void SetVisible(bool _visible);
+        void SetSelectable(bool _selectable);
         void SetName(const std::string& _name);
         void SetPosition(const Vector2& _pos);
         void SetColor(const Vector4& _color);

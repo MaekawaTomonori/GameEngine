@@ -56,6 +56,12 @@ public:
     bool IsPress(BYTE _key) const;
     bool IsTrigger(BYTE _key) const;
 
+    /** @brief マウスボタンが押されているかを判定
+     * @param _button ボタン番号（0=左, 1=右, 2=中）
+     */
+    bool IsMousePress(int _button) const;
+    bool IsMouseTrigger(int _button) const;
+
     /** @brief マウス座標を取得
      * Scene ウィンドウが有効な場合はゲーム空間座標に変換して返す
      */

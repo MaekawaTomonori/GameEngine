@@ -452,6 +452,11 @@
     <ClInclude Include="include\Ui\UiAnimation.hpp" />
     <ClInclude Include="include\Ui\UiManager.hpp" />
     <ClInclude Include="externals\font\stb_truetype.h" />
+    <ClInclude Include="include\Ui\Module\IModule.hpp" />
+    <ClInclude Include="include\Ui\Module\KeyboardModule.hpp" />
+    <ClInclude Include="include\Ui\Module\MouseModule.hpp" />
+    <ClInclude Include="src\Screen\Screen.hpp" />
+    <ClInclude Include="include\ScreenUtils.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Camera\Camera.cpp">
@@ -642,6 +647,9 @@
     <ClCompile Include="src\Scene\Sample\SampleScene.cpp" />
     <ClCompile Include="src\Config\ConfigLoader.cpp" />
     <ClCompile Include="src\Ui\UiManager.cpp" />
+    <ClCompile Include="src\Ui\Module\KeyboardModule.cpp" />
+    <ClCompile Include="src\Ui\Module\MouseModule.cpp" />
+    <ClCompile Include="src\Screen\Screen.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

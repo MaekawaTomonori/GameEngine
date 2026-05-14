@@ -76,6 +76,17 @@ bool Input::IsTrigger(const BYTE _key) const {
     return keyState_[_key] && !preState_[_key];
 }
 
+bool Input::IsMousePress(int _button) const {
+    if (_button < 0 || _button >= 4) return false;
+    return (mouseState_.rgbButtons[_button] & 0x80) != 0;
+}
+
+bool Input::IsMouseTrigger(int _button) const {
+    if (_button < 0 || _button >= 4) return false;
+    return (mouseState_.rgbButtons[_button] & 0x80) != 0 &&
+           (preMouseState_.rgbButtons[_button] & 0x80) == 0;
+}
+
 void Input::UpdateKeyboard() {
     if (keyboard_) {
         keyboard_->Acquire();

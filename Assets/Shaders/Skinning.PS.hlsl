@@ -81,19 +81,20 @@ PixelShaderOutput main(VertexShaderOutput input)
         return output;
     }
 
+    float3 normal = normalize(input.normal);
     float32_t3 toEye = normalize(gCamera.worldPosition - input.worldPosition);
-    float3 halfVector = normalize(toEye + input.normal);
+    float3 halfVector = normalize(toEye + normal);
 
     float3 col = float3(0,0,0);
     for (uint i = 0; i < gLightCount.dlCount; ++i) {
 	//directional
-        float nDotL = dot(normalize(input.normal), -gDirectionalLight[i].direction);
+        float nDotL = dot(normal, -gDirectionalLight[i].direction);
         float cos = pow(nDotL * 0.5f + 0.5f, 2.0f);
 	    
-        float32_t3 reflectLight = reflect(gDirectionalLight[i].direction, normalize(input.normal));
+        float32_t3 reflectLight = reflect(gDirectionalLight[i].direction, normal);
 
 		halfVector = normalize(-gDirectionalLight[i].direction + toEye);
-        float nDotH = saturate(dot(normalize(input.normal), halfVector));
+        float nDotH = saturate(dot(normal, halfVector));
         float specularPow = pow(saturate(nDotH), gMaterial.shininess);
 
         float32_t3 diffuse = rgb * gDirectionalLight[i].color.rgb * cos * gDirectionalLight[i].intensity;
@@ -103,15 +104,22 @@ PixelShaderOutput main(VertexShaderOutput input)
 
     for (uint j = 0; j < gLightCount.plCount; ++j) {
     //point
-        float32_t3 pointDirection = normalize(input.worldPosition - gPointLight[j].position);
+        float3 toLight = gPointLight[j].position - input.worldPosition;
+        float distSq = dot(toLight, toLight);
+        float radiusSq = gPointLight[j].radius * gPointLight[j].radius;
+        if (distSq >= radiusSq) {
+            continue;
+        }
 
-        float32_t distance = length(gPointLight[j].position - input.worldPosition);
-        float32_t factor = pow(saturate(-distance / gPointLight[j].radius + 1.0), gPointLight[j].decay);
+        float invDist = rsqrt(max(distSq, 1.0e-4f));
+        float32_t3 pointDirection = toLight * invDist;
+        float factor = saturate(1.0f - distSq / radiusSq);
+        factor *= factor;
 
-        float cosP = pow(dot(normalize(input.normal), -pointDirection) * 0.5f + 0.5f, 2.0f);
+        float cosP = pow(dot(normal, pointDirection) * 0.5f + 0.5f, 2.0f);
 
-        float32_t3 halfVectorP = normalize(-pointDirection + toEye);
-        float specularPowP = pow(saturate(dot(normalize(input.normal), halfVector)), gMaterial.shininess);
+        float32_t3 halfVectorP = normalize(pointDirection + toEye);
+        float specularPowP = pow(saturate(dot(normal, halfVectorP)), gMaterial.shininess);
 
         float32_t3 pointDiffuse = rgb * gPointLight[j].color.rgb * cosP * gPointLight[j].intensity * factor;
         float32_t3 pointSpecular = gPointLight[j].color.rgb * gPointLight[j].intensity * factor * specularPowP * float32_t3(1.f, 1.f, 1.f);
@@ -136,7 +144,7 @@ PixelShaderOutput main(VertexShaderOutput input)
     // Environment mapping (only if coefficient > 0)
     if (gMaterial.coefficient > 0.0f) {
         float3 ctp = normalize(input.worldPosition - gCamera.worldPosition);
-        float3 reflectDir = reflect(ctp, normalize(input.normal));
+        float3 reflectDir = reflect(ctp, normal);
         float4 environmentColor = gEnvironment.Sample(gSampler, reflectDir);
         finalRGB += environmentColor.rgb * gMaterial.coefficient;
     }

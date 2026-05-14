@@ -118,6 +118,10 @@
     <ClInclude Include="externals\json\json.hpp" />
     <ClInclude Include="include\DebugUI.hpp" />
     <ClInclude Include="include\PerformanceProfiler.hpp" />
+    <ClInclude Include="include\ScreenUtils.hpp" />
+    <ClInclude Include="include\Ui\Module\IModule.hpp" />
+    <ClInclude Include="include\Ui\Module\KeyboardModule.hpp" />
+    <ClInclude Include="include\Ui\Module\MouseModule.hpp" />
     <ClInclude Include="include\WatchDebugger.hpp" />
     <!-- AUDIO_DISABLED: <ClInclude Include="src\Audio\AudioDebugPanel.hpp" /> -->
     <ClInclude Include="src\Collision\CollisionManager.hpp" />
@@ -196,6 +200,7 @@
     <ClInclude Include="src\Scene\Transition\Transition.hpp" />
     <ClInclude Include="src\Scene\Transition\Fade.hpp" />
     <ClInclude Include="src\Scheduler\Scheduler.hpp" />
+    <ClInclude Include="src\Screen\Screen.hpp" />
     <ClInclude Include="src\Sky\Common\SkyCommon.hpp" />
     <ClInclude Include="src\Sky\Skybox.hpp" />
     <ClInclude Include="src\Sprite\Common\SpriteCommon.hpp" />
@@ -221,8 +226,11 @@
   <ItemGroup>
     <ClCompile Include="src\Config\ConfigLoader.cpp" />
     <ClCompile Include="src\Scene\Sample\SampleScene.cpp" />
+    <ClCompile Include="src\Screen\Screen.cpp" />
     <ClCompile Include="src\Ui\EventSystem.cpp" />
     <ClCompile Include="src\Ui\Element.cpp" />
+    <ClCompile Include="src\Ui\Module\KeyboardModule.cpp" />
+    <ClCompile Include="src\Ui\Module\MouseModule.cpp" />
     <ClCompile Include="src\Ui\SpriteElement.cpp" />
     <ClCompile Include="src\Ui\TextElement.cpp" />
     <ClCompile Include="src\Ui\UserInterface.cpp" />
@@ -325,7 +333,7 @@
     <ProjectReference Include="Lib\GESTD\GESTD.vcxproj">
       <Project>{a1b2c3d4-e5f6-7890-abcd-ef1234567890}</Project>
     </ProjectReference>
-    </ItemGroup>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

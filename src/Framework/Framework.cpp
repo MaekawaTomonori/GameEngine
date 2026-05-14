@@ -7,6 +7,7 @@
 #include "Random/RandomEngine.hpp"
 #include "src/Scene/Sample/SampleScene.hpp"
 #include "src/Config/ConfigLoader.hpp"
+#include "src/Screen/Screen.hpp"
 
 namespace {
     constexpr const char* APP_CONFIG_PATH = "Assets/Config/App.cnf";
@@ -33,6 +34,10 @@ Framework::Framework() {
 
     dxAdapter_ = std::make_unique<DirectXAdapter>(windows_->GetWindowHandle(), config_.width, config_.height);
     dxAdapter_->Initialize();
+
+    Singleton<Screen>::GetInstance()->Resize(
+        static_cast<float>(config_.width),
+        static_cast<float>(config_.height));
 
     srv_ = std::make_unique<SRVManager>();
     srv_->Initialize(dxAdapter_.get());
@@ -93,7 +98,7 @@ Framework::Framework() {
     collision_->Initialize(dbg);
 
     ui_ = Singleton<Ui::Manager>::GetInstance();
-    ui_->Setup(dbg);
+    ui_->Setup(dbg, input_);
 
 #ifdef _DEBUG
     Debugger::WatchGroup("Engine")
@@ -298,6 +303,9 @@ bool Framework::Check() const {
 
 void Framework::HandleWindowResize(int _width, int _height) const {
     dxAdapter_->UpdateWindowSize(static_cast<size_t>(_width), static_cast<size_t>(_height));
+    Singleton<Screen>::GetInstance()->Resize(
+        static_cast<float>(_width),
+        static_cast<float>(_height));
     postProcessor_->ResizeRenderTextures();
 
 #ifdef _DEBUG

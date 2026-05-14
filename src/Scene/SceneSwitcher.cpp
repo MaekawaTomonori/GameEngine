@@ -22,7 +22,6 @@ void SceneSwitcher::Setup(const Context& _context) {
 
 #ifdef _DEBUG
     if (context_.debug) {
-        context_.debug->RegisterMenuButton("SceneSwitcher");
         context_.debug->RegisterMenuButton("Transition");
     }
 

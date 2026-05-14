@@ -9,19 +9,33 @@
 
 namespace Ui {
 
-    void Manager::Setup(const GESTD::ReferencePtr<DebugUI>& _debugUi) {
-        if (!_debugUi) return;
+    void Manager::Setup(const GESTD::ReferencePtr<DebugUI>& _debugUi,
+                        const GESTD::ReferencePtr<Input>&   _input) {
+        input_ = _input;
 
+        if (!_debugUi) return;
         debugUI_ = _debugUi;
         debugUI_->RegisterMenuButton("UI");
     }
 
+    void Manager::SetFocusedCanvas(const Canvas* _canvas) const {
+        for (const auto& entry : entries_) {
+            if (!entry.canvas || !entry.canvas->input_) continue;
+            entry.canvas->input_->hasFocus = false;
+        }
+        if (_canvas && _canvas->input_) _canvas->input_->hasFocus = true;
+    }
+
     void Manager::Update() {
         for (const auto& entry : entries_) {
-            if (!entry.canvas) continue;
-            if (!entry.canvas->IsActive()) continue;
-
+            if (!entry.canvas || !entry.canvas->IsActive()) continue;
             entry.canvas->Update();
+        }
+
+        if (!input_) return;
+        for (const auto& entry : entries_) {
+            if (!entry.canvas || !entry.canvas->IsActive()) continue;
+            entry.canvas->ProcessInput(*input_);
         }
     }
 
