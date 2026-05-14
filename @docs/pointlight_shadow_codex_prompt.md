@@ -76,7 +76,7 @@ struct PointLight {
 - 毎フレーム全影付きPointLightの6面ShadowMapを更新する
 - Pixel Shader内で大量のPointLightを全ピクセルに対して総当たり計算する
 - 高解像度ShadowMapを標準にする
-- 多サンプルPCFを標準にする
+- 高サンプル数のPCF（16サンプル以上）を標準にする
 ```
 
 ---
@@ -90,10 +90,7 @@ struct PointLight {
     影なし
 
 重要PointLight:
-    Cube Shadow Mapを使用
-
-接地感や小物:
-    Fake Shadow / Blob Shadow / Contact Shadow風近似を使用
+    Cube Shadow Mapを使用（最大1個）
 ```
 
 最初の実装では、影付きPointLightは最大1個でよい。
@@ -194,35 +191,28 @@ PointLightの半径外にあるモデルはShadowPassから除外する。
 避けたい処理。
 
 ```hlsl
-length()
-pow()
+length()              // sqrt不要。distSqで代替する
 大量のPointLightループ
 CubeMap Shadowの多回サンプリング
 ```
 
-距離判定は可能な限り `distSq` ベースで行う。
-
+距離判定は `distSq` ベースで行い、範囲外は早期スキップする。
+減衰は `decay` を使った `pow()` で制御する（実装済み）。
 ```hlsl
 float3 toLight = light.position - worldPos;
 float distSq = dot(toLight, toLight);
 float radiusSq = light.radius * light.radius;
 
-if (distSq > radiusSq) {
+if (distSq >= radiusSq) {
     continue;
 }
 
-float atten = saturate(1.0f - distSq / radiusSq);
-atten *= atten;
+float atten = pow(saturate(1.0f - distSq / radiusSq), light.decay);
 
 float3 L = toLight * rsqrt(max(distSq, 0.0001f));
 float NdotL = saturate(dot(normal, L));
 ```
 
-`decay` を毎回 `pow(atten, decay)` に使うより、最初は固定カーブでよい。
-
-```hlsl
-atten *= atten;
-```
 
 ---
 
@@ -270,39 +260,8 @@ score = intensity * overlapFactor / distanceToModel
 
 ---
 
-### B. Fake Shadow / Blob Shadow
 
-キャラや小物の接地感には、リアルなPointLight ShadowではなくFake Shadowを併用したい。
-
-例。
-
-```txt
-- 足元の丸影
-- 床へのBlob Shadow
-- ライト距離で濃さを変える簡易影
-```
-
-メリット。
-
-```txt
-- ShadowMap不要
-- 実装が比較的簡単
-- 非常に軽い
-- 接地感を作りやすい
-```
-
-デメリット。
-
-```txt
-- 壁や複雑な形状には正しく影が落ちない
-- 正確な投影影ではない
-```
-
-ただし、ゲーム全体の見た目と処理負荷のバランスを考えると採用価値は高い。
-
----
-
-### C. Cube Shadow Map
+### B. Cube Shadow Map
 
 本当に必要なPointLightだけに使用する。
 
@@ -324,16 +283,15 @@ score = intensity * overlapFactor / distanceToModel
 以下の順で実装したい。
 
 ```txt
-1. 現在のPointLight計算をdistSqベースに軽量化
-2. pow(decay)を避け、固定減衰カーブにする
-3. CPU側でモデルごとの影響PointLightを最大8個程度に絞る
-4. PointLightShadow構造体をPointLight本体から分離して設計
-5. 影付きPointLightを最大1個としてCube Shadow Mapを実装
-6. ShadowMap解像度は256または512から開始
-7. ShadowCasterの距離・フラグによる絞り込みを実装
+1. [完了] PointLight計算をdistSqベースに軽量化
+2. [完了] decayを使ったpow()で減衰カーブを制御
+3. PointLightShadow構造体をPointLight本体から分離して設計
+4. 影付きPointLightを最大1個としてCube Shadow Mapを実装
+5. ShadowMap解像度は256または512から開始
+6. ShadowCasterの距離・フラグによる絞り込みを実装
+7. PCFによるソフトシャドウを実装（4サンプル程度・ぼやけ幅を調整可能にする）
 8. ShadowMapのキャッシュと更新頻度制御を実装
-9. 必要に応じてFake Shadow / Blob Shadowを追加
-10. 最後に必要ならPCF 4サンプル程度を検討
+9. CPU側でモデルごとの影響PointLightを最大8個程度に絞る
 ```
 
 ---
@@ -350,9 +308,8 @@ score = intensity * overlapFactor / distanceToModel
 5. Depth CubeMap用のリソース管理をどの既存クラスに組み込むべきか
 6. ShadowCasterの絞り込みをどこで行うべきか
 7. ShadowMap更新頻度制御をどこに持たせるべきか
-8. 最初の実装としてCube Shadow MapとFake Shadowのどちらを先に入れるべきか
-9. 将来的にForward+ / Clustered Forwardへ拡張する場合、今の設計で邪魔になる部分はどこか
-10. 原神のような「軽くて綺麗」な方向へ進めるため、今やるべきこと・後回しにするべきこと
+8. 将来的にForward+ / Clustered Forwardへ拡張する場合、今の設計で邪魔になる部分はどこか
+9. 原神のような「軽くて綺麗」な方向へ進めるため、今やるべきこと・後回しにするべきこと
 ```
 
 ---
@@ -384,9 +341,6 @@ PointLightのリアル影は、全ライト標準ではなく、重要ライト�
 重要PointLight:
     最大1個だけCube Shadow Map
 
-キャラや小物:
-    Fake Shadow / Blob Shadowで接地感を補う
-
 静的ライト:
     ShadowMapをキャッシュ
 
@@ -394,7 +348,7 @@ PointLightのリアル影は、全ライト標準ではなく、重要ライト�
     更新頻度を制限
 
 Pixel Shader:
-    distSqベース・pow回避・ライト数制限
+    distSqベース・decay制御の減衰・ライト数制限
 ```
 
 この方針を前提に、現在のコードベースを見て、最も安全で効果の高い実装順序と具体的な修正箇所を提案してほしい。

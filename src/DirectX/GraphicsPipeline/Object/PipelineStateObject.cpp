@@ -72,6 +72,7 @@ PipelineStateObject& PipelineStateObject::SetBlend(const BlendMode _blendMode) {
             break;
         case BlendMode::NONE:
             blendDesc_.RenderTarget[0].BlendEnable = false;
+            blendDesc_.RenderTarget[0].RenderTargetWriteMask = D3D12_COLOR_WRITE_ENABLE_ALL;
     }
 
     return *this;
@@ -102,6 +103,12 @@ PipelineStateObject& PipelineStateObject::SetDSVFormat(DXGI_FORMAT _format) {
     return *this;
 }
 
+PipelineStateObject& PipelineStateObject::SetRTVFormat(DXGI_FORMAT _format, UINT _numTargets) {
+    rtvFormat_ = _format;
+    numRenderTargets_ = _numTargets;
+    return *this;
+}
+
 void PipelineStateObject::Create() {
     desc_.pRootSignature = rootSignature_.Get();
     desc_.InputLayout = inputLayout_.Get();
@@ -111,8 +118,8 @@ void PipelineStateObject::Create() {
     desc_.PS = { shader_->GetPixelShader()->GetBufferPointer(), shader_->GetPixelShader()->GetBufferSize() };
     desc_.DepthStencilState = depthStencilDesc_;
 
-    desc_.NumRenderTargets = 1;
-    desc_.RTVFormats[0] = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
+    desc_.NumRenderTargets = numRenderTargets_;
+    desc_.RTVFormats[0] = (numRenderTargets_ > 0) ? rtvFormat_ : DXGI_FORMAT_UNKNOWN;
 
     desc_.PrimitiveTopologyType = topologyType_;
     desc_.SampleDesc.Count = 1;

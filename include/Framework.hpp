@@ -27,6 +27,8 @@
 #include "src/Sky/Common/SkyCommon.hpp"
 #include "src/Texture/TextureManager.hpp"
 #include "src/Text/TextCommon.hpp"
+#include "src/Shadow/ShadowCubeMap.hpp"
+#include "src/Shadow/ShadowPass.hpp"
 
 class IGame;
 
@@ -66,6 +68,9 @@ class Framework {
     GESTD::ReferencePtr<CameraDirector> cameraDirector_;
 
     GESTD::ReferencePtr<Ui::Manager> ui_;
+
+    std::unique_ptr<ShadowCubeMap> shadowCubeMap_;
+    std::unique_ptr<ShadowPass>    shadowPass_;
 
 public:
     Framework();

@@ -92,6 +92,12 @@ Framework::Framework() {
     light_ = Singleton<LightManager>::GetInstance();
     light_->Initialize(GESTD::ReferencePtr(dxAdapter_), dbg);
 
+    shadowCubeMap_ = std::make_unique<ShadowCubeMap>();
+    shadowCubeMap_->Initialize(dxAdapter_.get(), srv_.get());
+
+    shadowPass_ = std::make_unique<ShadowPass>();
+    shadowPass_->Initialize(dxAdapter_.get());
+
     Singleton<RandomEngine>::GetInstance()->Initialize();
 
     collision_ = std::make_unique<CollisionManager>();
@@ -244,6 +250,12 @@ void Framework::Draw() const {
     ui_->Draw();
 
     sky_->Draw(renderer_.get());
+
+    if (shadowCubeMap_ && shadowPass_ && light_) {
+        shadowPass_->Execute(*shadowCubeMap_, *model_, *light_);
+        model_->SetShadowBinding(shadowCubeMap_->GetSRVIndex(), shadowPass_->GetShadowDataAddress());
+    }
+
     model_->Draw(renderer_.get());
     particle_->Draw(renderer_.get());
     collision_->DrawDebug();
@@ -268,6 +280,9 @@ void Framework::Shutdown() {
     if (game_) {
         game_.reset();
     }
+
+    shadowPass_.reset();
+    shadowCubeMap_.reset();
 
     collision_.reset();
     text_.Reset();  // Singleton は SingletonFinalizer::Finalize() で破棄される

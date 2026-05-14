@@ -457,6 +457,8 @@
     <ClInclude Include="include\Ui\Module\MouseModule.hpp" />
     <ClInclude Include="src\Screen\Screen.hpp" />
     <ClInclude Include="include\ScreenUtils.hpp" />
+    <ClInclude Include="src\Shadow\ShadowCubeMap.hpp" />
+    <ClInclude Include="src\Shadow\ShadowPass.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Camera\Camera.cpp">
@@ -650,6 +652,8 @@
     <ClCompile Include="src\Ui\Module\KeyboardModule.cpp" />
     <ClCompile Include="src\Ui\Module\MouseModule.cpp" />
     <ClCompile Include="src\Screen\Screen.cpp" />
+    <ClCompile Include="src\Shadow\ShadowCubeMap.cpp" />
+    <ClCompile Include="src\Shadow\ShadowPass.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
