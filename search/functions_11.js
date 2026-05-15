@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['waitforfencevalue_0',['WaitForFenceValue',['../classDirectXAdapter.html#a7793686074430b7c1cff3a7ee3cd2513',1,'DirectXAdapter']]],
-  ['waitfornextframe_1',['WaitForNextFrame',['../classFrameRateLimiter.html#abc0d7e5bfc76fabcebe859b7d04fdd72',1,'FrameRateLimiter']]]
+  ['vh_0',['vh',['../classScreen_1_1Utils_1_1vh.html#aa01bf98800345b4ae1dfe33d9b1770a7',1,'Screen::Utils::vh']]],
+  ['vw_1',['vw',['../classScreen_1_1Utils_1_1vw.html#affe2d4d91698cb086e0387133eaf980f',1,'Screen::Utils::vw']]]
 ];

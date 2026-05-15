@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['ring_0',['Ring',['../Emitter_8hpp.html#a240c1924416689e5700ff0d9f30539d9ad4db177c94738b72bf9ce61e988ab1f1',1,'Emitter.hpp']]],
-  ['running_1',['Running',['../classFrameDebugger.html#ad9c8e021d2325a98bce0b8900293fd95a5bda814c4aedb126839228f1a3d92f09',1,'FrameDebugger']]]
+  ['paused_0',['Paused',['../classFrameDebugger.html#ad9c8e021d2325a98bce0b8900293fd95ae99180abf47a8b3a856e0bcb2656990a',1,'FrameDebugger']]],
+  ['point_1',['Point',['../LightType_8hpp.html#adc3ec8293e6a97ebe43f0196b9a7f638a2a3cd5946cfd317eb99c3d32e35e2d4c',1,'LightType.hpp']]]
 ];

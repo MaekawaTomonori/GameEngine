@@ -31,6 +31,11 @@ var searchData=
   ['modelrepository_2ecpp_28',['ModelRepository.cpp',['../ModelRepository_8cpp.html',1,'']]],
   ['modelrepository_2ehpp_29',['ModelRepository.hpp',['../ModelRepository_8hpp.html',1,'']]],
   ['modifier_30',['modifier',['../classBoxBlur.html#a46a6e5b5244d72b9ec5e56cce20bf19f',1,'BoxBlur::Modifier()'],['../classGrayscale.html#a1da256e18d825b92a0570883fe29fdab',1,'Grayscale::Modifier()'],['../classIPostEffect.html#a714a743aff95fad87356f280810dd286',1,'IPostEffect::Modifier()'],['../classVignette.html#a49055542d8d230abc9e01cd6a062f551',1,'Vignette::Modifier()']]],
-  ['multi_31',['MULTI',['../BlendMode_8hpp.html#a30323fa90e24ca484998b9fba6c40e85af26be970aac1b06fa62b87562bc73deb',1,'BlendMode.hpp']]],
-  ['mutex_5f_32',['mutex_',['../classCommon.html#a0e67c3b7f994e47e54d72108e91c9ada',1,'Common']]]
+  ['mousemodule_31',['MouseModule',['../classUi_1_1MouseModule.html',1,'Ui']]],
+  ['mousemodule_2ecpp_32',['MouseModule.cpp',['../MouseModule_8cpp.html',1,'']]],
+  ['mousemodule_2ehpp_33',['MouseModule.hpp',['../MouseModule_8hpp.html',1,'']]],
+  ['movecursordir_34',['MoveCursorDir',['../classUi_1_1Canvas.html#a8042679d73b4dd640f2804821cae4967',1,'Ui::Canvas']]],
+  ['movecursorto_35',['MoveCursorTo',['../classUi_1_1Canvas.html#a0250f815115c98adb2354a9b94c3587c',1,'Ui::Canvas']]],
+  ['multi_36',['MULTI',['../BlendMode_8hpp.html#a30323fa90e24ca484998b9fba6c40e85af26be970aac1b06fa62b87562bc73deb',1,'BlendMode.hpp']]],
+  ['mutex_5f_37',['mutex_',['../classCommon.html#a0e67c3b7f994e47e54d72108e91c9ada',1,'Common']]]
 ];

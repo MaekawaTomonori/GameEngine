@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['phase_0',['Phase',['../classUi_1_1Canvas.html#a84d5dd93e03a20dd5df3b64b8d7b3dc1',1,'Ui::Canvas']]],
-  ['primitivetype_1',['PrimitiveType',['../Emitter_8hpp.html#a240c1924416689e5700ff0d9f30539d9',1,'Emitter.hpp']]]
+  ['level_0',['Level',['../classLog.html#afb5d4c945d835d194a295461d752531e',1,'Log']]],
+  ['lighttype_1',['LightType',['../LightType_8hpp.html#adc3ec8293e6a97ebe43f0196b9a7f638',1,'LightType.hpp']]]
 ];

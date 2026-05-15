@@ -12,6 +12,7 @@ var dir_d44c64559bbebec7f509842c48db8b23 =
     [ "Log.hpp", "Log_8hpp.html", "Log_8hpp" ],
     [ "Model.hpp", "Model_8hpp.html", "Model_8hpp" ],
     [ "PerformanceProfiler.hpp", "PerformanceProfiler_8hpp.html", "PerformanceProfiler_8hpp" ],
+    [ "ScreenUtils.hpp", "ScreenUtils_8hpp.html", "ScreenUtils_8hpp" ],
     [ "Sprite.hpp", "Sprite_8hpp.html", "Sprite_8hpp" ],
     [ "WatchDebugger.hpp", "WatchDebugger_8hpp.html", null ]
 ];

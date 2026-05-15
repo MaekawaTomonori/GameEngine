@@ -6,6 +6,7 @@ var classUi_1_1Manager =
     [ "GetCanvas", "classUi_1_1Manager.html#ac47147e31dcbaaee068e350307e82923", null ],
     [ "Register", "classUi_1_1Manager.html#af746e87171f39323bc11ff4a78252490", null ],
     [ "ScanJsonFiles", "classUi_1_1Manager.html#ac7029fe37566a009b72725ccddaea258", null ],
-    [ "Setup", "classUi_1_1Manager.html#a090abd15747ffdf5bd7f354940d81681", null ],
+    [ "SetFocusedCanvas", "classUi_1_1Manager.html#ae63dbab365f33e2b31cbf88ae08ed419", null ],
+    [ "Setup", "classUi_1_1Manager.html#ad0ca332e6c5d8f586df78cd3d0d2562d", null ],
     [ "Update", "classUi_1_1Manager.html#ab777dbffc67b6212b35ae1fed3fe46b1", null ]
 ];

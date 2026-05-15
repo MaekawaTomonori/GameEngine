@@ -9,7 +9,9 @@ var classModelCommon =
     [ "Initialize", "classModelCommon.html#a44949376048a801f3a992f7370bdf846", null ],
     [ "RegisterShadowDraw", "classModelCommon.html#aefc8fca9de728eb26947da3e90c8f718", null ],
     [ "RegisterSkinningDraw", "classModelCommon.html#a4ad4834071e28461b02f11a0034ab960", null ],
+    [ "RegisterSkinningTransparentDraw", "classModelCommon.html#a06a5197d8fd19146306c11bd48b87d69", null ],
     [ "RegisterStaticDraw", "classModelCommon.html#a62676bc803883466bb245d434668d06f", null ],
+    [ "RegisterStaticTransparentDraw", "classModelCommon.html#ae9c7ea072bc48e694b6384877718b5d2", null ],
     [ "SetShadowBinding", "classModelCommon.html#a616882a8ecd8c3fb0d8774111c732f5b", null ],
     [ "UnregisterShadowDraw", "classModelCommon.html#abb8f719d3e5c3e7a03944b07a63c1df1", null ]
 ];

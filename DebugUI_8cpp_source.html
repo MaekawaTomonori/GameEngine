@@ -179,7 +179,7 @@ $(document).ready(function(){initNavTree('DebugUI_8cpp_source.html',''); initRes
 <div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    {</div>
 <div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>        ImGuiIO&amp; preIo = ImGui::GetIO();</div>
 <div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>        preIo.ConfigFlags |= ImGuiConfigFlags_DockingEnable;</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>        <span class="comment">// ImGuiConfigFlags_ViewportsEnable は UNORM_SRGB フォーマットのSwapChainが作れないため無効</span></div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>        <span class="comment">//preIo.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;</span></div>
 <div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    }</div>
 <div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
 <div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    ImGui_ImplDX12_InitInfo dx12Info{};</div>
@@ -343,7 +343,7 @@ $(document).ready(function(){initNavTree('DebugUI_8cpp_source.html',''); initRes
 <div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>        ImGuiIO&amp; io = ImGui::GetIO();</div>
 <div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>        io.DisplaySize = ImVec2(<span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(_width), <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(_height));</div>
 <div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>        io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;</div>
-<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>        <span class="comment">// ViewportsEnable は UNORM_SRGB フォーマットのSwapChainと非互換のため有効化しない</span></div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>        <span class="comment">//io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;</span></div>
 <div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>        io.FontGlobalScale = 1.f / ImGui_ImplWin32_GetDpiScaleForHwnd(adapter_-&gt;GetWindowHandle());</div>
 <div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>        <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>, <span class="stringliteral">&quot;ImGui display size updated: &quot;</span> + std::to_string(_width) + <span class="stringliteral">&quot;x&quot;</span> + std::to_string(_height));</div>
 <div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>    }</div>
@@ -648,7 +648,7 @@ $(document).ready(function(){initNavTree('DebugUI_8cpp_source.html',''); initRes
 <div class="line"><a id="l00528" name="l00528"></a><span class="lineno">  528</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00529" name="l00529"></a><span class="lineno">  529</span>}</div>
 <div class="ttc" id="aDebugUI_8hpp_html"><div class="ttname"><a href="DebugUI_8hpp.html">DebugUI.hpp</a></div></div>
-<div class="ttc" id="aInput_8hpp_html_a8f8f80d37794cde9472343e4487ba3eb"><div class="ttname"><a href="Input_8hpp.html#a8f8f80d37794cde9472343e4487ba3eb">name</a></div><div class="ttdeci">const char * name</div><div class="ttdef"><b>Definition</b> <a href="Input_8hpp_source.html#l00101">Input.hpp:101</a></div></div>
+<div class="ttc" id="aInput_8hpp_html_a8f8f80d37794cde9472343e4487ba3eb"><div class="ttname"><a href="Input_8hpp.html#a8f8f80d37794cde9472343e4487ba3eb">name</a></div><div class="ttdeci">const char * name</div><div class="ttdef"><b>Definition</b> <a href="Input_8hpp_source.html#l00107">Input.hpp:107</a></div></div>
 <div class="ttc" id="aLog_8hpp_html"><div class="ttname"><a href="Log_8hpp.html">Log.hpp</a></div></div>
 <div class="ttc" id="aclassDebugUI_html"><div class="ttname"><a href="classDebugUI.html">DebugUI</a></div><div class="ttdoc">ImGuiアダプタークラス デバッグUIの描画とコマンド管理を提供</div><div class="ttdef"><b>Definition</b> <a href="DebugUI_8hpp_source.html#l00015">DebugUI.hpp:15</a></div></div>
 <div class="ttc" id="aclassDebugUI_html_a1249d5798e2d9e84b6c576004b84181d"><div class="ttname"><a href="classDebugUI.html#a1249d5798e2d9e84b6c576004b84181d">DebugUI::SetToolbarContent</a></div><div class="ttdeci">void SetToolbarContent(std::function&lt; void()&gt; _content)</div><div class="ttdoc">メニューバー中央のツールバー描画コールバックを登録（初期化時に一度だけ呼ぶ）</div><div class="ttdef"><b>Definition</b> <a href="DebugUI_8cpp_source.html#l00183">DebugUI.cpp:183</a></div></div>
@@ -670,7 +670,7 @@ $(document).ready(function(){initNavTree('DebugUI_8cpp_source.html',''); initRes
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_3624c3011e0f2f30fa93f2c3df0f9e35.html">Debug</a></li><li class="navelem"><a class="el" href="DebugUI_8cpp.html">DebugUI.cpp</a></li>
-    <li class="footer">2026年05月11日(月) 05時32分01秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年05月15日(金) 06時30分58秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

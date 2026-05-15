@@ -1,0 +1,147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>PortfolioGame Engine: /home/runner/work/GameEngine/GameEngine/include/Ui/Module/IModule.hpp ソースファイル</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">PortfolioGame Engine<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">C++20 DirectX12 Game Engine</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','検索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function() { init_codefold(0); });
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('IModule_8hpp_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">読み取り中…</div>
+<div class="SRStatus" id="Searching">検索中…</div>
+<div class="SRStatus" id="NoMatches">一致する文字列を見つけられません</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">IModule.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="IModule_8hpp.html">[詳解]</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef UiIModule_HPP_</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define UiIModule_HPP_</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;string_view&gt;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;json.hpp&quot;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">class </span><a class="code hl_class" href="classInput.html">Input</a>;</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceUi.html">Ui</a> {</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>    <span class="keyword">class </span>Canvas;</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="foldopen" id="foldopen00012" data-start="{" data-end="};">
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="classUi_1_1IModule.html">   12</a></span>    <span class="keyword">class </span><a class="code hl_class" href="classUi_1_1IModule.html">IModule</a> {</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="classUi_1_1IModule.html#aaa6c408aaca5ad5062db58f74e9443df">   14</a></span>        <span class="keyword">virtual</span> <a class="code hl_function" href="classUi_1_1IModule.html#aaa6c408aaca5ad5062db58f74e9443df">~IModule</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="classUi_1_1IModule.html#ac9d0532a7941e28e568419215a4f2c6c">   15</a></span>        <span class="keyword">virtual</span> std::string_view <a class="code hl_function" href="classUi_1_1IModule.html#ac9d0532a7941e28e568419215a4f2c6c">GetType</a>() <span class="keyword">const</span> = 0;</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="classUi_1_1IModule.html#a2d2c79640eb68c964b8ca1da790fd80f">   16</a></span>        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classUi_1_1IModule.html#a2d2c79640eb68c964b8ca1da790fd80f">Update</a>(<a class="code hl_class" href="classUi_1_1Canvas.html">Canvas</a>&amp; canvas, <span class="keyword">const</span> <a class="code hl_class" href="classInput.html">Input</a>&amp; input) = 0;</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="classUi_1_1IModule.html#a27c06b779c22f3639e80752565cfe064">   17</a></span>        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classUi_1_1IModule.html#a27c06b779c22f3639e80752565cfe064">Draw</a>()<span class="keyword"> const </span>{}</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="classUi_1_1IModule.html#a5c9861e288a2cc2df90703ead406e7e1">   18</a></span>        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classUi_1_1IModule.html#a5c9861e288a2cc2df90703ead406e7e1">LoadFromJson</a>([[maybe_unused]] <span class="keyword">const</span> nlohmann::json&amp; j) {}</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="classUi_1_1IModule.html#a27b98759dad7e74dc131ec97ca51e230">   19</a></span>        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classUi_1_1IModule.html#a27b98759dad7e74dc131ec97ca51e230">SaveToJson</a>([[maybe_unused]] nlohmann::json&amp; j)<span class="keyword"> const </span>{}</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    };</div>
+</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>} <span class="comment">// namespace Ui</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="preprocessor">#endif </span><span class="comment">// UiIModule_HPP_</span></div>
+<div class="ttc" id="aclassInput_html"><div class="ttname"><a href="classInput.html">Input</a></div><div class="ttdoc">入力処理クラス キーボード、マウス、ジョイスティックの入力を管理</div><div class="ttdef"><b>Definition</b> <a href="Input_8hpp_source.html#l00012">Input.hpp:12</a></div></div>
+<div class="ttc" id="aclassUi_1_1Canvas_html"><div class="ttname"><a href="classUi_1_1Canvas.html">Ui::Canvas</a></div><div class="ttdef"><b>Definition</b> <a href="UserInterface_8hpp_source.html#l00020">UserInterface.hpp:20</a></div></div>
+<div class="ttc" id="aclassUi_1_1IModule_html"><div class="ttname"><a href="classUi_1_1IModule.html">Ui::IModule</a></div><div class="ttdef"><b>Definition</b> <a href="IModule_8hpp_source.html#l00012">IModule.hpp:12</a></div></div>
+<div class="ttc" id="aclassUi_1_1IModule_html_a27b98759dad7e74dc131ec97ca51e230"><div class="ttname"><a href="classUi_1_1IModule.html#a27b98759dad7e74dc131ec97ca51e230">Ui::IModule::SaveToJson</a></div><div class="ttdeci">virtual void SaveToJson(nlohmann::json &amp;j) const</div><div class="ttdef"><b>Definition</b> <a href="IModule_8hpp_source.html#l00019">IModule.hpp:19</a></div></div>
+<div class="ttc" id="aclassUi_1_1IModule_html_a27c06b779c22f3639e80752565cfe064"><div class="ttname"><a href="classUi_1_1IModule.html#a27c06b779c22f3639e80752565cfe064">Ui::IModule::Draw</a></div><div class="ttdeci">virtual void Draw() const</div><div class="ttdef"><b>Definition</b> <a href="IModule_8hpp_source.html#l00017">IModule.hpp:17</a></div></div>
+<div class="ttc" id="aclassUi_1_1IModule_html_a2d2c79640eb68c964b8ca1da790fd80f"><div class="ttname"><a href="classUi_1_1IModule.html#a2d2c79640eb68c964b8ca1da790fd80f">Ui::IModule::Update</a></div><div class="ttdeci">virtual void Update(Canvas &amp;canvas, const Input &amp;input)=0</div></div>
+<div class="ttc" id="aclassUi_1_1IModule_html_a5c9861e288a2cc2df90703ead406e7e1"><div class="ttname"><a href="classUi_1_1IModule.html#a5c9861e288a2cc2df90703ead406e7e1">Ui::IModule::LoadFromJson</a></div><div class="ttdeci">virtual void LoadFromJson(const nlohmann::json &amp;j)</div><div class="ttdef"><b>Definition</b> <a href="IModule_8hpp_source.html#l00018">IModule.hpp:18</a></div></div>
+<div class="ttc" id="aclassUi_1_1IModule_html_aaa6c408aaca5ad5062db58f74e9443df"><div class="ttname"><a href="classUi_1_1IModule.html#aaa6c408aaca5ad5062db58f74e9443df">Ui::IModule::~IModule</a></div><div class="ttdeci">virtual ~IModule()=default</div></div>
+<div class="ttc" id="aclassUi_1_1IModule_html_ac9d0532a7941e28e568419215a4f2c6c"><div class="ttname"><a href="classUi_1_1IModule.html#ac9d0532a7941e28e568419215a4f2c6c">Ui::IModule::GetType</a></div><div class="ttdeci">virtual std::string_view GetType() const =0</div></div>
+<div class="ttc" id="anamespaceUi_html"><div class="ttname"><a href="namespaceUi.html">Ui</a></div><div class="ttdef"><b>Definition</b> <a href="Element_8hpp_source.html#l00015">Element.hpp:15</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_6ba165bb2e09366e887108d984d89e5c.html">Ui</a></li><li class="navelem"><a class="el" href="dir_18e58bba1cac898d441d29ad24f94b12.html">Module</a></li><li class="navelem"><a class="el" href="IModule_8hpp.html">IModule.hpp</a></li>
+    <li class="footer">2026年05月15日(金) 06時30分58秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+  </ul>
+</div>
+</body>
+</html>

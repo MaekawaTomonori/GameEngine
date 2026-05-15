@@ -5,6 +5,7 @@ var namespaces_dup =
       [ "Calculate", "namespaceAnimationCurveFunction.html#a5bbf3e18be00b28d3610d655542a5bf7", null ]
     ] ],
     [ "GameEngine", "namespaceGameEngine.html", "namespaceGameEngine" ],
+    [ "Screen", "namespaceScreen.html", "namespaceScreen" ],
     [ "spdlog", "namespacespdlog.html", "namespacespdlog" ],
     [ "Ui", "namespaceUi.html", "namespaceUi" ]
 ];

@@ -107,7 +107,7 @@ $(document).ready(function(){initNavTree('Framework_8hpp_source.html',''); initR
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;<a class="code" href="Input_8hpp.html">Input.hpp</a>&quot;</span></div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#ifdef _DEBUG</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;<a class="code" href="Debugger_8hpp.html">src/Debug/Debugger.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">// AUDIO_DISABLED: #include &quot;src/Audio/AudioDebugPanel.hpp&quot;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">//#include &quot;src/Audio/AudioDebugPanel.hpp&quot;</span></div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;<a class="code" href="UiManager_8hpp.html">Ui/UiManager.hpp</a>&quot;</span></div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="CameraController_8hpp.html">src/Camera/Controller/CameraController.hpp</a>&quot;</span></div>
@@ -147,7 +147,7 @@ $(document).ready(function(){initNavTree('Framework_8hpp_source.html',''); initR
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    std::unique_ptr&lt;ResourceRepository&gt; resources_;</div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="preprocessor">#ifdef _DEBUG</span></div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    std::unique_ptr&lt;Debugger&gt;        debugger_;</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <span class="comment">// AUDIO_DISABLED: std::unique_ptr&lt;AudioDebugPanel&gt; audioPanel_;</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <span class="comment">//std::unique_ptr&lt;AudioDebugPanel&gt; audioPanel_;</span></div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    std::unique_ptr&lt;SRVManager&gt; srv_;</div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <span class="comment">//std::unique_ptr&lt;LevelEditor&gt; level_;</span></div>
@@ -217,9 +217,9 @@ $(document).ready(function(){initNavTree('Framework_8hpp_source.html',''); initR
 <div class="ttc" id="aUiManager_8hpp_html"><div class="ttname"><a href="UiManager_8hpp.html">UiManager.hpp</a></div></div>
 <div class="ttc" id="aWinApp_8hpp_html"><div class="ttname"><a href="WinApp_8hpp.html">WinApp.hpp</a></div></div>
 <div class="ttc" id="aclassFramework_html"><div class="ttname"><a href="classFramework.html">Framework</a></div><div class="ttdoc">メインアプリケーションフレームワーククラス ゲームループの実行とシステムコーディネーションを管理</div><div class="ttdef"><b>Definition</b> <a href="Framework_8hpp_source.html#l00038">Framework.hpp:38</a></div></div>
-<div class="ttc" id="aclassFramework_html_ac23600a259027d0edcdb12a4f2b51aba"><div class="ttname"><a href="classFramework.html#ac23600a259027d0edcdb12a4f2b51aba">Framework::~Framework</a></div><div class="ttdeci">~Framework()</div><div class="ttdef"><b>Definition</b> <a href="Framework_8cpp_source.html#l00114">Framework.cpp:114</a></div></div>
-<div class="ttc" id="aclassFramework_html_ad6e5ec2ae2d5b1309b75065911b29bb5"><div class="ttname"><a href="classFramework.html#ad6e5ec2ae2d5b1309b75065911b29bb5">Framework::Framework</a></div><div class="ttdeci">Framework()</div><div class="ttdef"><b>Definition</b> <a href="Framework_8cpp_source.html#l00015">Framework.cpp:15</a></div></div>
-<div class="ttc" id="aclassFramework_html_af9ee8f57f582f1d8ffb11a1189cf1ecf"><div class="ttname"><a href="classFramework.html#af9ee8f57f582f1d8ffb11a1189cf1ecf">Framework::Execute</a></div><div class="ttdeci">void Execute(std::unique_ptr&lt; IGame &gt; _game)</div><div class="ttdoc">ゲームを実行</div><div class="ttdef"><b>Definition</b> <a href="Framework_8cpp_source.html#l00120">Framework.cpp:120</a></div></div>
+<div class="ttc" id="aclassFramework_html_ac23600a259027d0edcdb12a4f2b51aba"><div class="ttname"><a href="classFramework.html#ac23600a259027d0edcdb12a4f2b51aba">Framework::~Framework</a></div><div class="ttdeci">~Framework()</div><div class="ttdef"><b>Definition</b> <a href="Framework_8cpp_source.html#l00125">Framework.cpp:125</a></div></div>
+<div class="ttc" id="aclassFramework_html_ad6e5ec2ae2d5b1309b75065911b29bb5"><div class="ttname"><a href="classFramework.html#ad6e5ec2ae2d5b1309b75065911b29bb5">Framework::Framework</a></div><div class="ttdeci">Framework()</div><div class="ttdef"><b>Definition</b> <a href="Framework_8cpp_source.html#l00017">Framework.cpp:17</a></div></div>
+<div class="ttc" id="aclassFramework_html_af9ee8f57f582f1d8ffb11a1189cf1ecf"><div class="ttname"><a href="classFramework.html#af9ee8f57f582f1d8ffb11a1189cf1ecf">Framework::Execute</a></div><div class="ttdeci">void Execute(std::unique_ptr&lt; IGame &gt; _game)</div><div class="ttdoc">ゲームを実行</div><div class="ttdef"><b>Definition</b> <a href="Framework_8cpp_source.html#l00131">Framework.cpp:131</a></div></div>
 <div class="ttc" id="aclassIGame_html"><div class="ttname"><a href="classIGame.html">IGame</a></div><div class="ttdoc">ゲーム実装の基底インターフェース シーン管理と設定の統合を提供</div><div class="ttdef"><b>Definition</b> <a href="IGame_8hpp_source.html#l00017">IGame.hpp:17</a></div></div>
 <div class="ttc" id="astructGameEngine_1_1Config_html"><div class="ttname"><a href="structGameEngine_1_1Config.html">GameEngine::Config</a></div><div class="ttdef"><b>Definition</b> <a href="Config_8hpp_source.html#l00007">Config.hpp:7</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
@@ -228,7 +228,7 @@ $(document).ready(function(){initNavTree('Framework_8hpp_source.html',''); initR
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="Framework_8hpp.html">Framework.hpp</a></li>
-    <li class="footer">2026年05月11日(月) 05時32分01秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年05月15日(金) 06時30分58秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

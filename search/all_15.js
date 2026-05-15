@@ -7,7 +7,7 @@ var searchData=
   ['watchdebugger_2ehpp_4',['WatchDebugger.hpp',['../WatchDebugger_8hpp.html',1,'']]],
   ['weight_5',['weight',['../structVertexWeightData.html#a946382fc31458260ff891a050688a918',1,'VertexWeightData']]],
   ['weights_6',['weights',['../structJointWeightData.html#a0e723bfafc04bb284deb1794cf335f51',1,'JointWeightData']]],
-  ['width_7',['width',['../structGameEngine_1_1Config.html#a466d7d763648938c319d6e265135b7ff',1,'GameEngine::Config']]],
+  ['width_7',['width',['../structGameEngine_1_1Config.html#a466d7d763648938c319d6e265135b7ff',1,'GameEngine::Config::width'],['../classScreen.html#aa6dac6b449a55c265cfd7497242d4e77',1,'Screen::Width()']]],
   ['winapp_8',['WinApp',['../classWinApp.html',1,'']]],
   ['winapp_2ecpp_9',['WinApp.cpp',['../WinApp_8cpp.html',1,'']]],
   ['winapp_2ehpp_10',['WinApp.hpp',['../WinApp_8hpp.html',1,'']]],

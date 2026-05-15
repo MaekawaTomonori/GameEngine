@@ -4,6 +4,13 @@ var annotated_dup =
       [ "Config", "structGameEngine_1_1Config.html", "structGameEngine_1_1Config" ],
       [ "ConfigLoader", "classGameEngine_1_1ConfigLoader.html", "classGameEngine_1_1ConfigLoader" ]
     ] ],
+    [ "Screen", "namespaceScreen.html", [
+      [ "Utils", "namespaceScreen_1_1Utils.html", [
+        [ "px", "classScreen_1_1Utils_1_1px.html", "classScreen_1_1Utils_1_1px" ],
+        [ "vh", "classScreen_1_1Utils_1_1vh.html", "classScreen_1_1Utils_1_1vh" ],
+        [ "vw", "classScreen_1_1Utils_1_1vw.html", "classScreen_1_1Utils_1_1vw" ]
+      ] ]
+    ] ],
     [ "std", null, [
       [ "hash< Ui::EventKey >", "structstd_1_1hash_3_01Ui_1_1EventKey_01_4.html", "structstd_1_1hash_3_01Ui_1_1EventKey_01_4" ]
     ] ],
@@ -12,7 +19,10 @@ var annotated_dup =
       [ "Canvas", "classUi_1_1Canvas.html", "classUi_1_1Canvas" ],
       [ "Element", "classUi_1_1Element.html", "classUi_1_1Element" ],
       [ "EventSystem", "classUi_1_1EventSystem.html", "classUi_1_1EventSystem" ],
+      [ "IModule", "classUi_1_1IModule.html", "classUi_1_1IModule" ],
+      [ "KeyboardModule", "classUi_1_1KeyboardModule.html", "classUi_1_1KeyboardModule" ],
       [ "Manager", "classUi_1_1Manager.html", "classUi_1_1Manager" ],
+      [ "MouseModule", "classUi_1_1MouseModule.html", "classUi_1_1MouseModule" ],
       [ "SpriteElement", "classUi_1_1SpriteElement.html", "classUi_1_1SpriteElement" ],
       [ "TextElement", "classUi_1_1TextElement.html", "classUi_1_1TextElement" ]
     ] ],
@@ -87,6 +97,7 @@ var annotated_dup =
     [ "SceneFactory", "classSceneFactory.html", "classSceneFactory" ],
     [ "SceneSwitcher", "classSceneSwitcher.html", "classSceneSwitcher" ],
     [ "Scheduler", "classScheduler.html", "classScheduler" ],
+    [ "Screen", "classScreen.html", "classScreen" ],
     [ "Shader", "classShader.html", "classShader" ],
     [ "ShadowCubeMap", "classShadowCubeMap.html", "classShadowCubeMap" ],
     [ "ShadowPass", "classShadowPass.html", "classShadowPass" ],
