@@ -76,7 +76,7 @@ void DebugUI::Initialize(const GESTD::ReferencePtr<DirectXAdapter>& _adapter) {
     {
         ImGuiIO& preIo = ImGui::GetIO();
         preIo.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
-        // ImGuiConfigFlags_ViewportsEnable は UNORM_SRGB フォーマットのSwapChainが作れないため無効
+        //preIo.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
     }
 
     ImGui_ImplDX12_InitInfo dx12Info{};
@@ -226,7 +226,7 @@ void DebugUI::UpdateDisplaySize([[maybe_unused]]int _width, [[maybe_unused]]int 
         ImGuiIO& io = ImGui::GetIO();
         io.DisplaySize = ImVec2(static_cast<float>(_width), static_cast<float>(_height));
         io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
-        // ViewportsEnable は UNORM_SRGB フォーマットのSwapChainと非互換のため有効化しない
+        //io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
         io.FontGlobalScale = 1.f / ImGui_ImplWin32_GetDpiScaleForHwnd(adapter_->GetWindowHandle());
         Log::Send(Log::Level::INFO, "ImGui display size updated: " + std::to_string(_width) + "x" + std::to_string(_height));
     }

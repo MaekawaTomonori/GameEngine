@@ -1,7 +1,5 @@
 #include "FrameDebugger.hpp"
 
-#include "imgui_internal.h"
-
 #ifdef _DEBUG
 #include "imgui.h"
 #include "DebugUI.hpp"
@@ -43,59 +41,6 @@ void FrameDebugger::SetStopCallback([[maybe_unused]] const std::function<void()>
 #endif
 }
 
-//void FrameDebugger::RenderToolbar() {
-//#ifdef _DEBUG
-//    // 停止中: 赤ハイライト  それ以外: 暗色
-//    ImGui::PushStyleColor(ImGuiCol_Button,
-//        state_ == State::Stopped ? ImVec4(0.35f, 0.08f, 0.08f, 1.0f)
-//                                 : ImVec4(0.10f, 0.10f, 0.10f, 1.0f));
-//    ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(0.55f, 0.12f, 0.12f, 1.0f));
-//    ImGui::PushStyleColor(ImGuiCol_ButtonActive,  ImVec4(0.28f, 0.06f, 0.06f, 1.0f));
-//    ImGui::PushStyleColor(ImGuiCol_Text,
-//        state_ == State::Stopped ? ImVec4(0.95f, 0.35f, 0.35f, 1.0f)
-//                                 : ImVec4(0.38f, 0.38f, 0.38f, 1.0f));
-//    if (ImGui::Button(" [] ") && state_ != State::Stopped) Stop();
-//    ImGui::PopStyleColor(4);
-//
-//    ImGui::SameLine(0.f, 4.f);
-//    ImGui::SeparatorEx(ImGuiSeparatorFlags_Vertical);
-//    ImGui::SameLine(0.f, 4.f);
-//
-//    // 実行中: 緑ハイライト  それ以外: 暗色
-//    ImGui::PushStyleColor(ImGuiCol_Button,
-//        state_ == State::Running ? ImVec4(0.07f, 0.28f, 0.09f, 1.0f)
-//                                 : ImVec4(0.10f, 0.10f, 0.10f, 1.0f));
-//    ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(0.10f, 0.40f, 0.13f, 1.0f));
-//    ImGui::PushStyleColor(ImGuiCol_ButtonActive,  ImVec4(0.05f, 0.20f, 0.07f, 1.0f));
-//    ImGui::PushStyleColor(ImGuiCol_Text,
-//        state_ == State::Running ? ImVec4(0.50f, 0.95f, 0.55f, 1.0f)
-//                                 : ImVec4(0.38f, 0.38f, 0.38f, 1.0f));
-//    if (ImGui::Button("  >  ") && state_ != State::Running) Play();
-//    ImGui::PopStyleColor(4);
-//
-//    ImGui::SameLine(0.f, 2.f);
-//
-//    // 一時停止中: アンバーハイライト  それ以外: 暗色
-//    ImGui::PushStyleColor(ImGuiCol_Button,
-//        state_ == State::Paused ? ImVec4(0.30f, 0.20f, 0.02f, 1.0f)
-//                                : ImVec4(0.10f, 0.10f, 0.10f, 1.0f));
-//    ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(0.42f, 0.28f, 0.04f, 1.0f));
-//    ImGui::PushStyleColor(ImGuiCol_ButtonActive,  ImVec4(0.22f, 0.14f, 0.02f, 1.0f));
-//    ImGui::PushStyleColor(ImGuiCol_Text,
-//        state_ == State::Paused ? ImVec4(0.95f, 0.76f, 0.20f, 1.0f)
-//                                : ImVec4(0.38f, 0.38f, 0.38f, 1.0f));
-//    if (ImGui::Button(" || ") && state_ == State::Running) Pause();
-//    ImGui::PopStyleColor(4);
-//
-//    ImGui::SameLine(0.f, 2.f);
-//
-//    // Paused 以外はグレーアウト
-//    if (state_ != State::Paused) ImGui::BeginDisabled();
-//    RenderStepButton();
-//    if (state_ != State::Paused) ImGui::EndDisabled();
-//#endif
-//}
-
 bool FrameDebugger::ShouldUpdate() {
 #ifdef _DEBUG
     ++frameCount_;
@@ -118,7 +63,6 @@ bool FrameDebugger::ShouldUpdate() {
 
 void FrameDebugger::RenderStepButton() {
 #ifdef _DEBUG
-    // >| ステップ（長押し加速）: 薄いブルーホバーでツールバーと区別
     ImGui::PushStyleColor(ImGuiCol_Button,        ImVec4(0.10f, 0.10f, 0.10f, 1.0f));
     ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(0.18f, 0.30f, 0.52f, 1.0f));
     ImGui::PushStyleColor(ImGuiCol_ButtonActive,  ImVec4(0.12f, 0.20f, 0.38f, 1.0f));

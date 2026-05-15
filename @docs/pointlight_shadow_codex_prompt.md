@@ -198,7 +198,6 @@ CubeMap Shadowの多回サンプリング
 
 距離判定は `distSq` ベースで行い、範囲外は早期スキップする。
 減衰は `decay` を使った `pow()` で制御する（実装済み）。
-
 ```hlsl
 float3 toLight = light.position - worldPos;
 float distSq = dot(toLight, toLight);
@@ -213,6 +212,7 @@ float atten = pow(saturate(1.0f - distSq / radiusSq), light.decay);
 float3 L = toLight * rsqrt(max(distSq, 0.0001f));
 float NdotL = saturate(dot(normal, L));
 ```
+
 
 ---
 
@@ -259,6 +259,7 @@ score = intensity * overlapFactor / distanceToModel
 ```
 
 ---
+
 
 ### B. Cube Shadow Map
 

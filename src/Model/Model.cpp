@@ -96,6 +96,8 @@ void Model::Initialize(const std::string& _name) {
     common_->RegisterShadowDraw(uuid_, [this]() {
         if (!castShadow_) return;
         commandList_->SetGraphicsRootConstantBufferView(0, wr_->Get()->GetGPUVirtualAddress());
+        commandList_->SetGraphicsRootConstantBufferView(2, mesh_->GetMaterialAddress());
+        commandList_->SetGraphicsRootDescriptorTable(3, Singleton<TextureManager>::GetInstance()->GetGPUHandle(mesh_->GetTextureName()));
         mesh_->DrawGeometryOnly();
     });
 }
@@ -125,21 +127,32 @@ void Model::Draw() const {
 
     const auto tm = Singleton<TextureManager>::GetInstance();
 
+    const bool isTransparent = mesh_->GetAlpha() < 1.0f;
     if (pose_.has_value() && !data_->skinCluster.empty()) {
-        common_->RegisterSkinningDraw([this, tm]() {
+        auto drawCmd = [this, tm]() {
             commandList_->SetGraphicsRootConstantBufferView(1, wr_->Get()->GetGPUVirtualAddress());
             commandList_->SetGraphicsRootConstantBufferView(4, cr_->Get()->GetGPUVirtualAddress());
             commandList_->SetGraphicsRootDescriptorTable(8, tm->GetGPUHandle(environmentTexture_));
             commandList_->SetGraphicsRootDescriptorTable(11, skinCluster_.paletteHandle.second);
             mesh_->Draw();
-            }, posteffect_);
-    }else {
-        common_->RegisterStaticDraw([this, tm]() {
+        };
+        if (isTransparent) {
+            common_->RegisterSkinningTransparentDraw(drawCmd, posteffect_);
+        } else {
+            common_->RegisterSkinningDraw(drawCmd, posteffect_);
+        }
+    } else {
+        auto drawCmd = [this, tm]() {
             commandList_->SetGraphicsRootConstantBufferView(1, wr_->Get()->GetGPUVirtualAddress());
             commandList_->SetGraphicsRootConstantBufferView(4, cr_->Get()->GetGPUVirtualAddress());
             commandList_->SetGraphicsRootDescriptorTable(8, tm->GetGPUHandle(environmentTexture_));
             mesh_->Draw();
-            }, posteffect_);
+        };
+        if (isTransparent) {
+            common_->RegisterStaticTransparentDraw(drawCmd, posteffect_);
+        } else {
+            common_->RegisterStaticDraw(drawCmd, posteffect_);
+        }
     }
 
     DrawLine();

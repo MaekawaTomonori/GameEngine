@@ -62,7 +62,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level4</WarningLevel>
       <PreprocessorDefinitions>_LIB;NDEBUG;DEBUG;_DEBUG;_WINDOWS;_UNICODE;UNICODE;_DBG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>externals;externals\assimp\include;externals\imgui;externals\DirectXTex;externals\spdlog\include;externals\json;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>externals;externals\assimp\include;externals\imgui;externals\DirectXTex;externals\spdlog\include;externals\json;Lib\Audio\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -87,7 +87,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level4</WarningLevel>
       <PreprocessorDefinitions>_LIB;NDEBUG;_WINDOWS;_UNICODE;UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>externals;externals\assimp\include;externals\imgui;externals\DirectXTex;externals\spdlog\include;externals\json;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>externals;externals\assimp\include;externals\imgui;externals\DirectXTex;externals\spdlog\include;externals\json;Lib\Audio\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>MinSpace</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -118,8 +118,12 @@
     <ClInclude Include="externals\json\json.hpp" />
     <ClInclude Include="include\DebugUI.hpp" />
     <ClInclude Include="include\PerformanceProfiler.hpp" />
+    <ClInclude Include="include\ScreenUtils.hpp" />
+    <ClInclude Include="include\Ui\Module\IModule.hpp" />
+    <ClInclude Include="include\Ui\Module\KeyboardModule.hpp" />
+    <ClInclude Include="include\Ui\Module\MouseModule.hpp" />
     <ClInclude Include="include\WatchDebugger.hpp" />
-    <!-- AUDIO_DISABLED: <ClInclude Include="src\Audio\AudioDebugPanel.hpp" /> -->
+    <ClInclude Include="src\Audio\AudioDebugPanel.hpp" />
     <ClInclude Include="src\Collision\CollisionManager.hpp" />
     <ClInclude Include="src\Config\ConfigLoader.hpp" />
     <ClInclude Include="src\Debug\Debugger.hpp" />
@@ -196,6 +200,7 @@
     <ClInclude Include="src\Scene\Transition\Transition.hpp" />
     <ClInclude Include="src\Scene\Transition\Fade.hpp" />
     <ClInclude Include="src\Scheduler\Scheduler.hpp" />
+    <ClInclude Include="src\Screen\Screen.hpp" />
     <ClInclude Include="src\Shadow\ShadowCubeMap.hpp" />
     <ClInclude Include="src\Shadow\ShadowPass.hpp" />
     <ClInclude Include="src\Sky\Common\SkyCommon.hpp" />
@@ -223,10 +228,13 @@
   <ItemGroup>
     <ClCompile Include="src\Config\ConfigLoader.cpp" />
     <ClCompile Include="src\Scene\Sample\SampleScene.cpp" />
+    <ClCompile Include="src\Screen\Screen.cpp" />
     <ClCompile Include="src\Shadow\ShadowCubeMap.cpp" />
     <ClCompile Include="src\Shadow\ShadowPass.cpp" />
     <ClCompile Include="src\Ui\EventSystem.cpp" />
     <ClCompile Include="src\Ui\Element.cpp" />
+    <ClCompile Include="src\Ui\Module\KeyboardModule.cpp" />
+    <ClCompile Include="src\Ui\Module\MouseModule.cpp" />
     <ClCompile Include="src\Ui\SpriteElement.cpp" />
     <ClCompile Include="src\Ui\TextElement.cpp" />
     <ClCompile Include="src\Ui\UserInterface.cpp" />
@@ -235,7 +243,7 @@
     <ClCompile Include="src\Camera\Controller\CameraController.cpp" />
     <ClCompile Include="src\Camera\Director\CameraDirector.cpp" />
     <ClCompile Include="src\Camera\Repository\CameraRepository.cpp" />
-    <!-- AUDIO_DISABLED: <ClCompile Include="src\Audio\AudioDebugPanel.cpp" /> -->
+    <ClCompile Include="src\Audio\AudioDebugPanel.cpp" />
     <ClCompile Include="src\Collision\CollisionManager.cpp" />
     <ClCompile Include="src\Common\Common.cpp" />
     <ClCompile Include="src\Container\Material.cpp" />
@@ -318,11 +326,9 @@
     <ProjectReference Include="externals\imgui\imgui.vcxproj">
       <Project>{05A9737C-E682-451F-A307-4B01DEB9D44B}</Project>
     </ProjectReference>
-    <!-- AUDIO_DISABLED:
     <ProjectReference Include="Lib\Audio\Audio.vcxproj">
       <Project>{4aa5fdee-80d9-4e30-8eff-d9435c7c4416}</Project>
     </ProjectReference>
-    -->
     <ProjectReference Include="Lib\Collision\CollisionLib.vcxproj">
       <Project>{3b4663f4-d09b-4503-aeb0-b2477444918f}</Project>
     </ProjectReference>

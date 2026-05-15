@@ -74,10 +74,6 @@ class CameraDirector {
     bool        isEditingWork_         = false;
     bool        isPreviewingKeyframe_  = false;
 
-    /** Control point visualizer shown when editing a Bezier keyframe
-     */
-    std::unique_ptr<Model> controlPointModel_;
-
 public:
     void Initialize(GESTD::ReferencePtr<DebugUI> _debug);
     void Update();

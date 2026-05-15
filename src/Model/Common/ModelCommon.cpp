@@ -24,6 +24,12 @@ void ModelCommon::Initialize(const GESTD::ReferencePtr<DirectXAdapter>& _adapter
 
 	// Static Model用のパイプライン作成
 	CreateStaticPipeline();
+
+    // 半透明モデル用のパイプライン作成（深度書き込み無効）
+    staticTransparentPipeline_   = std::make_unique<PipelineStateObject>(_adapter);
+    skinningTransparentPipeline_ = std::make_unique<PipelineStateObject>(_adapter);
+    CreateStaticTransparentPipeline();
+    CreateSkinningTransparentPipeline();
 }
 
 void ModelCommon::CreateSkinningPipeline() const {
@@ -314,6 +320,128 @@ void ModelCommon::CreateStaticPipeline() const {
 	Log::Send(Log::Level::INFO, "Static model pipeline created successfully");
 }
 
+void ModelCommon::CreateStaticTransparentPipeline() {
+	D3D12_DESCRIPTOR_RANGE textureRange{
+        .RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV,
+        .NumDescriptors = 1,
+        .BaseShaderRegister = 0,
+        .RegisterSpace = 0,
+        .OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND
+    };
+    D3D12_DESCRIPTOR_RANGE staticEnvironmentRange{
+        .RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV,
+        .NumDescriptors = 1,
+        .BaseShaderRegister = 5,
+        .RegisterSpace = 0,
+        .OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND
+    };
+    D3D12_DESCRIPTOR_RANGE shadowRange{
+        .RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV,
+        .NumDescriptors = 1,
+        .BaseShaderRegister = 6,
+        .RegisterSpace = 0,
+        .OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND
+    };
+
+	staticTransparentPipeline_->SetRootSignature(
+        RootSignature()
+            .AddParameter({ .ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV, .Descriptor = { .ShaderRegister = 0 }, .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL })
+            .AddParameter({ .ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV, .Descriptor = { .ShaderRegister = 0 }, .ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX })
+            .AddParameter({ .ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE, .DescriptorTable = { .NumDescriptorRanges = 1, .pDescriptorRanges = &textureRange }, .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL })
+            .AddParameter({ .ParameterType = D3D12_ROOT_PARAMETER_TYPE_SRV, .Descriptor = { .ShaderRegister = 1 }, .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL })
+            .AddParameter({ .ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV, .Descriptor = { .ShaderRegister = 2 }, .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL })
+            .AddParameter({ .ParameterType = D3D12_ROOT_PARAMETER_TYPE_SRV, .Descriptor = { .ShaderRegister = 3 }, .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL })
+            .AddParameter({ .ParameterType = D3D12_ROOT_PARAMETER_TYPE_SRV, .Descriptor = { .ShaderRegister = 4 }, .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL })
+            .AddParameter({ .ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV, .Descriptor = { .ShaderRegister = 5 }, .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL })
+            .AddParameter({ .ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE, .DescriptorTable = { .NumDescriptorRanges = 1, .pDescriptorRanges = &staticEnvironmentRange }, .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL })
+            .AddParameter({ .ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE, .DescriptorTable = { .NumDescriptorRanges = 1, .pDescriptorRanges = &shadowRange }, .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL })
+            .AddParameter({ .ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV, .Descriptor = { .ShaderRegister = 6 }, .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL })
+        .SetSampler({ .Filter = D3D12_FILTER_MIN_MAG_MIP_LINEAR, .AddressU = D3D12_TEXTURE_ADDRESS_MODE_WRAP, .AddressV = D3D12_TEXTURE_ADDRESS_MODE_WRAP, .AddressW = D3D12_TEXTURE_ADDRESS_MODE_WRAP, .ComparisonFunc = D3D12_COMPARISON_FUNC_NEVER, .MaxLOD = D3D12_FLOAT32_MAX, .ShaderRegister = 0, .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL })
+        .SetSampler({ .Filter = D3D12_FILTER_MIN_MAG_MIP_LINEAR, .AddressU = D3D12_TEXTURE_ADDRESS_MODE_CLAMP, .AddressV = D3D12_TEXTURE_ADDRESS_MODE_CLAMP, .AddressW = D3D12_TEXTURE_ADDRESS_MODE_CLAMP, .ComparisonFunc = D3D12_COMPARISON_FUNC_NEVER, .MaxLOD = D3D12_FLOAT32_MAX, .ShaderRegister = 1, .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL })
+    )
+	.SetInputLayout(InputLayout{}
+		.SetElement({"POSITION", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, D3D12_APPEND_ALIGNED_ELEMENT, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0})
+        .SetElement({"TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, D3D12_APPEND_ALIGNED_ELEMENT, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0})
+        .SetElement({"NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, D3D12_APPEND_ALIGNED_ELEMENT, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0})
+	)
+	.SetBlend(BlendMode::ALPHA)
+	.SetDepthStencil({
+	    .DepthEnable = true,
+	    .DepthWriteMask = D3D12_DEPTH_WRITE_MASK_ZERO,
+	    .DepthFunc = D3D12_COMPARISON_FUNC_LESS_EQUAL
+	})
+	.SetDSVFormat(DXGI_FORMAT_D24_UNORM_S8_UINT)
+	.SetShader(std::make_unique<Shader>(L"Model"))
+	.SetTopologyType(D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE)
+	.Create();
+}
+
+void ModelCommon::CreateSkinningTransparentPipeline() {
+	D3D12_DESCRIPTOR_RANGE textureRange{
+        .RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV,
+        .NumDescriptors = 1,
+        .BaseShaderRegister = 0,
+        .RegisterSpace = 0,
+        .OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND
+    };
+    D3D12_DESCRIPTOR_RANGE environmentRange{
+        .RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV,
+        .NumDescriptors = 1,
+        .BaseShaderRegister = 5,
+        .RegisterSpace = 0,
+        .OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND
+    };
+    D3D12_DESCRIPTOR_RANGE animationRange{
+        .RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV,
+        .NumDescriptors = 1,
+        .BaseShaderRegister = 0,
+        .RegisterSpace = 0,
+        .OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND
+    };
+    D3D12_DESCRIPTOR_RANGE shadowRange{
+        .RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV,
+        .NumDescriptors = 1,
+        .BaseShaderRegister = 6,
+        .RegisterSpace = 0,
+        .OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND
+    };
+
+	skinningTransparentPipeline_->SetRootSignature(
+        RootSignature()
+            .AddParameter({ .ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV, .Descriptor = { .ShaderRegister = 0 }, .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL })
+            .AddParameter({ .ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV, .Descriptor = { .ShaderRegister = 0 }, .ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX })
+            .AddParameter({ .ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE, .DescriptorTable = { .NumDescriptorRanges = 1, .pDescriptorRanges = &textureRange }, .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL })
+            .AddParameter({ .ParameterType = D3D12_ROOT_PARAMETER_TYPE_SRV, .Descriptor = { .ShaderRegister = 1 }, .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL })
+            .AddParameter({ .ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV, .Descriptor = { .ShaderRegister = 2 }, .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL })
+            .AddParameter({ .ParameterType = D3D12_ROOT_PARAMETER_TYPE_SRV, .Descriptor = { .ShaderRegister = 3 }, .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL })
+            .AddParameter({ .ParameterType = D3D12_ROOT_PARAMETER_TYPE_SRV, .Descriptor = { .ShaderRegister = 4 }, .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL })
+            .AddParameter({ .ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV, .Descriptor = { .ShaderRegister = 5 }, .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL })
+            .AddParameter({ .ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE, .DescriptorTable = { .NumDescriptorRanges = 1, .pDescriptorRanges = &environmentRange }, .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL })
+            .AddParameter({ .ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE, .DescriptorTable = { .NumDescriptorRanges = 1, .pDescriptorRanges = &shadowRange }, .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL })
+            .AddParameter({ .ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV, .Descriptor = { .ShaderRegister = 6 }, .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL })
+            .AddParameter({ .ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE, .DescriptorTable = { .NumDescriptorRanges = 1, .pDescriptorRanges = &animationRange }, .ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX })
+        .SetSampler({ .Filter = D3D12_FILTER_MIN_MAG_MIP_LINEAR, .AddressU = D3D12_TEXTURE_ADDRESS_MODE_WRAP, .AddressV = D3D12_TEXTURE_ADDRESS_MODE_WRAP, .AddressW = D3D12_TEXTURE_ADDRESS_MODE_WRAP, .ComparisonFunc = D3D12_COMPARISON_FUNC_NEVER, .MaxLOD = D3D12_FLOAT32_MAX, .ShaderRegister = 0, .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL })
+        .SetSampler({ .Filter = D3D12_FILTER_MIN_MAG_MIP_LINEAR, .AddressU = D3D12_TEXTURE_ADDRESS_MODE_CLAMP, .AddressV = D3D12_TEXTURE_ADDRESS_MODE_CLAMP, .AddressW = D3D12_TEXTURE_ADDRESS_MODE_CLAMP, .ComparisonFunc = D3D12_COMPARISON_FUNC_NEVER, .MaxLOD = D3D12_FLOAT32_MAX, .ShaderRegister = 1, .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL })
+    )
+	.SetInputLayout(InputLayout{}
+		.SetElement({"POSITION", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, D3D12_APPEND_ALIGNED_ELEMENT, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0})
+        .SetElement({"TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, D3D12_APPEND_ALIGNED_ELEMENT, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0})
+        .SetElement({"NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, D3D12_APPEND_ALIGNED_ELEMENT, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0})
+        .SetElement({"WEIGHT", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 1, D3D12_APPEND_ALIGNED_ELEMENT, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0})
+        .SetElement({"INDEX", 0, DXGI_FORMAT_R32G32B32A32_SINT, 1, D3D12_APPEND_ALIGNED_ELEMENT, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0})
+	)
+	.SetBlend(BlendMode::ALPHA)
+	.SetDepthStencil({
+	    .DepthEnable = true,
+	    .DepthWriteMask = D3D12_DEPTH_WRITE_MASK_ZERO,
+	    .DepthFunc = D3D12_COMPARISON_FUNC_LESS_EQUAL
+	})
+	.SetDSVFormat(DXGI_FORMAT_D24_UNORM_S8_UINT)
+	.SetShader(std::make_unique<Shader>(L"Skinning"))
+	.SetTopologyType(D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE)
+	.Create();
+}
+
 void ModelCommon::RegisterStaticDraw(const std::function<void()>& _command, bool _isApplyPostEffect) {
     std::lock_guard<std::mutex> lock(mutex_);
     staticDrawCommands_.push_back({ _command, _isApplyPostEffect });
@@ -322,6 +450,16 @@ void ModelCommon::RegisterStaticDraw(const std::function<void()>& _command, bool
 void ModelCommon::RegisterSkinningDraw(const std::function<void()>& _command, bool _isApplyPostEffect) {
     std::lock_guard<std::mutex> lock(mutex_);
     skinningDrawCommands_.push_back({ _command, _isApplyPostEffect });
+}
+
+void ModelCommon::RegisterStaticTransparentDraw(const std::function<void()>& _command, bool _isApplyPostEffect) {
+    std::lock_guard<std::mutex> lock(mutex_);
+    staticTransparentCommands_.push_back({ _command, _isApplyPostEffect });
+}
+
+void ModelCommon::RegisterSkinningTransparentDraw(const std::function<void()>& _command, bool _isApplyPostEffect) {
+    std::lock_guard<std::mutex> lock(mutex_);
+    skinningTransparentCommands_.push_back({ _command, _isApplyPostEffect });
 }
 
 void ModelCommon::RegisterShadowDraw(const std::string& _id, const std::function<void()>& _func) {
@@ -350,6 +488,10 @@ void ModelCommon::Draw(Renderer* _renderer) {
     std::vector<std::function<void()>> staticNoPostEffectTasks;
     std::vector<std::function<void()>> skinningPostEffectTasks;
     std::vector<std::function<void()>> skinningNoPostEffectTasks;
+    std::vector<std::function<void()>> staticTransparentPostTasks;
+    std::vector<std::function<void()>> staticTransparentNoPostTasks;
+    std::vector<std::function<void()>> skinningTransparentPostTasks;
+    std::vector<std::function<void()>> skinningTransparentNoPostTasks;
 
     {
         std::lock_guard<std::mutex> lock(mutex_);
@@ -371,6 +513,24 @@ void ModelCommon::Draw(Renderer* _renderer) {
             }
         }
         skinningDrawCommands_.clear();
+
+        for (const auto& command : staticTransparentCommands_) {
+            if (command.applyPostEffects) {
+                staticTransparentPostTasks.push_back(command.func);
+            } else {
+                staticTransparentNoPostTasks.push_back(command.func);
+            }
+        }
+        staticTransparentCommands_.clear();
+
+        for (const auto& command : skinningTransparentCommands_) {
+            if (command.applyPostEffects) {
+                skinningTransparentPostTasks.push_back(command.func);
+            } else {
+                skinningTransparentNoPostTasks.push_back(command.func);
+            }
+        }
+        skinningTransparentCommands_.clear();
     }
 
     auto bindShadow = [this]() {
@@ -380,6 +540,7 @@ void ModelCommon::Draw(Renderer* _renderer) {
         }
     };
 
+    // --- 不透明パス（深度書き込みあり）---
     if (!staticNoPostEffectTasks.empty()) {
         _renderer->Register([this, staticNoPostEffectTasks, bindShadow]() {
             if (staticPipeline_) {
@@ -423,6 +584,55 @@ void ModelCommon::Draw(Renderer* _renderer) {
             }
             bindShadow();
             for (auto& task : skinningPostEffectTasks) {
+                task();
+            }
+        }, true);
+    }
+
+    // --- 半透明パス（深度書き込みなし、不透明パスの後に描画）---
+    if (!staticTransparentNoPostTasks.empty()) {
+        _renderer->Register([this, staticTransparentNoPostTasks, bindShadow]() {
+            if (staticTransparentPipeline_) {
+                staticTransparentPipeline_->DrawCall();
+            }
+            bindShadow();
+            for (auto& task : staticTransparentNoPostTasks) {
+                task();
+            }
+        });
+    }
+
+    if (!staticTransparentPostTasks.empty()) {
+        _renderer->Register([this, staticTransparentPostTasks, bindShadow]() {
+            if (staticTransparentPipeline_) {
+                staticTransparentPipeline_->DrawCall();
+            }
+            bindShadow();
+            for (auto& task : staticTransparentPostTasks) {
+                task();
+            }
+        }, true);
+    }
+
+    if (!skinningTransparentNoPostTasks.empty()) {
+        _renderer->Register([this, skinningTransparentNoPostTasks, bindShadow]() {
+            if (skinningTransparentPipeline_) {
+                skinningTransparentPipeline_->DrawCall();
+            }
+            bindShadow();
+            for (auto& task : skinningTransparentNoPostTasks) {
+                task();
+            }
+        });
+    }
+
+    if (!skinningTransparentPostTasks.empty()) {
+        _renderer->Register([this, skinningTransparentPostTasks, bindShadow]() {
+            if (skinningTransparentPipeline_) {
+                skinningTransparentPipeline_->DrawCall();
+            }
+            bindShadow();
+            for (auto& task : skinningTransparentPostTasks) {
                 task();
             }
         }, true);

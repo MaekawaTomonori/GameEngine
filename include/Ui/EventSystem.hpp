@@ -8,31 +8,27 @@
 namespace Ui {
 
     enum class EventKey {
-        Execute,
-        Click,
         Hover,
+        Execute,
     };
 
     inline const char* EventKeyToString(EventKey _key) {
         switch (_key) {
-            case EventKey::Execute: return "Execute";
-            case EventKey::Click:   return "Click";
             case EventKey::Hover:   return "Hover";
+            case EventKey::Execute: return "Execute";
         }
         return "Unknown";
     }
 
     inline EventKey StringToEventKey(const std::string& _str) {
-        if (_str == "Execute") return EventKey::Execute;
-        if (_str == "Click")   return EventKey::Click;
         if (_str == "Hover")   return EventKey::Hover;
+        if (_str == "Execute") return EventKey::Execute;
         return EventKey::Execute;
     }
 
     constexpr EventKey ALL_EVENT_KEYS[] = {
-        EventKey::Execute,
-        EventKey::Click,
         EventKey::Hover,
+        EventKey::Execute,
     };
 
     class EventSystem {

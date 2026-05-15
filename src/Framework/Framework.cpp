@@ -1,5 +1,6 @@
 #include "include/Framework.hpp"
 
+#include "AudioLib.hpp"
 #include "Log.hpp"
 #include "IGame.hpp"
 #include "PerformanceProfiler.hpp"
@@ -7,6 +8,7 @@
 #include "Random/RandomEngine.hpp"
 #include "src/Scene/Sample/SampleScene.hpp"
 #include "src/Config/ConfigLoader.hpp"
+#include "src/Screen/Screen.hpp"
 
 namespace {
     constexpr const char* APP_CONFIG_PATH = "Assets/Config/App.cnf";
@@ -25,14 +27,16 @@ Framework::Framework() {
     Log::LogFileOperation("STARTUP_CHECK", "Assets",         std::filesystem::exists("Assets"),         "Checking assets directory");
     Log::LogFileOperation("STARTUP_CHECK", "Assets/Shaders", std::filesystem::exists("Assets/Shaders"), "Checking shaders directory");
 
-    // AUDIO_DISABLED: Audio::Initialize();
-
     windows_ = std::make_unique<WinApp>();
     windows_->Initialize();
     windows_->SetWindowSize(static_cast<int>(config_.width), static_cast<int>(config_.height));
 
     dxAdapter_ = std::make_unique<DirectXAdapter>(windows_->GetWindowHandle(), config_.width, config_.height);
     dxAdapter_->Initialize();
+
+    Singleton<Screen>::GetInstance()->Resize(
+        static_cast<float>(config_.width),
+        static_cast<float>(config_.height));
 
     srv_ = std::make_unique<SRVManager>();
     srv_->Initialize(dxAdapter_.get());
@@ -99,20 +103,27 @@ Framework::Framework() {
     collision_->Initialize(dbg);
 
     ui_ = Singleton<Ui::Manager>::GetInstance();
-    ui_->Setup(dbg);
+    ui_->Setup(dbg, input_);
 
 #ifdef _DEBUG
     Debugger::WatchGroup("Engine")
         .Watch("FPS", &config_.fps)
         .Watch("ShowCursor", &config_.showCursor);
 
-    // AUDIO_DISABLED: audioPanel_ = std::make_unique<AudioDebugPanel>();
-    // AUDIO_DISABLED: audioPanel_->Initialize(debugger_->GetUI());
+#endif
+
+    // miniaudio の内部アロケーションを全 windowStates_ ノードの後に配置し、
+    // バッファオーバーランによる DebugUI ヒープ破壊を回避する
+    Audio::Initialize();
+
+#ifdef _DEBUG
+    //audioPanel_ = std::make_unique<AudioDebugPanel>();
+    //audioPanel_->Initialize(debugger_->GetUI());
 #endif
 }
 
 Framework::~Framework() {
-    // AUDIO_DISABLED: Audio::Shutdown();
+    Audio::Shutdown();
     SingletonFinalizer::Finalize();
     CoUninitialize();
 }
@@ -196,12 +207,12 @@ void Framework::Update() const {
     particle_->Debug();
     postProcessor_->Debug();
     collision_->Debug();
-    // AUDIO_DISABLED: audioPanel_->Debug();
     debugger_->Debug();
     model_->Debug();
     sprite_->Debug();
     ui_->Debug();
     text_->Debug();
+    //audioPanel_->Debug();
 
     scene_->Debug();
     if (debugger_->ShouldUpdate()) {
@@ -276,6 +287,10 @@ void Framework::Shutdown() {
         game_.reset();
     }
 
+    // オーディオスレッドを先に停止し、DebugUI の破棄前にすべてのサウンドを解放する
+    // ~Framework() でも呼ばれるが Mixer::Shutdown() は二重呼び出しをガードしている
+    Audio::Shutdown();
+
     shadowPass_.reset();
     shadowCubeMap_.reset();
 
@@ -313,6 +328,9 @@ bool Framework::Check() const {
 
 void Framework::HandleWindowResize(int _width, int _height) const {
     dxAdapter_->UpdateWindowSize(static_cast<size_t>(_width), static_cast<size_t>(_height));
+    Singleton<Screen>::GetInstance()->Resize(
+        static_cast<float>(_width),
+        static_cast<float>(_height));
     postProcessor_->ResizeRenderTextures();
 
 #ifdef _DEBUG

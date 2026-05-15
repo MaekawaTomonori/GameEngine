@@ -127,6 +127,10 @@ public:
     void SetColor(const Vector4& _color) const;
 
     void EnableLighting(bool _active);
+
+    float GetAlpha() const { return material_ ? material_->color.w : 1.0f; }
+    D3D12_GPU_VIRTUAL_ADDRESS GetMaterialAddress() const { return mr_ ? mr_->Get()->GetGPUVirtualAddress() : 0; }
+    const std::string& GetTextureName() const { return texture_; }
 }; // class Mesh
 
 #endif // Mesh_HPP_

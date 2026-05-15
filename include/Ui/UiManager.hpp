@@ -7,6 +7,7 @@
 
 #include "ReferencePtr.hpp"
 #include "DebugUI.hpp"
+#include "Input.hpp"
 #include "Ui/UserInterface.hpp"
 #include "src/Renderer/Renderer.hpp"
 
@@ -25,6 +26,7 @@ namespace Ui {
 
     private:
         GESTD::ReferencePtr<DebugUI> debugUI_;
+        GESTD::ReferencePtr<Input>   input_;
 
         std::vector<Entry> entries_;
         std::vector<std::unique_ptr<Canvas>> owned_;
@@ -32,7 +34,11 @@ namespace Ui {
         std::array<char, 256> newNameBuff_ = {};
 
     public:
-        void Setup(const GESTD::ReferencePtr<DebugUI>& _debugUi);
+        void Setup(const GESTD::ReferencePtr<DebugUI>& _debugUi,
+                   const GESTD::ReferencePtr<Input>&   _input);
+
+        /** @brief フォーカスを持つ Canvas を切り替える（Canvas 内部から呼ばれる） */
+        void SetFocusedCanvas(const Canvas* _canvas) const;
 
         void Update();
         void Draw() const;

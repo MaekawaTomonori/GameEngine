@@ -44,7 +44,7 @@ namespace Ui {
         OnDraw();
     }
 
-    void Element::Debug(const std::vector<std::string>& _availableActions, const std::vector<std::string>& _availableAnimKeys) {
+    void Element::Debug(const std::vector<std::string>& _availableActions, const std::vector<std::string>& _availableAnimKeys, const std::function<void()>& _selectableExtra) {
         if (!isOpen_) return;
 
         ImGui::BeginChild("Body", ImVec2(0.f, 0.f), ImGuiChildFlags_Borders | ImGuiChildFlags_AutoResizeY, ImGuiWindowFlags_NoMove);
@@ -76,6 +76,10 @@ namespace Ui {
 
         ImGui::Text("Visible : "); ImGui::SameLine();
         ImGui::Checkbox("##visible", &visible_);
+
+        ImGui::Text("Selectable : "); ImGui::SameLine();
+        ImGui::Checkbox("##selectable", &selectable_);
+        if (selectable_ && _selectableExtra) _selectableExtra();
 
         ImGui::Separator();
 
@@ -146,7 +150,9 @@ namespace Ui {
 
     void Element::SetPosition(const Vector2& _pos) { position_ = _pos; }
     void Element::SetColor(const Vector4& _color)  { color_ = _color; }
-    void Element::SetVisible(bool _visible)        { visible_ = _visible; }
+    void Element::SetVisible(bool _visible)         { visible_    = _visible; }
+    void Element::SetSelectable(bool _selectable)  { selectable_ = _selectable; }
+    bool Element::IsSelectable() const             { return selectable_; }
     void Element::SetParent(const Vector2& _pos)   { parent_ = _pos; }
 
     void Element::SetName(const std::string& _name) {
@@ -194,6 +200,7 @@ namespace Ui {
         _dst.SetPosition(position_);
         _dst.SetColor(color_);
         _dst.SetVisible(visible_);
+        _dst.SetSelectable(selectable_);
         _dst.SetShowAnimKey(showAnimKey_);
         _dst.SetIdleAnimKey(idleAnimKey_);
         _dst.SetHideAnimKey(hideAnimKey_);

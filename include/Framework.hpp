@@ -7,7 +7,7 @@
 #include "Input.hpp"
 #ifdef _DEBUG
 #include "src/Debug/Debugger.hpp"
-// AUDIO_DISABLED: #include "src/Audio/AudioDebugPanel.hpp"
+//#include "src/Audio/AudioDebugPanel.hpp"
 #endif
 #include "Ui/UiManager.hpp"
 #include "src/Camera/Controller/CameraController.hpp"
@@ -49,7 +49,7 @@ class Framework {
     std::unique_ptr<ResourceRepository> resources_;
 #ifdef _DEBUG
     std::unique_ptr<Debugger>        debugger_;
-    // AUDIO_DISABLED: std::unique_ptr<AudioDebugPanel> audioPanel_;
+    //std::unique_ptr<AudioDebugPanel> audioPanel_;
 #endif
     std::unique_ptr<SRVManager> srv_;
     //std::unique_ptr<LevelEditor> level_;

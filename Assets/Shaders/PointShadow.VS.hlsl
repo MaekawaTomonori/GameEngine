@@ -7,6 +7,7 @@ struct VSInput {
 struct VSOutput {
     float4 position : SV_POSITION;
     float3 worldPos : TEXCOORD0;
+    float2 texcoord : TEXCOORD1;
 };
 
 struct Transformation {
@@ -28,5 +29,6 @@ VSOutput main(VSInput input) {
     float4 worldPos  = mul(input.position, gTransformation.world);
     output.worldPos  = worldPos.xyz;
     output.position  = mul(worldPos, gShadowCamera.faceVP);
+    output.texcoord  = input.texcoord;
     return output;
 }
