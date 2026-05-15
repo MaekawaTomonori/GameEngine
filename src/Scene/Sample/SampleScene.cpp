@@ -15,16 +15,15 @@ void SampleScene::Initialize() {
     plane->SetRotate({4.5f, 0.f, 0.f});
     plane->SetScale({5.f, 5.f, 1.f});
 
-    kick_ = Audio::Handle("Assets/audio/kick.wav");
+    kick_.emplace("Assets/audio/kick.wav");
 }
 
 void SampleScene::Update() {
     model_->Update();
     plane->Update();
 
-    if (Singleton<Input>::GetInstance()->IsTrigger(DIK_SPACE)) {
-        auto p = kick_.Play();
-        (void)p;
+    if (kick_ && Singleton<Input>::GetInstance()->IsTrigger(DIK_SPACE)) {
+        kick_->Play();
     }
 
 }

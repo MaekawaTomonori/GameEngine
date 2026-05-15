@@ -1,6 +1,7 @@
 #ifndef SampleScene_HPP_
 #define SampleScene_HPP_
 #include <memory>
+#include <optional>
 
 #include "IScene.hpp"
 #include "Model.hpp"
@@ -10,7 +11,7 @@ class SampleScene final : public IScene{
     std::unique_ptr<Model> model_;
     std::unique_ptr<Model> plane;
 
-    Audio::Handle kick_;
+    std::optional<Audio::Handle> kick_;
 
 public:
     void Initialize() override;
