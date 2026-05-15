@@ -1,5 +1,6 @@
 #include "include/Framework.hpp"
 
+#include "AudioLib.hpp"
 #include "Log.hpp"
 #include "IGame.hpp"
 #include "PerformanceProfiler.hpp"
@@ -109,13 +110,16 @@ Framework::Framework() {
         .Watch("FPS", &config_.fps)
         .Watch("ShowCursor", &config_.showCursor);
 
-    audioPanel_ = std::make_unique<AudioDebugPanel>();
-    audioPanel_->Initialize(debugger_->GetUI());
 #endif
 
     // miniaudio の内部アロケーションを全 windowStates_ ノードの後に配置し、
     // バッファオーバーランによる DebugUI ヒープ破壊を回避する
     Audio::Initialize();
+
+#ifdef _DEBUG
+    //audioPanel_ = std::make_unique<AudioDebugPanel>();
+    //audioPanel_->Initialize(debugger_->GetUI());
+#endif
 }
 
 Framework::~Framework() {
@@ -203,12 +207,12 @@ void Framework::Update() const {
     particle_->Debug();
     postProcessor_->Debug();
     collision_->Debug();
-    audioPanel_->Debug();
     debugger_->Debug();
     model_->Debug();
     sprite_->Debug();
     ui_->Debug();
     text_->Debug();
+    //audioPanel_->Debug();
 
     scene_->Debug();
     if (debugger_->ShouldUpdate()) {
@@ -283,6 +287,10 @@ void Framework::Shutdown() {
         game_.reset();
     }
 
+    // オーディオスレッドを先に停止し、DebugUI の破棄前にすべてのサウンドを解放する
+    // ~Framework() でも呼ばれるが Mixer::Shutdown() は二重呼び出しをガードしている
+    Audio::Shutdown();
+
     shadowPass_.reset();
     shadowCubeMap_.reset();
 
@@ -295,7 +303,6 @@ void Framework::Shutdown() {
     resources_.reset();
 
 #ifdef _DEBUG
-    audioPanel_.reset();
     debugger_.reset();
 #endif
 

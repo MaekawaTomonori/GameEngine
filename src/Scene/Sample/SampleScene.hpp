@@ -4,10 +4,13 @@
 
 #include "IScene.hpp"
 #include "Model.hpp"
+#include "Handle.hpp"
 
 class SampleScene final : public IScene{
     std::unique_ptr<Model> model_;
     std::unique_ptr<Model> plane;
+
+    Audio::Handle kick_;
 
 public:
     void Initialize() override;
