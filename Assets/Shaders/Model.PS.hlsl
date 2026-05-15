@@ -69,11 +69,11 @@ ConstantBuffer<ShadowData> gShadowData : register(b6);
 
 float SampleShadowPCF(float3 worldPos, float3 normal) {
     float3 lightDir    = normalize(gShadowData.lightPos - worldPos);
-    float  normalBias  = 0.05f * (1.0f - saturate(dot(normal, lightDir)));
+    float  normalBias  = 0.02f * (1.0f - saturate(dot(normal, lightDir)));
     float3 biasedPos   = worldPos + normal * normalBias;
 
     float3 toLight      = biasedPos - gShadowData.lightPos;
-    float  currentDepth = length(toLight) / gShadowData.farPlane - 0.005f;
+    float  currentDepth = length(toLight) / gShadowData.farPlane - 0.003f;
     float3 dir          = normalize(toLight);
 
     float3 up    = abs(dir.y) < 0.9f ? float3(0, 1, 0) : float3(1, 0, 0);
@@ -153,7 +153,7 @@ PixelShaderOutput main(VertexShaderOutput input)
         float specularPow = pow(saturate(nDotH), gMaterial.shininess);
 
         float32_t3 diffuse = rgb * gDirectionalLight[i].color.rgb * cos * gDirectionalLight[i].intensity;
-        float32_t3 specular = gDirectionalLight[i].color.rgb * gDirectionalLight[i].intensity * specularPow * float32_t3(1.f, 1.f, 1.f);
+        float32_t3 specular = gDirectionalLight[i].color.rgb * gDirectionalLight[i].intensity * specularPow * float32_t3(0.2f, 0.2f, 0.2f);
         col += diffuse + specular;
     }
 
@@ -176,7 +176,7 @@ PixelShaderOutput main(VertexShaderOutput input)
         float specularPowP = pow(saturate(dot(normal, halfVectorP)), gMaterial.shininess);
 
         float32_t3 pointDiffuse = rgb * gPointLight[j].color.rgb * cosP * gPointLight[j].intensity * factor;
-        float32_t3 pointSpecular = gPointLight[j].color.rgb * gPointLight[j].intensity * factor * specularPowP * float32_t3(1.f, 1.f, 1.f);
+        float32_t3 pointSpecular = gPointLight[j].color.rgb * gPointLight[j].intensity * factor * specularPowP * float32_t3(0.2f, 0.2f, 0.2f);
 
         float shadowFactor = 1.0f;
         if (gPointLight[j].castShadow != 0) {

@@ -5,7 +5,6 @@ void SampleScene::Initialize() {
     model_->Initialize("animatedCube");
     model_->SetTranslate({0.f, .5f, 0.f});
     model_->SetScale({0.4f, 0.4f, 0.4f});
-    
 
     plane = std::make_unique<Model>();
     plane->Initialize("plane");

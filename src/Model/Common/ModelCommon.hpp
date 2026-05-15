@@ -10,9 +10,13 @@ class ModelCommon : public Common{
     SRVManager* srv_ = nullptr;
 
     std::unique_ptr<PipelineStateObject> staticPipeline_;
+    std::unique_ptr<PipelineStateObject> staticTransparentPipeline_;
+    std::unique_ptr<PipelineStateObject> skinningTransparentPipeline_;
 
     std::vector<RenderingCommand> staticDrawCommands_;
     std::vector<RenderingCommand> skinningDrawCommands_;
+    std::vector<RenderingCommand> staticTransparentCommands_;
+    std::vector<RenderingCommand> skinningTransparentCommands_;
 
     std::unordered_map<std::string, std::function<void()>> shadowCommands_;
 
@@ -22,12 +26,16 @@ class ModelCommon : public Common{
     void Initialize(const GESTD::ReferencePtr<DirectXAdapter>& _adapter, const GESTD::ReferencePtr<DebugUI>& _debugUi) override;
     void CreateSkinningPipeline() const;
     void CreateStaticPipeline() const;
+    void CreateStaticTransparentPipeline();
+    void CreateSkinningTransparentPipeline();
 
 public:
     void Initialize(const GESTD::ReferencePtr<DirectXAdapter>& _adapter, const GESTD::ReferencePtr<DebugUI>& _debugUi, GESTD::ReferencePtr<ResourceRepository> _resource, SRVManager* _srv);
 
     void RegisterStaticDraw(const std::function<void()>& _command, bool _isApplyPostEffect = true);
     void RegisterSkinningDraw(const std::function<void()>& _command, bool _isApplyPostEffect = true);
+    void RegisterStaticTransparentDraw(const std::function<void()>& _command, bool _isApplyPostEffect = true);
+    void RegisterSkinningTransparentDraw(const std::function<void()>& _command, bool _isApplyPostEffect = true);
     void RegisterShadowDraw(const std::string& _id, const std::function<void()>& _func);
     void UnregisterShadowDraw(const std::string& _id);
 

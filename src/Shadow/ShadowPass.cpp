@@ -23,18 +23,50 @@ void ShadowPass::Initialize(DirectXAdapter* _adapter) {
 
     pso_ = std::make_unique<PipelineStateObject>(GESTD::ReferencePtr<DirectXAdapter>(_adapter));
 
+    D3D12_DESCRIPTOR_RANGE shadowTexRange{
+        .RangeType                         = D3D12_DESCRIPTOR_RANGE_TYPE_SRV,
+        .NumDescriptors                    = 1,
+        .BaseShaderRegister                = 0,
+        .RegisterSpace                     = 0,
+        .OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND
+    };
+
     pso_->SetRootSignature(
         RootSignature()
+            // root 0: Transform CBV (b0, VS)
             .AddParameter({
                 .ParameterType    = D3D12_ROOT_PARAMETER_TYPE_CBV,
                 .Descriptor       = { .ShaderRegister = 0 },
                 .ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX
             })
+            // root 1: ShadowCamera CBV (b1, ALL)
             .AddParameter({
                 .ParameterType    = D3D12_ROOT_PARAMETER_TYPE_CBV,
                 .Descriptor       = { .ShaderRegister = 1 },
                 .ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL
             })
+            // root 2: Material CBV (b0, PS) — for alpha transparency
+            .AddParameter({
+                .ParameterType    = D3D12_ROOT_PARAMETER_TYPE_CBV,
+                .Descriptor       = { .ShaderRegister = 0 },
+                .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL
+            })
+            // root 3: Texture SRV (t0, PS) — for alpha transparency
+            .AddParameter({
+                .ParameterType    = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE,
+                .DescriptorTable  = { .NumDescriptorRanges = 1, .pDescriptorRanges = &shadowTexRange },
+                .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL
+            })
+        .SetSampler({
+            .Filter           = D3D12_FILTER_MIN_MAG_MIP_LINEAR,
+            .AddressU         = D3D12_TEXTURE_ADDRESS_MODE_WRAP,
+            .AddressV         = D3D12_TEXTURE_ADDRESS_MODE_WRAP,
+            .AddressW         = D3D12_TEXTURE_ADDRESS_MODE_WRAP,
+            .ComparisonFunc   = D3D12_COMPARISON_FUNC_NEVER,
+            .MaxLOD           = D3D12_FLOAT32_MAX,
+            .ShaderRegister   = 0,
+            .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL
+        })
     )
     .SetInputLayout(
         InputLayout{}

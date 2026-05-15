@@ -18,11 +18,6 @@
 void CameraDirector::Initialize(GESTD::ReferencePtr<DebugUI> _debug) {
     debug_ = _debug;
 
-    controlPointModel_ = std::make_unique<Model>();
-    controlPointModel_->Initialize("AnimatedCube");
-    controlPointModel_->SetScale(Vector3(0.15f, 0.15f, 0.15f));
-    controlPointModel_->SetColor(Vector4{1.0f, 0.84f, 0.0f, 1.0f}); // gold
-
     LoadWorkList();
 
     if (debug_) {
@@ -31,17 +26,6 @@ void CameraDirector::Initialize(GESTD::ReferencePtr<DebugUI> _debug) {
 }
 
 void CameraDirector::Update() {
-    // Control point visualizer: update position when a Bezier keyframe is selected
-    if (controlPointModel_ && isEditingWork_ &&
-        selectedKeyframeIndex_ >= 0 &&
-        selectedKeyframeIndex_ < static_cast<int>(editingWork_.keyframes.size())) {
-        const Keyframe& kf = editingWork_.keyframes[selectedKeyframeIndex_];
-        if (kf.pathType == PathType::Bezier) {
-            controlPointModel_->SetTranslate(ToWorld(kf.controlPoint));
-            controlPointModel_->Update();
-        }
-    }
-
     // Preview: lock the active camera to the selected keyframe position
     if (isEditingWork_ && isPreviewingKeyframe_ &&
         selectedKeyframeIndex_ >= 0 &&
@@ -100,14 +84,13 @@ void CameraDirector::Update() {
 }
 
 void CameraDirector::Draw() {
-    if (!controlPointModel_ || !isEditingWork_) return;
+    if (!isEditingWork_) return;
     if (selectedKeyframeIndex_ < 0 ||
         selectedKeyframeIndex_ >= static_cast<int>(editingWork_.keyframes.size())) return;
 
     const Keyframe& kf = editingWork_.keyframes[selectedKeyframeIndex_];
     if (kf.pathType != PathType::Bezier) return;
 
-    controlPointModel_->Draw();
 }
 
 void CameraDirector::Load(const std::string& _key) {
