@@ -26,8 +26,6 @@ Framework::Framework() {
     Log::LogFileOperation("STARTUP_CHECK", "Assets",         std::filesystem::exists("Assets"),         "Checking assets directory");
     Log::LogFileOperation("STARTUP_CHECK", "Assets/Shaders", std::filesystem::exists("Assets/Shaders"), "Checking shaders directory");
 
-    // AUDIO_DISABLED: Audio::Initialize();
-
     windows_ = std::make_unique<WinApp>();
     windows_->Initialize();
     windows_->SetWindowSize(static_cast<int>(config_.width), static_cast<int>(config_.height));
@@ -111,13 +109,17 @@ Framework::Framework() {
         .Watch("FPS", &config_.fps)
         .Watch("ShowCursor", &config_.showCursor);
 
-    // AUDIO_DISABLED: audioPanel_ = std::make_unique<AudioDebugPanel>();
-    // AUDIO_DISABLED: audioPanel_->Initialize(debugger_->GetUI());
+    audioPanel_ = std::make_unique<AudioDebugPanel>();
+    audioPanel_->Initialize(debugger_->GetUI());
 #endif
+
+    // miniaudio の内部アロケーションを全 windowStates_ ノードの後に配置し、
+    // バッファオーバーランによる DebugUI ヒープ破壊を回避する
+    Audio::Initialize();
 }
 
 Framework::~Framework() {
-    // AUDIO_DISABLED: Audio::Shutdown();
+    Audio::Shutdown();
     SingletonFinalizer::Finalize();
     CoUninitialize();
 }
@@ -201,7 +203,7 @@ void Framework::Update() const {
     particle_->Debug();
     postProcessor_->Debug();
     collision_->Debug();
-    // AUDIO_DISABLED: audioPanel_->Debug();
+    audioPanel_->Debug();
     debugger_->Debug();
     model_->Debug();
     sprite_->Debug();
@@ -293,6 +295,7 @@ void Framework::Shutdown() {
     resources_.reset();
 
 #ifdef _DEBUG
+    audioPanel_.reset();
     debugger_.reset();
 #endif
 

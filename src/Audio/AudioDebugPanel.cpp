@@ -97,7 +97,7 @@ void AudioDebugPanel::AddTrack() {
     nextColorIdx_ = (nextColorIdx_ + 1) % DawStyle::kColorCount;
     tracks_.push_back(std::move(t));
     focusedTrack_ = static_cast<int>(tracks_.size()) - 1;
-    if (targetTrack_ < 0) targetTrack_ = 0;
+    targetTrack_ = std::max(targetTrack_, 0);
 }
 
 void AudioDebugPanel::RemoveTrack(int idx) {
@@ -250,10 +250,12 @@ void AudioDebugPanel::DrawPlayerContent() {
     ImGui::SameLine(0, 12.f);
 
     // PLAY button
+    const bool canPlay = hasSelection;
+    ImGui::BeginDisabled(!canPlay);
     ImGui::PushStyleColor(ImGuiCol_Button,        DawStyle::kPlayActive);
     ImGui::PushStyleColor(ImGuiCol_ButtonHovered, { 0.35f, 0.90f, 0.50f, 1.f });
     ImGui::PushStyleColor(ImGuiCol_ButtonActive,  { 0.12f, 0.50f, 0.22f, 1.f });
-    if (ImGui::Button("  >  PLAY  ") && hasSelection) {
+    if (ImGui::Button("  >  PLAY  ") && canPlay) {
         auto& sound = loadedSounds_[selectedSound_];
         PlayingItem item;
         item.soundName = sound.path;
@@ -275,6 +277,7 @@ void AudioDebugPanel::DrawPlayerContent() {
         }
     }
     ImGui::PopStyleColor(3);
+    ImGui::EndDisabled();
 
     ImGui::EndDisabled();
 }
