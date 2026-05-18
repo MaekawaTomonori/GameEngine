@@ -21,7 +21,7 @@ public:
     void Debug();
 
 private:
-    // --- Data types ---
+    // Data types
 
     struct LoadedSound {
         std::string       path;
@@ -50,25 +50,25 @@ private:
         std::vector<PlayingItem> items;
     };
 
-    // --- Window content renderers ---
+    // Window content renderers
     void DrawLoaderWindow();
     void DrawPlayerWindow();
     void DrawMixerWindow();
 
-    // --- Mixer strip / list helpers ---
+    // Mixer strip / list helpers
     void DrawMasterStrip(float groupX);
     void DrawTrackStrip(Track& t, int idx, float groupX, bool& remove);
     void DrawPlaybackList(std::string_view name, ImVec4 headerColor, std::vector<PlayingItem>& items);
     void DrawDualVU(int seed, float volume, bool active, float stripWidth);
 
-    // --- Track management ---
+    // Track management
     void AddTrack();
     void RemoveTrack(int idx);
 
-    // --- DebugUI reference ---
+    // DebugUI reference 
     GESTD::ReferencePtr<DebugUI> debugUI_;
 
-    // --- Persistent state ---
+    // Persistent state 
     char  pathBuf_[256]   = "Assets/Audio/";
     float masterVolume_   = 1.0f;
     int   nextColorIdx_   = 0;
