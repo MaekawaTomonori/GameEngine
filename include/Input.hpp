@@ -23,6 +23,7 @@ class Input {
     DIMOUSESTATE preMouseState_{};
 
     Vector2 mousePosition_{};
+    Vector2 mouseDist_{};
 
     bool cursorVisible_ = true;
     bool appliedCursorVisible_ = true;
@@ -61,6 +62,7 @@ public:
      */
     bool IsMousePress(int _button) const;
     bool IsMouseTrigger(int _button) const;
+    bool IsMouseRelease(int _button) const;
 
     /** @brief マウス座標を取得
      * Scene ウィンドウが有効な場合はゲーム空間座標に変換して返す
@@ -80,6 +82,11 @@ public:
      * @note Debug ビルドでは非表示時も SceneView 外ではカーソルを表示する
      */
     void SetCursorVisible(bool _visible);
+
+    /** @brief カーソルの位置を設定
+     * @param _position 新しいカーソル位置
+     */
+    void SetCursorPosition(Vector2 _position);
 
     /** @brief デバッグUI上にマウスがあるかを設定
      * @param _hovered デバッグUIにホバー中なら true

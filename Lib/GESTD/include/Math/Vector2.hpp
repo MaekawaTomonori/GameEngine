@@ -25,6 +25,14 @@ struct Vector2{
         return { x * _f, y * _f };
     }
 
+    Vector2 operator/(const Vector2& _v) const {
+        return { x / _v.x, y / _v.y };
+    }
+
+    Vector2 operator/(const float _f) const {
+        return { x / _f, y / _f };
+    }
+
 	void operator+=(const Vector2& _v) {
 		x += _v.x;
 		y += _v.y;

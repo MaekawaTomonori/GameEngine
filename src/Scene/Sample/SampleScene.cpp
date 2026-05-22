@@ -16,14 +16,17 @@ void SampleScene::Initialize() {
     plane->SetScale({5.f, 5.f, 1.f});
 
     kick_.emplace("Assets/audio/kick.wav");
+
+    Singleton<Input>::GetInstance()->SetCursorVisible(true);
 }
 
 void SampleScene::Update() {
     model_->Update();
     plane->Update();
 
-    if (kick_ && Singleton<Input>::GetInstance()->IsTrigger(DIK_SPACE)) {
-        kick_->Play();
+    auto i = Singleton<Input>::GetInstance();
+    if (kick_ && i->IsTrigger(DIK_SPACE)) {
+        i->SetCursorPosition({640.f, 360.f});
     }
 
 }

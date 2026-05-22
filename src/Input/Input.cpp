@@ -87,26 +87,40 @@ bool Input::IsMouseTrigger(int _button) const {
            (preMouseState_.rgbButtons[_button] & 0x80) == 0;
 }
 
+bool Input::IsMouseRelease(int _button) const {
+    if (_button < 0 || _button >= 4) return false;
+    return (mouseState_.rgbButtons[_button] & 0x80) == 0 &&
+           (preMouseState_.rgbButtons[_button] & 0x80) != 0;
+}
+
 void Input::UpdateKeyboard() {
-    if (keyboard_) {
-        keyboard_->Acquire();
-        memcpy_s(preState_, sizeof(keyState_), keyState_, sizeof(keyState_));
-        keyboard_->GetDeviceState(sizeof(keyState_), keyState_);
-    }
+    if (!keyboard_) return;
+
+    keyboard_->Acquire();
+
+    BYTE newState[256]{};
+    if (FAILED(keyboard_->GetDeviceState(sizeof(newState), newState))) return;
+
+    memcpy_s(preState_, sizeof(keyState_), keyState_, sizeof(keyState_));
+    memcpy_s(keyState_, sizeof(keyState_), newState, sizeof(newState));
 }
 
 void Input::UpdateMouse() {
-    if (mouse_) {
-        mouse_->Acquire();
-        preMouseState_ = mouseState_;
-        mouse_->GetDeviceState(sizeof(mouseState_), &mouseState_);
+    if (!mouse_) return;
 
-        // スクリーン座標を取得 (Windows API)
-        POINT point;
-        GetCursorPos(&point);
-        ScreenToClient(hWnd_, &point);
-        mousePosition_ = { static_cast<float>(point.x), static_cast<float>(point.y) };
-    }
+    mouse_->Acquire();
+
+    DIMOUSESTATE newState{};
+    if (FAILED(mouse_->GetDeviceState(sizeof(newState), &newState))) return;
+
+    preMouseState_ = mouseState_;
+    mouseState_    = newState;
+
+    // スクリーン座標を取得 (Windows API)
+    POINT point;
+    GetCursorPos(&point);
+    ScreenToClient(hWnd_, &point);
+    mousePosition_ = { static_cast<float>(point.x), static_cast<float>(point.y) };
 }
 
 Vector2 Input::GetMousePosition() const {
@@ -134,6 +148,11 @@ void Input::SetSceneViewTransform(bool _active, Vector2 _imagePos, Vector2 _imag
 
 void Input::SetCursorVisible(const bool _visible) {
     cursorVisible_ = _visible;
+}
+
+void Input::SetCursorPosition(Vector2 _position) {
+    mouseDist_ = _position;
+    SetCursorPos(static_cast<int>(mouseDist_.x), static_cast<int>(mouseDist_.y));
 }
 
 void Input::SetDebugUIHovered(const bool _hovered) {
