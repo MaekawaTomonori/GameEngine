@@ -150,6 +150,11 @@ void Input::SetCursorVisible(const bool _visible) {
     cursorVisible_ = _visible;
 }
 
+void Input::SetCursorPosition(Vector2 _position) {
+    mouseDist_ = _position;
+    SetCursorPos(static_cast<int>(mouseDist_.x), static_cast<int>(mouseDist_.y));
+}
+
 void Input::SetDebugUIHovered(const bool _hovered) {
     debugUIHovered_ = _hovered;
 }
