@@ -1,5 +1,7 @@
 var NAVTREEINDEX3 =
 {
+"classLightManager.html#a07c7063f02e20a33c0984965991aa4af":[1,0,43,0],
+"classLightManager.html#a1cf5a5081a0dfe8537200797fe1c4340":[1,0,43,1],
 "classLightManager.html#a23646e79e7b43996337b393dd588a58e":[1,0,43,2],
 "classLightManager.html#a52bc810bf663ca5ccdb3b11ba0bdf36c":[1,0,43,5],
 "classLightManager.html#a5e8b431b8a376f29d4b458885526cf62":[1,0,43,4],
@@ -247,7 +249,5 @@ var NAVTREEINDEX3 =
 "classSRVManager.html#a50f3a4b23df601f5f07eab1faaa21b2c":[1,0,85,7],
 "classSRVManager.html#a52ddf3be00089eabb447cbfcff8e1a95":[1,0,85,11],
 "classSRVManager.html#a969af2a4f6c4c49f564b7607995aa41c":[1,0,85,9],
-"classSRVManager.html#aa1cbbf7090b893d87a79bb4dfefb8c89":[1,0,85,5],
-"classSRVManager.html#abdd7c0c257ce051bb384397aff374deb":[1,0,85,6],
-"classSRVManager.html#ac1357e3c5a6da7f82d0088021a847e75":[1,0,85,8]
+"classSRVManager.html#aa1cbbf7090b893d87a79bb4dfefb8c89":[1,0,85,5]
 };
