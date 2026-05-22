@@ -42,8 +42,10 @@ namespace Ui {
             const auto    rect      = canvas.GetElementRect(i);
             const Vector2 screenPos = canvasPos + rect.position;
 
-            if (mousePos_.x >= screenPos.x && mousePos_.x < screenPos.x + rect.size.x &&
-                mousePos_.y >= screenPos.y && mousePos_.y < screenPos.y + rect.size.y) {
+            const float hw = rect.size.x / 2.f + hitPadding_;
+            const float hh = rect.size.y / 2.f + hitPadding_;
+            if (mousePos_.x >= screenPos.x - hw && mousePos_.x < screenPos.x + hw &&
+                mousePos_.y >= screenPos.y - hh && mousePos_.y < screenPos.y + hh) {
                 hovered = static_cast<int>(i);
                 break;
             }
@@ -77,16 +79,26 @@ namespace Ui {
         if (ImGui::DragFloat("##CursorSize", &mouseSize_.x)) {
             mouseSize_.y = mouseSize_.x;
         }
+        ImGui::Text("HitPadding");
+        ImGui::DragFloat("##HitPadding", &hitPadding_, 1.f, 0.f, 64.f);
     }
 
     void MouseModule::LoadFromJson(const nlohmann::json& j) {
         if (j.contains("Texture") && j["Texture"].is_string()) {
             textureName_ = j["Texture"].get<std::string>();
         }
+        if (j.contains("Size") && j["Size"].is_number()) {
+            mouseSize_.x = mouseSize_.y = j["Size"].get<float>();
+        }
+        if (j.contains("HitPadding") && j["HitPadding"].is_number()) {
+            hitPadding_ = j["HitPadding"].get<float>();
+        }
     }
 
     void MouseModule::SaveToJson(nlohmann::json& j) const {
-        j["Texture"] = textureName_;
+        j["Texture"]    = textureName_;
+        j["Size"]       = mouseSize_.x;
+        j["HitPadding"] = hitPadding_;
     }
 
 } // namespace Ui

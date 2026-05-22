@@ -329,7 +329,9 @@ namespace Ui {
         const auto& mods = root["Modules"];
 
         if (mods.contains("Mouse")) {
-            AddModule(std::make_unique<MouseModule>());
+            auto mm = std::make_unique<MouseModule>();
+            mm->LoadFromJson(mods["Mouse"]);
+            AddModule(std::move(mm));
         }
         if (mods.contains("Keyboard")) {
             auto km = std::make_unique<KeyboardModule>();

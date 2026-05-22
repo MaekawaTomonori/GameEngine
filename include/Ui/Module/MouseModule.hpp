@@ -18,6 +18,7 @@ namespace Ui {
         std::unique_ptr<Sprite> sprite_;
         Vector2              mousePos_ {};
         Vector2              mouseSize_{};
+        float                hitPadding_ = 8.f;
 
         void ApplyPendingTexture();
 
