@@ -61,6 +61,7 @@ public:
      */
     bool IsMousePress(int _button) const;
     bool IsMouseTrigger(int _button) const;
+    bool IsMouseRelease(int _button) const;
 
     /** @brief マウス座標を取得
      * Scene ウィンドウが有効な場合はゲーム空間座標に変換して返す
