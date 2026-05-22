@@ -11,9 +11,6 @@
 #undef min
 #undef max
 
-// ================================================================
-//  DAW visual constants (translation-unit local)
-// ================================================================
 namespace {
 namespace DawStyle {
 
@@ -44,9 +41,6 @@ namespace DawStyle {
 
 } // namespace DawStyle
 
-// ================================================================
-//  VU meter helpers
-// ================================================================
 void DrawVUBar(ImDrawList* dl, float x, float y, float w, float h, float level) {
     dl->AddRectFilled({ x, y }, { x + w, y + h }, IM_COL32(20, 20, 20, 255), 2.f);
     if (level <= 0.001f) return;
@@ -80,9 +74,6 @@ float SimulateVU(int seed, float time) {
 
 } // anonymous namespace
 
-// ================================================================
-//  Public interface
-// ================================================================
 void AudioDebugPanel::Initialize(const GESTD::ReferencePtr<DebugUI>& _debugUI) {
     debugUI_ = _debugUI;
     if (!debugUI_) {
@@ -117,9 +108,6 @@ void AudioDebugPanel::Debug() {
     });
 }
 
-// ================================================================
-//  Track management
-// ================================================================
 void AudioDebugPanel::AddTrack() {
     Track t;
     t.name     = "Track " + std::to_string(tracks_.size() + 1);
@@ -142,9 +130,6 @@ void AudioDebugPanel::RemoveTrack(int idx) {
     else if (targetTrack_ > idx)   --targetTrack_;
 }
 
-// ================================================================
-//  Loader window — load audio assets and list them
-// ================================================================
 void AudioDebugPanel::DrawLoaderWindow() {
     ImGui::SetNextItemWidth(220.f);
     ImGui::InputText("##path", pathBuf_, sizeof(pathBuf_));
@@ -194,9 +179,6 @@ void AudioDebugPanel::DrawLoaderWindow() {
     ImGui::EndChild();
 }
 
-// ================================================================
-//  Player window — choose sound, target track, params, then play
-// ================================================================
 void AudioDebugPanel::DrawPlayerWindow() {
     const bool hasSelection = (selectedSound_ >= 0 &&
                                selectedSound_ < static_cast<int>(loadedSounds_.size()));
@@ -285,9 +267,6 @@ void AudioDebugPanel::DrawPlayerWindow() {
     ImGui::EndDisabled();
 }
 
-// ================================================================
-//  Mixer window — Master + Track strips left, playback list right
-// ================================================================
 void AudioDebugPanel::DrawMixerWindow() {
     constexpr float kSplitterW  = 6.f;
     const float     availWidth  = ImGui::GetContentRegionAvail().x;
@@ -361,9 +340,6 @@ void AudioDebugPanel::DrawMixerWindow() {
     ImGui::EndChild();
 }
 
-// ================================================================
-//  Dual VU meter
-// ================================================================
 void AudioDebugPanel::DrawDualVU(int seed, float volume, bool active, float stripWidth) {
     float time   = static_cast<float>(ImGui::GetTime());
     float levelL = active ? SimulateVU(seed,     time) * volume : 0.f;
@@ -379,9 +355,6 @@ void AudioDebugPanel::DrawDualVU(int seed, float volume, bool active, float stri
     ImGui::Dummy({ stripWidth, DawStyle::kVUHeight });
 }
 
-// ================================================================
-//  Master strip
-// ================================================================
 void AudioDebugPanel::DrawMasterStrip(float groupX) {
     masterItems_.erase(std::remove_if(masterItems_.begin(), masterItems_.end(),
         [](const PlayingItem& item) { return !item.playback.IsPlaying() && !item.paused; }),
@@ -455,9 +428,6 @@ void AudioDebugPanel::DrawMasterStrip(float groupX) {
     ImGui::EndGroup();
 }
 
-// ================================================================
-//  Track strip
-// ================================================================
 void AudioDebugPanel::DrawTrackStrip(Track& t, int idx, float groupX, bool& remove) {
     t.items.erase(std::remove_if(t.items.begin(), t.items.end(),
         [](const PlayingItem& item) { return !item.playback.IsPlaying() && !item.paused; }),
@@ -579,9 +549,6 @@ void AudioDebugPanel::DrawTrackStrip(Track& t, int idx, float groupX, bool& remo
     ImGui::PopID();
 }
 
-// ================================================================
-//  Playback list (right panel of Mixer)
-// ================================================================
 void AudioDebugPanel::DrawPlaybackList(std::string_view name, ImVec4 headerColor,
                                        std::vector<PlayingItem>& items) {
     {
