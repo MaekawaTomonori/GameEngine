@@ -14,6 +14,8 @@ public:
 
     float Get(float _min, float _max);
 
+    std::mt19937 Get() const { return engine_; }
+
 private:
 
 }; // class RandomEngine

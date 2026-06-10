@@ -4,9 +4,11 @@
 #include <cmath>
 
 #include "Matrix.hpp"
+#include "ReferencePtr.hpp"
 #include "Transform.hpp"
 #include "Vector3.hpp"
 #include "Vector4.hpp"
+#include "Random/RandomEngine.hpp"
 
 //struct Transform;
 
@@ -16,7 +18,9 @@ namespace MathUtils{
 
     float Random(float _min, float _max);
     Vector3 Random(const Vector3& _min, const Vector3& _max);
-    
+
+    std::mt19937 GetRandomEngine();
+
     float Deg2Rad(float _degree);
 
     float Lerp(const float& _a, const float& _b, float _t);
