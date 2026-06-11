@@ -183,6 +183,10 @@ Vector3 MathUtils::Random(const Vector3& _min, const Vector3& _max) {
     };
 }
 
+std::mt19937 MathUtils::GetRandomEngine() {
+    return Singleton<RandomEngine>::GetInstance()->Get();
+}
+
 float MathUtils::Deg2Rad(float _degree) {
     return _degree * (F_PI / 180.f);
 }
