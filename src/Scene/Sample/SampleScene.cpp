@@ -17,7 +17,7 @@ void SampleScene::Initialize() {
 
     kick_.emplace("Assets/audio/kick.wav");
 
-    Singleton<Input>::GetInstance()->SetCursorVisible(true);
+    //Singleton<Input>::GetInstance()->SetCursorVisible(true);
 }
 
 void SampleScene::Update() {
