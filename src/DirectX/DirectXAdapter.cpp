@@ -273,6 +273,11 @@ void DirectXAdapter::DisplayFPS(const GESTD::ReferencePtr<DebugUI>& _debug) cons
     (void)_debug;
 }
 
+float DirectXAdapter::GetCurrentFps() const {
+    if (!fpsLimiter_) return 60.f;
+    return fpsLimiter_->GetCurrentFps();
+}
+
 void DirectXAdapter::SetSwapChainRenderTarget() const {
     UINT bbi = swapChain_->GetCurrentBackBufferIndex();
 

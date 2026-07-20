@@ -187,6 +187,9 @@
     <Filter Include="src\Texture">
       <UniqueIdentifier>{8DAD6B43-F962-E438-8257-DE0FEE0BDB3C}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Time">
+      <UniqueIdentifier>{2E7C9A1F-6B3D-4C5E-9A0B-1F2E3D4C5B6A}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\Timer">
       <UniqueIdentifier>{BD89E7B3-29F4-9B2A-7232-4DD0DEDB797F}</UniqueIdentifier>
     </Filter>
@@ -412,6 +415,9 @@
     <ClInclude Include="src\Texture\TextureManager.hpp">
       <Filter>src\Texture</Filter>
     </ClInclude>
+    <ClInclude Include="src\Time\Time.hpp">
+      <Filter>src\Time</Filter>
+    </ClInclude>
     <ClInclude Include="src\Timer\Timer.hpp">
       <Filter>src\Timer</Filter>
     </ClInclude>
@@ -617,6 +623,9 @@
     </ClCompile>
     <ClCompile Include="src\Texture\TextureManager.cpp">
       <Filter>src\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Time\Time.cpp">
+      <Filter>src\Time</Filter>
     </ClCompile>
     <ClCompile Include="src\Timer\Timer.cpp">
       <Filter>src\Timer</Filter>

@@ -151,6 +151,11 @@ public:
      */
     void DisplayFPS(const GESTD::ReferencePtr<DebugUI>& _debug) const;
 
+    /** @brief 直近フレームの実測FPSを取得
+     * @return FPS（Limiter未生成時は暫定値としてmaxFpsを返す）
+     */
+    [[nodiscard]] float GetCurrentFps() const;
+
     /** @brief ウィンドウサイズを更新（ビューポートとシザー矩形も更新）
      * @param _width 新しい幅
      * @param _height 新しい高さ

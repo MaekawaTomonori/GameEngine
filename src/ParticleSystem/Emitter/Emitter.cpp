@@ -6,6 +6,7 @@
 #include "Pattern/Singleton.hpp"
 #include "src/Camera/Controller/CameraController.hpp"
 #include "src/Texture/TextureManager.hpp"
+#include "src/Time/Time.hpp"
 
 Emitter::Emitter(DirectXAdapter* _adapter, SRVManager* _srv) : adapter_(_adapter), srv_(_srv), handle_() {}
 
@@ -219,8 +220,7 @@ void Emitter::FrequencyUpdate() {
         return;
     }
 
-    constexpr float DeltaTime = 1.f / 60.f;
-    timer_ += DeltaTime;
+    timer_ += Time::GetDeltaTime();
 }
 
 void Emitter::Spawn(const uint16_t& _count) {
