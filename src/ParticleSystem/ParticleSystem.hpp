@@ -83,7 +83,7 @@ public:
 
     /** @brief スポーン関数を文字列キーで登録
      * @param _key 関数を識別するキー
-     * @param _func スポーン関数 (emitterCenter, outPos, outVel)
+     * @param _func スポーン関数 (Emitter Position, This Particle Position, This Particle First Velocity(Acceleration))
      */
     void RegisterSpawnFunc(const std::string& _key, SpawnFunc _func);
 
