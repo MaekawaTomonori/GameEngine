@@ -13,6 +13,7 @@ var classDirectXAdapter =
     [ "GetCommandAllocator", "classDirectXAdapter.html#ac775788b343bb054d88bf1fb552aec29", null ],
     [ "GetCommandList", "classDirectXAdapter.html#abc7797e145abbf8c6b66d89ce219adbf", null ],
     [ "GetCommandQueue", "classDirectXAdapter.html#a445ba307d21fc96baec912681546c6ed", null ],
+    [ "GetCurrentFps", "classDirectXAdapter.html#aba3876eb4b121fd7e75ed5ef8c3d9216", null ],
     [ "GetDevice", "classDirectXAdapter.html#a28fe87825525272f00fd06231a0c1632", null ],
     [ "GetDSVHandle", "classDirectXAdapter.html#ae42c454315be5b6c511d8c297435886e", null ],
     [ "GetFence", "classDirectXAdapter.html#a7cd3f81861f775387b11548b6fdaa49f", null ],

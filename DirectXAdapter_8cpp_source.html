@@ -392,505 +392,512 @@ $(document).ready(function(){initNavTree('DirectXAdapter_8cpp_source.html',''); 
 <div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>}</div>
 </div>
 <div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span> </div>
-<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span><span class="keywordtype">void</span> DirectXAdapter::SetSwapChainRenderTarget()<span class="keyword"> const </span>{</div>
-<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>    UINT bbi = swapChain_-&gt;GetCurrentBackBufferIndex();</div>
-<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span> </div>
-<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>    swapChainResources_[bbi]-&gt;ChangeState(cList_.Get(), D3D12_RESOURCE_STATE_RENDER_TARGET);</div>
+<div class="foldopen" id="foldopen00276" data-start="{" data-end="}">
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno"><a class="line" href="classDirectXAdapter.html#aba3876eb4b121fd7e75ed5ef8c3d9216">  276</a></span><span class="keywordtype">float</span> <a class="code hl_function" href="classDirectXAdapter.html#aba3876eb4b121fd7e75ed5ef8c3d9216">DirectXAdapter::GetCurrentFps</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>    <span class="keywordflow">if</span> (!fpsLimiter_) <span class="keywordflow">return</span> 60.f;</div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>    <span class="keywordflow">return</span> fpsLimiter_-&gt;GetCurrentFps();</div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>}</div>
+</div>
 <div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span> </div>
-<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>    cList_-&gt;OMSetRenderTargets(1, &amp;rtvHandles_[bbi], <span class="keyword">false</span>, &amp;dsvHandle_);</div>
-<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>    cList_-&gt;ClearRenderTargetView(rtvHandles_[bbi], &amp;back_.x, 0, <span class="keyword">nullptr</span>);</div>
-<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>    cList_-&gt;ClearDepthStencilView(dsvHandle_, D3D12_CLEAR_FLAG_DEPTH, 1.f, 0, 0, <span class="keyword">nullptr</span>);</div>
-<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span> </div>
-<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>    <span class="comment">// デバッグ: 実際のSwapChainバッファサイズを確認</span></div>
-<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>    <span class="keyword">static</span> <span class="keywordtype">bool</span> firstFrame = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>    <span class="keywordflow">if</span> (firstFrame) {</div>
-<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>        D3D12_RESOURCE_DESC desc = swapChainResources_[bbi]-&gt;Get()-&gt;GetDesc();</div>
-<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>        <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>,</div>
-<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>            <span class="stringliteral">&quot;[RENDER] SwapChain buffer actual size: &quot;</span> +</div>
-<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>            std::to_string(desc.Width) + <span class="stringliteral">&quot;x&quot;</span> + std::to_string(desc.Height));</div>
-<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>        <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>,</div>
-<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>            <span class="stringliteral">&quot;[RENDER] Viewport size: &quot;</span> +</div>
-<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>            std::to_string(<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(viewport_.Width)) + <span class="stringliteral">&quot;x&quot;</span> + std::to_string(<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(viewport_.Height)));</div>
-<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>        firstFrame = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>    }</div>
-<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span> </div>
-<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>    cList_-&gt;RSSetViewports(1, &amp;viewport_);</div>
-<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>    cList_-&gt;RSSetScissorRects(1, &amp;scissorRect_);</div>
-<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>}</div>
-<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span> </div>
-<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span><span class="keywordtype">void</span> DirectXAdapter::Present() {</div>
-<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>    UINT bbi = swapChain_-&gt;GetCurrentBackBufferIndex();</div>
-<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span> </div>
-<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>    <span class="comment">// PostDraw</span></div>
-<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>    swapChainResources_[bbi]-&gt;ChangeState(cList_.Get(), D3D12_RESOURCE_STATE_PRESENT);</div>
-<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span> </div>
-<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>    <span class="keywordflow">if</span> (FAILED(cList_-&gt;Close())){</div>
-<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>        Utils::Alert(<span class="stringliteral">&quot;Failed to close command list&quot;</span>);</div>
-<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>        <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>    }</div>
-<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>    ID3D12CommandList* commandLists[] = { cList_.Get() };</div>
-<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>    cQueue_-&gt;ExecuteCommandLists(_countof(commandLists), commandLists);</div>
-<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>    swapChain_-&gt;Present(1, 0);</div>
-<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span> </div>
-<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>    Wait();</div>
-<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span> </div>
-<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>    <span class="keywordflow">if</span> (FAILED(cAllocator_-&gt;Reset())){</div>
-<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>        Utils::Alert(<span class="stringliteral">&quot;Failed to reset command allocator&quot;</span>);</div>
-<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>        <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>    }</div>
-<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>    <span class="keywordflow">if</span> (FAILED(cList_-&gt;Reset(cAllocator_.Get(), <span class="keyword">nullptr</span>))){</div>
-<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>        Utils::Alert(<span class="stringliteral">&quot;Failed to reset command list&quot;</span>);</div>
-<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>        <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>    }</div>
-<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>}</div>
-<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span> </div>
-<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span><span class="keywordtype">void</span> DirectXAdapter::EnableDebugLayer() {</div>
-<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span><span class="preprocessor">#ifdef _DEBUG</span></div>
-<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>    <span class="keywordflow">if</span> (SUCCEEDED(D3D12GetDebugInterface(IID_PPV_ARGS(&amp;debugLayer_)))){</div>
-<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>        debugLayer_-&gt;EnableDebugLayer();</div>
-<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>        debugLayer_-&gt;SetEnableGPUBasedValidation(<span class="keyword">true</span>);</div>
-<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>        debugLayer_-&gt;SetEnableSynchronizedCommandQueueValidation(<span class="keyword">true</span>);</div>
-<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span>        <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>, <span class="stringliteral">&quot;Debug Layer Enabled&quot;</span>);</div>
-<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>    } <span class="keywordflow">else</span>{</div>
-<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>        <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, <span class="stringliteral">&quot;Failed to enable debug layer&quot;</span>);</div>
-<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>    }</div>
-<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>}</div>
-<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span> </div>
-<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span><span class="keywordtype">bool</span> DirectXAdapter::CreateDXGI() {</div>
-<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>    <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>, <span class="stringliteral">&quot;Create DXGI&quot;</span>);</div>
-<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span> </div>
-<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>    <span class="comment">//Factory</span></div>
-<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span>    <span class="keywordflow">if</span> (FAILED(CreateDXGIFactory(IID_PPV_ARGS(&amp;factory_)))){</div>
-<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span>    }</div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span><span class="keywordtype">void</span> DirectXAdapter::SetSwapChainRenderTarget()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>    UINT bbi = swapChain_-&gt;GetCurrentBackBufferIndex();</div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span> </div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>    swapChainResources_[bbi]-&gt;ChangeState(cList_.Get(), D3D12_RESOURCE_STATE_RENDER_TARGET);</div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span> </div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>    cList_-&gt;OMSetRenderTargets(1, &amp;rtvHandles_[bbi], <span class="keyword">false</span>, &amp;dsvHandle_);</div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>    cList_-&gt;ClearRenderTargetView(rtvHandles_[bbi], &amp;back_.x, 0, <span class="keyword">nullptr</span>);</div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>    cList_-&gt;ClearDepthStencilView(dsvHandle_, D3D12_CLEAR_FLAG_DEPTH, 1.f, 0, 0, <span class="keyword">nullptr</span>);</div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span> </div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>    <span class="comment">// デバッグ: 実際のSwapChainバッファサイズを確認</span></div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>    <span class="keyword">static</span> <span class="keywordtype">bool</span> firstFrame = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>    <span class="keywordflow">if</span> (firstFrame) {</div>
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>        D3D12_RESOURCE_DESC desc = swapChainResources_[bbi]-&gt;Get()-&gt;GetDesc();</div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>        <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>,</div>
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>            <span class="stringliteral">&quot;[RENDER] SwapChain buffer actual size: &quot;</span> +</div>
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>            std::to_string(desc.Width) + <span class="stringliteral">&quot;x&quot;</span> + std::to_string(desc.Height));</div>
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>        <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>,</div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>            <span class="stringliteral">&quot;[RENDER] Viewport size: &quot;</span> +</div>
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>            std::to_string(<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(viewport_.Width)) + <span class="stringliteral">&quot;x&quot;</span> + std::to_string(<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(viewport_.Height)));</div>
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>        firstFrame = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>    }</div>
+<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span> </div>
+<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>    cList_-&gt;RSSetViewports(1, &amp;viewport_);</div>
+<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span>    cList_-&gt;RSSetScissorRects(1, &amp;scissorRect_);</div>
+<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>}</div>
+<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span> </div>
+<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span><span class="keywordtype">void</span> DirectXAdapter::Present() {</div>
+<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>    UINT bbi = swapChain_-&gt;GetCurrentBackBufferIndex();</div>
+<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span> </div>
+<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>    <span class="comment">// PostDraw</span></div>
+<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>    swapChainResources_[bbi]-&gt;ChangeState(cList_.Get(), D3D12_RESOURCE_STATE_PRESENT);</div>
+<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span> </div>
+<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>    <span class="keywordflow">if</span> (FAILED(cList_-&gt;Close())){</div>
+<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>        Utils::Alert(<span class="stringliteral">&quot;Failed to close command list&quot;</span>);</div>
+<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>    }</div>
+<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>    ID3D12CommandList* commandLists[] = { cList_.Get() };</div>
+<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>    cQueue_-&gt;ExecuteCommandLists(_countof(commandLists), commandLists);</div>
+<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>    swapChain_-&gt;Present(1, 0);</div>
+<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span> </div>
+<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>    Wait();</div>
+<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span> </div>
+<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>    <span class="keywordflow">if</span> (FAILED(cAllocator_-&gt;Reset())){</div>
+<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>        Utils::Alert(<span class="stringliteral">&quot;Failed to reset command allocator&quot;</span>);</div>
+<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>    }</div>
+<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>    <span class="keywordflow">if</span> (FAILED(cList_-&gt;Reset(cAllocator_.Get(), <span class="keyword">nullptr</span>))){</div>
+<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>        Utils::Alert(<span class="stringliteral">&quot;Failed to reset command list&quot;</span>);</div>
+<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>    }</div>
+<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>}</div>
+<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span> </div>
+<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span><span class="keywordtype">void</span> DirectXAdapter::EnableDebugLayer() {</div>
+<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span><span class="preprocessor">#ifdef _DEBUG</span></div>
+<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>    <span class="keywordflow">if</span> (SUCCEEDED(D3D12GetDebugInterface(IID_PPV_ARGS(&amp;debugLayer_)))){</div>
+<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>        debugLayer_-&gt;EnableDebugLayer();</div>
+<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>        debugLayer_-&gt;SetEnableGPUBasedValidation(<span class="keyword">true</span>);</div>
+<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>        debugLayer_-&gt;SetEnableSynchronizedCommandQueueValidation(<span class="keyword">true</span>);</div>
+<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>        <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>, <span class="stringliteral">&quot;Debug Layer Enabled&quot;</span>);</div>
+<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>    } <span class="keywordflow">else</span>{</div>
+<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>        <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, <span class="stringliteral">&quot;Failed to enable debug layer&quot;</span>);</div>
+<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>    }</div>
+<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>}</div>
+<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span> </div>
+<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span><span class="keywordtype">bool</span> DirectXAdapter::CreateDXGI() {</div>
+<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span>    <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>, <span class="stringliteral">&quot;Create DXGI&quot;</span>);</div>
 <div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span> </div>
-<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span>    <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>, <span class="stringliteral">&quot;Factory Created&quot;</span>);</div>
-<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span> </div>
-<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span>    <span class="comment">//Adaptor</span></div>
-<div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span>    <span class="keywordflow">for</span> (UINT i = 0; SUCCEEDED(factory_-&gt;EnumAdapterByGpuPreference(i, DXGI_GPU_PREFERENCE_HIGH_PERFORMANCE, IID_PPV_ARGS(&amp;adapter_))); ++i){</div>
-<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>        <span class="comment">// Check if the adapter supports Direct3D 12</span></div>
-<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>        DXGI_ADAPTER_DESC3 desc;</div>
-<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span>        <span class="keywordflow">if</span> (FAILED(adapter_-&gt;GetDesc3(&amp;desc))){</div>
-<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>            adapter_ = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span>        }</div>
-<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span>        <span class="keywordflow">if</span> (!(desc.Flags &amp; DXGI_ADAPTER_FLAG3_SOFTWARE)){</div>
-<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span>        }</div>
-<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span>        adapter_ = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>    }</div>
-<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span> </div>
-<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span>    <span class="keywordflow">if</span> (adapter_ == <span class="keyword">nullptr</span>)<span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span> </div>
-<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span>    <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>, <span class="stringliteral">&quot;Adapter Created&quot;</span>);</div>
-<div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span> </div>
-<div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span>    <span class="comment">//Device</span></div>
-<div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span>    D3D_FEATURE_LEVEL featureLevels[] = {</div>
-<div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span>        D3D_FEATURE_LEVEL_12_2,</div>
-<div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span>        D3D_FEATURE_LEVEL_12_1,</div>
-<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span>        D3D_FEATURE_LEVEL_12_0</div>
-<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span>    };</div>
-<div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span> </div>
-<div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span>    <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>, <span class="stringliteral">&quot;Device Loop Begin&quot;</span>);</div>
-<div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span>    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; _countof(featureLevels); ++i){</div>
-<div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span>        <span class="keyword">const</span> <span class="keywordtype">char</span>* featureLevelNames[] = {</div>
-<div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span>            <span class="stringliteral">&quot;12.2&quot;</span>,</div>
-<div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span>            <span class="stringliteral">&quot;12.1&quot;</span>,</div>
-<div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span>            <span class="stringliteral">&quot;12.0&quot;</span></div>
-<div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span>        };</div>
-<div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span>        <span class="keywordflow">if</span> (SUCCEEDED(D3D12CreateDevice(adapter_.Get(), featureLevels[i], IID_PPV_ARGS(&amp;device_)))){</div>
-<div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span>            <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>, <span class="stringliteral">&quot;Device Created&quot;</span>);</div>
-<div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span>            <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>, <span class="stringliteral">&quot;Feature Level: &quot;</span> + std::string(featureLevelNames[i]));</div>
-<div class="line"><a id="l00385" name="l00385"></a><span class="lineno">  385</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00386" name="l00386"></a><span class="lineno">  386</span>        }</div>
-<div class="line"><a id="l00387" name="l00387"></a><span class="lineno">  387</span> </div>
-<div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span>        <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, <span class="stringliteral">&quot;Failed to create device with feature level: &quot;</span> + std::string(featureLevelNames[i]));</div>
-<div class="line"><a id="l00389" name="l00389"></a><span class="lineno">  389</span>    }</div>
-<div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span> </div>
-<div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span>    <span class="keywordflow">if</span> (device_ == <span class="keyword">nullptr</span>){</div>
-<div class="line"><a id="l00392" name="l00392"></a><span class="lineno">  392</span>        <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, <span class="stringliteral">&quot;Failed to create device&quot;</span>);</div>
-<div class="line"><a id="l00393" name="l00393"></a><span class="lineno">  393</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span>    <span class="comment">//Factory</span></div>
+<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span>    <span class="keywordflow">if</span> (FAILED(CreateDXGIFactory(IID_PPV_ARGS(&amp;factory_)))){</div>
+<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span>    }</div>
+<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span> </div>
+<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>    <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>, <span class="stringliteral">&quot;Factory Created&quot;</span>);</div>
+<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span> </div>
+<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>    <span class="comment">//Adaptor</span></div>
+<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span>    <span class="keywordflow">for</span> (UINT i = 0; SUCCEEDED(factory_-&gt;EnumAdapterByGpuPreference(i, DXGI_GPU_PREFERENCE_HIGH_PERFORMANCE, IID_PPV_ARGS(&amp;adapter_))); ++i){</div>
+<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span>        <span class="comment">// Check if the adapter supports Direct3D 12</span></div>
+<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span>        DXGI_ADAPTER_DESC3 desc;</div>
+<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span>        <span class="keywordflow">if</span> (FAILED(adapter_-&gt;GetDesc3(&amp;desc))){</div>
+<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span>            adapter_ = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>        }</div>
+<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span>        <span class="keywordflow">if</span> (!(desc.Flags &amp; DXGI_ADAPTER_FLAG3_SOFTWARE)){</div>
+<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span>        }</div>
+<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span>        adapter_ = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span>    }</div>
+<div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span> </div>
+<div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span>    <span class="keywordflow">if</span> (adapter_ == <span class="keyword">nullptr</span>)<span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span> </div>
+<div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span>    <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>, <span class="stringliteral">&quot;Adapter Created&quot;</span>);</div>
+<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span> </div>
+<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span>    <span class="comment">//Device</span></div>
+<div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span>    D3D_FEATURE_LEVEL featureLevels[] = {</div>
+<div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span>        D3D_FEATURE_LEVEL_12_2,</div>
+<div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span>        D3D_FEATURE_LEVEL_12_1,</div>
+<div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span>        D3D_FEATURE_LEVEL_12_0</div>
+<div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span>    };</div>
+<div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span> </div>
+<div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span>    <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>, <span class="stringliteral">&quot;Device Loop Begin&quot;</span>);</div>
+<div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span>    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; _countof(featureLevels); ++i){</div>
+<div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span>        <span class="keyword">const</span> <span class="keywordtype">char</span>* featureLevelNames[] = {</div>
+<div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span>            <span class="stringliteral">&quot;12.2&quot;</span>,</div>
+<div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span>            <span class="stringliteral">&quot;12.1&quot;</span>,</div>
+<div class="line"><a id="l00385" name="l00385"></a><span class="lineno">  385</span>            <span class="stringliteral">&quot;12.0&quot;</span></div>
+<div class="line"><a id="l00386" name="l00386"></a><span class="lineno">  386</span>        };</div>
+<div class="line"><a id="l00387" name="l00387"></a><span class="lineno">  387</span>        <span class="keywordflow">if</span> (SUCCEEDED(D3D12CreateDevice(adapter_.Get(), featureLevels[i], IID_PPV_ARGS(&amp;device_)))){</div>
+<div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span>            <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>, <span class="stringliteral">&quot;Device Created&quot;</span>);</div>
+<div class="line"><a id="l00389" name="l00389"></a><span class="lineno">  389</span>            <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>, <span class="stringliteral">&quot;Feature Level: &quot;</span> + std::string(featureLevelNames[i]));</div>
+<div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span>        }</div>
+<div class="line"><a id="l00392" name="l00392"></a><span class="lineno">  392</span> </div>
+<div class="line"><a id="l00393" name="l00393"></a><span class="lineno">  393</span>        <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, <span class="stringliteral">&quot;Failed to create device with feature level: &quot;</span> + std::string(featureLevelNames[i]));</div>
 <div class="line"><a id="l00394" name="l00394"></a><span class="lineno">  394</span>    }</div>
 <div class="line"><a id="l00395" name="l00395"></a><span class="lineno">  395</span> </div>
-<div class="line"><a id="l00396" name="l00396"></a><span class="lineno">  396</span>    <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>, <span class="stringliteral">&quot;Complete create DXGI&quot;</span>);</div>
-<div class="line"><a id="l00397" name="l00397"></a><span class="lineno">  397</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00398" name="l00398"></a><span class="lineno">  398</span>}</div>
-<div class="line"><a id="l00399" name="l00399"></a><span class="lineno">  399</span> </div>
-<div class="line"><a id="l00400" name="l00400"></a><span class="lineno">  400</span><span class="keywordtype">bool</span> DirectXAdapter::InfoQueue()<span class="keyword"> const </span>{</div>
-<div class="line"><a id="l00401" name="l00401"></a><span class="lineno">  401</span><span class="preprocessor">#ifdef _DEBUG</span></div>
-<div class="line"><a id="l00402" name="l00402"></a><span class="lineno">  402</span>    {</div>
-<div class="line"><a id="l00403" name="l00403"></a><span class="lineno">  403</span>        Microsoft::WRL::ComPtr&lt;ID3D12InfoQueue&gt; infoQueue;</div>
-<div class="line"><a id="l00404" name="l00404"></a><span class="lineno">  404</span>        <span class="keywordflow">if</span> (SUCCEEDED(device_-&gt;QueryInterface(IID_PPV_ARGS(&amp;infoQueue)))){</div>
-<div class="line"><a id="l00405" name="l00405"></a><span class="lineno">  405</span>            infoQueue-&gt;SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_CORRUPTION, <span class="keyword">true</span>);</div>
-<div class="line"><a id="l00406" name="l00406"></a><span class="lineno">  406</span>            infoQueue-&gt;SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_ERROR, <span class="keyword">true</span>);</div>
-<div class="line"><a id="l00407" name="l00407"></a><span class="lineno">  407</span>            infoQueue-&gt;SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_WARNING, <span class="keyword">true</span>);</div>
-<div class="line"><a id="l00408" name="l00408"></a><span class="lineno">  408</span> </div>
-<div class="line"><a id="l00409" name="l00409"></a><span class="lineno">  409</span>            D3D12_MESSAGE_ID denyIds[] = { D3D12_MESSAGE_ID_RESOURCE_BARRIER_MISMATCHING_COMMAND_LIST_TYPE };</div>
-<div class="line"><a id="l00410" name="l00410"></a><span class="lineno">  410</span>            D3D12_MESSAGE_SEVERITY severities[] = { D3D12_MESSAGE_SEVERITY_INFO };</div>
-<div class="line"><a id="l00411" name="l00411"></a><span class="lineno">  411</span>            D3D12_INFO_QUEUE_FILTER filter = {};</div>
-<div class="line"><a id="l00412" name="l00412"></a><span class="lineno">  412</span>            filter.DenyList.NumIDs = _countof(denyIds);</div>
-<div class="line"><a id="l00413" name="l00413"></a><span class="lineno">  413</span>            filter.DenyList.pIDList = denyIds;</div>
-<div class="line"><a id="l00414" name="l00414"></a><span class="lineno">  414</span>            filter.DenyList.NumSeverities = _countof(severities);</div>
-<div class="line"><a id="l00415" name="l00415"></a><span class="lineno">  415</span>            filter.DenyList.pSeverityList = severities;</div>
-<div class="line"><a id="l00416" name="l00416"></a><span class="lineno">  416</span>            infoQueue-&gt;PushStorageFilter(&amp;filter);</div>
-<div class="line"><a id="l00417" name="l00417"></a><span class="lineno">  417</span>        }</div>
-<div class="line"><a id="l00418" name="l00418"></a><span class="lineno">  418</span>    }</div>
-<div class="line"><a id="l00419" name="l00419"></a><span class="lineno">  419</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00420" name="l00420"></a><span class="lineno">  420</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00421" name="l00421"></a><span class="lineno">  421</span>}</div>
-<div class="line"><a id="l00422" name="l00422"></a><span class="lineno">  422</span> </div>
-<div class="line"><a id="l00423" name="l00423"></a><span class="lineno">  423</span><span class="keywordtype">bool</span> DirectXAdapter::CreateCommand() {</div>
-<div class="line"><a id="l00424" name="l00424"></a><span class="lineno">  424</span>    <span class="comment">//Queue</span></div>
-<div class="line"><a id="l00425" name="l00425"></a><span class="lineno">  425</span>    D3D12_COMMAND_QUEUE_DESC queueDesc = {};</div>
-<div class="line"><a id="l00426" name="l00426"></a><span class="lineno">  426</span>    <span class="keywordflow">if</span> (FAILED(device_-&gt;CreateCommandQueue(&amp;queueDesc, IID_PPV_ARGS(&amp;cQueue_)))){</div>
-<div class="line"><a id="l00427" name="l00427"></a><span class="lineno">  427</span>        <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, <span class="stringliteral">&quot;Failed to create command queue&quot;</span>);</div>
-<div class="line"><a id="l00428" name="l00428"></a><span class="lineno">  428</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00429" name="l00429"></a><span class="lineno">  429</span>    }</div>
-<div class="line"><a id="l00430" name="l00430"></a><span class="lineno">  430</span>    <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>, <span class="stringliteral">&quot;Command Queue Created&quot;</span>);</div>
-<div class="line"><a id="l00431" name="l00431"></a><span class="lineno">  431</span> </div>
-<div class="line"><a id="l00432" name="l00432"></a><span class="lineno">  432</span>    <span class="comment">//Allocator</span></div>
-<div class="line"><a id="l00433" name="l00433"></a><span class="lineno">  433</span>    <span class="keywordflow">if</span> (FAILED(device_-&gt;CreateCommandAllocator(D3D12_COMMAND_LIST_TYPE_DIRECT, IID_PPV_ARGS(&amp;cAllocator_)))){</div>
-<div class="line"><a id="l00434" name="l00434"></a><span class="lineno">  434</span>        <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, <span class="stringliteral">&quot;Failed to create command allocator&quot;</span>);</div>
-<div class="line"><a id="l00435" name="l00435"></a><span class="lineno">  435</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00436" name="l00436"></a><span class="lineno">  436</span>    }</div>
-<div class="line"><a id="l00437" name="l00437"></a><span class="lineno">  437</span>    <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>, <span class="stringliteral">&quot;Command Allocator Created&quot;</span>);</div>
-<div class="line"><a id="l00438" name="l00438"></a><span class="lineno">  438</span> </div>
-<div class="line"><a id="l00439" name="l00439"></a><span class="lineno">  439</span>    <span class="comment">//List</span></div>
-<div class="line"><a id="l00440" name="l00440"></a><span class="lineno">  440</span>    <span class="keywordflow">if</span> (FAILED(device_-&gt;CreateCommandList(0, D3D12_COMMAND_LIST_TYPE_DIRECT, cAllocator_.Get(), <span class="keyword">nullptr</span>, IID_PPV_ARGS(&amp;cList_)))){</div>
-<div class="line"><a id="l00441" name="l00441"></a><span class="lineno">  441</span>        <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, <span class="stringliteral">&quot;Failed to create command list&quot;</span>);</div>
-<div class="line"><a id="l00442" name="l00442"></a><span class="lineno">  442</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00443" name="l00443"></a><span class="lineno">  443</span>    }</div>
-<div class="line"><a id="l00444" name="l00444"></a><span class="lineno">  444</span>    <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>, <span class="stringliteral">&quot;Command List Created&quot;</span>);</div>
-<div class="line"><a id="l00445" name="l00445"></a><span class="lineno">  445</span> </div>
-<div class="line"><a id="l00446" name="l00446"></a><span class="lineno">  446</span>    <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>, <span class="stringliteral">&quot;Complete create Commands&quot;</span>);</div>
-<div class="line"><a id="l00447" name="l00447"></a><span class="lineno">  447</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00448" name="l00448"></a><span class="lineno">  448</span>}</div>
-<div class="line"><a id="l00449" name="l00449"></a><span class="lineno">  449</span> </div>
-<div class="line"><a id="l00450" name="l00450"></a><span class="lineno">  450</span><span class="keywordtype">bool</span> DirectXAdapter::CreateSwapChain() {</div>
-<div class="line"><a id="l00451" name="l00451"></a><span class="lineno">  451</span>    <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>, <span class="stringliteral">&quot;Create Swap Chain BEGIN&quot;</span>);</div>
-<div class="line"><a id="l00452" name="l00452"></a><span class="lineno">  452</span>    DXGI_SWAP_CHAIN_DESC1 desc = {};</div>
-<div class="line"><a id="l00453" name="l00453"></a><span class="lineno">  453</span>    desc.Width = <span class="keyword">static_cast&lt;</span>UINT<span class="keyword">&gt;</span>(windowSize_.first);</div>
-<div class="line"><a id="l00454" name="l00454"></a><span class="lineno">  454</span>    desc.Height = <span class="keyword">static_cast&lt;</span>UINT<span class="keyword">&gt;</span>(windowSize_.second);</div>
-<div class="line"><a id="l00455" name="l00455"></a><span class="lineno">  455</span>    desc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;</div>
-<div class="line"><a id="l00456" name="l00456"></a><span class="lineno">  456</span>    desc.SampleDesc.Count = 1;</div>
-<div class="line"><a id="l00457" name="l00457"></a><span class="lineno">  457</span>    desc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;</div>
-<div class="line"><a id="l00458" name="l00458"></a><span class="lineno">  458</span>    desc.BufferCount = 2;</div>
-<div class="line"><a id="l00459" name="l00459"></a><span class="lineno">  459</span>    desc.SwapEffect = DXGI_SWAP_EFFECT_FLIP_DISCARD;</div>
-<div class="line"><a id="l00460" name="l00460"></a><span class="lineno">  460</span> </div>
-<div class="line"><a id="l00461" name="l00461"></a><span class="lineno">  461</span>    <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>, <span class="stringliteral">&quot;CreateSwapChainForHwnd&quot;</span>);</div>
-<div class="line"><a id="l00462" name="l00462"></a><span class="lineno">  462</span>    <span class="keywordflow">if</span> (FAILED(factory_-&gt;CreateSwapChainForHwnd(cQueue_.Get(), hWnd_, &amp;desc, <span class="keyword">nullptr</span>, <span class="keyword">nullptr</span>, <span class="keyword">reinterpret_cast&lt;</span>IDXGISwapChain1**<span class="keyword">&gt;</span>(swapChain_.GetAddressOf())))){</div>
-<div class="line"><a id="l00463" name="l00463"></a><span class="lineno">  463</span>        <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, <span class="stringliteral">&quot;Failed to create swap chain&quot;</span>);</div>
-<div class="line"><a id="l00464" name="l00464"></a><span class="lineno">  464</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00465" name="l00465"></a><span class="lineno">  465</span>    }</div>
-<div class="line"><a id="l00466" name="l00466"></a><span class="lineno">  466</span> </div>
-<div class="line"><a id="l00467" name="l00467"></a><span class="lineno">  467</span>    <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>, <span class="stringliteral">&quot;Swap Chain Created&quot;</span>);</div>
-<div class="line"><a id="l00468" name="l00468"></a><span class="lineno">  468</span> </div>
-<div class="line"><a id="l00469" name="l00469"></a><span class="lineno">  469</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00470" name="l00470"></a><span class="lineno">  470</span>}</div>
+<div class="line"><a id="l00396" name="l00396"></a><span class="lineno">  396</span>    <span class="keywordflow">if</span> (device_ == <span class="keyword">nullptr</span>){</div>
+<div class="line"><a id="l00397" name="l00397"></a><span class="lineno">  397</span>        <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, <span class="stringliteral">&quot;Failed to create device&quot;</span>);</div>
+<div class="line"><a id="l00398" name="l00398"></a><span class="lineno">  398</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00399" name="l00399"></a><span class="lineno">  399</span>    }</div>
+<div class="line"><a id="l00400" name="l00400"></a><span class="lineno">  400</span> </div>
+<div class="line"><a id="l00401" name="l00401"></a><span class="lineno">  401</span>    <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>, <span class="stringliteral">&quot;Complete create DXGI&quot;</span>);</div>
+<div class="line"><a id="l00402" name="l00402"></a><span class="lineno">  402</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00403" name="l00403"></a><span class="lineno">  403</span>}</div>
+<div class="line"><a id="l00404" name="l00404"></a><span class="lineno">  404</span> </div>
+<div class="line"><a id="l00405" name="l00405"></a><span class="lineno">  405</span><span class="keywordtype">bool</span> DirectXAdapter::InfoQueue()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00406" name="l00406"></a><span class="lineno">  406</span><span class="preprocessor">#ifdef _DEBUG</span></div>
+<div class="line"><a id="l00407" name="l00407"></a><span class="lineno">  407</span>    {</div>
+<div class="line"><a id="l00408" name="l00408"></a><span class="lineno">  408</span>        Microsoft::WRL::ComPtr&lt;ID3D12InfoQueue&gt; infoQueue;</div>
+<div class="line"><a id="l00409" name="l00409"></a><span class="lineno">  409</span>        <span class="keywordflow">if</span> (SUCCEEDED(device_-&gt;QueryInterface(IID_PPV_ARGS(&amp;infoQueue)))){</div>
+<div class="line"><a id="l00410" name="l00410"></a><span class="lineno">  410</span>            infoQueue-&gt;SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_CORRUPTION, <span class="keyword">true</span>);</div>
+<div class="line"><a id="l00411" name="l00411"></a><span class="lineno">  411</span>            infoQueue-&gt;SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_ERROR, <span class="keyword">true</span>);</div>
+<div class="line"><a id="l00412" name="l00412"></a><span class="lineno">  412</span>            infoQueue-&gt;SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_WARNING, <span class="keyword">true</span>);</div>
+<div class="line"><a id="l00413" name="l00413"></a><span class="lineno">  413</span> </div>
+<div class="line"><a id="l00414" name="l00414"></a><span class="lineno">  414</span>            D3D12_MESSAGE_ID denyIds[] = { D3D12_MESSAGE_ID_RESOURCE_BARRIER_MISMATCHING_COMMAND_LIST_TYPE };</div>
+<div class="line"><a id="l00415" name="l00415"></a><span class="lineno">  415</span>            D3D12_MESSAGE_SEVERITY severities[] = { D3D12_MESSAGE_SEVERITY_INFO };</div>
+<div class="line"><a id="l00416" name="l00416"></a><span class="lineno">  416</span>            D3D12_INFO_QUEUE_FILTER filter = {};</div>
+<div class="line"><a id="l00417" name="l00417"></a><span class="lineno">  417</span>            filter.DenyList.NumIDs = _countof(denyIds);</div>
+<div class="line"><a id="l00418" name="l00418"></a><span class="lineno">  418</span>            filter.DenyList.pIDList = denyIds;</div>
+<div class="line"><a id="l00419" name="l00419"></a><span class="lineno">  419</span>            filter.DenyList.NumSeverities = _countof(severities);</div>
+<div class="line"><a id="l00420" name="l00420"></a><span class="lineno">  420</span>            filter.DenyList.pSeverityList = severities;</div>
+<div class="line"><a id="l00421" name="l00421"></a><span class="lineno">  421</span>            infoQueue-&gt;PushStorageFilter(&amp;filter);</div>
+<div class="line"><a id="l00422" name="l00422"></a><span class="lineno">  422</span>        }</div>
+<div class="line"><a id="l00423" name="l00423"></a><span class="lineno">  423</span>    }</div>
+<div class="line"><a id="l00424" name="l00424"></a><span class="lineno">  424</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00425" name="l00425"></a><span class="lineno">  425</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00426" name="l00426"></a><span class="lineno">  426</span>}</div>
+<div class="line"><a id="l00427" name="l00427"></a><span class="lineno">  427</span> </div>
+<div class="line"><a id="l00428" name="l00428"></a><span class="lineno">  428</span><span class="keywordtype">bool</span> DirectXAdapter::CreateCommand() {</div>
+<div class="line"><a id="l00429" name="l00429"></a><span class="lineno">  429</span>    <span class="comment">//Queue</span></div>
+<div class="line"><a id="l00430" name="l00430"></a><span class="lineno">  430</span>    D3D12_COMMAND_QUEUE_DESC queueDesc = {};</div>
+<div class="line"><a id="l00431" name="l00431"></a><span class="lineno">  431</span>    <span class="keywordflow">if</span> (FAILED(device_-&gt;CreateCommandQueue(&amp;queueDesc, IID_PPV_ARGS(&amp;cQueue_)))){</div>
+<div class="line"><a id="l00432" name="l00432"></a><span class="lineno">  432</span>        <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, <span class="stringliteral">&quot;Failed to create command queue&quot;</span>);</div>
+<div class="line"><a id="l00433" name="l00433"></a><span class="lineno">  433</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00434" name="l00434"></a><span class="lineno">  434</span>    }</div>
+<div class="line"><a id="l00435" name="l00435"></a><span class="lineno">  435</span>    <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>, <span class="stringliteral">&quot;Command Queue Created&quot;</span>);</div>
+<div class="line"><a id="l00436" name="l00436"></a><span class="lineno">  436</span> </div>
+<div class="line"><a id="l00437" name="l00437"></a><span class="lineno">  437</span>    <span class="comment">//Allocator</span></div>
+<div class="line"><a id="l00438" name="l00438"></a><span class="lineno">  438</span>    <span class="keywordflow">if</span> (FAILED(device_-&gt;CreateCommandAllocator(D3D12_COMMAND_LIST_TYPE_DIRECT, IID_PPV_ARGS(&amp;cAllocator_)))){</div>
+<div class="line"><a id="l00439" name="l00439"></a><span class="lineno">  439</span>        <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, <span class="stringliteral">&quot;Failed to create command allocator&quot;</span>);</div>
+<div class="line"><a id="l00440" name="l00440"></a><span class="lineno">  440</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00441" name="l00441"></a><span class="lineno">  441</span>    }</div>
+<div class="line"><a id="l00442" name="l00442"></a><span class="lineno">  442</span>    <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>, <span class="stringliteral">&quot;Command Allocator Created&quot;</span>);</div>
+<div class="line"><a id="l00443" name="l00443"></a><span class="lineno">  443</span> </div>
+<div class="line"><a id="l00444" name="l00444"></a><span class="lineno">  444</span>    <span class="comment">//List</span></div>
+<div class="line"><a id="l00445" name="l00445"></a><span class="lineno">  445</span>    <span class="keywordflow">if</span> (FAILED(device_-&gt;CreateCommandList(0, D3D12_COMMAND_LIST_TYPE_DIRECT, cAllocator_.Get(), <span class="keyword">nullptr</span>, IID_PPV_ARGS(&amp;cList_)))){</div>
+<div class="line"><a id="l00446" name="l00446"></a><span class="lineno">  446</span>        <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, <span class="stringliteral">&quot;Failed to create command list&quot;</span>);</div>
+<div class="line"><a id="l00447" name="l00447"></a><span class="lineno">  447</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00448" name="l00448"></a><span class="lineno">  448</span>    }</div>
+<div class="line"><a id="l00449" name="l00449"></a><span class="lineno">  449</span>    <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>, <span class="stringliteral">&quot;Command List Created&quot;</span>);</div>
+<div class="line"><a id="l00450" name="l00450"></a><span class="lineno">  450</span> </div>
+<div class="line"><a id="l00451" name="l00451"></a><span class="lineno">  451</span>    <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>, <span class="stringliteral">&quot;Complete create Commands&quot;</span>);</div>
+<div class="line"><a id="l00452" name="l00452"></a><span class="lineno">  452</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00453" name="l00453"></a><span class="lineno">  453</span>}</div>
+<div class="line"><a id="l00454" name="l00454"></a><span class="lineno">  454</span> </div>
+<div class="line"><a id="l00455" name="l00455"></a><span class="lineno">  455</span><span class="keywordtype">bool</span> DirectXAdapter::CreateSwapChain() {</div>
+<div class="line"><a id="l00456" name="l00456"></a><span class="lineno">  456</span>    <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>, <span class="stringliteral">&quot;Create Swap Chain BEGIN&quot;</span>);</div>
+<div class="line"><a id="l00457" name="l00457"></a><span class="lineno">  457</span>    DXGI_SWAP_CHAIN_DESC1 desc = {};</div>
+<div class="line"><a id="l00458" name="l00458"></a><span class="lineno">  458</span>    desc.Width = <span class="keyword">static_cast&lt;</span>UINT<span class="keyword">&gt;</span>(windowSize_.first);</div>
+<div class="line"><a id="l00459" name="l00459"></a><span class="lineno">  459</span>    desc.Height = <span class="keyword">static_cast&lt;</span>UINT<span class="keyword">&gt;</span>(windowSize_.second);</div>
+<div class="line"><a id="l00460" name="l00460"></a><span class="lineno">  460</span>    desc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;</div>
+<div class="line"><a id="l00461" name="l00461"></a><span class="lineno">  461</span>    desc.SampleDesc.Count = 1;</div>
+<div class="line"><a id="l00462" name="l00462"></a><span class="lineno">  462</span>    desc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;</div>
+<div class="line"><a id="l00463" name="l00463"></a><span class="lineno">  463</span>    desc.BufferCount = 2;</div>
+<div class="line"><a id="l00464" name="l00464"></a><span class="lineno">  464</span>    desc.SwapEffect = DXGI_SWAP_EFFECT_FLIP_DISCARD;</div>
+<div class="line"><a id="l00465" name="l00465"></a><span class="lineno">  465</span> </div>
+<div class="line"><a id="l00466" name="l00466"></a><span class="lineno">  466</span>    <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>, <span class="stringliteral">&quot;CreateSwapChainForHwnd&quot;</span>);</div>
+<div class="line"><a id="l00467" name="l00467"></a><span class="lineno">  467</span>    <span class="keywordflow">if</span> (FAILED(factory_-&gt;CreateSwapChainForHwnd(cQueue_.Get(), hWnd_, &amp;desc, <span class="keyword">nullptr</span>, <span class="keyword">nullptr</span>, <span class="keyword">reinterpret_cast&lt;</span>IDXGISwapChain1**<span class="keyword">&gt;</span>(swapChain_.GetAddressOf())))){</div>
+<div class="line"><a id="l00468" name="l00468"></a><span class="lineno">  468</span>        <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, <span class="stringliteral">&quot;Failed to create swap chain&quot;</span>);</div>
+<div class="line"><a id="l00469" name="l00469"></a><span class="lineno">  469</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00470" name="l00470"></a><span class="lineno">  470</span>    }</div>
 <div class="line"><a id="l00471" name="l00471"></a><span class="lineno">  471</span> </div>
-<div class="line"><a id="l00472" name="l00472"></a><span class="lineno">  472</span><span class="keywordtype">bool</span> DirectXAdapter::CreateFence() {</div>
-<div class="line"><a id="l00473" name="l00473"></a><span class="lineno">  473</span>    <span class="keywordflow">if</span> (FAILED(device_-&gt;CreateFence(0, D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(&amp;fence_)))){</div>
-<div class="line"><a id="l00474" name="l00474"></a><span class="lineno">  474</span>        <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, <span class="stringliteral">&quot;Failed to create fence&quot;</span>);</div>
-<div class="line"><a id="l00475" name="l00475"></a><span class="lineno">  475</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00476" name="l00476"></a><span class="lineno">  476</span>    }</div>
-<div class="line"><a id="l00477" name="l00477"></a><span class="lineno">  477</span>    fenceEvent_ = CreateEvent(<span class="keyword">nullptr</span>, <span class="keyword">false</span>, <span class="keyword">false</span>, <span class="keyword">nullptr</span>);</div>
-<div class="line"><a id="l00478" name="l00478"></a><span class="lineno">  478</span> </div>
-<div class="line"><a id="l00479" name="l00479"></a><span class="lineno">  479</span>    <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>, <span class="stringliteral">&quot;Fence Created&quot;</span>);</div>
-<div class="line"><a id="l00480" name="l00480"></a><span class="lineno">  480</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00481" name="l00481"></a><span class="lineno">  481</span>}</div>
-<div class="line"><a id="l00482" name="l00482"></a><span class="lineno">  482</span> </div>
-<div class="line"><a id="l00483" name="l00483"></a><span class="lineno">  483</span><span class="keywordtype">bool</span> DirectXAdapter::CreateRTV() {</div>
-<div class="line"><a id="l00484" name="l00484"></a><span class="lineno">  484</span>    <span class="comment">// RTVヒープは初回のみ作成、リサイズ時は既存のものを再利用</span></div>
-<div class="line"><a id="l00485" name="l00485"></a><span class="lineno">  485</span>    <span class="keywordflow">if</span> (!rtvHeap_) {</div>
-<div class="line"><a id="l00486" name="l00486"></a><span class="lineno">  486</span>        rtvHeap_ = std::make_unique&lt;Heap&gt;();</div>
-<div class="line"><a id="l00487" name="l00487"></a><span class="lineno">  487</span>        <span class="keywordflow">if</span> (!rtvHeap_-&gt;Create(device_.Get(), D3D12_DESCRIPTOR_HEAP_TYPE_RTV, 2, D3D12_DESCRIPTOR_HEAP_FLAG_NONE)){</div>
-<div class="line"><a id="l00488" name="l00488"></a><span class="lineno">  488</span>            <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, <span class="stringliteral">&quot;Failed to create RTV Heap&quot;</span>);</div>
-<div class="line"><a id="l00489" name="l00489"></a><span class="lineno">  489</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00490" name="l00490"></a><span class="lineno">  490</span>        }</div>
-<div class="line"><a id="l00491" name="l00491"></a><span class="lineno">  491</span>        <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>, <span class="stringliteral">&quot;RTV Heap Created&quot;</span>);</div>
-<div class="line"><a id="l00492" name="l00492"></a><span class="lineno">  492</span>    }</div>
-<div class="line"><a id="l00493" name="l00493"></a><span class="lineno">  493</span> </div>
-<div class="line"><a id="l00494" name="l00494"></a><span class="lineno">  494</span>    <span class="comment">// SwapChainバッファを取得してラップ</span></div>
-<div class="line"><a id="l00495" name="l00495"></a><span class="lineno">  495</span>    swapChainResources_.resize(2);</div>
-<div class="line"><a id="l00496" name="l00496"></a><span class="lineno">  496</span>    <span class="keywordflow">for</span> (UINT i = 0; i &lt; 2; ++i){</div>
-<div class="line"><a id="l00497" name="l00497"></a><span class="lineno">  497</span>        Microsoft::WRL::ComPtr&lt;ID3D12Resource&gt; resource;</div>
-<div class="line"><a id="l00498" name="l00498"></a><span class="lineno">  498</span>        <span class="keywordflow">if</span> (FAILED(swapChain_-&gt;GetBuffer(i, IID_PPV_ARGS(&amp;resource)))){</div>
-<div class="line"><a id="l00499" name="l00499"></a><span class="lineno">  499</span>            <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, <span class="stringliteral">&quot;Failed to get swap chain buffer &quot;</span> + std::to_string(i));</div>
-<div class="line"><a id="l00500" name="l00500"></a><span class="lineno">  500</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00501" name="l00501"></a><span class="lineno">  501</span>        }</div>
-<div class="line"><a id="l00502" name="l00502"></a><span class="lineno">  502</span> </div>
-<div class="line"><a id="l00503" name="l00503"></a><span class="lineno">  503</span>        <span class="comment">// 新しいバッファサイズを確認</span></div>
-<div class="line"><a id="l00504" name="l00504"></a><span class="lineno">  504</span>        D3D12_RESOURCE_DESC desc = resource-&gt;GetDesc();</div>
-<div class="line"><a id="l00505" name="l00505"></a><span class="lineno">  505</span>        <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>,</div>
-<div class="line"><a id="l00506" name="l00506"></a><span class="lineno">  506</span>            <span class="stringliteral">&quot;SwapChain buffer &quot;</span> + std::to_string(i) + <span class="stringliteral">&quot; size: &quot;</span> +</div>
-<div class="line"><a id="l00507" name="l00507"></a><span class="lineno">  507</span>            std::to_string(desc.Width) + <span class="stringliteral">&quot;x&quot;</span> + std::to_string(desc.Height));</div>
-<div class="line"><a id="l00508" name="l00508"></a><span class="lineno">  508</span> </div>
-<div class="line"><a id="l00509" name="l00509"></a><span class="lineno">  509</span>        swapChainResources_[i] = std::make_unique&lt;DX12Resource&gt;();</div>
-<div class="line"><a id="l00510" name="l00510"></a><span class="lineno">  510</span>        swapChainResources_[i]-&gt;Create(resource);</div>
-<div class="line"><a id="l00511" name="l00511"></a><span class="lineno">  511</span>        swapChainResources_[i]-&gt;Get()-&gt;SetName(std::wstring(L<span class="stringliteral">&quot;SwapChain&quot;</span> + std::to_wstring(i)).c_str());</div>
-<div class="line"><a id="l00512" name="l00512"></a><span class="lineno">  512</span>    }</div>
-<div class="line"><a id="l00513" name="l00513"></a><span class="lineno">  513</span>    <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>, <span class="stringliteral">&quot;Swap Chain Resources Created&quot;</span>);</div>
-<div class="line"><a id="l00514" name="l00514"></a><span class="lineno">  514</span> </div>
-<div class="line"><a id="l00515" name="l00515"></a><span class="lineno">  515</span>    <span class="comment">// RTVディスクリプタを作成（既存のヒープに上書き）</span></div>
-<div class="line"><a id="l00516" name="l00516"></a><span class="lineno">  516</span>    D3D12_RENDER_TARGET_VIEW_DESC rtvDesc = {};</div>
-<div class="line"><a id="l00517" name="l00517"></a><span class="lineno">  517</span>    rtvDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;</div>
-<div class="line"><a id="l00518" name="l00518"></a><span class="lineno">  518</span>    rtvDesc.ViewDimension = D3D12_RTV_DIMENSION_TEXTURE2D;</div>
+<div class="line"><a id="l00472" name="l00472"></a><span class="lineno">  472</span>    <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>, <span class="stringliteral">&quot;Swap Chain Created&quot;</span>);</div>
+<div class="line"><a id="l00473" name="l00473"></a><span class="lineno">  473</span> </div>
+<div class="line"><a id="l00474" name="l00474"></a><span class="lineno">  474</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00475" name="l00475"></a><span class="lineno">  475</span>}</div>
+<div class="line"><a id="l00476" name="l00476"></a><span class="lineno">  476</span> </div>
+<div class="line"><a id="l00477" name="l00477"></a><span class="lineno">  477</span><span class="keywordtype">bool</span> DirectXAdapter::CreateFence() {</div>
+<div class="line"><a id="l00478" name="l00478"></a><span class="lineno">  478</span>    <span class="keywordflow">if</span> (FAILED(device_-&gt;CreateFence(0, D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(&amp;fence_)))){</div>
+<div class="line"><a id="l00479" name="l00479"></a><span class="lineno">  479</span>        <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, <span class="stringliteral">&quot;Failed to create fence&quot;</span>);</div>
+<div class="line"><a id="l00480" name="l00480"></a><span class="lineno">  480</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00481" name="l00481"></a><span class="lineno">  481</span>    }</div>
+<div class="line"><a id="l00482" name="l00482"></a><span class="lineno">  482</span>    fenceEvent_ = CreateEvent(<span class="keyword">nullptr</span>, <span class="keyword">false</span>, <span class="keyword">false</span>, <span class="keyword">nullptr</span>);</div>
+<div class="line"><a id="l00483" name="l00483"></a><span class="lineno">  483</span> </div>
+<div class="line"><a id="l00484" name="l00484"></a><span class="lineno">  484</span>    <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>, <span class="stringliteral">&quot;Fence Created&quot;</span>);</div>
+<div class="line"><a id="l00485" name="l00485"></a><span class="lineno">  485</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00486" name="l00486"></a><span class="lineno">  486</span>}</div>
+<div class="line"><a id="l00487" name="l00487"></a><span class="lineno">  487</span> </div>
+<div class="line"><a id="l00488" name="l00488"></a><span class="lineno">  488</span><span class="keywordtype">bool</span> DirectXAdapter::CreateRTV() {</div>
+<div class="line"><a id="l00489" name="l00489"></a><span class="lineno">  489</span>    <span class="comment">// RTVヒープは初回のみ作成、リサイズ時は既存のものを再利用</span></div>
+<div class="line"><a id="l00490" name="l00490"></a><span class="lineno">  490</span>    <span class="keywordflow">if</span> (!rtvHeap_) {</div>
+<div class="line"><a id="l00491" name="l00491"></a><span class="lineno">  491</span>        rtvHeap_ = std::make_unique&lt;Heap&gt;();</div>
+<div class="line"><a id="l00492" name="l00492"></a><span class="lineno">  492</span>        <span class="keywordflow">if</span> (!rtvHeap_-&gt;Create(device_.Get(), D3D12_DESCRIPTOR_HEAP_TYPE_RTV, 2, D3D12_DESCRIPTOR_HEAP_FLAG_NONE)){</div>
+<div class="line"><a id="l00493" name="l00493"></a><span class="lineno">  493</span>            <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, <span class="stringliteral">&quot;Failed to create RTV Heap&quot;</span>);</div>
+<div class="line"><a id="l00494" name="l00494"></a><span class="lineno">  494</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00495" name="l00495"></a><span class="lineno">  495</span>        }</div>
+<div class="line"><a id="l00496" name="l00496"></a><span class="lineno">  496</span>        <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>, <span class="stringliteral">&quot;RTV Heap Created&quot;</span>);</div>
+<div class="line"><a id="l00497" name="l00497"></a><span class="lineno">  497</span>    }</div>
+<div class="line"><a id="l00498" name="l00498"></a><span class="lineno">  498</span> </div>
+<div class="line"><a id="l00499" name="l00499"></a><span class="lineno">  499</span>    <span class="comment">// SwapChainバッファを取得してラップ</span></div>
+<div class="line"><a id="l00500" name="l00500"></a><span class="lineno">  500</span>    swapChainResources_.resize(2);</div>
+<div class="line"><a id="l00501" name="l00501"></a><span class="lineno">  501</span>    <span class="keywordflow">for</span> (UINT i = 0; i &lt; 2; ++i){</div>
+<div class="line"><a id="l00502" name="l00502"></a><span class="lineno">  502</span>        Microsoft::WRL::ComPtr&lt;ID3D12Resource&gt; resource;</div>
+<div class="line"><a id="l00503" name="l00503"></a><span class="lineno">  503</span>        <span class="keywordflow">if</span> (FAILED(swapChain_-&gt;GetBuffer(i, IID_PPV_ARGS(&amp;resource)))){</div>
+<div class="line"><a id="l00504" name="l00504"></a><span class="lineno">  504</span>            <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, <span class="stringliteral">&quot;Failed to get swap chain buffer &quot;</span> + std::to_string(i));</div>
+<div class="line"><a id="l00505" name="l00505"></a><span class="lineno">  505</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00506" name="l00506"></a><span class="lineno">  506</span>        }</div>
+<div class="line"><a id="l00507" name="l00507"></a><span class="lineno">  507</span> </div>
+<div class="line"><a id="l00508" name="l00508"></a><span class="lineno">  508</span>        <span class="comment">// 新しいバッファサイズを確認</span></div>
+<div class="line"><a id="l00509" name="l00509"></a><span class="lineno">  509</span>        D3D12_RESOURCE_DESC desc = resource-&gt;GetDesc();</div>
+<div class="line"><a id="l00510" name="l00510"></a><span class="lineno">  510</span>        <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>,</div>
+<div class="line"><a id="l00511" name="l00511"></a><span class="lineno">  511</span>            <span class="stringliteral">&quot;SwapChain buffer &quot;</span> + std::to_string(i) + <span class="stringliteral">&quot; size: &quot;</span> +</div>
+<div class="line"><a id="l00512" name="l00512"></a><span class="lineno">  512</span>            std::to_string(desc.Width) + <span class="stringliteral">&quot;x&quot;</span> + std::to_string(desc.Height));</div>
+<div class="line"><a id="l00513" name="l00513"></a><span class="lineno">  513</span> </div>
+<div class="line"><a id="l00514" name="l00514"></a><span class="lineno">  514</span>        swapChainResources_[i] = std::make_unique&lt;DX12Resource&gt;();</div>
+<div class="line"><a id="l00515" name="l00515"></a><span class="lineno">  515</span>        swapChainResources_[i]-&gt;Create(resource);</div>
+<div class="line"><a id="l00516" name="l00516"></a><span class="lineno">  516</span>        swapChainResources_[i]-&gt;Get()-&gt;SetName(std::wstring(L<span class="stringliteral">&quot;SwapChain&quot;</span> + std::to_wstring(i)).c_str());</div>
+<div class="line"><a id="l00517" name="l00517"></a><span class="lineno">  517</span>    }</div>
+<div class="line"><a id="l00518" name="l00518"></a><span class="lineno">  518</span>    <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>, <span class="stringliteral">&quot;Swap Chain Resources Created&quot;</span>);</div>
 <div class="line"><a id="l00519" name="l00519"></a><span class="lineno">  519</span> </div>
-<div class="line"><a id="l00520" name="l00520"></a><span class="lineno">  520</span>    rtvHandles_.resize(2);</div>
-<div class="line"><a id="l00521" name="l00521"></a><span class="lineno">  521</span>    rtvHandles_[0] = rtvHeap_-&gt;Get()-&gt;GetCPUDescriptorHandleForHeapStart();</div>
-<div class="line"><a id="l00522" name="l00522"></a><span class="lineno">  522</span>    device_-&gt;CreateRenderTargetView(swapChainResources_[0]-&gt;Get(), &amp;rtvDesc, rtvHandles_[0]);</div>
-<div class="line"><a id="l00523" name="l00523"></a><span class="lineno">  523</span> </div>
-<div class="line"><a id="l00524" name="l00524"></a><span class="lineno">  524</span>    rtvHandles_[1].ptr = rtvHandles_[0].ptr + device_-&gt;GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);</div>
-<div class="line"><a id="l00525" name="l00525"></a><span class="lineno">  525</span>    device_-&gt;CreateRenderTargetView(swapChainResources_[1]-&gt;Get(), &amp;rtvDesc, rtvHandles_[1]);</div>
-<div class="line"><a id="l00526" name="l00526"></a><span class="lineno">  526</span> </div>
-<div class="line"><a id="l00527" name="l00527"></a><span class="lineno">  527</span>    <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>, <span class="stringliteral">&quot;RTVs Created&quot;</span>);</div>
-<div class="line"><a id="l00528" name="l00528"></a><span class="lineno">  528</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00529" name="l00529"></a><span class="lineno">  529</span>}</div>
-<div class="line"><a id="l00530" name="l00530"></a><span class="lineno">  530</span> </div>
-<div class="line"><a id="l00531" name="l00531"></a><span class="lineno">  531</span><span class="keywordtype">bool</span> DirectXAdapter::CreateDSV() {</div>
-<div class="line"><a id="l00532" name="l00532"></a><span class="lineno">  532</span>    <span class="comment">// 新しいサイズで深度ステンシルリソースを作成</span></div>
-<div class="line"><a id="l00533" name="l00533"></a><span class="lineno">  533</span>    depthStencil_ = <a class="code hl_function" href="classDirectXAdapter.html#a84a4cb85ed76d714431374ba62fe5b10">CreateDepthStencilResource</a>(<span class="keyword">static_cast&lt;</span>int32_t<span class="keyword">&gt;</span>(windowSize_.first), <span class="keyword">static_cast&lt;</span>int32_t<span class="keyword">&gt;</span>(windowSize_.second));</div>
-<div class="line"><a id="l00534" name="l00534"></a><span class="lineno">  534</span> </div>
-<div class="line"><a id="l00535" name="l00535"></a><span class="lineno">  535</span>    <span class="keywordflow">if</span> (!depthStencil_) {</div>
-<div class="line"><a id="l00536" name="l00536"></a><span class="lineno">  536</span>        <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, <span class="stringliteral">&quot;Failed to create depth stencil resource&quot;</span>);</div>
-<div class="line"><a id="l00537" name="l00537"></a><span class="lineno">  537</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00538" name="l00538"></a><span class="lineno">  538</span>    }</div>
+<div class="line"><a id="l00520" name="l00520"></a><span class="lineno">  520</span>    <span class="comment">// RTVディスクリプタを作成（既存のヒープに上書き）</span></div>
+<div class="line"><a id="l00521" name="l00521"></a><span class="lineno">  521</span>    D3D12_RENDER_TARGET_VIEW_DESC rtvDesc = {};</div>
+<div class="line"><a id="l00522" name="l00522"></a><span class="lineno">  522</span>    rtvDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;</div>
+<div class="line"><a id="l00523" name="l00523"></a><span class="lineno">  523</span>    rtvDesc.ViewDimension = D3D12_RTV_DIMENSION_TEXTURE2D;</div>
+<div class="line"><a id="l00524" name="l00524"></a><span class="lineno">  524</span> </div>
+<div class="line"><a id="l00525" name="l00525"></a><span class="lineno">  525</span>    rtvHandles_.resize(2);</div>
+<div class="line"><a id="l00526" name="l00526"></a><span class="lineno">  526</span>    rtvHandles_[0] = rtvHeap_-&gt;Get()-&gt;GetCPUDescriptorHandleForHeapStart();</div>
+<div class="line"><a id="l00527" name="l00527"></a><span class="lineno">  527</span>    device_-&gt;CreateRenderTargetView(swapChainResources_[0]-&gt;Get(), &amp;rtvDesc, rtvHandles_[0]);</div>
+<div class="line"><a id="l00528" name="l00528"></a><span class="lineno">  528</span> </div>
+<div class="line"><a id="l00529" name="l00529"></a><span class="lineno">  529</span>    rtvHandles_[1].ptr = rtvHandles_[0].ptr + device_-&gt;GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);</div>
+<div class="line"><a id="l00530" name="l00530"></a><span class="lineno">  530</span>    device_-&gt;CreateRenderTargetView(swapChainResources_[1]-&gt;Get(), &amp;rtvDesc, rtvHandles_[1]);</div>
+<div class="line"><a id="l00531" name="l00531"></a><span class="lineno">  531</span> </div>
+<div class="line"><a id="l00532" name="l00532"></a><span class="lineno">  532</span>    <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>, <span class="stringliteral">&quot;RTVs Created&quot;</span>);</div>
+<div class="line"><a id="l00533" name="l00533"></a><span class="lineno">  533</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00534" name="l00534"></a><span class="lineno">  534</span>}</div>
+<div class="line"><a id="l00535" name="l00535"></a><span class="lineno">  535</span> </div>
+<div class="line"><a id="l00536" name="l00536"></a><span class="lineno">  536</span><span class="keywordtype">bool</span> DirectXAdapter::CreateDSV() {</div>
+<div class="line"><a id="l00537" name="l00537"></a><span class="lineno">  537</span>    <span class="comment">// 新しいサイズで深度ステンシルリソースを作成</span></div>
+<div class="line"><a id="l00538" name="l00538"></a><span class="lineno">  538</span>    depthStencil_ = <a class="code hl_function" href="classDirectXAdapter.html#a84a4cb85ed76d714431374ba62fe5b10">CreateDepthStencilResource</a>(<span class="keyword">static_cast&lt;</span>int32_t<span class="keyword">&gt;</span>(windowSize_.first), <span class="keyword">static_cast&lt;</span>int32_t<span class="keyword">&gt;</span>(windowSize_.second));</div>
 <div class="line"><a id="l00539" name="l00539"></a><span class="lineno">  539</span> </div>
-<div class="line"><a id="l00540" name="l00540"></a><span class="lineno">  540</span>    <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>,</div>
-<div class="line"><a id="l00541" name="l00541"></a><span class="lineno">  541</span>        <span class="stringliteral">&quot;Depth stencil buffer created: &quot;</span> + std::to_string(windowSize_.first) + <span class="stringliteral">&quot;x&quot;</span> + std::to_string(windowSize_.second));</div>
-<div class="line"><a id="l00542" name="l00542"></a><span class="lineno">  542</span> </div>
-<div class="line"><a id="l00543" name="l00543"></a><span class="lineno">  543</span>    <span class="comment">// DSVヒープは初回のみ作成、リサイズ時は既存のものを再利用</span></div>
-<div class="line"><a id="l00544" name="l00544"></a><span class="lineno">  544</span>    <span class="keywordflow">if</span> (!dsvHeap_) {</div>
-<div class="line"><a id="l00545" name="l00545"></a><span class="lineno">  545</span>        dsvHeap_ = std::make_unique&lt;Heap&gt;();</div>
-<div class="line"><a id="l00546" name="l00546"></a><span class="lineno">  546</span>        <span class="keywordflow">if</span> (!dsvHeap_-&gt;Create(device_.Get(), D3D12_DESCRIPTOR_HEAP_TYPE_DSV, 1, D3D12_DESCRIPTOR_HEAP_FLAG_NONE)){</div>
-<div class="line"><a id="l00547" name="l00547"></a><span class="lineno">  547</span>            <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, <span class="stringliteral">&quot;Failed to create DSV Heap&quot;</span>);</div>
-<div class="line"><a id="l00548" name="l00548"></a><span class="lineno">  548</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00549" name="l00549"></a><span class="lineno">  549</span>        }</div>
-<div class="line"><a id="l00550" name="l00550"></a><span class="lineno">  550</span>        <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>, <span class="stringliteral">&quot;DSV Heap Created&quot;</span>);</div>
-<div class="line"><a id="l00551" name="l00551"></a><span class="lineno">  551</span>    }</div>
-<div class="line"><a id="l00552" name="l00552"></a><span class="lineno">  552</span> </div>
-<div class="line"><a id="l00553" name="l00553"></a><span class="lineno">  553</span>    <span class="comment">// DSVディスクリプタを作成（既存のヒープに上書き）</span></div>
-<div class="line"><a id="l00554" name="l00554"></a><span class="lineno">  554</span>    D3D12_DEPTH_STENCIL_VIEW_DESC desc = {};</div>
-<div class="line"><a id="l00555" name="l00555"></a><span class="lineno">  555</span>    desc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;</div>
-<div class="line"><a id="l00556" name="l00556"></a><span class="lineno">  556</span>    desc.ViewDimension = D3D12_DSV_DIMENSION_TEXTURE2D;</div>
+<div class="line"><a id="l00540" name="l00540"></a><span class="lineno">  540</span>    <span class="keywordflow">if</span> (!depthStencil_) {</div>
+<div class="line"><a id="l00541" name="l00541"></a><span class="lineno">  541</span>        <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, <span class="stringliteral">&quot;Failed to create depth stencil resource&quot;</span>);</div>
+<div class="line"><a id="l00542" name="l00542"></a><span class="lineno">  542</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00543" name="l00543"></a><span class="lineno">  543</span>    }</div>
+<div class="line"><a id="l00544" name="l00544"></a><span class="lineno">  544</span> </div>
+<div class="line"><a id="l00545" name="l00545"></a><span class="lineno">  545</span>    <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>,</div>
+<div class="line"><a id="l00546" name="l00546"></a><span class="lineno">  546</span>        <span class="stringliteral">&quot;Depth stencil buffer created: &quot;</span> + std::to_string(windowSize_.first) + <span class="stringliteral">&quot;x&quot;</span> + std::to_string(windowSize_.second));</div>
+<div class="line"><a id="l00547" name="l00547"></a><span class="lineno">  547</span> </div>
+<div class="line"><a id="l00548" name="l00548"></a><span class="lineno">  548</span>    <span class="comment">// DSVヒープは初回のみ作成、リサイズ時は既存のものを再利用</span></div>
+<div class="line"><a id="l00549" name="l00549"></a><span class="lineno">  549</span>    <span class="keywordflow">if</span> (!dsvHeap_) {</div>
+<div class="line"><a id="l00550" name="l00550"></a><span class="lineno">  550</span>        dsvHeap_ = std::make_unique&lt;Heap&gt;();</div>
+<div class="line"><a id="l00551" name="l00551"></a><span class="lineno">  551</span>        <span class="keywordflow">if</span> (!dsvHeap_-&gt;Create(device_.Get(), D3D12_DESCRIPTOR_HEAP_TYPE_DSV, 1, D3D12_DESCRIPTOR_HEAP_FLAG_NONE)){</div>
+<div class="line"><a id="l00552" name="l00552"></a><span class="lineno">  552</span>            <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, <span class="stringliteral">&quot;Failed to create DSV Heap&quot;</span>);</div>
+<div class="line"><a id="l00553" name="l00553"></a><span class="lineno">  553</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00554" name="l00554"></a><span class="lineno">  554</span>        }</div>
+<div class="line"><a id="l00555" name="l00555"></a><span class="lineno">  555</span>        <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>, <span class="stringliteral">&quot;DSV Heap Created&quot;</span>);</div>
+<div class="line"><a id="l00556" name="l00556"></a><span class="lineno">  556</span>    }</div>
 <div class="line"><a id="l00557" name="l00557"></a><span class="lineno">  557</span> </div>
-<div class="line"><a id="l00558" name="l00558"></a><span class="lineno">  558</span>    device_-&gt;CreateDepthStencilView(depthStencil_-&gt;Get(), &amp;desc, dsvHeap_-&gt;Get()-&gt;GetCPUDescriptorHandleForHeapStart());</div>
-<div class="line"><a id="l00559" name="l00559"></a><span class="lineno">  559</span>    dsvHandle_ = dsvHeap_-&gt;GetCPUHandle(0);</div>
-<div class="line"><a id="l00560" name="l00560"></a><span class="lineno">  560</span> </div>
-<div class="line"><a id="l00561" name="l00561"></a><span class="lineno">  561</span>    <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>, <span class="stringliteral">&quot;DSV Created&quot;</span>);</div>
-<div class="line"><a id="l00562" name="l00562"></a><span class="lineno">  562</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00563" name="l00563"></a><span class="lineno">  563</span>}</div>
-<div class="line"><a id="l00564" name="l00564"></a><span class="lineno">  564</span> </div>
-<div class="line"><a id="l00565" name="l00565"></a><span class="lineno">  565</span><span class="keywordtype">bool</span> DirectXAdapter::CreateViewportAndScissor() {</div>
-<div class="line"><a id="l00566" name="l00566"></a><span class="lineno">  566</span>    viewport_.Width = <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(windowSize_.first);</div>
-<div class="line"><a id="l00567" name="l00567"></a><span class="lineno">  567</span>    viewport_.Height = <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(windowSize_.second);</div>
-<div class="line"><a id="l00568" name="l00568"></a><span class="lineno">  568</span>    viewport_.MinDepth = 0.0f;</div>
-<div class="line"><a id="l00569" name="l00569"></a><span class="lineno">  569</span>    viewport_.MaxDepth = 1.0f;</div>
-<div class="line"><a id="l00570" name="l00570"></a><span class="lineno">  570</span>    viewport_.TopLeftX = 0.0f;</div>
-<div class="line"><a id="l00571" name="l00571"></a><span class="lineno">  571</span>    viewport_.TopLeftY = 0.0f;</div>
-<div class="line"><a id="l00572" name="l00572"></a><span class="lineno">  572</span> </div>
-<div class="line"><a id="l00573" name="l00573"></a><span class="lineno">  573</span>    scissorRect_.left = 0;</div>
-<div class="line"><a id="l00574" name="l00574"></a><span class="lineno">  574</span>    scissorRect_.right = <span class="keyword">static_cast&lt;</span>LONG<span class="keyword">&gt;</span>(windowSize_.first);</div>
-<div class="line"><a id="l00575" name="l00575"></a><span class="lineno">  575</span>    scissorRect_.top = 0;</div>
-<div class="line"><a id="l00576" name="l00576"></a><span class="lineno">  576</span>    scissorRect_.bottom = <span class="keyword">static_cast&lt;</span>LONG<span class="keyword">&gt;</span>(windowSize_.second);</div>
-<div class="line"><a id="l00577" name="l00577"></a><span class="lineno">  577</span>    <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>, <span class="stringliteral">&quot;Viewport and Scissor Rect Created&quot;</span>);</div>
-<div class="line"><a id="l00578" name="l00578"></a><span class="lineno">  578</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00579" name="l00579"></a><span class="lineno">  579</span>}</div>
-<div class="line"><a id="l00580" name="l00580"></a><span class="lineno">  580</span> </div>
-<div class="line"><a id="l00581" name="l00581"></a><span class="lineno">  581</span><span class="keywordtype">void</span> DirectXAdapter::SyncGPU() {</div>
-<div class="line"><a id="l00582" name="l00582"></a><span class="lineno">  582</span>    <span class="comment">// GPU同期（コマンドキューを完全にフラッシュ）</span></div>
-<div class="line"><a id="l00583" name="l00583"></a><span class="lineno">  583</span>    uint64_t fenceValue = <a class="code hl_function" href="classDirectXAdapter.html#a159fa0e3baa6933654aa08009371bd6d">GetNextFenceValue</a>();</div>
-<div class="line"><a id="l00584" name="l00584"></a><span class="lineno">  584</span>    cQueue_-&gt;Signal(fence_.Get(), fenceValue);</div>
-<div class="line"><a id="l00585" name="l00585"></a><span class="lineno">  585</span>    <a class="code hl_function" href="classDirectXAdapter.html#a7793686074430b7c1cff3a7ee3cd2513">WaitForFenceValue</a>(fenceValue);</div>
-<div class="line"><a id="l00586" name="l00586"></a><span class="lineno">  586</span>    <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>, <span class="stringliteral">&quot;GPU synchronized&quot;</span>);</div>
-<div class="line"><a id="l00587" name="l00587"></a><span class="lineno">  587</span>}</div>
-<div class="line"><a id="l00588" name="l00588"></a><span class="lineno">  588</span> </div>
-<div class="line"><a id="l00589" name="l00589"></a><span class="lineno">  589</span><span class="keywordtype">void</span> DirectXAdapter::ReleaseSwapChainResources() {</div>
-<div class="line"><a id="l00590" name="l00590"></a><span class="lineno">  590</span>    <span class="comment">// SwapChainバッファへの参照を完全に解放</span></div>
-<div class="line"><a id="l00591" name="l00591"></a><span class="lineno">  591</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; resource : swapChainResources_) {</div>
-<div class="line"><a id="l00592" name="l00592"></a><span class="lineno">  592</span>        <span class="keywordflow">if</span> (resource) {</div>
-<div class="line"><a id="l00593" name="l00593"></a><span class="lineno">  593</span>            resource.reset();</div>
-<div class="line"><a id="l00594" name="l00594"></a><span class="lineno">  594</span>        }</div>
-<div class="line"><a id="l00595" name="l00595"></a><span class="lineno">  595</span>    }</div>
-<div class="line"><a id="l00596" name="l00596"></a><span class="lineno">  596</span>    swapChainResources_.clear();</div>
-<div class="line"><a id="l00597" name="l00597"></a><span class="lineno">  597</span>    rtvHandles_.clear();</div>
-<div class="line"><a id="l00598" name="l00598"></a><span class="lineno">  598</span> </div>
-<div class="line"><a id="l00599" name="l00599"></a><span class="lineno">  599</span>    <span class="comment">// 深度ステンシルバッファを解放</span></div>
-<div class="line"><a id="l00600" name="l00600"></a><span class="lineno">  600</span>    <span class="keywordflow">if</span> (depthStencil_) {</div>
-<div class="line"><a id="l00601" name="l00601"></a><span class="lineno">  601</span>        depthStencil_.reset();</div>
-<div class="line"><a id="l00602" name="l00602"></a><span class="lineno">  602</span>    }</div>
+<div class="line"><a id="l00558" name="l00558"></a><span class="lineno">  558</span>    <span class="comment">// DSVディスクリプタを作成（既存のヒープに上書き）</span></div>
+<div class="line"><a id="l00559" name="l00559"></a><span class="lineno">  559</span>    D3D12_DEPTH_STENCIL_VIEW_DESC desc = {};</div>
+<div class="line"><a id="l00560" name="l00560"></a><span class="lineno">  560</span>    desc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;</div>
+<div class="line"><a id="l00561" name="l00561"></a><span class="lineno">  561</span>    desc.ViewDimension = D3D12_DSV_DIMENSION_TEXTURE2D;</div>
+<div class="line"><a id="l00562" name="l00562"></a><span class="lineno">  562</span> </div>
+<div class="line"><a id="l00563" name="l00563"></a><span class="lineno">  563</span>    device_-&gt;CreateDepthStencilView(depthStencil_-&gt;Get(), &amp;desc, dsvHeap_-&gt;Get()-&gt;GetCPUDescriptorHandleForHeapStart());</div>
+<div class="line"><a id="l00564" name="l00564"></a><span class="lineno">  564</span>    dsvHandle_ = dsvHeap_-&gt;GetCPUHandle(0);</div>
+<div class="line"><a id="l00565" name="l00565"></a><span class="lineno">  565</span> </div>
+<div class="line"><a id="l00566" name="l00566"></a><span class="lineno">  566</span>    <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>, <span class="stringliteral">&quot;DSV Created&quot;</span>);</div>
+<div class="line"><a id="l00567" name="l00567"></a><span class="lineno">  567</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00568" name="l00568"></a><span class="lineno">  568</span>}</div>
+<div class="line"><a id="l00569" name="l00569"></a><span class="lineno">  569</span> </div>
+<div class="line"><a id="l00570" name="l00570"></a><span class="lineno">  570</span><span class="keywordtype">bool</span> DirectXAdapter::CreateViewportAndScissor() {</div>
+<div class="line"><a id="l00571" name="l00571"></a><span class="lineno">  571</span>    viewport_.Width = <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(windowSize_.first);</div>
+<div class="line"><a id="l00572" name="l00572"></a><span class="lineno">  572</span>    viewport_.Height = <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(windowSize_.second);</div>
+<div class="line"><a id="l00573" name="l00573"></a><span class="lineno">  573</span>    viewport_.MinDepth = 0.0f;</div>
+<div class="line"><a id="l00574" name="l00574"></a><span class="lineno">  574</span>    viewport_.MaxDepth = 1.0f;</div>
+<div class="line"><a id="l00575" name="l00575"></a><span class="lineno">  575</span>    viewport_.TopLeftX = 0.0f;</div>
+<div class="line"><a id="l00576" name="l00576"></a><span class="lineno">  576</span>    viewport_.TopLeftY = 0.0f;</div>
+<div class="line"><a id="l00577" name="l00577"></a><span class="lineno">  577</span> </div>
+<div class="line"><a id="l00578" name="l00578"></a><span class="lineno">  578</span>    scissorRect_.left = 0;</div>
+<div class="line"><a id="l00579" name="l00579"></a><span class="lineno">  579</span>    scissorRect_.right = <span class="keyword">static_cast&lt;</span>LONG<span class="keyword">&gt;</span>(windowSize_.first);</div>
+<div class="line"><a id="l00580" name="l00580"></a><span class="lineno">  580</span>    scissorRect_.top = 0;</div>
+<div class="line"><a id="l00581" name="l00581"></a><span class="lineno">  581</span>    scissorRect_.bottom = <span class="keyword">static_cast&lt;</span>LONG<span class="keyword">&gt;</span>(windowSize_.second);</div>
+<div class="line"><a id="l00582" name="l00582"></a><span class="lineno">  582</span>    <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>, <span class="stringliteral">&quot;Viewport and Scissor Rect Created&quot;</span>);</div>
+<div class="line"><a id="l00583" name="l00583"></a><span class="lineno">  583</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00584" name="l00584"></a><span class="lineno">  584</span>}</div>
+<div class="line"><a id="l00585" name="l00585"></a><span class="lineno">  585</span> </div>
+<div class="line"><a id="l00586" name="l00586"></a><span class="lineno">  586</span><span class="keywordtype">void</span> DirectXAdapter::SyncGPU() {</div>
+<div class="line"><a id="l00587" name="l00587"></a><span class="lineno">  587</span>    <span class="comment">// GPU同期（コマンドキューを完全にフラッシュ）</span></div>
+<div class="line"><a id="l00588" name="l00588"></a><span class="lineno">  588</span>    uint64_t fenceValue = <a class="code hl_function" href="classDirectXAdapter.html#a159fa0e3baa6933654aa08009371bd6d">GetNextFenceValue</a>();</div>
+<div class="line"><a id="l00589" name="l00589"></a><span class="lineno">  589</span>    cQueue_-&gt;Signal(fence_.Get(), fenceValue);</div>
+<div class="line"><a id="l00590" name="l00590"></a><span class="lineno">  590</span>    <a class="code hl_function" href="classDirectXAdapter.html#a7793686074430b7c1cff3a7ee3cd2513">WaitForFenceValue</a>(fenceValue);</div>
+<div class="line"><a id="l00591" name="l00591"></a><span class="lineno">  591</span>    <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>, <span class="stringliteral">&quot;GPU synchronized&quot;</span>);</div>
+<div class="line"><a id="l00592" name="l00592"></a><span class="lineno">  592</span>}</div>
+<div class="line"><a id="l00593" name="l00593"></a><span class="lineno">  593</span> </div>
+<div class="line"><a id="l00594" name="l00594"></a><span class="lineno">  594</span><span class="keywordtype">void</span> DirectXAdapter::ReleaseSwapChainResources() {</div>
+<div class="line"><a id="l00595" name="l00595"></a><span class="lineno">  595</span>    <span class="comment">// SwapChainバッファへの参照を完全に解放</span></div>
+<div class="line"><a id="l00596" name="l00596"></a><span class="lineno">  596</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; resource : swapChainResources_) {</div>
+<div class="line"><a id="l00597" name="l00597"></a><span class="lineno">  597</span>        <span class="keywordflow">if</span> (resource) {</div>
+<div class="line"><a id="l00598" name="l00598"></a><span class="lineno">  598</span>            resource.reset();</div>
+<div class="line"><a id="l00599" name="l00599"></a><span class="lineno">  599</span>        }</div>
+<div class="line"><a id="l00600" name="l00600"></a><span class="lineno">  600</span>    }</div>
+<div class="line"><a id="l00601" name="l00601"></a><span class="lineno">  601</span>    swapChainResources_.clear();</div>
+<div class="line"><a id="l00602" name="l00602"></a><span class="lineno">  602</span>    rtvHandles_.clear();</div>
 <div class="line"><a id="l00603" name="l00603"></a><span class="lineno">  603</span> </div>
-<div class="line"><a id="l00604" name="l00604"></a><span class="lineno">  604</span>    <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>, <span class="stringliteral">&quot;SwapChain resources released&quot;</span>);</div>
-<div class="line"><a id="l00605" name="l00605"></a><span class="lineno">  605</span>}</div>
-<div class="line"><a id="l00606" name="l00606"></a><span class="lineno">  606</span> </div>
-<div class="foldopen" id="foldopen00607" data-start="{" data-end="}">
-<div class="line"><a id="l00607" name="l00607"></a><span class="lineno"><a class="line" href="classDirectXAdapter.html#a76807e209ac784429e5f7a3a47763b16">  607</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classDirectXAdapter.html#a76807e209ac784429e5f7a3a47763b16">DirectXAdapter::UpdateWindowSize</a>(<span class="keywordtype">size_t</span> _width, <span class="keywordtype">size_t</span> _height) {</div>
-<div class="line"><a id="l00608" name="l00608"></a><span class="lineno">  608</span>    <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>,</div>
-<div class="line"><a id="l00609" name="l00609"></a><span class="lineno">  609</span>        <span class="stringliteral">&quot;UpdateWindowSize called: &quot;</span> + std::to_string(_width) + <span class="stringliteral">&quot;x&quot;</span> + std::to_string(_height) +</div>
-<div class="line"><a id="l00610" name="l00610"></a><span class="lineno">  610</span>        <span class="stringliteral">&quot; (current: &quot;</span> + std::to_string(windowSize_.first) + <span class="stringliteral">&quot;x&quot;</span> + std::to_string(windowSize_.second) + <span class="stringliteral">&quot;)&quot;</span>);</div>
+<div class="line"><a id="l00604" name="l00604"></a><span class="lineno">  604</span>    <span class="comment">// 深度ステンシルバッファを解放</span></div>
+<div class="line"><a id="l00605" name="l00605"></a><span class="lineno">  605</span>    <span class="keywordflow">if</span> (depthStencil_) {</div>
+<div class="line"><a id="l00606" name="l00606"></a><span class="lineno">  606</span>        depthStencil_.reset();</div>
+<div class="line"><a id="l00607" name="l00607"></a><span class="lineno">  607</span>    }</div>
+<div class="line"><a id="l00608" name="l00608"></a><span class="lineno">  608</span> </div>
+<div class="line"><a id="l00609" name="l00609"></a><span class="lineno">  609</span>    <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>, <span class="stringliteral">&quot;SwapChain resources released&quot;</span>);</div>
+<div class="line"><a id="l00610" name="l00610"></a><span class="lineno">  610</span>}</div>
 <div class="line"><a id="l00611" name="l00611"></a><span class="lineno">  611</span> </div>
-<div class="line"><a id="l00612" name="l00612"></a><span class="lineno">  612</span>    <span class="comment">// サイズが変わらない場合は何もしない</span></div>
-<div class="line"><a id="l00613" name="l00613"></a><span class="lineno">  613</span>    <span class="keywordflow">if</span> (_width == windowSize_.first &amp;&amp; _height == windowSize_.second) {</div>
-<div class="line"><a id="l00614" name="l00614"></a><span class="lineno">  614</span>        <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea059e9861e0400dfbe05c98a841f3f96b">Log::Level::WARNING</a>, <span class="stringliteral">&quot;Window size _unchanged, skipping resize&quot;</span>);</div>
-<div class="line"><a id="l00615" name="l00615"></a><span class="lineno">  615</span>        <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00616" name="l00616"></a><span class="lineno">  616</span>    }</div>
-<div class="line"><a id="l00617" name="l00617"></a><span class="lineno">  617</span> </div>
-<div class="line"><a id="l00618" name="l00618"></a><span class="lineno">  618</span>    <span class="comment">// 最小サイズ制約</span></div>
-<div class="line"><a id="l00619" name="l00619"></a><span class="lineno">  619</span>    _width = std::max(_width, <span class="keyword">static_cast&lt;</span><span class="keywordtype">size_t</span><span class="keyword">&gt;</span>(1));</div>
-<div class="line"><a id="l00620" name="l00620"></a><span class="lineno">  620</span>    _height = std::max(_height, <span class="keyword">static_cast&lt;</span><span class="keywordtype">size_t</span><span class="keyword">&gt;</span>(1));</div>
-<div class="line"><a id="l00621" name="l00621"></a><span class="lineno">  621</span> </div>
-<div class="line"><a id="l00622" name="l00622"></a><span class="lineno">  622</span>    <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>,</div>
-<div class="line"><a id="l00623" name="l00623"></a><span class="lineno">  623</span>        <span class="stringliteral">&quot;*** STARTING RESIZE: &quot;</span> + std::to_string(windowSize_.first) + <span class="stringliteral">&quot;x&quot;</span> + std::to_string(windowSize_.second) +</div>
-<div class="line"><a id="l00624" name="l00624"></a><span class="lineno">  624</span>        <span class="stringliteral">&quot; → &quot;</span> + std::to_string(_width) + <span class="stringliteral">&quot;x&quot;</span> + std::to_string(_height) + <span class="stringliteral">&quot; ***&quot;</span>);</div>
-<div class="line"><a id="l00625" name="l00625"></a><span class="lineno">  625</span> </div>
-<div class="line"><a id="l00626" name="l00626"></a><span class="lineno">  626</span>    <span class="comment">// RAII化：GPU同期とリソース解放を専用メソッドで実行</span></div>
-<div class="line"><a id="l00627" name="l00627"></a><span class="lineno">  627</span>    SyncGPU();</div>
-<div class="line"><a id="l00628" name="l00628"></a><span class="lineno">  628</span>    ReleaseSwapChainResources();</div>
-<div class="line"><a id="l00629" name="l00629"></a><span class="lineno">  629</span> </div>
-<div class="line"><a id="l00630" name="l00630"></a><span class="lineno">  630</span>    <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>, <span class="stringliteral">&quot;Resizing swap chain...&quot;</span>);</div>
-<div class="line"><a id="l00631" name="l00631"></a><span class="lineno">  631</span> </div>
-<div class="line"><a id="l00632" name="l00632"></a><span class="lineno">  632</span>    <span class="comment">// SwapChainをリサイズ</span></div>
-<div class="line"><a id="l00633" name="l00633"></a><span class="lineno">  633</span>    HRESULT hr = swapChain_-&gt;ResizeBuffers(</div>
-<div class="line"><a id="l00634" name="l00634"></a><span class="lineno">  634</span>        2,                              <span class="comment">// バッファ数</span></div>
-<div class="line"><a id="l00635" name="l00635"></a><span class="lineno">  635</span>        <span class="keyword">static_cast&lt;</span>UINT<span class="keyword">&gt;</span>(_width),      <span class="comment">// 新しい幅</span></div>
-<div class="line"><a id="l00636" name="l00636"></a><span class="lineno">  636</span>        <span class="keyword">static_cast&lt;</span>UINT<span class="keyword">&gt;</span>(_height),     <span class="comment">// 新しい高さ</span></div>
-<div class="line"><a id="l00637" name="l00637"></a><span class="lineno">  637</span>        DXGI_FORMAT_R8G8B8A8_UNORM,    <span class="comment">// フォーマット</span></div>
-<div class="line"><a id="l00638" name="l00638"></a><span class="lineno">  638</span>        0                               <span class="comment">// フラグ</span></div>
-<div class="line"><a id="l00639" name="l00639"></a><span class="lineno">  639</span>    );</div>
-<div class="line"><a id="l00640" name="l00640"></a><span class="lineno">  640</span> </div>
-<div class="line"><a id="l00641" name="l00641"></a><span class="lineno">  641</span>    <span class="keywordflow">if</span> (FAILED(hr)) {</div>
-<div class="line"><a id="l00642" name="l00642"></a><span class="lineno">  642</span>        <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>,</div>
-<div class="line"><a id="l00643" name="l00643"></a><span class="lineno">  643</span>            <span class="stringliteral">&quot;Failed to resize swap chain buffers - HRESULT: 0x&quot;</span> +</div>
-<div class="line"><a id="l00644" name="l00644"></a><span class="lineno">  644</span>            std::to_string(<span class="keyword">static_cast&lt;</span><span class="keywordtype">unsigned</span> <span class="keywordtype">long</span><span class="keyword">&gt;</span>(hr)));</div>
+<div class="foldopen" id="foldopen00612" data-start="{" data-end="}">
+<div class="line"><a id="l00612" name="l00612"></a><span class="lineno"><a class="line" href="classDirectXAdapter.html#a76807e209ac784429e5f7a3a47763b16">  612</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classDirectXAdapter.html#a76807e209ac784429e5f7a3a47763b16">DirectXAdapter::UpdateWindowSize</a>(<span class="keywordtype">size_t</span> _width, <span class="keywordtype">size_t</span> _height) {</div>
+<div class="line"><a id="l00613" name="l00613"></a><span class="lineno">  613</span>    <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>,</div>
+<div class="line"><a id="l00614" name="l00614"></a><span class="lineno">  614</span>        <span class="stringliteral">&quot;UpdateWindowSize called: &quot;</span> + std::to_string(_width) + <span class="stringliteral">&quot;x&quot;</span> + std::to_string(_height) +</div>
+<div class="line"><a id="l00615" name="l00615"></a><span class="lineno">  615</span>        <span class="stringliteral">&quot; (current: &quot;</span> + std::to_string(windowSize_.first) + <span class="stringliteral">&quot;x&quot;</span> + std::to_string(windowSize_.second) + <span class="stringliteral">&quot;)&quot;</span>);</div>
+<div class="line"><a id="l00616" name="l00616"></a><span class="lineno">  616</span> </div>
+<div class="line"><a id="l00617" name="l00617"></a><span class="lineno">  617</span>    <span class="comment">// サイズが変わらない場合は何もしない</span></div>
+<div class="line"><a id="l00618" name="l00618"></a><span class="lineno">  618</span>    <span class="keywordflow">if</span> (_width == windowSize_.first &amp;&amp; _height == windowSize_.second) {</div>
+<div class="line"><a id="l00619" name="l00619"></a><span class="lineno">  619</span>        <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea059e9861e0400dfbe05c98a841f3f96b">Log::Level::WARNING</a>, <span class="stringliteral">&quot;Window size _unchanged, skipping resize&quot;</span>);</div>
+<div class="line"><a id="l00620" name="l00620"></a><span class="lineno">  620</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00621" name="l00621"></a><span class="lineno">  621</span>    }</div>
+<div class="line"><a id="l00622" name="l00622"></a><span class="lineno">  622</span> </div>
+<div class="line"><a id="l00623" name="l00623"></a><span class="lineno">  623</span>    <span class="comment">// 最小サイズ制約</span></div>
+<div class="line"><a id="l00624" name="l00624"></a><span class="lineno">  624</span>    _width = std::max(_width, <span class="keyword">static_cast&lt;</span><span class="keywordtype">size_t</span><span class="keyword">&gt;</span>(1));</div>
+<div class="line"><a id="l00625" name="l00625"></a><span class="lineno">  625</span>    _height = std::max(_height, <span class="keyword">static_cast&lt;</span><span class="keywordtype">size_t</span><span class="keyword">&gt;</span>(1));</div>
+<div class="line"><a id="l00626" name="l00626"></a><span class="lineno">  626</span> </div>
+<div class="line"><a id="l00627" name="l00627"></a><span class="lineno">  627</span>    <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>,</div>
+<div class="line"><a id="l00628" name="l00628"></a><span class="lineno">  628</span>        <span class="stringliteral">&quot;*** STARTING RESIZE: &quot;</span> + std::to_string(windowSize_.first) + <span class="stringliteral">&quot;x&quot;</span> + std::to_string(windowSize_.second) +</div>
+<div class="line"><a id="l00629" name="l00629"></a><span class="lineno">  629</span>        <span class="stringliteral">&quot; → &quot;</span> + std::to_string(_width) + <span class="stringliteral">&quot;x&quot;</span> + std::to_string(_height) + <span class="stringliteral">&quot; ***&quot;</span>);</div>
+<div class="line"><a id="l00630" name="l00630"></a><span class="lineno">  630</span> </div>
+<div class="line"><a id="l00631" name="l00631"></a><span class="lineno">  631</span>    <span class="comment">// RAII化：GPU同期とリソース解放を専用メソッドで実行</span></div>
+<div class="line"><a id="l00632" name="l00632"></a><span class="lineno">  632</span>    SyncGPU();</div>
+<div class="line"><a id="l00633" name="l00633"></a><span class="lineno">  633</span>    ReleaseSwapChainResources();</div>
+<div class="line"><a id="l00634" name="l00634"></a><span class="lineno">  634</span> </div>
+<div class="line"><a id="l00635" name="l00635"></a><span class="lineno">  635</span>    <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>, <span class="stringliteral">&quot;Resizing swap chain...&quot;</span>);</div>
+<div class="line"><a id="l00636" name="l00636"></a><span class="lineno">  636</span> </div>
+<div class="line"><a id="l00637" name="l00637"></a><span class="lineno">  637</span>    <span class="comment">// SwapChainをリサイズ</span></div>
+<div class="line"><a id="l00638" name="l00638"></a><span class="lineno">  638</span>    HRESULT hr = swapChain_-&gt;ResizeBuffers(</div>
+<div class="line"><a id="l00639" name="l00639"></a><span class="lineno">  639</span>        2,                              <span class="comment">// バッファ数</span></div>
+<div class="line"><a id="l00640" name="l00640"></a><span class="lineno">  640</span>        <span class="keyword">static_cast&lt;</span>UINT<span class="keyword">&gt;</span>(_width),      <span class="comment">// 新しい幅</span></div>
+<div class="line"><a id="l00641" name="l00641"></a><span class="lineno">  641</span>        <span class="keyword">static_cast&lt;</span>UINT<span class="keyword">&gt;</span>(_height),     <span class="comment">// 新しい高さ</span></div>
+<div class="line"><a id="l00642" name="l00642"></a><span class="lineno">  642</span>        DXGI_FORMAT_R8G8B8A8_UNORM,    <span class="comment">// フォーマット</span></div>
+<div class="line"><a id="l00643" name="l00643"></a><span class="lineno">  643</span>        0                               <span class="comment">// フラグ</span></div>
+<div class="line"><a id="l00644" name="l00644"></a><span class="lineno">  644</span>    );</div>
 <div class="line"><a id="l00645" name="l00645"></a><span class="lineno">  645</span> </div>
-<div class="line"><a id="l00646" name="l00646"></a><span class="lineno">  646</span>        <span class="comment">// デバイス削除エラーの特別処理</span></div>
-<div class="line"><a id="l00647" name="l00647"></a><span class="lineno">  647</span>        <span class="keywordflow">if</span> (hr == DXGI_ERROR_DEVICE_REMOVED) {</div>
-<div class="line"><a id="l00648" name="l00648"></a><span class="lineno">  648</span>            HRESULT reason = device_-&gt;GetDeviceRemovedReason();</div>
-<div class="line"><a id="l00649" name="l00649"></a><span class="lineno">  649</span>            <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>,</div>
-<div class="line"><a id="l00650" name="l00650"></a><span class="lineno">  650</span>                <span class="stringliteral">&quot;Device removed! Reason: 0x&quot;</span> + std::to_string(<span class="keyword">static_cast&lt;</span><span class="keywordtype">unsigned</span> <span class="keywordtype">long</span><span class="keyword">&gt;</span>(reason)));</div>
-<div class="line"><a id="l00651" name="l00651"></a><span class="lineno">  651</span>        }</div>
-<div class="line"><a id="l00652" name="l00652"></a><span class="lineno">  652</span> </div>
-<div class="line"><a id="l00653" name="l00653"></a><span class="lineno">  653</span>        Utils::Alert(<span class="stringliteral">&quot;Failed to resize swap chain&quot;</span>);</div>
-<div class="line"><a id="l00654" name="l00654"></a><span class="lineno">  654</span>        <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00655" name="l00655"></a><span class="lineno">  655</span>    }</div>
-<div class="line"><a id="l00656" name="l00656"></a><span class="lineno">  656</span> </div>
-<div class="line"><a id="l00657" name="l00657"></a><span class="lineno">  657</span>    <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>, <span class="stringliteral">&quot;SwapChain resized successfully&quot;</span>);</div>
-<div class="line"><a id="l00658" name="l00658"></a><span class="lineno">  658</span> </div>
-<div class="line"><a id="l00659" name="l00659"></a><span class="lineno">  659</span>    <span class="comment">// ウィンドウサイズを更新</span></div>
-<div class="line"><a id="l00660" name="l00660"></a><span class="lineno">  660</span>    windowSize_ = {_width, _height};</div>
+<div class="line"><a id="l00646" name="l00646"></a><span class="lineno">  646</span>    <span class="keywordflow">if</span> (FAILED(hr)) {</div>
+<div class="line"><a id="l00647" name="l00647"></a><span class="lineno">  647</span>        <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>,</div>
+<div class="line"><a id="l00648" name="l00648"></a><span class="lineno">  648</span>            <span class="stringliteral">&quot;Failed to resize swap chain buffers - HRESULT: 0x&quot;</span> +</div>
+<div class="line"><a id="l00649" name="l00649"></a><span class="lineno">  649</span>            std::to_string(<span class="keyword">static_cast&lt;</span><span class="keywordtype">unsigned</span> <span class="keywordtype">long</span><span class="keyword">&gt;</span>(hr)));</div>
+<div class="line"><a id="l00650" name="l00650"></a><span class="lineno">  650</span> </div>
+<div class="line"><a id="l00651" name="l00651"></a><span class="lineno">  651</span>        <span class="comment">// デバイス削除エラーの特別処理</span></div>
+<div class="line"><a id="l00652" name="l00652"></a><span class="lineno">  652</span>        <span class="keywordflow">if</span> (hr == DXGI_ERROR_DEVICE_REMOVED) {</div>
+<div class="line"><a id="l00653" name="l00653"></a><span class="lineno">  653</span>            HRESULT reason = device_-&gt;GetDeviceRemovedReason();</div>
+<div class="line"><a id="l00654" name="l00654"></a><span class="lineno">  654</span>            <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>,</div>
+<div class="line"><a id="l00655" name="l00655"></a><span class="lineno">  655</span>                <span class="stringliteral">&quot;Device removed! Reason: 0x&quot;</span> + std::to_string(<span class="keyword">static_cast&lt;</span><span class="keywordtype">unsigned</span> <span class="keywordtype">long</span><span class="keyword">&gt;</span>(reason)));</div>
+<div class="line"><a id="l00656" name="l00656"></a><span class="lineno">  656</span>        }</div>
+<div class="line"><a id="l00657" name="l00657"></a><span class="lineno">  657</span> </div>
+<div class="line"><a id="l00658" name="l00658"></a><span class="lineno">  658</span>        Utils::Alert(<span class="stringliteral">&quot;Failed to resize swap chain&quot;</span>);</div>
+<div class="line"><a id="l00659" name="l00659"></a><span class="lineno">  659</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00660" name="l00660"></a><span class="lineno">  660</span>    }</div>
 <div class="line"><a id="l00661" name="l00661"></a><span class="lineno">  661</span> </div>
-<div class="line"><a id="l00662" name="l00662"></a><span class="lineno">  662</span>    <span class="comment">// RTVを再作成</span></div>
-<div class="line"><a id="l00663" name="l00663"></a><span class="lineno">  663</span>    <span class="keywordflow">if</span> (!CreateRTV()) {</div>
-<div class="line"><a id="l00664" name="l00664"></a><span class="lineno">  664</span>        <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, <span class="stringliteral">&quot;Failed to recreate RTV after resize&quot;</span>);</div>
-<div class="line"><a id="l00665" name="l00665"></a><span class="lineno">  665</span>        Utils::Alert(<span class="stringliteral">&quot;Failed to recreate RTV&quot;</span>);</div>
-<div class="line"><a id="l00666" name="l00666"></a><span class="lineno">  666</span>        <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00667" name="l00667"></a><span class="lineno">  667</span>    }</div>
-<div class="line"><a id="l00668" name="l00668"></a><span class="lineno">  668</span> </div>
-<div class="line"><a id="l00669" name="l00669"></a><span class="lineno">  669</span>    <span class="comment">// 深度ステンシルバッファを再作成</span></div>
-<div class="line"><a id="l00670" name="l00670"></a><span class="lineno">  670</span>    <span class="keywordflow">if</span> (!CreateDSV()) {</div>
-<div class="line"><a id="l00671" name="l00671"></a><span class="lineno">  671</span>        <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, <span class="stringliteral">&quot;Failed to recreate DSV after resize&quot;</span>);</div>
-<div class="line"><a id="l00672" name="l00672"></a><span class="lineno">  672</span>        Utils::Alert(<span class="stringliteral">&quot;Failed to recreate DSV&quot;</span>);</div>
-<div class="line"><a id="l00673" name="l00673"></a><span class="lineno">  673</span>        <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00674" name="l00674"></a><span class="lineno">  674</span>    }</div>
-<div class="line"><a id="l00675" name="l00675"></a><span class="lineno">  675</span> </div>
-<div class="line"><a id="l00676" name="l00676"></a><span class="lineno">  676</span>    <span class="comment">// ビューポートとシザー矩形を更新</span></div>
-<div class="line"><a id="l00677" name="l00677"></a><span class="lineno">  677</span>    viewport_.Width = <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(_width);</div>
-<div class="line"><a id="l00678" name="l00678"></a><span class="lineno">  678</span>    viewport_.Height = <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(_height);</div>
-<div class="line"><a id="l00679" name="l00679"></a><span class="lineno">  679</span>    scissorRect_.right = <span class="keyword">static_cast&lt;</span>LONG<span class="keyword">&gt;</span>(_width);</div>
-<div class="line"><a id="l00680" name="l00680"></a><span class="lineno">  680</span>    scissorRect_.bottom = <span class="keyword">static_cast&lt;</span>LONG<span class="keyword">&gt;</span>(_height);</div>
-<div class="line"><a id="l00681" name="l00681"></a><span class="lineno">  681</span> </div>
-<div class="line"><a id="l00682" name="l00682"></a><span class="lineno">  682</span>    <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>, <span class="stringliteral">&quot;Window resize completed successfully&quot;</span>);</div>
-<div class="line"><a id="l00683" name="l00683"></a><span class="lineno">  683</span>}</div>
+<div class="line"><a id="l00662" name="l00662"></a><span class="lineno">  662</span>    <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>, <span class="stringliteral">&quot;SwapChain resized successfully&quot;</span>);</div>
+<div class="line"><a id="l00663" name="l00663"></a><span class="lineno">  663</span> </div>
+<div class="line"><a id="l00664" name="l00664"></a><span class="lineno">  664</span>    <span class="comment">// ウィンドウサイズを更新</span></div>
+<div class="line"><a id="l00665" name="l00665"></a><span class="lineno">  665</span>    windowSize_ = {_width, _height};</div>
+<div class="line"><a id="l00666" name="l00666"></a><span class="lineno">  666</span> </div>
+<div class="line"><a id="l00667" name="l00667"></a><span class="lineno">  667</span>    <span class="comment">// RTVを再作成</span></div>
+<div class="line"><a id="l00668" name="l00668"></a><span class="lineno">  668</span>    <span class="keywordflow">if</span> (!CreateRTV()) {</div>
+<div class="line"><a id="l00669" name="l00669"></a><span class="lineno">  669</span>        <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, <span class="stringliteral">&quot;Failed to recreate RTV after resize&quot;</span>);</div>
+<div class="line"><a id="l00670" name="l00670"></a><span class="lineno">  670</span>        Utils::Alert(<span class="stringliteral">&quot;Failed to recreate RTV&quot;</span>);</div>
+<div class="line"><a id="l00671" name="l00671"></a><span class="lineno">  671</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00672" name="l00672"></a><span class="lineno">  672</span>    }</div>
+<div class="line"><a id="l00673" name="l00673"></a><span class="lineno">  673</span> </div>
+<div class="line"><a id="l00674" name="l00674"></a><span class="lineno">  674</span>    <span class="comment">// 深度ステンシルバッファを再作成</span></div>
+<div class="line"><a id="l00675" name="l00675"></a><span class="lineno">  675</span>    <span class="keywordflow">if</span> (!CreateDSV()) {</div>
+<div class="line"><a id="l00676" name="l00676"></a><span class="lineno">  676</span>        <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, <span class="stringliteral">&quot;Failed to recreate DSV after resize&quot;</span>);</div>
+<div class="line"><a id="l00677" name="l00677"></a><span class="lineno">  677</span>        Utils::Alert(<span class="stringliteral">&quot;Failed to recreate DSV&quot;</span>);</div>
+<div class="line"><a id="l00678" name="l00678"></a><span class="lineno">  678</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00679" name="l00679"></a><span class="lineno">  679</span>    }</div>
+<div class="line"><a id="l00680" name="l00680"></a><span class="lineno">  680</span> </div>
+<div class="line"><a id="l00681" name="l00681"></a><span class="lineno">  681</span>    <span class="comment">// ビューポートとシザー矩形を更新</span></div>
+<div class="line"><a id="l00682" name="l00682"></a><span class="lineno">  682</span>    viewport_.Width = <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(_width);</div>
+<div class="line"><a id="l00683" name="l00683"></a><span class="lineno">  683</span>    viewport_.Height = <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(_height);</div>
+<div class="line"><a id="l00684" name="l00684"></a><span class="lineno">  684</span>    scissorRect_.right = <span class="keyword">static_cast&lt;</span>LONG<span class="keyword">&gt;</span>(_width);</div>
+<div class="line"><a id="l00685" name="l00685"></a><span class="lineno">  685</span>    scissorRect_.bottom = <span class="keyword">static_cast&lt;</span>LONG<span class="keyword">&gt;</span>(_height);</div>
+<div class="line"><a id="l00686" name="l00686"></a><span class="lineno">  686</span> </div>
+<div class="line"><a id="l00687" name="l00687"></a><span class="lineno">  687</span>    <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>, <span class="stringliteral">&quot;Window resize completed successfully&quot;</span>);</div>
+<div class="line"><a id="l00688" name="l00688"></a><span class="lineno">  688</span>}</div>
 </div>
-<div class="line"><a id="l00684" name="l00684"></a><span class="lineno">  684</span> </div>
-<div class="line"><a id="l00685" name="l00685"></a><span class="lineno">  685</span><span class="keywordtype">bool</span> DirectXAdapter::CreateLimiter() {</div>
-<div class="line"><a id="l00686" name="l00686"></a><span class="lineno">  686</span>    fpsLimiter_ = std::make_unique&lt;FrameRateLimiter&gt;(<span class="keyword">static_cast&lt;</span>uint16_t<span class="keyword">&gt;</span>(60), <span class="keyword">true</span>); <span class="comment">// 60 FPS with VSync enabled</span></div>
-<div class="line"><a id="l00687" name="l00687"></a><span class="lineno">  687</span> </div>
-<div class="line"><a id="l00688" name="l00688"></a><span class="lineno">  688</span>    <span class="keywordflow">return</span> fpsLimiter_ != <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00689" name="l00689"></a><span class="lineno">  689</span>}</div>
-<div class="line"><a id="l00690" name="l00690"></a><span class="lineno">  690</span> </div>
-<div class="line"><a id="l00691" name="l00691"></a><span class="lineno">  691</span><span class="keywordtype">void</span> DirectXAdapter::Wait() {</div>
-<div class="line"><a id="l00692" name="l00692"></a><span class="lineno">  692</span>    uint64_t currentFenceValue = <a class="code hl_function" href="classDirectXAdapter.html#a159fa0e3baa6933654aa08009371bd6d">GetNextFenceValue</a>();</div>
-<div class="line"><a id="l00693" name="l00693"></a><span class="lineno">  693</span>    cQueue_-&gt;Signal(fence_.Get(), currentFenceValue);</div>
-<div class="line"><a id="l00694" name="l00694"></a><span class="lineno">  694</span>    <a class="code hl_function" href="classDirectXAdapter.html#a7793686074430b7c1cff3a7ee3cd2513">WaitForFenceValue</a>(currentFenceValue);</div>
-<div class="line"><a id="l00695" name="l00695"></a><span class="lineno">  695</span>    fpsLimiter_-&gt;WaitForNextFrame();</div>
-<div class="line"><a id="l00696" name="l00696"></a><span class="lineno">  696</span>}</div>
-<div class="line"><a id="l00697" name="l00697"></a><span class="lineno">  697</span> </div>
-<div class="foldopen" id="foldopen00698" data-start="{" data-end="}">
-<div class="line"><a id="l00698" name="l00698"></a><span class="lineno"><a class="line" href="classDirectXAdapter.html#a28fe87825525272f00fd06231a0c1632">  698</a></span>ID3D12Device* <a class="code hl_function" href="classDirectXAdapter.html#a28fe87825525272f00fd06231a0c1632">DirectXAdapter::GetDevice</a>()<span class="keyword"> const </span>{</div>
-<div class="line"><a id="l00699" name="l00699"></a><span class="lineno">  699</span>    <span class="keywordflow">return</span> device_.Get();</div>
-<div class="line"><a id="l00700" name="l00700"></a><span class="lineno">  700</span>}</div>
+<div class="line"><a id="l00689" name="l00689"></a><span class="lineno">  689</span> </div>
+<div class="line"><a id="l00690" name="l00690"></a><span class="lineno">  690</span><span class="keywordtype">bool</span> DirectXAdapter::CreateLimiter() {</div>
+<div class="line"><a id="l00691" name="l00691"></a><span class="lineno">  691</span>    fpsLimiter_ = std::make_unique&lt;FrameRateLimiter&gt;(<span class="keyword">static_cast&lt;</span>uint16_t<span class="keyword">&gt;</span>(60), <span class="keyword">true</span>); <span class="comment">// 60 FPS with VSync enabled</span></div>
+<div class="line"><a id="l00692" name="l00692"></a><span class="lineno">  692</span> </div>
+<div class="line"><a id="l00693" name="l00693"></a><span class="lineno">  693</span>    <span class="keywordflow">return</span> fpsLimiter_ != <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00694" name="l00694"></a><span class="lineno">  694</span>}</div>
+<div class="line"><a id="l00695" name="l00695"></a><span class="lineno">  695</span> </div>
+<div class="line"><a id="l00696" name="l00696"></a><span class="lineno">  696</span><span class="keywordtype">void</span> DirectXAdapter::Wait() {</div>
+<div class="line"><a id="l00697" name="l00697"></a><span class="lineno">  697</span>    uint64_t currentFenceValue = <a class="code hl_function" href="classDirectXAdapter.html#a159fa0e3baa6933654aa08009371bd6d">GetNextFenceValue</a>();</div>
+<div class="line"><a id="l00698" name="l00698"></a><span class="lineno">  698</span>    cQueue_-&gt;Signal(fence_.Get(), currentFenceValue);</div>
+<div class="line"><a id="l00699" name="l00699"></a><span class="lineno">  699</span>    <a class="code hl_function" href="classDirectXAdapter.html#a7793686074430b7c1cff3a7ee3cd2513">WaitForFenceValue</a>(currentFenceValue);</div>
+<div class="line"><a id="l00700" name="l00700"></a><span class="lineno">  700</span>    fpsLimiter_-&gt;WaitForNextFrame();</div>
+<div class="line"><a id="l00701" name="l00701"></a><span class="lineno">  701</span>}</div>
+<div class="line"><a id="l00702" name="l00702"></a><span class="lineno">  702</span> </div>
+<div class="foldopen" id="foldopen00703" data-start="{" data-end="}">
+<div class="line"><a id="l00703" name="l00703"></a><span class="lineno"><a class="line" href="classDirectXAdapter.html#a28fe87825525272f00fd06231a0c1632">  703</a></span>ID3D12Device* <a class="code hl_function" href="classDirectXAdapter.html#a28fe87825525272f00fd06231a0c1632">DirectXAdapter::GetDevice</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00704" name="l00704"></a><span class="lineno">  704</span>    <span class="keywordflow">return</span> device_.Get();</div>
+<div class="line"><a id="l00705" name="l00705"></a><span class="lineno">  705</span>}</div>
 </div>
-<div class="line"><a id="l00701" name="l00701"></a><span class="lineno">  701</span> </div>
-<div class="foldopen" id="foldopen00702" data-start="{" data-end="}">
-<div class="line"><a id="l00702" name="l00702"></a><span class="lineno"><a class="line" href="classDirectXAdapter.html#abc7797e145abbf8c6b66d89ce219adbf">  702</a></span>ID3D12GraphicsCommandList* <a class="code hl_function" href="classDirectXAdapter.html#abc7797e145abbf8c6b66d89ce219adbf">DirectXAdapter::GetCommandList</a>()<span class="keyword"> const </span>{</div>
-<div class="line"><a id="l00703" name="l00703"></a><span class="lineno">  703</span>    <span class="keywordflow">return</span> cList_.Get();</div>
-<div class="line"><a id="l00704" name="l00704"></a><span class="lineno">  704</span>}</div>
+<div class="line"><a id="l00706" name="l00706"></a><span class="lineno">  706</span> </div>
+<div class="foldopen" id="foldopen00707" data-start="{" data-end="}">
+<div class="line"><a id="l00707" name="l00707"></a><span class="lineno"><a class="line" href="classDirectXAdapter.html#abc7797e145abbf8c6b66d89ce219adbf">  707</a></span>ID3D12GraphicsCommandList* <a class="code hl_function" href="classDirectXAdapter.html#abc7797e145abbf8c6b66d89ce219adbf">DirectXAdapter::GetCommandList</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00708" name="l00708"></a><span class="lineno">  708</span>    <span class="keywordflow">return</span> cList_.Get();</div>
+<div class="line"><a id="l00709" name="l00709"></a><span class="lineno">  709</span>}</div>
 </div>
-<div class="line"><a id="l00705" name="l00705"></a><span class="lineno">  705</span> </div>
-<div class="foldopen" id="foldopen00706" data-start="{" data-end="}">
-<div class="line"><a id="l00706" name="l00706"></a><span class="lineno"><a class="line" href="classDirectXAdapter.html#a0fba31180c1f84825e4b5da99fdc3371">  706</a></span><span class="keywordtype">size_t</span> <a class="code hl_function" href="classDirectXAdapter.html#a0fba31180c1f84825e4b5da99fdc3371">DirectXAdapter::GetWidth</a>()<span class="keyword"> const </span>{</div>
-<div class="line"><a id="l00707" name="l00707"></a><span class="lineno">  707</span>    <span class="keywordflow">return</span> windowSize_.first;</div>
-<div class="line"><a id="l00708" name="l00708"></a><span class="lineno">  708</span>}</div>
+<div class="line"><a id="l00710" name="l00710"></a><span class="lineno">  710</span> </div>
+<div class="foldopen" id="foldopen00711" data-start="{" data-end="}">
+<div class="line"><a id="l00711" name="l00711"></a><span class="lineno"><a class="line" href="classDirectXAdapter.html#a0fba31180c1f84825e4b5da99fdc3371">  711</a></span><span class="keywordtype">size_t</span> <a class="code hl_function" href="classDirectXAdapter.html#a0fba31180c1f84825e4b5da99fdc3371">DirectXAdapter::GetWidth</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00712" name="l00712"></a><span class="lineno">  712</span>    <span class="keywordflow">return</span> windowSize_.first;</div>
+<div class="line"><a id="l00713" name="l00713"></a><span class="lineno">  713</span>}</div>
 </div>
-<div class="line"><a id="l00709" name="l00709"></a><span class="lineno">  709</span> </div>
-<div class="foldopen" id="foldopen00710" data-start="{" data-end="}">
-<div class="line"><a id="l00710" name="l00710"></a><span class="lineno"><a class="line" href="classDirectXAdapter.html#a73060803a4ebb0fc3be2ace3f93b5aef">  710</a></span><span class="keywordtype">size_t</span> <a class="code hl_function" href="classDirectXAdapter.html#a73060803a4ebb0fc3be2ace3f93b5aef">DirectXAdapter::GetHeight</a>()<span class="keyword"> const </span>{</div>
-<div class="line"><a id="l00711" name="l00711"></a><span class="lineno">  711</span>    <span class="keywordflow">return</span> windowSize_.second;</div>
-<div class="line"><a id="l00712" name="l00712"></a><span class="lineno">  712</span>}</div>
+<div class="line"><a id="l00714" name="l00714"></a><span class="lineno">  714</span> </div>
+<div class="foldopen" id="foldopen00715" data-start="{" data-end="}">
+<div class="line"><a id="l00715" name="l00715"></a><span class="lineno"><a class="line" href="classDirectXAdapter.html#a73060803a4ebb0fc3be2ace3f93b5aef">  715</a></span><span class="keywordtype">size_t</span> <a class="code hl_function" href="classDirectXAdapter.html#a73060803a4ebb0fc3be2ace3f93b5aef">DirectXAdapter::GetHeight</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00716" name="l00716"></a><span class="lineno">  716</span>    <span class="keywordflow">return</span> windowSize_.second;</div>
+<div class="line"><a id="l00717" name="l00717"></a><span class="lineno">  717</span>}</div>
 </div>
-<div class="line"><a id="l00713" name="l00713"></a><span class="lineno">  713</span> </div>
-<div class="foldopen" id="foldopen00714" data-start="{" data-end="}">
-<div class="line"><a id="l00714" name="l00714"></a><span class="lineno"><a class="line" href="classDirectXAdapter.html#a445ba307d21fc96baec912681546c6ed">  714</a></span>ID3D12CommandQueue* <a class="code hl_function" href="classDirectXAdapter.html#a445ba307d21fc96baec912681546c6ed">DirectXAdapter::GetCommandQueue</a>()<span class="keyword"> const </span>{</div>
-<div class="line"><a id="l00715" name="l00715"></a><span class="lineno">  715</span>    <span class="keywordflow">return</span> cQueue_.Get();</div>
-<div class="line"><a id="l00716" name="l00716"></a><span class="lineno">  716</span>}</div>
+<div class="line"><a id="l00718" name="l00718"></a><span class="lineno">  718</span> </div>
+<div class="foldopen" id="foldopen00719" data-start="{" data-end="}">
+<div class="line"><a id="l00719" name="l00719"></a><span class="lineno"><a class="line" href="classDirectXAdapter.html#a445ba307d21fc96baec912681546c6ed">  719</a></span>ID3D12CommandQueue* <a class="code hl_function" href="classDirectXAdapter.html#a445ba307d21fc96baec912681546c6ed">DirectXAdapter::GetCommandQueue</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00720" name="l00720"></a><span class="lineno">  720</span>    <span class="keywordflow">return</span> cQueue_.Get();</div>
+<div class="line"><a id="l00721" name="l00721"></a><span class="lineno">  721</span>}</div>
 </div>
-<div class="line"><a id="l00717" name="l00717"></a><span class="lineno">  717</span> </div>
-<div class="foldopen" id="foldopen00718" data-start="{" data-end="}">
-<div class="line"><a id="l00718" name="l00718"></a><span class="lineno"><a class="line" href="classDirectXAdapter.html#ac775788b343bb054d88bf1fb552aec29">  718</a></span>ID3D12CommandAllocator* <a class="code hl_function" href="classDirectXAdapter.html#ac775788b343bb054d88bf1fb552aec29">DirectXAdapter::GetCommandAllocator</a>()<span class="keyword"> const </span>{</div>
-<div class="line"><a id="l00719" name="l00719"></a><span class="lineno">  719</span>    <span class="keywordflow">return</span> cAllocator_.Get();</div>
-<div class="line"><a id="l00720" name="l00720"></a><span class="lineno">  720</span>}</div>
+<div class="line"><a id="l00722" name="l00722"></a><span class="lineno">  722</span> </div>
+<div class="foldopen" id="foldopen00723" data-start="{" data-end="}">
+<div class="line"><a id="l00723" name="l00723"></a><span class="lineno"><a class="line" href="classDirectXAdapter.html#ac775788b343bb054d88bf1fb552aec29">  723</a></span>ID3D12CommandAllocator* <a class="code hl_function" href="classDirectXAdapter.html#ac775788b343bb054d88bf1fb552aec29">DirectXAdapter::GetCommandAllocator</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00724" name="l00724"></a><span class="lineno">  724</span>    <span class="keywordflow">return</span> cAllocator_.Get();</div>
+<div class="line"><a id="l00725" name="l00725"></a><span class="lineno">  725</span>}</div>
 </div>
-<div class="line"><a id="l00721" name="l00721"></a><span class="lineno">  721</span> </div>
-<div class="foldopen" id="foldopen00722" data-start="{" data-end="}">
-<div class="line"><a id="l00722" name="l00722"></a><span class="lineno"><a class="line" href="classDirectXAdapter.html#aa2dd5421a95bb06f49d6cda5d8222fa5">  722</a></span>IDXGISwapChain4* <a class="code hl_function" href="classDirectXAdapter.html#aa2dd5421a95bb06f49d6cda5d8222fa5">DirectXAdapter::GetSwapChain</a>()<span class="keyword"> const </span>{</div>
-<div class="line"><a id="l00723" name="l00723"></a><span class="lineno">  723</span>    <span class="keywordflow">return</span> swapChain_.Get();</div>
-<div class="line"><a id="l00724" name="l00724"></a><span class="lineno">  724</span>}</div>
+<div class="line"><a id="l00726" name="l00726"></a><span class="lineno">  726</span> </div>
+<div class="foldopen" id="foldopen00727" data-start="{" data-end="}">
+<div class="line"><a id="l00727" name="l00727"></a><span class="lineno"><a class="line" href="classDirectXAdapter.html#aa2dd5421a95bb06f49d6cda5d8222fa5">  727</a></span>IDXGISwapChain4* <a class="code hl_function" href="classDirectXAdapter.html#aa2dd5421a95bb06f49d6cda5d8222fa5">DirectXAdapter::GetSwapChain</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00728" name="l00728"></a><span class="lineno">  728</span>    <span class="keywordflow">return</span> swapChain_.Get();</div>
+<div class="line"><a id="l00729" name="l00729"></a><span class="lineno">  729</span>}</div>
 </div>
-<div class="line"><a id="l00725" name="l00725"></a><span class="lineno">  725</span> </div>
-<div class="foldopen" id="foldopen00726" data-start="{" data-end="}">
-<div class="line"><a id="l00726" name="l00726"></a><span class="lineno"><a class="line" href="classDirectXAdapter.html#a7cd3f81861f775387b11548b6fdaa49f">  726</a></span>ID3D12Fence* <a class="code hl_function" href="classDirectXAdapter.html#a7cd3f81861f775387b11548b6fdaa49f">DirectXAdapter::GetFence</a>()<span class="keyword"> const </span>{</div>
-<div class="line"><a id="l00727" name="l00727"></a><span class="lineno">  727</span>    <span class="keywordflow">return</span> fence_.Get();</div>
-<div class="line"><a id="l00728" name="l00728"></a><span class="lineno">  728</span>}</div>
+<div class="line"><a id="l00730" name="l00730"></a><span class="lineno">  730</span> </div>
+<div class="foldopen" id="foldopen00731" data-start="{" data-end="}">
+<div class="line"><a id="l00731" name="l00731"></a><span class="lineno"><a class="line" href="classDirectXAdapter.html#a7cd3f81861f775387b11548b6fdaa49f">  731</a></span>ID3D12Fence* <a class="code hl_function" href="classDirectXAdapter.html#a7cd3f81861f775387b11548b6fdaa49f">DirectXAdapter::GetFence</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00732" name="l00732"></a><span class="lineno">  732</span>    <span class="keywordflow">return</span> fence_.Get();</div>
+<div class="line"><a id="l00733" name="l00733"></a><span class="lineno">  733</span>}</div>
 </div>
-<div class="line"><a id="l00729" name="l00729"></a><span class="lineno">  729</span> </div>
-<div class="foldopen" id="foldopen00730" data-start="{" data-end="}">
-<div class="line"><a id="l00730" name="l00730"></a><span class="lineno"><a class="line" href="classDirectXAdapter.html#a7dbec72fb7c4efcfc6cdda738aecafcb">  730</a></span>HWND <a class="code hl_function" href="classDirectXAdapter.html#a7dbec72fb7c4efcfc6cdda738aecafcb">DirectXAdapter::GetWindowHandle</a>()<span class="keyword"> const </span>{</div>
-<div class="line"><a id="l00731" name="l00731"></a><span class="lineno">  731</span>    <span class="keywordflow">return</span> hWnd_;</div>
-<div class="line"><a id="l00732" name="l00732"></a><span class="lineno">  732</span>}</div>
+<div class="line"><a id="l00734" name="l00734"></a><span class="lineno">  734</span> </div>
+<div class="foldopen" id="foldopen00735" data-start="{" data-end="}">
+<div class="line"><a id="l00735" name="l00735"></a><span class="lineno"><a class="line" href="classDirectXAdapter.html#a7dbec72fb7c4efcfc6cdda738aecafcb">  735</a></span>HWND <a class="code hl_function" href="classDirectXAdapter.html#a7dbec72fb7c4efcfc6cdda738aecafcb">DirectXAdapter::GetWindowHandle</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00736" name="l00736"></a><span class="lineno">  736</span>    <span class="keywordflow">return</span> hWnd_;</div>
+<div class="line"><a id="l00737" name="l00737"></a><span class="lineno">  737</span>}</div>
 </div>
-<div class="line"><a id="l00733" name="l00733"></a><span class="lineno">  733</span> </div>
-<div class="foldopen" id="foldopen00734" data-start="{" data-end="}">
-<div class="line"><a id="l00734" name="l00734"></a><span class="lineno"><a class="line" href="classDirectXAdapter.html#ae42c454315be5b6c511d8c297435886e">  734</a></span>D3D12_CPU_DESCRIPTOR_HANDLE <a class="code hl_function" href="classDirectXAdapter.html#ae42c454315be5b6c511d8c297435886e">DirectXAdapter::GetDSVHandle</a>()<span class="keyword"> const </span>{</div>
-<div class="line"><a id="l00735" name="l00735"></a><span class="lineno">  735</span>    <span class="keywordflow">return</span> dsvHandle_;</div>
-<div class="line"><a id="l00736" name="l00736"></a><span class="lineno">  736</span>}</div>
+<div class="line"><a id="l00738" name="l00738"></a><span class="lineno">  738</span> </div>
+<div class="foldopen" id="foldopen00739" data-start="{" data-end="}">
+<div class="line"><a id="l00739" name="l00739"></a><span class="lineno"><a class="line" href="classDirectXAdapter.html#ae42c454315be5b6c511d8c297435886e">  739</a></span>D3D12_CPU_DESCRIPTOR_HANDLE <a class="code hl_function" href="classDirectXAdapter.html#ae42c454315be5b6c511d8c297435886e">DirectXAdapter::GetDSVHandle</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00740" name="l00740"></a><span class="lineno">  740</span>    <span class="keywordflow">return</span> dsvHandle_;</div>
+<div class="line"><a id="l00741" name="l00741"></a><span class="lineno">  741</span>}</div>
 </div>
-<div class="line"><a id="l00737" name="l00737"></a><span class="lineno">  737</span> </div>
-<div class="foldopen" id="foldopen00738" data-start="{" data-end="}">
-<div class="line"><a id="l00738" name="l00738"></a><span class="lineno"><a class="line" href="classDirectXAdapter.html#a159fa0e3baa6933654aa08009371bd6d">  738</a></span>uint64_t <a class="code hl_function" href="classDirectXAdapter.html#a159fa0e3baa6933654aa08009371bd6d">DirectXAdapter::GetNextFenceValue</a>() {</div>
-<div class="line"><a id="l00739" name="l00739"></a><span class="lineno">  739</span>    <span class="keywordflow">return</span> ++fenceValue_;</div>
-<div class="line"><a id="l00740" name="l00740"></a><span class="lineno">  740</span>}</div>
+<div class="line"><a id="l00742" name="l00742"></a><span class="lineno">  742</span> </div>
+<div class="foldopen" id="foldopen00743" data-start="{" data-end="}">
+<div class="line"><a id="l00743" name="l00743"></a><span class="lineno"><a class="line" href="classDirectXAdapter.html#a159fa0e3baa6933654aa08009371bd6d">  743</a></span>uint64_t <a class="code hl_function" href="classDirectXAdapter.html#a159fa0e3baa6933654aa08009371bd6d">DirectXAdapter::GetNextFenceValue</a>() {</div>
+<div class="line"><a id="l00744" name="l00744"></a><span class="lineno">  744</span>    <span class="keywordflow">return</span> ++fenceValue_;</div>
+<div class="line"><a id="l00745" name="l00745"></a><span class="lineno">  745</span>}</div>
 </div>
-<div class="line"><a id="l00741" name="l00741"></a><span class="lineno">  741</span> </div>
-<div class="foldopen" id="foldopen00742" data-start="{" data-end="}">
-<div class="line"><a id="l00742" name="l00742"></a><span class="lineno"><a class="line" href="classDirectXAdapter.html#a7793686074430b7c1cff3a7ee3cd2513">  742</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classDirectXAdapter.html#a7793686074430b7c1cff3a7ee3cd2513">DirectXAdapter::WaitForFenceValue</a>(<span class="keyword">const</span> uint64_t _fenceValue)<span class="keyword"> const </span>{</div>
-<div class="line"><a id="l00743" name="l00743"></a><span class="lineno">  743</span>    <span class="keywordflow">if</span> (fence_-&gt;GetCompletedValue() &lt; _fenceValue) {</div>
-<div class="line"><a id="l00744" name="l00744"></a><span class="lineno">  744</span>        HANDLE fenceEvent = CreateEvent(<span class="keyword">nullptr</span>, <span class="keyword">false</span>, <span class="keyword">false</span>, <span class="keyword">nullptr</span>);</div>
-<div class="line"><a id="l00745" name="l00745"></a><span class="lineno">  745</span>        fence_-&gt;SetEventOnCompletion(_fenceValue, fenceEvent);</div>
-<div class="line"><a id="l00746" name="l00746"></a><span class="lineno">  746</span>        WaitForSingleObject(fenceEvent, INFINITE);</div>
-<div class="line"><a id="l00747" name="l00747"></a><span class="lineno">  747</span>        CloseHandle(fenceEvent);</div>
-<div class="line"><a id="l00748" name="l00748"></a><span class="lineno">  748</span>    }</div>
-<div class="line"><a id="l00749" name="l00749"></a><span class="lineno">  749</span>}</div>
+<div class="line"><a id="l00746" name="l00746"></a><span class="lineno">  746</span> </div>
+<div class="foldopen" id="foldopen00747" data-start="{" data-end="}">
+<div class="line"><a id="l00747" name="l00747"></a><span class="lineno"><a class="line" href="classDirectXAdapter.html#a7793686074430b7c1cff3a7ee3cd2513">  747</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classDirectXAdapter.html#a7793686074430b7c1cff3a7ee3cd2513">DirectXAdapter::WaitForFenceValue</a>(<span class="keyword">const</span> uint64_t _fenceValue)<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00748" name="l00748"></a><span class="lineno">  748</span>    <span class="keywordflow">if</span> (fence_-&gt;GetCompletedValue() &lt; _fenceValue) {</div>
+<div class="line"><a id="l00749" name="l00749"></a><span class="lineno">  749</span>        HANDLE fenceEvent = CreateEvent(<span class="keyword">nullptr</span>, <span class="keyword">false</span>, <span class="keyword">false</span>, <span class="keyword">nullptr</span>);</div>
+<div class="line"><a id="l00750" name="l00750"></a><span class="lineno">  750</span>        fence_-&gt;SetEventOnCompletion(_fenceValue, fenceEvent);</div>
+<div class="line"><a id="l00751" name="l00751"></a><span class="lineno">  751</span>        WaitForSingleObject(fenceEvent, INFINITE);</div>
+<div class="line"><a id="l00752" name="l00752"></a><span class="lineno">  752</span>        CloseHandle(fenceEvent);</div>
+<div class="line"><a id="l00753" name="l00753"></a><span class="lineno">  753</span>    }</div>
+<div class="line"><a id="l00754" name="l00754"></a><span class="lineno">  754</span>}</div>
 </div>
 <div class="ttc" id="aD3DResourceLeakChecker_8hpp_html"><div class="ttname"><a href="D3DResourceLeakChecker_8hpp.html">D3DResourceLeakChecker.hpp</a></div></div>
 <div class="ttc" id="aDebugUI_8hpp_html"><div class="ttname"><a href="DebugUI_8hpp.html">DebugUI.hpp</a></div></div>
@@ -899,28 +906,29 @@ $(document).ready(function(){initNavTree('DirectXAdapter_8cpp_source.html',''); 
 <div class="ttc" id="aLog_8hpp_html"><div class="ttname"><a href="Log_8hpp.html">Log.hpp</a></div></div>
 <div class="ttc" id="aclassD3DResourceLeakChecker_html"><div class="ttname"><a href="classD3DResourceLeakChecker.html">D3DResourceLeakChecker</a></div><div class="ttdef"><b>Definition</b> <a href="D3DResourceLeakChecker_8hpp_source.html#l00004">D3DResourceLeakChecker.hpp:4</a></div></div>
 <div class="ttc" id="aclassDirectXAdapter_html_a0d43436aa69fd3a5fb2f462b47b74600"><div class="ttname"><a href="classDirectXAdapter.html#a0d43436aa69fd3a5fb2f462b47b74600">DirectXAdapter::Initialize</a></div><div class="ttdeci">void Initialize()</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8cpp_source.html#l00064">DirectXAdapter.cpp:64</a></div></div>
-<div class="ttc" id="aclassDirectXAdapter_html_a0fba31180c1f84825e4b5da99fdc3371"><div class="ttname"><a href="classDirectXAdapter.html#a0fba31180c1f84825e4b5da99fdc3371">DirectXAdapter::GetWidth</a></div><div class="ttdeci">size_t GetWidth() const</div><div class="ttdoc">ウィンドウ幅を取得</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8cpp_source.html#l00706">DirectXAdapter.cpp:706</a></div></div>
-<div class="ttc" id="aclassDirectXAdapter_html_a159fa0e3baa6933654aa08009371bd6d"><div class="ttname"><a href="classDirectXAdapter.html#a159fa0e3baa6933654aa08009371bd6d">DirectXAdapter::GetNextFenceValue</a></div><div class="ttdeci">uint64_t GetNextFenceValue()</div><div class="ttdoc">次のフェンス値を取得</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8cpp_source.html#l00738">DirectXAdapter.cpp:738</a></div></div>
-<div class="ttc" id="aclassDirectXAdapter_html_a28fe87825525272f00fd06231a0c1632"><div class="ttname"><a href="classDirectXAdapter.html#a28fe87825525272f00fd06231a0c1632">DirectXAdapter::GetDevice</a></div><div class="ttdeci">ID3D12Device * GetDevice() const</div><div class="ttdoc">DirectX12デバイスを取得</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8cpp_source.html#l00698">DirectXAdapter.cpp:698</a></div></div>
-<div class="ttc" id="aclassDirectXAdapter_html_a445ba307d21fc96baec912681546c6ed"><div class="ttname"><a href="classDirectXAdapter.html#a445ba307d21fc96baec912681546c6ed">DirectXAdapter::GetCommandQueue</a></div><div class="ttdeci">ID3D12CommandQueue * GetCommandQueue() const</div><div class="ttdoc">コマンドキューを取得</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8cpp_source.html#l00714">DirectXAdapter.cpp:714</a></div></div>
+<div class="ttc" id="aclassDirectXAdapter_html_a0fba31180c1f84825e4b5da99fdc3371"><div class="ttname"><a href="classDirectXAdapter.html#a0fba31180c1f84825e4b5da99fdc3371">DirectXAdapter::GetWidth</a></div><div class="ttdeci">size_t GetWidth() const</div><div class="ttdoc">ウィンドウ幅を取得</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8cpp_source.html#l00711">DirectXAdapter.cpp:711</a></div></div>
+<div class="ttc" id="aclassDirectXAdapter_html_a159fa0e3baa6933654aa08009371bd6d"><div class="ttname"><a href="classDirectXAdapter.html#a159fa0e3baa6933654aa08009371bd6d">DirectXAdapter::GetNextFenceValue</a></div><div class="ttdeci">uint64_t GetNextFenceValue()</div><div class="ttdoc">次のフェンス値を取得</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8cpp_source.html#l00743">DirectXAdapter.cpp:743</a></div></div>
+<div class="ttc" id="aclassDirectXAdapter_html_a28fe87825525272f00fd06231a0c1632"><div class="ttname"><a href="classDirectXAdapter.html#a28fe87825525272f00fd06231a0c1632">DirectXAdapter::GetDevice</a></div><div class="ttdeci">ID3D12Device * GetDevice() const</div><div class="ttdoc">DirectX12デバイスを取得</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8cpp_source.html#l00703">DirectXAdapter.cpp:703</a></div></div>
+<div class="ttc" id="aclassDirectXAdapter_html_a445ba307d21fc96baec912681546c6ed"><div class="ttname"><a href="classDirectXAdapter.html#a445ba307d21fc96baec912681546c6ed">DirectXAdapter::GetCommandQueue</a></div><div class="ttdeci">ID3D12CommandQueue * GetCommandQueue() const</div><div class="ttdoc">コマンドキューを取得</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8cpp_source.html#l00719">DirectXAdapter.cpp:719</a></div></div>
 <div class="ttc" id="aclassDirectXAdapter_html_a5caa8b31df1102febe4016600a6c7fbd"><div class="ttname"><a href="classDirectXAdapter.html#a5caa8b31df1102febe4016600a6c7fbd">DirectXAdapter::PreProcess</a></div><div class="ttdeci">void PreProcess() const</div><div class="ttdoc">プリプロセス処理</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8cpp_source.html#l00255">DirectXAdapter.cpp:255</a></div></div>
 <div class="ttc" id="aclassDirectXAdapter_html_a6e8fa2518fe43611bc83625caa4884f9"><div class="ttname"><a href="classDirectXAdapter.html#a6e8fa2518fe43611bc83625caa4884f9">DirectXAdapter::CreateRenderTextureResource</a></div><div class="ttdeci">std::unique_ptr&lt; DX12Resource &gt; CreateRenderTextureResource(uint32_t _width, uint32_t _height, DXGI_FORMAT _format, const Vector4 &amp;_cc) const</div><div class="ttdoc">レンダーテクスチャリソースを作成</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8cpp_source.html#l00191">DirectXAdapter.cpp:191</a></div></div>
-<div class="ttc" id="aclassDirectXAdapter_html_a73060803a4ebb0fc3be2ace3f93b5aef"><div class="ttname"><a href="classDirectXAdapter.html#a73060803a4ebb0fc3be2ace3f93b5aef">DirectXAdapter::GetHeight</a></div><div class="ttdeci">size_t GetHeight() const</div><div class="ttdoc">ウィンドウ高さを取得</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8cpp_source.html#l00710">DirectXAdapter.cpp:710</a></div></div>
-<div class="ttc" id="aclassDirectXAdapter_html_a76807e209ac784429e5f7a3a47763b16"><div class="ttname"><a href="classDirectXAdapter.html#a76807e209ac784429e5f7a3a47763b16">DirectXAdapter::UpdateWindowSize</a></div><div class="ttdeci">void UpdateWindowSize(size_t _width, size_t _height)</div><div class="ttdoc">ウィンドウサイズを更新（ビューポートとシザー矩形も更新）</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8cpp_source.html#l00607">DirectXAdapter.cpp:607</a></div></div>
-<div class="ttc" id="aclassDirectXAdapter_html_a7793686074430b7c1cff3a7ee3cd2513"><div class="ttname"><a href="classDirectXAdapter.html#a7793686074430b7c1cff3a7ee3cd2513">DirectXAdapter::WaitForFenceValue</a></div><div class="ttdeci">void WaitForFenceValue(uint64_t _fenceValue) const</div><div class="ttdoc">フェンス値まで待機</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8cpp_source.html#l00742">DirectXAdapter.cpp:742</a></div></div>
-<div class="ttc" id="aclassDirectXAdapter_html_a7cd3f81861f775387b11548b6fdaa49f"><div class="ttname"><a href="classDirectXAdapter.html#a7cd3f81861f775387b11548b6fdaa49f">DirectXAdapter::GetFence</a></div><div class="ttdeci">ID3D12Fence * GetFence() const</div><div class="ttdoc">フェンスを取得</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8cpp_source.html#l00726">DirectXAdapter.cpp:726</a></div></div>
-<div class="ttc" id="aclassDirectXAdapter_html_a7dbec72fb7c4efcfc6cdda738aecafcb"><div class="ttname"><a href="classDirectXAdapter.html#a7dbec72fb7c4efcfc6cdda738aecafcb">DirectXAdapter::GetWindowHandle</a></div><div class="ttdeci">HWND GetWindowHandle() const</div><div class="ttdoc">ウィンドウハンドルを取得</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8cpp_source.html#l00730">DirectXAdapter.cpp:730</a></div></div>
+<div class="ttc" id="aclassDirectXAdapter_html_a73060803a4ebb0fc3be2ace3f93b5aef"><div class="ttname"><a href="classDirectXAdapter.html#a73060803a4ebb0fc3be2ace3f93b5aef">DirectXAdapter::GetHeight</a></div><div class="ttdeci">size_t GetHeight() const</div><div class="ttdoc">ウィンドウ高さを取得</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8cpp_source.html#l00715">DirectXAdapter.cpp:715</a></div></div>
+<div class="ttc" id="aclassDirectXAdapter_html_a76807e209ac784429e5f7a3a47763b16"><div class="ttname"><a href="classDirectXAdapter.html#a76807e209ac784429e5f7a3a47763b16">DirectXAdapter::UpdateWindowSize</a></div><div class="ttdeci">void UpdateWindowSize(size_t _width, size_t _height)</div><div class="ttdoc">ウィンドウサイズを更新（ビューポートとシザー矩形も更新）</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8cpp_source.html#l00612">DirectXAdapter.cpp:612</a></div></div>
+<div class="ttc" id="aclassDirectXAdapter_html_a7793686074430b7c1cff3a7ee3cd2513"><div class="ttname"><a href="classDirectXAdapter.html#a7793686074430b7c1cff3a7ee3cd2513">DirectXAdapter::WaitForFenceValue</a></div><div class="ttdeci">void WaitForFenceValue(uint64_t _fenceValue) const</div><div class="ttdoc">フェンス値まで待機</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8cpp_source.html#l00747">DirectXAdapter.cpp:747</a></div></div>
+<div class="ttc" id="aclassDirectXAdapter_html_a7cd3f81861f775387b11548b6fdaa49f"><div class="ttname"><a href="classDirectXAdapter.html#a7cd3f81861f775387b11548b6fdaa49f">DirectXAdapter::GetFence</a></div><div class="ttdeci">ID3D12Fence * GetFence() const</div><div class="ttdoc">フェンスを取得</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8cpp_source.html#l00731">DirectXAdapter.cpp:731</a></div></div>
+<div class="ttc" id="aclassDirectXAdapter_html_a7dbec72fb7c4efcfc6cdda738aecafcb"><div class="ttname"><a href="classDirectXAdapter.html#a7dbec72fb7c4efcfc6cdda738aecafcb">DirectXAdapter::GetWindowHandle</a></div><div class="ttdeci">HWND GetWindowHandle() const</div><div class="ttdoc">ウィンドウハンドルを取得</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8cpp_source.html#l00735">DirectXAdapter.cpp:735</a></div></div>
 <div class="ttc" id="aclassDirectXAdapter_html_a80e041974efa90cd2ac83342727ec2c4"><div class="ttname"><a href="classDirectXAdapter.html#a80e041974efa90cd2ac83342727ec2c4">DirectXAdapter::BeginFrame</a></div><div class="ttdeci">void BeginFrame()</div><div class="ttdoc">フレームの開始処理</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8cpp_source.html#l00262">DirectXAdapter.cpp:262</a></div></div>
 <div class="ttc" id="aclassDirectXAdapter_html_a84a4cb85ed76d714431374ba62fe5b10"><div class="ttname"><a href="classDirectXAdapter.html#a84a4cb85ed76d714431374ba62fe5b10">DirectXAdapter::CreateDepthStencilResource</a></div><div class="ttdeci">std::unique_ptr&lt; DX12Resource &gt; CreateDepthStencilResource(int32_t _width, int32_t _height) const</div><div class="ttdoc">深度ステンシルリソースを作成</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8cpp_source.html#l00160">DirectXAdapter.cpp:160</a></div></div>
 <div class="ttc" id="aclassDirectXAdapter_html_a85e48b1e8da92999e6c60a29f63e506c"><div class="ttname"><a href="classDirectXAdapter.html#a85e48b1e8da92999e6c60a29f63e506c">DirectXAdapter::CreateUnorderedAccessView</a></div><div class="ttdeci">std::unique_ptr&lt; DX12Resource &gt; CreateUnorderedAccessView() const</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8cpp_source.html#l00226">DirectXAdapter.cpp:226</a></div></div>
 <div class="ttc" id="aclassDirectXAdapter_html_a8ae7a6cf709d8871abca74664d469572"><div class="ttname"><a href="classDirectXAdapter.html#a8ae7a6cf709d8871abca74664d469572">DirectXAdapter::DirectXAdapter</a></div><div class="ttdeci">DirectXAdapter(HWND _hWnd, size_t _width, size_t _height)</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8cpp_source.html#l00024">DirectXAdapter.cpp:24</a></div></div>
-<div class="ttc" id="aclassDirectXAdapter_html_aa2dd5421a95bb06f49d6cda5d8222fa5"><div class="ttname"><a href="classDirectXAdapter.html#aa2dd5421a95bb06f49d6cda5d8222fa5">DirectXAdapter::GetSwapChain</a></div><div class="ttdeci">IDXGISwapChain4 * GetSwapChain() const</div><div class="ttdoc">スワップチェーンを取得</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8cpp_source.html#l00722">DirectXAdapter.cpp:722</a></div></div>
+<div class="ttc" id="aclassDirectXAdapter_html_aa2dd5421a95bb06f49d6cda5d8222fa5"><div class="ttname"><a href="classDirectXAdapter.html#aa2dd5421a95bb06f49d6cda5d8222fa5">DirectXAdapter::GetSwapChain</a></div><div class="ttdeci">IDXGISwapChain4 * GetSwapChain() const</div><div class="ttdoc">スワップチェーンを取得</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8cpp_source.html#l00727">DirectXAdapter.cpp:727</a></div></div>
 <div class="ttc" id="aclassDirectXAdapter_html_ab4b4c251cdfee90870ce155e610c9500"><div class="ttname"><a href="classDirectXAdapter.html#ab4b4c251cdfee90870ce155e610c9500">DirectXAdapter::CreateBufferResource</a></div><div class="ttdeci">std::unique_ptr&lt; DX12Resource &gt; CreateBufferResource(size_t _size) const</div><div class="ttdoc">バッファリソースを作成</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8cpp_source.html#l00079">DirectXAdapter.cpp:79</a></div></div>
 <div class="ttc" id="aclassDirectXAdapter_html_ab560a413b9a36c7ab838ff7e89bc55a2"><div class="ttname"><a href="classDirectXAdapter.html#ab560a413b9a36c7ab838ff7e89bc55a2">DirectXAdapter::CreateTextureResource</a></div><div class="ttdeci">std::unique_ptr&lt; DX12Resource &gt; CreateTextureResource(const DirectX::TexMetadata &amp;_metadata) const</div><div class="ttdoc">テクスチャリソースを作成</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8cpp_source.html#l00109">DirectXAdapter.cpp:109</a></div></div>
-<div class="ttc" id="aclassDirectXAdapter_html_abc7797e145abbf8c6b66d89ce219adbf"><div class="ttname"><a href="classDirectXAdapter.html#abc7797e145abbf8c6b66d89ce219adbf">DirectXAdapter::GetCommandList</a></div><div class="ttdeci">ID3D12GraphicsCommandList * GetCommandList() const</div><div class="ttdoc">コマンドリストを取得</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8cpp_source.html#l00702">DirectXAdapter.cpp:702</a></div></div>
-<div class="ttc" id="aclassDirectXAdapter_html_ac775788b343bb054d88bf1fb552aec29"><div class="ttname"><a href="classDirectXAdapter.html#ac775788b343bb054d88bf1fb552aec29">DirectXAdapter::GetCommandAllocator</a></div><div class="ttdeci">ID3D12CommandAllocator * GetCommandAllocator() const</div><div class="ttdoc">コマンドアロケーターを取得</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8cpp_source.html#l00718">DirectXAdapter.cpp:718</a></div></div>
+<div class="ttc" id="aclassDirectXAdapter_html_aba3876eb4b121fd7e75ed5ef8c3d9216"><div class="ttname"><a href="classDirectXAdapter.html#aba3876eb4b121fd7e75ed5ef8c3d9216">DirectXAdapter::GetCurrentFps</a></div><div class="ttdeci">float GetCurrentFps() const</div><div class="ttdoc">直近フレームの実測FPSを取得</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8cpp_source.html#l00276">DirectXAdapter.cpp:276</a></div></div>
+<div class="ttc" id="aclassDirectXAdapter_html_abc7797e145abbf8c6b66d89ce219adbf"><div class="ttname"><a href="classDirectXAdapter.html#abc7797e145abbf8c6b66d89ce219adbf">DirectXAdapter::GetCommandList</a></div><div class="ttdeci">ID3D12GraphicsCommandList * GetCommandList() const</div><div class="ttdoc">コマンドリストを取得</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8cpp_source.html#l00707">DirectXAdapter.cpp:707</a></div></div>
+<div class="ttc" id="aclassDirectXAdapter_html_ac775788b343bb054d88bf1fb552aec29"><div class="ttname"><a href="classDirectXAdapter.html#ac775788b343bb054d88bf1fb552aec29">DirectXAdapter::GetCommandAllocator</a></div><div class="ttdeci">ID3D12CommandAllocator * GetCommandAllocator() const</div><div class="ttdoc">コマンドアロケーターを取得</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8cpp_source.html#l00723">DirectXAdapter.cpp:723</a></div></div>
 <div class="ttc" id="aclassDirectXAdapter_html_adc51732c509d008911e309337697aa97"><div class="ttname"><a href="classDirectXAdapter.html#adc51732c509d008911e309337697aa97">DirectXAdapter::EndFrame</a></div><div class="ttdeci">void EndFrame()</div><div class="ttdoc">フレームの終了処理</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8cpp_source.html#l00267">DirectXAdapter.cpp:267</a></div></div>
-<div class="ttc" id="aclassDirectXAdapter_html_ae42c454315be5b6c511d8c297435886e"><div class="ttname"><a href="classDirectXAdapter.html#ae42c454315be5b6c511d8c297435886e">DirectXAdapter::GetDSVHandle</a></div><div class="ttdeci">D3D12_CPU_DESCRIPTOR_HANDLE GetDSVHandle() const</div><div class="ttdoc">DSVハンドルを取得</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8cpp_source.html#l00734">DirectXAdapter.cpp:734</a></div></div>
+<div class="ttc" id="aclassDirectXAdapter_html_ae42c454315be5b6c511d8c297435886e"><div class="ttname"><a href="classDirectXAdapter.html#ae42c454315be5b6c511d8c297435886e">DirectXAdapter::GetDSVHandle</a></div><div class="ttdeci">D3D12_CPU_DESCRIPTOR_HANDLE GetDSVHandle() const</div><div class="ttdoc">DSVハンドルを取得</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8cpp_source.html#l00739">DirectXAdapter.cpp:739</a></div></div>
 <div class="ttc" id="aclassDirectXAdapter_html_aea6c994c8bf3371a46ea09db47c6df5a"><div class="ttname"><a href="classDirectXAdapter.html#aea6c994c8bf3371a46ea09db47c6df5a">DirectXAdapter::DisplayFPS</a></div><div class="ttdeci">void DisplayFPS(const GESTD::ReferencePtr&lt; DebugUI &gt; &amp;_debug) const</div><div class="ttdoc">FPSを表示</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8cpp_source.html#l00272">DirectXAdapter.cpp:272</a></div></div>
 <div class="ttc" id="aclassDirectXAdapter_html_af1673d96626cdc953b11b16a69d87e6f"><div class="ttname"><a href="classDirectXAdapter.html#af1673d96626cdc953b11b16a69d87e6f">DirectXAdapter::~DirectXAdapter</a></div><div class="ttdeci">~DirectXAdapter()</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8cpp_source.html#l00029">DirectXAdapter.cpp:29</a></div></div>
 <div class="ttc" id="aclassLog_html_af351e7d4bd43c85e7c90f52846b64bdb"><div class="ttname"><a href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a></div><div class="ttdeci">static void Send(Level _level, const std::string &amp;_message=&quot;&quot;)</div><div class="ttdoc">ログメッセージを送信</div><div class="ttdef"><b>Definition</b> <a href="Log_8cpp_source.html#l00108">Log.cpp:108</a></div></div>
@@ -933,7 +941,7 @@ $(document).ready(function(){initNavTree('DirectXAdapter_8cpp_source.html',''); 
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_31399d34f22961890ce23f7132fb3e96.html">DirectX</a></li><li class="navelem"><a class="el" href="DirectXAdapter_8cpp.html">DirectXAdapter.cpp</a></li>
-    <li class="footer">2026年06月11日(木) 12時58分33秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年08月31日(月) 06時55分50秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

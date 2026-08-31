@@ -8,8 +8,10 @@ var searchData=
   ['textelement_2ehpp_5',['TextElement.hpp',['../TextElement_8hpp.html',1,'']]],
   ['texturemanager_2ecpp_6',['TextureManager.cpp',['../TextureManager_8cpp.html',1,'']]],
   ['texturemanager_2ehpp_7',['TextureManager.hpp',['../TextureManager_8hpp.html',1,'']]],
-  ['timer_2ecpp_8',['Timer.cpp',['../Timer_8cpp.html',1,'']]],
-  ['timer_2ehpp_9',['Timer.hpp',['../Timer_8hpp.html',1,'']]],
-  ['transition_2ecpp_10',['Transition.cpp',['../Transition_8cpp.html',1,'']]],
-  ['transition_2ehpp_11',['Transition.hpp',['../Transition_8hpp.html',1,'']]]
+  ['time_2ecpp_8',['Time.cpp',['../Time_8cpp.html',1,'']]],
+  ['time_2ehpp_9',['Time.hpp',['../Time_8hpp.html',1,'']]],
+  ['timer_2ecpp_10',['Timer.cpp',['../Timer_8cpp.html',1,'']]],
+  ['timer_2ehpp_11',['Timer.hpp',['../Timer_8hpp.html',1,'']]],
+  ['transition_2ecpp_12',['Transition.cpp',['../Transition_8cpp.html',1,'']]],
+  ['transition_2ehpp_13',['Transition.hpp',['../Transition_8hpp.html',1,'']]]
 ];
