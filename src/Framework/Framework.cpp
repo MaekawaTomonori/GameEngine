@@ -9,6 +9,7 @@
 #include "src/Scene/Sample/SampleScene.hpp"
 #include "src/Config/ConfigLoader.hpp"
 #include "src/Screen/Screen.hpp"
+#include "src/Time/Time.hpp"
 
 namespace {
     constexpr const char* APP_CONFIG_PATH = "Assets/Config/App.cnf";
@@ -188,6 +189,8 @@ bool Framework::Loop() const {
 void Framework::Update() const {
     if (!Check()) return;
 
+    Time::Tick(1.0f / dxAdapter_->GetCurrentFps());
+
     input_->Update();
 
     /// Borderless fullscreen toggle
@@ -221,7 +224,7 @@ void Framework::Update() const {
         { PROFILE_SCOPE("CameraDirector"); cameraDirector_->Update(); }
         { PROFILE_SCOPE("Particle");       particle_->Update(); }
 
-        const float deltaTime = 1.0f / static_cast<float>(config_.fps);
+        const float deltaTime = Time::GetDeltaTime();
         postProcessor_->Update(deltaTime);
 
         { PROFILE_SCOPE("Scene");          scene_->Update(); }

@@ -213,6 +213,7 @@
     <ClInclude Include="include\Text\Text.hpp" />
     <ClInclude Include="src\Text\TextCommon.hpp" />
     <ClInclude Include="src\Texture\TextureManager.hpp" />
+    <ClInclude Include="src\Time\Time.hpp" />
     <ClInclude Include="src\Timer\Timer.hpp" />
     <ClInclude Include="src\Window\Window.hpp" />
     <ClInclude Include="externals\MagicEnum\magic_enum.hpp" />
@@ -310,6 +311,7 @@
     <ClCompile Include="src\Text\Text.cpp" />
     <ClCompile Include="src\Text\TextCommon.cpp" />
     <ClCompile Include="src\Texture\TextureManager.cpp" />
+    <ClCompile Include="src\Time\Time.cpp" />
     <ClCompile Include="src\Timer\Timer.cpp" />
     <ClCompile Include="src\Window\Window.cpp" />
   </ItemGroup>

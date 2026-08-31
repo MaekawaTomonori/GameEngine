@@ -22,7 +22,7 @@ void FrameRateLimiter::WaitForNextFrame() {
 }
 
 float FrameRateLimiter::GetCurrentFps() const {
-    return 1e6f / std::chrono::duration<float>(reference_-pre_).count();
+    return 1.0f / std::chrono::duration<float>(reference_-pre_).count();
 }
 
 float FrameRateLimiter::GetMaxFps() const {
