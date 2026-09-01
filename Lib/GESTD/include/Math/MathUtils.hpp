@@ -45,6 +45,18 @@ namespace MathUtils{
     float Distance(const Vector3& _a, const Vector3& _b);
     //Vector3 TransformNormal(const Vector3& v, const Transform& t);
 
+    float Dot(const Vector3& _a, const Vector3& _b);
+    float SquaredDistance(const Vector3& _a, const Vector3& _b);
+    Vector3 Clamp(const Vector3& _value, const Vector3& _min, const Vector3& _max);
+
+    /** @brief 線分(_segmentStart - _segmentEnd)上で_pointに最も近い点を求める **/
+    Vector3 ClosestPointOnSegment(const Vector3& _point, const Vector3& _segmentStart, const Vector3& _segmentEnd);
+
+    /** @brief 2つの線分(_p1-_q1, _p2-_q2)間の最近傍点同士の距離の2乗を求める
+     ** (Ericson, "Real-Time Collision Detection" の ClosestPtSegmentSegment に基づく)
+     **/
+    float SquaredDistanceBetweenSegments(const Vector3& _p1, const Vector3& _q1, const Vector3& _p2, const Vector3& _q2);
+
     /** @brief 2次ベジェ曲線をパラメータ t で評価する **/
     Vector3 QuadBezier(const Vector3& _p0, const Vector3& _cp, const Vector3& _p1, float _t);
 
