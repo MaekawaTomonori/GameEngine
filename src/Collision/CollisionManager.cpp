@@ -1,5 +1,6 @@
 #include "CollisionManager.hpp"
 
+#include <type_traits>
 #include <variant>
 
 #include "Log.hpp"
@@ -73,12 +74,17 @@ void CollisionManager::RebuildDebugLines() {
         const auto size = c->GetSize();
         const Vector3 center = c->GetTranslate();
 
-        if (std::holds_alternative<float>(size)) {
-            DrawSphere(center, std::get<float>(size));
-        } else {
-            const Vector3 half = std::get<Vector3>(size) * 0.5f;
-            DrawAABB(center, half);
-        }
+        std::visit([&](const auto& _shape) {
+            using Shape = std::decay_t<decltype(_shape)>;
+            if constexpr (std::is_same_v<Shape, Collision::SphereShape>) {
+                DrawSphere(center, _shape.radius);
+            } else if constexpr (std::is_same_v<Shape, Collision::AabbShape>) {
+                DrawAABB(center, _shape.size * 0.5f);
+            } else if constexpr (std::is_same_v<Shape, Collision::CapsuleShape>) {
+                DrawSphere(center, _shape.radius);
+                DrawSphere(center + _shape.offset, _shape.radius);
+            }
+        }, size);
     }
 
     debugLine_->Update();
