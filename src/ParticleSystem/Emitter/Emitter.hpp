@@ -9,6 +9,7 @@
 #include "src/DirectX/Heap/SRVManager.h"
 #include "src/DirectX/Resource/DX12Resource.hpp"
 #include "src/Mesh/Data/MeshData.hpp"
+#include "src/ParticleSystem/Keyframe.hpp"
 #include "src/ParticleSystem/Particle/Particle.hpp"
 
 enum class PrimitiveType {
@@ -44,7 +45,11 @@ class Emitter {
     Vector3 rotation_{};
     Vector3 rotationVelocity_{};
     Vector4 color_{ 1.f, 1.f, 1.f, 1.f };
+    std::vector<GradientKey<Vector4>> colorKeys_;
+    std::vector<GradientKey<Vector3>> sizeKeys_;
     float timer_ = 0.f;
+    float elapsedTime_ = 0.f;
+    float particleLifetime_ = 3.f;
 
     std::function<void(const Vector3&, Vector3&, Vector3&)> spawnFunc_;
     std::function<void(float, const Vector3&, Vector3&, Vector3&, Vector4&)> updateFunc_;
@@ -115,6 +120,15 @@ public:
     Emitter& SetRotation(const Vector3& _rotation);
 
     Emitter& SetRotationVelocity(const Vector3& _rotationVelocity);
+
+    /** @brief パーティクル1個あたりの寿命（秒）を設定 */
+    Emitter& SetParticleLifetime(const float& _lifetime);
+
+    /** @brief 色の補間キーを設定（内部で時間昇順にソートされる）。空なら色は変化しない */
+    Emitter& SetColorKeys(std::vector<GradientKey<Vector4>> _keys);
+
+    /** @brief サイズの補間キーを設定（内部で時間昇順にソートされる）。空ならサイズは変化しない */
+    Emitter& SetSizeKeys(std::vector<GradientKey<Vector3>> _keys);
 
     /** @brief パーティクル更新関数を設定
      * @param _func <float(time)>, <const Vector3&(origin)>, <Vector3&(position)>, <Vector3&(velocity)>, <Vector4&(color)>

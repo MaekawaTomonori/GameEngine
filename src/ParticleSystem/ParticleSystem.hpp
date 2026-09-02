@@ -28,6 +28,9 @@ public:
         Vector3 size = {1.f, 1.f, 1.f};
         Vector3 velocity = {0.f, 0.f, 0.f};
         Vector4 color = {1.f, 1.f, 1.f, 1.f};
+        std::vector<GradientKey<Vector4>> colorKeys;
+        std::vector<GradientKey<Vector3>> sizeKeys;
+        float particleLifetime = 3.f;
         std::string spawnFuncKey;
         std::string updateFuncKey;
         PrimitiveType primitive = PrimitiveType::Billboard;

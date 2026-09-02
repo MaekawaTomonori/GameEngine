@@ -2,8 +2,10 @@
 #define Particle_HPP_
 #include <functional>
 #include <string>
+#include <vector>
 #include "Math/Vector3.hpp"
 #include "Math/Vector4.hpp"
+#include "src/ParticleSystem/Keyframe.hpp"
 
 class Particle {
     std::function<void(float, const Vector3&, Vector3&, Vector3&, Vector4&)> update_;
@@ -17,6 +19,8 @@ class Particle {
     Vector3 rotation_{};
     Vector3 rotationVelocity_{};
     Vector4 color_{ 1.f, 1.f, 1.f, 1.f };
+    std::vector<GradientKey<Vector4>> colorKeys_;
+    std::vector<GradientKey<Vector3>> sizeKeys_;
     float duration_ = 0.f;
     float now_ = 0.f;
 
@@ -40,6 +44,12 @@ public:
     Particle& SetRotation(const Vector3& _rotation);
     Particle& SetRotationVelocity(const Vector3& _rotationVelocity);
     Particle& SetColor(const Vector4& _color);
+
+    /** @brief 色の補間キー（時間昇順にソート済みであること）。空なら色は変化しない */
+    Particle& SetColorKeys(const std::vector<GradientKey<Vector4>>& _keys);
+
+    /** @brief サイズの補間キー（時間昇順にソート済みであること）。空ならサイズは変化しない */
+    Particle& SetSizeKeys(const std::vector<GradientKey<Vector3>>& _keys);
 
     Particle& RandomizePosition(const Vector3& _min = { -1.f, -1.f, -1.f }, const Vector3& _max = { 1.f, 1.f, 1.f });
     Particle& RandomizeScale(const Vector3& _min = { 0.1f, 0.1f, 0.1f }, const Vector3& _max = { 1.f, 1.f, 1.f });

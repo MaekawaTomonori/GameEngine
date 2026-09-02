@@ -117,6 +117,7 @@
     <ClInclude Include="externals\font\stb_truetype.h" />
     <ClInclude Include="externals\json\json.hpp" />
     <ClInclude Include="include\DebugUI.hpp" />
+    <ClInclude Include="include\DebugUIWidgets.hpp" />
     <ClInclude Include="include\PerformanceProfiler.hpp" />
     <ClInclude Include="include\ScreenUtils.hpp" />
     <ClInclude Include="include\Ui\Module\IModule.hpp" />
@@ -184,6 +185,7 @@
     <ClInclude Include="src\Model\Repository\ModelRepository.hpp" />
     <ClInclude Include="src\Model\Skeleton\Skeleton.hpp" />
     <ClInclude Include="src\ParticleSystem\Emitter\Emitter.hpp" />
+    <ClInclude Include="src\ParticleSystem\Keyframe.hpp" />
     <ClInclude Include="src\ParticleSystem\ParticleSystem.hpp" />
     <ClInclude Include="src\ParticleSystem\Particle\Particle.hpp" />
     <ClInclude Include="src\Platform\WinApp.hpp" />
@@ -250,6 +252,7 @@
     <ClCompile Include="src\Container\Material.cpp" />
     <ClCompile Include="src\Debug\Debugger.cpp" />
     <ClCompile Include="src\Debug\DebugUI.cpp" />
+    <ClCompile Include="src\Debug\DebugUIWidgets.cpp" />
     <ClCompile Include="src\Debug\FrameDebugger.cpp" />
     <ClCompile Include="src\Debug\PerformanceProfiler.cpp" />
     <ClCompile Include="src\Debug\WatchDebugger.cpp" />
