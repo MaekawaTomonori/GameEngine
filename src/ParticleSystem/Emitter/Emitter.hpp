@@ -3,6 +3,7 @@
 #include <memory>
 #include <span>
 
+#include "ReferencePtr.hpp"
 #include "Math/MathUtils.hpp"
 #include "Math/Vector3.hpp"
 #include "src/DirectX/DirectXAdapter.hpp"
@@ -17,6 +18,27 @@ enum class PrimitiveType {
     Ring,
     Cylinder,
     Trail,
+};
+
+class Emitter;
+
+/** @brief 発生させたEmitterを外部から安全に操作するための軽量ハンドル
+ * 参照先が破棄されていてもSetPosition/Stopは安全に無視される
+ */
+class EmitterHandle {
+    GESTD::ReferencePtr<Emitter> emitter_;
+
+public:
+    EmitterHandle() = default;
+    explicit EmitterHandle(const GESTD::ReferencePtr<Emitter>& _emitter) : emitter_(_emitter) {}
+
+    bool IsValid() const { return static_cast<bool>(emitter_); }
+
+    void SetPosition(const Vector3& _position);
+
+    /** @brief 継続的なスポーンを停止する。既存のパーティクルは寿命が尽きるまで残る
+     */
+    void Stop();
 };
 
 class Emitter {
@@ -78,12 +100,14 @@ class Emitter {
     D3D12_INDEX_BUFFER_VIEW ibv_{};
     std::span<uint32_t> id_;
 
+    GESTD::LifetimeSentinel lifetime_;
+
 public:
     Emitter(DirectXAdapter* _adapter, SRVManager* _srv);
     void Initialize(const MeshData& _mesh);
     void Update();
     void Draw();
-    void Emit();
+    EmitterHandle Emit();
 
     void Debug();
 

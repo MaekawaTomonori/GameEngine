@@ -278,22 +278,23 @@ void ParticleSystem::SaveTemplate(const std::string& _name) const {
     Log::Send(Log::Level::INFO, "Saved particle template: " + _name);
 }
 
-void ParticleSystem::Emit(const std::string& _templateName, const Vector3& _position) {
+EmitterHandle ParticleSystem::Emit(const std::string& _templateName, const Vector3& _position) {
     if (!poolInitialized_) {
         InitializePool();
     }
 
     if (!templates_.contains(_templateName)) {
         Log::Send(Log::Level::WARNING, "Template not found: " + _templateName);
-        return;
+        return EmitterHandle();
     }
 
     const auto& tmpl = templates_[_templateName];
+    EmitterHandle firstHandle;
 
     for (const auto& config : tmpl.emitters) {
         if (available_.empty()) {
             Log::Send(Log::Level::WARNING, "Emitter pool exhausted, skipping emit");
-            return;
+            return firstHandle;
         }
 
         Emitter* emitter = available_.back();
@@ -325,9 +326,14 @@ void ParticleSystem::Emit(const std::string& _templateName, const Vector3& _posi
             emitter->SetSpawnFunction(spawnFunc);
         }
 
-        emitter->Emit();
+        EmitterHandle handle = emitter->Emit();
+        if (!firstHandle.IsValid()) {
+            firstHandle = handle;
+        }
         active_.push_back(emitter);
     }
+
+    return firstHandle;
 }
 
 void ParticleSystem::DeleteTemplate(const std::string& _name) {

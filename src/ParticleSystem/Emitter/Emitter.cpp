@@ -87,7 +87,7 @@ void Emitter::Draw() {
     }
 }
 
-void Emitter::Emit() {
+EmitterHandle Emitter::Emit() {
     active_ = true;
     timer_ = 0.f;
     elapsedTime_ = 0.f;
@@ -97,6 +97,16 @@ void Emitter::Emit() {
     if (frequency_ <= 0.01f) {
         active_ = false;
     }
+
+    return EmitterHandle(GESTD::ReferencePtr<Emitter>(this, lifetime_));
+}
+
+void EmitterHandle::SetPosition(const Vector3& _position) {
+    if (emitter_) emitter_->SetPosition(_position);
+}
+
+void EmitterHandle::Stop() {
+    if (emitter_) emitter_->Enable(false);
 }
 
 void Emitter::Reset() {
