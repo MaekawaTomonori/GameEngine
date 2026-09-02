@@ -1,5 +1,6 @@
 var Emitter_8hpp =
 [
+    [ "EmitterHandle", "classEmitterHandle.html", "classEmitterHandle" ],
     [ "Emitter", "classEmitter.html", "classEmitter" ],
     [ "PrimitiveType", "Emitter_8hpp.html#a240c1924416689e5700ff0d9f30539d9", [
       [ "Billboard", "Emitter_8hpp.html#a240c1924416689e5700ff0d9f30539d9acf9f62d4906d63087d71916c1c94c058", null ],

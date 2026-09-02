@@ -34,5 +34,6 @@ var searchData=
   ['isshowdone_31',['IsShowDone',['../classUi_1_1Element.html#ad27d908196c26eeafba24004740aee20',1,'Ui::Element']]],
   ['isstopped_32',['IsStopped',['../classFrameDebugger.html#a95e392c5838cdb4d91bebc489e5b132c',1,'FrameDebugger']]],
   ['istrigger_33',['IsTrigger',['../classInput.html#a70db939e1efea6bfa41b8f9f1144bf13',1,'Input']]],
-  ['isvisible_34',['isvisible',['../classDebugUI.html#a20aa22ba8319a4a3dd25b1f1308fe472',1,'DebugUI::IsVisible()'],['../classText.html#af767da155a2b724c306d415e521e42e1',1,'Text::IsVisible()'],['../classUi_1_1Element.html#a0121dd3d21ccbfb501b9d5a71120f416',1,'Ui::Element::IsVisible()']]]
+  ['isvalid_34',['IsValid',['../classEmitterHandle.html#aa68045092a069681351dcefadd5fb0fb',1,'EmitterHandle']]],
+  ['isvisible_35',['isvisible',['../classDebugUI.html#a20aa22ba8319a4a3dd25b1f1308fe472',1,'DebugUI::IsVisible()'],['../classText.html#af767da155a2b724c306d415e521e42e1',1,'Text::IsVisible()'],['../classUi_1_1Element.html#a0121dd3d21ccbfb501b9d5a71120f416',1,'Ui::Element::IsVisible()']]]
 ];

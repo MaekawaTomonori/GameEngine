@@ -4,7 +4,7 @@ var searchData=
   ['texture_1',['texture',['../structMeshData.html#ab7bed81125007b625b5b001517ae957b',1,'MeshData::texture'],['../structParticleSystem_1_1EmitterConfig.html#af2ec61f245c0b9c882f70872b3e193b9',1,'ParticleSystem::EmitterConfig::texture'],['../structUi_1_1SpriteElement_1_1Data.html#a12f3d59343c00f1c8b94468803640bb6',1,'Ui::SpriteElement::Data::texture']]],
   ['texturelefttop_2',['textureLeftTop',['../structUi_1_1SpriteElement_1_1Data.html#a5d596efd280cc43cc87007aca4e99280',1,'Ui::SpriteElement::Data']]],
   ['texturesize_3',['textureSize',['../structUi_1_1SpriteElement_1_1Data.html#a0b0c425c99b2cb2cf42558c55f4ced26',1,'Ui::SpriteElement::Data']]],
-  ['time_4',['time',['../structKeyframe.html#abe885f982835db759fc5e52b3ed41227',1,'Keyframe']]],
+  ['time_4',['time',['../structKeyframe.html#abe885f982835db759fc5e52b3ed41227',1,'Keyframe::time'],['../structGradientKey.html#aa399fb3a73386a34a64a3905a9d7fc10',1,'GradientKey::time']]],
   ['timestamp_5',['timestamp',['../structLog_1_1LogEntry.html#a87fa7c85241d5c893028567ab30cdc60',1,'Log::LogEntry']]],
   ['title_6',['title',['../structGameEngine_1_1Config.html#a3c33302431734a0f598bfb6ca9c55c47',1,'GameEngine::Config']]],
   ['transform_7',['transform',['../structNode.html#a3bb2f13d17b8b6b01f82d471940977a2',1,'Node::transform'],['../structJoint.html#a080b6261e90e1de1c9720bcc38b1ffed',1,'Joint::transform']]],

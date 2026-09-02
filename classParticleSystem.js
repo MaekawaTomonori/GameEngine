@@ -10,7 +10,7 @@ var classParticleSystem =
     [ "Debug", "classParticleSystem.html#ac1acbb946e972d60c3c19837077cac4e", null ],
     [ "DeleteTemplate", "classParticleSystem.html#addc81e7079a8fe7f7b5967a21641f287", null ],
     [ "Draw", "classParticleSystem.html#af4ff722847f80477a37a3b24a9237568", null ],
-    [ "Emit", "classParticleSystem.html#a42fdb6b7f9f940aca1feeeec4d5ab384", null ],
+    [ "Emit", "classParticleSystem.html#a3420fc4dd6ce4fcd98e7f3e2755b5be5", null ],
     [ "Initialize", "classParticleSystem.html#a582067f4beec2abe2320ab1378be9fca", null ],
     [ "LoadTemplate", "classParticleSystem.html#a484987c7c3b6df13923e492a969d54c7", null ],
     [ "Register", "classParticleSystem.html#a94125e0be2fd21a7a7e0707f7440bea6", null ],

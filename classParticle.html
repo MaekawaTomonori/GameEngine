@@ -131,6 +131,12 @@ $(document).ready(function(){initNavTree('classParticle.html',''); initResizable
 <tr class="separator:a981335662064b0d12d95d92c20564f7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aecde5aed663a3cb3a73a76051500c4cf" id="r_aecde5aed663a3cb3a73a76051500c4cf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classParticle.html">Particle</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticle.html#aecde5aed663a3cb3a73a76051500c4cf">SetColor</a> (const Vector4 &amp;_color)</td></tr>
 <tr class="separator:aecde5aed663a3cb3a73a76051500c4cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7fbe1c579a1b219ea80179ca3b7e70f4" id="r_a7fbe1c579a1b219ea80179ca3b7e70f4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classParticle.html">Particle</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticle.html#a7fbe1c579a1b219ea80179ca3b7e70f4">SetColorKeys</a> (const std::vector&lt; <a class="el" href="structGradientKey.html">GradientKey</a>&lt; Vector4 &gt; &gt; &amp;_keys)</td></tr>
+<tr class="memdesc:a7fbe1c579a1b219ea80179ca3b7e70f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">色の補間キー（時間昇順にソート済みであること）。空なら色は変化しない  <br /></td></tr>
+<tr class="separator:a7fbe1c579a1b219ea80179ca3b7e70f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a84f623845d76e2afb66b9c08fc78a772" id="r_a84f623845d76e2afb66b9c08fc78a772"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classParticle.html">Particle</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticle.html#a84f623845d76e2afb66b9c08fc78a772">SetSizeKeys</a> (const std::vector&lt; <a class="el" href="structGradientKey.html">GradientKey</a>&lt; Vector3 &gt; &gt; &amp;_keys)</td></tr>
+<tr class="memdesc:a84f623845d76e2afb66b9c08fc78a772"><td class="mdescLeft">&#160;</td><td class="mdescRight">サイズの補間キー（時間昇順にソート済みであること）。空ならサイズは変化しない  <br /></td></tr>
+<tr class="separator:a84f623845d76e2afb66b9c08fc78a772"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab44f2101d6c23813cd4303a3d02f7f76" id="r_ab44f2101d6c23813cd4303a3d02f7f76"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classParticle.html">Particle</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticle.html#ab44f2101d6c23813cd4303a3d02f7f76">RandomizePosition</a> (const Vector3 &amp;_min={ -1.f, -1.f, -1.f }, const Vector3 &amp;_max={ 1.f, 1.f, 1.f })</td></tr>
 <tr class="separator:ab44f2101d6c23813cd4303a3d02f7f76"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad63df131600556021a0de192ca78e92c" id="r_ad63df131600556021a0de192ca78e92c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classParticle.html">Particle</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticle.html#ad63df131600556021a0de192ca78e92c">RandomizeScale</a> (const Vector3 &amp;_min={ 0.1f, 0.1f, 0.1f }, const Vector3 &amp;_max={ 1.f, 1.f, 1.f })</td></tr>
@@ -145,7 +151,7 @@ $(document).ready(function(){initNavTree('classParticle.html',''); initResizable
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">詳解</h2>
 <div class="textblock">
-<p class="definition"> <a class="el" href="Particle_8hpp_source.html">Particle.hpp</a> の <a class="el" href="Particle_8hpp_source.html#l00008">8</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Particle_8hpp_source.html">Particle.hpp</a> の <a class="el" href="Particle_8hpp_source.html#l00010">10</a> 行目に定義があります。</p>
 </div><h2 class="groupheader">関数詳解</h2>
 <a id="a7ada3a5a4b95eee683bd918fb438fadd" name="a7ada3a5a4b95eee683bd918fb438fadd"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7ada3a5a4b95eee683bd918fb438fadd">&#9670;&#160;</a></span>Debug()</h2>
@@ -162,7 +168,9 @@ $(document).ready(function(){initNavTree('classParticle.html',''); initResizable
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="Particle_8cpp_source.html">Particle.cpp</a> の <a class="el" href="Particle_8cpp_source.html#l00023">23</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Particle_8cpp_source.html">Particle.cpp</a> の <a class="el" href="Particle_8cpp_source.html#l00029">29</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="DebugUIWidgets_8cpp_source.html#l00030">DebugUIWidgets::ColorEdit4()</a>, <a class="el" href="DebugUIWidgets_8cpp_source.html#l00012">DebugUIWidgets::DragFloat()</a>, <a class="el" href="DebugUIWidgets_8cpp_source.html#l00018">DebugUIWidgets::DragFloat3()</a>.</p>
 
 </div>
 </div>
@@ -258,7 +266,7 @@ $(document).ready(function(){initNavTree('classParticle.html',''); initResizable
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="Particle_8cpp_source.html">Particle.cpp</a> の <a class="el" href="Particle_8cpp_source.html#l00007">7</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Particle_8cpp_source.html">Particle.cpp</a> の <a class="el" href="Particle_8cpp_source.html#l00008">8</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -307,7 +315,7 @@ $(document).ready(function(){initNavTree('classParticle.html',''); initResizable
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="Particle_8cpp_source.html">Particle.cpp</a> の <a class="el" href="Particle_8cpp_source.html#l00116">116</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Particle_8cpp_source.html">Particle.cpp</a> の <a class="el" href="Particle_8cpp_source.html#l00126">126</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -337,7 +345,7 @@ $(document).ready(function(){initNavTree('classParticle.html',''); initResizable
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="Particle_8cpp_source.html">Particle.cpp</a> の <a class="el" href="Particle_8cpp_source.html#l00098">98</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Particle_8cpp_source.html">Particle.cpp</a> の <a class="el" href="Particle_8cpp_source.html#l00108">108</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -367,7 +375,7 @@ $(document).ready(function(){initNavTree('classParticle.html',''); initResizable
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="Particle_8cpp_source.html">Particle.cpp</a> の <a class="el" href="Particle_8cpp_source.html#l00107">107</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Particle_8cpp_source.html">Particle.cpp</a> の <a class="el" href="Particle_8cpp_source.html#l00117">117</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -397,7 +405,7 @@ $(document).ready(function(){initNavTree('classParticle.html',''); initResizable
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="Particle_8cpp_source.html">Particle.cpp</a> の <a class="el" href="Particle_8cpp_source.html#l00126">126</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Particle_8cpp_source.html">Particle.cpp</a> の <a class="el" href="Particle_8cpp_source.html#l00136">136</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -418,6 +426,28 @@ $(document).ready(function(){initNavTree('classParticle.html',''); initResizable
 </div><div class="memdoc">
 
 <p class="definition"> <a class="el" href="Particle_8cpp_source.html">Particle.cpp</a> の <a class="el" href="Particle_8cpp_source.html#l00078">78</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="a7fbe1c579a1b219ea80179ca3b7e70f4" name="a7fbe1c579a1b219ea80179ca3b7e70f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7fbe1c579a1b219ea80179ca3b7e70f4">&#9670;&#160;</a></span>SetColorKeys()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classParticle.html">Particle</a> &amp; Particle::SetColorKeys </td>
+          <td>(</td>
+          <td class="paramtype">const std::vector&lt; <a class="el" href="structGradientKey.html">GradientKey</a>&lt; Vector4 &gt; &gt; &amp;&#160;</td>
+          <td class="paramname"><em>_keys</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>色の補間キー（時間昇順にソート済みであること）。空なら色は変化しない </p>
+
+<p class="definition"> <a class="el" href="Particle_8cpp_source.html">Particle.cpp</a> の <a class="el" href="Particle_8cpp_source.html#l00083">83</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -477,7 +507,7 @@ $(document).ready(function(){initNavTree('classParticle.html',''); initResizable
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="Particle_8cpp_source.html">Particle.cpp</a> の <a class="el" href="Particle_8cpp_source.html#l00088">88</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Particle_8cpp_source.html">Particle.cpp</a> の <a class="el" href="Particle_8cpp_source.html#l00098">98</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -497,7 +527,7 @@ $(document).ready(function(){initNavTree('classParticle.html',''); initResizable
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="Particle_8cpp_source.html">Particle.cpp</a> の <a class="el" href="Particle_8cpp_source.html#l00093">93</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Particle_8cpp_source.html">Particle.cpp</a> の <a class="el" href="Particle_8cpp_source.html#l00103">103</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -518,6 +548,28 @@ $(document).ready(function(){initNavTree('classParticle.html',''); initResizable
 </div><div class="memdoc">
 
 <p class="definition"> <a class="el" href="Particle_8cpp_source.html">Particle.cpp</a> の <a class="el" href="Particle_8cpp_source.html#l00073">73</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="a84f623845d76e2afb66b9c08fc78a772" name="a84f623845d76e2afb66b9c08fc78a772"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a84f623845d76e2afb66b9c08fc78a772">&#9670;&#160;</a></span>SetSizeKeys()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classParticle.html">Particle</a> &amp; Particle::SetSizeKeys </td>
+          <td>(</td>
+          <td class="paramtype">const std::vector&lt; <a class="el" href="structGradientKey.html">GradientKey</a>&lt; Vector3 &gt; &gt; &amp;&#160;</td>
+          <td class="paramname"><em>_keys</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>サイズの補間キー（時間昇順にソート済みであること）。空ならサイズは変化しない </p>
+
+<p class="definition"> <a class="el" href="Particle_8cpp_source.html">Particle.cpp</a> の <a class="el" href="Particle_8cpp_source.html#l00088">88</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -545,7 +597,7 @@ $(document).ready(function(){initNavTree('classParticle.html',''); initResizable
   </dd>
 </dl>
 
-<p class="definition"> <a class="el" href="Particle_8cpp_source.html">Particle.cpp</a> の <a class="el" href="Particle_8cpp_source.html#l00135">135</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Particle_8cpp_source.html">Particle.cpp</a> の <a class="el" href="Particle_8cpp_source.html#l00145">145</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -565,7 +617,7 @@ $(document).ready(function(){initNavTree('classParticle.html',''); initResizable
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="Particle_8cpp_source.html">Particle.cpp</a> の <a class="el" href="Particle_8cpp_source.html#l00083">83</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Particle_8cpp_source.html">Particle.cpp</a> の <a class="el" href="Particle_8cpp_source.html#l00093">93</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -584,7 +636,9 @@ $(document).ready(function(){initNavTree('classParticle.html',''); initResizable
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="Particle_8cpp_source.html">Particle.cpp</a> の <a class="el" href="Particle_8cpp_source.html#l00012">12</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Particle_8cpp_source.html">Particle.cpp</a> の <a class="el" href="Particle_8cpp_source.html#l00013">13</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="Keyframe_8hpp_source.html#l00023">EvaluateGradient()</a>.</p>
 
 </div>
 </div>
@@ -598,7 +652,7 @@ $(document).ready(function(){initNavTree('classParticle.html',''); initResizable
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classParticle.html">Particle</a></li>
-    <li class="footer">2026年09月01日(火) 08時00分10秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年09月02日(水) 09時31分25秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

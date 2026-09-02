@@ -110,8 +110,8 @@ $(document).ready(function(){initNavTree('classEmitter.html',''); initResizable(
 <tr class="separator:a92aadafc647cca2fcb8be5185fbf7104"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1a7f88acfebb09e0a3ab3bc6740a7287" id="r_a1a7f88acfebb09e0a3ab3bc6740a7287"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEmitter.html#a1a7f88acfebb09e0a3ab3bc6740a7287">Draw</a> ()</td></tr>
 <tr class="separator:a1a7f88acfebb09e0a3ab3bc6740a7287"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a26da6925c62afe55eb0c6c17e7bedd69" id="r_a26da6925c62afe55eb0c6c17e7bedd69"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEmitter.html#a26da6925c62afe55eb0c6c17e7bedd69">Emit</a> ()</td></tr>
-<tr class="separator:a26da6925c62afe55eb0c6c17e7bedd69"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8a3d960532f37088635aae0bbaeec82" id="r_ac8a3d960532f37088635aae0bbaeec82"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classEmitterHandle.html">EmitterHandle</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEmitter.html#ac8a3d960532f37088635aae0bbaeec82">Emit</a> ()</td></tr>
+<tr class="separator:ac8a3d960532f37088635aae0bbaeec82"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abebbc8dc1101b3c3d9a9ba57716437aa" id="r_abebbc8dc1101b3c3d9a9ba57716437aa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEmitter.html#abebbc8dc1101b3c3d9a9ba57716437aa">Debug</a> ()</td></tr>
 <tr class="separator:abebbc8dc1101b3c3d9a9ba57716437aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a75b599d0f0986459cd1346ea8fd9068e" id="r_a75b599d0f0986459cd1346ea8fd9068e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEmitter.html#a75b599d0f0986459cd1346ea8fd9068e">Reset</a> ()</td></tr>
@@ -148,6 +148,15 @@ $(document).ready(function(){initNavTree('classEmitter.html',''); initResizable(
 <tr class="separator:af9b9a14463df850af2688eaf06693865"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a95e1cf154287bdd7e066e02110e020a7" id="r_a95e1cf154287bdd7e066e02110e020a7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classEmitter.html">Emitter</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEmitter.html#a95e1cf154287bdd7e066e02110e020a7">SetRotationVelocity</a> (const Vector3 &amp;_rotationVelocity)</td></tr>
 <tr class="separator:a95e1cf154287bdd7e066e02110e020a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb060efc260a2c7511a5931eac9b2ab3" id="r_abb060efc260a2c7511a5931eac9b2ab3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classEmitter.html">Emitter</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEmitter.html#abb060efc260a2c7511a5931eac9b2ab3">SetParticleLifetime</a> (const float &amp;_lifetime)</td></tr>
+<tr class="memdesc:abb060efc260a2c7511a5931eac9b2ab3"><td class="mdescLeft">&#160;</td><td class="mdescRight">パーティクル1個あたりの寿命（秒）を設定  <br /></td></tr>
+<tr class="separator:abb060efc260a2c7511a5931eac9b2ab3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad1f52531c563e25f89349988d2efbee8" id="r_ad1f52531c563e25f89349988d2efbee8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classEmitter.html">Emitter</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEmitter.html#ad1f52531c563e25f89349988d2efbee8">SetColorKeys</a> (std::vector&lt; <a class="el" href="structGradientKey.html">GradientKey</a>&lt; Vector4 &gt; &gt; _keys)</td></tr>
+<tr class="memdesc:ad1f52531c563e25f89349988d2efbee8"><td class="mdescLeft">&#160;</td><td class="mdescRight">色の補間キーを設定（内部で時間昇順にソートされる）。空なら色は変化しない  <br /></td></tr>
+<tr class="separator:ad1f52531c563e25f89349988d2efbee8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5b0f58bc8c98326914e1e069b0c3137" id="r_aa5b0f58bc8c98326914e1e069b0c3137"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classEmitter.html">Emitter</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEmitter.html#aa5b0f58bc8c98326914e1e069b0c3137">SetSizeKeys</a> (std::vector&lt; <a class="el" href="structGradientKey.html">GradientKey</a>&lt; Vector3 &gt; &gt; _keys)</td></tr>
+<tr class="memdesc:aa5b0f58bc8c98326914e1e069b0c3137"><td class="mdescLeft">&#160;</td><td class="mdescRight">サイズの補間キーを設定（内部で時間昇順にソートされる）。空ならサイズは変化しない  <br /></td></tr>
+<tr class="separator:aa5b0f58bc8c98326914e1e069b0c3137"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a29d5e63a07da34e87d77c0668c70e65c" id="r_a29d5e63a07da34e87d77c0668c70e65c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classEmitter.html">Emitter</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEmitter.html#a29d5e63a07da34e87d77c0668c70e65c">SetUpdateFunction</a> (const std::function&lt; void(float, const Vector3 &amp;, Vector3 &amp;, Vector3 &amp;, Vector4 &amp;)&gt; &amp;_func)</td></tr>
 <tr class="memdesc:a29d5e63a07da34e87d77c0668c70e65c"><td class="mdescLeft">&#160;</td><td class="mdescRight">パーティクル更新関数を設定  <br /></td></tr>
 <tr class="separator:a29d5e63a07da34e87d77c0668c70e65c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -157,7 +166,7 @@ $(document).ready(function(){initNavTree('classEmitter.html',''); initResizable(
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">詳解</h2>
 <div class="textblock">
-<p class="definition"> <a class="el" href="Emitter_8hpp_source.html">Emitter.hpp</a> の <a class="el" href="Emitter_8hpp_source.html#l00021">21</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Emitter_8hpp_source.html">Emitter.hpp</a> の <a class="el" href="Emitter_8hpp_source.html#l00044">44</a> 行目に定義があります。</p>
 </div><h2 class="groupheader">構築子と解体子</h2>
 <a id="ade89f82a8db08880833a0786ed8f812f" name="ade89f82a8db08880833a0786ed8f812f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ade89f82a8db08880833a0786ed8f812f">&#9670;&#160;</a></span>Emitter()</h2>
@@ -185,7 +194,7 @@ $(document).ready(function(){initNavTree('classEmitter.html',''); initResizable(
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="Emitter_8cpp_source.html">Emitter.cpp</a> の <a class="el" href="Emitter_8cpp_source.html#l00011">11</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Emitter_8cpp_source.html">Emitter.cpp</a> の <a class="el" href="Emitter_8cpp_source.html#l00012">12</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -205,7 +214,9 @@ $(document).ready(function(){initNavTree('classEmitter.html',''); initResizable(
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="Emitter_8cpp_source.html">Emitter.cpp</a> の <a class="el" href="Emitter_8cpp_source.html#l00110">110</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Emitter_8cpp_source.html">Emitter.cpp</a> の <a class="el" href="Emitter_8cpp_source.html#l00141">141</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="DebugUIWidgets_8cpp_source.html#l00036">DebugUIWidgets::Checkbox()</a>, <a class="el" href="DebugUIWidgets_8cpp_source.html#l00030">DebugUIWidgets::ColorEdit4()</a>, <a class="el" href="DebugUIWidgets_8cpp_source.html#l00012">DebugUIWidgets::DragFloat()</a>, <a class="el" href="DebugUIWidgets_8cpp_source.html#l00018">DebugUIWidgets::DragFloat3()</a>, <a class="el" href="DebugUIWidgets_8cpp_source.html#l00024">DebugUIWidgets::DragInt()</a>.</p>
 
 </div>
 </div>
@@ -224,20 +235,20 @@ $(document).ready(function(){initNavTree('classEmitter.html',''); initResizable(
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="Emitter_8cpp_source.html">Emitter.cpp</a> の <a class="el" href="Emitter_8cpp_source.html#l00069">69</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Emitter_8cpp_source.html">Emitter.cpp</a> の <a class="el" href="Emitter_8cpp_source.html#l00070">70</a> 行目に定義があります。</p>
 
 <p class="reference">参照先 <a class="el" href="DirectXAdapter_8cpp_source.html#l00707">DirectXAdapter::GetCommandList()</a>.</p>
 
 </div>
 </div>
-<a id="a26da6925c62afe55eb0c6c17e7bedd69" name="a26da6925c62afe55eb0c6c17e7bedd69"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a26da6925c62afe55eb0c6c17e7bedd69">&#9670;&#160;</a></span>Emit()</h2>
+<a id="ac8a3d960532f37088635aae0bbaeec82" name="ac8a3d960532f37088635aae0bbaeec82"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8a3d960532f37088635aae0bbaeec82">&#9670;&#160;</a></span>Emit()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void Emitter::Emit </td>
+          <td class="memname"><a class="el" href="classEmitterHandle.html">EmitterHandle</a> Emitter::Emit </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -245,9 +256,9 @@ $(document).ready(function(){initNavTree('classEmitter.html',''); initResizable(
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="Emitter_8cpp_source.html">Emitter.cpp</a> の <a class="el" href="Emitter_8cpp_source.html#l00089">89</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Emitter_8cpp_source.html">Emitter.cpp</a> の <a class="el" href="Emitter_8cpp_source.html#l00090">90</a> 行目に定義があります。</p>
 
-<p class="reference">参照元 <a class="el" href="ParticleSystem_8cpp_source.html#l00296">ParticleSystem::Debug()</a>, <a class="el" href="ParticleSystem_8cpp_source.html#l00192">ParticleSystem::Emit()</a>.</p>
+<p class="reference">参照元 <a class="el" href="ParticleSystem_8cpp_source.html#l00394">ParticleSystem::Debug()</a>, <a class="el" href="ParticleSystem_8cpp_source.html#l00281">ParticleSystem::Emit()</a>.</p>
 
 </div>
 </div>
@@ -267,7 +278,7 @@ $(document).ready(function(){initNavTree('classEmitter.html',''); initResizable(
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="Emitter_8cpp_source.html">Emitter.cpp</a> の <a class="el" href="Emitter_8cpp_source.html#l00209">209</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Emitter_8cpp_source.html">Emitter.cpp</a> の <a class="el" href="Emitter_8cpp_source.html#l00257">257</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -287,7 +298,7 @@ $(document).ready(function(){initNavTree('classEmitter.html',''); initResizable(
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="Emitter_8cpp_source.html">Emitter.cpp</a> の <a class="el" href="Emitter_8cpp_source.html#l00013">13</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Emitter_8cpp_source.html">Emitter.cpp</a> の <a class="el" href="Emitter_8cpp_source.html#l00014">14</a> 行目に定義があります。</p>
 
 <p class="reference">参照先 <a class="el" href="SRVManager_8cpp_source.html#l00033">SRVManager::Allocate()</a>, <a class="el" href="DirectXAdapter_8cpp_source.html#l00079">DirectXAdapter::CreateBufferResource()</a>, <a class="el" href="SRVManager_8cpp_source.html#l00058">SRVManager::CreateSRVForStructuredBuffer()</a>, <a class="el" href="SRVManager_8cpp_source.html#l00095">SRVManager::GetGPUHandle()</a>, <a class="el" href="MeshData_8hpp_source.html#l00018">MeshData::indices</a>, <a class="el" href="MeshData_8hpp_source.html#l00017">MeshData::vertices</a>.</p>
 
@@ -310,9 +321,9 @@ $(document).ready(function(){initNavTree('classEmitter.html',''); initResizable(
 
 <p>全パーティクルが死亡し、追加スポーンもない場合trueを返す </p>
 
-<p class="definition"> <a class="el" href="Emitter_8cpp_source.html">Emitter.cpp</a> の <a class="el" href="Emitter_8cpp_source.html#l00106">106</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Emitter_8cpp_source.html">Emitter.cpp</a> の <a class="el" href="Emitter_8cpp_source.html#l00137">137</a> 行目に定義があります。</p>
 
-<p class="reference">参照元 <a class="el" href="ParticleSystem_8cpp_source.html#l00047">ParticleSystem::Update()</a>.</p>
+<p class="reference">参照元 <a class="el" href="ParticleSystem_8cpp_source.html#l00096">ParticleSystem::Update()</a>.</p>
 
 </div>
 </div>
@@ -333,7 +344,7 @@ $(document).ready(function(){initNavTree('classEmitter.html',''); initResizable(
 
 <p>パーティクルをクリアしタイマーをリセットして再利用可能状態にする（GPUリソースは保持） </p>
 
-<p class="definition"> <a class="el" href="Emitter_8cpp_source.html">Emitter.cpp</a> の <a class="el" href="Emitter_8cpp_source.html#l00093">93</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Emitter_8cpp_source.html">Emitter.cpp</a> の <a class="el" href="Emitter_8cpp_source.html#l00112">112</a> 行目に定義があります。</p>
 
 <p class="reference">参照先 <a class="el" href="Emitter_8hpp.html#a240c1924416689e5700ff0d9f30539d9acf9f62d4906d63087d71916c1c94c058">Billboard</a>.</p>
 
@@ -355,9 +366,9 @@ $(document).ready(function(){initNavTree('classEmitter.html',''); initResizable(
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="Emitter_8cpp_source.html">Emitter.cpp</a> の <a class="el" href="Emitter_8cpp_source.html#l00174">174</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Emitter_8cpp_source.html">Emitter.cpp</a> の <a class="el" href="Emitter_8cpp_source.html#l00205">205</a> 行目に定義があります。</p>
 
-<p class="reference">参照元 <a class="el" href="ParticleSystem_8cpp_source.html#l00192">ParticleSystem::Emit()</a>.</p>
+<p class="reference">参照元 <a class="el" href="ParticleSystem_8cpp_source.html#l00281">ParticleSystem::Emit()</a>.</p>
 
 </div>
 </div>
@@ -377,9 +388,35 @@ $(document).ready(function(){initNavTree('classEmitter.html',''); initResizable(
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="Emitter_8cpp_source.html">Emitter.cpp</a> の <a class="el" href="Emitter_8cpp_source.html#l00148">148</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Emitter_8cpp_source.html">Emitter.cpp</a> の <a class="el" href="Emitter_8cpp_source.html#l00179">179</a> 行目に定義があります。</p>
 
-<p class="reference">参照元 <a class="el" href="ParticleSystem_8cpp_source.html#l00296">ParticleSystem::Debug()</a>, <a class="el" href="ParticleSystem_8cpp_source.html#l00192">ParticleSystem::Emit()</a>.</p>
+<p class="reference">参照元 <a class="el" href="ParticleSystem_8cpp_source.html#l00394">ParticleSystem::Debug()</a>, <a class="el" href="ParticleSystem_8cpp_source.html#l00281">ParticleSystem::Emit()</a>.</p>
+
+</div>
+</div>
+<a id="ad1f52531c563e25f89349988d2efbee8" name="ad1f52531c563e25f89349988d2efbee8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad1f52531c563e25f89349988d2efbee8">&#9670;&#160;</a></span>SetColorKeys()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classEmitter.html">Emitter</a> &amp; Emitter::SetColorKeys </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="structGradientKey.html">GradientKey</a>&lt; Vector4 &gt; &gt;&#160;</td>
+          <td class="paramname"><em>_keys</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>色の補間キーを設定（内部で時間昇順にソートされる）。空なら色は変化しない </p>
+
+<p class="definition"> <a class="el" href="Emitter_8cpp_source.html">Emitter.cpp</a> の <a class="el" href="Emitter_8cpp_source.html#l00230">230</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="Keyframe_8hpp_source.html#l00041">SortGradient()</a>.</p>
+
+<p class="reference">参照元 <a class="el" href="ParticleSystem_8cpp_source.html#l00394">ParticleSystem::Debug()</a>, <a class="el" href="ParticleSystem_8cpp_source.html#l00281">ParticleSystem::Emit()</a>.</p>
 
 </div>
 </div>
@@ -399,9 +436,9 @@ $(document).ready(function(){initNavTree('classEmitter.html',''); initResizable(
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="Emitter_8cpp_source.html">Emitter.cpp</a> の <a class="el" href="Emitter_8cpp_source.html#l00204">204</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Emitter_8cpp_source.html">Emitter.cpp</a> の <a class="el" href="Emitter_8cpp_source.html#l00252">252</a> 行目に定義があります。</p>
 
-<p class="reference">参照元 <a class="el" href="ParticleSystem_8cpp_source.html#l00296">ParticleSystem::Debug()</a>, <a class="el" href="ParticleSystem_8cpp_source.html#l00192">ParticleSystem::Emit()</a>.</p>
+<p class="reference">参照元 <a class="el" href="ParticleSystem_8cpp_source.html#l00394">ParticleSystem::Debug()</a>, <a class="el" href="ParticleSystem_8cpp_source.html#l00281">ParticleSystem::Emit()</a>.</p>
 
 </div>
 </div>
@@ -421,9 +458,33 @@ $(document).ready(function(){initNavTree('classEmitter.html',''); initResizable(
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="Emitter_8cpp_source.html">Emitter.cpp</a> の <a class="el" href="Emitter_8cpp_source.html#l00140">140</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Emitter_8cpp_source.html">Emitter.cpp</a> の <a class="el" href="Emitter_8cpp_source.html#l00171">171</a> 行目に定義があります。</p>
 
-<p class="reference">参照元 <a class="el" href="ParticleSystem_8cpp_source.html#l00296">ParticleSystem::Debug()</a>, <a class="el" href="ParticleSystem_8cpp_source.html#l00192">ParticleSystem::Emit()</a>.</p>
+<p class="reference">参照元 <a class="el" href="ParticleSystem_8cpp_source.html#l00394">ParticleSystem::Debug()</a>, <a class="el" href="ParticleSystem_8cpp_source.html#l00281">ParticleSystem::Emit()</a>.</p>
+
+</div>
+</div>
+<a id="abb060efc260a2c7511a5931eac9b2ab3" name="abb060efc260a2c7511a5931eac9b2ab3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb060efc260a2c7511a5931eac9b2ab3">&#9670;&#160;</a></span>SetParticleLifetime()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classEmitter.html">Emitter</a> &amp; Emitter::SetParticleLifetime </td>
+          <td>(</td>
+          <td class="paramtype">const float &amp;&#160;</td>
+          <td class="paramname"><em>_lifetime</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>パーティクル1個あたりの寿命（秒）を設定 </p>
+
+<p class="definition"> <a class="el" href="Emitter_8cpp_source.html">Emitter.cpp</a> の <a class="el" href="Emitter_8cpp_source.html#l00225">225</a> 行目に定義があります。</p>
+
+<p class="reference">参照元 <a class="el" href="ParticleSystem_8cpp_source.html#l00394">ParticleSystem::Debug()</a>, <a class="el" href="ParticleSystem_8cpp_source.html#l00281">ParticleSystem::Emit()</a>.</p>
 
 </div>
 </div>
@@ -443,9 +504,9 @@ $(document).ready(function(){initNavTree('classEmitter.html',''); initResizable(
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="Emitter_8cpp_source.html">Emitter.cpp</a> の <a class="el" href="Emitter_8cpp_source.html#l00136">136</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Emitter_8cpp_source.html">Emitter.cpp</a> の <a class="el" href="Emitter_8cpp_source.html#l00167">167</a> 行目に定義があります。</p>
 
-<p class="reference">参照元 <a class="el" href="ParticleSystem_8cpp_source.html#l00296">ParticleSystem::Debug()</a>, <a class="el" href="ParticleSystem_8cpp_source.html#l00192">ParticleSystem::Emit()</a>.</p>
+<p class="reference">参照元 <a class="el" href="ParticleSystem_8cpp_source.html#l00394">ParticleSystem::Debug()</a>, <a class="el" href="ParticleSystem_8cpp_source.html#l00281">ParticleSystem::Emit()</a>.</p>
 
 </div>
 </div>
@@ -465,9 +526,9 @@ $(document).ready(function(){initNavTree('classEmitter.html',''); initResizable(
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="Emitter_8cpp_source.html">Emitter.cpp</a> の <a class="el" href="Emitter_8cpp_source.html#l00179">179</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Emitter_8cpp_source.html">Emitter.cpp</a> の <a class="el" href="Emitter_8cpp_source.html#l00210">210</a> 行目に定義があります。</p>
 
-<p class="reference">参照元 <a class="el" href="ParticleSystem_8cpp_source.html#l00296">ParticleSystem::Debug()</a>, <a class="el" href="ParticleSystem_8cpp_source.html#l00192">ParticleSystem::Emit()</a>.</p>
+<p class="reference">参照元 <a class="el" href="ParticleSystem_8cpp_source.html#l00394">ParticleSystem::Debug()</a>, <a class="el" href="ParticleSystem_8cpp_source.html#l00281">ParticleSystem::Emit()</a>.</p>
 
 </div>
 </div>
@@ -487,9 +548,9 @@ $(document).ready(function(){initNavTree('classEmitter.html',''); initResizable(
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="Emitter_8cpp_source.html">Emitter.cpp</a> の <a class="el" href="Emitter_8cpp_source.html#l00184">184</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Emitter_8cpp_source.html">Emitter.cpp</a> の <a class="el" href="Emitter_8cpp_source.html#l00215">215</a> 行目に定義があります。</p>
 
-<p class="reference">参照元 <a class="el" href="ParticleSystem_8cpp_source.html#l00296">ParticleSystem::Debug()</a>, <a class="el" href="ParticleSystem_8cpp_source.html#l00192">ParticleSystem::Emit()</a>.</p>
+<p class="reference">参照元 <a class="el" href="ParticleSystem_8cpp_source.html#l00394">ParticleSystem::Debug()</a>, <a class="el" href="ParticleSystem_8cpp_source.html#l00281">ParticleSystem::Emit()</a>.</p>
 
 </div>
 </div>
@@ -509,9 +570,9 @@ $(document).ready(function(){initNavTree('classEmitter.html',''); initResizable(
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="Emitter_8cpp_source.html">Emitter.cpp</a> の <a class="el" href="Emitter_8cpp_source.html#l00189">189</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Emitter_8cpp_source.html">Emitter.cpp</a> の <a class="el" href="Emitter_8cpp_source.html#l00220">220</a> 行目に定義があります。</p>
 
-<p class="reference">参照元 <a class="el" href="ParticleSystem_8cpp_source.html#l00296">ParticleSystem::Debug()</a>, <a class="el" href="ParticleSystem_8cpp_source.html#l00192">ParticleSystem::Emit()</a>.</p>
+<p class="reference">参照元 <a class="el" href="ParticleSystem_8cpp_source.html#l00394">ParticleSystem::Debug()</a>, <a class="el" href="ParticleSystem_8cpp_source.html#l00281">ParticleSystem::Emit()</a>.</p>
 
 </div>
 </div>
@@ -531,9 +592,9 @@ $(document).ready(function(){initNavTree('classEmitter.html',''); initResizable(
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="Emitter_8cpp_source.html">Emitter.cpp</a> の <a class="el" href="Emitter_8cpp_source.html#l00159">159</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Emitter_8cpp_source.html">Emitter.cpp</a> の <a class="el" href="Emitter_8cpp_source.html#l00190">190</a> 行目に定義があります。</p>
 
-<p class="reference">参照元 <a class="el" href="ParticleSystem_8cpp_source.html#l00296">ParticleSystem::Debug()</a>, <a class="el" href="ParticleSystem_8cpp_source.html#l00192">ParticleSystem::Emit()</a>.</p>
+<p class="reference">参照元 <a class="el" href="ParticleSystem_8cpp_source.html#l00394">ParticleSystem::Debug()</a>, <a class="el" href="ParticleSystem_8cpp_source.html#l00281">ParticleSystem::Emit()</a>.</p>
 
 </div>
 </div>
@@ -553,7 +614,33 @@ $(document).ready(function(){initNavTree('classEmitter.html',''); initResizable(
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="Emitter_8cpp_source.html">Emitter.cpp</a> の <a class="el" href="Emitter_8cpp_source.html#l00164">164</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Emitter_8cpp_source.html">Emitter.cpp</a> の <a class="el" href="Emitter_8cpp_source.html#l00195">195</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="aa5b0f58bc8c98326914e1e069b0c3137" name="aa5b0f58bc8c98326914e1e069b0c3137"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa5b0f58bc8c98326914e1e069b0c3137">&#9670;&#160;</a></span>SetSizeKeys()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classEmitter.html">Emitter</a> &amp; Emitter::SetSizeKeys </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="structGradientKey.html">GradientKey</a>&lt; Vector3 &gt; &gt;&#160;</td>
+          <td class="paramname"><em>_keys</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>サイズの補間キーを設定（内部で時間昇順にソートされる）。空ならサイズは変化しない </p>
+
+<p class="definition"> <a class="el" href="Emitter_8cpp_source.html">Emitter.cpp</a> の <a class="el" href="Emitter_8cpp_source.html#l00236">236</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="Keyframe_8hpp_source.html#l00041">SortGradient()</a>.</p>
+
+<p class="reference">参照元 <a class="el" href="ParticleSystem_8cpp_source.html#l00394">ParticleSystem::Debug()</a>, <a class="el" href="ParticleSystem_8cpp_source.html#l00281">ParticleSystem::Emit()</a>.</p>
 
 </div>
 </div>
@@ -573,9 +660,9 @@ $(document).ready(function(){initNavTree('classEmitter.html',''); initResizable(
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="Emitter_8cpp_source.html">Emitter.cpp</a> の <a class="el" href="Emitter_8cpp_source.html#l00144">144</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Emitter_8cpp_source.html">Emitter.cpp</a> の <a class="el" href="Emitter_8cpp_source.html#l00175">175</a> 行目に定義があります。</p>
 
-<p class="reference">参照元 <a class="el" href="ParticleSystem_8cpp_source.html#l00296">ParticleSystem::Debug()</a>, <a class="el" href="ParticleSystem_8cpp_source.html#l00192">ParticleSystem::Emit()</a>.</p>
+<p class="reference">参照元 <a class="el" href="ParticleSystem_8cpp_source.html#l00394">ParticleSystem::Debug()</a>, <a class="el" href="ParticleSystem_8cpp_source.html#l00281">ParticleSystem::Emit()</a>.</p>
 
 </div>
 </div>
@@ -603,9 +690,9 @@ $(document).ready(function(){initNavTree('classEmitter.html',''); initResizable(
   </dd>
 </dl>
 
-<p class="definition"> <a class="el" href="Emitter_8cpp_source.html">Emitter.cpp</a> の <a class="el" href="Emitter_8cpp_source.html#l00199">199</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Emitter_8cpp_source.html">Emitter.cpp</a> の <a class="el" href="Emitter_8cpp_source.html#l00247">247</a> 行目に定義があります。</p>
 
-<p class="reference">参照元 <a class="el" href="ParticleSystem_8cpp_source.html#l00296">ParticleSystem::Debug()</a>, <a class="el" href="ParticleSystem_8cpp_source.html#l00192">ParticleSystem::Emit()</a>.</p>
+<p class="reference">参照元 <a class="el" href="ParticleSystem_8cpp_source.html#l00394">ParticleSystem::Debug()</a>, <a class="el" href="ParticleSystem_8cpp_source.html#l00281">ParticleSystem::Emit()</a>.</p>
 
 </div>
 </div>
@@ -625,9 +712,9 @@ $(document).ready(function(){initNavTree('classEmitter.html',''); initResizable(
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="Emitter_8cpp_source.html">Emitter.cpp</a> の <a class="el" href="Emitter_8cpp_source.html#l00153">153</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Emitter_8cpp_source.html">Emitter.cpp</a> の <a class="el" href="Emitter_8cpp_source.html#l00184">184</a> 行目に定義があります。</p>
 
-<p class="reference">参照元 <a class="el" href="ParticleSystem_8cpp_source.html#l00296">ParticleSystem::Debug()</a>, <a class="el" href="ParticleSystem_8cpp_source.html#l00192">ParticleSystem::Emit()</a>.</p>
+<p class="reference">参照元 <a class="el" href="ParticleSystem_8cpp_source.html#l00394">ParticleSystem::Debug()</a>, <a class="el" href="ParticleSystem_8cpp_source.html#l00281">ParticleSystem::Emit()</a>.</p>
 
 </div>
 </div>
@@ -655,9 +742,9 @@ $(document).ready(function(){initNavTree('classEmitter.html',''); initResizable(
   </dd>
 </dl>
 
-<p class="definition"> <a class="el" href="Emitter_8cpp_source.html">Emitter.cpp</a> の <a class="el" href="Emitter_8cpp_source.html#l00194">194</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Emitter_8cpp_source.html">Emitter.cpp</a> の <a class="el" href="Emitter_8cpp_source.html#l00242">242</a> 行目に定義があります。</p>
 
-<p class="reference">参照元 <a class="el" href="ParticleSystem_8cpp_source.html#l00296">ParticleSystem::Debug()</a>, <a class="el" href="ParticleSystem_8cpp_source.html#l00192">ParticleSystem::Emit()</a>.</p>
+<p class="reference">参照元 <a class="el" href="ParticleSystem_8cpp_source.html#l00394">ParticleSystem::Debug()</a>, <a class="el" href="ParticleSystem_8cpp_source.html#l00281">ParticleSystem::Emit()</a>.</p>
 
 </div>
 </div>
@@ -677,9 +764,9 @@ $(document).ready(function(){initNavTree('classEmitter.html',''); initResizable(
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="Emitter_8cpp_source.html">Emitter.cpp</a> の <a class="el" href="Emitter_8cpp_source.html#l00169">169</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Emitter_8cpp_source.html">Emitter.cpp</a> の <a class="el" href="Emitter_8cpp_source.html#l00200">200</a> 行目に定義があります。</p>
 
-<p class="reference">参照元 <a class="el" href="ParticleSystem_8cpp_source.html#l00296">ParticleSystem::Debug()</a>, <a class="el" href="ParticleSystem_8cpp_source.html#l00192">ParticleSystem::Emit()</a>.</p>
+<p class="reference">参照元 <a class="el" href="ParticleSystem_8cpp_source.html#l00394">ParticleSystem::Debug()</a>, <a class="el" href="ParticleSystem_8cpp_source.html#l00281">ParticleSystem::Emit()</a>.</p>
 
 </div>
 </div>
@@ -698,7 +785,7 @@ $(document).ready(function(){initNavTree('classEmitter.html',''); initResizable(
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="Emitter_8cpp_source.html">Emitter.cpp</a> の <a class="el" href="Emitter_8cpp_source.html#l00063">63</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Emitter_8cpp_source.html">Emitter.cpp</a> の <a class="el" href="Emitter_8cpp_source.html#l00064">64</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -712,7 +799,7 @@ $(document).ready(function(){initNavTree('classEmitter.html',''); initResizable(
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classEmitter.html">Emitter</a></li>
-    <li class="footer">2026年09月01日(火) 08時00分10秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年09月02日(水) 09時31分25秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

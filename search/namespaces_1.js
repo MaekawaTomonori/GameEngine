@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['gameengine_0',['GameEngine',['../namespaceGameEngine.html',1,'']]]
+  ['debuguiwidgets_0',['DebugUIWidgets',['../namespaceDebugUIWidgets.html',1,'']]]
 ];

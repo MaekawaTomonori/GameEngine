@@ -4,6 +4,7 @@ var dir_d44c64559bbebec7f509842c48db8b23 =
     [ "Text", "dir_8f6aab17bf85ffc60ccef3721c0e9e08.html", "dir_8f6aab17bf85ffc60ccef3721c0e9e08" ],
     [ "Ui", "dir_6ba165bb2e09366e887108d984d89e5c.html", "dir_6ba165bb2e09366e887108d984d89e5c" ],
     [ "DebugUI.hpp", "DebugUI_8hpp.html", "DebugUI_8hpp" ],
+    [ "DebugUIWidgets.hpp", "DebugUIWidgets_8hpp.html", "DebugUIWidgets_8hpp" ],
     [ "Framework.hpp", "Framework_8hpp.html", "Framework_8hpp" ],
     [ "IGame.hpp", "IGame_8hpp.html", "IGame_8hpp" ],
     [ "Input.hpp", "Input_8hpp.html", "Input_8hpp" ],

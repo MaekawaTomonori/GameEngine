@@ -7,5 +7,6 @@ var searchData=
   ['code_4',['code',['../Input_8hpp.html#a4e3273e7667573e3b0b61df9d034fd40',1,'Input.hpp']]],
   ['color_5',['color',['../structMaterial.html#adb84a919c3817e517b83204fef63221e',1,'Material::color'],['../structDirectionalLight.html#af7cec050b680e38218d207936671820b',1,'DirectionalLight::color'],['../structPointLight.html#abbefa0b6bed88de9049aaf72f9feb437',1,'PointLight::color'],['../structSpotLight.html#a66aff00aafa672a52aafab06dd1648ea',1,'SpotLight::color'],['../structParticleSystem_1_1EmitterConfig.html#a8e01733a6eafbf7e743d8e8fba05b676',1,'ParticleSystem::EmitterConfig::color']]],
   ['color_5f_6',['color_',['../classUi_1_1Element.html#a68cd0a58f218e08030cba6a609cf6cfb',1,'Ui::Element']]],
-  ['cosangle_7',['cosAngle',['../structSpotLight.html#af34c60194528537d1a3c585e0a5af2f2',1,'SpotLight']]]
+  ['colorkeys_7',['colorKeys',['../structParticleSystem_1_1EmitterConfig.html#a5dcdf49ced7b24d2252c93fcbefcd96d',1,'ParticleSystem::EmitterConfig']]],
+  ['cosangle_8',['cosAngle',['../structSpotLight.html#af34c60194528537d1a3c585e0a5af2f2',1,'SpotLight']]]
 ];

@@ -1,14 +1,7 @@
 var searchData=
 [
-  ['ondraw_0',['ondraw',['../classUi_1_1SpriteElement.html#a7a102b6f1e9ffa2bb3e67843570cdaa1',1,'Ui::SpriteElement::OnDraw()'],['../classUi_1_1TextElement.html#abd94ed4d56a24973a0f97efc1e64869c',1,'Ui::TextElement::OnDraw()'],['../classUi_1_1Element.html#af4a937ed1b55b7500fdf34d2c9e65e74',1,'Ui::Element::OnDraw() const =0']]],
-  ['oninitialize_1',['oninitialize',['../classUi_1_1Element.html#a24a5093419f181c921bc4756005ecb7e',1,'Ui::Element::OnInitialize()'],['../classUi_1_1SpriteElement.html#a4ce07c74c16d15bffa355c92b18f9f96',1,'Ui::SpriteElement::OnInitialize()'],['../classUi_1_1TextElement.html#a9411036448ec3bf9f8f1a142a203efb2',1,'Ui::TextElement::OnInitialize()']]],
-  ['onupdate_2',['onupdate',['../classUi_1_1Element.html#a8aea04a85a3789f6d2abd99922817a7b',1,'Ui::Element::OnUpdate()'],['../classUi_1_1SpriteElement.html#a2d74957bc4fc2b880c510325d9e0a178',1,'Ui::SpriteElement::OnUpdate()'],['../classUi_1_1TextElement.html#aa3e7477e8e89bffaf0c95b5e8ed2f696',1,'Ui::TextElement::OnUpdate()']]],
-  ['openeditor_3',['OpenEditor',['../classPostProcessPresetEditor.html#a61f659a3a084d7f6f194a67368e9a88e',1,'PostProcessPresetEditor']]],
-  ['openpreseteditor_4',['OpenPresetEditor',['../classPostProcessExecutor.html#aa21de519d6c5cd112023a0dd60dce0f0',1,'PostProcessExecutor']]],
-  ['operator_20float_5',['operator float',['../classScreen_1_1Utils_1_1vw.html#a6f4db051ed830b56c475610e0a17d4fb',1,'Screen::Utils::vw::operator float()'],['../classScreen_1_1Utils_1_1px.html#a5488222b6b073c8eefff78ca789333f4',1,'Screen::Utils::px::operator float()'],['../classScreen_1_1Utils_1_1vh.html#a933521ea0251adedda577ffd808e60d5',1,'Screen::Utils::vh::operator float()']]],
-  ['operator_22_22_5fpx_6',['operator&quot;&quot;_px',['../ScreenUtils_8hpp.html#a946ec06eb72518183f4d7c9155e6d06b',1,'operator&quot;&quot;_px(long double v):&#160;ScreenUtils.hpp'],['../ScreenUtils_8hpp.html#a4e48cccaca883f5e9dd9ba651cd59214',1,'operator&quot;&quot;_px(unsigned long long v):&#160;ScreenUtils.hpp']]],
-  ['operator_22_22_5fvh_7',['operator&quot;&quot;_vh',['../ScreenUtils_8hpp.html#af33329168a2075df20c4a694f7c35542',1,'operator&quot;&quot;_vh(long double v):&#160;ScreenUtils.hpp'],['../ScreenUtils_8hpp.html#ab2526a32203b42a17c1a80195a69f678',1,'operator&quot;&quot;_vh(unsigned long long v):&#160;ScreenUtils.hpp']]],
-  ['operator_22_22_5fvw_8',['operator&quot;&quot;_vw',['../ScreenUtils_8hpp.html#ace8562c575562d121589f584c4a099c7',1,'operator&quot;&quot;_vw(long double v):&#160;ScreenUtils.hpp'],['../ScreenUtils_8hpp.html#a7d57e203092d265c5585ec46e9ee08d1',1,'operator&quot;&quot;_vw(unsigned long long v):&#160;ScreenUtils.hpp']]],
-  ['operator_28_29_9',['operator()',['../structstd_1_1hash_3_01Ui_1_1EventKey_01_4.html#ab8449ac838947c2be0ae584252df0585',1,'std::hash&lt; Ui::EventKey &gt;']]],
-  ['operator_3d_10',['operator=',['../classRawLight.html#a8be8572995bb02317ddbe74004b01b18',1,'RawLight::operator=()'],['../classRawSpotLight.html#a3cc9c2c50b44d0584a532f82ec4e6d8f',1,'RawSpotLight::operator=()']]]
+  ['model_0',['Model',['../classModel.html#ae3b375de5f6df4faf74a95d64748e048',1,'Model']]],
+  ['modifier_1',['modifier',['../classBoxBlur.html#a46a6e5b5244d72b9ec5e56cce20bf19f',1,'BoxBlur::Modifier()'],['../classGrayscale.html#a1da256e18d825b92a0570883fe29fdab',1,'Grayscale::Modifier()'],['../classIPostEffect.html#a714a743aff95fad87356f280810dd286',1,'IPostEffect::Modifier()'],['../classVignette.html#a49055542d8d230abc9e01cd6a062f551',1,'Vignette::Modifier()']]],
+  ['movecursordir_2',['MoveCursorDir',['../classUi_1_1Canvas.html#a8042679d73b4dd640f2804821cae4967',1,'Ui::Canvas']]],
+  ['movecursorto_3',['MoveCursorTo',['../classUi_1_1Canvas.html#a0250f815115c98adb2354a9b94c3587c',1,'Ui::Canvas']]]
 ];

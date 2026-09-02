@@ -1,0 +1,138 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>PortfolioGame Engine: /home/runner/work/GameEngine/GameEngine/include/DebugUIWidgets.hpp ソースファイル</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">PortfolioGame Engine<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">C++20 DirectX12 Game Engine</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','検索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function() { init_codefold(0); });
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('DebugUIWidgets_8hpp_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">読み取り中…</div>
+<div class="SRStatus" id="Searching">検索中…</div>
+<div class="SRStatus" id="NoMatches">一致する文字列を見つけられません</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">DebugUIWidgets.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="DebugUIWidgets_8hpp.html">[詳解]</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef DebugUIWidgets_HPP_</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define DebugUIWidgets_HPP_</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
+<div class="foldopen" id="foldopen00010" data-start="{" data-end="}">
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="namespaceDebugUIWidgets.html">   10</a></span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceDebugUIWidgets.html">DebugUIWidgets</a> {</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="namespaceDebugUIWidgets.html#abf4b2db655e467712312b1946ea7a4a9">DragFloat</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* _label, <span class="keywordtype">float</span>* _v, <span class="keywordtype">float</span> _speed = 0.01f, <span class="keywordtype">float</span> _min = 0.f, <span class="keywordtype">float</span> _max = 0.f);</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="namespaceDebugUIWidgets.html#ae8c25976513e692fb312642cdcf1c5a5">DragFloat3</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* _label, <span class="keywordtype">float</span>* _v, <span class="keywordtype">float</span> _speed = 0.01f, <span class="keywordtype">float</span> _min = 0.f, <span class="keywordtype">float</span> _max = 0.f);</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="namespaceDebugUIWidgets.html#a1268e5c5539b05f4d8d9d372234201d9">DragInt</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* _label, <span class="keywordtype">int</span>* _v, <span class="keywordtype">float</span> _speed, <span class="keywordtype">int</span> _min, <span class="keywordtype">int</span> _max);</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="namespaceDebugUIWidgets.html#a5461d52b909a6f736a1c5e57a96e6de4">ColorEdit4</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* _label, <span class="keywordtype">float</span>* _v);</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="namespaceDebugUIWidgets.html#a22293e2874b2c9f1635cdbe98f0ce111">Checkbox</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* _label, <span class="keywordtype">bool</span>* _v);</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="namespaceDebugUIWidgets.html#a29c916187f64358f743586aca8450ab3">Combo</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* _label, <span class="keywordtype">int</span>* _current, <span class="keyword">const</span> <span class="keywordtype">char</span>* <span class="keyword">const</span> _items[], <span class="keywordtype">int</span> _count);</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="namespaceDebugUIWidgets.html#a8bf4bb8b3eb57d041db8ac19d3ffc576">KeyCombo</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* _label, <span class="keyword">const</span> std::vector&lt;std::string&gt;&amp; _keys, std::string&amp; _selected);</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>} <span class="comment">// namespace DebugUIWidgets</span></div>
+</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#endif </span><span class="comment">// DebugUIWidgets_HPP_</span></div>
+<div class="ttc" id="anamespaceDebugUIWidgets_html"><div class="ttname"><a href="namespaceDebugUIWidgets.html">DebugUIWidgets</a></div><div class="ttdoc">ImGui入力ウィジェットのラッパー集 デフォルトの &lt;Widget&gt;[Name] レイアウトはウィンドウが狭いと名前が読めなくなるため、 名前を上段に、ウィジェットを下段いっぱいに表示するレイアウトへ...</div><div class="ttdef"><b>Definition</b> <a href="DebugUIWidgets_8hpp_source.html#l00010">DebugUIWidgets.hpp:10</a></div></div>
+<div class="ttc" id="anamespaceDebugUIWidgets_html_a1268e5c5539b05f4d8d9d372234201d9"><div class="ttname"><a href="namespaceDebugUIWidgets.html#a1268e5c5539b05f4d8d9d372234201d9">DebugUIWidgets::DragInt</a></div><div class="ttdeci">bool DragInt(const char *_label, int *_v, float _speed, int _min, int _max)</div><div class="ttdef"><b>Definition</b> <a href="DebugUIWidgets_8cpp_source.html#l00024">DebugUIWidgets.cpp:24</a></div></div>
+<div class="ttc" id="anamespaceDebugUIWidgets_html_a22293e2874b2c9f1635cdbe98f0ce111"><div class="ttname"><a href="namespaceDebugUIWidgets.html#a22293e2874b2c9f1635cdbe98f0ce111">DebugUIWidgets::Checkbox</a></div><div class="ttdeci">bool Checkbox(const char *_label, bool *_v)</div><div class="ttdef"><b>Definition</b> <a href="DebugUIWidgets_8cpp_source.html#l00036">DebugUIWidgets.cpp:36</a></div></div>
+<div class="ttc" id="anamespaceDebugUIWidgets_html_a29c916187f64358f743586aca8450ab3"><div class="ttname"><a href="namespaceDebugUIWidgets.html#a29c916187f64358f743586aca8450ab3">DebugUIWidgets::Combo</a></div><div class="ttdeci">bool Combo(const char *_label, int *_current, const char *const _items[], int _count)</div><div class="ttdef"><b>Definition</b> <a href="DebugUIWidgets_8cpp_source.html#l00041">DebugUIWidgets.cpp:41</a></div></div>
+<div class="ttc" id="anamespaceDebugUIWidgets_html_a5461d52b909a6f736a1c5e57a96e6de4"><div class="ttname"><a href="namespaceDebugUIWidgets.html#a5461d52b909a6f736a1c5e57a96e6de4">DebugUIWidgets::ColorEdit4</a></div><div class="ttdeci">bool ColorEdit4(const char *_label, float *_v)</div><div class="ttdef"><b>Definition</b> <a href="DebugUIWidgets_8cpp_source.html#l00030">DebugUIWidgets.cpp:30</a></div></div>
+<div class="ttc" id="anamespaceDebugUIWidgets_html_a8bf4bb8b3eb57d041db8ac19d3ffc576"><div class="ttname"><a href="namespaceDebugUIWidgets.html#a8bf4bb8b3eb57d041db8ac19d3ffc576">DebugUIWidgets::KeyCombo</a></div><div class="ttdeci">bool KeyCombo(const char *_label, const std::vector&lt; std::string &gt; &amp;_keys, std::string &amp;_selected)</div><div class="ttdoc">キー一覧からコンボボックスで選択させる（先頭は未設定扱い）</div><div class="ttdef"><b>Definition</b> <a href="DebugUIWidgets_8cpp_source.html#l00047">DebugUIWidgets.cpp:47</a></div></div>
+<div class="ttc" id="anamespaceDebugUIWidgets_html_abf4b2db655e467712312b1946ea7a4a9"><div class="ttname"><a href="namespaceDebugUIWidgets.html#abf4b2db655e467712312b1946ea7a4a9">DebugUIWidgets::DragFloat</a></div><div class="ttdeci">bool DragFloat(const char *_label, float *_v, float _speed=0.01f, float _min=0.f, float _max=0.f)</div><div class="ttdef"><b>Definition</b> <a href="DebugUIWidgets_8cpp_source.html#l00012">DebugUIWidgets.cpp:12</a></div></div>
+<div class="ttc" id="anamespaceDebugUIWidgets_html_ae8c25976513e692fb312642cdcf1c5a5"><div class="ttname"><a href="namespaceDebugUIWidgets.html#ae8c25976513e692fb312642cdcf1c5a5">DebugUIWidgets::DragFloat3</a></div><div class="ttdeci">bool DragFloat3(const char *_label, float *_v, float _speed=0.01f, float _min=0.f, float _max=0.f)</div><div class="ttdef"><b>Definition</b> <a href="DebugUIWidgets_8cpp_source.html#l00018">DebugUIWidgets.cpp:18</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="DebugUIWidgets_8hpp.html">DebugUIWidgets.hpp</a></li>
+    <li class="footer">2026年09月02日(水) 09時31分25秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+  </ul>
+</div>
+</body>
+</html>
