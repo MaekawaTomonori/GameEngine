@@ -28,6 +28,9 @@ public:
         Vector3 size = {1.f, 1.f, 1.f};
         Vector3 velocity = {0.f, 0.f, 0.f};
         Vector4 color = {1.f, 1.f, 1.f, 1.f};
+        std::vector<GradientKey<Vector4>> colorKeys;
+        std::vector<GradientKey<Vector3>> sizeKeys;
+        float particleLifetime = 3.f;
         std::string spawnFuncKey;
         std::string updateFuncKey;
         PrimitiveType primitive = PrimitiveType::Billboard;
@@ -58,8 +61,8 @@ private:
     GESTD::ReferencePtr<DebugUI> debugUI_ = nullptr;
 
     std::unordered_map<std::string, Template> templates_;
-    std::unordered_map<std::string, UpdateFunc> updateFuncs_;
     std::unordered_map<std::string, SpawnFunc>  spawnFuncs_;
+    std::unordered_map<std::string, UpdateFunc> updateFuncs_;
 
     std::vector<std::unique_ptr<Emitter>> pool_;
     std::vector<Emitter*> available_;
@@ -113,8 +116,9 @@ public:
     /** @brief テンプレートからInstanceを生成してパーティクルを発射
      * @param _templateName テンプレート名
      * @param _position 発射位置
+     * @return 発射した最初のEmitterのハンドル（複数Emitterのテンプレートでも先頭のみ）。発射できなければ無効なハンドル
      */
-    void Emit(const std::string& _templateName, const Vector3& _position);
+    EmitterHandle Emit(const std::string& _templateName, const Vector3& _position);
 
     /** @brief テンプレートを削除
      * @param _name テンプレート名
@@ -132,8 +136,8 @@ private:
     void SetupPSO();
     void InitializePool();
     void LoadTemplates();
-    UpdateFunc ResolveUpdateFunc(const EmitterConfig& _config) const;
     SpawnFunc  ResolveSpawnFunc(const EmitterConfig& _config) const;
+    UpdateFunc ResolveUpdateFunc(const EmitterConfig& _config) const;
 }; // class ParticleSystem
 
 #endif // ParticleSystem_HPP_

@@ -1,5 +1,6 @@
 #include "Emitter.hpp"
 
+#include "DebugUIWidgets.hpp"
 #include "Log.hpp"
 #include "Utils.hpp"
 #include "imgui_internal.h"
@@ -86,19 +87,49 @@ void Emitter::Draw() {
     }
 }
 
-void Emitter::Emit() {
+EmitterHandle Emitter::Emit() {
+    active_ = true;
+    timer_ = 0.f;
+    elapsedTime_ = 0.f;
     Spawn(spawnCount_);
+
+    // frequency<=0 は継続スポーンを行わない単発バーストとして扱う
+    if (frequency_ <= 0.01f) {
+        active_ = false;
+    }
+
+    return EmitterHandle(GESTD::ReferencePtr<Emitter>(this, lifetime_));
+}
+
+void EmitterHandle::SetPosition(const Vector3& _position) {
+    if (emitter_) emitter_->SetPosition(_position);
+}
+
+void EmitterHandle::Stop() {
+    if (emitter_) emitter_->Enable(false);
 }
 
 void Emitter::Reset() {
     particles_.clear();
     timer_ = 0.f;
+    elapsedTime_ = 0.f;
     actives_ = 0;
     active_ = false;
     billboard_ = true;
     primitive_ = PrimitiveType::Billboard;
+    position_ = {};
     rotation_ = {};
     rotationVelocity_ = {};
+    duration_ = 1.f;
+    frequency_ = 0.f;
+    spawnCount_ = 1;
+    size_ = { 1.f, 1.f, 1.f };
+    velocity_ = {};
+    color_ = { 1.f, 1.f, 1.f, 1.f };
+    colorKeys_.clear();
+    sizeKeys_.clear();
+    particleLifetime_ = 3.f;
+    texture_ = "white_x16.png";
     updateFunc_ = nullptr;
     spawnFunc_ = nullptr;
 }
@@ -111,15 +142,15 @@ void Emitter::Debug() {
     ImGui::PushID(uuid_.c_str());
     if (ImGui::TreeNode((name_ + " (" + uuid_ + ")").c_str())){
         ImGui::Text("Texture: %s", texture_.c_str());
-        ImGui::Checkbox("Billboard", &billboard_);
-        ImGui::DragFloat3("Position", &position_.x, 0.1f);
-        ImGui::DragFloat3("Rotation", &rotation_.x, 0.01f);
-        ImGui::DragFloat3("Rotation Velocity", &rotationVelocity_.x, 0.01f);
-        ImGui::DragInt("Spawn Count", reinterpret_cast<int*>(&spawnCount_), 1.f, 1, 1000);
-        ImGui::DragFloat("Frequency", &frequency_, 0.01f, 0.f, 100.f);
-        ImGui::DragFloat("Duration", &duration_, 0.01f, 0.f, 100.f);
-        ImGui::DragFloat3("Size", &size_.x, 0.01f, 0.f, 100.f);
-        ImGui::ColorEdit4("Color", &color_.x);
+        DebugUIWidgets::Checkbox("Billboard", &billboard_);
+        DebugUIWidgets::DragFloat3("Position", &position_.x, 0.1f);
+        DebugUIWidgets::DragFloat3("Rotation", &rotation_.x, 0.01f);
+        DebugUIWidgets::DragFloat3("Rotation Velocity", &rotationVelocity_.x, 0.01f);
+        DebugUIWidgets::DragInt("Spawn Count", reinterpret_cast<int*>(&spawnCount_), 1.f, 1, 1000);
+        DebugUIWidgets::DragFloat("Frequency", &frequency_, 0.01f, 0.f, 100.f);
+        DebugUIWidgets::DragFloat("Duration", &duration_, 0.01f, 0.f, 100.f);
+        DebugUIWidgets::DragFloat3("Size", &size_.x, 0.01f, 0.f, 100.f);
+        DebugUIWidgets::ColorEdit4("Color", &color_.x);
 
         if (ImGui::TreeNode("Particles")){
             for (const auto& particle : particles_) {
@@ -191,6 +222,23 @@ Emitter& Emitter::SetRotationVelocity(const Vector3& _rotationVelocity) {
     return *this;
 }
 
+Emitter& Emitter::SetParticleLifetime(const float& _lifetime) {
+    particleLifetime_ = _lifetime;
+    return *this;
+}
+
+Emitter& Emitter::SetColorKeys(std::vector<GradientKey<Vector4>> _keys) {
+    SortGradient(_keys);
+    colorKeys_ = std::move(_keys);
+    return *this;
+}
+
+Emitter& Emitter::SetSizeKeys(std::vector<GradientKey<Vector3>> _keys) {
+    SortGradient(_keys);
+    sizeKeys_ = std::move(_keys);
+    return *this;
+}
+
 Emitter& Emitter::SetUpdateFunction(const std::function<void(float, const Vector3&, Vector3&, Vector3&, Vector4&)>& _func) {
     updateFunc_ = _func;
     return *this;
@@ -213,10 +261,20 @@ Emitter& Emitter::Enable(bool _active) {
 
 void Emitter::FrequencyUpdate() {
     if (!active_) return;
-    if (frequency_ <= 0.01f) return;
+    if (frequency_ <= 0.01f) {
+        active_ = false;
+        return;
+    }
+
+    elapsedTime_ += Time::GetDeltaTime();
+    if (elapsedTime_ >= duration_) {
+        active_ = false;
+        return;
+    }
+
     if (frequency_ <= timer_) {
         timer_ = 0.f;
-        Emit();
+        Spawn(spawnCount_);
         return;
     }
 
@@ -239,8 +297,10 @@ void Emitter::Spawn(const uint16_t& _count) {
             .SetVelocity(spawnVel)
             .SetRotation(rotation_)
             .SetRotationVelocity(rotationVelocity_)
+            .SetColorKeys(colorKeys_)
+            .SetSizeKeys(sizeKeys_)
             .SetUpdateFunction(updateFunc_)
-            .Initialize(3.f);
+            .Initialize(particleLifetime_);
         particles_.emplace_back(std::move(particle));
     }
 }

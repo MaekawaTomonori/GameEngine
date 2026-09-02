@@ -222,6 +222,9 @@
     <ClInclude Include="include\DebugUI.hpp">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="include\DebugUIWidgets.hpp">
+      <Filter>include</Filter>
+    </ClInclude>
     <ClInclude Include="include\Framework.hpp">
       <Filter>include</Filter>
     </ClInclude>
@@ -435,6 +438,7 @@
     <ClInclude Include="src\DirectX\RootSignature\InputLayout.hpp" />
     <ClInclude Include="src\DirectX\RootSignature\RootSignature.hpp" />
     <ClInclude Include="src\ParticleSystem\Emitter\Emitter.hpp" />
+    <ClInclude Include="src\ParticleSystem\Keyframe.hpp" />
     <ClInclude Include="src\ParticleSystem\ParticleSystem.hpp" />
     <ClInclude Include="src\ParticleSystem\Particle\Particle.hpp" />
     <ClInclude Include="src\PostProcess\Editor\PostProcessPresetEditor.hpp" />
@@ -478,6 +482,9 @@
       <Filter>src\Container</Filter>
     </ClCompile>
     <ClCompile Include="src\Debug\DebugUI.cpp">
+      <Filter>src\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Debug\DebugUIWidgets.cpp">
       <Filter>src\Debug</Filter>
     </ClCompile>
     <ClCompile Include="src\DirectX\DirectXAdapter.cpp">

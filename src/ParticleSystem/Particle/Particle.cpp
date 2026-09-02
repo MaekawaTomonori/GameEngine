@@ -1,5 +1,6 @@
 #include "Particle.hpp"
 
+#include "DebugUIWidgets.hpp"
 #include "Utils.hpp"
 #include "imgui_internal.h"
 #include "Math/MathUtils.hpp"
@@ -10,8 +11,13 @@ void Particle::Initialize(float _duration) {
 }
 
 void Particle::Update() {
+    const float progress = duration_ > 0.f ? now_ / duration_ : 0.f;
+
+    color_ = EvaluateGradient(colorKeys_, progress, color_);
+    scale_ = EvaluateGradient(sizeKeys_, progress, scale_);
+
     if (update_) {
-        update_(now_ / duration_, origin_, position_, velocity_, color_);
+        update_(progress, origin_, position_, velocity_, color_);
     }
 
     static constexpr float DT = 1.f / 60.f;
@@ -23,18 +29,12 @@ void Particle::Update() {
 void Particle::Debug() {
     ImGui::PushID(uuid_.c_str());
     if (ImGui::TreeNode(uuid_.c_str())) {
-        ImGui::Text("Position");
-        ImGui::DragFloat3("##Position", &position_.x, 0.1f);
-        ImGui::Text("Scale");
-        ImGui::DragFloat3("##Scale", &scale_.x, 0.1f);
-        ImGui::Text("Rotation");
-        ImGui::DragFloat3("##Rotation", &rotation_.x, 0.01f);
-        ImGui::Text("RotVelocity");
-        ImGui::DragFloat3("##RotVelocity", &rotationVelocity_.x, 0.01f);
-        ImGui::Text("Color");
-        ImGui::ColorEdit4("##Color", &color_.x);
-        ImGui::Text("Duration");
-        ImGui::DragFloat("##Duration", &duration_, 0.01f, 0.f, 100.f);
+        DebugUIWidgets::DragFloat3("Position", &position_.x, 0.1f);
+        DebugUIWidgets::DragFloat3("Scale", &scale_.x, 0.1f);
+        DebugUIWidgets::DragFloat3("Rotation", &rotation_.x, 0.01f);
+        DebugUIWidgets::DragFloat3("RotVelocity", &rotationVelocity_.x, 0.01f);
+        DebugUIWidgets::ColorEdit4("Color", &color_.x);
+        DebugUIWidgets::DragFloat("Duration", &duration_, 0.01f, 0.f, 100.f);
         ImGui::TreePop();
     }
     ImGui::PopID();
@@ -77,6 +77,16 @@ Particle& Particle::SetScale(const Vector3& _scale) {
 
 Particle& Particle::SetColor(const Vector4& _color) {
     color_ = _color;
+    return *this;
+}
+
+Particle& Particle::SetColorKeys(const std::vector<GradientKey<Vector4>>& _keys) {
+    colorKeys_ = _keys;
+    return *this;
+}
+
+Particle& Particle::SetSizeKeys(const std::vector<GradientKey<Vector3>>& _keys) {
+    sizeKeys_ = _keys;
     return *this;
 }
 
