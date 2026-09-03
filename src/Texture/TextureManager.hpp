@@ -7,6 +7,7 @@
 #include <string>
 #include <unordered_map>
 #include <memory>
+#include <vector>
 
 #include "src/DirectX/DirectXAdapter.hpp"
 #include "src/DirectX/Heap/SRVManager.h"
@@ -108,6 +109,19 @@ public:
      * @return リソースポインタ。未登録の場合 nullptr
      */
     ID3D12Resource* GetResource(const std::string& _name) const;
+
+    /** @brief 読み込み可能な画像ファイルの一覧を取得（デバッグUIの選択肢表示用）
+     * folderPath_ 配下を再帰的に走査し、対応拡張子（png/jpg/jpeg/dds/tga）のファイルを
+     * folderPath_ からの相対パス（Load等にそのまま渡せるキー形式）で返す
+     * @return ソート済みの相対パス一覧
+     */
+    std::vector<std::string> ListAvailableTextures() const;
+
+    /** @brief 既に読み込み済み（GPUへアップロード済み）のテクスチャキー一覧を取得
+     * ディスクを走査せず、現在使用可能なテクスチャだけを返す（デバッグUIの選択肢表示用）
+     * @return ソート済みの読み込み済みテクスチャキー一覧
+     */
+    std::vector<std::string> GetLoadedTextureNames() const;
 
 private: //Methods
     DirectX::ScratchImage LoadTexture(const std::string& _filename) const;

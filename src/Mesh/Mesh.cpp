@@ -94,6 +94,27 @@ void Mesh::Draw(const uint16_t _instanceCount) const {
 }
 
 void Mesh::Debug() {
+    ImGui::SeparatorText("Texture");
+    {
+        TextureManager* texture = Singleton<TextureManager>::GetInstance();
+        const std::vector<std::string> available = texture->GetLoadedTextureNames();
+
+        const char* preview = texture_.empty() ? "(none)" : texture_.c_str();
+        if (ImGui::BeginCombo("Texture", preview)) {
+            for (const auto& tex : available) {
+                const bool selected = (texture_ == tex);
+                if (ImGui::Selectable(tex.c_str(), selected)) {
+                    SetTexture(tex);
+                }
+                if (selected) ImGui::SetItemDefaultFocus();
+            }
+            if (available.empty()) {
+                ImGui::TextDisabled("No images found under Assets/Resources");
+            }
+            ImGui::EndCombo();
+        }
+    }
+
     ImGui::ColorEdit4("Color", &material_->color.x);
     ImGui::Checkbox("EnableLighting", &lighting_);
     if (lighting_) {

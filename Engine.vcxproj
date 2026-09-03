@@ -214,6 +214,9 @@
     <ClInclude Include="src\Stage\StageRepository.hpp" />
     <ClInclude Include="include\Text\Text.hpp" />
     <ClInclude Include="src\Text\TextCommon.hpp" />
+    <ClInclude Include="src\Texture\Composition\PlaneTextureBaker.hpp" />
+    <ClInclude Include="src\Texture\Composition\PlaneTextureLayer.hpp" />
+    <ClInclude Include="src\Texture\Composition\PlaneTextureLayoutEditor.hpp" />
     <ClInclude Include="src\Texture\TextureManager.hpp" />
     <ClInclude Include="src\Time\Time.hpp" />
     <ClInclude Include="src\Timer\Timer.hpp" />
@@ -313,6 +316,8 @@
     <ClCompile Include="src\System\Log.cpp" />
     <ClCompile Include="src\Text\Text.cpp" />
     <ClCompile Include="src\Text\TextCommon.cpp" />
+    <ClCompile Include="src\Texture\Composition\PlaneTextureBaker.cpp" />
+    <ClCompile Include="src\Texture\Composition\PlaneTextureLayoutEditor.cpp" />
     <ClCompile Include="src\Texture\TextureManager.cpp" />
     <ClCompile Include="src\Time\Time.cpp" />
     <ClCompile Include="src\Timer\Timer.cpp" />

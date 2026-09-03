@@ -9,11 +9,13 @@
  */
 namespace DebugUIWidgets {
     bool DragFloat(const char* _label, float* _v, float _speed = 0.01f, float _min = 0.f, float _max = 0.f);
+    bool DragFloat2(const char* _label, float* _v, float _speed = 0.01f, float _min = 0.f, float _max = 0.f);
     bool DragFloat3(const char* _label, float* _v, float _speed = 0.01f, float _min = 0.f, float _max = 0.f);
     bool DragInt(const char* _label, int* _v, float _speed, int _min, int _max);
     bool ColorEdit4(const char* _label, float* _v);
     bool Checkbox(const char* _label, bool* _v);
     bool Combo(const char* _label, int* _current, const char* const _items[], int _count);
+    bool InputText(const char* _label, char* _buf, size_t _bufSize);
 
     /** @brief キー一覧からコンボボックスで選択させる（先頭は未設定扱い）
      * @param _label 表示名
