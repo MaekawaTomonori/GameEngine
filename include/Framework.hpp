@@ -7,6 +7,7 @@
 #include "Input.hpp"
 #ifdef _DEBUG
 #include "src/Debug/Debugger.hpp"
+#include "src/Texture/Composition/PlaneTextureLayoutEditor.hpp"
 #endif
 #include "Ui/UiManager.hpp"
 #include "src/Camera/Controller/CameraController.hpp"
@@ -48,6 +49,7 @@ class Framework {
     std::unique_ptr<ResourceRepository> resources_;
 #ifdef _DEBUG
     std::unique_ptr<Debugger>        debugger_;
+    std::unique_ptr<PlaneTextureLayoutEditor> planeTextureEditor_;
 #endif
     std::unique_ptr<SRVManager> srv_;
     std::unique_ptr<ParticleSystem>      particle_;

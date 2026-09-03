@@ -1,5 +1,7 @@
 #include "TextureManager.hpp"
 
+#include <algorithm>
+#include <filesystem>
 #include <format>
 #include <mutex>
 
@@ -195,11 +197,14 @@ bool TextureManager::Load(const std::string& _fileName) {
 bool TextureManager::LoadFromRawPixels(const std::string& _name, const uint8_t* _pixels, uint32_t _width, uint32_t _height, DXGI_FORMAT _format) {
     std::lock_guard<std::mutex> lock(mutex_);
 
-    if (textures_.contains(_name)) {
-        return true;
-    }
+    const auto existing = textures_.find(_name);
 
-    assert(!srv_->IsFull());
+    // 新規キーの場合のみディスクリプタ枯渇をチェックする（既存キー更新はSRVスロットを使い回すため枯渇しない）
+    if (existing == textures_.end() && srv_->IsFull()) {
+        Log::Send(Log::Level::ERR, std::format("TextureManager::LoadFromRawPixels: SRV heap is full: {}", _name));
+        Utils::Alert(std::format("TextureManager::LoadFromRawPixels: SRV heap is full: {}", _name));
+        return false;
+    }
 
     // 2D テクスチャ用メタデータを手動構築（ミップなし）
     DirectX::TexMetadata meta{};
@@ -233,17 +238,28 @@ bool TextureManager::LoadFromRawPixels(const std::string& _name, const uint8_t* 
                srcRowPitch);
     }
 
-    Texture texture;
-    texture.metadata = img.GetMetadata();
-    texture.resource = adapter_->CreateTextureResource(img.GetMetadata());
-
-    if (!texture.resource) {
+    // 生成・アップロードが完了するまでは既存エントリに触れない
+    std::unique_ptr<DX12Resource> resource = adapter_->CreateTextureResource(img.GetMetadata());
+    if (!resource) {
         Log::Send(Log::Level::ERR, std::format("TextureManager::LoadFromRawPixels: CreateTextureResource failed: {}", _name));
         return false;
     }
 
-    UploadTextureData(texture.resource.get(), img);
+    UploadTextureData(resource.get(), img);
 
+    if (existing != textures_.end()) {
+        // UploadTextureData 内でフェンス待ち済みのため旧リソースは解放してよい
+        // SRVスロットは使い回す
+        existing->second.metadata = img.GetMetadata();
+        existing->second.resource = std::move(resource);
+        srv_->CreateSRVForTexture2D(existing->second.srvIndex, existing->second.resource->Get(), _format, 1);
+        Log::Send(Log::Level::INFO, std::format("TextureManager::LoadFromRawPixels: updated {}", _name));
+        return true;
+    }
+
+    Texture texture;
+    texture.metadata  = img.GetMetadata();
+    texture.resource  = std::move(resource);
     texture.srvIndex  = srv_->Allocate();
     texture.cpuHandle = srv_->GetCPUHandle(texture.srvIndex);
     texture.gpuHandle = srv_->GetGPUHandle(texture.srvIndex);
@@ -327,4 +343,40 @@ ID3D12Resource* TextureManager::GetResource(const std::string& _name) const {
         return it->second.resource->Get();
     }
     return nullptr;
+}
+
+std::vector<std::string> TextureManager::ListAvailableTextures() const {
+    namespace fs = std::filesystem;
+
+    std::vector<std::string> result;
+
+    std::error_code ec;
+    const fs::path root = folderPath_;
+    if (!fs::exists(root, ec) || !fs::is_directory(root, ec)) return result;
+
+    for (const auto& entry : fs::recursive_directory_iterator(root, fs::directory_options::skip_permission_denied, ec)) {
+        if (ec) break;
+        if (!entry.is_regular_file(ec)) continue;
+
+        const std::string ext = entry.path().extension().string();
+        const bool isImage = ext == ".png" || ext == ".jpg" || ext == ".jpeg" || ext == ".dds" || ext == ".tga";
+        if (!isImage) continue;
+
+        const fs::path relative = fs::relative(entry.path(), root, ec);
+        if (ec) continue;
+        result.push_back(relative.generic_string());
+    }
+
+    std::sort(result.begin(), result.end());
+    return result;
+}
+
+std::vector<std::string> TextureManager::GetLoadedTextureNames() const {
+    std::vector<std::string> result;
+    result.reserve(textures_.size());
+    for (const auto& [name, tex] : textures_) {
+        result.push_back(name);
+    }
+    std::sort(result.begin(), result.end());
+    return result;
 }

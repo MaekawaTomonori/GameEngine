@@ -68,6 +68,11 @@ Framework::Framework() {
     texture_ = Singleton<TextureManager>::GetInstance();
     texture_->Initialize(dxAdapter_.get(), srv_.get());
 
+#ifdef _DEBUG
+    planeTextureEditor_ = std::make_unique<PlaneTextureLayoutEditor>();
+    planeTextureEditor_->Initialize(dbg, static_cast<TextureManager*>(texture_), "PlaneTextureLayout", 1.f);
+#endif
+
     text_ = Singleton<TextCommon>::GetInstance();
     text_->Initialize(GESTD::ReferencePtr(dxAdapter_), dbg, static_cast<TextureManager*>(texture_), srv_.get());
 
@@ -215,6 +220,7 @@ void Framework::Update() const {
     sprite_->Debug();
     ui_->Debug();
     text_->Debug();
+    planeTextureEditor_->Debug();
     //audioPanel_->Debug();
 
     scene_->Debug();
@@ -306,6 +312,7 @@ void Framework::Shutdown() {
     resources_.reset();
 
 #ifdef _DEBUG
+    planeTextureEditor_.reset();
     debugger_.reset();
 #endif
 

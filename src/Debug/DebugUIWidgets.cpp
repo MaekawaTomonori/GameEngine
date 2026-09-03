@@ -15,6 +15,12 @@ namespace DebugUIWidgets {
         return ImGui::DragFloat(("##" + std::string(_label)).c_str(), _v, _speed, _min, _max);
     }
 
+    bool DragFloat2(const char* _label, float* _v, float _speed, float _min, float _max) {
+        ImGui::Text("%s", _label);
+        UseFullWidth();
+        return ImGui::DragFloat2(("##" + std::string(_label)).c_str(), _v, _speed, _min, _max);
+    }
+
     bool DragFloat3(const char* _label, float* _v, float _speed, float _min, float _max) {
         ImGui::Text("%s", _label);
         UseFullWidth();
@@ -42,6 +48,12 @@ namespace DebugUIWidgets {
         ImGui::Text("%s", _label);
         UseFullWidth();
         return ImGui::Combo(("##" + std::string(_label)).c_str(), _current, _items, _count);
+    }
+
+    bool InputText(const char* _label, char* _buf, size_t _bufSize) {
+        ImGui::Text("%s", _label);
+        UseFullWidth();
+        return ImGui::InputText(("##" + std::string(_label)).c_str(), _buf, _bufSize);
     }
 
     bool KeyCombo(const char* _label, const std::vector<std::string>& _keys, std::string& _selected) {

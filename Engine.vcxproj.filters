@@ -187,6 +187,9 @@
     <Filter Include="src\Texture">
       <UniqueIdentifier>{8DAD6B43-F962-E438-8257-DE0FEE0BDB3C}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Texture\Composition">
+      <UniqueIdentifier>{5C6D7E8F-9A0B-4C1D-8E2F-3A4B5C6D7E8F}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\Time">
       <UniqueIdentifier>{2E7C9A1F-6B3D-4C5E-9A0B-1F2E3D4C5B6A}</UniqueIdentifier>
     </Filter>
@@ -415,6 +418,15 @@
     <ClInclude Include="src\Text\TextCommon.hpp">
       <Filter>src\Text</Filter>
     </ClInclude>
+    <ClInclude Include="src\Texture\Composition\PlaneTextureBaker.hpp">
+      <Filter>src\Texture\Composition</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Texture\Composition\PlaneTextureLayer.hpp">
+      <Filter>src\Texture\Composition</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Texture\Composition\PlaneTextureLayoutEditor.hpp">
+      <Filter>src\Texture\Composition</Filter>
+    </ClInclude>
     <ClInclude Include="src\Texture\TextureManager.hpp">
       <Filter>src\Texture</Filter>
     </ClInclude>
@@ -627,6 +639,12 @@
     </ClCompile>
     <ClCompile Include="src\Text\TextCommon.cpp">
       <Filter>src\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Texture\Composition\PlaneTextureBaker.cpp">
+      <Filter>src\Texture\Composition</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Texture\Composition\PlaneTextureLayoutEditor.cpp">
+      <Filter>src\Texture\Composition</Filter>
     </ClCompile>
     <ClCompile Include="src\Texture\TextureManager.cpp">
       <Filter>src\Texture</Filter>
