@@ -4,6 +4,7 @@
 #include <variant>
 
 #include "Log.hpp"
+#include "PerformanceProfiler.hpp"
 #include "Utils.hpp"
 #include "Pattern/Singleton.hpp"
 #include "Math/MathUtils.hpp"
@@ -31,8 +32,8 @@ void CollisionManager::Initialize([[maybe_unused]] const GESTD::ReferencePtr<Deb
 }
 
 void CollisionManager::Update() {
-    manager_->Detect();
-    manager_->ProcessEvent();
+    { PROFILE_SCOPE("Collision Detect");  manager_->Detect();}
+    { PROFILE_SCOPE("Collision Event");  manager_->ProcessEvent();}
 
 #ifdef _DEBUG
     if (debugEnabled_) {
