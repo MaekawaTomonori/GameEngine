@@ -85,6 +85,8 @@ var annotated_dup =
     [ "Particle", "classParticle.html", "classParticle" ],
     [ "ParticleSystem", "classParticleSystem.html", "classParticleSystem" ],
     [ "PipelineStateObject", "classPipelineStateObject.html", "classPipelineStateObject" ],
+    [ "PlaneTextureLayer", "structPlaneTextureLayer.html", "structPlaneTextureLayer" ],
+    [ "PlaneTextureLayoutEditor", "classPlaneTextureLayoutEditor.html", "classPlaneTextureLayoutEditor" ],
     [ "PointLight", "structPointLight.html", "structPointLight" ],
     [ "PostProcessExecutor", "classPostProcessExecutor.html", "classPostProcessExecutor" ],
     [ "PostProcessPresetEditor", "classPostProcessPresetEditor.html", "classPostProcessPresetEditor" ],

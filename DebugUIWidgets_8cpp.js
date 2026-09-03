@@ -4,7 +4,9 @@ var DebugUIWidgets_8cpp =
     [ "ColorEdit4", "DebugUIWidgets_8cpp.html#a5461d52b909a6f736a1c5e57a96e6de4", null ],
     [ "Combo", "DebugUIWidgets_8cpp.html#a29c916187f64358f743586aca8450ab3", null ],
     [ "DragFloat", "DebugUIWidgets_8cpp.html#abf4b2db655e467712312b1946ea7a4a9", null ],
+    [ "DragFloat2", "DebugUIWidgets_8cpp.html#ac6b7006535129835c8a1bf1b4f029e27", null ],
     [ "DragFloat3", "DebugUIWidgets_8cpp.html#ae8c25976513e692fb312642cdcf1c5a5", null ],
     [ "DragInt", "DebugUIWidgets_8cpp.html#a1268e5c5539b05f4d8d9d372234201d9", null ],
+    [ "InputText", "DebugUIWidgets_8cpp.html#af0e70e4166c701fb0adbdc6a59c96da8", null ],
     [ "KeyCombo", "DebugUIWidgets_8cpp.html#a8bf4bb8b3eb57d041db8ac19d3ffc576", null ]
 ];

@@ -100,347 +100,403 @@ $(document).ready(function(){initNavTree('TextureManager_8cpp_source.html',''); 
 <div class="contents">
 <a href="TextureManager_8cpp.html">[詳解]</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#include &quot;<a class="code" href="TextureManager_8hpp.html">TextureManager.hpp</a>&quot;</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;format&gt;</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;mutex&gt;</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;<a class="code" href="Log_8hpp.html">Log.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;Utils.hpp&quot;</span></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;d3dx12.h&quot;</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
-<div class="foldopen" id="foldopen00010" data-start="{" data-end="}">
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="classTextureManager.html#a001d6d74674961db79987e3222682576">   10</a></span><a class="code hl_function" href="classTextureManager.html#a001d6d74674961db79987e3222682576">TextureManager::~TextureManager</a>() {</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    <a class="code hl_function" href="classTextureManager.html#ac1747fe5df0613980d545934904c949a">Unload</a>();</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>}</div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;algorithm&gt;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;filesystem&gt;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;format&gt;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;mutex&gt;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;<a class="code" href="Log_8hpp.html">Log.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;Utils.hpp&quot;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;d3dx12.h&quot;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="foldopen" id="foldopen00012" data-start="{" data-end="}">
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="classTextureManager.html#a001d6d74674961db79987e3222682576">   12</a></span><a class="code hl_function" href="classTextureManager.html#a001d6d74674961db79987e3222682576">TextureManager::~TextureManager</a>() {</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    <a class="code hl_function" href="classTextureManager.html#ac1747fe5df0613980d545934904c949a">Unload</a>();</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>}</div>
 </div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>DirectX::ScratchImage TextureManager::LoadTexture(<span class="keyword">const</span> std::string&amp; _filename)<span class="keyword"> const </span>{</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    DirectX::ScratchImage image {};</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    std::string fullPath = folderPath_ + _filename;</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    std::wstring filePathW = Utils::Convert(fullPath);</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <span class="keywordflow">if</span> (filePathW.ends_with(L<span class="stringliteral">&quot;.dds&quot;</span>))<span class="keywordflow">return</span> LoadDDS(filePathW);</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>DirectX::ScratchImage TextureManager::LoadTexture(<span class="keyword">const</span> std::string&amp; _filename)<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    DirectX::ScratchImage image {};</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    std::string fullPath = folderPath_ + _filename;</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    std::wstring filePathW = Utils::Convert(fullPath);</div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    [[maybe_unused]]HRESULT hr = LoadFromWICFile(filePathW.c_str(), DirectX::WIC_FLAGS_FORCE_SRGB, <span class="keyword">nullptr</span>, image);</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <span class="keywordflow">if</span> (filePathW.ends_with(L<span class="stringliteral">&quot;.dds&quot;</span>))<span class="keywordflow">return</span> LoadDDS(filePathW);</div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <span class="keywordflow">if</span> (FAILED(hr)) {</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>        <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, std::format(<span class="stringliteral">&quot;Failed to load texture file: {}&quot;</span>, fullPath));</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        Utils::Alert(std::format(<span class="stringliteral">&quot;Failed to load texture file: {}&quot;</span>, fullPath));</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        <span class="keywordflow">return</span> {};</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    }</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    DirectX::ScratchImage mipImages {};</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    hr = GenerateMipMaps(image.GetImages(), image.GetImageCount(), image.GetMetadata(), DirectX::TEX_FILTER_SRGB, 0, mipImages);</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <span class="keywordflow">if</span> (FAILED(hr)) {</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>        <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, std::format(<span class="stringliteral">&quot;Failed to generate mipmaps for texture file: {}&quot;</span>, fullPath));</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        Utils::Alert(std::format(<span class="stringliteral">&quot;Failed to generate mipmaps for texture file: {}&quot;</span>, fullPath));</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>        <span class="keywordflow">return</span> {};</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    }</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keywordflow">return</span> mipImages;</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>}</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="keywordtype">void</span> TextureManager::UploadTextureData(<a class="code hl_class" href="classDX12Resource.html">DX12Resource</a>* _texture, <span class="keyword">const</span> DirectX::ScratchImage&amp; _mipImages)<span class="keyword"> const </span>{</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    std::vector&lt;D3D12_SUBRESOURCE_DATA&gt; subResources;</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    PrepareUpload(adapter_-&gt;<a class="code hl_function" href="classDirectXAdapter.html#a28fe87825525272f00fd06231a0c1632">GetDevice</a>(), _mipImages.GetImages(), _mipImages.GetImageCount(), _mipImages.GetMetadata(), subResources);</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    uint32_t intermediateSize = <span class="keyword">static_cast&lt;</span>uint32_t<span class="keyword">&gt;</span>(GetRequiredIntermediateSize(_texture-&gt;<a class="code hl_function" href="classDX12Resource.html#a7de5777515323fc496662e3e01c83a30">Get</a>(), 0, <span class="keyword">static_cast&lt;</span>UINT<span class="keyword">&gt;</span>(subResources.size())));</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    std::unique_ptr&lt;DX12Resource&gt; intermediateResource = adapter_-&gt;<a class="code hl_function" href="classDirectXAdapter.html#ab4b4c251cdfee90870ce155e610c9500">CreateBufferResource</a>(intermediateSize);</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <span class="comment">// 専用のコマンドアロケーターとコマンドリストをリセット</span></div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="keywordflow">if</span> (FAILED(uploadCommandAllocator_-&gt;Reset())) {</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        Utils::Alert(<span class="stringliteral">&quot;Failed to reset upload command allocator&quot;</span>);</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    }</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <span class="keywordflow">if</span> (FAILED(uploadCommandList_-&gt;Reset(uploadCommandAllocator_.Get(), <span class="keyword">nullptr</span>))) {</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        Utils::Alert(<span class="stringliteral">&quot;Failed to reset upload command list&quot;</span>);</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    }</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    UpdateSubresources(uploadCommandList_.Get(), _texture-&gt;<a class="code hl_function" href="classDX12Resource.html#a7de5777515323fc496662e3e01c83a30">Get</a>(), intermediateResource-&gt;Get(), 0, 0, <span class="keyword">static_cast&lt;</span>UINT<span class="keyword">&gt;</span>(subResources.size()), subResources.data());</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    _texture-&gt;<a class="code hl_function" href="classDX12Resource.html#ab449563ef728d837d81b333e9910aad8">ChangeState</a>(uploadCommandList_.Get(), D3D12_RESOURCE_STATE_GENERIC_READ);</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <span class="keywordflow">if</span> (FAILED(uploadCommandList_-&gt;Close())) {</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        Utils::Alert(<span class="stringliteral">&quot;Failed to close upload command list&quot;</span>);</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>        <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    }</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    ID3D12CommandList* cls[] = { uploadCommandList_.Get() };</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    adapter_-&gt;<a class="code hl_function" href="classDirectXAdapter.html#a445ba307d21fc96baec912681546c6ed">GetCommandQueue</a>()-&gt;ExecuteCommandLists(_countof(cls), cls);</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    <span class="comment">// 適切なFence値管理を使用してコマンドキューの実行を待つ</span></div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    uint64_t fenceValue = adapter_-&gt;<a class="code hl_function" href="classDirectXAdapter.html#a159fa0e3baa6933654aa08009371bd6d">GetNextFenceValue</a>();</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    adapter_-&gt;<a class="code hl_function" href="classDirectXAdapter.html#a445ba307d21fc96baec912681546c6ed">GetCommandQueue</a>()-&gt;Signal(adapter_-&gt;<a class="code hl_function" href="classDirectXAdapter.html#a7cd3f81861f775387b11548b6fdaa49f">GetFence</a>(), fenceValue);</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    adapter_-&gt;<a class="code hl_function" href="classDirectXAdapter.html#a7793686074430b7c1cff3a7ee3cd2513">WaitForFenceValue</a>(fenceValue);</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>}</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>DirectX::ScratchImage TextureManager::LoadDDS(<span class="keyword">const</span> std::wstring&amp; _path) {</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    DirectX::ScratchImage image{};</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    HRESULT hr = LoadFromDDSFile(_path.c_str(), DirectX::DDS_FLAGS_NONE, <span class="keyword">nullptr</span>, image);</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    <span class="keywordflow">if</span> (FAILED(hr)) {</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>        <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, std::format(<span class="stringliteral">&quot;Failed to load DDS file: {}&quot;</span>, Utils::Convert(_path)));</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>        Utils::Alert(std::format(<span class="stringliteral">&quot;Failed to load DDS file: {}&quot;</span>, Utils::Convert(_path)));</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>        <span class="keywordflow">return</span> {};</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    }</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    DirectX::ScratchImage mip;</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    <span class="keywordflow">if</span> (DirectX::IsCompressed(image.GetMetadata().format)) {</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>        mip = std::move(image);</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>        hr = GenerateMipMaps(image.GetImages(), image.GetImageCount(), image.GetMetadata(), DirectX::TEX_FILTER_SRGB, 4, mip);</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>        <span class="keywordflow">if</span> (FAILED(hr)){</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>            <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, std::format(<span class="stringliteral">&quot;Failed to generate mipmaps for DDS file: {}&quot;</span>, Utils::Convert(_path)));</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>            Utils::Alert(std::format(<span class="stringliteral">&quot;Failed to generate mipmaps for DDS file: {}&quot;</span>, Utils::Convert(_path)));</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>            <span class="keywordflow">return</span> {};</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>        }</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    }</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span> </div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    <span class="keywordflow">return</span> mip;</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>}</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span> </div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
-<div class="foldopen" id="foldopen00099" data-start="{" data-end="}">
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno"><a class="line" href="classTextureManager.html#aa0b611b9efc8c6ad6483697908ca69d2">   99</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classTextureManager.html#aa0b611b9efc8c6ad6483697908ca69d2">TextureManager::Initialize</a>(<a class="code hl_class" href="classDirectXAdapter.html">DirectXAdapter</a>* _adapter, <a class="code hl_class" href="classSRVManager.html">SRVManager</a>* _srv) {</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    std::lock_guard&lt;std::mutex&gt; lock(mutex_);</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span> </div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    adapter_ = _adapter;</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    srv_ = _srv;</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    <span class="comment">// テクスチャアップロード専用のコマンドアロケーターとコマンドリストを作成</span></div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    HRESULT hr = adapter_-&gt;<a class="code hl_function" href="classDirectXAdapter.html#a28fe87825525272f00fd06231a0c1632">GetDevice</a>()-&gt;CreateCommandAllocator(</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>        D3D12_COMMAND_LIST_TYPE_DIRECT,</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>        IID_PPV_ARGS(&amp;uploadCommandAllocator_)</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    );</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    <span class="keywordflow">if</span> (FAILED(hr)) {</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>        Utils::Alert(<span class="stringliteral">&quot;Failed to create upload command allocator&quot;</span>);</div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>        <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    }</div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span> </div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    hr = adapter_-&gt;<a class="code hl_function" href="classDirectXAdapter.html#a28fe87825525272f00fd06231a0c1632">GetDevice</a>()-&gt;CreateCommandList(</div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>        0,</div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>        D3D12_COMMAND_LIST_TYPE_DIRECT,</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>        uploadCommandAllocator_.Get(),</div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>        <span class="keyword">nullptr</span>,</div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>        IID_PPV_ARGS(&amp;uploadCommandList_)</div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    );</div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    <span class="keywordflow">if</span> (FAILED(hr)) {</div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>        Utils::Alert(<span class="stringliteral">&quot;Failed to create upload command list&quot;</span>);</div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>        <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    }</div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span> </div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    <span class="comment">// 初期状態では閉じておく</span></div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    uploadCommandList_-&gt;Close();</div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span> </div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>    <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>, <span class="stringliteral">&quot;TextureManager Initialized&quot;</span>);</div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>}</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    [[maybe_unused]]HRESULT hr = LoadFromWICFile(filePathW.c_str(), DirectX::WIC_FLAGS_FORCE_SRGB, <span class="keyword">nullptr</span>, image);</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <span class="keywordflow">if</span> (FAILED(hr)) {</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, std::format(<span class="stringliteral">&quot;Failed to load texture file: {}&quot;</span>, fullPath));</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>        Utils::Alert(std::format(<span class="stringliteral">&quot;Failed to load texture file: {}&quot;</span>, fullPath));</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        <span class="keywordflow">return</span> {};</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    }</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    DirectX::ScratchImage mipImages {};</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    hr = GenerateMipMaps(image.GetImages(), image.GetImageCount(), image.GetMetadata(), DirectX::TEX_FILTER_SRGB, 0, mipImages);</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="keywordflow">if</span> (FAILED(hr)) {</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>        <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, std::format(<span class="stringliteral">&quot;Failed to generate mipmaps for texture file: {}&quot;</span>, fullPath));</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        Utils::Alert(std::format(<span class="stringliteral">&quot;Failed to generate mipmaps for texture file: {}&quot;</span>, fullPath));</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        <span class="keywordflow">return</span> {};</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    }</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keywordflow">return</span> mipImages;</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>}</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="keywordtype">void</span> TextureManager::UploadTextureData(<a class="code hl_class" href="classDX12Resource.html">DX12Resource</a>* _texture, <span class="keyword">const</span> DirectX::ScratchImage&amp; _mipImages)<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    std::vector&lt;D3D12_SUBRESOURCE_DATA&gt; subResources;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    PrepareUpload(adapter_-&gt;<a class="code hl_function" href="classDirectXAdapter.html#a28fe87825525272f00fd06231a0c1632">GetDevice</a>(), _mipImages.GetImages(), _mipImages.GetImageCount(), _mipImages.GetMetadata(), subResources);</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    uint32_t intermediateSize = <span class="keyword">static_cast&lt;</span>uint32_t<span class="keyword">&gt;</span>(GetRequiredIntermediateSize(_texture-&gt;<a class="code hl_function" href="classDX12Resource.html#a7de5777515323fc496662e3e01c83a30">Get</a>(), 0, <span class="keyword">static_cast&lt;</span>UINT<span class="keyword">&gt;</span>(subResources.size())));</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    std::unique_ptr&lt;DX12Resource&gt; intermediateResource = adapter_-&gt;<a class="code hl_function" href="classDirectXAdapter.html#ab4b4c251cdfee90870ce155e610c9500">CreateBufferResource</a>(intermediateSize);</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <span class="comment">// 専用のコマンドアロケーターとコマンドリストをリセット</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <span class="keywordflow">if</span> (FAILED(uploadCommandAllocator_-&gt;Reset())) {</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        Utils::Alert(<span class="stringliteral">&quot;Failed to reset upload command allocator&quot;</span>);</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    }</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <span class="keywordflow">if</span> (FAILED(uploadCommandList_-&gt;Reset(uploadCommandAllocator_.Get(), <span class="keyword">nullptr</span>))) {</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        Utils::Alert(<span class="stringliteral">&quot;Failed to reset upload command list&quot;</span>);</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    }</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    UpdateSubresources(uploadCommandList_.Get(), _texture-&gt;<a class="code hl_function" href="classDX12Resource.html#a7de5777515323fc496662e3e01c83a30">Get</a>(), intermediateResource-&gt;Get(), 0, 0, <span class="keyword">static_cast&lt;</span>UINT<span class="keyword">&gt;</span>(subResources.size()), subResources.data());</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    _texture-&gt;<a class="code hl_function" href="classDX12Resource.html#ab449563ef728d837d81b333e9910aad8">ChangeState</a>(uploadCommandList_.Get(), D3D12_RESOURCE_STATE_GENERIC_READ);</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <span class="keywordflow">if</span> (FAILED(uploadCommandList_-&gt;Close())) {</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        Utils::Alert(<span class="stringliteral">&quot;Failed to close upload command list&quot;</span>);</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    }</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    ID3D12CommandList* cls[] = { uploadCommandList_.Get() };</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    adapter_-&gt;<a class="code hl_function" href="classDirectXAdapter.html#a445ba307d21fc96baec912681546c6ed">GetCommandQueue</a>()-&gt;ExecuteCommandLists(_countof(cls), cls);</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <span class="comment">// 適切なFence値管理を使用してコマンドキューの実行を待つ</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    uint64_t fenceValue = adapter_-&gt;<a class="code hl_function" href="classDirectXAdapter.html#a159fa0e3baa6933654aa08009371bd6d">GetNextFenceValue</a>();</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    adapter_-&gt;<a class="code hl_function" href="classDirectXAdapter.html#a445ba307d21fc96baec912681546c6ed">GetCommandQueue</a>()-&gt;Signal(adapter_-&gt;<a class="code hl_function" href="classDirectXAdapter.html#a7cd3f81861f775387b11548b6fdaa49f">GetFence</a>(), fenceValue);</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    adapter_-&gt;<a class="code hl_function" href="classDirectXAdapter.html#a7793686074430b7c1cff3a7ee3cd2513">WaitForFenceValue</a>(fenceValue);</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>}</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>DirectX::ScratchImage TextureManager::LoadDDS(<span class="keyword">const</span> std::wstring&amp; _path) {</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    DirectX::ScratchImage image{};</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    HRESULT hr = LoadFromDDSFile(_path.c_str(), DirectX::DDS_FLAGS_NONE, <span class="keyword">nullptr</span>, image);</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    <span class="keywordflow">if</span> (FAILED(hr)) {</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>        <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, std::format(<span class="stringliteral">&quot;Failed to load DDS file: {}&quot;</span>, Utils::Convert(_path)));</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>        Utils::Alert(std::format(<span class="stringliteral">&quot;Failed to load DDS file: {}&quot;</span>, Utils::Convert(_path)));</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>        <span class="keywordflow">return</span> {};</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    }</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    DirectX::ScratchImage mip;</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    <span class="keywordflow">if</span> (DirectX::IsCompressed(image.GetMetadata().format)) {</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>        mip = std::move(image);</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>        hr = GenerateMipMaps(image.GetImages(), image.GetImageCount(), image.GetMetadata(), DirectX::TEX_FILTER_SRGB, 4, mip);</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>        <span class="keywordflow">if</span> (FAILED(hr)){</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>            <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, std::format(<span class="stringliteral">&quot;Failed to generate mipmaps for DDS file: {}&quot;</span>, Utils::Convert(_path)));</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>            Utils::Alert(std::format(<span class="stringliteral">&quot;Failed to generate mipmaps for DDS file: {}&quot;</span>, Utils::Convert(_path)));</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>            <span class="keywordflow">return</span> {};</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>        }</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    }</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span> </div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    <span class="keywordflow">return</span> mip;</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>}</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span> </div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
+<div class="foldopen" id="foldopen00101" data-start="{" data-end="}">
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno"><a class="line" href="classTextureManager.html#aa0b611b9efc8c6ad6483697908ca69d2">  101</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classTextureManager.html#aa0b611b9efc8c6ad6483697908ca69d2">TextureManager::Initialize</a>(<a class="code hl_class" href="classDirectXAdapter.html">DirectXAdapter</a>* _adapter, <a class="code hl_class" href="classSRVManager.html">SRVManager</a>* _srv) {</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    std::lock_guard&lt;std::mutex&gt; lock(mutex_);</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span> </div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    adapter_ = _adapter;</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    srv_ = _srv;</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span> </div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    <span class="comment">// テクスチャアップロード専用のコマンドアロケーターとコマンドリストを作成</span></div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    HRESULT hr = adapter_-&gt;<a class="code hl_function" href="classDirectXAdapter.html#a28fe87825525272f00fd06231a0c1632">GetDevice</a>()-&gt;CreateCommandAllocator(</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>        D3D12_COMMAND_LIST_TYPE_DIRECT,</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>        IID_PPV_ARGS(&amp;uploadCommandAllocator_)</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    );</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    <span class="keywordflow">if</span> (FAILED(hr)) {</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>        Utils::Alert(<span class="stringliteral">&quot;Failed to create upload command allocator&quot;</span>);</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    }</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span> </div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    hr = adapter_-&gt;<a class="code hl_function" href="classDirectXAdapter.html#a28fe87825525272f00fd06231a0c1632">GetDevice</a>()-&gt;CreateCommandList(</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>        0,</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>        D3D12_COMMAND_LIST_TYPE_DIRECT,</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>        uploadCommandAllocator_.Get(),</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>        <span class="keyword">nullptr</span>,</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>        IID_PPV_ARGS(&amp;uploadCommandList_)</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    );</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    <span class="keywordflow">if</span> (FAILED(hr)) {</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>        Utils::Alert(<span class="stringliteral">&quot;Failed to create upload command list&quot;</span>);</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    }</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span> </div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>    <span class="comment">// 初期状態では閉じておく</span></div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>    uploadCommandList_-&gt;Close();</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span> </div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>, <span class="stringliteral">&quot;TextureManager Initialized&quot;</span>);</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>}</div>
 </div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span> </div>
-<div class="foldopen" id="foldopen00133" data-start="{" data-end="}">
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno"><a class="line" href="classTextureManager.html#ad7d3de3b18a76f2c0116321d6f91c332">  133</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="classTextureManager.html#ad7d3de3b18a76f2c0116321d6f91c332">TextureManager::Load</a>(<span class="keyword">const</span> std::string&amp; _fileName) {</div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>    std::lock_guard&lt;std::mutex&gt; lock(mutex_);</div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span> </div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>    <span class="comment">//Remove FolderPath</span></div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>    std::string <a class="code hl_variable" href="Input_8hpp.html#a8f8f80d37794cde9472343e4487ba3eb">name</a> = _fileName;</div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>    <span class="keywordtype">size_t</span> pos = 0;</div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>    <span class="keywordflow">while</span>((pos = <a class="code hl_variable" href="Input_8hpp.html#a8f8f80d37794cde9472343e4487ba3eb">name</a>.find(folderPath_, pos)) != std::string::npos){</div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>        <a class="code hl_variable" href="Input_8hpp.html#a8f8f80d37794cde9472343e4487ba3eb">name</a>.erase(pos, folderPath_.length());</div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>    }</div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span> </div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>    <span class="comment">//Check if texture is already loaded</span></div>
-<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>    <span class="keywordflow">if</span> (textures_.contains(<a class="code hl_variable" href="Input_8hpp.html#a8f8f80d37794cde9472343e4487ba3eb">name</a>)){</div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>    }</div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span> </div>
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>    assert(!srv_-&gt;<a class="code hl_function" href="classSRVManager.html#a969af2a4f6c4c49f564b7607995aa41c">IsFull</a>());</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span> </div>
+<div class="foldopen" id="foldopen00135" data-start="{" data-end="}">
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno"><a class="line" href="classTextureManager.html#ad7d3de3b18a76f2c0116321d6f91c332">  135</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="classTextureManager.html#ad7d3de3b18a76f2c0116321d6f91c332">TextureManager::Load</a>(<span class="keyword">const</span> std::string&amp; _fileName) {</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>    std::lock_guard&lt;std::mutex&gt; lock(mutex_);</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span> </div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>    <span class="comment">//Remove FolderPath</span></div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>    std::string <a class="code hl_variable" href="Input_8hpp.html#a8f8f80d37794cde9472343e4487ba3eb">name</a> = _fileName;</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>    <span class="keywordtype">size_t</span> pos = 0;</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>    <span class="keywordflow">while</span>((pos = <a class="code hl_variable" href="Input_8hpp.html#a8f8f80d37794cde9472343e4487ba3eb">name</a>.find(folderPath_, pos)) != std::string::npos){</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>        <a class="code hl_variable" href="Input_8hpp.html#a8f8f80d37794cde9472343e4487ba3eb">name</a>.erase(pos, folderPath_.length());</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>    }</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span> </div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>    <span class="comment">//Check if texture is already loaded</span></div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>    <span class="keywordflow">if</span> (textures_.contains(<a class="code hl_variable" href="Input_8hpp.html#a8f8f80d37794cde9472343e4487ba3eb">name</a>)){</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>    }</div>
 <div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span> </div>
-<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span> </div>
-<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span> </div>
-<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>    <span class="comment">//Load Texture</span></div>
-<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>    DirectX::ScratchImage img = LoadTexture(<a class="code hl_variable" href="Input_8hpp.html#a8f8f80d37794cde9472343e4487ba3eb">name</a>);</div>
-<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span> </div>
-<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>    <span class="keywordflow">if</span> (!img.GetImages() || img.GetImageCount() == 0) {</div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>        <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, std::format(<span class="stringliteral">&quot;TextureManager::Load: Failed to load texture: {}&quot;</span>, <a class="code hl_variable" href="Input_8hpp.html#a8f8f80d37794cde9472343e4487ba3eb">name</a>));</div>
-<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>    }</div>
-<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span> </div>
-<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>    Texture texture;</div>
-<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>    texture.metadata = img.GetMetadata();</div>
-<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>    texture.resource = adapter_-&gt;<a class="code hl_function" href="classDirectXAdapter.html#ab560a413b9a36c7ab838ff7e89bc55a2">CreateTextureResource</a>(img.GetMetadata());</div>
-<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span> </div>
-<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>    <span class="keywordflow">if</span> (!texture.resource) {</div>
-<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>        <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, std::format(<span class="stringliteral">&quot;TextureManager::Load: Failed to create texture resource: {}&quot;</span>, <a class="code hl_variable" href="Input_8hpp.html#a8f8f80d37794cde9472343e4487ba3eb">name</a>));</div>
-<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>    }</div>
-<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span> </div>
-<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>    UploadTextureData(texture.resource.get(), img);</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>    assert(!srv_-&gt;<a class="code hl_function" href="classSRVManager.html#a969af2a4f6c4c49f564b7607995aa41c">IsFull</a>());</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span> </div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span> </div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span> </div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>    <span class="comment">//Load Texture</span></div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>    DirectX::ScratchImage img = LoadTexture(<a class="code hl_variable" href="Input_8hpp.html#a8f8f80d37794cde9472343e4487ba3eb">name</a>);</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span> </div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>    <span class="keywordflow">if</span> (!img.GetImages() || img.GetImageCount() == 0) {</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>        <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, std::format(<span class="stringliteral">&quot;TextureManager::Load: Failed to load texture: {}&quot;</span>, <a class="code hl_variable" href="Input_8hpp.html#a8f8f80d37794cde9472343e4487ba3eb">name</a>));</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>    }</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span> </div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>    Texture texture;</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>    texture.metadata = img.GetMetadata();</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>    texture.resource = adapter_-&gt;<a class="code hl_function" href="classDirectXAdapter.html#ab560a413b9a36c7ab838ff7e89bc55a2">CreateTextureResource</a>(img.GetMetadata());</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span> </div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>    <span class="keywordflow">if</span> (!texture.resource) {</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>        <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, std::format(<span class="stringliteral">&quot;TextureManager::Load: Failed to create texture resource: {}&quot;</span>, <a class="code hl_variable" href="Input_8hpp.html#a8f8f80d37794cde9472343e4487ba3eb">name</a>));</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>    }</div>
 <div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span> </div>
-<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>    texture.srvIndex = srv_-&gt;<a class="code hl_function" href="classSRVManager.html#a1e7a23d2422f4228cc6a9436ad1de225">Allocate</a>();</div>
-<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>    texture.cpuHandle = srv_-&gt;<a class="code hl_function" href="classSRVManager.html#aa1cbbf7090b893d87a79bb4dfefb8c89">GetCPUHandle</a>(texture.srvIndex);</div>
-<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>    texture.gpuHandle = srv_-&gt;<a class="code hl_function" href="classSRVManager.html#a50f3a4b23df601f5f07eab1faaa21b2c">GetGPUHandle</a>(texture.srvIndex);</div>
-<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span> </div>
-<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>    <span class="keywordflow">if</span> (texture.metadata.IsCubemap()) {</div>
-<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>        srv_-&gt;<a class="code hl_function" href="classSRVManager.html#a22c6c456ddc0efa04782a82e512214f1">CreateSRVForCubeMap</a>(texture.srvIndex, texture.resource-&gt;Get(), texture.metadata.format);</div>
-<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>    }<span class="keywordflow">else</span>{</div>
-<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>        srv_-&gt;<a class="code hl_function" href="classSRVManager.html#a32125910a69daf0aa5ca99d981f58e5a">CreateSRVForTexture2D</a>(texture.srvIndex, texture.resource-&gt;Get(), texture.metadata.format, <span class="keyword">static_cast&lt;</span>UINT<span class="keyword">&gt;</span>(texture.metadata.mipLevels));</div>
-<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>    }</div>
-<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span> </div>
-<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>    textures_[<a class="code hl_variable" href="Input_8hpp.html#a8f8f80d37794cde9472343e4487ba3eb">name</a>] = std::move(texture);</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>    UploadTextureData(texture.resource.get(), img);</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span> </div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>    texture.srvIndex = srv_-&gt;<a class="code hl_function" href="classSRVManager.html#a1e7a23d2422f4228cc6a9436ad1de225">Allocate</a>();</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>    texture.cpuHandle = srv_-&gt;<a class="code hl_function" href="classSRVManager.html#aa1cbbf7090b893d87a79bb4dfefb8c89">GetCPUHandle</a>(texture.srvIndex);</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>    texture.gpuHandle = srv_-&gt;<a class="code hl_function" href="classSRVManager.html#a50f3a4b23df601f5f07eab1faaa21b2c">GetGPUHandle</a>(texture.srvIndex);</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span> </div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>    <span class="keywordflow">if</span> (texture.metadata.IsCubemap()) {</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>        srv_-&gt;<a class="code hl_function" href="classSRVManager.html#a22c6c456ddc0efa04782a82e512214f1">CreateSRVForCubeMap</a>(texture.srvIndex, texture.resource-&gt;Get(), texture.metadata.format);</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>    }<span class="keywordflow">else</span>{</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>        srv_-&gt;<a class="code hl_function" href="classSRVManager.html#a32125910a69daf0aa5ca99d981f58e5a">CreateSRVForTexture2D</a>(texture.srvIndex, texture.resource-&gt;Get(), texture.metadata.format, <span class="keyword">static_cast&lt;</span>UINT<span class="keyword">&gt;</span>(texture.metadata.mipLevels));</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>    }</div>
 <div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span> </div>
-<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>    <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>, std::format(<span class="stringliteral">&quot;TextureManager::Load: {}&quot;</span>, <a class="code hl_variable" href="Input_8hpp.html#a8f8f80d37794cde9472343e4487ba3eb">name</a>));</div>
-<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>}</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>    textures_[<a class="code hl_variable" href="Input_8hpp.html#a8f8f80d37794cde9472343e4487ba3eb">name</a>] = std::move(texture);</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span> </div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>    <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>, std::format(<span class="stringliteral">&quot;TextureManager::Load: {}&quot;</span>, <a class="code hl_variable" href="Input_8hpp.html#a8f8f80d37794cde9472343e4487ba3eb">name</a>));</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>}</div>
 </div>
-<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span> </div>
-<div class="foldopen" id="foldopen00195" data-start="{" data-end="}">
-<div class="line"><a id="l00195" name="l00195"></a><span class="lineno"><a class="line" href="classTextureManager.html#a1e2c5d36c9a06ae42cd061da2f6b85ac">  195</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="classTextureManager.html#a1e2c5d36c9a06ae42cd061da2f6b85ac">TextureManager::LoadFromRawPixels</a>(<span class="keyword">const</span> std::string&amp; _name, <span class="keyword">const</span> uint8_t* _pixels, uint32_t _width, uint32_t _height, DXGI_FORMAT _format) {</div>
-<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>    std::lock_guard&lt;std::mutex&gt; lock(mutex_);</div>
-<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span> </div>
-<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>    <span class="keywordflow">if</span> (textures_.contains(_name)) {</div>
-<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>    }</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span> </div>
+<div class="foldopen" id="foldopen00197" data-start="{" data-end="}">
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno"><a class="line" href="classTextureManager.html#a1e2c5d36c9a06ae42cd061da2f6b85ac">  197</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="classTextureManager.html#a1e2c5d36c9a06ae42cd061da2f6b85ac">TextureManager::LoadFromRawPixels</a>(<span class="keyword">const</span> std::string&amp; _name, <span class="keyword">const</span> uint8_t* _pixels, uint32_t _width, uint32_t _height, DXGI_FORMAT _format) {</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>    std::lock_guard&lt;std::mutex&gt; lock(mutex_);</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span> </div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>    <span class="keyword">const</span> <span class="keyword">auto</span> existing = textures_.find(_name);</div>
 <div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span> </div>
-<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>    assert(!srv_-&gt;<a class="code hl_function" href="classSRVManager.html#a969af2a4f6c4c49f564b7607995aa41c">IsFull</a>());</div>
-<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span> </div>
-<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>    <span class="comment">// 2D テクスチャ用メタデータを手動構築（ミップなし）</span></div>
-<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>    DirectX::TexMetadata meta{};</div>
-<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>    meta.width     = _width;</div>
-<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>    meta.height    = _height;</div>
-<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>    meta.depth     = 1;</div>
-<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>    meta.arraySize = 1;</div>
-<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>    meta.mipLevels = 1;</div>
-<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>    meta.format    = _format;</div>
-<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>    meta.dimension = DirectX::TEX_DIMENSION_TEXTURE2D;</div>
-<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span> </div>
-<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>    <span class="comment">// ScratchImage を確保してピクセルをコピー</span></div>
-<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>    DirectX::ScratchImage img;</div>
-<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>    HRESULT hr = img.Initialize2D(_format, _width, _height, 1, 1);</div>
-<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>    <span class="keywordflow">if</span> (FAILED(hr)) {</div>
-<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>        <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, std::format(<span class="stringliteral">&quot;TextureManager::LoadFromRawPixels: ScratchImage init failed: {}&quot;</span>, _name));</div>
-<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>    }</div>
-<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span> </div>
-<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>    <span class="keyword">const</span> DirectX::Image* imageSlice = img.GetImage(0, 0, 0);</div>
-<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>    <span class="keywordflow">if</span> (!imageSlice) {</div>
-<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>        <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, std::format(<span class="stringliteral">&quot;TextureManager::LoadFromRawPixels: internal ScratchImage error: {}&quot;</span>, _name));</div>
-<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>    }</div>
-<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span> </div>
-<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>    <span class="comment">// rowPitch が GPU アライメントで広い場合に対応して行ごとにコピー</span></div>
-<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>    <span class="keywordtype">size_t</span> srcRowPitch = <span class="keyword">static_cast&lt;</span><span class="keywordtype">size_t</span><span class="keyword">&gt;</span>(_width) * DirectX::BitsPerPixel(_format) / 8;</div>
-<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>    <span class="keywordflow">for</span> (uint32_t row = 0; row &lt; _height; ++row) {</div>
-<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>        memcpy(imageSlice-&gt;pixels + row * imageSlice-&gt;rowPitch,</div>
-<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>               _pixels           + row * srcRowPitch,</div>
-<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>               srcRowPitch);</div>
-<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>    }</div>
-<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span> </div>
-<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>    Texture texture;</div>
-<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>    texture.metadata = img.GetMetadata();</div>
-<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>    texture.resource = adapter_-&gt;<a class="code hl_function" href="classDirectXAdapter.html#ab560a413b9a36c7ab838ff7e89bc55a2">CreateTextureResource</a>(img.GetMetadata());</div>
-<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span> </div>
-<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>    <span class="keywordflow">if</span> (!texture.resource) {</div>
-<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>        <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, std::format(<span class="stringliteral">&quot;TextureManager::LoadFromRawPixels: CreateTextureResource failed: {}&quot;</span>, _name));</div>
-<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>    }</div>
-<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span> </div>
-<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>    UploadTextureData(texture.resource.get(), img);</div>
-<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span> </div>
-<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>    texture.srvIndex  = srv_-&gt;<a class="code hl_function" href="classSRVManager.html#a1e7a23d2422f4228cc6a9436ad1de225">Allocate</a>();</div>
-<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>    texture.cpuHandle = srv_-&gt;<a class="code hl_function" href="classSRVManager.html#aa1cbbf7090b893d87a79bb4dfefb8c89">GetCPUHandle</a>(texture.srvIndex);</div>
-<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>    texture.gpuHandle = srv_-&gt;<a class="code hl_function" href="classSRVManager.html#a50f3a4b23df601f5f07eab1faaa21b2c">GetGPUHandle</a>(texture.srvIndex);</div>
-<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>    srv_-&gt;<a class="code hl_function" href="classSRVManager.html#a32125910a69daf0aa5ca99d981f58e5a">CreateSRVForTexture2D</a>(texture.srvIndex, texture.resource-&gt;Get(), _format, 1);</div>
-<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span> </div>
-<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>    textures_[_name] = std::move(texture);</div>
-<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>    <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>, std::format(<span class="stringliteral">&quot;TextureManager::LoadFromRawPixels: {}&quot;</span>, _name));</div>
-<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>}</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>    <span class="comment">// 新規キーの場合のみディスクリプタ枯渇をチェックする（既存キー更新はSRVスロットを使い回すため枯渇しない）</span></div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>    <span class="keywordflow">if</span> (existing == textures_.end() &amp;&amp; srv_-&gt;<a class="code hl_function" href="classSRVManager.html#a969af2a4f6c4c49f564b7607995aa41c">IsFull</a>()) {</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>        <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, std::format(<span class="stringliteral">&quot;TextureManager::LoadFromRawPixels: SRV heap is full: {}&quot;</span>, _name));</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>        Utils::Alert(std::format(<span class="stringliteral">&quot;TextureManager::LoadFromRawPixels: SRV heap is full: {}&quot;</span>, _name));</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>    }</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span> </div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>    <span class="comment">// 2D テクスチャ用メタデータを手動構築（ミップなし）</span></div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>    DirectX::TexMetadata meta{};</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>    meta.width     = _width;</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>    meta.height    = _height;</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>    meta.depth     = 1;</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>    meta.arraySize = 1;</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>    meta.mipLevels = 1;</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>    meta.format    = _format;</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>    meta.dimension = DirectX::TEX_DIMENSION_TEXTURE2D;</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span> </div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>    <span class="comment">// ScratchImage を確保してピクセルをコピー</span></div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>    DirectX::ScratchImage img;</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>    HRESULT hr = img.Initialize2D(_format, _width, _height, 1, 1);</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>    <span class="keywordflow">if</span> (FAILED(hr)) {</div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>        <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, std::format(<span class="stringliteral">&quot;TextureManager::LoadFromRawPixels: ScratchImage init failed: {}&quot;</span>, _name));</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>    }</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span> </div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>    <span class="keyword">const</span> DirectX::Image* imageSlice = img.GetImage(0, 0, 0);</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>    <span class="keywordflow">if</span> (!imageSlice) {</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>        <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, std::format(<span class="stringliteral">&quot;TextureManager::LoadFromRawPixels: internal ScratchImage error: {}&quot;</span>, _name));</div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>    }</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span> </div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>    <span class="comment">// rowPitch が GPU アライメントで広い場合に対応して行ごとにコピー</span></div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>    <span class="keywordtype">size_t</span> srcRowPitch = <span class="keyword">static_cast&lt;</span><span class="keywordtype">size_t</span><span class="keyword">&gt;</span>(_width) * DirectX::BitsPerPixel(_format) / 8;</div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>    <span class="keywordflow">for</span> (uint32_t row = 0; row &lt; _height; ++row) {</div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>        memcpy(imageSlice-&gt;pixels + row * imageSlice-&gt;rowPitch,</div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>               _pixels           + row * srcRowPitch,</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>               srcRowPitch);</div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>    }</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span> </div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>    <span class="comment">// 生成・アップロードが完了するまでは既存エントリに触れない</span></div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>    std::unique_ptr&lt;DX12Resource&gt; resource = adapter_-&gt;<a class="code hl_function" href="classDirectXAdapter.html#ab560a413b9a36c7ab838ff7e89bc55a2">CreateTextureResource</a>(img.GetMetadata());</div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>    <span class="keywordflow">if</span> (!resource) {</div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>        <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, std::format(<span class="stringliteral">&quot;TextureManager::LoadFromRawPixels: CreateTextureResource failed: {}&quot;</span>, _name));</div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>    }</div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span> </div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>    UploadTextureData(resource.get(), img);</div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span> </div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>    <span class="keywordflow">if</span> (existing != textures_.end()) {</div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>        <span class="comment">// UploadTextureData 内でフェンス待ち済みのため旧リソースは解放してよい</span></div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>        <span class="comment">// SRVスロットは使い回す</span></div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>        existing-&gt;second.metadata = img.GetMetadata();</div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>        existing-&gt;second.resource = std::move(resource);</div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>        srv_-&gt;<a class="code hl_function" href="classSRVManager.html#a32125910a69daf0aa5ca99d981f58e5a">CreateSRVForTexture2D</a>(existing-&gt;second.srvIndex, existing-&gt;second.resource-&gt;Get(), _format, 1);</div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>        <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>, std::format(<span class="stringliteral">&quot;TextureManager::LoadFromRawPixels: updated {}&quot;</span>, _name));</div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>    }</div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span> </div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>    Texture texture;</div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>    texture.metadata  = img.GetMetadata();</div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>    texture.resource  = std::move(resource);</div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>    texture.srvIndex  = srv_-&gt;<a class="code hl_function" href="classSRVManager.html#a1e7a23d2422f4228cc6a9436ad1de225">Allocate</a>();</div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>    texture.cpuHandle = srv_-&gt;<a class="code hl_function" href="classSRVManager.html#aa1cbbf7090b893d87a79bb4dfefb8c89">GetCPUHandle</a>(texture.srvIndex);</div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>    texture.gpuHandle = srv_-&gt;<a class="code hl_function" href="classSRVManager.html#a50f3a4b23df601f5f07eab1faaa21b2c">GetGPUHandle</a>(texture.srvIndex);</div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>    srv_-&gt;<a class="code hl_function" href="classSRVManager.html#a32125910a69daf0aa5ca99d981f58e5a">CreateSRVForTexture2D</a>(texture.srvIndex, texture.resource-&gt;Get(), _format, 1);</div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span> </div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>    textures_[_name] = std::move(texture);</div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>    <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>, std::format(<span class="stringliteral">&quot;TextureManager::LoadFromRawPixels: {}&quot;</span>, _name));</div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>}</div>
 </div>
-<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span> </div>
-<div class="foldopen" id="foldopen00257" data-start="{" data-end="}">
-<div class="line"><a id="l00257" name="l00257"></a><span class="lineno"><a class="line" href="classTextureManager.html#ac1747fe5df0613980d545934904c949a">  257</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classTextureManager.html#ac1747fe5df0613980d545934904c949a">TextureManager::Unload</a>() {</div>
-<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> itr = textures_.begin(); itr != textures_.end(); ){</div>
-<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>        itr-&gt;second.resource.reset();</div>
-<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span> </div>
-<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>        itr = textures_.erase(itr);</div>
-<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>    }</div>
-<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>    textures_.clear();</div>
-<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>}</div>
-</div>
-<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span> </div>
-<div class="foldopen" id="foldopen00266" data-start="{" data-end="}">
-<div class="line"><a id="l00266" name="l00266"></a><span class="lineno"><a class="line" href="classTextureManager.html#a3f3a61e562dad63752a8bf8150c6537e">  266</a></span><span class="keyword">const</span> DirectX::TexMetadata&amp; <a class="code hl_function" href="classTextureManager.html#a3f3a61e562dad63752a8bf8150c6537e">TextureManager::GetTextureMetadata</a>(<span class="keyword">const</span> std::string&amp; _fileName) {</div>
-<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>    std::lock_guard&lt;std::mutex&gt; lock(mutex_);</div>
-<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span> </div>
-<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>    <span class="keywordflow">if</span> (textures_.contains(_fileName)){</div>
-<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>        <span class="keywordflow">return</span> textures_.at(_fileName).metadata;</div>
-<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>    }</div>
 <div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span> </div>
-<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>    <a class="code hl_function" href="classTextureManager.html#ad7d3de3b18a76f2c0116321d6f91c332">Load</a>(_fileName);</div>
-<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>    <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, std::format(<span class="stringliteral">&quot;TextureManager::GetTextureMetadata: {} not found&quot;</span>, _fileName));</div>
-<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>    Utils::Alert(std::format(<span class="stringliteral">&quot;TextureManager::GetTextureMetadata: {} not found&quot;</span>, _fileName));</div>
-<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>    <span class="keywordflow">return</span> textures_.at(_fileName).metadata;</div>
-<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>}</div>
+<div class="foldopen" id="foldopen00273" data-start="{" data-end="}">
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno"><a class="line" href="classTextureManager.html#ac1747fe5df0613980d545934904c949a">  273</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classTextureManager.html#ac1747fe5df0613980d545934904c949a">TextureManager::Unload</a>() {</div>
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> itr = textures_.begin(); itr != textures_.end(); ){</div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>        itr-&gt;second.resource.reset();</div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span> </div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>        itr = textures_.erase(itr);</div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>    }</div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>    textures_.clear();</div>
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>}</div>
 </div>
-<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span> </div>
-<div class="foldopen" id="foldopen00279" data-start="{" data-end="}">
-<div class="line"><a id="l00279" name="l00279"></a><span class="lineno"><a class="line" href="classTextureManager.html#abb179cd1141b16276350c1489ac727db">  279</a></span>uint32_t <a class="code hl_function" href="classTextureManager.html#abb179cd1141b16276350c1489ac727db">TextureManager::GetSrvIndex</a>(<span class="keyword">const</span> std::string&amp; _fileName) {</div>
-<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>    std::lock_guard&lt;std::mutex&gt; lock(mutex_);</div>
 <div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span> </div>
-<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>    <span class="keywordflow">if</span> (textures_.contains(_fileName)){</div>
-<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>        <span class="keywordflow">return</span> textures_.at(_fileName).srvIndex;</div>
-<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>    }</div>
-<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span> </div>
-<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>    <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, std::format(<span class="stringliteral">&quot;TextureManager::GetSrvIndex: {} not found&quot;</span>, _fileName));</div>
-<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>    assert(0);</div>
-<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>    <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>}</div>
+<div class="foldopen" id="foldopen00282" data-start="{" data-end="}">
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno"><a class="line" href="classTextureManager.html#a3f3a61e562dad63752a8bf8150c6537e">  282</a></span><span class="keyword">const</span> DirectX::TexMetadata&amp; <a class="code hl_function" href="classTextureManager.html#a3f3a61e562dad63752a8bf8150c6537e">TextureManager::GetTextureMetadata</a>(<span class="keyword">const</span> std::string&amp; _fileName) {</div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>    std::lock_guard&lt;std::mutex&gt; lock(mutex_);</div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span> </div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>    <span class="keywordflow">if</span> (textures_.contains(_fileName)){</div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>        <span class="keywordflow">return</span> textures_.at(_fileName).metadata;</div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>    }</div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span> </div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>    <a class="code hl_function" href="classTextureManager.html#ad7d3de3b18a76f2c0116321d6f91c332">Load</a>(_fileName);</div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>    <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, std::format(<span class="stringliteral">&quot;TextureManager::GetTextureMetadata: {} not found&quot;</span>, _fileName));</div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>    Utils::Alert(std::format(<span class="stringliteral">&quot;TextureManager::GetTextureMetadata: {} not found&quot;</span>, _fileName));</div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>    <span class="keywordflow">return</span> textures_.at(_fileName).metadata;</div>
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>}</div>
 </div>
-<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span> </div>
-<div class="foldopen" id="foldopen00291" data-start="{" data-end="}">
-<div class="line"><a id="l00291" name="l00291"></a><span class="lineno"><a class="line" href="classTextureManager.html#a8e806aaadf7d533d8951e874ddaba39a">  291</a></span>uint32_t <a class="code hl_function" href="classTextureManager.html#a8e806aaadf7d533d8951e874ddaba39a">TextureManager::GetTextureIndexByFilePath</a>(<span class="keyword">const</span> std::string&amp; _path)<span class="keyword"> const </span>{</div>
-<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>    <span class="keywordflow">if</span> (textures_.contains(_path)){</div>
-<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>        <span class="keywordflow">return</span> textures_.at(_path).srvIndex;</div>
-<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>    }</div>
-<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span> </div>
-<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>    <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, std::format(<span class="stringliteral">&quot;TextureManager::GetTextureIndexByFilePath: {} not found&quot;</span>, _path));</div>
-<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>    assert(0);</div>
-<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>    <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>}</div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span> </div>
+<div class="foldopen" id="foldopen00295" data-start="{" data-end="}">
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno"><a class="line" href="classTextureManager.html#abb179cd1141b16276350c1489ac727db">  295</a></span>uint32_t <a class="code hl_function" href="classTextureManager.html#abb179cd1141b16276350c1489ac727db">TextureManager::GetSrvIndex</a>(<span class="keyword">const</span> std::string&amp; _fileName) {</div>
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>    std::lock_guard&lt;std::mutex&gt; lock(mutex_);</div>
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span> </div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>    <span class="keywordflow">if</span> (textures_.contains(_fileName)){</div>
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>        <span class="keywordflow">return</span> textures_.at(_fileName).srvIndex;</div>
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>    }</div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span> </div>
+<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>    <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, std::format(<span class="stringliteral">&quot;TextureManager::GetSrvIndex: {} not found&quot;</span>, _fileName));</div>
+<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>    assert(0);</div>
+<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>}</div>
 </div>
-<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span> </div>
-<div class="foldopen" id="foldopen00301" data-start="{" data-end="}">
-<div class="line"><a id="l00301" name="l00301"></a><span class="lineno"><a class="line" href="classTextureManager.html#ab10fdb00af3862499ba1f5e915ffe756">  301</a></span>D3D12_GPU_DESCRIPTOR_HANDLE <a class="code hl_function" href="classTextureManager.html#ab10fdb00af3862499ba1f5e915ffe756">TextureManager::GetGPUHandle</a>(<span class="keyword">const</span> std::string&amp; _fileName) {</div>
-<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>    std::lock_guard&lt;std::mutex&gt; lock(mutex_);</div>
-<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span> </div>
-<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span>    std::string <a class="code hl_variable" href="Input_8hpp.html#a8f8f80d37794cde9472343e4487ba3eb">name</a> = _fileName;</div>
-<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>    <span class="keywordtype">size_t</span> pos = 0;</div>
-<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>    <span class="keywordflow">while</span> ((pos = <a class="code hl_variable" href="Input_8hpp.html#a8f8f80d37794cde9472343e4487ba3eb">name</a>.find(folderPath_, pos)) != std::string::npos){</div>
-<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>        <a class="code hl_variable" href="Input_8hpp.html#a8f8f80d37794cde9472343e4487ba3eb">name</a>.erase(pos, folderPath_.length());</div>
-<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>    }</div>
-<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span> </div>
-<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>    <span class="keywordflow">if</span> (textures_.contains(<a class="code hl_variable" href="Input_8hpp.html#a8f8f80d37794cde9472343e4487ba3eb">name</a>)){</div>
-<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>        <span class="keywordflow">return</span> textures_.at(<a class="code hl_variable" href="Input_8hpp.html#a8f8f80d37794cde9472343e4487ba3eb">name</a>).gpuHandle;</div>
-<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>    }</div>
-<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span> </div>
-<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>    <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, std::format(<span class="stringliteral">&quot;TextureManager::GetGPUHandle: {} not found&quot;</span>, <a class="code hl_variable" href="Input_8hpp.html#a8f8f80d37794cde9472343e4487ba3eb">name</a>));</div>
-<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>    assert(0);</div>
-<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>    <span class="keywordflow">return</span> {};</div>
-<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>}</div>
+<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span> </div>
+<div class="foldopen" id="foldopen00307" data-start="{" data-end="}">
+<div class="line"><a id="l00307" name="l00307"></a><span class="lineno"><a class="line" href="classTextureManager.html#a8e806aaadf7d533d8951e874ddaba39a">  307</a></span>uint32_t <a class="code hl_function" href="classTextureManager.html#a8e806aaadf7d533d8951e874ddaba39a">TextureManager::GetTextureIndexByFilePath</a>(<span class="keyword">const</span> std::string&amp; _path)<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>    <span class="keywordflow">if</span> (textures_.contains(_path)){</div>
+<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>        <span class="keywordflow">return</span> textures_.at(_path).srvIndex;</div>
+<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>    }</div>
+<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span> </div>
+<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>    <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, std::format(<span class="stringliteral">&quot;TextureManager::GetTextureIndexByFilePath: {} not found&quot;</span>, _path));</div>
+<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>    assert(0);</div>
+<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>}</div>
 </div>
-<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span> </div>
-<div class="foldopen" id="foldopen00319" data-start="{" data-end="}">
-<div class="line"><a id="l00319" name="l00319"></a><span class="lineno"><a class="line" href="classTextureManager.html#a24d93e12963f1de93cab40fa13833512">  319</a></span>D3D12_GPU_DESCRIPTOR_HANDLE <a class="code hl_function" href="classTextureManager.html#ab10fdb00af3862499ba1f5e915ffe756">TextureManager::GetGPUHandle</a>(<span class="keyword">const</span> uint32_t _index)<span class="keyword"> const </span>{</div>
-<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>    assert(_index &lt;= textures_.size());</div>
-<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>    <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>, std::format(<span class="stringliteral">&quot;TextureManager::GetGPUHandle: index {}&quot;</span>, _index));</div>
-<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>    <span class="keywordflow">return</span> srv_-&gt;<a class="code hl_function" href="classSRVManager.html#a50f3a4b23df601f5f07eab1faaa21b2c">GetGPUHandle</a>(_index);</div>
-<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>}</div>
-</div>
-<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span> </div>
-<div class="foldopen" id="foldopen00325" data-start="{" data-end="}">
-<div class="line"><a id="l00325" name="l00325"></a><span class="lineno"><a class="line" href="classTextureManager.html#a9b048758ed45a996c7a53a21cd3bb15e">  325</a></span>ID3D12Resource* <a class="code hl_function" href="classTextureManager.html#a9b048758ed45a996c7a53a21cd3bb15e">TextureManager::GetResource</a>(<span class="keyword">const</span> std::string&amp; _name)<span class="keyword"> const </span>{</div>
-<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>    <span class="keywordflow">if</span> (<span class="keyword">const</span> <span class="keyword">auto</span> it = textures_.find(_name); it != textures_.end()) {</div>
-<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>        <span class="keywordflow">return</span> it-&gt;second.resource-&gt;Get();</div>
+<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span> </div>
+<div class="foldopen" id="foldopen00317" data-start="{" data-end="}">
+<div class="line"><a id="l00317" name="l00317"></a><span class="lineno"><a class="line" href="classTextureManager.html#ab10fdb00af3862499ba1f5e915ffe756">  317</a></span>D3D12_GPU_DESCRIPTOR_HANDLE <a class="code hl_function" href="classTextureManager.html#ab10fdb00af3862499ba1f5e915ffe756">TextureManager::GetGPUHandle</a>(<span class="keyword">const</span> std::string&amp; _fileName) {</div>
+<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>    std::lock_guard&lt;std::mutex&gt; lock(mutex_);</div>
+<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span> </div>
+<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>    std::string <a class="code hl_variable" href="Input_8hpp.html#a8f8f80d37794cde9472343e4487ba3eb">name</a> = _fileName;</div>
+<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>    <span class="keywordtype">size_t</span> pos = 0;</div>
+<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>    <span class="keywordflow">while</span> ((pos = <a class="code hl_variable" href="Input_8hpp.html#a8f8f80d37794cde9472343e4487ba3eb">name</a>.find(folderPath_, pos)) != std::string::npos){</div>
+<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>        <a class="code hl_variable" href="Input_8hpp.html#a8f8f80d37794cde9472343e4487ba3eb">name</a>.erase(pos, folderPath_.length());</div>
+<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>    }</div>
+<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span> </div>
+<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>    <span class="keywordflow">if</span> (textures_.contains(<a class="code hl_variable" href="Input_8hpp.html#a8f8f80d37794cde9472343e4487ba3eb">name</a>)){</div>
+<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>        <span class="keywordflow">return</span> textures_.at(<a class="code hl_variable" href="Input_8hpp.html#a8f8f80d37794cde9472343e4487ba3eb">name</a>).gpuHandle;</div>
 <div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>    }</div>
-<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>    <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>}</div>
+<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span> </div>
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>    <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, std::format(<span class="stringliteral">&quot;TextureManager::GetGPUHandle: {} not found&quot;</span>, <a class="code hl_variable" href="Input_8hpp.html#a8f8f80d37794cde9472343e4487ba3eb">name</a>));</div>
+<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>    assert(0);</div>
+<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>    <span class="keywordflow">return</span> {};</div>
+<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>}</div>
+</div>
+<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span> </div>
+<div class="foldopen" id="foldopen00335" data-start="{" data-end="}">
+<div class="line"><a id="l00335" name="l00335"></a><span class="lineno"><a class="line" href="classTextureManager.html#a24d93e12963f1de93cab40fa13833512">  335</a></span>D3D12_GPU_DESCRIPTOR_HANDLE <a class="code hl_function" href="classTextureManager.html#ab10fdb00af3862499ba1f5e915ffe756">TextureManager::GetGPUHandle</a>(<span class="keyword">const</span> uint32_t _index)<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>    assert(_index &lt;= textures_.size());</div>
+<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>    <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::Level::INFO</a>, std::format(<span class="stringliteral">&quot;TextureManager::GetGPUHandle: index {}&quot;</span>, _index));</div>
+<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>    <span class="keywordflow">return</span> srv_-&gt;<a class="code hl_function" href="classSRVManager.html#a50f3a4b23df601f5f07eab1faaa21b2c">GetGPUHandle</a>(_index);</div>
+<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>}</div>
+</div>
+<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span> </div>
+<div class="foldopen" id="foldopen00341" data-start="{" data-end="}">
+<div class="line"><a id="l00341" name="l00341"></a><span class="lineno"><a class="line" href="classTextureManager.html#a9b048758ed45a996c7a53a21cd3bb15e">  341</a></span>ID3D12Resource* <a class="code hl_function" href="classTextureManager.html#a9b048758ed45a996c7a53a21cd3bb15e">TextureManager::GetResource</a>(<span class="keyword">const</span> std::string&amp; _name)<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>    <span class="keywordflow">if</span> (<span class="keyword">const</span> <span class="keyword">auto</span> it = textures_.find(_name); it != textures_.end()) {</div>
+<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>        <span class="keywordflow">return</span> it-&gt;second.resource-&gt;Get();</div>
+<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>    }</div>
+<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span>    <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span>}</div>
+</div>
+<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span> </div>
+<div class="foldopen" id="foldopen00348" data-start="{" data-end="}">
+<div class="line"><a id="l00348" name="l00348"></a><span class="lineno"><a class="line" href="classTextureManager.html#a4760e08c39182472b00a98f9233ad9f2">  348</a></span>std::vector&lt;std::string&gt; <a class="code hl_function" href="classTextureManager.html#a4760e08c39182472b00a98f9233ad9f2">TextureManager::ListAvailableTextures</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span>    <span class="keyword">namespace </span>fs = std::filesystem;</div>
+<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span> </div>
+<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span>    std::vector&lt;std::string&gt; result;</div>
+<div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span> </div>
+<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>    std::error_code ec;</div>
+<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>    <span class="keyword">const</span> fs::path root = folderPath_;</div>
+<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span>    <span class="keywordflow">if</span> (!fs::exists(root, ec) || !fs::is_directory(root, ec)) <span class="keywordflow">return</span> result;</div>
+<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span> </div>
+<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span>    <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; entry : fs::recursive_directory_iterator(root, fs::directory_options::skip_permission_denied, ec)) {</div>
+<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span>        <span class="keywordflow">if</span> (ec) <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span>        <span class="keywordflow">if</span> (!entry.is_regular_file(ec)) <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span> </div>
+<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span>        <span class="keyword">const</span> std::string ext = entry.path().extension().string();</div>
+<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>        <span class="keyword">const</span> <span class="keywordtype">bool</span> isImage = ext == <span class="stringliteral">&quot;.png&quot;</span> || ext == <span class="stringliteral">&quot;.jpg&quot;</span> || ext == <span class="stringliteral">&quot;.jpeg&quot;</span> || ext == <span class="stringliteral">&quot;.dds&quot;</span> || ext == <span class="stringliteral">&quot;.tga&quot;</span>;</div>
+<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span>        <span class="keywordflow">if</span> (!isImage) <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span> </div>
+<div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span>        <span class="keyword">const</span> fs::path relative = fs::relative(entry.path(), root, ec);</div>
+<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span>        <span class="keywordflow">if</span> (ec) <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span>        result.push_back(relative.generic_string());</div>
+<div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span>    }</div>
+<div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span> </div>
+<div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span>    std::sort(result.begin(), result.end());</div>
+<div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span>    <span class="keywordflow">return</span> result;</div>
+<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span>}</div>
+</div>
+<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span> </div>
+<div class="foldopen" id="foldopen00374" data-start="{" data-end="}">
+<div class="line"><a id="l00374" name="l00374"></a><span class="lineno"><a class="line" href="classTextureManager.html#a524b200ece4771f1cc500328d8d432e9">  374</a></span>std::vector&lt;std::string&gt; <a class="code hl_function" href="classTextureManager.html#a524b200ece4771f1cc500328d8d432e9">TextureManager::GetLoadedTextureNames</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span>    std::vector&lt;std::string&gt; result;</div>
+<div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span>    result.reserve(textures_.size());</div>
+<div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span>    <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; [<a class="code hl_variable" href="Input_8hpp.html#a8f8f80d37794cde9472343e4487ba3eb">name</a>, tex] : textures_) {</div>
+<div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span>        result.push_back(<a class="code hl_variable" href="Input_8hpp.html#a8f8f80d37794cde9472343e4487ba3eb">name</a>);</div>
+<div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span>    }</div>
+<div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span>    std::sort(result.begin(), result.end());</div>
+<div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span>    <span class="keywordflow">return</span> result;</div>
+<div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span>}</div>
 </div>
 <div class="ttc" id="aInput_8hpp_html_a8f8f80d37794cde9472343e4487ba3eb"><div class="ttname"><a href="Input_8hpp.html#a8f8f80d37794cde9472343e4487ba3eb">name</a></div><div class="ttdeci">const char * name</div><div class="ttdef"><b>Definition</b> <a href="Input_8hpp_source.html#l00114">Input.hpp:114</a></div></div>
 <div class="ttc" id="aLog_8hpp_html"><div class="ttname"><a href="Log_8hpp.html">Log.hpp</a></div></div>
@@ -466,23 +522,25 @@ $(document).ready(function(){initNavTree('TextureManager_8cpp_source.html',''); 
 <div class="ttc" id="aclassSRVManager_html_a50f3a4b23df601f5f07eab1faaa21b2c"><div class="ttname"><a href="classSRVManager.html#a50f3a4b23df601f5f07eab1faaa21b2c">SRVManager::GetGPUHandle</a></div><div class="ttdeci">D3D12_GPU_DESCRIPTOR_HANDLE GetGPUHandle(uint32_t index) const</div><div class="ttdef"><b>Definition</b> <a href="SRVManager_8cpp_source.html#l00095">SRVManager.cpp:95</a></div></div>
 <div class="ttc" id="aclassSRVManager_html_a969af2a4f6c4c49f564b7607995aa41c"><div class="ttname"><a href="classSRVManager.html#a969af2a4f6c4c49f564b7607995aa41c">SRVManager::IsFull</a></div><div class="ttdeci">bool IsFull() const</div><div class="ttdef"><b>Definition</b> <a href="SRVManager_8h_source.html#l00033">SRVManager.h:33</a></div></div>
 <div class="ttc" id="aclassSRVManager_html_aa1cbbf7090b893d87a79bb4dfefb8c89"><div class="ttname"><a href="classSRVManager.html#aa1cbbf7090b893d87a79bb4dfefb8c89">SRVManager::GetCPUHandle</a></div><div class="ttdeci">D3D12_CPU_DESCRIPTOR_HANDLE GetCPUHandle(uint32_t index) const</div><div class="ttdef"><b>Definition</b> <a href="SRVManager_8cpp_source.html#l00090">SRVManager.cpp:90</a></div></div>
-<div class="ttc" id="aclassTextureManager_html_a001d6d74674961db79987e3222682576"><div class="ttname"><a href="classTextureManager.html#a001d6d74674961db79987e3222682576">TextureManager::~TextureManager</a></div><div class="ttdeci">~TextureManager()</div><div class="ttdef"><b>Definition</b> <a href="TextureManager_8cpp_source.html#l00010">TextureManager.cpp:10</a></div></div>
-<div class="ttc" id="aclassTextureManager_html_a1e2c5d36c9a06ae42cd061da2f6b85ac"><div class="ttname"><a href="classTextureManager.html#a1e2c5d36c9a06ae42cd061da2f6b85ac">TextureManager::LoadFromRawPixels</a></div><div class="ttdeci">bool LoadFromRawPixels(const std::string &amp;_name, const uint8_t *_pixels, uint32_t _width, uint32_t _height, DXGI_FORMAT _format=DXGI_FORMAT_R8G8B8A8_UNORM)</div><div class="ttdoc">生ピクセルデータからテクスチャを登録</div><div class="ttdef"><b>Definition</b> <a href="TextureManager_8cpp_source.html#l00195">TextureManager.cpp:195</a></div></div>
-<div class="ttc" id="aclassTextureManager_html_a3f3a61e562dad63752a8bf8150c6537e"><div class="ttname"><a href="classTextureManager.html#a3f3a61e562dad63752a8bf8150c6537e">TextureManager::GetTextureMetadata</a></div><div class="ttdeci">const DirectX::TexMetadata &amp; GetTextureMetadata(const std::string &amp;_fileName)</div><div class="ttdoc">テクスチャメタデータを取得</div><div class="ttdef"><b>Definition</b> <a href="TextureManager_8cpp_source.html#l00266">TextureManager.cpp:266</a></div></div>
-<div class="ttc" id="aclassTextureManager_html_a8e806aaadf7d533d8951e874ddaba39a"><div class="ttname"><a href="classTextureManager.html#a8e806aaadf7d533d8951e874ddaba39a">TextureManager::GetTextureIndexByFilePath</a></div><div class="ttdeci">uint32_t GetTextureIndexByFilePath(const std::string &amp;_path) const</div><div class="ttdoc">ファイルパスからテクスチャインデックスを取得</div><div class="ttdef"><b>Definition</b> <a href="TextureManager_8cpp_source.html#l00291">TextureManager.cpp:291</a></div></div>
-<div class="ttc" id="aclassTextureManager_html_a9b048758ed45a996c7a53a21cd3bb15e"><div class="ttname"><a href="classTextureManager.html#a9b048758ed45a996c7a53a21cd3bb15e">TextureManager::GetResource</a></div><div class="ttdeci">ID3D12Resource * GetResource(const std::string &amp;_name) const</div><div class="ttdoc">生 DX12 リソースポインタを返す（デバッグ表示用）</div><div class="ttdef"><b>Definition</b> <a href="TextureManager_8cpp_source.html#l00325">TextureManager.cpp:325</a></div></div>
-<div class="ttc" id="aclassTextureManager_html_aa0b611b9efc8c6ad6483697908ca69d2"><div class="ttname"><a href="classTextureManager.html#aa0b611b9efc8c6ad6483697908ca69d2">TextureManager::Initialize</a></div><div class="ttdeci">void Initialize(DirectXAdapter *_adapter, SRVManager *_srv)</div><div class="ttdoc">テクスチャマネージャーを初期化</div><div class="ttdef"><b>Definition</b> <a href="TextureManager_8cpp_source.html#l00099">TextureManager.cpp:99</a></div></div>
-<div class="ttc" id="aclassTextureManager_html_ab10fdb00af3862499ba1f5e915ffe756"><div class="ttname"><a href="classTextureManager.html#ab10fdb00af3862499ba1f5e915ffe756">TextureManager::GetGPUHandle</a></div><div class="ttdeci">D3D12_GPU_DESCRIPTOR_HANDLE GetGPUHandle(const std::string &amp;_fileName)</div><div class="ttdoc">GPUハンドルを取得（ファイル名指定）</div><div class="ttdef"><b>Definition</b> <a href="TextureManager_8cpp_source.html#l00301">TextureManager.cpp:301</a></div></div>
-<div class="ttc" id="aclassTextureManager_html_abb179cd1141b16276350c1489ac727db"><div class="ttname"><a href="classTextureManager.html#abb179cd1141b16276350c1489ac727db">TextureManager::GetSrvIndex</a></div><div class="ttdeci">uint32_t GetSrvIndex(const std::string &amp;_fileName)</div><div class="ttdoc">SRVインデックスを取得</div><div class="ttdef"><b>Definition</b> <a href="TextureManager_8cpp_source.html#l00279">TextureManager.cpp:279</a></div></div>
-<div class="ttc" id="aclassTextureManager_html_ac1747fe5df0613980d545934904c949a"><div class="ttname"><a href="classTextureManager.html#ac1747fe5df0613980d545934904c949a">TextureManager::Unload</a></div><div class="ttdeci">void Unload()</div><div class="ttdoc">すべてのテクスチャをアンロード（クリア）</div><div class="ttdef"><b>Definition</b> <a href="TextureManager_8cpp_source.html#l00257">TextureManager.cpp:257</a></div></div>
-<div class="ttc" id="aclassTextureManager_html_ad7d3de3b18a76f2c0116321d6f91c332"><div class="ttname"><a href="classTextureManager.html#ad7d3de3b18a76f2c0116321d6f91c332">TextureManager::Load</a></div><div class="ttdeci">bool Load(const std::string &amp;_fileName)</div><div class="ttdoc">テクスチャを読み込み</div><div class="ttdef"><b>Definition</b> <a href="TextureManager_8cpp_source.html#l00133">TextureManager.cpp:133</a></div></div>
+<div class="ttc" id="aclassTextureManager_html_a001d6d74674961db79987e3222682576"><div class="ttname"><a href="classTextureManager.html#a001d6d74674961db79987e3222682576">TextureManager::~TextureManager</a></div><div class="ttdeci">~TextureManager()</div><div class="ttdef"><b>Definition</b> <a href="TextureManager_8cpp_source.html#l00012">TextureManager.cpp:12</a></div></div>
+<div class="ttc" id="aclassTextureManager_html_a1e2c5d36c9a06ae42cd061da2f6b85ac"><div class="ttname"><a href="classTextureManager.html#a1e2c5d36c9a06ae42cd061da2f6b85ac">TextureManager::LoadFromRawPixels</a></div><div class="ttdeci">bool LoadFromRawPixels(const std::string &amp;_name, const uint8_t *_pixels, uint32_t _width, uint32_t _height, DXGI_FORMAT _format=DXGI_FORMAT_R8G8B8A8_UNORM)</div><div class="ttdoc">生ピクセルデータからテクスチャを登録</div><div class="ttdef"><b>Definition</b> <a href="TextureManager_8cpp_source.html#l00197">TextureManager.cpp:197</a></div></div>
+<div class="ttc" id="aclassTextureManager_html_a3f3a61e562dad63752a8bf8150c6537e"><div class="ttname"><a href="classTextureManager.html#a3f3a61e562dad63752a8bf8150c6537e">TextureManager::GetTextureMetadata</a></div><div class="ttdeci">const DirectX::TexMetadata &amp; GetTextureMetadata(const std::string &amp;_fileName)</div><div class="ttdoc">テクスチャメタデータを取得</div><div class="ttdef"><b>Definition</b> <a href="TextureManager_8cpp_source.html#l00282">TextureManager.cpp:282</a></div></div>
+<div class="ttc" id="aclassTextureManager_html_a4760e08c39182472b00a98f9233ad9f2"><div class="ttname"><a href="classTextureManager.html#a4760e08c39182472b00a98f9233ad9f2">TextureManager::ListAvailableTextures</a></div><div class="ttdeci">std::vector&lt; std::string &gt; ListAvailableTextures() const</div><div class="ttdoc">読み込み可能な画像ファイルの一覧を取得（デバッグUIの選択肢表示用） folderPath_ 配下を再帰的に走査し、対応拡張子（png/jpg/jpeg/dds/tga）のファイルを folderPat...</div><div class="ttdef"><b>Definition</b> <a href="TextureManager_8cpp_source.html#l00348">TextureManager.cpp:348</a></div></div>
+<div class="ttc" id="aclassTextureManager_html_a524b200ece4771f1cc500328d8d432e9"><div class="ttname"><a href="classTextureManager.html#a524b200ece4771f1cc500328d8d432e9">TextureManager::GetLoadedTextureNames</a></div><div class="ttdeci">std::vector&lt; std::string &gt; GetLoadedTextureNames() const</div><div class="ttdoc">既に読み込み済み（GPUへアップロード済み）のテクスチャキー一覧を取得 ディスクを走査せず、現在使用可能なテクスチャだけを返す（デバッグUIの選択肢表示用）</div><div class="ttdef"><b>Definition</b> <a href="TextureManager_8cpp_source.html#l00374">TextureManager.cpp:374</a></div></div>
+<div class="ttc" id="aclassTextureManager_html_a8e806aaadf7d533d8951e874ddaba39a"><div class="ttname"><a href="classTextureManager.html#a8e806aaadf7d533d8951e874ddaba39a">TextureManager::GetTextureIndexByFilePath</a></div><div class="ttdeci">uint32_t GetTextureIndexByFilePath(const std::string &amp;_path) const</div><div class="ttdoc">ファイルパスからテクスチャインデックスを取得</div><div class="ttdef"><b>Definition</b> <a href="TextureManager_8cpp_source.html#l00307">TextureManager.cpp:307</a></div></div>
+<div class="ttc" id="aclassTextureManager_html_a9b048758ed45a996c7a53a21cd3bb15e"><div class="ttname"><a href="classTextureManager.html#a9b048758ed45a996c7a53a21cd3bb15e">TextureManager::GetResource</a></div><div class="ttdeci">ID3D12Resource * GetResource(const std::string &amp;_name) const</div><div class="ttdoc">生 DX12 リソースポインタを返す（デバッグ表示用）</div><div class="ttdef"><b>Definition</b> <a href="TextureManager_8cpp_source.html#l00341">TextureManager.cpp:341</a></div></div>
+<div class="ttc" id="aclassTextureManager_html_aa0b611b9efc8c6ad6483697908ca69d2"><div class="ttname"><a href="classTextureManager.html#aa0b611b9efc8c6ad6483697908ca69d2">TextureManager::Initialize</a></div><div class="ttdeci">void Initialize(DirectXAdapter *_adapter, SRVManager *_srv)</div><div class="ttdoc">テクスチャマネージャーを初期化</div><div class="ttdef"><b>Definition</b> <a href="TextureManager_8cpp_source.html#l00101">TextureManager.cpp:101</a></div></div>
+<div class="ttc" id="aclassTextureManager_html_ab10fdb00af3862499ba1f5e915ffe756"><div class="ttname"><a href="classTextureManager.html#ab10fdb00af3862499ba1f5e915ffe756">TextureManager::GetGPUHandle</a></div><div class="ttdeci">D3D12_GPU_DESCRIPTOR_HANDLE GetGPUHandle(const std::string &amp;_fileName)</div><div class="ttdoc">GPUハンドルを取得（ファイル名指定）</div><div class="ttdef"><b>Definition</b> <a href="TextureManager_8cpp_source.html#l00317">TextureManager.cpp:317</a></div></div>
+<div class="ttc" id="aclassTextureManager_html_abb179cd1141b16276350c1489ac727db"><div class="ttname"><a href="classTextureManager.html#abb179cd1141b16276350c1489ac727db">TextureManager::GetSrvIndex</a></div><div class="ttdeci">uint32_t GetSrvIndex(const std::string &amp;_fileName)</div><div class="ttdoc">SRVインデックスを取得</div><div class="ttdef"><b>Definition</b> <a href="TextureManager_8cpp_source.html#l00295">TextureManager.cpp:295</a></div></div>
+<div class="ttc" id="aclassTextureManager_html_ac1747fe5df0613980d545934904c949a"><div class="ttname"><a href="classTextureManager.html#ac1747fe5df0613980d545934904c949a">TextureManager::Unload</a></div><div class="ttdeci">void Unload()</div><div class="ttdoc">すべてのテクスチャをアンロード（クリア）</div><div class="ttdef"><b>Definition</b> <a href="TextureManager_8cpp_source.html#l00273">TextureManager.cpp:273</a></div></div>
+<div class="ttc" id="aclassTextureManager_html_ad7d3de3b18a76f2c0116321d6f91c332"><div class="ttname"><a href="classTextureManager.html#ad7d3de3b18a76f2c0116321d6f91c332">TextureManager::Load</a></div><div class="ttdeci">bool Load(const std::string &amp;_fileName)</div><div class="ttdoc">テクスチャを読み込み</div><div class="ttdef"><b>Definition</b> <a href="TextureManager_8cpp_source.html#l00135">TextureManager.cpp:135</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_64cece8721923da8192b70f373152c4b.html">Texture</a></li><li class="navelem"><a class="el" href="TextureManager_8cpp.html">TextureManager.cpp</a></li>
-    <li class="footer">2026年09月02日(水) 09時31分25秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年09月03日(木) 06時58分30秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

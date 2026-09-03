@@ -97,6 +97,8 @@ var hierarchy =
     [ "Particle", "classParticle.html", null ],
     [ "ParticleSystem", "classParticleSystem.html", null ],
     [ "PipelineStateObject", "classPipelineStateObject.html", null ],
+    [ "PlaneTextureLayer", "structPlaneTextureLayer.html", null ],
+    [ "PlaneTextureLayoutEditor", "classPlaneTextureLayoutEditor.html", null ],
     [ "PointLight", "structPointLight.html", null ],
     [ "PostProcessExecutor", "classPostProcessExecutor.html", null ],
     [ "PostProcessPresetEditor", "classPostProcessPresetEditor.html", null ],
