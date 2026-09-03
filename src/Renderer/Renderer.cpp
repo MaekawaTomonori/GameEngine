@@ -26,8 +26,10 @@ void Renderer::Render() {
 
     // Phase 1: シーン描画（renderTexture_）
     // キャプチャモード時は非PostEffectタスクも renderTexture_ へ描画する
+    // 描画タスクが1件も無いフレーム（シーン切替直後など）でも renderTexture_ を
+    // クリアするため、タスクの有無に関わらず毎フレーム実行する
     bool hasPostProcess = false;
-    if (!pp_.empty() || (captureMode && !tasks_.empty())) {
+    if (postProcessor_) {
         postProcessor_->BeginFrame();
         hasPostProcess = true;
 
