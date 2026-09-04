@@ -184,6 +184,7 @@
     <ClInclude Include="src\Model\Node\Node.hpp" />
     <ClInclude Include="src\Model\Repository\ModelRepository.hpp" />
     <ClInclude Include="src\Model\Skeleton\Skeleton.hpp" />
+    <ClInclude Include="src\Model\Skinning\SkinningState.hpp" />
     <ClInclude Include="src\ParticleSystem\Emitter\Emitter.hpp" />
     <ClInclude Include="src\ParticleSystem\Keyframe.hpp" />
     <ClInclude Include="src\ParticleSystem\ParticleSystem.hpp" />
@@ -288,6 +289,7 @@
     <ClCompile Include="src\Model\Loader\ObjLoader.cpp" />
     <ClCompile Include="src\Model\Model.cpp" />
     <ClCompile Include="src\Model\Repository\ModelRepository.cpp" />
+    <ClCompile Include="src\Model\Skinning\SkinningState.cpp" />
     <ClCompile Include="src\ParticleSystem\Emitter\Emitter.cpp" />
     <ClCompile Include="src\ParticleSystem\ParticleSystem.cpp" />
     <ClCompile Include="src\ParticleSystem\Particle\Particle.cpp" />

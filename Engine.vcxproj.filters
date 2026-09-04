@@ -127,6 +127,9 @@
     <Filter Include="src\Model\Skeleton">
       <UniqueIdentifier>{01AA2634-ED8D-E789-56EE-E1DC42F1D10B}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Model\Skinning">
+      <UniqueIdentifier>{7F3B9C1E-4A2D-4E6B-9F0A-2C5D8E1B6A47}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\Platform">
       <UniqueIdentifier>{21CA02E5-0D2D-9289-B6B2-CA3FA2F45D0C}</UniqueIdentifier>
     </Filter>
@@ -363,6 +366,9 @@
     <ClInclude Include="src\Model\Skeleton\Skeleton.hpp">
       <Filter>src\Model\Skeleton</Filter>
     </ClInclude>
+    <ClInclude Include="src\Model\Skinning\SkinningState.hpp">
+      <Filter>src\Model\Skinning</Filter>
+    </ClInclude>
     <ClInclude Include="src\Platform\WinApp.hpp">
       <Filter>src\Platform</Filter>
     </ClInclude>
@@ -576,6 +582,9 @@
     </ClCompile>
     <ClCompile Include="src\Model\Repository\ModelRepository.cpp">
       <Filter>src\Model\Repository</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Model\Skinning\SkinningState.cpp">
+      <Filter>src\Model\Skinning</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\WinApp.cpp">
       <Filter>src\Platform</Filter>
