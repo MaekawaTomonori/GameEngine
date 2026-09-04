@@ -1,9 +1,20 @@
 var NAVTREEINDEX8 =
 {
-"structVertex.html#adce2d4b3d1191c69328519bdf231c344":[1,0,98,0],
-"structVertexWeightData.html":[1,0,99],
-"structVertexWeightData.html#a946382fc31458260ff891a050688a918":[1,0,99,1],
-"structVertexWeightData.html#ad87e381dd9f1e49f4bde12a01e044af0":[1,0,99,0],
+"structUi_1_1SpriteElement_1_1Data.html#a6861296be77e7d219ab75ce8cdba363a":[1,0,3,8,0,0],
+"structUi_1_1SpriteElement_1_1Data.html#a6861296be77e7d219ab75ce8cdba363a":[0,0,6,8,0,0],
+"structUi_1_1TextElement_1_1Data.html":[0,0,6,9,0],
+"structUi_1_1TextElement_1_1Data.html":[1,0,3,9,0],
+"structUi_1_1TextElement_1_1Data.html#a4b82ff7f89e90da7c507408ad714fb9d":[0,0,6,9,0,0],
+"structUi_1_1TextElement_1_1Data.html#a4b82ff7f89e90da7c507408ad714fb9d":[1,0,3,9,0,0],
+"structUi_1_1TextElement_1_1Data.html#a727808e59ab863f95a6a531ed0ca7b63":[0,0,6,9,0,1],
+"structUi_1_1TextElement_1_1Data.html#a727808e59ab863f95a6a531ed0ca7b63":[1,0,3,9,0,1],
+"structVertex.html":[1,0,99],
+"structVertex.html#a12518753ef33de96e2e6fec258b16bd5":[1,0,99,1],
+"structVertex.html#a334094143f24252bb6df5a84ce9bb473":[1,0,99,2],
+"structVertex.html#adce2d4b3d1191c69328519bdf231c344":[1,0,99,0],
+"structVertexWeightData.html":[1,0,100],
+"structVertexWeightData.html#a946382fc31458260ff891a050688a918":[1,0,100,1],
+"structVertexWeightData.html#ad87e381dd9f1e49f4bde12a01e044af0":[1,0,100,0],
 "structstd_1_1hash_3_01Ui_1_1EventKey_01_4.html":[1,0,2,0],
 "structstd_1_1hash_3_01Ui_1_1EventKey_01_4.html#ab8449ac838947c2be0ae584252df0585":[1,0,2,0,0]
 };

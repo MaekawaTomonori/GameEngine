@@ -318,10 +318,10 @@ $(document).ready(function(){initNavTree('ModelCommon_8cpp_source.html',''); ini
 <div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>                .Descriptor = { .ShaderRegister = 0 },</div>
 <div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>                .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL</div>
 <div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>            })</div>
-<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>            <span class="comment">// root 1: Transform CBV (b0, VS)</span></div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>            <span class="comment">// root 1: Transform SRV (t2, VS)</span></div>
 <div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>            .AddParameter({</div>
-<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>                .ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV,</div>
-<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>                .Descriptor = { .ShaderRegister = 0 },</div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>                .ParameterType = D3D12_ROOT_PARAMETER_TYPE_SRV,</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>                .Descriptor = { .ShaderRegister = 2 },</div>
 <div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>                .ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX</div>
 <div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>            })</div>
 <div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>            <span class="comment">// root 2: Texture SRV (t0, PS)</span></div>
@@ -446,7 +446,7 @@ $(document).ready(function(){initNavTree('ModelCommon_8cpp_source.html',''); ini
 <div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span>    staticTransparentPipeline_-&gt;SetRootSignature(</div>
 <div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span>        <a class="code hl_class" href="classRootSignature.html">RootSignature</a>()</div>
 <div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>            .AddParameter({ .ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV, .Descriptor = { .ShaderRegister = 0 }, .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL })</div>
-<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span>            .AddParameter({ .ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV, .Descriptor = { .ShaderRegister = 0 }, .ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX })</div>
+<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span>            .AddParameter({ .ParameterType = D3D12_ROOT_PARAMETER_TYPE_SRV, .Descriptor = { .ShaderRegister = 2 }, .ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX })</div>
 <div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span>            .AddParameter({ .ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE, .DescriptorTable = { .NumDescriptorRanges = 1, .pDescriptorRanges = &amp;textureRange }, .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL })</div>
 <div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span>            .AddParameter({ .ParameterType = D3D12_ROOT_PARAMETER_TYPE_SRV, .Descriptor = { .ShaderRegister = 1 }, .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL })</div>
 <div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span>            .AddParameter({ .ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV, .Descriptor = { .ShaderRegister = 2 }, .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL })</div>
@@ -815,7 +815,7 @@ $(document).ready(function(){initNavTree('ModelCommon_8cpp_source.html',''); ini
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_32e188284d239da8bb14ec1dabb0c35f.html">Model</a></li><li class="navelem"><a class="el" href="dir_b2f92e52a2eafb814cc1aab98605e6c6.html">Common</a></li><li class="navelem"><a class="el" href="ModelCommon_8cpp.html">ModelCommon.cpp</a></li>
-    <li class="footer">2026年09月03日(木) 07時05分54秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年09月04日(金) 07時22分07秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

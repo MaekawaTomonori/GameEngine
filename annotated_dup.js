@@ -106,6 +106,7 @@ var annotated_dup =
     [ "ShadowCubeMap", "classShadowCubeMap.html", "classShadowCubeMap" ],
     [ "ShadowPass", "classShadowPass.html", "classShadowPass" ],
     [ "Skeleton", "structSkeleton.html", "structSkeleton" ],
+    [ "SkinningState", "classSkinningState.html", "classSkinningState" ],
     [ "Skybox", "classSkybox.html", "classSkybox" ],
     [ "SkyCommon", "classSkyCommon.html", "classSkyCommon" ],
     [ "SpotLight", "structSpotLight.html", "structSpotLight" ],

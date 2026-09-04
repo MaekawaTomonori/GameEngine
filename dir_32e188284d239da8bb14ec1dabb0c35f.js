@@ -6,5 +6,6 @@ var dir_32e188284d239da8bb14ec1dabb0c35f =
     [ "Node", "dir_36c9be76db1783f4ff84c9803b358d35.html", "dir_36c9be76db1783f4ff84c9803b358d35" ],
     [ "Repository", "dir_36451068af2da8b4be760cdcffe7ca19.html", "dir_36451068af2da8b4be760cdcffe7ca19" ],
     [ "Skeleton", "dir_fbc49d2b4f97f00c52c8b4c513a9ae49.html", "dir_fbc49d2b4f97f00c52c8b4c513a9ae49" ],
+    [ "Skinning", "dir_6f124710814787f0bee276fc77846216.html", "dir_6f124710814787f0bee276fc77846216" ],
     [ "Model.cpp", "Model_8cpp.html", null ]
 ];

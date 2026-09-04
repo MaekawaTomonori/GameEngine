@@ -5,7 +5,7 @@ var searchData=
   ['material_2',['Material',['../structMaterial.html',1,'']]],
   ['material_2ecpp_3',['Material.cpp',['../Material_8cpp.html',1,'']]],
   ['material_2ehpp_4',['Material.hpp',['../Material_8hpp.html',1,'']]],
-  ['max_5finfluence_5',['MAX_INFLUENCE',['../Model_8hpp.html#ac97594404e23d387dc61bdd4ce252e20',1,'Model.hpp']]],
+  ['max_5finfluence_5',['MAX_INFLUENCE',['../SkinningState_8hpp.html#ac97594404e23d387dc61bdd4ce252e20',1,'SkinningState.hpp']]],
   ['member_6',['Member',['../structPostProcessExecutor_1_1Work_1_1Member.html',1,'PostProcessExecutor::Work']]],
   ['members_7',['members',['../structPostProcessPresetEditor_1_1PresetData.html#a38f6302b4822374e74e0e714ee6c7f88',1,'PostProcessPresetEditor::PresetData']]],
   ['mesh_8',['mesh',['../structModelData.html#a366f0dee864486569b1d72334f2f7bad',1,'ModelData::mesh'],['../classMesh.html',1,'Mesh']]],

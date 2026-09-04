@@ -122,6 +122,7 @@ var hierarchy =
     [ "ShadowCubeMap", "classShadowCubeMap.html", null ],
     [ "ShadowPass", "classShadowPass.html", null ],
     [ "Skeleton", "structSkeleton.html", null ],
+    [ "SkinningState", "classSkinningState.html", null ],
     [ "Skybox", "classSkybox.html", null ],
     [ "SpotLight", "structSpotLight.html", null ],
     [ "Sprite", "classSprite.html", null ],
