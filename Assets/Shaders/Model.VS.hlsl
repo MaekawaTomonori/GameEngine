@@ -5,7 +5,7 @@ struct TransformationMatrix{
     float32_t4x4 World;
     float32_t4x4 WorldInverseTranspose;
 };
-ConstantBuffer<TransformationMatrix> gTransformationMatrix : register(b0);
+StructuredBuffer<TransformationMatrix> gTransformationMatrix : register(t2);
 
 struct VertexShaderInput{
 	float32_t4 position : POSITION0;
@@ -13,16 +13,18 @@ struct VertexShaderInput{
     float32_t3 normal : NORMAL0;
 };
 
-VertexShaderOutput main(VertexShaderInput input){
+VertexShaderOutput main(VertexShaderInput input, uint instanceId : SV_InstanceID){
     VertexShaderOutput output;
-    output.position = mul(input.position, gTransformationMatrix.WVP);
+    TransformationMatrix transform = gTransformationMatrix[instanceId];
+
+    output.position = mul(input.position, transform.WVP);
     output.texcoord = input.texcoord;
 
     //Lambertian Reflectance
-    output.normal = normalize(mul(input.normal, (float32_t3x3)gTransformationMatrix.WorldInverseTranspose));
+    output.normal = normalize(mul(input.normal, (float32_t3x3)transform.WorldInverseTranspose));
 
     //Phong Reflection Model
-    output.worldPosition = mul(input.position, gTransformationMatrix.World).xyz;
+    output.worldPosition = mul(input.position, transform.World).xyz;
 
     return output;
 }

@@ -1,54 +1,21 @@
 #ifndef Model_HPP_
 #define Model_HPP_
-#include <array>
-#include <span>
 #include <memory>
 
 #include "ReferencePtr.hpp"
 
-#include "Line.hpp"
 #include "Math/Matrix.hpp"
 #include "src/Camera/Camera.hpp"
 #include "src/Mesh/Mesh.hpp"
 #include "src/Model/Common/ModelCommon.hpp"
 #include "src/DirectX/Resource/DX12Resource.hpp"
 
-const uint32_t MAX_INFLUENCE = 4;
+class SkinningState;
 
 /** @brief 3Dモデルクラス
  * メッシュ、テクスチャ、アニメーション、スキニングを管理
  */
 class Model {
-    /** @brief 頂点のスキニング影響情報
-     */
-    struct VertexInfluence {
-        std::array<float, MAX_INFLUENCE> weights;
-        std::array<int32_t, MAX_INFLUENCE> jointIndices;
-    };
-
-    /** @brief GPU用のスキニングデータ
-     */
-    struct WellForGpu {
-        Matrix4x4 space;
-        Matrix4x4 inverseTranspose;
-    };
-
-    /** @brief スキンクラスターデータ
-     * アニメーション用のボーン変換情報を保持
-     */
-    struct SkinCluster {
-        std::vector<Matrix4x4> inverseBindPoses;
-
-        std::unique_ptr<DX12Resource> influenceResource;
-        D3D12_VERTEX_BUFFER_VIEW influenceBufferView;
-        std::span<VertexInfluence> mappedInfluence;
-
-        std::unique_ptr<DX12Resource> paletteResource;
-        std::span<WellForGpu> mappedPalette;
-        uint32_t srvIndex;
-        std::pair<D3D12_CPU_DESCRIPTOR_HANDLE, D3D12_GPU_DESCRIPTOR_HANDLE> paletteHandle;
-    };
-
     /** @brief モデルの変換行列データ
      */
     struct Transformation {
@@ -68,13 +35,10 @@ class Model {
     GESTD::ReferencePtr<ModelData> data_ = nullptr;
     std::unique_ptr<Mesh> mesh_;
 
-    std::optional<Skeleton> pose_;
-
-    bool animationEnable_ = true;
-    bool animationTimerLock_ = true;
-    float animationTime_ = 0.0f;
-
-    Line line_;
+    /** スキニング専用の状態（骨格・アニメーション・スキンクラスター）
+     * スキニングデータを持たないモデルではnullptrのまま
+     */
+    std::unique_ptr<SkinningState> skinning_;
 
     /** GPU RESOURCES
      */
@@ -87,8 +51,6 @@ class Model {
      */
     std::unique_ptr<DX12Resource> cr_;
     CameraForGpu* cd_ = nullptr;
-
-    SkinCluster skinCluster_;
 
     std::string environmentTexture_ = "";
 
@@ -183,36 +145,7 @@ private:
      */
     void Debug();
 
-    /** @brief スキンクラスターの生成
-     */
-    void CreateSkinCluster();
-
-    /** @brief バインドポーズの設定
-     * @param _skeleton スケルトン
-     */
-    void SetBindPose(Skeleton& _skeleton);
-
-    /** @brief スキンクラスターの更新
-     */
-    void UpdateSkinCluster();
-
-    /** @brief スケルトンの更新
-     */
-    void UpdateSkeleton();
-
-    /** @brief アニメーションの更新
-     */
-    void UpdateAnimation();
-
-    /** @brief アニメーションの適用
-     */
-    void ApplyAnimation();
-
-    /** @brief デバッグ用ラインの生成
-     */
-    void CreateLine();
-
-    /** @brief デバッグ用ラインの描画
+    /** @brief デバッグ用ラインの描画（スキニングモデルのみ）
      */
     void DrawLine() const;
 }; // class Model

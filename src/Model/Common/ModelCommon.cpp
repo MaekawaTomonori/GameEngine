@@ -218,10 +218,10 @@ void ModelCommon::CreateStaticPipeline() const {
                 .Descriptor = { .ShaderRegister = 0 },
                 .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL
             })
-            // root 1: Transform CBV (b0, VS)
+            // root 1: Transform SRV (t2, VS)
             .AddParameter({
-                .ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV,
-                .Descriptor = { .ShaderRegister = 0 },
+                .ParameterType = D3D12_ROOT_PARAMETER_TYPE_SRV,
+                .Descriptor = { .ShaderRegister = 2 },
                 .ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX
             })
             // root 2: Texture SRV (t0, PS)
@@ -346,7 +346,7 @@ void ModelCommon::CreateStaticTransparentPipeline() {
 	staticTransparentPipeline_->SetRootSignature(
         RootSignature()
             .AddParameter({ .ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV, .Descriptor = { .ShaderRegister = 0 }, .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL })
-            .AddParameter({ .ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV, .Descriptor = { .ShaderRegister = 0 }, .ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX })
+            .AddParameter({ .ParameterType = D3D12_ROOT_PARAMETER_TYPE_SRV, .Descriptor = { .ShaderRegister = 2 }, .ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX })
             .AddParameter({ .ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE, .DescriptorTable = { .NumDescriptorRanges = 1, .pDescriptorRanges = &textureRange }, .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL })
             .AddParameter({ .ParameterType = D3D12_ROOT_PARAMETER_TYPE_SRV, .Descriptor = { .ShaderRegister = 1 }, .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL })
             .AddParameter({ .ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV, .Descriptor = { .ShaderRegister = 2 }, .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL })
