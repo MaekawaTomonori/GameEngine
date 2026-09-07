@@ -40,6 +40,5 @@ PixelOutput main(VertexShaderOutput input) {
         }
     }
 
-    output.color.a = 1.0f;
     return output;
 };

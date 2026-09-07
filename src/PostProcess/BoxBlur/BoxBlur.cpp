@@ -41,7 +41,7 @@ void BoxBlur::Initialize() {
             .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL
         })
     )
-    .SetBlend(BlendMode::ALPHA)
+    .SetBlend(BlendMode::NONE)
     .SetShader(std::make_unique<Shader>(L"CpyImg", L"BoxBlur"))
     .SetTopologyType(D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE)
     .Create();
@@ -53,10 +53,7 @@ void BoxBlur::Initialize() {
 }
 
 void BoxBlur::Debug() {
-    if (ImGui::TreeNode("BoxBlur-Details")){
-        ImGui::ColorEdit3("Color", &material_->color.x);
-        ImGui::TreePop();
-    }
+    ImGui::ColorEdit3("Color", &material_->color.x);
 }
 
 void BoxBlur::Modifier() {
@@ -67,3 +64,16 @@ void BoxBlur::LoadPreset(const std::string& _presetName) { (void)_presetName;}
 void BoxBlur::SavePreset(const std::string& _presetName) { (void)_presetName;}
 nlohmann::json BoxBlur::SaveParameters() const { return nlohmann::json(); }
 void BoxBlur::UpdateAnimation(const float _t) { (void)_t;}
+
+nlohmann::json BoxBlur::CaptureCurrentParameters() const {
+    nlohmann::json j;
+    j["color"] = {material_->color.x, material_->color.y, material_->color.z, material_->color.w};
+    return j;
+}
+
+void BoxBlur::ApplyParameters(const nlohmann::json& _params) {
+    if (_params.contains("color")) {
+        const auto& c = _params["color"];
+        material_->color = Vector4(c[0], c[1], c[2], c[3]);
+    }
+}

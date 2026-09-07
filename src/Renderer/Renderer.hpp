@@ -3,6 +3,7 @@
 
 #include <functional>
 #include <queue>
+#include <string>
 
 #include "ReferencePtr.hpp"
 
@@ -16,12 +17,6 @@ class Renderer {
     GESTD::ReferencePtr<DirectXAdapter> adapter_ = nullptr;
     GESTD::ReferencePtr<PostProcessExecutor> postProcessor_ = nullptr;
 
-    /** PostProcessを適応するタスク
-     */
-    std::queue<std::function<void()>> pp_;
-    /** PostProcessを適用しないゲームオブジェクトのタスク
-     */
-    std::queue<std::function<void()>> tasks_;
     /** UIタスク（常にスワップチェーンへ描画：ImGui等）
      */
     std::queue<std::function<void()>> uiTasks_;
@@ -35,9 +30,9 @@ public:
 
     /** @brief 描画タスクを登録
      * @param _task 描画タスク
-     * @param _applyPostEffect ポストエフェクトを適用するか
+     * @param _canvasName 登録先Canvas名
      */
-    void Register(const std::function<void()>& _task, bool _applyPostEffect = false);
+    void Register(const std::function<void()>& _task, const std::string& _canvasName = "None");
 
     /** @brief UIタスクを登録（常にスワップチェーンへ描画）
      * @param _task 描画タスク（ImGui等）

@@ -32,10 +32,10 @@ class ModelCommon : public Common{
 public:
     void Initialize(const GESTD::ReferencePtr<DirectXAdapter>& _adapter, const GESTD::ReferencePtr<DebugUI>& _debugUi, GESTD::ReferencePtr<ResourceRepository> _resource, SRVManager* _srv);
 
-    void RegisterStaticDraw(const std::function<void()>& _command, bool _isApplyPostEffect = true);
-    void RegisterSkinningDraw(const std::function<void()>& _command, bool _isApplyPostEffect = true);
-    void RegisterStaticTransparentDraw(const std::function<void()>& _command, bool _isApplyPostEffect = true);
-    void RegisterSkinningTransparentDraw(const std::function<void()>& _command, bool _isApplyPostEffect = true);
+    void RegisterStaticDraw(const std::function<void()>& _command, const std::string& _canvasName = "Main");
+    void RegisterSkinningDraw(const std::function<void()>& _command, const std::string& _canvasName = "Main");
+    void RegisterStaticTransparentDraw(const std::function<void()>& _command, const std::string& _canvasName = "Main");
+    void RegisterSkinningTransparentDraw(const std::function<void()>& _command, const std::string& _canvasName = "Main");
     void RegisterShadowDraw(const std::string& _id, const std::function<void()>& _func);
     void UnregisterShadowDraw(const std::string& _id);
 

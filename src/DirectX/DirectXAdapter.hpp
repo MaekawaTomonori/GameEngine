@@ -146,6 +146,9 @@ public:
      */
     void EndFrame();
 
+    /** @brief SwapChainの現在のバックバッファを描画先として再設定する（クリアも行う） */
+    void SetSwapChainRenderTarget() const;
+
     /** @brief FPSを表示
      * @param _debug デバッグUI
      */
@@ -174,7 +177,6 @@ private:
     bool CreateViewportAndScissor();
     bool CreateLimiter();
 
-    void SetSwapChainRenderTarget() const;
     void Present();
     void Wait();
 
@@ -195,6 +197,9 @@ private:
     void CreateDSVDescriptor();
 
 public: //Accessor
+    /** @brief SwapChainの背景クリア色を取得 */
+    const Vector4& GetBackgroundColor() const { return back_; }
+
     /** @brief ウィンドウハンドルを取得
      * @return ウィンドウハンドル
      */

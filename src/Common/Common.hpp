@@ -12,9 +12,7 @@ class Common {
 protected:
     struct RenderingCommand {
         std::function<void()> func;
-        bool applyPostEffects;
-        /** Add PostEffect Mask later
-         */
+        std::string canvasName = "None";
     };
 
     GESTD::ReferencePtr<DirectXAdapter> adapter_;
@@ -39,7 +37,7 @@ public:
 
     void RegisterDebug(const std::string& _id, const std::function<void()>& _func);
     void RegisterUpdate(const std::string& _id, const std::function<void()>& _func);
-    void RegisterDraw(const std::function<void()>& _command, bool _isApplyPostEffect = true);
+    void RegisterDraw(const std::function<void()>& _command);
 
     void Unregister(const std::string& _uuid);
 

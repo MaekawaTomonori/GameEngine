@@ -6,9 +6,10 @@
 #include "ReferencePtr.hpp"
 #include "src/Scene/SceneSwitcher.hpp"
 #include "src/Config/Config.hpp"
+#include "Factory/PostEffectFactory.hpp"
+#include "src/PostProcess/IPostEffect.hpp"
 
 class AbstractSceneFactory;
-class AbstractPostEffectFactory;
 class PostProcessExecutor;
 
 /** @brief ゲーム実装の基底インターフェース
@@ -16,7 +17,7 @@ class PostProcessExecutor;
  */
 class IGame {
     std::unique_ptr<SceneSwitcher> scene_;
-    std::unique_ptr<AbstractPostEffectFactory> postEffectFactory_;
+    std::unique_ptr<PostEffectFactory> postEffectFactory_;
 
 public:
     IGame();
@@ -32,7 +33,7 @@ public:
     /** @brief PostEffectFactoryを取得
      * @return PostEffectファクトリーのポインタ
      */
-    GESTD::ReferencePtr<AbstractPostEffectFactory> GetPostEffectFactory() const;
+    GESTD::ReferencePtr<PostEffectFactory> GetPostEffectFactory() const;
 
 protected:
     template<typename T>
@@ -41,10 +42,15 @@ protected:
         scene_->RegisterScene(_name, [] { return std::make_unique<T>(); });
     }
 
-    /** @brief PostEffectFactoryを設定
-     * @param _factory PostEffectファクトリー
+    /** @brief PostEffectを登録する
+     * @tparam T IPostEffectを継承したエフェクトクラス
+     * @param _type エフェクトタイプ名
      */
-    void SetPostEffectFactory(std::unique_ptr<AbstractPostEffectFactory> _factory);
+    template<typename T>
+    void RegisterPostEffect(const std::string& _type) {
+        static_assert(std::is_base_of_v<IPostEffect, T>, "T must be derived from IPostEffect");
+        postEffectFactory_->Register(_type, [] { return std::make_unique<T>(); });
+    }
 }; // class IGame
 
 #endif // IGame_HPP_

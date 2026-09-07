@@ -5,6 +5,9 @@
 bool Heap::Create(ID3D12Device* _device, D3D12_DESCRIPTOR_HEAP_TYPE _type, UINT _numDescriptors, D3D12_DESCRIPTOR_HEAP_FLAGS _flags) {
     device_ = _device;
     type_ = _type;
+    numDescriptors_ = _numDescriptors;
+    nextIndex_ = 0;
+    freeIndices_.clear();
 
     D3D12_DESCRIPTOR_HEAP_DESC desc = {};
     desc.Type = _type;
@@ -16,6 +19,25 @@ bool Heap::Create(ID3D12Device* _device, D3D12_DESCRIPTOR_HEAP_TYPE _type, UINT 
     }
 
     return true;
+}
+
+uint32_t Heap::Allocate() {
+    if (!freeIndices_.empty()) {
+        uint32_t index = freeIndices_.back();
+        freeIndices_.pop_back();
+        return index;
+    }
+
+    if (nextIndex_ >= numDescriptors_) {
+        Utils::Alert("Heap is full");
+        return 0;
+    }
+
+    return nextIndex_++;
+}
+
+void Heap::Free(uint32_t _index) {
+    freeIndices_.push_back(_index);
 }
 
 ID3D12DescriptorHeap * Heap::Get() const {

@@ -446,7 +446,7 @@
       <Filter>src\Window</Filter>
     </ClInclude>
     <ClInclude Include="src\Debug\FrameDebugger.hpp" />
-    <ClInclude Include="include\Factory\AbstractPostEffectFactory.hpp" />
+    <ClInclude Include="include\Factory\PostEffectFactory.hpp" />
     <ClInclude Include="src\Scene\SceneFactory.hpp" />
     <ClInclude Include="src\Camera\Controller\CameraController.hpp" />
     <ClInclude Include="src\Camera\Director\CameraDirector.hpp" />
@@ -459,6 +459,11 @@
     <ClInclude Include="src\ParticleSystem\Keyframe.hpp" />
     <ClInclude Include="src\ParticleSystem\ParticleSystem.hpp" />
     <ClInclude Include="src\ParticleSystem\Particle\Particle.hpp" />
+    <ClInclude Include="src\Canvas\Canvas.hpp" />
+    <ClInclude Include="src\Canvas\CanvasLayer.hpp" />
+    <ClInclude Include="src\Canvas\Editor\CanvasLayerEditor.hpp" />
+    <ClInclude Include="src\PostProcess\Chain\PostEffectChain.hpp" />
+    <ClInclude Include="src\PostProcess\Editor\PostEffectChainEditorUI.hpp" />
     <ClInclude Include="src\PostProcess\Editor\PostProcessPresetEditor.hpp" />
     <ClInclude Include="src\Scene\Transition\ITransitionEffect.hpp" />
     <ClInclude Include="src\Scene\Transition\Transition.hpp" />
@@ -677,7 +682,13 @@
     <ClCompile Include="src\ParticleSystem\Emitter\Emitter.cpp" />
     <ClCompile Include="src\ParticleSystem\ParticleSystem.cpp" />
     <ClCompile Include="src\ParticleSystem\Particle\Particle.cpp" />
+    <ClCompile Include="src\Canvas\Canvas.cpp" />
+    <ClCompile Include="src\Canvas\CanvasLayer.cpp" />
+    <ClCompile Include="src\Canvas\Editor\CanvasLayerEditor.cpp" />
+    <ClCompile Include="src\PostProcess\Chain\PostEffectChain.cpp" />
+    <ClCompile Include="src\PostProcess\Editor\PostEffectChainEditorUI.cpp" />
     <ClCompile Include="src\PostProcess\Editor\PostProcessPresetEditor.cpp" />
+    <ClCompile Include="src\Factory\PostEffectFactory.cpp" />
     <ClCompile Include="src\Scene\SceneFactory.cpp" />
     <ClCompile Include="src\Scene\Transition\Transition.cpp" />
     <ClCompile Include="src\Scene\Transition\Fade.cpp" />

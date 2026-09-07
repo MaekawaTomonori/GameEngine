@@ -37,6 +37,9 @@ public:
     void SavePreset(const std::string& _presetName) override;
     nlohmann::json SaveParameters() const override;
     void UpdateAnimation(float _t) override;
+    std::string GetTypeName() const override { return "Vignette"; }
+    nlohmann::json CaptureCurrentParameters() const override;
+    void ApplyParameters(const nlohmann::json& _params) override;
 
 protected:
     void Modifier() override;

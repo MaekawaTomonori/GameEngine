@@ -54,7 +54,7 @@ class Model {
 
     std::string environmentTexture_ = "";
 
-    bool posteffect_ = true;
+    std::string canvasName_ = "Main";
     bool castShadow_ = true;
 
 public:
@@ -124,6 +124,14 @@ public:
      * @return メソッドチェーン用の自身への参照
      */
     Model& SetColor(const Vector4& _color);
+
+    /** @brief 所属Canvas名を設定
+     * @return メソッドチェーン用の自身への参照
+     */
+    Model& SetCanvasName(const std::string& _canvasName);
+
+    /** @brief 所属Canvas名を取得 */
+    const std::string& GetCanvasName() const { return canvasName_; }
 
     /** @brief モデル名の取得
      * @return モデル名

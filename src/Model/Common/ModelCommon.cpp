@@ -442,24 +442,24 @@ void ModelCommon::CreateSkinningTransparentPipeline() {
 	.Create();
 }
 
-void ModelCommon::RegisterStaticDraw(const std::function<void()>& _command, bool _isApplyPostEffect) {
+void ModelCommon::RegisterStaticDraw(const std::function<void()>& _command, const std::string& _canvasName) {
     std::lock_guard<std::mutex> lock(mutex_);
-    staticDrawCommands_.push_back({ _command, _isApplyPostEffect });
+    staticDrawCommands_.push_back({ _command, _canvasName });
 }
 
-void ModelCommon::RegisterSkinningDraw(const std::function<void()>& _command, bool _isApplyPostEffect) {
+void ModelCommon::RegisterSkinningDraw(const std::function<void()>& _command, const std::string& _canvasName) {
     std::lock_guard<std::mutex> lock(mutex_);
-    skinningDrawCommands_.push_back({ _command, _isApplyPostEffect });
+    skinningDrawCommands_.push_back({ _command, _canvasName });
 }
 
-void ModelCommon::RegisterStaticTransparentDraw(const std::function<void()>& _command, bool _isApplyPostEffect) {
+void ModelCommon::RegisterStaticTransparentDraw(const std::function<void()>& _command, const std::string& _canvasName) {
     std::lock_guard<std::mutex> lock(mutex_);
-    staticTransparentCommands_.push_back({ _command, _isApplyPostEffect });
+    staticTransparentCommands_.push_back({ _command, _canvasName });
 }
 
-void ModelCommon::RegisterSkinningTransparentDraw(const std::function<void()>& _command, bool _isApplyPostEffect) {
+void ModelCommon::RegisterSkinningTransparentDraw(const std::function<void()>& _command, const std::string& _canvasName) {
     std::lock_guard<std::mutex> lock(mutex_);
-    skinningTransparentCommands_.push_back({ _command, _isApplyPostEffect });
+    skinningTransparentCommands_.push_back({ _command, _canvasName });
 }
 
 void ModelCommon::RegisterShadowDraw(const std::string& _id, const std::function<void()>& _func) {
@@ -483,53 +483,35 @@ void ModelCommon::SetShadowBinding(uint32_t _srvIndex, D3D12_GPU_VIRTUAL_ADDRESS
     shadowCbvAddress_ = _cbvAddress;
 }
 
+namespace {
+    using CanvasTaskGroups = std::unordered_map<std::string, std::vector<std::function<void()>>>;
+}
+
 void ModelCommon::Draw(Renderer* _renderer) {
-    std::vector<std::function<void()>> staticPostEffectTasks;
-    std::vector<std::function<void()>> staticNoPostEffectTasks;
-    std::vector<std::function<void()>> skinningPostEffectTasks;
-    std::vector<std::function<void()>> skinningNoPostEffectTasks;
-    std::vector<std::function<void()>> staticTransparentPostTasks;
-    std::vector<std::function<void()>> staticTransparentNoPostTasks;
-    std::vector<std::function<void()>> skinningTransparentPostTasks;
-    std::vector<std::function<void()>> skinningTransparentNoPostTasks;
+    CanvasTaskGroups staticGroups;
+    CanvasTaskGroups skinningGroups;
+    CanvasTaskGroups staticTransparentGroups;
+    CanvasTaskGroups skinningTransparentGroups;
+
+    auto groupByCanvas = [](const std::vector<RenderingCommand>& _commands, CanvasTaskGroups& _out) {
+        for (const auto& command : _commands) {
+            _out[command.canvasName].push_back(command.func);
+        }
+    };
 
     {
         std::lock_guard<std::mutex> lock(mutex_);
 
-        for (const auto& command : staticDrawCommands_) {
-            if (command.applyPostEffects) {
-                staticPostEffectTasks.push_back(command.func);
-            } else {
-                staticNoPostEffectTasks.push_back(command.func);
-            }
-        }
+        groupByCanvas(staticDrawCommands_, staticGroups);
         staticDrawCommands_.clear();
 
-        for (const auto& command : skinningDrawCommands_) {
-            if (command.applyPostEffects) {
-                skinningPostEffectTasks.push_back(command.func);
-            } else {
-                skinningNoPostEffectTasks.push_back(command.func);
-            }
-        }
+        groupByCanvas(skinningDrawCommands_, skinningGroups);
         skinningDrawCommands_.clear();
 
-        for (const auto& command : staticTransparentCommands_) {
-            if (command.applyPostEffects) {
-                staticTransparentPostTasks.push_back(command.func);
-            } else {
-                staticTransparentNoPostTasks.push_back(command.func);
-            }
-        }
+        groupByCanvas(staticTransparentCommands_, staticTransparentGroups);
         staticTransparentCommands_.clear();
 
-        for (const auto& command : skinningTransparentCommands_) {
-            if (command.applyPostEffects) {
-                skinningTransparentPostTasks.push_back(command.func);
-            } else {
-                skinningTransparentNoPostTasks.push_back(command.func);
-            }
-        }
+        groupByCanvas(skinningTransparentCommands_, skinningTransparentGroups);
         skinningTransparentCommands_.clear();
     }
 
@@ -540,103 +522,28 @@ void ModelCommon::Draw(Renderer* _renderer) {
         }
     };
 
+    auto registerGrouped = [_renderer, &bindShadow](const CanvasTaskGroups& _groups, PipelineStateObject* _pipeline) {
+        for (const auto& [canvasName, tasks] : _groups) {
+            if (tasks.empty()) continue;
+            _renderer->Register([_pipeline, tasks, bindShadow]() {
+                if (_pipeline) {
+                    _pipeline->DrawCall();
+                }
+                bindShadow();
+                for (auto& task : tasks) {
+                    task();
+                }
+            }, canvasName);
+        }
+    };
+
     // --- 不透明パス（深度書き込みあり）---
-    if (!staticNoPostEffectTasks.empty()) {
-        _renderer->Register([this, staticNoPostEffectTasks, bindShadow]() {
-            if (staticPipeline_) {
-                staticPipeline_->DrawCall();
-            }
-            bindShadow();
-            for (auto& task : staticNoPostEffectTasks) {
-                task();
-            }
-        });
-    }
-
-    if (!staticPostEffectTasks.empty()) {
-        _renderer->Register([this, staticPostEffectTasks, bindShadow]() {
-            if (staticPipeline_) {
-                staticPipeline_->DrawCall();
-            }
-            bindShadow();
-            for (auto& task : staticPostEffectTasks) {
-                task();
-            }
-        }, true);
-    }
-
-    if (!skinningNoPostEffectTasks.empty()) {
-        _renderer->Register([this, skinningNoPostEffectTasks, bindShadow]() {
-            if (pipeline_) {
-                pipeline_->DrawCall();
-            }
-            bindShadow();
-            for (auto& task : skinningNoPostEffectTasks) {
-                task();
-            }
-        });
-    }
-
-    if (!skinningPostEffectTasks.empty()) {
-        _renderer->Register([this, skinningPostEffectTasks, bindShadow]() {
-            if (pipeline_) {
-                pipeline_->DrawCall();
-            }
-            bindShadow();
-            for (auto& task : skinningPostEffectTasks) {
-                task();
-            }
-        }, true);
-    }
+    registerGrouped(staticGroups, staticPipeline_.get());
+    registerGrouped(skinningGroups, pipeline_.get());
 
     // --- 半透明パス（深度書き込みなし、不透明パスの後に描画）---
-    if (!staticTransparentNoPostTasks.empty()) {
-        _renderer->Register([this, staticTransparentNoPostTasks, bindShadow]() {
-            if (staticTransparentPipeline_) {
-                staticTransparentPipeline_->DrawCall();
-            }
-            bindShadow();
-            for (auto& task : staticTransparentNoPostTasks) {
-                task();
-            }
-        });
-    }
-
-    if (!staticTransparentPostTasks.empty()) {
-        _renderer->Register([this, staticTransparentPostTasks, bindShadow]() {
-            if (staticTransparentPipeline_) {
-                staticTransparentPipeline_->DrawCall();
-            }
-            bindShadow();
-            for (auto& task : staticTransparentPostTasks) {
-                task();
-            }
-        }, true);
-    }
-
-    if (!skinningTransparentNoPostTasks.empty()) {
-        _renderer->Register([this, skinningTransparentNoPostTasks, bindShadow]() {
-            if (skinningTransparentPipeline_) {
-                skinningTransparentPipeline_->DrawCall();
-            }
-            bindShadow();
-            for (auto& task : skinningTransparentNoPostTasks) {
-                task();
-            }
-        });
-    }
-
-    if (!skinningTransparentPostTasks.empty()) {
-        _renderer->Register([this, skinningTransparentPostTasks, bindShadow]() {
-            if (skinningTransparentPipeline_) {
-                skinningTransparentPipeline_->DrawCall();
-            }
-            bindShadow();
-            for (auto& task : skinningTransparentPostTasks) {
-                task();
-            }
-        }, true);
-    }
+    registerGrouped(staticTransparentGroups, staticTransparentPipeline_.get());
+    registerGrouped(skinningTransparentGroups, skinningTransparentPipeline_.get());
 }
 
 void ModelCommon::DrawSkinning() const {

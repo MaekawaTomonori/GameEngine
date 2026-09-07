@@ -62,7 +62,7 @@ void Skybox::Draw() {
         commandList->SetGraphicsRootDescriptorTable(2, tm->GetGPUHandle(texture_));
 
         commandList->DrawIndexedInstanced(36, 1, 0, 0, 0);
-    }, posteffect_);
+    });
 }
 
 void Skybox::SetColor(const Vector4& _color) const {

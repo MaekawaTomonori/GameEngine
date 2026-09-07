@@ -81,6 +81,7 @@ class Emitter {
     uint16_t actives_ = 0;
 
     std::string name_ = "Emitter";
+    std::string canvasName_ = "None";
     std::string uuid_;
     MeshData data_;
 
@@ -144,6 +145,12 @@ public:
     Emitter& SetRotation(const Vector3& _rotation);
 
     Emitter& SetRotationVelocity(const Vector3& _rotationVelocity);
+
+    /** @brief 所属Canvas名を設定する */
+    Emitter& SetCanvasName(const std::string& _canvasName);
+
+    /** @brief 所属Canvas名を取得する */
+    const std::string& GetCanvasName() const { return canvasName_; }
 
     /** @brief パーティクル1個あたりの寿命（秒）を設定 */
     Emitter& SetParticleLifetime(const float& _lifetime);

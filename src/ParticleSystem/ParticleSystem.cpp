@@ -10,6 +10,7 @@
 #include "Utils.hpp"
 #include "imgui_internal.h"
 #include "json.hpp"
+#include "src/PostProcess/Executor/PostProcessExecutor.hpp"
 
 namespace {
     constexpr const char* kPrimitiveNames[] = { "Billboard", "Ring", "Cylinder", "Trail" };
@@ -111,12 +112,19 @@ void ParticleSystem::Update() {
 void ParticleSystem::Draw(Renderer* _renderer) {
     if (active_.empty()) return;
 
-    _renderer->Register([&] {
-        pso_->DrawCall();
-        for (auto* emitter : active_) {
-            emitter->Draw();
-        }
-    }, true);
+    std::unordered_map<std::string, std::vector<Emitter*>> groups;
+    for (auto* emitter : active_) {
+        groups[emitter->GetCanvasName()].push_back(emitter);
+    }
+
+    for (const auto& [canvasName, emitters] : groups) {
+        _renderer->Register([this, emitters] {
+            pso_->DrawCall();
+            for (auto* emitter : emitters) {
+                emitter->Draw();
+            }
+        }, canvasName);
+    }
 }
 
 void ParticleSystem::RegisterUpdateFunc(const std::string& _key, UpdateFunc _func) {
@@ -193,6 +201,7 @@ void ParticleSystem::LoadTemplate(const std::string& _name) {
                 }
             }
 
+            config.canvasName = emitterData.value("CanvasName", "None");
             config.updateFuncKey = emitterData.value("UpdateFunc", "");
             config.spawnFuncKey  = emitterData.value("SpawnFunc",  "");
             config.primitive     = StringToPrimitive(emitterData.value("Primitive", "Billboard"));
@@ -257,6 +266,7 @@ void ParticleSystem::SaveTemplate(const std::string& _name) const {
         if (!config.spawnFuncKey.empty()) {
             emitterData["SpawnFunc"] = config.spawnFuncKey;
         }
+        emitterData["CanvasName"] = config.canvasName;
         emitterData["Primitive"] = PrimitiveToString(config.primitive);
         emitterData["Billboard"] = config.billboard;
         emitterData["Rotation"] = {config.rotation.x, config.rotation.y, config.rotation.z};
@@ -314,7 +324,8 @@ EmitterHandle ParticleSystem::Emit(const std::string& _templateName, const Vecto
             .SetRotationVelocity(config.rotationVelocity)
             .SetParticleLifetime(config.particleLifetime)
             .SetColorKeys(config.colorKeys)
-            .SetSizeKeys(config.sizeKeys);
+            .SetSizeKeys(config.sizeKeys)
+            .SetCanvasName(config.canvasName);
 
         UpdateFunc updateFunc = ResolveUpdateFunc(config);
         if (updateFunc) {
@@ -438,6 +449,14 @@ void ParticleSystem::Debug() {
                         DebugUIWidgets::KeyCombo("UpdateFunc", CollectKeys(updateFuncs_), config.updateFuncKey);
                         DebugUIWidgets::KeyCombo("SpawnFunc", CollectKeys(spawnFuncs_), config.spawnFuncKey);
 
+                        if (postProcessor_) {
+                            std::vector<std::string> canvasNames;
+                            for (const auto& [zOrder, canvas] : postProcessor_->GetCanvases()) {
+                                canvasNames.push_back(canvas->GetName());
+                            }
+                            DebugUIWidgets::KeyCombo("Canvas", canvasNames, config.canvasName);
+                        }
+
                         ImGui::Spacing();
                         if (ImGui::SmallButton("Test")) {
                             if (!poolInitialized_) InitializePool();
@@ -458,7 +477,8 @@ void ParticleSystem::Debug() {
                                     .SetRotationVelocity(config.rotationVelocity)
                                     .SetParticleLifetime(config.particleLifetime)
                                     .SetColorKeys(config.colorKeys)
-                                    .SetSizeKeys(config.sizeKeys);
+                                    .SetSizeKeys(config.sizeKeys)
+                                    .SetCanvasName(config.canvasName);
                                 UpdateFunc uf = ResolveUpdateFunc(config);
                                 if (uf) emitter->SetUpdateFunction(uf);
                                 SpawnFunc sf = ResolveSpawnFunc(config);
