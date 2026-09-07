@@ -27,6 +27,7 @@ void RawPointLight::Save(const std::string& _path) {
 	json->SetValue(_path, uuid_, "radius", light_.radius);
 	json->SetValue(_path, uuid_, "decay", light_.decay);
 	json->SetValue(_path, uuid_, "castShadow", static_cast<int32_t>(light_.castShadow));
+	json->SetValue(_path, uuid_, "followRef", static_cast<int32_t>(FollowsGlobalRef()));
 }
 
 void RawPointLight::ImGuiSetting(int _index) {
@@ -49,6 +50,11 @@ void RawPointLight::ImGuiSetting(int _index) {
         bool castShadow = light_.castShadow != 0;
         if (ImGui::Checkbox("Cast Shadow", &castShadow)) {
             light_.castShadow = castShadow ? 1u : 0u;
+        }
+        bool followsRef = FollowsGlobalRef();
+        if (ImGui::Checkbox("Follow Ref", &followsRef)) {
+            SetFollowsGlobalRef(followsRef);
+            if (!followsRef) ClearRef();
         }
         if (ImGui::Button("Delete")) { enable_ = false; }
         ImGui::TreePop();
