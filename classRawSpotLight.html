@@ -146,6 +146,10 @@ RawSpotLight の継承関係図</div>
 <tr class="separator:ae603ebe7b28d1f9371a7e822f334ee31 inherit pub_methods_classRawLight"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1b90adacfed1993f359f2a95a927a2d8 inherit pub_methods_classRawLight" id="r_a1b90adacfed1993f359f2a95a927a2d8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRawLight.html#a1b90adacfed1993f359f2a95a927a2d8">ClearRef</a> ()</td></tr>
 <tr class="separator:a1b90adacfed1993f359f2a95a927a2d8 inherit pub_methods_classRawLight"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5aedb993ecf706920819c7517f470c3c inherit pub_methods_classRawLight" id="r_a5aedb993ecf706920819c7517f470c3c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRawLight.html#a5aedb993ecf706920819c7517f470c3c">SetFollowsGlobalRef</a> (bool _follow)</td></tr>
+<tr class="separator:a5aedb993ecf706920819c7517f470c3c inherit pub_methods_classRawLight"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a087a2c41ec0e78100e2affbd82fe3ac7 inherit pub_methods_classRawLight" id="r_a087a2c41ec0e78100e2affbd82fe3ac7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRawLight.html#a087a2c41ec0e78100e2affbd82fe3ac7">FollowsGlobalRef</a> () const</td></tr>
+<tr class="separator:a087a2c41ec0e78100e2affbd82fe3ac7 inherit pub_methods_classRawLight"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5ee792e77f3f2c8b7c5127d4bab05555 inherit pub_methods_classRawLight" id="r_a5ee792e77f3f2c8b7c5127d4bab05555"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRawLight.html#a5ee792e77f3f2c8b7c5127d4bab05555">GetUUID</a> () const</td></tr>
 <tr class="separator:a5ee792e77f3f2c8b7c5127d4bab05555 inherit pub_methods_classRawLight"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4da5fcd22227ad478bd8a700db045549 inherit pub_methods_classRawLight" id="r_a4da5fcd22227ad478bd8a700db045549"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRawLight.html#a4da5fcd22227ad478bd8a700db045549">HasRef</a> () const</td></tr>
@@ -167,6 +171,8 @@ RawSpotLight の継承関係図</div>
 <tr class="separator:a416c4f454098f5d3526f9a23c6beec38 inherit pro_attribs_classRawLight"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa1e1f1797787a1bf9607137de54486b2 inherit pro_attribs_classRawLight" id="r_aa1e1f1797787a1bf9607137de54486b2"><td class="memItemLeft" align="right" valign="top">std::optional&lt; Vector3 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRawLight.html#aa1e1f1797787a1bf9607137de54486b2">ref_</a></td></tr>
 <tr class="separator:aa1e1f1797787a1bf9607137de54486b2 inherit pro_attribs_classRawLight"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a14a69f6cf883441bc04486eb1b114f50 inherit pro_attribs_classRawLight" id="r_a14a69f6cf883441bc04486eb1b114f50"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRawLight.html#a14a69f6cf883441bc04486eb1b114f50">followsGlobalRef_</a> = false</td></tr>
+<tr class="separator:a14a69f6cf883441bc04486eb1b114f50 inherit pro_attribs_classRawLight"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">詳解</h2>
 <div class="textblock">
@@ -281,7 +287,7 @@ RawSpotLight の継承関係図</div>
 
 <p><a class="el" href="classRawLight.html#a34f5c0e7007c4716a8fa52d76a3fda8d">RawLight</a>を実装しています。</p>
 
-<p class="definition"> <a class="el" href="SpotLight_8cpp_source.html">SpotLight.cpp</a> の <a class="el" href="SpotLight_8cpp_source.html#l00078">78</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="SpotLight_8cpp_source.html">SpotLight.cpp</a> の <a class="el" href="SpotLight_8cpp_source.html#l00084">84</a> 行目に定義があります。</p>
 
 <p class="reference">参照先 <a class="el" href="SpotLight_8h_source.html#l00009">SpotLight::position</a>, <a class="el" href="RawLight_8h_source.html#l00012">RawLight::ref_</a>.</p>
 
@@ -340,9 +346,9 @@ RawSpotLight の継承関係図</div>
 
 <p><a class="el" href="classRawLight.html#afa47ed5607b97c55f1b48363202aae6b">RawLight</a>を実装しています。</p>
 
-<p class="definition"> <a class="el" href="SpotLight_8cpp_source.html">SpotLight.cpp</a> の <a class="el" href="SpotLight_8cpp_source.html#l00040">40</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="SpotLight_8cpp_source.html">SpotLight.cpp</a> の <a class="el" href="SpotLight_8cpp_source.html#l00041">41</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="SpotLight_8h_source.html#l00007">SpotLight::color</a>, <a class="el" href="SpotLight_8h_source.html#l00016">SpotLight::cosAngle</a>, <a class="el" href="SpotLight_8h_source.html#l00015">SpotLight::decay</a>, <a class="el" href="SpotLight_8h_source.html#l00012">SpotLight::direction</a>, <a class="el" href="SpotLight_8h_source.html#l00013">SpotLight::distance</a>, <a class="el" href="RawLight_8h_source.html#l00010">RawLight::enable_</a>, <a class="el" href="SpotLight_8h_source.html#l00017">SpotLight::falloffStart</a>, <a class="el" href="RawLight_8h_source.html#l00050">RawLight::HasRef()</a>, <a class="el" href="SpotLight_8h_source.html#l00010">SpotLight::intensity</a>, <a class="el" href="SpotLight_8h_source.html#l00009">SpotLight::position</a>, <a class="el" href="RawLight_8h_source.html#l00008">RawLight::uuid_</a>.</p>
+<p class="reference">参照先 <a class="el" href="RawLight_8h_source.html#l00039">RawLight::ClearRef()</a>, <a class="el" href="SpotLight_8h_source.html#l00007">SpotLight::color</a>, <a class="el" href="SpotLight_8h_source.html#l00016">SpotLight::cosAngle</a>, <a class="el" href="SpotLight_8h_source.html#l00015">SpotLight::decay</a>, <a class="el" href="SpotLight_8h_source.html#l00012">SpotLight::direction</a>, <a class="el" href="SpotLight_8h_source.html#l00013">SpotLight::distance</a>, <a class="el" href="RawLight_8h_source.html#l00010">RawLight::enable_</a>, <a class="el" href="SpotLight_8h_source.html#l00017">SpotLight::falloffStart</a>, <a class="el" href="RawLight_8h_source.html#l00047">RawLight::FollowsGlobalRef()</a>, <a class="el" href="RawLight_8h_source.html#l00062">RawLight::HasRef()</a>, <a class="el" href="SpotLight_8h_source.html#l00010">SpotLight::intensity</a>, <a class="el" href="SpotLight_8h_source.html#l00009">SpotLight::position</a>, <a class="el" href="RawLight_8h_source.html#l00043">RawLight::SetFollowsGlobalRef()</a>, <a class="el" href="RawLight_8h_source.html#l00008">RawLight::uuid_</a>.</p>
 
 </div>
 </div>
@@ -401,7 +407,7 @@ RawSpotLight の継承関係図</div>
 
 <p class="definition"> <a class="el" href="SpotLight_8cpp_source.html">SpotLight.cpp</a> の <a class="el" href="SpotLight_8cpp_source.html#l00026">26</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="SpotLight_8h_source.html#l00007">SpotLight::color</a>, <a class="el" href="SpotLight_8h_source.html#l00016">SpotLight::cosAngle</a>, <a class="el" href="SpotLight_8h_source.html#l00015">SpotLight::decay</a>, <a class="el" href="SpotLight_8h_source.html#l00012">SpotLight::direction</a>, <a class="el" href="SpotLight_8h_source.html#l00013">SpotLight::distance</a>, <a class="el" href="SpotLight_8h_source.html#l00017">SpotLight::falloffStart</a>, <a class="el" href="SpotLight_8h_source.html#l00010">SpotLight::intensity</a>, <a class="el" href="SpotLight_8h_source.html#l00009">SpotLight::position</a>, <a class="el" href="RawLight_8h_source.html#l00009">RawLight::type_</a>, <a class="el" href="RawLight_8h_source.html#l00008">RawLight::uuid_</a>.</p>
+<p class="reference">参照先 <a class="el" href="SpotLight_8h_source.html#l00007">SpotLight::color</a>, <a class="el" href="SpotLight_8h_source.html#l00016">SpotLight::cosAngle</a>, <a class="el" href="SpotLight_8h_source.html#l00015">SpotLight::decay</a>, <a class="el" href="SpotLight_8h_source.html#l00012">SpotLight::direction</a>, <a class="el" href="SpotLight_8h_source.html#l00013">SpotLight::distance</a>, <a class="el" href="SpotLight_8h_source.html#l00017">SpotLight::falloffStart</a>, <a class="el" href="RawLight_8h_source.html#l00047">RawLight::FollowsGlobalRef()</a>, <a class="el" href="SpotLight_8h_source.html#l00010">SpotLight::intensity</a>, <a class="el" href="SpotLight_8h_source.html#l00009">SpotLight::position</a>, <a class="el" href="RawLight_8h_source.html#l00009">RawLight::type_</a>, <a class="el" href="RawLight_8h_source.html#l00008">RawLight::uuid_</a>.</p>
 
 </div>
 </div>
@@ -447,7 +453,7 @@ RawSpotLight の継承関係図</div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classRawSpotLight.html">RawSpotLight</a></li>
-    <li class="footer">2026年09月07日(月) 03時45分00秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年09月07日(月) 05時02分45秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

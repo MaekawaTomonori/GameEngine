@@ -7,6 +7,8 @@ var classLightManager =
     [ "Draw", "classLightManager.html#a5e8b431b8a376f29d4b458885526cf62", null ],
     [ "GetShadowCastingPointLight", "classLightManager.html#a52bc810bf663ca5ccdb3b11ba0bdf36c", null ],
     [ "Initialize", "classLightManager.html#a634287d3fac161cd1d38993c79df5310", null ],
+    [ "SetIntensity", "classLightManager.html#a18e10f53dc9615a94958761f846b0be4", null ],
     [ "SetPosition", "classLightManager.html#aa20befe6fe61793a33198ea0970e7c67", null ],
+    [ "SetRadius", "classLightManager.html#aa2850c5fd0210cca08928cbfdad5c4a4", null ],
     [ "Update", "classLightManager.html#a84028910a94635b5a011e05994953ca1", null ]
 ];

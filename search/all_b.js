@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['left_0',['left',['../classUi_1_1Canvas.html#a9c5177948b6a4c0736a8bed9523ed002a945d5e233cf7d6240f6b783b36a374ff',1,'Ui::Canvas::Left'],['../structUi_1_1Canvas_1_1InputContext_1_1NavNeighbors.html#af888c2b989044820bb5ca764d4d2635a',1,'Ui::Canvas::InputContext::NavNeighbors::left'],['../structUi_1_1KeyboardModule_1_1KeyBindings.html#aae84c36863381daf30ee264d4fe8e7cb',1,'Ui::KeyboardModule::KeyBindings::left']]],
-  ['level_1',['level',['../structLog_1_1LogEntry.html#a9b44a49e586b03f6de8292eb54b11c7a',1,'Log::LogEntry::level'],['../classLog.html#afb5d4c945d835d194a295461d752531e',1,'Log::Level']]],
+  ['left_0',['left',['../structUi_1_1Canvas_1_1InputContext_1_1NavNeighbors.html#af888c2b989044820bb5ca764d4d2635a',1,'Ui::Canvas::InputContext::NavNeighbors::left'],['../structUi_1_1KeyboardModule_1_1KeyBindings.html#aae84c36863381daf30ee264d4fe8e7cb',1,'Ui::KeyboardModule::KeyBindings::left'],['../classUi_1_1Canvas.html#a9c5177948b6a4c0736a8bed9523ed002a945d5e233cf7d6240f6b783b36a374ff',1,'Ui::Canvas::Left']]],
+  ['level_1',['level',['../classLog.html#afb5d4c945d835d194a295461d752531e',1,'Log::Level'],['../structLog_1_1LogEntry.html#a9b44a49e586b03f6de8292eb54b11c7a',1,'Log::LogEntry::level']]],
   ['leveldata_2',['LevelData',['../structLevelData.html',1,'']]],
   ['leveldata_2ehpp_3',['LevelData.hpp',['../LevelData_8hpp.html',1,'']]],
   ['leveleditor_4',['leveleditor',['../classLevelEditor.html',1,'LevelEditor'],['../classLevelEditor.html#a4031644fe6350d1681c78ea418dbbb4c',1,'LevelEditor::LevelEditor()']]],
