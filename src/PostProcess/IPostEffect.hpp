@@ -1,6 +1,7 @@
 #ifndef IPostEffect_HPP_
 #define IPostEffect_HPP_
 #include <string>
+#include <utility>
 #include <vector>
 
 #include "src/DirectX/DirectXAdapter.hpp"
@@ -127,6 +128,16 @@ protected:
      * @param _order キーフレームの並び順
      */
     void SaveKeyframeFile(const std::string& _presetName, const nlohmann::json& _keyframesObject, const std::vector<std::string>& _order) const;
+
+    /** @brief 全体の進行度tから、キーフレーム列上の区間indexと区間内での進行度を求める
+     * UpdateAnimation()実装で毎回同じロジックが重複しがちな「区間選択」部分だけを切り出した共通処理。
+     * NOTE: 現時点ではまだどのエフェクトからも呼ばれていない（用意のみ）。今後キーフレーム対応のエフェクトを増やす際は、
+     * 各UpdateAnimation()内の区間計算をこちらへ寄せていく想定（Vignette::UpdateAnimation()の該当部分が移行対象）。
+     * @param _t 全体の進行度(0.0〜1.0)
+     * @param _keyframeCount キーフレーム数
+     * @return {区間の開始インデックス, 区間内進行度(0.0〜1.0)}。キーフレームが1個以下の場合は{0, 0.0f}
+     */
+    static std::pair<size_t, float> ResolveKeyframeSegment(float _t, size_t _keyframeCount);
 }; // class IPostEffect
 
 #endif // IPostEffect_HPP_

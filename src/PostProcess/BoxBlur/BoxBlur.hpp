@@ -5,6 +5,9 @@
 class BoxBlur : public IPostEffect{
     struct Material {
         Vector4 color;
+        float radius;
+        float strength;
+        float pad[2];
     };
 
     std::unique_ptr<DX12Resource> mr_;

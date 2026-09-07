@@ -91,6 +91,25 @@ bool IPostEffect::LoadKeyframeFile(const std::string& _presetName, nlohmann::jso
     return true;
 }
 
+std::pair<size_t, float> IPostEffect::ResolveKeyframeSegment(const float _t, const size_t _keyframeCount) {
+    if (_keyframeCount <= 1) return { 0, 0.0f };
+
+    const float segmentCount = static_cast<float>(_keyframeCount - 1);
+    const float segmentProgress = _t * segmentCount;
+    int currentSegment = static_cast<int>(segmentProgress);
+    float segmentT = segmentProgress - static_cast<float>(currentSegment);
+
+    if (currentSegment >= static_cast<int>(segmentCount)) {
+        currentSegment = static_cast<int>(segmentCount) - 1;
+        segmentT = 1.0f;
+    }
+    if (currentSegment < 0) {
+        currentSegment = 0;
+    }
+
+    return { static_cast<size_t>(currentSegment), segmentT };
+}
+
 void IPostEffect::SaveKeyframeFile(const std::string& _presetName, const nlohmann::json& _keyframesObject, const std::vector<std::string>& _order) const {
     const std::string dir = "./Assets/Data/PostEffect/" + GetTypeName();
     std::filesystem::create_directories(dir);

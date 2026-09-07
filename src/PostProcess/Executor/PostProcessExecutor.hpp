@@ -111,8 +111,11 @@ public:
     /** @brief Canvasを削除する */
     void RemoveCanvas(const std::string& _name);
 
-    /** @brief 名前からCanvasを取得する */
-    Canvas* GetCanvas(const std::string& _name) const;
+    /** @brief 名前からCanvasを取得する
+     * 該当Canvasが存在しなくても、保存済みの常時構成Json（"./Assets/Data/PostEffect/Canvases/<_name>.json"）が
+     * 存在する場合は自動でCanvasを生成し、その設定を読み込んだ上で返す
+     */
+    Canvas* GetCanvas(const std::string& _name);
 
     /** @brief 全Canvasを Z順（昇順）で取得する（Editor等の一覧表示用） */
     std::vector<std::pair<CanvasLayer::ZOrder, Canvas*>> GetCanvases() const;

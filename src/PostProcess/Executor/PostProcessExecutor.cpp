@@ -86,9 +86,21 @@ void PostProcessExecutor::RemoveCanvas(const std::string& _name) {
     layer_.RemoveCanvas(_name);
 }
 
-Canvas* PostProcessExecutor::GetCanvas(const std::string& _name) const {
+Canvas* PostProcessExecutor::GetCanvas(const std::string& _name) {
     if (_name == "None") return noneCanvas_.get();
-    return layer_.GetCanvas(_name);
+
+    if (Canvas* canvas = layer_.GetCanvas(_name)) {
+        return canvas;
+    }
+
+    // Canvasがまだ存在しなくても、保存済みの常時構成Jsonがあれば自動で生成・読み込みする
+    const std::string configPath = "./Assets/Data/PostEffect/Canvases/" + _name + ".json";
+    if (!std::filesystem::exists(configPath)) {
+        return nullptr;
+    }
+
+    Log::Send(Log::Level::INFO, std::format("PostProcessExecutor: restoring canvas '{}' from saved config", _name));
+    return layer_.AddCanvas(_name);
 }
 
 std::vector<std::pair<CanvasLayer::ZOrder, Canvas*>> PostProcessExecutor::GetCanvases() const {

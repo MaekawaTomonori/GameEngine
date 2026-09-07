@@ -50,10 +50,14 @@ void BoxBlur::Initialize() {
     mr_->Get()->Map(0, nullptr, reinterpret_cast<void**>(&material_));
 
     material_->color = {1.f, 1.f, 1.f, 1.f};
+    material_->radius = 1.f;
+    material_->strength = 1.f;
 }
 
 void BoxBlur::Debug() {
     ImGui::ColorEdit3("Color", &material_->color.x);
+    ImGui::DragFloat("Radius", &material_->radius, 0.05f, 0.f, 10.f);
+    ImGui::DragFloat("Strength", &material_->strength, 0.01f, 0.f, 1.f);
 }
 
 void BoxBlur::Modifier() {
@@ -68,6 +72,8 @@ void BoxBlur::UpdateAnimation(const float _t) { (void)_t;}
 nlohmann::json BoxBlur::CaptureCurrentParameters() const {
     nlohmann::json j;
     j["color"] = {material_->color.x, material_->color.y, material_->color.z, material_->color.w};
+    j["radius"] = material_->radius;
+    j["strength"] = material_->strength;
     return j;
 }
 
@@ -76,4 +82,6 @@ void BoxBlur::ApplyParameters(const nlohmann::json& _params) {
         const auto& c = _params["color"];
         material_->color = Vector4(c[0], c[1], c[2], c[3]);
     }
+    material_->radius = _params.value("radius", material_->radius);
+    material_->strength = _params.value("strength", material_->strength);
 }

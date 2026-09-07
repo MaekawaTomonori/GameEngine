@@ -106,6 +106,10 @@ void Vignette::LoadPreset(const std::string& _presetName) {
 }
 
 void Vignette::UpdateAnimation(float _t) {
+    // TODO: この関数内の区間計算部分はエフェクトに依存しない汎用ロジックであり、
+    // IPostEffect::ResolveKeyframeSegment() に切り出し済み（未統合）。他エフェクトにも
+    // キーフレーム対応を広げるタイミングで、ここも含めて置き換える。
+
     // Q43: 単一キーフレーム対応
     if (keyframeOrder_.size() == 1) {
         const auto& kf = keyframes_[keyframeOrder_[0]];
