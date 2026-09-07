@@ -67,6 +67,8 @@ class SkinningState {
     bool animationTimerLock_ = true;
     float animationTime_ = 0.0f;
 
+    bool showSkeletonLines_ = false;
+
     /** デバッグ用ジョイント可視化ライン
      */
     Line line_;
