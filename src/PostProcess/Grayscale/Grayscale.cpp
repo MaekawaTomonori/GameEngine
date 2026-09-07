@@ -41,7 +41,7 @@ void Grayscale::Initialize() {
             .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL
         })
     )
-    .SetBlend(BlendMode::ALPHA)
+    .SetBlend(BlendMode::NONE)
     .SetShader(std::make_unique<Shader>(L"CpyImg", L"Grayscale"))
     .SetTopologyType(D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE)
     .Create();
@@ -53,12 +53,13 @@ void Grayscale::Initialize() {
 }
 
 void Grayscale::Debug() {
-    if (ImGui::TreeNode("Grayscale-Details")){
-        ImGui::ColorEdit3("Color", &material_->color.x);
-        if (ImGui::Button("Sepia")){
-            material_->color = SEPIA;
-        }
-        ImGui::TreePop();
+    ImGui::ColorEdit3("Color", &material_->color.x);
+    if (ImGui::Button("Gray")) {
+        material_->color = GRAY;
+    }
+    ImGui::SameLine();
+    if (ImGui::Button("Sepia")){
+        material_->color = SEPIA;
     }
 }
 
@@ -70,3 +71,16 @@ void Grayscale::LoadPreset(const std::string& _presetName) { (void)_presetName;}
 void Grayscale::SavePreset(const std::string& _presetName) { (void)_presetName;}
 nlohmann::json Grayscale::SaveParameters() const { return nlohmann::json();}
 void Grayscale::UpdateAnimation(float _t) { (void)_t;}
+
+nlohmann::json Grayscale::CaptureCurrentParameters() const {
+    nlohmann::json j;
+    j["color"] = {material_->color.x, material_->color.y, material_->color.z, material_->color.w};
+    return j;
+}
+
+void Grayscale::ApplyParameters(const nlohmann::json& _params) {
+    if (_params.contains("color")) {
+        const auto& c = _params["color"];
+        material_->color = Vector4(c[0], c[1], c[2], c[3]);
+    }
+}

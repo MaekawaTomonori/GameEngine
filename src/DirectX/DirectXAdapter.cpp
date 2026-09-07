@@ -319,8 +319,7 @@ void DirectXAdapter::Present() {
     swapChain_->Present(1, 0);
 
     Wait();
-
-    if (FAILED(cAllocator_->Reset())){
+        if (FAILED(cAllocator_->Reset())){
         Utils::Alert("Failed to reset command allocator");
         return;
     }

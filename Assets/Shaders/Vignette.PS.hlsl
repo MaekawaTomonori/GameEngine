@@ -25,6 +25,5 @@ PixelOutput main(VertexShaderOutput input) {
     float strength = edge * gMaterial.color.a;
     output.color.rgb = lerp(output.color.rgb, gMaterial.color.rgb, strength);
     //output.color.rgb = lerp(gMaterial.color.rgb, output.color.rgb, value);
-    output.color.a = 1.f;
     return output;
 };

@@ -129,6 +129,7 @@ void Emitter::Reset() {
     colorKeys_.clear();
     sizeKeys_.clear();
     particleLifetime_ = 3.f;
+    canvasName_ = "None";
     texture_ = "white_x16.png";
     updateFunc_ = nullptr;
     spawnFunc_ = nullptr;
@@ -219,6 +220,11 @@ Emitter& Emitter::SetRotation(const Vector3& _rotation) {
 
 Emitter& Emitter::SetRotationVelocity(const Vector3& _rotationVelocity) {
     rotationVelocity_ = _rotationVelocity;
+    return *this;
+}
+
+Emitter& Emitter::SetCanvasName(const std::string& _canvasName) {
+    canvasName_ = _canvasName;
     return *this;
 }
 

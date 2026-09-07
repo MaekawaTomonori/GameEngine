@@ -15,6 +15,8 @@
 #include "src/Mesh/Repository/MeshRepository.hpp"
 #include "src/Renderer/Renderer.hpp"
 
+class PostProcessExecutor;
+
 class ParticleSystem {
 public:
     using SpawnFunc  = std::function<void(const Vector3&, Vector3&, Vector3&)>;
@@ -37,6 +39,7 @@ public:
         bool billboard = true;
         Vector3 rotation = {0.f, 0.f, 0.f};
         Vector3 rotationVelocity = {0.f, 0.f, 0.f};
+        std::string canvasName = "None";
     };
 
     struct Template {
@@ -59,6 +62,7 @@ private:
     SRVManager* srv_ = nullptr;
     GESTD::ReferencePtr<MeshRepository> mesh_ = nullptr;
     GESTD::ReferencePtr<DebugUI> debugUI_ = nullptr;
+    GESTD::ReferencePtr<PostProcessExecutor> postProcessor_ = nullptr;
 
     std::unordered_map<std::string, Template> templates_;
     std::unordered_map<std::string, SpawnFunc>  spawnFuncs_;
@@ -77,6 +81,9 @@ public:
     void Initialize();
     void Update();
     void Draw(Renderer* _renderer);
+
+    /** @brief Editorのキャンバス選択に使うPostProcessExecutorを設定 */
+    void SetPostProcessor(GESTD::ReferencePtr<PostProcessExecutor> _postProcessor) { postProcessor_ = _postProcessor; }
 
     /** @brief 更新関数を文字列キーで登録
      * @param _key 関数を識別するキー

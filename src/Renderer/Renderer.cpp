@@ -1,5 +1,7 @@
 #include "Renderer.hpp"
 
+#include "Log.hpp"
+#include "src/Canvas/Canvas.hpp"
 #include "src/DirectX/DirectXAdapter.hpp"
 #include "src/PostProcess/Executor/PostProcessExecutor.hpp"
 
@@ -8,66 +10,33 @@ void Renderer::Initialize(GESTD::ReferencePtr<DirectXAdapter> _adapter, GESTD::R
     postProcessor_ = _postProcessor;
 }
 
-void Renderer::Register(const std::function<void()>& _task, const bool _applyPostEffect) {
-    if (_applyPostEffect){
-        pp_.push(std::move(_task));
-    } else{
-        tasks_.push(std::move(_task));
+void Renderer::Register(const std::function<void()>& _task, const std::string& _canvasName) {
+    Canvas* canvas = postProcessor_->GetCanvas(_canvasName);
+    if (!canvas) {
+        Log::Send(Log::Level::ERR, "Renderer: Canvas not found: " + _canvasName + ", falling back to None");
+        canvas = postProcessor_->GetCanvas("None");
+    }
+
+    if (canvas) {
+        canvas->RegisterTask(_task);
     }
 }
 
 void Renderer::RegisterUI(const std::function<void()>& _task) {
-    uiTasks_.push(std::move(_task));
+    uiTasks_.push(_task);
 }
 
 void Renderer::Render() {
-    // キャプチャモード: Scene ウィンドウが表示されている場合、全オブジェクトを renderTexture_ へ描画
-    const bool captureMode = postProcessor_ && postProcessor_->IsSceneViewActive();
+    // Phase 1: 各Canvasが自分のタスクを自分のRTへ描画し、常時構成PostEffectを適用する
+    postProcessor_->DrawObjects();
+    postProcessor_->ApplyPostEffects();
 
-    // Phase 1: シーン描画（renderTexture_）
-    // キャプチャモード時は非PostEffectタスクも renderTexture_ へ描画する
-    // 描画タスクが1件も無いフレーム（シーン切替直後など）でも renderTexture_ を
-    // クリアするため、タスクの有無に関わらず毎フレーム実行する
-    bool hasPostProcess = false;
-    if (postProcessor_) {
-        postProcessor_->BeginFrame();
-        hasPostProcess = true;
+    // Phase 2: 各Canvasを合成し、ワンショット演出を適用する（自分のRTへ描画するだけ）
+    postProcessor_->DrawCanvases();
 
-        while (!pp_.empty()) {
-            auto task = std::move(pp_.front());
-            pp_.pop();
-            task();
-        }
-
-        if (captureMode) {
-            // 非PostEffectゲームオブジェクト（Sprite等）もrenderTexture_へ描画
-            while (!tasks_.empty()) {
-                auto task = std::move(tasks_.front());
-                tasks_.pop();
-                task();
-            }
-        }
-
-        postProcessor_->EndFrame();
-        postProcessor_->Execute();
-    }
-
-    // Phase 2: スワップチェーンへ描画（常に実行してフレームをPresent）
+    // Phase 3: スワップチェーンへ切り替えてから、最終結果を描画する
     adapter_->BeginFrame();
-
-    if (hasPostProcess && !captureMode) {
-        // 通常モード: PostProcess結果をスワップチェーンへ描画
-        postProcessor_->Draw();
-    }
-
-    if (!captureMode) {
-        // 通常モード: 非PostEffectゲームオブジェクトをスワップチェーンへ描画
-        while (!tasks_.empty()) {
-            auto task = std::move(tasks_.front());
-            tasks_.pop();
-            task();
-        }
-    }
+    postProcessor_->Draw();
 
     // UIタスク（ImGui等）は常にスワップチェーンへ描画
     while (!uiTasks_.empty()) {

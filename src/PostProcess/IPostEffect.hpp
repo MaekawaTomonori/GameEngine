@@ -1,5 +1,9 @@
 #ifndef IPostEffect_HPP_
 #define IPostEffect_HPP_
+#include <string>
+#include <utility>
+#include <vector>
+
 #include "src/DirectX/DirectXAdapter.hpp"
 #include "src/DirectX/Heap/SRVManager.h"
 #include "src/DirectX/GraphicsPipeline/Object/PipelineStateObject.hpp"
@@ -47,6 +51,14 @@ public:
      */
     void SetRTVHandle(D3D12_CPU_DESCRIPTOR_HANDLE _rtvHandle);
 
+    /** @brief 出力先リソースを取得する（Editorのプレビュー表示等に使う）
+     * @return 出力リソース。未初期化の場合は nullptr
+     */
+    ID3D12Resource* GetOutputResource() const { return output_ ? output_->Get() : nullptr; }
+
+    /** @brief 出力SRVのスロット番号を取得する（削除時にディスクリプタを付け替えるために使う） */
+    uint32_t GetSrvIndex() const { return index_; }
+
     /** @brief デバッグ情報の表示（純粋仮想関数）
      */
     virtual void Debug() = 0;
@@ -71,12 +83,61 @@ public:
      */
     virtual void UpdateAnimation(float _t) = 0;
 
+    /** @brief エフェクトタイプ名を取得
+     * Factory登録名・プリセットファイルのパスと一致させる。
+     * @return エフェクトタイプ名（例: "Vignette"）
+     */
+    virtual std::string GetTypeName() const = 0;
+
+    /** @brief 現在稼働中のパラメータ値を1キーフレーム分のJSONとして取得
+     * SaveParameters()と異なり、保持中の全キーフレームではなく現在の実行時パラメータのみを返す。
+     * @return 現在のパラメータのJSON表現
+     */
+    virtual nlohmann::json CaptureCurrentParameters() const = 0;
+
+    /** @brief JSONで表現されたパラメータを現在の実行時パラメータへ適用する
+     * CaptureCurrentParameters()と対になる。
+     * @param _params 適用するパラメータのJSON表現
+     */
+    virtual void ApplyParameters(const nlohmann::json& _params) = 0;
+
 protected:
     /** @brief 出力リソースの作成
      */
     void CreateOutput();
 
     virtual void Modifier() = 0;
+
+    /** @brief プリセットファイルのパスを組み立てる
+     * @param _presetName プリセット名
+     * @return "./Assets/Data/PostEffect/<GetTypeName()>/<_presetName>.json"
+     */
+    std::string BuildPresetPath(const std::string& _presetName) const;
+
+    /** @brief キーフレームファイルを読み込む
+     * @param _presetName プリセット名
+     * @param _outRaw "keyframes"を除いた生JSON（キーフレーム名 -> パラメータJSON）
+     * @param _outOrder キーフレームの並び順
+     * @return ファイルが存在し読み込めた場合はtrue。存在しない場合はfalse（呼び出し側でデフォルト値を適用する）
+     */
+    bool LoadKeyframeFile(const std::string& _presetName, nlohmann::json& _outRaw, std::vector<std::string>& _outOrder) const;
+
+    /** @brief キーフレームファイルを保存する
+     * @param _presetName プリセット名
+     * @param _keyframesObject キーフレーム名 -> パラメータJSON
+     * @param _order キーフレームの並び順
+     */
+    void SaveKeyframeFile(const std::string& _presetName, const nlohmann::json& _keyframesObject, const std::vector<std::string>& _order) const;
+
+    /** @brief 全体の進行度tから、キーフレーム列上の区間indexと区間内での進行度を求める
+     * UpdateAnimation()実装で毎回同じロジックが重複しがちな「区間選択」部分だけを切り出した共通処理。
+     * NOTE: 現時点ではまだどのエフェクトからも呼ばれていない（用意のみ）。今後キーフレーム対応のエフェクトを増やす際は、
+     * 各UpdateAnimation()内の区間計算をこちらへ寄せていく想定（Vignette::UpdateAnimation()の該当部分が移行対象）。
+     * @param _t 全体の進行度(0.0〜1.0)
+     * @param _keyframeCount キーフレーム数
+     * @return {区間の開始インデックス, 区間内進行度(0.0〜1.0)}。キーフレームが1個以下の場合は{0, 0.0f}
+     */
+    static std::pair<size_t, float> ResolveKeyframeSegment(float _t, size_t _keyframeCount);
 }; // class IPostEffect
 
 #endif // IPostEffect_HPP_

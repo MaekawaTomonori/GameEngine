@@ -1,18 +1,22 @@
 #include "PostProcessPresetEditor.hpp"
 
 #include <algorithm>
-#include <cctype>
 #include <format>
 #include <fstream>
 #include <filesystem>
 #include "DebugUI.hpp"
 #include "Log.hpp"
 #include "imgui.h"
+#include "Factory/PostEffectFactory.hpp"
 #include "src/PostProcess/Executor/PostProcessExecutor.hpp"
 
 void PostProcessPresetEditor::Initialize(const GESTD::ReferencePtr<DebugUI>& _debug, const GESTD::ReferencePtr<PostProcessExecutor>& _executor) {
     debug_ = _debug;
     executor_ = _executor;
+}
+
+std::string PostProcessPresetEditor::PresetsFilePath() const {
+    return "./Assets/Data/PostEffect/" + executor_->GetName() + "/presets.json";
 }
 
 void PostProcessPresetEditor::ShowEditor() {
@@ -94,7 +98,6 @@ void PostProcessPresetEditor::RenderAvailablePresetsSection() {
     ImGui::BeginChild("PresetsList", ImVec2(0, 250), true);
 
     static std::string selectedPresetForDuplicate = "";
-    static bool showDuplicateDialog = false;
 
     for (const auto& presetName : presets) {
         ImGui::PushID(presetName.c_str());
@@ -118,13 +121,12 @@ void PostProcessPresetEditor::RenderAvailablePresetsSection() {
         // Preset name
         ImGui::Text("%s", presetName.c_str());
 
-        // Preset info (duration, member count, mode)
+        // Preset info (duration, member count)
         ImGui::SameLine(250);
         ImGui::TextColored(ImVec4(0.6f, 0.6f, 0.6f, 1.0f),
-                          "(%.1fs | %d fx | %s)",
+                          "(%.1fs | %d fx)",
                           info.duration,
-                          info.memberCount,
-                          info.mode == "maintain_state" ? "M" : "D");
+                          info.memberCount);
 
         // Action buttons
         ImGui::SameLine(380);
@@ -149,7 +151,6 @@ void PostProcessPresetEditor::RenderAvailablePresetsSection() {
 
         if (ImGui::SmallButton("Duplicate")) {
             selectedPresetForDuplicate = presetName;
-            showDuplicateDialog = true;
         }
         ImGui::SameLine();
 
@@ -165,15 +166,10 @@ void PostProcessPresetEditor::RenderAvailablePresetsSection() {
     }
     ImGui::EndChild();
 
-    // Duplicate Dialog
-    if (showDuplicateDialog) {
-        ImGui::OpenPopup("DuplicatePresetDialog");
-        showDuplicateDialog = false;
-    }
-
-    if (ImGui::BeginPopupModal("DuplicatePresetDialog", nullptr, ImGuiWindowFlags_AlwaysAutoResize)) {
-        ImGui::Text("Duplicate Preset: %s", selectedPresetForDuplicate.c_str());
+    // Duplicate section（選択中のみ表示）
+    if (!selectedPresetForDuplicate.empty()) {
         ImGui::Separator();
+        ImGui::Text("Duplicate Preset: %s", selectedPresetForDuplicate.c_str());
 
         static char newNameBuf[256] = "";
         static std::string errorMsg = "";
@@ -184,8 +180,6 @@ void PostProcessPresetEditor::RenderAvailablePresetsSection() {
             ImGui::TextColored(ImVec4(1.0f, 0.3f, 0.3f, 1.0f), "%s", errorMsg.c_str());
         }
 
-        ImGui::Spacing();
-
         if (ImGui::Button("Duplicate", ImVec2(120, 0))) {
             std::string newName = newNameBuf;
             errorMsg.clear();
@@ -194,17 +188,15 @@ void PostProcessPresetEditor::RenderAvailablePresetsSection() {
                 DuplicatePreset(selectedPresetForDuplicate, newName);
                 newNameBuf[0] = '\0';
                 errorMsg.clear();
-                ImGui::CloseCurrentPopup();
+                selectedPresetForDuplicate.clear();
             }
         }
         ImGui::SameLine();
         if (ImGui::Button("Cancel", ImVec2(120, 0))) {
             newNameBuf[0] = '\0';
             errorMsg.clear();
-            ImGui::CloseCurrentPopup();
+            selectedPresetForDuplicate.clear();
         }
-
-        ImGui::EndPopup();
     }
 }
 
@@ -270,35 +262,13 @@ void PostProcessPresetEditor::RenderPresetConfigurationSection() {
 
     // Members List
     RenderMembersList();
-    ImGui::Spacing();
-
-    // Ignore List
-    RenderIgnoreList();
 }
 
 void PostProcessPresetEditor::RenderBasicSettings() {
     ImGui::TextColored(ImVec4(0.8f, 0.8f, 0.2f, 1.0f), "Basic Settings");
     ImGui::Separator();
 
-    // Duration
     ImGui::DragFloat("Duration (seconds)", &editingPreset_.duration, 0.1f, 0.0f, 10.0f, "%.2f");
-
-    // Mode selection
-    const char* modeItems[] = { "maintain_state", "disable_unlisted" };
-    int currentMode = (editingPreset_.mode == "disable_unlisted") ? 1 : 0;
-    if (ImGui::Combo("Mode", &currentMode, modeItems, IM_ARRAYSIZE(modeItems))) {
-        editingPreset_.mode = modeItems[currentMode];
-    }
-
-    // Help text
-    ImGui::SameLine();
-    ImGui::TextColored(ImVec4(0.6f, 0.6f, 0.6f, 1.0f), "(?)");
-    if (ImGui::IsItemHovered()) {
-        ImGui::BeginTooltip();
-        ImGui::Text("maintain_state: Keep unlisted effects in current state");
-        ImGui::Text("disable_unlisted: Disable all effects not in members list");
-        ImGui::EndTooltip();
-    }
 }
 
 void PostProcessPresetEditor::RenderMembersList() {
@@ -306,23 +276,13 @@ void PostProcessPresetEditor::RenderMembersList() {
     ImGui::Separator();
 
     ImGui::Text("Members (%zu)", editingPreset_.members.size());
-    ImGui::SameLine();
-    if (ImGui::Button("Add Member")) {
-        showAddMemberDialog_ = true;
-    }
 
-    // Add Member Dialog
-    if (showAddMemberDialog_) {
-        ImGui::OpenPopup("AddMemberDialog");
-        showAddMemberDialog_ = false;
-    }
-
-    RenderAddMemberDialog();
+    RenderAddMemberSection();
 
     // Members List
     ImGui::BeginChild("MembersListChild", ImVec2(0, 200), true);
     if (editingPreset_.members.empty()) {
-        ImGui::TextColored(ImVec4(0.7f, 0.7f, 0.7f, 1.0f), "No members. Click 'Add Member' to start.");
+        ImGui::TextColored(ImVec4(0.7f, 0.7f, 0.7f, 1.0f), "No members. Add one above to start.");
     } else {
         int indexToRemove = -1;
         int indexToMoveUp = -1;
@@ -355,20 +315,10 @@ void PostProcessPresetEditor::RenderMembersList() {
 
             // Selectable member item
             ImGui::PushStyleColor(ImGuiCol_Header, isSelected ? ImVec4(0.3f, 0.5f, 0.8f, 0.8f) : ImVec4(0.2f, 0.2f, 0.2f, 0.5f));
-            if (ImGui::Selectable(member.name.c_str(), isSelected, 0, ImVec2(180, 0))) {
+            if (ImGui::Selectable(member.type.c_str(), isSelected, 0, ImVec2(180, 0))) {
                 selectedMemberIndex_ = i;
             }
             ImGui::PopStyleColor();
-
-            ImGui::SameLine(250);
-            ImGui::TextColored(ImVec4(0.6f, 0.6f, 0.6f, 1.0f), "(%s)", member.type.c_str());
-
-            ImGui::SameLine();
-            if (member.autoCreate) {
-                ImGui::TextColored(ImVec4(0.2f, 0.8f, 0.2f, 1.0f), "[Auto]");
-            } else {
-                ImGui::TextColored(ImVec4(0.8f, 0.6f, 0.2f, 1.0f), "[Manual]");
-            }
 
             ImGui::SameLine(450);
             ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.0f, 0.3f, 0.3f, 1.0f));
@@ -392,145 +342,29 @@ void PostProcessPresetEditor::RenderMembersList() {
         }
     }
     ImGui::EndChild();
-
-    // Selected Member Details
-    if (selectedMemberIndex_ >= 0 && selectedMemberIndex_ < static_cast<int>(editingPreset_.members.size())) {
-        ImGui::Separator();
-        ImGui::TextColored(ImVec4(0.8f, 0.8f, 0.2f, 1.0f), "Member Details");
-        ImGui::Separator();
-
-        auto& selectedMember = editingPreset_.members[selectedMemberIndex_];
-
-        // Name editing
-        char nameBuf[128];
-        strncpy_s(nameBuf, selectedMember.name.c_str(), sizeof(nameBuf) - 1);
-        nameBuf[sizeof(nameBuf) - 1] = '\0';
-        if (ImGui::InputText("Name", nameBuf, sizeof(nameBuf))) {
-            selectedMember.name = std::string(nameBuf);
-        }
-
-        // Type display (read-only)
-        ImGui::Text("Type: %s", selectedMember.type.c_str());
-
-        // Auto-create flag
-        ImGui::Checkbox("Auto Create", &selectedMember.autoCreate);
-        ImGui::SameLine();
-        ImGui::TextColored(ImVec4(0.6f, 0.6f, 0.6f, 1.0f), "(?)");
-        if (ImGui::IsItemHovered()) {
-            ImGui::BeginTooltip();
-            ImGui::Text("If _true, effect will be created automatically if it doesn't exist");
-            ImGui::EndTooltip();
-        }
-    }
 }
 
-void PostProcessPresetEditor::RenderIgnoreList() {
-    ImGui::TextColored(ImVec4(0.8f, 0.8f, 0.2f, 1.0f), "Ignore List");
-    ImGui::Separator();
+void PostProcessPresetEditor::RenderAddMemberSection() {
+    auto availableTypes = GetAvailableEffectTypes();
 
-    ImGui::Text("Ignored Effects (%zu)", editingPreset_.ignoreList.size());
+    if (availableTypes.empty()) {
+        ImGui::TextColored(ImVec4(1.0f, 0.3f, 0.3f, 1.0f), "No effect types available!");
+        return;
+    }
+
+    std::vector<const char*> typesCStr;
+    for (const auto& type : availableTypes) {
+        typesCStr.push_back(type.c_str());
+    }
+
+    ImGui::SetNextItemWidth(200);
+    ImGui::Combo("##NewMemberType", &selectedMemberType_, typesCStr.data(), static_cast<int>(typesCStr.size()));
     ImGui::SameLine();
-    if (ImGui::Button("Add Ignored Effect")) {
-        ImGui::OpenPopup("AddIgnoreDialog");
-    }
 
-    // Add Ignore Dialog
-    if (ImGui::BeginPopup("AddIgnoreDialog")) {
-        ImGui::Text("Add Effect to Ignore List");
-        ImGui::Separator();
-
-        static char ignoreNameBuf[128] = "";
-        ImGui::InputText("Effect Name", ignoreNameBuf, sizeof(ignoreNameBuf));
-
-        if (ImGui::Button("Add", ImVec2(120, 0))) {
-            if (strlen(ignoreNameBuf) > 0) {
-                editingPreset_.ignoreList.push_back(std::string(ignoreNameBuf));
-                ignoreNameBuf[0] = '\0';
-                ImGui::CloseCurrentPopup();
-            }
+    if (ImGui::Button("Add Member")) {
+        if (selectedMemberType_ >= 0 && selectedMemberType_ < static_cast<int>(availableTypes.size())) {
+            AddMember(availableTypes[selectedMemberType_]);
         }
-        ImGui::SameLine();
-        if (ImGui::Button("Cancel", ImVec2(120, 0))) {
-            ImGui::CloseCurrentPopup();
-        }
-
-        ImGui::EndPopup();
-    }
-
-    // Ignore List Display
-    ImGui::BeginChild("IgnoreListChild", ImVec2(0, 100), true);
-    if (editingPreset_.ignoreList.empty()) {
-        ImGui::TextColored(ImVec4(0.7f, 0.7f, 0.7f, 1.0f), "No ignored effects.");
-    } else {
-        int ignoreIndexToRemove = -1;
-
-        for (int i = 0; i < static_cast<int>(editingPreset_.ignoreList.size()); ++i) {
-            ImGui::PushID(i);
-
-            ImGui::Text("%s", editingPreset_.ignoreList[i].c_str());
-            ImGui::SameLine(300);
-
-            ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.0f, 0.3f, 0.3f, 1.0f));
-            if (ImGui::SmallButton("Remove")) {
-                ignoreIndexToRemove = i;
-            }
-            ImGui::PopStyleColor();
-
-            ImGui::PopID();
-        }
-
-        // Deferred deletion
-        if (ignoreIndexToRemove >= 0) {
-            editingPreset_.ignoreList.erase(editingPreset_.ignoreList.begin() + ignoreIndexToRemove);
-        }
-    }
-    ImGui::EndChild();
-}
-
-void PostProcessPresetEditor::RenderAddMemberDialog() {
-    if (ImGui::BeginPopup("AddMemberDialog")) {
-        ImGui::Text("Add New Member");
-        ImGui::Separator();
-
-        static int selectedType = 0;
-        auto availableTypes = GetAvailableEffectTypes();
-
-        if (!availableTypes.empty()) {
-            // Type selection
-            std::vector<const char*> typesCStr;
-            for (const auto& type : availableTypes) {
-                typesCStr.push_back(type.c_str());
-            }
-            ImGui::Combo("Type", &selectedType, typesCStr.data(), static_cast<int>(typesCStr.size()));
-
-            // Name input
-            static char memberNameBuf[128] = "";
-            ImGui::InputText("Name", memberNameBuf, sizeof(memberNameBuf));
-
-            // Auto-create checkbox
-            static bool autoCreate = true;
-            ImGui::Checkbox("Auto Create", &autoCreate);
-
-            ImGui::Spacing();
-
-            if (ImGui::Button("Add", ImVec2(120, 0))) {
-                if (strlen(memberNameBuf) > 0 && selectedType >= 0 && selectedType < static_cast<int>(availableTypes.size())) {
-                    AddMember(availableTypes[selectedType], std::string(memberNameBuf), autoCreate);
-                    memberNameBuf[0] = '\0';
-                    autoCreate = true;
-                    selectedType = 0;
-                    ImGui::CloseCurrentPopup();
-                }
-            }
-            ImGui::SameLine();
-            if (ImGui::Button("Cancel", ImVec2(120, 0))) {
-                ImGui::CloseCurrentPopup();
-            }
-        } else {
-            ImGui::TextColored(ImVec4(1.0f, 0.3f, 0.3f, 1.0f), "No effect types available!");
-        }
-
-        ImGui::EndPopup();
     }
 }
 
@@ -570,7 +404,7 @@ void PostProcessPresetEditor::CloseEditor() {
 }
 
 void PostProcessPresetEditor::LoadPresetForEditing(const std::string& _presetName) {
-    std::string path = "./Assets/Data/PostEffect/presets.json";
+    std::string path = PresetsFilePath();
 
     if (!std::filesystem::exists(path)) {
         Log::Send(Log::Level::ERR, "presets.json not found");
@@ -592,25 +426,14 @@ void PostProcessPresetEditor::LoadPresetForEditing(const std::string& _presetNam
     // Load preset data
     editingPreset_.name = _presetName;
     editingPreset_.duration = presetJson.value("duration", 2.0f);
-    editingPreset_.mode = presetJson.value("mode", "maintain_state");
     editingPreset_.members.clear();
-    editingPreset_.ignoreList.clear();
 
     // Load members
     if (presetJson.contains("members")) {
         for (const auto& memberJson : presetJson["members"]) {
             PresetMember member;
             member.type = memberJson.value("type", "");
-            member.name = memberJson.value("name", "");
-            member.autoCreate = memberJson.value("autoCreate", true);
             editingPreset_.members.push_back(member);
-        }
-    }
-
-    // Load ignore list
-    if (presetJson.contains("ignoreList")) {
-        for (const auto& ignoreName : presetJson["ignoreList"]) {
-            editingPreset_.ignoreList.push_back(ignoreName);
         }
     }
 
@@ -623,7 +446,7 @@ void PostProcessPresetEditor::LoadPresetForEditing(const std::string& _presetNam
 void PostProcessPresetEditor::SaveEditingPreset() {
     if (!isEditingPreset_) return;
 
-    std::string path = "./Assets/Data/PostEffect/presets.json";
+    std::string path = PresetsFilePath();
 
     // Load existing presets
     nlohmann::json allPresets;
@@ -636,31 +459,21 @@ void PostProcessPresetEditor::SaveEditingPreset() {
     // Build preset JSON
     nlohmann::json presetJson;
     presetJson["duration"] = editingPreset_.duration;
-    presetJson["mode"] = editingPreset_.mode;
 
     // Serialize members
     nlohmann::json membersArray = nlohmann::json::array();
     for (const auto& member : editingPreset_.members) {
         nlohmann::json memberJson;
         memberJson["type"] = member.type;
-        memberJson["name"] = member.name;
-        memberJson["autoCreate"] = member.autoCreate;
         membersArray.push_back(memberJson);
     }
     presetJson["members"] = membersArray;
-
-    // Serialize ignore list
-    nlohmann::json ignoreArray = nlohmann::json::array();
-    for (const auto& ignoreName : editingPreset_.ignoreList) {
-        ignoreArray.push_back(ignoreName);
-    }
-    presetJson["ignoreList"] = ignoreArray;
 
     // Update presets
     allPresets[editingPreset_.name] = presetJson;
 
     // Save to file
-    std::filesystem::create_directories("./Assets/Data/PostEffect");
+    std::filesystem::create_directories("./Assets/Data/PostEffect/" + executor_->GetName());
     std::ofstream outFile(path);
     outFile << allPresets.dump(4);
     outFile.close();
@@ -671,9 +484,7 @@ void PostProcessPresetEditor::SaveEditingPreset() {
 void PostProcessPresetEditor::CreateNewPreset(const std::string& _name) {
     editingPreset_.name = _name.empty() ? "NewPreset" : _name;
     editingPreset_.duration = 2.0f;
-    editingPreset_.mode = "maintain_state";
     editingPreset_.members.clear();
-    editingPreset_.ignoreList.clear();
     selectedMemberIndex_ = -1;
     isEditingPreset_ = true;
 
@@ -689,7 +500,7 @@ void PostProcessPresetEditor::StopEditingPreset() {
 }
 
 void PostProcessPresetEditor::DeletePreset(const std::string& _presetName) {
-    std::string path = "./Assets/Data/PostEffect/presets.json";
+    std::string path = PresetsFilePath();
 
     if (!std::filesystem::exists(path)) {
         Log::Send(Log::Level::ERR, "presets.json not found");
@@ -717,14 +528,12 @@ void PostProcessPresetEditor::DeletePreset(const std::string& _presetName) {
     }
 }
 
-void PostProcessPresetEditor::AddMember(const std::string& _type, const std::string& _name, bool _autoCreate) {
+void PostProcessPresetEditor::AddMember(const std::string& _type) {
     PresetMember member;
     member.type = _type;
-    member.name = _name;
-    member.autoCreate = _autoCreate;
     editingPreset_.members.push_back(member);
 
-    Log::Send(Log::Level::INFO, std::format("Added member '{}' ({})", _name, _type));
+    Log::Send(Log::Level::INFO, std::format("Added member ({})", _type));
 }
 
 void PostProcessPresetEditor::RemoveMember(int _index) {
@@ -747,7 +556,7 @@ void PostProcessPresetEditor::RemoveMember(int _index) {
 std::vector<std::string> PostProcessPresetEditor::GetAvailablePresets() const {
     std::vector<std::string> presets;
 
-    std::string path = "./Assets/Data/PostEffect/presets.json";
+    std::string path = PresetsFilePath();
     if (!std::filesystem::exists(path)) {
         return presets;
     }
@@ -765,13 +574,16 @@ std::vector<std::string> PostProcessPresetEditor::GetAvailablePresets() const {
 }
 
 std::vector<std::string> PostProcessPresetEditor::GetAvailableEffectTypes() const {
-    // TODO: This should query PostProcessExecutor's factory for available types
-    // For now, return hardcoded list
-    return { "Vignette", "Grayscale", "BoxBlur" };
+    if (!executor_) return {};
+
+    auto factory = executor_->GetFactory();
+    if (!factory) return {};
+
+    return factory->GetRegisteredTypes();
 }
 
 void PostProcessPresetEditor::MoveMemberUp(int _index) {
-    if (_index <= 0 || _index >= static_cast<int>(editingPreset_.members.size())) {
+    if (_index <= 0 || std::cmp_greater_equal(_index, editingPreset_.members.size())) {
         return;
     }
 
@@ -805,7 +617,7 @@ void PostProcessPresetEditor::MoveMemberDown(int _index) {
 }
 
 void PostProcessPresetEditor::DuplicatePreset(const std::string& _sourceName, const std::string& _newName) {
-    std::string path = "./Assets/Data/PostEffect/presets.json";
+    std::string path = PresetsFilePath();
 
     if (!std::filesystem::exists(path)) {
         Log::Send(Log::Level::ERR, "presets.json not found");
@@ -880,9 +692,8 @@ PostProcessPresetEditor::PresetInfo PostProcessPresetEditor::GetPresetInfo(const
     info.name = _presetName;
     info.memberCount = 0;
     info.duration = 0.0f;
-    info.mode = "unknown";
 
-    std::string path = "./Assets/Data/PostEffect/presets.json";
+    std::string path = PresetsFilePath();
     if (!std::filesystem::exists(path)) {
         return info;
     }
@@ -898,7 +709,6 @@ PostProcessPresetEditor::PresetInfo PostProcessPresetEditor::GetPresetInfo(const
 
     auto presetJson = presetsJson[_presetName];
     info.duration = presetJson.value("duration", 0.0f);
-    info.mode = presetJson.value("mode", "unknown");
 
     if (presetJson.contains("members")) {
         info.memberCount = static_cast<int>(presetJson["members"].size());
@@ -979,14 +789,11 @@ void PostProcessPresetEditor::RenderKeyframePointsTab() {
         bool isSelected = (selectedMemberIndex_ == i);
 
         ImGui::PushStyleColor(ImGuiCol_Header, isSelected ? ImVec4(0.3f, 0.5f, 0.8f, 0.8f) : ImVec4(0.2f, 0.2f, 0.2f, 0.5f));
-        if (ImGui::Selectable(member.name.c_str(), isSelected)) {
+        if (ImGui::Selectable(member.type.c_str(), isSelected)) {
             selectedMemberIndex_ = i;
             LoadMemberKeyframes();
         }
         ImGui::PopStyleColor();
-
-        ImGui::SameLine(250);
-        ImGui::TextColored(ImVec4(0.6f, 0.6f, 0.6f, 1.0f), "(%s)", member.type.c_str());
 
         ImGui::PopID();
     }
@@ -1005,42 +812,24 @@ void PostProcessPresetEditor::RenderKeyframePointsTab() {
 void PostProcessPresetEditor::RenderPointsList() {
     auto& selectedMember = editingPreset_.members[selectedMemberIndex_];
 
-    ImGui::TextColored(ImVec4(0.8f, 0.8f, 0.2f, 1.0f), "Keyframe Points for: %s", selectedMember.name.c_str());
+    ImGui::TextColored(ImVec4(0.8f, 0.8f, 0.2f, 1.0f), "Keyframe Points for: %s", selectedMember.type.c_str());
 
     ImGui::Text("Points (%zu)", editingKeyframeOrder_.size());
-    ImGui::SameLine();
-    if (ImGui::Button("Add Point")) {
-        ImGui::OpenPopup("AddPointDialog");
-    }
     ImGui::SameLine();
     if (ImGui::Button("Reload from JSON")) {
         LoadMemberKeyframes();
     }
 
-    // Add Point Dialog
-    if (ImGui::BeginPopupModal("AddPointDialog", nullptr, ImGuiWindowFlags_AlwaysAutoResize)) {
-        ImGui::Text("Add New Keyframe Point");
-        ImGui::Separator();
-
-        static char pointNameBuf[128] = "";
-        ImGui::InputText("Point Name", pointNameBuf, sizeof(pointNameBuf));
-
-        ImGui::Spacing();
-
-        if (ImGui::Button("Add", ImVec2(120, 0))) {
-            if (strlen(pointNameBuf) > 0) {
-                AddKeyframePoint(std::string(pointNameBuf));
-                pointNameBuf[0] = '\0';
-                ImGui::CloseCurrentPopup();
-            }
-        }
-        ImGui::SameLine();
-        if (ImGui::Button("Cancel", ImVec2(120, 0))) {
+    // Add Point（インラインフォーム）
+    static char pointNameBuf[128] = "";
+    ImGui::SetNextItemWidth(200);
+    ImGui::InputTextWithHint("##NewPointName", "New point name", pointNameBuf, sizeof(pointNameBuf));
+    ImGui::SameLine();
+    if (ImGui::Button("Add Point")) {
+        if (strlen(pointNameBuf) > 0) {
+            AddKeyframePoint(std::string(pointNameBuf));
             pointNameBuf[0] = '\0';
-            ImGui::CloseCurrentPopup();
         }
-
-        ImGui::EndPopup();
     }
 
     // Points List
@@ -1130,7 +919,7 @@ void PostProcessPresetEditor::LoadMemberKeyframes() {
         editingKeyframeOrder_.clear();
         selectedPointIndex_ = -1;
         keyframesDirty_ = false;
-        Log::Send(Log::Level::INFO, std::format("No keyframe file found for '{}', starting empty", member.name));
+        Log::Send(Log::Level::INFO, std::format("No keyframe file found for '{}', starting empty", member.type));
         return;
     }
 
@@ -1169,7 +958,7 @@ void PostProcessPresetEditor::LoadMemberKeyframes() {
 
     keyframesDirty_ = false;
     Log::Send(Log::Level::INFO, std::format("Loaded {} keyframe points for '{}'",
-              editingKeyframes_.size(), member.name));
+              editingKeyframes_.size(), member.type));
 }
 
 void PostProcessPresetEditor::SaveMemberKeyframes() {
@@ -1203,7 +992,7 @@ void PostProcessPresetEditor::SaveMemberKeyframes() {
 
     keyframesDirty_ = false;
     Log::Send(Log::Level::INFO, std::format("Saved {} keyframe points for '{}' to {}",
-              editingKeyframes_.size(), member.name, keyframePath));
+              editingKeyframes_.size(), member.type, keyframePath));
 }
 
 void PostProcessPresetEditor::PreviewCurrentPoint() {
@@ -1219,9 +1008,9 @@ void PostProcessPresetEditor::PreviewCurrentPoint() {
     const std::string& pointName = editingKeyframeOrder_[selectedPointIndex_];
 
     // エフェクトインスタンスを取得
-    IPostEffect* effect = executor_->FindOrCreate(member.type, member.name, true);
+    IPostEffect* effect = executor_->Create(member.type);
     if (!effect){
-        Log::Send(Log::Level::ERR, std::format("Failed to find/create effect '{}'", member.name));
+        Log::Send(Log::Level::ERR, std::format("Failed to find/create effect '{}'", member.type));
         return;
     }
 
@@ -1242,7 +1031,7 @@ void PostProcessPresetEditor::PreviewCurrentPoint() {
     effect->UpdateAnimation(t);
 
     Log::Send(Log::Level::DBG, std::format("Preview point '{}' (t={:.2f}) for '{}'",
-              pointName, t, member.name));
+              pointName, t, member.type));
 }
 
 void PostProcessPresetEditor::RenderPointParameters() {
@@ -1290,7 +1079,7 @@ void PostProcessPresetEditor::RenderPointParameters() {
         ImGui::TextColored(ImVec4(0.7f, 0.7f, 0.7f, 1.0f), "Effect instance not available.");
     } else {
         auto& member = editingPreset_.members[selectedMemberIndex_];
-        IPostEffect* effect = executor_->FindOrCreate(member.type, member.name, true);
+        IPostEffect* effect = executor_->Create(member.type);
 
         if (effect) {
             // エフェクトのDebug()を呼び出してパラメータを編集
@@ -1308,52 +1097,17 @@ void PostProcessPresetEditor::RenderPointParameters() {
     // 保存ボタン - エフェクトの現在の状態をこのポイントに保存
     ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.2f, 0.6f, 0.8f, 1.0f));
     if (ImGui::Button("Save Current Parameters to Point", ImVec2(-1, 0))) {
-        // エフェクトの現在のパラメータを取得してJSONに保存
         if (executor_ && selectedMemberIndex_ >= 0 && selectedMemberIndex_ < static_cast<int>(editingPreset_.members.size())) {
             auto& member = editingPreset_.members[selectedMemberIndex_];
-            IPostEffect* effect = executor_->FindOrCreate(member.type, member.name, true);
+            IPostEffect* effect = executor_->Create(member.type);
 
             if (effect) {
                 const std::string& currentPointName = editingKeyframeOrder_[selectedPointIndex_];
 
-                // 一時的なプリセット名で現在の状態を保存
-                std::string tempPresetName = "_editor_temp_" + currentPointName;
-                effect->SavePreset(tempPresetName);
+                editingKeyframes_[currentPointName] = effect->CaptureCurrentParameters();
+                SaveMemberKeyframes();
 
-                // 保存された一時ファイルを読み込む
-                std::string tempPath = std::format("./Assets/Data/PostEffect/{}/{}.json", member.type, tempPresetName);
-                if (std::filesystem::exists(tempPath)) {
-                    std::ifstream tempFile(tempPath);
-                    nlohmann::json tempJson;
-                    tempFile >> tempJson;
-                    tempFile.close();
-
-                    // 一時ファイルから現在のポイントのデータを抽出
-                    // SaveParameters()が返すのは全キーフレーム構造なので、
-                    // 任意のキーフレームデータを取り出す（実際のmaterial_の値）
-                    bool foundData = false;
-                    for (auto it = tempJson.begin(); it != tempJson.end(); ++it) {
-                        if (it.key() != "keyframes" && it.value().is_object()) {
-                            // これが実際のパラメータデータ
-                            editingKeyframes_[currentPointName] = it.value();
-                            foundData = true;
-                            break;
-                        }
-                    }
-
-                    // 一時ファイルを削除
-                    std::filesystem::remove(tempPath);
-
-                    if (foundData) {
-                        // JSONファイルに保存
-                        SaveMemberKeyframes();
-                        Log::Send(Log::Level::INFO, std::format("Saved current parameters to point '{}'", currentPointName));
-                    } else {
-                        Log::Send(Log::Level::WARNING, "Could not extract parameter data from effect");
-                    }
-                } else {
-                    Log::Send(Log::Level::ERR, std::format("Temp file not found: {}", tempPath));
-                }
+                Log::Send(Log::Level::INFO, std::format("Saved current parameters to point '{}'", currentPointName));
             }
         }
     }

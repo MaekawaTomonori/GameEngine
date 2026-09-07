@@ -51,7 +51,8 @@ Framework::Framework() {
 #endif
 
     postProcessor_ = std::make_unique<PostProcessExecutor>();
-    postProcessor_->Initialize(GESTD::ReferencePtr(dxAdapter_), GESTD::ReferencePtr(srv_), dbg);
+    postProcessor_->Initialize(GESTD::ReferencePtr(dxAdapter_), GESTD::ReferencePtr(srv_), dbg, "Main");
+    postProcessor_->AddCanvas("Main");
 
     renderer_ = std::make_unique<Renderer>();
     renderer_->Initialize(GESTD::ReferencePtr(dxAdapter_), GESTD::ReferencePtr(postProcessor_));
@@ -60,6 +61,7 @@ Framework::Framework() {
     resources_->Initialize();
 
     particle_ = std::make_unique<ParticleSystem>(GESTD::ReferencePtr(dxAdapter_), srv_.get(), resources_->GetMeshRepository(), dbg);
+    particle_->SetPostProcessor(GESTD::ReferencePtr(postProcessor_));
     particle_->Initialize();
 
     input_ = Singleton<Input>::GetInstance();

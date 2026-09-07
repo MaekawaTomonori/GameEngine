@@ -137,7 +137,7 @@ void Sprite::Draw() {
         commandList_->SetGraphicsRootDescriptorTable(2, Singleton<TextureManager>::GetInstance()->GetGPUHandle(texturePath_));
 
         commandList_->DrawIndexedInstanced(6, 1, 0, 0, 0);
-    }, posteffect_);
+    });
 }
 
 void Sprite::AdjustTextureSize() {

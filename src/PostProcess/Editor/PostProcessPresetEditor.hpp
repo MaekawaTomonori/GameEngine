@@ -19,17 +19,13 @@ public:
     /** @brief preset を構成する effect 定義 */
     struct PresetMember {
         std::string type;        // "Vignette"
-        std::string name;        // "MainVignette"
-        bool autoCreate = true;  // 自動生成フラグ
     };
 
     /** @brief preset 編集データ */
     struct PresetData {
         std::string name;                       // "DarkScene"
-        std::string mode = "maintain_state";   // "disable_unlisted" or "maintain_state"
         float duration = 2.0f;                 // animation duration
         std::vector<PresetMember> members;     // effect list
-        std::vector<std::string> ignoreList;   // ignored effect names
     };
 
 private:
@@ -45,9 +41,7 @@ private:
 
     /** UI state */
     char newPresetNameBuf_[128] = "";
-    char newMemberNameBuf_[128] = "Effect1";
     int selectedMemberType_ = 0;
-    bool showAddMemberDialog_ = false;
 
     /** Search and filter state */
     char searchBuffer_[256] = "";
@@ -108,7 +102,7 @@ private:
     std::vector<std::string> GetAvailableEffectTypes() const;
 
     /** @brief メンバーを追加 */
-    void AddMember(const std::string& _type, const std::string& _name, bool _autoCreate = true);
+    void AddMember(const std::string& _type);
 
     /** @brief メンバーを削除 */
     void RemoveMember(int _index);
@@ -139,12 +133,14 @@ private:
         std::string name;
         int memberCount;
         float duration;
-        std::string mode;
     };
     PresetInfo GetPresetInfo(const std::string& _presetName) const;
 
     /** @brief フィルタ・ソート済み preset 一覧を取得 */
     std::vector<std::string> GetFilteredAndSortedPresets() const;
+
+    /** @brief "./Assets/Data/PostEffect/<Canvas名>/presets.json"のパスを取得 */
+    std::string PresetsFilePath() const;
 
     /** UI rendering methods */
     void RenderAvailablePresetsSection();
@@ -152,8 +148,7 @@ private:
     void RenderPresetConfigurationSection();
     void RenderBasicSettings();
     void RenderMembersList();
-    void RenderIgnoreList();
-    void RenderAddMemberDialog();
+    void RenderAddMemberSection();
     void RenderQuickSaveSection();
 
     /** Keyframe points editing methods */

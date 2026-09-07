@@ -9,6 +9,9 @@ struct PixelOutput{
 
 PixelOutput main(VertexShaderOutput input) {
     PixelOutput output;
-    output.color = gTexture.Sample(gSampler, input.texCoord);
+    float4 sampled = gTexture.Sample(gSampler, input.texCoord);
+
+    // ストレートアルファのテクスチャを事前乗算アルファへ変換して出力する
+    output.color = float4(sampled.rgb * sampled.a, sampled.a);
     return output;
 };

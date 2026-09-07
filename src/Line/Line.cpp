@@ -54,7 +54,7 @@ void Line::Draw() const {
         commandList_->SetGraphicsRootConstantBufferView(1, transformationResource_->Get()->GetGPUVirtualAddress());
 
         commandList_->DrawInstanced(static_cast<UINT>(positions_.size()), 1, 0, 0);
-    }, false);
+    });
 }
 
 void Line::AddLine(const Vector3& _start, const Vector3& _end) {

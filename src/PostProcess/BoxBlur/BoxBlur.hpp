@@ -5,6 +5,9 @@
 class BoxBlur : public IPostEffect{
     struct Material {
         Vector4 color;
+        float radius;
+        float strength;
+        float pad[2];
     };
 
     std::unique_ptr<DX12Resource> mr_;
@@ -22,6 +25,9 @@ public:
     void SavePreset(const std::string& _presetName) override;
     nlohmann::json SaveParameters() const override;
     void UpdateAnimation(float _t) override;
+    std::string GetTypeName() const override { return "BoxBlur"; }
+    nlohmann::json CaptureCurrentParameters() const override;
+    void ApplyParameters(const nlohmann::json& _params) override;
 }; // class BoxBlur
 
 #endif // BoxBlur_HPP_

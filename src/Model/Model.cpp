@@ -125,9 +125,9 @@ void Model::Draw() const {
             mesh_->Draw();
         };
         if (isTransparent) {
-            common_->RegisterSkinningTransparentDraw(drawCmd, posteffect_);
+            common_->RegisterSkinningTransparentDraw(drawCmd, canvasName_);
         } else {
-            common_->RegisterSkinningDraw(drawCmd, posteffect_);
+            common_->RegisterSkinningDraw(drawCmd, canvasName_);
         }
     } else {
         auto drawCmd = [this, tm]() {
@@ -137,9 +137,9 @@ void Model::Draw() const {
             mesh_->Draw();
         };
         if (isTransparent) {
-            common_->RegisterStaticTransparentDraw(drawCmd, posteffect_);
+            common_->RegisterStaticTransparentDraw(drawCmd, canvasName_);
         } else {
-            common_->RegisterStaticDraw(drawCmd, posteffect_);
+            common_->RegisterStaticDraw(drawCmd, canvasName_);
         }
     }
 
@@ -201,6 +201,11 @@ Model& Model::SetColor(const Vector4& _color) {
     if (mesh_) {
         mesh_->SetColor(_color);
     }
+    return *this;
+}
+
+Model& Model::SetCanvasName(const std::string& _canvasName) {
+    canvasName_ = _canvasName;
     return *this;
 }
 

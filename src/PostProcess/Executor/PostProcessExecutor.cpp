@@ -6,11 +6,8 @@
 #include "Log.hpp"
 #include "Input.hpp"
 #include "Pattern/Singleton.hpp"
-#include "Factory/AbstractPostEffectFactory.hpp"
+#include "Factory/PostEffectFactory.hpp"
 #include "src/DirectX/DirectXAdapter.hpp"
-#include "src/DirectX/Heap/Heap.hpp"
-#include "src/DirectX/GraphicsPipeline/Object/PipelineStateObject.hpp"
-#include "src/DirectX/Heap/SRVManager.h"
 #include "src/PostProcess/IPostEffect.hpp"
 #include "src/PostProcess/Editor/PostProcessPresetEditor.hpp"
 #include <fstream>
@@ -21,10 +18,11 @@
 
 using json = nlohmann::json;
 
-void PostProcessExecutor::Initialize(const GESTD::ReferencePtr<DirectXAdapter>& _adapter, const GESTD::ReferencePtr<SRVManager>& _srv, const GESTD::ReferencePtr<DebugUI>& _debug) {
+void PostProcessExecutor::Initialize(const GESTD::ReferencePtr<DirectXAdapter>& _adapter, const GESTD::ReferencePtr<SRVManager>& _srv, const GESTD::ReferencePtr<DebugUI>& _debug, const std::string& _name) {
     adapter_ = _adapter;
     srv_ = _srv;
     debugUI_ = _debug;
+    name_ = _name;
 
 #ifdef _DEBUG
     if (debugUI_) {
@@ -38,133 +36,123 @@ void PostProcessExecutor::Initialize(const GESTD::ReferencePtr<DirectXAdapter>& 
         return;
     }
 
-    // シーン描画用の RenderTexture を作成する。
-    CreateSceneRenderTexture();
+    chain_ = std::make_unique<PostEffectChain>();
+    chain_->Initialize(adapter_, srv_, name_);
 
-    D3D12_DESCRIPTOR_RANGE range{
-        .RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV,
-        .NumDescriptors = 1,
-        .BaseShaderRegister = 0,
-        .RegisterSpace = 0,
-        .OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND
-    };
+    layer_.Initialize(adapter_, srv_);
 
-    // ポストプロセス結果を画面へコピーするための PSO。
-    pso_ = std::make_unique<PipelineStateObject>(adapter_);
-    pso_->SetRootSignature(
-        RootSignature().AddParameter({
-                .ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE,
-                .DescriptorTable = {
-                    .NumDescriptorRanges = 1,
-                    .pDescriptorRanges = &range
-                },
-                .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL
-            })
-            .SetSampler({
-                .Filter = D3D12_FILTER_MIN_MAG_MIP_LINEAR,
-                .AddressU = D3D12_TEXTURE_ADDRESS_MODE_WRAP,
-                .AddressV = D3D12_TEXTURE_ADDRESS_MODE_WRAP,
-                .AddressW = D3D12_TEXTURE_ADDRESS_MODE_WRAP,
-                .ComparisonFunc = D3D12_COMPARISON_FUNC_NEVER,
-                .MaxLOD = D3D12_FLOAT32_MAX,
-                .ShaderRegister = 0,
-                .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL
-            })
-    )
-    .SetBlend(BlendMode::NONE)
-    .SetShader(std::make_unique<Shader>(L"CpyImg"))
-    .SetTopologyType(D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE)
-    .Create();
+    noneCanvas_ = std::make_unique<Canvas>();
+    noneCanvas_->Initialize(adapter_, srv_, "None");
+
+#ifdef _DEBUG
+    // DebugUI の Scene プレビュー用に、最終合成結果をもう一度描いておくための専用チェーンを用意する。
+    sceneCaptureChain_ = std::make_unique<PostEffectChain>();
+    sceneCaptureChain_->SetClearColor(adapter_->GetBackgroundColor());
+    sceneCaptureChain_->Initialize(adapter_, srv_, name_ + "SceneCapture");
+
+    if (debugUI_) {
+        sceneImGuiTextureId_ = debugUI_->RegisterTexture(sceneCaptureChain_->GetRenderTextureResource(), DXGI_FORMAT_R8G8B8A8_UNORM_SRGB);
+    }
+#endif
 
     // Preset editor を関連付ける。
     presetEditor_ = std::make_unique<PostProcessPresetEditor>();
     presetEditor_->Initialize(debugUI_, GESTD::ReferencePtr<PostProcessExecutor>(this));
+
+    // Canvas Editor を関連付ける。
+    canvasLayerEditor_ = std::make_unique<CanvasLayerEditor>();
+    canvasLayerEditor_->Initialize(debugUI_, GESTD::ReferencePtr<PostProcessExecutor>(this));
 }
 
-void PostProcessExecutor::SetFactory(GESTD::ReferencePtr<AbstractPostEffectFactory> _factory) {
+void PostProcessExecutor::SetFactory(GESTD::ReferencePtr<PostEffectFactory> _factory) {
     factory_ = _factory;
+    chain_->SetFactory(_factory);
+    layer_.SetFactory(_factory);
 }
 
-void PostProcessExecutor::Add(std::unique_ptr<IPostEffect> _effect, const std::string& _name) {
-    if (_effect) {
-        _effect->SetUp(adapter_, srv_);
-
-        // 各エフェクトに対応する RTV ハンドルを順番に割り当てる。
-        auto rtvHandle = rtvHeap_->GetCPUHandle(static_cast<uint32_t>(effects_.size()) + 1);
-        _effect->SetRTVHandle(rtvHandle);
-        _effect->Initialize();
-        effects_.emplace_back(EffectData{ std::move(_effect), _name, "", true });
-    } else {
-        Log::Send(Log::Level::ERR, "Attempted to add a null post effect");
-    }
+void PostProcessExecutor::Add(std::unique_ptr<IPostEffect> _effect) {
+    chain_->Add(std::move(_effect));
 }
 
-void PostProcessExecutor::BeginFrame() const {
-    if (!adapter_ || !renderTexture_) {
-        Log::Send(Log::Level::ERR, "PostProcessExecutor is not properly initialized");
-        return;
-    }
-
-    renderTexture_->ChangeState(adapter_->GetCommandList(), D3D12_RESOURCE_STATE_RENDER_TARGET);
-
-    auto dsvHandle = adapter_->GetDSVHandle();
-    adapter_->GetCommandList()->OMSetRenderTargets(1, &rtvHandle_, false, &dsvHandle);
-    adapter_->GetCommandList()->ClearRenderTargetView(rtvHandle_, &clearColor_.x, 0, nullptr);
-
-    adapter_->PreProcess();
+Canvas* PostProcessExecutor::AddCanvas(const std::string& _name) {
+    return layer_.AddCanvas(_name);
 }
 
-void PostProcessExecutor::EndFrame() const {
-    if (!adapter_ || !renderTexture_) {
-        return;
-    }
-
-    renderTexture_->ChangeState(adapter_->GetCommandList(), D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE);
+Canvas* PostProcessExecutor::AddCanvasTop(const std::string& _name) {
+    return layer_.AddCanvasTop(_name);
 }
 
-void PostProcessExecutor::Execute() {
-    if (!adapter_) {
-        Log::Send(Log::Level::ERR, "DirectXAdapter is not initialized");
-        return;
+void PostProcessExecutor::RemoveCanvas(const std::string& _name) {
+    layer_.RemoveCanvas(_name);
+}
+
+Canvas* PostProcessExecutor::GetCanvas(const std::string& _name) {
+    if (_name == "None") return noneCanvas_.get();
+
+    if (Canvas* canvas = layer_.GetCanvas(_name)) {
+        return canvas;
     }
 
-    auto handle = srv_->GetGPUHandle(srvIndex_);
-
-    // 有効なエフェクトを追加順に適用する。
-    for (const auto& effect : effects_) {
-        if (!effect.enabled) continue;
-        handle = effect.effect->Apply(handle);
+    // Canvasがまだ存在しなくても、保存済みの常時構成Jsonがあれば自動で生成・読み込みする
+    const std::string configPath = "./Assets/Data/PostEffect/Canvases/" + _name + ".json";
+    if (!std::filesystem::exists(configPath)) {
+        return nullptr;
     }
 
-    srvHandle_ = handle;
+    Log::Send(Log::Level::INFO, std::format("PostProcessExecutor: restoring canvas '{}' from saved config", _name));
+    return layer_.AddCanvas(_name);
+}
+
+std::vector<std::pair<CanvasLayer::ZOrder, Canvas*>> PostProcessExecutor::GetCanvases() const {
+    return layer_.GetCanvases();
+}
+
+void PostProcessExecutor::DrawObjects() {
+    layer_.DrawObjects();
+    noneCanvas_->DrawObjects();
+}
+
+void PostProcessExecutor::ApplyPostEffects() {
+    layer_.ApplyPostEffects();
+    noneCanvas_->ApplyPostEffects();
+}
+
+void PostProcessExecutor::DrawCanvases() {
+    // 各Canvasを、このExecutor自身の合成用RTへ描画する。
+    chain_->BeginFrame();
+    layer_.DrawCanvases();
+    chain_->EndFrame();
+
+    // 自分専用の常時構成エフェクトを適用する（通常は空）。
+    auto handle = chain_->Execute();
+
+    // 合成後の画面に対してワンショット演出を適用する。
+    for (const auto& temporary : temporaries_) {
+        if (!temporary.enabled) continue;
+        handle = temporary.effect->Apply(handle);
+    }
+
+    chain_->SetSrvHandle(handle);
 }
 
 void PostProcessExecutor::Draw() const {
-    if (!adapter_ || !pso_) {
-        Log::Send(Log::Level::ERR, "PostProcessExecutor is not properly initialized");
-        return;
-    }
+#ifdef _DEBUG
+    // Sceneプレビュー用に、最終合成結果を専用テクスチャへ先に描いておく。
+    sceneCaptureChain_->BeginFrame();
+    chain_->Draw();
+    noneCanvas_->Draw();
+    sceneCaptureChain_->EndFrame();
 
-    srv_->PreDraw();
-    adapter_->PreProcess();
-    adapter_->GetCommandList()->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+    // SwapChainのバインドを取り戻す（クリアされるが、まだ何も描いていないため問題ない）。
+    adapter_->SetSwapChainRenderTarget();
+#endif
 
-    // フルスクリーン描画用 PSO を適用する。
-    pso_->DrawCall();
-
-    adapter_->GetCommandList()->SetGraphicsRootDescriptorTable(0, srvHandle_);
-
-    // フルスクリーントライアングルで結果テクスチャを描画する。
-    adapter_->GetCommandList()->DrawInstanced(3, 1, 0, 0);
+    chain_->Draw();
+    noneCanvas_->Draw();
 }
 
-void PostProcessExecutor::SetActive(const std::string& _name, bool _enable) {
-    for (auto& effect : effects_) {
-        if (effect.name == _name) {
-            effect.enabled = _enable;
-            return;
-        }
-    }
+void PostProcessExecutor::SetActive(const std::string& _type, bool _enable) {
+    chain_->SetActive(_type, _enable);
 }
 
 bool PostProcessExecutor::IsSceneViewActive() {
@@ -225,184 +213,101 @@ void PostProcessExecutor::Debug() {
         if (ImGui::Button("Open Preset Editor", ImVec2(-1, 30))) {
             OpenPresetEditor();
         }
+        if (ImGui::Button("Open Canvas Editor", ImVec2(-1, 30))) {
+            OpenCanvasEditor();
+        }
 
-        if (ImGui::BeginTabBar("##PostEffectTabs")) {
-            if (ImGui::BeginTabItem("List")) {
-                for (auto& effect : effects_) {
-                    ImGui::Checkbox(effect.name.c_str(), &effect.enabled);
-                }
-                ImGui::EndTabItem();
-            }
-
-            if (ImGui::BeginTabItem("Details")) {
-                for (auto& effect : effects_) {
-                    ImGui::PushID(effect.name.c_str());
-                    if (ImGui::TreeNode(effect.name.c_str())) {
-                        effect.effect->Debug();
-                        ImGui::TreePop();
-                    }
-                    ImGui::PopID();
-                }
-                ImGui::EndTabItem();
-            }
-
-            ImGui::EndTabBar();
+        ImGui::Separator();
+        ImGui::TextDisabled("Overlay / Canvas の常時構成エフェクトは Canvas Editor から編集してください。");
+        if (!temporaries_.empty()) {
+            ImGui::TextDisabled("Temporary effects: %zu", temporaries_.size());
         }
 
         ImGui::End();
 
-        // PostEffect ウィンドウを閉じたら PresetEditor も閉じる。
-        if (!visible && presetEditor_) {
-            presetEditor_->CloseEditor();
+        // PostEffect ウィンドウを閉じたら PresetEditor / Canvas Editor も閉じる。
+        if (!visible) {
+            if (presetEditor_) presetEditor_->CloseEditor();
+            if (canvasLayerEditor_) canvasLayerEditor_->CloseEditor();
         }
     });
 
     if (presetEditor_ && presetEditor_->IsOpen()) {
         presetEditor_->ShowEditor();
     }
-}
 
-void PostProcessExecutor::CreateSceneRenderTexture() {
-    if (!adapter_) {
-        return;
+    // Canvasごとの詳細ウィンドウは常時登録するため、開閉状態に関わらず毎フレーム呼ぶ
+    if (canvasLayerEditor_) {
+        canvasLayerEditor_->ShowEditor();
     }
-
-    // Scene 用 1 枚と effect 用の RTV を格納する heap を作成する。
-    rtvHeap_ = std::make_unique<Heap>();
-    if (!rtvHeap_->Create(adapter_->GetDevice(), D3D12_DESCRIPTOR_HEAP_TYPE_RTV, 16, D3D12_DESCRIPTOR_HEAP_FLAG_NONE)) {
-        Log::Send(Log::Level::ERR, "Failed to create RTV heap for PostProcessExecutor");
-        return;
-    }
-
-    // Scene 描画先の RenderTexture を生成する。
-    renderTexture_ = adapter_->CreateRenderTextureResource(
-        static_cast<uint32_t>(adapter_->GetWidth()),
-        static_cast<uint32_t>(adapter_->GetHeight()),
-        DXGI_FORMAT_R8G8B8A8_UNORM_SRGB,
-        clearColor_
-    );
-
-    renderTexture_->Get()->SetName(L"RenderTexture");
-
-    if (!renderTexture_->Get()) {
-        Log::Send(Log::Level::ERR, "Failed to create scene render texture");
-        return;
-    }
-
-    // Scene texture 用の SRV index を確保する。
-    srvIndex_ = srv_->Allocate();
-
-    // RTV/SRV を作成する。
-    CreateRenderTextureViews();
-
-    // DebugUI で SceneView 表示できるようにテクスチャを登録する。
-    if (debugUI_) {
-        sceneImGuiTextureId_ = debugUI_->RegisterTexture(renderTexture_->Get(), DXGI_FORMAT_R8G8B8A8_UNORM_SRGB);
-    }
-
-    Log::Send(Log::Level::INFO, "PostProcessExecutor scene render texture created successfully");
-}
-
-void PostProcessExecutor::CreateRenderTextureViews() {
-    if (!renderTexture_ || !renderTexture_->Get()) {
-        Log::Send(Log::Level::ERR, "Cannot create views: render texture is null");
-        return;
-    }
-
-    // RTV を作成する。
-    rtvHandle_ = rtvHeap_->GetCPUHandle(0);
-
-    D3D12_RENDER_TARGET_VIEW_DESC rtvDesc = {};
-    rtvDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
-    rtvDesc.ViewDimension = D3D12_RTV_DIMENSION_TEXTURE2D;
-
-    adapter_->GetDevice()->CreateRenderTargetView(renderTexture_->Get(), &rtvDesc, rtvHandle_);
-
-    // SRV を作成する。
-    srv_->CreateSRVForTexture2D(srvIndex_, renderTexture_->Get(), DXGI_FORMAT_R8G8B8A8_UNORM_SRGB, 1);
-    srvHandle_ = srv_->GetGPUHandle(srvIndex_);
 }
 
 void PostProcessExecutor::ResizeRenderTextures() {
-    if (!adapter_) {
-        return;
-    }
+    chain_->ResizeRenderTextures();
+    layer_.ResizeRenderTextures();
+    noneCanvas_->ResizeRenderTextures();
 
-    Log::Send(Log::Level::INFO,
-        "PostProcessExecutor: Resizing render textures to " +
-        std::to_string(adapter_->GetWidth()) + "x" + std::to_string(adapter_->GetHeight()));
-
-    // 旧 RenderTexture を破棄する。
-    if (renderTexture_) {
-        renderTexture_.reset();
-    }
-
-    // 新しいサイズで RenderTexture を再作成する。
-    renderTexture_ = adapter_->CreateRenderTextureResource(
-        static_cast<uint32_t>(adapter_->GetWidth()),
-        static_cast<uint32_t>(adapter_->GetHeight()),
-        DXGI_FORMAT_R8G8B8A8_UNORM_SRGB,
-        clearColor_
-    );
-
-    renderTexture_->Get()->SetName(L"RenderTexture");
-
-    if (!renderTexture_->Get()) {
-        Log::Send(Log::Level::ERR, "Failed to recreate scene render texture");
-        return;
-    }
-
-    // RTV/SRV を再作成する。
-    CreateRenderTextureViews();
+#ifdef _DEBUG
+    sceneCaptureChain_->ResizeRenderTextures();
 
     // DebugUI へ再登録する。
     if (debugUI_) {
-        sceneImGuiTextureId_ = debugUI_->RegisterTexture(renderTexture_->Get(), DXGI_FORMAT_R8G8B8A8_UNORM_SRGB);
+        sceneImGuiTextureId_ = debugUI_->RegisterTexture(sceneCaptureChain_->GetRenderTextureResource(), DXGI_FORMAT_R8G8B8A8_UNORM_SRGB);
     }
-
-    Log::Send(Log::Level::INFO, "PostProcessExecutor render textures resized successfully");
+#endif
 }
 
-IPostEffect* PostProcessExecutor::FindOrCreate(const std::string& _type, const std::string& _name, bool _create) {
-    // 既存 instance を検索する。
-    for (auto& effectData : effects_) {
-        if (effectData.name == _name) {
-            return effectData.effect.get();
-        }
-    }
+IPostEffect* PostProcessExecutor::Create(const std::string& _type) {
+    return chain_->Create(_type);
+}
 
-    // 自動生成しない場合はここで終了。
-    if (!_create) return nullptr;
-
-    // Factory が未設定なら生成できない。
+uint32_t PostProcessExecutor::CreateTemporary(const std::string& _type) {
     if (!factory_) {
         Log::Send(Log::Level::ERR, "PostEffectFactory is not set");
-        return nullptr;
+        return 0;
     }
 
-    // Factory から新しい effect を生成する。
     auto newEffect = factory_->Create(_type);
     if (!newEffect) {
         Log::Send(Log::Level::ERR, std::format("Failed to create effect type: {}", _type));
-        return nullptr;
+        return 0;
     }
 
-    // effect を executor 配下へ組み込む。
     newEffect->SetUp(adapter_, srv_);
-    auto rtvHandle = rtvHeap_->GetCPUHandle(static_cast<uint32_t>(effects_.size()) + 1);
-    newEffect->SetRTVHandle(rtvHandle);
+    const uint32_t slot = chain_->AllocateRtvSlot();
+    newEffect->SetRTVHandle(chain_->GetRtvCpuHandle(slot));
     newEffect->Initialize();
 
-    effects_.emplace_back(EffectData{ std::move(newEffect), _name, _type, true });
+    const uint32_t id = nextTemporaryId_++;
+    temporaries_.emplace_back(TemporaryEffectData{ std::move(newEffect), _type, slot, id, true });
 
-    return effects_.back().effect.get();
+    return id;
 }
 
-void PostProcessExecutor::ApplyPreset(const std::string& _presetName, const std::string& _mode, const std::vector<std::string>& _ignoreList, std::function<void()> _onComplete) {
+IPostEffect* PostProcessExecutor::GetTemporary(uint32_t _id) {
+    for (auto& temporary : temporaries_) {
+        if (temporary.id == _id) {
+            return temporary.effect.get();
+        }
+    }
+    return nullptr;
+}
+
+void PostProcessExecutor::RemoveTemporary(uint32_t _id) {
+    for (auto it = temporaries_.begin(); it != temporaries_.end(); ++it) {
+        if (it->id == _id) {
+            chain_->FreeRtvSlot(it->rtvSlot);
+            temporaries_.erase(it);
+            return;
+        }
+    }
+}
+
+void PostProcessExecutor::ApplyPreset(const std::string& _presetName, std::function<void()> _onComplete) {
     // 完了時コールバックを保持する。
     onAnimationComplete_ = _onComplete;
 
-    std::string path = "./Assets/Data/PostEffect/presets.json";
+    std::string path = PresetsFilePath();
 
     // preset 定義ファイルの存在確認。
     if (!std::filesystem::exists(path)) {
@@ -431,54 +336,28 @@ void PostProcessExecutor::ApplyPreset(const std::string& _presetName, const std:
     // アニメーション時間を読み取る。
     animationDuration_ = presetData.value("duration", 0.0f);
 
-    // replace モードでは既存 effect を一旦無効化する。
-    if (_mode == "replace") {
-        for (auto& effectData : effects_) {
-            effectData.enabled = false;
-        }
-    }
+    // 今回のアニメーション対象（一時エフェクトのid）を初期化する。
+    animatingTemporaries_.clear();
 
-    // 今回のアニメーション対象を初期化する。
-    animatingEffects_.clear();
-
-    // effects / members のどちらにも対応する。
-    const char* arrayKey = presetData.contains("effects") ? "effects" : "members";
-
-    if (presetData.contains(arrayKey)) {
-        for (const auto& effectEntry : presetData[arrayKey]) {
-            std::string type = effectEntry["type"];
-            std::string name = effectEntry["name"];
+    if (presetData.contains("members")) {
+        for (const auto& memberEntry : presetData["members"]) {
+            std::string type = memberEntry["type"];
 
             // preset 名省略時は現在の preset 名を使う。
-            std::string presetName = effectEntry.value("preset", _presetName);
-            bool autoCreate = effectEntry.value("autoCreate", true);
+            std::string presetName = memberEntry.value("preset", _presetName);
 
-            // ignore list に含まれる effect はスキップする。
-            bool shouldIgnore = false;
-            for (const auto& ignoreName : _ignoreList) {
-                if (ignoreName == name) {
-                    shouldIgnore = true;
-                    break;
-                }
-            }
-            if (shouldIgnore) continue;
-
-            // effect を取得または生成する。
-            IPostEffect* effect = FindOrCreate(type, name, autoCreate);
-            if (!effect) {
-                Log::Send(Log::Level::WARNING, std::format("Failed to create effect: {} ({})", name, type));
+            // 演出用の一時エフェクトを生成する。
+            const uint32_t id = CreateTemporary(type);
+            if (id == 0) {
+                Log::Send(Log::Level::WARNING, std::format("Failed to create temporary effect: {}", type));
                 continue;
             }
 
-            // preset を読み込み、有効化する。
+            IPostEffect* effect = GetTemporary(id);
             effect->LoadPreset(presetName);
-            Log::Send(Log::Level::DBG, std::format("Loaded preset '{}' for effect '{}' ({})", presetName, name, type));
+            Log::Send(Log::Level::DBG, std::format("Loaded preset '{}' for temporary effect ({})", presetName, type));
 
-            SetActive(name, true);
-            Log::Send(Log::Level::DBG, std::format("Enabled effect '{}' (enabled: {})", name, true));
-
-            // アニメーション対象として記録する。
-            animatingEffects_.push_back(name);
+            animatingTemporaries_.push_back(id);
         }
     }
 
@@ -487,28 +366,25 @@ void PostProcessExecutor::ApplyPreset(const std::string& _presetName, const std:
         isAnimating_ = true;
         animationTimer_ = 0.0f;
         Log::Send(Log::Level::INFO, std::format("Started animation for preset '{}' (duration: {:.1f}s, effects: {})",
-            _presetName, animationDuration_, animatingEffects_.size()));
+            _presetName, animationDuration_, animatingTemporaries_.size()));
     } else {
-        // duration が 0 の場合は即座に最終状態を適用する。
-        for (const auto& effectName : animatingEffects_) {
-            for (auto& effectData : effects_) {
-                if (effectData.name == effectName) {
-                    effectData.effect->UpdateAnimation(1.0f);
-                    break;
-                }
+        // duration が 0 の場合は即座に最終状態を適用してから破棄する。
+        for (const uint32_t id : animatingTemporaries_) {
+            if (IPostEffect* effect = GetTemporary(id)) {
+                effect->UpdateAnimation(1.0f);
             }
+            RemoveTemporary(id);
         }
+        animatingTemporaries_.clear();
         isAnimating_ = false;
+
+        if (onAnimationComplete_) {
+            onAnimationComplete_();
+            onAnimationComplete_ = nullptr;
+        }
     }
 
-    // デバッグ出力。
-    Log::Send(Log::Level::INFO, std::format("Total effects: {}", effects_.size()));
-    for (const auto& effectData : effects_) {
-        Log::Send(Log::Level::INFO, std::format("  Effect '{}' ({}): enabled={}",
-            effectData.name, effectData.type, effectData.enabled ? "true" : "false"));
-    }
-
-    Log::Send(Log::Level::INFO, std::format("Preset '{}' applied with mode '{}'", _presetName, _mode));
+    Log::Send(Log::Level::INFO, std::format("Preset '{}' applied", _presetName));
 }
 
 void PostProcessExecutor::Update(float _deltaTime) {
@@ -517,37 +393,23 @@ void PostProcessExecutor::Update(float _deltaTime) {
     animationTimer_ += _deltaTime;
     float t = std::min(animationTimer_ / animationDuration_, 1.0f);
 
-    // アニメーション対象 effect を進行度 t で更新する。
-    for (const auto& effectName : animatingEffects_) {
-        for (auto& effectData : effects_) {
-            if (effectData.name == effectName) {
-                effectData.effect->UpdateAnimation(t);
-                break;
-            }
+    // アニメーション対象の一時エフェクトを進行度 t で更新する。
+    for (const uint32_t id : animatingTemporaries_) {
+        if (IPostEffect* effect = GetTemporary(id)) {
+            effect->UpdateAnimation(t);
         }
     }
 
-    // 最後まで到達したら状態を片付ける。
+    // 最後まで到達したら一時エフェクトを破棄する。
     if (t >= 1.0f) {
         isAnimating_ = false;
 
-        // 一時的に使った effect を初期状態へ戻して無効化する。
-        for (const auto& effectName : animatingEffects_) {
-            for (auto& effectData : effects_) {
-                if (effectData.name == effectName) {
-                    effectData.enabled = false;
-                    effectData.effect->Initialize();
-
-                    Log::Send(Log::Level::INFO, std::format("Reset and disabled effect '{}'", effectName));
-                    break;
-                }
-            }
+        for (const uint32_t id : animatingTemporaries_) {
+            RemoveTemporary(id);
         }
+        animatingTemporaries_.clear();
 
-        // 対象一覧をクリアする。
-        animatingEffects_.clear();
-
-        Log::Send(Log::Level::INFO, "PostEffect animation completed and effects reset");
+        Log::Send(Log::Level::INFO, "PostEffect animation completed and temporary effects removed");
 
         // 完了コールバックがあれば呼び出す。
         if (onAnimationComplete_) {
@@ -562,15 +424,13 @@ void PostProcessExecutor::SavePreset(const std::string& _presetName) {
     json presetJson;
 
     // 現在有効な effect だけを書き出す。
-    for (const auto& effectData : effects_) {
+    for (const auto& effectData : chain_->GetEffects()) {
         if (effectData.enabled) {
-            json effectEntry;
-            effectEntry["type"] = effectData.type;
-            effectEntry["name"] = effectData.name;
-            effectEntry["preset"] = _presetName;
-            effectEntry["autoCreate"] = true;
+            json memberEntry;
+            memberEntry["type"] = effectData.type;
+            memberEntry["preset"] = _presetName;
 
-            presetJson["effects"].push_back(effectEntry);
+            presetJson["members"].push_back(memberEntry);
 
             // 各 effect のパラメータも保存する。
             effectData.effect->SavePreset(_presetName);
@@ -581,8 +441,8 @@ void PostProcessExecutor::SavePreset(const std::string& _presetName) {
     presetJson["duration"] = animationDuration_;
 
     // presets.json を更新する。
-    std::string presetsPath = "./Assets/Data/PostEffect/presets.json";
-    std::filesystem::create_directories("./Assets/Data/PostEffect");
+    std::string presetsPath = PresetsFilePath();
+    std::filesystem::create_directories("./Assets/Data/PostEffect/" + name_);
 
     // 既存ファイルがあれば読み込む。
     json allPresets;
@@ -608,6 +468,20 @@ void PostProcessExecutor::SavePreset(const std::string& _presetName) {
     outFile.close();
 
     Log::Send(Log::Level::INFO, std::format("Preset '{}' saved successfully", _presetName));
+}
+
+void PostProcessExecutor::LoadPermanentConfig() {
+    chain_->LoadPermanentConfig();
+}
+
+void PostProcessExecutor::SavePermanentConfig() const {
+    chain_->SavePermanentConfig();
+}
+
+void PostProcessExecutor::OpenCanvasEditor() {
+    if (canvasLayerEditor_) {
+        canvasLayerEditor_->OpenEditor();
+    }
 }
 
 void PostProcessExecutor::OpenPresetEditor(const std::string& _presetName) {

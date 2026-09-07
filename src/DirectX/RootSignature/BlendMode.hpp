@@ -7,6 +7,7 @@ enum class BlendMode{
     SUB,
     MULTI,
     SCREEN,
+    PREMULTIPLIED,
 
     NONE
 };

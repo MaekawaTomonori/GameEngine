@@ -40,38 +40,23 @@ void Common::Debug() {
 }
 
 void Common::Draw(Renderer* _renderer) {
-    std::vector<std::function<void()>> postEffectTasks;
-    std::vector<std::function<void()>> noPostEffectTasks;
+    std::vector<std::function<void()>> tasks;
     {
         for (const auto& command : drawFunctions_){
             if (!command.func)continue;
-            if (command.applyPostEffects){
-                postEffectTasks.push_back(command.func);
-            } else {
-                noPostEffectTasks.push_back(command.func);
-            }
+            tasks.push_back(command.func);
         }
         drawFunctions_.clear();
     }
 
     if (!pipeline_) return;
-    if (!noPostEffectTasks.empty()) {
-        _renderer->Register([this, noPostEffectTasks](){
+    if (!tasks.empty()) {
+        _renderer->Register([this, tasks](){
             pipeline_->DrawCall();
-            for (auto& task : noPostEffectTasks){
+            for (auto& task : tasks){
                 task();
             }
-        });
-    }
-
-    if (!postEffectTasks.empty()) {
-        _renderer->Register([this, postEffectTasks](){
-            pipeline_->DrawCall();
-
-            for (auto& task : postEffectTasks){
-                task();
-            }
-        }, true);
+        }, "None");
     }
 }
 
@@ -87,8 +72,8 @@ void Common::RegisterUpdate(const std::string& _id, const std::function<void()>&
     updateCommands_[_id] = _func;
 }
 
-void Common::RegisterDraw(const std::function<void()>& _command, bool _isApplyPostEffect) {
-    drawFunctions_.push_back({ _command, _isApplyPostEffect });
+void Common::RegisterDraw(const std::function<void()>& _command) {
+    drawFunctions_.push_back({ _command });
 }
 
 void Common::Unregister(const std::string& _uuid) {

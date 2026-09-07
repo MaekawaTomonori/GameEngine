@@ -2,8 +2,6 @@
 
 #include "imgui.h"
 #include "Log.hpp"
-#include <filesystem>
-#include <fstream>
 
 #include "Math/MathUtils.hpp"
 #include "json.hpp"
@@ -49,7 +47,7 @@ void Vignette::Initialize() {
             .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL
         })
     )
-    .SetBlend(BlendMode::ALPHA)
+    .SetBlend(BlendMode::NONE)
     .SetShader(std::make_unique<Shader>(L"CpyImg", L"Vignette"))
     .SetTopologyType(D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE)
     .Create();
@@ -74,40 +72,24 @@ void Vignette::Modifier() {
 }
 
 void Vignette::LoadPreset(const std::string& _presetName) {
-    std::string path = "./Assets/Data/PostEffect/Vignette/" + _presetName + ".json";
+    json rawKeyframes;
+    keyframes_.clear();
 
     // ファイル不在時はデフォルト値
-    if (!std::filesystem::exists(path)) {
-        keyframes_.clear();
+    if (!LoadKeyframeFile(_presetName, rawKeyframes, keyframeOrder_)) {
         keyframes_["Start"] = {0.0f, 1.0f, Vector4(0.f, 0.f, 0.f, 1.f)};
         keyframes_["End"] = {0.5f, 1.2f, Vector4(0.05f, 0.05f, 0.05f, 1.f)};
         keyframeOrder_ = {"Start", "End"};
         return;
     }
 
-    std::ifstream file(path);
-    if (!file.is_open()) {
-        Log::Send(Log::Level::WARNING, std::format("Failed to open preset file: {}", path));
-        return;
-    }
-
-    json paramJson;
-    file >> paramJson;
-    file.close();
-
     // 任意名キーフレーム読み込み
-    keyframes_.clear();
-    for (auto& [name, data] : paramJson.items()) {
-        if (name == "keyframes") continue;
+    for (auto& [name, data] : rawKeyframes.items()) {
         KeyframeData kf;
         kf.intensity = data["intensity"];
         kf.scale = data["scale"];
         kf.color = Vector4(data["color"][0], data["color"][1], data["color"][2]);
         keyframes_[name] = kf;
-    }
-
-    if (paramJson.contains("keyframes")) {
-        keyframeOrder_ = paramJson["keyframes"].get<std::vector<std::string>>();
     }
 
     // キーフレーム検証
@@ -124,6 +106,10 @@ void Vignette::LoadPreset(const std::string& _presetName) {
 }
 
 void Vignette::UpdateAnimation(float _t) {
+    // TODO: この関数内の区間計算部分はエフェクトに依存しない汎用ロジックであり、
+    // IPostEffect::ResolveKeyframeSegment() に切り出し済み（未統合）。他エフェクトにも
+    // キーフレーム対応を広げるタイミングで、ここも含めて置き換える。
+
     // Q43: 単一キーフレーム対応
     if (keyframeOrder_.size() == 1) {
         const auto& kf = keyframes_[keyframeOrder_[0]];
@@ -157,21 +143,14 @@ void Vignette::UpdateAnimation(float _t) {
 }
 
 void Vignette::SavePreset(const std::string& _presetName) {
-    std::string path = "./Assets/Data/PostEffect/Vignette/" + _presetName + ".json";
-
-    // ディレクトリ作成
-    std::filesystem::create_directories("./Assets/Data/PostEffect/Vignette");
-
-    json paramJson = SaveParameters();
-
-    std::ofstream file(path);
-    if (!file.is_open()) {
-        Log::Send(Log::Level::ERR, std::format("Failed to save preset '{}': {}", _presetName, path));
-        return;
+    json keyframesJson;
+    for (const auto& [name, kf] : keyframes_) {
+        keyframesJson[name]["intensity"] = kf.intensity;
+        keyframesJson[name]["scale"] = kf.scale;
+        keyframesJson[name]["color"] = {kf.color.x, kf.color.y, kf.color.z};
     }
 
-    file << paramJson.dump(4);
-    file.close();
+    SaveKeyframeFile(_presetName, keyframesJson, keyframeOrder_);
 }
 
 nlohmann::json Vignette::SaveParameters() const {
@@ -183,4 +162,21 @@ nlohmann::json Vignette::SaveParameters() const {
     }
     j["keyframes"] = keyframeOrder_;
     return j;
+}
+
+nlohmann::json Vignette::CaptureCurrentParameters() const {
+    json j;
+    j["intensity"] = material_->intensity;
+    j["scale"] = material_->scale;
+    j["color"] = {material_->color.x, material_->color.y, material_->color.z};
+    return j;
+}
+
+void Vignette::ApplyParameters(const nlohmann::json& _params) {
+    material_->intensity = _params.value("intensity", material_->intensity);
+    material_->scale = _params.value("scale", material_->scale);
+    if (_params.contains("color")) {
+        const auto& c = _params["color"];
+        material_->color = Vector4(c[0], c[1], c[2], material_->color.w);
+    }
 }
