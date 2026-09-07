@@ -7,7 +7,7 @@ var classCommon =
     [ "GetAdapter", "classCommon.html#a22e116f89d995ae4180123e2be1608ca", null ],
     [ "Initialize", "classCommon.html#a7f881cf0d0b1ba4f6fc54d8ff35fc161", null ],
     [ "RegisterDebug", "classCommon.html#a9ee5c7c05e387bc2bda4cdba171740bc", null ],
-    [ "RegisterDraw", "classCommon.html#ae93c4bd439c1a6d360c5ba68d13a6d4f", null ],
+    [ "RegisterDraw", "classCommon.html#a5deb139a94073649f0a02ec8bf017d58", null ],
     [ "RegisterUpdate", "classCommon.html#aaccb5f6b151eed7f3297e67046668ff3", null ],
     [ "Setup", "classCommon.html#a6344b82bbc9c51f22b4ba6dd51c403a7", null ],
     [ "Unregister", "classCommon.html#acf757da19ea43b691fcdd6f8a18dd922", null ],

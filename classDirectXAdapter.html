@@ -133,6 +133,9 @@ $(document).ready(function(){initNavTree('classDirectXAdapter.html',''); initRes
 <tr class="memitem:adc51732c509d008911e309337697aa97" id="r_adc51732c509d008911e309337697aa97"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDirectXAdapter.html#adc51732c509d008911e309337697aa97">EndFrame</a> ()</td></tr>
 <tr class="memdesc:adc51732c509d008911e309337697aa97"><td class="mdescLeft">&#160;</td><td class="mdescRight">フレームの終了処理  <br /></td></tr>
 <tr class="separator:adc51732c509d008911e309337697aa97"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e6a9f66a690d39c403a6157ca801728" id="r_a2e6a9f66a690d39c403a6157ca801728"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDirectXAdapter.html#a2e6a9f66a690d39c403a6157ca801728">SetSwapChainRenderTarget</a> () const</td></tr>
+<tr class="memdesc:a2e6a9f66a690d39c403a6157ca801728"><td class="mdescLeft">&#160;</td><td class="mdescRight">SwapChainの現在のバックバッファを描画先として再設定する（クリアも行う）  <br /></td></tr>
+<tr class="separator:a2e6a9f66a690d39c403a6157ca801728"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aea6c994c8bf3371a46ea09db47c6df5a" id="r_aea6c994c8bf3371a46ea09db47c6df5a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDirectXAdapter.html#aea6c994c8bf3371a46ea09db47c6df5a">DisplayFPS</a> (const GESTD::ReferencePtr&lt; <a class="el" href="classDebugUI.html">DebugUI</a> &gt; &amp;_debug) const</td></tr>
 <tr class="memdesc:aea6c994c8bf3371a46ea09db47c6df5a"><td class="mdescLeft">&#160;</td><td class="mdescRight">FPSを表示  <br /></td></tr>
 <tr class="separator:aea6c994c8bf3371a46ea09db47c6df5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -142,6 +145,9 @@ $(document).ready(function(){initNavTree('classDirectXAdapter.html',''); initRes
 <tr class="memitem:a76807e209ac784429e5f7a3a47763b16" id="r_a76807e209ac784429e5f7a3a47763b16"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDirectXAdapter.html#a76807e209ac784429e5f7a3a47763b16">UpdateWindowSize</a> (size_t _width, size_t _height)</td></tr>
 <tr class="memdesc:a76807e209ac784429e5f7a3a47763b16"><td class="mdescLeft">&#160;</td><td class="mdescRight">ウィンドウサイズを更新（ビューポートとシザー矩形も更新）  <br /></td></tr>
 <tr class="separator:a76807e209ac784429e5f7a3a47763b16"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec67f2c8465c5981b690fdd042a956b5" id="r_aec67f2c8465c5981b690fdd042a956b5"><td class="memItemLeft" align="right" valign="top">const Vector4 &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDirectXAdapter.html#aec67f2c8465c5981b690fdd042a956b5">GetBackgroundColor</a> () const</td></tr>
+<tr class="memdesc:aec67f2c8465c5981b690fdd042a956b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">SwapChainの背景クリア色を取得  <br /></td></tr>
+<tr class="separator:aec67f2c8465c5981b690fdd042a956b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7dbec72fb7c4efcfc6cdda738aecafcb" id="r_a7dbec72fb7c4efcfc6cdda738aecafcb"><td class="memItemLeft" align="right" valign="top">HWND&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDirectXAdapter.html#a7dbec72fb7c4efcfc6cdda738aecafcb">GetWindowHandle</a> () const</td></tr>
 <tr class="memdesc:a7dbec72fb7c4efcfc6cdda738aecafcb"><td class="mdescLeft">&#160;</td><td class="mdescRight">ウィンドウハンドルを取得  <br /></td></tr>
 <tr class="separator:a7dbec72fb7c4efcfc6cdda738aecafcb"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -260,6 +266,8 @@ $(document).ready(function(){initNavTree('classDirectXAdapter.html',''); initRes
 <p>フレームの開始処理 </p>
 
 <p class="definition"> <a class="el" href="DirectXAdapter_8cpp_source.html">DirectXAdapter.cpp</a> の <a class="el" href="DirectXAdapter_8cpp_source.html#l00262">262</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="DirectXAdapter_8cpp_source.html#l00281">SetSwapChainRenderTarget()</a>.</p>
 
 </div>
 </div>
@@ -502,6 +510,35 @@ $(document).ready(function(){initNavTree('classDirectXAdapter.html',''); initRes
 
 </div>
 </div>
+<a id="aec67f2c8465c5981b690fdd042a956b5" name="aec67f2c8465c5981b690fdd042a956b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec67f2c8465c5981b690fdd042a956b5">&#9670;&#160;</a></span>GetBackgroundColor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const Vector4 &amp; DirectXAdapter::GetBackgroundColor </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>SwapChainの背景クリア色を取得 </p>
+
+<p class="definition"> <a class="el" href="DirectXAdapter_8hpp_source.html">DirectXAdapter.hpp</a> の <a class="el" href="DirectXAdapter_8hpp_source.html#l00201">201</a> 行目に定義があります。</p>
+
+</div>
+</div>
 <a id="ac775788b343bb054d88bf1fb552aec29" name="ac775788b343bb054d88bf1fb552aec29"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac775788b343bb054d88bf1fb552aec29">&#9670;&#160;</a></span>GetCommandAllocator()</h2>
 
@@ -520,7 +557,7 @@ $(document).ready(function(){initNavTree('classDirectXAdapter.html',''); initRes
 <p>コマンドアロケーターを取得 </p>
 <dl class="section return"><dt>戻り値</dt><dd>コマンドアロケーターポインタ </dd></dl>
 
-<p class="definition"> <a class="el" href="DirectXAdapter_8cpp_source.html">DirectXAdapter.cpp</a> の <a class="el" href="DirectXAdapter_8cpp_source.html#l00723">723</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="DirectXAdapter_8cpp_source.html">DirectXAdapter.cpp</a> の <a class="el" href="DirectXAdapter_8cpp_source.html#l00722">722</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -542,7 +579,7 @@ $(document).ready(function(){initNavTree('classDirectXAdapter.html',''); initRes
 <p>コマンドリストを取得 </p>
 <dl class="section return"><dt>戻り値</dt><dd>コマンドリストポインタ </dd></dl>
 
-<p class="definition"> <a class="el" href="DirectXAdapter_8cpp_source.html">DirectXAdapter.cpp</a> の <a class="el" href="DirectXAdapter_8cpp_source.html#l00707">707</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="DirectXAdapter_8cpp_source.html">DirectXAdapter.cpp</a> の <a class="el" href="DirectXAdapter_8cpp_source.html#l00706">706</a> 行目に定義があります。</p>
 
 <p class="reference">参照元 <a class="el" href="Emitter_8cpp_source.html#l00070">Emitter::Draw()</a>, <a class="el" href="ShadowPass_8cpp_source.html#l00098">ShadowPass::Execute()</a>, <a class="el" href="SRVManager_8cpp_source.html#l00043">SRVManager::PreDraw()</a>, <a class="el" href="SRVManager_8cpp_source.html#l00082">SRVManager::SetGraphicsRootDescriptorTable()</a>.</p>
 
@@ -566,7 +603,7 @@ $(document).ready(function(){initNavTree('classDirectXAdapter.html',''); initRes
 <p>コマンドキューを取得 </p>
 <dl class="section return"><dt>戻り値</dt><dd>コマンドキューポインタ </dd></dl>
 
-<p class="definition"> <a class="el" href="DirectXAdapter_8cpp_source.html">DirectXAdapter.cpp</a> の <a class="el" href="DirectXAdapter_8cpp_source.html#l00719">719</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="DirectXAdapter_8cpp_source.html">DirectXAdapter.cpp</a> の <a class="el" href="DirectXAdapter_8cpp_source.html#l00718">718</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -610,7 +647,7 @@ $(document).ready(function(){initNavTree('classDirectXAdapter.html',''); initRes
 <p>DirectX12デバイスを取得 </p>
 <dl class="section return"><dt>戻り値</dt><dd>デバイスポインタ </dd></dl>
 
-<p class="definition"> <a class="el" href="DirectXAdapter_8cpp_source.html">DirectXAdapter.cpp</a> の <a class="el" href="DirectXAdapter_8cpp_source.html#l00703">703</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="DirectXAdapter_8cpp_source.html">DirectXAdapter.cpp</a> の <a class="el" href="DirectXAdapter_8cpp_source.html#l00702">702</a> 行目に定義があります。</p>
 
 <p class="reference">参照元 <a class="el" href="SRVManager_8cpp_source.html#l00070">SRVManager::CreateSRVForCubeMap()</a>, <a class="el" href="SRVManager_8cpp_source.html#l00058">SRVManager::CreateSRVForStructuredBuffer()</a>, <a class="el" href="SRVManager_8cpp_source.html#l00048">SRVManager::CreateSRVForTexture2D()</a>, <a class="el" href="ShadowCubeMap_8cpp_source.html#l00005">ShadowCubeMap::Initialize()</a>, <a class="el" href="TextureManager_8cpp_source.html#l00101">TextureManager::Initialize()</a>.</p>
 
@@ -634,7 +671,7 @@ $(document).ready(function(){initNavTree('classDirectXAdapter.html',''); initRes
 <p>DSVハンドルを取得 </p>
 <dl class="section return"><dt>戻り値</dt><dd>DSVハンドル </dd></dl>
 
-<p class="definition"> <a class="el" href="DirectXAdapter_8cpp_source.html">DirectXAdapter.cpp</a> の <a class="el" href="DirectXAdapter_8cpp_source.html#l00739">739</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="DirectXAdapter_8cpp_source.html">DirectXAdapter.cpp</a> の <a class="el" href="DirectXAdapter_8cpp_source.html#l00738">738</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -656,7 +693,7 @@ $(document).ready(function(){initNavTree('classDirectXAdapter.html',''); initRes
 <p>フェンスを取得 </p>
 <dl class="section return"><dt>戻り値</dt><dd>フェンスポインタ </dd></dl>
 
-<p class="definition"> <a class="el" href="DirectXAdapter_8cpp_source.html">DirectXAdapter.cpp</a> の <a class="el" href="DirectXAdapter_8cpp_source.html#l00731">731</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="DirectXAdapter_8cpp_source.html">DirectXAdapter.cpp</a> の <a class="el" href="DirectXAdapter_8cpp_source.html#l00730">730</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -678,7 +715,7 @@ $(document).ready(function(){initNavTree('classDirectXAdapter.html',''); initRes
 <p>ウィンドウ高さを取得 </p>
 <dl class="section return"><dt>戻り値</dt><dd>高さ </dd></dl>
 
-<p class="definition"> <a class="el" href="DirectXAdapter_8cpp_source.html">DirectXAdapter.cpp</a> の <a class="el" href="DirectXAdapter_8cpp_source.html#l00715">715</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="DirectXAdapter_8cpp_source.html">DirectXAdapter.cpp</a> の <a class="el" href="DirectXAdapter_8cpp_source.html#l00714">714</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -700,7 +737,7 @@ $(document).ready(function(){initNavTree('classDirectXAdapter.html',''); initRes
 <p>次のフェンス値を取得 </p>
 <dl class="section return"><dt>戻り値</dt><dd>フェンス値 </dd></dl>
 
-<p class="definition"> <a class="el" href="DirectXAdapter_8cpp_source.html">DirectXAdapter.cpp</a> の <a class="el" href="DirectXAdapter_8cpp_source.html#l00743">743</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="DirectXAdapter_8cpp_source.html">DirectXAdapter.cpp</a> の <a class="el" href="DirectXAdapter_8cpp_source.html#l00742">742</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -722,7 +759,7 @@ $(document).ready(function(){initNavTree('classDirectXAdapter.html',''); initRes
 <p>スワップチェーンを取得 </p>
 <dl class="section return"><dt>戻り値</dt><dd>スワップチェーンポインタ </dd></dl>
 
-<p class="definition"> <a class="el" href="DirectXAdapter_8cpp_source.html">DirectXAdapter.cpp</a> の <a class="el" href="DirectXAdapter_8cpp_source.html#l00727">727</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="DirectXAdapter_8cpp_source.html">DirectXAdapter.cpp</a> の <a class="el" href="DirectXAdapter_8cpp_source.html#l00726">726</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -744,7 +781,7 @@ $(document).ready(function(){initNavTree('classDirectXAdapter.html',''); initRes
 <p>ウィンドウ幅を取得 </p>
 <dl class="section return"><dt>戻り値</dt><dd>幅 </dd></dl>
 
-<p class="definition"> <a class="el" href="DirectXAdapter_8cpp_source.html">DirectXAdapter.cpp</a> の <a class="el" href="DirectXAdapter_8cpp_source.html#l00711">711</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="DirectXAdapter_8cpp_source.html">DirectXAdapter.cpp</a> の <a class="el" href="DirectXAdapter_8cpp_source.html#l00710">710</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -766,7 +803,7 @@ $(document).ready(function(){initNavTree('classDirectXAdapter.html',''); initRes
 <p>ウィンドウハンドルを取得 </p>
 <dl class="section return"><dt>戻り値</dt><dd>ウィンドウハンドル </dd></dl>
 
-<p class="definition"> <a class="el" href="DirectXAdapter_8cpp_source.html">DirectXAdapter.cpp</a> の <a class="el" href="DirectXAdapter_8cpp_source.html#l00735">735</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="DirectXAdapter_8cpp_source.html">DirectXAdapter.cpp</a> の <a class="el" href="DirectXAdapter_8cpp_source.html#l00734">734</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -812,6 +849,31 @@ $(document).ready(function(){initNavTree('classDirectXAdapter.html',''); initRes
 
 </div>
 </div>
+<a id="a2e6a9f66a690d39c403a6157ca801728" name="a2e6a9f66a690d39c403a6157ca801728"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e6a9f66a690d39c403a6157ca801728">&#9670;&#160;</a></span>SetSwapChainRenderTarget()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void DirectXAdapter::SetSwapChainRenderTarget </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>SwapChainの現在のバックバッファを描画先として再設定する（クリアも行う） </p>
+
+<p class="definition"> <a class="el" href="DirectXAdapter_8cpp_source.html">DirectXAdapter.cpp</a> の <a class="el" href="DirectXAdapter_8cpp_source.html#l00281">281</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::INFO</a>, <a class="el" href="Log_8cpp_source.html#l00108">Log::Send()</a>.</p>
+
+<p class="reference">参照元 <a class="el" href="DirectXAdapter_8cpp_source.html#l00262">BeginFrame()</a>.</p>
+
+</div>
+</div>
 <a id="a76807e209ac784429e5f7a3a47763b16" name="a76807e209ac784429e5f7a3a47763b16"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a76807e209ac784429e5f7a3a47763b16">&#9670;&#160;</a></span>UpdateWindowSize()</h2>
 
@@ -847,7 +909,7 @@ $(document).ready(function(){initNavTree('classDirectXAdapter.html',''); initRes
   </dd>
 </dl>
 
-<p class="definition"> <a class="el" href="DirectXAdapter_8cpp_source.html">DirectXAdapter.cpp</a> の <a class="el" href="DirectXAdapter_8cpp_source.html#l00612">612</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="DirectXAdapter_8cpp_source.html">DirectXAdapter.cpp</a> の <a class="el" href="DirectXAdapter_8cpp_source.html#l00611">611</a> 行目に定義があります。</p>
 
 <p class="reference">参照先 <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::ERR</a>, <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::INFO</a>, <a class="el" href="Log_8cpp_source.html#l00108">Log::Send()</a>, <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531ea059e9861e0400dfbe05c98a841f3f96b">Log::WARNING</a>.</p>
 
@@ -877,7 +939,7 @@ $(document).ready(function(){initNavTree('classDirectXAdapter.html',''); initRes
   </dd>
 </dl>
 
-<p class="definition"> <a class="el" href="DirectXAdapter_8cpp_source.html">DirectXAdapter.cpp</a> の <a class="el" href="DirectXAdapter_8cpp_source.html#l00747">747</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="DirectXAdapter_8cpp_source.html">DirectXAdapter.cpp</a> の <a class="el" href="DirectXAdapter_8cpp_source.html#l00746">746</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -891,7 +953,7 @@ $(document).ready(function(){initNavTree('classDirectXAdapter.html',''); initRes
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classDirectXAdapter.html">DirectXAdapter</a></li>
-    <li class="footer">2026年09月04日(金) 07時22分07秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年09月07日(月) 03時45分00秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

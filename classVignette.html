@@ -129,6 +129,15 @@ Vignette の継承関係図</div>
 <tr class="memitem:a546d80e5d21d1804a21a919ba2f34855" id="r_a546d80e5d21d1804a21a919ba2f34855"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVignette.html#a546d80e5d21d1804a21a919ba2f34855">UpdateAnimation</a> (float _t) override</td></tr>
 <tr class="memdesc:a546d80e5d21d1804a21a919ba2f34855"><td class="mdescLeft">&#160;</td><td class="mdescRight">アニメーション進行（tは0.0~1.0）  <br /></td></tr>
 <tr class="separator:a546d80e5d21d1804a21a919ba2f34855"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3176edc9ad9464582b6b9b5e72fa7de" id="r_ad3176edc9ad9464582b6b9b5e72fa7de"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVignette.html#ad3176edc9ad9464582b6b9b5e72fa7de">GetTypeName</a> () const override</td></tr>
+<tr class="memdesc:ad3176edc9ad9464582b6b9b5e72fa7de"><td class="mdescLeft">&#160;</td><td class="mdescRight">エフェクトタイプ名を取得 Factory登録名・プリセットファイルのパスと一致させる。  <br /></td></tr>
+<tr class="separator:ad3176edc9ad9464582b6b9b5e72fa7de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08bddd306b8aef3ecf6f7f7ec7001aa8" id="r_a08bddd306b8aef3ecf6f7f7ec7001aa8"><td class="memItemLeft" align="right" valign="top">nlohmann::json&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVignette.html#a08bddd306b8aef3ecf6f7f7ec7001aa8">CaptureCurrentParameters</a> () const override</td></tr>
+<tr class="memdesc:a08bddd306b8aef3ecf6f7f7ec7001aa8"><td class="mdescLeft">&#160;</td><td class="mdescRight">現在稼働中のパラメータ値を1キーフレーム分のJSONとして取得 <a class="el" href="classVignette.html#a5555514987eeec54915583f0c02898f8" title="現在のパラメータをJSONに変換">SaveParameters()</a>と異なり、保持中の全キーフレームではなく現在の実行時パラメータのみを返す。  <br /></td></tr>
+<tr class="separator:a08bddd306b8aef3ecf6f7f7ec7001aa8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6bd2620534004b4405b343636a4da281" id="r_a6bd2620534004b4405b343636a4da281"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVignette.html#a6bd2620534004b4405b343636a4da281">ApplyParameters</a> (const nlohmann::json &amp;_params) override</td></tr>
+<tr class="memdesc:a6bd2620534004b4405b343636a4da281"><td class="mdescLeft">&#160;</td><td class="mdescRight">JSONで表現されたパラメータを現在の実行時パラメータへ適用する <a class="el" href="classVignette.html#a08bddd306b8aef3ecf6f7f7ec7001aa8" title="現在稼働中のパラメータ値を1キーフレーム分のJSONとして取得 SaveParameters()と異なり、保持中の全キーフレームではなく現在の実行時パラメータのみを返す。">CaptureCurrentParameters()</a>と対になる。  <br /></td></tr>
+<tr class="separator:a6bd2620534004b4405b343636a4da281"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classIPostEffect"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classIPostEffect')"><img src="closed.png" alt="-"/>&#160;基底クラス <a class="el" href="classIPostEffect.html">IPostEffect</a> に属する継承公開メンバ関数</td></tr>
 <tr class="memitem:a74aee36fc8d995e104765a99a1e49f49 inherit pub_methods_classIPostEffect" id="r_a74aee36fc8d995e104765a99a1e49f49"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIPostEffect.html#a74aee36fc8d995e104765a99a1e49f49">~IPostEffect</a> ()=default</td></tr>
 <tr class="separator:a74aee36fc8d995e104765a99a1e49f49 inherit pub_methods_classIPostEffect"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -141,6 +150,12 @@ Vignette の継承関係図</div>
 <tr class="memitem:a2d0e0b0c528df87d6cbeb9cd914f3c6a inherit pub_methods_classIPostEffect" id="r_a2d0e0b0c528df87d6cbeb9cd914f3c6a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIPostEffect.html#a2d0e0b0c528df87d6cbeb9cd914f3c6a">SetRTVHandle</a> (D3D12_CPU_DESCRIPTOR_HANDLE _rtvHandle)</td></tr>
 <tr class="memdesc:a2d0e0b0c528df87d6cbeb9cd914f3c6a inherit pub_methods_classIPostEffect"><td class="mdescLeft">&#160;</td><td class="mdescRight">RTVハンドルを設定  <br /></td></tr>
 <tr class="separator:a2d0e0b0c528df87d6cbeb9cd914f3c6a inherit pub_methods_classIPostEffect"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5490d675b9568296ee3a46536dcac4db inherit pub_methods_classIPostEffect" id="r_a5490d675b9568296ee3a46536dcac4db"><td class="memItemLeft" align="right" valign="top">ID3D12Resource *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIPostEffect.html#a5490d675b9568296ee3a46536dcac4db">GetOutputResource</a> () const</td></tr>
+<tr class="memdesc:a5490d675b9568296ee3a46536dcac4db inherit pub_methods_classIPostEffect"><td class="mdescLeft">&#160;</td><td class="mdescRight">出力先リソースを取得する（Editorのプレビュー表示等に使う）  <br /></td></tr>
+<tr class="separator:a5490d675b9568296ee3a46536dcac4db inherit pub_methods_classIPostEffect"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad786579490d2ded06a0565632fd41f72 inherit pub_methods_classIPostEffect" id="r_ad786579490d2ded06a0565632fd41f72"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIPostEffect.html#ad786579490d2ded06a0565632fd41f72">GetSrvIndex</a> () const</td></tr>
+<tr class="memdesc:ad786579490d2ded06a0565632fd41f72 inherit pub_methods_classIPostEffect"><td class="mdescLeft">&#160;</td><td class="mdescRight">出力SRVのスロット番号を取得する（削除時にディスクリプタを付け替えるために使う）  <br /></td></tr>
+<tr class="separator:ad786579490d2ded06a0565632fd41f72 inherit pub_methods_classIPostEffect"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 限定公開メンバ関数</h2></td></tr>
@@ -150,9 +165,22 @@ Vignette の継承関係図</div>
 <tr class="memitem:aca73455bd632277bf5cc476313c83217 inherit pro_methods_classIPostEffect" id="r_aca73455bd632277bf5cc476313c83217"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIPostEffect.html#aca73455bd632277bf5cc476313c83217">CreateOutput</a> ()</td></tr>
 <tr class="memdesc:aca73455bd632277bf5cc476313c83217 inherit pro_methods_classIPostEffect"><td class="mdescLeft">&#160;</td><td class="mdescRight">出力リソースの作成  <br /></td></tr>
 <tr class="separator:aca73455bd632277bf5cc476313c83217 inherit pro_methods_classIPostEffect"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a24dc91bcc9a78de583975643f3cd665e inherit pro_methods_classIPostEffect" id="r_a24dc91bcc9a78de583975643f3cd665e"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIPostEffect.html#a24dc91bcc9a78de583975643f3cd665e">BuildPresetPath</a> (const std::string &amp;_presetName) const</td></tr>
+<tr class="memdesc:a24dc91bcc9a78de583975643f3cd665e inherit pro_methods_classIPostEffect"><td class="mdescLeft">&#160;</td><td class="mdescRight">プリセットファイルのパスを組み立てる  <br /></td></tr>
+<tr class="separator:a24dc91bcc9a78de583975643f3cd665e inherit pro_methods_classIPostEffect"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a94d3218097299c47f54a9bffc82ac52b inherit pro_methods_classIPostEffect" id="r_a94d3218097299c47f54a9bffc82ac52b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIPostEffect.html#a94d3218097299c47f54a9bffc82ac52b">LoadKeyframeFile</a> (const std::string &amp;_presetName, nlohmann::json &amp;_outRaw, std::vector&lt; std::string &gt; &amp;_outOrder) const</td></tr>
+<tr class="memdesc:a94d3218097299c47f54a9bffc82ac52b inherit pro_methods_classIPostEffect"><td class="mdescLeft">&#160;</td><td class="mdescRight">キーフレームファイルを読み込む  <br /></td></tr>
+<tr class="separator:a94d3218097299c47f54a9bffc82ac52b inherit pro_methods_classIPostEffect"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a946fc21c0a8d4ed670aa7a2069b94e7f inherit pro_methods_classIPostEffect" id="r_a946fc21c0a8d4ed670aa7a2069b94e7f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIPostEffect.html#a946fc21c0a8d4ed670aa7a2069b94e7f">SaveKeyframeFile</a> (const std::string &amp;_presetName, const nlohmann::json &amp;_keyframesObject, const std::vector&lt; std::string &gt; &amp;_order) const</td></tr>
+<tr class="memdesc:a946fc21c0a8d4ed670aa7a2069b94e7f inherit pro_methods_classIPostEffect"><td class="mdescLeft">&#160;</td><td class="mdescRight">キーフレームファイルを保存する  <br /></td></tr>
+<tr class="separator:a946fc21c0a8d4ed670aa7a2069b94e7f inherit pro_methods_classIPostEffect"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
 その他の継承メンバ</h2></td></tr>
+<tr class="inherit_header pro_static_methods_classIPostEffect"><td colspan="2" onclick="javascript:toggleInherit('pro_static_methods_classIPostEffect')"><img src="closed.png" alt="-"/>&#160;基底クラス <a class="el" href="classIPostEffect.html">IPostEffect</a> に属する継承静的限定公開メンバ関数</td></tr>
+<tr class="memitem:aaf91d7df6bab884140a48035852ec0ef inherit pro_static_methods_classIPostEffect" id="r_aaf91d7df6bab884140a48035852ec0ef"><td class="memItemLeft" align="right" valign="top">static std::pair&lt; size_t, float &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIPostEffect.html#aaf91d7df6bab884140a48035852ec0ef">ResolveKeyframeSegment</a> (float _t, size_t _keyframeCount)</td></tr>
+<tr class="memdesc:aaf91d7df6bab884140a48035852ec0ef inherit pro_static_methods_classIPostEffect"><td class="mdescLeft">&#160;</td><td class="mdescRight">全体の進行度tから、キーフレーム列上の区間indexと区間内での進行度を求める <a class="el" href="classIPostEffect.html#a6646b9d42682d20f9fde8aa44d42a82e" title="アニメーション進行（tは0.0~1.0）">UpdateAnimation()</a>実装で毎回同じロジックが重複しがちな「区間選択」部分だけを切り出した共通処理。 NOTE: 現時点ではまだどのエフェクトからも呼ばれていない（用意のみ）。今後キーフレーム対応のエフェクトを増やす際は、 各UpdateAnimation()内の区間計算をこちらへ寄せていく想定（Vignette::UpdateAnimation()の該当部分が移行対象）。  <br /></td></tr>
+<tr class="separator:aaf91d7df6bab884140a48035852ec0ef inherit pro_static_methods_classIPostEffect"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_classIPostEffect"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classIPostEffect')"><img src="closed.png" alt="-"/>&#160;基底クラス <a class="el" href="classIPostEffect.html">IPostEffect</a> に属する継承限定公開変数類</td></tr>
 <tr class="memitem:ae0dc01028757f721f28df7ba30cdd48e inherit pro_attribs_classIPostEffect" id="r_ae0dc01028757f721f28df7ba30cdd48e"><td class="memItemLeft" align="right" valign="top">const Vector4&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIPostEffect.html#ae0dc01028757f721f28df7ba30cdd48e">CLEAR_COLOR</a> = { 0.2f, 0.2f, 0.2f, 1.0f }</td></tr>
 <tr class="separator:ae0dc01028757f721f28df7ba30cdd48e inherit pro_attribs_classIPostEffect"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -175,6 +203,76 @@ Vignette の継承関係図</div>
 <div class="textblock">
 <p class="definition"> <a class="el" href="Vignette_8hpp_source.html">Vignette.hpp</a> の <a class="el" href="Vignette_8hpp_source.html#l00008">8</a> 行目に定義があります。</p>
 </div><h2 class="groupheader">関数詳解</h2>
+<a id="a6bd2620534004b4405b343636a4da281" name="a6bd2620534004b4405b343636a4da281"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6bd2620534004b4405b343636a4da281">&#9670;&#160;</a></span>ApplyParameters()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Vignette::ApplyParameters </td>
+          <td>(</td>
+          <td class="paramtype">const nlohmann::json &amp;&#160;</td>
+          <td class="paramname"><em>_params</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>JSONで表現されたパラメータを現在の実行時パラメータへ適用する <a class="el" href="classVignette.html#a08bddd306b8aef3ecf6f7f7ec7001aa8" title="現在稼働中のパラメータ値を1キーフレーム分のJSONとして取得 SaveParameters()と異なり、保持中の全キーフレームではなく現在の実行時パラメータのみを返す。">CaptureCurrentParameters()</a>と対になる。 </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_params</td><td>適用するパラメータのJSON表現 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p><a class="el" href="classIPostEffect.html#abefb33f8dbe387893dde26e46ddd5d84">IPostEffect</a>を実装しています。</p>
+
+<p class="definition"> <a class="el" href="Vignette_8cpp_source.html">Vignette.cpp</a> の <a class="el" href="Vignette_8cpp_source.html#l00175">175</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="a08bddd306b8aef3ecf6f7f7ec7001aa8" name="a08bddd306b8aef3ecf6f7f7ec7001aa8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a08bddd306b8aef3ecf6f7f7ec7001aa8">&#9670;&#160;</a></span>CaptureCurrentParameters()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">nlohmann::json Vignette::CaptureCurrentParameters </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>現在稼働中のパラメータ値を1キーフレーム分のJSONとして取得 <a class="el" href="classVignette.html#a5555514987eeec54915583f0c02898f8" title="現在のパラメータをJSONに変換">SaveParameters()</a>と異なり、保持中の全キーフレームではなく現在の実行時パラメータのみを返す。 </p>
+<dl class="section return"><dt>戻り値</dt><dd>現在のパラメータのJSON表現 </dd></dl>
+
+<p><a class="el" href="classIPostEffect.html#abd38faf574c02b14e4338eaef18021e1">IPostEffect</a>を実装しています。</p>
+
+<p class="definition"> <a class="el" href="Vignette_8cpp_source.html">Vignette.cpp</a> の <a class="el" href="Vignette_8cpp_source.html#l00167">167</a> 行目に定義があります。</p>
+
+</div>
+</div>
 <a id="a738704cd88ac0149b7f5c40aee475d04" name="a738704cd88ac0149b7f5c40aee475d04"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a738704cd88ac0149b7f5c40aee475d04">&#9670;&#160;</a></span>Debug()</h2>
 
@@ -202,7 +300,39 @@ Vignette の継承関係図</div>
 
 <p><a class="el" href="classIPostEffect.html#a3124729a71608533d70a77d8bf268879">IPostEffect</a>を実装しています。</p>
 
-<p class="definition"> <a class="el" href="Vignette_8cpp_source.html">Vignette.cpp</a> の <a class="el" href="Vignette_8cpp_source.html#l00065">65</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Vignette_8cpp_source.html">Vignette.cpp</a> の <a class="el" href="Vignette_8cpp_source.html#l00063">63</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="ad3176edc9ad9464582b6b9b5e72fa7de" name="ad3176edc9ad9464582b6b9b5e72fa7de"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad3176edc9ad9464582b6b9b5e72fa7de">&#9670;&#160;</a></span>GetTypeName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string Vignette::GetTypeName </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>エフェクトタイプ名を取得 Factory登録名・プリセットファイルのパスと一致させる。 </p>
+<dl class="section return"><dt>戻り値</dt><dd>エフェクトタイプ名（例: "Vignette"） </dd></dl>
+
+<p><a class="el" href="classIPostEffect.html#acecc8b652fd30930a74c70607d49cd94">IPostEffect</a>を実装しています。</p>
+
+<p class="definition"> <a class="el" href="Vignette_8hpp_source.html">Vignette.hpp</a> の <a class="el" href="Vignette_8hpp_source.html#l00040">40</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -233,9 +363,9 @@ Vignette の継承関係図</div>
 
 <p><a class="el" href="classIPostEffect.html#a27bb874a8d60dd891aa9a7687e2b9c53">IPostEffect</a>を実装しています。</p>
 
-<p class="definition"> <a class="el" href="Vignette_8cpp_source.html">Vignette.cpp</a> の <a class="el" href="Vignette_8cpp_source.html#l00013">13</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Vignette_8cpp_source.html">Vignette.cpp</a> の <a class="el" href="Vignette_8cpp_source.html#l00011">11</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="IPostEffect_8hpp_source.html#l00015">IPostEffect::adapter_</a>, <a class="el" href="BlendMode_8hpp.html#a30323fa90e24ca484998b9fba6c40e85a002101f8725e5c78d9f30d87f3fa4c87">ALPHA</a>, <a class="el" href="IPostEffect_8hpp_source.html#l00018">IPostEffect::pso_</a>.</p>
+<p class="reference">参照先 <a class="el" href="IPostEffect_8hpp_source.html#l00019">IPostEffect::adapter_</a>, <a class="el" href="BlendMode_8hpp.html#a30323fa90e24ca484998b9fba6c40e85ab50339a10e1de285ac99d4c3990b8693">NONE</a>, <a class="el" href="IPostEffect_8hpp_source.html#l00022">IPostEffect::pso_</a>.</p>
 
 </div>
 </div>
@@ -266,9 +396,9 @@ Vignette の継承関係図</div>
 
 <p><a class="el" href="classIPostEffect.html#a69ac2ac44055c03e456c6ee0dca92adb">IPostEffect</a>を実装しています。</p>
 
-<p class="definition"> <a class="el" href="Vignette_8cpp_source.html">Vignette.cpp</a> の <a class="el" href="Vignette_8cpp_source.html#l00076">76</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Vignette_8cpp_source.html">Vignette.cpp</a> の <a class="el" href="Vignette_8cpp_source.html#l00074">74</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="Input_8hpp_source.html#l00114">name</a>, <a class="el" href="Log_8cpp_source.html#l00108">Log::Send()</a>, <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531ea059e9861e0400dfbe05c98a841f3f96b">Log::WARNING</a>.</p>
+<p class="reference">参照先 <a class="el" href="IPostEffect_8cpp_source.html#l00063">IPostEffect::LoadKeyframeFile()</a>, <a class="el" href="Input_8hpp_source.html#l00114">name</a>, <a class="el" href="Log_8cpp_source.html#l00108">Log::Send()</a>, <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531ea059e9861e0400dfbe05c98a841f3f96b">Log::WARNING</a>.</p>
 
 </div>
 </div>
@@ -297,9 +427,9 @@ Vignette の継承関係図</div>
 
 <p><a class="el" href="classIPostEffect.html#a714a743aff95fad87356f280810dd286">IPostEffect</a>を実装しています。</p>
 
-<p class="definition"> <a class="el" href="Vignette_8cpp_source.html">Vignette.cpp</a> の <a class="el" href="Vignette_8cpp_source.html#l00072">72</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Vignette_8cpp_source.html">Vignette.cpp</a> の <a class="el" href="Vignette_8cpp_source.html#l00070">70</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="IPostEffect_8hpp_source.html#l00015">IPostEffect::adapter_</a>.</p>
+<p class="reference">参照先 <a class="el" href="IPostEffect_8hpp_source.html#l00019">IPostEffect::adapter_</a>.</p>
 
 </div>
 </div>
@@ -331,11 +461,9 @@ Vignette の継承関係図</div>
 
 <p><a class="el" href="classIPostEffect.html#a33e6d8f724d663306c0fe86b83758dcb">IPostEffect</a>を実装しています。</p>
 
-<p class="definition"> <a class="el" href="Vignette_8cpp_source.html">Vignette.cpp</a> の <a class="el" href="Vignette_8cpp_source.html#l00177">177</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Vignette_8cpp_source.html">Vignette.cpp</a> の <a class="el" href="Vignette_8cpp_source.html#l00156">156</a> 行目に定義があります。</p>
 
 <p class="reference">参照先 <a class="el" href="Input_8hpp_source.html#l00114">name</a>.</p>
-
-<p class="reference">参照元 <a class="el" href="Vignette_8cpp_source.html#l00159">SavePreset()</a>.</p>
 
 </div>
 </div>
@@ -373,9 +501,9 @@ Vignette の継承関係図</div>
 
 <p><a class="el" href="classIPostEffect.html#a263ae7d55f311c0fbc3fc0af5db4675e">IPostEffect</a>を実装しています。</p>
 
-<p class="definition"> <a class="el" href="Vignette_8cpp_source.html">Vignette.cpp</a> の <a class="el" href="Vignette_8cpp_source.html#l00159">159</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Vignette_8cpp_source.html">Vignette.cpp</a> の <a class="el" href="Vignette_8cpp_source.html#l00145">145</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::ERR</a>, <a class="el" href="Vignette_8cpp_source.html#l00177">SaveParameters()</a>, <a class="el" href="Log_8cpp_source.html#l00108">Log::Send()</a>.</p>
+<p class="reference">参照先 <a class="el" href="Input_8hpp_source.html#l00114">name</a>, <a class="el" href="IPostEffect_8cpp_source.html#l00113">IPostEffect::SaveKeyframeFile()</a>.</p>
 
 </div>
 </div>
@@ -413,7 +541,7 @@ Vignette の継承関係図</div>
 
 <p><a class="el" href="classIPostEffect.html#a6646b9d42682d20f9fde8aa44d42a82e">IPostEffect</a>を実装しています。</p>
 
-<p class="definition"> <a class="el" href="Vignette_8cpp_source.html">Vignette.cpp</a> の <a class="el" href="Vignette_8cpp_source.html#l00126">126</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Vignette_8cpp_source.html">Vignette.cpp</a> の <a class="el" href="Vignette_8cpp_source.html#l00108">108</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -427,7 +555,7 @@ Vignette の継承関係図</div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classVignette.html">Vignette</a></li>
-    <li class="footer">2026年09月04日(金) 07時22分07秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年09月07日(月) 03時45分00秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

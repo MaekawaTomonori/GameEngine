@@ -8,10 +8,10 @@ var classModelCommon =
     [ "GetSRVManager", "classModelCommon.html#a33e697baa0ec17fc95e1f952c04f57ca", null ],
     [ "Initialize", "classModelCommon.html#a44949376048a801f3a992f7370bdf846", null ],
     [ "RegisterShadowDraw", "classModelCommon.html#aefc8fca9de728eb26947da3e90c8f718", null ],
-    [ "RegisterSkinningDraw", "classModelCommon.html#a4ad4834071e28461b02f11a0034ab960", null ],
-    [ "RegisterSkinningTransparentDraw", "classModelCommon.html#a06a5197d8fd19146306c11bd48b87d69", null ],
-    [ "RegisterStaticDraw", "classModelCommon.html#a62676bc803883466bb245d434668d06f", null ],
-    [ "RegisterStaticTransparentDraw", "classModelCommon.html#ae9c7ea072bc48e694b6384877718b5d2", null ],
+    [ "RegisterSkinningDraw", "classModelCommon.html#a35ef3ee491255683522839180556c5e1", null ],
+    [ "RegisterSkinningTransparentDraw", "classModelCommon.html#ac4d29a0f5b2947fd111df5d12cb6e324", null ],
+    [ "RegisterStaticDraw", "classModelCommon.html#a3339c4e3b8600a5fcbd55f867d436203", null ],
+    [ "RegisterStaticTransparentDraw", "classModelCommon.html#abbd9b6964536ebe64b3a8045483d87b9", null ],
     [ "SetShadowBinding", "classModelCommon.html#a616882a8ecd8c3fb0d8774111c732f5b", null ],
     [ "UnregisterShadowDraw", "classModelCommon.html#abb8f719d3e5c3e7a03944b07a63c1df1", null ]
 ];

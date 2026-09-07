@@ -1,6 +1,5 @@
 var hierarchy =
 [
-    [ "AbstractPostEffectFactory", "classAbstractPostEffectFactory.html", null ],
     [ "AbstractSceneFactory", "classAbstractSceneFactory.html", null ],
     [ "Animation", "structAnimation.html", null ],
     [ "AnimationCurve< T >", "structAnimationCurve.html", null ],
@@ -12,7 +11,10 @@ var hierarchy =
     [ "CameraDirector", "classCameraDirector.html", null ],
     [ "CameraForGpu", "structCameraForGpu.html", null ],
     [ "CameraRepository", "classCameraRepository.html", null ],
+    [ "Canvas", "classCanvas.html", null ],
     [ "Ui::Canvas", "classUi_1_1Canvas.html", null ],
+    [ "CanvasLayer", "classCanvasLayer.html", null ],
+    [ "CanvasLayerEditor", "classCanvasLayerEditor.html", null ],
     [ "CollisionManager", "classCollisionManager.html", null ],
     [ "Common", "classCommon.html", [
       [ "LineCommon", "classLineCommon.html", null ],
@@ -32,6 +34,7 @@ var hierarchy =
     [ "DirectionalLight", "structDirectionalLight.html", null ],
     [ "DirectXAdapter", "classDirectXAdapter.html", null ],
     [ "DX12Resource", "classDX12Resource.html", null ],
+    [ "PostEffectChain::EffectData", "structPostEffectChain_1_1EffectData.html", null ],
     [ "Ui::Element", "classUi_1_1Element.html", [
       [ "Ui::SpriteElement", "classUi_1_1SpriteElement.html", null ],
       [ "Ui::TextElement", "classUi_1_1TextElement.html", null ]
@@ -83,7 +86,6 @@ var hierarchy =
     [ "Log::LogEntry", "structLog_1_1LogEntry.html", null ],
     [ "Ui::Manager", "classUi_1_1Manager.html", null ],
     [ "Material", "structMaterial.html", null ],
-    [ "PostProcessExecutor::Work::Member", "structPostProcessExecutor_1_1Work_1_1Member.html", null ],
     [ "Mesh", "classMesh.html", null ],
     [ "MeshData", "structMeshData.html", null ],
     [ "MeshRepository", "classMeshRepository.html", null ],
@@ -100,6 +102,8 @@ var hierarchy =
     [ "PlaneTextureLayer", "structPlaneTextureLayer.html", null ],
     [ "PlaneTextureLayoutEditor", "classPlaneTextureLayoutEditor.html", null ],
     [ "PointLight", "structPointLight.html", null ],
+    [ "PostEffectChain", "classPostEffectChain.html", null ],
+    [ "PostEffectFactory", "classPostEffectFactory.html", null ],
     [ "PostProcessExecutor", "classPostProcessExecutor.html", null ],
     [ "PostProcessPresetEditor", "classPostProcessPresetEditor.html", null ],
     [ "PostProcessPresetEditor::PresetData", "structPostProcessPresetEditor_1_1PresetData.html", null ],

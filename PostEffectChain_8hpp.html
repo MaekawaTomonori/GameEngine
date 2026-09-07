@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>PortfolioGame Engine: メンバ一覧</title>
+<title>PortfolioGame Engine: /home/runner/work/GameEngine/GameEngine/src/PostProcess/Chain/PostEffectChain.hpp ファイル</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -64,7 +64,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('structPostProcessExecutor_1_1Work_1_1Member.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('PostEffectChain_8hpp.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -90,21 +90,39 @@ $(document).ready(function(){initNavTree('structPostProcessExecutor_1_1Work_1_1M
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">PostProcessExecutor::Work::Member メンバ一覧</div></div>
+  <div class="summary">
+<a href="#nested-classes">クラス</a>  </div>
+  <div class="headertitle"><div class="title">PostEffectChain.hpp ファイル</div></div>
 </div><!--header-->
 <div class="contents">
-
-<p>継承メンバを含む <a class="el" href="structPostProcessExecutor_1_1Work_1_1Member.html">PostProcessExecutor::Work::Member</a> の全メンバ一覧です。</p>
-<table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="structPostProcessExecutor_1_1Work_1_1Member.html#aba8279f523ae74f6aa603b059c842f3c">autoCreate</a></td><td class="entry"><a class="el" href="structPostProcessExecutor_1_1Work_1_1Member.html">PostProcessExecutor::Work::Member</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="structPostProcessExecutor_1_1Work_1_1Member.html#acc33a172ea23a41936739c3b8a606996">name</a></td><td class="entry"><a class="el" href="structPostProcessExecutor_1_1Work_1_1Member.html">PostProcessExecutor::Work::Member</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="structPostProcessExecutor_1_1Work_1_1Member.html#a92b3ec37afbd6f3dc75256cb5aeb0ff3">type</a></td><td class="entry"><a class="el" href="structPostProcessExecutor_1_1Work_1_1Member.html">PostProcessExecutor::Work::Member</a></td><td class="entry"></td></tr>
-</table></div><!-- contents -->
+<div class="textblock"><code>#include &lt;memory&gt;</code><br />
+<code>#include &lt;string&gt;</code><br />
+<code>#include &lt;vector&gt;</code><br />
+<code>#include &lt;d3d12.h&gt;</code><br />
+<code>#include &quot;ReferencePtr.hpp&quot;</code><br />
+<code>#include &quot;<a class="el" href="PipelineStateObject_8hpp_source.html">src/DirectX/GraphicsPipeline/Object/PipelineStateObject.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="SRVManager_8h_source.html">src/DirectX/Heap/SRVManager.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="IPostEffect_8hpp_source.html">src/PostProcess/IPostEffect.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="DX12Resource_8hpp_source.html">src/DirectX/Resource/DX12Resource.hpp</a>&quot;</code><br />
+</div>
+<p><a href="PostEffectChain_8hpp_source.html">[ソースコード]</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+クラス</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPostEffectChain.html">PostEffectChain</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">常時構成のPostEffectチェーンを1枚のRTに適用するクラス Canvas1つにつき1つ持つ想定。ワンショット演出（一時エフェクト）は持たない。  <a href="classPostEffectChain.html#details">[詳解]</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structPostEffectChain_1_1EffectData.html">PostEffectChain::EffectData</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">常時構成エフェクト。型ごとに最大1個  <a href="structPostEffectChain_1_1EffectData.html#details">[詳解]</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+</div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">2026年09月04日(金) 07時22分07秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_0aad7dfa151619e6dfb72b346155edbe.html">PostProcess</a></li><li class="navelem"><a class="el" href="dir_26fa46f460e81050d551bc50026764c6.html">Chain</a></li><li class="navelem"><a class="el" href="PostEffectChain_8hpp.html">PostEffectChain.hpp</a></li>
+    <li class="footer">2026年09月07日(月) 03時45分00秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

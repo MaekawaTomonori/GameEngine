@@ -102,37 +102,66 @@ $(document).ready(function(){initNavTree('classPostProcessExecutor.html',''); in
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 公開メンバ関数</h2></td></tr>
-<tr class="memitem:ad97a026ca101640cf06810bfbdf46431" id="r_ad97a026ca101640cf06810bfbdf46431"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPostProcessExecutor.html#ad97a026ca101640cf06810bfbdf46431">Initialize</a> (const GESTD::ReferencePtr&lt; <a class="el" href="classDirectXAdapter.html">DirectXAdapter</a> &gt; &amp;_adapter, const GESTD::ReferencePtr&lt; <a class="el" href="classSRVManager.html">SRVManager</a> &gt; &amp;_srv, const GESTD::ReferencePtr&lt; <a class="el" href="classDebugUI.html">DebugUI</a> &gt; &amp;_debug)</td></tr>
-<tr class="memdesc:ad97a026ca101640cf06810bfbdf46431"><td class="mdescLeft">&#160;</td><td class="mdescRight">初期化 &lt;param name=_adapter"&gt;DirectX adapter&lt;/param&gt;
-&lt;param name=_srv"&gt;SRV manager&lt;param name=_debug"&gt;Debug UI <br /></td></tr>
-<tr class="separator:ad97a026ca101640cf06810bfbdf46431"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a690d2db7b8e679f0eb12d82c730179e0" id="r_a690d2db7b8e679f0eb12d82c730179e0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPostProcessExecutor.html#a690d2db7b8e679f0eb12d82c730179e0">SetFactory</a> (GESTD::ReferencePtr&lt; <a class="el" href="classAbstractPostEffectFactory.html">AbstractPostEffectFactory</a> &gt; _factory)</td></tr>
-<tr class="memdesc:a690d2db7b8e679f0eb12d82c730179e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">PostEffect factory を設定  <br /></td></tr>
-<tr class="separator:a690d2db7b8e679f0eb12d82c730179e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a20e592ca2994b9091bc005b4f4102f5f" id="r_a20e592ca2994b9091bc005b4f4102f5f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPostProcessExecutor.html#a20e592ca2994b9091bc005b4f4102f5f">Add</a> (std::unique_ptr&lt; <a class="el" href="classIPostEffect.html">IPostEffect</a> &gt; _effect, const std::string &amp;_name=&quot;NoName&quot;)</td></tr>
-<tr class="memdesc:a20e592ca2994b9091bc005b4f4102f5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">エフェクトを追加  <br /></td></tr>
-<tr class="separator:a20e592ca2994b9091bc005b4f4102f5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a76bdc95372e84d8393cbafea7b7df8a7" id="r_a76bdc95372e84d8393cbafea7b7df8a7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPostProcessExecutor.html#a76bdc95372e84d8393cbafea7b7df8a7">BeginFrame</a> () const</td></tr>
-<tr class="memdesc:a76bdc95372e84d8393cbafea7b7df8a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">フレーム開始時の描画準備  <br /></td></tr>
-<tr class="separator:a76bdc95372e84d8393cbafea7b7df8a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5394827a0c5c97483fe957138d3c5d6c" id="r_a5394827a0c5c97483fe957138d3c5d6c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPostProcessExecutor.html#a5394827a0c5c97483fe957138d3c5d6c">EndFrame</a> () const</td></tr>
-<tr class="memdesc:a5394827a0c5c97483fe957138d3c5d6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">フレーム終了時のクリーンアップ  <br /></td></tr>
-<tr class="separator:a5394827a0c5c97483fe957138d3c5d6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8322f922ebe3f1444ee573ab3960d76d" id="r_a8322f922ebe3f1444ee573ab3960d76d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPostProcessExecutor.html#a8322f922ebe3f1444ee573ab3960d76d">Execute</a> ()</td></tr>
-<tr class="memdesc:a8322f922ebe3f1444ee573ab3960d76d"><td class="mdescLeft">&#160;</td><td class="mdescRight">エフェクトを実行  <br /></td></tr>
-<tr class="separator:a8322f922ebe3f1444ee573ab3960d76d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa6839693394022492abf153b3f8d75d8" id="r_aa6839693394022492abf153b3f8d75d8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPostProcessExecutor.html#aa6839693394022492abf153b3f8d75d8">Initialize</a> (const GESTD::ReferencePtr&lt; <a class="el" href="classDirectXAdapter.html">DirectXAdapter</a> &gt; &amp;_adapter, const GESTD::ReferencePtr&lt; <a class="el" href="classSRVManager.html">SRVManager</a> &gt; &amp;_srv, const GESTD::ReferencePtr&lt; <a class="el" href="classDebugUI.html">DebugUI</a> &gt; &amp;_debug, const std::string &amp;_name)</td></tr>
+<tr class="memdesc:aa6839693394022492abf153b3f8d75d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">初期化  <br /></td></tr>
+<tr class="separator:aa6839693394022492abf153b3f8d75d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa6c597c54639293921d27e93025174ba" id="r_aa6c597c54639293921d27e93025174ba"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPostProcessExecutor.html#aa6c597c54639293921d27e93025174ba">SetFactory</a> (GESTD::ReferencePtr&lt; <a class="el" href="classPostEffectFactory.html">PostEffectFactory</a> &gt; _factory)</td></tr>
+<tr class="memdesc:aa6c597c54639293921d27e93025174ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">PostEffect factory を設定  <br /></td></tr>
+<tr class="separator:aa6c597c54639293921d27e93025174ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adebe320ab2f4cf1b4c12c681b1cefd22" id="r_adebe320ab2f4cf1b4c12c681b1cefd22"><td class="memItemLeft" align="right" valign="top">GESTD::ReferencePtr&lt; <a class="el" href="classPostEffectFactory.html">PostEffectFactory</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPostProcessExecutor.html#adebe320ab2f4cf1b4c12c681b1cefd22">GetFactory</a> () const</td></tr>
+<tr class="memdesc:adebe320ab2f4cf1b4c12c681b1cefd22"><td class="mdescLeft">&#160;</td><td class="mdescRight">PostEffect factory を取得  <br /></td></tr>
+<tr class="separator:adebe320ab2f4cf1b4c12c681b1cefd22"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b712b928efe74d86bc2d7b394755c5f" id="r_a1b712b928efe74d86bc2d7b394755c5f"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPostProcessExecutor.html#a1b712b928efe74d86bc2d7b394755c5f">GetName</a> () const</td></tr>
+<tr class="memdesc:a1b712b928efe74d86bc2d7b394755c5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Canvas名を取得  <br /></td></tr>
+<tr class="separator:a1b712b928efe74d86bc2d7b394755c5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73be370676bc6b123f4fb3d2cb2a9df2" id="r_a73be370676bc6b123f4fb3d2cb2a9df2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classPostEffectChain.html">PostEffectChain</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPostProcessExecutor.html#a73be370676bc6b123f4fb3d2cb2a9df2">GetOverlayChain</a> () const</td></tr>
+<tr class="memdesc:a73be370676bc6b123f4fb3d2cb2a9df2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overlay（合成後の画面に適用する常時構成チェーン）を取得。Canvas Editorからの編集用  <br /></td></tr>
+<tr class="separator:a73be370676bc6b123f4fb3d2cb2a9df2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a37c5cb8ebf829061b2280b8188094cfd" id="r_a37c5cb8ebf829061b2280b8188094cfd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPostProcessExecutor.html#a37c5cb8ebf829061b2280b8188094cfd">LoadPermanentConfig</a> ()</td></tr>
+<tr class="memdesc:a37c5cb8ebf829061b2280b8188094cfd"><td class="mdescLeft">&#160;</td><td class="mdescRight">常時構成（型＋baseParameters）を"./Assets/Data/PostEffect/Canvases/&lt;Canvas名&gt;.json"から読み込む  <br /></td></tr>
+<tr class="separator:a37c5cb8ebf829061b2280b8188094cfd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa1cb992831df1a92fdad75fbddb7608" id="r_aaa1cb992831df1a92fdad75fbddb7608"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPostProcessExecutor.html#aaa1cb992831df1a92fdad75fbddb7608">SavePermanentConfig</a> () const</td></tr>
+<tr class="memdesc:aaa1cb992831df1a92fdad75fbddb7608"><td class="mdescLeft">&#160;</td><td class="mdescRight">常時構成を"./Assets/Data/PostEffect/Canvases/&lt;Canvas名&gt;.json"へ保存する  <br /></td></tr>
+<tr class="separator:aaa1cb992831df1a92fdad75fbddb7608"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adba81681437f7003dafb1b241345a0a7" id="r_adba81681437f7003dafb1b241345a0a7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPostProcessExecutor.html#adba81681437f7003dafb1b241345a0a7">Add</a> (std::unique_ptr&lt; <a class="el" href="classIPostEffect.html">IPostEffect</a> &gt; _effect)</td></tr>
+<tr class="memdesc:adba81681437f7003dafb1b241345a0a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">エフェクトを追加  <br /></td></tr>
+<tr class="separator:adba81681437f7003dafb1b241345a0a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45834ff93188f06fa9d6546a0e064e90" id="r_a45834ff93188f06fa9d6546a0e064e90"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classCanvas.html">Canvas</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPostProcessExecutor.html#a45834ff93188f06fa9d6546a0e064e90">AddCanvas</a> (const std::string &amp;_name)</td></tr>
+<tr class="memdesc:a45834ff93188f06fa9d6546a0e064e90"><td class="mdescLeft">&#160;</td><td class="mdescRight">Canvasを追加する（Z順は自動採番）  <br /></td></tr>
+<tr class="separator:a45834ff93188f06fa9d6546a0e064e90"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2124a32394228f244619d492045bb99" id="r_ad2124a32394228f244619d492045bb99"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classCanvas.html">Canvas</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPostProcessExecutor.html#ad2124a32394228f244619d492045bb99">AddCanvasTop</a> (const std::string &amp;_name)</td></tr>
+<tr class="memdesc:ad2124a32394228f244619d492045bb99"><td class="mdescLeft">&#160;</td><td class="mdescRight">Canvasを最前面グループに追加する  <br /></td></tr>
+<tr class="separator:ad2124a32394228f244619d492045bb99"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a297ec3265c980cc61d95f7e992af2caf" id="r_a297ec3265c980cc61d95f7e992af2caf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPostProcessExecutor.html#a297ec3265c980cc61d95f7e992af2caf">RemoveCanvas</a> (const std::string &amp;_name)</td></tr>
+<tr class="memdesc:a297ec3265c980cc61d95f7e992af2caf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Canvasを削除する  <br /></td></tr>
+<tr class="separator:a297ec3265c980cc61d95f7e992af2caf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab427f5d61cd187fc0d24f6f446a3caa5" id="r_ab427f5d61cd187fc0d24f6f446a3caa5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classCanvas.html">Canvas</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPostProcessExecutor.html#ab427f5d61cd187fc0d24f6f446a3caa5">GetCanvas</a> (const std::string &amp;_name)</td></tr>
+<tr class="memdesc:ab427f5d61cd187fc0d24f6f446a3caa5"><td class="mdescLeft">&#160;</td><td class="mdescRight">名前からCanvasを取得する 該当Canvasが存在しなくても、保存済みの常時構成Json（"./Assets/Data/PostEffect/Canvases/&lt;_name&gt;.json"）が 存在する場合は自動でCanvasを生成し、その設定を読み込んだ上で返す  <br /></td></tr>
+<tr class="separator:ab427f5d61cd187fc0d24f6f446a3caa5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0f9ae729876b4d20a338e4df847133e" id="r_ad0f9ae729876b4d20a338e4df847133e"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::pair&lt; <a class="el" href="classCanvasLayer.html#a1eb0c321c7e4d378c533a6e4acb32958">CanvasLayer::ZOrder</a>, <a class="el" href="classCanvas.html">Canvas</a> * &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPostProcessExecutor.html#ad0f9ae729876b4d20a338e4df847133e">GetCanvases</a> () const</td></tr>
+<tr class="memdesc:ad0f9ae729876b4d20a338e4df847133e"><td class="mdescLeft">&#160;</td><td class="mdescRight">全Canvasを Z順（昇順）で取得する（Editor等の一覧表示用）  <br /></td></tr>
+<tr class="separator:ad0f9ae729876b4d20a338e4df847133e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0fa2751398547179ac46cf2d9cd9a26b" id="r_a0fa2751398547179ac46cf2d9cd9a26b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPostProcessExecutor.html#a0fa2751398547179ac46cf2d9cd9a26b">DrawObjects</a> ()</td></tr>
+<tr class="memdesc:a0fa2751398547179ac46cf2d9cd9a26b"><td class="mdescLeft">&#160;</td><td class="mdescRight">各Canvasが自分のタスクキューを消化し、自分のRTへ描画する  <br /></td></tr>
+<tr class="separator:a0fa2751398547179ac46cf2d9cd9a26b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1885d97982b8a130565427fe93f7228c" id="r_a1885d97982b8a130565427fe93f7228c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPostProcessExecutor.html#a1885d97982b8a130565427fe93f7228c">ApplyPostEffects</a> ()</td></tr>
+<tr class="memdesc:a1885d97982b8a130565427fe93f7228c"><td class="mdescLeft">&#160;</td><td class="mdescRight">各Canvasの常時構成PostEffectを適用する  <br /></td></tr>
+<tr class="separator:a1885d97982b8a130565427fe93f7228c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4859f3547294324474b4a5378ad95bb" id="r_ab4859f3547294324474b4a5378ad95bb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPostProcessExecutor.html#ab4859f3547294324474b4a5378ad95bb">DrawCanvases</a> ()</td></tr>
+<tr class="memdesc:ab4859f3547294324474b4a5378ad95bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Canvasを合成し、ワンショット演出を適用する（自分のRTへ描画するだけで、スワップチェーンへはまだ描かない）  <br /></td></tr>
+<tr class="separator:ab4859f3547294324474b4a5378ad95bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac9fc2402efe9f6791365982dfaefacea" id="r_ac9fc2402efe9f6791365982dfaefacea"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPostProcessExecutor.html#ac9fc2402efe9f6791365982dfaefacea">Draw</a> () const</td></tr>
-<tr class="memdesc:ac9fc2402efe9f6791365982dfaefacea"><td class="mdescLeft">&#160;</td><td class="mdescRight">エフェクト結果を描画  <br /></td></tr>
+<tr class="memdesc:ac9fc2402efe9f6791365982dfaefacea"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classPostProcessExecutor.html#ab4859f3547294324474b4a5378ad95bb" title="Canvasを合成し、ワンショット演出を適用する（自分のRTへ描画するだけで、スワップチェーンへはまだ描かない）">DrawCanvases()</a>の最終結果を、現在バインドされている描画先（通常はスワップチェーン）へ描画する  <br /></td></tr>
 <tr class="separator:ac9fc2402efe9f6791365982dfaefacea"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a59b510e45f46ad87308269fbc36836e1" id="r_a59b510e45f46ad87308269fbc36836e1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPostProcessExecutor.html#a59b510e45f46ad87308269fbc36836e1">SetActive</a> (const std::string &amp;_name, bool _enable)</td></tr>
-<tr class="memdesc:a59b510e45f46ad87308269fbc36836e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">エフェクトの有効/無効を切り替える  <br /></td></tr>
-<tr class="separator:a59b510e45f46ad87308269fbc36836e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af16c0a5609a299068c3564c8ab353eae" id="r_af16c0a5609a299068c3564c8ab353eae"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPostProcessExecutor.html#af16c0a5609a299068c3564c8ab353eae">SetActive</a> (const std::string &amp;_type, bool _enable)</td></tr>
+<tr class="memdesc:af16c0a5609a299068c3564c8ab353eae"><td class="mdescLeft">&#160;</td><td class="mdescRight">エフェクトの有効/無効を切り替える  <br /></td></tr>
+<tr class="separator:af16c0a5609a299068c3564c8ab353eae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1b5dd858bf7d3e3ca2140dde7385668c" id="r_a1b5dd858bf7d3e3ca2140dde7385668c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPostProcessExecutor.html#a1b5dd858bf7d3e3ca2140dde7385668c">Debug</a> ()</td></tr>
 <tr class="memdesc:a1b5dd858bf7d3e3ca2140dde7385668c"><td class="mdescLeft">&#160;</td><td class="mdescRight">デバッグ UI を表示  <br /></td></tr>
 <tr class="separator:a1b5dd858bf7d3e3ca2140dde7385668c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4ba24e1b6a7f501df50d1a8003db1f09" id="r_a4ba24e1b6a7f501df50d1a8003db1f09"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPostProcessExecutor.html#a4ba24e1b6a7f501df50d1a8003db1f09">ApplyPreset</a> (const std::string &amp;_presetName, const std::string &amp;_mode=&quot;replace&quot;, const std::vector&lt; std::string &gt; &amp;_ignoreList={}, std::function&lt; void()&gt; _onComplete=nullptr)</td></tr>
-<tr class="memdesc:a4ba24e1b6a7f501df50d1a8003db1f09"><td class="mdescLeft">&#160;</td><td class="mdescRight">preset を適用する  <br /></td></tr>
-<tr class="separator:a4ba24e1b6a7f501df50d1a8003db1f09"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a83737ebdd569cdc994d513fc9e084fd7" id="r_a83737ebdd569cdc994d513fc9e084fd7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPostProcessExecutor.html#a83737ebdd569cdc994d513fc9e084fd7">ApplyPreset</a> (const std::string &amp;_presetName, std::function&lt; void()&gt; _onComplete=nullptr)</td></tr>
+<tr class="memdesc:a83737ebdd569cdc994d513fc9e084fd7"><td class="mdescLeft">&#160;</td><td class="mdescRight">preset を適用する 対象エフェクトは一時インスタンスとして生成され、再生完了後に破棄される  <br /></td></tr>
+<tr class="separator:a83737ebdd569cdc994d513fc9e084fd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a686899b0de87f0c418363b9b19e474d3" id="r_a686899b0de87f0c418363b9b19e474d3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPostProcessExecutor.html#a686899b0de87f0c418363b9b19e474d3">Update</a> (float _deltaTime)</td></tr>
 <tr class="memdesc:a686899b0de87f0c418363b9b19e474d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">アニメーションを更新  <br /></td></tr>
 <tr class="separator:a686899b0de87f0c418363b9b19e474d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -142,9 +171,21 @@ $(document).ready(function(){initNavTree('classPostProcessExecutor.html',''); in
 <tr class="memitem:aa21de519d6c5cd112023a0dd60dce0f0" id="r_aa21de519d6c5cd112023a0dd60dce0f0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPostProcessExecutor.html#aa21de519d6c5cd112023a0dd60dce0f0">OpenPresetEditor</a> (const std::string &amp;_presetName=&quot;&quot;)</td></tr>
 <tr class="memdesc:aa21de519d6c5cd112023a0dd60dce0f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">preset editor を開く  <br /></td></tr>
 <tr class="separator:aa21de519d6c5cd112023a0dd60dce0f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab44e68997e32b5c93fe38309dcf7158f" id="r_ab44e68997e32b5c93fe38309dcf7158f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classIPostEffect.html">IPostEffect</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPostProcessExecutor.html#ab44e68997e32b5c93fe38309dcf7158f">FindOrCreate</a> (const std::string &amp;_type, const std::string &amp;_name, bool _create)</td></tr>
-<tr class="memdesc:ab44e68997e32b5c93fe38309dcf7158f"><td class="mdescLeft">&#160;</td><td class="mdescRight">エフェクトを検索し、必要なら生成する  <br /></td></tr>
-<tr class="separator:ab44e68997e32b5c93fe38309dcf7158f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af045cdba8d14eb321f02fa16c5b5343a" id="r_af045cdba8d14eb321f02fa16c5b5343a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPostProcessExecutor.html#af045cdba8d14eb321f02fa16c5b5343a">OpenCanvasEditor</a> ()</td></tr>
+<tr class="memdesc:af045cdba8d14eb321f02fa16c5b5343a"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classCanvas.html" title="描画先1枚（RTとタスクキュー）を表すクラス 常時構成のPostEffectは内部の PostEffectChain が担う。 ワンショット演出は持たない（合成後の画面にのみかける）。">Canvas</a> Editor を開く  <br /></td></tr>
+<tr class="separator:af045cdba8d14eb321f02fa16c5b5343a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:accf3ba8dc0a84e496c45fd61b442315f" id="r_accf3ba8dc0a84e496c45fd61b442315f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classIPostEffect.html">IPostEffect</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPostProcessExecutor.html#accf3ba8dc0a84e496c45fd61b442315f">Create</a> (const std::string &amp;_type)</td></tr>
+<tr class="memdesc:accf3ba8dc0a84e496c45fd61b442315f"><td class="mdescLeft">&#160;</td><td class="mdescRight">常時構成のエフェクトを取得する。無ければ生成する  <br /></td></tr>
+<tr class="separator:accf3ba8dc0a84e496c45fd61b442315f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aefd4ad229cb3569ad896cece62f313ff" id="r_aefd4ad229cb3569ad896cece62f313ff"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPostProcessExecutor.html#aefd4ad229cb3569ad896cece62f313ff">CreateTemporary</a> (const std::string &amp;_type)</td></tr>
+<tr class="memdesc:aefd4ad229cb3569ad896cece62f313ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">ワンショット演出用の一時エフェクトを生成する  <br /></td></tr>
+<tr class="separator:aefd4ad229cb3569ad896cece62f313ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad81aea5697947ac9e41b4e9f141b8886" id="r_ad81aea5697947ac9e41b4e9f141b8886"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classIPostEffect.html">IPostEffect</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPostProcessExecutor.html#ad81aea5697947ac9e41b4e9f141b8886">GetTemporary</a> (uint32_t _id)</td></tr>
+<tr class="memdesc:ad81aea5697947ac9e41b4e9f141b8886"><td class="mdescLeft">&#160;</td><td class="mdescRight">idから一時エフェクトを取得する  <br /></td></tr>
+<tr class="separator:ad81aea5697947ac9e41b4e9f141b8886"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a354facaaa6cec6dbd196e49ad1a2bf60" id="r_a354facaaa6cec6dbd196e49ad1a2bf60"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPostProcessExecutor.html#a354facaaa6cec6dbd196e49ad1a2bf60">RemoveTemporary</a> (uint32_t _id)</td></tr>
+<tr class="memdesc:a354facaaa6cec6dbd196e49ad1a2bf60"><td class="mdescLeft">&#160;</td><td class="mdescRight">一時エフェクトを破棄する  <br /></td></tr>
+<tr class="separator:a354facaaa6cec6dbd196e49ad1a2bf60"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a24d5f96db824fcae4164c856c8cff0e7" id="r_a24d5f96db824fcae4164c856c8cff0e7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPostProcessExecutor.html#a24d5f96db824fcae4164c856c8cff0e7">ResizeRenderTextures</a> ()</td></tr>
 <tr class="memdesc:a24d5f96db824fcae4164c856c8cff0e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">render texture をリサイズする  <br /></td></tr>
 <tr class="separator:a24d5f96db824fcae4164c856c8cff0e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -157,10 +198,10 @@ $(document).ready(function(){initNavTree('classPostProcessExecutor.html',''); in
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">詳解</h2>
 <div class="textblock">
-<p class="definition"> <a class="el" href="PostProcessExecutor_8hpp_source.html">PostProcessExecutor.hpp</a> の <a class="el" href="PostProcessExecutor_8hpp_source.html#l00019">19</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="PostProcessExecutor_8hpp_source.html">PostProcessExecutor.hpp</a> の <a class="el" href="PostProcessExecutor_8hpp_source.html#l00021">21</a> 行目に定義があります。</p>
 </div><h2 class="groupheader">関数詳解</h2>
-<a id="a20e592ca2994b9091bc005b4f4102f5f" name="a20e592ca2994b9091bc005b4f4102f5f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a20e592ca2994b9091bc005b4f4102f5f">&#9670;&#160;</a></span>Add()</h2>
+<a id="adba81681437f7003dafb1b241345a0a7" name="adba81681437f7003dafb1b241345a0a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adba81681437f7003dafb1b241345a0a7">&#9670;&#160;</a></span>Add()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -169,18 +210,8 @@ $(document).ready(function(){initNavTree('classPostProcessExecutor.html',''); in
           <td class="memname">void PostProcessExecutor::Add </td>
           <td>(</td>
           <td class="paramtype">std::unique_ptr&lt; <a class="el" href="classIPostEffect.html">IPostEffect</a> &gt;&#160;</td>
-          <td class="paramname"><em>_effect</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramname"><em>_effect</em></td><td>)</td>
           <td></td>
-          <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>_name</em> = <code>&quot;NoName&quot;</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -189,19 +220,87 @@ $(document).ready(function(){initNavTree('classPostProcessExecutor.html',''); in
 <dl class="params"><dt>引数</dt><dd>
   <table class="params">
     <tr><td class="paramname">_effect</td><td>追加するエフェクト </td></tr>
-    <tr><td class="paramname">_name</td><td>エフェクト名 </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition"> <a class="el" href="PostProcessExecutor_8cpp_source.html">PostProcessExecutor.cpp</a> の <a class="el" href="PostProcessExecutor_8cpp_source.html#l00088">88</a> 行目に定義があります。</p>
-
-<p class="reference">参照先 <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::ERR</a>, <a class="el" href="Log_8cpp_source.html#l00108">Log::Send()</a>.</p>
+<p class="definition"> <a class="el" href="PostProcessExecutor_8cpp_source.html">PostProcessExecutor.cpp</a> の <a class="el" href="PostProcessExecutor_8cpp_source.html#l00073">73</a> 行目に定義があります。</p>
 
 </div>
 </div>
-<a id="a4ba24e1b6a7f501df50d1a8003db1f09" name="a4ba24e1b6a7f501df50d1a8003db1f09"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4ba24e1b6a7f501df50d1a8003db1f09">&#9670;&#160;</a></span>ApplyPreset()</h2>
+<a id="a45834ff93188f06fa9d6546a0e064e90" name="a45834ff93188f06fa9d6546a0e064e90"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a45834ff93188f06fa9d6546a0e064e90">&#9670;&#160;</a></span>AddCanvas()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classCanvas.html">Canvas</a> * PostProcessExecutor::AddCanvas </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>_name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Canvasを追加する（Z順は自動採番） </p>
+
+<p class="definition"> <a class="el" href="PostProcessExecutor_8cpp_source.html">PostProcessExecutor.cpp</a> の <a class="el" href="PostProcessExecutor_8cpp_source.html#l00077">77</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="CanvasLayer_8cpp_source.html#l00018">CanvasLayer::AddCanvas()</a>.</p>
+
+</div>
+</div>
+<a id="ad2124a32394228f244619d492045bb99" name="ad2124a32394228f244619d492045bb99"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad2124a32394228f244619d492045bb99">&#9670;&#160;</a></span>AddCanvasTop()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classCanvas.html">Canvas</a> * PostProcessExecutor::AddCanvasTop </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>_name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Canvasを最前面グループに追加する </p>
+
+<p class="definition"> <a class="el" href="PostProcessExecutor_8cpp_source.html">PostProcessExecutor.cpp</a> の <a class="el" href="PostProcessExecutor_8cpp_source.html#l00081">81</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="CanvasLayer_8cpp_source.html#l00043">CanvasLayer::AddCanvasTop()</a>.</p>
+
+</div>
+</div>
+<a id="a1885d97982b8a130565427fe93f7228c" name="a1885d97982b8a130565427fe93f7228c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1885d97982b8a130565427fe93f7228c">&#9670;&#160;</a></span>ApplyPostEffects()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void PostProcessExecutor::ApplyPostEffects </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>各Canvasの常時構成PostEffectを適用する </p>
+
+<p class="definition"> <a class="el" href="PostProcessExecutor_8cpp_source.html">PostProcessExecutor.cpp</a> の <a class="el" href="PostProcessExecutor_8cpp_source.html#l00115">115</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="CanvasLayer_8cpp_source.html#l00100">CanvasLayer::ApplyPostEffects()</a>.</p>
+
+</div>
+</div>
+<a id="a83737ebdd569cdc994d513fc9e084fd7" name="a83737ebdd569cdc994d513fc9e084fd7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a83737ebdd569cdc994d513fc9e084fd7">&#9670;&#160;</a></span>ApplyPreset()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -211,18 +310,6 @@ $(document).ready(function(){initNavTree('classPostProcessExecutor.html',''); in
           <td>(</td>
           <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>_presetName</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>_mode</em> = <code>&quot;replace&quot;</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::vector&lt; std::string &gt; &amp;&#160;</td>
-          <td class="paramname"><em>_ignoreList</em> = <code>{}</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -238,43 +325,80 @@ $(document).ready(function(){initNavTree('classPostProcessExecutor.html',''); in
       </table>
 </div><div class="memdoc">
 
-<p>preset を適用する </p>
+<p>preset を適用する 対象エフェクトは一時インスタンスとして生成され、再生完了後に破棄される </p>
 <dl class="params"><dt>引数</dt><dd>
   <table class="params">
     <tr><td class="paramname">_presetName</td><td>preset 名 </td></tr>
-    <tr><td class="paramname">_mode</td><td>"add" または "replace" </td></tr>
-    <tr><td class="paramname">_ignoreList</td><td>無視する effect 名 </td></tr>
     <tr><td class="paramname">_onComplete</td><td>完了時コールバック </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition"> <a class="el" href="PostProcessExecutor_8cpp_source.html">PostProcessExecutor.cpp</a> の <a class="el" href="PostProcessExecutor_8cpp_source.html#l00401">401</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="PostProcessExecutor_8cpp_source.html">PostProcessExecutor.cpp</a> の <a class="el" href="PostProcessExecutor_8cpp_source.html#l00306">306</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531eaa642a85aab89544a289fb1f29eab689d">Log::DBG</a>, <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::ERR</a>, <a class="el" href="PostProcessExecutor_8cpp_source.html#l00366">FindOrCreate()</a>, <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::INFO</a>, <a class="el" href="classIPostEffect.html#a69ac2ac44055c03e456c6ee0dca92adb">IPostEffect::LoadPreset()</a>, <a class="el" href="Input_8hpp_source.html#l00114">name</a>, <a class="el" href="Log_8cpp_source.html#l00108">Log::Send()</a>, <a class="el" href="PostProcessExecutor_8cpp_source.html#l00161">SetActive()</a>, <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531ea059e9861e0400dfbe05c98a841f3f96b">Log::WARNING</a>.</p>
+<p class="reference">参照先 <a class="el" href="PostProcessExecutor_8cpp_source.html#l00264">CreateTemporary()</a>, <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531eaa642a85aab89544a289fb1f29eab689d">Log::DBG</a>, <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::ERR</a>, <a class="el" href="PostProcessExecutor_8cpp_source.html#l00287">GetTemporary()</a>, <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::INFO</a>, <a class="el" href="classIPostEffect.html#a69ac2ac44055c03e456c6ee0dca92adb">IPostEffect::LoadPreset()</a>, <a class="el" href="PostProcessExecutor_8cpp_source.html#l00296">RemoveTemporary()</a>, <a class="el" href="Log_8cpp_source.html#l00108">Log::Send()</a>, <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531ea059e9861e0400dfbe05c98a841f3f96b">Log::WARNING</a>.</p>
 
 </div>
 </div>
-<a id="a76bdc95372e84d8393cbafea7b7df8a7" name="a76bdc95372e84d8393cbafea7b7df8a7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a76bdc95372e84d8393cbafea7b7df8a7">&#9670;&#160;</a></span>BeginFrame()</h2>
+<a id="accf3ba8dc0a84e496c45fd61b442315f" name="accf3ba8dc0a84e496c45fd61b442315f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#accf3ba8dc0a84e496c45fd61b442315f">&#9670;&#160;</a></span>Create()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void PostProcessExecutor::BeginFrame </td>
+          <td class="memname"><a class="el" href="classIPostEffect.html">IPostEffect</a> * PostProcessExecutor::Create </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>_type</em></td><td>)</td>
+          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>フレーム開始時の描画準備 </p>
+<p>常時構成のエフェクトを取得する。無ければ生成する </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_type</td><td>effect type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>戻り値</dt><dd>effect instance。失敗時は nullptr </dd></dl>
 
-<p class="definition"> <a class="el" href="PostProcessExecutor_8cpp_source.html">PostProcessExecutor.cpp</a> の <a class="el" href="PostProcessExecutor_8cpp_source.html#l00102">102</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="PostProcessExecutor_8cpp_source.html">PostProcessExecutor.cpp</a> の <a class="el" href="PostProcessExecutor_8cpp_source.html#l00260">260</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="aefd4ad229cb3569ad896cece62f313ff" name="aefd4ad229cb3569ad896cece62f313ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aefd4ad229cb3569ad896cece62f313ff">&#9670;&#160;</a></span>CreateTemporary()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t PostProcessExecutor::CreateTemporary </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>_type</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>ワンショット演出用の一時エフェクトを生成する </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_type</td><td>effect type </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>戻り値</dt><dd>生成した一時エフェクトのid。失敗時は0 </dd></dl>
+
+<p class="definition"> <a class="el" href="PostProcessExecutor_8cpp_source.html">PostProcessExecutor.cpp</a> の <a class="el" href="PostProcessExecutor_8cpp_source.html#l00264">264</a> 行目に定義があります。</p>
 
 <p class="reference">参照先 <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::ERR</a>, <a class="el" href="Log_8cpp_source.html#l00108">Log::Send()</a>.</p>
+
+<p class="reference">参照元 <a class="el" href="PostProcessExecutor_8cpp_source.html#l00306">ApplyPreset()</a>.</p>
 
 </div>
 </div>
@@ -295,9 +419,9 @@ $(document).ready(function(){initNavTree('classPostProcessExecutor.html',''); in
 
 <p>デバッグ UI を表示 </p>
 
-<p class="definition"> <a class="el" href="PostProcessExecutor_8cpp_source.html">PostProcessExecutor.cpp</a> の <a class="el" href="PostProcessExecutor_8cpp_source.html#l00175">175</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="PostProcessExecutor_8cpp_source.html">PostProcessExecutor.cpp</a> の <a class="el" href="PostProcessExecutor_8cpp_source.html#l00163">163</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="PostProcessExecutor_8cpp_source.html#l00613">OpenPresetEditor()</a>.</p>
+<p class="reference">参照先 <a class="el" href="PostProcessExecutor_8cpp_source.html#l00481">OpenCanvasEditor()</a>, <a class="el" href="PostProcessExecutor_8cpp_source.html#l00487">OpenPresetEditor()</a>.</p>
 
 </div>
 </div>
@@ -316,22 +440,90 @@ $(document).ready(function(){initNavTree('classPostProcessExecutor.html',''); in
       </table>
 </div><div class="memdoc">
 
-<p>エフェクト結果を描画 </p>
+<p><a class="el" href="classPostProcessExecutor.html#ab4859f3547294324474b4a5378ad95bb" title="Canvasを合成し、ワンショット演出を適用する（自分のRTへ描画するだけで、スワップチェーンへはまだ描かない）">DrawCanvases()</a>の最終結果を、現在バインドされている描画先（通常はスワップチェーン）へ描画する </p>
 
-<p class="definition"> <a class="el" href="PostProcessExecutor_8cpp_source.html">PostProcessExecutor.cpp</a> の <a class="el" href="PostProcessExecutor_8cpp_source.html#l00142">142</a> 行目に定義があります。</p>
-
-<p class="reference">参照先 <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::ERR</a>, <a class="el" href="Log_8cpp_source.html#l00108">Log::Send()</a>.</p>
+<p class="definition"> <a class="el" href="PostProcessExecutor_8cpp_source.html">PostProcessExecutor.cpp</a> の <a class="el" href="PostProcessExecutor_8cpp_source.html#l00138">138</a> 行目に定義があります。</p>
 
 </div>
 </div>
-<a id="a5394827a0c5c97483fe957138d3c5d6c" name="a5394827a0c5c97483fe957138d3c5d6c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5394827a0c5c97483fe957138d3c5d6c">&#9670;&#160;</a></span>EndFrame()</h2>
+<a id="ab4859f3547294324474b4a5378ad95bb" name="ab4859f3547294324474b4a5378ad95bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab4859f3547294324474b4a5378ad95bb">&#9670;&#160;</a></span>DrawCanvases()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void PostProcessExecutor::EndFrame </td>
+          <td class="memname">void PostProcessExecutor::DrawCanvases </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Canvasを合成し、ワンショット演出を適用する（自分のRTへ描画するだけで、スワップチェーンへはまだ描かない） </p>
+
+<p class="definition"> <a class="el" href="PostProcessExecutor_8cpp_source.html">PostProcessExecutor.cpp</a> の <a class="el" href="PostProcessExecutor_8cpp_source.html#l00120">120</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="CanvasLayer_8cpp_source.html#l00108">CanvasLayer::DrawCanvases()</a>.</p>
+
+</div>
+</div>
+<a id="a0fa2751398547179ac46cf2d9cd9a26b" name="a0fa2751398547179ac46cf2d9cd9a26b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0fa2751398547179ac46cf2d9cd9a26b">&#9670;&#160;</a></span>DrawObjects()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void PostProcessExecutor::DrawObjects </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>各Canvasが自分のタスクキューを消化し、自分のRTへ描画する </p>
+
+<p class="definition"> <a class="el" href="PostProcessExecutor_8cpp_source.html">PostProcessExecutor.cpp</a> の <a class="el" href="PostProcessExecutor_8cpp_source.html#l00110">110</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="CanvasLayer_8cpp_source.html#l00092">CanvasLayer::DrawObjects()</a>.</p>
+
+</div>
+</div>
+<a id="ab427f5d61cd187fc0d24f6f446a3caa5" name="ab427f5d61cd187fc0d24f6f446a3caa5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab427f5d61cd187fc0d24f6f446a3caa5">&#9670;&#160;</a></span>GetCanvas()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classCanvas.html">Canvas</a> * PostProcessExecutor::GetCanvas </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>_name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>名前からCanvasを取得する 該当Canvasが存在しなくても、保存済みの常時構成Json（"./Assets/Data/PostEffect/Canvases/&lt;_name&gt;.json"）が 存在する場合は自動でCanvasを生成し、その設定を読み込んだ上で返す </p>
+
+<p class="definition"> <a class="el" href="PostProcessExecutor_8cpp_source.html">PostProcessExecutor.cpp</a> の <a class="el" href="PostProcessExecutor_8cpp_source.html#l00089">89</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="CanvasLayer_8cpp_source.html#l00018">CanvasLayer::AddCanvas()</a>, <a class="el" href="CanvasLayer_8cpp_source.html#l00074">CanvasLayer::GetCanvas()</a>, <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::INFO</a>, <a class="el" href="Log_8cpp_source.html#l00108">Log::Send()</a>.</p>
+
+</div>
+</div>
+<a id="ad0f9ae729876b4d20a338e4df847133e" name="ad0f9ae729876b4d20a338e4df847133e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad0f9ae729876b4d20a338e4df847133e">&#9670;&#160;</a></span>GetCanvases()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; std::pair&lt; <a class="el" href="classCanvasLayer.html#a1eb0c321c7e4d378c533a6e4acb32958">CanvasLayer::ZOrder</a>, <a class="el" href="classCanvas.html">Canvas</a> * &gt; &gt; PostProcessExecutor::GetCanvases </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -339,83 +531,98 @@ $(document).ready(function(){initNavTree('classPostProcessExecutor.html',''); in
       </table>
 </div><div class="memdoc">
 
-<p>フレーム終了時のクリーンアップ </p>
+<p>全Canvasを Z順（昇順）で取得する（Editor等の一覧表示用） </p>
 
-<p class="definition"> <a class="el" href="PostProcessExecutor_8cpp_source.html">PostProcessExecutor.cpp</a> の <a class="el" href="PostProcessExecutor_8cpp_source.html#l00117">117</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="PostProcessExecutor_8cpp_source.html">PostProcessExecutor.cpp</a> の <a class="el" href="PostProcessExecutor_8cpp_source.html#l00106">106</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="CanvasLayer_8cpp_source.html#l00083">CanvasLayer::GetCanvases()</a>.</p>
 
 </div>
 </div>
-<a id="a8322f922ebe3f1444ee573ab3960d76d" name="a8322f922ebe3f1444ee573ab3960d76d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8322f922ebe3f1444ee573ab3960d76d">&#9670;&#160;</a></span>Execute()</h2>
+<a id="adebe320ab2f4cf1b4c12c681b1cefd22" name="adebe320ab2f4cf1b4c12c681b1cefd22"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adebe320ab2f4cf1b4c12c681b1cefd22">&#9670;&#160;</a></span>GetFactory()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void PostProcessExecutor::Execute </td>
+          <td class="memname">GESTD::ReferencePtr&lt; <a class="el" href="classPostEffectFactory.html">PostEffectFactory</a> &gt; PostProcessExecutor::GetFactory </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td> const</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p>エフェクトを実行 </p>
+<p>PostEffect factory を取得 </p>
 
-<p class="definition"> <a class="el" href="PostProcessExecutor_8cpp_source.html">PostProcessExecutor.cpp</a> の <a class="el" href="PostProcessExecutor_8cpp_source.html#l00125">125</a> 行目に定義があります。</p>
-
-<p class="reference">参照先 <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::ERR</a>, <a class="el" href="Log_8cpp_source.html#l00108">Log::Send()</a>.</p>
+<p class="definition"> <a class="el" href="PostProcessExecutor_8hpp_source.html">PostProcessExecutor.hpp</a> の <a class="el" href="PostProcessExecutor_8hpp_source.html#l00086">86</a> 行目に定義があります。</p>
 
 </div>
 </div>
-<a id="ab44e68997e32b5c93fe38309dcf7158f" name="ab44e68997e32b5c93fe38309dcf7158f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab44e68997e32b5c93fe38309dcf7158f">&#9670;&#160;</a></span>FindOrCreate()</h2>
+<a id="a1b712b928efe74d86bc2d7b394755c5f" name="a1b712b928efe74d86bc2d7b394755c5f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1b712b928efe74d86bc2d7b394755c5f">&#9670;&#160;</a></span>GetName()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classIPostEffect.html">IPostEffect</a> * PostProcessExecutor::FindOrCreate </td>
+          <td class="memname">const std::string &amp; PostProcessExecutor::GetName </td>
           <td>(</td>
-          <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>_type</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>_name</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>_create</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p>エフェクトを検索し、必要なら生成する </p>
-<dl class="params"><dt>引数</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">_type</td><td>effect type </td></tr>
-    <tr><td class="paramname">_name</td><td>instance 名 </td></tr>
-    <tr><td class="paramname">_create</td><td>見つからないときに生成するか </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>戻り値</dt><dd>effect instance。失敗時は nullptr </dd></dl>
+<p>Canvas名を取得 </p>
 
-<p class="definition"> <a class="el" href="PostProcessExecutor_8cpp_source.html">PostProcessExecutor.cpp</a> の <a class="el" href="PostProcessExecutor_8cpp_source.html#l00366">366</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="PostProcessExecutor_8hpp_source.html">PostProcessExecutor.hpp</a> の <a class="el" href="PostProcessExecutor_8hpp_source.html#l00089">89</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::ERR</a>, <a class="el" href="Log_8cpp_source.html#l00108">Log::Send()</a>.</p>
+</div>
+</div>
+<a id="a73be370676bc6b123f4fb3d2cb2a9df2" name="a73be370676bc6b123f4fb3d2cb2a9df2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a73be370676bc6b123f4fb3d2cb2a9df2">&#9670;&#160;</a></span>GetOverlayChain()</h2>
 
-<p class="reference">参照元 <a class="el" href="PostProcessExecutor_8cpp_source.html#l00401">ApplyPreset()</a>.</p>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classPostEffectChain.html">PostEffectChain</a> * PostProcessExecutor::GetOverlayChain </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Overlay（合成後の画面に適用する常時構成チェーン）を取得。Canvas Editorからの編集用 </p>
+
+<p class="definition"> <a class="el" href="PostProcessExecutor_8hpp_source.html">PostProcessExecutor.hpp</a> の <a class="el" href="PostProcessExecutor_8hpp_source.html#l00092">92</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -444,12 +651,43 @@ $(document).ready(function(){initNavTree('classPostProcessExecutor.html',''); in
 
 <p>SceneView の表示スケールを取得 </p>
 
-<p class="definition"> <a class="el" href="PostProcessExecutor_8hpp_source.html">PostProcessExecutor.hpp</a> の <a class="el" href="PostProcessExecutor_8hpp_source.html#l00162">162</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="PostProcessExecutor_8hpp_source.html">PostProcessExecutor.hpp</a> の <a class="el" href="PostProcessExecutor_8hpp_source.html#l00199">199</a> 行目に定義があります。</p>
 
 </div>
 </div>
-<a id="ad97a026ca101640cf06810bfbdf46431" name="ad97a026ca101640cf06810bfbdf46431"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad97a026ca101640cf06810bfbdf46431">&#9670;&#160;</a></span>Initialize()</h2>
+<a id="ad81aea5697947ac9e41b4e9f141b8886" name="ad81aea5697947ac9e41b4e9f141b8886"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad81aea5697947ac9e41b4e9f141b8886">&#9670;&#160;</a></span>GetTemporary()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classIPostEffect.html">IPostEffect</a> * PostProcessExecutor::GetTemporary </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>_id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>idから一時エフェクトを取得する </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_id</td><td>CreateTemporaryが返したid </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>戻り値</dt><dd>effect instance。見つからない場合は nullptr </dd></dl>
+
+<p class="definition"> <a class="el" href="PostProcessExecutor_8cpp_source.html">PostProcessExecutor.cpp</a> の <a class="el" href="PostProcessExecutor_8cpp_source.html#l00287">287</a> 行目に定義があります。</p>
+
+<p class="reference">参照元 <a class="el" href="PostProcessExecutor_8cpp_source.html#l00306">ApplyPreset()</a>, <a class="el" href="PostProcessExecutor_8cpp_source.html#l00390">Update()</a>.</p>
+
+</div>
+</div>
+<a id="aa6839693394022492abf153b3f8d75d8" name="aa6839693394022492abf153b3f8d75d8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa6839693394022492abf153b3f8d75d8">&#9670;&#160;</a></span>Initialize()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -470,7 +708,13 @@ $(document).ready(function(){initNavTree('classPostProcessExecutor.html',''); in
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const GESTD::ReferencePtr&lt; <a class="el" href="classDebugUI.html">DebugUI</a> &gt; &amp;&#160;</td>
-          <td class="paramname"><em>_debug</em>&#160;</td>
+          <td class="paramname"><em>_debug</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>_name</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -480,12 +724,20 @@ $(document).ready(function(){initNavTree('classPostProcessExecutor.html',''); in
       </table>
 </div><div class="memdoc">
 
-<p>初期化 &lt;param name=_adapter"&gt;DirectX adapter&lt;/param&gt;
-&lt;param name=_srv"&gt;SRV manager&lt;param name=_debug"&gt;Debug UI</p>
+<p>初期化 </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_adapter</td><td>DirectX adapter </td></tr>
+    <tr><td class="paramname">_srv</td><td>SRV manager </td></tr>
+    <tr><td class="paramname">_debug</td><td>Debug UI </td></tr>
+    <tr><td class="paramname">_name</td><td>Canvas名。ウィンドウ名・プリセットパスの一意化に使う </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p class="definition"> <a class="el" href="PostProcessExecutor_8cpp_source.html">PostProcessExecutor.cpp</a> の <a class="el" href="PostProcessExecutor_8cpp_source.html#l00024">24</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="PostProcessExecutor_8cpp_source.html">PostProcessExecutor.cpp</a> の <a class="el" href="PostProcessExecutor_8cpp_source.html#l00021">21</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::ERR</a>, <a class="el" href="BlendMode_8hpp.html#a30323fa90e24ca484998b9fba6c40e85ab50339a10e1de285ac99d4c3990b8693">NONE</a>, <a class="el" href="Log_8cpp_source.html#l00108">Log::Send()</a>.</p>
+<p class="reference">参照先 <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::ERR</a>, <a class="el" href="CanvasLayer_8cpp_source.html#l00005">CanvasLayer::Initialize()</a>, <a class="el" href="Log_8cpp_source.html#l00108">Log::Send()</a>.</p>
 
 </div>
 </div>
@@ -506,7 +758,51 @@ $(document).ready(function(){initNavTree('classPostProcessExecutor.html',''); in
 
 <p>SceneView が表示中かどうか </p>
 
-<p class="definition"> <a class="el" href="PostProcessExecutor_8cpp_source.html">PostProcessExecutor.cpp</a> の <a class="el" href="PostProcessExecutor_8cpp_source.html#l00170">170</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="PostProcessExecutor_8cpp_source.html">PostProcessExecutor.cpp</a> の <a class="el" href="PostProcessExecutor_8cpp_source.html#l00158">158</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="a37c5cb8ebf829061b2280b8188094cfd" name="a37c5cb8ebf829061b2280b8188094cfd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a37c5cb8ebf829061b2280b8188094cfd">&#9670;&#160;</a></span>LoadPermanentConfig()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void PostProcessExecutor::LoadPermanentConfig </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>常時構成（型＋baseParameters）を"./Assets/Data/PostEffect/Canvases/&lt;Canvas名&gt;.json"から読み込む </p>
+
+<p class="definition"> <a class="el" href="PostProcessExecutor_8cpp_source.html">PostProcessExecutor.cpp</a> の <a class="el" href="PostProcessExecutor_8cpp_source.html#l00473">473</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="af045cdba8d14eb321f02fa16c5b5343a" name="af045cdba8d14eb321f02fa16c5b5343a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af045cdba8d14eb321f02fa16c5b5343a">&#9670;&#160;</a></span>OpenCanvasEditor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void PostProcessExecutor::OpenCanvasEditor </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><a class="el" href="classCanvas.html" title="描画先1枚（RTとタスクキュー）を表すクラス 常時構成のPostEffectは内部の PostEffectChain が担う。 ワンショット演出は持たない（合成後の画面にのみかける）。">Canvas</a> Editor を開く </p>
+
+<p class="definition"> <a class="el" href="PostProcessExecutor_8cpp_source.html">PostProcessExecutor.cpp</a> の <a class="el" href="PostProcessExecutor_8cpp_source.html#l00481">481</a> 行目に定義があります。</p>
+
+<p class="reference">参照元 <a class="el" href="PostProcessExecutor_8cpp_source.html#l00163">Debug()</a>.</p>
 
 </div>
 </div>
@@ -534,9 +830,63 @@ $(document).ready(function(){initNavTree('classPostProcessExecutor.html',''); in
   </dd>
 </dl>
 
-<p class="definition"> <a class="el" href="PostProcessExecutor_8cpp_source.html">PostProcessExecutor.cpp</a> の <a class="el" href="PostProcessExecutor_8cpp_source.html#l00613">613</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="PostProcessExecutor_8cpp_source.html">PostProcessExecutor.cpp</a> の <a class="el" href="PostProcessExecutor_8cpp_source.html#l00487">487</a> 行目に定義があります。</p>
 
-<p class="reference">参照元 <a class="el" href="PostProcessExecutor_8cpp_source.html#l00175">Debug()</a>.</p>
+<p class="reference">参照元 <a class="el" href="PostProcessExecutor_8cpp_source.html#l00163">Debug()</a>.</p>
+
+</div>
+</div>
+<a id="a297ec3265c980cc61d95f7e992af2caf" name="a297ec3265c980cc61d95f7e992af2caf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a297ec3265c980cc61d95f7e992af2caf">&#9670;&#160;</a></span>RemoveCanvas()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void PostProcessExecutor::RemoveCanvas </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>_name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Canvasを削除する </p>
+
+<p class="definition"> <a class="el" href="PostProcessExecutor_8cpp_source.html">PostProcessExecutor.cpp</a> の <a class="el" href="PostProcessExecutor_8cpp_source.html#l00085">85</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="CanvasLayer_8cpp_source.html#l00065">CanvasLayer::RemoveCanvas()</a>.</p>
+
+</div>
+</div>
+<a id="a354facaaa6cec6dbd196e49ad1a2bf60" name="a354facaaa6cec6dbd196e49ad1a2bf60"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a354facaaa6cec6dbd196e49ad1a2bf60">&#9670;&#160;</a></span>RemoveTemporary()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void PostProcessExecutor::RemoveTemporary </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>_id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>一時エフェクトを破棄する </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_id</td><td>CreateTemporaryが返したid </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition"> <a class="el" href="PostProcessExecutor_8cpp_source.html">PostProcessExecutor.cpp</a> の <a class="el" href="PostProcessExecutor_8cpp_source.html#l00296">296</a> 行目に定義があります。</p>
+
+<p class="reference">参照元 <a class="el" href="PostProcessExecutor_8cpp_source.html#l00306">ApplyPreset()</a>, <a class="el" href="PostProcessExecutor_8cpp_source.html#l00390">Update()</a>.</p>
 
 </div>
 </div>
@@ -557,9 +907,30 @@ $(document).ready(function(){initNavTree('classPostProcessExecutor.html',''); in
 
 <p>render texture をリサイズする </p>
 
-<p class="definition"> <a class="el" href="PostProcessExecutor_8cpp_source.html">PostProcessExecutor.cpp</a> の <a class="el" href="PostProcessExecutor_8cpp_source.html#l00326">326</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="PostProcessExecutor_8cpp_source.html">PostProcessExecutor.cpp</a> の <a class="el" href="PostProcessExecutor_8cpp_source.html#l00245">245</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::ERR</a>, <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::INFO</a>, <a class="el" href="Log_8cpp_source.html#l00108">Log::Send()</a>.</p>
+<p class="reference">参照先 <a class="el" href="CanvasLayer_8cpp_source.html#l00116">CanvasLayer::ResizeRenderTextures()</a>.</p>
+
+</div>
+</div>
+<a id="aaa1cb992831df1a92fdad75fbddb7608" name="aaa1cb992831df1a92fdad75fbddb7608"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa1cb992831df1a92fdad75fbddb7608">&#9670;&#160;</a></span>SavePermanentConfig()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void PostProcessExecutor::SavePermanentConfig </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>常時構成を"./Assets/Data/PostEffect/Canvases/&lt;Canvas名&gt;.json"へ保存する </p>
+
+<p class="definition"> <a class="el" href="PostProcessExecutor_8cpp_source.html">PostProcessExecutor.cpp</a> の <a class="el" href="PostProcessExecutor_8cpp_source.html#l00477">477</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -587,14 +958,14 @@ $(document).ready(function(){initNavTree('classPostProcessExecutor.html',''); in
   </dd>
 </dl>
 
-<p class="definition"> <a class="el" href="PostProcessExecutor_8cpp_source.html">PostProcessExecutor.cpp</a> の <a class="el" href="PostProcessExecutor_8cpp_source.html#l00561">561</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="PostProcessExecutor_8cpp_source.html">PostProcessExecutor.cpp</a> の <a class="el" href="PostProcessExecutor_8cpp_source.html#l00423">423</a> 行目に定義があります。</p>
 
 <p class="reference">参照先 <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::ERR</a>, <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::INFO</a>, <a class="el" href="Log_8cpp_source.html#l00108">Log::Send()</a>.</p>
 
 </div>
 </div>
-<a id="a59b510e45f46ad87308269fbc36836e1" name="a59b510e45f46ad87308269fbc36836e1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a59b510e45f46ad87308269fbc36836e1">&#9670;&#160;</a></span>SetActive()</h2>
+<a id="af16c0a5609a299068c3564c8ab353eae" name="af16c0a5609a299068c3564c8ab353eae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af16c0a5609a299068c3564c8ab353eae">&#9670;&#160;</a></span>SetActive()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -603,7 +974,7 @@ $(document).ready(function(){initNavTree('classPostProcessExecutor.html',''); in
           <td class="memname">void PostProcessExecutor::SetActive </td>
           <td>(</td>
           <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>_name</em>, </td>
+          <td class="paramname"><em>_type</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -622,20 +993,18 @@ $(document).ready(function(){initNavTree('classPostProcessExecutor.html',''); in
 <p>エフェクトの有効/無効を切り替える </p>
 <dl class="params"><dt>引数</dt><dd>
   <table class="params">
-    <tr><td class="paramname">_name</td><td>エフェクト名 </td></tr>
+    <tr><td class="paramname">_type</td><td>エフェクトタイプ名 </td></tr>
     <tr><td class="paramname">_enable</td><td>有効フラグ </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition"> <a class="el" href="PostProcessExecutor_8cpp_source.html">PostProcessExecutor.cpp</a> の <a class="el" href="PostProcessExecutor_8cpp_source.html#l00161">161</a> 行目に定義があります。</p>
-
-<p class="reference">参照元 <a class="el" href="PostProcessExecutor_8cpp_source.html#l00401">ApplyPreset()</a>.</p>
+<p class="definition"> <a class="el" href="PostProcessExecutor_8cpp_source.html">PostProcessExecutor.cpp</a> の <a class="el" href="PostProcessExecutor_8cpp_source.html#l00154">154</a> 行目に定義があります。</p>
 
 </div>
 </div>
-<a id="a690d2db7b8e679f0eb12d82c730179e0" name="a690d2db7b8e679f0eb12d82c730179e0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a690d2db7b8e679f0eb12d82c730179e0">&#9670;&#160;</a></span>SetFactory()</h2>
+<a id="aa6c597c54639293921d27e93025174ba" name="aa6c597c54639293921d27e93025174ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa6c597c54639293921d27e93025174ba">&#9670;&#160;</a></span>SetFactory()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -643,7 +1012,7 @@ $(document).ready(function(){initNavTree('classPostProcessExecutor.html',''); in
         <tr>
           <td class="memname">void PostProcessExecutor::SetFactory </td>
           <td>(</td>
-          <td class="paramtype">GESTD::ReferencePtr&lt; <a class="el" href="classAbstractPostEffectFactory.html">AbstractPostEffectFactory</a> &gt;&#160;</td>
+          <td class="paramtype">GESTD::ReferencePtr&lt; <a class="el" href="classPostEffectFactory.html">PostEffectFactory</a> &gt;&#160;</td>
           <td class="paramname"><em>_factory</em></td><td>)</td>
           <td></td>
         </tr>
@@ -652,7 +1021,9 @@ $(document).ready(function(){initNavTree('classPostProcessExecutor.html',''); in
 
 <p>PostEffect factory を設定 </p>
 
-<p class="definition"> <a class="el" href="PostProcessExecutor_8cpp_source.html">PostProcessExecutor.cpp</a> の <a class="el" href="PostProcessExecutor_8cpp_source.html#l00084">84</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="PostProcessExecutor_8cpp_source.html">PostProcessExecutor.cpp</a> の <a class="el" href="PostProcessExecutor_8cpp_source.html#l00067">67</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="CanvasLayer_8cpp_source.html#l00010">CanvasLayer::SetFactory()</a>.</p>
 
 </div>
 </div>
@@ -680,9 +1051,9 @@ $(document).ready(function(){initNavTree('classPostProcessExecutor.html',''); in
   </dd>
 </dl>
 
-<p class="definition"> <a class="el" href="PostProcessExecutor_8cpp_source.html">PostProcessExecutor.cpp</a> の <a class="el" href="PostProcessExecutor_8cpp_source.html#l00514">514</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="PostProcessExecutor_8cpp_source.html">PostProcessExecutor.cpp</a> の <a class="el" href="PostProcessExecutor_8cpp_source.html#l00390">390</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::INFO</a>, <a class="el" href="Log_8cpp_source.html#l00108">Log::Send()</a>.</p>
+<p class="reference">参照先 <a class="el" href="PostProcessExecutor_8cpp_source.html#l00287">GetTemporary()</a>, <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::INFO</a>, <a class="el" href="PostProcessExecutor_8cpp_source.html#l00296">RemoveTemporary()</a>, <a class="el" href="Log_8cpp_source.html#l00108">Log::Send()</a>.</p>
 
 </div>
 </div>
@@ -696,7 +1067,7 @@ $(document).ready(function(){initNavTree('classPostProcessExecutor.html',''); in
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classPostProcessExecutor.html">PostProcessExecutor</a></li>
-    <li class="footer">2026年09月04日(金) 07時22分07秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年09月07日(月) 03時45分00秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

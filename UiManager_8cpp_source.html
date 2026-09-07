@@ -227,7 +227,7 @@ $(document).ready(function(){initNavTree('UiManager_8cpp_source.html',''); initR
 <div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    <span class="keywordtype">void</span> Manager::UnloadCanvas(<span class="keywordtype">int</span> _index) {</div>
 <div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>        <span class="keywordflow">if</span> (!IsOwned(_index)) <span class="keywordflow">return</span>;</div>
 <div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span> </div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>        Canvas* target = <span class="keyword">static_cast&lt;</span>Canvas*<span class="keyword">&gt;</span>(entries_[_index].canvas);</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>        <a class="code hl_class" href="classCanvas.html">Canvas</a>* target = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="classCanvas.html">Canvas</a>*<span class="keyword">&gt;</span>(entries_[_index].canvas);</div>
 <div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>        <span class="keyword">const</span> <span class="keyword">auto</span> it = std::find_if(owned_.begin(), owned_.end(),</div>
 <div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>            [target](<span class="keyword">const</span> <span class="keyword">auto</span>&amp; p) { return p.get() == target; });</div>
 <div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>        <span class="keywordflow">if</span> (it != owned_.end()) {</div>
@@ -237,7 +237,7 @@ $(document).ready(function(){initNavTree('UiManager_8cpp_source.html',''); initR
 <div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span> </div>
 <div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    <span class="keywordtype">bool</span> Manager::IsOwned(<span class="keywordtype">int</span> _index)<span class="keyword"> const </span>{</div>
 <div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>        <span class="keywordflow">if</span> (_index &lt; 0 || _index &gt;= <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(entries_.size())) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>        Canvas* ptr = <span class="keyword">static_cast&lt;</span>Canvas*<span class="keyword">&gt;</span>(entries_[_index].canvas);</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>        <a class="code hl_class" href="classCanvas.html">Canvas</a>* ptr = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="classCanvas.html">Canvas</a>*<span class="keyword">&gt;</span>(entries_[_index].canvas);</div>
 <div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>        <span class="keywordflow">if</span> (!ptr) <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>        <span class="keywordflow">return</span> std::any_of(owned_.begin(), owned_.end(),</div>
 <div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>            [ptr](<span class="keyword">const</span> <span class="keyword">auto</span>&amp; p) { return p.get() == ptr; });</div>
@@ -362,6 +362,7 @@ $(document).ready(function(){initNavTree('UiManager_8cpp_source.html',''); initR
 <div class="ttc" id="aInput_8hpp_html_a8f8f80d37794cde9472343e4487ba3eb"><div class="ttname"><a href="Input_8hpp.html#a8f8f80d37794cde9472343e4487ba3eb">name</a></div><div class="ttdeci">const char * name</div><div class="ttdef"><b>Definition</b> <a href="Input_8hpp_source.html#l00114">Input.hpp:114</a></div></div>
 <div class="ttc" id="aLog_8hpp_html"><div class="ttname"><a href="Log_8hpp.html">Log.hpp</a></div></div>
 <div class="ttc" id="aUiManager_8hpp_html"><div class="ttname"><a href="UiManager_8hpp.html">UiManager.hpp</a></div></div>
+<div class="ttc" id="aclassCanvas_html"><div class="ttname"><a href="classCanvas.html">Canvas</a></div><div class="ttdoc">描画先1枚（RTとタスクキュー）を表すクラス 常時構成のPostEffectは内部の PostEffectChain が担う。 ワンショット演出は持たない（合成後の画面にのみかける）。</div><div class="ttdef"><b>Definition</b> <a href="Canvas_8hpp_source.html#l00019">Canvas.hpp:19</a></div></div>
 <div class="ttc" id="aclassLog_html_af351e7d4bd43c85e7c90f52846b64bdb"><div class="ttname"><a href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a></div><div class="ttdeci">static void Send(Level _level, const std::string &amp;_message=&quot;&quot;)</div><div class="ttdoc">ログメッセージを送信</div><div class="ttdef"><b>Definition</b> <a href="Log_8cpp_source.html#l00108">Log.cpp:108</a></div></div>
 <div class="ttc" id="aclassLog_html_afb5d4c945d835d194a295461d752531ea059e9861e0400dfbe05c98a841f3f96b"><div class="ttname"><a href="classLog.html#afb5d4c945d835d194a295461d752531ea059e9861e0400dfbe05c98a841f3f96b">Log::Level::WARNING</a></div><div class="ttdeci">@ WARNING</div></div>
 <div class="ttc" id="aclassUi_1_1Canvas_html"><div class="ttname"><a href="classUi_1_1Canvas.html">Ui::Canvas</a></div><div class="ttdef"><b>Definition</b> <a href="UserInterface_8hpp_source.html#l00020">UserInterface.hpp:20</a></div></div>
@@ -381,7 +382,7 @@ $(document).ready(function(){initNavTree('UiManager_8cpp_source.html',''); initR
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_e796c29efe043a3b967d81e1c9f5f281.html">Ui</a></li><li class="navelem"><a class="el" href="UiManager_8cpp.html">UiManager.cpp</a></li>
-    <li class="footer">2026年09月04日(金) 07時22分07秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年09月07日(月) 03時45分00秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

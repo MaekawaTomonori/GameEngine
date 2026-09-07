@@ -1,0 +1,456 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>PortfolioGame Engine: CanvasLayer クラス</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">PortfolioGame Engine<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">C++20 DirectX12 Game Engine</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','検索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('classCanvasLayer.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">読み取り中…</div>
+<div class="SRStatus" id="Searching">検索中…</div>
+<div class="SRStatus" id="NoMatches">一致する文字列を見つけられません</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-types">公開型</a> &#124;
+<a href="#pub-methods">公開メンバ関数</a> &#124;
+<a href="classCanvasLayer-members.html">全メンバ一覧</a>  </div>
+  <div class="headertitle"><div class="title">CanvasLayer クラス</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>複数Canvasの前後関係（Z順）だけを管理するクラス エフェクトの中身には一切関与しない。  
+ <a href="classCanvasLayer.html#details">[詳解]</a></p>
+
+<p><code>#include &lt;<a class="el" href="CanvasLayer_8hpp_source.html">CanvasLayer.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+公開型</h2></td></tr>
+<tr class="memitem:a1eb0c321c7e4d378c533a6e4acb32958" id="r_a1eb0c321c7e4d378c533a6e4acb32958"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCanvasLayer.html#a1eb0c321c7e4d378c533a6e4acb32958">ZOrder</a> = uint32_t</td></tr>
+<tr class="separator:a1eb0c321c7e4d378c533a6e4acb32958"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+公開メンバ関数</h2></td></tr>
+<tr class="memitem:a6e236779539b833b19e8d891dc520f4c" id="r_a6e236779539b833b19e8d891dc520f4c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCanvasLayer.html#a6e236779539b833b19e8d891dc520f4c">Initialize</a> (const GESTD::ReferencePtr&lt; <a class="el" href="classDirectXAdapter.html">DirectXAdapter</a> &gt; &amp;_adapter, const GESTD::ReferencePtr&lt; <a class="el" href="classSRVManager.html">SRVManager</a> &gt; &amp;_srv)</td></tr>
+<tr class="memdesc:a6e236779539b833b19e8d891dc520f4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">初期化  <br /></td></tr>
+<tr class="separator:a6e236779539b833b19e8d891dc520f4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a3c2e81257354d9f853f31b5f1ea34b" id="r_a4a3c2e81257354d9f853f31b5f1ea34b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCanvasLayer.html#a4a3c2e81257354d9f853f31b5f1ea34b">SetFactory</a> (GESTD::ReferencePtr&lt; <a class="el" href="classPostEffectFactory.html">PostEffectFactory</a> &gt; _factory)</td></tr>
+<tr class="memdesc:a4a3c2e81257354d9f853f31b5f1ea34b"><td class="mdescLeft">&#160;</td><td class="mdescRight">PostEffect factory を設定（保持中の全Canvas＋以後追加するCanvasに適用）  <br /></td></tr>
+<tr class="separator:a4a3c2e81257354d9f853f31b5f1ea34b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a17b6ff81c2ac36929255075d6d24c8ec" id="r_a17b6ff81c2ac36929255075d6d24c8ec"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classCanvas.html">Canvas</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCanvasLayer.html#a17b6ff81c2ac36929255075d6d24c8ec">AddCanvas</a> (const std::string &amp;_name)</td></tr>
+<tr class="memdesc:a17b6ff81c2ac36929255075d6d24c8ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Canvasを追加する（Z順は自動採番）  <br /></td></tr>
+<tr class="separator:a17b6ff81c2ac36929255075d6d24c8ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c64c35571c538b7530a7c6c8efd6933" id="r_a3c64c35571c538b7530a7c6c8efd6933"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classCanvas.html">Canvas</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCanvasLayer.html#a3c64c35571c538b7530a7c6c8efd6933">AddCanvasTop</a> (const std::string &amp;_name)</td></tr>
+<tr class="memdesc:a3c64c35571c538b7530a7c6c8efd6933"><td class="mdescLeft">&#160;</td><td class="mdescRight">Canvasを最前面グループに追加する  <br /></td></tr>
+<tr class="separator:a3c64c35571c538b7530a7c6c8efd6933"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a296dc531827762a71ca73ff8a818c1d2" id="r_a296dc531827762a71ca73ff8a818c1d2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCanvasLayer.html#a296dc531827762a71ca73ff8a818c1d2">RemoveCanvas</a> (const std::string &amp;_name)</td></tr>
+<tr class="memdesc:a296dc531827762a71ca73ff8a818c1d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Canvasを削除する  <br /></td></tr>
+<tr class="separator:a296dc531827762a71ca73ff8a818c1d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa21ce277f52795f8739fef7546359c7a" id="r_aa21ce277f52795f8739fef7546359c7a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classCanvas.html">Canvas</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCanvasLayer.html#aa21ce277f52795f8739fef7546359c7a">GetCanvas</a> (const std::string &amp;_name) const</td></tr>
+<tr class="memdesc:aa21ce277f52795f8739fef7546359c7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">名前からCanvasを取得する  <br /></td></tr>
+<tr class="separator:aa21ce277f52795f8739fef7546359c7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4f678760fed38facb81eeb70832a681" id="r_ac4f678760fed38facb81eeb70832a681"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::pair&lt; <a class="el" href="classCanvasLayer.html#a1eb0c321c7e4d378c533a6e4acb32958">ZOrder</a>, <a class="el" href="classCanvas.html">Canvas</a> * &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCanvasLayer.html#ac4f678760fed38facb81eeb70832a681">GetCanvases</a> () const</td></tr>
+<tr class="memdesc:ac4f678760fed38facb81eeb70832a681"><td class="mdescLeft">&#160;</td><td class="mdescRight">全Canvasを Z順（昇順）で取得する（Editor等の一覧表示用）  <br /></td></tr>
+<tr class="separator:ac4f678760fed38facb81eeb70832a681"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00cc3d1d9e74bfd4089f998ae0cceda5" id="r_a00cc3d1d9e74bfd4089f998ae0cceda5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCanvasLayer.html#a00cc3d1d9e74bfd4089f998ae0cceda5">DrawObjects</a> ()</td></tr>
+<tr class="memdesc:a00cc3d1d9e74bfd4089f998ae0cceda5"><td class="mdescLeft">&#160;</td><td class="mdescRight">各Canvasが自分のタスクキューを消化し、自分のRTへ描画する  <br /></td></tr>
+<tr class="separator:a00cc3d1d9e74bfd4089f998ae0cceda5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd846e57d07aa9cff9beaddac8136078" id="r_afd846e57d07aa9cff9beaddac8136078"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCanvasLayer.html#afd846e57d07aa9cff9beaddac8136078">ApplyPostEffects</a> ()</td></tr>
+<tr class="memdesc:afd846e57d07aa9cff9beaddac8136078"><td class="mdescLeft">&#160;</td><td class="mdescRight">各Canvasの常時構成PostEffectを適用する  <br /></td></tr>
+<tr class="separator:afd846e57d07aa9cff9beaddac8136078"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c008821c8294f97e691f2927a65b87f" id="r_a8c008821c8294f97e691f2927a65b87f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCanvasLayer.html#a8c008821c8294f97e691f2927a65b87f">DrawCanvases</a> () const</td></tr>
+<tr class="memdesc:a8c008821c8294f97e691f2927a65b87f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Z昇順に各Canvasを合成描画する（現在バインドされている描画先へ）  <br /></td></tr>
+<tr class="separator:a8c008821c8294f97e691f2927a65b87f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe39a598a5cf7be99c0c256b985c2434" id="r_abe39a598a5cf7be99c0c256b985c2434"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCanvasLayer.html#abe39a598a5cf7be99c0c256b985c2434">ResizeRenderTextures</a> () const</td></tr>
+<tr class="memdesc:abe39a598a5cf7be99c0c256b985c2434"><td class="mdescLeft">&#160;</td><td class="mdescRight">全Canvasのrender textureをリサイズする  <br /></td></tr>
+<tr class="separator:abe39a598a5cf7be99c0c256b985c2434"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">詳解</h2>
+<div class="textblock"><p>複数Canvasの前後関係（Z順）だけを管理するクラス エフェクトの中身には一切関与しない。 </p>
+
+<p class="definition"> <a class="el" href="CanvasLayer_8hpp_source.html">CanvasLayer.hpp</a> の <a class="el" href="CanvasLayer_8hpp_source.html#l00020">20</a> 行目に定義があります。</p>
+</div><h2 class="groupheader">型定義メンバ詳解</h2>
+<a id="a1eb0c321c7e4d378c533a6e4acb32958" name="a1eb0c321c7e4d378c533a6e4acb32958"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1eb0c321c7e4d378c533a6e4acb32958">&#9670;&#160;</a></span>ZOrder</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classCanvasLayer.html#a1eb0c321c7e4d378c533a6e4acb32958">CanvasLayer::ZOrder</a> =  uint32_t</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="CanvasLayer_8hpp_source.html">CanvasLayer.hpp</a> の <a class="el" href="CanvasLayer_8hpp_source.html#l00022">22</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<h2 class="groupheader">関数詳解</h2>
+<a id="a17b6ff81c2ac36929255075d6d24c8ec" name="a17b6ff81c2ac36929255075d6d24c8ec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a17b6ff81c2ac36929255075d6d24c8ec">&#9670;&#160;</a></span>AddCanvas()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classCanvas.html">Canvas</a> * CanvasLayer::AddCanvas </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>_name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Canvasを追加する（Z順は自動採番） </p>
+
+<p class="definition"> <a class="el" href="CanvasLayer_8cpp_source.html">CanvasLayer.cpp</a> の <a class="el" href="CanvasLayer_8cpp_source.html#l00018">18</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::ERR</a>, <a class="el" href="Log_8cpp_source.html#l00108">Log::Send()</a>.</p>
+
+<p class="reference">参照元 <a class="el" href="PostProcessExecutor_8cpp_source.html#l00077">PostProcessExecutor::AddCanvas()</a>, <a class="el" href="PostProcessExecutor_8cpp_source.html#l00089">PostProcessExecutor::GetCanvas()</a>.</p>
+
+</div>
+</div>
+<a id="a3c64c35571c538b7530a7c6c8efd6933" name="a3c64c35571c538b7530a7c6c8efd6933"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c64c35571c538b7530a7c6c8efd6933">&#9670;&#160;</a></span>AddCanvasTop()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classCanvas.html">Canvas</a> * CanvasLayer::AddCanvasTop </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>_name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Canvasを最前面グループに追加する </p>
+
+<p class="definition"> <a class="el" href="CanvasLayer_8cpp_source.html">CanvasLayer.cpp</a> の <a class="el" href="CanvasLayer_8cpp_source.html#l00043">43</a> 行目に定義があります。</p>
+
+<p class="reference">参照元 <a class="el" href="PostProcessExecutor_8cpp_source.html#l00081">PostProcessExecutor::AddCanvasTop()</a>.</p>
+
+</div>
+</div>
+<a id="afd846e57d07aa9cff9beaddac8136078" name="afd846e57d07aa9cff9beaddac8136078"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afd846e57d07aa9cff9beaddac8136078">&#9670;&#160;</a></span>ApplyPostEffects()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CanvasLayer::ApplyPostEffects </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>各Canvasの常時構成PostEffectを適用する </p>
+
+<p class="definition"> <a class="el" href="CanvasLayer_8cpp_source.html">CanvasLayer.cpp</a> の <a class="el" href="CanvasLayer_8cpp_source.html#l00100">100</a> 行目に定義があります。</p>
+
+<p class="reference">参照元 <a class="el" href="PostProcessExecutor_8cpp_source.html#l00115">PostProcessExecutor::ApplyPostEffects()</a>.</p>
+
+</div>
+</div>
+<a id="a8c008821c8294f97e691f2927a65b87f" name="a8c008821c8294f97e691f2927a65b87f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c008821c8294f97e691f2927a65b87f">&#9670;&#160;</a></span>DrawCanvases()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CanvasLayer::DrawCanvases </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Z昇順に各Canvasを合成描画する（現在バインドされている描画先へ） </p>
+
+<p class="definition"> <a class="el" href="CanvasLayer_8cpp_source.html">CanvasLayer.cpp</a> の <a class="el" href="CanvasLayer_8cpp_source.html#l00108">108</a> 行目に定義があります。</p>
+
+<p class="reference">参照元 <a class="el" href="PostProcessExecutor_8cpp_source.html#l00120">PostProcessExecutor::DrawCanvases()</a>.</p>
+
+</div>
+</div>
+<a id="a00cc3d1d9e74bfd4089f998ae0cceda5" name="a00cc3d1d9e74bfd4089f998ae0cceda5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a00cc3d1d9e74bfd4089f998ae0cceda5">&#9670;&#160;</a></span>DrawObjects()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CanvasLayer::DrawObjects </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>各Canvasが自分のタスクキューを消化し、自分のRTへ描画する </p>
+
+<p class="definition"> <a class="el" href="CanvasLayer_8cpp_source.html">CanvasLayer.cpp</a> の <a class="el" href="CanvasLayer_8cpp_source.html#l00092">92</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="Canvas_8cpp_source.html#l00017">Canvas::DrawObjects()</a>.</p>
+
+<p class="reference">参照元 <a class="el" href="PostProcessExecutor_8cpp_source.html#l00110">PostProcessExecutor::DrawObjects()</a>.</p>
+
+</div>
+</div>
+<a id="aa21ce277f52795f8739fef7546359c7a" name="aa21ce277f52795f8739fef7546359c7a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa21ce277f52795f8739fef7546359c7a">&#9670;&#160;</a></span>GetCanvas()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classCanvas.html">Canvas</a> * CanvasLayer::GetCanvas </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>_name</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>名前からCanvasを取得する </p>
+
+<p class="definition"> <a class="el" href="CanvasLayer_8cpp_source.html">CanvasLayer.cpp</a> の <a class="el" href="CanvasLayer_8cpp_source.html#l00074">74</a> 行目に定義があります。</p>
+
+<p class="reference">参照元 <a class="el" href="PostProcessExecutor_8cpp_source.html#l00089">PostProcessExecutor::GetCanvas()</a>.</p>
+
+</div>
+</div>
+<a id="ac4f678760fed38facb81eeb70832a681" name="ac4f678760fed38facb81eeb70832a681"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac4f678760fed38facb81eeb70832a681">&#9670;&#160;</a></span>GetCanvases()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; std::pair&lt; <a class="el" href="classCanvasLayer.html#a1eb0c321c7e4d378c533a6e4acb32958">CanvasLayer::ZOrder</a>, <a class="el" href="classCanvas.html">Canvas</a> * &gt; &gt; CanvasLayer::GetCanvases </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>全Canvasを Z順（昇順）で取得する（Editor等の一覧表示用） </p>
+
+<p class="definition"> <a class="el" href="CanvasLayer_8cpp_source.html">CanvasLayer.cpp</a> の <a class="el" href="CanvasLayer_8cpp_source.html#l00083">83</a> 行目に定義があります。</p>
+
+<p class="reference">参照元 <a class="el" href="PostProcessExecutor_8cpp_source.html#l00106">PostProcessExecutor::GetCanvases()</a>.</p>
+
+</div>
+</div>
+<a id="a6e236779539b833b19e8d891dc520f4c" name="a6e236779539b833b19e8d891dc520f4c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e236779539b833b19e8d891dc520f4c">&#9670;&#160;</a></span>Initialize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CanvasLayer::Initialize </td>
+          <td>(</td>
+          <td class="paramtype">const GESTD::ReferencePtr&lt; <a class="el" href="classDirectXAdapter.html">DirectXAdapter</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>_adapter</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const GESTD::ReferencePtr&lt; <a class="el" href="classSRVManager.html">SRVManager</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>_srv</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>初期化 </p>
+
+<p class="definition"> <a class="el" href="CanvasLayer_8cpp_source.html">CanvasLayer.cpp</a> の <a class="el" href="CanvasLayer_8cpp_source.html#l00005">5</a> 行目に定義があります。</p>
+
+<p class="reference">参照元 <a class="el" href="PostProcessExecutor_8cpp_source.html#l00021">PostProcessExecutor::Initialize()</a>.</p>
+
+</div>
+</div>
+<a id="a296dc531827762a71ca73ff8a818c1d2" name="a296dc531827762a71ca73ff8a818c1d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a296dc531827762a71ca73ff8a818c1d2">&#9670;&#160;</a></span>RemoveCanvas()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CanvasLayer::RemoveCanvas </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>_name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Canvasを削除する </p>
+
+<p class="definition"> <a class="el" href="CanvasLayer_8cpp_source.html">CanvasLayer.cpp</a> の <a class="el" href="CanvasLayer_8cpp_source.html#l00065">65</a> 行目に定義があります。</p>
+
+<p class="reference">参照元 <a class="el" href="PostProcessExecutor_8cpp_source.html#l00085">PostProcessExecutor::RemoveCanvas()</a>.</p>
+
+</div>
+</div>
+<a id="abe39a598a5cf7be99c0c256b985c2434" name="abe39a598a5cf7be99c0c256b985c2434"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe39a598a5cf7be99c0c256b985c2434">&#9670;&#160;</a></span>ResizeRenderTextures()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CanvasLayer::ResizeRenderTextures </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>全Canvasのrender textureをリサイズする </p>
+
+<p class="definition"> <a class="el" href="CanvasLayer_8cpp_source.html">CanvasLayer.cpp</a> の <a class="el" href="CanvasLayer_8cpp_source.html#l00116">116</a> 行目に定義があります。</p>
+
+<p class="reference">参照元 <a class="el" href="PostProcessExecutor_8cpp_source.html#l00245">PostProcessExecutor::ResizeRenderTextures()</a>.</p>
+
+</div>
+</div>
+<a id="a4a3c2e81257354d9f853f31b5f1ea34b" name="a4a3c2e81257354d9f853f31b5f1ea34b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a3c2e81257354d9f853f31b5f1ea34b">&#9670;&#160;</a></span>SetFactory()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CanvasLayer::SetFactory </td>
+          <td>(</td>
+          <td class="paramtype">GESTD::ReferencePtr&lt; <a class="el" href="classPostEffectFactory.html">PostEffectFactory</a> &gt;&#160;</td>
+          <td class="paramname"><em>_factory</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>PostEffect factory を設定（保持中の全Canvas＋以後追加するCanvasに適用） </p>
+
+<p class="definition"> <a class="el" href="CanvasLayer_8cpp_source.html">CanvasLayer.cpp</a> の <a class="el" href="CanvasLayer_8cpp_source.html#l00010">10</a> 行目に定義があります。</p>
+
+<p class="reference">参照元 <a class="el" href="PostProcessExecutor_8cpp_source.html#l00067">PostProcessExecutor::SetFactory()</a>.</p>
+
+</div>
+</div>
+<hr/>このクラス詳解は次のファイルから抽出されました:<ul>
+<li>/home/runner/work/GameEngine/GameEngine/src/Canvas/<a class="el" href="CanvasLayer_8hpp_source.html">CanvasLayer.hpp</a></li>
+<li>/home/runner/work/GameEngine/GameEngine/src/Canvas/<a class="el" href="CanvasLayer_8cpp_source.html">CanvasLayer.cpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="classCanvasLayer.html">CanvasLayer</a></li>
+    <li class="footer">2026年09月07日(月) 03時45分00秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,5 +1,5 @@
 var structCommon_1_1RenderingCommand =
 [
-    [ "applyPostEffects", "structCommon_1_1RenderingCommand.html#a3497b96f25436852d5e2c72368c6b8fe", null ],
+    [ "canvasName", "structCommon_1_1RenderingCommand.html#ab32c1aa115bcf5d132ef3a39afb71ddd", null ],
     [ "func", "structCommon_1_1RenderingCommand.html#a308eb5e96576fd37306ea7c472eb8189", null ]
 ];

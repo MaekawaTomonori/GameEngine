@@ -6,6 +6,7 @@ var BlendMode_8hpp =
       [ "SUB", "BlendMode_8hpp.html#a30323fa90e24ca484998b9fba6c40e85a241dd841abade20fcb27b8a9f494e1eb", null ],
       [ "MULTI", "BlendMode_8hpp.html#a30323fa90e24ca484998b9fba6c40e85af26be970aac1b06fa62b87562bc73deb", null ],
       [ "SCREEN", "BlendMode_8hpp.html#a30323fa90e24ca484998b9fba6c40e85ab8640f4f990ba83d8d8bef816def1b80", null ],
+      [ "PREMULTIPLIED", "BlendMode_8hpp.html#a30323fa90e24ca484998b9fba6c40e85af3134542f135ddce52d9c38166befcab", null ],
       [ "NONE", "BlendMode_8hpp.html#a30323fa90e24ca484998b9fba6c40e85ab50339a10e1de285ac99d4c3990b8693", null ]
     ] ]
 ];

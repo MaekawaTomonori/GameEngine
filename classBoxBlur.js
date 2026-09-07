@@ -1,6 +1,9 @@
 var classBoxBlur =
 [
+    [ "ApplyParameters", "classBoxBlur.html#a2342959bf7beced1b4e98a76c7c743f8", null ],
+    [ "CaptureCurrentParameters", "classBoxBlur.html#a491d007c1f7cb84bc237b969493932c6", null ],
     [ "Debug", "classBoxBlur.html#a2843247f5f75d3c04a5512fff7045669", null ],
+    [ "GetTypeName", "classBoxBlur.html#a71938f624121e60e0440a674edaecc15", null ],
     [ "Initialize", "classBoxBlur.html#a77cb0eb48f448d1e7195c285ad106b4c", null ],
     [ "LoadPreset", "classBoxBlur.html#a102748b48272258d006574b049c78b00", null ],
     [ "Modifier", "classBoxBlur.html#a46a6e5b5244d72b9ec5e56cce20bf19f", null ],

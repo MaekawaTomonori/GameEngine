@@ -18,5 +18,6 @@ var classParticleSystem =
     [ "RegisterSpawnFunc", "classParticleSystem.html#a965e45c694b5c949d83d622c7247d650", null ],
     [ "RegisterUpdateFunc", "classParticleSystem.html#a416ddf7b359420456fc349735eeb9542", null ],
     [ "SaveTemplate", "classParticleSystem.html#a4b536a4b5ac3b36f1c56207f782bed1b", null ],
+    [ "SetPostProcessor", "classParticleSystem.html#aa77c7e3cfd99134fb4c326958ada645f", null ],
     [ "Update", "classParticleSystem.html#a219f527d3fc6a502adbdeeb6d5efb72b", null ]
 ];

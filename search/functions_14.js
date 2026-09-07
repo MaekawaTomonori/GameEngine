@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['_7eabstractposteffectfactory_0',['~AbstractPostEffectFactory',['../classAbstractPostEffectFactory.html#a611342a78ef5c96bb6426d4e9f4c6684',1,'AbstractPostEffectFactory']]],
-  ['_7eabstractscenefactory_1',['~AbstractSceneFactory',['../classAbstractSceneFactory.html#a8bb710dc2ffeaeae2d70bef52e1e8240',1,'AbstractSceneFactory']]],
+  ['_7eabstractscenefactory_0',['~AbstractSceneFactory',['../classAbstractSceneFactory.html#a8bb710dc2ffeaeae2d70bef52e1e8240',1,'AbstractSceneFactory']]],
+  ['_7ecanvaslayereditor_1',['~CanvasLayerEditor',['../classCanvasLayerEditor.html#a9053298ad8c8c5b31ef56a81c5946731',1,'CanvasLayerEditor']]],
   ['_7ecommon_2',['~Common',['../classCommon.html#a731fbced46f3c3dbc3cf8234dc0f0eb0',1,'Common']]],
   ['_7ed3dresourceleakchecker_3',['~D3DResourceLeakChecker',['../classD3DResourceLeakChecker.html#af4c6d99e82a98c893fb836f6af687755',1,'D3DResourceLeakChecker']]],
   ['_7edebugui_4',['~DebugUI',['../classDebugUI.html#a9c08c8a56117976e4b3a6873248f1ced',1,'DebugUI']]],

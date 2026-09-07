@@ -10,6 +10,7 @@ var classDirectXAdapter =
     [ "CreateUnorderedAccessView", "classDirectXAdapter.html#a85e48b1e8da92999e6c60a29f63e506c", null ],
     [ "DisplayFPS", "classDirectXAdapter.html#aea6c994c8bf3371a46ea09db47c6df5a", null ],
     [ "EndFrame", "classDirectXAdapter.html#adc51732c509d008911e309337697aa97", null ],
+    [ "GetBackgroundColor", "classDirectXAdapter.html#aec67f2c8465c5981b690fdd042a956b5", null ],
     [ "GetCommandAllocator", "classDirectXAdapter.html#ac775788b343bb054d88bf1fb552aec29", null ],
     [ "GetCommandList", "classDirectXAdapter.html#abc7797e145abbf8c6b66d89ce219adbf", null ],
     [ "GetCommandQueue", "classDirectXAdapter.html#a445ba307d21fc96baec912681546c6ed", null ],
@@ -24,6 +25,7 @@ var classDirectXAdapter =
     [ "GetWindowHandle", "classDirectXAdapter.html#a7dbec72fb7c4efcfc6cdda738aecafcb", null ],
     [ "Initialize", "classDirectXAdapter.html#a0d43436aa69fd3a5fb2f462b47b74600", null ],
     [ "PreProcess", "classDirectXAdapter.html#a5caa8b31df1102febe4016600a6c7fbd", null ],
+    [ "SetSwapChainRenderTarget", "classDirectXAdapter.html#a2e6a9f66a690d39c403a6157ca801728", null ],
     [ "UpdateWindowSize", "classDirectXAdapter.html#a76807e209ac784429e5f7a3a47763b16", null ],
     [ "WaitForFenceValue", "classDirectXAdapter.html#a7793686074430b7c1cff3a7ee3cd2513", null ]
 ];

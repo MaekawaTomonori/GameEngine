@@ -99,11 +99,11 @@ $(document).ready(function(){initNavTree('IGame_8cpp_source.html',''); initResiz
 </div><!--header-->
 <div class="contents">
 <a href="IGame_8cpp.html">[詳解]</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#include &quot;<a class="code" href="IGame_8hpp.html">include/IGame.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#include &quot;<a class="code" href="AbstractPostEffectFactory_8hpp.html">Factory/AbstractPostEffectFactory.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
-<div class="foldopen" id="foldopen00004" data-start="{" data-end="}">
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno"><a class="line" href="classIGame.html#a20d6d1cc5e972feba895d2dedd2cb40e">    4</a></span><a class="code hl_function" href="classIGame.html#a20d6d1cc5e972feba895d2dedd2cb40e">IGame::IGame</a>() {</div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span>    scene_ = std::make_unique&lt;SceneSwitcher&gt;();</div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
+<div class="foldopen" id="foldopen00003" data-start="{" data-end="}">
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno"><a class="line" href="classIGame.html#a20d6d1cc5e972feba895d2dedd2cb40e">    3</a></span><a class="code hl_function" href="classIGame.html#a20d6d1cc5e972feba895d2dedd2cb40e">IGame::IGame</a>() {</div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span>    scene_ = std::make_unique&lt;SceneSwitcher&gt;();</div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span>    postEffectFactory_ = std::make_unique&lt;PostEffectFactory&gt;();</div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span>}</div>
 </div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
@@ -116,21 +116,13 @@ $(document).ready(function(){initNavTree('IGame_8cpp_source.html',''); initResiz
 </div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
 <div class="foldopen" id="foldopen00014" data-start="{" data-end="}">
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="classIGame.html#a0bef264333ba4f348b3327caf21a39ab">   14</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classIGame.html#a0bef264333ba4f348b3327caf21a39ab">IGame::SetPostEffectFactory</a>(std::unique_ptr&lt;AbstractPostEffectFactory&gt; _factory) {</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    postEffectFactory_ = std::move(_factory);</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="classIGame.html#a598804a44ebba4ab0e44d4acadb1d6c0">   14</a></span>GESTD::ReferencePtr&lt;PostEffectFactory&gt; <a class="code hl_function" href="classIGame.html#a598804a44ebba4ab0e44d4acadb1d6c0">IGame::GetPostEffectFactory</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <span class="keywordflow">return</span> GESTD::ReferencePtr&lt;PostEffectFactory&gt;(postEffectFactory_);</div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>}</div>
 </div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
-<div class="foldopen" id="foldopen00018" data-start="{" data-end="}">
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="classIGame.html#a571af785e225ad47a700b280d10823a3">   18</a></span>GESTD::ReferencePtr&lt;AbstractPostEffectFactory&gt; <a class="code hl_function" href="classIGame.html#a571af785e225ad47a700b280d10823a3">IGame::GetPostEffectFactory</a>()<span class="keyword"> const </span>{</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <span class="keywordflow">return</span> GESTD::ReferencePtr&lt;AbstractPostEffectFactory&gt;(postEffectFactory_);</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>}</div>
-</div>
-<div class="ttc" id="aAbstractPostEffectFactory_8hpp_html"><div class="ttname"><a href="AbstractPostEffectFactory_8hpp.html">AbstractPostEffectFactory.hpp</a></div></div>
 <div class="ttc" id="aIGame_8hpp_html"><div class="ttname"><a href="IGame_8hpp.html">IGame.hpp</a></div></div>
-<div class="ttc" id="aclassIGame_html_a0bef264333ba4f348b3327caf21a39ab"><div class="ttname"><a href="classIGame.html#a0bef264333ba4f348b3327caf21a39ab">IGame::SetPostEffectFactory</a></div><div class="ttdeci">void SetPostEffectFactory(std::unique_ptr&lt; AbstractPostEffectFactory &gt; _factory)</div><div class="ttdoc">PostEffectFactoryを設定</div><div class="ttdef"><b>Definition</b> <a href="IGame_8cpp_source.html#l00014">IGame.cpp:14</a></div></div>
-<div class="ttc" id="aclassIGame_html_a20d6d1cc5e972feba895d2dedd2cb40e"><div class="ttname"><a href="classIGame.html#a20d6d1cc5e972feba895d2dedd2cb40e">IGame::IGame</a></div><div class="ttdeci">IGame()</div><div class="ttdef"><b>Definition</b> <a href="IGame_8cpp_source.html#l00004">IGame.cpp:4</a></div></div>
-<div class="ttc" id="aclassIGame_html_a571af785e225ad47a700b280d10823a3"><div class="ttname"><a href="classIGame.html#a571af785e225ad47a700b280d10823a3">IGame::GetPostEffectFactory</a></div><div class="ttdeci">GESTD::ReferencePtr&lt; AbstractPostEffectFactory &gt; GetPostEffectFactory() const</div><div class="ttdoc">PostEffectFactoryを取得</div><div class="ttdef"><b>Definition</b> <a href="IGame_8cpp_source.html#l00018">IGame.cpp:18</a></div></div>
+<div class="ttc" id="aclassIGame_html_a20d6d1cc5e972feba895d2dedd2cb40e"><div class="ttname"><a href="classIGame.html#a20d6d1cc5e972feba895d2dedd2cb40e">IGame::IGame</a></div><div class="ttdeci">IGame()</div><div class="ttdef"><b>Definition</b> <a href="IGame_8cpp_source.html#l00003">IGame.cpp:3</a></div></div>
+<div class="ttc" id="aclassIGame_html_a598804a44ebba4ab0e44d4acadb1d6c0"><div class="ttname"><a href="classIGame.html#a598804a44ebba4ab0e44d4acadb1d6c0">IGame::GetPostEffectFactory</a></div><div class="ttdeci">GESTD::ReferencePtr&lt; PostEffectFactory &gt; GetPostEffectFactory() const</div><div class="ttdoc">PostEffectFactoryを取得</div><div class="ttdef"><b>Definition</b> <a href="IGame_8cpp_source.html#l00014">IGame.cpp:14</a></div></div>
 <div class="ttc" id="aclassIGame_html_ab630b8e753e939883b208e51759209cf"><div class="ttname"><a href="classIGame.html#ab630b8e753e939883b208e51759209cf">IGame::GetSceneSwitcher</a></div><div class="ttdeci">GESTD::ReferencePtr&lt; SceneSwitcher &gt; GetSceneSwitcher() const</div><div class="ttdoc">シーン切り替え管理を取得</div><div class="ttdef"><b>Definition</b> <a href="IGame_8cpp_source.html#l00010">IGame.cpp:10</a></div></div>
 <div class="ttc" id="aclassIGame_html_ab8b4ffb842b701fc0fdd4623943e9b5a"><div class="ttname"><a href="classIGame.html#ab8b4ffb842b701fc0fdd4623943e9b5a">IGame::~IGame</a></div><div class="ttdeci">virtual ~IGame()</div></div>
 </div><!-- fragment --></div><!-- contents -->
@@ -139,7 +131,7 @@ $(document).ready(function(){initNavTree('IGame_8cpp_source.html',''); initResiz
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_b43036362fece0f978c3c8156df55d19.html">Game</a></li><li class="navelem"><a class="el" href="IGame_8cpp.html">IGame.cpp</a></li>
-    <li class="footer">2026年09月04日(金) 07時22分07秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年09月07日(月) 03時45分00秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

@@ -10,5 +10,6 @@ var searchData=
   ['rotate_7',['rotate',['../structLevelData_1_1ObjectData.html#a5951d77cc0967f18e350287bb487eb96',1,'LevelData::ObjectData']]],
   ['rotation_8',['rotation',['../structNodeAnimation.html#abff16af5b1447cedceaed85731707458',1,'NodeAnimation::rotation'],['../structParticleSystem_1_1EmitterConfig.html#a23071a776f9bffba00aaa96e446a013f',1,'ParticleSystem::EmitterConfig::rotation']]],
   ['rotationvelocity_9',['rotationVelocity',['../structParticleSystem_1_1EmitterConfig.html#addc9b00f07be65ced48624393e9351da',1,'ParticleSystem::EmitterConfig']]],
-  ['rtvhandle_5f_10',['rtvHandle_',['../classIPostEffect.html#a023ba9eb932df36c3f0b04959806db87',1,'IPostEffect']]]
+  ['rtvhandle_5f_10',['rtvHandle_',['../classIPostEffect.html#a023ba9eb932df36c3f0b04959806db87',1,'IPostEffect']]],
+  ['rtvslot_11',['rtvSlot',['../structPostEffectChain_1_1EffectData.html#a972e678732b09ef229364eed80af4867',1,'PostEffectChain::EffectData']]]
 ];

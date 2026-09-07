@@ -112,14 +112,14 @@ ModelCommon の継承関係図</div>
 公開メンバ関数</h2></td></tr>
 <tr class="memitem:a44949376048a801f3a992f7370bdf846" id="r_a44949376048a801f3a992f7370bdf846"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelCommon.html#a44949376048a801f3a992f7370bdf846">Initialize</a> (const GESTD::ReferencePtr&lt; <a class="el" href="classDirectXAdapter.html">DirectXAdapter</a> &gt; &amp;_adapter, const GESTD::ReferencePtr&lt; <a class="el" href="classDebugUI.html">DebugUI</a> &gt; &amp;_debugUi, GESTD::ReferencePtr&lt; <a class="el" href="classResourceRepository.html">ResourceRepository</a> &gt; _resource, <a class="el" href="classSRVManager.html">SRVManager</a> *_srv)</td></tr>
 <tr class="separator:a44949376048a801f3a992f7370bdf846"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a62676bc803883466bb245d434668d06f" id="r_a62676bc803883466bb245d434668d06f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelCommon.html#a62676bc803883466bb245d434668d06f">RegisterStaticDraw</a> (const std::function&lt; void()&gt; &amp;_command, bool _isApplyPostEffect=true)</td></tr>
-<tr class="separator:a62676bc803883466bb245d434668d06f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4ad4834071e28461b02f11a0034ab960" id="r_a4ad4834071e28461b02f11a0034ab960"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelCommon.html#a4ad4834071e28461b02f11a0034ab960">RegisterSkinningDraw</a> (const std::function&lt; void()&gt; &amp;_command, bool _isApplyPostEffect=true)</td></tr>
-<tr class="separator:a4ad4834071e28461b02f11a0034ab960"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae9c7ea072bc48e694b6384877718b5d2" id="r_ae9c7ea072bc48e694b6384877718b5d2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelCommon.html#ae9c7ea072bc48e694b6384877718b5d2">RegisterStaticTransparentDraw</a> (const std::function&lt; void()&gt; &amp;_command, bool _isApplyPostEffect=true)</td></tr>
-<tr class="separator:ae9c7ea072bc48e694b6384877718b5d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a06a5197d8fd19146306c11bd48b87d69" id="r_a06a5197d8fd19146306c11bd48b87d69"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelCommon.html#a06a5197d8fd19146306c11bd48b87d69">RegisterSkinningTransparentDraw</a> (const std::function&lt; void()&gt; &amp;_command, bool _isApplyPostEffect=true)</td></tr>
-<tr class="separator:a06a5197d8fd19146306c11bd48b87d69"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3339c4e3b8600a5fcbd55f867d436203" id="r_a3339c4e3b8600a5fcbd55f867d436203"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelCommon.html#a3339c4e3b8600a5fcbd55f867d436203">RegisterStaticDraw</a> (const std::function&lt; void()&gt; &amp;_command, const std::string &amp;_canvasName=&quot;Main&quot;)</td></tr>
+<tr class="separator:a3339c4e3b8600a5fcbd55f867d436203"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35ef3ee491255683522839180556c5e1" id="r_a35ef3ee491255683522839180556c5e1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelCommon.html#a35ef3ee491255683522839180556c5e1">RegisterSkinningDraw</a> (const std::function&lt; void()&gt; &amp;_command, const std::string &amp;_canvasName=&quot;Main&quot;)</td></tr>
+<tr class="separator:a35ef3ee491255683522839180556c5e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abbd9b6964536ebe64b3a8045483d87b9" id="r_abbd9b6964536ebe64b3a8045483d87b9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelCommon.html#abbd9b6964536ebe64b3a8045483d87b9">RegisterStaticTransparentDraw</a> (const std::function&lt; void()&gt; &amp;_command, const std::string &amp;_canvasName=&quot;Main&quot;)</td></tr>
+<tr class="separator:abbd9b6964536ebe64b3a8045483d87b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4d29a0f5b2947fd111df5d12cb6e324" id="r_ac4d29a0f5b2947fd111df5d12cb6e324"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelCommon.html#ac4d29a0f5b2947fd111df5d12cb6e324">RegisterSkinningTransparentDraw</a> (const std::function&lt; void()&gt; &amp;_command, const std::string &amp;_canvasName=&quot;Main&quot;)</td></tr>
+<tr class="separator:ac4d29a0f5b2947fd111df5d12cb6e324"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aefc8fca9de728eb26947da3e90c8f718" id="r_aefc8fca9de728eb26947da3e90c8f718"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelCommon.html#aefc8fca9de728eb26947da3e90c8f718">RegisterShadowDraw</a> (const std::string &amp;_id, const std::function&lt; void()&gt; &amp;_func)</td></tr>
 <tr class="separator:aefc8fca9de728eb26947da3e90c8f718"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abb8f719d3e5c3e7a03944b07a63c1df1" id="r_abb8f719d3e5c3e7a03944b07a63c1df1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelCommon.html#abb8f719d3e5c3e7a03944b07a63c1df1">UnregisterShadowDraw</a> (const std::string &amp;_id)</td></tr>
@@ -149,8 +149,8 @@ ModelCommon の継承関係図</div>
 <tr class="separator:a9ee5c7c05e387bc2bda4cdba171740bc inherit pub_methods_classCommon"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaccb5f6b151eed7f3297e67046668ff3 inherit pub_methods_classCommon" id="r_aaccb5f6b151eed7f3297e67046668ff3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCommon.html#aaccb5f6b151eed7f3297e67046668ff3">RegisterUpdate</a> (const std::string &amp;_id, const std::function&lt; void()&gt; &amp;_func)</td></tr>
 <tr class="separator:aaccb5f6b151eed7f3297e67046668ff3 inherit pub_methods_classCommon"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae93c4bd439c1a6d360c5ba68d13a6d4f inherit pub_methods_classCommon" id="r_ae93c4bd439c1a6d360c5ba68d13a6d4f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCommon.html#ae93c4bd439c1a6d360c5ba68d13a6d4f">RegisterDraw</a> (const std::function&lt; void()&gt; &amp;_command, bool _isApplyPostEffect=true)</td></tr>
-<tr class="separator:ae93c4bd439c1a6d360c5ba68d13a6d4f inherit pub_methods_classCommon"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5deb139a94073649f0a02ec8bf017d58 inherit pub_methods_classCommon" id="r_a5deb139a94073649f0a02ec8bf017d58"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCommon.html#a5deb139a94073649f0a02ec8bf017d58">RegisterDraw</a> (const std::function&lt; void()&gt; &amp;_command)</td></tr>
+<tr class="separator:a5deb139a94073649f0a02ec8bf017d58 inherit pub_methods_classCommon"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acf757da19ea43b691fcdd6f8a18dd922 inherit pub_methods_classCommon" id="r_acf757da19ea43b691fcdd6f8a18dd922"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCommon.html#acf757da19ea43b691fcdd6f8a18dd922">Unregister</a> (const std::string &amp;_uuid)</td></tr>
 <tr class="separator:acf757da19ea43b691fcdd6f8a18dd922 inherit pub_methods_classCommon"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a22e116f89d995ae4180123e2be1608ca inherit pub_methods_classCommon" id="r_a22e116f89d995ae4180123e2be1608ca"><td class="memItemLeft" align="right" valign="top">GESTD::ReferencePtr&lt; <a class="el" href="classDirectXAdapter.html">DirectXAdapter</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCommon.html#a22e116f89d995ae4180123e2be1608ca">GetAdapter</a> () const</td></tr>
@@ -209,9 +209,9 @@ ModelCommon の継承関係図</div>
 
 <p><a class="el" href="classCommon.html#a24a9aa7c0ce1b85fa15471c3386d04cf">Common</a>を再実装しています。</p>
 
-<p class="definition"> <a class="el" href="ModelCommon_8cpp_source.html">ModelCommon.cpp</a> の <a class="el" href="ModelCommon_8cpp_source.html#l00486">486</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="ModelCommon_8cpp_source.html">ModelCommon.cpp</a> の <a class="el" href="ModelCommon_8cpp_source.html#l00490">490</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="Common_8hpp_source.html#l00020">Common::adapter_</a>, <a class="el" href="Common_8hpp_source.html#l00024">Common::mutex_</a>, <a class="el" href="Common_8hpp_source.html#l00026">Common::pipeline_</a>, <a class="el" href="Renderer_8cpp_source.html#l00011">Renderer::Register()</a>, <a class="el" href="SRVManager_8cpp_source.html#l00082">SRVManager::SetGraphicsRootDescriptorTable()</a>.</p>
+<p class="reference">参照先 <a class="el" href="Common_8hpp_source.html#l00018">Common::adapter_</a>, <a class="el" href="Common_8hpp_source.html#l00022">Common::mutex_</a>, <a class="el" href="Common_8hpp_source.html#l00024">Common::pipeline_</a>, <a class="el" href="Renderer_8cpp_source.html#l00013">Renderer::Register()</a>, <a class="el" href="SRVManager_8cpp_source.html#l00082">SRVManager::SetGraphicsRootDescriptorTable()</a>.</p>
 
 </div>
 </div>
@@ -230,9 +230,9 @@ ModelCommon の継承関係図</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="ModelCommon_8cpp_source.html">ModelCommon.cpp</a> の <a class="el" href="ModelCommon_8cpp_source.html#l00642">642</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="ModelCommon_8cpp_source.html">ModelCommon.cpp</a> の <a class="el" href="ModelCommon_8cpp_source.html#l00549">549</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="Common_8hpp_source.html#l00026">Common::pipeline_</a>.</p>
+<p class="reference">参照先 <a class="el" href="Common_8hpp_source.html#l00024">Common::pipeline_</a>.</p>
 
 </div>
 </div>
@@ -251,7 +251,7 @@ ModelCommon の継承関係図</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="ModelCommon_8cpp_source.html">ModelCommon.cpp</a> の <a class="el" href="ModelCommon_8cpp_source.html#l00646">646</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="ModelCommon_8cpp_source.html">ModelCommon.cpp</a> の <a class="el" href="ModelCommon_8cpp_source.html#l00553">553</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -368,7 +368,7 @@ ModelCommon の継承関係図</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="ModelCommon_8cpp_source.html">ModelCommon.cpp</a> の <a class="el" href="ModelCommon_8cpp_source.html#l00650">650</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="ModelCommon_8cpp_source.html">ModelCommon.cpp</a> の <a class="el" href="ModelCommon_8cpp_source.html#l00557">557</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -400,12 +400,12 @@ ModelCommon の継承関係図</div>
 
 <p class="definition"> <a class="el" href="ModelCommon_8cpp_source.html">ModelCommon.cpp</a> の <a class="el" href="ModelCommon_8cpp_source.html#l00465">465</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="Common_8hpp_source.html#l00024">Common::mutex_</a>.</p>
+<p class="reference">参照先 <a class="el" href="Common_8hpp_source.html#l00022">Common::mutex_</a>.</p>
 
 </div>
 </div>
-<a id="a4ad4834071e28461b02f11a0034ab960" name="a4ad4834071e28461b02f11a0034ab960"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4ad4834071e28461b02f11a0034ab960">&#9670;&#160;</a></span>RegisterSkinningDraw()</h2>
+<a id="a35ef3ee491255683522839180556c5e1" name="a35ef3ee491255683522839180556c5e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a35ef3ee491255683522839180556c5e1">&#9670;&#160;</a></span>RegisterSkinningDraw()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -419,8 +419,8 @@ ModelCommon の継承関係図</div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>_isApplyPostEffect</em> = <code>true</code>&#160;</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>_canvasName</em> = <code>&quot;Main&quot;</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -432,12 +432,12 @@ ModelCommon の継承関係図</div>
 
 <p class="definition"> <a class="el" href="ModelCommon_8cpp_source.html">ModelCommon.cpp</a> の <a class="el" href="ModelCommon_8cpp_source.html#l00450">450</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="Common_8hpp_source.html#l00024">Common::mutex_</a>.</p>
+<p class="reference">参照先 <a class="el" href="Common_8hpp_source.html#l00022">Common::mutex_</a>.</p>
 
 </div>
 </div>
-<a id="a06a5197d8fd19146306c11bd48b87d69" name="a06a5197d8fd19146306c11bd48b87d69"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a06a5197d8fd19146306c11bd48b87d69">&#9670;&#160;</a></span>RegisterSkinningTransparentDraw()</h2>
+<a id="ac4d29a0f5b2947fd111df5d12cb6e324" name="ac4d29a0f5b2947fd111df5d12cb6e324"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac4d29a0f5b2947fd111df5d12cb6e324">&#9670;&#160;</a></span>RegisterSkinningTransparentDraw()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -451,8 +451,8 @@ ModelCommon の継承関係図</div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>_isApplyPostEffect</em> = <code>true</code>&#160;</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>_canvasName</em> = <code>&quot;Main&quot;</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -464,12 +464,12 @@ ModelCommon の継承関係図</div>
 
 <p class="definition"> <a class="el" href="ModelCommon_8cpp_source.html">ModelCommon.cpp</a> の <a class="el" href="ModelCommon_8cpp_source.html#l00460">460</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="Common_8hpp_source.html#l00024">Common::mutex_</a>.</p>
+<p class="reference">参照先 <a class="el" href="Common_8hpp_source.html#l00022">Common::mutex_</a>.</p>
 
 </div>
 </div>
-<a id="a62676bc803883466bb245d434668d06f" name="a62676bc803883466bb245d434668d06f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a62676bc803883466bb245d434668d06f">&#9670;&#160;</a></span>RegisterStaticDraw()</h2>
+<a id="a3339c4e3b8600a5fcbd55f867d436203" name="a3339c4e3b8600a5fcbd55f867d436203"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3339c4e3b8600a5fcbd55f867d436203">&#9670;&#160;</a></span>RegisterStaticDraw()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -483,8 +483,8 @@ ModelCommon の継承関係図</div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>_isApplyPostEffect</em> = <code>true</code>&#160;</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>_canvasName</em> = <code>&quot;Main&quot;</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -496,12 +496,12 @@ ModelCommon の継承関係図</div>
 
 <p class="definition"> <a class="el" href="ModelCommon_8cpp_source.html">ModelCommon.cpp</a> の <a class="el" href="ModelCommon_8cpp_source.html#l00445">445</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="Common_8hpp_source.html#l00024">Common::mutex_</a>.</p>
+<p class="reference">参照先 <a class="el" href="Common_8hpp_source.html#l00022">Common::mutex_</a>.</p>
 
 </div>
 </div>
-<a id="ae9c7ea072bc48e694b6384877718b5d2" name="ae9c7ea072bc48e694b6384877718b5d2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae9c7ea072bc48e694b6384877718b5d2">&#9670;&#160;</a></span>RegisterStaticTransparentDraw()</h2>
+<a id="abbd9b6964536ebe64b3a8045483d87b9" name="abbd9b6964536ebe64b3a8045483d87b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abbd9b6964536ebe64b3a8045483d87b9">&#9670;&#160;</a></span>RegisterStaticTransparentDraw()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -515,8 +515,8 @@ ModelCommon の継承関係図</div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>_isApplyPostEffect</em> = <code>true</code>&#160;</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>_canvasName</em> = <code>&quot;Main&quot;</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -528,7 +528,7 @@ ModelCommon の継承関係図</div>
 
 <p class="definition"> <a class="el" href="ModelCommon_8cpp_source.html">ModelCommon.cpp</a> の <a class="el" href="ModelCommon_8cpp_source.html#l00455">455</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="Common_8hpp_source.html#l00024">Common::mutex_</a>.</p>
+<p class="reference">参照先 <a class="el" href="Common_8hpp_source.html#l00022">Common::mutex_</a>.</p>
 
 </div>
 </div>
@@ -580,7 +580,7 @@ ModelCommon の継承関係図</div>
 
 <p class="definition"> <a class="el" href="ModelCommon_8cpp_source.html">ModelCommon.cpp</a> の <a class="el" href="ModelCommon_8cpp_source.html#l00470">470</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="Common_8hpp_source.html#l00024">Common::mutex_</a>.</p>
+<p class="reference">参照先 <a class="el" href="Common_8hpp_source.html#l00022">Common::mutex_</a>.</p>
 
 </div>
 </div>
@@ -594,7 +594,7 @@ ModelCommon の継承関係図</div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classModelCommon.html">ModelCommon</a></li>
-    <li class="footer">2026年09月04日(金) 07時22分07秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年09月07日(月) 03時45分00秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

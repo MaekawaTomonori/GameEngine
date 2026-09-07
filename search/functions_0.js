@@ -1,15 +1,20 @@
 var searchData=
 [
-  ['add_0',['add',['../classCameraRepository.html#ac6e796aa34f1d8f1006a99c6e2f88aa7',1,'CameraRepository::Add()'],['../classLightManager.html#a1cf5a5081a0dfe8537200797fe1c4340',1,'LightManager::Add()'],['../classMeshRepository.html#a330bb2912dac8930faf1b0a6f202c0c4',1,'MeshRepository::Add()'],['../classModelRepository.html#af9f26431792428a60332cfc6b653a911',1,'ModelRepository::Add()'],['../classPostProcessExecutor.html#a20e592ca2994b9091bc005b4f4102f5f',1,'PostProcessExecutor::Add()'],['../classStageRepository.html#acd2c79a51cbbab7a6a29b501812af839',1,'StageRepository::Add()'],['../classCameraController.html#a5cd4ad3fd80b301b3edd61172bb2fe69',1,'CameraController::Add()']]],
-  ['addcount_1',['AddCount',['../classLineCommon.html#a527dae5e5dac2e75bb00c9261a0ca0e3',1,'LineCommon']]],
-  ['addemitter_2',['AddEmitter',['../classParticleSystem_1_1TemplateEditor.html#a47fa9059d0b9edaea9a14fcd539e680a',1,'ParticleSystem::TemplateEditor']]],
-  ['addlayer_3',['AddLayer',['../classPlaneTextureLayoutEditor.html#ae4d620f7d36ffcc5e9485609ce08d7e5',1,'PlaneTextureLayoutEditor']]],
-  ['addline_4',['AddLine',['../classLine.html#a3e95b55c7d5d69801a398215cf8a7db8',1,'Line']]],
-  ['addmodule_5',['AddModule',['../classUi_1_1Canvas.html#aa5ff827de11df1ed5224c1491273ceb3',1,'Ui::Canvas']]],
-  ['addparameter_6',['AddParameter',['../classRootSignature.html#a6d6cd5a567816ca14e34f47841d98901',1,'RootSignature']]],
-  ['allocate_7',['Allocate',['../classSRVManager.html#a1e7a23d2422f4228cc6a9436ad1de225',1,'SRVManager']]],
-  ['apply_8',['Apply',['../classIPostEffect.html#a92340d8f3785eaf52501ac02866c549a',1,'IPostEffect']]],
-  ['applycursorvisibility_9',['ApplyCursorVisibility',['../classInput.html#a1f6f6ae51b56fec3cb2e49b3d9ed5824',1,'Input']]],
-  ['applypreset_10',['ApplyPreset',['../classPostProcessExecutor.html#a4ba24e1b6a7f501df50d1a8003db1f09',1,'PostProcessExecutor']]],
-  ['awake_11',['awake',['../classIScene.html#a4074b2200747d160b993fc3ac7f428ce',1,'IScene::Awake()'],['../classTransition.html#ac07725de59e8c6520741b7a9d3bec8fd',1,'Transition::Awake(Type _type, ITransitionEffect::State _state)'],['../classTransition.html#a00b54bae79f74cfbe98fd98a8b303c79',1,'Transition::Awake(Type _type, ITransitionEffect::State _state, float _duration)']]]
+  ['add_0',['add',['../classCameraRepository.html#ac6e796aa34f1d8f1006a99c6e2f88aa7',1,'CameraRepository::Add()'],['../classCameraController.html#a5cd4ad3fd80b301b3edd61172bb2fe69',1,'CameraController::Add()'],['../classStageRepository.html#acd2c79a51cbbab7a6a29b501812af839',1,'StageRepository::Add()'],['../classPostProcessExecutor.html#adba81681437f7003dafb1b241345a0a7',1,'PostProcessExecutor::Add()'],['../classPostEffectChain.html#ab27f5ccac10247f9bade05b24e94c141',1,'PostEffectChain::Add()'],['../classModelRepository.html#af9f26431792428a60332cfc6b653a911',1,'ModelRepository::Add()'],['../classMeshRepository.html#a330bb2912dac8930faf1b0a6f202c0c4',1,'MeshRepository::Add()'],['../classLightManager.html#a1cf5a5081a0dfe8537200797fe1c4340',1,'LightManager::Add()']]],
+  ['addcanvas_1',['addcanvas',['../classCanvasLayer.html#a17b6ff81c2ac36929255075d6d24c8ec',1,'CanvasLayer::AddCanvas()'],['../classPostProcessExecutor.html#a45834ff93188f06fa9d6546a0e064e90',1,'PostProcessExecutor::AddCanvas()']]],
+  ['addcanvastop_2',['addcanvastop',['../classCanvasLayer.html#a3c64c35571c538b7530a7c6c8efd6933',1,'CanvasLayer::AddCanvasTop()'],['../classPostProcessExecutor.html#ad2124a32394228f244619d492045bb99',1,'PostProcessExecutor::AddCanvasTop()']]],
+  ['addcount_3',['AddCount',['../classLineCommon.html#a527dae5e5dac2e75bb00c9261a0ca0e3',1,'LineCommon']]],
+  ['addemitter_4',['AddEmitter',['../classParticleSystem_1_1TemplateEditor.html#a47fa9059d0b9edaea9a14fcd539e680a',1,'ParticleSystem::TemplateEditor']]],
+  ['addlayer_5',['AddLayer',['../classPlaneTextureLayoutEditor.html#ae4d620f7d36ffcc5e9485609ce08d7e5',1,'PlaneTextureLayoutEditor']]],
+  ['addline_6',['AddLine',['../classLine.html#a3e95b55c7d5d69801a398215cf8a7db8',1,'Line']]],
+  ['addmodule_7',['AddModule',['../classUi_1_1Canvas.html#a409bb3ff40721a9ce6ddb7b401cdb1be',1,'Ui::Canvas']]],
+  ['addparameter_8',['AddParameter',['../classRootSignature.html#a6d6cd5a567816ca14e34f47841d98901',1,'RootSignature']]],
+  ['allocate_9',['allocate',['../classHeap.html#adb09b8fd19ed687a247a7261910cbb30',1,'Heap::Allocate()'],['../classSRVManager.html#a1e7a23d2422f4228cc6a9436ad1de225',1,'SRVManager::Allocate()']]],
+  ['allocatertvslot_10',['AllocateRtvSlot',['../classPostEffectChain.html#ab0518c5931733c445b6d1ce693d1c67b',1,'PostEffectChain']]],
+  ['apply_11',['Apply',['../classIPostEffect.html#a92340d8f3785eaf52501ac02866c549a',1,'IPostEffect']]],
+  ['applycursorvisibility_12',['ApplyCursorVisibility',['../classInput.html#a1f6f6ae51b56fec3cb2e49b3d9ed5824',1,'Input']]],
+  ['applyparameters_13',['applyparameters',['../classBoxBlur.html#a2342959bf7beced1b4e98a76c7c743f8',1,'BoxBlur::ApplyParameters()'],['../classGrayscale.html#afea7c3b448cebf9932abc07502134bc7',1,'Grayscale::ApplyParameters()'],['../classIPostEffect.html#abefb33f8dbe387893dde26e46ddd5d84',1,'IPostEffect::ApplyParameters()'],['../classVignette.html#a6bd2620534004b4405b343636a4da281',1,'Vignette::ApplyParameters()']]],
+  ['applyposteffects_14',['applyposteffects',['../classCanvas.html#a1606adf2861cdcccb65b19e4609189ae',1,'Canvas::ApplyPostEffects()'],['../classCanvasLayer.html#afd846e57d07aa9cff9beaddac8136078',1,'CanvasLayer::ApplyPostEffects()'],['../classPostProcessExecutor.html#a1885d97982b8a130565427fe93f7228c',1,'PostProcessExecutor::ApplyPostEffects()']]],
+  ['applypreset_15',['ApplyPreset',['../classPostProcessExecutor.html#a83737ebdd569cdc994d513fc9e084fd7',1,'PostProcessExecutor']]],
+  ['awake_16',['awake',['../classIScene.html#a4074b2200747d160b993fc3ac7f428ce',1,'IScene::Awake()'],['../classTransition.html#ac07725de59e8c6520741b7a9d3bec8fd',1,'Transition::Awake(Type _type, ITransitionEffect::State _state)'],['../classTransition.html#a00b54bae79f74cfbe98fd98a8b303c79',1,'Transition::Awake(Type _type, ITransitionEffect::State _state, float _duration)']]]
 ];

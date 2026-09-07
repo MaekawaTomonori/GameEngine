@@ -1,6 +1,7 @@
 var structParticleSystem_1_1EmitterConfig =
 [
     [ "billboard", "structParticleSystem_1_1EmitterConfig.html#a7be790e92261fca933d9d07213b73fa2", null ],
+    [ "canvasName", "structParticleSystem_1_1EmitterConfig.html#a327239954598daa08996d8675b0430d0", null ],
     [ "color", "structParticleSystem_1_1EmitterConfig.html#a8e01733a6eafbf7e743d8e8fba05b676", null ],
     [ "colorKeys", "structParticleSystem_1_1EmitterConfig.html#a5dcdf49ced7b24d2252c93fcbefcd96d", null ],
     [ "duration", "structParticleSystem_1_1EmitterConfig.html#a4457af19f9a804b4f6bf0020aa0e6428", null ],

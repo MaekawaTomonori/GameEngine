@@ -107,6 +107,12 @@ $(document).ready(function(){initNavTree('classHeap.html',''); initResizable(); 
 <tr class="memitem:a7542b6d8d537068c8f30aa84385db638" id="r_a7542b6d8d537068c8f30aa84385db638"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHeap.html#a7542b6d8d537068c8f30aa84385db638">Create</a> (ID3D12Device *_device, D3D12_DESCRIPTOR_HEAP_TYPE _type, UINT _numDescriptors, D3D12_DESCRIPTOR_HEAP_FLAGS _flags=D3D12_DESCRIPTOR_HEAP_FLAG_NONE)</td></tr>
 <tr class="memdesc:a7542b6d8d537068c8f30aa84385db638"><td class="mdescLeft">&#160;</td><td class="mdescRight">ディスクリプタヒープを作成  <br /></td></tr>
 <tr class="separator:a7542b6d8d537068c8f30aa84385db638"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb09b8fd19ed687a247a7261910cbb30" id="r_adb09b8fd19ed687a247a7261910cbb30"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHeap.html#adb09b8fd19ed687a247a7261910cbb30">Allocate</a> ()</td></tr>
+<tr class="memdesc:adb09b8fd19ed687a247a7261910cbb30"><td class="mdescLeft">&#160;</td><td class="mdescRight">空いているスロットを確保する 解放済みスロットがあればそれを再利用し、無ければ未使用の新しいスロットを返す  <br /></td></tr>
+<tr class="separator:adb09b8fd19ed687a247a7261910cbb30"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad7589260c6b5a8c76d9965f8e2fec19a" id="r_ad7589260c6b5a8c76d9965f8e2fec19a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHeap.html#ad7589260c6b5a8c76d9965f8e2fec19a">Free</a> (uint32_t _index)</td></tr>
+<tr class="memdesc:ad7589260c6b5a8c76d9965f8e2fec19a"><td class="mdescLeft">&#160;</td><td class="mdescRight">スロットを解放し、以後のAllocate()で再利用可能にする  <br /></td></tr>
+<tr class="separator:ad7589260c6b5a8c76d9965f8e2fec19a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aea3ea1db8ed4ce3e8f7b3b538006cf8b" id="r_aea3ea1db8ed4ce3e8f7b3b538006cf8b"><td class="memItemLeft" align="right" valign="top">ID3D12DescriptorHeap *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHeap.html#aea3ea1db8ed4ce3e8f7b3b538006cf8b">Get</a> () const</td></tr>
 <tr class="memdesc:aea3ea1db8ed4ce3e8f7b3b538006cf8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">ディスクリプタヒープを取得  <br /></td></tr>
 <tr class="separator:aea3ea1db8ed4ce3e8f7b3b538006cf8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -120,8 +126,30 @@ $(document).ready(function(){initNavTree('classHeap.html',''); initResizable(); 
 <a name="details" id="details"></a><h2 class="groupheader">詳解</h2>
 <div class="textblock"><p>ディスクリプタヒープクラス DirectX12のディスクリプタヒープを管理 </p>
 
-<p class="definition"> <a class="el" href="Heap_8hpp_source.html">Heap.hpp</a> の <a class="el" href="Heap_8hpp_source.html#l00010">10</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Heap_8hpp_source.html">Heap.hpp</a> の <a class="el" href="Heap_8hpp_source.html#l00011">11</a> 行目に定義があります。</p>
 </div><h2 class="groupheader">関数詳解</h2>
+<a id="adb09b8fd19ed687a247a7261910cbb30" name="adb09b8fd19ed687a247a7261910cbb30"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adb09b8fd19ed687a247a7261910cbb30">&#9670;&#160;</a></span>Allocate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t Heap::Allocate </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>空いているスロットを確保する 解放済みスロットがあればそれを再利用し、無ければ未使用の新しいスロットを返す </p>
+<dl class="section return"><dt>戻り値</dt><dd>確保したスロットのインデックス </dd></dl>
+
+<p class="definition"> <a class="el" href="Heap_8cpp_source.html">Heap.cpp</a> の <a class="el" href="Heap_8cpp_source.html#l00024">24</a> 行目に定義があります。</p>
+
+</div>
+</div>
 <a id="a7542b6d8d537068c8f30aa84385db638" name="a7542b6d8d537068c8f30aa84385db638"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7542b6d8d537068c8f30aa84385db638">&#9670;&#160;</a></span>Create()</h2>
 
@@ -176,6 +204,34 @@ $(document).ready(function(){initNavTree('classHeap.html',''); initResizable(); 
 
 </div>
 </div>
+<a id="ad7589260c6b5a8c76d9965f8e2fec19a" name="ad7589260c6b5a8c76d9965f8e2fec19a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad7589260c6b5a8c76d9965f8e2fec19a">&#9670;&#160;</a></span>Free()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Heap::Free </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>_index</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>スロットを解放し、以後のAllocate()で再利用可能にする </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_index</td><td>解放するスロットのインデックス </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition"> <a class="el" href="Heap_8cpp_source.html">Heap.cpp</a> の <a class="el" href="Heap_8cpp_source.html#l00039">39</a> 行目に定義があります。</p>
+
+</div>
+</div>
 <a id="aea3ea1db8ed4ce3e8f7b3b538006cf8b" name="aea3ea1db8ed4ce3e8f7b3b538006cf8b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aea3ea1db8ed4ce3e8f7b3b538006cf8b">&#9670;&#160;</a></span>Get()</h2>
 
@@ -194,7 +250,7 @@ $(document).ready(function(){initNavTree('classHeap.html',''); initResizable(); 
 <p>ディスクリプタヒープを取得 </p>
 <dl class="section return"><dt>戻り値</dt><dd>ディスクリプタヒープポインタ </dd></dl>
 
-<p class="definition"> <a class="el" href="Heap_8cpp_source.html">Heap.cpp</a> の <a class="el" href="Heap_8cpp_source.html#l00021">21</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Heap_8cpp_source.html">Heap.cpp</a> の <a class="el" href="Heap_8cpp_source.html#l00043">43</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -223,7 +279,7 @@ $(document).ready(function(){initNavTree('classHeap.html',''); initResizable(); 
 </dl>
 <dl class="section return"><dt>戻り値</dt><dd>CPUディスクリプタハンドル </dd></dl>
 
-<p class="definition"> <a class="el" href="Heap_8cpp_source.html">Heap.cpp</a> の <a class="el" href="Heap_8cpp_source.html#l00025">25</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Heap_8cpp_source.html">Heap.cpp</a> の <a class="el" href="Heap_8cpp_source.html#l00047">47</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -252,7 +308,7 @@ $(document).ready(function(){initNavTree('classHeap.html',''); initResizable(); 
 </dl>
 <dl class="section return"><dt>戻り値</dt><dd>GPUディスクリプタハンドル </dd></dl>
 
-<p class="definition"> <a class="el" href="Heap_8cpp_source.html">Heap.cpp</a> の <a class="el" href="Heap_8cpp_source.html#l00031">31</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Heap_8cpp_source.html">Heap.cpp</a> の <a class="el" href="Heap_8cpp_source.html#l00053">53</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -266,7 +322,7 @@ $(document).ready(function(){initNavTree('classHeap.html',''); initResizable(); 
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classHeap.html">Heap</a></li>
-    <li class="footer">2026年09月04日(金) 07時22分07秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年09月07日(月) 03時45分00秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>
