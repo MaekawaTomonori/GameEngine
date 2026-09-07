@@ -35,6 +35,7 @@ void RawSpotLight::Save(const std::string& _path) {
     json->SetValue(_path, uuid_, "decay", light_.decay);
     json->SetValue(_path, uuid_, "cosAngle", light_.cosAngle);
     json->SetValue(_path, uuid_, "falloffStart", light_.falloffStart);
+    json->SetValue(_path, uuid_, "followRef", static_cast<int32_t>(FollowsGlobalRef()));
 }
 
 void RawSpotLight::ImGuiSetting(int _index) {
@@ -67,6 +68,11 @@ void RawSpotLight::ImGuiSetting(int _index) {
             light_.falloffStart = std::cos(falloffDeg * MathUtils::F_PI / 180.f);
         }
 
+        bool followsRef = FollowsGlobalRef();
+        if (ImGui::Checkbox("Follow Ref", &followsRef)) {
+            SetFollowsGlobalRef(followsRef);
+            if (!followsRef) ClearRef();
+        }
         if (ImGui::Button("Delete")) { enable_ = false; }
         ImGui::TreePop();
     }

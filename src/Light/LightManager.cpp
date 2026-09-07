@@ -162,6 +162,12 @@ void LightManager::Load() {
                     pl.castShadow = static_cast<uint32_t>(std::get<int32_t>(group.at("castShadow")));
                 }
                 rawPointLights_.back()->Set(itr.first, pl);
+                if (group.count("followRef")) {
+                    rawPointLights_.back()->SetFollowsGlobalRef(std::get<int32_t>(group.at("followRef")) != 0);
+                }
+                if (rawPointLights_.back()->FollowsGlobalRef() && ref_.has_value()) {
+                    rawPointLights_.back()->SetReference(ref_.value());
+                }
                 break;
             }
             case LightType::Spot:
@@ -177,6 +183,12 @@ void LightManager::Load() {
                     std::get<float>(group.at("falloffStart")),
                     0
                 });
+                if (group.count("followRef")) {
+                    rawSpotLights_.back()->SetFollowsGlobalRef(std::get<int32_t>(group.at("followRef")) != 0);
+                }
+                if (rawSpotLights_.back()->FollowsGlobalRef() && ref_.has_value()) {
+                    rawSpotLights_.back()->SetReference(ref_.value());
+                }
                 break;
         }
     }
@@ -270,9 +282,6 @@ void LightManager::Add(LightType _type) {
         }
         directional = std::make_unique<RawDirectionalLight>();
         directional->DefaultSetting();
-        if (ref_.has_value()){
-            directional->SetReference(ref_.value());
-        }
         rawDirectionalLights_.push_back(std::move(directional));
         break;
     case LightType::Point:
@@ -281,9 +290,6 @@ void LightManager::Add(LightType _type) {
         }
         point = std::make_unique<RawPointLight>();
         point->DefaultSetting();
-        if (ref_.has_value()){
-            point->SetReference(ref_.value());
-        }
         rawPointLights_.push_back(std::move(point));
         break;
     case LightType::Spot:
@@ -292,9 +298,6 @@ void LightManager::Add(LightType _type) {
         }
         spot = std::make_unique<RawSpotLight>();
         spot->DefaultSetting();
-        if (ref_.has_value()){
-            spot->SetReference(ref_.value());
-        }
         rawSpotLights_.push_back(std::move(spot));
         break;
     }
@@ -304,15 +307,27 @@ void LightManager::SetPosition(const Vector3& _pos) {
     ref_ = _pos;
 
     for (const auto& dl : rawDirectionalLights_) {
-        dl->SetReference(_pos);
+        if (dl->FollowsGlobalRef()) dl->SetReference(_pos);
     }
 
     for (const auto& pl : rawPointLights_) {
-        pl->SetReference(_pos);
+        if (pl->FollowsGlobalRef()) pl->SetReference(_pos);
     }
 
     for (const auto& sl : rawSpotLights_) {
-        sl->SetReference(_pos);
+        if (sl->FollowsGlobalRef()) sl->SetReference(_pos);
+    }
+}
+
+void LightManager::SetIntensity(float _intensity) {
+    for (const auto& pl : rawPointLights_) {
+        if (pl->FollowsGlobalRef()) pl->GetLight().intensity = _intensity;
+    }
+}
+
+void LightManager::SetRadius(float _radius) {
+    for (const auto& pl : rawPointLights_) {
+        if (pl->FollowsGlobalRef()) pl->GetLight().radius = _radius;
     }
 }
 

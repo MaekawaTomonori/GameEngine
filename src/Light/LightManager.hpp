@@ -77,10 +77,22 @@ public:
      */
     void Add(LightType _type);
 
-    /** @brief ライトの参照座標を設定
+    /** @brief 参照追従が有効なライトの座標を設定
      * @param _pos 参照座標
+     * @note SetFollowsGlobalRef(true) を設定したライトのみが対象。
+     *       他のライトはそれぞれの個別設定を維持する。
      */
     void SetPosition(const Vector3& _pos);
+
+    /** @brief 参照追従が有効な点光源の強さを設定
+     * @param _intensity 強さ
+     */
+    void SetIntensity(float _intensity);
+
+    /** @brief 参照追従が有効な点光源の半径を設定
+     * @param _radius 半径
+     */
+    void SetRadius(float _radius);
 
     void ClearRef();
 

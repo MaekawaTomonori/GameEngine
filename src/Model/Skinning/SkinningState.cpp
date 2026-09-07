@@ -5,6 +5,7 @@
 #include <variant>
 
 #include "Log.hpp"
+#include "PerformanceProfiler.hpp"
 #include "Utils.hpp"
 #include "imgui.h"
 #include "Math/MathUtils.hpp"
@@ -27,18 +28,22 @@ void SkinningState::Initialize(const GESTD::ReferencePtr<DirectXAdapter>& _adapt
 }
 
 void SkinningState::Update() {
-    UpdateAnimation();
-    UpdateSkeleton();
-    UpdateSkinCluster();
+    { PROFILE_SCOPE("Skinning - Animation");   UpdateAnimation(); }
+    { PROFILE_SCOPE("Skinning - Skeleton");    UpdateSkeleton(); }
+    { PROFILE_SCOPE("Skinning - SkinCluster"); UpdateSkinCluster(); }
 
 #ifdef _DEBUG
-    CreateLine();
+    if (showSkeletonLines_) {
+        PROFILE_SCOPE("Skinning - DebugLine");
+        CreateLine();
+    }
 #endif
 }
 
 void SkinningState::Debug(const std::string& _uuidPrefix) {
     ImGui::PushID(("skeleton_" + _uuidPrefix).c_str());
     ImGui::SeparatorText("Skeleton");
+    ImGui::Checkbox("Show Skeleton Lines", &showSkeletonLines_);
     std::function<void(int32_t)> Recursive = [&](int32_t _index) {
         Joint& joint = pose_.joints[_index];
         if (ImGui::TreeNode(joint.name.c_str())) {
@@ -83,6 +88,7 @@ void SkinningState::Debug(const std::string& _uuidPrefix) {
 }
 
 void SkinningState::DrawLine() const {
+    if (!showSkeletonLines_) return;
     line_.Draw();
 }
 
@@ -187,7 +193,6 @@ void SkinningState::UpdateSkeleton() {
 
 void SkinningState::UpdateAnimation() {
     if (!data_->animation.has_value()) {
-        Log::Send(Log::Level::WARNING, "Model data does not contain an animation");
         return;
     }
     Animation& animation = data_->animation.value();

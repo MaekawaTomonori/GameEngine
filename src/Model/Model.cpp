@@ -3,6 +3,7 @@
 #include <filesystem>
 
 #include "Log.hpp"
+#include "PerformanceProfiler.hpp"
 #include "Utils.hpp"
 #include "imgui.h"
 #include "Pattern/Singleton.hpp"
@@ -100,11 +101,12 @@ void Model::Initialize(const std::string& _name) {
 void Model::Update() {
     // Update Animation, Skeleton, SkinCluster, and debug line only if this model has skinning data
     if (skinning_) {
+        PROFILE_SCOPE("Model - Skinning");
         skinning_->Update();
     }
 
     // Mesh Update
-    mesh_->Update();
+    { PROFILE_SCOPE("Model - Mesh"); mesh_->Update(); }
 }
 
 void Model::Draw() const {
@@ -220,7 +222,6 @@ GESTD::ReferencePtr<Mesh> Model::GetMesh() const {
 void Model::Load(const std::string& _name) {
     auto repo = Singleton<ModelCommon>::GetInstance()->GetResourceRepository();
     if (repo->GetModelRepository()->Contains(_name)){
-        Log::Send(Log::Level::WARNING, "Already Loaded Model : " + _name);
         return;
     }
 

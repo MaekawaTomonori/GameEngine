@@ -11,6 +11,10 @@ protected:
 
     std::optional<Vector3> ref_;
 
+    // true の場合のみ LightManager::SetPosition の一括反映対象になる
+    // （ライトが複数ある場合に全ライトが同じ座標に引っ張られてしまう問題への対処）
+    bool followsGlobalRef_ = false;
+
 public:
 	RawLight();
 	virtual ~RawLight() = default;
@@ -34,6 +38,14 @@ public:
 
     void ClearRef() {
         ref_.reset();
+    }
+
+    void SetFollowsGlobalRef(bool _follow) {
+        followsGlobalRef_ = _follow;
+    }
+
+    bool FollowsGlobalRef() const {
+        return followsGlobalRef_;
     }
 
     std::string GetUUID() const {
