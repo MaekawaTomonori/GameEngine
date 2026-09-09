@@ -65,6 +65,10 @@ public:
      */
     void Draw();
 
+    /** @brief 遷移の描画
+     */
+    void DrawTransition();
+
     /** @brief シーンを登録する
      * @param _name シーン名
      * @param _creator シーン生成関数
