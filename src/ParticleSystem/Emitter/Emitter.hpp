@@ -76,7 +76,7 @@ class Emitter {
     std::function<void(const Vector3&, Vector3&, Vector3&)> spawnFunc_;
     std::function<void(float, const Vector3&, Vector3&, Vector3&, Vector4&)> updateFunc_;
 
-    std::vector<std::unique_ptr<Particle>> particles_;
+    std::vector<Particle> particlePool_;
 
     uint16_t actives_ = 0;
 
