@@ -47,11 +47,6 @@ class Model {
     std::unique_ptr<DX12Resource> wr_;
     Transformation* wd_ = nullptr;
 
-    /** Camera
-     */
-    std::unique_ptr<DX12Resource> cr_;
-    CameraForGpu* cd_ = nullptr;
-
     std::string environmentTexture_ = "";
 
     std::string canvasName_ = "Main";

@@ -15,7 +15,7 @@ public:
     void Initialize(DirectXAdapter* _adapter);
 
     void Add(const std::string &_name, const MeshData& _raw);
-    MeshData Get(const std::string& _name);
+    const MeshData& Get(const std::string& _name);
     bool Contains(const std::string& _name) const;
 }; // class MeshRepository
 

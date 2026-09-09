@@ -60,9 +60,6 @@ void Model::Initialize(const std::string& _name) {
     wd_->world = MathUtils::Matrix::MakeIdentity();
     wd_->inverse = MathUtils::Matrix::MakeIdentity();
 
-    cr_ = (adapter_->CreateBufferResource(sizeof(CameraForGpu)));
-    cr_->Get()->Map(0, nullptr, reinterpret_cast<void**>(&cd_));
-
     // Create SkinningState only if skeleton exists and skinCluster data is available
     if (data_->skeleton.has_value() && !data_->skinCluster.empty()) {
         Log::Send(Log::Level::TRACE, "Creating SkinningState for: " + _name);
@@ -93,7 +90,7 @@ void Model::Initialize(const std::string& _name) {
         if (!castShadow_) return;
         commandList_->SetGraphicsRootConstantBufferView(0, wr_->Get()->GetGPUVirtualAddress());
         commandList_->SetGraphicsRootConstantBufferView(2, mesh_->GetMaterialAddress());
-        commandList_->SetGraphicsRootDescriptorTable(3, Singleton<TextureManager>::GetInstance()->GetGPUHandle(mesh_->GetTextureName()));
+        commandList_->SetGraphicsRootDescriptorTable(3, Singleton<TextureManager>::GetInstance()->GetGPUHandle(mesh_->GetTextureSrvIndex()));
         mesh_->DrawGeometryOnly();
     });
 }
@@ -121,7 +118,7 @@ void Model::Draw() const {
     if (skinning_) {
         auto drawCmd = [this, tm]() {
             commandList_->SetGraphicsRootConstantBufferView(1, wr_->Get()->GetGPUVirtualAddress());
-            commandList_->SetGraphicsRootConstantBufferView(4, cr_->Get()->GetGPUVirtualAddress());
+            commandList_->SetGraphicsRootConstantBufferView(4, common_->GetCameraCBVAddress());
             commandList_->SetGraphicsRootDescriptorTable(8, tm->GetGPUHandle(environmentTexture_));
             commandList_->SetGraphicsRootDescriptorTable(11, skinning_->GetPaletteHandle());
             mesh_->Draw();
@@ -134,7 +131,7 @@ void Model::Draw() const {
     } else {
         auto drawCmd = [this, tm]() {
             commandList_->SetGraphicsRootShaderResourceView(1, wr_->Get()->GetGPUVirtualAddress());
-            commandList_->SetGraphicsRootConstantBufferView(4, cr_->Get()->GetGPUVirtualAddress());
+            commandList_->SetGraphicsRootConstantBufferView(4, common_->GetCameraCBVAddress());
             commandList_->SetGraphicsRootDescriptorTable(8, tm->GetGPUHandle(environmentTexture_));
             mesh_->Draw();
         };
@@ -278,8 +275,6 @@ void Model::UpdateMapData() const {
     wd_->world = MathUtils::Matrix::MakeAffineMatrix(transform_.scale, std::get<Vector3>(transform_.rotate), transform_.translate);
     wd_->wvp = wd_->world * camera->GetViewProjection();
     wd_->inverse = wd_->world.Inverse().Transpose();
-
-    *cd_ = camera->GetCameraForGpu();
 }
 
 void Model::DrawLine() const {

@@ -3,11 +3,17 @@
 
 #include "src/Common/Common.hpp"
 #include "src/DirectX/Heap/SRVManager.h"
+#include "src/DirectX/Resource/DX12Resource.hpp"
 #include "src/ResourceRepository/ResourceRepository.hpp"
+
+struct CameraForGpu;
 
 class ModelCommon : public Common{
     GESTD::ReferencePtr<ResourceRepository> resource_ = nullptr;
     SRVManager* srv_ = nullptr;
+
+    std::unique_ptr<DX12Resource> cameraResource_;
+    CameraForGpu* cameraData_ = nullptr;
 
     std::unique_ptr<PipelineStateObject> staticPipeline_;
     std::unique_ptr<PipelineStateObject> staticTransparentPipeline_;
@@ -41,6 +47,8 @@ public:
 
     void ExecuteShadowDraw() const;
     void SetShadowBinding(uint32_t _srvIndex, D3D12_GPU_VIRTUAL_ADDRESS _cbvAddress);
+
+    D3D12_GPU_VIRTUAL_ADDRESS GetCameraCBVAddress() const;
 
     void Draw(Renderer* _renderer) override;
 

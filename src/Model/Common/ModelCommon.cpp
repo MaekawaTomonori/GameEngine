@@ -3,6 +3,9 @@
 #include <ranges>
 
 #include "Log.hpp"
+#include "Pattern/Singleton.hpp"
+#include "src/Camera/Camera.hpp"
+#include "src/Camera/Controller/CameraController.hpp"
 #include "src/DirectX/Heap/SRVManager.h"
 #include "src/DirectX/RootSignature/BlendMode.hpp"
 #include "src/DirectX/RootSignature/InputLayout.hpp"
@@ -30,6 +33,9 @@ void ModelCommon::Initialize(const GESTD::ReferencePtr<DirectXAdapter>& _adapter
     skinningTransparentPipeline_ = std::make_unique<PipelineStateObject>(_adapter);
     CreateStaticTransparentPipeline();
     CreateSkinningTransparentPipeline();
+
+    cameraResource_ = _adapter->CreateBufferResource(sizeof(CameraForGpu));
+    cameraResource_->Get()->Map(0, nullptr, reinterpret_cast<void**>(&cameraData_));
 }
 
 void ModelCommon::CreateSkinningPipeline() const {
@@ -483,19 +489,25 @@ void ModelCommon::SetShadowBinding(uint32_t _srvIndex, D3D12_GPU_VIRTUAL_ADDRESS
     shadowCbvAddress_ = _cbvAddress;
 }
 
+D3D12_GPU_VIRTUAL_ADDRESS ModelCommon::GetCameraCBVAddress() const {
+    return cameraResource_->Get()->GetGPUVirtualAddress();
+}
+
 namespace {
     using CanvasTaskGroups = std::unordered_map<std::string, std::vector<std::function<void()>>>;
 }
 
 void ModelCommon::Draw(Renderer* _renderer) {
+    *cameraData_ = Singleton<CameraController>::GetInstance()->GetActive()->GetCameraForGpu();
+
     CanvasTaskGroups staticGroups;
     CanvasTaskGroups skinningGroups;
     CanvasTaskGroups staticTransparentGroups;
     CanvasTaskGroups skinningTransparentGroups;
 
-    auto groupByCanvas = [](const std::vector<RenderingCommand>& _commands, CanvasTaskGroups& _out) {
-        for (const auto& command : _commands) {
-            _out[command.canvasName].push_back(command.func);
+    auto groupByCanvas = [](std::vector<RenderingCommand>& _commands, CanvasTaskGroups& _out) {
+        for (auto& command : _commands) {
+            _out[command.canvasName].push_back(std::move(command.func));
         }
     };
 
@@ -522,10 +534,10 @@ void ModelCommon::Draw(Renderer* _renderer) {
         }
     };
 
-    auto registerGrouped = [_renderer, &bindShadow](const CanvasTaskGroups& _groups, PipelineStateObject* _pipeline) {
-        for (const auto& [canvasName, tasks] : _groups) {
+    auto registerGrouped = [_renderer, &bindShadow](CanvasTaskGroups& _groups, PipelineStateObject* _pipeline) {
+        for (auto& [canvasName, tasks] : _groups) {
             if (tasks.empty()) continue;
-            _renderer->Register([_pipeline, tasks, bindShadow]() {
+            _renderer->Register([_pipeline, tasks = std::move(tasks), bindShadow]() {
                 if (_pipeline) {
                     _pipeline->DrawCall();
                 }

@@ -295,11 +295,17 @@ const DirectX::TexMetadata& TextureManager::GetTextureMetadata(const std::string
 uint32_t TextureManager::GetSrvIndex(const std::string& _fileName) {
     std::lock_guard<std::mutex> lock(mutex_);
 
-    if (textures_.contains(_fileName)){
-        return textures_.at(_fileName).srvIndex;
+    std::string name = _fileName;
+    size_t pos = 0;
+    while ((pos = name.find(folderPath_, pos)) != std::string::npos){
+        name.erase(pos, folderPath_.length());
     }
 
-    Log::Send(Log::Level::ERR, std::format("TextureManager::GetSrvIndex: {} not found", _fileName));
+    if (textures_.contains(name)){
+        return textures_.at(name).srvIndex;
+    }
+
+    Log::Send(Log::Level::ERR, std::format("TextureManager::GetSrvIndex: {} not found", name));
     assert(0);
     return 0;
 }
@@ -334,7 +340,6 @@ D3D12_GPU_DESCRIPTOR_HANDLE TextureManager::GetGPUHandle(const std::string& _fil
 
 D3D12_GPU_DESCRIPTOR_HANDLE TextureManager::GetGPUHandle(const uint32_t _index) const {
     assert(_index <= textures_.size());
-    Log::Send(Log::Level::INFO, std::format("TextureManager::GetGPUHandle: index {}", _index));
     return srv_->GetGPUHandle(_index);
 }
 

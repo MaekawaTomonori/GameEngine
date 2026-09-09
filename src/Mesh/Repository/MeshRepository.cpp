@@ -12,14 +12,15 @@ void MeshRepository::Add(const std::string& _name, const MeshData& _raw) {
     data_[_name] = std::move(_raw);
 }
 
-MeshData MeshRepository::Get(const std::string& _name) {
-    if (data_.contains(_name)){return data_[_name];}
+const MeshData& MeshRepository::Get(const std::string& _name) {
+    if (data_.contains(_name)){return data_.at(_name);}
     Model::Load(_name);
-    if (data_.contains(_name)){return data_[_name];}
+    if (data_.contains(_name)){return data_.at(_name);}
 
     Utils::Alert("MeshRepository: Mesh not found: " + _name);
 
-    return {};
+    static const MeshData EMPTY{};
+    return EMPTY;
 }
 
 bool MeshRepository::Contains(const std::string& _name) const {
