@@ -70,7 +70,7 @@ void Mesh::DrawGeometryOnly() const {
 
 void Mesh::Update() {
     if (material_) {
-        material_->uvTransform = MathUtils::Matrix::MakeIdentity() * MathUtils::Matrix::MakeScaleMatrix({ material_->tilingMul.x, material_->tilingMul.y, 1.0f });
+        material_->uvTransform = MathUtils::Matrix::MakeScaleMatrix({ material_->tilingMul.x, material_->tilingMul.y, 1.0f });
     }
 }
 

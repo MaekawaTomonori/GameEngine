@@ -71,6 +71,24 @@ void Model::Initialize(const std::string& _name) {
         Log::Send(Log::Level::TRACE, "No valid skinning data found, skipping SkinningState creation for: " + _name);
     }
 
+    if (skinning_) {
+        drawCommand_ = [this]() {
+            const auto tm = Singleton<TextureManager>::GetInstance();
+            commandList_->SetGraphicsRootConstantBufferView(1, wr_->Get()->GetGPUVirtualAddress());
+            commandList_->SetGraphicsRootConstantBufferView(4, common_->GetCameraCBVAddress());
+            commandList_->SetGraphicsRootDescriptorTable(8, tm->GetGPUHandle(environmentTexture_));
+            commandList_->SetGraphicsRootDescriptorTable(11, skinning_->GetPaletteHandle());
+            mesh_->Draw();
+        };
+    } else {
+        drawCommand_ = [this]() {
+            const auto tm = Singleton<TextureManager>::GetInstance();
+            commandList_->SetGraphicsRootShaderResourceView(1, wr_->Get()->GetGPUVirtualAddress());
+            commandList_->SetGraphicsRootConstantBufferView(4, common_->GetCameraCBVAddress());
+            commandList_->SetGraphicsRootDescriptorTable(8, tm->GetGPUHandle(environmentTexture_));
+            mesh_->Draw();
+        };
+    }
 
     transform_ = {
         {1,1,1},
@@ -112,33 +130,18 @@ void Model::Draw() const {
         return;
     }
 
-    const auto tm = Singleton<TextureManager>::GetInstance();
-
     const bool isTransparent = mesh_->GetAlpha() < 1.0f;
     if (skinning_) {
-        auto drawCmd = [this, tm]() {
-            commandList_->SetGraphicsRootConstantBufferView(1, wr_->Get()->GetGPUVirtualAddress());
-            commandList_->SetGraphicsRootConstantBufferView(4, common_->GetCameraCBVAddress());
-            commandList_->SetGraphicsRootDescriptorTable(8, tm->GetGPUHandle(environmentTexture_));
-            commandList_->SetGraphicsRootDescriptorTable(11, skinning_->GetPaletteHandle());
-            mesh_->Draw();
-        };
         if (isTransparent) {
-            common_->RegisterSkinningTransparentDraw(drawCmd, canvasName_);
+            common_->RegisterSkinningTransparentDraw(drawCommand_, canvasName_);
         } else {
-            common_->RegisterSkinningDraw(drawCmd, canvasName_);
+            common_->RegisterSkinningDraw(drawCommand_, canvasName_);
         }
     } else {
-        auto drawCmd = [this, tm]() {
-            commandList_->SetGraphicsRootShaderResourceView(1, wr_->Get()->GetGPUVirtualAddress());
-            commandList_->SetGraphicsRootConstantBufferView(4, common_->GetCameraCBVAddress());
-            commandList_->SetGraphicsRootDescriptorTable(8, tm->GetGPUHandle(environmentTexture_));
-            mesh_->Draw();
-        };
         if (isTransparent) {
-            common_->RegisterStaticTransparentDraw(drawCmd, canvasName_);
+            common_->RegisterStaticTransparentDraw(drawCommand_, canvasName_);
         } else {
-            common_->RegisterStaticDraw(drawCmd, canvasName_);
+            common_->RegisterStaticDraw(drawCommand_, canvasName_);
         }
     }
 
