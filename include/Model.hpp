@@ -1,5 +1,6 @@
 #ifndef Model_HPP_
 #define Model_HPP_
+#include <functional>
 #include <memory>
 
 #include "ReferencePtr.hpp"
@@ -46,6 +47,8 @@ class Model {
      */
     std::unique_ptr<DX12Resource> wr_;
     Transformation* wd_ = nullptr;
+
+    std::function<void()> drawCommand_;
 
     std::string environmentTexture_ = "";
 
