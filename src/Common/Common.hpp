@@ -15,6 +15,11 @@ protected:
         std::string canvasName = "None";
     };
 
+    struct KeyedCommand {
+        std::string id;
+        std::function<void()> func;
+    };
+
     GESTD::ReferencePtr<DirectXAdapter> adapter_;
     GESTD::ReferencePtr<DebugUI> debugUI_;
     std::string windowName_;
@@ -23,8 +28,8 @@ protected:
 
     std::unique_ptr<PipelineStateObject> pipeline_;
 
-    std::unordered_map<std::string, std::function<void()>> debugCommands_;
-    std::unordered_map<std::string, std::function<void()>> updateCommands_;
+    std::vector<KeyedCommand> debugCommands_;
+    std::vector<KeyedCommand> updateCommands_;
     std::vector<RenderingCommand> drawFunctions_;
 
 

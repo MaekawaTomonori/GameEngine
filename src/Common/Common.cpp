@@ -1,6 +1,6 @@
 #include "Common.hpp"
 
-#include <ranges>
+#include <algorithm>
 
 #ifdef _DEBUG
 #include "imgui.h"
@@ -18,10 +18,8 @@ void Common::Setup(const GESTD::ReferencePtr<DirectXAdapter>& _adapter, const GE
 }
 
 void Common::Update() {
-    if (updateCommands_.empty()) return;
-
-    for (const auto& func : updateCommands_ | std::views::values) {
-        func();
+    for (const auto& command : updateCommands_) {
+        command.func();
     }
 }
 
@@ -31,8 +29,8 @@ void Common::Debug() {
     debugUI_->RegisterCommand(windowName_, [this]() {
 #ifdef _DEBUG
         ImGui::Begin(windowName_.c_str(), &debugUI_->IsVisible(windowName_));
-        for (const auto& func : debugCommands_ | std::views::values) {
-            func();
+        for (const auto& command : debugCommands_) {
+            command.func();
         }
         ImGui::End();
 #endif
@@ -42,16 +40,16 @@ void Common::Debug() {
 void Common::Draw(Renderer* _renderer) {
     std::vector<std::function<void()>> tasks;
     {
-        for (const auto& command : drawFunctions_){
+        for (auto& command : drawFunctions_){
             if (!command.func)continue;
-            tasks.push_back(command.func);
+            tasks.push_back(std::move(command.func));
         }
         drawFunctions_.clear();
     }
 
     if (!pipeline_) return;
     if (!tasks.empty()) {
-        _renderer->Register([this, tasks](){
+        _renderer->Register([this, tasks = std::move(tasks)](){
             pipeline_->DrawCall();
             for (auto& task : tasks){
                 task();
@@ -63,13 +61,13 @@ void Common::Draw(Renderer* _renderer) {
 void Common::RegisterDebug(const std::string& _id, const std::function<void()>& _func) {
     std::lock_guard lock(mutex_);
 
-    debugCommands_[_id] = _func;
+    debugCommands_.push_back({ _id, _func });
 }
 
 void Common::RegisterUpdate(const std::string& _id, const std::function<void()>& _func) {
     std::lock_guard lock(mutex_);
 
-    updateCommands_[_id] = _func;
+    updateCommands_.push_back({ _id, _func });
 }
 
 void Common::RegisterDraw(const std::function<void()>& _command) {
@@ -78,6 +76,6 @@ void Common::RegisterDraw(const std::function<void()>& _command) {
 
 void Common::Unregister(const std::string& _uuid) {
     std::lock_guard lock(mutex_);
-    updateCommands_.erase(_uuid);
-    debugCommands_.erase(_uuid);
+    std::erase_if(updateCommands_, [&_uuid](const KeyedCommand& _command) { return _command.id == _uuid; });
+    std::erase_if(debugCommands_, [&_uuid](const KeyedCommand& _command) { return _command.id == _uuid; });
 }

@@ -49,6 +49,7 @@ void Mesh::Initialize(const GESTD::ReferencePtr<DirectXAdapter>& _adapter, const
 
     Singleton<TextureManager>::GetInstance()->Load(data_.texture);
     texture_ = data_.texture;
+    textureSrvIndex_ = Singleton<TextureManager>::GetInstance()->GetSrvIndex(texture_);
 
     lighting_ = true;
 }
@@ -84,7 +85,7 @@ void Mesh::Draw(const uint16_t _instanceCount) const {
         commandList_->IASetIndexBuffer(&ibv_);
     }
     commandList_->SetGraphicsRootConstantBufferView(0, mr_->Get()->GetGPUVirtualAddress());
-    commandList_->SetGraphicsRootDescriptorTable(2, Singleton<TextureManager>::GetInstance()->GetGPUHandle(texture_));
+    commandList_->SetGraphicsRootDescriptorTable(2, Singleton<TextureManager>::GetInstance()->GetGPUHandle(textureSrvIndex_));
 
     if (lighting_) {
         material_->lighting = 1;
@@ -192,6 +193,7 @@ void Mesh::SetTexture(const std::string& _texturePath) {
 
     // Update the current texture path
     texture_ = _texturePath;
+    textureSrvIndex_ = Singleton<TextureManager>::GetInstance()->GetSrvIndex(texture_);
 }
 
 void Mesh::SetTextureSize(const Vector2 _tilingMul) const {
