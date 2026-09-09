@@ -143,6 +143,8 @@ $(document).ready(function(){initNavTree('classMesh.html',''); initResizable(); 
 <tr class="separator:afb18a5ee58dd23048bfe465dd081c6e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7ad596a926670dd6f6b6d59df3de4ec3" id="r_a7ad596a926670dd6f6b6d59df3de4ec3"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMesh.html#a7ad596a926670dd6f6b6d59df3de4ec3">GetTextureName</a> () const</td></tr>
 <tr class="separator:a7ad596a926670dd6f6b6d59df3de4ec3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf8bafd12e63ef95b9e0353cfee1cacb" id="r_abf8bafd12e63ef95b9e0353cfee1cacb"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMesh.html#abf8bafd12e63ef95b9e0353cfee1cacb">GetTextureSrvIndex</a> () const</td></tr>
+<tr class="separator:abf8bafd12e63ef95b9e0353cfee1cacb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">詳解</h2>
 <div class="textblock"><p>メッシュクラス 頂点データ、インデックス、マテリアルを管理 </p>
@@ -166,9 +168,9 @@ $(document).ready(function(){initNavTree('classMesh.html',''); initResizable(); 
 
 <p>デバッグ情報の表示 </p>
 
-<p class="definition"> <a class="el" href="Mesh_8cpp_source.html">Mesh.cpp</a> の <a class="el" href="Mesh_8cpp_source.html#l00096">96</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Mesh_8cpp_source.html">Mesh.cpp</a> の <a class="el" href="Mesh_8cpp_source.html#l00097">97</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="TextureManager_8cpp_source.html#l00374">TextureManager::GetLoadedTextureNames()</a>, <a class="el" href="Mesh_8cpp_source.html#l00189">SetTexture()</a>.</p>
+<p class="reference">参照先 <a class="el" href="TextureManager_8cpp_source.html#l00379">TextureManager::GetLoadedTextureNames()</a>, <a class="el" href="Mesh_8cpp_source.html#l00190">SetTexture()</a>.</p>
 
 </div>
 </div>
@@ -190,7 +192,7 @@ $(document).ready(function(){initNavTree('classMesh.html',''); initResizable(); 
 
 <p>メッシュを描画 </p>
 
-<p class="definition"> <a class="el" href="Mesh_8cpp_source.html">Mesh.cpp</a> の <a class="el" href="Mesh_8cpp_source.html#l00076">76</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Mesh_8cpp_source.html">Mesh.cpp</a> の <a class="el" href="Mesh_8cpp_source.html#l00077">77</a> 行目に定義があります。</p>
 
 <p class="reference">参照先 <a class="el" href="MeshData_8hpp_source.html#l00018">MeshData::indices</a>, <a class="el" href="MeshData_8hpp_source.html#l00017">MeshData::vertices</a>.</p>
 
@@ -213,7 +215,7 @@ $(document).ready(function(){initNavTree('classMesh.html',''); initResizable(); 
 
 <p>ジオメトリのみを描画（シャドウパス用） ルートパラメータを一切設定しない。呼び出し元が事前に設定すること。 </p>
 
-<p class="definition"> <a class="el" href="Mesh_8cpp_source.html">Mesh.cpp</a> の <a class="el" href="Mesh_8cpp_source.html#l00056">56</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Mesh_8cpp_source.html">Mesh.cpp</a> の <a class="el" href="Mesh_8cpp_source.html#l00057">57</a> 行目に定義があります。</p>
 
 <p class="reference">参照先 <a class="el" href="MeshData_8hpp_source.html#l00018">MeshData::indices</a>, <a class="el" href="MeshData_8hpp_source.html#l00017">MeshData::vertices</a>.</p>
 
@@ -235,7 +237,7 @@ $(document).ready(function(){initNavTree('classMesh.html',''); initResizable(); 
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="Mesh_8cpp_source.html">Mesh.cpp</a> の <a class="el" href="Mesh_8cpp_source.html#l00207">207</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Mesh_8cpp_source.html">Mesh.cpp</a> の <a class="el" href="Mesh_8cpp_source.html#l00209">209</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -262,7 +264,7 @@ $(document).ready(function(){initNavTree('classMesh.html',''); initResizable(); 
 </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="Mesh_8hpp_source.html">Mesh.hpp</a> の <a class="el" href="Mesh_8hpp_source.html#l00131">131</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Mesh_8hpp_source.html">Mesh.hpp</a> の <a class="el" href="Mesh_8hpp_source.html#l00132">132</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -284,7 +286,7 @@ $(document).ready(function(){initNavTree('classMesh.html',''); initResizable(); 
 <p>メッシュデータを取得 </p>
 <dl class="section return"><dt>戻り値</dt><dd>メッシュデータ </dd></dl>
 
-<p class="definition"> <a class="el" href="Mesh_8cpp_source.html">Mesh.cpp</a> の <a class="el" href="Mesh_8cpp_source.html#l00185">185</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Mesh_8cpp_source.html">Mesh.cpp</a> の <a class="el" href="Mesh_8cpp_source.html#l00186">186</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -311,7 +313,7 @@ $(document).ready(function(){initNavTree('classMesh.html',''); initResizable(); 
 </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="Mesh_8hpp_source.html">Mesh.hpp</a> の <a class="el" href="Mesh_8hpp_source.html#l00132">132</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Mesh_8hpp_source.html">Mesh.hpp</a> の <a class="el" href="Mesh_8hpp_source.html#l00133">133</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -338,7 +340,34 @@ $(document).ready(function(){initNavTree('classMesh.html',''); initResizable(); 
 </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="Mesh_8hpp_source.html">Mesh.hpp</a> の <a class="el" href="Mesh_8hpp_source.html#l00133">133</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Mesh_8hpp_source.html">Mesh.hpp</a> の <a class="el" href="Mesh_8hpp_source.html#l00134">134</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="abf8bafd12e63ef95b9e0353cfee1cacb" name="abf8bafd12e63ef95b9e0353cfee1cacb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf8bafd12e63ef95b9e0353cfee1cacb">&#9670;&#160;</a></span>GetTextureSrvIndex()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t Mesh::GetTextureSrvIndex </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="Mesh_8hpp_source.html">Mesh.hpp</a> の <a class="el" href="Mesh_8hpp_source.html#l00135">135</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -414,7 +443,7 @@ $(document).ready(function(){initNavTree('classMesh.html',''); initResizable(); 
   </dd>
 </dl>
 
-<p class="definition"> <a class="el" href="Mesh_8cpp_source.html">Mesh.cpp</a> の <a class="el" href="Mesh_8cpp_source.html#l00203">203</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Mesh_8cpp_source.html">Mesh.cpp</a> の <a class="el" href="Mesh_8cpp_source.html#l00205">205</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -442,9 +471,9 @@ $(document).ready(function(){initNavTree('classMesh.html',''); initResizable(); 
   </dd>
 </dl>
 
-<p class="definition"> <a class="el" href="Mesh_8cpp_source.html">Mesh.cpp</a> の <a class="el" href="Mesh_8cpp_source.html#l00189">189</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Mesh_8cpp_source.html">Mesh.cpp</a> の <a class="el" href="Mesh_8cpp_source.html#l00190">190</a> 行目に定義があります。</p>
 
-<p class="reference">参照元 <a class="el" href="Mesh_8cpp_source.html#l00096">Debug()</a>.</p>
+<p class="reference">参照元 <a class="el" href="Mesh_8cpp_source.html#l00097">Debug()</a>.</p>
 
 </div>
 </div>
@@ -472,7 +501,7 @@ $(document).ready(function(){initNavTree('classMesh.html',''); initResizable(); 
   </dd>
 </dl>
 
-<p class="definition"> <a class="el" href="Mesh_8cpp_source.html">Mesh.cpp</a> の <a class="el" href="Mesh_8cpp_source.html#l00197">197</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Mesh_8cpp_source.html">Mesh.cpp</a> の <a class="el" href="Mesh_8cpp_source.html#l00199">199</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -500,7 +529,7 @@ $(document).ready(function(){initNavTree('classMesh.html',''); initResizable(); 
   </dd>
 </dl>
 
-<p class="definition"> <a class="el" href="Mesh_8cpp_source.html">Mesh.cpp</a> の <a class="el" href="Mesh_8cpp_source.html#l00181">181</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Mesh_8cpp_source.html">Mesh.cpp</a> の <a class="el" href="Mesh_8cpp_source.html#l00182">182</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -521,7 +550,7 @@ $(document).ready(function(){initNavTree('classMesh.html',''); initResizable(); 
 
 <p>メッシュの更新処理 </p>
 
-<p class="definition"> <a class="el" href="Mesh_8cpp_source.html">Mesh.cpp</a> の <a class="el" href="Mesh_8cpp_source.html#l00070">70</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Mesh_8cpp_source.html">Mesh.cpp</a> の <a class="el" href="Mesh_8cpp_source.html#l00071">71</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -535,7 +564,7 @@ $(document).ready(function(){initNavTree('classMesh.html',''); initResizable(); 
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classMesh.html">Mesh</a></li>
-    <li class="footer">2026年09月09日(水) 01時54分52秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年09月09日(水) 07時42分09秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

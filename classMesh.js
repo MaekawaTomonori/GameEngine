@@ -8,6 +8,7 @@ var classMesh =
     [ "GetData", "classMesh.html#a45733c8b9432ef0becde4bb5fe6b7c39", null ],
     [ "GetMaterialAddress", "classMesh.html#afb18a5ee58dd23048bfe465dd081c6e6", null ],
     [ "GetTextureName", "classMesh.html#a7ad596a926670dd6f6b6d59df3de4ec3", null ],
+    [ "GetTextureSrvIndex", "classMesh.html#abf8bafd12e63ef95b9e0353cfee1cacb", null ],
     [ "Initialize", "classMesh.html#a01f85a2ee158cfa24e39dca292e6e2ef", null ],
     [ "SetColor", "classMesh.html#ab19fdba5647193ee6837ed97a3e2def1", null ],
     [ "SetTexture", "classMesh.html#a62b78c884dc190abda74fd1222c3b7cd", null ],

@@ -77,6 +77,7 @@ var hierarchy =
     [ "JointWeightData", "structJointWeightData.html", null ],
     [ "JsonParams", "classJsonParams.html", null ],
     [ "Ui::KeyboardModule::KeyBindings", "structUi_1_1KeyboardModule_1_1KeyBindings.html", null ],
+    [ "Common::KeyedCommand", "structCommon_1_1KeyedCommand.html", null ],
     [ "Keyframe< T >", "structKeyframe.html", null ],
     [ "LevelData", "structLevelData.html", null ],
     [ "LevelEditor", "classLevelEditor.html", null ],

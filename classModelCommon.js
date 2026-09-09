@@ -4,6 +4,7 @@ var classModelCommon =
     [ "DrawSkinning", "classModelCommon.html#ade04bb612cfb76cfe3351ec73c628009", null ],
     [ "DrawStatic", "classModelCommon.html#a1f98b05bc6592d10c5814db883f31c6c", null ],
     [ "ExecuteShadowDraw", "classModelCommon.html#a32e8662a3ef23d366bd4c41eebd60619", null ],
+    [ "GetCameraCBVAddress", "classModelCommon.html#a85b4554b586b362f55f3c860b3ccab12", null ],
     [ "GetResourceRepository", "classModelCommon.html#afd34699d268cba689c22a142466850e6", null ],
     [ "GetSRVManager", "classModelCommon.html#a33e697baa0ec17fc95e1f952c04f57ca", null ],
     [ "Initialize", "classModelCommon.html#a44949376048a801f3a992f7370bdf846", null ],
