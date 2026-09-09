@@ -265,6 +265,7 @@ void Framework::Draw() const {
 
     scene_->Draw();
     ui_->Draw();
+    scene_->DrawTransition();
 
     sky_->Draw(renderer_.get());
 

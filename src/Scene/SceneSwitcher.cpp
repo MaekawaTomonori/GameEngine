@@ -95,6 +95,9 @@ void SceneSwitcher::Draw() {
     if (scene_){
         scene_->Draw();
     }
+}
+
+void SceneSwitcher::DrawTransition() {
     if (transition_) {
         transition_->Draw();
     }
