@@ -5,6 +5,7 @@ var classSceneSwitcher =
     [ "Change", "classSceneSwitcher.html#a4528a1be76f6925038254e0e8e0fc06d", null ],
     [ "Debug", "classSceneSwitcher.html#a4ec925fd7848bb9a7e8e4a9f446417f8", null ],
     [ "Draw", "classSceneSwitcher.html#aaa2f2d6b4d8bcf3daeaa0a53b4c40226", null ],
+    [ "DrawTransition", "classSceneSwitcher.html#a486d28b219ecb4220985b97e80a77f12", null ],
     [ "GetContext", "classSceneSwitcher.html#a6490cc72d977cc953493fe7e1c7c5fd3", null ],
     [ "PlayTransition", "classSceneSwitcher.html#a5aa9bf7b5353ecfd904cc2827ffc3528", null ],
     [ "PlayTransition", "classSceneSwitcher.html#acea7a39ed879913919ff21e9f26cb5b9", null ],

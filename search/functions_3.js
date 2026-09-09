@@ -19,5 +19,6 @@ var searchData=
   ['drawline_16',['DrawLine',['../classSkinningState.html#ad8e7cd8a34e3a5270a5be0de96ab2be6',1,'SkinningState']]],
   ['drawobjects_17',['drawobjects',['../classCanvas.html#ab751aed2bf34c98e4dc87cdc6c9ba9f9',1,'Canvas::DrawObjects()'],['../classCanvasLayer.html#a00cc3d1d9e74bfd4089f998ae0cceda5',1,'CanvasLayer::DrawObjects()'],['../classPostProcessExecutor.html#a0fa2751398547179ac46cf2d9cd9a26b',1,'PostProcessExecutor::DrawObjects()']]],
   ['drawskinning_18',['DrawSkinning',['../classModelCommon.html#ade04bb612cfb76cfe3351ec73c628009',1,'ModelCommon']]],
-  ['drawstatic_19',['DrawStatic',['../classModelCommon.html#a1f98b05bc6592d10c5814db883f31c6c',1,'ModelCommon']]]
+  ['drawstatic_19',['DrawStatic',['../classModelCommon.html#a1f98b05bc6592d10c5814db883f31c6c',1,'ModelCommon']]],
+  ['drawtransition_20',['DrawTransition',['../classSceneSwitcher.html#a486d28b219ecb4220985b97e80a77f12',1,'SceneSwitcher']]]
 ];

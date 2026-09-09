@@ -121,6 +121,9 @@ $(document).ready(function(){initNavTree('classSceneSwitcher.html',''); initResi
 <tr class="memitem:aaa2f2d6b4d8bcf3daeaa0a53b4c40226" id="r_aaa2f2d6b4d8bcf3daeaa0a53b4c40226"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSceneSwitcher.html#aaa2f2d6b4d8bcf3daeaa0a53b4c40226">Draw</a> ()</td></tr>
 <tr class="memdesc:aaa2f2d6b4d8bcf3daeaa0a53b4c40226"><td class="mdescLeft">&#160;</td><td class="mdescRight">描画処理  <br /></td></tr>
 <tr class="separator:aaa2f2d6b4d8bcf3daeaa0a53b4c40226"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a486d28b219ecb4220985b97e80a77f12" id="r_a486d28b219ecb4220985b97e80a77f12"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSceneSwitcher.html#a486d28b219ecb4220985b97e80a77f12">DrawTransition</a> ()</td></tr>
+<tr class="memdesc:a486d28b219ecb4220985b97e80a77f12"><td class="mdescLeft">&#160;</td><td class="mdescRight">遷移の描画  <br /></td></tr>
+<tr class="separator:a486d28b219ecb4220985b97e80a77f12"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a66fca08d6a530d882453f74f74e0914e" id="r_a66fca08d6a530d882453f74f74e0914e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSceneSwitcher.html#a66fca08d6a530d882453f74f74e0914e">RegisterScene</a> (const std::string &amp;_name, const std::function&lt; std::unique_ptr&lt; <a class="el" href="classIScene.html">IScene</a> &gt;()&gt; &amp;_creator) const</td></tr>
 <tr class="memdesc:a66fca08d6a530d882453f74f74e0914e"><td class="mdescLeft">&#160;</td><td class="mdescRight">シーンを登録する  <br /></td></tr>
 <tr class="separator:a66fca08d6a530d882453f74f74e0914e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -188,11 +191,11 @@ $(document).ready(function(){initNavTree('classSceneSwitcher.html',''); initResi
   </dd>
 </dl>
 
-<p class="definition"> <a class="el" href="SceneSwitcher_8cpp_source.html">SceneSwitcher.cpp</a> の <a class="el" href="SceneSwitcher_8cpp_source.html#l00237">237</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="SceneSwitcher_8cpp_source.html">SceneSwitcher.cpp</a> の <a class="el" href="SceneSwitcher_8cpp_source.html#l00240">240</a> 行目に定義があります。</p>
 
 <p class="reference">参照先 <a class="el" href="classITransitionEffect.html#a86868f632ccdf014543bbf471096227ba7c147cda9e49590f6abe83d118b7353b">ITransitionEffect::Out</a>.</p>
 
-<p class="reference">参照元 <a class="el" href="IScene_8cpp_source.html#l00022">IScene::Change()</a>, <a class="el" href="SceneSwitcher_8cpp_source.html#l00108">Debug()</a>, <a class="el" href="SceneSwitcher_8cpp_source.html#l00017">Setup()</a>.</p>
+<p class="reference">参照元 <a class="el" href="IScene_8cpp_source.html#l00022">IScene::Change()</a>, <a class="el" href="SceneSwitcher_8cpp_source.html#l00111">Debug()</a>, <a class="el" href="SceneSwitcher_8cpp_source.html#l00017">Setup()</a>.</p>
 
 </div>
 </div>
@@ -213,9 +216,9 @@ $(document).ready(function(){initNavTree('classSceneSwitcher.html',''); initResi
 
 <p>デバッグ情報の表示 </p>
 
-<p class="definition"> <a class="el" href="SceneSwitcher_8cpp_source.html">SceneSwitcher.cpp</a> の <a class="el" href="SceneSwitcher_8cpp_source.html#l00108">108</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="SceneSwitcher_8cpp_source.html">SceneSwitcher.cpp</a> の <a class="el" href="SceneSwitcher_8cpp_source.html#l00111">111</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="SceneSwitcher_8cpp_source.html#l00237">Change()</a>, <a class="el" href="SceneSwitcher_8hpp_source.html#l00027">SceneSwitcher::Context::debug</a>.</p>
+<p class="reference">参照先 <a class="el" href="SceneSwitcher_8cpp_source.html#l00240">Change()</a>, <a class="el" href="SceneSwitcher_8hpp_source.html#l00027">SceneSwitcher::Context::debug</a>.</p>
 
 </div>
 </div>
@@ -240,6 +243,27 @@ $(document).ready(function(){initNavTree('classSceneSwitcher.html',''); initResi
 
 </div>
 </div>
+<a id="a486d28b219ecb4220985b97e80a77f12" name="a486d28b219ecb4220985b97e80a77f12"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a486d28b219ecb4220985b97e80a77f12">&#9670;&#160;</a></span>DrawTransition()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SceneSwitcher::DrawTransition </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>遷移の描画 </p>
+
+<p class="definition"> <a class="el" href="SceneSwitcher_8cpp_source.html">SceneSwitcher.cpp</a> の <a class="el" href="SceneSwitcher_8cpp_source.html#l00100">100</a> 行目に定義があります。</p>
+
+</div>
+</div>
 <a id="a6490cc72d977cc953493fe7e1c7c5fd3" name="a6490cc72d977cc953493fe7e1c7c5fd3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6490cc72d977cc953493fe7e1c7c5fd3">&#9670;&#160;</a></span>GetContext()</h2>
 
@@ -255,7 +279,7 @@ $(document).ready(function(){initNavTree('classSceneSwitcher.html',''); initResi
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="SceneSwitcher_8cpp_source.html">SceneSwitcher.cpp</a> の <a class="el" href="SceneSwitcher_8cpp_source.html#l00219">219</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="SceneSwitcher_8cpp_source.html">SceneSwitcher.cpp</a> の <a class="el" href="SceneSwitcher_8cpp_source.html#l00222">222</a> 行目に定義があります。</p>
 
 <p class="reference">参照元 <a class="el" href="IScene_8cpp_source.html#l00043">IScene::Particle()</a>, <a class="el" href="IScene_8cpp_source.html#l00039">IScene::PostEffect()</a>.</p>
 
@@ -303,11 +327,11 @@ $(document).ready(function(){initNavTree('classSceneSwitcher.html',''); initResi
   </dd>
 </dl>
 
-<p class="definition"> <a class="el" href="SceneSwitcher_8cpp_source.html">SceneSwitcher.cpp</a> の <a class="el" href="SceneSwitcher_8cpp_source.html#l00223">223</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="SceneSwitcher_8cpp_source.html">SceneSwitcher.cpp</a> の <a class="el" href="SceneSwitcher_8cpp_source.html#l00226">226</a> 行目に定義があります。</p>
 
 <p class="reference">参照先 <a class="el" href="classITransitionEffect.html#a86868f632ccdf014543bbf471096227ba7c147cda9e49590f6abe83d118b7353b">ITransitionEffect::Out</a>.</p>
 
-<p class="reference">参照元 <a class="el" href="IScene_8cpp_source.html#l00029">IScene::PlayTransition()</a>, <a class="el" href="IScene_8cpp_source.html#l00034">IScene::PlayTransition()</a>, <a class="el" href="SceneSwitcher_8cpp_source.html#l00233">PlayTransition()</a>.</p>
+<p class="reference">参照元 <a class="el" href="IScene_8cpp_source.html#l00029">IScene::PlayTransition()</a>, <a class="el" href="IScene_8cpp_source.html#l00034">IScene::PlayTransition()</a>, <a class="el" href="SceneSwitcher_8cpp_source.html#l00236">PlayTransition()</a>.</p>
 
 </div>
 </div>
@@ -346,9 +370,9 @@ $(document).ready(function(){initNavTree('classSceneSwitcher.html',''); initResi
   </dd>
 </dl>
 
-<p class="definition"> <a class="el" href="SceneSwitcher_8cpp_source.html">SceneSwitcher.cpp</a> の <a class="el" href="SceneSwitcher_8cpp_source.html#l00233">233</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="SceneSwitcher_8cpp_source.html">SceneSwitcher.cpp</a> の <a class="el" href="SceneSwitcher_8cpp_source.html#l00236">236</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="SceneSwitcher_8cpp_source.html#l00223">PlayTransition()</a>.</p>
+<p class="reference">参照先 <a class="el" href="SceneSwitcher_8cpp_source.html#l00226">PlayTransition()</a>.</p>
 
 </div>
 </div>
@@ -387,7 +411,7 @@ $(document).ready(function(){initNavTree('classSceneSwitcher.html',''); initResi
   </dd>
 </dl>
 
-<p class="definition"> <a class="el" href="SceneSwitcher_8cpp_source.html">SceneSwitcher.cpp</a> の <a class="el" href="SceneSwitcher_8cpp_source.html#l00103">103</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="SceneSwitcher_8cpp_source.html">SceneSwitcher.cpp</a> の <a class="el" href="SceneSwitcher_8cpp_source.html#l00106">106</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -417,7 +441,7 @@ $(document).ready(function(){initNavTree('classSceneSwitcher.html',''); initResi
 
 <p class="definition"> <a class="el" href="SceneSwitcher_8cpp_source.html">SceneSwitcher.cpp</a> の <a class="el" href="SceneSwitcher_8cpp_source.html#l00017">17</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="SceneSwitcher_8cpp_source.html#l00237">Change()</a>, <a class="el" href="SceneSwitcher_8hpp_source.html#l00027">SceneSwitcher::Context::debug</a>.</p>
+<p class="reference">参照先 <a class="el" href="SceneSwitcher_8cpp_source.html#l00240">Change()</a>, <a class="el" href="SceneSwitcher_8hpp_source.html#l00027">SceneSwitcher::Context::debug</a>.</p>
 
 </div>
 </div>
@@ -454,7 +478,7 @@ $(document).ready(function(){initNavTree('classSceneSwitcher.html',''); initResi
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classSceneSwitcher.html">SceneSwitcher</a></li>
-    <li class="footer">2026年09月07日(月) 05時02分45秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年09月09日(水) 01時54分52秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>
