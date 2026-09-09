@@ -58,6 +58,8 @@ void Emitter::Initialize(const MeshData& _mesh) {
     handle_ = srv_->GetGPUHandle(index_);
     srv_->CreateSRVForStructuredBuffer(index_, resource_->Get(), MAX, sizeof(ForGpu));
 
+    particlePool_.resize(MAX);
+
     Singleton<TextureManager>::GetInstance()->Load(texture_);
 }
 
@@ -110,10 +112,9 @@ void EmitterHandle::Stop() {
 }
 
 void Emitter::Reset() {
-    particles_.clear();
+    actives_ = 0;
     timer_ = 0.f;
     elapsedTime_ = 0.f;
-    actives_ = 0;
     active_ = false;
     billboard_ = true;
     primitive_ = PrimitiveType::Billboard;
@@ -136,7 +137,7 @@ void Emitter::Reset() {
 }
 
 bool Emitter::IsFinished() const {
-    return particles_.empty() && !active_;
+    return actives_ == 0 && !active_;
 }
 
 void Emitter::Debug() {
@@ -154,8 +155,8 @@ void Emitter::Debug() {
         DebugUIWidgets::ColorEdit4("Color", &color_.x);
 
         if (ImGui::TreeNode("Particles")){
-            for (const auto& particle : particles_) {
-                particle->Debug();
+            for (uint16_t i = 0; i < actives_; ++i) {
+                particlePool_[i].Debug();
             }
             ImGui::TreePop();
         }
@@ -289,14 +290,16 @@ void Emitter::FrequencyUpdate() {
 
 void Emitter::Spawn(const uint16_t& _count) {
     for (uint16_t i = 0; i < _count; ++i) {
+        if (actives_ >= MAX) return;
+
         Vector3 spawnPos = position_;
         Vector3 spawnVel = velocity_;
         if (spawnFunc_) {
             spawnFunc_(position_, spawnPos, spawnVel);
         }
 
-        std::unique_ptr<Particle> particle = std::make_unique<Particle>();
-        particle->SetOrigin(position_)
+        Particle& particle = particlePool_[actives_];
+        particle.SetOrigin(position_)
             .SetPosition(spawnPos)
             .SetScale(size_)
             .SetColor(color_)
@@ -307,7 +310,7 @@ void Emitter::Spawn(const uint16_t& _count) {
             .SetSizeKeys(sizeKeys_)
             .SetUpdateFunction(updateFunc_)
             .Initialize(particleLifetime_);
-        particles_.emplace_back(std::move(particle));
+        ++actives_;
     }
 }
 
@@ -324,27 +327,34 @@ void Emitter::RegisterGpu() {
         rotation = MathUtils::Matrix::MakeIdentity();
     }
 
-    actives_ = 0;
+    for (uint16_t i = 0; i < actives_; ) {
+        if (particlePool_[i].IsDead()) {
+            --actives_;
+            if (i != actives_) {
+                particlePool_[i] = std::move(particlePool_[actives_]);
+            }
+            continue;
+        }
+        ++i;
+    }
 
-    std::erase_if(particles_, [&](const auto& _p) { return _p->IsDead(); });
+    if (actives_ == 0) return;
 
-    if (particles_.empty()) return;
+    for (uint16_t i = 0; i < actives_; ++i) {
+        Particle& particle = particlePool_[i];
+        particle.Update();
 
-    for (auto& particle : particles_) {
-        particle->Update();
-
-        const Vector3 rot = particle->GetRotation();
+        const Vector3 rot = particle.GetRotation();
         const Matrix4x4 particleRot = MathUtils::Matrix::MakeRotateX(rot.x)
                                     * MathUtils::Matrix::MakeRotateY(rot.y)
                                     * MathUtils::Matrix::MakeRotateZ(rot.z);
 
-        mapped_[actives_].world = MathUtils::Matrix::MakeAffineMatrix(
-            MathUtils::Matrix::MakeScaleMatrix(particle->GetScale()),
+        mapped_[i].world = MathUtils::Matrix::MakeAffineMatrix(
+            MathUtils::Matrix::MakeScaleMatrix(particle.GetScale()),
             particleRot * rotation,
-            MathUtils::Matrix::MakeTranslateMatrix(particle->GetPosition())
+            MathUtils::Matrix::MakeTranslateMatrix(particle.GetPosition())
         );
-        mapped_[actives_].wvp = mapped_[actives_].world * ac->GetViewProjection();
-        mapped_[actives_].color = particle->GetColor();
-        ++actives_;
+        mapped_[i].wvp = mapped_[i].world * ac->GetViewProjection();
+        mapped_[i].color = particle.GetColor();
     }
 }

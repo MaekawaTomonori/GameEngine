@@ -8,6 +8,7 @@
 void Particle::Initialize(float _duration) {
     uuid_ = Utils::GenerateUniqueId();
     duration_ = _duration;
+    now_ = 0.f;
 }
 
 void Particle::Update() {
