@@ -7,6 +7,7 @@
 
 #include "ReferencePtr.hpp"
 #include "src/DirectX/GraphicsPipeline/Object/PipelineStateObject.hpp"
+#include "src/DirectX/Heap/SRVHandle.hpp"
 #include "src/DirectX/Heap/SRVManager.h"
 #include "src/PostProcess/IPostEffect.hpp"
 #include "src/DirectX/Resource/DX12Resource.hpp"
@@ -45,7 +46,7 @@ private:
     std::unique_ptr<PipelineStateObject> pso_;
 
     Vector4 clearColor_{ 0.0f, 0.0f, 0.0f, 0.0f };
-    uint32_t srvIndex_ = 0;
+    SRVHandle srvIndex_;
 
     /** 名前。プリセットパスの一意化に使う */
     std::string name_;

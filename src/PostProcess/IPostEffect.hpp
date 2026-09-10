@@ -5,6 +5,7 @@
 #include <vector>
 
 #include "src/DirectX/DirectXAdapter.hpp"
+#include "src/DirectX/Heap/SRVHandle.hpp"
 #include "src/DirectX/Heap/SRVManager.h"
 #include "src/DirectX/GraphicsPipeline/Object/PipelineStateObject.hpp"
 #include "json.hpp"
@@ -24,7 +25,7 @@ protected:
 
     D3D12_CPU_DESCRIPTOR_HANDLE rtvHandle_{};
 
-    uint32_t index_{};
+    SRVHandle index_;
     D3D12_GPU_DESCRIPTOR_HANDLE handle_{};
 
 public:

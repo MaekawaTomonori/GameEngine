@@ -4,6 +4,7 @@
 
 #include "src/DirectX/DirectXAdapter.hpp"
 #include "src/DirectX/Heap/Heap.hpp"
+#include "src/DirectX/Heap/SRVHandle.hpp"
 #include "src/DirectX/Heap/SRVManager.h"
 #include "src/DirectX/Resource/DX12Resource.hpp"
 
@@ -19,7 +20,7 @@ private:
     std::unique_ptr<Heap> rtvHeap_;
     std::unique_ptr<Heap> dsvHeap_;
 
-    uint32_t srvIndex_ = UINT_MAX;
+    SRVHandle srvIndex_;
 
     DirectXAdapter* adapter_ = nullptr;
     SRVManager* srv_ = nullptr;

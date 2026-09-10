@@ -10,6 +10,7 @@
 #include <vector>
 
 #include "src/DirectX/DirectXAdapter.hpp"
+#include "src/DirectX/Heap/SRVHandle.hpp"
 #include "src/DirectX/Heap/SRVManager.h"
 #include "src/DirectX/Resource/DX12Resource.hpp"
 
@@ -22,7 +23,7 @@ class TextureManager{
     /** @brief テクスチャデータ
      */
     struct Texture{
-        uint32_t srvIndex;
+        SRVHandle srvIndex;
         DirectX::TexMetadata metadata;
         std::unique_ptr<DX12Resource> resource;
         D3D12_CPU_DESCRIPTOR_HANDLE cpuHandle;

@@ -7,6 +7,7 @@
 
 #include "Math/Vector2.hpp"
 #include "src/Common/Common.hpp"
+#include "src/DirectX/Heap/SRVHandle.hpp"
 #include "src/DirectX/Heap/SRVManager.h"
 #include "src/DirectX/Resource/DX12Resource.hpp"
 
@@ -64,7 +65,7 @@ class TextCommon : public Common {
 
     std::unique_ptr<DX12Resource> instanceBuffer_;
     GlyphInstance*                mappedInstances_  = nullptr;
-    uint32_t                      glyphSrvIndex_    = 0;
+    SRVHandle                     glyphSrvIndex_;
     D3D12_GPU_DESCRIPTOR_HANDLE   glyphGpuHandle_{};
 
     std::unique_ptr<DX12Resource> screenParamsCb_;
