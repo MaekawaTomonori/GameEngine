@@ -1,11 +1,11 @@
 #include "SRVManager.h"
 
-#include <algorithm>
 #include <cassert>
 #include <memory>
 
 #include "Heap.hpp"
 #include "Log.hpp"
+#include "SRVHandle.hpp"
 
 const uint32_t SRVManager::kMaxSRVCount = 512;
 
@@ -22,8 +22,6 @@ void SRVManager::Initialize(DirectXAdapter* _adapter) {
     heap_->Create(dxc->GetDevice(), D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV, kMaxSRVCount, D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE);
     descriptorSize = dxc->GetDevice()->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
 
-    useIndex_ = 0;
-
     Log::Send(Log::Level::INFO, "SRVManager Enabled");
 }
 
@@ -31,36 +29,21 @@ void SRVManager::Finalize() {
     //Log::Send((Log::Level::INFO, "SRVManager Disabled");
 }
 
-uint32_t SRVManager::Allocate() {
-    if (!freeList_.empty()) {
-        uint32_t index = freeList_.back();
-        freeList_.pop_back();
-        return index;
+SRVHandle SRVManager::Allocate() {
+    if (heap_->IsFull()) {
+        Log::Send(Log::Level::ERR, "SRVManager::Allocate: heap is full");
+        return {};
     }
 
-    assert(useIndex_ < kMaxSRVCount);
-
-    uint32_t index = useIndex_;
-
-    ++useIndex_;
-
-    return index;
+    return SRVHandle(this, heap_->Allocate());
 }
 
 void SRVManager::Free(uint32_t _index) {
-    if (_index >= useIndex_) {
-        Log::Send(Log::Level::ERR, "SRVManager::Free: index out of range");
-        return;
-    }
+    heap_->Free(_index);
+}
 
-#ifdef _DEBUG
-    if (std::find(freeList_.begin(), freeList_.end(), _index) != freeList_.end()) {
-        Log::Send(Log::Level::ERR, "SRVManager::Free: double free detected");
-        return;
-    }
-#endif
-
-    freeList_.push_back(_index);
+bool SRVManager::IsFull() const {
+    return heap_->IsFull();
 }
 
 void SRVManager::PreDraw() const {
@@ -111,11 +94,11 @@ ID3D12DescriptorHeap* SRVManager::GetDescriptorHeap() const {
 }
 
 D3D12_CPU_DESCRIPTOR_HANDLE SRVManager::GetCPUHandle(uint32_t _index) const {
-    assert(_index < useIndex_);
+    assert(_index < kMaxSRVCount);
     return heap_->GetCPUHandle(_index);
 }
 
 D3D12_GPU_DESCRIPTOR_HANDLE SRVManager::GetGPUHandle(uint32_t _index) const {
-    assert(_index < useIndex_);
+    assert(_index < kMaxSRVCount);
     return heap_->GetGPUHandle(_index);
 }
