@@ -77,7 +77,6 @@ void DirectXAdapter::Initialize() {
 }
 
 std::unique_ptr<DX12Resource> DirectXAdapter::CreateBufferResource(const size_t _size) const {
-    std::unique_ptr<DX12Resource> wrapper = std::make_unique<DX12Resource>();
     D3D12_HEAP_PROPERTIES properties{};
     properties.Type = D3D12_HEAP_TYPE_UPLOAD;
 
@@ -99,11 +98,13 @@ std::unique_ptr<DX12Resource> DirectXAdapter::CreateBufferResource(const size_t 
         Log::Send(Log::Level::ERR, "Failed to create buffer resource");
         Utils::Alert("Failed to create buffer resource");
         assert(false);
+        return nullptr;
     }
 
+    std::unique_ptr<DX12Resource> wrapper = std::make_unique<DX12Resource>();
     wrapper->Create(resource, D3D12_RESOURCE_STATE_GENERIC_READ);
 
-    return std::move(wrapper);
+    return wrapper;
 }
 
 std::unique_ptr<DX12Resource> DirectXAdapter::CreateTextureResource(const DirectX::TexMetadata& _metadata) const {
@@ -112,8 +113,6 @@ std::unique_ptr<DX12Resource> DirectXAdapter::CreateTextureResource(const Direct
     /// 2. Heap setting
     /// 3. Generate Resource
     ///
-
-    std::unique_ptr<DX12Resource> wrapper = std::make_unique<DX12Resource>();
 
     //Step1
     //Setting Resource from Metadata
@@ -150,15 +149,16 @@ std::unique_ptr<DX12Resource> DirectXAdapter::CreateTextureResource(const Direct
         Log::Send(Log::Level::ERR, "Failed to create texture resource");
         Utils::Alert("Failed to create texture resource");
         assert(false);
+        return nullptr;
     }
 
+    std::unique_ptr<DX12Resource> wrapper = std::make_unique<DX12Resource>();
     wrapper->Create(resource, D3D12_RESOURCE_STATE_COPY_DEST);
 
-    return std::move(wrapper);
+    return wrapper;
 }
 
 std::unique_ptr<DX12Resource> DirectXAdapter::CreateDepthStencilResource(int32_t _width, int32_t _height) const {
-    std::unique_ptr<DX12Resource> wrapper = std::make_unique<DX12Resource>();
     D3D12_RESOURCE_DESC desc{};
     desc.Width = _width;
     desc.Height = _height;
@@ -182,14 +182,15 @@ std::unique_ptr<DX12Resource> DirectXAdapter::CreateDepthStencilResource(int32_t
         Log::Send(Log::Level::ERR, "Failed to create depth stencil resource");
         Utils::Alert("Failed to create depth stencil resource");
         assert(false);
+        return nullptr;
     }
 
+    std::unique_ptr<DX12Resource> wrapper = std::make_unique<DX12Resource>();
     wrapper->Create(resource, D3D12_RESOURCE_STATE_DEPTH_WRITE);
-    return std::move(wrapper);
+    return wrapper;
 }
 
 std::unique_ptr<DX12Resource> DirectXAdapter::CreateRenderTextureResource(uint32_t _width, uint32_t _height, DXGI_FORMAT _format, const Vector4& _cc) const {
-    std::unique_ptr<DX12Resource> wrapper = std::make_unique<DX12Resource>();
     D3D12_RESOURCE_DESC desc{};
     desc.Width = _width;
     desc.Height = _height;
@@ -216,16 +217,16 @@ std::unique_ptr<DX12Resource> DirectXAdapter::CreateRenderTextureResource(uint32
         Log::Send(Log::Level::ERR, "Failed to create render texture resource");
         Utils::Alert("Failed to create render texture resource");
         assert(false);
+        return nullptr;
     }
 
+    std::unique_ptr<DX12Resource> wrapper = std::make_unique<DX12Resource>();
     wrapper->Create(resource, D3D12_RESOURCE_STATE_RENDER_TARGET);
 
-    return std::move(wrapper);
+    return wrapper;
 }
 
 std::unique_ptr<DX12Resource> DirectXAdapter::CreateUnorderedAccessView() const {
-    std::unique_ptr<DX12Resource> wrapper = std::make_unique<DX12Resource>();
-
     D3D12_RESOURCE_DESC desc {};
     desc.Flags = D3D12_RESOURCE_FLAG_ALLOW_UNORDERED_ACCESS;
 
@@ -244,11 +245,13 @@ std::unique_ptr<DX12Resource> DirectXAdapter::CreateUnorderedAccessView() const 
     if (FAILED(hr)) {
         Log::Send(Log::Level::ERR, "Failed to create unordered access view");
         Utils::Alert("Failed to create unordered access view");
-        throw std::runtime_error("Failed to create unordered access view");
+        assert(false);
+        return nullptr;
     }
 
+    std::unique_ptr<DX12Resource> wrapper = std::make_unique<DX12Resource>();
     wrapper->Create(resource, D3D12_RESOURCE_STATE_COMMON);
-    return std::move(wrapper);
+    return wrapper;
 }
 
 // without render target settings

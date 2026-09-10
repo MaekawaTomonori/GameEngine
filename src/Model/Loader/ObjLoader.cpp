@@ -4,6 +4,7 @@
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
 
+#include "Log.hpp"
 #include "Utils.hpp"
 
 void ObjLoader::LoadModel(const std::string& _name, GESTD::ReferencePtr<ResourceRepository> _repository) {
@@ -14,8 +15,14 @@ void ObjLoader::LoadModel(const std::string& _name, GESTD::ReferencePtr<Resource
     Assimp::Importer importer;
     std::string path = ASSETS_FOLDER + _name + "/" + _name + ".obj";
     const aiScene* scene = importer.ReadFile(path, aiProcess_FlipWindingOrder | aiProcess_FlipUVs);
+    if (!scene) {
+        Utils::Alert("ObjLoader::LoadModel: Failed to load file: " + path + "\nError: " + importer.GetErrorString());
+        Log::Send(Log::Level::ERR, "[Obj Loader] Failed to load " + path + ": " + importer.GetErrorString());
+        return;
+    }
     if (!scene->HasMeshes()){
-        Utils::Alert("Mesh::LoadObj: No meshes found in file: " + path);
+        Utils::Alert("ObjLoader::LoadModel: No meshes found in file: " + path);
+        return;
     }
     for (uint32_t meshIndex = 0; meshIndex < scene->mNumMeshes; ++meshIndex){
         aiMesh* mesh = scene->mMeshes[meshIndex];
