@@ -104,63 +104,73 @@ $(document).ready(function(){initNavTree('ObjLoader_8cpp_source.html',''); initR
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;assimp/scene.h&gt;</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;assimp/postprocess.h&gt;</span></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;Utils.hpp&quot;</span></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
-<div class="foldopen" id="foldopen00009" data-start="{" data-end="}">
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno"><a class="line" href="classObjLoader.html#a693c5b20f805aa902fe0293bf747c153">    9</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classObjLoader.html#a693c5b20f805aa902fe0293bf747c153">ObjLoader::LoadModel</a>(<span class="keyword">const</span> std::string&amp; _name, GESTD::ReferencePtr&lt;ResourceRepository&gt; _repository) {</div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>    std::unique_ptr&lt;ModelData&gt; data = std::make_unique&lt;ModelData&gt;();</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    data-&gt;name = _name;</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    data-&gt;mesh = _name;</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    Assimp::Importer importer;</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    std::string path = <a class="code hl_variable" href="classIModelLoader.html#a87bb7caceb51c4aa8716d21408107bef">ASSETS_FOLDER</a> + _name + <span class="stringliteral">&quot;/&quot;</span> + _name + <span class="stringliteral">&quot;.obj&quot;</span>;</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <span class="keyword">const</span> aiScene* scene = importer.ReadFile(path, aiProcess_FlipWindingOrder | aiProcess_FlipUVs);</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="keywordflow">if</span> (!scene-&gt;HasMeshes()){</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>        Utils::Alert(<span class="stringliteral">&quot;Mesh::LoadObj: No meshes found in file: &quot;</span> + path);</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    }</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <span class="keywordflow">for</span> (uint32_t meshIndex = 0; meshIndex &lt; scene-&gt;mNumMeshes; ++meshIndex){</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>        aiMesh* mesh = scene-&gt;mMeshes[meshIndex];</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        <a class="code hl_struct" href="structMeshData.html">MeshData</a> raw;</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>        <span class="keywordflow">for</span> (uint32_t faceIndex = 0; faceIndex &lt; mesh-&gt;mNumFaces; ++faceIndex){</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>            aiFace&amp; face = mesh-&gt;mFaces[faceIndex];</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>            <span class="keywordflow">for</span> (uint32_t element = 0; element &lt; face.mNumIndices; ++element){</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>                uint32_t vertex = face.mIndices[element];</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>                aiVector3D&amp; position = mesh-&gt;mVertices[vertex];</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>                aiVector3D&amp; normal = mesh-&gt;mNormals[vertex];</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>                aiVector3D uv = mesh-&gt;mTextureCoords[0][vertex];</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>                <a class="code hl_struct" href="structVertex.html">Vertex</a> vertexData;</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>                vertexData.<a class="code hl_variable" href="structVertex.html#a12518753ef33de96e2e6fec258b16bd5">position</a> = Vector4(position.x, position.y, position.z, 1.0f);</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>                vertexData.<a class="code hl_variable" href="structVertex.html#a334094143f24252bb6df5a84ce9bb473">uv</a> = Vector2(uv.x, uv.y);</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>                vertexData.<a class="code hl_variable" href="structVertex.html#adce2d4b3d1191c69328519bdf231c344">normal</a> = Vector3(normal.x, normal.y, normal.z);</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>                vertexData.<a class="code hl_variable" href="structVertex.html#a12518753ef33de96e2e6fec258b16bd5">position</a>.x *= -1; <span class="comment">// Flip X axis</span></div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>                vertexData.<a class="code hl_variable" href="structVertex.html#adce2d4b3d1191c69328519bdf231c344">normal</a>.x *= -1; <span class="comment">// Flip X axis</span></div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>                raw.<a class="code hl_variable" href="structMeshData.html#aac93fd7e3e5968c5f4376038ef1aac96">vertices</a>.push_back(vertexData);</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>            }</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        }</div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;<a class="code" href="Log_8hpp.html">Log.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;Utils.hpp&quot;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="foldopen" id="foldopen00010" data-start="{" data-end="}">
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="classObjLoader.html#a693c5b20f805aa902fe0293bf747c153">   10</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classObjLoader.html#a693c5b20f805aa902fe0293bf747c153">ObjLoader::LoadModel</a>(<span class="keyword">const</span> std::string&amp; _name, GESTD::ReferencePtr&lt;ResourceRepository&gt; _repository) {</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    std::unique_ptr&lt;ModelData&gt; data = std::make_unique&lt;ModelData&gt;();</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    data-&gt;name = _name;</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    data-&gt;mesh = _name;</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    Assimp::Importer importer;</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    std::string path = <a class="code hl_variable" href="classIModelLoader.html#a87bb7caceb51c4aa8716d21408107bef">ASSETS_FOLDER</a> + _name + <span class="stringliteral">&quot;/&quot;</span> + _name + <span class="stringliteral">&quot;.obj&quot;</span>;</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="keyword">const</span> aiScene* scene = importer.ReadFile(path, aiProcess_FlipWindingOrder | aiProcess_FlipUVs);</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <span class="keywordflow">if</span> (!scene) {</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>        Utils::Alert(<span class="stringliteral">&quot;ObjLoader::LoadModel: Failed to load file: &quot;</span> + path + <span class="stringliteral">&quot;\nError: &quot;</span> + importer.GetErrorString());</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>        <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, <span class="stringliteral">&quot;[Obj Loader] Failed to load &quot;</span> + path + <span class="stringliteral">&quot;: &quot;</span> + importer.GetErrorString());</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    }</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <span class="keywordflow">if</span> (!scene-&gt;HasMeshes()){</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>        Utils::Alert(<span class="stringliteral">&quot;ObjLoader::LoadModel: No meshes found in file: &quot;</span> + path);</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    }</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="keywordflow">for</span> (uint32_t meshIndex = 0; meshIndex &lt; scene-&gt;mNumMeshes; ++meshIndex){</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        aiMesh* mesh = scene-&gt;mMeshes[meshIndex];</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>        <a class="code hl_struct" href="structMeshData.html">MeshData</a> raw;</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>        <span class="keywordflow">for</span> (uint32_t faceIndex = 0; faceIndex &lt; mesh-&gt;mNumFaces; ++faceIndex){</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>            aiFace&amp; face = mesh-&gt;mFaces[faceIndex];</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>            <span class="keywordflow">for</span> (uint32_t element = 0; element &lt; face.mNumIndices; ++element){</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>                uint32_t vertex = face.mIndices[element];</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>                aiVector3D&amp; position = mesh-&gt;mVertices[vertex];</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>                aiVector3D&amp; normal = mesh-&gt;mNormals[vertex];</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>                aiVector3D uv = mesh-&gt;mTextureCoords[0][vertex];</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>                <a class="code hl_struct" href="structVertex.html">Vertex</a> vertexData;</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>                vertexData.<a class="code hl_variable" href="structVertex.html#a12518753ef33de96e2e6fec258b16bd5">position</a> = Vector4(position.x, position.y, position.z, 1.0f);</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>                vertexData.<a class="code hl_variable" href="structVertex.html#a334094143f24252bb6df5a84ce9bb473">uv</a> = Vector2(uv.x, uv.y);</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>                vertexData.<a class="code hl_variable" href="structVertex.html#adce2d4b3d1191c69328519bdf231c344">normal</a> = Vector3(normal.x, normal.y, normal.z);</div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        <span class="keywordflow">for</span> (uint32_t materialIndex = 0; materialIndex &lt; scene-&gt;mNumMaterials; ++materialIndex){</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>            aiMaterial* material = scene-&gt;mMaterials[mesh-&gt;mMaterialIndex];</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>            <span class="keywordflow">if</span> (material-&gt;GetTextureCount(aiTextureType_DIFFUSE)){</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>                aiString texturePath;</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>                material-&gt;GetTexture(aiTextureType_DIFFUSE, 0, &amp;texturePath);</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>                raw.<a class="code hl_variable" href="structMeshData.html#ab7bed81125007b625b5b001517ae957b">texture</a> = <a class="code hl_variable" href="classIModelLoader.html#a87bb7caceb51c4aa8716d21408107bef">ASSETS_FOLDER</a> + _name + <span class="stringliteral">&quot;/&quot;</span> + texturePath.C_Str();</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>            }</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        }</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        _repository-&gt;GetMeshRepository()-&gt;Add(_name, raw);</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    }</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    _repository-&gt;GetModelRepository()-&gt;Add(_name, std::move(data));</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>}</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>                vertexData.<a class="code hl_variable" href="structVertex.html#a12518753ef33de96e2e6fec258b16bd5">position</a>.x *= -1; <span class="comment">// Flip X axis</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>                vertexData.<a class="code hl_variable" href="structVertex.html#adce2d4b3d1191c69328519bdf231c344">normal</a>.x *= -1; <span class="comment">// Flip X axis</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>                raw.<a class="code hl_variable" href="structMeshData.html#aac93fd7e3e5968c5f4376038ef1aac96">vertices</a>.push_back(vertexData);</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>            }</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        }</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        <span class="keywordflow">for</span> (uint32_t materialIndex = 0; materialIndex &lt; scene-&gt;mNumMaterials; ++materialIndex){</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>            aiMaterial* material = scene-&gt;mMaterials[mesh-&gt;mMaterialIndex];</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>            <span class="keywordflow">if</span> (material-&gt;GetTextureCount(aiTextureType_DIFFUSE)){</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>                aiString texturePath;</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>                material-&gt;GetTexture(aiTextureType_DIFFUSE, 0, &amp;texturePath);</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>                raw.<a class="code hl_variable" href="structMeshData.html#ab7bed81125007b625b5b001517ae957b">texture</a> = <a class="code hl_variable" href="classIModelLoader.html#a87bb7caceb51c4aa8716d21408107bef">ASSETS_FOLDER</a> + _name + <span class="stringliteral">&quot;/&quot;</span> + texturePath.C_Str();</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>            }</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>        }</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>        _repository-&gt;GetMeshRepository()-&gt;Add(_name, raw);</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    }</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    _repository-&gt;GetModelRepository()-&gt;Add(_name, std::move(data));</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>}</div>
 </div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
+<div class="ttc" id="aLog_8hpp_html"><div class="ttname"><a href="Log_8hpp.html">Log.hpp</a></div></div>
 <div class="ttc" id="aObjLoader_8hpp_html"><div class="ttname"><a href="ObjLoader_8hpp.html">ObjLoader.hpp</a></div></div>
 <div class="ttc" id="aclassIModelLoader_html_a87bb7caceb51c4aa8716d21408107bef"><div class="ttname"><a href="classIModelLoader.html#a87bb7caceb51c4aa8716d21408107bef">IModelLoader::ASSETS_FOLDER</a></div><div class="ttdeci">const std::string ASSETS_FOLDER</div><div class="ttdef"><b>Definition</b> <a href="IModelLoader_8hpp_source.html#l00008">IModelLoader.hpp:8</a></div></div>
-<div class="ttc" id="aclassObjLoader_html_a693c5b20f805aa902fe0293bf747c153"><div class="ttname"><a href="classObjLoader.html#a693c5b20f805aa902fe0293bf747c153">ObjLoader::LoadModel</a></div><div class="ttdeci">void LoadModel(const std::string &amp;_name, GESTD::ReferencePtr&lt; ResourceRepository &gt; _repository) override</div><div class="ttdef"><b>Definition</b> <a href="ObjLoader_8cpp_source.html#l00009">ObjLoader.cpp:9</a></div></div>
+<div class="ttc" id="aclassLog_html_af351e7d4bd43c85e7c90f52846b64bdb"><div class="ttname"><a href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a></div><div class="ttdeci">static void Send(Level _level, const std::string &amp;_message=&quot;&quot;)</div><div class="ttdoc">ログメッセージを送信</div><div class="ttdef"><b>Definition</b> <a href="Log_8cpp_source.html#l00108">Log.cpp:108</a></div></div>
+<div class="ttc" id="aclassLog_html_afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482"><div class="ttname"><a href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a></div><div class="ttdeci">@ ERR</div></div>
+<div class="ttc" id="aclassObjLoader_html_a693c5b20f805aa902fe0293bf747c153"><div class="ttname"><a href="classObjLoader.html#a693c5b20f805aa902fe0293bf747c153">ObjLoader::LoadModel</a></div><div class="ttdeci">void LoadModel(const std::string &amp;_name, GESTD::ReferencePtr&lt; ResourceRepository &gt; _repository) override</div><div class="ttdef"><b>Definition</b> <a href="ObjLoader_8cpp_source.html#l00010">ObjLoader.cpp:10</a></div></div>
 <div class="ttc" id="astructMeshData_html"><div class="ttname"><a href="structMeshData.html">MeshData</a></div><div class="ttdef"><b>Definition</b> <a href="MeshData_8hpp_source.html#l00016">MeshData.hpp:16</a></div></div>
 <div class="ttc" id="astructMeshData_html_aac93fd7e3e5968c5f4376038ef1aac96"><div class="ttname"><a href="structMeshData.html#aac93fd7e3e5968c5f4376038ef1aac96">MeshData::vertices</a></div><div class="ttdeci">std::vector&lt; Vertex &gt; vertices</div><div class="ttdef"><b>Definition</b> <a href="MeshData_8hpp_source.html#l00017">MeshData.hpp:17</a></div></div>
 <div class="ttc" id="astructMeshData_html_ab7bed81125007b625b5b001517ae957b"><div class="ttname"><a href="structMeshData.html#ab7bed81125007b625b5b001517ae957b">MeshData::texture</a></div><div class="ttdeci">std::string texture</div><div class="ttdef"><b>Definition</b> <a href="MeshData_8hpp_source.html#l00019">MeshData.hpp:19</a></div></div>
@@ -174,7 +184,7 @@ $(document).ready(function(){initNavTree('ObjLoader_8cpp_source.html',''); initR
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_32e188284d239da8bb14ec1dabb0c35f.html">Model</a></li><li class="navelem"><a class="el" href="dir_aa79645136f550af3f328110421da7cc.html">Loader</a></li><li class="navelem"><a class="el" href="ObjLoader_8cpp.html">ObjLoader.cpp</a></li>
-    <li class="footer">2026年09月09日(水) 08時45分13秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年09月10日(木) 15時08分41秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>
