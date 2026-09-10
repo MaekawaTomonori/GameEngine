@@ -38,6 +38,11 @@ public:
      */
     void Free(uint32_t _index);
 
+    /** @brief 空きスロットが無いかどうか
+     * @return 空きが無ければtrue
+     */
+    bool IsFull() const;
+
     /** @brief ディスクリプタヒープを取得
      * @return ディスクリプタヒープポインタ
      */
