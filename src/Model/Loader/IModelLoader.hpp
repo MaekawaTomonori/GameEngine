@@ -1,6 +1,8 @@
 #ifndef IModelLoader_HPP_
 #define IModelLoader_HPP_
-#include "Model.hpp"
+#include <string>
+
+#include "ReferencePtr.hpp"
 #include "src/ResourceRepository/ResourceRepository.hpp"
 
 class IModelLoader {

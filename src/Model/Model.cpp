@@ -1,15 +1,11 @@
 #include "Model.hpp"
 
-#include <filesystem>
-
 #include "Log.hpp"
 #include "PerformanceProfiler.hpp"
 #include "Utils.hpp"
 #include "imgui.h"
 #include "Pattern/Singleton.hpp"
-#include "Loader/GltfLoader.hpp"
-#include "Loader/IModelLoader.hpp"
-#include "Loader/ObjLoader.hpp"
+#include "Loader/ModelLoaderFactory.hpp"
 #include "Math/MathUtils.hpp"
 #include "src/Camera/Controller/CameraController.hpp"
 #include "src/Model/Skinning/SkinningState.hpp"
@@ -220,24 +216,7 @@ GESTD::ReferencePtr<Mesh> Model::GetMesh() const {
 }
 
 void Model::Load(const std::string& _name) {
-    auto repo = Singleton<ModelCommon>::GetInstance()->GetResourceRepository();
-    if (repo->GetModelRepository()->Contains(_name)){
-        return;
-    }
-
-    std::unique_ptr<IModelLoader> loader;
-    if (std::filesystem::exists("Assets/Resources/" + _name + "/" + _name + ".obj")) {
-        loader = std::make_unique<ObjLoader>();
-    }
-    else if (std::filesystem::exists("Assets/Resources/" + _name + "/" + _name + ".gltf")) {
-        loader = std::make_unique<GltfLoader>();
-    }
-    else {
-        Log::Send(Log::Level::ERR, "Model::Load: Model not found: " + _name);
-        Utils::Alert("Model not found: " + _name);
-        return;
-    }
-    loader->LoadModel(_name, repo);
+    ModelLoaderFactory::Load(_name, Singleton<ModelCommon>::GetInstance()->GetResourceRepository());
 }
 
 void Model::Debug() {

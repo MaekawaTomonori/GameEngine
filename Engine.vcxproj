@@ -181,6 +181,7 @@
     <ClInclude Include="src\Model\Data\ModelData.hpp" />
     <ClInclude Include="src\Model\Loader\GltfLoader.hpp" />
     <ClInclude Include="src\Model\Loader\IModelLoader.hpp" />
+    <ClInclude Include="src\Model\Loader\ModelLoaderFactory.hpp" />
     <ClInclude Include="src\Model\Loader\ObjLoader.hpp" />
     <ClInclude Include="src\Model\Node\Node.hpp" />
     <ClInclude Include="src\Model\Repository\ModelRepository.hpp" />
@@ -293,6 +294,7 @@
     <ClCompile Include="src\Model\Common\ModelCommon.cpp" />
     <ClCompile Include="src\Model\Data\ModelData.cpp" />
     <ClCompile Include="src\Model\Loader\GltfLoader.cpp" />
+    <ClCompile Include="src\Model\Loader\ModelLoaderFactory.cpp" />
     <ClCompile Include="src\Model\Loader\ObjLoader.cpp" />
     <ClCompile Include="src\Model\Model.cpp" />
     <ClCompile Include="src\Model\Repository\ModelRepository.cpp" />

@@ -357,6 +357,9 @@
     <ClInclude Include="src\Model\Loader\IModelLoader.hpp">
       <Filter>src\Model\Loader</Filter>
     </ClInclude>
+    <ClInclude Include="src\Model\Loader\ModelLoaderFactory.hpp">
+      <Filter>src\Model\Loader</Filter>
+    </ClInclude>
     <ClInclude Include="src\Model\Loader\ObjLoader.hpp">
       <Filter>src\Model\Loader</Filter>
     </ClInclude>
@@ -583,6 +586,9 @@
       <Filter>src\Model\Data</Filter>
     </ClCompile>
     <ClCompile Include="src\Model\Loader\GltfLoader.cpp">
+      <Filter>src\Model\Loader</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Model\Loader\ModelLoaderFactory.cpp">
       <Filter>src\Model\Loader</Filter>
     </ClCompile>
     <ClCompile Include="src\Model\Loader\ObjLoader.cpp">
