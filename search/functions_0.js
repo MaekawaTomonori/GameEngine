@@ -9,7 +9,7 @@ var searchData=
   ['addline_6',['AddLine',['../classLine.html#a3e95b55c7d5d69801a398215cf8a7db8',1,'Line']]],
   ['addmodule_7',['AddModule',['../classUi_1_1Canvas.html#a409bb3ff40721a9ce6ddb7b401cdb1be',1,'Ui::Canvas']]],
   ['addparameter_8',['AddParameter',['../classRootSignature.html#a6d6cd5a567816ca14e34f47841d98901',1,'RootSignature']]],
-  ['allocate_9',['allocate',['../classHeap.html#adb09b8fd19ed687a247a7261910cbb30',1,'Heap::Allocate()'],['../classSRVManager.html#a1e7a23d2422f4228cc6a9436ad1de225',1,'SRVManager::Allocate()']]],
+  ['allocate_9',['allocate',['../classHeap.html#adb09b8fd19ed687a247a7261910cbb30',1,'Heap::Allocate()'],['../classSRVManager.html#ade510ec021ed84676c4622771027bbbb',1,'SRVManager::Allocate()']]],
   ['allocatertvslot_10',['AllocateRtvSlot',['../classPostEffectChain.html#ab0518c5931733c445b6d1ce693d1c67b',1,'PostEffectChain']]],
   ['apply_11',['Apply',['../classIPostEffect.html#a92340d8f3785eaf52501ac02866c549a',1,'IPostEffect']]],
   ['applycursorvisibility_12',['ApplyCursorVisibility',['../classInput.html#a1f6f6ae51b56fec3cb2e49b3d9ed5824',1,'Input']]],

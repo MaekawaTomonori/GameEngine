@@ -32,10 +32,12 @@ var searchData=
   ['spritecommon_2ehpp_29',['SpriteCommon.hpp',['../SpriteCommon_8hpp.html',1,'']]],
   ['spriteelement_2ecpp_30',['SpriteElement.cpp',['../SpriteElement_8cpp.html',1,'']]],
   ['spriteelement_2ehpp_31',['SpriteElement.hpp',['../SpriteElement_8hpp.html',1,'']]],
-  ['srvmanager_2ecpp_32',['SRVManager.cpp',['../SRVManager_8cpp.html',1,'']]],
-  ['srvmanager_2eh_33',['SRVManager.h',['../SRVManager_8h.html',1,'']]],
-  ['stageloader_2ecpp_34',['StageLoader.cpp',['../StageLoader_8cpp.html',1,'']]],
-  ['stageloader_2ehpp_35',['StageLoader.hpp',['../StageLoader_8hpp.html',1,'']]],
-  ['stagerepository_2ecpp_36',['StageRepository.cpp',['../StageRepository_8cpp.html',1,'']]],
-  ['stagerepository_2ehpp_37',['StageRepository.hpp',['../StageRepository_8hpp.html',1,'']]]
+  ['srvhandle_2ecpp_32',['SRVHandle.cpp',['../SRVHandle_8cpp.html',1,'']]],
+  ['srvhandle_2ehpp_33',['SRVHandle.hpp',['../SRVHandle_8hpp.html',1,'']]],
+  ['srvmanager_2ecpp_34',['SRVManager.cpp',['../SRVManager_8cpp.html',1,'']]],
+  ['srvmanager_2eh_35',['SRVManager.h',['../SRVManager_8h.html',1,'']]],
+  ['stageloader_2ecpp_36',['StageLoader.cpp',['../StageLoader_8cpp.html',1,'']]],
+  ['stageloader_2ehpp_37',['StageLoader.hpp',['../StageLoader_8hpp.html',1,'']]],
+  ['stagerepository_2ecpp_38',['StageRepository.cpp',['../StageRepository_8cpp.html',1,'']]],
+  ['stagerepository_2ehpp_39',['StageRepository.hpp',['../StageRepository_8hpp.html',1,'']]]
 ];

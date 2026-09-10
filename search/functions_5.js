@@ -9,6 +9,6 @@ var searchData=
   ['followsglobalref_6',['FollowsGlobalRef',['../classRawLight.html#a087a2c41ec0e78100e2affbd82fe3ac7',1,'RawLight']]],
   ['frameratelimiter_7',['FrameRateLimiter',['../classFrameRateLimiter.html#ab37b1f16e5369537dbc86ab2a274c7f2',1,'FrameRateLimiter']]],
   ['framework_8',['Framework',['../classFramework.html#ad6e5ec2ae2d5b1309b75065911b29bb5',1,'Framework']]],
-  ['free_9',['Free',['../classHeap.html#ad7589260c6b5a8c76d9965f8e2fec19a',1,'Heap']]],
+  ['free_9',['free',['../classHeap.html#ad7589260c6b5a8c76d9965f8e2fec19a',1,'Heap::Free()'],['../classSRVManager.html#af8b610e91d88a018a61c4c26fb1b10dd',1,'SRVManager::Free()']]],
   ['freertvslot_10',['FreeRtvSlot',['../classPostEffectChain.html#a8198ee49f0d8b1bc0b53ce717a43f93b',1,'PostEffectChain']]]
 ];

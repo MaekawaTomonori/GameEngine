@@ -105,8 +105,10 @@ $(document).ready(function(){initNavTree('classSRVManager.html',''); initResizab
 <tr class="separator:ac1357e3c5a6da7f82d0088021a847e75"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a28b1560dc9426e358de05a75b4699d4d" id="r_a28b1560dc9426e358de05a75b4699d4d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSRVManager.html#a28b1560dc9426e358de05a75b4699d4d">Finalize</a> ()</td></tr>
 <tr class="separator:a28b1560dc9426e358de05a75b4699d4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1e7a23d2422f4228cc6a9436ad1de225" id="r_a1e7a23d2422f4228cc6a9436ad1de225"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSRVManager.html#a1e7a23d2422f4228cc6a9436ad1de225">Allocate</a> ()</td></tr>
-<tr class="separator:a1e7a23d2422f4228cc6a9436ad1de225"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade510ec021ed84676c4622771027bbbb" id="r_ade510ec021ed84676c4622771027bbbb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSRVHandle.html">SRVHandle</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSRVManager.html#ade510ec021ed84676c4622771027bbbb">Allocate</a> ()</td></tr>
+<tr class="separator:ade510ec021ed84676c4622771027bbbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af8b610e91d88a018a61c4c26fb1b10dd" id="r_af8b610e91d88a018a61c4c26fb1b10dd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSRVManager.html#af8b610e91d88a018a61c4c26fb1b10dd">Free</a> (uint32_t _index)</td></tr>
+<tr class="separator:af8b610e91d88a018a61c4c26fb1b10dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1713664e29361b62ed0b8f64d0a7d0f2" id="r_a1713664e29361b62ed0b8f64d0a7d0f2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSRVManager.html#a1713664e29361b62ed0b8f64d0a7d0f2">PreDraw</a> () const</td></tr>
 <tr class="separator:a1713664e29361b62ed0b8f64d0a7d0f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a32125910a69daf0aa5ca99d981f58e5a" id="r_a32125910a69daf0aa5ca99d981f58e5a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSRVManager.html#a32125910a69daf0aa5ca99d981f58e5a">CreateSRVForTexture2D</a> (uint32_t srvIndex, ID3D12Resource *pResource, DXGI_FORMAT format, UINT mipMap) const</td></tr>
@@ -128,16 +130,16 @@ $(document).ready(function(){initNavTree('classSRVManager.html',''); initResizab
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">詳解</h2>
 <div class="textblock">
-<p class="definition"> <a class="el" href="SRVManager_8h_source.html">SRVManager.h</a> の <a class="el" href="SRVManager_8h_source.html#l00010">10</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="SRVManager_8h_source.html">SRVManager.h</a> の <a class="el" href="SRVManager_8h_source.html#l00011">11</a> 行目に定義があります。</p>
 </div><h2 class="groupheader">関数詳解</h2>
-<a id="a1e7a23d2422f4228cc6a9436ad1de225" name="a1e7a23d2422f4228cc6a9436ad1de225"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1e7a23d2422f4228cc6a9436ad1de225">&#9670;&#160;</a></span>Allocate()</h2>
+<a id="ade510ec021ed84676c4622771027bbbb" name="ade510ec021ed84676c4622771027bbbb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade510ec021ed84676c4622771027bbbb">&#9670;&#160;</a></span>Allocate()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint32_t SRVManager::Allocate </td>
+          <td class="memname"><a class="el" href="classSRVHandle.html">SRVHandle</a> SRVManager::Allocate </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -145,7 +147,9 @@ $(document).ready(function(){initNavTree('classSRVManager.html',''); initResizab
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="SRVManager_8cpp_source.html">SRVManager.cpp</a> の <a class="el" href="SRVManager_8cpp_source.html#l00033">33</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="SRVManager_8cpp_source.html">SRVManager.cpp</a> の <a class="el" href="SRVManager_8cpp_source.html#l00032">32</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::ERR</a>, <a class="el" href="Log_8cpp_source.html#l00108">Log::Send()</a>.</p>
 
 <p class="reference">参照元 <a class="el" href="TextCommon_8cpp_source.html#l00032">TextCommon::Initialize()</a>, <a class="el" href="Emitter_8cpp_source.html#l00014">Emitter::Initialize()</a>, <a class="el" href="ShadowCubeMap_8cpp_source.html#l00005">ShadowCubeMap::Initialize()</a>, <a class="el" href="TextureManager_8cpp_source.html#l00135">TextureManager::Load()</a>, <a class="el" href="TextureManager_8cpp_source.html#l00197">TextureManager::LoadFromRawPixels()</a>.</p>
 
@@ -183,7 +187,7 @@ $(document).ready(function(){initNavTree('classSRVManager.html',''); initResizab
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="SRVManager_8cpp_source.html">SRVManager.cpp</a> の <a class="el" href="SRVManager_8cpp_source.html#l00070">70</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="SRVManager_8cpp_source.html">SRVManager.cpp</a> の <a class="el" href="SRVManager_8cpp_source.html#l00076">76</a> 行目に定義があります。</p>
 
 <p class="reference">参照先 <a class="el" href="DirectXAdapter_8cpp_source.html#l00705">DirectXAdapter::GetDevice()</a>.</p>
 
@@ -229,7 +233,7 @@ $(document).ready(function(){initNavTree('classSRVManager.html',''); initResizab
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="SRVManager_8cpp_source.html">SRVManager.cpp</a> の <a class="el" href="SRVManager_8cpp_source.html#l00058">58</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="SRVManager_8cpp_source.html">SRVManager.cpp</a> の <a class="el" href="SRVManager_8cpp_source.html#l00064">64</a> 行目に定義があります。</p>
 
 <p class="reference">参照先 <a class="el" href="DirectXAdapter_8cpp_source.html#l00705">DirectXAdapter::GetDevice()</a>.</p>
 
@@ -275,7 +279,7 @@ $(document).ready(function(){initNavTree('classSRVManager.html',''); initResizab
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="SRVManager_8cpp_source.html">SRVManager.cpp</a> の <a class="el" href="SRVManager_8cpp_source.html#l00048">48</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="SRVManager_8cpp_source.html">SRVManager.cpp</a> の <a class="el" href="SRVManager_8cpp_source.html#l00054">54</a> 行目に定義があります。</p>
 
 <p class="reference">参照先 <a class="el" href="DirectXAdapter_8cpp_source.html#l00705">DirectXAdapter::GetDevice()</a>.</p>
 
@@ -298,7 +302,29 @@ $(document).ready(function(){initNavTree('classSRVManager.html',''); initResizab
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="SRVManager_8cpp_source.html">SRVManager.cpp</a> の <a class="el" href="SRVManager_8cpp_source.html#l00029">29</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="SRVManager_8cpp_source.html">SRVManager.cpp</a> の <a class="el" href="SRVManager_8cpp_source.html#l00028">28</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="af8b610e91d88a018a61c4c26fb1b10dd" name="af8b610e91d88a018a61c4c26fb1b10dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af8b610e91d88a018a61c4c26fb1b10dd">&#9670;&#160;</a></span>Free()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SRVManager::Free </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>_index</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="SRVManager_8cpp_source.html">SRVManager.cpp</a> の <a class="el" href="SRVManager_8cpp_source.html#l00041">41</a> 行目に定義があります。</p>
+
+<p class="reference">参照元 <a class="el" href="SRVHandle_8cpp_source.html#l00028">SRVHandle::Reset()</a>.</p>
 
 </div>
 </div>
@@ -318,7 +344,7 @@ $(document).ready(function(){initNavTree('classSRVManager.html',''); initResizab
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="SRVManager_8cpp_source.html">SRVManager.cpp</a> の <a class="el" href="SRVManager_8cpp_source.html#l00090">90</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="SRVManager_8cpp_source.html">SRVManager.cpp</a> の <a class="el" href="SRVManager_8cpp_source.html#l00096">96</a> 行目に定義があります。</p>
 
 <p class="reference">参照元 <a class="el" href="TextureManager_8cpp_source.html#l00135">TextureManager::Load()</a>, <a class="el" href="TextureManager_8cpp_source.html#l00197">TextureManager::LoadFromRawPixels()</a>.</p>
 
@@ -339,7 +365,7 @@ $(document).ready(function(){initNavTree('classSRVManager.html',''); initResizab
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="SRVManager_8cpp_source.html">SRVManager.cpp</a> の <a class="el" href="SRVManager_8cpp_source.html#l00086">86</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="SRVManager_8cpp_source.html">SRVManager.cpp</a> の <a class="el" href="SRVManager_8cpp_source.html#l00092">92</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -359,7 +385,7 @@ $(document).ready(function(){initNavTree('classSRVManager.html',''); initResizab
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="SRVManager_8cpp_source.html">SRVManager.cpp</a> の <a class="el" href="SRVManager_8cpp_source.html#l00095">95</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="SRVManager_8cpp_source.html">SRVManager.cpp</a> の <a class="el" href="SRVManager_8cpp_source.html#l00101">101</a> 行目に定義があります。</p>
 
 <p class="reference">参照元 <a class="el" href="TextureManager_8cpp_source.html#l00357">TextureManager::GetGPUHandle()</a>, <a class="el" href="TextCommon_8cpp_source.html#l00032">TextCommon::Initialize()</a>, <a class="el" href="Emitter_8cpp_source.html#l00014">Emitter::Initialize()</a>, <a class="el" href="TextureManager_8cpp_source.html#l00135">TextureManager::Load()</a>, <a class="el" href="TextureManager_8cpp_source.html#l00197">TextureManager::LoadFromRawPixels()</a>.</p>
 
@@ -381,7 +407,7 @@ $(document).ready(function(){initNavTree('classSRVManager.html',''); initResizab
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="SRVManager_8cpp_source.html">SRVManager.cpp</a> の <a class="el" href="SRVManager_8cpp_source.html#l00011">11</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="SRVManager_8cpp_source.html">SRVManager.cpp</a> の <a class="el" href="SRVManager_8cpp_source.html#l00012">12</a> 行目に定義があります。</p>
 
 <p class="reference">参照先 <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::ERR</a>, <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::INFO</a>, <a class="el" href="Log_8cpp_source.html#l00108">Log::Send()</a>.</p>
 
@@ -392,9 +418,6 @@ $(document).ready(function(){initNavTree('classSRVManager.html',''); initResizab
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">bool SRVManager::IsFull </td>
@@ -403,14 +426,9 @@ $(document).ready(function(){initNavTree('classSRVManager.html',''); initResizab
           <td> const</td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="SRVManager_8h_source.html">SRVManager.h</a> の <a class="el" href="SRVManager_8h_source.html#l00033">33</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="SRVManager_8cpp_source.html">SRVManager.cpp</a> の <a class="el" href="SRVManager_8cpp_source.html#l00045">45</a> 行目に定義があります。</p>
 
 <p class="reference">参照元 <a class="el" href="TextureManager_8cpp_source.html#l00135">TextureManager::Load()</a>, <a class="el" href="TextureManager_8cpp_source.html#l00197">TextureManager::LoadFromRawPixels()</a>.</p>
 
@@ -431,7 +449,7 @@ $(document).ready(function(){initNavTree('classSRVManager.html',''); initResizab
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="SRVManager_8cpp_source.html">SRVManager.cpp</a> の <a class="el" href="SRVManager_8cpp_source.html#l00043">43</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="SRVManager_8cpp_source.html">SRVManager.cpp</a> の <a class="el" href="SRVManager_8cpp_source.html#l00049">49</a> 行目に定義があります。</p>
 
 <p class="reference">参照先 <a class="el" href="DirectXAdapter_8cpp_source.html#l00709">DirectXAdapter::GetCommandList()</a>.</p>
 
@@ -463,7 +481,7 @@ $(document).ready(function(){initNavTree('classSRVManager.html',''); initResizab
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="SRVManager_8cpp_source.html">SRVManager.cpp</a> の <a class="el" href="SRVManager_8cpp_source.html#l00082">82</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="SRVManager_8cpp_source.html">SRVManager.cpp</a> の <a class="el" href="SRVManager_8cpp_source.html#l00088">88</a> 行目に定義があります。</p>
 
 <p class="reference">参照先 <a class="el" href="DirectXAdapter_8cpp_source.html#l00709">DirectXAdapter::GetCommandList()</a>.</p>
 
@@ -481,7 +499,7 @@ $(document).ready(function(){initNavTree('classSRVManager.html',''); initResizab
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classSRVManager.html">SRVManager</a></li>
-    <li class="footer">2026年09月10日(木) 17時37分33秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年09月10日(木) 18時01分29秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

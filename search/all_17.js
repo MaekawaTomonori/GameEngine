@@ -23,10 +23,11 @@ var searchData=
   ['_7erawlight_20',['~RawLight',['../classRawLight.html#a651507c85c1388fe3fa4bbedcae0a72c',1,'RawLight']]],
   ['_7escheduler_21',['~Scheduler',['../classScheduler.html#afc8187779b46f64039d3ffa58f0dbe51',1,'Scheduler']]],
   ['_7esprite_22',['~Sprite',['../classSprite.html#a8accab430f9d90ae5117b57d67e32b84',1,'Sprite']]],
-  ['_7etext_23',['~Text',['../classText.html#a2d49e5c280e205125b149f7777ae30c7',1,'Text']]],
-  ['_7etextcommon_24',['~TextCommon',['../classTextCommon.html#a40d54493daa27f6cb225a4006d7d51ec',1,'TextCommon']]],
-  ['_7etexturemanager_25',['~TextureManager',['../classTextureManager.html#a001d6d74674961db79987e3222682576',1,'TextureManager']]],
-  ['_7etransition_26',['~Transition',['../classTransition.html#a8188371835c70df89e30274994ee9cf5',1,'Transition']]],
-  ['_7ewinapp_27',['~WinApp',['../classWinApp.html#a362c038771b5fc0c581e875d39dc9aa7',1,'WinApp']]],
-  ['_7ewindow_28',['~Window',['../classWindow.html#adc361d2d83c3531576b0d7bc1589cdfb',1,'Window']]]
+  ['_7esrvhandle_23',['~SRVHandle',['../classSRVHandle.html#a75bfd359a8ad65e817c9029f02647ac4',1,'SRVHandle']]],
+  ['_7etext_24',['~Text',['../classText.html#a2d49e5c280e205125b149f7777ae30c7',1,'Text']]],
+  ['_7etextcommon_25',['~TextCommon',['../classTextCommon.html#a40d54493daa27f6cb225a4006d7d51ec',1,'TextCommon']]],
+  ['_7etexturemanager_26',['~TextureManager',['../classTextureManager.html#a001d6d74674961db79987e3222682576',1,'TextureManager']]],
+  ['_7etransition_27',['~Transition',['../classTransition.html#a8188371835c70df89e30274994ee9cf5',1,'Transition']]],
+  ['_7ewinapp_28',['~WinApp',['../classWinApp.html#a362c038771b5fc0c581e875d39dc9aa7',1,'WinApp']]],
+  ['_7ewindow_29',['~Window',['../classWindow.html#adc361d2d83c3531576b0d7bc1589cdfb',1,'Window']]]
 ];

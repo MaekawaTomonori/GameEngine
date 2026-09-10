@@ -107,168 +107,169 @@ $(document).ready(function(){initNavTree('Emitter_8hpp_source.html',''); initRes
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;Math/MathUtils.hpp&quot;</span></div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;Math/Vector3.hpp&quot;</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;<a class="code" href="DirectXAdapter_8hpp.html">src/DirectX/DirectXAdapter.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;<a class="code" href="SRVManager_8h.html">src/DirectX/Heap/SRVManager.h</a>&quot;</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;<a class="code" href="DX12Resource_8hpp.html">src/DirectX/Resource/DX12Resource.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;<a class="code" href="MeshData_8hpp.html">src/Mesh/Data/MeshData.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="Keyframe_8hpp.html">src/ParticleSystem/Keyframe.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;<a class="code" href="Particle_8hpp.html">src/ParticleSystem/Particle/Particle.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
-<div class="foldopen" id="foldopen00016" data-start="{" data-end="};">
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="Emitter_8hpp.html#a240c1924416689e5700ff0d9f30539d9">   16</a></span><span class="keyword">enum class</span> <a class="code hl_enumeration" href="Emitter_8hpp.html#a240c1924416689e5700ff0d9f30539d9">PrimitiveType</a> {</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <a class="code hl_enumvalue" href="Emitter_8hpp.html#a240c1924416689e5700ff0d9f30539d9acf9f62d4906d63087d71916c1c94c058">Billboard</a>,</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <a class="code hl_enumvalue" href="Emitter_8hpp.html#a240c1924416689e5700ff0d9f30539d9ad4db177c94738b72bf9ce61e988ab1f1">Ring</a>,</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <a class="code hl_enumvalue" href="Emitter_8hpp.html#a240c1924416689e5700ff0d9f30539d9a2ec2c2961c7ce5a114d969c1f562a563">Cylinder</a>,</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <a class="code hl_enumvalue" href="Emitter_8hpp.html#a240c1924416689e5700ff0d9f30539d9ad518a06262ac68f1f006a4f802588130">Trail</a>,</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>};</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;<a class="code" href="SRVHandle_8hpp.html">src/DirectX/Heap/SRVHandle.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;<a class="code" href="SRVManager_8h.html">src/DirectX/Heap/SRVManager.h</a>&quot;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;<a class="code" href="DX12Resource_8hpp.html">src/DirectX/Resource/DX12Resource.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="MeshData_8hpp.html">src/Mesh/Data/MeshData.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;<a class="code" href="Keyframe_8hpp.html">src/ParticleSystem/Keyframe.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &quot;<a class="code" href="Particle_8hpp.html">src/ParticleSystem/Particle/Particle.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="foldopen" id="foldopen00017" data-start="{" data-end="};">
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="Emitter_8hpp.html#a240c1924416689e5700ff0d9f30539d9">   17</a></span><span class="keyword">enum class</span> <a class="code hl_enumeration" href="Emitter_8hpp.html#a240c1924416689e5700ff0d9f30539d9">PrimitiveType</a> {</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <a class="code hl_enumvalue" href="Emitter_8hpp.html#a240c1924416689e5700ff0d9f30539d9acf9f62d4906d63087d71916c1c94c058">Billboard</a>,</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <a class="code hl_enumvalue" href="Emitter_8hpp.html#a240c1924416689e5700ff0d9f30539d9ad4db177c94738b72bf9ce61e988ab1f1">Ring</a>,</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <a class="code hl_enumvalue" href="Emitter_8hpp.html#a240c1924416689e5700ff0d9f30539d9a2ec2c2961c7ce5a114d969c1f562a563">Cylinder</a>,</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <a class="code hl_enumvalue" href="Emitter_8hpp.html#a240c1924416689e5700ff0d9f30539d9ad518a06262ac68f1f006a4f802588130">Trail</a>,</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>};</div>
 </div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="keyword">class </span><a class="code hl_class" href="classEmitter.html">Emitter</a>;</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
-<div class="foldopen" id="foldopen00028" data-start="{" data-end="};">
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="classEmitterHandle.html">   28</a></span><span class="keyword">class </span><a class="code hl_class" href="classEmitterHandle.html">EmitterHandle</a> {</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    GESTD::ReferencePtr&lt;Emitter&gt; emitter_;</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="classEmitterHandle.html#ac31cac002213f42738c0f384fb61ed41">   32</a></span>    <a class="code hl_function" href="classEmitterHandle.html#ac31cac002213f42738c0f384fb61ed41">EmitterHandle</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="classEmitterHandle.html#ac8228f7c5c678ed0bb4f6d5a7452523c">   33</a></span>    <span class="keyword">explicit</span> <a class="code hl_function" href="classEmitterHandle.html#ac8228f7c5c678ed0bb4f6d5a7452523c">EmitterHandle</a>(<span class="keyword">const</span> GESTD::ReferencePtr&lt;Emitter&gt;&amp; _emitter) : emitter_(_emitter) {}</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="classEmitterHandle.html#aa68045092a069681351dcefadd5fb0fb">   35</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classEmitterHandle.html#aa68045092a069681351dcefadd5fb0fb">IsValid</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keywordtype">bool</span><span class="keyword">&gt;</span>(emitter_); }</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classEmitterHandle.html#a3d12f4b7aa503f8bc45ae61093b7a7be">SetPosition</a>(<span class="keyword">const</span> Vector3&amp; _position);</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classEmitterHandle.html#a77c962c3b7f70766dd5f03a6629b4944">Stop</a>();</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>};</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="keyword">class </span><a class="code hl_class" href="classEmitter.html">Emitter</a>;</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
+<div class="foldopen" id="foldopen00029" data-start="{" data-end="};">
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="classEmitterHandle.html">   29</a></span><span class="keyword">class </span><a class="code hl_class" href="classEmitterHandle.html">EmitterHandle</a> {</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    GESTD::ReferencePtr&lt;Emitter&gt; emitter_;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="classEmitterHandle.html#ac31cac002213f42738c0f384fb61ed41">   33</a></span>    <a class="code hl_function" href="classEmitterHandle.html#ac31cac002213f42738c0f384fb61ed41">EmitterHandle</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="classEmitterHandle.html#ac8228f7c5c678ed0bb4f6d5a7452523c">   34</a></span>    <span class="keyword">explicit</span> <a class="code hl_function" href="classEmitterHandle.html#ac8228f7c5c678ed0bb4f6d5a7452523c">EmitterHandle</a>(<span class="keyword">const</span> GESTD::ReferencePtr&lt;Emitter&gt;&amp; _emitter) : emitter_(_emitter) {}</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="classEmitterHandle.html#aa68045092a069681351dcefadd5fb0fb">   36</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classEmitterHandle.html#aa68045092a069681351dcefadd5fb0fb">IsValid</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keywordtype">bool</span><span class="keyword">&gt;</span>(emitter_); }</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classEmitterHandle.html#a3d12f4b7aa503f8bc45ae61093b7a7be">SetPosition</a>(<span class="keyword">const</span> Vector3&amp; _position);</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classEmitterHandle.html#a77c962c3b7f70766dd5f03a6629b4944">Stop</a>();</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>};</div>
 </div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
-<div class="foldopen" id="foldopen00044" data-start="{" data-end="};">
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="classEmitter.html">   44</a></span><span class="keyword">class </span><a class="code hl_class" href="classEmitter.html">Emitter</a> {</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <span class="keyword">struct </span>ForGpu {</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        Matrix4x4 wvp;</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        Matrix4x4 world;</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        Vector4 color;</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    };</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <span class="keyword">const</span> uint16_t MAX = 1024;</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <span class="keyword">const</span> Matrix4x4 BackToFront = MathUtils::Matrix::MakeRotateY(MathUtils::F_PI);</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <a class="code hl_class" href="classDirectXAdapter.html">DirectXAdapter</a>* adapter_ = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <a class="code hl_class" href="classSRVManager.html">SRVManager</a>* srv_ = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    <span class="keywordtype">bool</span> active_ = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <span class="keywordtype">bool</span> billboard_ = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <a class="code hl_enumeration" href="Emitter_8hpp.html#a240c1924416689e5700ff0d9f30539d9">PrimitiveType</a> primitive_ = <a class="code hl_enumvalue" href="Emitter_8hpp.html#a240c1924416689e5700ff0d9f30539d9acf9f62d4906d63087d71916c1c94c058">PrimitiveType::Billboard</a>;</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    Vector3 position_{};</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <span class="keywordtype">float</span> duration_ = 1.f;</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    <span class="keywordtype">float</span> frequency_ = 0.f;</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    uint16_t spawnCount_ = 1;</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    Vector3 size_{ 1.f, 1.f, 1.f };</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    Vector3 velocity_ {};</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    Vector3 rotation_{};</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    Vector3 rotationVelocity_{};</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    Vector4 color_{ 1.f, 1.f, 1.f, 1.f };</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    std::vector&lt;GradientKey&lt;Vector4&gt;&gt; colorKeys_;</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    std::vector&lt;GradientKey&lt;Vector3&gt;&gt; sizeKeys_;</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    <span class="keywordtype">float</span> timer_ = 0.f;</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    <span class="keywordtype">float</span> elapsedTime_ = 0.f;</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    <span class="keywordtype">float</span> particleLifetime_ = 3.f;</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    std::function&lt;void(<span class="keyword">const</span> Vector3&amp;, Vector3&amp;, Vector3&amp;)&gt; spawnFunc_;</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    std::function&lt;void(<span class="keywordtype">float</span>, <span class="keyword">const</span> Vector3&amp;, Vector3&amp;, Vector3&amp;, Vector4&amp;)&gt; updateFunc_;</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    std::vector&lt;Particle&gt; particlePool_;</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    uint16_t actives_ = 0;</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    std::string name_ = <span class="stringliteral">&quot;Emitter&quot;</span>;</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    std::string canvasName_ = <span class="stringliteral">&quot;None&quot;</span>;</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    std::string uuid_;</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    <a class="code hl_struct" href="structMeshData.html">MeshData</a> data_;</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> </div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    std::string texture_ = <span class="stringliteral">&quot;white_x16.png&quot;</span>;</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    std::unique_ptr&lt;DX12Resource&gt; resource_;</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    std::span&lt;ForGpu&gt; mapped_;</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span> </div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    uint32_t index_ = 0;</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    D3D12_GPU_DESCRIPTOR_HANDLE handle_;</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    std::unique_ptr&lt;DX12Resource&gt; vr_;</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    D3D12_VERTEX_BUFFER_VIEW vbv_{};</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    std::span&lt;Vertex&gt; vd_;</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span> </div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    std::unique_ptr&lt;DX12Resource&gt; ir_;</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    D3D12_INDEX_BUFFER_VIEW ibv_{};</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    std::span&lt;uint32_t&gt; id_;</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span> </div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    GESTD::LifetimeSentinel lifetime_;</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    <a class="code hl_class" href="classEmitter.html">Emitter</a>(<a class="code hl_class" href="classDirectXAdapter.html">DirectXAdapter</a>* _adapter, <a class="code hl_class" href="classSRVManager.html">SRVManager</a>* _srv);</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classEmitter.html#aca523935cb30696904d953e0f8193b9a">Initialize</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structMeshData.html">MeshData</a>&amp; _mesh);</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classEmitter.html#a92aadafc647cca2fcb8be5185fbf7104">Update</a>();</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classEmitter.html#a1a7f88acfebb09e0a3ab3bc6740a7287">Draw</a>();</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    <a class="code hl_class" href="classEmitterHandle.html">EmitterHandle</a> <a class="code hl_function" href="classEmitter.html#ac8a3d960532f37088635aae0bbaeec82">Emit</a>();</div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span> </div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classEmitter.html#abebbc8dc1101b3c3d9a9ba57716437aa">Debug</a>();</div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span> </div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classEmitter.html#a75b599d0f0986459cd1346ea8fd9068e">Reset</a>();</div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span> </div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classEmitter.html#a32cd672a9952510f7c6edb57d600e4d5">IsFinished</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span> </div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    <a class="code hl_class" href="classEmitter.html">Emitter</a>&amp; <a class="code hl_function" href="classEmitter.html#a15dfb67ed3eee79e5160770747dc18b2">Enable</a>(<span class="keywordtype">bool</span> _active = <span class="keyword">true</span>);</div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span> </div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    <a class="code hl_class" href="classEmitter.html">Emitter</a>&amp; <a class="code hl_function" href="classEmitter.html#a1eb9148eed139eb454da633c1464a1a3">SetPosition</a>(<span class="keyword">const</span> Vector3&amp; _position);</div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span> </div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    <a class="code hl_class" href="classEmitter.html">Emitter</a>&amp; <a class="code hl_function" href="classEmitter.html#ae21fe745d7375257ee5c6b405ecd7f34">SetFrequency</a>(<span class="keyword">const</span> <span class="keywordtype">float</span>&amp; _frequency);</div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span> </div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    <a class="code hl_class" href="classEmitter.html">Emitter</a>&amp; <a class="code hl_function" href="classEmitter.html#a3da27ca5ddd18d5724d36f0114268b90">SetDuration</a>(<span class="keyword">const</span> <span class="keywordtype">float</span>&amp; _duration);</div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span> </div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>    <a class="code hl_class" href="classEmitter.html">Emitter</a>&amp; <a class="code hl_function" href="classEmitter.html#a909a63b866dd041e6f58a60ea97229d1">SetSpawnCount</a>(<span class="keyword">const</span> uint16_t&amp; _count);</div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span> </div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    <a class="code hl_class" href="classEmitter.html">Emitter</a>&amp; <a class="code hl_function" href="classEmitter.html#af3723d6f82e61f1f999cbee7989c32f1">SetColor</a>(<span class="keyword">const</span> Vector4&amp; _color);</div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span> </div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>    <a class="code hl_class" href="classEmitter.html">Emitter</a>&amp; <a class="code hl_function" href="classEmitter.html#aa1e83b59fe416e1b5a1d4349af252846">SetTexture</a>(<span class="keyword">const</span> std::string&amp; _texture);</div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span> </div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    <a class="code hl_class" href="classEmitter.html">Emitter</a>&amp; <a class="code hl_function" href="classEmitter.html#ae8cc5409733765eac82c3002a59377cf">SetSize</a>(<span class="keyword">const</span> <span class="keywordtype">float</span>&amp; _size);</div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span> </div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>    <a class="code hl_class" href="classEmitter.html">Emitter</a>&amp; <a class="code hl_function" href="classEmitter.html#ae8cc5409733765eac82c3002a59377cf">SetSize</a>(<span class="keyword">const</span> Vector3&amp; _size);</div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span> </div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>    <a class="code hl_class" href="classEmitter.html">Emitter</a>&amp; <a class="code hl_function" href="classEmitter.html#a48ba66b2e247cf590106b542b2d2dd7c">SetVelocity</a>(<span class="keyword">const</span> Vector3&amp; _velocity);</div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span> </div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>    <a class="code hl_class" href="classEmitter.html">Emitter</a>&amp; <a class="code hl_function" href="classEmitter.html#a341e52825f4a91398c2db4b846d17727">SetBillboard</a>(<span class="keywordtype">bool</span> _billboard);</div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span> </div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>    <a class="code hl_class" href="classEmitter.html">Emitter</a>&amp; <a class="code hl_function" href="classEmitter.html#a9f8872dfa03ccf8af5a6ed90417a4f11">SetPrimitive</a>(<a class="code hl_enumeration" href="Emitter_8hpp.html#a240c1924416689e5700ff0d9f30539d9">PrimitiveType</a> _type);</div>
-<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span> </div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>    <a class="code hl_class" href="classEmitter.html">Emitter</a>&amp; <a class="code hl_function" href="classEmitter.html#af9b9a14463df850af2688eaf06693865">SetRotation</a>(<span class="keyword">const</span> Vector3&amp; _rotation);</div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span> </div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>    <a class="code hl_class" href="classEmitter.html">Emitter</a>&amp; <a class="code hl_function" href="classEmitter.html#a95e1cf154287bdd7e066e02110e020a7">SetRotationVelocity</a>(<span class="keyword">const</span> Vector3&amp; _rotationVelocity);</div>
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span> </div>
-<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>    <a class="code hl_class" href="classEmitter.html">Emitter</a>&amp; <a class="code hl_function" href="classEmitter.html#a5a98eb42fc8bcd7e60a4a355cffd853b">SetCanvasName</a>(<span class="keyword">const</span> std::string&amp; _canvasName);</div>
-<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span> </div>
-<div class="line"><a id="l00153" name="l00153"></a><span class="lineno"><a class="line" href="classEmitter.html#a1702bbddab513af0bb953899d186c759">  153</a></span>    <span class="keyword">const</span> std::string&amp; <a class="code hl_function" href="classEmitter.html#a1702bbddab513af0bb953899d186c759">GetCanvasName</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> canvasName_; }</div>
-<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span> </div>
-<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>    <a class="code hl_class" href="classEmitter.html">Emitter</a>&amp; <a class="code hl_function" href="classEmitter.html#abb060efc260a2c7511a5931eac9b2ab3">SetParticleLifetime</a>(<span class="keyword">const</span> <span class="keywordtype">float</span>&amp; _lifetime);</div>
-<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span> </div>
-<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>    <a class="code hl_class" href="classEmitter.html">Emitter</a>&amp; <a class="code hl_function" href="classEmitter.html#ad1f52531c563e25f89349988d2efbee8">SetColorKeys</a>(std::vector&lt;<a class="code hl_struct" href="structGradientKey.html">GradientKey&lt;Vector4&gt;</a>&gt; _keys);</div>
-<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span> </div>
-<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>    <a class="code hl_class" href="classEmitter.html">Emitter</a>&amp; <a class="code hl_function" href="classEmitter.html#aa5b0f58bc8c98326914e1e069b0c3137">SetSizeKeys</a>(std::vector&lt;<a class="code hl_struct" href="structGradientKey.html">GradientKey&lt;Vector3&gt;</a>&gt; _keys);</div>
-<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span> </div>
-<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>    <a class="code hl_class" href="classEmitter.html">Emitter</a>&amp; <a class="code hl_function" href="classEmitter.html#a29d5e63a07da34e87d77c0668c70e65c">SetUpdateFunction</a>(<span class="keyword">const</span> std::function&lt;<span class="keywordtype">void</span>(<span class="keywordtype">float</span>, <span class="keyword">const</span> Vector3&amp;, Vector3&amp;, Vector3&amp;, Vector4&amp;)&gt;&amp; _func);</div>
-<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span> </div>
-<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>    <a class="code hl_class" href="classEmitter.html">Emitter</a>&amp; <a class="code hl_function" href="classEmitter.html#ac60b2b75d585dff8356d2f13f464a0d7">SetSpawnFunction</a>(<span class="keyword">const</span> std::function&lt;<span class="keywordtype">void</span>(<span class="keyword">const</span> Vector3&amp;, Vector3&amp;, Vector3&amp;)&gt;&amp; _func);</div>
-<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span> </div>
-<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>    <span class="keywordtype">void</span> FrequencyUpdate();</div>
-<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>    <span class="keywordtype">void</span> Spawn(<span class="keyword">const</span> uint16_t&amp; _count);</div>
-<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>    <span class="keywordtype">void</span> RegisterGpu();</div>
-<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>}; <span class="comment">// class Emitter</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
+<div class="foldopen" id="foldopen00045" data-start="{" data-end="};">
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="classEmitter.html">   45</a></span><span class="keyword">class </span><a class="code hl_class" href="classEmitter.html">Emitter</a> {</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keyword">struct </span>ForGpu {</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        Matrix4x4 wvp;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        Matrix4x4 world;</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        Vector4 color;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    };</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <span class="keyword">const</span> uint16_t MAX = 1024;</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    <span class="keyword">const</span> Matrix4x4 BackToFront = MathUtils::Matrix::MakeRotateY(MathUtils::F_PI);</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <a class="code hl_class" href="classDirectXAdapter.html">DirectXAdapter</a>* adapter_ = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <a class="code hl_class" href="classSRVManager.html">SRVManager</a>* srv_ = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <span class="keywordtype">bool</span> active_ = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <span class="keywordtype">bool</span> billboard_ = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <a class="code hl_enumeration" href="Emitter_8hpp.html#a240c1924416689e5700ff0d9f30539d9">PrimitiveType</a> primitive_ = <a class="code hl_enumvalue" href="Emitter_8hpp.html#a240c1924416689e5700ff0d9f30539d9acf9f62d4906d63087d71916c1c94c058">PrimitiveType::Billboard</a>;</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    Vector3 position_{};</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    <span class="keywordtype">float</span> duration_ = 1.f;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    <span class="keywordtype">float</span> frequency_ = 0.f;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    uint16_t spawnCount_ = 1;</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    Vector3 size_{ 1.f, 1.f, 1.f };</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    Vector3 velocity_ {};</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    Vector3 rotation_{};</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    Vector3 rotationVelocity_{};</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    Vector4 color_{ 1.f, 1.f, 1.f, 1.f };</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    std::vector&lt;GradientKey&lt;Vector4&gt;&gt; colorKeys_;</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    std::vector&lt;GradientKey&lt;Vector3&gt;&gt; sizeKeys_;</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    <span class="keywordtype">float</span> timer_ = 0.f;</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    <span class="keywordtype">float</span> elapsedTime_ = 0.f;</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    <span class="keywordtype">float</span> particleLifetime_ = 3.f;</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    std::function&lt;void(<span class="keyword">const</span> Vector3&amp;, Vector3&amp;, Vector3&amp;)&gt; spawnFunc_;</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    std::function&lt;void(<span class="keywordtype">float</span>, <span class="keyword">const</span> Vector3&amp;, Vector3&amp;, Vector3&amp;, Vector4&amp;)&gt; updateFunc_;</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    std::vector&lt;Particle&gt; particlePool_;</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    uint16_t actives_ = 0;</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span> </div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    std::string name_ = <span class="stringliteral">&quot;Emitter&quot;</span>;</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    std::string canvasName_ = <span class="stringliteral">&quot;None&quot;</span>;</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    std::string uuid_;</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    <a class="code hl_struct" href="structMeshData.html">MeshData</a> data_;</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    std::string texture_ = <span class="stringliteral">&quot;white_x16.png&quot;</span>;</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    std::unique_ptr&lt;DX12Resource&gt; resource_;</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    std::span&lt;ForGpu&gt; mapped_;</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span> </div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    <a class="code hl_class" href="classSRVHandle.html">SRVHandle</a> index_;</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    D3D12_GPU_DESCRIPTOR_HANDLE handle_;</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span> </div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    std::unique_ptr&lt;DX12Resource&gt; vr_;</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    D3D12_VERTEX_BUFFER_VIEW vbv_{};</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    std::span&lt;Vertex&gt; vd_;</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    std::unique_ptr&lt;DX12Resource&gt; ir_;</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    D3D12_INDEX_BUFFER_VIEW ibv_{};</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    std::span&lt;uint32_t&gt; id_;</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    GESTD::LifetimeSentinel lifetime_;</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span> </div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    <a class="code hl_class" href="classEmitter.html">Emitter</a>(<a class="code hl_class" href="classDirectXAdapter.html">DirectXAdapter</a>* _adapter, <a class="code hl_class" href="classSRVManager.html">SRVManager</a>* _srv);</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classEmitter.html#aca523935cb30696904d953e0f8193b9a">Initialize</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structMeshData.html">MeshData</a>&amp; _mesh);</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classEmitter.html#a92aadafc647cca2fcb8be5185fbf7104">Update</a>();</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classEmitter.html#a1a7f88acfebb09e0a3ab3bc6740a7287">Draw</a>();</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    <a class="code hl_class" href="classEmitterHandle.html">EmitterHandle</a> <a class="code hl_function" href="classEmitter.html#ac8a3d960532f37088635aae0bbaeec82">Emit</a>();</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span> </div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classEmitter.html#abebbc8dc1101b3c3d9a9ba57716437aa">Debug</a>();</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span> </div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classEmitter.html#a75b599d0f0986459cd1346ea8fd9068e">Reset</a>();</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span> </div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classEmitter.html#a32cd672a9952510f7c6edb57d600e4d5">IsFinished</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span> </div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    <a class="code hl_class" href="classEmitter.html">Emitter</a>&amp; <a class="code hl_function" href="classEmitter.html#a15dfb67ed3eee79e5160770747dc18b2">Enable</a>(<span class="keywordtype">bool</span> _active = <span class="keyword">true</span>);</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span> </div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    <a class="code hl_class" href="classEmitter.html">Emitter</a>&amp; <a class="code hl_function" href="classEmitter.html#a1eb9148eed139eb454da633c1464a1a3">SetPosition</a>(<span class="keyword">const</span> Vector3&amp; _position);</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span> </div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    <a class="code hl_class" href="classEmitter.html">Emitter</a>&amp; <a class="code hl_function" href="classEmitter.html#ae21fe745d7375257ee5c6b405ecd7f34">SetFrequency</a>(<span class="keyword">const</span> <span class="keywordtype">float</span>&amp; _frequency);</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span> </div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    <a class="code hl_class" href="classEmitter.html">Emitter</a>&amp; <a class="code hl_function" href="classEmitter.html#a3da27ca5ddd18d5724d36f0114268b90">SetDuration</a>(<span class="keyword">const</span> <span class="keywordtype">float</span>&amp; _duration);</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span> </div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>    <a class="code hl_class" href="classEmitter.html">Emitter</a>&amp; <a class="code hl_function" href="classEmitter.html#a909a63b866dd041e6f58a60ea97229d1">SetSpawnCount</a>(<span class="keyword">const</span> uint16_t&amp; _count);</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span> </div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    <a class="code hl_class" href="classEmitter.html">Emitter</a>&amp; <a class="code hl_function" href="classEmitter.html#af3723d6f82e61f1f999cbee7989c32f1">SetColor</a>(<span class="keyword">const</span> Vector4&amp; _color);</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span> </div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>    <a class="code hl_class" href="classEmitter.html">Emitter</a>&amp; <a class="code hl_function" href="classEmitter.html#aa1e83b59fe416e1b5a1d4349af252846">SetTexture</a>(<span class="keyword">const</span> std::string&amp; _texture);</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span> </div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>    <a class="code hl_class" href="classEmitter.html">Emitter</a>&amp; <a class="code hl_function" href="classEmitter.html#ae8cc5409733765eac82c3002a59377cf">SetSize</a>(<span class="keyword">const</span> <span class="keywordtype">float</span>&amp; _size);</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span> </div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>    <a class="code hl_class" href="classEmitter.html">Emitter</a>&amp; <a class="code hl_function" href="classEmitter.html#ae8cc5409733765eac82c3002a59377cf">SetSize</a>(<span class="keyword">const</span> Vector3&amp; _size);</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span> </div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>    <a class="code hl_class" href="classEmitter.html">Emitter</a>&amp; <a class="code hl_function" href="classEmitter.html#a48ba66b2e247cf590106b542b2d2dd7c">SetVelocity</a>(<span class="keyword">const</span> Vector3&amp; _velocity);</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span> </div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>    <a class="code hl_class" href="classEmitter.html">Emitter</a>&amp; <a class="code hl_function" href="classEmitter.html#a341e52825f4a91398c2db4b846d17727">SetBillboard</a>(<span class="keywordtype">bool</span> _billboard);</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span> </div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>    <a class="code hl_class" href="classEmitter.html">Emitter</a>&amp; <a class="code hl_function" href="classEmitter.html#a9f8872dfa03ccf8af5a6ed90417a4f11">SetPrimitive</a>(<a class="code hl_enumeration" href="Emitter_8hpp.html#a240c1924416689e5700ff0d9f30539d9">PrimitiveType</a> _type);</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span> </div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>    <a class="code hl_class" href="classEmitter.html">Emitter</a>&amp; <a class="code hl_function" href="classEmitter.html#af9b9a14463df850af2688eaf06693865">SetRotation</a>(<span class="keyword">const</span> Vector3&amp; _rotation);</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span> </div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>    <a class="code hl_class" href="classEmitter.html">Emitter</a>&amp; <a class="code hl_function" href="classEmitter.html#a95e1cf154287bdd7e066e02110e020a7">SetRotationVelocity</a>(<span class="keyword">const</span> Vector3&amp; _rotationVelocity);</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span> </div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>    <a class="code hl_class" href="classEmitter.html">Emitter</a>&amp; <a class="code hl_function" href="classEmitter.html#a5a98eb42fc8bcd7e60a4a355cffd853b">SetCanvasName</a>(<span class="keyword">const</span> std::string&amp; _canvasName);</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span> </div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno"><a class="line" href="classEmitter.html#a1702bbddab513af0bb953899d186c759">  154</a></span>    <span class="keyword">const</span> std::string&amp; <a class="code hl_function" href="classEmitter.html#a1702bbddab513af0bb953899d186c759">GetCanvasName</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> canvasName_; }</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span> </div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>    <a class="code hl_class" href="classEmitter.html">Emitter</a>&amp; <a class="code hl_function" href="classEmitter.html#abb060efc260a2c7511a5931eac9b2ab3">SetParticleLifetime</a>(<span class="keyword">const</span> <span class="keywordtype">float</span>&amp; _lifetime);</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span> </div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>    <a class="code hl_class" href="classEmitter.html">Emitter</a>&amp; <a class="code hl_function" href="classEmitter.html#ad1f52531c563e25f89349988d2efbee8">SetColorKeys</a>(std::vector&lt;<a class="code hl_struct" href="structGradientKey.html">GradientKey&lt;Vector4&gt;</a>&gt; _keys);</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span> </div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>    <a class="code hl_class" href="classEmitter.html">Emitter</a>&amp; <a class="code hl_function" href="classEmitter.html#aa5b0f58bc8c98326914e1e069b0c3137">SetSizeKeys</a>(std::vector&lt;<a class="code hl_struct" href="structGradientKey.html">GradientKey&lt;Vector3&gt;</a>&gt; _keys);</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span> </div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>    <a class="code hl_class" href="classEmitter.html">Emitter</a>&amp; <a class="code hl_function" href="classEmitter.html#a29d5e63a07da34e87d77c0668c70e65c">SetUpdateFunction</a>(<span class="keyword">const</span> std::function&lt;<span class="keywordtype">void</span>(<span class="keywordtype">float</span>, <span class="keyword">const</span> Vector3&amp;, Vector3&amp;, Vector3&amp;, Vector4&amp;)&gt;&amp; _func);</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span> </div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>    <a class="code hl_class" href="classEmitter.html">Emitter</a>&amp; <a class="code hl_function" href="classEmitter.html#ac60b2b75d585dff8356d2f13f464a0d7">SetSpawnFunction</a>(<span class="keyword">const</span> std::function&lt;<span class="keywordtype">void</span>(<span class="keyword">const</span> Vector3&amp;, Vector3&amp;, Vector3&amp;)&gt;&amp; _func);</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span> </div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>    <span class="keywordtype">void</span> FrequencyUpdate();</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>    <span class="keywordtype">void</span> Spawn(<span class="keyword">const</span> uint16_t&amp; _count);</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>    <span class="keywordtype">void</span> RegisterGpu();</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>}; <span class="comment">// class Emitter</span></div>
 </div>
-<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span> </div>
-<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span><span class="preprocessor">#endif </span><span class="comment">// Emitter_HPP_</span></div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span> </div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span><span class="preprocessor">#endif </span><span class="comment">// Emitter_HPP_</span></div>
 <div class="ttc" id="aDX12Resource_8hpp_html"><div class="ttname"><a href="DX12Resource_8hpp.html">DX12Resource.hpp</a></div></div>
 <div class="ttc" id="aDirectXAdapter_8hpp_html"><div class="ttname"><a href="DirectXAdapter_8hpp.html">DirectXAdapter.hpp</a></div></div>
-<div class="ttc" id="aEmitter_8hpp_html_a240c1924416689e5700ff0d9f30539d9"><div class="ttname"><a href="Emitter_8hpp.html#a240c1924416689e5700ff0d9f30539d9">PrimitiveType</a></div><div class="ttdeci">PrimitiveType</div><div class="ttdef"><b>Definition</b> <a href="Emitter_8hpp_source.html#l00016">Emitter.hpp:16</a></div></div>
+<div class="ttc" id="aEmitter_8hpp_html_a240c1924416689e5700ff0d9f30539d9"><div class="ttname"><a href="Emitter_8hpp.html#a240c1924416689e5700ff0d9f30539d9">PrimitiveType</a></div><div class="ttdeci">PrimitiveType</div><div class="ttdef"><b>Definition</b> <a href="Emitter_8hpp_source.html#l00017">Emitter.hpp:17</a></div></div>
 <div class="ttc" id="aEmitter_8hpp_html_a240c1924416689e5700ff0d9f30539d9a2ec2c2961c7ce5a114d969c1f562a563"><div class="ttname"><a href="Emitter_8hpp.html#a240c1924416689e5700ff0d9f30539d9a2ec2c2961c7ce5a114d969c1f562a563">PrimitiveType::Cylinder</a></div><div class="ttdeci">@ Cylinder</div></div>
 <div class="ttc" id="aEmitter_8hpp_html_a240c1924416689e5700ff0d9f30539d9acf9f62d4906d63087d71916c1c94c058"><div class="ttname"><a href="Emitter_8hpp.html#a240c1924416689e5700ff0d9f30539d9acf9f62d4906d63087d71916c1c94c058">PrimitiveType::Billboard</a></div><div class="ttdeci">@ Billboard</div></div>
 <div class="ttc" id="aEmitter_8hpp_html_a240c1924416689e5700ff0d9f30539d9ad4db177c94738b72bf9ce61e988ab1f1"><div class="ttname"><a href="Emitter_8hpp.html#a240c1924416689e5700ff0d9f30539d9ad4db177c94738b72bf9ce61e988ab1f1">PrimitiveType::Ring</a></div><div class="ttdeci">@ Ring</div></div>
@@ -276,17 +277,18 @@ $(document).ready(function(){initNavTree('Emitter_8hpp_source.html',''); initRes
 <div class="ttc" id="aKeyframe_8hpp_html"><div class="ttname"><a href="Keyframe_8hpp.html">Keyframe.hpp</a></div></div>
 <div class="ttc" id="aMeshData_8hpp_html"><div class="ttname"><a href="MeshData_8hpp.html">MeshData.hpp</a></div></div>
 <div class="ttc" id="aParticle_8hpp_html"><div class="ttname"><a href="Particle_8hpp.html">Particle.hpp</a></div></div>
+<div class="ttc" id="aSRVHandle_8hpp_html"><div class="ttname"><a href="SRVHandle_8hpp.html">SRVHandle.hpp</a></div></div>
 <div class="ttc" id="aSRVManager_8h_html"><div class="ttname"><a href="SRVManager_8h.html">SRVManager.h</a></div></div>
 <div class="ttc" id="aclassDirectXAdapter_html"><div class="ttname"><a href="classDirectXAdapter.html">DirectXAdapter</a></div><div class="ttdoc">DirectX12アダプタークラス DirectX12の初期化とデバイス管理を提供</div><div class="ttdef"><b>Definition</b> <a href="DirectXAdapter_8hpp_source.html#l00025">DirectXAdapter.hpp:25</a></div></div>
-<div class="ttc" id="aclassEmitterHandle_html"><div class="ttname"><a href="classEmitterHandle.html">EmitterHandle</a></div><div class="ttdoc">発生させたEmitterを外部から安全に操作するための軽量ハンドル 参照先が破棄されていてもSetPosition/Stopは安全に無視される</div><div class="ttdef"><b>Definition</b> <a href="Emitter_8hpp_source.html#l00028">Emitter.hpp:28</a></div></div>
+<div class="ttc" id="aclassEmitterHandle_html"><div class="ttname"><a href="classEmitterHandle.html">EmitterHandle</a></div><div class="ttdoc">発生させたEmitterを外部から安全に操作するための軽量ハンドル 参照先が破棄されていてもSetPosition/Stopは安全に無視される</div><div class="ttdef"><b>Definition</b> <a href="Emitter_8hpp_source.html#l00029">Emitter.hpp:29</a></div></div>
 <div class="ttc" id="aclassEmitterHandle_html_a3d12f4b7aa503f8bc45ae61093b7a7be"><div class="ttname"><a href="classEmitterHandle.html#a3d12f4b7aa503f8bc45ae61093b7a7be">EmitterHandle::SetPosition</a></div><div class="ttdeci">void SetPosition(const Vector3 &amp;_position)</div><div class="ttdef"><b>Definition</b> <a href="Emitter_8cpp_source.html#l00106">Emitter.cpp:106</a></div></div>
 <div class="ttc" id="aclassEmitterHandle_html_a77c962c3b7f70766dd5f03a6629b4944"><div class="ttname"><a href="classEmitterHandle.html#a77c962c3b7f70766dd5f03a6629b4944">EmitterHandle::Stop</a></div><div class="ttdeci">void Stop()</div><div class="ttdoc">継続的なスポーンを停止する。既存のパーティクルは寿命が尽きるまで残る</div><div class="ttdef"><b>Definition</b> <a href="Emitter_8cpp_source.html#l00110">Emitter.cpp:110</a></div></div>
-<div class="ttc" id="aclassEmitterHandle_html_aa68045092a069681351dcefadd5fb0fb"><div class="ttname"><a href="classEmitterHandle.html#aa68045092a069681351dcefadd5fb0fb">EmitterHandle::IsValid</a></div><div class="ttdeci">bool IsValid() const</div><div class="ttdef"><b>Definition</b> <a href="Emitter_8hpp_source.html#l00035">Emitter.hpp:35</a></div></div>
+<div class="ttc" id="aclassEmitterHandle_html_aa68045092a069681351dcefadd5fb0fb"><div class="ttname"><a href="classEmitterHandle.html#aa68045092a069681351dcefadd5fb0fb">EmitterHandle::IsValid</a></div><div class="ttdeci">bool IsValid() const</div><div class="ttdef"><b>Definition</b> <a href="Emitter_8hpp_source.html#l00036">Emitter.hpp:36</a></div></div>
 <div class="ttc" id="aclassEmitterHandle_html_ac31cac002213f42738c0f384fb61ed41"><div class="ttname"><a href="classEmitterHandle.html#ac31cac002213f42738c0f384fb61ed41">EmitterHandle::EmitterHandle</a></div><div class="ttdeci">EmitterHandle()=default</div></div>
-<div class="ttc" id="aclassEmitterHandle_html_ac8228f7c5c678ed0bb4f6d5a7452523c"><div class="ttname"><a href="classEmitterHandle.html#ac8228f7c5c678ed0bb4f6d5a7452523c">EmitterHandle::EmitterHandle</a></div><div class="ttdeci">EmitterHandle(const GESTD::ReferencePtr&lt; Emitter &gt; &amp;_emitter)</div><div class="ttdef"><b>Definition</b> <a href="Emitter_8hpp_source.html#l00033">Emitter.hpp:33</a></div></div>
-<div class="ttc" id="aclassEmitter_html"><div class="ttname"><a href="classEmitter.html">Emitter</a></div><div class="ttdef"><b>Definition</b> <a href="Emitter_8hpp_source.html#l00044">Emitter.hpp:44</a></div></div>
+<div class="ttc" id="aclassEmitterHandle_html_ac8228f7c5c678ed0bb4f6d5a7452523c"><div class="ttname"><a href="classEmitterHandle.html#ac8228f7c5c678ed0bb4f6d5a7452523c">EmitterHandle::EmitterHandle</a></div><div class="ttdeci">EmitterHandle(const GESTD::ReferencePtr&lt; Emitter &gt; &amp;_emitter)</div><div class="ttdef"><b>Definition</b> <a href="Emitter_8hpp_source.html#l00034">Emitter.hpp:34</a></div></div>
+<div class="ttc" id="aclassEmitter_html"><div class="ttname"><a href="classEmitter.html">Emitter</a></div><div class="ttdef"><b>Definition</b> <a href="Emitter_8hpp_source.html#l00045">Emitter.hpp:45</a></div></div>
 <div class="ttc" id="aclassEmitter_html_a15dfb67ed3eee79e5160770747dc18b2"><div class="ttname"><a href="classEmitter.html#a15dfb67ed3eee79e5160770747dc18b2">Emitter::Enable</a></div><div class="ttdeci">Emitter &amp; Enable(bool _active=true)</div><div class="ttdef"><b>Definition</b> <a href="Emitter_8cpp_source.html#l00264">Emitter.cpp:264</a></div></div>
-<div class="ttc" id="aclassEmitter_html_a1702bbddab513af0bb953899d186c759"><div class="ttname"><a href="classEmitter.html#a1702bbddab513af0bb953899d186c759">Emitter::GetCanvasName</a></div><div class="ttdeci">const std::string &amp; GetCanvasName() const</div><div class="ttdoc">所属Canvas名を取得する</div><div class="ttdef"><b>Definition</b> <a href="Emitter_8hpp_source.html#l00153">Emitter.hpp:153</a></div></div>
+<div class="ttc" id="aclassEmitter_html_a1702bbddab513af0bb953899d186c759"><div class="ttname"><a href="classEmitter.html#a1702bbddab513af0bb953899d186c759">Emitter::GetCanvasName</a></div><div class="ttdeci">const std::string &amp; GetCanvasName() const</div><div class="ttdoc">所属Canvas名を取得する</div><div class="ttdef"><b>Definition</b> <a href="Emitter_8hpp_source.html#l00154">Emitter.hpp:154</a></div></div>
 <div class="ttc" id="aclassEmitter_html_a1a7f88acfebb09e0a3ab3bc6740a7287"><div class="ttname"><a href="classEmitter.html#a1a7f88acfebb09e0a3ab3bc6740a7287">Emitter::Draw</a></div><div class="ttdeci">void Draw()</div><div class="ttdef"><b>Definition</b> <a href="Emitter_8cpp_source.html#l00072">Emitter.cpp:72</a></div></div>
 <div class="ttc" id="aclassEmitter_html_a1eb9148eed139eb454da633c1464a1a3"><div class="ttname"><a href="classEmitter.html#a1eb9148eed139eb454da633c1464a1a3">Emitter::SetPosition</a></div><div class="ttdeci">Emitter &amp; SetPosition(const Vector3 &amp;_position)</div><div class="ttdef"><b>Definition</b> <a href="Emitter_8cpp_source.html#l00169">Emitter.cpp:169</a></div></div>
 <div class="ttc" id="aclassEmitter_html_a29d5e63a07da34e87d77c0668c70e65c"><div class="ttname"><a href="classEmitter.html#a29d5e63a07da34e87d77c0668c70e65c">Emitter::SetUpdateFunction</a></div><div class="ttdeci">Emitter &amp; SetUpdateFunction(const std::function&lt; void(float, const Vector3 &amp;, Vector3 &amp;, Vector3 &amp;, Vector4 &amp;)&gt; &amp;_func)</div><div class="ttdoc">パーティクル更新関数を設定</div><div class="ttdef"><b>Definition</b> <a href="Emitter_8cpp_source.html#l00249">Emitter.cpp:249</a></div></div>
@@ -312,7 +314,8 @@ $(document).ready(function(){initNavTree('Emitter_8hpp_source.html',''); initRes
 <div class="ttc" id="aclassEmitter_html_ae8cc5409733765eac82c3002a59377cf"><div class="ttname"><a href="classEmitter.html#ae8cc5409733765eac82c3002a59377cf">Emitter::SetSize</a></div><div class="ttdeci">Emitter &amp; SetSize(const float &amp;_size)</div><div class="ttdef"><b>Definition</b> <a href="Emitter_8cpp_source.html#l00192">Emitter.cpp:192</a></div></div>
 <div class="ttc" id="aclassEmitter_html_af3723d6f82e61f1f999cbee7989c32f1"><div class="ttname"><a href="classEmitter.html#af3723d6f82e61f1f999cbee7989c32f1">Emitter::SetColor</a></div><div class="ttdeci">Emitter &amp; SetColor(const Vector4 &amp;_color)</div><div class="ttdef"><b>Definition</b> <a href="Emitter_8cpp_source.html#l00181">Emitter.cpp:181</a></div></div>
 <div class="ttc" id="aclassEmitter_html_af9b9a14463df850af2688eaf06693865"><div class="ttname"><a href="classEmitter.html#af9b9a14463df850af2688eaf06693865">Emitter::SetRotation</a></div><div class="ttdeci">Emitter &amp; SetRotation(const Vector3 &amp;_rotation)</div><div class="ttdef"><b>Definition</b> <a href="Emitter_8cpp_source.html#l00217">Emitter.cpp:217</a></div></div>
-<div class="ttc" id="aclassSRVManager_html"><div class="ttname"><a href="classSRVManager.html">SRVManager</a></div><div class="ttdef"><b>Definition</b> <a href="SRVManager_8h_source.html#l00010">SRVManager.h:10</a></div></div>
+<div class="ttc" id="aclassSRVHandle_html"><div class="ttname"><a href="classSRVHandle.html">SRVHandle</a></div><div class="ttdoc">SRVスロットの所有権を表すRAIIハンドル 破棄時にSRVManagerへスロットを自動的に返却する</div><div class="ttdef"><b>Definition</b> <a href="SRVHandle_8hpp_source.html#l00010">SRVHandle.hpp:10</a></div></div>
+<div class="ttc" id="aclassSRVManager_html"><div class="ttname"><a href="classSRVManager.html">SRVManager</a></div><div class="ttdef"><b>Definition</b> <a href="SRVManager_8h_source.html#l00011">SRVManager.h:11</a></div></div>
 <div class="ttc" id="astructGradientKey_html"><div class="ttname"><a href="structGradientKey.html">GradientKey</a></div><div class="ttdoc">時間(0～1)と値の組。パーティクルの色・サイズなどを寿命に沿って補間するための制御点 Animation/KeyFrame.hpp の Keyframe とは無関係（用途が異なるため別定義）</div><div class="ttdef"><b>Definition</b> <a href="Keyframe_8hpp_source.html#l00012">Keyframe.hpp:12</a></div></div>
 <div class="ttc" id="astructMeshData_html"><div class="ttname"><a href="structMeshData.html">MeshData</a></div><div class="ttdef"><b>Definition</b> <a href="MeshData_8hpp_source.html#l00016">MeshData.hpp:16</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
@@ -321,7 +324,7 @@ $(document).ready(function(){initNavTree('Emitter_8hpp_source.html',''); initRes
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_df328ebff461bc1e23583455c21900d5.html">ParticleSystem</a></li><li class="navelem"><a class="el" href="dir_26090d170b361dece3705c0117e4c678.html">Emitter</a></li><li class="navelem"><a class="el" href="Emitter_8hpp.html">Emitter.hpp</a></li>
-    <li class="footer">2026年09月10日(木) 17時37分33秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年09月10日(木) 18時01分29秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

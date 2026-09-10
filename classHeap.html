@@ -113,6 +113,9 @@ $(document).ready(function(){initNavTree('classHeap.html',''); initResizable(); 
 <tr class="memitem:ad7589260c6b5a8c76d9965f8e2fec19a" id="r_ad7589260c6b5a8c76d9965f8e2fec19a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHeap.html#ad7589260c6b5a8c76d9965f8e2fec19a">Free</a> (uint32_t _index)</td></tr>
 <tr class="memdesc:ad7589260c6b5a8c76d9965f8e2fec19a"><td class="mdescLeft">&#160;</td><td class="mdescRight">スロットを解放し、以後のAllocate()で再利用可能にする  <br /></td></tr>
 <tr class="separator:ad7589260c6b5a8c76d9965f8e2fec19a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a17b8fbe134bd346e4befd4a0772c76e8" id="r_a17b8fbe134bd346e4befd4a0772c76e8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHeap.html#a17b8fbe134bd346e4befd4a0772c76e8">IsFull</a> () const</td></tr>
+<tr class="memdesc:a17b8fbe134bd346e4befd4a0772c76e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">空きスロットが無いかどうか  <br /></td></tr>
+<tr class="separator:a17b8fbe134bd346e4befd4a0772c76e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aea3ea1db8ed4ce3e8f7b3b538006cf8b" id="r_aea3ea1db8ed4ce3e8f7b3b538006cf8b"><td class="memItemLeft" align="right" valign="top">ID3D12DescriptorHeap *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHeap.html#aea3ea1db8ed4ce3e8f7b3b538006cf8b">Get</a> () const</td></tr>
 <tr class="memdesc:aea3ea1db8ed4ce3e8f7b3b538006cf8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">ディスクリプタヒープを取得  <br /></td></tr>
 <tr class="separator:aea3ea1db8ed4ce3e8f7b3b538006cf8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -146,7 +149,7 @@ $(document).ready(function(){initNavTree('classHeap.html',''); initResizable(); 
 <p>空いているスロットを確保する 解放済みスロットがあればそれを再利用し、無ければ未使用の新しいスロットを返す </p>
 <dl class="section return"><dt>戻り値</dt><dd>確保したスロットのインデックス </dd></dl>
 
-<p class="definition"> <a class="el" href="Heap_8cpp_source.html">Heap.cpp</a> の <a class="el" href="Heap_8cpp_source.html#l00024">24</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Heap_8cpp_source.html">Heap.cpp</a> の <a class="el" href="Heap_8cpp_source.html#l00026">26</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -200,7 +203,7 @@ $(document).ready(function(){initNavTree('classHeap.html',''); initResizable(); 
 </dl>
 <dl class="section return"><dt>戻り値</dt><dd>成功した場合true </dd></dl>
 
-<p class="definition"> <a class="el" href="Heap_8cpp_source.html">Heap.cpp</a> の <a class="el" href="Heap_8cpp_source.html#l00005">5</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Heap_8cpp_source.html">Heap.cpp</a> の <a class="el" href="Heap_8cpp_source.html#l00007">7</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -228,7 +231,7 @@ $(document).ready(function(){initNavTree('classHeap.html',''); initResizable(); 
   </dd>
 </dl>
 
-<p class="definition"> <a class="el" href="Heap_8cpp_source.html">Heap.cpp</a> の <a class="el" href="Heap_8cpp_source.html#l00039">39</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Heap_8cpp_source.html">Heap.cpp</a> の <a class="el" href="Heap_8cpp_source.html#l00041">41</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -250,7 +253,7 @@ $(document).ready(function(){initNavTree('classHeap.html',''); initResizable(); 
 <p>ディスクリプタヒープを取得 </p>
 <dl class="section return"><dt>戻り値</dt><dd>ディスクリプタヒープポインタ </dd></dl>
 
-<p class="definition"> <a class="el" href="Heap_8cpp_source.html">Heap.cpp</a> の <a class="el" href="Heap_8cpp_source.html#l00043">43</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Heap_8cpp_source.html">Heap.cpp</a> の <a class="el" href="Heap_8cpp_source.html#l00061">61</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -279,7 +282,7 @@ $(document).ready(function(){initNavTree('classHeap.html',''); initResizable(); 
 </dl>
 <dl class="section return"><dt>戻り値</dt><dd>CPUディスクリプタハンドル </dd></dl>
 
-<p class="definition"> <a class="el" href="Heap_8cpp_source.html">Heap.cpp</a> の <a class="el" href="Heap_8cpp_source.html#l00047">47</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Heap_8cpp_source.html">Heap.cpp</a> の <a class="el" href="Heap_8cpp_source.html#l00065">65</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -308,7 +311,29 @@ $(document).ready(function(){initNavTree('classHeap.html',''); initResizable(); 
 </dl>
 <dl class="section return"><dt>戻り値</dt><dd>GPUディスクリプタハンドル </dd></dl>
 
-<p class="definition"> <a class="el" href="Heap_8cpp_source.html">Heap.cpp</a> の <a class="el" href="Heap_8cpp_source.html#l00053">53</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Heap_8cpp_source.html">Heap.cpp</a> の <a class="el" href="Heap_8cpp_source.html#l00071">71</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="a17b8fbe134bd346e4befd4a0772c76e8" name="a17b8fbe134bd346e4befd4a0772c76e8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a17b8fbe134bd346e4befd4a0772c76e8">&#9670;&#160;</a></span>IsFull()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Heap::IsFull </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>空きスロットが無いかどうか </p>
+<dl class="section return"><dt>戻り値</dt><dd>空きが無ければtrue </dd></dl>
+
+<p class="definition"> <a class="el" href="Heap_8cpp_source.html">Heap.cpp</a> の <a class="el" href="Heap_8cpp_source.html#l00057">57</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -322,7 +347,7 @@ $(document).ready(function(){initNavTree('classHeap.html',''); initResizable(); 
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classHeap.html">Heap</a></li>
-    <li class="footer">2026年09月10日(木) 17時37分33秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年09月10日(木) 18時01分29秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

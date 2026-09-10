@@ -200,15 +200,15 @@ IPostEffect の継承関係図</div>
 <tr class="separator:a030babb9fa7adc6f2898ed3b7fd653cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a023ba9eb932df36c3f0b04959806db87" id="r_a023ba9eb932df36c3f0b04959806db87"><td class="memItemLeft" align="right" valign="top">D3D12_CPU_DESCRIPTOR_HANDLE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIPostEffect.html#a023ba9eb932df36c3f0b04959806db87">rtvHandle_</a> {}</td></tr>
 <tr class="separator:a023ba9eb932df36c3f0b04959806db87"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a264ad5a2434240dbb6482b9fe0f973a1" id="r_a264ad5a2434240dbb6482b9fe0f973a1"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIPostEffect.html#a264ad5a2434240dbb6482b9fe0f973a1">index_</a> {}</td></tr>
-<tr class="separator:a264ad5a2434240dbb6482b9fe0f973a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afbed4f9bc5ddcf6537dbc86600833b43" id="r_afbed4f9bc5ddcf6537dbc86600833b43"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSRVHandle.html">SRVHandle</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIPostEffect.html#afbed4f9bc5ddcf6537dbc86600833b43">index_</a></td></tr>
+<tr class="separator:afbed4f9bc5ddcf6537dbc86600833b43"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:add903b173582345e40decf67fde5ee2f" id="r_add903b173582345e40decf67fde5ee2f"><td class="memItemLeft" align="right" valign="top">D3D12_GPU_DESCRIPTOR_HANDLE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIPostEffect.html#add903b173582345e40decf67fde5ee2f">handle_</a> {}</td></tr>
 <tr class="separator:add903b173582345e40decf67fde5ee2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">詳解</h2>
 <div class="textblock"><p>ポストエフェクト基底インターフェース シェーダーベースのポストプロセス効果を実装するための基底クラス </p>
 
-<p class="definition"> <a class="el" href="IPostEffect_8hpp_source.html">IPostEffect.hpp</a> の <a class="el" href="IPostEffect_8hpp_source.html#l00015">15</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="IPostEffect_8hpp_source.html">IPostEffect.hpp</a> の <a class="el" href="IPostEffect_8hpp_source.html#l00016">16</a> 行目に定義があります。</p>
 </div><h2 class="groupheader">構築子と解体子</h2>
 <a id="a74aee36fc8d995e104765a99a1e49f49" name="a74aee36fc8d995e104765a99a1e49f49"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a74aee36fc8d995e104765a99a1e49f49">&#9670;&#160;</a></span>~IPostEffect()</h2>
@@ -263,7 +263,7 @@ IPostEffect の継承関係図</div>
 
 <p class="definition"> <a class="el" href="IPostEffect_8cpp_source.html">IPostEffect.cpp</a> の <a class="el" href="IPostEffect_8cpp_source.html#l00019">19</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="IPostEffect_8hpp_source.html#l00019">adapter_</a>, <a class="el" href="IPostEffect_8hpp_source.html#l00017">CLEAR_COLOR</a>, <a class="el" href="IPostEffect_8hpp_source.html#l00027">index_</a>, <a class="el" href="classIPostEffect.html#a714a743aff95fad87356f280810dd286">Modifier()</a>, <a class="el" href="IPostEffect_8hpp_source.html#l00023">output_</a>, <a class="el" href="IPostEffect_8hpp_source.html#l00022">pso_</a>, <a class="el" href="IPostEffect_8hpp_source.html#l00025">rtvHandle_</a>, <a class="el" href="IPostEffect_8hpp_source.html#l00020">srv_</a>.</p>
+<p class="reference">参照先 <a class="el" href="IPostEffect_8hpp_source.html#l00020">adapter_</a>, <a class="el" href="IPostEffect_8hpp_source.html#l00018">CLEAR_COLOR</a>, <a class="el" href="IPostEffect_8hpp_source.html#l00028">index_</a>, <a class="el" href="classIPostEffect.html#a714a743aff95fad87356f280810dd286">Modifier()</a>, <a class="el" href="IPostEffect_8hpp_source.html#l00024">output_</a>, <a class="el" href="IPostEffect_8hpp_source.html#l00023">pso_</a>, <a class="el" href="IPostEffect_8hpp_source.html#l00026">rtvHandle_</a>, <a class="el" href="IPostEffect_8hpp_source.html#l00021">srv_</a>.</p>
 
 </div>
 </div>
@@ -403,7 +403,7 @@ IPostEffect の継承関係図</div>
 
 <p class="definition"> <a class="el" href="IPostEffect_8cpp_source.html">IPostEffect.cpp</a> の <a class="el" href="IPostEffect_8cpp_source.html#l00042">42</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="IPostEffect_8hpp_source.html#l00019">adapter_</a>, <a class="el" href="IPostEffect_8hpp_source.html#l00017">CLEAR_COLOR</a>, <a class="el" href="IPostEffect_8hpp_source.html#l00028">handle_</a>, <a class="el" href="IPostEffect_8hpp_source.html#l00027">index_</a>, <a class="el" href="IPostEffect_8hpp_source.html#l00023">output_</a>, <a class="el" href="IPostEffect_8hpp_source.html#l00020">srv_</a>.</p>
+<p class="reference">参照先 <a class="el" href="IPostEffect_8hpp_source.html#l00020">adapter_</a>, <a class="el" href="IPostEffect_8hpp_source.html#l00018">CLEAR_COLOR</a>, <a class="el" href="SRVHandle_8hpp_source.html#l00043">SRVHandle::Get()</a>, <a class="el" href="IPostEffect_8hpp_source.html#l00029">handle_</a>, <a class="el" href="IPostEffect_8hpp_source.html#l00028">index_</a>, <a class="el" href="IPostEffect_8hpp_source.html#l00024">output_</a>, <a class="el" href="IPostEffect_8hpp_source.html#l00021">srv_</a>.</p>
 
 <p class="reference">参照元 <a class="el" href="IPostEffect_8cpp_source.html#l00013">SetUp()</a>.</p>
 
@@ -464,9 +464,9 @@ IPostEffect の継承関係図</div>
 <p>出力先リソースを取得する（Editorのプレビュー表示等に使う） </p>
 <dl class="section return"><dt>戻り値</dt><dd>出力リソース。未初期化の場合は nullptr </dd></dl>
 
-<p class="definition"> <a class="el" href="IPostEffect_8hpp_source.html">IPostEffect.hpp</a> の <a class="el" href="IPostEffect_8hpp_source.html#l00057">57</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="IPostEffect_8hpp_source.html">IPostEffect.hpp</a> の <a class="el" href="IPostEffect_8hpp_source.html#l00058">58</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="IPostEffect_8hpp_source.html#l00023">output_</a>.</p>
+<p class="reference">参照先 <a class="el" href="IPostEffect_8hpp_source.html#l00024">output_</a>.</p>
 
 </div>
 </div>
@@ -495,9 +495,9 @@ IPostEffect の継承関係図</div>
 
 <p>出力SRVのスロット番号を取得する（削除時にディスクリプタを付け替えるために使う） </p>
 
-<p class="definition"> <a class="el" href="IPostEffect_8hpp_source.html">IPostEffect.hpp</a> の <a class="el" href="IPostEffect_8hpp_source.html#l00060">60</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="IPostEffect_8hpp_source.html">IPostEffect.hpp</a> の <a class="el" href="IPostEffect_8hpp_source.html#l00061">61</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="IPostEffect_8hpp_source.html#l00027">index_</a>.</p>
+<p class="reference">参照先 <a class="el" href="IPostEffect_8hpp_source.html#l00028">index_</a>.</p>
 
 </div>
 </div>
@@ -886,7 +886,7 @@ IPostEffect の継承関係図</div>
 
 <p class="definition"> <a class="el" href="IPostEffect_8cpp_source.html">IPostEffect.cpp</a> の <a class="el" href="IPostEffect_8cpp_source.html#l00050">50</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="IPostEffect_8hpp_source.html#l00019">adapter_</a>, <a class="el" href="IPostEffect_8hpp_source.html#l00023">output_</a>, <a class="el" href="IPostEffect_8hpp_source.html#l00025">rtvHandle_</a>.</p>
+<p class="reference">参照先 <a class="el" href="IPostEffect_8hpp_source.html#l00020">adapter_</a>, <a class="el" href="IPostEffect_8hpp_source.html#l00024">output_</a>, <a class="el" href="IPostEffect_8hpp_source.html#l00026">rtvHandle_</a>.</p>
 
 </div>
 </div>
@@ -927,7 +927,7 @@ IPostEffect の継承関係図</div>
 
 <p class="definition"> <a class="el" href="IPostEffect_8cpp_source.html">IPostEffect.cpp</a> の <a class="el" href="IPostEffect_8cpp_source.html#l00013">13</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="IPostEffect_8hpp_source.html#l00019">adapter_</a>, <a class="el" href="IPostEffect_8cpp_source.html#l00042">CreateOutput()</a>, <a class="el" href="IPostEffect_8hpp_source.html#l00020">srv_</a>.</p>
+<p class="reference">参照先 <a class="el" href="IPostEffect_8hpp_source.html#l00020">adapter_</a>, <a class="el" href="IPostEffect_8cpp_source.html#l00042">CreateOutput()</a>, <a class="el" href="IPostEffect_8hpp_source.html#l00021">srv_</a>.</p>
 
 </div>
 </div>
@@ -988,7 +988,7 @@ IPostEffect の継承関係図</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="IPostEffect_8hpp_source.html">IPostEffect.hpp</a> の <a class="el" href="IPostEffect_8hpp_source.html#l00019">19</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="IPostEffect_8hpp_source.html">IPostEffect.hpp</a> の <a class="el" href="IPostEffect_8hpp_source.html#l00020">20</a> 行目に定義があります。</p>
 
 <p class="reference">参照元 <a class="el" href="IPostEffect_8cpp_source.html#l00019">Apply()</a>, <a class="el" href="IPostEffect_8cpp_source.html#l00042">CreateOutput()</a>, <a class="el" href="BoxBlur_8cpp_source.html#l00005">BoxBlur::Initialize()</a>, <a class="el" href="Grayscale_8cpp_source.html#l00005">Grayscale::Initialize()</a>, <a class="el" href="Vignette_8cpp_source.html#l00011">Vignette::Initialize()</a>, <a class="el" href="BoxBlur_8cpp_source.html#l00063">BoxBlur::Modifier()</a>, <a class="el" href="Grayscale_8cpp_source.html#l00066">Grayscale::Modifier()</a>, <a class="el" href="Vignette_8cpp_source.html#l00070">Vignette::Modifier()</a>, <a class="el" href="IPostEffect_8cpp_source.html#l00050">SetRTVHandle()</a>, <a class="el" href="IPostEffect_8cpp_source.html#l00013">SetUp()</a>.</p>
 
@@ -1014,7 +1014,7 @@ IPostEffect の継承関係図</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="IPostEffect_8hpp_source.html">IPostEffect.hpp</a> の <a class="el" href="IPostEffect_8hpp_source.html#l00017">17</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="IPostEffect_8hpp_source.html">IPostEffect.hpp</a> の <a class="el" href="IPostEffect_8hpp_source.html#l00018">18</a> 行目に定義があります。</p>
 
 <p class="reference">参照元 <a class="el" href="IPostEffect_8cpp_source.html#l00019">Apply()</a>, <a class="el" href="IPostEffect_8cpp_source.html#l00042">CreateOutput()</a>.</p>
 
@@ -1040,14 +1040,14 @@ IPostEffect の継承関係図</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="IPostEffect_8hpp_source.html">IPostEffect.hpp</a> の <a class="el" href="IPostEffect_8hpp_source.html#l00028">28</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="IPostEffect_8hpp_source.html">IPostEffect.hpp</a> の <a class="el" href="IPostEffect_8hpp_source.html#l00029">29</a> 行目に定義があります。</p>
 
 <p class="reference">参照元 <a class="el" href="IPostEffect_8cpp_source.html#l00042">CreateOutput()</a>.</p>
 
 </div>
 </div>
-<a id="a264ad5a2434240dbb6482b9fe0f973a1" name="a264ad5a2434240dbb6482b9fe0f973a1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a264ad5a2434240dbb6482b9fe0f973a1">&#9670;&#160;</a></span>index_</h2>
+<a id="afbed4f9bc5ddcf6537dbc86600833b43" name="afbed4f9bc5ddcf6537dbc86600833b43"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afbed4f9bc5ddcf6537dbc86600833b43">&#9670;&#160;</a></span>index_</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1056,7 +1056,7 @@ IPostEffect の継承関係図</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">uint32_t IPostEffect::index_ {}</td>
+          <td class="memname"><a class="el" href="classSRVHandle.html">SRVHandle</a> IPostEffect::index_</td>
         </tr>
       </table>
   </td>
@@ -1066,9 +1066,9 @@ IPostEffect の継承関係図</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="IPostEffect_8hpp_source.html">IPostEffect.hpp</a> の <a class="el" href="IPostEffect_8hpp_source.html#l00027">27</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="IPostEffect_8hpp_source.html">IPostEffect.hpp</a> の <a class="el" href="IPostEffect_8hpp_source.html#l00028">28</a> 行目に定義があります。</p>
 
-<p class="reference">参照元 <a class="el" href="IPostEffect_8cpp_source.html#l00019">Apply()</a>, <a class="el" href="IPostEffect_8cpp_source.html#l00042">CreateOutput()</a>, <a class="el" href="IPostEffect_8hpp_source.html#l00060">GetSrvIndex()</a>.</p>
+<p class="reference">参照元 <a class="el" href="IPostEffect_8cpp_source.html#l00019">Apply()</a>, <a class="el" href="IPostEffect_8cpp_source.html#l00042">CreateOutput()</a>, <a class="el" href="IPostEffect_8hpp_source.html#l00061">GetSrvIndex()</a>.</p>
 
 </div>
 </div>
@@ -1092,9 +1092,9 @@ IPostEffect の継承関係図</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="IPostEffect_8hpp_source.html">IPostEffect.hpp</a> の <a class="el" href="IPostEffect_8hpp_source.html#l00023">23</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="IPostEffect_8hpp_source.html">IPostEffect.hpp</a> の <a class="el" href="IPostEffect_8hpp_source.html#l00024">24</a> 行目に定義があります。</p>
 
-<p class="reference">参照元 <a class="el" href="IPostEffect_8cpp_source.html#l00019">Apply()</a>, <a class="el" href="IPostEffect_8cpp_source.html#l00042">CreateOutput()</a>, <a class="el" href="IPostEffect_8hpp_source.html#l00057">GetOutputResource()</a>, <a class="el" href="IPostEffect_8cpp_source.html#l00050">SetRTVHandle()</a>.</p>
+<p class="reference">参照元 <a class="el" href="IPostEffect_8cpp_source.html#l00019">Apply()</a>, <a class="el" href="IPostEffect_8cpp_source.html#l00042">CreateOutput()</a>, <a class="el" href="IPostEffect_8hpp_source.html#l00058">GetOutputResource()</a>, <a class="el" href="IPostEffect_8cpp_source.html#l00050">SetRTVHandle()</a>.</p>
 
 </div>
 </div>
@@ -1118,7 +1118,7 @@ IPostEffect の継承関係図</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="IPostEffect_8hpp_source.html">IPostEffect.hpp</a> の <a class="el" href="IPostEffect_8hpp_source.html#l00022">22</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="IPostEffect_8hpp_source.html">IPostEffect.hpp</a> の <a class="el" href="IPostEffect_8hpp_source.html#l00023">23</a> 行目に定義があります。</p>
 
 <p class="reference">参照元 <a class="el" href="IPostEffect_8cpp_source.html#l00019">Apply()</a>, <a class="el" href="BoxBlur_8cpp_source.html#l00005">BoxBlur::Initialize()</a>, <a class="el" href="Grayscale_8cpp_source.html#l00005">Grayscale::Initialize()</a>, <a class="el" href="Vignette_8cpp_source.html#l00011">Vignette::Initialize()</a>.</p>
 
@@ -1144,7 +1144,7 @@ IPostEffect の継承関係図</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="IPostEffect_8hpp_source.html">IPostEffect.hpp</a> の <a class="el" href="IPostEffect_8hpp_source.html#l00025">25</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="IPostEffect_8hpp_source.html">IPostEffect.hpp</a> の <a class="el" href="IPostEffect_8hpp_source.html#l00026">26</a> 行目に定義があります。</p>
 
 <p class="reference">参照元 <a class="el" href="IPostEffect_8cpp_source.html#l00019">Apply()</a>, <a class="el" href="IPostEffect_8cpp_source.html#l00050">SetRTVHandle()</a>.</p>
 
@@ -1170,7 +1170,7 @@ IPostEffect の継承関係図</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="IPostEffect_8hpp_source.html">IPostEffect.hpp</a> の <a class="el" href="IPostEffect_8hpp_source.html#l00020">20</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="IPostEffect_8hpp_source.html">IPostEffect.hpp</a> の <a class="el" href="IPostEffect_8hpp_source.html#l00021">21</a> 行目に定義があります。</p>
 
 <p class="reference">参照元 <a class="el" href="IPostEffect_8cpp_source.html#l00019">Apply()</a>, <a class="el" href="IPostEffect_8cpp_source.html#l00042">CreateOutput()</a>, <a class="el" href="IPostEffect_8cpp_source.html#l00013">SetUp()</a>.</p>
 
@@ -1186,7 +1186,7 @@ IPostEffect の継承関係図</div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classIPostEffect.html">IPostEffect</a></li>
-    <li class="footer">2026年09月10日(木) 17時37分33秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年09月10日(木) 18時01分29秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

@@ -131,6 +131,7 @@ var hierarchy =
     [ "Skybox", "classSkybox.html", null ],
     [ "SpotLight", "structSpotLight.html", null ],
     [ "Sprite", "classSprite.html", null ],
+    [ "SRVHandle", "classSRVHandle.html", null ],
     [ "SRVManager", "classSRVManager.html", null ],
     [ "StageLoader", "classStageLoader.html", null ],
     [ "StageRepository", "classStageRepository.html", null ],

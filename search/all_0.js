@@ -13,7 +13,7 @@ var searchData=
   ['addmodule_10',['AddModule',['../classUi_1_1Canvas.html#a409bb3ff40721a9ce6ddb7b401cdb1be',1,'Ui::Canvas']]],
   ['addparameter_11',['AddParameter',['../classRootSignature.html#a6d6cd5a567816ca14e34f47841d98901',1,'RootSignature']]],
   ['all_5fevent_5fkeys_12',['ALL_EVENT_KEYS',['../namespaceUi.html#ab1c214982c43f98f7a960db604656a64',1,'Ui']]],
-  ['allocate_13',['allocate',['../classSRVManager.html#a1e7a23d2422f4228cc6a9436ad1de225',1,'SRVManager::Allocate()'],['../classHeap.html#adb09b8fd19ed687a247a7261910cbb30',1,'Heap::Allocate()']]],
+  ['allocate_13',['allocate',['../classSRVManager.html#ade510ec021ed84676c4622771027bbbb',1,'SRVManager::Allocate()'],['../classHeap.html#adb09b8fd19ed687a247a7261910cbb30',1,'Heap::Allocate()']]],
   ['allocatertvslot_14',['AllocateRtvSlot',['../classPostEffectChain.html#ab0518c5931733c445b6d1ce693d1c67b',1,'PostEffectChain']]],
   ['alpha_15',['ALPHA',['../BlendMode_8hpp.html#a30323fa90e24ca484998b9fba6c40e85a002101f8725e5c78d9f30d87f3fa4c87',1,'BlendMode.hpp']]],
   ['animation_16',['animation',['../structModelData.html#a70d45dc93c29a7388e4f8938dc508102',1,'ModelData::animation'],['../structAnimation.html',1,'Animation']]],

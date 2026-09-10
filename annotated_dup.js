@@ -116,6 +116,7 @@ var annotated_dup =
     [ "SpotLight", "structSpotLight.html", "structSpotLight" ],
     [ "Sprite", "classSprite.html", "classSprite" ],
     [ "SpriteCommon", "classSpriteCommon.html", "classSpriteCommon" ],
+    [ "SRVHandle", "classSRVHandle.html", "classSRVHandle" ],
     [ "SRVManager", "classSRVManager.html", "classSRVManager" ],
     [ "StageLoader", "classStageLoader.html", "classStageLoader" ],
     [ "StageRepository", "classStageRepository.html", "classStageRepository" ],

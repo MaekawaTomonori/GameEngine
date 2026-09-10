@@ -16,7 +16,8 @@ var searchData=
   ['sprite_13',['Sprite',['../classSprite.html',1,'']]],
   ['spritecommon_14',['SpriteCommon',['../classSpriteCommon.html',1,'']]],
   ['spriteelement_15',['SpriteElement',['../classUi_1_1SpriteElement.html',1,'Ui']]],
-  ['srvmanager_16',['SRVManager',['../classSRVManager.html',1,'']]],
-  ['stageloader_17',['StageLoader',['../classStageLoader.html',1,'']]],
-  ['stagerepository_18',['StageRepository',['../classStageRepository.html',1,'']]]
+  ['srvhandle_16',['SRVHandle',['../classSRVHandle.html',1,'']]],
+  ['srvmanager_17',['SRVManager',['../classSRVManager.html',1,'']]],
+  ['stageloader_18',['StageLoader',['../classStageLoader.html',1,'']]],
+  ['stagerepository_19',['StageRepository',['../classStageRepository.html',1,'']]]
 ];

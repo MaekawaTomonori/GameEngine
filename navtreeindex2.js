@@ -1,5 +1,9 @@
 var NAVTREEINDEX2 =
 {
+"WinApp_8cpp_source.html":[2,0,1,20,0],
+"WinApp_8hpp.html":[2,0,1,20,1],
+"WinApp_8hpp_source.html":[2,0,1,20,1],
+"Window_8cpp.html":[2,0,1,37,0],
 "Window_8cpp.html#a472ebf35234204ce3e34742b0d8829af":[2,0,1,37,0,0],
 "Window_8cpp_source.html":[2,0,1,37,0],
 "Window_8hpp.html":[2,0,1,37,1],
@@ -245,9 +249,5 @@ var NAVTREEINDEX2 =
 "classFrameRateLimiter.html":[1,0,28],
 "classFrameRateLimiter.html#a236b5ccf3e5aff2b22c8f38fb5005f9c":[1,0,28,2],
 "classFrameRateLimiter.html#ab37b1f16e5369537dbc86ab2a274c7f2":[1,0,28,0],
-"classFrameRateLimiter.html#abc0d7e5bfc76fabcebe859b7d04fdd72":[1,0,28,3],
-"classFrameRateLimiter.html#ae6e78fa07900aa0ef55c8fc411c4e362":[1,0,28,1],
-"classFramework.html":[1,0,29],
-"classFramework.html#ac23600a259027d0edcdb12a4f2b51aba":[1,0,29,1],
-"classFramework.html#ad6e5ec2ae2d5b1309b75065911b29bb5":[1,0,29,0]
+"classFrameRateLimiter.html#abc0d7e5bfc76fabcebe859b7d04fdd72":[1,0,28,3]
 };
