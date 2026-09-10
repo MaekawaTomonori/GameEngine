@@ -16,6 +16,12 @@
 #include "src/Mesh/Mesh.hpp"
 #include "src/Model/Common/ModelCommon.hpp"
 
+SkinningState::~SkinningState() {
+    if (common_ && common_->GetSRVManager()) {
+        common_->GetSRVManager()->Free(skinCluster_.srvIndex);
+    }
+}
+
 void SkinningState::Initialize(const GESTD::ReferencePtr<DirectXAdapter>& _adapter, const GESTD::ReferencePtr<ModelCommon>& _common, const GESTD::ReferencePtr<ModelData>& _data, Mesh& _mesh) {
     adapter_ = _adapter;
     common_ = _common;

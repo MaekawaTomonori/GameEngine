@@ -74,6 +74,8 @@ class SkinningState {
     Line line_;
 
 public:
+    ~SkinningState();
+
     /** @brief スキニング状態を初期化
      * @param _adapter DirectXアダプター
      * @param _common ModelCommon（SRVManager取得用）
