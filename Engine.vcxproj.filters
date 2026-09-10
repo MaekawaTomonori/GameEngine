@@ -297,6 +297,9 @@
     <ClInclude Include="src\DirectX\Heap\Heap.hpp">
       <Filter>src\DirectX\Heap</Filter>
     </ClInclude>
+    <ClInclude Include="src\DirectX\Heap\SRVHandle.hpp">
+      <Filter>src\DirectX\Heap</Filter>
+    </ClInclude>
     <ClInclude Include="src\DirectX\Heap\SRVManager.h">
       <Filter>src\DirectX\Heap</Filter>
     </ClInclude>
@@ -520,6 +523,9 @@
       <Filter>src\DirectX\GraphicsPipeline\Object</Filter>
     </ClCompile>
     <ClCompile Include="src\DirectX\Heap\Heap.cpp">
+      <Filter>src\DirectX\Heap</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DirectX\Heap\SRVHandle.cpp">
       <Filter>src\DirectX\Heap</Filter>
     </ClCompile>
     <ClCompile Include="src\DirectX\Heap\SRVManager.cpp">

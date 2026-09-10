@@ -9,7 +9,7 @@ class SRVManager;
  */
 class SRVHandle {
     SRVManager* owner_ = nullptr;
-    uint32_t index_ = UINT_MAX;
+    uint32_t index_ = UINT32_MAX;
 
 public:
     SRVHandle() = default;

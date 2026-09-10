@@ -16,7 +16,7 @@ SRVHandle& SRVHandle::operator=(SRVHandle&& _other) noexcept {
         owner_ = _other.owner_;
         index_ = _other.index_;
         _other.owner_ = nullptr;
-        _other.index_ = UINT_MAX;
+        _other.index_ = UINT32_MAX;
     }
     return *this;
 }
@@ -30,5 +30,5 @@ void SRVHandle::Reset() {
         owner_->Free(index_);
     }
     owner_ = nullptr;
-    index_ = UINT_MAX;
+    index_ = UINT32_MAX;
 }
