@@ -1,5 +1,6 @@
 #include "SRVManager.h"
 
+#include <algorithm>
 #include <cassert>
 #include <memory>
 
@@ -31,13 +32,35 @@ void SRVManager::Finalize() {
 }
 
 uint32_t SRVManager::Allocate() {
-    assert(useIndex_ <= kMaxSRVCount);
+    if (!freeList_.empty()) {
+        uint32_t index = freeList_.back();
+        freeList_.pop_back();
+        return index;
+    }
+
+    assert(useIndex_ < kMaxSRVCount);
 
     uint32_t index = useIndex_;
 
     ++useIndex_;
 
     return index;
+}
+
+void SRVManager::Free(uint32_t _index) {
+    if (_index >= useIndex_) {
+        Log::Send(Log::Level::ERR, "SRVManager::Free: index out of range");
+        return;
+    }
+
+#ifdef _DEBUG
+    if (std::find(freeList_.begin(), freeList_.end(), _index) != freeList_.end()) {
+        Log::Send(Log::Level::ERR, "SRVManager::Free: double free detected");
+        return;
+    }
+#endif
+
+    freeList_.push_back(_index);
 }
 
 void SRVManager::PreDraw() const {
@@ -88,11 +111,11 @@ ID3D12DescriptorHeap* SRVManager::GetDescriptorHeap() const {
 }
 
 D3D12_CPU_DESCRIPTOR_HANDLE SRVManager::GetCPUHandle(uint32_t _index) const {
-    assert(_index <= useIndex_);
+    assert(_index < useIndex_);
     return heap_->GetCPUHandle(_index);
 }
 
 D3D12_GPU_DESCRIPTOR_HANDLE SRVManager::GetGPUHandle(uint32_t _index) const {
-    assert(_index <= useIndex_);
+    assert(_index < useIndex_);
     return heap_->GetGPUHandle(_index);
 }
