@@ -280,16 +280,32 @@ void TextureManager::Unload() {
 }
 
 const DirectX::TexMetadata& TextureManager::GetTextureMetadata(const std::string& _fileName) {
-    std::lock_guard<std::mutex> lock(mutex_);
+    std::string name = _fileName;
+    size_t pos = 0;
+    while ((pos = name.find(folderPath_, pos)) != std::string::npos){
+        name.erase(pos, folderPath_.length());
+    }
 
-    if (textures_.contains(_fileName)){
-        return textures_.at(_fileName).metadata;
+    {
+        std::lock_guard<std::mutex> lock(mutex_);
+        if (textures_.contains(name)){
+            return textures_.at(name).metadata;
+        }
     }
 
     Load(_fileName);
-    Log::Send(Log::Level::ERR, std::format("TextureManager::GetTextureMetadata: {} not found", _fileName));
-    Utils::Alert(std::format("TextureManager::GetTextureMetadata: {} not found", _fileName));
-    return textures_.at(_fileName).metadata;
+
+    {
+        std::lock_guard<std::mutex> lock(mutex_);
+        if (textures_.contains(name)){
+            return textures_.at(name).metadata;
+        }
+    }
+
+    Log::Send(Log::Level::ERR, std::format("TextureManager::GetTextureMetadata: {} not found", name));
+    Utils::Alert(std::format("TextureManager::GetTextureMetadata: {} not found", name));
+    static const DirectX::TexMetadata EMPTY{};
+    return EMPTY;
 }
 
 uint32_t TextureManager::GetSrvIndex(const std::string& _fileName) {
