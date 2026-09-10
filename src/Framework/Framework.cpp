@@ -133,6 +133,13 @@ Framework::Framework() {
 Framework::~Framework() {
     Audio::Shutdown();
     SingletonFinalizer::Finalize();
+
+    // SRVManagerはSRVHandleの破棄先として全シングルトンより後まで生きている必要がある
+    if (srv_) {
+        srv_->Finalize();
+        srv_.reset();
+    }
+
     CoUninitialize();
 }
 
@@ -318,9 +325,6 @@ void Framework::Shutdown() {
     planeTextureEditor_.reset();
     debugger_.reset();
 #endif
-
-    srv_->Finalize();
-    srv_.reset();
 }
 
 bool Framework::Check() const {
