@@ -1,5 +1,7 @@
 #include "Heap.hpp"
 
+#include <algorithm>
+
 #include "Utils.hpp"
 
 bool Heap::Create(ID3D12Device* _device, D3D12_DESCRIPTOR_HEAP_TYPE _type, UINT _numDescriptors, D3D12_DESCRIPTOR_HEAP_FLAGS _flags) {
@@ -37,7 +39,23 @@ uint32_t Heap::Allocate() {
 }
 
 void Heap::Free(uint32_t _index) {
+    if (_index >= nextIndex_) {
+        Utils::Alert("Heap::Free: index out of range");
+        return;
+    }
+
+#ifdef _DEBUG
+    if (std::find(freeIndices_.begin(), freeIndices_.end(), _index) != freeIndices_.end()) {
+        Utils::Alert("Heap::Free: double free detected");
+        return;
+    }
+#endif
+
     freeIndices_.push_back(_index);
+}
+
+bool Heap::IsFull() const {
+    return freeIndices_.empty() && nextIndex_ >= numDescriptors_;
 }
 
 ID3D12DescriptorHeap * Heap::Get() const {

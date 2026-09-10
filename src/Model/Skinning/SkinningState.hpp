@@ -11,6 +11,7 @@
 #include "Line.hpp"
 #include "Math/Matrix.hpp"
 #include "ReferencePtr.hpp"
+#include "src/DirectX/Heap/SRVHandle.hpp"
 #include "src/DirectX/Resource/DX12Resource.hpp"
 #include "src/Model/Data/ModelData.hpp"
 #include "src/Model/Skeleton/Skeleton.hpp"
@@ -52,7 +53,7 @@ class SkinningState {
 
         std::unique_ptr<DX12Resource> paletteResource;
         std::span<WellForGpu> mappedPalette;
-        uint32_t srvIndex;
+        SRVHandle srvIndex;
         std::pair<D3D12_CPU_DESCRIPTOR_HANDLE, D3D12_GPU_DESCRIPTOR_HANDLE> paletteHandle;
     };
 

@@ -7,6 +7,7 @@
 #include "Math/MathUtils.hpp"
 #include "Math/Vector3.hpp"
 #include "src/DirectX/DirectXAdapter.hpp"
+#include "src/DirectX/Heap/SRVHandle.hpp"
 #include "src/DirectX/Heap/SRVManager.h"
 #include "src/DirectX/Resource/DX12Resource.hpp"
 #include "src/Mesh/Data/MeshData.hpp"
@@ -90,7 +91,7 @@ class Emitter {
     std::unique_ptr<DX12Resource> resource_;
     std::span<ForGpu> mapped_;
 
-    uint32_t index_ = 0;
+    SRVHandle index_;
     D3D12_GPU_DESCRIPTOR_HANDLE handle_;
 
     std::unique_ptr<DX12Resource> vr_;

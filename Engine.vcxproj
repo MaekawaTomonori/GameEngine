@@ -161,6 +161,7 @@
     <ClInclude Include="src\DirectX\GraphicsPipeline\Object\PipelineStateObject.hpp" />
     <ClInclude Include="src\DirectX\RootSignature\RootSignature.hpp" />
     <ClInclude Include="src\DirectX\Heap\Heap.hpp" />
+    <ClInclude Include="src\DirectX\Heap\SRVHandle.hpp" />
     <ClInclude Include="src\DirectX\Heap\SRVManager.h" />
     <ClInclude Include="src\DirectX\LeakChecker\D3DResourceLeakChecker.hpp" />
     <ClInclude Include="src\DirectX\Resource\DX12Resource.hpp" />
@@ -272,6 +273,7 @@
     <ClCompile Include="src\DirectX\GraphicsPipeline\Object\PipelineStateObject.cpp" />
     <ClCompile Include="src\DirectX\RootSignature\RootSignature.cpp" />
     <ClCompile Include="src\DirectX\Heap\Heap.cpp" />
+    <ClCompile Include="src\DirectX\Heap\SRVHandle.cpp" />
     <ClCompile Include="src\DirectX\Heap\SRVManager.cpp" />
     <ClCompile Include="src\DirectX\LeakChecker\D3DResourceLeakChecker.cpp" />
     <ClCompile Include="src\DirectX\Resource\DX12Resource.cpp" />

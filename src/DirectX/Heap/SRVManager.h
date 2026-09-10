@@ -6,6 +6,7 @@
 #include "src/DirectX/DirectXAdapter.hpp"
 
 class Heap;
+class SRVHandle;
 
 class SRVManager{
     DirectXAdapter* adapter_ = nullptr;
@@ -13,7 +14,6 @@ class SRVManager{
     static const uint32_t kMaxSRVCount;
 
     uint32_t descriptorSize = 0;
-    uint32_t useIndex_ = 0;
 
     std::shared_ptr<Heap> heap_;
 
@@ -21,7 +21,8 @@ public:
 	void Initialize(DirectXAdapter* _adapter);
     void Finalize();
 
-    uint32_t Allocate();
+    SRVHandle Allocate();
+    void Free(uint32_t _index);
     void PreDraw() const;
 
     void CreateSRVForTexture2D(uint32_t srvIndex, ID3D12Resource* pResource, DXGI_FORMAT format, UINT mipMap) const;
@@ -30,9 +31,7 @@ public:
 
     void SetGraphicsRootDescriptorTable(UINT rootParameterIndex, uint32_t srvIndex) const;
 
-    bool IsFull() const {
-        return kMaxSRVCount <= useIndex_;
-    }
+    bool IsFull() const;
 
     ID3D12DescriptorHeap* GetDescriptorHeap() const;
 
