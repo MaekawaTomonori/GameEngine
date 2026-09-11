@@ -1,63 +1,30 @@
 #ifndef Model_HPP_
 #define Model_HPP_
-#include <functional>
-#include <memory>
+#include <string>
 
 #include "ReferencePtr.hpp"
+#include "Math/Vector2.hpp"
+#include "Math/Vector3.hpp"
+#include "Math/Vector4.hpp"
 
-#include "Math/Matrix.hpp"
-#include "src/Camera/Camera.hpp"
-#include "src/Mesh/Mesh.hpp"
-#include "src/Model/Common/ModelCommon.hpp"
-#include "src/DirectX/Resource/DX12Resource.hpp"
+class ModelInstance;
 
-class SkinningState;
-
-/** @brief 3Dモデルクラス
- * メッシュ、テクスチャ、アニメーション、スキニングを管理
+/** @brief 3Dモデルクラス（公開ハンドル）
+ * 実体（ModelInstance）はEngine側が所有し、本クラスは実体への安全な参照を保持するだけの薄いラッパー。
+ * 実体が破棄された後に呼び出しても安全に無視される。
  */
 class Model {
-    /** @brief モデルの変換行列データ
-     */
-    struct Transformation {
-        Matrix4x4 wvp;
-        Matrix4x4 world;
-        Matrix4x4 inverse;
-    };
-
-    GESTD::ReferencePtr<ModelCommon> common_;
-    GESTD::ReferencePtr<DirectXAdapter> adapter_ = nullptr;
-
-    Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> commandList_ = nullptr;
-
-    std::string name_;
-    std::string uuid_;
-    Transform transform_;
-    GESTD::ReferencePtr<ModelData> data_ = nullptr;
-    std::unique_ptr<Mesh> mesh_;
-
-    /** スキニング専用の状態（骨格・アニメーション・スキンクラスター）
-     * スキニングデータを持たないモデルではnullptrのまま
-     */
-    std::unique_ptr<SkinningState> skinning_;
-
-    /** GPU RESOURCES
-     */
-    /** world transform
-     */
-    std::unique_ptr<DX12Resource> wr_;
-    Transformation* wd_ = nullptr;
-
-    std::function<void()> drawCommand_;
-
-    std::string environmentTexture_ = "";
-
-    std::string canvasName_ = "Main";
-    bool castShadow_ = true;
+    GESTD::ReferencePtr<ModelInstance> instance_;
 
 public:
     Model();
     ~Model();
+
+    Model(const Model&) = delete;
+    Model& operator=(const Model&) = delete;
+
+    Model(Model&& _other) noexcept;
+    Model& operator=(Model&& _other) noexcept;
 
     /** @brief モデルを初期化
      * @param _name モデル名
@@ -77,7 +44,7 @@ public:
     void Draw() const;
 
     /** @brief 名前を設定
-     * @param _name 
+     * @param _name
      * @return メソッドチェーン用の自身への参照
      */
     Model& SetName(const std::string& _name);
@@ -129,31 +96,17 @@ public:
     Model& SetCanvasName(const std::string& _canvasName);
 
     /** @brief 所属Canvas名を取得 */
-    const std::string& GetCanvasName() const { return canvasName_; }
+    const std::string& GetCanvasName() const;
 
     /** @brief モデル名の取得
      * @return モデル名
      */
     const std::string& GetName() const;
 
-    /** @brief メッシュの取得
-     * @return メッシュへのポインタ
-     */
-    GESTD::ReferencePtr<Mesh> GetMesh() const;
-
     /** @brief モデルデータを事前読み込み
      * @param _name モデル名
      */
     static void Load(const std::string& _name);
-
-private:
-    /** @brief デバッグ情報の表示
-     */
-    void Debug();
-
-    /** @brief デバッグ用ラインの描画（スキニングモデルのみ）
-     */
-    void DrawLine() const;
 }; // class Model
 
 #endif // Model_HPP_

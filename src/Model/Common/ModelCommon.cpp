@@ -12,6 +12,8 @@
 #include "src/DirectX/RootSignature/RootSignature.hpp"
 #include "src/DirectX/Shader/Shader.h"
 
+ModelCommon::~ModelCommon() = default;
+
 void ModelCommon::Initialize(const GESTD::ReferencePtr<DirectXAdapter>& _adapter, const GESTD::ReferencePtr<DebugUI>& _debugUi) {
 	Setup(_adapter, _debugUi, "Model");
 	debugUI_->RegisterMenuButton("Model");
@@ -491,6 +493,24 @@ void ModelCommon::SetShadowBinding(uint32_t _srvIndex, D3D12_GPU_VIRTUAL_ADDRESS
 
 D3D12_GPU_VIRTUAL_ADDRESS ModelCommon::GetCameraCBVAddress() const {
     return cameraResource_->Get()->GetGPUVirtualAddress();
+}
+
+GESTD::ReferencePtr<ModelInstance> ModelCommon::CreateModelInstance(const std::string& _name) {
+    auto instance = std::make_unique<ModelInstance>();
+    instance->Initialize(_name);
+
+    GESTD::ReferencePtr<ModelInstance> reference = instance->GetReference();
+    instances_.push_back(std::move(instance));
+    return reference;
+}
+
+void ModelCommon::DestroyModelInstance(const GESTD::ReferencePtr<ModelInstance>& _instance) {
+    ModelInstance* raw = _instance;
+    if (!raw) return;
+
+    std::erase_if(instances_, [raw](const std::unique_ptr<ModelInstance>& _entry) {
+        return _entry.get() == raw;
+    });
 }
 
 namespace {
