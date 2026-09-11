@@ -1,5 +1,7 @@
 #include "Canvas.hpp"
 
+#include <utility>
+
 void Canvas::Initialize(const GESTD::ReferencePtr<DirectXAdapter>& _adapter, const GESTD::ReferencePtr<SRVManager>& _srv, const std::string& _name) {
     name_ = _name;
     chain_ = std::make_unique<PostEffectChain>();
@@ -10,8 +12,8 @@ void Canvas::SetFactory(GESTD::ReferencePtr<PostEffectFactory> _factory) {
     chain_->SetFactory(_factory);
 }
 
-void Canvas::RegisterTask(const std::function<void()>& _task) {
-    tasks_.push_back(_task);
+void Canvas::RegisterTask(std::function<void()> _task) {
+    tasks_.push_back(std::move(_task));
 }
 
 void Canvas::DrawObjects() {

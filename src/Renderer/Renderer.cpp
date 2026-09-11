@@ -10,7 +10,7 @@ void Renderer::Initialize(GESTD::ReferencePtr<DirectXAdapter> _adapter, GESTD::R
     postProcessor_ = _postProcessor;
 }
 
-void Renderer::Register(const std::function<void()>& _task, const std::string& _canvasName) {
+void Renderer::Register(std::function<void()> _task, const std::string& _canvasName) {
     Canvas* canvas = postProcessor_->GetCanvas(_canvasName);
     if (!canvas) {
         Log::Send(Log::Level::ERR, "Renderer: Canvas not found: " + _canvasName + ", falling back to None");
@@ -18,12 +18,12 @@ void Renderer::Register(const std::function<void()>& _task, const std::string& _
     }
 
     if (canvas) {
-        canvas->RegisterTask(_task);
+        canvas->RegisterTask(std::move(_task));
     }
 }
 
-void Renderer::RegisterUI(const std::function<void()>& _task) {
-    uiTasks_.push(_task);
+void Renderer::RegisterUI(std::function<void()> _task) {
+    uiTasks_.push(std::move(_task));
 }
 
 void Renderer::Render() {

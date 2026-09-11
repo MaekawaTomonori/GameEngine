@@ -34,7 +34,7 @@ public:
     void SetFactory(GESTD::ReferencePtr<PostEffectFactory> _factory);
 
     /** @brief 描画タスクを登録する（次のDrawObjects()で消化される） */
-    void RegisterTask(const std::function<void()>& _task);
+    void RegisterTask(std::function<void()> _task);
 
     /** @brief 登録されたタスクを自分のRTへ描画する */
     void DrawObjects();
