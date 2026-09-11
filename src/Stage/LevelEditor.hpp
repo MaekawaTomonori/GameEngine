@@ -2,6 +2,7 @@
 #define LevelEditor_HPP_
 #include <memory>
 
+#include "DebugUI.hpp"
 #include "LevelData.hpp"
 #include "Model.hpp"
 #include "Loader/StageLoader.hpp"
@@ -12,7 +13,7 @@ class LevelEditor {
         std::unique_ptr<Model> model;
     };
 
-    DebugUI* debug_;
+    GESTD::ReferencePtr<DebugUI> debug_;
 
     std::unique_ptr<StageLoader> loader_;
     std::unique_ptr<StageRepository> repository_;
