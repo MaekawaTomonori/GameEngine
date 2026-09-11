@@ -357,8 +357,23 @@
     <ClInclude Include="src\Model\Loader\IModelLoader.hpp">
       <Filter>src\Model\Loader</Filter>
     </ClInclude>
+    <ClInclude Include="src\Model\Loader\ModelLoaderFactory.hpp">
+      <Filter>src\Model\Loader</Filter>
+    </ClInclude>
     <ClInclude Include="src\Model\Loader\ObjLoader.hpp">
       <Filter>src\Model\Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Model\ModelInstance.hpp">
+      <Filter>src\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Model\StaticModelInstance.hpp">
+      <Filter>src\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Model\SkinningModelInstance.hpp">
+      <Filter>src\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Model\Common\ModelTypeRenderer.hpp">
+      <Filter>src\Model\Common</Filter>
     </ClInclude>
     <ClInclude Include="src\Model\Node\Node.hpp">
       <Filter>src\Model\Node</Filter>
@@ -585,10 +600,22 @@
     <ClCompile Include="src\Model\Loader\GltfLoader.cpp">
       <Filter>src\Model\Loader</Filter>
     </ClCompile>
+    <ClCompile Include="src\Model\Loader\ModelLoaderFactory.cpp">
+      <Filter>src\Model\Loader</Filter>
+    </ClCompile>
     <ClCompile Include="src\Model\Loader\ObjLoader.cpp">
       <Filter>src\Model\Loader</Filter>
     </ClCompile>
     <ClCompile Include="src\Model\Model.cpp">
+      <Filter>src\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Model\ModelInstance.cpp">
+      <Filter>src\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Model\StaticModelInstance.cpp">
+      <Filter>src\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Model\SkinningModelInstance.cpp">
       <Filter>src\Model</Filter>
     </ClCompile>
     <ClCompile Include="src\Model\Repository\ModelRepository.cpp">

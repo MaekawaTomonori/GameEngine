@@ -1,6 +1,7 @@
 #include "LevelEditor.hpp"
 
 #include "Log.hpp"
+#include "Utils.hpp"
 #include "imgui_internal.h"
 
 LevelEditor::LevelEditor(DebugUI* _debug) :debug_(_debug), loader_(std::make_unique<StageLoader>()), repository_(std::make_unique<StageRepository>()){
