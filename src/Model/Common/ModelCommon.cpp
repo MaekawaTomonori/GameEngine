@@ -11,6 +11,7 @@
 #include "src/DirectX/RootSignature/InputLayout.hpp"
 #include "src/DirectX/RootSignature/RootSignature.hpp"
 #include "src/DirectX/Shader/Shader.h"
+#include "src/Model/Loader/ModelLoaderFactory.hpp"
 
 ModelCommon::~ModelCommon() = default;
 
@@ -18,21 +19,14 @@ void ModelCommon::Initialize(const GESTD::ReferencePtr<DirectXAdapter>& _adapter
 	Setup(_adapter, _debugUi, "Model");
 	debugUI_->RegisterMenuButton("Model");
 
-	// PipelineStateObjectの初期化 (Skinning用)
-	pipeline_ = std::make_unique<PipelineStateObject>(_adapter);
+	skinningRenderer_.pipeline = std::make_unique<PipelineStateObject>(_adapter);
+	staticRenderer_.pipeline = std::make_unique<PipelineStateObject>(_adapter);
 
-	// PipelineStateObjectの初期化 (Static用)
-	staticPipeline_ = std::make_unique<PipelineStateObject>(_adapter);
-
-	// Skinning Model用のパイプライン作成
 	CreateSkinningPipeline();
-
-	// Static Model用のパイプライン作成
 	CreateStaticPipeline();
 
-    // 半透明モデル用のパイプライン作成（深度書き込み無効）
-    staticTransparentPipeline_   = std::make_unique<PipelineStateObject>(_adapter);
-    skinningTransparentPipeline_ = std::make_unique<PipelineStateObject>(_adapter);
+    staticRenderer_.transparentPipeline   = std::make_unique<PipelineStateObject>(_adapter);
+    skinningRenderer_.transparentPipeline = std::make_unique<PipelineStateObject>(_adapter);
     CreateStaticTransparentPipeline();
     CreateSkinningTransparentPipeline();
 
@@ -74,7 +68,7 @@ void ModelCommon::CreateSkinningPipeline() const {
     };
 
 	// PipelineStateObject作成 (Skinning用)
-	pipeline_->SetRootSignature(
+	skinningRenderer_.pipeline->SetRootSignature(
         RootSignature()
             // root 0: Material CBV (b0, PS)
             .AddParameter({
@@ -218,7 +212,7 @@ void ModelCommon::CreateStaticPipeline() const {
     };
 
 	// PipelineStateObject作成 (Static用)
-	staticPipeline_->SetRootSignature(
+	staticRenderer_.pipeline->SetRootSignature(
         RootSignature()
             // root 0: Material CBV (b0, PS)
             .AddParameter({
@@ -351,7 +345,7 @@ void ModelCommon::CreateStaticTransparentPipeline() {
         .OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND
     };
 
-	staticTransparentPipeline_->SetRootSignature(
+	staticRenderer_.transparentPipeline->SetRootSignature(
         RootSignature()
             .AddParameter({ .ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV, .Descriptor = { .ShaderRegister = 0 }, .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL })
             .AddParameter({ .ParameterType = D3D12_ROOT_PARAMETER_TYPE_SRV, .Descriptor = { .ShaderRegister = 2 }, .ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX })
@@ -414,7 +408,7 @@ void ModelCommon::CreateSkinningTransparentPipeline() {
         .OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND
     };
 
-	skinningTransparentPipeline_->SetRootSignature(
+	skinningRenderer_.transparentPipeline->SetRootSignature(
         RootSignature()
             .AddParameter({ .ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV, .Descriptor = { .ShaderRegister = 0 }, .ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL })
             .AddParameter({ .ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV, .Descriptor = { .ShaderRegister = 0 }, .ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX })
@@ -450,24 +444,14 @@ void ModelCommon::CreateSkinningTransparentPipeline() {
 	.Create();
 }
 
-void ModelCommon::RegisterStaticDraw(const std::function<void()>& _command, const std::string& _canvasName) {
+void ModelCommon::RegisterStaticDraw(StaticModelInstance* _instance, bool _isTransparent, const std::string& _canvasName) {
     std::lock_guard<std::mutex> lock(mutex_);
-    staticDrawCommands_.push_back({ _command, _canvasName });
+    staticRenderer_.Register(_instance, _isTransparent, _canvasName);
 }
 
-void ModelCommon::RegisterSkinningDraw(const std::function<void()>& _command, const std::string& _canvasName) {
+void ModelCommon::RegisterSkinningDraw(SkinningModelInstance* _instance, bool _isTransparent, const std::string& _canvasName) {
     std::lock_guard<std::mutex> lock(mutex_);
-    skinningDrawCommands_.push_back({ _command, _canvasName });
-}
-
-void ModelCommon::RegisterStaticTransparentDraw(const std::function<void()>& _command, const std::string& _canvasName) {
-    std::lock_guard<std::mutex> lock(mutex_);
-    staticTransparentCommands_.push_back({ _command, _canvasName });
-}
-
-void ModelCommon::RegisterSkinningTransparentDraw(const std::function<void()>& _command, const std::string& _canvasName) {
-    std::lock_guard<std::mutex> lock(mutex_);
-    skinningTransparentCommands_.push_back({ _command, _canvasName });
+    skinningRenderer_.Register(_instance, _isTransparent, _canvasName);
 }
 
 void ModelCommon::RegisterShadowDraw(const std::string& _id, const std::function<void()>& _func) {
@@ -496,8 +480,19 @@ D3D12_GPU_VIRTUAL_ADDRESS ModelCommon::GetCameraCBVAddress() const {
 }
 
 GESTD::ReferencePtr<ModelInstance> ModelCommon::CreateModelInstance(const std::string& _name) {
-    auto instance = std::make_unique<ModelInstance>();
-    instance->Initialize(_name);
+    ModelLoaderFactory::Load(_name, resource_);
+    GESTD::ReferencePtr<ModelData> data = resource_->GetModelRepository()->Get(_name);
+
+    std::unique_ptr<ModelInstance> instance;
+    if (data && data->skeleton.has_value() && !data->skinCluster.empty()) {
+        auto skinningInstance = std::make_unique<SkinningModelInstance>();
+        skinningInstance->Initialize(_name);
+        instance = std::move(skinningInstance);
+    } else {
+        auto staticInstance = std::make_unique<StaticModelInstance>();
+        staticInstance->Initialize(_name);
+        instance = std::move(staticInstance);
+    }
 
     GESTD::ReferencePtr<ModelInstance> reference = instance->GetReference();
     instances_.push_back(std::move(instance));
@@ -513,39 +508,8 @@ void ModelCommon::DestroyModelInstance(const GESTD::ReferencePtr<ModelInstance>&
     });
 }
 
-namespace {
-    using CanvasTaskGroups = std::unordered_map<std::string, std::vector<std::function<void()>>>;
-}
-
 void ModelCommon::Draw(Renderer* _renderer) {
     *cameraData_ = Singleton<CameraController>::GetInstance()->GetActive()->GetCameraForGpu();
-
-    CanvasTaskGroups staticGroups;
-    CanvasTaskGroups skinningGroups;
-    CanvasTaskGroups staticTransparentGroups;
-    CanvasTaskGroups skinningTransparentGroups;
-
-    auto groupByCanvas = [](std::vector<RenderingCommand>& _commands, CanvasTaskGroups& _out) {
-        for (auto& command : _commands) {
-            _out[command.canvasName].push_back(std::move(command.func));
-        }
-    };
-
-    {
-        std::lock_guard<std::mutex> lock(mutex_);
-
-        groupByCanvas(staticDrawCommands_, staticGroups);
-        staticDrawCommands_.clear();
-
-        groupByCanvas(skinningDrawCommands_, skinningGroups);
-        skinningDrawCommands_.clear();
-
-        groupByCanvas(staticTransparentCommands_, staticTransparentGroups);
-        staticTransparentCommands_.clear();
-
-        groupByCanvas(skinningTransparentCommands_, skinningTransparentGroups);
-        skinningTransparentCommands_.clear();
-    }
 
     auto bindShadow = [this]() {
         if (shadowSrvIndex_ != UINT_MAX && srv_) {
@@ -554,36 +518,9 @@ void ModelCommon::Draw(Renderer* _renderer) {
         }
     };
 
-    auto registerGrouped = [_renderer, &bindShadow](CanvasTaskGroups& _groups, PipelineStateObject* _pipeline) {
-        for (auto& [canvasName, tasks] : _groups) {
-            if (tasks.empty()) continue;
-            _renderer->Register([_pipeline, tasks = std::move(tasks), bindShadow]() {
-                if (_pipeline) {
-                    _pipeline->DrawCall();
-                }
-                bindShadow();
-                for (auto& task : tasks) {
-                    task();
-                }
-            }, canvasName);
-        }
-    };
-
-    // --- 不透明パス（深度書き込みあり）---
-    registerGrouped(staticGroups, staticPipeline_.get());
-    registerGrouped(skinningGroups, pipeline_.get());
-
-    // --- 半透明パス（深度書き込みなし、不透明パスの後に描画）---
-    registerGrouped(staticTransparentGroups, staticTransparentPipeline_.get());
-    registerGrouped(skinningTransparentGroups, skinningTransparentPipeline_.get());
-}
-
-void ModelCommon::DrawSkinning() const {
-	pipeline_->DrawCall();
-}
-
-void ModelCommon::DrawStatic() const {
-	staticPipeline_->DrawCall();
+    std::lock_guard<std::mutex> lock(mutex_);
+    staticRenderer_.Flush(_renderer, bindShadow);
+    skinningRenderer_.Flush(_renderer, bindShadow);
 }
 
 void ModelCommon::Initialize(const GESTD::ReferencePtr<DirectXAdapter>& _adapter, const GESTD::ReferencePtr<DebugUI>& _debugUi, GESTD::ReferencePtr<ResourceRepository> _resource, SRVManager* _srv) {

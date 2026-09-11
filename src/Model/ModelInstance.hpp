@@ -12,13 +12,14 @@
 
 class ModelCommon;
 struct ModelData;
-class SkinningState;
 
-/** @brief 3Dモデルの実体（Engine内部専用）
- * メッシュ、テクスチャ、アニメーション、スキニングを管理する。
+/** @brief 3Dモデルの実体の共通基底（Engine内部専用）
+ * トランスフォーム・メッシュ・ワールド行列バッファなど、モデル種別によらず共通の状態のみを持つ。
+ * 種別固有の処理（Update/Draw/Debug）は派生クラスが実装する。
  * 生成・破棄は ModelCommon が行い、外部からは公開ハンドルの Model 経由でのみ操作される。
  */
 class ModelInstance {
+protected:
     /** @brief モデルの変換行列データ
      */
     struct Transformation {
@@ -38,19 +39,8 @@ class ModelInstance {
     GESTD::ReferencePtr<ModelData> data_ = nullptr;
     std::unique_ptr<Mesh> mesh_;
 
-    /** スキニング専用の状態（骨格・アニメーション・スキンクラスター）
-     * スキニングデータを持たないモデルではnullptrのまま
-     */
-    std::unique_ptr<SkinningState> skinning_;
-
-    /** GPU RESOURCES
-     */
-    /** world transform
-     */
     std::unique_ptr<DX12Resource> wr_;
     Transformation* wd_ = nullptr;
-
-    std::function<void()> drawCommand_;
 
     std::string environmentTexture_ = "";
 
@@ -59,26 +49,21 @@ class ModelInstance {
 
     GESTD::LifetimeSentinel lifetime_;
 
+    /** @brief 派生クラス共通の初期化処理（モデルデータ読み込み・メッシュ生成・更新/デバッグ/シャドウ登録） */
+    void InitializeCommon(const std::string& _name);
+
+    void DebugTransformSection();
+    void DebugMeshSection();
+
 public:
     ModelInstance();
-    ~ModelInstance();
+    virtual ~ModelInstance();
 
-    /** @brief モデルを初期化
-     * @param _name モデル名
-     */
-    void Initialize(const std::string& _name);
+    virtual void Update() = 0;
+    virtual void Draw() = 0;
+    virtual void Debug() = 0;
 
-    /** @brief モデルの更新処理
-     */
-    void Update();
-
-    /** @brief マップデータの更新
-     */
     void UpdateMapData() const;
-
-    /** @brief モデルを描画
-     */
-    void Draw() const;
 
     ModelInstance& SetName(const std::string& _name);
     ModelInstance& SetTranslate(const Vector3& _translate);
@@ -98,15 +83,6 @@ public:
      * @return ダングリング検出つきの参照
      */
     GESTD::ReferencePtr<ModelInstance> GetReference() { return GESTD::ReferencePtr<ModelInstance>(this, lifetime_); }
-
-private:
-    /** @brief デバッグ情報の表示
-     */
-    void Debug();
-
-    /** @brief デバッグ用ラインの描画（スキニングモデルのみ）
-     */
-    void DrawLine() const;
 }; // class ModelInstance
 
 #endif // ModelInstance_HPP_

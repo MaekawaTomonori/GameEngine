@@ -6,7 +6,10 @@
 #include "src/Common/Common.hpp"
 #include "src/DirectX/Heap/SRVManager.h"
 #include "src/DirectX/Resource/DX12Resource.hpp"
+#include "src/Model/Common/ModelTypeRenderer.hpp"
 #include "src/Model/ModelInstance.hpp"
+#include "src/Model/SkinningModelInstance.hpp"
+#include "src/Model/StaticModelInstance.hpp"
 #include "src/ResourceRepository/ResourceRepository.hpp"
 
 struct CameraForGpu;
@@ -18,14 +21,8 @@ class ModelCommon : public Common{
     std::unique_ptr<DX12Resource> cameraResource_;
     CameraForGpu* cameraData_ = nullptr;
 
-    std::unique_ptr<PipelineStateObject> staticPipeline_;
-    std::unique_ptr<PipelineStateObject> staticTransparentPipeline_;
-    std::unique_ptr<PipelineStateObject> skinningTransparentPipeline_;
-
-    std::vector<RenderingCommand> staticDrawCommands_;
-    std::vector<RenderingCommand> skinningDrawCommands_;
-    std::vector<RenderingCommand> staticTransparentCommands_;
-    std::vector<RenderingCommand> skinningTransparentCommands_;
+    ModelTypeRenderer<StaticModelInstance> staticRenderer_;
+    ModelTypeRenderer<SkinningModelInstance> skinningRenderer_;
 
     std::unordered_map<std::string, std::function<void()>> shadowCommands_;
 
@@ -45,10 +42,8 @@ public:
 
     void Initialize(const GESTD::ReferencePtr<DirectXAdapter>& _adapter, const GESTD::ReferencePtr<DebugUI>& _debugUi, GESTD::ReferencePtr<ResourceRepository> _resource, SRVManager* _srv);
 
-    void RegisterStaticDraw(const std::function<void()>& _command, const std::string& _canvasName = "Main");
-    void RegisterSkinningDraw(const std::function<void()>& _command, const std::string& _canvasName = "Main");
-    void RegisterStaticTransparentDraw(const std::function<void()>& _command, const std::string& _canvasName = "Main");
-    void RegisterSkinningTransparentDraw(const std::function<void()>& _command, const std::string& _canvasName = "Main");
+    void RegisterStaticDraw(StaticModelInstance* _instance, bool _isTransparent, const std::string& _canvasName = "Main");
+    void RegisterSkinningDraw(SkinningModelInstance* _instance, bool _isTransparent, const std::string& _canvasName = "Main");
     void RegisterShadowDraw(const std::string& _id, const std::function<void()>& _func);
     void UnregisterShadowDraw(const std::string& _id);
 
@@ -69,9 +64,6 @@ public:
     void DestroyModelInstance(const GESTD::ReferencePtr<ModelInstance>& _instance);
 
     void Draw(Renderer* _renderer) override;
-
-    void DrawSkinning() const;
-    void DrawStatic() const;
 
     GESTD::ReferencePtr<ResourceRepository> GetResourceRepository() const {
         return resource_;
