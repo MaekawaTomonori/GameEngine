@@ -92,7 +92,15 @@ var hierarchy =
     [ "MeshRepository", "classMeshRepository.html", null ],
     [ "Model", "classModel.html", null ],
     [ "ModelData", "structModelData.html", null ],
+    [ "ModelInstance", "classModelInstance.html", [
+      [ "SkinningModelInstance", "classSkinningModelInstance.html", null ],
+      [ "StaticModelInstance", "classStaticModelInstance.html", null ]
+    ] ],
+    [ "ModelLoaderFactory", "classModelLoaderFactory.html", null ],
     [ "ModelRepository", "classModelRepository.html", null ],
+    [ "ModelTypeRenderer< T >", "classModelTypeRenderer.html", null ],
+    [ "ModelTypeRenderer< SkinningModelInstance >", "classModelTypeRenderer.html", null ],
+    [ "ModelTypeRenderer< StaticModelInstance >", "classModelTypeRenderer.html", null ],
     [ "Ui::Canvas::InputContext::NavNeighbors", "structUi_1_1Canvas_1_1InputContext_1_1NavNeighbors.html", null ],
     [ "Node", "structNode.html", null ],
     [ "NodeAnimation", "structNodeAnimation.html", null ],
@@ -141,6 +149,7 @@ var hierarchy =
     [ "TextureManager", "classTextureManager.html", null ],
     [ "Time", "classTime.html", null ],
     [ "Timer", "classTimer.html", null ],
+    [ "ModelInstance::Transformation", "structModelInstance_1_1Transformation.html", null ],
     [ "Transition", "classTransition.html", null ],
     [ "Vertex", "structVertex.html", null ],
     [ "VertexWeightData", "structVertexWeightData.html", null ],

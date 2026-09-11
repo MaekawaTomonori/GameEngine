@@ -95,21 +95,18 @@ $(document).ready(function(){initNavTree('Model_8hpp.html',''); initResizable();
   <div class="headertitle"><div class="title">Model.hpp ファイル</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;functional&gt;</code><br />
-<code>#include &lt;memory&gt;</code><br />
+<div class="textblock"><code>#include &lt;string&gt;</code><br />
 <code>#include &quot;ReferencePtr.hpp&quot;</code><br />
-<code>#include &quot;Math/Matrix.hpp&quot;</code><br />
-<code>#include &quot;<a class="el" href="Camera_8hpp_source.html">src/Camera/Camera.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="Mesh_8hpp_source.html">src/Mesh/Mesh.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="ModelCommon_8hpp_source.html">src/Model/Common/ModelCommon.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="DX12Resource_8hpp_source.html">src/DirectX/Resource/DX12Resource.hpp</a>&quot;</code><br />
+<code>#include &quot;Math/Vector2.hpp&quot;</code><br />
+<code>#include &quot;Math/Vector3.hpp&quot;</code><br />
+<code>#include &quot;Math/Vector4.hpp&quot;</code><br />
 </div>
 <p><a href="Model_8hpp_source.html">[ソースコード]</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 クラス</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModel.html">Model</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">3Dモデルクラス メッシュ、テクスチャ、アニメーション、スキニングを管理  <a href="classModel.html#details">[詳解]</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">3Dモデルクラス（公開ハンドル） 実体（ModelInstance）はEngine側が所有し、本クラスは実体への安全な参照を保持するだけの薄いラッパー。 実体が破棄された後に呼び出しても安全に無視される。  <a href="classModel.html#details">[詳解]</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
@@ -118,7 +115,7 @@ $(document).ready(function(){initNavTree('Model_8hpp.html',''); initResizable();
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="Model_8hpp.html">Model.hpp</a></li>
-    <li class="footer">2026年09月10日(木) 18時01分29秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年09月11日(金) 07時37分44秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

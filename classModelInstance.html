@@ -1,0 +1,1124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>PortfolioGame Engine: ModelInstance クラス</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">PortfolioGame Engine<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">C++20 DirectX12 Game Engine</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','検索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('classModelInstance.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">読み取り中…</div>
+<div class="SRStatus" id="Searching">検索中…</div>
+<div class="SRStatus" id="NoMatches">一致する文字列を見つけられません</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">クラス</a> &#124;
+<a href="#pub-methods">公開メンバ関数</a> &#124;
+<a href="#pro-methods">限定公開メンバ関数</a> &#124;
+<a href="#pro-attribs">限定公開変数類</a> &#124;
+<a href="classModelInstance-members.html">全メンバ一覧</a>  </div>
+  <div class="headertitle"><div class="title">ModelInstance クラス<span class="mlabels"><span class="mlabel">abstract</span></span></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>3Dモデルの実体の共通基底（Engine内部専用） トランスフォーム・メッシュ・ワールド行列バッファなど、モデル種別によらず共通の状態のみを持つ。 種別固有の処理（Update/Draw/Debug）は派生クラスが実装する。 生成・破棄は <a class="el" href="classModelCommon.html">ModelCommon</a> が行い、外部からは公開ハンドルの <a class="el" href="classModel.html" title="3Dモデルクラス（公開ハンドル） 実体（ModelInstance）はEngine側が所有し、本クラスは実体への安全な参照を保持するだけの薄いラッパー。 実体が破棄された後に呼び出しても安全に無視される...">Model</a> 経由でのみ操作される。  
+ <a href="classModelInstance.html#details">[詳解]</a></p>
+
+<p><code>#include &lt;<a class="el" href="ModelInstance_8hpp_source.html">ModelInstance.hpp</a>&gt;</code></p>
+<div class="dynheader">
+ModelInstance の継承関係図</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classModelInstance.png" usemap="#ModelInstance_map" alt=""/>
+  <map id="ModelInstance_map" name="ModelInstance_map">
+<area href="classSkinningModelInstance.html" title="スキニング（骨格アニメーション）を持つモデルの実体" alt="SkinningModelInstance" shape="rect" coords="0,56,142,80"/>
+<area href="classStaticModelInstance.html" title="スキニングを持たないモデルの実体" alt="StaticModelInstance" shape="rect" coords="152,56,294,80"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+クラス</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structModelInstance_1_1Transformation.html">Transformation</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">モデルの変換行列データ  <a href="structModelInstance_1_1Transformation.html#details">[詳解]</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+公開メンバ関数</h2></td></tr>
+<tr class="memitem:ae93392a221929b34a7870ebd05a48d96" id="r_ae93392a221929b34a7870ebd05a48d96"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelInstance.html#ae93392a221929b34a7870ebd05a48d96">ModelInstance</a> ()</td></tr>
+<tr class="separator:ae93392a221929b34a7870ebd05a48d96"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae63e50bcf33cd1e2e53921b212d3f8f9" id="r_ae63e50bcf33cd1e2e53921b212d3f8f9"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelInstance.html#ae63e50bcf33cd1e2e53921b212d3f8f9">~ModelInstance</a> ()</td></tr>
+<tr class="separator:ae63e50bcf33cd1e2e53921b212d3f8f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a478040085f9b1766b54b935c43c3d401" id="r_a478040085f9b1766b54b935c43c3d401"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelInstance.html#a478040085f9b1766b54b935c43c3d401">Update</a> ()=0</td></tr>
+<tr class="separator:a478040085f9b1766b54b935c43c3d401"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea395adc6f904f9fca3ffde013dcbfcf" id="r_aea395adc6f904f9fca3ffde013dcbfcf"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelInstance.html#aea395adc6f904f9fca3ffde013dcbfcf">Draw</a> ()=0</td></tr>
+<tr class="separator:aea395adc6f904f9fca3ffde013dcbfcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9788dd03bf9123f8a76b0e3d2355f13d" id="r_a9788dd03bf9123f8a76b0e3d2355f13d"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelInstance.html#a9788dd03bf9123f8a76b0e3d2355f13d">Debug</a> ()=0</td></tr>
+<tr class="separator:a9788dd03bf9123f8a76b0e3d2355f13d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89062e3f652a41b577698ff0a9496e02" id="r_a89062e3f652a41b577698ff0a9496e02"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelInstance.html#a89062e3f652a41b577698ff0a9496e02">UpdateMapData</a> () const</td></tr>
+<tr class="separator:a89062e3f652a41b577698ff0a9496e02"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a105bc08b71ce4cf3c3d7ccbe7c479990" id="r_a105bc08b71ce4cf3c3d7ccbe7c479990"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classModelInstance.html">ModelInstance</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelInstance.html#a105bc08b71ce4cf3c3d7ccbe7c479990">SetName</a> (const std::string &amp;_name)</td></tr>
+<tr class="separator:a105bc08b71ce4cf3c3d7ccbe7c479990"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c820fe89d28c9f06cd6ffa410268645" id="r_a3c820fe89d28c9f06cd6ffa410268645"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classModelInstance.html">ModelInstance</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelInstance.html#a3c820fe89d28c9f06cd6ffa410268645">SetTranslate</a> (const Vector3 &amp;_translate)</td></tr>
+<tr class="separator:a3c820fe89d28c9f06cd6ffa410268645"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a935e1fb420cdba779db10bc663f969d8" id="r_a935e1fb420cdba779db10bc663f969d8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classModelInstance.html">ModelInstance</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelInstance.html#a935e1fb420cdba779db10bc663f969d8">SetRotate</a> (const Vector3 &amp;_rotate)</td></tr>
+<tr class="separator:a935e1fb420cdba779db10bc663f969d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6600f35bfc4b1708a6a5e282e6b3c95" id="r_af6600f35bfc4b1708a6a5e282e6b3c95"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classModelInstance.html">ModelInstance</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelInstance.html#af6600f35bfc4b1708a6a5e282e6b3c95">SetScale</a> (const Vector3 &amp;_scale)</td></tr>
+<tr class="separator:af6600f35bfc4b1708a6a5e282e6b3c95"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac29f2f98aa5b2a48ff673518538c79ce" id="r_ac29f2f98aa5b2a48ff673518538c79ce"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classModelInstance.html">ModelInstance</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelInstance.html#ac29f2f98aa5b2a48ff673518538c79ce">SetEnvironmentTexture</a> (const std::string &amp;_texture)</td></tr>
+<tr class="separator:ac29f2f98aa5b2a48ff673518538c79ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee5886b06544d6421b94f033f26a871c" id="r_aee5886b06544d6421b94f033f26a871c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classModelInstance.html">ModelInstance</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelInstance.html#aee5886b06544d6421b94f033f26a871c">SetTexture</a> (const std::string &amp;_texture)</td></tr>
+<tr class="separator:aee5886b06544d6421b94f033f26a871c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8060558ded1e856bec072f029a9edcbf" id="r_a8060558ded1e856bec072f029a9edcbf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classModelInstance.html">ModelInstance</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelInstance.html#a8060558ded1e856bec072f029a9edcbf">SetTilingMultiply</a> (Vector2 _mul)</td></tr>
+<tr class="separator:a8060558ded1e856bec072f029a9edcbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a898c954521034dd59c0547688324dba7" id="r_a898c954521034dd59c0547688324dba7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classModelInstance.html">ModelInstance</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelInstance.html#a898c954521034dd59c0547688324dba7">SetColor</a> (const Vector4 &amp;_color)</td></tr>
+<tr class="separator:a898c954521034dd59c0547688324dba7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac10755c6c9bde04b3121e6563f83b8fd" id="r_ac10755c6c9bde04b3121e6563f83b8fd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classModelInstance.html">ModelInstance</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelInstance.html#ac10755c6c9bde04b3121e6563f83b8fd">SetCanvasName</a> (const std::string &amp;_canvasName)</td></tr>
+<tr class="separator:ac10755c6c9bde04b3121e6563f83b8fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa07e4d9cd271c296626aeb64bbe3eadc" id="r_aa07e4d9cd271c296626aeb64bbe3eadc"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelInstance.html#aa07e4d9cd271c296626aeb64bbe3eadc">GetCanvasName</a> () const</td></tr>
+<tr class="separator:aa07e4d9cd271c296626aeb64bbe3eadc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ce409a4f207a0c55037377d7267963f" id="r_a8ce409a4f207a0c55037377d7267963f"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelInstance.html#a8ce409a4f207a0c55037377d7267963f">GetName</a> () const</td></tr>
+<tr class="separator:a8ce409a4f207a0c55037377d7267963f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a18c26435c9ee0943b554b9f938ef447d" id="r_a18c26435c9ee0943b554b9f938ef447d"><td class="memItemLeft" align="right" valign="top">GESTD::ReferencePtr&lt; <a class="el" href="classModelInstance.html">ModelInstance</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelInstance.html#a18c26435c9ee0943b554b9f938ef447d">GetReference</a> ()</td></tr>
+<tr class="memdesc:a18c26435c9ee0943b554b9f938ef447d"><td class="mdescLeft">&#160;</td><td class="mdescRight">自身への安全な参照を取得する <a class="el" href="classModelCommon.html">ModelCommon</a> がハンドル（Model）生成時にのみ使用する。  <br /></td></tr>
+<tr class="separator:a18c26435c9ee0943b554b9f938ef447d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
+限定公開メンバ関数</h2></td></tr>
+<tr class="memitem:ac410d3680630b2c64570edb10309fb92" id="r_ac410d3680630b2c64570edb10309fb92"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelInstance.html#ac410d3680630b2c64570edb10309fb92">InitializeCommon</a> (const std::string &amp;_name)</td></tr>
+<tr class="memdesc:ac410d3680630b2c64570edb10309fb92"><td class="mdescLeft">&#160;</td><td class="mdescRight">派生クラス共通の初期化処理（モデルデータ読み込み・メッシュ生成・更新/デバッグ/シャドウ登録）  <br /></td></tr>
+<tr class="separator:ac410d3680630b2c64570edb10309fb92"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d9b5e98454fb134106a2ad0e024dfbb" id="r_a5d9b5e98454fb134106a2ad0e024dfbb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelInstance.html#a5d9b5e98454fb134106a2ad0e024dfbb">DebugTransformSection</a> ()</td></tr>
+<tr class="separator:a5d9b5e98454fb134106a2ad0e024dfbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a85f7f2ff89d3f7b41640e48c770b3027" id="r_a85f7f2ff89d3f7b41640e48c770b3027"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelInstance.html#a85f7f2ff89d3f7b41640e48c770b3027">DebugMeshSection</a> ()</td></tr>
+<tr class="separator:a85f7f2ff89d3f7b41640e48c770b3027"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
+限定公開変数類</h2></td></tr>
+<tr class="memitem:ab9116201a570c14869de6e54278f4e87" id="r_ab9116201a570c14869de6e54278f4e87"><td class="memItemLeft" align="right" valign="top">GESTD::ReferencePtr&lt; <a class="el" href="classModelCommon.html">ModelCommon</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelInstance.html#ab9116201a570c14869de6e54278f4e87">common_</a></td></tr>
+<tr class="separator:ab9116201a570c14869de6e54278f4e87"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb1c82f548b3e9ede5398e7922afd80e" id="r_afb1c82f548b3e9ede5398e7922afd80e"><td class="memItemLeft" align="right" valign="top">GESTD::ReferencePtr&lt; <a class="el" href="classDirectXAdapter.html">DirectXAdapter</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelInstance.html#afb1c82f548b3e9ede5398e7922afd80e">adapter_</a> = nullptr</td></tr>
+<tr class="separator:afb1c82f548b3e9ede5398e7922afd80e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb9ea8ed1ad54e65b44e06e741600297" id="r_adb9ea8ed1ad54e65b44e06e741600297"><td class="memItemLeft" align="right" valign="top">Microsoft::WRL::ComPtr&lt; ID3D12GraphicsCommandList &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelInstance.html#adb9ea8ed1ad54e65b44e06e741600297">commandList_</a> = nullptr</td></tr>
+<tr class="separator:adb9ea8ed1ad54e65b44e06e741600297"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5504a38fd62e06bc7b3a3bc1b6fad6a" id="r_aa5504a38fd62e06bc7b3a3bc1b6fad6a"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelInstance.html#aa5504a38fd62e06bc7b3a3bc1b6fad6a">name_</a></td></tr>
+<tr class="separator:aa5504a38fd62e06bc7b3a3bc1b6fad6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aefeec93e2497c6829dbbe135ecaf0cc8" id="r_aefeec93e2497c6829dbbe135ecaf0cc8"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelInstance.html#aefeec93e2497c6829dbbe135ecaf0cc8">uuid_</a></td></tr>
+<tr class="separator:aefeec93e2497c6829dbbe135ecaf0cc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe947e8459ff3fc7d25201aae24c8b18" id="r_afe947e8459ff3fc7d25201aae24c8b18"><td class="memItemLeft" align="right" valign="top">Transform&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelInstance.html#afe947e8459ff3fc7d25201aae24c8b18">transform_</a></td></tr>
+<tr class="separator:afe947e8459ff3fc7d25201aae24c8b18"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a189a2271cdebb4ccb9df950936107583" id="r_a189a2271cdebb4ccb9df950936107583"><td class="memItemLeft" align="right" valign="top">GESTD::ReferencePtr&lt; <a class="el" href="structModelData.html">ModelData</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelInstance.html#a189a2271cdebb4ccb9df950936107583">data_</a> = nullptr</td></tr>
+<tr class="separator:a189a2271cdebb4ccb9df950936107583"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7302bcfce19c75487c3c8d05390fb629" id="r_a7302bcfce19c75487c3c8d05390fb629"><td class="memItemLeft" align="right" valign="top">std::unique_ptr&lt; <a class="el" href="classMesh.html">Mesh</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelInstance.html#a7302bcfce19c75487c3c8d05390fb629">mesh_</a></td></tr>
+<tr class="separator:a7302bcfce19c75487c3c8d05390fb629"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a201d05ba4e03e55694655a6712f99b41" id="r_a201d05ba4e03e55694655a6712f99b41"><td class="memItemLeft" align="right" valign="top">std::unique_ptr&lt; <a class="el" href="classDX12Resource.html">DX12Resource</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelInstance.html#a201d05ba4e03e55694655a6712f99b41">wr_</a></td></tr>
+<tr class="separator:a201d05ba4e03e55694655a6712f99b41"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d42c0b5a0822574fe7dc51b5d769cb7" id="r_a9d42c0b5a0822574fe7dc51b5d769cb7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structModelInstance_1_1Transformation.html">Transformation</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelInstance.html#a9d42c0b5a0822574fe7dc51b5d769cb7">wd_</a> = nullptr</td></tr>
+<tr class="separator:a9d42c0b5a0822574fe7dc51b5d769cb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a49808c39942fe26812139637fc016524" id="r_a49808c39942fe26812139637fc016524"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelInstance.html#a49808c39942fe26812139637fc016524">environmentTexture_</a> = &quot;&quot;</td></tr>
+<tr class="separator:a49808c39942fe26812139637fc016524"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a704be401ad7c16f85dc963560c183d36" id="r_a704be401ad7c16f85dc963560c183d36"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelInstance.html#a704be401ad7c16f85dc963560c183d36">canvasName_</a> = &quot;Main&quot;</td></tr>
+<tr class="separator:a704be401ad7c16f85dc963560c183d36"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a019859398829ff33d5f8216db37a1e62" id="r_a019859398829ff33d5f8216db37a1e62"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelInstance.html#a019859398829ff33d5f8216db37a1e62">castShadow_</a> = true</td></tr>
+<tr class="separator:a019859398829ff33d5f8216db37a1e62"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c7119ac54c6b0fdcc09c5bfb60a41d3" id="r_a1c7119ac54c6b0fdcc09c5bfb60a41d3"><td class="memItemLeft" align="right" valign="top">GESTD::LifetimeSentinel&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelInstance.html#a1c7119ac54c6b0fdcc09c5bfb60a41d3">lifetime_</a></td></tr>
+<tr class="separator:a1c7119ac54c6b0fdcc09c5bfb60a41d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">詳解</h2>
+<div class="textblock"><p>3Dモデルの実体の共通基底（Engine内部専用） トランスフォーム・メッシュ・ワールド行列バッファなど、モデル種別によらず共通の状態のみを持つ。 種別固有の処理（Update/Draw/Debug）は派生クラスが実装する。 生成・破棄は <a class="el" href="classModelCommon.html">ModelCommon</a> が行い、外部からは公開ハンドルの <a class="el" href="classModel.html" title="3Dモデルクラス（公開ハンドル） 実体（ModelInstance）はEngine側が所有し、本クラスは実体への安全な参照を保持するだけの薄いラッパー。 実体が破棄された後に呼び出しても安全に無視される...">Model</a> 経由でのみ操作される。 </p>
+
+<p class="definition"> <a class="el" href="ModelInstance_8hpp_source.html">ModelInstance.hpp</a> の <a class="el" href="ModelInstance_8hpp_source.html#l00021">21</a> 行目に定義があります。</p>
+</div><h2 class="groupheader">構築子と解体子</h2>
+<a id="ae93392a221929b34a7870ebd05a48d96" name="ae93392a221929b34a7870ebd05a48d96"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae93392a221929b34a7870ebd05a48d96">&#9670;&#160;</a></span>ModelInstance()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ModelInstance::ModelInstance </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="ModelInstance_8cpp_source.html">ModelInstance.cpp</a> の <a class="el" href="ModelInstance_8cpp_source.html#l00013">13</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="ae63e50bcf33cd1e2e53921b212d3f8f9" name="ae63e50bcf33cd1e2e53921b212d3f8f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae63e50bcf33cd1e2e53921b212d3f8f9">&#9670;&#160;</a></span>~ModelInstance()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">ModelInstance::~ModelInstance </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="ModelInstance_8cpp_source.html">ModelInstance.cpp</a> の <a class="el" href="ModelInstance_8cpp_source.html#l00020">20</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="ModelInstance_8hpp_source.html#l00031">common_</a>, <a class="el" href="ModelInstance_8hpp_source.html#l00037">uuid_</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">関数詳解</h2>
+<a id="a9788dd03bf9123f8a76b0e3d2355f13d" name="a9788dd03bf9123f8a76b0e3d2355f13d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9788dd03bf9123f8a76b0e3d2355f13d">&#9670;&#160;</a></span>Debug()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void ModelInstance::Debug </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p><a class="el" href="classSkinningModelInstance.html#a4cfd2f7b720b20d74918463ce74ecaed">SkinningModelInstance</a>, <a class="el" href="classStaticModelInstance.html#a7937471a9b12f1d2de29c23c69a02a79">StaticModelInstance</a>で実装されています。</p>
+
+<p class="reference">参照元 <a class="el" href="ModelInstance_8cpp_source.html#l00025">InitializeCommon()</a>.</p>
+
+</div>
+</div>
+<a id="a85f7f2ff89d3f7b41640e48c770b3027" name="a85f7f2ff89d3f7b41640e48c770b3027"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a85f7f2ff89d3f7b41640e48c770b3027">&#9670;&#160;</a></span>DebugMeshSection()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ModelInstance::DebugMeshSection </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="ModelInstance_8cpp_source.html">ModelInstance.cpp</a> の <a class="el" href="ModelInstance_8cpp_source.html#l00163">163</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="ModelInstance_8hpp_source.html#l00040">mesh_</a>.</p>
+
+<p class="reference">参照元 <a class="el" href="SkinningModelInstance_8cpp_source.html#l00045">SkinningModelInstance::Debug()</a>, <a class="el" href="StaticModelInstance_8cpp_source.html#l00037">StaticModelInstance::Debug()</a>.</p>
+
+</div>
+</div>
+<a id="a5d9b5e98454fb134106a2ad0e024dfbb" name="a5d9b5e98454fb134106a2ad0e024dfbb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d9b5e98454fb134106a2ad0e024dfbb">&#9670;&#160;</a></span>DebugTransformSection()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ModelInstance::DebugTransformSection </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="ModelInstance_8cpp_source.html">ModelInstance.cpp</a> の <a class="el" href="ModelInstance_8cpp_source.html#l00146">146</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="ModelInstance_8hpp_source.html#l00038">transform_</a>.</p>
+
+<p class="reference">参照元 <a class="el" href="SkinningModelInstance_8cpp_source.html#l00045">SkinningModelInstance::Debug()</a>, <a class="el" href="StaticModelInstance_8cpp_source.html#l00037">StaticModelInstance::Debug()</a>.</p>
+
+</div>
+</div>
+<a id="aea395adc6f904f9fca3ffde013dcbfcf" name="aea395adc6f904f9fca3ffde013dcbfcf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aea395adc6f904f9fca3ffde013dcbfcf">&#9670;&#160;</a></span>Draw()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void ModelInstance::Draw </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p><a class="el" href="classSkinningModelInstance.html#af3e31d11afdf86393c3b5c4c4a79e60d">SkinningModelInstance</a>, <a class="el" href="classStaticModelInstance.html#a40af2f0db23c2bfcf4ce008fb8f2e396">StaticModelInstance</a>で実装されています。</p>
+
+</div>
+</div>
+<a id="aa07e4d9cd271c296626aeb64bbe3eadc" name="aa07e4d9cd271c296626aeb64bbe3eadc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa07e4d9cd271c296626aeb64bbe3eadc">&#9670;&#160;</a></span>GetCanvasName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::string &amp; ModelInstance::GetCanvasName </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="ModelInstance_8hpp_source.html">ModelInstance.hpp</a> の <a class="el" href="ModelInstance_8hpp_source.html#l00078">78</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="ModelInstance_8hpp_source.html#l00047">canvasName_</a>.</p>
+
+</div>
+</div>
+<a id="a8ce409a4f207a0c55037377d7267963f" name="a8ce409a4f207a0c55037377d7267963f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8ce409a4f207a0c55037377d7267963f">&#9670;&#160;</a></span>GetName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::string &amp; ModelInstance::GetName </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="ModelInstance_8cpp_source.html">ModelInstance.cpp</a> の <a class="el" href="ModelInstance_8cpp_source.html#l00134">134</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="ModelInstance_8hpp_source.html#l00036">name_</a>.</p>
+
+</div>
+</div>
+<a id="a18c26435c9ee0943b554b9f938ef447d" name="a18c26435c9ee0943b554b9f938ef447d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a18c26435c9ee0943b554b9f938ef447d">&#9670;&#160;</a></span>GetReference()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">GESTD::ReferencePtr&lt; <a class="el" href="classModelInstance.html">ModelInstance</a> &gt; ModelInstance::GetReference </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>自身への安全な参照を取得する <a class="el" href="classModelCommon.html">ModelCommon</a> がハンドル（Model）生成時にのみ使用する。 </p>
+<dl class="section return"><dt>戻り値</dt><dd>ダングリング検出つきの参照 </dd></dl>
+
+<p class="definition"> <a class="el" href="ModelInstance_8hpp_source.html">ModelInstance.hpp</a> の <a class="el" href="ModelInstance_8hpp_source.html#l00085">85</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="ModelInstance_8hpp_source.html#l00050">lifetime_</a>.</p>
+
+</div>
+</div>
+<a id="ac410d3680630b2c64570edb10309fb92" name="ac410d3680630b2c64570edb10309fb92"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac410d3680630b2c64570edb10309fb92">&#9670;&#160;</a></span>InitializeCommon()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ModelInstance::InitializeCommon </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>_name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>派生クラス共通の初期化処理（モデルデータ読み込み・メッシュ生成・更新/デバッグ/シャドウ登録） </p>
+
+<p class="definition"> <a class="el" href="ModelInstance_8cpp_source.html">ModelInstance.cpp</a> の <a class="el" href="ModelInstance_8cpp_source.html#l00025">25</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="ModelInstance_8hpp_source.html#l00032">adapter_</a>, <a class="el" href="ModelInstance_8hpp_source.html#l00048">castShadow_</a>, <a class="el" href="ModelInstance_8hpp_source.html#l00034">commandList_</a>, <a class="el" href="ModelInstance_8hpp_source.html#l00031">common_</a>, <a class="el" href="ModelInstance_8hpp_source.html#l00039">data_</a>, <a class="el" href="classModelInstance.html#a9788dd03bf9123f8a76b0e3d2355f13d">Debug()</a>, <a class="el" href="ModelInstance_8hpp_source.html#l00045">environmentTexture_</a>, <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::ERR</a>, <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::INFO</a>, <a class="el" href="ModelInstance_8hpp_source.html#l00028">ModelInstance::Transformation::inverse</a>, <a class="el" href="ModelLoaderFactory_8cpp_source.html#l00014">ModelLoaderFactory::Load()</a>, <a class="el" href="ModelInstance_8hpp_source.html#l00040">mesh_</a>, <a class="el" href="Log_8cpp_source.html#l00108">Log::Send()</a>, <a class="el" href="ModelInstance_8hpp_source.html#l00038">transform_</a>, <a class="el" href="ModelInstance_8cpp_source.html#l00138">UpdateMapData()</a>, <a class="el" href="ModelInstance_8hpp_source.html#l00037">uuid_</a>, <a class="el" href="ModelInstance_8hpp_source.html#l00043">wd_</a>, <a class="el" href="ModelInstance_8hpp_source.html#l00027">ModelInstance::Transformation::world</a>, <a class="el" href="ModelInstance_8hpp_source.html#l00042">wr_</a>, <a class="el" href="ModelInstance_8hpp_source.html#l00026">ModelInstance::Transformation::wvp</a> (計20項目).</p>
+
+<p class="reference">参照元 <a class="el" href="SkinningModelInstance_8cpp_source.html#l00010">SkinningModelInstance::Initialize()</a>, <a class="el" href="StaticModelInstance_8cpp_source.html#l00010">StaticModelInstance::Initialize()</a>.</p>
+
+</div>
+</div>
+<a id="ac10755c6c9bde04b3121e6563f83b8fd" name="ac10755c6c9bde04b3121e6563f83b8fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac10755c6c9bde04b3121e6563f83b8fd">&#9670;&#160;</a></span>SetCanvasName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classModelInstance.html">ModelInstance</a> &amp; ModelInstance::SetCanvasName </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>_canvasName</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="ModelInstance_8cpp_source.html">ModelInstance.cpp</a> の <a class="el" href="ModelInstance_8cpp_source.html#l00129">129</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="ModelInstance_8hpp_source.html#l00047">canvasName_</a>.</p>
+
+</div>
+</div>
+<a id="a898c954521034dd59c0547688324dba7" name="a898c954521034dd59c0547688324dba7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a898c954521034dd59c0547688324dba7">&#9670;&#160;</a></span>SetColor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classModelInstance.html">ModelInstance</a> &amp; ModelInstance::SetColor </td>
+          <td>(</td>
+          <td class="paramtype">const Vector4 &amp;&#160;</td>
+          <td class="paramname"><em>_color</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="ModelInstance_8cpp_source.html">ModelInstance.cpp</a> の <a class="el" href="ModelInstance_8cpp_source.html#l00122">122</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="ModelInstance_8hpp_source.html#l00040">mesh_</a>, <a class="el" href="ModelInstance_8cpp_source.html#l00122">SetColor()</a>.</p>
+
+<p class="reference">参照元 <a class="el" href="ModelInstance_8cpp_source.html#l00122">SetColor()</a>.</p>
+
+</div>
+</div>
+<a id="ac29f2f98aa5b2a48ff673518538c79ce" name="ac29f2f98aa5b2a48ff673518538c79ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac29f2f98aa5b2a48ff673518538c79ce">&#9670;&#160;</a></span>SetEnvironmentTexture()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classModelInstance.html">ModelInstance</a> &amp; ModelInstance::SetEnvironmentTexture </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>_texture</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="ModelInstance_8cpp_source.html">ModelInstance.cpp</a> の <a class="el" href="ModelInstance_8cpp_source.html#l00093">93</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="ModelInstance_8hpp_source.html#l00045">environmentTexture_</a>.</p>
+
+</div>
+</div>
+<a id="a105bc08b71ce4cf3c3d7ccbe7c479990" name="a105bc08b71ce4cf3c3d7ccbe7c479990"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a105bc08b71ce4cf3c3d7ccbe7c479990">&#9670;&#160;</a></span>SetName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classModelInstance.html">ModelInstance</a> &amp; ModelInstance::SetName </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>_name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="ModelInstance_8cpp_source.html">ModelInstance.cpp</a> の <a class="el" href="ModelInstance_8cpp_source.html#l00073">73</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="ModelInstance_8hpp_source.html#l00036">name_</a>.</p>
+
+</div>
+</div>
+<a id="a935e1fb420cdba779db10bc663f969d8" name="a935e1fb420cdba779db10bc663f969d8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a935e1fb420cdba779db10bc663f969d8">&#9670;&#160;</a></span>SetRotate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classModelInstance.html">ModelInstance</a> &amp; ModelInstance::SetRotate </td>
+          <td>(</td>
+          <td class="paramtype">const Vector3 &amp;&#160;</td>
+          <td class="paramname"><em>_rotate</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="ModelInstance_8cpp_source.html">ModelInstance.cpp</a> の <a class="el" href="ModelInstance_8cpp_source.html#l00083">83</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="ModelInstance_8hpp_source.html#l00038">transform_</a>.</p>
+
+</div>
+</div>
+<a id="af6600f35bfc4b1708a6a5e282e6b3c95" name="af6600f35bfc4b1708a6a5e282e6b3c95"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af6600f35bfc4b1708a6a5e282e6b3c95">&#9670;&#160;</a></span>SetScale()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classModelInstance.html">ModelInstance</a> &amp; ModelInstance::SetScale </td>
+          <td>(</td>
+          <td class="paramtype">const Vector3 &amp;&#160;</td>
+          <td class="paramname"><em>_scale</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="ModelInstance_8cpp_source.html">ModelInstance.cpp</a> の <a class="el" href="ModelInstance_8cpp_source.html#l00088">88</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="ModelInstance_8hpp_source.html#l00038">transform_</a>.</p>
+
+</div>
+</div>
+<a id="aee5886b06544d6421b94f033f26a871c" name="aee5886b06544d6421b94f033f26a871c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aee5886b06544d6421b94f033f26a871c">&#9670;&#160;</a></span>SetTexture()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classModelInstance.html">ModelInstance</a> &amp; ModelInstance::SetTexture </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>_texture</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="ModelInstance_8cpp_source.html">ModelInstance.cpp</a> の <a class="el" href="ModelInstance_8cpp_source.html#l00102">102</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="ModelInstance_8hpp_source.html#l00040">mesh_</a>, <a class="el" href="Log_8cpp_source.html#l00108">Log::Send()</a>, <a class="el" href="ModelInstance_8cpp_source.html#l00102">SetTexture()</a>, <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531ea059e9861e0400dfbe05c98a841f3f96b">Log::WARNING</a>.</p>
+
+<p class="reference">参照元 <a class="el" href="ModelInstance_8cpp_source.html#l00102">SetTexture()</a>.</p>
+
+</div>
+</div>
+<a id="a8060558ded1e856bec072f029a9edcbf" name="a8060558ded1e856bec072f029a9edcbf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8060558ded1e856bec072f029a9edcbf">&#9670;&#160;</a></span>SetTilingMultiply()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classModelInstance.html">ModelInstance</a> &amp; ModelInstance::SetTilingMultiply </td>
+          <td>(</td>
+          <td class="paramtype">Vector2&#160;</td>
+          <td class="paramname"><em>_mul</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="ModelInstance_8cpp_source.html">ModelInstance.cpp</a> の <a class="el" href="ModelInstance_8cpp_source.html#l00112">112</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="ModelInstance_8hpp_source.html#l00040">mesh_</a>, <a class="el" href="Log_8cpp_source.html#l00108">Log::Send()</a>, <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531ea059e9861e0400dfbe05c98a841f3f96b">Log::WARNING</a>.</p>
+
+</div>
+</div>
+<a id="a3c820fe89d28c9f06cd6ffa410268645" name="a3c820fe89d28c9f06cd6ffa410268645"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c820fe89d28c9f06cd6ffa410268645">&#9670;&#160;</a></span>SetTranslate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classModelInstance.html">ModelInstance</a> &amp; ModelInstance::SetTranslate </td>
+          <td>(</td>
+          <td class="paramtype">const Vector3 &amp;&#160;</td>
+          <td class="paramname"><em>_translate</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="ModelInstance_8cpp_source.html">ModelInstance.cpp</a> の <a class="el" href="ModelInstance_8cpp_source.html#l00078">78</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="ModelInstance_8hpp_source.html#l00038">transform_</a>.</p>
+
+</div>
+</div>
+<a id="a478040085f9b1766b54b935c43c3d401" name="a478040085f9b1766b54b935c43c3d401"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a478040085f9b1766b54b935c43c3d401">&#9670;&#160;</a></span>Update()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void ModelInstance::Update </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p><a class="el" href="classSkinningModelInstance.html#a9dcf4dbee2434dfaeaff9166c1de1146">SkinningModelInstance</a>, <a class="el" href="classStaticModelInstance.html#a832c7fdd462c0ca8d98033f81484c96b">StaticModelInstance</a>で実装されています。</p>
+
+</div>
+</div>
+<a id="a89062e3f652a41b577698ff0a9496e02" name="a89062e3f652a41b577698ff0a9496e02"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a89062e3f652a41b577698ff0a9496e02">&#9670;&#160;</a></span>UpdateMapData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ModelInstance::UpdateMapData </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="ModelInstance_8cpp_source.html">ModelInstance.cpp</a> の <a class="el" href="ModelInstance_8cpp_source.html#l00138">138</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="ModelInstance_8hpp_source.html#l00028">ModelInstance::Transformation::inverse</a>, <a class="el" href="ModelInstance_8hpp_source.html#l00038">transform_</a>, <a class="el" href="ModelInstance_8hpp_source.html#l00043">wd_</a>, <a class="el" href="ModelInstance_8hpp_source.html#l00027">ModelInstance::Transformation::world</a>, <a class="el" href="ModelInstance_8hpp_source.html#l00026">ModelInstance::Transformation::wvp</a>.</p>
+
+<p class="reference">参照元 <a class="el" href="ModelInstance_8cpp_source.html#l00025">InitializeCommon()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">メンバ詳解</h2>
+<a id="afb1c82f548b3e9ede5398e7922afd80e" name="afb1c82f548b3e9ede5398e7922afd80e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb1c82f548b3e9ede5398e7922afd80e">&#9670;&#160;</a></span>adapter_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">GESTD::ReferencePtr&lt;<a class="el" href="classDirectXAdapter.html">DirectXAdapter</a>&gt; ModelInstance::adapter_ = nullptr</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="ModelInstance_8hpp_source.html">ModelInstance.hpp</a> の <a class="el" href="ModelInstance_8hpp_source.html#l00032">32</a> 行目に定義があります。</p>
+
+<p class="reference">参照元 <a class="el" href="SkinningModelInstance_8cpp_source.html#l00010">SkinningModelInstance::Initialize()</a>, <a class="el" href="ModelInstance_8cpp_source.html#l00025">InitializeCommon()</a>.</p>
+
+</div>
+</div>
+<a id="a704be401ad7c16f85dc963560c183d36" name="a704be401ad7c16f85dc963560c183d36"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a704be401ad7c16f85dc963560c183d36">&#9670;&#160;</a></span>canvasName_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string ModelInstance::canvasName_ = &quot;Main&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="ModelInstance_8hpp_source.html">ModelInstance.hpp</a> の <a class="el" href="ModelInstance_8hpp_source.html#l00047">47</a> 行目に定義があります。</p>
+
+<p class="reference">参照元 <a class="el" href="SkinningModelInstance_8cpp_source.html#l00022">SkinningModelInstance::Draw()</a>, <a class="el" href="StaticModelInstance_8cpp_source.html#l00019">StaticModelInstance::Draw()</a>, <a class="el" href="ModelInstance_8hpp_source.html#l00078">GetCanvasName()</a>, <a class="el" href="ModelInstance_8cpp_source.html#l00129">SetCanvasName()</a>.</p>
+
+</div>
+</div>
+<a id="a019859398829ff33d5f8216db37a1e62" name="a019859398829ff33d5f8216db37a1e62"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a019859398829ff33d5f8216db37a1e62">&#9670;&#160;</a></span>castShadow_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool ModelInstance::castShadow_ = true</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="ModelInstance_8hpp_source.html">ModelInstance.hpp</a> の <a class="el" href="ModelInstance_8hpp_source.html#l00048">48</a> 行目に定義があります。</p>
+
+<p class="reference">参照元 <a class="el" href="ModelInstance_8cpp_source.html#l00025">InitializeCommon()</a>.</p>
+
+</div>
+</div>
+<a id="adb9ea8ed1ad54e65b44e06e741600297" name="adb9ea8ed1ad54e65b44e06e741600297"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adb9ea8ed1ad54e65b44e06e741600297">&#9670;&#160;</a></span>commandList_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Microsoft::WRL::ComPtr&lt;ID3D12GraphicsCommandList&gt; ModelInstance::commandList_ = nullptr</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="ModelInstance_8hpp_source.html">ModelInstance.hpp</a> の <a class="el" href="ModelInstance_8hpp_source.html#l00034">34</a> 行目に定義があります。</p>
+
+<p class="reference">参照元 <a class="el" href="SkinningModelInstance_8cpp_source.html#l00022">SkinningModelInstance::Draw()</a>, <a class="el" href="StaticModelInstance_8cpp_source.html#l00019">StaticModelInstance::Draw()</a>, <a class="el" href="SkinningModelInstance_8cpp_source.html#l00036">SkinningModelInstance::ExecuteDraw()</a>, <a class="el" href="StaticModelInstance_8cpp_source.html#l00029">StaticModelInstance::ExecuteDraw()</a>, <a class="el" href="ModelInstance_8cpp_source.html#l00025">InitializeCommon()</a>.</p>
+
+</div>
+</div>
+<a id="ab9116201a570c14869de6e54278f4e87" name="ab9116201a570c14869de6e54278f4e87"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab9116201a570c14869de6e54278f4e87">&#9670;&#160;</a></span>common_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">GESTD::ReferencePtr&lt;<a class="el" href="classModelCommon.html">ModelCommon</a>&gt; ModelInstance::common_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="ModelInstance_8hpp_source.html">ModelInstance.hpp</a> の <a class="el" href="ModelInstance_8hpp_source.html#l00031">31</a> 行目に定義があります。</p>
+
+<p class="reference">参照元 <a class="el" href="SkinningModelInstance_8cpp_source.html#l00022">SkinningModelInstance::Draw()</a>, <a class="el" href="StaticModelInstance_8cpp_source.html#l00019">StaticModelInstance::Draw()</a>, <a class="el" href="SkinningModelInstance_8cpp_source.html#l00036">SkinningModelInstance::ExecuteDraw()</a>, <a class="el" href="StaticModelInstance_8cpp_source.html#l00029">StaticModelInstance::ExecuteDraw()</a>, <a class="el" href="SkinningModelInstance_8cpp_source.html#l00010">SkinningModelInstance::Initialize()</a>, <a class="el" href="ModelInstance_8cpp_source.html#l00025">InitializeCommon()</a>, <a class="el" href="ModelInstance_8cpp_source.html#l00020">~ModelInstance()</a>.</p>
+
+</div>
+</div>
+<a id="a189a2271cdebb4ccb9df950936107583" name="a189a2271cdebb4ccb9df950936107583"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a189a2271cdebb4ccb9df950936107583">&#9670;&#160;</a></span>data_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">GESTD::ReferencePtr&lt;<a class="el" href="structModelData.html">ModelData</a>&gt; ModelInstance::data_ = nullptr</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="ModelInstance_8hpp_source.html">ModelInstance.hpp</a> の <a class="el" href="ModelInstance_8hpp_source.html#l00039">39</a> 行目に定義があります。</p>
+
+<p class="reference">参照元 <a class="el" href="SkinningModelInstance_8cpp_source.html#l00045">SkinningModelInstance::Debug()</a>, <a class="el" href="StaticModelInstance_8cpp_source.html#l00037">StaticModelInstance::Debug()</a>, <a class="el" href="SkinningModelInstance_8cpp_source.html#l00010">SkinningModelInstance::Initialize()</a>, <a class="el" href="ModelInstance_8cpp_source.html#l00025">InitializeCommon()</a>.</p>
+
+</div>
+</div>
+<a id="a49808c39942fe26812139637fc016524" name="a49808c39942fe26812139637fc016524"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a49808c39942fe26812139637fc016524">&#9670;&#160;</a></span>environmentTexture_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string ModelInstance::environmentTexture_ = &quot;&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="ModelInstance_8hpp_source.html">ModelInstance.hpp</a> の <a class="el" href="ModelInstance_8hpp_source.html#l00045">45</a> 行目に定義があります。</p>
+
+<p class="reference">参照元 <a class="el" href="SkinningModelInstance_8cpp_source.html#l00036">SkinningModelInstance::ExecuteDraw()</a>, <a class="el" href="StaticModelInstance_8cpp_source.html#l00029">StaticModelInstance::ExecuteDraw()</a>, <a class="el" href="ModelInstance_8cpp_source.html#l00025">InitializeCommon()</a>, <a class="el" href="ModelInstance_8cpp_source.html#l00093">SetEnvironmentTexture()</a>.</p>
+
+</div>
+</div>
+<a id="a1c7119ac54c6b0fdcc09c5bfb60a41d3" name="a1c7119ac54c6b0fdcc09c5bfb60a41d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c7119ac54c6b0fdcc09c5bfb60a41d3">&#9670;&#160;</a></span>lifetime_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">GESTD::LifetimeSentinel ModelInstance::lifetime_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="ModelInstance_8hpp_source.html">ModelInstance.hpp</a> の <a class="el" href="ModelInstance_8hpp_source.html#l00050">50</a> 行目に定義があります。</p>
+
+<p class="reference">参照元 <a class="el" href="ModelInstance_8hpp_source.html#l00085">GetReference()</a>.</p>
+
+</div>
+</div>
+<a id="a7302bcfce19c75487c3c8d05390fb629" name="a7302bcfce19c75487c3c8d05390fb629"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7302bcfce19c75487c3c8d05390fb629">&#9670;&#160;</a></span>mesh_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::unique_ptr&lt;<a class="el" href="classMesh.html">Mesh</a>&gt; ModelInstance::mesh_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="ModelInstance_8hpp_source.html">ModelInstance.hpp</a> の <a class="el" href="ModelInstance_8hpp_source.html#l00040">40</a> 行目に定義があります。</p>
+
+<p class="reference">参照元 <a class="el" href="ModelInstance_8cpp_source.html#l00163">DebugMeshSection()</a>, <a class="el" href="SkinningModelInstance_8cpp_source.html#l00022">SkinningModelInstance::Draw()</a>, <a class="el" href="StaticModelInstance_8cpp_source.html#l00019">StaticModelInstance::Draw()</a>, <a class="el" href="SkinningModelInstance_8cpp_source.html#l00036">SkinningModelInstance::ExecuteDraw()</a>, <a class="el" href="StaticModelInstance_8cpp_source.html#l00029">StaticModelInstance::ExecuteDraw()</a>, <a class="el" href="SkinningModelInstance_8cpp_source.html#l00010">SkinningModelInstance::Initialize()</a>, <a class="el" href="ModelInstance_8cpp_source.html#l00025">InitializeCommon()</a>, <a class="el" href="ModelInstance_8cpp_source.html#l00122">SetColor()</a>, <a class="el" href="ModelInstance_8cpp_source.html#l00102">SetTexture()</a>, <a class="el" href="ModelInstance_8cpp_source.html#l00112">SetTilingMultiply()</a>, <a class="el" href="SkinningModelInstance_8cpp_source.html#l00017">SkinningModelInstance::Update()</a>, <a class="el" href="StaticModelInstance_8cpp_source.html#l00014">StaticModelInstance::Update()</a>.</p>
+
+</div>
+</div>
+<a id="aa5504a38fd62e06bc7b3a3bc1b6fad6a" name="aa5504a38fd62e06bc7b3a3bc1b6fad6a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa5504a38fd62e06bc7b3a3bc1b6fad6a">&#9670;&#160;</a></span>name_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string ModelInstance::name_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="ModelInstance_8hpp_source.html">ModelInstance.hpp</a> の <a class="el" href="ModelInstance_8hpp_source.html#l00036">36</a> 行目に定義があります。</p>
+
+<p class="reference">参照元 <a class="el" href="SkinningModelInstance_8cpp_source.html#l00045">SkinningModelInstance::Debug()</a>, <a class="el" href="StaticModelInstance_8cpp_source.html#l00037">StaticModelInstance::Debug()</a>, <a class="el" href="ModelInstance_8cpp_source.html#l00134">GetName()</a>, <a class="el" href="ModelInstance_8cpp_source.html#l00073">SetName()</a>.</p>
+
+</div>
+</div>
+<a id="afe947e8459ff3fc7d25201aae24c8b18" name="afe947e8459ff3fc7d25201aae24c8b18"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afe947e8459ff3fc7d25201aae24c8b18">&#9670;&#160;</a></span>transform_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Transform ModelInstance::transform_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="ModelInstance_8hpp_source.html">ModelInstance.hpp</a> の <a class="el" href="ModelInstance_8hpp_source.html#l00038">38</a> 行目に定義があります。</p>
+
+<p class="reference">参照元 <a class="el" href="ModelInstance_8cpp_source.html#l00146">DebugTransformSection()</a>, <a class="el" href="ModelInstance_8cpp_source.html#l00025">InitializeCommon()</a>, <a class="el" href="ModelInstance_8cpp_source.html#l00083">SetRotate()</a>, <a class="el" href="ModelInstance_8cpp_source.html#l00088">SetScale()</a>, <a class="el" href="ModelInstance_8cpp_source.html#l00078">SetTranslate()</a>, <a class="el" href="ModelInstance_8cpp_source.html#l00138">UpdateMapData()</a>.</p>
+
+</div>
+</div>
+<a id="aefeec93e2497c6829dbbe135ecaf0cc8" name="aefeec93e2497c6829dbbe135ecaf0cc8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aefeec93e2497c6829dbbe135ecaf0cc8">&#9670;&#160;</a></span>uuid_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string ModelInstance::uuid_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="ModelInstance_8hpp_source.html">ModelInstance.hpp</a> の <a class="el" href="ModelInstance_8hpp_source.html#l00037">37</a> 行目に定義があります。</p>
+
+<p class="reference">参照元 <a class="el" href="SkinningModelInstance_8cpp_source.html#l00045">SkinningModelInstance::Debug()</a>, <a class="el" href="StaticModelInstance_8cpp_source.html#l00037">StaticModelInstance::Debug()</a>, <a class="el" href="ModelInstance_8cpp_source.html#l00025">InitializeCommon()</a>, <a class="el" href="ModelInstance_8cpp_source.html#l00020">~ModelInstance()</a>.</p>
+
+</div>
+</div>
+<a id="a9d42c0b5a0822574fe7dc51b5d769cb7" name="a9d42c0b5a0822574fe7dc51b5d769cb7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d42c0b5a0822574fe7dc51b5d769cb7">&#9670;&#160;</a></span>wd_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structModelInstance_1_1Transformation.html">Transformation</a>* ModelInstance::wd_ = nullptr</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="ModelInstance_8hpp_source.html">ModelInstance.hpp</a> の <a class="el" href="ModelInstance_8hpp_source.html#l00043">43</a> 行目に定義があります。</p>
+
+<p class="reference">参照元 <a class="el" href="ModelInstance_8cpp_source.html#l00025">InitializeCommon()</a>, <a class="el" href="ModelInstance_8cpp_source.html#l00138">UpdateMapData()</a>.</p>
+
+</div>
+</div>
+<a id="a201d05ba4e03e55694655a6712f99b41" name="a201d05ba4e03e55694655a6712f99b41"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a201d05ba4e03e55694655a6712f99b41">&#9670;&#160;</a></span>wr_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::unique_ptr&lt;<a class="el" href="classDX12Resource.html">DX12Resource</a>&gt; ModelInstance::wr_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="ModelInstance_8hpp_source.html">ModelInstance.hpp</a> の <a class="el" href="ModelInstance_8hpp_source.html#l00042">42</a> 行目に定義があります。</p>
+
+<p class="reference">参照元 <a class="el" href="SkinningModelInstance_8cpp_source.html#l00036">SkinningModelInstance::ExecuteDraw()</a>, <a class="el" href="StaticModelInstance_8cpp_source.html#l00029">StaticModelInstance::ExecuteDraw()</a>, <a class="el" href="ModelInstance_8cpp_source.html#l00025">InitializeCommon()</a>.</p>
+
+</div>
+</div>
+<hr/>このクラス詳解は次のファイルから抽出されました:<ul>
+<li>/home/runner/work/GameEngine/GameEngine/src/Model/<a class="el" href="ModelInstance_8hpp_source.html">ModelInstance.hpp</a></li>
+<li>/home/runner/work/GameEngine/GameEngine/src/Model/<a class="el" href="ModelInstance_8cpp_source.html">ModelInstance.cpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="classModelInstance.html">ModelInstance</a></li>
+    <li class="footer">2026年09月11日(金) 07時37分44秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+  </ul>
+</div>
+</body>
+</html>

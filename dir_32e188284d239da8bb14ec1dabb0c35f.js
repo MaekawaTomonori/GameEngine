@@ -7,5 +7,11 @@ var dir_32e188284d239da8bb14ec1dabb0c35f =
     [ "Repository", "dir_36451068af2da8b4be760cdcffe7ca19.html", "dir_36451068af2da8b4be760cdcffe7ca19" ],
     [ "Skeleton", "dir_fbc49d2b4f97f00c52c8b4c513a9ae49.html", "dir_fbc49d2b4f97f00c52c8b4c513a9ae49" ],
     [ "Skinning", "dir_6f124710814787f0bee276fc77846216.html", "dir_6f124710814787f0bee276fc77846216" ],
-    [ "Model.cpp", "Model_8cpp.html", null ]
+    [ "Model.cpp", "Model_8cpp.html", null ],
+    [ "ModelInstance.cpp", "ModelInstance_8cpp.html", null ],
+    [ "ModelInstance.hpp", "ModelInstance_8hpp.html", "ModelInstance_8hpp" ],
+    [ "SkinningModelInstance.cpp", "SkinningModelInstance_8cpp.html", null ],
+    [ "SkinningModelInstance.hpp", "SkinningModelInstance_8hpp.html", "SkinningModelInstance_8hpp" ],
+    [ "StaticModelInstance.cpp", "StaticModelInstance_8cpp.html", null ],
+    [ "StaticModelInstance.hpp", "StaticModelInstance_8hpp.html", "StaticModelInstance_8hpp" ]
 ];

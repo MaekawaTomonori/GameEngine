@@ -1,0 +1,357 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>PortfolioGame Engine: StaticModelInstance クラス</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">PortfolioGame Engine<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">C++20 DirectX12 Game Engine</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','検索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('classStaticModelInstance.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">読み取り中…</div>
+<div class="SRStatus" id="Searching">検索中…</div>
+<div class="SRStatus" id="NoMatches">一致する文字列を見つけられません</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">公開メンバ関数</a> &#124;
+<a href="classStaticModelInstance-members.html">全メンバ一覧</a>  </div>
+  <div class="headertitle"><div class="title">StaticModelInstance クラス</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>スキニングを持たないモデルの実体  
+ <a href="classStaticModelInstance.html#details">[詳解]</a></p>
+
+<p><code>#include &lt;<a class="el" href="StaticModelInstance_8hpp_source.html">StaticModelInstance.hpp</a>&gt;</code></p>
+<div class="dynheader">
+StaticModelInstance の継承関係図</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classStaticModelInstance.png" usemap="#StaticModelInstance_map" alt=""/>
+  <map id="StaticModelInstance_map" name="StaticModelInstance_map">
+<area href="classModelInstance.html" title="3Dモデルの実体の共通基底（Engine内部専用） トランスフォーム・メッシュ・ワールド行列バッファなど、モデル種別によらず共通の状態のみを持つ。 種別固有の処理（Update/Draw/Debug）は..." alt="ModelInstance" shape="rect" coords="0,0,125,24"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+公開メンバ関数</h2></td></tr>
+<tr class="memitem:ab404bcddd1d042c3758678cb6026f610" id="r_ab404bcddd1d042c3758678cb6026f610"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStaticModelInstance.html#ab404bcddd1d042c3758678cb6026f610">Initialize</a> (const std::string &amp;_name)</td></tr>
+<tr class="separator:ab404bcddd1d042c3758678cb6026f610"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a832c7fdd462c0ca8d98033f81484c96b" id="r_a832c7fdd462c0ca8d98033f81484c96b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStaticModelInstance.html#a832c7fdd462c0ca8d98033f81484c96b">Update</a> () override</td></tr>
+<tr class="separator:a832c7fdd462c0ca8d98033f81484c96b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40af2f0db23c2bfcf4ce008fb8f2e396" id="r_a40af2f0db23c2bfcf4ce008fb8f2e396"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStaticModelInstance.html#a40af2f0db23c2bfcf4ce008fb8f2e396">Draw</a> () override</td></tr>
+<tr class="separator:a40af2f0db23c2bfcf4ce008fb8f2e396"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7937471a9b12f1d2de29c23c69a02a79" id="r_a7937471a9b12f1d2de29c23c69a02a79"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStaticModelInstance.html#a7937471a9b12f1d2de29c23c69a02a79">Debug</a> () override</td></tr>
+<tr class="separator:a7937471a9b12f1d2de29c23c69a02a79"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8c3ec1388efa69b256f111f7edcd3e1" id="r_ac8c3ec1388efa69b256f111f7edcd3e1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStaticModelInstance.html#ac8c3ec1388efa69b256f111f7edcd3e1">ExecuteDraw</a> () const</td></tr>
+<tr class="memdesc:ac8c3ec1388efa69b256f111f7edcd3e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">描画本体（ModelTypeRendererから直接・非virtualに呼ばれる）  <br /></td></tr>
+<tr class="separator:ac8c3ec1388efa69b256f111f7edcd3e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classModelInstance"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classModelInstance')"><img src="closed.png" alt="-"/>&#160;基底クラス <a class="el" href="classModelInstance.html">ModelInstance</a> に属する継承公開メンバ関数</td></tr>
+<tr class="memitem:ae93392a221929b34a7870ebd05a48d96 inherit pub_methods_classModelInstance" id="r_ae93392a221929b34a7870ebd05a48d96"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelInstance.html#ae93392a221929b34a7870ebd05a48d96">ModelInstance</a> ()</td></tr>
+<tr class="separator:ae93392a221929b34a7870ebd05a48d96 inherit pub_methods_classModelInstance"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae63e50bcf33cd1e2e53921b212d3f8f9 inherit pub_methods_classModelInstance" id="r_ae63e50bcf33cd1e2e53921b212d3f8f9"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelInstance.html#ae63e50bcf33cd1e2e53921b212d3f8f9">~ModelInstance</a> ()</td></tr>
+<tr class="separator:ae63e50bcf33cd1e2e53921b212d3f8f9 inherit pub_methods_classModelInstance"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89062e3f652a41b577698ff0a9496e02 inherit pub_methods_classModelInstance" id="r_a89062e3f652a41b577698ff0a9496e02"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelInstance.html#a89062e3f652a41b577698ff0a9496e02">UpdateMapData</a> () const</td></tr>
+<tr class="separator:a89062e3f652a41b577698ff0a9496e02 inherit pub_methods_classModelInstance"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a105bc08b71ce4cf3c3d7ccbe7c479990 inherit pub_methods_classModelInstance" id="r_a105bc08b71ce4cf3c3d7ccbe7c479990"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classModelInstance.html">ModelInstance</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelInstance.html#a105bc08b71ce4cf3c3d7ccbe7c479990">SetName</a> (const std::string &amp;_name)</td></tr>
+<tr class="separator:a105bc08b71ce4cf3c3d7ccbe7c479990 inherit pub_methods_classModelInstance"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c820fe89d28c9f06cd6ffa410268645 inherit pub_methods_classModelInstance" id="r_a3c820fe89d28c9f06cd6ffa410268645"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classModelInstance.html">ModelInstance</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelInstance.html#a3c820fe89d28c9f06cd6ffa410268645">SetTranslate</a> (const Vector3 &amp;_translate)</td></tr>
+<tr class="separator:a3c820fe89d28c9f06cd6ffa410268645 inherit pub_methods_classModelInstance"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a935e1fb420cdba779db10bc663f969d8 inherit pub_methods_classModelInstance" id="r_a935e1fb420cdba779db10bc663f969d8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classModelInstance.html">ModelInstance</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelInstance.html#a935e1fb420cdba779db10bc663f969d8">SetRotate</a> (const Vector3 &amp;_rotate)</td></tr>
+<tr class="separator:a935e1fb420cdba779db10bc663f969d8 inherit pub_methods_classModelInstance"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6600f35bfc4b1708a6a5e282e6b3c95 inherit pub_methods_classModelInstance" id="r_af6600f35bfc4b1708a6a5e282e6b3c95"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classModelInstance.html">ModelInstance</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelInstance.html#af6600f35bfc4b1708a6a5e282e6b3c95">SetScale</a> (const Vector3 &amp;_scale)</td></tr>
+<tr class="separator:af6600f35bfc4b1708a6a5e282e6b3c95 inherit pub_methods_classModelInstance"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac29f2f98aa5b2a48ff673518538c79ce inherit pub_methods_classModelInstance" id="r_ac29f2f98aa5b2a48ff673518538c79ce"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classModelInstance.html">ModelInstance</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelInstance.html#ac29f2f98aa5b2a48ff673518538c79ce">SetEnvironmentTexture</a> (const std::string &amp;_texture)</td></tr>
+<tr class="separator:ac29f2f98aa5b2a48ff673518538c79ce inherit pub_methods_classModelInstance"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee5886b06544d6421b94f033f26a871c inherit pub_methods_classModelInstance" id="r_aee5886b06544d6421b94f033f26a871c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classModelInstance.html">ModelInstance</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelInstance.html#aee5886b06544d6421b94f033f26a871c">SetTexture</a> (const std::string &amp;_texture)</td></tr>
+<tr class="separator:aee5886b06544d6421b94f033f26a871c inherit pub_methods_classModelInstance"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8060558ded1e856bec072f029a9edcbf inherit pub_methods_classModelInstance" id="r_a8060558ded1e856bec072f029a9edcbf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classModelInstance.html">ModelInstance</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelInstance.html#a8060558ded1e856bec072f029a9edcbf">SetTilingMultiply</a> (Vector2 _mul)</td></tr>
+<tr class="separator:a8060558ded1e856bec072f029a9edcbf inherit pub_methods_classModelInstance"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a898c954521034dd59c0547688324dba7 inherit pub_methods_classModelInstance" id="r_a898c954521034dd59c0547688324dba7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classModelInstance.html">ModelInstance</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelInstance.html#a898c954521034dd59c0547688324dba7">SetColor</a> (const Vector4 &amp;_color)</td></tr>
+<tr class="separator:a898c954521034dd59c0547688324dba7 inherit pub_methods_classModelInstance"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac10755c6c9bde04b3121e6563f83b8fd inherit pub_methods_classModelInstance" id="r_ac10755c6c9bde04b3121e6563f83b8fd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classModelInstance.html">ModelInstance</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelInstance.html#ac10755c6c9bde04b3121e6563f83b8fd">SetCanvasName</a> (const std::string &amp;_canvasName)</td></tr>
+<tr class="separator:ac10755c6c9bde04b3121e6563f83b8fd inherit pub_methods_classModelInstance"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa07e4d9cd271c296626aeb64bbe3eadc inherit pub_methods_classModelInstance" id="r_aa07e4d9cd271c296626aeb64bbe3eadc"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelInstance.html#aa07e4d9cd271c296626aeb64bbe3eadc">GetCanvasName</a> () const</td></tr>
+<tr class="separator:aa07e4d9cd271c296626aeb64bbe3eadc inherit pub_methods_classModelInstance"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ce409a4f207a0c55037377d7267963f inherit pub_methods_classModelInstance" id="r_a8ce409a4f207a0c55037377d7267963f"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelInstance.html#a8ce409a4f207a0c55037377d7267963f">GetName</a> () const</td></tr>
+<tr class="separator:a8ce409a4f207a0c55037377d7267963f inherit pub_methods_classModelInstance"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a18c26435c9ee0943b554b9f938ef447d inherit pub_methods_classModelInstance" id="r_a18c26435c9ee0943b554b9f938ef447d"><td class="memItemLeft" align="right" valign="top">GESTD::ReferencePtr&lt; <a class="el" href="classModelInstance.html">ModelInstance</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelInstance.html#a18c26435c9ee0943b554b9f938ef447d">GetReference</a> ()</td></tr>
+<tr class="memdesc:a18c26435c9ee0943b554b9f938ef447d inherit pub_methods_classModelInstance"><td class="mdescLeft">&#160;</td><td class="mdescRight">自身への安全な参照を取得する <a class="el" href="classModelCommon.html">ModelCommon</a> がハンドル（Model）生成時にのみ使用する。  <br /></td></tr>
+<tr class="separator:a18c26435c9ee0943b554b9f938ef447d inherit pub_methods_classModelInstance"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
+その他の継承メンバ</h2></td></tr>
+<tr class="inherit_header pro_methods_classModelInstance"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classModelInstance')"><img src="closed.png" alt="-"/>&#160;基底クラス <a class="el" href="classModelInstance.html">ModelInstance</a> に属する継承限定公開メンバ関数</td></tr>
+<tr class="memitem:ac410d3680630b2c64570edb10309fb92 inherit pro_methods_classModelInstance" id="r_ac410d3680630b2c64570edb10309fb92"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelInstance.html#ac410d3680630b2c64570edb10309fb92">InitializeCommon</a> (const std::string &amp;_name)</td></tr>
+<tr class="memdesc:ac410d3680630b2c64570edb10309fb92 inherit pro_methods_classModelInstance"><td class="mdescLeft">&#160;</td><td class="mdescRight">派生クラス共通の初期化処理（モデルデータ読み込み・メッシュ生成・更新/デバッグ/シャドウ登録）  <br /></td></tr>
+<tr class="separator:ac410d3680630b2c64570edb10309fb92 inherit pro_methods_classModelInstance"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d9b5e98454fb134106a2ad0e024dfbb inherit pro_methods_classModelInstance" id="r_a5d9b5e98454fb134106a2ad0e024dfbb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelInstance.html#a5d9b5e98454fb134106a2ad0e024dfbb">DebugTransformSection</a> ()</td></tr>
+<tr class="separator:a5d9b5e98454fb134106a2ad0e024dfbb inherit pro_methods_classModelInstance"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a85f7f2ff89d3f7b41640e48c770b3027 inherit pro_methods_classModelInstance" id="r_a85f7f2ff89d3f7b41640e48c770b3027"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelInstance.html#a85f7f2ff89d3f7b41640e48c770b3027">DebugMeshSection</a> ()</td></tr>
+<tr class="separator:a85f7f2ff89d3f7b41640e48c770b3027 inherit pro_methods_classModelInstance"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_classModelInstance"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classModelInstance')"><img src="closed.png" alt="-"/>&#160;基底クラス <a class="el" href="classModelInstance.html">ModelInstance</a> に属する継承限定公開変数類</td></tr>
+<tr class="memitem:ab9116201a570c14869de6e54278f4e87 inherit pro_attribs_classModelInstance" id="r_ab9116201a570c14869de6e54278f4e87"><td class="memItemLeft" align="right" valign="top">GESTD::ReferencePtr&lt; <a class="el" href="classModelCommon.html">ModelCommon</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelInstance.html#ab9116201a570c14869de6e54278f4e87">common_</a></td></tr>
+<tr class="separator:ab9116201a570c14869de6e54278f4e87 inherit pro_attribs_classModelInstance"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb1c82f548b3e9ede5398e7922afd80e inherit pro_attribs_classModelInstance" id="r_afb1c82f548b3e9ede5398e7922afd80e"><td class="memItemLeft" align="right" valign="top">GESTD::ReferencePtr&lt; <a class="el" href="classDirectXAdapter.html">DirectXAdapter</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelInstance.html#afb1c82f548b3e9ede5398e7922afd80e">adapter_</a> = nullptr</td></tr>
+<tr class="separator:afb1c82f548b3e9ede5398e7922afd80e inherit pro_attribs_classModelInstance"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb9ea8ed1ad54e65b44e06e741600297 inherit pro_attribs_classModelInstance" id="r_adb9ea8ed1ad54e65b44e06e741600297"><td class="memItemLeft" align="right" valign="top">Microsoft::WRL::ComPtr&lt; ID3D12GraphicsCommandList &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelInstance.html#adb9ea8ed1ad54e65b44e06e741600297">commandList_</a> = nullptr</td></tr>
+<tr class="separator:adb9ea8ed1ad54e65b44e06e741600297 inherit pro_attribs_classModelInstance"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5504a38fd62e06bc7b3a3bc1b6fad6a inherit pro_attribs_classModelInstance" id="r_aa5504a38fd62e06bc7b3a3bc1b6fad6a"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelInstance.html#aa5504a38fd62e06bc7b3a3bc1b6fad6a">name_</a></td></tr>
+<tr class="separator:aa5504a38fd62e06bc7b3a3bc1b6fad6a inherit pro_attribs_classModelInstance"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aefeec93e2497c6829dbbe135ecaf0cc8 inherit pro_attribs_classModelInstance" id="r_aefeec93e2497c6829dbbe135ecaf0cc8"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelInstance.html#aefeec93e2497c6829dbbe135ecaf0cc8">uuid_</a></td></tr>
+<tr class="separator:aefeec93e2497c6829dbbe135ecaf0cc8 inherit pro_attribs_classModelInstance"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe947e8459ff3fc7d25201aae24c8b18 inherit pro_attribs_classModelInstance" id="r_afe947e8459ff3fc7d25201aae24c8b18"><td class="memItemLeft" align="right" valign="top">Transform&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelInstance.html#afe947e8459ff3fc7d25201aae24c8b18">transform_</a></td></tr>
+<tr class="separator:afe947e8459ff3fc7d25201aae24c8b18 inherit pro_attribs_classModelInstance"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a189a2271cdebb4ccb9df950936107583 inherit pro_attribs_classModelInstance" id="r_a189a2271cdebb4ccb9df950936107583"><td class="memItemLeft" align="right" valign="top">GESTD::ReferencePtr&lt; <a class="el" href="structModelData.html">ModelData</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelInstance.html#a189a2271cdebb4ccb9df950936107583">data_</a> = nullptr</td></tr>
+<tr class="separator:a189a2271cdebb4ccb9df950936107583 inherit pro_attribs_classModelInstance"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7302bcfce19c75487c3c8d05390fb629 inherit pro_attribs_classModelInstance" id="r_a7302bcfce19c75487c3c8d05390fb629"><td class="memItemLeft" align="right" valign="top">std::unique_ptr&lt; <a class="el" href="classMesh.html">Mesh</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelInstance.html#a7302bcfce19c75487c3c8d05390fb629">mesh_</a></td></tr>
+<tr class="separator:a7302bcfce19c75487c3c8d05390fb629 inherit pro_attribs_classModelInstance"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a201d05ba4e03e55694655a6712f99b41 inherit pro_attribs_classModelInstance" id="r_a201d05ba4e03e55694655a6712f99b41"><td class="memItemLeft" align="right" valign="top">std::unique_ptr&lt; <a class="el" href="classDX12Resource.html">DX12Resource</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelInstance.html#a201d05ba4e03e55694655a6712f99b41">wr_</a></td></tr>
+<tr class="separator:a201d05ba4e03e55694655a6712f99b41 inherit pro_attribs_classModelInstance"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d42c0b5a0822574fe7dc51b5d769cb7 inherit pro_attribs_classModelInstance" id="r_a9d42c0b5a0822574fe7dc51b5d769cb7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structModelInstance_1_1Transformation.html">Transformation</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelInstance.html#a9d42c0b5a0822574fe7dc51b5d769cb7">wd_</a> = nullptr</td></tr>
+<tr class="separator:a9d42c0b5a0822574fe7dc51b5d769cb7 inherit pro_attribs_classModelInstance"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a49808c39942fe26812139637fc016524 inherit pro_attribs_classModelInstance" id="r_a49808c39942fe26812139637fc016524"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelInstance.html#a49808c39942fe26812139637fc016524">environmentTexture_</a> = &quot;&quot;</td></tr>
+<tr class="separator:a49808c39942fe26812139637fc016524 inherit pro_attribs_classModelInstance"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a704be401ad7c16f85dc963560c183d36 inherit pro_attribs_classModelInstance" id="r_a704be401ad7c16f85dc963560c183d36"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelInstance.html#a704be401ad7c16f85dc963560c183d36">canvasName_</a> = &quot;Main&quot;</td></tr>
+<tr class="separator:a704be401ad7c16f85dc963560c183d36 inherit pro_attribs_classModelInstance"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a019859398829ff33d5f8216db37a1e62 inherit pro_attribs_classModelInstance" id="r_a019859398829ff33d5f8216db37a1e62"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelInstance.html#a019859398829ff33d5f8216db37a1e62">castShadow_</a> = true</td></tr>
+<tr class="separator:a019859398829ff33d5f8216db37a1e62 inherit pro_attribs_classModelInstance"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c7119ac54c6b0fdcc09c5bfb60a41d3 inherit pro_attribs_classModelInstance" id="r_a1c7119ac54c6b0fdcc09c5bfb60a41d3"><td class="memItemLeft" align="right" valign="top">GESTD::LifetimeSentinel&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelInstance.html#a1c7119ac54c6b0fdcc09c5bfb60a41d3">lifetime_</a></td></tr>
+<tr class="separator:a1c7119ac54c6b0fdcc09c5bfb60a41d3 inherit pro_attribs_classModelInstance"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">詳解</h2>
+<div class="textblock"><p>スキニングを持たないモデルの実体 </p>
+
+<p class="definition"> <a class="el" href="StaticModelInstance_8hpp_source.html">StaticModelInstance.hpp</a> の <a class="el" href="StaticModelInstance_8hpp_source.html#l00007">7</a> 行目に定義があります。</p>
+</div><h2 class="groupheader">関数詳解</h2>
+<a id="a7937471a9b12f1d2de29c23c69a02a79" name="a7937471a9b12f1d2de29c23c69a02a79"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7937471a9b12f1d2de29c23c69a02a79">&#9670;&#160;</a></span>Debug()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void StaticModelInstance::Debug </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p><a class="el" href="classModelInstance.html#a9788dd03bf9123f8a76b0e3d2355f13d">ModelInstance</a>を実装しています。</p>
+
+<p class="definition"> <a class="el" href="StaticModelInstance_8cpp_source.html">StaticModelInstance.cpp</a> の <a class="el" href="StaticModelInstance_8cpp_source.html#l00037">37</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="ModelInstance_8hpp_source.html#l00039">ModelInstance::data_</a>, <a class="el" href="ModelInstance_8cpp_source.html#l00163">ModelInstance::DebugMeshSection()</a>, <a class="el" href="ModelInstance_8cpp_source.html#l00146">ModelInstance::DebugTransformSection()</a>, <a class="el" href="ModelInstance_8hpp_source.html#l00036">ModelInstance::name_</a>, <a class="el" href="ModelInstance_8hpp_source.html#l00037">ModelInstance::uuid_</a>.</p>
+
+</div>
+</div>
+<a id="a40af2f0db23c2bfcf4ce008fb8f2e396" name="a40af2f0db23c2bfcf4ce008fb8f2e396"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a40af2f0db23c2bfcf4ce008fb8f2e396">&#9670;&#160;</a></span>Draw()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void StaticModelInstance::Draw </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p><a class="el" href="classModelInstance.html#aea395adc6f904f9fca3ffde013dcbfcf">ModelInstance</a>を実装しています。</p>
+
+<p class="definition"> <a class="el" href="StaticModelInstance_8cpp_source.html">StaticModelInstance.cpp</a> の <a class="el" href="StaticModelInstance_8cpp_source.html#l00019">19</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="ModelInstance_8hpp_source.html#l00047">ModelInstance::canvasName_</a>, <a class="el" href="ModelInstance_8hpp_source.html#l00034">ModelInstance::commandList_</a>, <a class="el" href="ModelInstance_8hpp_source.html#l00031">ModelInstance::common_</a>, <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::ERR</a>, <a class="el" href="ModelInstance_8hpp_source.html#l00040">ModelInstance::mesh_</a>, <a class="el" href="Log_8cpp_source.html#l00108">Log::Send()</a>.</p>
+
+</div>
+</div>
+<a id="ac8c3ec1388efa69b256f111f7edcd3e1" name="ac8c3ec1388efa69b256f111f7edcd3e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8c3ec1388efa69b256f111f7edcd3e1">&#9670;&#160;</a></span>ExecuteDraw()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void StaticModelInstance::ExecuteDraw </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>描画本体（ModelTypeRendererから直接・非virtualに呼ばれる） </p>
+
+<p class="definition"> <a class="el" href="StaticModelInstance_8cpp_source.html">StaticModelInstance.cpp</a> の <a class="el" href="StaticModelInstance_8cpp_source.html#l00029">29</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="ModelInstance_8hpp_source.html#l00034">ModelInstance::commandList_</a>, <a class="el" href="ModelInstance_8hpp_source.html#l00031">ModelInstance::common_</a>, <a class="el" href="ModelInstance_8hpp_source.html#l00045">ModelInstance::environmentTexture_</a>, <a class="el" href="ModelInstance_8hpp_source.html#l00040">ModelInstance::mesh_</a>, <a class="el" href="ModelInstance_8hpp_source.html#l00042">ModelInstance::wr_</a>.</p>
+
+</div>
+</div>
+<a id="ab404bcddd1d042c3758678cb6026f610" name="ab404bcddd1d042c3758678cb6026f610"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab404bcddd1d042c3758678cb6026f610">&#9670;&#160;</a></span>Initialize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void StaticModelInstance::Initialize </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>_name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="StaticModelInstance_8cpp_source.html">StaticModelInstance.cpp</a> の <a class="el" href="StaticModelInstance_8cpp_source.html#l00010">10</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="ModelInstance_8cpp_source.html#l00025">ModelInstance::InitializeCommon()</a>.</p>
+
+</div>
+</div>
+<a id="a832c7fdd462c0ca8d98033f81484c96b" name="a832c7fdd462c0ca8d98033f81484c96b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a832c7fdd462c0ca8d98033f81484c96b">&#9670;&#160;</a></span>Update()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void StaticModelInstance::Update </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p><a class="el" href="classModelInstance.html#a478040085f9b1766b54b935c43c3d401">ModelInstance</a>を実装しています。</p>
+
+<p class="definition"> <a class="el" href="StaticModelInstance_8cpp_source.html">StaticModelInstance.cpp</a> の <a class="el" href="StaticModelInstance_8cpp_source.html#l00014">14</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="ModelInstance_8hpp_source.html#l00040">ModelInstance::mesh_</a>, <a class="el" href="PerformanceProfiler_8hpp_source.html#l00076">PROFILE_SCOPE</a>.</p>
+
+</div>
+</div>
+<hr/>このクラス詳解は次のファイルから抽出されました:<ul>
+<li>/home/runner/work/GameEngine/GameEngine/src/Model/<a class="el" href="StaticModelInstance_8hpp_source.html">StaticModelInstance.hpp</a></li>
+<li>/home/runner/work/GameEngine/GameEngine/src/Model/<a class="el" href="StaticModelInstance_8cpp_source.html">StaticModelInstance.cpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="classStaticModelInstance.html">StaticModelInstance</a></li>
+    <li class="footer">2026年09月11日(金) 07時37分44秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,201 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>PortfolioGame Engine: /home/runner/work/GameEngine/GameEngine/src/Model/SkinningModelInstance.cpp ソースファイル</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">PortfolioGame Engine<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">C++20 DirectX12 Game Engine</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','検索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function() { init_codefold(0); });
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('SkinningModelInstance_8cpp_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">読み取り中…</div>
+<div class="SRStatus" id="Searching">検索中…</div>
+<div class="SRStatus" id="NoMatches">一致する文字列を見つけられません</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">SkinningModelInstance.cpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="SkinningModelInstance_8cpp.html">[詳解]</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#include &quot;<a class="code" href="SkinningModelInstance_8hpp.html">SkinningModelInstance.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;<a class="code" href="Log_8hpp.html">Log.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="PerformanceProfiler_8hpp.html">PerformanceProfiler.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;imgui.h&quot;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;Pattern/Singleton.hpp&quot;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;<a class="code" href="ModelCommon_8hpp.html">src/Model/Common/ModelCommon.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;<a class="code" href="TextureManager_8hpp.html">src/Texture/TextureManager.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="foldopen" id="foldopen00010" data-start="{" data-end="}">
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="classSkinningModelInstance.html#affab70b09b1a0dea07747917557bfcb1">   10</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classSkinningModelInstance.html#affab70b09b1a0dea07747917557bfcb1">SkinningModelInstance::Initialize</a>(<span class="keyword">const</span> std::string&amp; _name) {</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    <a class="code hl_function" href="classModelInstance.html#ac410d3680630b2c64570edb10309fb92">InitializeCommon</a>(_name);</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    skinning_ = std::make_unique&lt;SkinningState&gt;();</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    skinning_-&gt;Initialize(<a class="code hl_variable" href="classModelInstance.html#afb1c82f548b3e9ede5398e7922afd80e">adapter_</a>, <a class="code hl_variable" href="classModelInstance.html#ab9116201a570c14869de6e54278f4e87">common_</a>, <a class="code hl_variable" href="classModelInstance.html#a189a2271cdebb4ccb9df950936107583">data_</a>, *<a class="code hl_variable" href="classModelInstance.html#a7302bcfce19c75487c3c8d05390fb629">mesh_</a>);</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>}</div>
+</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="foldopen" id="foldopen00017" data-start="{" data-end="}">
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="classSkinningModelInstance.html#a9dcf4dbee2434dfaeaff9166c1de1146">   17</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classSkinningModelInstance.html#a9dcf4dbee2434dfaeaff9166c1de1146">SkinningModelInstance::Update</a>() {</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    { <a class="code hl_define" href="PerformanceProfiler_8hpp.html#aac1c1303c628961f4a2eefc0a1083766">PROFILE_SCOPE</a>(<span class="stringliteral">&quot;Model - Skinning&quot;</span>); skinning_-&gt;Update(); }</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    { <a class="code hl_define" href="PerformanceProfiler_8hpp.html#aac1c1303c628961f4a2eefc0a1083766">PROFILE_SCOPE</a>(<span class="stringliteral">&quot;Model - Mesh&quot;</span>); <a class="code hl_variable" href="classModelInstance.html#a7302bcfce19c75487c3c8d05390fb629">mesh_</a>-&gt;Update(); }</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>}</div>
+</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="foldopen" id="foldopen00022" data-start="{" data-end="}">
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="classSkinningModelInstance.html#af3e31d11afdf86393c3b5c4c4a79e60d">   22</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classSkinningModelInstance.html#af3e31d11afdf86393c3b5c4c4a79e60d">SkinningModelInstance::Draw</a>() {</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <span class="keywordflow">if</span> (!<a class="code hl_variable" href="classModelInstance.html#adb9ea8ed1ad54e65b44e06e741600297">commandList_</a>) {</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>        <a class="code hl_function" href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a>(<a class="code hl_enumvalue" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a>, <span class="stringliteral">&quot;Command list is null&quot;</span>);</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    }</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <span class="keyword">const</span> <span class="keywordtype">bool</span> isTransparent = <a class="code hl_variable" href="classModelInstance.html#a7302bcfce19c75487c3c8d05390fb629">mesh_</a>-&gt;GetAlpha() &lt; 1.0f;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <a class="code hl_variable" href="classModelInstance.html#ab9116201a570c14869de6e54278f4e87">common_</a>-&gt;RegisterSkinningDraw(<span class="keyword">this</span>, isTransparent, <a class="code hl_variable" href="classModelInstance.html#a704be401ad7c16f85dc963560c183d36">canvasName_</a>);</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="preprocessor">#ifdef _DEBUG</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    skinning_-&gt;DrawLine();</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>}</div>
+</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
+<div class="foldopen" id="foldopen00036" data-start="{" data-end="}">
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="classSkinningModelInstance.html#ad1539b3f4877d5a27b8be6da96dc6ae0">   36</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classSkinningModelInstance.html#ad1539b3f4877d5a27b8be6da96dc6ae0">SkinningModelInstance::ExecuteDraw</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="keyword">const</span> <span class="keyword">auto</span> tm = Singleton&lt;TextureManager&gt;::GetInstance();</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <a class="code hl_variable" href="classModelInstance.html#adb9ea8ed1ad54e65b44e06e741600297">commandList_</a>-&gt;SetGraphicsRootConstantBufferView(1, <a class="code hl_variable" href="classModelInstance.html#a201d05ba4e03e55694655a6712f99b41">wr_</a>-&gt;Get()-&gt;GetGPUVirtualAddress());</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <a class="code hl_variable" href="classModelInstance.html#adb9ea8ed1ad54e65b44e06e741600297">commandList_</a>-&gt;SetGraphicsRootConstantBufferView(4, <a class="code hl_variable" href="classModelInstance.html#ab9116201a570c14869de6e54278f4e87">common_</a>-&gt;GetCameraCBVAddress());</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <a class="code hl_variable" href="classModelInstance.html#adb9ea8ed1ad54e65b44e06e741600297">commandList_</a>-&gt;SetGraphicsRootDescriptorTable(8, tm-&gt;GetGPUHandle(<a class="code hl_variable" href="classModelInstance.html#a49808c39942fe26812139637fc016524">environmentTexture_</a>));</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <a class="code hl_variable" href="classModelInstance.html#adb9ea8ed1ad54e65b44e06e741600297">commandList_</a>-&gt;SetGraphicsRootDescriptorTable(11, skinning_-&gt;GetPaletteHandle());</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <a class="code hl_variable" href="classModelInstance.html#a7302bcfce19c75487c3c8d05390fb629">mesh_</a>-&gt;Draw();</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>}</div>
+</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
+<div class="foldopen" id="foldopen00045" data-start="{" data-end="}">
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="classSkinningModelInstance.html#a4cfd2f7b720b20d74918463ce74ecaed">   45</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classSkinningModelInstance.html#a4cfd2f7b720b20d74918463ce74ecaed">SkinningModelInstance::Debug</a>() {</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keyword">const</span> std::string&amp; label = <a class="code hl_variable" href="classModelInstance.html#aa5504a38fd62e06bc7b3a3bc1b6fad6a">name_</a>.empty() ? <a class="code hl_variable" href="classModelInstance.html#a189a2271cdebb4ccb9df950936107583">data_</a>-&gt;name : <a class="code hl_variable" href="classModelInstance.html#aa5504a38fd62e06bc7b3a3bc1b6fad6a">name_</a>;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    ImGui::PushID(<a class="code hl_variable" href="classModelInstance.html#aefeec93e2497c6829dbbe135ecaf0cc8">uuid_</a>.c_str());</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="keywordflow">if</span> (ImGui::CollapsingHeader(label.c_str())) {</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        <a class="code hl_function" href="classModelInstance.html#a5d9b5e98454fb134106a2ad0e024dfbb">DebugTransformSection</a>();</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        skinning_-&gt;Debug(<a class="code hl_variable" href="classModelInstance.html#aefeec93e2497c6829dbbe135ecaf0cc8">uuid_</a>);</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        <a class="code hl_function" href="classModelInstance.html#a85f7f2ff89d3f7b41640e48c770b3027">DebugMeshSection</a>();</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    }</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    ImGui::PopID();</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>}</div>
+</div>
+<div class="ttc" id="aLog_8hpp_html"><div class="ttname"><a href="Log_8hpp.html">Log.hpp</a></div></div>
+<div class="ttc" id="aModelCommon_8hpp_html"><div class="ttname"><a href="ModelCommon_8hpp.html">ModelCommon.hpp</a></div></div>
+<div class="ttc" id="aPerformanceProfiler_8hpp_html"><div class="ttname"><a href="PerformanceProfiler_8hpp.html">PerformanceProfiler.hpp</a></div></div>
+<div class="ttc" id="aPerformanceProfiler_8hpp_html_aac1c1303c628961f4a2eefc0a1083766"><div class="ttname"><a href="PerformanceProfiler_8hpp.html#aac1c1303c628961f4a2eefc0a1083766">PROFILE_SCOPE</a></div><div class="ttdeci">#define PROFILE_SCOPE(name)</div><div class="ttdef"><b>Definition</b> <a href="PerformanceProfiler_8hpp_source.html#l00076">PerformanceProfiler.hpp:76</a></div></div>
+<div class="ttc" id="aSkinningModelInstance_8hpp_html"><div class="ttname"><a href="SkinningModelInstance_8hpp.html">SkinningModelInstance.hpp</a></div></div>
+<div class="ttc" id="aTextureManager_8hpp_html"><div class="ttname"><a href="TextureManager_8hpp.html">TextureManager.hpp</a></div></div>
+<div class="ttc" id="aclassLog_html_af351e7d4bd43c85e7c90f52846b64bdb"><div class="ttname"><a href="classLog.html#af351e7d4bd43c85e7c90f52846b64bdb">Log::Send</a></div><div class="ttdeci">static void Send(Level _level, const std::string &amp;_message=&quot;&quot;)</div><div class="ttdoc">ログメッセージを送信</div><div class="ttdef"><b>Definition</b> <a href="Log_8cpp_source.html#l00108">Log.cpp:108</a></div></div>
+<div class="ttc" id="aclassLog_html_afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482"><div class="ttname"><a href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::Level::ERR</a></div><div class="ttdeci">@ ERR</div></div>
+<div class="ttc" id="aclassModelInstance_html_a189a2271cdebb4ccb9df950936107583"><div class="ttname"><a href="classModelInstance.html#a189a2271cdebb4ccb9df950936107583">ModelInstance::data_</a></div><div class="ttdeci">GESTD::ReferencePtr&lt; ModelData &gt; data_</div><div class="ttdef"><b>Definition</b> <a href="ModelInstance_8hpp_source.html#l00039">ModelInstance.hpp:39</a></div></div>
+<div class="ttc" id="aclassModelInstance_html_a201d05ba4e03e55694655a6712f99b41"><div class="ttname"><a href="classModelInstance.html#a201d05ba4e03e55694655a6712f99b41">ModelInstance::wr_</a></div><div class="ttdeci">std::unique_ptr&lt; DX12Resource &gt; wr_</div><div class="ttdef"><b>Definition</b> <a href="ModelInstance_8hpp_source.html#l00042">ModelInstance.hpp:42</a></div></div>
+<div class="ttc" id="aclassModelInstance_html_a49808c39942fe26812139637fc016524"><div class="ttname"><a href="classModelInstance.html#a49808c39942fe26812139637fc016524">ModelInstance::environmentTexture_</a></div><div class="ttdeci">std::string environmentTexture_</div><div class="ttdef"><b>Definition</b> <a href="ModelInstance_8hpp_source.html#l00045">ModelInstance.hpp:45</a></div></div>
+<div class="ttc" id="aclassModelInstance_html_a5d9b5e98454fb134106a2ad0e024dfbb"><div class="ttname"><a href="classModelInstance.html#a5d9b5e98454fb134106a2ad0e024dfbb">ModelInstance::DebugTransformSection</a></div><div class="ttdeci">void DebugTransformSection()</div><div class="ttdef"><b>Definition</b> <a href="ModelInstance_8cpp_source.html#l00146">ModelInstance.cpp:146</a></div></div>
+<div class="ttc" id="aclassModelInstance_html_a704be401ad7c16f85dc963560c183d36"><div class="ttname"><a href="classModelInstance.html#a704be401ad7c16f85dc963560c183d36">ModelInstance::canvasName_</a></div><div class="ttdeci">std::string canvasName_</div><div class="ttdef"><b>Definition</b> <a href="ModelInstance_8hpp_source.html#l00047">ModelInstance.hpp:47</a></div></div>
+<div class="ttc" id="aclassModelInstance_html_a7302bcfce19c75487c3c8d05390fb629"><div class="ttname"><a href="classModelInstance.html#a7302bcfce19c75487c3c8d05390fb629">ModelInstance::mesh_</a></div><div class="ttdeci">std::unique_ptr&lt; Mesh &gt; mesh_</div><div class="ttdef"><b>Definition</b> <a href="ModelInstance_8hpp_source.html#l00040">ModelInstance.hpp:40</a></div></div>
+<div class="ttc" id="aclassModelInstance_html_a85f7f2ff89d3f7b41640e48c770b3027"><div class="ttname"><a href="classModelInstance.html#a85f7f2ff89d3f7b41640e48c770b3027">ModelInstance::DebugMeshSection</a></div><div class="ttdeci">void DebugMeshSection()</div><div class="ttdef"><b>Definition</b> <a href="ModelInstance_8cpp_source.html#l00163">ModelInstance.cpp:163</a></div></div>
+<div class="ttc" id="aclassModelInstance_html_aa5504a38fd62e06bc7b3a3bc1b6fad6a"><div class="ttname"><a href="classModelInstance.html#aa5504a38fd62e06bc7b3a3bc1b6fad6a">ModelInstance::name_</a></div><div class="ttdeci">std::string name_</div><div class="ttdef"><b>Definition</b> <a href="ModelInstance_8hpp_source.html#l00036">ModelInstance.hpp:36</a></div></div>
+<div class="ttc" id="aclassModelInstance_html_ab9116201a570c14869de6e54278f4e87"><div class="ttname"><a href="classModelInstance.html#ab9116201a570c14869de6e54278f4e87">ModelInstance::common_</a></div><div class="ttdeci">GESTD::ReferencePtr&lt; ModelCommon &gt; common_</div><div class="ttdef"><b>Definition</b> <a href="ModelInstance_8hpp_source.html#l00031">ModelInstance.hpp:31</a></div></div>
+<div class="ttc" id="aclassModelInstance_html_ac410d3680630b2c64570edb10309fb92"><div class="ttname"><a href="classModelInstance.html#ac410d3680630b2c64570edb10309fb92">ModelInstance::InitializeCommon</a></div><div class="ttdeci">void InitializeCommon(const std::string &amp;_name)</div><div class="ttdoc">派生クラス共通の初期化処理（モデルデータ読み込み・メッシュ生成・更新/デバッグ/シャドウ登録）</div><div class="ttdef"><b>Definition</b> <a href="ModelInstance_8cpp_source.html#l00025">ModelInstance.cpp:25</a></div></div>
+<div class="ttc" id="aclassModelInstance_html_adb9ea8ed1ad54e65b44e06e741600297"><div class="ttname"><a href="classModelInstance.html#adb9ea8ed1ad54e65b44e06e741600297">ModelInstance::commandList_</a></div><div class="ttdeci">Microsoft::WRL::ComPtr&lt; ID3D12GraphicsCommandList &gt; commandList_</div><div class="ttdef"><b>Definition</b> <a href="ModelInstance_8hpp_source.html#l00034">ModelInstance.hpp:34</a></div></div>
+<div class="ttc" id="aclassModelInstance_html_aefeec93e2497c6829dbbe135ecaf0cc8"><div class="ttname"><a href="classModelInstance.html#aefeec93e2497c6829dbbe135ecaf0cc8">ModelInstance::uuid_</a></div><div class="ttdeci">std::string uuid_</div><div class="ttdef"><b>Definition</b> <a href="ModelInstance_8hpp_source.html#l00037">ModelInstance.hpp:37</a></div></div>
+<div class="ttc" id="aclassModelInstance_html_afb1c82f548b3e9ede5398e7922afd80e"><div class="ttname"><a href="classModelInstance.html#afb1c82f548b3e9ede5398e7922afd80e">ModelInstance::adapter_</a></div><div class="ttdeci">GESTD::ReferencePtr&lt; DirectXAdapter &gt; adapter_</div><div class="ttdef"><b>Definition</b> <a href="ModelInstance_8hpp_source.html#l00032">ModelInstance.hpp:32</a></div></div>
+<div class="ttc" id="aclassSkinningModelInstance_html_a4cfd2f7b720b20d74918463ce74ecaed"><div class="ttname"><a href="classSkinningModelInstance.html#a4cfd2f7b720b20d74918463ce74ecaed">SkinningModelInstance::Debug</a></div><div class="ttdeci">void Debug() override</div><div class="ttdef"><b>Definition</b> <a href="SkinningModelInstance_8cpp_source.html#l00045">SkinningModelInstance.cpp:45</a></div></div>
+<div class="ttc" id="aclassSkinningModelInstance_html_a9dcf4dbee2434dfaeaff9166c1de1146"><div class="ttname"><a href="classSkinningModelInstance.html#a9dcf4dbee2434dfaeaff9166c1de1146">SkinningModelInstance::Update</a></div><div class="ttdeci">void Update() override</div><div class="ttdef"><b>Definition</b> <a href="SkinningModelInstance_8cpp_source.html#l00017">SkinningModelInstance.cpp:17</a></div></div>
+<div class="ttc" id="aclassSkinningModelInstance_html_ad1539b3f4877d5a27b8be6da96dc6ae0"><div class="ttname"><a href="classSkinningModelInstance.html#ad1539b3f4877d5a27b8be6da96dc6ae0">SkinningModelInstance::ExecuteDraw</a></div><div class="ttdeci">void ExecuteDraw() const</div><div class="ttdoc">描画本体（ModelTypeRendererから直接・非virtualに呼ばれる）</div><div class="ttdef"><b>Definition</b> <a href="SkinningModelInstance_8cpp_source.html#l00036">SkinningModelInstance.cpp:36</a></div></div>
+<div class="ttc" id="aclassSkinningModelInstance_html_af3e31d11afdf86393c3b5c4c4a79e60d"><div class="ttname"><a href="classSkinningModelInstance.html#af3e31d11afdf86393c3b5c4c4a79e60d">SkinningModelInstance::Draw</a></div><div class="ttdeci">void Draw() override</div><div class="ttdef"><b>Definition</b> <a href="SkinningModelInstance_8cpp_source.html#l00022">SkinningModelInstance.cpp:22</a></div></div>
+<div class="ttc" id="aclassSkinningModelInstance_html_affab70b09b1a0dea07747917557bfcb1"><div class="ttname"><a href="classSkinningModelInstance.html#affab70b09b1a0dea07747917557bfcb1">SkinningModelInstance::Initialize</a></div><div class="ttdeci">void Initialize(const std::string &amp;_name)</div><div class="ttdef"><b>Definition</b> <a href="SkinningModelInstance_8cpp_source.html#l00010">SkinningModelInstance.cpp:10</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_32e188284d239da8bb14ec1dabb0c35f.html">Model</a></li><li class="navelem"><a class="el" href="SkinningModelInstance_8cpp.html">SkinningModelInstance.cpp</a></li>
+    <li class="footer">2026年09月11日(金) 07時37分44秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+  </ul>
+</div>
+</body>
+</html>

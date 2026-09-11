@@ -9,8 +9,9 @@ var searchData=
   ['timestamp_6',['timestamp',['../structLog_1_1LogEntry.html#a87fa7c85241d5c893028567ab30cdc60',1,'Log::LogEntry']]],
   ['title_7',['title',['../structGameEngine_1_1Config.html#a3c33302431734a0f598bfb6ca9c55c47',1,'GameEngine::Config']]],
   ['transform_8',['transform',['../structNode.html#a3bb2f13d17b8b6b01f82d471940977a2',1,'Node::transform'],['../structJoint.html#a080b6261e90e1de1c9720bcc38b1ffed',1,'Joint::transform']]],
-  ['transform_5f_9',['transform_',['../classCamera.html#a5080e65f5233788bd49544ccc1c6f8cd',1,'Camera']]],
+  ['transform_5f_9',['transform_',['../classCamera.html#a5080e65f5233788bd49544ccc1c6f8cd',1,'Camera::transform_'],['../classModelInstance.html#afe947e8459ff3fc7d25201aae24c8b18',1,'ModelInstance::transform_']]],
   ['translate_10',['translate',['../structNodeAnimation.html#aadfeef2517a847af3d52eb0bf4788e7b',1,'NodeAnimation::translate'],['../structLevelData_1_1ObjectData.html#a9d664c946b2b8cfa1f89ee8e4812298a',1,'LevelData::ObjectData::translate']]],
-  ['type_11',['type',['../structPostEffectChain_1_1EffectData.html#a264fe8e086cb8ac729fd885d10706910',1,'PostEffectChain::EffectData::type'],['../structPostProcessPresetEditor_1_1PresetMember.html#a4f79b09c2edb6a74e6aa9d1a52c0f9d3',1,'PostProcessPresetEditor::PresetMember::type'],['../structPlaneTextureLayer.html#af110be31ae25a422fdc5e1e8dc9b51ff',1,'PlaneTextureLayer::type']]],
-  ['type_5f_12',['type_',['../classRawLight.html#af42e5167bd37be9858031d48802910b2',1,'RawLight']]]
+  ['transparentpipeline_11',['transparentPipeline',['../classModelTypeRenderer.html#a1a88a8214542f93dd2721cd245c38449',1,'ModelTypeRenderer']]],
+  ['type_12',['type',['../structPostEffectChain_1_1EffectData.html#a264fe8e086cb8ac729fd885d10706910',1,'PostEffectChain::EffectData::type'],['../structPostProcessPresetEditor_1_1PresetMember.html#a4f79b09c2edb6a74e6aa9d1a52c0f9d3',1,'PostProcessPresetEditor::PresetMember::type'],['../structPlaneTextureLayer.html#af110be31ae25a422fdc5e1e8dc9b51ff',1,'PlaneTextureLayer::type']]],
+  ['type_5f_13',['type_',['../classRawLight.html#af42e5167bd37be9858031d48802910b2',1,'RawLight']]]
 ];
