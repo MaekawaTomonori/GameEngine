@@ -363,6 +363,9 @@
     <ClInclude Include="src\Model\Loader\ObjLoader.hpp">
       <Filter>src\Model\Loader</Filter>
     </ClInclude>
+    <ClInclude Include="src\Model\ModelInstance.hpp">
+      <Filter>src\Model</Filter>
+    </ClInclude>
     <ClInclude Include="src\Model\Node\Node.hpp">
       <Filter>src\Model\Node</Filter>
     </ClInclude>
@@ -595,6 +598,9 @@
       <Filter>src\Model\Loader</Filter>
     </ClCompile>
     <ClCompile Include="src\Model\Model.cpp">
+      <Filter>src\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Model\ModelInstance.cpp">
       <Filter>src\Model</Filter>
     </ClCompile>
     <ClCompile Include="src\Model\Repository\ModelRepository.cpp">
