@@ -107,12 +107,12 @@ $(document).ready(function(){initNavTree('classRenderer.html',''); initResizable
 <tr class="memitem:a402d95229ab6ad2d20a997928d3cc6bf" id="r_a402d95229ab6ad2d20a997928d3cc6bf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRenderer.html#a402d95229ab6ad2d20a997928d3cc6bf">Initialize</a> (GESTD::ReferencePtr&lt; <a class="el" href="classDirectXAdapter.html">DirectXAdapter</a> &gt; _adapter, GESTD::ReferencePtr&lt; <a class="el" href="classPostProcessExecutor.html">PostProcessExecutor</a> &gt; _postProcessor)</td></tr>
 <tr class="memdesc:a402d95229ab6ad2d20a997928d3cc6bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">レンダラーを初期化  <br /></td></tr>
 <tr class="separator:a402d95229ab6ad2d20a997928d3cc6bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a04e431b7aae8fdde0e3df38d4c92f56b" id="r_a04e431b7aae8fdde0e3df38d4c92f56b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRenderer.html#a04e431b7aae8fdde0e3df38d4c92f56b">Register</a> (const std::function&lt; void()&gt; &amp;_task, const std::string &amp;_canvasName=&quot;None&quot;)</td></tr>
-<tr class="memdesc:a04e431b7aae8fdde0e3df38d4c92f56b"><td class="mdescLeft">&#160;</td><td class="mdescRight">描画タスクを登録  <br /></td></tr>
-<tr class="separator:a04e431b7aae8fdde0e3df38d4c92f56b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a139ffaec18ab75f4a2dd1b0fe2aab110" id="r_a139ffaec18ab75f4a2dd1b0fe2aab110"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRenderer.html#a139ffaec18ab75f4a2dd1b0fe2aab110">RegisterUI</a> (const std::function&lt; void()&gt; &amp;_task)</td></tr>
-<tr class="memdesc:a139ffaec18ab75f4a2dd1b0fe2aab110"><td class="mdescLeft">&#160;</td><td class="mdescRight">UIタスクを登録（常にスワップチェーンへ描画）  <br /></td></tr>
-<tr class="separator:a139ffaec18ab75f4a2dd1b0fe2aab110"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad05020bfe81b672b8b7a0202f51399f4" id="r_ad05020bfe81b672b8b7a0202f51399f4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRenderer.html#ad05020bfe81b672b8b7a0202f51399f4">Register</a> (std::function&lt; void()&gt; _task, const std::string &amp;_canvasName=&quot;None&quot;)</td></tr>
+<tr class="memdesc:ad05020bfe81b672b8b7a0202f51399f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">描画タスクを登録  <br /></td></tr>
+<tr class="separator:ad05020bfe81b672b8b7a0202f51399f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8ad0418f38c77f3a4016cad50f91dc0" id="r_aa8ad0418f38c77f3a4016cad50f91dc0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRenderer.html#aa8ad0418f38c77f3a4016cad50f91dc0">RegisterUI</a> (std::function&lt; void()&gt; _task)</td></tr>
+<tr class="memdesc:aa8ad0418f38c77f3a4016cad50f91dc0"><td class="mdescLeft">&#160;</td><td class="mdescRight">UIタスクを登録（常にスワップチェーンへ描画）  <br /></td></tr>
+<tr class="separator:aa8ad0418f38c77f3a4016cad50f91dc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adde94d3402b015b1fcd23c9a283cae2e" id="r_adde94d3402b015b1fcd23c9a283cae2e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRenderer.html#adde94d3402b015b1fcd23c9a283cae2e">Render</a> ()</td></tr>
 <tr class="memdesc:adde94d3402b015b1fcd23c9a283cae2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">登録されたタスクをレンダリング  <br /></td></tr>
 <tr class="separator:adde94d3402b015b1fcd23c9a283cae2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -161,8 +161,8 @@ $(document).ready(function(){initNavTree('classRenderer.html',''); initResizable
 
 </div>
 </div>
-<a id="a04e431b7aae8fdde0e3df38d4c92f56b" name="a04e431b7aae8fdde0e3df38d4c92f56b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a04e431b7aae8fdde0e3df38d4c92f56b">&#9670;&#160;</a></span>Register()</h2>
+<a id="ad05020bfe81b672b8b7a0202f51399f4" name="ad05020bfe81b672b8b7a0202f51399f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad05020bfe81b672b8b7a0202f51399f4">&#9670;&#160;</a></span>Register()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -170,7 +170,7 @@ $(document).ready(function(){initNavTree('classRenderer.html',''); initResizable
         <tr>
           <td class="memname">void Renderer::Register </td>
           <td>(</td>
-          <td class="paramtype">const std::function&lt; void()&gt; &amp;&#160;</td>
+          <td class="paramtype">std::function&lt; void()&gt;&#160;</td>
           <td class="paramname"><em>_task</em>, </td>
         </tr>
         <tr>
@@ -198,14 +198,14 @@ $(document).ready(function(){initNavTree('classRenderer.html',''); initResizable
 
 <p class="definition"> <a class="el" href="Renderer_8cpp_source.html">Renderer.cpp</a> の <a class="el" href="Renderer_8cpp_source.html#l00013">13</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::ERR</a>, <a class="el" href="Canvas_8cpp_source.html#l00013">Canvas::RegisterTask()</a>, <a class="el" href="Log_8cpp_source.html#l00108">Log::Send()</a>.</p>
+<p class="reference">参照先 <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::ERR</a>, <a class="el" href="Canvas_8cpp_source.html#l00015">Canvas::RegisterTask()</a>, <a class="el" href="Log_8cpp_source.html#l00108">Log::Send()</a>.</p>
 
-<p class="reference">参照元 <a class="el" href="Common_8cpp_source.html#l00040">Common::Draw()</a>, <a class="el" href="ParticleSystem_8cpp_source.html#l00112">ParticleSystem::Draw()</a>, <a class="el" href="TextCommon_8cpp_source.html#l00378">TextCommon::Draw()</a>.</p>
+<p class="reference">参照元 <a class="el" href="Common_8cpp_source.html#l00040">Common::Draw()</a>, <a class="el" href="ParticleSystem_8cpp_source.html#l00112">ParticleSystem::Draw()</a>, <a class="el" href="LineCommon_8cpp_source.html#l00073">LineCommon::Draw()</a>, <a class="el" href="SpriteCommon_8cpp_source.html#l00095">SpriteCommon::Draw()</a>, <a class="el" href="TextCommon_8cpp_source.html#l00378">TextCommon::Draw()</a>.</p>
 
 </div>
 </div>
-<a id="a139ffaec18ab75f4a2dd1b0fe2aab110" name="a139ffaec18ab75f4a2dd1b0fe2aab110"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a139ffaec18ab75f4a2dd1b0fe2aab110">&#9670;&#160;</a></span>RegisterUI()</h2>
+<a id="aa8ad0418f38c77f3a4016cad50f91dc0" name="aa8ad0418f38c77f3a4016cad50f91dc0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa8ad0418f38c77f3a4016cad50f91dc0">&#9670;&#160;</a></span>RegisterUI()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -213,7 +213,7 @@ $(document).ready(function(){initNavTree('classRenderer.html',''); initResizable
         <tr>
           <td class="memname">void Renderer::RegisterUI </td>
           <td>(</td>
-          <td class="paramtype">const std::function&lt; void()&gt; &amp;&#160;</td>
+          <td class="paramtype">std::function&lt; void()&gt;&#160;</td>
           <td class="paramname"><em>_task</em></td><td>)</td>
           <td></td>
         </tr>
@@ -263,7 +263,7 @@ $(document).ready(function(){initNavTree('classRenderer.html',''); initResizable
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classRenderer.html">Renderer</a></li>
-    <li class="footer">2026年09月11日(金) 07時37分44秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年09月12日(土) 13時06分01秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

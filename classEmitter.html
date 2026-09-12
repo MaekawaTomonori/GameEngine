@@ -163,9 +163,9 @@ $(document).ready(function(){initNavTree('classEmitter.html',''); initResizable(
 <tr class="memitem:aa5b0f58bc8c98326914e1e069b0c3137" id="r_aa5b0f58bc8c98326914e1e069b0c3137"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classEmitter.html">Emitter</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEmitter.html#aa5b0f58bc8c98326914e1e069b0c3137">SetSizeKeys</a> (std::vector&lt; <a class="el" href="structGradientKey.html">GradientKey</a>&lt; Vector3 &gt; &gt; _keys)</td></tr>
 <tr class="memdesc:aa5b0f58bc8c98326914e1e069b0c3137"><td class="mdescLeft">&#160;</td><td class="mdescRight">サイズの補間キーを設定（内部で時間昇順にソートされる）。空ならサイズは変化しない  <br /></td></tr>
 <tr class="separator:aa5b0f58bc8c98326914e1e069b0c3137"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a29d5e63a07da34e87d77c0668c70e65c" id="r_a29d5e63a07da34e87d77c0668c70e65c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classEmitter.html">Emitter</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEmitter.html#a29d5e63a07da34e87d77c0668c70e65c">SetUpdateFunction</a> (const std::function&lt; void(float, const Vector3 &amp;, Vector3 &amp;, Vector3 &amp;, Vector4 &amp;)&gt; &amp;_func)</td></tr>
-<tr class="memdesc:a29d5e63a07da34e87d77c0668c70e65c"><td class="mdescLeft">&#160;</td><td class="mdescRight">パーティクル更新関数を設定  <br /></td></tr>
-<tr class="separator:a29d5e63a07da34e87d77c0668c70e65c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a071c463b7a3dc351caf713e93cb47b8f" id="r_a071c463b7a3dc351caf713e93cb47b8f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classEmitter.html">Emitter</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEmitter.html#a071c463b7a3dc351caf713e93cb47b8f">SetUpdateFunction</a> (const std::function&lt; void(std::span&lt; <a class="el" href="classParticle.html">Particle</a> &gt;)&gt; &amp;_func)</td></tr>
+<tr class="memdesc:a071c463b7a3dc351caf713e93cb47b8f"><td class="mdescLeft">&#160;</td><td class="mdescRight">パーティクル更新関数を設定（生存中の全パーティクルをまとめて1回渡す）  <br /></td></tr>
+<tr class="separator:a071c463b7a3dc351caf713e93cb47b8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac60b2b75d585dff8356d2f13f464a0d7" id="r_ac60b2b75d585dff8356d2f13f464a0d7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classEmitter.html">Emitter</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEmitter.html#ac60b2b75d585dff8356d2f13f464a0d7">SetSpawnFunction</a> (const std::function&lt; void(const Vector3 &amp;, Vector3 &amp;, Vector3 &amp;)&gt; &amp;_func)</td></tr>
 <tr class="memdesc:ac60b2b75d585dff8356d2f13f464a0d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">パーティクルスポーン関数を設定（スポーン時の初期位置・速度をカスタマイズ）  <br /></td></tr>
 <tr class="separator:ac60b2b75d585dff8356d2f13f464a0d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -777,8 +777,8 @@ $(document).ready(function(){initNavTree('classEmitter.html',''); initResizable(
 
 </div>
 </div>
-<a id="a29d5e63a07da34e87d77c0668c70e65c" name="a29d5e63a07da34e87d77c0668c70e65c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a29d5e63a07da34e87d77c0668c70e65c">&#9670;&#160;</a></span>SetUpdateFunction()</h2>
+<a id="a071c463b7a3dc351caf713e93cb47b8f" name="a071c463b7a3dc351caf713e93cb47b8f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a071c463b7a3dc351caf713e93cb47b8f">&#9670;&#160;</a></span>SetUpdateFunction()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -786,20 +786,14 @@ $(document).ready(function(){initNavTree('classEmitter.html',''); initResizable(
         <tr>
           <td class="memname"><a class="el" href="classEmitter.html">Emitter</a> &amp; Emitter::SetUpdateFunction </td>
           <td>(</td>
-          <td class="paramtype">const std::function&lt; void(float, const Vector3 &amp;, Vector3 &amp;, Vector3 &amp;, Vector4 &amp;)&gt; &amp;&#160;</td>
+          <td class="paramtype">const std::function&lt; void(std::span&lt; <a class="el" href="classParticle.html">Particle</a> &gt;)&gt; &amp;&#160;</td>
           <td class="paramname"><em>_func</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>パーティクル更新関数を設定 </p>
-<dl class="params"><dt>引数</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">_func</td><td>&lt;float(time)&gt;, &lt;const Vector3&amp;(origin)&gt;, &lt;Vector3&amp;(position)&gt;, &lt;Vector3&amp;(velocity)&gt;, &lt;Vector4&amp;(color)&gt; </td></tr>
-  </table>
-  </dd>
-</dl>
+<p>パーティクル更新関数を設定（生存中の全パーティクルをまとめて1回渡す） </p>
 
 <p class="definition"> <a class="el" href="Emitter_8cpp_source.html">Emitter.cpp</a> の <a class="el" href="Emitter_8cpp_source.html#l00249">249</a> 行目に定義があります。</p>
 
@@ -858,7 +852,7 @@ $(document).ready(function(){initNavTree('classEmitter.html',''); initResizable(
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classEmitter.html">Emitter</a></li>
-    <li class="footer">2026年09月11日(金) 07時37分44秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年09月12日(土) 13時06分01秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

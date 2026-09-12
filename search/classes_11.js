@@ -17,9 +17,10 @@ var searchData=
   ['sprite_14',['Sprite',['../classSprite.html',1,'']]],
   ['spritecommon_15',['SpriteCommon',['../classSpriteCommon.html',1,'']]],
   ['spriteelement_16',['SpriteElement',['../classUi_1_1SpriteElement.html',1,'Ui']]],
-  ['srvhandle_17',['SRVHandle',['../classSRVHandle.html',1,'']]],
-  ['srvmanager_18',['SRVManager',['../classSRVManager.html',1,'']]],
-  ['stageloader_19',['StageLoader',['../classStageLoader.html',1,'']]],
-  ['stagerepository_20',['StageRepository',['../classStageRepository.html',1,'']]],
-  ['staticmodelinstance_21',['StaticModelInstance',['../classStaticModelInstance.html',1,'']]]
+  ['spriteinstance_17',['SpriteInstance',['../classSpriteInstance.html',1,'']]],
+  ['srvhandle_18',['SRVHandle',['../classSRVHandle.html',1,'']]],
+  ['srvmanager_19',['SRVManager',['../classSRVManager.html',1,'']]],
+  ['stageloader_20',['StageLoader',['../classStageLoader.html',1,'']]],
+  ['stagerepository_21',['StageRepository',['../classStageRepository.html',1,'']]],
+  ['staticmodelinstance_22',['StaticModelInstance',['../classStaticModelInstance.html',1,'']]]
 ];

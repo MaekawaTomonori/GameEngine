@@ -100,64 +100,66 @@ $(document).ready(function(){initNavTree('Canvas_8cpp_source.html',''); initResi
 <div class="contents">
 <a href="Canvas_8cpp.html">[詳解]</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#include &quot;<a class="code" href="Canvas_8hpp.html">Canvas.hpp</a>&quot;</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
-<div class="foldopen" id="foldopen00003" data-start="{" data-end="}">
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno"><a class="line" href="classCanvas.html#ab81f1a09c82115028a8d9dc7ed3fa753">    3</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classCanvas.html#ab81f1a09c82115028a8d9dc7ed3fa753">Canvas::Initialize</a>(<span class="keyword">const</span> GESTD::ReferencePtr&lt;DirectXAdapter&gt;&amp; _adapter, <span class="keyword">const</span> GESTD::ReferencePtr&lt;SRVManager&gt;&amp; _srv, <span class="keyword">const</span> std::string&amp; _name) {</div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span>    name_ = _name;</div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span>    chain_ = std::make_unique&lt;PostEffectChain&gt;();</div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span>    chain_-&gt;Initialize(_adapter, _srv, _name);</div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span>}</div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;utility&gt;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="foldopen" id="foldopen00005" data-start="{" data-end="}">
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno"><a class="line" href="classCanvas.html#ab81f1a09c82115028a8d9dc7ed3fa753">    5</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classCanvas.html#ab81f1a09c82115028a8d9dc7ed3fa753">Canvas::Initialize</a>(<span class="keyword">const</span> GESTD::ReferencePtr&lt;DirectXAdapter&gt;&amp; _adapter, <span class="keyword">const</span> GESTD::ReferencePtr&lt;SRVManager&gt;&amp; _srv, <span class="keyword">const</span> std::string&amp; _name) {</div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span>    name_ = _name;</div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span>    chain_ = std::make_unique&lt;PostEffectChain&gt;();</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>    chain_-&gt;Initialize(_adapter, _srv, _name);</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>}</div>
 </div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
-<div class="foldopen" id="foldopen00009" data-start="{" data-end="}">
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno"><a class="line" href="classCanvas.html#ab6e8e8718c3aca4a81476e82d4becf51">    9</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classCanvas.html#ab6e8e8718c3aca4a81476e82d4becf51">Canvas::SetFactory</a>(GESTD::ReferencePtr&lt;PostEffectFactory&gt; _factory) {</div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>    chain_-&gt;SetFactory(_factory);</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>}</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="foldopen" id="foldopen00011" data-start="{" data-end="}">
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="classCanvas.html#ab6e8e8718c3aca4a81476e82d4becf51">   11</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classCanvas.html#ab6e8e8718c3aca4a81476e82d4becf51">Canvas::SetFactory</a>(GESTD::ReferencePtr&lt;PostEffectFactory&gt; _factory) {</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    chain_-&gt;SetFactory(_factory);</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>}</div>
 </div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
-<div class="foldopen" id="foldopen00013" data-start="{" data-end="}">
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="classCanvas.html#a07217fe3c2894cd13ec8382de514200a">   13</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classCanvas.html#a07217fe3c2894cd13ec8382de514200a">Canvas::RegisterTask</a>(<span class="keyword">const</span> std::function&lt;<span class="keywordtype">void</span>()&gt;&amp; _task) {</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    tasks_.push_back(_task);</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>}</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="foldopen" id="foldopen00015" data-start="{" data-end="}">
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="classCanvas.html#a7f2a6523c451bfc5d863c673a5d1b912">   15</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classCanvas.html#a7f2a6523c451bfc5d863c673a5d1b912">Canvas::RegisterTask</a>(std::function&lt;<span class="keywordtype">void</span>()&gt; _task) {</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    tasks_.push_back(std::move(_task));</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>}</div>
 </div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
-<div class="foldopen" id="foldopen00017" data-start="{" data-end="}">
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="classCanvas.html#ab751aed2bf34c98e4dc87cdc6c9ba9f9">   17</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classCanvas.html#ab751aed2bf34c98e4dc87cdc6c9ba9f9">Canvas::DrawObjects</a>() {</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    chain_-&gt;BeginFrame();</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; task : tasks_) {</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>        task();</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    }</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    tasks_.clear();</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    chain_-&gt;EndFrame();</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>}</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
+<div class="foldopen" id="foldopen00019" data-start="{" data-end="}">
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="classCanvas.html#ab751aed2bf34c98e4dc87cdc6c9ba9f9">   19</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classCanvas.html#ab751aed2bf34c98e4dc87cdc6c9ba9f9">Canvas::DrawObjects</a>() {</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    chain_-&gt;BeginFrame();</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; task : tasks_) {</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>        task();</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    }</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    tasks_.clear();</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    chain_-&gt;EndFrame();</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>}</div>
 </div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
-<div class="foldopen" id="foldopen00028" data-start="{" data-end="}">
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="classCanvas.html#a1606adf2861cdcccb65b19e4609189ae">   28</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classCanvas.html#a1606adf2861cdcccb65b19e4609189ae">Canvas::ApplyPostEffects</a>() {</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    chain_-&gt;Execute();</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>}</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="foldopen" id="foldopen00030" data-start="{" data-end="}">
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="classCanvas.html#a1606adf2861cdcccb65b19e4609189ae">   30</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classCanvas.html#a1606adf2861cdcccb65b19e4609189ae">Canvas::ApplyPostEffects</a>() {</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    chain_-&gt;Execute();</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>}</div>
 </div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
-<div class="foldopen" id="foldopen00032" data-start="{" data-end="}">
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="classCanvas.html#a6e450f5cf405317d4ef94deddef11864">   32</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classCanvas.html#a6e450f5cf405317d4ef94deddef11864">Canvas::Draw</a>()<span class="keyword"> const </span>{</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    chain_-&gt;Draw();</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>}</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
+<div class="foldopen" id="foldopen00034" data-start="{" data-end="}">
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="classCanvas.html#a6e450f5cf405317d4ef94deddef11864">   34</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classCanvas.html#a6e450f5cf405317d4ef94deddef11864">Canvas::Draw</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    chain_-&gt;Draw();</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>}</div>
 </div>
 <div class="ttc" id="aCanvas_8hpp_html"><div class="ttname"><a href="Canvas_8hpp.html">Canvas.hpp</a></div></div>
-<div class="ttc" id="aclassCanvas_html_a07217fe3c2894cd13ec8382de514200a"><div class="ttname"><a href="classCanvas.html#a07217fe3c2894cd13ec8382de514200a">Canvas::RegisterTask</a></div><div class="ttdeci">void RegisterTask(const std::function&lt; void()&gt; &amp;_task)</div><div class="ttdoc">描画タスクを登録する（次のDrawObjects()で消化される）</div><div class="ttdef"><b>Definition</b> <a href="Canvas_8cpp_source.html#l00013">Canvas.cpp:13</a></div></div>
-<div class="ttc" id="aclassCanvas_html_a1606adf2861cdcccb65b19e4609189ae"><div class="ttname"><a href="classCanvas.html#a1606adf2861cdcccb65b19e4609189ae">Canvas::ApplyPostEffects</a></div><div class="ttdeci">void ApplyPostEffects()</div><div class="ttdoc">常時構成のPostEffectを適用する</div><div class="ttdef"><b>Definition</b> <a href="Canvas_8cpp_source.html#l00028">Canvas.cpp:28</a></div></div>
-<div class="ttc" id="aclassCanvas_html_a6e450f5cf405317d4ef94deddef11864"><div class="ttname"><a href="classCanvas.html#a6e450f5cf405317d4ef94deddef11864">Canvas::Draw</a></div><div class="ttdeci">void Draw() const</div><div class="ttdoc">適用結果を、現在バインドされている描画先へ合成描画する</div><div class="ttdef"><b>Definition</b> <a href="Canvas_8cpp_source.html#l00032">Canvas.cpp:32</a></div></div>
-<div class="ttc" id="aclassCanvas_html_ab6e8e8718c3aca4a81476e82d4becf51"><div class="ttname"><a href="classCanvas.html#ab6e8e8718c3aca4a81476e82d4becf51">Canvas::SetFactory</a></div><div class="ttdeci">void SetFactory(GESTD::ReferencePtr&lt; PostEffectFactory &gt; _factory)</div><div class="ttdoc">PostEffect factory を設定</div><div class="ttdef"><b>Definition</b> <a href="Canvas_8cpp_source.html#l00009">Canvas.cpp:9</a></div></div>
-<div class="ttc" id="aclassCanvas_html_ab751aed2bf34c98e4dc87cdc6c9ba9f9"><div class="ttname"><a href="classCanvas.html#ab751aed2bf34c98e4dc87cdc6c9ba9f9">Canvas::DrawObjects</a></div><div class="ttdeci">void DrawObjects()</div><div class="ttdoc">登録されたタスクを自分のRTへ描画する</div><div class="ttdef"><b>Definition</b> <a href="Canvas_8cpp_source.html#l00017">Canvas.cpp:17</a></div></div>
-<div class="ttc" id="aclassCanvas_html_ab81f1a09c82115028a8d9dc7ed3fa753"><div class="ttname"><a href="classCanvas.html#ab81f1a09c82115028a8d9dc7ed3fa753">Canvas::Initialize</a></div><div class="ttdeci">void Initialize(const GESTD::ReferencePtr&lt; DirectXAdapter &gt; &amp;_adapter, const GESTD::ReferencePtr&lt; SRVManager &gt; &amp;_srv, const std::string &amp;_name)</div><div class="ttdoc">初期化</div><div class="ttdef"><b>Definition</b> <a href="Canvas_8cpp_source.html#l00003">Canvas.cpp:3</a></div></div>
+<div class="ttc" id="aclassCanvas_html_a1606adf2861cdcccb65b19e4609189ae"><div class="ttname"><a href="classCanvas.html#a1606adf2861cdcccb65b19e4609189ae">Canvas::ApplyPostEffects</a></div><div class="ttdeci">void ApplyPostEffects()</div><div class="ttdoc">常時構成のPostEffectを適用する</div><div class="ttdef"><b>Definition</b> <a href="Canvas_8cpp_source.html#l00030">Canvas.cpp:30</a></div></div>
+<div class="ttc" id="aclassCanvas_html_a6e450f5cf405317d4ef94deddef11864"><div class="ttname"><a href="classCanvas.html#a6e450f5cf405317d4ef94deddef11864">Canvas::Draw</a></div><div class="ttdeci">void Draw() const</div><div class="ttdoc">適用結果を、現在バインドされている描画先へ合成描画する</div><div class="ttdef"><b>Definition</b> <a href="Canvas_8cpp_source.html#l00034">Canvas.cpp:34</a></div></div>
+<div class="ttc" id="aclassCanvas_html_a7f2a6523c451bfc5d863c673a5d1b912"><div class="ttname"><a href="classCanvas.html#a7f2a6523c451bfc5d863c673a5d1b912">Canvas::RegisterTask</a></div><div class="ttdeci">void RegisterTask(std::function&lt; void()&gt; _task)</div><div class="ttdoc">描画タスクを登録する（次のDrawObjects()で消化される）</div><div class="ttdef"><b>Definition</b> <a href="Canvas_8cpp_source.html#l00015">Canvas.cpp:15</a></div></div>
+<div class="ttc" id="aclassCanvas_html_ab6e8e8718c3aca4a81476e82d4becf51"><div class="ttname"><a href="classCanvas.html#ab6e8e8718c3aca4a81476e82d4becf51">Canvas::SetFactory</a></div><div class="ttdeci">void SetFactory(GESTD::ReferencePtr&lt; PostEffectFactory &gt; _factory)</div><div class="ttdoc">PostEffect factory を設定</div><div class="ttdef"><b>Definition</b> <a href="Canvas_8cpp_source.html#l00011">Canvas.cpp:11</a></div></div>
+<div class="ttc" id="aclassCanvas_html_ab751aed2bf34c98e4dc87cdc6c9ba9f9"><div class="ttname"><a href="classCanvas.html#ab751aed2bf34c98e4dc87cdc6c9ba9f9">Canvas::DrawObjects</a></div><div class="ttdeci">void DrawObjects()</div><div class="ttdoc">登録されたタスクを自分のRTへ描画する</div><div class="ttdef"><b>Definition</b> <a href="Canvas_8cpp_source.html#l00019">Canvas.cpp:19</a></div></div>
+<div class="ttc" id="aclassCanvas_html_ab81f1a09c82115028a8d9dc7ed3fa753"><div class="ttname"><a href="classCanvas.html#ab81f1a09c82115028a8d9dc7ed3fa753">Canvas::Initialize</a></div><div class="ttdeci">void Initialize(const GESTD::ReferencePtr&lt; DirectXAdapter &gt; &amp;_adapter, const GESTD::ReferencePtr&lt; SRVManager &gt; &amp;_srv, const std::string &amp;_name)</div><div class="ttdoc">初期化</div><div class="ttdef"><b>Definition</b> <a href="Canvas_8cpp_source.html#l00005">Canvas.cpp:5</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_6df1ba428a0157b93a3749ecb1671ed8.html">Canvas</a></li><li class="navelem"><a class="el" href="Canvas_8cpp.html">Canvas.cpp</a></li>
-    <li class="footer">2026年09月11日(金) 07時37分44秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年09月12日(土) 13時06分01秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

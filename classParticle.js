@@ -2,10 +2,14 @@ var classParticle =
 [
     [ "Debug", "classParticle.html#a7ada3a5a4b95eee683bd918fb438fadd", null ],
     [ "GetColor", "classParticle.html#a978d8ac44e1ea71214a6e95a45585103", null ],
+    [ "GetOrigin", "classParticle.html#acc43b5d9ed146096cef1aeb4f2cf5891", null ],
     [ "GetPosition", "classParticle.html#add3c9ecb00172d8e82c7addded4fbdb8", null ],
+    [ "GetProgress", "classParticle.html#a8d1a161eb696c2dc697a901e4a6c0fec", null ],
     [ "GetRotation", "classParticle.html#a0adc658603155ea529112a1c232ace72", null ],
     [ "GetScale", "classParticle.html#a1d52b5f184d82b5dd166fa717e655747", null ],
+    [ "GetVelocity", "classParticle.html#a49652e2e6581bdad9e424096dbc026d8", null ],
     [ "Initialize", "classParticle.html#a06fe78b0d71b9fa9f004d1e45fd23ba1", null ],
+    [ "Integrate", "classParticle.html#a841de2aa334787f1bed0873306c4bd8d", null ],
     [ "IsDead", "classParticle.html#a601a99e7f1ea0f70452b508249ff5272", null ],
     [ "RandomizeColor", "classParticle.html#af6bb22f82fbdec676ddf9fa5a3d5d693", null ],
     [ "RandomizePosition", "classParticle.html#ab44f2101d6c23813cd4303a3d02f7f76", null ],
@@ -19,7 +23,6 @@ var classParticle =
     [ "SetRotationVelocity", "classParticle.html#a981335662064b0d12d95d92c20564f7a", null ],
     [ "SetScale", "classParticle.html#aae8773234e782b8bfdfdaaa3e1624fb7", null ],
     [ "SetSizeKeys", "classParticle.html#a84f623845d76e2afb66b9c08fc78a772", null ],
-    [ "SetUpdateFunction", "classParticle.html#a2f8fa67f2cfe78472091651d35ecefe7", null ],
     [ "SetVelocity", "classParticle.html#a64a89784a0d0f8cf113511c0faef1cac", null ],
-    [ "Update", "classParticle.html#a9ff98679ed52065d043d29a5af7a8980", null ]
+    [ "UpdateProgress", "classParticle.html#a05f255fd01cfac773659b60cadc643d4", null ]
 ];

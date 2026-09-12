@@ -91,14 +91,13 @@ $(document).ready(function(){initNavTree('classSprite.html',''); initResizable()
 
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">クラス</a> &#124;
 <a href="#pub-methods">公開メンバ関数</a> &#124;
 <a href="classSprite-members.html">全メンバ一覧</a>  </div>
   <div class="headertitle"><div class="title">Sprite クラス</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>2Dスプライトクラス テクスチャ付き2D四角形の描画を管理  
+<p>2Dスプライトクラス（公開ハンドル） 実体（SpriteInstance）はEngine側が所有し、本クラスは実体への安全な参照を保持するだけの薄いラッパー。 実体が破棄された後に呼び出しても安全に無視される。  
  <a href="classSprite.html#details">[詳解]</a></p>
 
 <p><code>#include &lt;<a class="el" href="Sprite_8hpp_source.html">Sprite.hpp</a>&gt;</code></p>
@@ -109,6 +108,14 @@ $(document).ready(function(){initNavTree('classSprite.html',''); initResizable()
 <tr class="separator:a12cba3ac1868418add3c4d95ce87e615"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8accab430f9d90ae5117b57d67e32b84" id="r_a8accab430f9d90ae5117b57d67e32b84"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSprite.html#a8accab430f9d90ae5117b57d67e32b84">~Sprite</a> ()</td></tr>
 <tr class="separator:a8accab430f9d90ae5117b57d67e32b84"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab216809ce70a929c1e4407ce39b57547" id="r_ab216809ce70a929c1e4407ce39b57547"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSprite.html#ab216809ce70a929c1e4407ce39b57547">Sprite</a> (const <a class="el" href="classSprite.html">Sprite</a> &amp;)=delete</td></tr>
+<tr class="separator:ab216809ce70a929c1e4407ce39b57547"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a225170eee0c00e25d1c3eff955b8024f" id="r_a225170eee0c00e25d1c3eff955b8024f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSprite.html">Sprite</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSprite.html#a225170eee0c00e25d1c3eff955b8024f">operator=</a> (const <a class="el" href="classSprite.html">Sprite</a> &amp;)=delete</td></tr>
+<tr class="separator:a225170eee0c00e25d1c3eff955b8024f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa38f13d544e759e1897701b9a559f1ff" id="r_aa38f13d544e759e1897701b9a559f1ff"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSprite.html#aa38f13d544e759e1897701b9a559f1ff">Sprite</a> (<a class="el" href="classSprite.html">Sprite</a> &amp;&amp;_other) noexcept</td></tr>
+<tr class="separator:aa38f13d544e759e1897701b9a559f1ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a06039b0dfae00c36d7f67cbfa0abce1f" id="r_a06039b0dfae00c36d7f67cbfa0abce1f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classSprite.html">Sprite</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSprite.html#a06039b0dfae00c36d7f67cbfa0abce1f">operator=</a> (<a class="el" href="classSprite.html">Sprite</a> &amp;&amp;_other) noexcept</td></tr>
+<tr class="separator:a06039b0dfae00c36d7f67cbfa0abce1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a431a8d5512646518384ff8e677a7b174" id="r_a431a8d5512646518384ff8e677a7b174"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSprite.html#a431a8d5512646518384ff8e677a7b174">Initialize</a> (const std::string &amp;_texture)</td></tr>
 <tr class="memdesc:a431a8d5512646518384ff8e677a7b174"><td class="mdescLeft">&#160;</td><td class="mdescRight">スプライトを初期化  <br /></td></tr>
 <tr class="separator:a431a8d5512646518384ff8e677a7b174"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -180,15 +187,18 @@ $(document).ready(function(){initNavTree('classSprite.html',''); initResizable()
 <tr class="separator:a3a1898798f07eaefdfb500f18a56678e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">詳解</h2>
-<div class="textblock"><p>2Dスプライトクラス テクスチャ付き2D四角形の描画を管理 </p>
+<div class="textblock"><p>2Dスプライトクラス（公開ハンドル） 実体（SpriteInstance）はEngine側が所有し、本クラスは実体への安全な参照を保持するだけの薄いラッパー。 実体が破棄された後に呼び出しても安全に無視される。 </p>
 
-<p class="definition"> <a class="el" href="Sprite_8hpp_source.html">Sprite.hpp</a> の <a class="el" href="Sprite_8hpp_source.html#l00017">17</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Sprite_8hpp_source.html">Sprite.hpp</a> の <a class="el" href="Sprite_8hpp_source.html#l00015">15</a> 行目に定義があります。</p>
 </div><h2 class="groupheader">構築子と解体子</h2>
 <a id="a12cba3ac1868418add3c4d95ce87e615" name="a12cba3ac1868418add3c4d95ce87e615"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a12cba3ac1868418add3c4d95ce87e615">&#9670;&#160;</a></span>Sprite()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a12cba3ac1868418add3c4d95ce87e615">&#9670;&#160;</a></span>Sprite() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">Sprite::Sprite </td>
@@ -197,9 +207,12 @@ $(document).ready(function(){initNavTree('classSprite.html',''); initResizable()
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
-
-<p class="definition"> <a class="el" href="Sprite_8cpp_source.html">Sprite.cpp</a> の <a class="el" href="Sprite_8cpp_source.html#l00013">13</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -218,7 +231,61 @@ $(document).ready(function(){initNavTree('classSprite.html',''); initResizable()
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="Sprite_8cpp_source.html">Sprite.cpp</a> の <a class="el" href="Sprite_8cpp_source.html#l00077">77</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Sprite_8cpp_source.html">Sprite.cpp</a> の <a class="el" href="Sprite_8cpp_source.html#l00009">9</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="ab216809ce70a929c1e4407ce39b57547" name="ab216809ce70a929c1e4407ce39b57547"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab216809ce70a929c1e4407ce39b57547">&#9670;&#160;</a></span>Sprite() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Sprite::Sprite </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classSprite.html">Sprite</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa38f13d544e759e1897701b9a559f1ff" name="aa38f13d544e759e1897701b9a559f1ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa38f13d544e759e1897701b9a559f1ff">&#9670;&#160;</a></span>Sprite() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Sprite::Sprite </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classSprite.html">Sprite</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>_other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="Sprite_8cpp_source.html">Sprite.cpp</a> の <a class="el" href="Sprite_8cpp_source.html#l00015">15</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -240,7 +307,7 @@ $(document).ready(function(){initNavTree('classSprite.html',''); initResizable()
 
 <p>スプライトを描画 </p>
 
-<p class="definition"> <a class="el" href="Sprite_8cpp_source.html">Sprite.cpp</a> の <a class="el" href="Sprite_8cpp_source.html#l00130">130</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Sprite_8cpp_source.html">Sprite.cpp</a> の <a class="el" href="Sprite_8cpp_source.html#l00041">41</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -262,7 +329,7 @@ $(document).ready(function(){initNavTree('classSprite.html',''); initResizable()
 <p>アンカーポイントを取得 </p>
 <dl class="section return"><dt>戻り値</dt><dd>アンカーポイントへの参照 </dd></dl>
 
-<p class="definition"> <a class="el" href="Sprite_8cpp_source.html">Sprite.cpp</a> の <a class="el" href="Sprite_8cpp_source.html#l00196">196</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Sprite_8cpp_source.html">Sprite.cpp</a> の <a class="el" href="Sprite_8cpp_source.html#l00080">80</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -284,7 +351,7 @@ $(document).ready(function(){initNavTree('classSprite.html',''); initResizable()
 <p>色を取得 </p>
 <dl class="section return"><dt>戻り値</dt><dd>色ベクトルへの参照 </dd></dl>
 
-<p class="definition"> <a class="el" href="Sprite_8cpp_source.html">Sprite.cpp</a> の <a class="el" href="Sprite_8cpp_source.html#l00188">188</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Sprite_8cpp_source.html">Sprite.cpp</a> の <a class="el" href="Sprite_8cpp_source.html#l00071">71</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -306,7 +373,7 @@ $(document).ready(function(){initNavTree('classSprite.html',''); initResizable()
 <p>位置を取得 </p>
 <dl class="section return"><dt>戻り値</dt><dd>位置ベクトルへの参照 </dd></dl>
 
-<p class="definition"> <a class="el" href="Sprite_8cpp_source.html">Sprite.cpp</a> の <a class="el" href="Sprite_8cpp_source.html#l00164">164</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Sprite_8cpp_source.html">Sprite.cpp</a> の <a class="el" href="Sprite_8cpp_source.html#l00045">45</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -328,7 +395,7 @@ $(document).ready(function(){initNavTree('classSprite.html',''); initResizable()
 <p>回転角度を取得 </p>
 <dl class="section return"><dt>戻り値</dt><dd>回転角度（ラジアン） </dd></dl>
 
-<p class="definition"> <a class="el" href="Sprite_8cpp_source.html">Sprite.cpp</a> の <a class="el" href="Sprite_8cpp_source.html#l00180">180</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Sprite_8cpp_source.html">Sprite.cpp</a> の <a class="el" href="Sprite_8cpp_source.html#l00063">63</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -350,7 +417,7 @@ $(document).ready(function(){initNavTree('classSprite.html',''); initResizable()
 <p>サイズを取得 </p>
 <dl class="section return"><dt>戻り値</dt><dd>サイズベクトルへの参照 </dd></dl>
 
-<p class="definition"> <a class="el" href="Sprite_8cpp_source.html">Sprite.cpp</a> の <a class="el" href="Sprite_8cpp_source.html#l00172">172</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Sprite_8cpp_source.html">Sprite.cpp</a> の <a class="el" href="Sprite_8cpp_source.html#l00054">54</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -372,7 +439,7 @@ $(document).ready(function(){initNavTree('classSprite.html',''); initResizable()
 <p>テクスチャの左上座標を取得 </p>
 <dl class="section return"><dt>戻り値</dt><dd>左上座標への参照 </dd></dl>
 
-<p class="definition"> <a class="el" href="Sprite_8cpp_source.html">Sprite.cpp</a> の <a class="el" href="Sprite_8cpp_source.html#l00220">220</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Sprite_8cpp_source.html">Sprite.cpp</a> の <a class="el" href="Sprite_8cpp_source.html#l00105">105</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -394,7 +461,7 @@ $(document).ready(function(){initNavTree('classSprite.html',''); initResizable()
 <p>テクスチャサイズを取得 </p>
 <dl class="section return"><dt>戻り値</dt><dd>テクスチャサイズへの参照 </dd></dl>
 
-<p class="definition"> <a class="el" href="Sprite_8cpp_source.html">Sprite.cpp</a> の <a class="el" href="Sprite_8cpp_source.html#l00228">228</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Sprite_8cpp_source.html">Sprite.cpp</a> の <a class="el" href="Sprite_8cpp_source.html#l00114">114</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -422,7 +489,7 @@ $(document).ready(function(){initNavTree('classSprite.html',''); initResizable()
   </dd>
 </dl>
 
-<p class="definition"> <a class="el" href="Sprite_8cpp_source.html">Sprite.cpp</a> の <a class="el" href="Sprite_8cpp_source.html#l00021">21</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Sprite_8cpp_source.html">Sprite.cpp</a> の <a class="el" href="Sprite_8cpp_source.html#l00030">30</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -444,7 +511,7 @@ $(document).ready(function(){initNavTree('classSprite.html',''); initResizable()
 <p>X軸反転の状態を取得 </p>
 <dl class="section return"><dt>戻り値</dt><dd>反転している場合true </dd></dl>
 
-<p class="definition"> <a class="el" href="Sprite_8cpp_source.html">Sprite.cpp</a> の <a class="el" href="Sprite_8cpp_source.html#l00204">204</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Sprite_8cpp_source.html">Sprite.cpp</a> の <a class="el" href="Sprite_8cpp_source.html#l00089">89</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -466,7 +533,61 @@ $(document).ready(function(){initNavTree('classSprite.html',''); initResizable()
 <p>Y軸反転の状態を取得 </p>
 <dl class="section return"><dt>戻り値</dt><dd>反転している場合true </dd></dl>
 
-<p class="definition"> <a class="el" href="Sprite_8cpp_source.html">Sprite.cpp</a> の <a class="el" href="Sprite_8cpp_source.html#l00212">212</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Sprite_8cpp_source.html">Sprite.cpp</a> の <a class="el" href="Sprite_8cpp_source.html#l00097">97</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="a225170eee0c00e25d1c3eff955b8024f" name="a225170eee0c00e25d1c3eff955b8024f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a225170eee0c00e25d1c3eff955b8024f">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classSprite.html">Sprite</a> &amp; Sprite::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classSprite.html">Sprite</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a06039b0dfae00c36d7f67cbfa0abce1f" name="a06039b0dfae00c36d7f67cbfa0abce1f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a06039b0dfae00c36d7f67cbfa0abce1f">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classSprite.html">Sprite</a> &amp; Sprite::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classSprite.html">Sprite</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>_other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="Sprite_8cpp_source.html">Sprite.cpp</a> の <a class="el" href="Sprite_8cpp_source.html#l00019">19</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -494,7 +615,7 @@ $(document).ready(function(){initNavTree('classSprite.html',''); initResizable()
   </dd>
 </dl>
 
-<p class="definition"> <a class="el" href="Sprite_8cpp_source.html">Sprite.cpp</a> の <a class="el" href="Sprite_8cpp_source.html#l00236">236</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Sprite_8cpp_source.html">Sprite.cpp</a> の <a class="el" href="Sprite_8cpp_source.html#l00123">123</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -522,7 +643,7 @@ $(document).ready(function(){initNavTree('classSprite.html',''); initResizable()
   </dd>
 </dl>
 
-<p class="definition"> <a class="el" href="Sprite_8cpp_source.html">Sprite.cpp</a> の <a class="el" href="Sprite_8cpp_source.html#l00200">200</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Sprite_8cpp_source.html">Sprite.cpp</a> の <a class="el" href="Sprite_8cpp_source.html#l00085">85</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -550,7 +671,7 @@ $(document).ready(function(){initNavTree('classSprite.html',''); initResizable()
   </dd>
 </dl>
 
-<p class="definition"> <a class="el" href="Sprite_8cpp_source.html">Sprite.cpp</a> の <a class="el" href="Sprite_8cpp_source.html#l00192">192</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Sprite_8cpp_source.html">Sprite.cpp</a> の <a class="el" href="Sprite_8cpp_source.html#l00076">76</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -578,7 +699,7 @@ $(document).ready(function(){initNavTree('classSprite.html',''); initResizable()
   </dd>
 </dl>
 
-<p class="definition"> <a class="el" href="Sprite_8cpp_source.html">Sprite.cpp</a> の <a class="el" href="Sprite_8cpp_source.html#l00208">208</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Sprite_8cpp_source.html">Sprite.cpp</a> の <a class="el" href="Sprite_8cpp_source.html#l00093">93</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -606,7 +727,7 @@ $(document).ready(function(){initNavTree('classSprite.html',''); initResizable()
   </dd>
 </dl>
 
-<p class="definition"> <a class="el" href="Sprite_8cpp_source.html">Sprite.cpp</a> の <a class="el" href="Sprite_8cpp_source.html#l00216">216</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Sprite_8cpp_source.html">Sprite.cpp</a> の <a class="el" href="Sprite_8cpp_source.html#l00101">101</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -634,7 +755,7 @@ $(document).ready(function(){initNavTree('classSprite.html',''); initResizable()
   </dd>
 </dl>
 
-<p class="definition"> <a class="el" href="Sprite_8cpp_source.html">Sprite.cpp</a> の <a class="el" href="Sprite_8cpp_source.html#l00168">168</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Sprite_8cpp_source.html">Sprite.cpp</a> の <a class="el" href="Sprite_8cpp_source.html#l00050">50</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -662,7 +783,7 @@ $(document).ready(function(){initNavTree('classSprite.html',''); initResizable()
   </dd>
 </dl>
 
-<p class="definition"> <a class="el" href="Sprite_8cpp_source.html">Sprite.cpp</a> の <a class="el" href="Sprite_8cpp_source.html#l00184">184</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Sprite_8cpp_source.html">Sprite.cpp</a> の <a class="el" href="Sprite_8cpp_source.html#l00067">67</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -690,7 +811,7 @@ $(document).ready(function(){initNavTree('classSprite.html',''); initResizable()
   </dd>
 </dl>
 
-<p class="definition"> <a class="el" href="Sprite_8cpp_source.html">Sprite.cpp</a> の <a class="el" href="Sprite_8cpp_source.html#l00176">176</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Sprite_8cpp_source.html">Sprite.cpp</a> の <a class="el" href="Sprite_8cpp_source.html#l00059">59</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -718,7 +839,7 @@ $(document).ready(function(){initNavTree('classSprite.html',''); initResizable()
   </dd>
 </dl>
 
-<p class="definition"> <a class="el" href="Sprite_8cpp_source.html">Sprite.cpp</a> の <a class="el" href="Sprite_8cpp_source.html#l00240">240</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Sprite_8cpp_source.html">Sprite.cpp</a> の <a class="el" href="Sprite_8cpp_source.html#l00127">127</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -746,7 +867,7 @@ $(document).ready(function(){initNavTree('classSprite.html',''); initResizable()
   </dd>
 </dl>
 
-<p class="definition"> <a class="el" href="Sprite_8cpp_source.html">Sprite.cpp</a> の <a class="el" href="Sprite_8cpp_source.html#l00224">224</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Sprite_8cpp_source.html">Sprite.cpp</a> の <a class="el" href="Sprite_8cpp_source.html#l00110">110</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -774,7 +895,7 @@ $(document).ready(function(){initNavTree('classSprite.html',''); initResizable()
   </dd>
 </dl>
 
-<p class="definition"> <a class="el" href="Sprite_8cpp_source.html">Sprite.cpp</a> の <a class="el" href="Sprite_8cpp_source.html#l00232">232</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Sprite_8cpp_source.html">Sprite.cpp</a> の <a class="el" href="Sprite_8cpp_source.html#l00119">119</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -795,7 +916,7 @@ $(document).ready(function(){initNavTree('classSprite.html',''); initResizable()
 
 <p>スプライトの更新処理 </p>
 
-<p class="definition"> <a class="el" href="Sprite_8cpp_source.html">Sprite.cpp</a> の <a class="el" href="Sprite_8cpp_source.html#l00083">83</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Sprite_8cpp_source.html">Sprite.cpp</a> の <a class="el" href="Sprite_8cpp_source.html#l00037">37</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -809,7 +930,7 @@ $(document).ready(function(){initNavTree('classSprite.html',''); initResizable()
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classSprite.html">Sprite</a></li>
-    <li class="footer">2026年09月11日(金) 07時37分44秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年09月12日(土) 13時06分01秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

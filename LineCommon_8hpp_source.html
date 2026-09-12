@@ -100,51 +100,72 @@ $(document).ready(function(){initNavTree('LineCommon_8hpp_source.html',''); init
 <div class="contents">
 <a href="LineCommon_8hpp.html">[詳解]</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef LineCommon_HPP_</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define LineCommon_HPP_</span></div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;<a class="code" href="Common_8hpp.html">src/Common/Common.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="SRVManager_8h.html">src/DirectX/Heap/SRVManager.h</a>&quot;</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
-<div class="foldopen" id="foldopen00006" data-start="{" data-end="};">
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno"><a class="line" href="classLineCommon.html">    6</a></span><span class="keyword">class </span><a class="code hl_class" href="classLineCommon.html">LineCommon</a> : <span class="keyword">public</span> <a class="code hl_class" href="classCommon.html">Common</a> {</div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span>    <a class="code hl_class" href="classSRVManager.html">SRVManager</a>* srv_ = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>    uint32_t count_ = 0;</div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classLineCommon.html#ab1d4780649f3469aadf5e7b14e9b946f">Initialize</a>(<span class="keyword">const</span> GESTD::ReferencePtr&lt;DirectXAdapter&gt;&amp; _adapter, <span class="keyword">const</span> GESTD::ReferencePtr&lt;DebugUI&gt;&amp; _debugUi, <a class="code hl_class" href="classSRVManager.html">SRVManager</a>* _srv);</div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;<a class="code" href="Common_8hpp.html">src/Common/Common.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;<a class="code" href="SRVManager_8h.html">src/DirectX/Heap/SRVManager.h</a>&quot;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;<a class="code" href="LineInstance_8hpp.html">src/Line/LineInstance.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="foldopen" id="foldopen00009" data-start="{" data-end="};">
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno"><a class="line" href="classLineCommon.html">    9</a></span><span class="keyword">class </span><a class="code hl_class" href="classLineCommon.html">LineCommon</a> : <span class="keyword">public</span> <a class="code hl_class" href="classCommon.html">Common</a> {</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>    <a class="code hl_class" href="classSRVManager.html">SRVManager</a>* srv_ = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    uint32_t count_ = 0;</div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
-<div class="foldopen" id="foldopen00013" data-start="{" data-end="}">
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="classLineCommon.html#afbb4536641bd5b4154bea817d7e46263">   13</a></span>    <a class="code hl_class" href="classSRVManager.html">SRVManager</a>* <a class="code hl_function" href="classLineCommon.html#afbb4536641bd5b4154bea817d7e46263">GetSRVManager</a>()<span class="keyword"> const </span>{</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>        <span class="keywordflow">return</span> srv_;</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    }</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    std::vector&lt;std::unique_ptr&lt;LineInstance&gt;&gt; instances_;</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    std::vector&lt;LineInstance*&gt; drawQueue_;</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classLineCommon.html#ab1d4780649f3469aadf5e7b14e9b946f">Initialize</a>(<span class="keyword">const</span> GESTD::ReferencePtr&lt;DirectXAdapter&gt;&amp; _adapter, <span class="keyword">const</span> GESTD::ReferencePtr&lt;DebugUI&gt;&amp; _debugUi, <a class="code hl_class" href="classSRVManager.html">SRVManager</a>* _srv);</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
+<div class="foldopen" id="foldopen00019" data-start="{" data-end="}">
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="classLineCommon.html#afbb4536641bd5b4154bea817d7e46263">   19</a></span>    <a class="code hl_class" href="classSRVManager.html">SRVManager</a>* <a class="code hl_function" href="classLineCommon.html#afbb4536641bd5b4154bea817d7e46263">GetSRVManager</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>        <span class="keywordflow">return</span> srv_;</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    }</div>
 </div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
-<div class="foldopen" id="foldopen00017" data-start="{" data-end="}">
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="classLineCommon.html#a527dae5e5dac2e75bb00c9261a0ca0e3">   17</a></span>    uint32_t <a class="code hl_function" href="classLineCommon.html#a527dae5e5dac2e75bb00c9261a0ca0e3">AddCount</a>(){</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>        <span class="keywordflow">return</span> ++count_;</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    }</div>
-</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
-<div class="foldopen" id="foldopen00021" data-start="{" data-end="}">
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="classLineCommon.html#a6fb4f91cc53fa628d9851495998f39fe">   21</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classLineCommon.html#a6fb4f91cc53fa628d9851495998f39fe">Remove</a>(){</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        <span class="keywordflow">if</span> (count_ &gt; 0){</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>            --count_;</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>        }</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
+<div class="foldopen" id="foldopen00023" data-start="{" data-end="}">
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="classLineCommon.html#a527dae5e5dac2e75bb00c9261a0ca0e3">   23</a></span>    uint32_t <a class="code hl_function" href="classLineCommon.html#a527dae5e5dac2e75bb00c9261a0ca0e3">AddCount</a>(){</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>        <span class="keywordflow">return</span> ++count_;</div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    }</div>
 </div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classLineCommon.html#ab1d4780649f3469aadf5e7b14e9b946f">Initialize</a>(<span class="keyword">const</span> GESTD::ReferencePtr&lt;DirectXAdapter&gt;&amp; _adapter, <span class="keyword">const</span> GESTD::ReferencePtr&lt;DebugUI&gt;&amp; _debugUi) <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>};</div>
+<div class="foldopen" id="foldopen00027" data-start="{" data-end="}">
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="classLineCommon.html#a6fb4f91cc53fa628d9851495998f39fe">   27</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classLineCommon.html#a6fb4f91cc53fa628d9851495998f39fe">Remove</a>(){</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        <span class="keywordflow">if</span> (count_ &gt; 0){</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>            --count_;</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>        }</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    }</div>
 </div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="preprocessor">#endif </span><span class="comment">// LineCommon_HPP_</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    GESTD::ReferencePtr&lt;LineInstance&gt; <a class="code hl_function" href="classLineCommon.html#a1bad94de5085dc599a51be495c3a4566">CreateInstance</a>();</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classLineCommon.html#a7f427a6ee75fa27f2731cfe3f4a32485">DestroyInstance</a>(<span class="keyword">const</span> GESTD::ReferencePtr&lt;LineInstance&gt;&amp; _instance);</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classLineCommon.html#ac10cb9eba06ac27c7f9aa7e156bf03df">RegisterDraw</a>(<a class="code hl_class" href="classLineInstance.html">LineInstance</a>* _instance);</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classLineCommon.html#a7fcd985a7a5e1b1d4adde582c8784419">Draw</a>(<a class="code hl_class" href="classRenderer.html">Renderer</a>* _renderer) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classLineCommon.html#ab1d4780649f3469aadf5e7b14e9b946f">Initialize</a>(<span class="keyword">const</span> GESTD::ReferencePtr&lt;DirectXAdapter&gt;&amp; _adapter, <span class="keyword">const</span> GESTD::ReferencePtr&lt;DebugUI&gt;&amp; _debugUi) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>};</div>
+</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="preprocessor">#endif </span><span class="comment">// LineCommon_HPP_</span></div>
 <div class="ttc" id="aCommon_8hpp_html"><div class="ttname"><a href="Common_8hpp.html">Common.hpp</a></div></div>
+<div class="ttc" id="aLineInstance_8hpp_html"><div class="ttname"><a href="LineInstance_8hpp.html">LineInstance.hpp</a></div></div>
 <div class="ttc" id="aSRVManager_8h_html"><div class="ttname"><a href="SRVManager_8h.html">SRVManager.h</a></div></div>
 <div class="ttc" id="aclassCommon_html"><div class="ttname"><a href="classCommon.html">Common</a></div><div class="ttdef"><b>Definition</b> <a href="Common_8hpp_source.html#l00011">Common.hpp:11</a></div></div>
-<div class="ttc" id="aclassLineCommon_html"><div class="ttname"><a href="classLineCommon.html">LineCommon</a></div><div class="ttdef"><b>Definition</b> <a href="LineCommon_8hpp_source.html#l00006">LineCommon.hpp:6</a></div></div>
-<div class="ttc" id="aclassLineCommon_html_a527dae5e5dac2e75bb00c9261a0ca0e3"><div class="ttname"><a href="classLineCommon.html#a527dae5e5dac2e75bb00c9261a0ca0e3">LineCommon::AddCount</a></div><div class="ttdeci">uint32_t AddCount()</div><div class="ttdef"><b>Definition</b> <a href="LineCommon_8hpp_source.html#l00017">LineCommon.hpp:17</a></div></div>
-<div class="ttc" id="aclassLineCommon_html_a6fb4f91cc53fa628d9851495998f39fe"><div class="ttname"><a href="classLineCommon.html#a6fb4f91cc53fa628d9851495998f39fe">LineCommon::Remove</a></div><div class="ttdeci">void Remove()</div><div class="ttdef"><b>Definition</b> <a href="LineCommon_8hpp_source.html#l00021">LineCommon.hpp:21</a></div></div>
+<div class="ttc" id="aclassLineCommon_html"><div class="ttname"><a href="classLineCommon.html">LineCommon</a></div><div class="ttdef"><b>Definition</b> <a href="LineCommon_8hpp_source.html#l00009">LineCommon.hpp:9</a></div></div>
+<div class="ttc" id="aclassLineCommon_html_a1bad94de5085dc599a51be495c3a4566"><div class="ttname"><a href="classLineCommon.html#a1bad94de5085dc599a51be495c3a4566">LineCommon::CreateInstance</a></div><div class="ttdeci">GESTD::ReferencePtr&lt; LineInstance &gt; CreateInstance()</div><div class="ttdoc">ライン実体を生成し登録する</div><div class="ttdef"><b>Definition</b> <a href="LineCommon_8cpp_source.html#l00051">LineCommon.cpp:51</a></div></div>
+<div class="ttc" id="aclassLineCommon_html_a527dae5e5dac2e75bb00c9261a0ca0e3"><div class="ttname"><a href="classLineCommon.html#a527dae5e5dac2e75bb00c9261a0ca0e3">LineCommon::AddCount</a></div><div class="ttdeci">uint32_t AddCount()</div><div class="ttdef"><b>Definition</b> <a href="LineCommon_8hpp_source.html#l00023">LineCommon.hpp:23</a></div></div>
+<div class="ttc" id="aclassLineCommon_html_a6fb4f91cc53fa628d9851495998f39fe"><div class="ttname"><a href="classLineCommon.html#a6fb4f91cc53fa628d9851495998f39fe">LineCommon::Remove</a></div><div class="ttdeci">void Remove()</div><div class="ttdef"><b>Definition</b> <a href="LineCommon_8hpp_source.html#l00027">LineCommon.hpp:27</a></div></div>
+<div class="ttc" id="aclassLineCommon_html_a7f427a6ee75fa27f2731cfe3f4a32485"><div class="ttname"><a href="classLineCommon.html#a7f427a6ee75fa27f2731cfe3f4a32485">LineCommon::DestroyInstance</a></div><div class="ttdeci">void DestroyInstance(const GESTD::ReferencePtr&lt; LineInstance &gt; &amp;_instance)</div><div class="ttdoc">ライン実体を破棄する</div><div class="ttdef"><b>Definition</b> <a href="LineCommon_8cpp_source.html#l00060">LineCommon.cpp:60</a></div></div>
+<div class="ttc" id="aclassLineCommon_html_a7fcd985a7a5e1b1d4adde582c8784419"><div class="ttname"><a href="classLineCommon.html#a7fcd985a7a5e1b1d4adde582c8784419">LineCommon::Draw</a></div><div class="ttdeci">void Draw(Renderer *_renderer) override</div><div class="ttdef"><b>Definition</b> <a href="LineCommon_8cpp_source.html#l00073">LineCommon.cpp:73</a></div></div>
 <div class="ttc" id="aclassLineCommon_html_ab1d4780649f3469aadf5e7b14e9b946f"><div class="ttname"><a href="classLineCommon.html#ab1d4780649f3469aadf5e7b14e9b946f">LineCommon::Initialize</a></div><div class="ttdeci">void Initialize(const GESTD::ReferencePtr&lt; DirectXAdapter &gt; &amp;_adapter, const GESTD::ReferencePtr&lt; DebugUI &gt; &amp;_debugUi, SRVManager *_srv)</div><div class="ttdef"><b>Definition</b> <a href="LineCommon_8cpp_source.html#l00046">LineCommon.cpp:46</a></div></div>
-<div class="ttc" id="aclassLineCommon_html_afbb4536641bd5b4154bea817d7e46263"><div class="ttname"><a href="classLineCommon.html#afbb4536641bd5b4154bea817d7e46263">LineCommon::GetSRVManager</a></div><div class="ttdeci">SRVManager * GetSRVManager() const</div><div class="ttdef"><b>Definition</b> <a href="LineCommon_8hpp_source.html#l00013">LineCommon.hpp:13</a></div></div>
+<div class="ttc" id="aclassLineCommon_html_ac10cb9eba06ac27c7f9aa7e156bf03df"><div class="ttname"><a href="classLineCommon.html#ac10cb9eba06ac27c7f9aa7e156bf03df">LineCommon::RegisterDraw</a></div><div class="ttdeci">void RegisterDraw(LineInstance *_instance)</div><div class="ttdoc">このフレームの描画キューに登録する（呼ばれた順序を保つ）</div><div class="ttdef"><b>Definition</b> <a href="LineCommon_8cpp_source.html#l00069">LineCommon.cpp:69</a></div></div>
+<div class="ttc" id="aclassLineCommon_html_afbb4536641bd5b4154bea817d7e46263"><div class="ttname"><a href="classLineCommon.html#afbb4536641bd5b4154bea817d7e46263">LineCommon::GetSRVManager</a></div><div class="ttdeci">SRVManager * GetSRVManager() const</div><div class="ttdef"><b>Definition</b> <a href="LineCommon_8hpp_source.html#l00019">LineCommon.hpp:19</a></div></div>
+<div class="ttc" id="aclassLineInstance_html"><div class="ttname"><a href="classLineInstance.html">LineInstance</a></div><div class="ttdoc">3Dラインの実体（Engine内部専用） 生成・破棄は LineCommon が行い、外部からは公開ハンドルの Line 経由でのみ操作される。</div><div class="ttdef"><b>Definition</b> <a href="LineInstance_8hpp_source.html#l00023">LineInstance.hpp:23</a></div></div>
+<div class="ttc" id="aclassRenderer_html"><div class="ttname"><a href="classRenderer.html">Renderer</a></div><div class="ttdoc">レンダラークラス 描画タスクの管理とポストプロセス適用を制御</div><div class="ttdef"><b>Definition</b> <a href="Renderer_8hpp_source.html#l00016">Renderer.hpp:16</a></div></div>
 <div class="ttc" id="aclassSRVManager_html"><div class="ttname"><a href="classSRVManager.html">SRVManager</a></div><div class="ttdef"><b>Definition</b> <a href="SRVManager_8h_source.html#l00011">SRVManager.h:11</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
@@ -152,7 +173,7 @@ $(document).ready(function(){initNavTree('LineCommon_8hpp_source.html',''); init
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_b15d966fbc6fa0124f20ad4341a35812.html">Line</a></li><li class="navelem"><a class="el" href="dir_ba2d007febb1b6c086cea9fe2a495876.html">Common</a></li><li class="navelem"><a class="el" href="LineCommon_8hpp.html">LineCommon.hpp</a></li>
-    <li class="footer">2026年09月11日(金) 07時37分44秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年09月12日(土) 13時06分01秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

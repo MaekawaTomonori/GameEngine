@@ -171,26 +171,79 @@ $(document).ready(function(){initNavTree('SpriteCommon_8cpp_source.html',''); in
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    .Create();</div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>}</div>
 </div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
+<div class="foldopen" id="foldopen00073" data-start="{" data-end="}">
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno"><a class="line" href="classSpriteCommon.html#ad090879ba15638f72a28124bc6a28b80">   73</a></span>GESTD::ReferencePtr&lt;SpriteInstance&gt; <a class="code hl_function" href="classSpriteCommon.html#ad090879ba15638f72a28124bc6a28b80">SpriteCommon::CreateInstance</a>(<span class="keyword">const</span> std::string&amp; _texture) {</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    <span class="keyword">auto</span> instance = std::make_unique&lt;SpriteInstance&gt;();</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    instance-&gt;Initialize(_texture);</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    GESTD::ReferencePtr&lt;SpriteInstance&gt; reference = instance-&gt;GetReference();</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    instances_.push_back(std::move(instance));</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    <span class="keywordflow">return</span> reference;</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>}</div>
+</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
+<div class="foldopen" id="foldopen00082" data-start="{" data-end="}">
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno"><a class="line" href="classSpriteCommon.html#a08ac82a897eba568ea178489340b88d1">   82</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classSpriteCommon.html#a08ac82a897eba568ea178489340b88d1">SpriteCommon::DestroyInstance</a>(<span class="keyword">const</span> GESTD::ReferencePtr&lt;SpriteInstance&gt;&amp; _instance) {</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    <a class="code hl_class" href="classSpriteInstance.html">SpriteInstance</a>* raw = _instance;</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    <span class="keywordflow">if</span> (!raw) <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    std::erase_if(instances_, [raw](<span class="keyword">const</span> std::unique_ptr&lt;SpriteInstance&gt;&amp; _entry) {</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>        <span class="keywordflow">return</span> _entry.get() == raw;</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    });</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>}</div>
+</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
+<div class="foldopen" id="foldopen00091" data-start="{" data-end="}">
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno"><a class="line" href="classSpriteCommon.html#a5b6dff704ca4c356bcd6048740e44429">   91</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classSpriteCommon.html#a5b6dff704ca4c356bcd6048740e44429">SpriteCommon::RegisterDraw</a>(<a class="code hl_class" href="classSpriteInstance.html">SpriteInstance</a>* _instance) {</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    drawQueue_.push_back(_instance);</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>}</div>
+</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span> </div>
+<div class="foldopen" id="foldopen00095" data-start="{" data-end="}">
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno"><a class="line" href="classSpriteCommon.html#a390c6fd8a48d282a63a8c33c270eac32">   95</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classSpriteCommon.html#a390c6fd8a48d282a63a8c33c270eac32">SpriteCommon::Draw</a>(<a class="code hl_class" href="classRenderer.html">Renderer</a>* _renderer) {</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    <span class="keywordflow">if</span> (drawQueue_.empty()) <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    <span class="keywordflow">if</span> (!<a class="code hl_variable" href="classCommon.html#a56791becb6f297b823111b69ce45398d">pipeline_</a>) <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    std::lock_guard&lt;std::mutex&gt; lock(<a class="code hl_variable" href="classCommon.html#a0e67c3b7f994e47e54d72108e91c9ada">mutex_</a>);</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    _renderer-&gt;<a class="code hl_function" href="classRenderer.html#ad05020bfe81b672b8b7a0202f51399f4">Register</a>([<span class="keyword">this</span>, queue = std::move(drawQueue_)]() {</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>        <a class="code hl_variable" href="classCommon.html#a56791becb6f297b823111b69ce45398d">pipeline_</a>-&gt;DrawCall();</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>        <span class="keywordflow">for</span> (<a class="code hl_class" href="classSpriteInstance.html">SpriteInstance</a>* instance : queue) {</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>            instance-&gt;ExecuteDraw();</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>        }</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    }, <span class="stringliteral">&quot;None&quot;</span>);</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span> </div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    drawQueue_.clear();</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>}</div>
+</div>
 <div class="ttc" id="aBlendMode_8hpp_html"><div class="ttname"><a href="BlendMode_8hpp.html">BlendMode.hpp</a></div></div>
 <div class="ttc" id="aBlendMode_8hpp_html_a30323fa90e24ca484998b9fba6c40e85a002101f8725e5c78d9f30d87f3fa4c87"><div class="ttname"><a href="BlendMode_8hpp.html#a30323fa90e24ca484998b9fba6c40e85a002101f8725e5c78d9f30d87f3fa4c87">BlendMode::ALPHA</a></div><div class="ttdeci">@ ALPHA</div></div>
 <div class="ttc" id="aInputLayout_8hpp_html"><div class="ttname"><a href="InputLayout_8hpp.html">InputLayout.hpp</a></div></div>
 <div class="ttc" id="aRootSignature_8hpp_html"><div class="ttname"><a href="RootSignature_8hpp.html">RootSignature.hpp</a></div></div>
 <div class="ttc" id="aShader_8h_html"><div class="ttname"><a href="Shader_8h.html">Shader.h</a></div></div>
 <div class="ttc" id="aSpriteCommon_8hpp_html"><div class="ttname"><a href="SpriteCommon_8hpp.html">SpriteCommon.hpp</a></div></div>
+<div class="ttc" id="aclassCommon_html_a0e67c3b7f994e47e54d72108e91c9ada"><div class="ttname"><a href="classCommon.html#a0e67c3b7f994e47e54d72108e91c9ada">Common::mutex_</a></div><div class="ttdeci">std::mutex mutex_</div><div class="ttdef"><b>Definition</b> <a href="Common_8hpp_source.html#l00027">Common.hpp:27</a></div></div>
 <div class="ttc" id="aclassCommon_html_a56791becb6f297b823111b69ce45398d"><div class="ttname"><a href="classCommon.html#a56791becb6f297b823111b69ce45398d">Common::pipeline_</a></div><div class="ttdeci">std::unique_ptr&lt; PipelineStateObject &gt; pipeline_</div><div class="ttdef"><b>Definition</b> <a href="Common_8hpp_source.html#l00029">Common.hpp:29</a></div></div>
 <div class="ttc" id="aclassCommon_html_a6344b82bbc9c51f22b4ba6dd51c403a7"><div class="ttname"><a href="classCommon.html#a6344b82bbc9c51f22b4ba6dd51c403a7">Common::Setup</a></div><div class="ttdeci">void Setup(const GESTD::ReferencePtr&lt; DirectXAdapter &gt; &amp;_adapter, const GESTD::ReferencePtr&lt; DebugUI &gt; &amp;_debugUi, const std::string &amp;_windowName)</div><div class="ttdef"><b>Definition</b> <a href="Common_8cpp_source.html#l00011">Common.cpp:11</a></div></div>
 <div class="ttc" id="aclassCommon_html_aa4fead241d22b2c899a8deb284fdcd74"><div class="ttname"><a href="classCommon.html#aa4fead241d22b2c899a8deb284fdcd74">Common::debugUI_</a></div><div class="ttdeci">GESTD::ReferencePtr&lt; DebugUI &gt; debugUI_</div><div class="ttdef"><b>Definition</b> <a href="Common_8hpp_source.html#l00024">Common.hpp:24</a></div></div>
 <div class="ttc" id="aclassInputLayout_html"><div class="ttname"><a href="classInputLayout.html">InputLayout</a></div><div class="ttdef"><b>Definition</b> <a href="InputLayout_8hpp_source.html#l00006">InputLayout.hpp:6</a></div></div>
 <div class="ttc" id="aclassInputLayout_html_a7c8232ab0bd4c9830db907c6da5887cb"><div class="ttname"><a href="classInputLayout.html#a7c8232ab0bd4c9830db907c6da5887cb">InputLayout::SetElement</a></div><div class="ttdeci">InputLayout &amp; SetElement(const D3D12_INPUT_ELEMENT_DESC &amp;_element)</div><div class="ttdef"><b>Definition</b> <a href="InputLayout_8cpp_source.html#l00003">InputLayout.cpp:3</a></div></div>
+<div class="ttc" id="aclassRenderer_html"><div class="ttname"><a href="classRenderer.html">Renderer</a></div><div class="ttdoc">レンダラークラス 描画タスクの管理とポストプロセス適用を制御</div><div class="ttdef"><b>Definition</b> <a href="Renderer_8hpp_source.html#l00016">Renderer.hpp:16</a></div></div>
+<div class="ttc" id="aclassRenderer_html_ad05020bfe81b672b8b7a0202f51399f4"><div class="ttname"><a href="classRenderer.html#ad05020bfe81b672b8b7a0202f51399f4">Renderer::Register</a></div><div class="ttdeci">void Register(std::function&lt; void()&gt; _task, const std::string &amp;_canvasName=&quot;None&quot;)</div><div class="ttdoc">描画タスクを登録</div><div class="ttdef"><b>Definition</b> <a href="Renderer_8cpp_source.html#l00013">Renderer.cpp:13</a></div></div>
 <div class="ttc" id="aclassRootSignature_html"><div class="ttname"><a href="classRootSignature.html">RootSignature</a></div><div class="ttdef"><b>Definition</b> <a href="RootSignature_8hpp_source.html#l00008">RootSignature.hpp:8</a></div></div>
+<div class="ttc" id="aclassSpriteCommon_html_a08ac82a897eba568ea178489340b88d1"><div class="ttname"><a href="classSpriteCommon.html#a08ac82a897eba568ea178489340b88d1">SpriteCommon::DestroyInstance</a></div><div class="ttdeci">void DestroyInstance(const GESTD::ReferencePtr&lt; SpriteInstance &gt; &amp;_instance)</div><div class="ttdoc">スプライト実体を破棄する</div><div class="ttdef"><b>Definition</b> <a href="SpriteCommon_8cpp_source.html#l00082">SpriteCommon.cpp:82</a></div></div>
+<div class="ttc" id="aclassSpriteCommon_html_a390c6fd8a48d282a63a8c33c270eac32"><div class="ttname"><a href="classSpriteCommon.html#a390c6fd8a48d282a63a8c33c270eac32">SpriteCommon::Draw</a></div><div class="ttdeci">void Draw(Renderer *_renderer) override</div><div class="ttdef"><b>Definition</b> <a href="SpriteCommon_8cpp_source.html#l00095">SpriteCommon.cpp:95</a></div></div>
 <div class="ttc" id="aclassSpriteCommon_html_a4cbb799be84dee947a2ac96a92891399"><div class="ttname"><a href="classSpriteCommon.html#a4cbb799be84dee947a2ac96a92891399">SpriteCommon::Initialize</a></div><div class="ttdeci">void Initialize(const GESTD::ReferencePtr&lt; DirectXAdapter &gt; &amp;_adapter, const GESTD::ReferencePtr&lt; DebugUI &gt; &amp;_debugUi) override</div><div class="ttdef"><b>Definition</b> <a href="SpriteCommon_8cpp_source.html#l00008">SpriteCommon.cpp:8</a></div></div>
+<div class="ttc" id="aclassSpriteCommon_html_a5b6dff704ca4c356bcd6048740e44429"><div class="ttname"><a href="classSpriteCommon.html#a5b6dff704ca4c356bcd6048740e44429">SpriteCommon::RegisterDraw</a></div><div class="ttdeci">void RegisterDraw(SpriteInstance *_instance)</div><div class="ttdoc">このフレームの描画キューに登録する（呼ばれた順序を保つ）</div><div class="ttdef"><b>Definition</b> <a href="SpriteCommon_8cpp_source.html#l00091">SpriteCommon.cpp:91</a></div></div>
+<div class="ttc" id="aclassSpriteCommon_html_ad090879ba15638f72a28124bc6a28b80"><div class="ttname"><a href="classSpriteCommon.html#ad090879ba15638f72a28124bc6a28b80">SpriteCommon::CreateInstance</a></div><div class="ttdeci">GESTD::ReferencePtr&lt; SpriteInstance &gt; CreateInstance(const std::string &amp;_texture)</div><div class="ttdoc">スプライト実体を生成し登録する</div><div class="ttdef"><b>Definition</b> <a href="SpriteCommon_8cpp_source.html#l00073">SpriteCommon.cpp:73</a></div></div>
+<div class="ttc" id="aclassSpriteInstance_html"><div class="ttname"><a href="classSpriteInstance.html">SpriteInstance</a></div><div class="ttdoc">2Dスプライトの実体（Engine内部専用） 生成・破棄は SpriteCommon が行い、外部からは公開ハンドルの Sprite 経由でのみ操作される。</div><div class="ttdef"><b>Definition</b> <a href="SpriteInstance_8hpp_source.html#l00017">SpriteInstance.hpp:17</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_909c286288939002c1b25213a067bdba.html">Sprite</a></li><li class="navelem"><a class="el" href="dir_c27cb4f1352f494a0d00cb2d05d35956.html">Common</a></li><li class="navelem"><a class="el" href="SpriteCommon_8cpp.html">SpriteCommon.cpp</a></li>
-    <li class="footer">2026年09月11日(金) 07時37分44秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年09月12日(土) 13時06分01秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

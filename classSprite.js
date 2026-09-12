@@ -2,6 +2,8 @@ var classSprite =
 [
     [ "Sprite", "classSprite.html#a12cba3ac1868418add3c4d95ce87e615", null ],
     [ "~Sprite", "classSprite.html#a8accab430f9d90ae5117b57d67e32b84", null ],
+    [ "Sprite", "classSprite.html#ab216809ce70a929c1e4407ce39b57547", null ],
+    [ "Sprite", "classSprite.html#aa38f13d544e759e1897701b9a559f1ff", null ],
     [ "Draw", "classSprite.html#a054a4c340c14c3d218b99e484bf83d21", null ],
     [ "GetAnchorPoint", "classSprite.html#a3c4c7d54444c311da2b4baa2d605e399", null ],
     [ "GetColor", "classSprite.html#a31202ac855810107f97b1ce627a1771c", null ],
@@ -13,6 +15,8 @@ var classSprite =
     [ "Initialize", "classSprite.html#a431a8d5512646518384ff8e677a7b174", null ],
     [ "IsFlipX", "classSprite.html#a93c88ecde8bf8ffce86ccd6c23e7805c", null ],
     [ "IsFlipY", "classSprite.html#a01dde3293edf3256aa18cf053c95d144", null ],
+    [ "operator=", "classSprite.html#a225170eee0c00e25d1c3eff955b8024f", null ],
+    [ "operator=", "classSprite.html#a06039b0dfae00c36d7f67cbfa0abce1f", null ],
     [ "SetActivePostEffect", "classSprite.html#a54e22edc74b8cfc2c70b3b6ffe3de5cf", null ],
     [ "SetAnchorPoint", "classSprite.html#a04e10b224c20c9bea7e2a5062c6afc75", null ],
     [ "SetColor", "classSprite.html#a3d48c99484539f768e6b33092d8e8cf7", null ],

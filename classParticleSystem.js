@@ -4,7 +4,7 @@ var classParticleSystem =
     [ "Template", "structParticleSystem_1_1Template.html", "structParticleSystem_1_1Template" ],
     [ "TemplateEditor", "classParticleSystem_1_1TemplateEditor.html", "classParticleSystem_1_1TemplateEditor" ],
     [ "SpawnFunc", "classParticleSystem.html#a51b5f16dd713454699d433f767e741ba", null ],
-    [ "UpdateFunc", "classParticleSystem.html#ac60924e91a2ab7daeb0becb3befcd5ff", null ],
+    [ "UpdateFunc", "classParticleSystem.html#a4c3d79a1b8c1c3067845bb6e8206276f", null ],
     [ "ParticleSystem", "classParticleSystem.html#ad70dc3eaccd74f2a46e9688aade383d8", null ],
     [ "ClearActive", "classParticleSystem.html#a3e49cce419af6e16f331bc7fa3fe4666", null ],
     [ "Debug", "classParticleSystem.html#ac1acbb946e972d60c3c19837077cac4e", null ],

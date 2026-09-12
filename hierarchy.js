@@ -68,6 +68,7 @@ var hierarchy =
       [ "Vignette", "classVignette.html", null ]
     ] ],
     [ "IScene", "classIScene.html", [
+      [ "ParticleTestScene", "classParticleTestScene.html", null ],
       [ "SampleScene", "classSampleScene.html", null ]
     ] ],
     [ "ITransitionEffect", "classITransitionEffect.html", [
@@ -83,6 +84,7 @@ var hierarchy =
     [ "LevelEditor", "classLevelEditor.html", null ],
     [ "LightManager", "classLightManager.html", null ],
     [ "Line", "classLine.html", null ],
+    [ "LineInstance", "classLineInstance.html", null ],
     [ "Log", "classLog.html", null ],
     [ "Log::LogEntry", "structLog_1_1LogEntry.html", null ],
     [ "Ui::Manager", "classUi_1_1Manager.html", null ],
@@ -139,6 +141,7 @@ var hierarchy =
     [ "Skybox", "classSkybox.html", null ],
     [ "SpotLight", "structSpotLight.html", null ],
     [ "Sprite", "classSprite.html", null ],
+    [ "SpriteInstance", "classSpriteInstance.html", null ],
     [ "SRVHandle", "classSRVHandle.html", null ],
     [ "SRVManager", "classSRVManager.html", null ],
     [ "StageLoader", "classStageLoader.html", null ],

@@ -149,17 +149,70 @@ $(document).ready(function(){initNavTree('LineCommon_8cpp_source.html',''); init
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <a class="code hl_function" href="classLineCommon.html#ab1d4780649f3469aadf5e7b14e9b946f">Initialize</a>(_adapter, _debugUi);</div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>}</div>
 </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
+<div class="foldopen" id="foldopen00051" data-start="{" data-end="}">
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="classLineCommon.html#a1bad94de5085dc599a51be495c3a4566">   51</a></span>GESTD::ReferencePtr&lt;LineInstance&gt; <a class="code hl_function" href="classLineCommon.html#a1bad94de5085dc599a51be495c3a4566">LineCommon::CreateInstance</a>() {</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <span class="keyword">auto</span> instance = std::make_unique&lt;LineInstance&gt;();</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    instance-&gt;Initialize();</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    GESTD::ReferencePtr&lt;LineInstance&gt; reference = instance-&gt;GetReference();</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    instances_.push_back(std::move(instance));</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    <span class="keywordflow">return</span> reference;</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>}</div>
+</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
+<div class="foldopen" id="foldopen00060" data-start="{" data-end="}">
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno"><a class="line" href="classLineCommon.html#a7f427a6ee75fa27f2731cfe3f4a32485">   60</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classLineCommon.html#a7f427a6ee75fa27f2731cfe3f4a32485">LineCommon::DestroyInstance</a>(<span class="keyword">const</span> GESTD::ReferencePtr&lt;LineInstance&gt;&amp; _instance) {</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <a class="code hl_class" href="classLineInstance.html">LineInstance</a>* raw = _instance;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <span class="keywordflow">if</span> (!raw) <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    std::erase_if(instances_, [raw](<span class="keyword">const</span> std::unique_ptr&lt;LineInstance&gt;&amp; _entry) {</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        <span class="keywordflow">return</span> _entry.get() == raw;</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    });</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>}</div>
+</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
+<div class="foldopen" id="foldopen00069" data-start="{" data-end="}">
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno"><a class="line" href="classLineCommon.html#ac10cb9eba06ac27c7f9aa7e156bf03df">   69</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classLineCommon.html#ac10cb9eba06ac27c7f9aa7e156bf03df">LineCommon::RegisterDraw</a>(<a class="code hl_class" href="classLineInstance.html">LineInstance</a>* _instance) {</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    drawQueue_.push_back(_instance);</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>}</div>
+</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
+<div class="foldopen" id="foldopen00073" data-start="{" data-end="}">
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno"><a class="line" href="classLineCommon.html#a7fcd985a7a5e1b1d4adde582c8784419">   73</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classLineCommon.html#a7fcd985a7a5e1b1d4adde582c8784419">LineCommon::Draw</a>(<a class="code hl_class" href="classRenderer.html">Renderer</a>* _renderer) {</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    <span class="keywordflow">if</span> (drawQueue_.empty()) <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    <span class="keywordflow">if</span> (!<a class="code hl_variable" href="classCommon.html#a56791becb6f297b823111b69ce45398d">pipeline_</a>) <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    std::lock_guard&lt;std::mutex&gt; lock(<a class="code hl_variable" href="classCommon.html#a0e67c3b7f994e47e54d72108e91c9ada">mutex_</a>);</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    _renderer-&gt;<a class="code hl_function" href="classRenderer.html#ad05020bfe81b672b8b7a0202f51399f4">Register</a>([<span class="keyword">this</span>, queue = std::move(drawQueue_)]() {</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>        <a class="code hl_variable" href="classCommon.html#a56791becb6f297b823111b69ce45398d">pipeline_</a>-&gt;DrawCall();</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>        <span class="keywordflow">for</span> (<a class="code hl_class" href="classLineInstance.html">LineInstance</a>* instance : queue) {</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>            instance-&gt;ExecuteDraw();</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>        }</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    }, <span class="stringliteral">&quot;None&quot;</span>);</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    drawQueue_.clear();</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>}</div>
+</div>
 <div class="ttc" id="aBlendMode_8hpp_html"><div class="ttname"><a href="BlendMode_8hpp.html">BlendMode.hpp</a></div></div>
 <div class="ttc" id="aBlendMode_8hpp_html_a30323fa90e24ca484998b9fba6c40e85ab50339a10e1de285ac99d4c3990b8693"><div class="ttname"><a href="BlendMode_8hpp.html#a30323fa90e24ca484998b9fba6c40e85ab50339a10e1de285ac99d4c3990b8693">BlendMode::NONE</a></div><div class="ttdeci">@ NONE</div></div>
 <div class="ttc" id="aInputLayout_8hpp_html"><div class="ttname"><a href="InputLayout_8hpp.html">InputLayout.hpp</a></div></div>
 <div class="ttc" id="aLineCommon_8hpp_html"><div class="ttname"><a href="LineCommon_8hpp.html">LineCommon.hpp</a></div></div>
 <div class="ttc" id="aRootSignature_8hpp_html"><div class="ttname"><a href="RootSignature_8hpp.html">RootSignature.hpp</a></div></div>
 <div class="ttc" id="aShader_8h_html"><div class="ttname"><a href="Shader_8h.html">Shader.h</a></div></div>
+<div class="ttc" id="aclassCommon_html_a0e67c3b7f994e47e54d72108e91c9ada"><div class="ttname"><a href="classCommon.html#a0e67c3b7f994e47e54d72108e91c9ada">Common::mutex_</a></div><div class="ttdeci">std::mutex mutex_</div><div class="ttdef"><b>Definition</b> <a href="Common_8hpp_source.html#l00027">Common.hpp:27</a></div></div>
 <div class="ttc" id="aclassCommon_html_a56791becb6f297b823111b69ce45398d"><div class="ttname"><a href="classCommon.html#a56791becb6f297b823111b69ce45398d">Common::pipeline_</a></div><div class="ttdeci">std::unique_ptr&lt; PipelineStateObject &gt; pipeline_</div><div class="ttdef"><b>Definition</b> <a href="Common_8hpp_source.html#l00029">Common.hpp:29</a></div></div>
 <div class="ttc" id="aclassCommon_html_a6344b82bbc9c51f22b4ba6dd51c403a7"><div class="ttname"><a href="classCommon.html#a6344b82bbc9c51f22b4ba6dd51c403a7">Common::Setup</a></div><div class="ttdeci">void Setup(const GESTD::ReferencePtr&lt; DirectXAdapter &gt; &amp;_adapter, const GESTD::ReferencePtr&lt; DebugUI &gt; &amp;_debugUi, const std::string &amp;_windowName)</div><div class="ttdef"><b>Definition</b> <a href="Common_8cpp_source.html#l00011">Common.cpp:11</a></div></div>
 <div class="ttc" id="aclassInputLayout_html"><div class="ttname"><a href="classInputLayout.html">InputLayout</a></div><div class="ttdef"><b>Definition</b> <a href="InputLayout_8hpp_source.html#l00006">InputLayout.hpp:6</a></div></div>
 <div class="ttc" id="aclassInputLayout_html_a7c8232ab0bd4c9830db907c6da5887cb"><div class="ttname"><a href="classInputLayout.html#a7c8232ab0bd4c9830db907c6da5887cb">InputLayout::SetElement</a></div><div class="ttdeci">InputLayout &amp; SetElement(const D3D12_INPUT_ELEMENT_DESC &amp;_element)</div><div class="ttdef"><b>Definition</b> <a href="InputLayout_8cpp_source.html#l00003">InputLayout.cpp:3</a></div></div>
+<div class="ttc" id="aclassLineCommon_html_a1bad94de5085dc599a51be495c3a4566"><div class="ttname"><a href="classLineCommon.html#a1bad94de5085dc599a51be495c3a4566">LineCommon::CreateInstance</a></div><div class="ttdeci">GESTD::ReferencePtr&lt; LineInstance &gt; CreateInstance()</div><div class="ttdoc">ライン実体を生成し登録する</div><div class="ttdef"><b>Definition</b> <a href="LineCommon_8cpp_source.html#l00051">LineCommon.cpp:51</a></div></div>
+<div class="ttc" id="aclassLineCommon_html_a7f427a6ee75fa27f2731cfe3f4a32485"><div class="ttname"><a href="classLineCommon.html#a7f427a6ee75fa27f2731cfe3f4a32485">LineCommon::DestroyInstance</a></div><div class="ttdeci">void DestroyInstance(const GESTD::ReferencePtr&lt; LineInstance &gt; &amp;_instance)</div><div class="ttdoc">ライン実体を破棄する</div><div class="ttdef"><b>Definition</b> <a href="LineCommon_8cpp_source.html#l00060">LineCommon.cpp:60</a></div></div>
+<div class="ttc" id="aclassLineCommon_html_a7fcd985a7a5e1b1d4adde582c8784419"><div class="ttname"><a href="classLineCommon.html#a7fcd985a7a5e1b1d4adde582c8784419">LineCommon::Draw</a></div><div class="ttdeci">void Draw(Renderer *_renderer) override</div><div class="ttdef"><b>Definition</b> <a href="LineCommon_8cpp_source.html#l00073">LineCommon.cpp:73</a></div></div>
 <div class="ttc" id="aclassLineCommon_html_ab1d4780649f3469aadf5e7b14e9b946f"><div class="ttname"><a href="classLineCommon.html#ab1d4780649f3469aadf5e7b14e9b946f">LineCommon::Initialize</a></div><div class="ttdeci">void Initialize(const GESTD::ReferencePtr&lt; DirectXAdapter &gt; &amp;_adapter, const GESTD::ReferencePtr&lt; DebugUI &gt; &amp;_debugUi, SRVManager *_srv)</div><div class="ttdef"><b>Definition</b> <a href="LineCommon_8cpp_source.html#l00046">LineCommon.cpp:46</a></div></div>
+<div class="ttc" id="aclassLineCommon_html_ac10cb9eba06ac27c7f9aa7e156bf03df"><div class="ttname"><a href="classLineCommon.html#ac10cb9eba06ac27c7f9aa7e156bf03df">LineCommon::RegisterDraw</a></div><div class="ttdeci">void RegisterDraw(LineInstance *_instance)</div><div class="ttdoc">このフレームの描画キューに登録する（呼ばれた順序を保つ）</div><div class="ttdef"><b>Definition</b> <a href="LineCommon_8cpp_source.html#l00069">LineCommon.cpp:69</a></div></div>
+<div class="ttc" id="aclassLineInstance_html"><div class="ttname"><a href="classLineInstance.html">LineInstance</a></div><div class="ttdoc">3Dラインの実体（Engine内部専用） 生成・破棄は LineCommon が行い、外部からは公開ハンドルの Line 経由でのみ操作される。</div><div class="ttdef"><b>Definition</b> <a href="LineInstance_8hpp_source.html#l00023">LineInstance.hpp:23</a></div></div>
+<div class="ttc" id="aclassRenderer_html"><div class="ttname"><a href="classRenderer.html">Renderer</a></div><div class="ttdoc">レンダラークラス 描画タスクの管理とポストプロセス適用を制御</div><div class="ttdef"><b>Definition</b> <a href="Renderer_8hpp_source.html#l00016">Renderer.hpp:16</a></div></div>
+<div class="ttc" id="aclassRenderer_html_ad05020bfe81b672b8b7a0202f51399f4"><div class="ttname"><a href="classRenderer.html#ad05020bfe81b672b8b7a0202f51399f4">Renderer::Register</a></div><div class="ttdeci">void Register(std::function&lt; void()&gt; _task, const std::string &amp;_canvasName=&quot;None&quot;)</div><div class="ttdoc">描画タスクを登録</div><div class="ttdef"><b>Definition</b> <a href="Renderer_8cpp_source.html#l00013">Renderer.cpp:13</a></div></div>
 <div class="ttc" id="aclassRootSignature_html"><div class="ttname"><a href="classRootSignature.html">RootSignature</a></div><div class="ttdef"><b>Definition</b> <a href="RootSignature_8hpp_source.html#l00008">RootSignature.hpp:8</a></div></div>
 <div class="ttc" id="aclassSRVManager_html"><div class="ttname"><a href="classSRVManager.html">SRVManager</a></div><div class="ttdef"><b>Definition</b> <a href="SRVManager_8h_source.html#l00011">SRVManager.h:11</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
@@ -168,7 +221,7 @@ $(document).ready(function(){initNavTree('LineCommon_8cpp_source.html',''); init
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_b15d966fbc6fa0124f20ad4341a35812.html">Line</a></li><li class="navelem"><a class="el" href="dir_ba2d007febb1b6c086cea9fe2a495876.html">Common</a></li><li class="navelem"><a class="el" href="LineCommon_8cpp.html">LineCommon.cpp</a></li>
-    <li class="footer">2026年09月11日(金) 07時37分44秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年09月12日(土) 13時06分01秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

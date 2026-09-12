@@ -1,0 +1,197 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>PortfolioGame Engine: /home/runner/work/GameEngine/GameEngine/src/Scene/ParticleTest/ParticleTestScene.cpp ソースファイル</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">PortfolioGame Engine<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">C++20 DirectX12 Game Engine</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','検索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function() { init_codefold(0); });
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('ParticleTestScene_8cpp_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">読み取り中…</div>
+<div class="SRStatus" id="Searching">検索中…</div>
+<div class="SRStatus" id="NoMatches">一致する文字列を見つけられません</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">ParticleTestScene.cpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="ParticleTestScene_8cpp.html">[詳解]</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#include &quot;<a class="code" href="ParticleTestScene_8hpp.html">ParticleTestScene.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;<a class="code" href="Input_8hpp.html">Input.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;Pattern/Singleton.hpp&quot;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;<a class="code" href="Time_8hpp.html">src/Time/Time.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">namespace </span>{</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>    <span class="keyword">constexpr</span> <span class="keyword">const</span> <span class="keywordtype">char</span>* TEST_TEMPLATE = <span class="stringliteral">&quot;particle_test_burst&quot;</span>;</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>}</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="foldopen" id="foldopen00011" data-start="{" data-end="}">
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="classParticleTestScene.html#ab689ba0d4e85c3c3460dd1656d718d03">   11</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classParticleTestScene.html#ab689ba0d4e85c3c3460dd1656d718d03">ParticleTestScene::Initialize</a>() {</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    plane_ = std::make_unique&lt;Model&gt;();</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    plane_-&gt;Initialize(<span class="stringliteral">&quot;plane&quot;</span>);</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    plane_-&gt;SetTranslate({0.f, -0.4f, 0.f});</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    plane_-&gt;SetRotate({4.5f, 0.f, 0.f});</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    plane_-&gt;SetScale({5.f, 5.f, 1.f});</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <a class="code hl_struct" href="structParticleSystem_1_1EmitterConfig.html">ParticleSystem::EmitterConfig</a> config;</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    config.<a class="code hl_variable" href="structParticleSystem_1_1EmitterConfig.html#af2ec61f245c0b9c882f70872b3e193b9">texture</a> = <span class="stringliteral">&quot;white_x16.png&quot;</span>;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    config.<a class="code hl_variable" href="structParticleSystem_1_1EmitterConfig.html#aef380ed9f570c0e0c96a08d4c5a0c0bc">frequency</a> = 0.f;</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    config.<a class="code hl_variable" href="structParticleSystem_1_1EmitterConfig.html#a4457af19f9a804b4f6bf0020aa0e6428">duration</a> = 0.f;</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    config.<a class="code hl_variable" href="structParticleSystem_1_1EmitterConfig.html#a9efff02e92442978dec875db6e46d45b">spawnCount</a> = 30;</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    config.<a class="code hl_variable" href="structParticleSystem_1_1EmitterConfig.html#ac367143e9a1ea8ba183076d47267477e">size</a> = {0.3f, 0.3f, 0.3f};</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    config.<a class="code hl_variable" href="structParticleSystem_1_1EmitterConfig.html#ab8ca8de929c85f1091451c89cdebdbdc">velocity</a> = {0.f, 2.f, 0.f};</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    config.<a class="code hl_variable" href="structParticleSystem_1_1EmitterConfig.html#a8e01733a6eafbf7e743d8e8fba05b676">color</a> = {1.f, 1.f, 1.f, 1.f};</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    config.<a class="code hl_variable" href="structParticleSystem_1_1EmitterConfig.html#ace2b0a26ed9873c4fe398368e9e4d348">particleLifetime</a> = 1.5f;</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    config.<a class="code hl_variable" href="structParticleSystem_1_1EmitterConfig.html#a5dcdf49ced7b24d2252c93fcbefcd96d">colorKeys</a> = {</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        <a class="code hl_struct" href="structGradientKey.html">GradientKey&lt;Vector4&gt;</a>{0.0f, {1.f, 1.f, 1.f, 1.f}},</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>        <a class="code hl_struct" href="structGradientKey.html">GradientKey&lt;Vector4&gt;</a>{1.0f, {1.f, 1.f, 1.f, 0.f}}</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    };</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <a class="code hl_struct" href="structParticleSystem_1_1Template.html">ParticleSystem::Template</a> tmpl;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    tmpl.<a class="code hl_variable" href="structParticleSystem_1_1Template.html#a2c378ab21d043f36c8da4b2d119ce554">emitters</a>.push_back(config);</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <a class="code hl_function" href="classIScene.html#a60e0d5ab487faa91cf3134395826292c">Particle</a>()-&gt;Register(TEST_TEMPLATE, tmpl, <span class="keyword">true</span>);</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>}</div>
+</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
+<div class="foldopen" id="foldopen00037" data-start="{" data-end="}">
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="classParticleTestScene.html#a2fc0c40baacedae692a560ff4e43c73d">   37</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classParticleTestScene.html#a2fc0c40baacedae692a560ff4e43c73d">ParticleTestScene::Update</a>() {</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    plane_-&gt;Update();</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    timer_ += <a class="code hl_function" href="classTime.html#a24f6ae9c72fb22aa6baa831f77c4c8bd">Time::GetDeltaTime</a>();</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="keywordflow">if</span> (timer_ &gt;= 1.0f) {</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        timer_ = 0.f;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        <a class="code hl_function" href="classIScene.html#a60e0d5ab487faa91cf3134395826292c">Particle</a>()-&gt;Emit(TEST_TEMPLATE, {0.f, 1.f, 0.f});</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    }</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keywordflow">if</span> (Singleton&lt;Input&gt;::GetInstance()-&gt;IsTrigger(DIK_SPACE)) {</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        <a class="code hl_function" href="classIScene.html#a60e0d5ab487faa91cf3134395826292c">Particle</a>()-&gt;Emit(TEST_TEMPLATE, {0.f, 1.f, 0.f});</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    }</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>}</div>
+</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
+<div class="foldopen" id="foldopen00051" data-start="{" data-end="}">
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="classParticleTestScene.html#ac173637725c5b9daa90f3afecd45108e">   51</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classParticleTestScene.html#ac173637725c5b9daa90f3afecd45108e">ParticleTestScene::Draw</a>() {</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    plane_-&gt;Draw();</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>}</div>
+</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
+<div class="foldopen" id="foldopen00055" data-start="{" data-end="}">
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno"><a class="line" href="classParticleTestScene.html#a95bbdabc9208503a75c4432562e7b9d0">   55</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classParticleTestScene.html#a95bbdabc9208503a75c4432562e7b9d0">ParticleTestScene::Debug</a>() {</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>}</div>
+</div>
+<div class="ttc" id="aInput_8hpp_html"><div class="ttname"><a href="Input_8hpp.html">Input.hpp</a></div></div>
+<div class="ttc" id="aParticleTestScene_8hpp_html"><div class="ttname"><a href="ParticleTestScene_8hpp.html">ParticleTestScene.hpp</a></div></div>
+<div class="ttc" id="aTime_8hpp_html"><div class="ttname"><a href="Time_8hpp.html">Time.hpp</a></div></div>
+<div class="ttc" id="aclassIScene_html_a60e0d5ab487faa91cf3134395826292c"><div class="ttname"><a href="classIScene.html#a60e0d5ab487faa91cf3134395826292c">IScene::Particle</a></div><div class="ttdeci">GESTD::ReferencePtr&lt; ParticleSystem &gt; Particle() const</div><div class="ttdef"><b>Definition</b> <a href="IScene_8cpp_source.html#l00043">IScene.cpp:43</a></div></div>
+<div class="ttc" id="aclassParticleTestScene_html_a2fc0c40baacedae692a560ff4e43c73d"><div class="ttname"><a href="classParticleTestScene.html#a2fc0c40baacedae692a560ff4e43c73d">ParticleTestScene::Update</a></div><div class="ttdeci">void Update() override</div><div class="ttdoc">更新処理（純粋仮想関数）</div><div class="ttdef"><b>Definition</b> <a href="ParticleTestScene_8cpp_source.html#l00037">ParticleTestScene.cpp:37</a></div></div>
+<div class="ttc" id="aclassParticleTestScene_html_a95bbdabc9208503a75c4432562e7b9d0"><div class="ttname"><a href="classParticleTestScene.html#a95bbdabc9208503a75c4432562e7b9d0">ParticleTestScene::Debug</a></div><div class="ttdeci">void Debug() override</div><div class="ttdoc">Debug用 ImGuiはここで扱うようにする</div><div class="ttdef"><b>Definition</b> <a href="ParticleTestScene_8cpp_source.html#l00055">ParticleTestScene.cpp:55</a></div></div>
+<div class="ttc" id="aclassParticleTestScene_html_ab689ba0d4e85c3c3460dd1656d718d03"><div class="ttname"><a href="classParticleTestScene.html#ab689ba0d4e85c3c3460dd1656d718d03">ParticleTestScene::Initialize</a></div><div class="ttdeci">void Initialize() override</div><div class="ttdoc">初期化処理（純粋仮想関数）</div><div class="ttdef"><b>Definition</b> <a href="ParticleTestScene_8cpp_source.html#l00011">ParticleTestScene.cpp:11</a></div></div>
+<div class="ttc" id="aclassParticleTestScene_html_ac173637725c5b9daa90f3afecd45108e"><div class="ttname"><a href="classParticleTestScene.html#ac173637725c5b9daa90f3afecd45108e">ParticleTestScene::Draw</a></div><div class="ttdeci">void Draw() override</div><div class="ttdoc">描画処理（純粋仮想関数）</div><div class="ttdef"><b>Definition</b> <a href="ParticleTestScene_8cpp_source.html#l00051">ParticleTestScene.cpp:51</a></div></div>
+<div class="ttc" id="aclassTime_html_a24f6ae9c72fb22aa6baa831f77c4c8bd"><div class="ttname"><a href="classTime.html#a24f6ae9c72fb22aa6baa831f77c4c8bd">Time::GetDeltaTime</a></div><div class="ttdeci">static float GetDeltaTime()</div><div class="ttdoc">タイムスケール適用後の、1フレーム分の経過秒数を取得</div><div class="ttdef"><b>Definition</b> <a href="Time_8cpp_source.html#l00005">Time.cpp:5</a></div></div>
+<div class="ttc" id="astructGradientKey_html"><div class="ttname"><a href="structGradientKey.html">GradientKey</a></div><div class="ttdoc">時間(0～1)と値の組。パーティクルの色・サイズなどを寿命に沿って補間するための制御点 Animation/KeyFrame.hpp の Keyframe とは無関係（用途が異なるため別定義）</div><div class="ttdef"><b>Definition</b> <a href="Keyframe_8hpp_source.html#l00012">Keyframe.hpp:12</a></div></div>
+<div class="ttc" id="astructParticleSystem_1_1EmitterConfig_html"><div class="ttname"><a href="structParticleSystem_1_1EmitterConfig.html">ParticleSystem::EmitterConfig</a></div><div class="ttdef"><b>Definition</b> <a href="ParticleSystem_8hpp_source.html#l00026">ParticleSystem.hpp:26</a></div></div>
+<div class="ttc" id="astructParticleSystem_1_1EmitterConfig_html_a4457af19f9a804b4f6bf0020aa0e6428"><div class="ttname"><a href="structParticleSystem_1_1EmitterConfig.html#a4457af19f9a804b4f6bf0020aa0e6428">ParticleSystem::EmitterConfig::duration</a></div><div class="ttdeci">float duration</div><div class="ttdef"><b>Definition</b> <a href="ParticleSystem_8hpp_source.html#l00029">ParticleSystem.hpp:29</a></div></div>
+<div class="ttc" id="astructParticleSystem_1_1EmitterConfig_html_a5dcdf49ced7b24d2252c93fcbefcd96d"><div class="ttname"><a href="structParticleSystem_1_1EmitterConfig.html#a5dcdf49ced7b24d2252c93fcbefcd96d">ParticleSystem::EmitterConfig::colorKeys</a></div><div class="ttdeci">std::vector&lt; GradientKey&lt; Vector4 &gt; &gt; colorKeys</div><div class="ttdef"><b>Definition</b> <a href="ParticleSystem_8hpp_source.html#l00034">ParticleSystem.hpp:34</a></div></div>
+<div class="ttc" id="astructParticleSystem_1_1EmitterConfig_html_a8e01733a6eafbf7e743d8e8fba05b676"><div class="ttname"><a href="structParticleSystem_1_1EmitterConfig.html#a8e01733a6eafbf7e743d8e8fba05b676">ParticleSystem::EmitterConfig::color</a></div><div class="ttdeci">Vector4 color</div><div class="ttdef"><b>Definition</b> <a href="ParticleSystem_8hpp_source.html#l00033">ParticleSystem.hpp:33</a></div></div>
+<div class="ttc" id="astructParticleSystem_1_1EmitterConfig_html_a9efff02e92442978dec875db6e46d45b"><div class="ttname"><a href="structParticleSystem_1_1EmitterConfig.html#a9efff02e92442978dec875db6e46d45b">ParticleSystem::EmitterConfig::spawnCount</a></div><div class="ttdeci">uint16_t spawnCount</div><div class="ttdef"><b>Definition</b> <a href="ParticleSystem_8hpp_source.html#l00030">ParticleSystem.hpp:30</a></div></div>
+<div class="ttc" id="astructParticleSystem_1_1EmitterConfig_html_ab8ca8de929c85f1091451c89cdebdbdc"><div class="ttname"><a href="structParticleSystem_1_1EmitterConfig.html#ab8ca8de929c85f1091451c89cdebdbdc">ParticleSystem::EmitterConfig::velocity</a></div><div class="ttdeci">Vector3 velocity</div><div class="ttdef"><b>Definition</b> <a href="ParticleSystem_8hpp_source.html#l00032">ParticleSystem.hpp:32</a></div></div>
+<div class="ttc" id="astructParticleSystem_1_1EmitterConfig_html_ac367143e9a1ea8ba183076d47267477e"><div class="ttname"><a href="structParticleSystem_1_1EmitterConfig.html#ac367143e9a1ea8ba183076d47267477e">ParticleSystem::EmitterConfig::size</a></div><div class="ttdeci">Vector3 size</div><div class="ttdef"><b>Definition</b> <a href="ParticleSystem_8hpp_source.html#l00031">ParticleSystem.hpp:31</a></div></div>
+<div class="ttc" id="astructParticleSystem_1_1EmitterConfig_html_ace2b0a26ed9873c4fe398368e9e4d348"><div class="ttname"><a href="structParticleSystem_1_1EmitterConfig.html#ace2b0a26ed9873c4fe398368e9e4d348">ParticleSystem::EmitterConfig::particleLifetime</a></div><div class="ttdeci">float particleLifetime</div><div class="ttdef"><b>Definition</b> <a href="ParticleSystem_8hpp_source.html#l00036">ParticleSystem.hpp:36</a></div></div>
+<div class="ttc" id="astructParticleSystem_1_1EmitterConfig_html_aef380ed9f570c0e0c96a08d4c5a0c0bc"><div class="ttname"><a href="structParticleSystem_1_1EmitterConfig.html#aef380ed9f570c0e0c96a08d4c5a0c0bc">ParticleSystem::EmitterConfig::frequency</a></div><div class="ttdeci">float frequency</div><div class="ttdef"><b>Definition</b> <a href="ParticleSystem_8hpp_source.html#l00028">ParticleSystem.hpp:28</a></div></div>
+<div class="ttc" id="astructParticleSystem_1_1EmitterConfig_html_af2ec61f245c0b9c882f70872b3e193b9"><div class="ttname"><a href="structParticleSystem_1_1EmitterConfig.html#af2ec61f245c0b9c882f70872b3e193b9">ParticleSystem::EmitterConfig::texture</a></div><div class="ttdeci">std::string texture</div><div class="ttdef"><b>Definition</b> <a href="ParticleSystem_8hpp_source.html#l00027">ParticleSystem.hpp:27</a></div></div>
+<div class="ttc" id="astructParticleSystem_1_1Template_html"><div class="ttname"><a href="structParticleSystem_1_1Template.html">ParticleSystem::Template</a></div><div class="ttdef"><b>Definition</b> <a href="ParticleSystem_8hpp_source.html#l00046">ParticleSystem.hpp:46</a></div></div>
+<div class="ttc" id="astructParticleSystem_1_1Template_html_a2c378ab21d043f36c8da4b2d119ce554"><div class="ttname"><a href="structParticleSystem_1_1Template.html#a2c378ab21d043f36c8da4b2d119ce554">ParticleSystem::Template::emitters</a></div><div class="ttdeci">std::vector&lt; EmitterConfig &gt; emitters</div><div class="ttdef"><b>Definition</b> <a href="ParticleSystem_8hpp_source.html#l00047">ParticleSystem.hpp:47</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_204260ac86670e69c647eaba8962e745.html">Scene</a></li><li class="navelem"><a class="el" href="dir_c1f94d26de62b98a82af6caa42df1cab.html">ParticleTest</a></li><li class="navelem"><a class="el" href="ParticleTestScene_8cpp.html">ParticleTestScene.cpp</a></li>
+    <li class="footer">2026年09月12日(土) 13時06分01秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+  </ul>
+</div>
+</body>
+</html>

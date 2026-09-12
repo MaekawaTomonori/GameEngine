@@ -91,14 +91,13 @@ $(document).ready(function(){initNavTree('classLine.html',''); initResizable(); 
 
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">クラス</a> &#124;
 <a href="#pub-methods">公開メンバ関数</a> &#124;
 <a href="classLine-members.html">全メンバ一覧</a>  </div>
   <div class="headertitle"><div class="title">Line クラス</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>3Dラインレンダリングクラス デバッグ用の3D線分描画を提供  
+<p>3Dラインレンダリングクラス（公開ハンドル） デバッグ用の3D線分描画を提供。 実体（LineInstance）はEngine側が所有し、本クラスは実体への安全な参照を保持するだけの薄いラッパー。 実体が破棄された後に呼び出しても安全に無視される。  
  <a href="classLine.html#details">[詳解]</a></p>
 
 <p><code>#include &lt;<a class="el" href="Line_8hpp_source.html">Line.hpp</a>&gt;</code></p>
@@ -109,6 +108,14 @@ $(document).ready(function(){initNavTree('classLine.html',''); initResizable(); 
 <tr class="separator:acc11b8a429d8cdd63ba6803dff5602b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aabe85f48d22d92b62257091f48174fac" id="r_aabe85f48d22d92b62257091f48174fac"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLine.html#aabe85f48d22d92b62257091f48174fac">~Line</a> ()</td></tr>
 <tr class="separator:aabe85f48d22d92b62257091f48174fac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a39f1d91cfb4c01a8580d149af73c89b2" id="r_a39f1d91cfb4c01a8580d149af73c89b2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLine.html#a39f1d91cfb4c01a8580d149af73c89b2">Line</a> (const <a class="el" href="classLine.html">Line</a> &amp;)=delete</td></tr>
+<tr class="separator:a39f1d91cfb4c01a8580d149af73c89b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f69b735133d52f9a3db4484cca12ff7" id="r_a6f69b735133d52f9a3db4484cca12ff7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classLine.html">Line</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLine.html#a6f69b735133d52f9a3db4484cca12ff7">operator=</a> (const <a class="el" href="classLine.html">Line</a> &amp;)=delete</td></tr>
+<tr class="separator:a6f69b735133d52f9a3db4484cca12ff7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5edd7f2b8959b7138f8a60f4f37f14aa" id="r_a5edd7f2b8959b7138f8a60f4f37f14aa"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLine.html#a5edd7f2b8959b7138f8a60f4f37f14aa">Line</a> (<a class="el" href="classLine.html">Line</a> &amp;&amp;_other) noexcept</td></tr>
+<tr class="separator:a5edd7f2b8959b7138f8a60f4f37f14aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a616586776cee2bf7810ffc8af30d64ba" id="r_a616586776cee2bf7810ffc8af30d64ba"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classLine.html">Line</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLine.html#a616586776cee2bf7810ffc8af30d64ba">operator=</a> (<a class="el" href="classLine.html">Line</a> &amp;&amp;_other) noexcept</td></tr>
+<tr class="separator:a616586776cee2bf7810ffc8af30d64ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa596fba48c72141176f5e10c9141315b" id="r_aa596fba48c72141176f5e10c9141315b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLine.html#aa596fba48c72141176f5e10c9141315b">Initialize</a> ()</td></tr>
 <tr class="memdesc:aa596fba48c72141176f5e10c9141315b"><td class="mdescLeft">&#160;</td><td class="mdescRight">ラインを初期化  <br /></td></tr>
 <tr class="separator:aa596fba48c72141176f5e10c9141315b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -132,15 +139,18 @@ $(document).ready(function(){initNavTree('classLine.html',''); initResizable(); 
 <tr class="separator:a435b3ea29baad09fa23aaa4b866f3aba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">詳解</h2>
-<div class="textblock"><p>3Dラインレンダリングクラス デバッグ用の3D線分描画を提供 </p>
+<div class="textblock"><p>3Dラインレンダリングクラス（公開ハンドル） デバッグ用の3D線分描画を提供。 実体（LineInstance）はEngine側が所有し、本クラスは実体への安全な参照を保持するだけの薄いラッパー。 実体が破棄された後に呼び出しても安全に無視される。 </p>
 
-<p class="definition"> <a class="el" href="Line_8hpp_source.html">Line.hpp</a> の <a class="el" href="Line_8hpp_source.html#l00023">23</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Line_8hpp_source.html">Line.hpp</a> の <a class="el" href="Line_8hpp_source.html#l00017">17</a> 行目に定義があります。</p>
 </div><h2 class="groupheader">構築子と解体子</h2>
 <a id="acc11b8a429d8cdd63ba6803dff5602b3" name="acc11b8a429d8cdd63ba6803dff5602b3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acc11b8a429d8cdd63ba6803dff5602b3">&#9670;&#160;</a></span>Line()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#acc11b8a429d8cdd63ba6803dff5602b3">&#9670;&#160;</a></span>Line() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">Line::Line </td>
@@ -149,9 +159,12 @@ $(document).ready(function(){initNavTree('classLine.html',''); initResizable(); 
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
-
-<p class="definition"> <a class="el" href="Line_8cpp_source.html">Line.cpp</a> の <a class="el" href="Line_8cpp_source.html#l00010">10</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -170,7 +183,61 @@ $(document).ready(function(){initNavTree('classLine.html',''); initResizable(); 
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="Line_8cpp_source.html">Line.cpp</a> の <a class="el" href="Line_8cpp_source.html#l00019">19</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Line_8cpp_source.html">Line.cpp</a> の <a class="el" href="Line_8cpp_source.html#l00009">9</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="a39f1d91cfb4c01a8580d149af73c89b2" name="a39f1d91cfb4c01a8580d149af73c89b2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a39f1d91cfb4c01a8580d149af73c89b2">&#9670;&#160;</a></span>Line() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Line::Line </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classLine.html">Line</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5edd7f2b8959b7138f8a60f4f37f14aa" name="a5edd7f2b8959b7138f8a60f4f37f14aa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5edd7f2b8959b7138f8a60f4f37f14aa">&#9670;&#160;</a></span>Line() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Line::Line </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classLine.html">Line</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>_other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="Line_8cpp_source.html">Line.cpp</a> の <a class="el" href="Line_8cpp_source.html#l00015">15</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -210,7 +277,7 @@ $(document).ready(function(){initNavTree('classLine.html',''); initResizable(); 
   </dd>
 </dl>
 
-<p class="definition"> <a class="el" href="Line_8cpp_source.html">Line.cpp</a> の <a class="el" href="Line_8cpp_source.html#l00060">60</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Line_8cpp_source.html">Line.cpp</a> の <a class="el" href="Line_8cpp_source.html#l00045">45</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -231,7 +298,7 @@ $(document).ready(function(){initNavTree('classLine.html',''); initResizable(); 
 
 <p>すべての線をクリア </p>
 
-<p class="definition"> <a class="el" href="Line_8cpp_source.html">Line.cpp</a> の <a class="el" href="Line_8cpp_source.html#l00070">70</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Line_8cpp_source.html">Line.cpp</a> の <a class="el" href="Line_8cpp_source.html#l00049">49</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -252,7 +319,7 @@ $(document).ready(function(){initNavTree('classLine.html',''); initResizable(); 
 
 <p>ラインを描画 </p>
 
-<p class="definition"> <a class="el" href="Line_8cpp_source.html">Line.cpp</a> の <a class="el" href="Line_8cpp_source.html#l00048">48</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Line_8cpp_source.html">Line.cpp</a> の <a class="el" href="Line_8cpp_source.html#l00041">41</a> 行目に定義があります。</p>
 
 <p class="reference">参照元 <a class="el" href="SkinningState_8cpp_source.html#l00090">SkinningState::DrawLine()</a>.</p>
 
@@ -275,9 +342,63 @@ $(document).ready(function(){initNavTree('classLine.html',''); initResizable(); 
 
 <p>ラインを初期化 </p>
 
-<p class="definition"> <a class="el" href="Line_8cpp_source.html">Line.cpp</a> の <a class="el" href="Line_8cpp_source.html#l00023">23</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Line_8cpp_source.html">Line.cpp</a> の <a class="el" href="Line_8cpp_source.html#l00030">30</a> 行目に定義があります。</p>
 
 <p class="reference">参照元 <a class="el" href="SkinningState_8cpp_source.html#l00019">SkinningState::Initialize()</a>.</p>
+
+</div>
+</div>
+<a id="a6f69b735133d52f9a3db4484cca12ff7" name="a6f69b735133d52f9a3db4484cca12ff7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f69b735133d52f9a3db4484cca12ff7">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classLine.html">Line</a> &amp; Line::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classLine.html">Line</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a616586776cee2bf7810ffc8af30d64ba" name="a616586776cee2bf7810ffc8af30d64ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a616586776cee2bf7810ffc8af30d64ba">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classLine.html">Line</a> &amp; Line::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classLine.html">Line</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>_other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="Line_8cpp_source.html">Line.cpp</a> の <a class="el" href="Line_8cpp_source.html#l00019">19</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -305,7 +426,7 @@ $(document).ready(function(){initNavTree('classLine.html',''); initResizable(); 
   </dd>
 </dl>
 
-<p class="definition"> <a class="el" href="Line_8cpp_source.html">Line.cpp</a> の <a class="el" href="Line_8cpp_source.html#l00074">74</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Line_8cpp_source.html">Line.cpp</a> の <a class="el" href="Line_8cpp_source.html#l00053">53</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -333,7 +454,7 @@ $(document).ready(function(){initNavTree('classLine.html',''); initResizable(); 
   </dd>
 </dl>
 
-<p class="definition"> <a class="el" href="Line_8cpp_source.html">Line.cpp</a> の <a class="el" href="Line_8cpp_source.html#l00082">82</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Line_8cpp_source.html">Line.cpp</a> の <a class="el" href="Line_8cpp_source.html#l00057">57</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -354,7 +475,7 @@ $(document).ready(function(){initNavTree('classLine.html',''); initResizable(); 
 
 <p>ラインの更新処理 </p>
 
-<p class="definition"> <a class="el" href="Line_8cpp_source.html">Line.cpp</a> の <a class="el" href="Line_8cpp_source.html#l00029">29</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Line_8cpp_source.html">Line.cpp</a> の <a class="el" href="Line_8cpp_source.html#l00037">37</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -368,7 +489,7 @@ $(document).ready(function(){initNavTree('classLine.html',''); initResizable(); 
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classLine.html">Line</a></li>
-    <li class="footer">2026年09月11日(金) 07時37分44秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年09月12日(土) 13時06分01秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

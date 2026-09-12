@@ -95,20 +95,17 @@ $(document).ready(function(){initNavTree('Sprite_8hpp.html',''); initResizable()
   <div class="headertitle"><div class="title">Sprite.hpp ファイル</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;ReferencePtr.hpp&quot;</code><br />
-<code>#include &quot;Math/Matrix.hpp&quot;</code><br />
+<div class="textblock"><code>#include &lt;string&gt;</code><br />
+<code>#include &quot;ReferencePtr.hpp&quot;</code><br />
 <code>#include &quot;Math/Vector2.hpp&quot;</code><br />
 <code>#include &quot;Math/Vector4.hpp&quot;</code><br />
-<code>#include &quot;<a class="el" href="DX12Resource_8hpp_source.html">src/DirectX/Resource/DX12Resource.hpp</a>&quot;</code><br />
-<code>#include &lt;memory&gt;</code><br />
-<code>#include &quot;<a class="el" href="DirectXAdapter_8hpp_source.html">src/DirectX/DirectXAdapter.hpp</a>&quot;</code><br />
 </div>
 <p><a href="Sprite_8hpp_source.html">[ソースコード]</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 クラス</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSprite.html">Sprite</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">2Dスプライトクラス テクスチャ付き2D四角形の描画を管理  <a href="classSprite.html#details">[詳解]</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">2Dスプライトクラス（公開ハンドル） 実体（SpriteInstance）はEngine側が所有し、本クラスは実体への安全な参照を保持するだけの薄いラッパー。 実体が破棄された後に呼び出しても安全に無視される。  <a href="classSprite.html#details">[詳解]</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
@@ -117,7 +114,7 @@ $(document).ready(function(){initNavTree('Sprite_8hpp.html',''); initResizable()
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="Sprite_8hpp.html">Sprite.hpp</a></li>
-    <li class="footer">2026年09月11日(金) 07時37分44秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年09月12日(土) 13時06分01秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

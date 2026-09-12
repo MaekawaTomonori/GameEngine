@@ -100,27 +100,48 @@ $(document).ready(function(){initNavTree('SpriteCommon_8hpp_source.html',''); in
 <div class="contents">
 <a href="SpriteCommon_8hpp.html">[詳解]</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef SpriteCommon_HPP_</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define SpriteCommon_HPP_</span></div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;<a class="code" href="Common_8hpp.html">src/Common/Common.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;vector&gt;</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
-<div class="foldopen" id="foldopen00005" data-start="{" data-end="};">
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno"><a class="line" href="classSpriteCommon.html">    5</a></span><span class="keyword">class </span><a class="code hl_class" href="classSpriteCommon.html">SpriteCommon</a> : <span class="keyword">public</span> <a class="code hl_class" href="classCommon.html">Common</a>{</div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classSpriteCommon.html#a4cbb799be84dee947a2ac96a92891399">Initialize</a>(<span class="keyword">const</span> GESTD::ReferencePtr&lt;DirectXAdapter&gt;&amp; _adapter, <span class="keyword">const</span> GESTD::ReferencePtr&lt;DebugUI&gt;&amp; _debugUi) <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>}; <span class="comment">// class SpriteCommon</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;<a class="code" href="Common_8hpp.html">src/Common/Common.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;<a class="code" href="SpriteInstance_8hpp.html">src/Sprite/SpriteInstance.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="foldopen" id="foldopen00008" data-start="{" data-end="};">
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno"><a class="line" href="classSpriteCommon.html">    8</a></span><span class="keyword">class </span><a class="code hl_class" href="classSpriteCommon.html">SpriteCommon</a> : <span class="keyword">public</span> <a class="code hl_class" href="classCommon.html">Common</a>{</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>    std::vector&lt;std::unique_ptr&lt;SpriteInstance&gt;&gt; instances_;</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>    std::vector&lt;SpriteInstance*&gt; drawQueue_;</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classSpriteCommon.html#a4cbb799be84dee947a2ac96a92891399">Initialize</a>(<span class="keyword">const</span> GESTD::ReferencePtr&lt;DirectXAdapter&gt;&amp; _adapter, <span class="keyword">const</span> GESTD::ReferencePtr&lt;DebugUI&gt;&amp; _debugUi) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    GESTD::ReferencePtr&lt;SpriteInstance&gt; <a class="code hl_function" href="classSpriteCommon.html#ad090879ba15638f72a28124bc6a28b80">CreateInstance</a>(<span class="keyword">const</span> std::string&amp; _texture);</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classSpriteCommon.html#a08ac82a897eba568ea178489340b88d1">DestroyInstance</a>(<span class="keyword">const</span> GESTD::ReferencePtr&lt;SpriteInstance&gt;&amp; _instance);</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classSpriteCommon.html#a5b6dff704ca4c356bcd6048740e44429">RegisterDraw</a>(<a class="code hl_class" href="classSpriteInstance.html">SpriteInstance</a>* _instance);</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classSpriteCommon.html#a390c6fd8a48d282a63a8c33c270eac32">Draw</a>(<a class="code hl_class" href="classRenderer.html">Renderer</a>* _renderer) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>}; <span class="comment">// class SpriteCommon</span></div>
 </div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#endif </span><span class="comment">// SpriteCommon_HPP_</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="preprocessor">#endif </span><span class="comment">// SpriteCommon_HPP_</span></div>
 <div class="ttc" id="aCommon_8hpp_html"><div class="ttname"><a href="Common_8hpp.html">Common.hpp</a></div></div>
+<div class="ttc" id="aSpriteInstance_8hpp_html"><div class="ttname"><a href="SpriteInstance_8hpp.html">SpriteInstance.hpp</a></div></div>
 <div class="ttc" id="aclassCommon_html"><div class="ttname"><a href="classCommon.html">Common</a></div><div class="ttdef"><b>Definition</b> <a href="Common_8hpp_source.html#l00011">Common.hpp:11</a></div></div>
-<div class="ttc" id="aclassSpriteCommon_html"><div class="ttname"><a href="classSpriteCommon.html">SpriteCommon</a></div><div class="ttdef"><b>Definition</b> <a href="SpriteCommon_8hpp_source.html#l00005">SpriteCommon.hpp:5</a></div></div>
+<div class="ttc" id="aclassRenderer_html"><div class="ttname"><a href="classRenderer.html">Renderer</a></div><div class="ttdoc">レンダラークラス 描画タスクの管理とポストプロセス適用を制御</div><div class="ttdef"><b>Definition</b> <a href="Renderer_8hpp_source.html#l00016">Renderer.hpp:16</a></div></div>
+<div class="ttc" id="aclassSpriteCommon_html"><div class="ttname"><a href="classSpriteCommon.html">SpriteCommon</a></div><div class="ttdef"><b>Definition</b> <a href="SpriteCommon_8hpp_source.html#l00008">SpriteCommon.hpp:8</a></div></div>
+<div class="ttc" id="aclassSpriteCommon_html_a08ac82a897eba568ea178489340b88d1"><div class="ttname"><a href="classSpriteCommon.html#a08ac82a897eba568ea178489340b88d1">SpriteCommon::DestroyInstance</a></div><div class="ttdeci">void DestroyInstance(const GESTD::ReferencePtr&lt; SpriteInstance &gt; &amp;_instance)</div><div class="ttdoc">スプライト実体を破棄する</div><div class="ttdef"><b>Definition</b> <a href="SpriteCommon_8cpp_source.html#l00082">SpriteCommon.cpp:82</a></div></div>
+<div class="ttc" id="aclassSpriteCommon_html_a390c6fd8a48d282a63a8c33c270eac32"><div class="ttname"><a href="classSpriteCommon.html#a390c6fd8a48d282a63a8c33c270eac32">SpriteCommon::Draw</a></div><div class="ttdeci">void Draw(Renderer *_renderer) override</div><div class="ttdef"><b>Definition</b> <a href="SpriteCommon_8cpp_source.html#l00095">SpriteCommon.cpp:95</a></div></div>
 <div class="ttc" id="aclassSpriteCommon_html_a4cbb799be84dee947a2ac96a92891399"><div class="ttname"><a href="classSpriteCommon.html#a4cbb799be84dee947a2ac96a92891399">SpriteCommon::Initialize</a></div><div class="ttdeci">void Initialize(const GESTD::ReferencePtr&lt; DirectXAdapter &gt; &amp;_adapter, const GESTD::ReferencePtr&lt; DebugUI &gt; &amp;_debugUi) override</div><div class="ttdef"><b>Definition</b> <a href="SpriteCommon_8cpp_source.html#l00008">SpriteCommon.cpp:8</a></div></div>
+<div class="ttc" id="aclassSpriteCommon_html_a5b6dff704ca4c356bcd6048740e44429"><div class="ttname"><a href="classSpriteCommon.html#a5b6dff704ca4c356bcd6048740e44429">SpriteCommon::RegisterDraw</a></div><div class="ttdeci">void RegisterDraw(SpriteInstance *_instance)</div><div class="ttdoc">このフレームの描画キューに登録する（呼ばれた順序を保つ）</div><div class="ttdef"><b>Definition</b> <a href="SpriteCommon_8cpp_source.html#l00091">SpriteCommon.cpp:91</a></div></div>
+<div class="ttc" id="aclassSpriteCommon_html_ad090879ba15638f72a28124bc6a28b80"><div class="ttname"><a href="classSpriteCommon.html#ad090879ba15638f72a28124bc6a28b80">SpriteCommon::CreateInstance</a></div><div class="ttdeci">GESTD::ReferencePtr&lt; SpriteInstance &gt; CreateInstance(const std::string &amp;_texture)</div><div class="ttdoc">スプライト実体を生成し登録する</div><div class="ttdef"><b>Definition</b> <a href="SpriteCommon_8cpp_source.html#l00073">SpriteCommon.cpp:73</a></div></div>
+<div class="ttc" id="aclassSpriteInstance_html"><div class="ttname"><a href="classSpriteInstance.html">SpriteInstance</a></div><div class="ttdoc">2Dスプライトの実体（Engine内部専用） 生成・破棄は SpriteCommon が行い、外部からは公開ハンドルの Sprite 経由でのみ操作される。</div><div class="ttdef"><b>Definition</b> <a href="SpriteInstance_8hpp_source.html#l00017">SpriteInstance.hpp:17</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_909c286288939002c1b25213a067bdba.html">Sprite</a></li><li class="navelem"><a class="el" href="dir_c27cb4f1352f494a0d00cb2d05d35956.html">Common</a></li><li class="navelem"><a class="el" href="SpriteCommon_8hpp.html">SpriteCommon.hpp</a></li>
-    <li class="footer">2026年09月11日(金) 07時37分44秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年09月12日(土) 13時06分01秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

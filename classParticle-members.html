@@ -98,10 +98,14 @@ $(document).ready(function(){initNavTree('classParticle.html',''); initResizable
 <table class="directory">
   <tr class="even"><td class="entry"><a class="el" href="classParticle.html#a7ada3a5a4b95eee683bd918fb438fadd">Debug</a>()</td><td class="entry"><a class="el" href="classParticle.html">Particle</a></td><td class="entry"></td></tr>
   <tr class="odd"><td class="entry"><a class="el" href="classParticle.html#a978d8ac44e1ea71214a6e95a45585103">GetColor</a>() const</td><td class="entry"><a class="el" href="classParticle.html">Particle</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classParticle.html#add3c9ecb00172d8e82c7addded4fbdb8">GetPosition</a>() const</td><td class="entry"><a class="el" href="classParticle.html">Particle</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classParticle.html#acc43b5d9ed146096cef1aeb4f2cf5891">GetOrigin</a>() const</td><td class="entry"><a class="el" href="classParticle.html">Particle</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classParticle.html#add3c9ecb00172d8e82c7addded4fbdb8">GetPosition</a>() const</td><td class="entry"><a class="el" href="classParticle.html">Particle</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classParticle.html#a8d1a161eb696c2dc697a901e4a6c0fec">GetProgress</a>() const</td><td class="entry"><a class="el" href="classParticle.html">Particle</a></td><td class="entry"></td></tr>
   <tr class="odd"><td class="entry"><a class="el" href="classParticle.html#a0adc658603155ea529112a1c232ace72">GetRotation</a>() const</td><td class="entry"><a class="el" href="classParticle.html">Particle</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classParticle.html#a1d52b5f184d82b5dd166fa717e655747">GetScale</a>() const</td><td class="entry"><a class="el" href="classParticle.html">Particle</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="classParticle.html#a06fe78b0d71b9fa9f004d1e45fd23ba1">Initialize</a>(float _duration)</td><td class="entry"><a class="el" href="classParticle.html">Particle</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classParticle.html#a49652e2e6581bdad9e424096dbc026d8">GetVelocity</a>() const</td><td class="entry"><a class="el" href="classParticle.html">Particle</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classParticle.html#a06fe78b0d71b9fa9f004d1e45fd23ba1">Initialize</a>(float _duration)</td><td class="entry"><a class="el" href="classParticle.html">Particle</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classParticle.html#a841de2aa334787f1bed0873306c4bd8d">Integrate</a>()</td><td class="entry"><a class="el" href="classParticle.html">Particle</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classParticle.html#a601a99e7f1ea0f70452b508249ff5272">IsDead</a>() const</td><td class="entry"><a class="el" href="classParticle.html">Particle</a></td><td class="entry"></td></tr>
   <tr class="odd"><td class="entry"><a class="el" href="classParticle.html#af6bb22f82fbdec676ddf9fa5a3d5d693">RandomizeColor</a>(const Vector4 &amp;_min={ 0.f, 0.f, 0.f, 0.f }, const Vector4 &amp;_max={ 1.f, 1.f, 1.f, 1.f })</td><td class="entry"><a class="el" href="classParticle.html">Particle</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classParticle.html#ab44f2101d6c23813cd4303a3d02f7f76">RandomizePosition</a>(const Vector3 &amp;_min={ -1.f, -1.f, -1.f }, const Vector3 &amp;_max={ 1.f, 1.f, 1.f })</td><td class="entry"><a class="el" href="classParticle.html">Particle</a></td><td class="entry"></td></tr>
@@ -115,15 +119,14 @@ $(document).ready(function(){initNavTree('classParticle.html',''); initResizable
   <tr class="even"><td class="entry"><a class="el" href="classParticle.html#a981335662064b0d12d95d92c20564f7a">SetRotationVelocity</a>(const Vector3 &amp;_rotationVelocity)</td><td class="entry"><a class="el" href="classParticle.html">Particle</a></td><td class="entry"></td></tr>
   <tr class="odd"><td class="entry"><a class="el" href="classParticle.html#aae8773234e782b8bfdfdaaa3e1624fb7">SetScale</a>(const Vector3 &amp;_scale)</td><td class="entry"><a class="el" href="classParticle.html">Particle</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classParticle.html#a84f623845d76e2afb66b9c08fc78a772">SetSizeKeys</a>(const std::vector&lt; GradientKey&lt; Vector3 &gt; &gt; &amp;_keys)</td><td class="entry"><a class="el" href="classParticle.html">Particle</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="classParticle.html#a2f8fa67f2cfe78472091651d35ecefe7">SetUpdateFunction</a>(const std::function&lt; void(float, const Vector3 &amp;, Vector3 &amp;, Vector3 &amp;, Vector4 &amp;)&gt; &amp;_func)</td><td class="entry"><a class="el" href="classParticle.html">Particle</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classParticle.html#a64a89784a0d0f8cf113511c0faef1cac">SetVelocity</a>(const Vector3 &amp;_velocity)</td><td class="entry"><a class="el" href="classParticle.html">Particle</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="classParticle.html#a9ff98679ed52065d043d29a5af7a8980">Update</a>()</td><td class="entry"><a class="el" href="classParticle.html">Particle</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classParticle.html#a64a89784a0d0f8cf113511c0faef1cac">SetVelocity</a>(const Vector3 &amp;_velocity)</td><td class="entry"><a class="el" href="classParticle.html">Particle</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classParticle.html#a05f255fd01cfac773659b60cadc643d4">UpdateProgress</a>()</td><td class="entry"><a class="el" href="classParticle.html">Particle</a></td><td class="entry"></td></tr>
 </table></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">2026年09月11日(金) 07時37分44秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年09月12日(土) 13時06分01秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

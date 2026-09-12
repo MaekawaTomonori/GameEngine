@@ -110,9 +110,9 @@ $(document).ready(function(){initNavTree('classCanvas.html',''); initResizable()
 <tr class="memitem:ab6e8e8718c3aca4a81476e82d4becf51" id="r_ab6e8e8718c3aca4a81476e82d4becf51"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCanvas.html#ab6e8e8718c3aca4a81476e82d4becf51">SetFactory</a> (GESTD::ReferencePtr&lt; <a class="el" href="classPostEffectFactory.html">PostEffectFactory</a> &gt; _factory)</td></tr>
 <tr class="memdesc:ab6e8e8718c3aca4a81476e82d4becf51"><td class="mdescLeft">&#160;</td><td class="mdescRight">PostEffect factory を設定  <br /></td></tr>
 <tr class="separator:ab6e8e8718c3aca4a81476e82d4becf51"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a07217fe3c2894cd13ec8382de514200a" id="r_a07217fe3c2894cd13ec8382de514200a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCanvas.html#a07217fe3c2894cd13ec8382de514200a">RegisterTask</a> (const std::function&lt; void()&gt; &amp;_task)</td></tr>
-<tr class="memdesc:a07217fe3c2894cd13ec8382de514200a"><td class="mdescLeft">&#160;</td><td class="mdescRight">描画タスクを登録する（次のDrawObjects()で消化される）  <br /></td></tr>
-<tr class="separator:a07217fe3c2894cd13ec8382de514200a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f2a6523c451bfc5d863c673a5d1b912" id="r_a7f2a6523c451bfc5d863c673a5d1b912"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCanvas.html#a7f2a6523c451bfc5d863c673a5d1b912">RegisterTask</a> (std::function&lt; void()&gt; _task)</td></tr>
+<tr class="memdesc:a7f2a6523c451bfc5d863c673a5d1b912"><td class="mdescLeft">&#160;</td><td class="mdescRight">描画タスクを登録する（次のDrawObjects()で消化される）  <br /></td></tr>
+<tr class="separator:a7f2a6523c451bfc5d863c673a5d1b912"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab751aed2bf34c98e4dc87cdc6c9ba9f9" id="r_ab751aed2bf34c98e4dc87cdc6c9ba9f9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCanvas.html#ab751aed2bf34c98e4dc87cdc6c9ba9f9">DrawObjects</a> ()</td></tr>
 <tr class="memdesc:ab751aed2bf34c98e4dc87cdc6c9ba9f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">登録されたタスクを自分のRTへ描画する  <br /></td></tr>
 <tr class="separator:ab751aed2bf34c98e4dc87cdc6c9ba9f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -160,7 +160,7 @@ $(document).ready(function(){initNavTree('classCanvas.html',''); initResizable()
 
 <p>常時構成のPostEffectを適用する </p>
 
-<p class="definition"> <a class="el" href="Canvas_8cpp_source.html">Canvas.cpp</a> の <a class="el" href="Canvas_8cpp_source.html#l00028">28</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Canvas_8cpp_source.html">Canvas.cpp</a> の <a class="el" href="Canvas_8cpp_source.html#l00030">30</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -181,7 +181,7 @@ $(document).ready(function(){initNavTree('classCanvas.html',''); initResizable()
 
 <p>適用結果を、現在バインドされている描画先へ合成描画する </p>
 
-<p class="definition"> <a class="el" href="Canvas_8cpp_source.html">Canvas.cpp</a> の <a class="el" href="Canvas_8cpp_source.html#l00032">32</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Canvas_8cpp_source.html">Canvas.cpp</a> の <a class="el" href="Canvas_8cpp_source.html#l00034">34</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -202,7 +202,7 @@ $(document).ready(function(){initNavTree('classCanvas.html',''); initResizable()
 
 <p>登録されたタスクを自分のRTへ描画する </p>
 
-<p class="definition"> <a class="el" href="Canvas_8cpp_source.html">Canvas.cpp</a> の <a class="el" href="Canvas_8cpp_source.html#l00017">17</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Canvas_8cpp_source.html">Canvas.cpp</a> の <a class="el" href="Canvas_8cpp_source.html#l00019">19</a> 行目に定義があります。</p>
 
 <p class="reference">参照元 <a class="el" href="CanvasLayer_8cpp_source.html#l00092">CanvasLayer::DrawObjects()</a>.</p>
 
@@ -308,7 +308,7 @@ $(document).ready(function(){initNavTree('classCanvas.html',''); initResizable()
   </dd>
 </dl>
 
-<p class="definition"> <a class="el" href="Canvas_8cpp_source.html">Canvas.cpp</a> の <a class="el" href="Canvas_8cpp_source.html#l00003">3</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Canvas_8cpp_source.html">Canvas.cpp</a> の <a class="el" href="Canvas_8cpp_source.html#l00005">5</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -341,8 +341,8 @@ $(document).ready(function(){initNavTree('classCanvas.html',''); initResizable()
 
 </div>
 </div>
-<a id="a07217fe3c2894cd13ec8382de514200a" name="a07217fe3c2894cd13ec8382de514200a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a07217fe3c2894cd13ec8382de514200a">&#9670;&#160;</a></span>RegisterTask()</h2>
+<a id="a7f2a6523c451bfc5d863c673a5d1b912" name="a7f2a6523c451bfc5d863c673a5d1b912"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f2a6523c451bfc5d863c673a5d1b912">&#9670;&#160;</a></span>RegisterTask()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -350,7 +350,7 @@ $(document).ready(function(){initNavTree('classCanvas.html',''); initResizable()
         <tr>
           <td class="memname">void Canvas::RegisterTask </td>
           <td>(</td>
-          <td class="paramtype">const std::function&lt; void()&gt; &amp;&#160;</td>
+          <td class="paramtype">std::function&lt; void()&gt;&#160;</td>
           <td class="paramname"><em>_task</em></td><td>)</td>
           <td></td>
         </tr>
@@ -359,7 +359,7 @@ $(document).ready(function(){initNavTree('classCanvas.html',''); initResizable()
 
 <p>描画タスクを登録する（次のDrawObjects()で消化される） </p>
 
-<p class="definition"> <a class="el" href="Canvas_8cpp_source.html">Canvas.cpp</a> の <a class="el" href="Canvas_8cpp_source.html#l00013">13</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Canvas_8cpp_source.html">Canvas.cpp</a> の <a class="el" href="Canvas_8cpp_source.html#l00015">15</a> 行目に定義があります。</p>
 
 <p class="reference">参照元 <a class="el" href="Renderer_8cpp_source.html#l00013">Renderer::Register()</a>.</p>
 
@@ -442,7 +442,7 @@ $(document).ready(function(){initNavTree('classCanvas.html',''); initResizable()
 
 <p>PostEffect factory を設定 </p>
 
-<p class="definition"> <a class="el" href="Canvas_8cpp_source.html">Canvas.cpp</a> の <a class="el" href="Canvas_8cpp_source.html#l00009">9</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="Canvas_8cpp_source.html">Canvas.cpp</a> の <a class="el" href="Canvas_8cpp_source.html#l00011">11</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -456,7 +456,7 @@ $(document).ready(function(){initNavTree('classCanvas.html',''); initResizable()
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classCanvas.html">Canvas</a></li>
-    <li class="footer">2026年09月11日(金) 07時37分44秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年09月12日(土) 13時06分01秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

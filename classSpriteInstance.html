@@ -1,0 +1,873 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>PortfolioGame Engine: SpriteInstance クラス</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">PortfolioGame Engine<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">C++20 DirectX12 Game Engine</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','検索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('classSpriteInstance.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">読み取り中…</div>
+<div class="SRStatus" id="Searching">検索中…</div>
+<div class="SRStatus" id="NoMatches">一致する文字列を見つけられません</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">クラス</a> &#124;
+<a href="#pub-methods">公開メンバ関数</a> &#124;
+<a href="classSpriteInstance-members.html">全メンバ一覧</a>  </div>
+  <div class="headertitle"><div class="title">SpriteInstance クラス</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>2Dスプライトの実体（Engine内部専用） 生成・破棄は <a class="el" href="classSpriteCommon.html">SpriteCommon</a> が行い、外部からは公開ハンドルの <a class="el" href="classSprite.html" title="2Dスプライトクラス（公開ハンドル） 実体（SpriteInstance）はEngine側が所有し、本クラスは実体への安全な参照を保持するだけの薄いラッパー。 実体が破棄された後に呼び出しても安全に無視...">Sprite</a> 経由でのみ操作される。  
+ <a href="classSpriteInstance.html#details">[詳解]</a></p>
+
+<p><code>#include &lt;<a class="el" href="SpriteInstance_8hpp_source.html">SpriteInstance.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+公開メンバ関数</h2></td></tr>
+<tr class="memitem:acd8e8ceadefad33e97ded9cd01eff796" id="r_acd8e8ceadefad33e97ded9cd01eff796"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpriteInstance.html#acd8e8ceadefad33e97ded9cd01eff796">SpriteInstance</a> ()</td></tr>
+<tr class="separator:acd8e8ceadefad33e97ded9cd01eff796"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adbbf97a0bff6e2e86bfd57aa00fa9e98" id="r_adbbf97a0bff6e2e86bfd57aa00fa9e98"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpriteInstance.html#adbbf97a0bff6e2e86bfd57aa00fa9e98">~SpriteInstance</a> ()</td></tr>
+<tr class="separator:adbbf97a0bff6e2e86bfd57aa00fa9e98"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a66dda29e704dc5ae31776f348fec8921" id="r_a66dda29e704dc5ae31776f348fec8921"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpriteInstance.html#a66dda29e704dc5ae31776f348fec8921">Initialize</a> (const std::string &amp;_texture)</td></tr>
+<tr class="memdesc:a66dda29e704dc5ae31776f348fec8921"><td class="mdescLeft">&#160;</td><td class="mdescRight">スプライトを初期化  <br /></td></tr>
+<tr class="separator:a66dda29e704dc5ae31776f348fec8921"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80460519688261ab90eaabe545a1a813" id="r_a80460519688261ab90eaabe545a1a813"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpriteInstance.html#a80460519688261ab90eaabe545a1a813">Update</a> ()</td></tr>
+<tr class="memdesc:a80460519688261ab90eaabe545a1a813"><td class="mdescLeft">&#160;</td><td class="mdescRight">スプライトの更新処理  <br /></td></tr>
+<tr class="separator:a80460519688261ab90eaabe545a1a813"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acadac4ce0006865b2ffb84bb85e693c3" id="r_acadac4ce0006865b2ffb84bb85e693c3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpriteInstance.html#acadac4ce0006865b2ffb84bb85e693c3">Draw</a> ()</td></tr>
+<tr class="memdesc:acadac4ce0006865b2ffb84bb85e693c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">スプライトを描画キューに登録  <br /></td></tr>
+<tr class="separator:acadac4ce0006865b2ffb84bb85e693c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac47704271af7a58daeb43bca5c41bb25" id="r_ac47704271af7a58daeb43bca5c41bb25"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpriteInstance.html#ac47704271af7a58daeb43bca5c41bb25">ExecuteDraw</a> () const</td></tr>
+<tr class="memdesc:ac47704271af7a58daeb43bca5c41bb25"><td class="mdescLeft">&#160;</td><td class="mdescRight">描画本体（SpriteCommonから直接・非virtualに呼ばれる）  <br /></td></tr>
+<tr class="separator:ac47704271af7a58daeb43bca5c41bb25"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aedb8103146ae358b6dfe4bc46ae8853d" id="r_aedb8103146ae358b6dfe4bc46ae8853d"><td class="memItemLeft" align="right" valign="top">const Vector2 &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpriteInstance.html#aedb8103146ae358b6dfe4bc46ae8853d">GetPosition</a> () const</td></tr>
+<tr class="memdesc:aedb8103146ae358b6dfe4bc46ae8853d"><td class="mdescLeft">&#160;</td><td class="mdescRight">位置を取得  <br /></td></tr>
+<tr class="separator:aedb8103146ae358b6dfe4bc46ae8853d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a200d2e3a10371643cbed33af28afe582" id="r_a200d2e3a10371643cbed33af28afe582"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpriteInstance.html#a200d2e3a10371643cbed33af28afe582">SetPosition</a> (const Vector2 &amp;_p)</td></tr>
+<tr class="memdesc:a200d2e3a10371643cbed33af28afe582"><td class="mdescLeft">&#160;</td><td class="mdescRight">位置を設定  <br /></td></tr>
+<tr class="separator:a200d2e3a10371643cbed33af28afe582"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad957c4ebc2dd388d0f2568b2f8edaac0" id="r_ad957c4ebc2dd388d0f2568b2f8edaac0"><td class="memItemLeft" align="right" valign="top">const Vector2 &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpriteInstance.html#ad957c4ebc2dd388d0f2568b2f8edaac0">GetSize</a> () const</td></tr>
+<tr class="memdesc:ad957c4ebc2dd388d0f2568b2f8edaac0"><td class="mdescLeft">&#160;</td><td class="mdescRight">サイズを取得  <br /></td></tr>
+<tr class="separator:ad957c4ebc2dd388d0f2568b2f8edaac0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b62af0dd54e597492b38a5b1f077acd" id="r_a2b62af0dd54e597492b38a5b1f077acd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpriteInstance.html#a2b62af0dd54e597492b38a5b1f077acd">SetSize</a> (const Vector2 &amp;_s)</td></tr>
+<tr class="memdesc:a2b62af0dd54e597492b38a5b1f077acd"><td class="mdescLeft">&#160;</td><td class="mdescRight">サイズを設定  <br /></td></tr>
+<tr class="separator:a2b62af0dd54e597492b38a5b1f077acd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad42862ab86fe820d9f971e96d0a520f7" id="r_ad42862ab86fe820d9f971e96d0a520f7"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpriteInstance.html#ad42862ab86fe820d9f971e96d0a520f7">GetRotation</a> () const</td></tr>
+<tr class="memdesc:ad42862ab86fe820d9f971e96d0a520f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">回転角度を取得  <br /></td></tr>
+<tr class="separator:ad42862ab86fe820d9f971e96d0a520f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abbdff896817ad8af8f03b0a684733857" id="r_abbdff896817ad8af8f03b0a684733857"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpriteInstance.html#abbdff896817ad8af8f03b0a684733857">SetRotation</a> (float _r)</td></tr>
+<tr class="memdesc:abbdff896817ad8af8f03b0a684733857"><td class="mdescLeft">&#160;</td><td class="mdescRight">回転角度を設定  <br /></td></tr>
+<tr class="separator:abbdff896817ad8af8f03b0a684733857"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a77e2f20b2921ab3a8b84b431afadeb6c" id="r_a77e2f20b2921ab3a8b84b431afadeb6c"><td class="memItemLeft" align="right" valign="top">const Vector4 &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpriteInstance.html#a77e2f20b2921ab3a8b84b431afadeb6c">GetColor</a> () const</td></tr>
+<tr class="memdesc:a77e2f20b2921ab3a8b84b431afadeb6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">色を取得  <br /></td></tr>
+<tr class="separator:a77e2f20b2921ab3a8b84b431afadeb6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e7542ba770f5a15a807214f1bb0a4e3" id="r_a5e7542ba770f5a15a807214f1bb0a4e3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpriteInstance.html#a5e7542ba770f5a15a807214f1bb0a4e3">SetColor</a> (const Vector4 &amp;_color) const</td></tr>
+<tr class="memdesc:a5e7542ba770f5a15a807214f1bb0a4e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">色を設定  <br /></td></tr>
+<tr class="separator:a5e7542ba770f5a15a807214f1bb0a4e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ac009109397473ef24e439a5fad27dd" id="r_a6ac009109397473ef24e439a5fad27dd"><td class="memItemLeft" align="right" valign="top">const Vector2 &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpriteInstance.html#a6ac009109397473ef24e439a5fad27dd">GetAnchorPoint</a> () const</td></tr>
+<tr class="memdesc:a6ac009109397473ef24e439a5fad27dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">アンカーポイントを取得  <br /></td></tr>
+<tr class="separator:a6ac009109397473ef24e439a5fad27dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adda329425bc56b8f4021ef9b1c6100ee" id="r_adda329425bc56b8f4021ef9b1c6100ee"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpriteInstance.html#adda329425bc56b8f4021ef9b1c6100ee">SetAnchorPoint</a> (const Vector2 &amp;_a)</td></tr>
+<tr class="memdesc:adda329425bc56b8f4021ef9b1c6100ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">アンカーポイントを設定  <br /></td></tr>
+<tr class="separator:adda329425bc56b8f4021ef9b1c6100ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9666133358fad47035efc6464cb517b0" id="r_a9666133358fad47035efc6464cb517b0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpriteInstance.html#a9666133358fad47035efc6464cb517b0">IsFlipX</a> () const</td></tr>
+<tr class="memdesc:a9666133358fad47035efc6464cb517b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">X軸反転の状態を取得  <br /></td></tr>
+<tr class="separator:a9666133358fad47035efc6464cb517b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae095eacc4b9edbb0aaf5b81a82e1c099" id="r_ae095eacc4b9edbb0aaf5b81a82e1c099"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpriteInstance.html#ae095eacc4b9edbb0aaf5b81a82e1c099">SetFlipX</a> (bool _f)</td></tr>
+<tr class="memdesc:ae095eacc4b9edbb0aaf5b81a82e1c099"><td class="mdescLeft">&#160;</td><td class="mdescRight">X軸反転を設定  <br /></td></tr>
+<tr class="separator:ae095eacc4b9edbb0aaf5b81a82e1c099"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0fdd036af55bdf955620be4dc9779efc" id="r_a0fdd036af55bdf955620be4dc9779efc"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpriteInstance.html#a0fdd036af55bdf955620be4dc9779efc">IsFlipY</a> () const</td></tr>
+<tr class="memdesc:a0fdd036af55bdf955620be4dc9779efc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Y軸反転の状態を取得  <br /></td></tr>
+<tr class="separator:a0fdd036af55bdf955620be4dc9779efc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f348443070c0cc6f0251d41c91e8bde" id="r_a5f348443070c0cc6f0251d41c91e8bde"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpriteInstance.html#a5f348443070c0cc6f0251d41c91e8bde">SetFlipY</a> (bool _f)</td></tr>
+<tr class="memdesc:a5f348443070c0cc6f0251d41c91e8bde"><td class="mdescLeft">&#160;</td><td class="mdescRight">Y軸反転を設定  <br /></td></tr>
+<tr class="separator:a5f348443070c0cc6f0251d41c91e8bde"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac7f934b041fc1f690a90e1491403d404" id="r_ac7f934b041fc1f690a90e1491403d404"><td class="memItemLeft" align="right" valign="top">const Vector2 &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpriteInstance.html#ac7f934b041fc1f690a90e1491403d404">GetTextureLeftTop</a> () const</td></tr>
+<tr class="memdesc:ac7f934b041fc1f690a90e1491403d404"><td class="mdescLeft">&#160;</td><td class="mdescRight">テクスチャの左上座標を取得  <br /></td></tr>
+<tr class="separator:ac7f934b041fc1f690a90e1491403d404"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9eee9219ea5e91dcf1c6a5b9ec24240b" id="r_a9eee9219ea5e91dcf1c6a5b9ec24240b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpriteInstance.html#a9eee9219ea5e91dcf1c6a5b9ec24240b">SetTextureLeftTop</a> (const Vector2 &amp;_textureLeftTop)</td></tr>
+<tr class="memdesc:a9eee9219ea5e91dcf1c6a5b9ec24240b"><td class="mdescLeft">&#160;</td><td class="mdescRight">テクスチャの左上座標を設定  <br /></td></tr>
+<tr class="separator:a9eee9219ea5e91dcf1c6a5b9ec24240b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f670804dd7dba3be92e981d4f3eb709" id="r_a8f670804dd7dba3be92e981d4f3eb709"><td class="memItemLeft" align="right" valign="top">const Vector2 &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpriteInstance.html#a8f670804dd7dba3be92e981d4f3eb709">GetTextureSize</a> () const</td></tr>
+<tr class="memdesc:a8f670804dd7dba3be92e981d4f3eb709"><td class="mdescLeft">&#160;</td><td class="mdescRight">テクスチャサイズを取得  <br /></td></tr>
+<tr class="separator:a8f670804dd7dba3be92e981d4f3eb709"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5c49c4695a160b79acdf8664566a443" id="r_ae5c49c4695a160b79acdf8664566a443"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpriteInstance.html#ae5c49c4695a160b79acdf8664566a443">SetTextureSize</a> (const Vector2 &amp;_textureSize)</td></tr>
+<tr class="memdesc:ae5c49c4695a160b79acdf8664566a443"><td class="mdescLeft">&#160;</td><td class="mdescRight">テクスチャサイズを設定  <br /></td></tr>
+<tr class="separator:ae5c49c4695a160b79acdf8664566a443"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2becebd5e4ca48cca7b5be1cb82aa713" id="r_a2becebd5e4ca48cca7b5be1cb82aa713"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpriteInstance.html#a2becebd5e4ca48cca7b5be1cb82aa713">SetActivePostEffect</a> (bool _active)</td></tr>
+<tr class="memdesc:a2becebd5e4ca48cca7b5be1cb82aa713"><td class="mdescLeft">&#160;</td><td class="mdescRight">ポストエフェクトを有効化/無効化  <br /></td></tr>
+<tr class="separator:a2becebd5e4ca48cca7b5be1cb82aa713"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d63a9538be125c2a8aa5a1670684b9b" id="r_a5d63a9538be125c2a8aa5a1670684b9b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpriteInstance.html#a5d63a9538be125c2a8aa5a1670684b9b">SetTexture</a> (const std::string &amp;_texture)</td></tr>
+<tr class="memdesc:a5d63a9538be125c2a8aa5a1670684b9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">テクスチャを設定  <br /></td></tr>
+<tr class="separator:a5d63a9538be125c2a8aa5a1670684b9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af73805b408c75c94cc04c230f30386a8" id="r_af73805b408c75c94cc04c230f30386a8"><td class="memItemLeft" align="right" valign="top">GESTD::ReferencePtr&lt; <a class="el" href="classSpriteInstance.html">SpriteInstance</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSpriteInstance.html#af73805b408c75c94cc04c230f30386a8">GetReference</a> ()</td></tr>
+<tr class="memdesc:af73805b408c75c94cc04c230f30386a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">自身への安全な参照を取得する <a class="el" href="classSpriteCommon.html">SpriteCommon</a> がハンドル（Sprite）生成時にのみ使用する。  <br /></td></tr>
+<tr class="separator:af73805b408c75c94cc04c230f30386a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">詳解</h2>
+<div class="textblock"><p>2Dスプライトの実体（Engine内部専用） 生成・破棄は <a class="el" href="classSpriteCommon.html">SpriteCommon</a> が行い、外部からは公開ハンドルの <a class="el" href="classSprite.html" title="2Dスプライトクラス（公開ハンドル） 実体（SpriteInstance）はEngine側が所有し、本クラスは実体への安全な参照を保持するだけの薄いラッパー。 実体が破棄された後に呼び出しても安全に無視...">Sprite</a> 経由でのみ操作される。 </p>
+
+<p class="definition"> <a class="el" href="SpriteInstance_8hpp_source.html">SpriteInstance.hpp</a> の <a class="el" href="SpriteInstance_8hpp_source.html#l00017">17</a> 行目に定義があります。</p>
+</div><h2 class="groupheader">構築子と解体子</h2>
+<a id="acd8e8ceadefad33e97ded9cd01eff796" name="acd8e8ceadefad33e97ded9cd01eff796"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acd8e8ceadefad33e97ded9cd01eff796">&#9670;&#160;</a></span>SpriteInstance()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SpriteInstance::SpriteInstance </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="SpriteInstance_8cpp_source.html">SpriteInstance.cpp</a> の <a class="el" href="SpriteInstance_8cpp_source.html#l00013">13</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="adbbf97a0bff6e2e86bfd57aa00fa9e98" name="adbbf97a0bff6e2e86bfd57aa00fa9e98"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adbbf97a0bff6e2e86bfd57aa00fa9e98">&#9670;&#160;</a></span>~SpriteInstance()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SpriteInstance::~SpriteInstance </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition"> <a class="el" href="SpriteInstance_8cpp_source.html">SpriteInstance.cpp</a> の <a class="el" href="SpriteInstance_8cpp_source.html#l00021">21</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<h2 class="groupheader">関数詳解</h2>
+<a id="acadac4ce0006865b2ffb84bb85e693c3" name="acadac4ce0006865b2ffb84bb85e693c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acadac4ce0006865b2ffb84bb85e693c3">&#9670;&#160;</a></span>Draw()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SpriteInstance::Draw </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>スプライトを描画キューに登録 </p>
+
+<p class="definition"> <a class="el" href="SpriteInstance_8cpp_source.html">SpriteInstance.cpp</a> の <a class="el" href="SpriteInstance_8cpp_source.html#l00130">130</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="ac47704271af7a58daeb43bca5c41bb25" name="ac47704271af7a58daeb43bca5c41bb25"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac47704271af7a58daeb43bca5c41bb25">&#9670;&#160;</a></span>ExecuteDraw()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SpriteInstance::ExecuteDraw </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>描画本体（SpriteCommonから直接・非virtualに呼ばれる） </p>
+
+<p class="definition"> <a class="el" href="SpriteInstance_8cpp_source.html">SpriteInstance.cpp</a> の <a class="el" href="SpriteInstance_8cpp_source.html#l00134">134</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="a6ac009109397473ef24e439a5fad27dd" name="a6ac009109397473ef24e439a5fad27dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ac009109397473ef24e439a5fad27dd">&#9670;&#160;</a></span>GetAnchorPoint()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const Vector2 &amp; SpriteInstance::GetAnchorPoint </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>アンカーポイントを取得 </p>
+<dl class="section return"><dt>戻り値</dt><dd>アンカーポイントへの参照 </dd></dl>
+
+<p class="definition"> <a class="el" href="SpriteInstance_8cpp_source.html">SpriteInstance.cpp</a> の <a class="el" href="SpriteInstance_8cpp_source.html#l00198">198</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="a77e2f20b2921ab3a8b84b431afadeb6c" name="a77e2f20b2921ab3a8b84b431afadeb6c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a77e2f20b2921ab3a8b84b431afadeb6c">&#9670;&#160;</a></span>GetColor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const Vector4 &amp; SpriteInstance::GetColor </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>色を取得 </p>
+<dl class="section return"><dt>戻り値</dt><dd>色ベクトルへの参照 </dd></dl>
+
+<p class="definition"> <a class="el" href="SpriteInstance_8cpp_source.html">SpriteInstance.cpp</a> の <a class="el" href="SpriteInstance_8cpp_source.html#l00190">190</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="aedb8103146ae358b6dfe4bc46ae8853d" name="aedb8103146ae358b6dfe4bc46ae8853d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aedb8103146ae358b6dfe4bc46ae8853d">&#9670;&#160;</a></span>GetPosition()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const Vector2 &amp; SpriteInstance::GetPosition </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>位置を取得 </p>
+<dl class="section return"><dt>戻り値</dt><dd>位置ベクトルへの参照 </dd></dl>
+
+<p class="definition"> <a class="el" href="SpriteInstance_8cpp_source.html">SpriteInstance.cpp</a> の <a class="el" href="SpriteInstance_8cpp_source.html#l00166">166</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="af73805b408c75c94cc04c230f30386a8" name="af73805b408c75c94cc04c230f30386a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af73805b408c75c94cc04c230f30386a8">&#9670;&#160;</a></span>GetReference()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">GESTD::ReferencePtr&lt; <a class="el" href="classSpriteInstance.html">SpriteInstance</a> &gt; SpriteInstance::GetReference </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>自身への安全な参照を取得する <a class="el" href="classSpriteCommon.html">SpriteCommon</a> がハンドル（Sprite）生成時にのみ使用する。 </p>
+<dl class="section return"><dt>戻り値</dt><dd>ダングリング検出つきの参照 </dd></dl>
+
+<p class="definition"> <a class="el" href="SpriteInstance_8hpp_source.html">SpriteInstance.hpp</a> の <a class="el" href="SpriteInstance_8hpp_source.html#l00215">215</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="ad42862ab86fe820d9f971e96d0a520f7" name="ad42862ab86fe820d9f971e96d0a520f7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad42862ab86fe820d9f971e96d0a520f7">&#9670;&#160;</a></span>GetRotation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float SpriteInstance::GetRotation </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>回転角度を取得 </p>
+<dl class="section return"><dt>戻り値</dt><dd>回転角度（ラジアン） </dd></dl>
+
+<p class="definition"> <a class="el" href="SpriteInstance_8cpp_source.html">SpriteInstance.cpp</a> の <a class="el" href="SpriteInstance_8cpp_source.html#l00182">182</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="ad957c4ebc2dd388d0f2568b2f8edaac0" name="ad957c4ebc2dd388d0f2568b2f8edaac0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad957c4ebc2dd388d0f2568b2f8edaac0">&#9670;&#160;</a></span>GetSize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const Vector2 &amp; SpriteInstance::GetSize </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>サイズを取得 </p>
+<dl class="section return"><dt>戻り値</dt><dd>サイズベクトルへの参照 </dd></dl>
+
+<p class="definition"> <a class="el" href="SpriteInstance_8cpp_source.html">SpriteInstance.cpp</a> の <a class="el" href="SpriteInstance_8cpp_source.html#l00174">174</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="ac7f934b041fc1f690a90e1491403d404" name="ac7f934b041fc1f690a90e1491403d404"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac7f934b041fc1f690a90e1491403d404">&#9670;&#160;</a></span>GetTextureLeftTop()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const Vector2 &amp; SpriteInstance::GetTextureLeftTop </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>テクスチャの左上座標を取得 </p>
+<dl class="section return"><dt>戻り値</dt><dd>左上座標への参照 </dd></dl>
+
+<p class="definition"> <a class="el" href="SpriteInstance_8cpp_source.html">SpriteInstance.cpp</a> の <a class="el" href="SpriteInstance_8cpp_source.html#l00222">222</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="a8f670804dd7dba3be92e981d4f3eb709" name="a8f670804dd7dba3be92e981d4f3eb709"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f670804dd7dba3be92e981d4f3eb709">&#9670;&#160;</a></span>GetTextureSize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const Vector2 &amp; SpriteInstance::GetTextureSize </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>テクスチャサイズを取得 </p>
+<dl class="section return"><dt>戻り値</dt><dd>テクスチャサイズへの参照 </dd></dl>
+
+<p class="definition"> <a class="el" href="SpriteInstance_8cpp_source.html">SpriteInstance.cpp</a> の <a class="el" href="SpriteInstance_8cpp_source.html#l00230">230</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="a66dda29e704dc5ae31776f348fec8921" name="a66dda29e704dc5ae31776f348fec8921"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a66dda29e704dc5ae31776f348fec8921">&#9670;&#160;</a></span>Initialize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SpriteInstance::Initialize </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>_texture</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>スプライトを初期化 </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_texture</td><td>テクスチャパス </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition"> <a class="el" href="SpriteInstance_8cpp_source.html">SpriteInstance.cpp</a> の <a class="el" href="SpriteInstance_8cpp_source.html#l00027">27</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="a9666133358fad47035efc6464cb517b0" name="a9666133358fad47035efc6464cb517b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9666133358fad47035efc6464cb517b0">&#9670;&#160;</a></span>IsFlipX()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool SpriteInstance::IsFlipX </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>X軸反転の状態を取得 </p>
+<dl class="section return"><dt>戻り値</dt><dd>反転している場合true </dd></dl>
+
+<p class="definition"> <a class="el" href="SpriteInstance_8cpp_source.html">SpriteInstance.cpp</a> の <a class="el" href="SpriteInstance_8cpp_source.html#l00206">206</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="a0fdd036af55bdf955620be4dc9779efc" name="a0fdd036af55bdf955620be4dc9779efc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0fdd036af55bdf955620be4dc9779efc">&#9670;&#160;</a></span>IsFlipY()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool SpriteInstance::IsFlipY </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Y軸反転の状態を取得 </p>
+<dl class="section return"><dt>戻り値</dt><dd>反転している場合true </dd></dl>
+
+<p class="definition"> <a class="el" href="SpriteInstance_8cpp_source.html">SpriteInstance.cpp</a> の <a class="el" href="SpriteInstance_8cpp_source.html#l00214">214</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="a2becebd5e4ca48cca7b5be1cb82aa713" name="a2becebd5e4ca48cca7b5be1cb82aa713"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2becebd5e4ca48cca7b5be1cb82aa713">&#9670;&#160;</a></span>SetActivePostEffect()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SpriteInstance::SetActivePostEffect </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>_active</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>ポストエフェクトを有効化/無効化 </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_active</td><td>アクティブにする場合true </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition"> <a class="el" href="SpriteInstance_8cpp_source.html">SpriteInstance.cpp</a> の <a class="el" href="SpriteInstance_8cpp_source.html#l00238">238</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="adda329425bc56b8f4021ef9b1c6100ee" name="adda329425bc56b8f4021ef9b1c6100ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adda329425bc56b8f4021ef9b1c6100ee">&#9670;&#160;</a></span>SetAnchorPoint()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SpriteInstance::SetAnchorPoint </td>
+          <td>(</td>
+          <td class="paramtype">const Vector2 &amp;&#160;</td>
+          <td class="paramname"><em>_a</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>アンカーポイントを設定 </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_a</td><td>アンカーポイント </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition"> <a class="el" href="SpriteInstance_8cpp_source.html">SpriteInstance.cpp</a> の <a class="el" href="SpriteInstance_8cpp_source.html#l00202">202</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="a5e7542ba770f5a15a807214f1bb0a4e3" name="a5e7542ba770f5a15a807214f1bb0a4e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5e7542ba770f5a15a807214f1bb0a4e3">&#9670;&#160;</a></span>SetColor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SpriteInstance::SetColor </td>
+          <td>(</td>
+          <td class="paramtype">const Vector4 &amp;&#160;</td>
+          <td class="paramname"><em>_color</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>色を設定 </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_color</td><td>色ベクトル </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition"> <a class="el" href="SpriteInstance_8cpp_source.html">SpriteInstance.cpp</a> の <a class="el" href="SpriteInstance_8cpp_source.html#l00194">194</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="ae095eacc4b9edbb0aaf5b81a82e1c099" name="ae095eacc4b9edbb0aaf5b81a82e1c099"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae095eacc4b9edbb0aaf5b81a82e1c099">&#9670;&#160;</a></span>SetFlipX()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SpriteInstance::SetFlipX </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>_f</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>X軸反転を設定 </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_f</td><td>反転する場合true </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition"> <a class="el" href="SpriteInstance_8cpp_source.html">SpriteInstance.cpp</a> の <a class="el" href="SpriteInstance_8cpp_source.html#l00210">210</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="a5f348443070c0cc6f0251d41c91e8bde" name="a5f348443070c0cc6f0251d41c91e8bde"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5f348443070c0cc6f0251d41c91e8bde">&#9670;&#160;</a></span>SetFlipY()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SpriteInstance::SetFlipY </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>_f</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Y軸反転を設定 </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_f</td><td>反転する場合true </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition"> <a class="el" href="SpriteInstance_8cpp_source.html">SpriteInstance.cpp</a> の <a class="el" href="SpriteInstance_8cpp_source.html#l00218">218</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="a200d2e3a10371643cbed33af28afe582" name="a200d2e3a10371643cbed33af28afe582"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a200d2e3a10371643cbed33af28afe582">&#9670;&#160;</a></span>SetPosition()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SpriteInstance::SetPosition </td>
+          <td>(</td>
+          <td class="paramtype">const Vector2 &amp;&#160;</td>
+          <td class="paramname"><em>_p</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>位置を設定 </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_p</td><td>位置ベクトル </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition"> <a class="el" href="SpriteInstance_8cpp_source.html">SpriteInstance.cpp</a> の <a class="el" href="SpriteInstance_8cpp_source.html#l00170">170</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="abbdff896817ad8af8f03b0a684733857" name="abbdff896817ad8af8f03b0a684733857"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abbdff896817ad8af8f03b0a684733857">&#9670;&#160;</a></span>SetRotation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SpriteInstance::SetRotation </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>_r</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>回転角度を設定 </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_r</td><td>回転角度（ラジアン） </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition"> <a class="el" href="SpriteInstance_8cpp_source.html">SpriteInstance.cpp</a> の <a class="el" href="SpriteInstance_8cpp_source.html#l00186">186</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="a2b62af0dd54e597492b38a5b1f077acd" name="a2b62af0dd54e597492b38a5b1f077acd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b62af0dd54e597492b38a5b1f077acd">&#9670;&#160;</a></span>SetSize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SpriteInstance::SetSize </td>
+          <td>(</td>
+          <td class="paramtype">const Vector2 &amp;&#160;</td>
+          <td class="paramname"><em>_s</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>サイズを設定 </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_s</td><td>サイズベクトル </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition"> <a class="el" href="SpriteInstance_8cpp_source.html">SpriteInstance.cpp</a> の <a class="el" href="SpriteInstance_8cpp_source.html#l00178">178</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="a5d63a9538be125c2a8aa5a1670684b9b" name="a5d63a9538be125c2a8aa5a1670684b9b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d63a9538be125c2a8aa5a1670684b9b">&#9670;&#160;</a></span>SetTexture()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SpriteInstance::SetTexture </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>_texture</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>テクスチャを設定 </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_texture</td><td>テクスチャパス </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition"> <a class="el" href="SpriteInstance_8cpp_source.html">SpriteInstance.cpp</a> の <a class="el" href="SpriteInstance_8cpp_source.html#l00242">242</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="a9eee9219ea5e91dcf1c6a5b9ec24240b" name="a9eee9219ea5e91dcf1c6a5b9ec24240b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9eee9219ea5e91dcf1c6a5b9ec24240b">&#9670;&#160;</a></span>SetTextureLeftTop()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SpriteInstance::SetTextureLeftTop </td>
+          <td>(</td>
+          <td class="paramtype">const Vector2 &amp;&#160;</td>
+          <td class="paramname"><em>_textureLeftTop</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>テクスチャの左上座標を設定 </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_textureLeftTop</td><td>左上座標 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition"> <a class="el" href="SpriteInstance_8cpp_source.html">SpriteInstance.cpp</a> の <a class="el" href="SpriteInstance_8cpp_source.html#l00226">226</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="ae5c49c4695a160b79acdf8664566a443" name="ae5c49c4695a160b79acdf8664566a443"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae5c49c4695a160b79acdf8664566a443">&#9670;&#160;</a></span>SetTextureSize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SpriteInstance::SetTextureSize </td>
+          <td>(</td>
+          <td class="paramtype">const Vector2 &amp;&#160;</td>
+          <td class="paramname"><em>_textureSize</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>テクスチャサイズを設定 </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_textureSize</td><td>テクスチャサイズ </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition"> <a class="el" href="SpriteInstance_8cpp_source.html">SpriteInstance.cpp</a> の <a class="el" href="SpriteInstance_8cpp_source.html#l00234">234</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="a80460519688261ab90eaabe545a1a813" name="a80460519688261ab90eaabe545a1a813"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a80460519688261ab90eaabe545a1a813">&#9670;&#160;</a></span>Update()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SpriteInstance::Update </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>スプライトの更新処理 </p>
+
+<p class="definition"> <a class="el" href="SpriteInstance_8cpp_source.html">SpriteInstance.cpp</a> の <a class="el" href="SpriteInstance_8cpp_source.html#l00083">83</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<hr/>このクラス詳解は次のファイルから抽出されました:<ul>
+<li>/home/runner/work/GameEngine/GameEngine/src/Sprite/<a class="el" href="SpriteInstance_8hpp_source.html">SpriteInstance.hpp</a></li>
+<li>/home/runner/work/GameEngine/GameEngine/src/Sprite/<a class="el" href="SpriteInstance_8cpp_source.html">SpriteInstance.cpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="classSpriteInstance.html">SpriteInstance</a></li>
+    <li class="footer">2026年09月12日(土) 13時06分01秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+  </ul>
+</div>
+</body>
+</html>

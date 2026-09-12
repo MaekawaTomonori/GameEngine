@@ -26,7 +26,7 @@ var classEmitter =
     [ "SetSpawnCount", "classEmitter.html#a909a63b866dd041e6f58a60ea97229d1", null ],
     [ "SetSpawnFunction", "classEmitter.html#ac60b2b75d585dff8356d2f13f464a0d7", null ],
     [ "SetTexture", "classEmitter.html#aa1e83b59fe416e1b5a1d4349af252846", null ],
-    [ "SetUpdateFunction", "classEmitter.html#a29d5e63a07da34e87d77c0668c70e65c", null ],
+    [ "SetUpdateFunction", "classEmitter.html#a071c463b7a3dc351caf713e93cb47b8f", null ],
     [ "SetVelocity", "classEmitter.html#a48ba66b2e247cf590106b542b2d2dd7c", null ],
     [ "Update", "classEmitter.html#a92aadafc647cca2fcb8be5185fbf7104", null ]
 ];

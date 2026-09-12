@@ -114,8 +114,8 @@ $(document).ready(function(){initNavTree('classParticleSystem.html',''); initRes
 公開型</h2></td></tr>
 <tr class="memitem:a51b5f16dd713454699d433f767e741ba" id="r_a51b5f16dd713454699d433f767e741ba"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticleSystem.html#a51b5f16dd713454699d433f767e741ba">SpawnFunc</a> = std::function&lt; void(const Vector3 &amp;, Vector3 &amp;, Vector3 &amp;)&gt;</td></tr>
 <tr class="separator:a51b5f16dd713454699d433f767e741ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac60924e91a2ab7daeb0becb3befcd5ff" id="r_ac60924e91a2ab7daeb0becb3befcd5ff"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticleSystem.html#ac60924e91a2ab7daeb0becb3befcd5ff">UpdateFunc</a> = std::function&lt; void(float, const Vector3 &amp;, Vector3 &amp;, Vector3 &amp;, Vector4 &amp;)&gt;</td></tr>
-<tr class="separator:ac60924e91a2ab7daeb0becb3befcd5ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c3d79a1b8c1c3067845bb6e8206276f" id="r_a4c3d79a1b8c1c3067845bb6e8206276f"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticleSystem.html#a4c3d79a1b8c1c3067845bb6e8206276f">UpdateFunc</a> = std::function&lt; void(std::span&lt; <a class="el" href="classParticle.html">Particle</a> &gt;)&gt;</td></tr>
+<tr class="separator:a4c3d79a1b8c1c3067845bb6e8206276f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 公開メンバ関数</h2></td></tr>
@@ -130,7 +130,7 @@ $(document).ready(function(){initNavTree('classParticleSystem.html',''); initRes
 <tr class="memitem:aa77c7e3cfd99134fb4c326958ada645f" id="r_aa77c7e3cfd99134fb4c326958ada645f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticleSystem.html#aa77c7e3cfd99134fb4c326958ada645f">SetPostProcessor</a> (GESTD::ReferencePtr&lt; <a class="el" href="classPostProcessExecutor.html">PostProcessExecutor</a> &gt; _postProcessor)</td></tr>
 <tr class="memdesc:aa77c7e3cfd99134fb4c326958ada645f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Editorのキャンバス選択に使うPostProcessExecutorを設定  <br /></td></tr>
 <tr class="separator:aa77c7e3cfd99134fb4c326958ada645f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a416ddf7b359420456fc349735eeb9542" id="r_a416ddf7b359420456fc349735eeb9542"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticleSystem.html#a416ddf7b359420456fc349735eeb9542">RegisterUpdateFunc</a> (const std::string &amp;_key, <a class="el" href="classParticleSystem.html#ac60924e91a2ab7daeb0becb3befcd5ff">UpdateFunc</a> _func)</td></tr>
+<tr class="memitem:a416ddf7b359420456fc349735eeb9542" id="r_a416ddf7b359420456fc349735eeb9542"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticleSystem.html#a416ddf7b359420456fc349735eeb9542">RegisterUpdateFunc</a> (const std::string &amp;_key, <a class="el" href="classParticleSystem.html#a4c3d79a1b8c1c3067845bb6e8206276f">UpdateFunc</a> _func)</td></tr>
 <tr class="memdesc:a416ddf7b359420456fc349735eeb9542"><td class="mdescLeft">&#160;</td><td class="mdescRight">更新関数を文字列キーで登録  <br /></td></tr>
 <tr class="separator:a416ddf7b359420456fc349735eeb9542"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a965e45c694b5c949d83d622c7247d650" id="r_a965e45c694b5c949d83d622c7247d650"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticleSystem.html#a965e45c694b5c949d83d622c7247d650">RegisterSpawnFunc</a> (const std::string &amp;_key, <a class="el" href="classParticleSystem.html#a51b5f16dd713454699d433f767e741ba">SpawnFunc</a> _func)</td></tr>
@@ -162,7 +162,7 @@ $(document).ready(function(){initNavTree('classParticleSystem.html',''); initRes
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">詳解</h2>
 <div class="textblock">
-<p class="definition"> <a class="el" href="ParticleSystem_8hpp_source.html">ParticleSystem.hpp</a> の <a class="el" href="ParticleSystem_8hpp_source.html#l00020">20</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="ParticleSystem_8hpp_source.html">ParticleSystem.hpp</a> の <a class="el" href="ParticleSystem_8hpp_source.html#l00021">21</a> 行目に定義があります。</p>
 </div><h2 class="groupheader">型定義メンバ詳解</h2>
 <a id="a51b5f16dd713454699d433f767e741ba" name="a51b5f16dd713454699d433f767e741ba"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a51b5f16dd713454699d433f767e741ba">&#9670;&#160;</a></span>SpawnFunc</h2>
@@ -176,23 +176,23 @@ $(document).ready(function(){initNavTree('classParticleSystem.html',''); initRes
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="ParticleSystem_8hpp_source.html">ParticleSystem.hpp</a> の <a class="el" href="ParticleSystem_8hpp_source.html#l00022">22</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="ParticleSystem_8hpp_source.html">ParticleSystem.hpp</a> の <a class="el" href="ParticleSystem_8hpp_source.html#l00023">23</a> 行目に定義があります。</p>
 
 </div>
 </div>
-<a id="ac60924e91a2ab7daeb0becb3befcd5ff" name="ac60924e91a2ab7daeb0becb3befcd5ff"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac60924e91a2ab7daeb0becb3befcd5ff">&#9670;&#160;</a></span>UpdateFunc</h2>
+<a id="a4c3d79a1b8c1c3067845bb6e8206276f" name="a4c3d79a1b8c1c3067845bb6e8206276f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c3d79a1b8c1c3067845bb6e8206276f">&#9670;&#160;</a></span>UpdateFunc</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="classParticleSystem.html#ac60924e91a2ab7daeb0becb3befcd5ff">ParticleSystem::UpdateFunc</a> =  std::function&lt;void(float, const Vector3&amp;, Vector3&amp;, Vector3&amp;, Vector4&amp;)&gt;</td>
+          <td class="memname">using <a class="el" href="classParticleSystem.html#a4c3d79a1b8c1c3067845bb6e8206276f">ParticleSystem::UpdateFunc</a> =  std::function&lt;void(std::span&lt;<a class="el" href="classParticle.html">Particle</a>&gt;)&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="ParticleSystem_8hpp_source.html">ParticleSystem.hpp</a> の <a class="el" href="ParticleSystem_8hpp_source.html#l00023">23</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="ParticleSystem_8hpp_source.html">ParticleSystem.hpp</a> の <a class="el" href="ParticleSystem_8hpp_source.html#l00024">24</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -423,7 +423,7 @@ $(document).ready(function(){initNavTree('classParticleSystem.html',''); initRes
 
 <p class="definition"> <a class="el" href="ParticleSystem_8cpp_source.html">ParticleSystem.cpp</a> の <a class="el" href="ParticleSystem_8cpp_source.html#l00155">155</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="ParticleSystem_8hpp_source.html#l00039">ParticleSystem::EmitterConfig::billboard</a>, <a class="el" href="ParticleSystem_8hpp_source.html#l00042">ParticleSystem::EmitterConfig::canvasName</a>, <a class="el" href="ParticleSystem_8hpp_source.html#l00032">ParticleSystem::EmitterConfig::color</a>, <a class="el" href="ParticleSystem_8hpp_source.html#l00033">ParticleSystem::EmitterConfig::colorKeys</a>, <a class="el" href="ParticleSystem_8hpp_source.html#l00028">ParticleSystem::EmitterConfig::duration</a>, <a class="el" href="ParticleSystem_8hpp_source.html#l00046">ParticleSystem::Template::emitters</a>, <a class="el" href="ParticleSystem_8hpp_source.html#l00027">ParticleSystem::EmitterConfig::frequency</a>, <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::INFO</a>, <a class="el" href="ParticleSystem_8hpp_source.html#l00035">ParticleSystem::EmitterConfig::particleLifetime</a>, <a class="el" href="ParticleSystem_8hpp_source.html#l00038">ParticleSystem::EmitterConfig::primitive</a>, <a class="el" href="ParticleSystem_8hpp_source.html#l00040">ParticleSystem::EmitterConfig::rotation</a>, <a class="el" href="ParticleSystem_8hpp_source.html#l00041">ParticleSystem::EmitterConfig::rotationVelocity</a>, <a class="el" href="Log_8cpp_source.html#l00108">Log::Send()</a>, <a class="el" href="ParticleSystem_8hpp_source.html#l00030">ParticleSystem::EmitterConfig::size</a>, <a class="el" href="ParticleSystem_8hpp_source.html#l00034">ParticleSystem::EmitterConfig::sizeKeys</a>, <a class="el" href="ParticleSystem_8hpp_source.html#l00029">ParticleSystem::EmitterConfig::spawnCount</a>, <a class="el" href="ParticleSystem_8hpp_source.html#l00036">ParticleSystem::EmitterConfig::spawnFuncKey</a>, <a class="el" href="ParticleSystem_8hpp_source.html#l00026">ParticleSystem::EmitterConfig::texture</a>, <a class="el" href="Keyframe_8hpp_source.html#l00013">GradientKey&lt; T &gt;::time</a>, <a class="el" href="ParticleSystem_8hpp_source.html#l00037">ParticleSystem::EmitterConfig::updateFuncKey</a>, <a class="el" href="Keyframe_8hpp_source.html#l00014">GradientKey&lt; T &gt;::value</a>, <a class="el" href="ParticleSystem_8hpp_source.html#l00031">ParticleSystem::EmitterConfig::velocity</a>, <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531ea059e9861e0400dfbe05c98a841f3f96b">Log::WARNING</a> (計23項目).</p>
+<p class="reference">参照先 <a class="el" href="ParticleSystem_8hpp_source.html#l00040">ParticleSystem::EmitterConfig::billboard</a>, <a class="el" href="ParticleSystem_8hpp_source.html#l00043">ParticleSystem::EmitterConfig::canvasName</a>, <a class="el" href="ParticleSystem_8hpp_source.html#l00033">ParticleSystem::EmitterConfig::color</a>, <a class="el" href="ParticleSystem_8hpp_source.html#l00034">ParticleSystem::EmitterConfig::colorKeys</a>, <a class="el" href="ParticleSystem_8hpp_source.html#l00029">ParticleSystem::EmitterConfig::duration</a>, <a class="el" href="ParticleSystem_8hpp_source.html#l00047">ParticleSystem::Template::emitters</a>, <a class="el" href="ParticleSystem_8hpp_source.html#l00028">ParticleSystem::EmitterConfig::frequency</a>, <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::INFO</a>, <a class="el" href="ParticleSystem_8hpp_source.html#l00036">ParticleSystem::EmitterConfig::particleLifetime</a>, <a class="el" href="ParticleSystem_8hpp_source.html#l00039">ParticleSystem::EmitterConfig::primitive</a>, <a class="el" href="ParticleSystem_8hpp_source.html#l00041">ParticleSystem::EmitterConfig::rotation</a>, <a class="el" href="ParticleSystem_8hpp_source.html#l00042">ParticleSystem::EmitterConfig::rotationVelocity</a>, <a class="el" href="Log_8cpp_source.html#l00108">Log::Send()</a>, <a class="el" href="ParticleSystem_8hpp_source.html#l00031">ParticleSystem::EmitterConfig::size</a>, <a class="el" href="ParticleSystem_8hpp_source.html#l00035">ParticleSystem::EmitterConfig::sizeKeys</a>, <a class="el" href="ParticleSystem_8hpp_source.html#l00030">ParticleSystem::EmitterConfig::spawnCount</a>, <a class="el" href="ParticleSystem_8hpp_source.html#l00037">ParticleSystem::EmitterConfig::spawnFuncKey</a>, <a class="el" href="ParticleSystem_8hpp_source.html#l00027">ParticleSystem::EmitterConfig::texture</a>, <a class="el" href="Keyframe_8hpp_source.html#l00013">GradientKey&lt; T &gt;::time</a>, <a class="el" href="ParticleSystem_8hpp_source.html#l00038">ParticleSystem::EmitterConfig::updateFuncKey</a>, <a class="el" href="Keyframe_8hpp_source.html#l00014">GradientKey&lt; T &gt;::value</a>, <a class="el" href="ParticleSystem_8hpp_source.html#l00032">ParticleSystem::EmitterConfig::velocity</a>, <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531ea059e9861e0400dfbe05c98a841f3f96b">Log::WARNING</a> (計23項目).</p>
 
 </div>
 </div>
@@ -565,7 +565,7 @@ $(document).ready(function(){initNavTree('classParticleSystem.html',''); initRes
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classParticleSystem.html#ac60924e91a2ab7daeb0becb3befcd5ff">UpdateFunc</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="classParticleSystem.html#a4c3d79a1b8c1c3067845bb6e8206276f">UpdateFunc</a>&#160;</td>
           <td class="paramname"><em>_func</em>&#160;</td>
         </tr>
         <tr>
@@ -649,7 +649,7 @@ $(document).ready(function(){initNavTree('classParticleSystem.html',''); initRes
 
 <p>Editorのキャンバス選択に使うPostProcessExecutorを設定 </p>
 
-<p class="definition"> <a class="el" href="ParticleSystem_8hpp_source.html">ParticleSystem.hpp</a> の <a class="el" href="ParticleSystem_8hpp_source.html#l00086">86</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="ParticleSystem_8hpp_source.html">ParticleSystem.hpp</a> の <a class="el" href="ParticleSystem_8hpp_source.html#l00087">87</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -684,7 +684,7 @@ $(document).ready(function(){initNavTree('classParticleSystem.html',''); initRes
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classParticleSystem.html">ParticleSystem</a></li>
-    <li class="footer">2026年09月11日(金) 07時37分44秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年09月12日(土) 13時06分01秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>
