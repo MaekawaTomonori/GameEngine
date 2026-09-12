@@ -336,6 +336,9 @@
     <ClInclude Include="src\Line\Common\LineCommon.hpp">
       <Filter>src\Line\Common</Filter>
     </ClInclude>
+    <ClInclude Include="src\Line\LineInstance.hpp">
+      <Filter>src\Line</Filter>
+    </ClInclude>
     <ClInclude Include="src\Mesh\Data\MeshData.hpp">
       <Filter>src\Mesh\Data</Filter>
     </ClInclude>
@@ -426,6 +429,9 @@
     <ClInclude Include="src\Sprite\Common\SpriteCommon.hpp">
       <Filter>src\Sprite\Common</Filter>
     </ClInclude>
+    <ClInclude Include="src\Sprite\SpriteInstance.hpp">
+      <Filter>src\Sprite</Filter>
+    </ClInclude>
     <ClInclude Include="src\Stage\LevelData.hpp">
       <Filter>src\Stage</Filter>
     </ClInclude>
@@ -498,6 +504,7 @@
     <ClInclude Include="src\Ui\SpriteElement.hpp" />
     <ClInclude Include="src\Ui\TextElement.hpp" />
     <ClInclude Include="include\Ui\UserInterface.hpp" />
+    <ClInclude Include="src\Scene\ParticleTest\ParticleTestScene.hpp" />
     <ClInclude Include="src\Scene\Sample\SampleScene.hpp" />
     <ClInclude Include="src\Config\ConfigLoader.hpp" />
     <ClInclude Include="include\Ui\UiAnimation.hpp" />
@@ -585,6 +592,9 @@
     <ClCompile Include="src\Line\Line.cpp">
       <Filter>src\Line</Filter>
     </ClCompile>
+    <ClCompile Include="src\Line\LineInstance.cpp">
+      <Filter>src\Line</Filter>
+    </ClCompile>
     <ClCompile Include="src\Mesh\Mesh.cpp">
       <Filter>src\Mesh</Filter>
     </ClCompile>
@@ -669,6 +679,9 @@
     <ClCompile Include="src\Sprite\Sprite.cpp">
       <Filter>src\Sprite</Filter>
     </ClCompile>
+    <ClCompile Include="src\Sprite\SpriteInstance.cpp">
+      <Filter>src\Sprite</Filter>
+    </ClCompile>
     <ClCompile Include="src\Stage\LevelEditor.cpp">
       <Filter>src\Stage</Filter>
     </ClCompile>
@@ -734,6 +747,7 @@
     <ClCompile Include="src\Ui\SpriteElement.cpp" />
     <ClCompile Include="src\Ui\TextElement.cpp" />
     <ClCompile Include="src\Ui\UserInterface.cpp" />
+    <ClCompile Include="src\Scene\ParticleTest\ParticleTestScene.cpp" />
     <ClCompile Include="src\Scene\Sample\SampleScene.cpp" />
     <ClCompile Include="src\Config\ConfigLoader.cpp" />
     <ClCompile Include="src\Ui\UiManager.cpp" />

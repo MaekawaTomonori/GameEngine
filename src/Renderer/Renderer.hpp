@@ -32,12 +32,12 @@ public:
      * @param _task 描画タスク
      * @param _canvasName 登録先Canvas名
      */
-    void Register(const std::function<void()>& _task, const std::string& _canvasName = "None");
+    void Register(std::function<void()> _task, const std::string& _canvasName = "None");
 
     /** @brief UIタスクを登録（常にスワップチェーンへ描画）
      * @param _task 描画タスク（ImGui等）
      */
-    void RegisterUI(const std::function<void()>& _task);
+    void RegisterUI(std::function<void()> _task);
 
     /** @brief 登録されたタスクをレンダリング
      */

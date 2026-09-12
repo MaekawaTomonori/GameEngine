@@ -2,6 +2,7 @@
 #define ParticleSystem_HPP_
 #include <functional>
 #include <memory>
+#include <span>
 #include <string>
 #include <unordered_map>
 #include <vector>
@@ -20,7 +21,7 @@ class PostProcessExecutor;
 class ParticleSystem {
 public:
     using SpawnFunc  = std::function<void(const Vector3&, Vector3&, Vector3&)>;
-    using UpdateFunc = std::function<void(float, const Vector3&, Vector3&, Vector3&, Vector4&)>;
+    using UpdateFunc = std::function<void(std::span<Particle>)>;
 
     struct EmitterConfig {
         std::string texture = "white_x16.png";

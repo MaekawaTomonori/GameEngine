@@ -6,6 +6,7 @@
 #include "PerformanceProfiler.hpp"
 #include "Pattern/Singleton.hpp"
 #include "Random/RandomEngine.hpp"
+#include "src/Scene/ParticleTest/ParticleTestScene.hpp"
 #include "src/Scene/Sample/SampleScene.hpp"
 #include "src/Config/ConfigLoader.hpp"
 #include "src/Screen/Screen.hpp"
@@ -167,6 +168,7 @@ void Framework::Initialize() {
 
 #ifdef _DEBUG
     scene_->RegisterScene("sample", []{return std::make_unique<SampleScene>(); });
+    scene_->RegisterScene("particle_test", []{return std::make_unique<ParticleTestScene>(); });
 
     const auto dbg = debugger_->GetUI();
 #else

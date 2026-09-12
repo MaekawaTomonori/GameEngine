@@ -11,16 +11,13 @@ void Particle::Initialize(float _duration) {
     now_ = 0.f;
 }
 
-void Particle::Update() {
-    const float progress = duration_ > 0.f ? now_ / duration_ : 0.f;
-
+void Particle::UpdateProgress() {
+    const float progress = GetProgress();
     color_ = EvaluateGradient(colorKeys_, progress, color_);
     scale_ = EvaluateGradient(sizeKeys_, progress, scale_);
+}
 
-    if (update_) {
-        update_(progress, origin_, position_, velocity_, color_);
-    }
-
+void Particle::Integrate() {
     static constexpr float DT = 1.f / 60.f;
     now_ += DT;
     position_ += velocity_ * DT;
@@ -45,8 +42,20 @@ bool Particle::IsDead() const {
     return duration_ <= now_;
 }
 
+float Particle::GetProgress() const {
+    return duration_ > 0.f ? now_ / duration_ : 0.f;
+}
+
+Vector3 Particle::GetOrigin() const {
+    return origin_;
+}
+
 Vector3 Particle::GetPosition() const {
     return position_;
+}
+
+Vector3 Particle::GetVelocity() const {
+    return velocity_;
 }
 
 Vector3 Particle::GetScale() const {
@@ -140,10 +149,5 @@ Particle& Particle::RandomizeVelocity(const Vector3& _min, const Vector3& _max) 
         MathUtils::Random(_min.y, _max.y),
         MathUtils::Random(_min.z, _max.z)
     };
-    return *this;
-}
-
-Particle& Particle::SetUpdateFunction(const std::function<void(float, const Vector3&, Vector3&, Vector3&, Vector4&)>& _func) {
-    update_ = _func;
     return *this;
 }
