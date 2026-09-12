@@ -133,6 +133,7 @@ var annotated_dup =
     [ "TextureManager", "classTextureManager.html", "classTextureManager" ],
     [ "Time", "classTime.html", "classTime" ],
     [ "Timer", "classTimer.html", "classTimer" ],
+    [ "TimeSystem", "classTimeSystem.html", "classTimeSystem" ],
     [ "Transition", "classTransition.html", "classTransition" ],
     [ "Vertex", "structVertex.html", "structVertex" ],
     [ "VertexWeightData", "structVertexWeightData.html", "structVertexWeightData" ],

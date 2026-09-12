@@ -101,45 +101,35 @@ $(document).ready(function(){initNavTree('Time_8hpp_source.html',''); initResiza
 <a href="Time_8hpp.html">[詳解]</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef Time_HPP_</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define Time_HPP_</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
-<div class="foldopen" id="foldopen00007" data-start="{" data-end="};">
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno"><a class="line" href="classTime.html">    7</a></span><span class="keyword">class </span><a class="code hl_class" href="classTime.html">Time</a> {</div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno"><a class="line" href="classTime.html#a0eedb4e626b8e3fdcaf63519b86ea778">    9</a></span>    <a class="code hl_function" href="classTime.html#a0eedb4e626b8e3fdcaf63519b86ea778">Time</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    <span class="keyword">static</span> <span class="keywordtype">float</span> <a class="code hl_function" href="classTime.html#a24f6ae9c72fb22aa6baa831f77c4c8bd">GetDeltaTime</a>();</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <span class="keyword">static</span> <span class="keywordtype">float</span> <a class="code hl_function" href="classTime.html#a10fb1e27be3cf39bd8188cff30dd192b">GetTimeScale</a>();</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classTime.html#a213ce923afa55f98d978e2eb9b27907e">SetTimeScale</a>(<span class="keywordtype">float</span> _scale, <span class="keywordtype">float</span> _duration = 0.f);</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classTime.html#ac2dd382f1f744ce8283147690fbd2dc2">Tick</a>(<span class="keywordtype">float</span> _realDeltaSeconds);</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="keyword">static</span> <a class="code hl_class" href="classTime.html">Time</a>&amp; Instance();</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="keywordtype">void</span> TickImpl(<span class="keywordtype">float</span> _realDeltaSeconds);</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="keywordtype">void</span> SetTimeScaleImpl(<span class="keywordtype">float</span> _scale, <span class="keywordtype">float</span> _duration);</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keywordtype">float</span> deltaTime_     = 0.f;</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keywordtype">float</span> timeScale_     = 1.f;</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="keywordtype">float</span> scaleDuration_ = 0.f; <span class="comment">// 残り時間(実時間)。0以下なら無期限</span></div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>}; <span class="comment">// class Time</span></div>
+<div class="foldopen" id="foldopen00008" data-start="{" data-end="};">
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno"><a class="line" href="classTime.html">    8</a></span><span class="keyword">class </span><a class="code hl_class" href="classTime.html">Time</a> {</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="classTime.html#a0eedb4e626b8e3fdcaf63519b86ea778">   10</a></span>    <a class="code hl_function" href="classTime.html#a0eedb4e626b8e3fdcaf63519b86ea778">Time</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <span class="keywordtype">float</span> <a class="code hl_function" href="classTime.html#a282bf69fc11f56f832e46c096ea54349">GetDeltaTime</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <span class="keywordtype">float</span> <a class="code hl_function" href="classTime.html#ab9932282617089ad228b0d4d1df9276b">GetUnscaledDeltaTime</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="keywordtype">float</span> <a class="code hl_function" href="classTime.html#a23b282b7a18047566399bc13fb829205">GetTimeScale</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classTime.html#a213ce923afa55f98d978e2eb9b27907e">SetTimeScale</a>(<span class="keywordtype">float</span> _scale, <span class="keywordtype">float</span> _duration = 0.f);</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>}; <span class="comment">// class Time</span></div>
 </div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="preprocessor">#endif </span><span class="comment">// Time_HPP_</span></div>
-<div class="ttc" id="aclassTime_html"><div class="ttname"><a href="classTime.html">Time</a></div><div class="ttdoc">ゲーム全体の時間を管理するクラス タイムスケール(スローモーション等)を適用した1フレーム分の経過秒数を提供する</div><div class="ttdef"><b>Definition</b> <a href="Time_8hpp_source.html#l00007">Time.hpp:7</a></div></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="preprocessor">#endif </span><span class="comment">// Time_HPP_</span></div>
+<div class="ttc" id="aclassTime_html"><div class="ttname"><a href="classTime.html">Time</a></div><div class="ttdoc">ゲーム全体の時間を扱うハンドルクラス タイムスケール(ヒットストップ、スローモーション等)を適用した 1Tick分の経過秒数を提供する。</div><div class="ttdef"><b>Definition</b> <a href="Time_8hpp_source.html#l00008">Time.hpp:8</a></div></div>
 <div class="ttc" id="aclassTime_html_a0eedb4e626b8e3fdcaf63519b86ea778"><div class="ttname"><a href="classTime.html#a0eedb4e626b8e3fdcaf63519b86ea778">Time::Time</a></div><div class="ttdeci">Time()=default</div></div>
-<div class="ttc" id="aclassTime_html_a10fb1e27be3cf39bd8188cff30dd192b"><div class="ttname"><a href="classTime.html#a10fb1e27be3cf39bd8188cff30dd192b">Time::GetTimeScale</a></div><div class="ttdeci">static float GetTimeScale()</div><div class="ttdoc">現在のタイムスケールを取得</div><div class="ttdef"><b>Definition</b> <a href="Time_8cpp_source.html#l00009">Time.cpp:9</a></div></div>
-<div class="ttc" id="aclassTime_html_a213ce923afa55f98d978e2eb9b27907e"><div class="ttname"><a href="classTime.html#a213ce923afa55f98d978e2eb9b27907e">Time::SetTimeScale</a></div><div class="ttdeci">static void SetTimeScale(float _scale, float _duration=0.f)</div><div class="ttdoc">タイムスケールを変更する</div><div class="ttdef"><b>Definition</b> <a href="Time_8cpp_source.html#l00013">Time.cpp:13</a></div></div>
-<div class="ttc" id="aclassTime_html_a24f6ae9c72fb22aa6baa831f77c4c8bd"><div class="ttname"><a href="classTime.html#a24f6ae9c72fb22aa6baa831f77c4c8bd">Time::GetDeltaTime</a></div><div class="ttdeci">static float GetDeltaTime()</div><div class="ttdoc">タイムスケール適用後の、1フレーム分の経過秒数を取得</div><div class="ttdef"><b>Definition</b> <a href="Time_8cpp_source.html#l00005">Time.cpp:5</a></div></div>
-<div class="ttc" id="aclassTime_html_ac2dd382f1f744ce8283147690fbd2dc2"><div class="ttname"><a href="classTime.html#ac2dd382f1f744ce8283147690fbd2dc2">Time::Tick</a></div><div class="ttdeci">static void Tick(float _realDeltaSeconds)</div><div class="ttdoc">実測の1フレーム分経過秒数を渡して更新する Frameworkが毎フレーム呼び出す想定</div><div class="ttdef"><b>Definition</b> <a href="Time_8cpp_source.html#l00017">Time.cpp:17</a></div></div>
+<div class="ttc" id="aclassTime_html_a213ce923afa55f98d978e2eb9b27907e"><div class="ttname"><a href="classTime.html#a213ce923afa55f98d978e2eb9b27907e">Time::SetTimeScale</a></div><div class="ttdeci">void SetTimeScale(float _scale, float _duration=0.f)</div><div class="ttdoc">タイムスケールを変更する ヒットストップやスローモーションなど、演出目的での使用を想定</div><div class="ttdef"><b>Definition</b> <a href="Time_8cpp_source.html#l00018">Time.cpp:18</a></div></div>
+<div class="ttc" id="aclassTime_html_a23b282b7a18047566399bc13fb829205"><div class="ttname"><a href="classTime.html#a23b282b7a18047566399bc13fb829205">Time::GetTimeScale</a></div><div class="ttdeci">float GetTimeScale() const</div><div class="ttdoc">現在のタイムスケールを取得</div><div class="ttdef"><b>Definition</b> <a href="Time_8cpp_source.html#l00014">Time.cpp:14</a></div></div>
+<div class="ttc" id="aclassTime_html_a282bf69fc11f56f832e46c096ea54349"><div class="ttname"><a href="classTime.html#a282bf69fc11f56f832e46c096ea54349">Time::GetDeltaTime</a></div><div class="ttdeci">float GetDeltaTime() const</div><div class="ttdoc">タイムスケール適用後の、1Tick分の経過秒数を取得</div><div class="ttdef"><b>Definition</b> <a href="Time_8cpp_source.html#l00006">Time.cpp:6</a></div></div>
+<div class="ttc" id="aclassTime_html_ab9932282617089ad228b0d4d1df9276b"><div class="ttname"><a href="classTime.html#ab9932282617089ad228b0d4d1df9276b">Time::GetUnscaledDeltaTime</a></div><div class="ttdeci">float GetUnscaledDeltaTime() const</div><div class="ttdoc">タイムスケール適用前の、1Tick分の経過秒数を取得 グローバルなタイムスケール(ヒットストップ/スローモーション)に 関係なく進めたい処理や、独自のローカルスケールを乗算したい場合に使用する</div><div class="ttdef"><b>Definition</b> <a href="Time_8cpp_source.html#l00010">Time.cpp:10</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_af040d62cd01c4f8d6f60c2ba79ed1d7.html">Time</a></li><li class="navelem"><a class="el" href="Time_8hpp.html">Time.hpp</a></li>
-    <li class="footer">2026年09月12日(土) 13時06分01秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年09月12日(土) 17時53分24秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

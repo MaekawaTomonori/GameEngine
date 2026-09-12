@@ -245,9 +245,9 @@ var NAVTREEINDEX1 =
 "TextureManager_8cpp_source.html":[2,0,1,33,1],
 "TextureManager_8hpp.html":[2,0,1,33,2],
 "TextureManager_8hpp_source.html":[2,0,1,33,2],
-"Time_8cpp.html":[2,0,1,34,0],
-"Time_8cpp_source.html":[2,0,1,34,0],
-"Time_8hpp.html":[2,0,1,34,1],
-"Time_8hpp_source.html":[2,0,1,34,1],
-"Timer_8cpp.html":[2,0,1,35,0]
+"TimeSystem_8cpp.html":[2,0,1,34,2],
+"TimeSystem_8cpp_source.html":[2,0,1,34,2],
+"TimeSystem_8hpp.html":[2,0,1,34,3],
+"TimeSystem_8hpp_source.html":[2,0,1,34,3],
+"Time_8cpp.html":[2,0,1,34,0]
 };

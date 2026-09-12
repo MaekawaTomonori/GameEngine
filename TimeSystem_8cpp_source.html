@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>PortfolioGame Engine: /home/runner/work/GameEngine/GameEngine/src/Time/TimeSystem.cpp ソースファイル</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">PortfolioGame Engine<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">C++20 DirectX12 Game Engine</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','検索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function() { init_codefold(0); });
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('TimeSystem_8cpp_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">読み取り中…</div>
+<div class="SRStatus" id="Searching">検索中…</div>
+<div class="SRStatus" id="NoMatches">一致する文字列を見つけられません</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">TimeSystem.cpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="TimeSystem_8cpp.html">[詳解]</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#include &quot;<a class="code" href="TimeSystem_8hpp.html">TimeSystem.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
+<div class="foldopen" id="foldopen00003" data-start="{" data-end="}">
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno"><a class="line" href="classTimeSystem.html#a11b9091ef861d01a5df1e8d3b67eb915">    3</a></span><span class="keywordtype">float</span> <a class="code hl_function" href="classTimeSystem.html#a11b9091ef861d01a5df1e8d3b67eb915">TimeSystem::GetDeltaTime</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span>    <span class="keywordflow">return</span> deltaTime_;</div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span>}</div>
+</div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
+<div class="foldopen" id="foldopen00007" data-start="{" data-end="}">
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno"><a class="line" href="classTimeSystem.html#a9b954dd55c80d92510187a179081938c">    7</a></span><span class="keywordtype">float</span> <a class="code hl_function" href="classTimeSystem.html#a9b954dd55c80d92510187a179081938c">TimeSystem::GetUnscaledDeltaTime</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>    <span class="keywordflow">return</span> <a class="code hl_variable" href="classTimeSystem.html#af5ee82cd5dbf56b28020f1b876d206cf">kFixedDeltaTime</a>;</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>}</div>
+</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="foldopen" id="foldopen00011" data-start="{" data-end="}">
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="classTimeSystem.html#a590114382e625649f862f6f77e8e5f6e">   11</a></span><span class="keywordtype">float</span> <a class="code hl_function" href="classTimeSystem.html#a590114382e625649f862f6f77e8e5f6e">TimeSystem::GetTimeScale</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    <span class="keywordflow">return</span> timeScale_;</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>}</div>
+</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="foldopen" id="foldopen00015" data-start="{" data-end="}">
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="classTimeSystem.html#ac129d4f767caf843564e7f6d6685aa0c">   15</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classTimeSystem.html#ac129d4f767caf843564e7f6d6685aa0c">TimeSystem::SetTimeScale</a>(<span class="keywordtype">float</span> _scale, <span class="keywordtype">float</span> _duration) {</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    timeScale_     = _scale;</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    scaleDuration_ = _duration;</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>}</div>
+</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
+<div class="foldopen" id="foldopen00020" data-start="{" data-end="}">
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="classTimeSystem.html#a95669f7c017a1e2611597bb08956a4d4">   20</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classTimeSystem.html#a95669f7c017a1e2611597bb08956a4d4">TimeSystem::Tick</a>(<span class="keywordtype">float</span> _realDeltaSeconds) {</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <span class="keywordflow">if</span> (scaleDuration_ &gt; 0.f) {</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        scaleDuration_ -= _realDeltaSeconds;</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>        <span class="keywordflow">if</span> (scaleDuration_ &lt;= 0.f) {</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>            scaleDuration_ = 0.f;</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>            timeScale_     = 1.f;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        }</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    }</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    deltaTime_ = <a class="code hl_variable" href="classTimeSystem.html#af5ee82cd5dbf56b28020f1b876d206cf">kFixedDeltaTime</a> * timeScale_;</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>}</div>
+</div>
+<div class="ttc" id="aTimeSystem_8hpp_html"><div class="ttname"><a href="TimeSystem_8hpp.html">TimeSystem.hpp</a></div></div>
+<div class="ttc" id="aclassTimeSystem_html_a11b9091ef861d01a5df1e8d3b67eb915"><div class="ttname"><a href="classTimeSystem.html#a11b9091ef861d01a5df1e8d3b67eb915">TimeSystem::GetDeltaTime</a></div><div class="ttdeci">float GetDeltaTime() const</div><div class="ttdoc">タイムスケール適用後の、1Tick分の経過秒数を取得</div><div class="ttdef"><b>Definition</b> <a href="TimeSystem_8cpp_source.html#l00003">TimeSystem.cpp:3</a></div></div>
+<div class="ttc" id="aclassTimeSystem_html_a590114382e625649f862f6f77e8e5f6e"><div class="ttname"><a href="classTimeSystem.html#a590114382e625649f862f6f77e8e5f6e">TimeSystem::GetTimeScale</a></div><div class="ttdeci">float GetTimeScale() const</div><div class="ttdoc">現在のタイムスケールを取得</div><div class="ttdef"><b>Definition</b> <a href="TimeSystem_8cpp_source.html#l00011">TimeSystem.cpp:11</a></div></div>
+<div class="ttc" id="aclassTimeSystem_html_a95669f7c017a1e2611597bb08956a4d4"><div class="ttname"><a href="classTimeSystem.html#a95669f7c017a1e2611597bb08956a4d4">TimeSystem::Tick</a></div><div class="ttdeci">void Tick(float _realDeltaSeconds)</div><div class="ttdoc">実測の1フレーム分経過秒数を渡して更新する Frameworkが毎フレーム呼び出す想定。タイムスケールの残り時間(実時間)のカウントダウンにのみ使用する</div><div class="ttdef"><b>Definition</b> <a href="TimeSystem_8cpp_source.html#l00020">TimeSystem.cpp:20</a></div></div>
+<div class="ttc" id="aclassTimeSystem_html_a9b954dd55c80d92510187a179081938c"><div class="ttname"><a href="classTimeSystem.html#a9b954dd55c80d92510187a179081938c">TimeSystem::GetUnscaledDeltaTime</a></div><div class="ttdeci">float GetUnscaledDeltaTime() const</div><div class="ttdoc">タイムスケール適用前の、1Tick分の経過秒数を取得</div><div class="ttdef"><b>Definition</b> <a href="TimeSystem_8cpp_source.html#l00007">TimeSystem.cpp:7</a></div></div>
+<div class="ttc" id="aclassTimeSystem_html_ac129d4f767caf843564e7f6d6685aa0c"><div class="ttname"><a href="classTimeSystem.html#ac129d4f767caf843564e7f6d6685aa0c">TimeSystem::SetTimeScale</a></div><div class="ttdeci">void SetTimeScale(float _scale, float _duration=0.f)</div><div class="ttdoc">タイムスケールを変更する</div><div class="ttdef"><b>Definition</b> <a href="TimeSystem_8cpp_source.html#l00015">TimeSystem.cpp:15</a></div></div>
+<div class="ttc" id="aclassTimeSystem_html_af5ee82cd5dbf56b28020f1b876d206cf"><div class="ttname"><a href="classTimeSystem.html#af5ee82cd5dbf56b28020f1b876d206cf">TimeSystem::kFixedDeltaTime</a></div><div class="ttdeci">static constexpr float kFixedDeltaTime</div><div class="ttdoc">ゲームTickの固定間隔(秒)。フレームレートと同じ1/60を基本単位とする</div><div class="ttdef"><b>Definition</b> <a href="TimeSystem_8hpp_source.html#l00013">TimeSystem.hpp:13</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_af040d62cd01c4f8d6f60c2ba79ed1d7.html">Time</a></li><li class="navelem"><a class="el" href="TimeSystem_8cpp.html">TimeSystem.cpp</a></li>
+    <li class="footer">2026年09月12日(土) 17時53分24秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+  </ul>
+</div>
+</body>
+</html>

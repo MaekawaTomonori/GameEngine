@@ -152,6 +152,7 @@ var hierarchy =
     [ "TextureManager", "classTextureManager.html", null ],
     [ "Time", "classTime.html", null ],
     [ "Timer", "classTimer.html", null ],
+    [ "TimeSystem", "classTimeSystem.html", null ],
     [ "ModelInstance::Transformation", "structModelInstance_1_1Transformation.html", null ],
     [ "Transition", "classTransition.html", null ],
     [ "Vertex", "structVertex.html", null ],
