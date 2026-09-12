@@ -130,6 +130,7 @@
     <ClInclude Include="src\Debug\Debugger.hpp" />
     <ClInclude Include="src\Debug\FrameDebugger.hpp" />
     <ClInclude Include="include\Factory\PostEffectFactory.hpp" />
+    <ClInclude Include="src\Scene\ParticleTest\ParticleTestScene.hpp" />
     <ClInclude Include="src\Scene\Sample\SampleScene.hpp" />
     <ClInclude Include="src\Scene\SceneFactory.hpp" />
     <ClInclude Include="include\Framework.hpp" />
@@ -174,6 +175,7 @@
     <ClInclude Include="src\Light\RawLight.h" />
     <ClInclude Include="src\Light\SpotLight\SpotLight.h" />
     <ClInclude Include="src\Line\Common\LineCommon.hpp" />
+    <ClInclude Include="src\Line\LineInstance.hpp" />
     <ClInclude Include="src\Mesh\Data\MeshData.hpp" />
     <ClInclude Include="src\Mesh\Mesh.hpp" />
     <ClInclude Include="src\Mesh\Repository\MeshRepository.hpp" />
@@ -220,6 +222,7 @@
     <ClInclude Include="src\Sky\Common\SkyCommon.hpp" />
     <ClInclude Include="src\Sky\Skybox.hpp" />
     <ClInclude Include="src\Sprite\Common\SpriteCommon.hpp" />
+    <ClInclude Include="src\Sprite\SpriteInstance.hpp" />
     <ClInclude Include="src\Stage\LevelData.hpp" />
     <ClInclude Include="src\Stage\LevelEditor.hpp" />
     <ClInclude Include="src\Stage\Loader\StageLoader.hpp" />
@@ -245,6 +248,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Config\ConfigLoader.cpp" />
+    <ClCompile Include="src\Scene\ParticleTest\ParticleTestScene.cpp" />
     <ClCompile Include="src\Scene\Sample\SampleScene.cpp" />
     <ClCompile Include="src\Screen\Screen.cpp" />
     <ClCompile Include="src\Shadow\ShadowCubeMap.cpp" />
@@ -293,6 +297,7 @@
     <ClCompile Include="src\Light\SpotLight\SpotLight.cpp" />
     <ClCompile Include="src\Line\Common\LineCommon.cpp" />
     <ClCompile Include="src\Line\Line.cpp" />
+    <ClCompile Include="src\Line\LineInstance.cpp" />
     <ClCompile Include="src\Mesh\Mesh.cpp" />
     <ClCompile Include="src\Mesh\Repository\MeshRepository.cpp" />
     <ClCompile Include="src\Model\Common\ModelCommon.cpp" />
@@ -334,6 +339,7 @@
     <ClCompile Include="src\Sky\Skybox.cpp" />
     <ClCompile Include="src\Sprite\Common\SpriteCommon.cpp" />
     <ClCompile Include="src\Sprite\Sprite.cpp" />
+    <ClCompile Include="src\Sprite\SpriteInstance.cpp" />
     <ClCompile Include="src\Stage\LevelEditor.cpp" />
     <ClCompile Include="src\Stage\Loader\StageLoader.cpp" />
     <ClCompile Include="src\Stage\StageRepository.cpp" />

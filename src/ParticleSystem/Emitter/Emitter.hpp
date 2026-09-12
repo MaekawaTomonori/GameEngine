@@ -75,7 +75,7 @@ class Emitter {
     float particleLifetime_ = 3.f;
 
     std::function<void(const Vector3&, Vector3&, Vector3&)> spawnFunc_;
-    std::function<void(float, const Vector3&, Vector3&, Vector3&, Vector4&)> updateFunc_;
+    std::function<void(std::span<Particle>)> updateFunc_;
 
     std::vector<Particle> particlePool_;
 
@@ -162,10 +162,8 @@ public:
     /** @brief サイズの補間キーを設定（内部で時間昇順にソートされる）。空ならサイズは変化しない */
     Emitter& SetSizeKeys(std::vector<GradientKey<Vector3>> _keys);
 
-    /** @brief パーティクル更新関数を設定
-     * @param _func <float(time)>, <const Vector3&(origin)>, <Vector3&(position)>, <Vector3&(velocity)>, <Vector4&(color)>
-     */
-    Emitter& SetUpdateFunction(const std::function<void(float, const Vector3&, Vector3&, Vector3&, Vector4&)>& _func);
+    /** @brief パーティクル更新関数を設定（生存中の全パーティクルをまとめて1回渡す） */
+    Emitter& SetUpdateFunction(const std::function<void(std::span<Particle>)>& _func);
 
     /** @brief パーティクルスポーン関数を設定（スポーン時の初期位置・速度をカスタマイズ）
      * @param _func <const Vector3&(emitterCenter)>, <Vector3&(outPos)>, <Vector3&(outVel)>

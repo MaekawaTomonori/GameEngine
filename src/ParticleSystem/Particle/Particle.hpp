@@ -1,6 +1,5 @@
 #ifndef Particle_HPP_
 #define Particle_HPP_
-#include <functional>
 #include <string>
 #include <vector>
 #include "Math/Vector3.hpp"
@@ -8,8 +7,6 @@
 #include "src/ParticleSystem/Keyframe.hpp"
 
 class Particle {
-    std::function<void(float, const Vector3&, Vector3&, Vector3&, Vector4&)> update_;
-
     std::string uuid_;
 
     Vector3 origin_{};
@@ -26,13 +23,21 @@ class Particle {
 
 public:
     void Initialize(float _duration);
-    void Update();
+
+    /** @brief 進行度に応じた色・サイズの補間を行う（フレーム冒頭で全粒子ぶん呼ぶ） */
+    void UpdateProgress();
+
+    /** @brief 速度に基づく位置・回転の積分を行う（バッチ更新関数の後で全粒子ぶん呼ぶ） */
+    void Integrate();
 
     void Debug();
 
     bool IsDead() const;
 
+    float GetProgress() const;
+    Vector3 GetOrigin() const;
     Vector3 GetPosition() const;
+    Vector3 GetVelocity() const;
     Vector3 GetScale() const;
     Vector3 GetRotation() const;
     Vector4 GetColor() const;
@@ -55,11 +60,6 @@ public:
     Particle& RandomizeScale(const Vector3& _min = { 0.1f, 0.1f, 0.1f }, const Vector3& _max = { 1.f, 1.f, 1.f });
     Particle& RandomizeVelocity(const Vector3& _min = { -1.f, -1.f, -1.f }, const Vector3& _max = { 1.f, 1.f, 1.f });
     Particle& RandomizeColor(const Vector4& _min = { 0.f, 0.f, 0.f, 0.f }, const Vector4& _max = { 1.f, 1.f, 1.f, 1.f });
-
-    /** @brief パーティクル更新関数を設定
-     * @param _func <float(time)>, <const Vector3&(origin)>, <Vector3&(position)>, <Vector3&(velocity)>, <Vector4&(color)>
-     */
-    Particle& SetUpdateFunction(const std::function<void(float, const Vector3&, Vector3&, Vector3&, Vector4&)>& _func);
 
 private:
 

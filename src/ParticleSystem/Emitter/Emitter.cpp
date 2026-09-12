@@ -246,7 +246,7 @@ Emitter& Emitter::SetSizeKeys(std::vector<GradientKey<Vector3>> _keys) {
     return *this;
 }
 
-Emitter& Emitter::SetUpdateFunction(const std::function<void(float, const Vector3&, Vector3&, Vector3&, Vector4&)>& _func) {
+Emitter& Emitter::SetUpdateFunction(const std::function<void(std::span<Particle>)>& _func) {
     updateFunc_ = _func;
     return *this;
 }
@@ -308,7 +308,6 @@ void Emitter::Spawn(const uint16_t& _count) {
             .SetRotationVelocity(rotationVelocity_)
             .SetColorKeys(colorKeys_)
             .SetSizeKeys(sizeKeys_)
-            .SetUpdateFunction(updateFunc_)
             .Initialize(particleLifetime_);
         ++actives_;
     }
@@ -341,8 +340,16 @@ void Emitter::RegisterGpu() {
     if (actives_ == 0) return;
 
     for (uint16_t i = 0; i < actives_; ++i) {
+        particlePool_[i].UpdateProgress();
+    }
+
+    if (updateFunc_) {
+        updateFunc_(std::span<Particle>(particlePool_.data(), actives_));
+    }
+
+    for (uint16_t i = 0; i < actives_; ++i) {
         Particle& particle = particlePool_[i];
-        particle.Update();
+        particle.Integrate();
 
         const Vector3 rot = particle.GetRotation();
         const Matrix4x4 particleRot = MathUtils::Matrix::MakeRotateX(rot.x)
