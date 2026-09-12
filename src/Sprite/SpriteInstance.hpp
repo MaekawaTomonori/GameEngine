@@ -1,29 +1,96 @@
-#ifndef Sprite_HPP_
-#define Sprite_HPP_
-#include <string>
-
+#ifndef SpriteInstance_HPP_
+#define SpriteInstance_HPP_
 #include "ReferencePtr.hpp"
+#include "Math/Matrix.hpp"
 #include "Math/Vector2.hpp"
 #include "Math/Vector4.hpp"
+#include "src/DirectX/Resource/DX12Resource.hpp"
+#include <memory>
 
-class SpriteInstance;
+#include "src/DirectX/DirectXAdapter.hpp"
 
-/** @brief 2Dスプライトクラス（公開ハンドル）
- * 実体（SpriteInstance）はEngine側が所有し、本クラスは実体への安全な参照を保持するだけの薄いラッパー。
- * 実体が破棄された後に呼び出しても安全に無視される。
+class SpriteCommon;
+
+/** @brief 2Dスプライトの実体（Engine内部専用）
+ * 生成・破棄は SpriteCommon が行い、外部からは公開ハンドルの Sprite 経由でのみ操作される。
  */
-class Sprite {
-    GESTD::ReferencePtr<SpriteInstance> instance_;
+class SpriteInstance {
+    /** @brief スプライトのマテリアルデータ
+     */
+    struct Material {
+        Vector4 color;
+    };
+
+    /** @brief スプライトの頂点データ
+     */
+    struct VertexData {
+        Vector4 position;
+        Vector2 uv;
+    };
+
+    /** @brief スプライトの変換行列データ
+     */
+    struct Transformation {
+        Matrix4x4 wvp;
+        Matrix4x4 world;
+    };
+
+    GESTD::ReferencePtr<SpriteCommon> common_;
+    GESTD::ReferencePtr<DirectXAdapter> adapter_ = nullptr;
+
+    Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> commandList_ = nullptr;
+
+    std::string uuid_;
+
+    std::string texturePath_;
+
+    /** vertex resource
+     */
+    std::unique_ptr<DX12Resource> vr_;
+    /** vertex buffer view
+     */
+    D3D12_VERTEX_BUFFER_VIEW vbv_{};
+    /** vertex data
+     */
+    VertexData* vd_ = nullptr;
+
+    /** index resource
+     */
+    std::unique_ptr<DX12Resource> ir_;
+    /** index buffer view
+     */
+    D3D12_INDEX_BUFFER_VIEW ibv_{};
+    uint32_t* index_ = nullptr;
+
+    /** material resource
+     */
+    std::unique_ptr<DX12Resource> mr_;
+    Material* material_ = nullptr;
+
+    /** world transform
+     */
+    std::unique_ptr<DX12Resource> wr_;
+    Transformation* wd_ = nullptr;
+
+    Vector2 position_ = {0, 0};
+    Vector2 size_ = {100, 100};
+
+    float rotation_ = 0.f;
+
+    Vector2 anchorPoint_ = {0.5f, 0.5f};
+    bool flipX_ = false;
+    bool flipY_ = false;
+
+    Vector2 leftTop_{};
+    Vector2 texSize_ = {100, 100};
+
+    bool posteffect_ = false;
+
+    GESTD::LifetimeSentinel lifetime_;
 
 public:
-    Sprite();
-    ~Sprite();
-
-    Sprite(const Sprite&) = delete;
-    Sprite& operator=(const Sprite&) = delete;
-
-    Sprite(Sprite&& _other) noexcept;
-    Sprite& operator=(Sprite&& _other) noexcept;
+    SpriteInstance();
+    ~SpriteInstance();
 
     /** @brief スプライトを初期化
      * @param _texture テクスチャパス
@@ -34,9 +101,12 @@ public:
      */
     void Update();
 
-    /** @brief スプライトを描画
+    /** @brief スプライトを描画キューに登録
      */
     void Draw();
+
+    /** @brief 描画本体（SpriteCommonから直接・非virtualに呼ばれる） */
+    void ExecuteDraw() const;
 
     /** @brief 位置を取得
      * @return 位置ベクトルへの参照
@@ -137,6 +207,25 @@ public:
      * @param _texture テクスチャパス
      */
     void SetTexture(const std::string& _texture);
-}; // class Sprite
 
-#endif // Sprite_HPP_
+    /** @brief 自身への安全な参照を取得する
+     * SpriteCommon がハンドル（Sprite）生成時にのみ使用する。
+     * @return ダングリング検出つきの参照
+     */
+    GESTD::ReferencePtr<SpriteInstance> GetReference() { return GESTD::ReferencePtr<SpriteInstance>(this, lifetime_); }
+
+private:
+    /** @brief テクスチャサイズの調整
+     */
+    void AdjustTextureSize();
+
+    /** @brief マップデータの更新（頂点・WVP行列）
+     */
+    void UpdateMapData() const;
+
+    /** @brief デバッグ情報の表示
+     */
+    void Debug();
+}; // class SpriteInstance
+
+#endif // SpriteInstance_HPP_

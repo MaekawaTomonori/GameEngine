@@ -1,75 +1,31 @@
 #ifndef Line_HPP_
 #define Line_HPP_
 
-#include <d3d12.h>
-#include <wrl/client.h>
-#include <vector>
 #include <string>
-#include <memory>
 
 #include "ReferencePtr.hpp"
-#include "Math/Matrix.hpp"
 #include "Math/Vector3.hpp"
 #include "Math/Vector4.hpp"
-#include "src/DirectX/Resource/DX12Resource.hpp"
 
-class LineCommon;
-class DirectXAdapter;
-class CameraController;
+class LineInstance;
 
-/** @brief 3Dラインレンダリングクラス
- * デバッグ用の3D線分描画を提供
+/** @brief 3Dラインレンダリングクラス（公開ハンドル）
+ * デバッグ用の3D線分描画を提供。
+ * 実体（LineInstance）はEngine側が所有し、本クラスは実体への安全な参照を保持するだけの薄いラッパー。
+ * 実体が破棄された後に呼び出しても安全に無視される。
  */
 class Line {
-    /** @brief ラインの頂点データ
-     */
-    struct VertexData {
-        Vector4 position;
-    };
-
-    /** @brief ラインのマテリアルデータ
-     */
-    struct Material {
-        Vector4 color;
-    };
-
-    /** @brief ラインの変換行列データ
-     */
-    struct Transformation {
-        Matrix4x4 WVP;
-    };
-
-    GESTD::ReferencePtr<LineCommon> common_;
-    GESTD::ReferencePtr<DirectXAdapter> adapter_ = nullptr;
-    Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> commandList_ = nullptr;
-    GESTD::ReferencePtr<CameraController> cameraManager_;
-
-    std::string uuid_;
-
-    const uint32_t MAX_LINES = 1000;
-
-    /** 基本線形状用の頂点バッファ（2つの頂点）
-     */
-    std::unique_ptr<DX12Resource> vertexResource_;
-    D3D12_VERTEX_BUFFER_VIEW vertexBufferView_{};
-    VertexData* vertexData_ = nullptr;
-
-    /** Material
-     */
-    std::unique_ptr<DX12Resource> materialResource_;
-    Material* materialData_ = nullptr;
-
-    std::unique_ptr<DX12Resource> transformationResource_;
-    Transformation* transformationData_ = nullptr;
-
-    std::vector<Vector4> positions_;
-
-    std::string name_;
-    uint32_t id_ = 0;
+    GESTD::ReferencePtr<LineInstance> instance_;
 
 public:
     Line();
     ~Line();
+
+    Line(const Line&) = delete;
+    Line& operator=(const Line&) = delete;
+
+    Line(Line&& _other) noexcept;
+    Line& operator=(Line&& _other) noexcept;
 
     /** @brief ラインを初期化
      */
@@ -102,19 +58,6 @@ public:
      * @param _name 名前
      */
     void SetName(const std::string& _name);
-
-private:
-    /** @brief 頂点バッファの生成
-     */
-    void CreateVertexBuffer();
-
-    /** @brief マテリアルバッファの生成
-     */
-    void CreateMaterialBuffer();
-
-    /** @brief 変換バッファの生成
-     */
-    void CreateTransformationBuffer();
 };
 
 #endif // Line_HPP_

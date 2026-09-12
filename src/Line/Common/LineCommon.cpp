@@ -47,3 +47,40 @@ void LineCommon::Initialize(const GESTD::ReferencePtr<DirectXAdapter>& _adapter,
     srv_ = _srv;
     Initialize(_adapter, _debugUi);
 }
+
+GESTD::ReferencePtr<LineInstance> LineCommon::CreateInstance() {
+    auto instance = std::make_unique<LineInstance>();
+    instance->Initialize();
+
+    GESTD::ReferencePtr<LineInstance> reference = instance->GetReference();
+    instances_.push_back(std::move(instance));
+    return reference;
+}
+
+void LineCommon::DestroyInstance(const GESTD::ReferencePtr<LineInstance>& _instance) {
+    LineInstance* raw = _instance;
+    if (!raw) return;
+
+    std::erase_if(instances_, [raw](const std::unique_ptr<LineInstance>& _entry) {
+        return _entry.get() == raw;
+    });
+}
+
+void LineCommon::RegisterDraw(LineInstance* _instance) {
+    drawQueue_.push_back(_instance);
+}
+
+void LineCommon::Draw(Renderer* _renderer) {
+    if (drawQueue_.empty()) return;
+    if (!pipeline_) return;
+
+    std::lock_guard<std::mutex> lock(mutex_);
+    _renderer->Register([this, queue = std::move(drawQueue_)]() {
+        pipeline_->DrawCall();
+        for (LineInstance* instance : queue) {
+            instance->ExecuteDraw();
+        }
+    }, "None");
+
+    drawQueue_.clear();
+}

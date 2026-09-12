@@ -69,3 +69,40 @@ void SpriteCommon::Initialize(const GESTD::ReferencePtr<DirectXAdapter>& _adapte
     .SetTopologyType(D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE)
     .Create();
 }
+
+GESTD::ReferencePtr<SpriteInstance> SpriteCommon::CreateInstance(const std::string& _texture) {
+    auto instance = std::make_unique<SpriteInstance>();
+    instance->Initialize(_texture);
+
+    GESTD::ReferencePtr<SpriteInstance> reference = instance->GetReference();
+    instances_.push_back(std::move(instance));
+    return reference;
+}
+
+void SpriteCommon::DestroyInstance(const GESTD::ReferencePtr<SpriteInstance>& _instance) {
+    SpriteInstance* raw = _instance;
+    if (!raw) return;
+
+    std::erase_if(instances_, [raw](const std::unique_ptr<SpriteInstance>& _entry) {
+        return _entry.get() == raw;
+    });
+}
+
+void SpriteCommon::RegisterDraw(SpriteInstance* _instance) {
+    drawQueue_.push_back(_instance);
+}
+
+void SpriteCommon::Draw(Renderer* _renderer) {
+    if (drawQueue_.empty()) return;
+    if (!pipeline_) return;
+
+    std::lock_guard<std::mutex> lock(mutex_);
+    _renderer->Register([this, queue = std::move(drawQueue_)]() {
+        pipeline_->DrawCall();
+        for (SpriteInstance* instance : queue) {
+            instance->ExecuteDraw();
+        }
+    }, "None");
+
+    drawQueue_.clear();
+}
