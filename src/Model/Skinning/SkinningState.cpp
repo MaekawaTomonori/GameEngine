@@ -15,6 +15,7 @@
 #include "src/DirectX/Heap/SRVManager.h"
 #include "src/Mesh/Mesh.hpp"
 #include "src/Model/Common/ModelCommon.hpp"
+#include "src/Time/Time.hpp"
 
 void SkinningState::Initialize(const GESTD::ReferencePtr<DirectXAdapter>& _adapter, const GESTD::ReferencePtr<ModelCommon>& _common, const GESTD::ReferencePtr<ModelData>& _data, Mesh& _mesh) {
     adapter_ = _adapter;
@@ -198,7 +199,7 @@ void SkinningState::UpdateAnimation() {
     Animation& animation = data_->animation.value();
     // Update AnimationTimer
     if (animationEnable_) {
-        animationTime_ += 1.f / 60.f;
+        animationTime_ += Time().GetDeltaTime();
         animationTime_ = fmod(animationTime_, animation.duration);
     }
 

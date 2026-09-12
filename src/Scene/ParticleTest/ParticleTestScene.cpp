@@ -37,7 +37,7 @@ void ParticleTestScene::Initialize() {
 void ParticleTestScene::Update() {
     plane_->Update();
 
-    timer_ += Time::GetDeltaTime();
+    timer_ += Time().GetDeltaTime();
     if (timer_ >= 1.0f) {
         timer_ = 0.f;
         Particle()->Emit(TEST_TEMPLATE, {0.f, 1.f, 0.f});

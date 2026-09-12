@@ -4,6 +4,7 @@
 #include "Utils.hpp"
 #include "imgui_internal.h"
 #include "Math/MathUtils.hpp"
+#include "src/Time/Time.hpp"
 
 void Particle::Initialize(float _duration) {
     uuid_ = Utils::GenerateUniqueId();
@@ -18,10 +19,10 @@ void Particle::UpdateProgress() {
 }
 
 void Particle::Integrate() {
-    static constexpr float DT = 1.f / 60.f;
-    now_ += DT;
-    position_ += velocity_ * DT;
-    rotation_ += rotationVelocity_ * DT;
+    const float dt = Time().GetDeltaTime();
+    now_ += dt;
+    position_ += velocity_ * dt;
+    rotation_ += rotationVelocity_ * dt;
 }
 
 void Particle::Debug() {

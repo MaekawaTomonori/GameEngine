@@ -8,7 +8,6 @@ class Sprite;
 class Fade : public ITransitionEffect {
     float duration_ = 1.0f;
     float time_ = 0.0f;
-    float speed_ = 1.0f / 60.0f;
     float alpha_ = 0.0f;
 
     State state_ = State::None;

@@ -463,6 +463,9 @@
     <ClInclude Include="src\Time\Time.hpp">
       <Filter>src\Time</Filter>
     </ClInclude>
+    <ClInclude Include="src\Time\TimeSystem.hpp">
+      <Filter>src\Time</Filter>
+    </ClInclude>
     <ClInclude Include="src\Timer\Timer.hpp">
       <Filter>src\Timer</Filter>
     </ClInclude>
@@ -710,6 +713,9 @@
       <Filter>src\Texture</Filter>
     </ClCompile>
     <ClCompile Include="src\Time\Time.cpp">
+      <Filter>src\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Time\TimeSystem.cpp">
       <Filter>src\Time</Filter>
     </ClCompile>
     <ClCompile Include="src\Timer\Timer.cpp">
