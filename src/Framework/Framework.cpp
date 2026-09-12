@@ -11,6 +11,7 @@
 #include "src/Config/ConfigLoader.hpp"
 #include "src/Screen/Screen.hpp"
 #include "src/Time/Time.hpp"
+#include "src/Time/TimeSystem.hpp"
 
 namespace {
     constexpr const char* APP_CONFIG_PATH = "Assets/Config/App.cnf";
@@ -205,7 +206,7 @@ bool Framework::Loop() const {
 void Framework::Update() const {
     if (!Check()) return;
 
-    Time::Tick(1.0f / dxAdapter_->GetCurrentFps());
+    Singleton<TimeSystem>::GetInstance()->Tick(1.0f / dxAdapter_->GetCurrentFps());
 
     input_->Update();
 
@@ -241,7 +242,7 @@ void Framework::Update() const {
         { PROFILE_SCOPE("CameraDirector"); cameraDirector_->Update(); }
         { PROFILE_SCOPE("Particle");       particle_->Update(); }
 
-        const float deltaTime = Time::GetDeltaTime();
+        const float deltaTime = Time().GetDeltaTime();
         postProcessor_->Update(deltaTime);
 
         { PROFILE_SCOPE("Scene");          scene_->Update(); }

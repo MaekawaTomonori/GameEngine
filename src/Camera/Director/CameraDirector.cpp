@@ -10,6 +10,7 @@
 #include "Pattern/Singleton.hpp"
 #include "src/Camera/Camera.hpp"
 #include "src/Camera/Controller/CameraController.hpp"
+#include "src/Time/Time.hpp"
 #include "json.hpp"
 
 #undef min
@@ -51,7 +52,7 @@ void CameraDirector::Update() {
     if (!isProgress_ || !active_) return;
 
     Work& current = works_[currentWorkKey_];
-    timer_ += 1.0f / 60.0f;
+    timer_ += Time().GetDeltaTime();
 
     if (timer_ / current.duration >= 1.0f) {
         if (isLoop_) {

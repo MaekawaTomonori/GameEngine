@@ -1,6 +1,7 @@
 #define NOMINMAX
 #include "Fade.hpp"
 #include "Sprite.hpp"
+#include "src/Time/Time.hpp"
 #include <algorithm>
 
 Fade::Fade() {
@@ -23,7 +24,7 @@ void Fade::Update() {
         return;
     }
 
-    time_ -= speed_;
+    time_ -= Time().GetUnscaledDeltaTime();
     if (time_ < 0.f) {
         time_ = 0.f;
     }

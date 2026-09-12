@@ -273,7 +273,7 @@ void Emitter::FrequencyUpdate() {
         return;
     }
 
-    elapsedTime_ += Time::GetDeltaTime();
+    elapsedTime_ += Time().GetDeltaTime();
     if (elapsedTime_ >= duration_) {
         active_ = false;
         return;
@@ -285,7 +285,7 @@ void Emitter::FrequencyUpdate() {
         return;
     }
 
-    timer_ += Time::GetDeltaTime();
+    timer_ += Time().GetDeltaTime();
 }
 
 void Emitter::Spawn(const uint16_t& _count) {

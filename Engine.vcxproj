@@ -234,6 +234,7 @@
     <ClInclude Include="src\Texture\Composition\PlaneTextureLayoutEditor.hpp" />
     <ClInclude Include="src\Texture\TextureManager.hpp" />
     <ClInclude Include="src\Time\Time.hpp" />
+    <ClInclude Include="src\Time\TimeSystem.hpp" />
     <ClInclude Include="src\Timer\Timer.hpp" />
     <ClInclude Include="src\Window\Window.hpp" />
     <ClInclude Include="externals\MagicEnum\magic_enum.hpp" />
@@ -350,6 +351,7 @@
     <ClCompile Include="src\Texture\Composition\PlaneTextureLayoutEditor.cpp" />
     <ClCompile Include="src\Texture\TextureManager.cpp" />
     <ClCompile Include="src\Time\Time.cpp" />
+    <ClCompile Include="src\Time\TimeSystem.cpp" />
     <ClCompile Include="src\Timer\Timer.cpp" />
     <ClCompile Include="src\Window\Window.cpp" />
   </ItemGroup>

@@ -1,40 +1,20 @@
 #include "Time.hpp"
 
+#include "TimeSystem.hpp"
 #include "Pattern/Singleton.hpp"
 
-float Time::GetDeltaTime() {
-    return Instance().deltaTime_;
+float Time::GetDeltaTime() const {
+    return Singleton<TimeSystem>::GetInstance()->GetDeltaTime();
 }
 
-float Time::GetTimeScale() {
-    return Instance().timeScale_;
+float Time::GetUnscaledDeltaTime() const {
+    return Singleton<TimeSystem>::GetInstance()->GetUnscaledDeltaTime();
+}
+
+float Time::GetTimeScale() const {
+    return Singleton<TimeSystem>::GetInstance()->GetTimeScale();
 }
 
 void Time::SetTimeScale(float _scale, float _duration) {
-    Instance().SetTimeScaleImpl(_scale, _duration);
-}
-
-void Time::Tick(float _realDeltaSeconds) {
-    Instance().TickImpl(_realDeltaSeconds);
-}
-
-Time& Time::Instance() {
-    return *Singleton<Time>::GetInstance();
-}
-
-void Time::TickImpl(float _realDeltaSeconds) {
-    if (scaleDuration_ > 0.f) {
-        scaleDuration_ -= _realDeltaSeconds;
-        if (scaleDuration_ <= 0.f) {
-            scaleDuration_ = 0.f;
-            timeScale_ = 1.f;
-        }
-    }
-
-    deltaTime_ = _realDeltaSeconds * timeScale_;
-}
-
-void Time::SetTimeScaleImpl(float _scale, float _duration) {
-    timeScale_ = _scale;
-    scaleDuration_ = _duration;
+    Singleton<TimeSystem>::GetInstance()->SetTimeScale(_scale, _duration);
 }
