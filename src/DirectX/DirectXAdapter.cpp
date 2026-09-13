@@ -21,6 +21,11 @@
 #pragma comment(lib, "dxguid.lib")
 #pragma comment(lib, "dxcompiler.lib")
 
+// DX12デバッグレイヤー(GPU-Based Validation等)を有効化するかどうか。
+// GPU-Based Validationは非常に重く、Debugビルドでゲーム側のデバッグをする際の
+// 余計な負荷になるため、_DEBUGとは切り離し、DX12自体を検証したい時だけ1にする。
+#define ENGINE_DEBUG 0
+
 DirectXAdapter::DirectXAdapter(const HWND _hWnd, size_t _width, size_t _height) :
     windowSize_(_width, _height), hWnd_(_hWnd), dsvHandle_() {
     Log::Send(Log::Level::INFO, "DirectXAdapter Created");
@@ -333,7 +338,7 @@ void DirectXAdapter::Present() {
 }
 
 void DirectXAdapter::EnableDebugLayer() {
-#ifdef _DEBUG
+#if ENGINE_DEBUG
     if (SUCCEEDED(D3D12GetDebugInterface(IID_PPV_ARGS(&debugLayer_)))){
         debugLayer_->EnableDebugLayer();
         debugLayer_->SetEnableGPUBasedValidation(true);
