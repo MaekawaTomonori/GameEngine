@@ -42,8 +42,6 @@ protected:
     std::unique_ptr<DX12Resource> wr_;
     Transformation* wd_ = nullptr;
 
-    std::string environmentTexture_ = "";
-
     std::string canvasName_ = "Main";
     bool castShadow_ = true;
 
@@ -69,7 +67,6 @@ public:
     ModelInstance& SetTranslate(const Vector3& _translate);
     ModelInstance& SetRotate(const Vector3& _rotate);
     ModelInstance& SetScale(const Vector3& _scale);
-    ModelInstance& SetEnvironmentTexture(const std::string& _texture);
     ModelInstance& SetTexture(const std::string& _texture);
     ModelInstance& SetTilingMultiply(Vector2 _mul);
     ModelInstance& SetColor(const Vector4& _color);

@@ -67,11 +67,6 @@ Model& Model::SetScale(const Vector3& _scale) {
     return *this;
 }
 
-Model& Model::SetEnvironmentTexture(const std::string& _texture) {
-    if (instance_) instance_->SetEnvironmentTexture(_texture);
-    return *this;
-}
-
 Model& Model::SetTexture(const std::string& _texture) {
     if (instance_) instance_->SetTexture(_texture);
     return *this;

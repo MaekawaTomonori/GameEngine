@@ -67,12 +67,6 @@ public:
      */
     Model& SetScale(const Vector3& _scale);
 
-    /** @brief 環境マッピング用テクスチャを設定
-     * @param _texture テクスチャパス
-     * @return メソッドチェーン用の自身への参照
-     */
-    Model& SetEnvironmentTexture(const std::string& _texture);
-
     /** @brief テクスチャを設定
      * @param _texture テクスチャパス
      * @return メソッドチェーン用の自身への参照

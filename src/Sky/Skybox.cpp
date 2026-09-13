@@ -69,6 +69,11 @@ void Skybox::SetColor(const Vector4& _color) const {
     md_->color = _color;
 }
 
+void Skybox::SetTexture(const std::string& _texture) {
+    Singleton<TextureManager>::GetInstance()->Load(_texture);
+    texture_ = _texture;
+}
+
 void Skybox::CreateVertex() {
     vr_ = adapter_->CreateBufferResource(sizeof(VertexData) * 24);
     vbv_.BufferLocation = vr_->Get()->GetGPUVirtualAddress();

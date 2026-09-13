@@ -52,6 +52,7 @@ public:
     void Draw();
 
     void SetColor(const Vector4& _color) const;
+    void SetTexture(const std::string& _texture);
 
 private:
     void CreateVertex();

@@ -88,11 +88,13 @@ void SceneSwitcher::Update() {
         scene_->Awake();
     }
 
+    scene_->UpdateSky();
     scene_->Update();
 }
 
 void SceneSwitcher::Draw() {
     if (scene_){
+        scene_->DrawSky();
         scene_->Draw();
     }
 }

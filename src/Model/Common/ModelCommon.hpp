@@ -31,6 +31,8 @@ class ModelCommon : public Common{
 
     std::vector<std::unique_ptr<ModelInstance>> instances_;
 
+    std::string environmentTexture_ = "white_x16.png";
+
     void Initialize(const GESTD::ReferencePtr<DirectXAdapter>& _adapter, const GESTD::ReferencePtr<DebugUI>& _debugUi) override;
     void CreateSkinningPipeline() const;
     void CreateStaticPipeline() const;
@@ -62,6 +64,9 @@ public:
      * @param _instance 破棄する実体への参照
      */
     void DestroyModelInstance(const GESTD::ReferencePtr<ModelInstance>& _instance);
+
+    void SetEnvironmentTexture(const std::string& _texture);
+    const std::string& GetEnvironmentTexture() const { return environmentTexture_; }
 
     void Draw(Renderer* _renderer) override;
 
