@@ -1,5 +1,8 @@
 var NAVTREEINDEX9 =
 {
+"structPointLight.html#aaeaf77fdcb63b00d69b5a97fff13a253":[1,0,72,4],
+"structPointLight.html#abbefa0b6bed88de9049aaf72f9feb437":[1,0,72,1],
+"structPointLight.html#aefa51d6ad5e2b6747d605bc5038692a2":[1,0,72,3],
 "structPostEffectChain_1_1EffectData.html":[1,0,73,0],
 "structPostEffectChain_1_1EffectData.html#a264fe8e086cb8ac729fd885d10706910":[1,0,73,0,3],
 "structPostEffectChain_1_1EffectData.html#a7b72c07c000cab425bd82356adb43ae0":[1,0,73,0,0],

@@ -154,9 +154,18 @@ IScene の継承関係図</div>
 <tr class="memitem:a36e4a540971c4d907c717eceeb33687b" id="r_a36e4a540971c4d907c717eceeb33687b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIScene.html#a36e4a540971c4d907c717eceeb33687b">SetName</a> (const std::string &amp;_name)</td></tr>
 <tr class="memdesc:a36e4a540971c4d907c717eceeb33687b"><td class="mdescLeft">&#160;</td><td class="mdescRight">シーンの名前を設定(登録時にSwitcherから設定する)  <br /></td></tr>
 <tr class="separator:a36e4a540971c4d907c717eceeb33687b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e149e209193cdc72e41de4dd5479023" id="r_a5e149e209193cdc72e41de4dd5479023"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIScene.html#a5e149e209193cdc72e41de4dd5479023">UpdateSky</a> ()</td></tr>
+<tr class="memdesc:a5e149e209193cdc72e41de4dd5479023"><td class="mdescLeft">&#160;</td><td class="mdescRight">Skyboxを更新（SceneSwitcherが毎フレーム呼び出す）  <br /></td></tr>
+<tr class="separator:a5e149e209193cdc72e41de4dd5479023"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a635001b592e97688a3a77a2dfe36db" id="r_a9a635001b592e97688a3a77a2dfe36db"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIScene.html#a9a635001b592e97688a3a77a2dfe36db">DrawSky</a> ()</td></tr>
+<tr class="memdesc:a9a635001b592e97688a3a77a2dfe36db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Skyboxを描画（SceneSwitcherが毎フレーム呼び出す）  <br /></td></tr>
+<tr class="separator:a9a635001b592e97688a3a77a2dfe36db"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 限定公開メンバ関数</h2></td></tr>
+<tr class="memitem:af5c44ea6ef4823e6fa6160c9f26c3ec7" id="r_af5c44ea6ef4823e6fa6160c9f26c3ec7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIScene.html#af5c44ea6ef4823e6fa6160c9f26c3ec7">SetSky</a> (const std::string &amp;_textureKey)</td></tr>
+<tr class="memdesc:af5c44ea6ef4823e6fa6160c9f26c3ec7"><td class="mdescLeft">&#160;</td><td class="mdescRight">空のテクスチャを設定（未生成なら生成し、Modelの反射テクスチャも同期する）  <br /></td></tr>
+<tr class="separator:af5c44ea6ef4823e6fa6160c9f26c3ec7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ade036cc2b8e260b5302328eb980d5cac" id="r_ade036cc2b8e260b5302328eb980d5cac"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIScene.html#ade036cc2b8e260b5302328eb980d5cac">Change</a> ()</td></tr>
 <tr class="memdesc:ade036cc2b8e260b5302328eb980d5cac"><td class="mdescLeft">&#160;</td><td class="mdescRight">シーンをnext_に変更  <br /></td></tr>
 <tr class="separator:ade036cc2b8e260b5302328eb980d5cac"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -183,7 +192,7 @@ IScene の継承関係図</div>
 <a name="details" id="details"></a><h2 class="groupheader">詳解</h2>
 <div class="textblock"><p>ゲームシーンの基底インターフェース シーンのライフサイクル管理とトランジションを提供 </p>
 
-<p class="definition"> <a class="el" href="IScene_8hpp_source.html">IScene.hpp</a> の <a class="el" href="IScene_8hpp_source.html#l00017">17</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="IScene_8hpp_source.html">IScene.hpp</a> の <a class="el" href="IScene_8hpp_source.html#l00019">19</a> 行目に定義があります。</p>
 </div><h2 class="groupheader">構築子と解体子</h2>
 <a id="a146b1101069efb7a46b3bb6e419bc2bc" name="a146b1101069efb7a46b3bb6e419bc2bc"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a146b1101069efb7a46b3bb6e419bc2bc">&#9670;&#160;</a></span>~IScene()</h2>
@@ -228,7 +237,7 @@ IScene の継承関係図</div>
 
 <p>シーンを起動 </p>
 
-<p class="definition"> <a class="el" href="IScene_8cpp_source.html">IScene.cpp</a> の <a class="el" href="IScene_8cpp_source.html#l00009">9</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="IScene_8cpp_source.html">IScene.cpp</a> の <a class="el" href="IScene_8cpp_source.html#l00011">11</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -257,9 +266,9 @@ IScene の継承関係図</div>
 
 <p>シーンをnext_に変更 </p>
 
-<p class="definition"> <a class="el" href="IScene_8cpp_source.html">IScene.cpp</a> の <a class="el" href="IScene_8cpp_source.html#l00022">22</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="IScene_8cpp_source.html">IScene.cpp</a> の <a class="el" href="IScene_8cpp_source.html#l00042">42</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="SceneSwitcher_8cpp_source.html#l00240">SceneSwitcher::Change()</a>, <a class="el" href="IScene_8hpp_source.html#l00023">next_</a>.</p>
+<p class="reference">参照先 <a class="el" href="SceneSwitcher_8cpp_source.html#l00242">SceneSwitcher::Change()</a>, <a class="el" href="IScene_8hpp_source.html#l00027">next_</a>.</p>
 
 </div>
 </div>
@@ -290,7 +299,7 @@ IScene の継承関係図</div>
 
 <p><a class="el" href="classParticleTestScene.html#a95bbdabc9208503a75c4432562e7b9d0">ParticleTestScene</a>, <a class="el" href="classSampleScene.html#a59833e9fc90a12376ce4b00e439415d8">SampleScene</a>で再実装されています。</p>
 
-<p class="definition"> <a class="el" href="IScene_8hpp_source.html">IScene.hpp</a> の <a class="el" href="IScene_8hpp_source.html#l00049">49</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="IScene_8hpp_source.html">IScene.hpp</a> の <a class="el" href="IScene_8hpp_source.html#l00053">53</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -323,6 +332,27 @@ IScene の継承関係図</div>
 
 </div>
 </div>
+<a id="a9a635001b592e97688a3a77a2dfe36db" name="a9a635001b592e97688a3a77a2dfe36db"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a635001b592e97688a3a77a2dfe36db">&#9670;&#160;</a></span>DrawSky()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void IScene::DrawSky </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Skyboxを描画（SceneSwitcherが毎フレーム呼び出す） </p>
+
+<p class="definition"> <a class="el" href="IScene_8cpp_source.html">IScene.cpp</a> の <a class="el" href="IScene_8cpp_source.html#l00038">38</a> 行目に定義があります。</p>
+
+</div>
+</div>
 <a id="a5d82f06c208dbdd80a0a5d566468c185" name="a5d82f06c208dbdd80a0a5d566468c185"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5d82f06c208dbdd80a0a5d566468c185">&#9670;&#160;</a></span>Finalize()</h2>
 
@@ -348,7 +378,7 @@ IScene の継承関係図</div>
 
 <p>終了処理 </p>
 
-<p class="definition"> <a class="el" href="IScene_8hpp_source.html">IScene.hpp</a> の <a class="el" href="IScene_8hpp_source.html#l00045">45</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="IScene_8hpp_source.html">IScene.hpp</a> の <a class="el" href="IScene_8hpp_source.html#l00049">49</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -378,9 +408,9 @@ IScene の継承関係図</div>
 <p>入場トランジションタイプを取得 </p>
 <dl class="section return"><dt>戻り値</dt><dd>トランジションタイプ </dd></dl>
 
-<p class="definition"> <a class="el" href="IScene_8hpp_source.html">IScene.hpp</a> の <a class="el" href="IScene_8hpp_source.html#l00074">74</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="IScene_8hpp_source.html">IScene.hpp</a> の <a class="el" href="IScene_8hpp_source.html#l00078">78</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="IScene_8hpp_source.html#l00025">entryTransition_</a>.</p>
+<p class="reference">参照先 <a class="el" href="IScene_8hpp_source.html#l00029">entryTransition_</a>.</p>
 
 </div>
 </div>
@@ -410,9 +440,9 @@ IScene の継承関係図</div>
 <p>退場トランジションタイプを取得 </p>
 <dl class="section return"><dt>戻り値</dt><dd>トランジションタイプ </dd></dl>
 
-<p class="definition"> <a class="el" href="IScene_8hpp_source.html">IScene.hpp</a> の <a class="el" href="IScene_8hpp_source.html#l00079">79</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="IScene_8hpp_source.html">IScene.hpp</a> の <a class="el" href="IScene_8hpp_source.html#l00083">83</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="IScene_8hpp_source.html#l00026">exitTransition_</a>.</p>
+<p class="reference">参照先 <a class="el" href="IScene_8hpp_source.html#l00030">exitTransition_</a>.</p>
 
 </div>
 </div>
@@ -442,7 +472,7 @@ IScene の継承関係図</div>
 <p>シーン名を取得 </p>
 <dl class="section return"><dt>戻り値</dt><dd>シーン名への参照 </dd></dl>
 
-<p class="definition"> <a class="el" href="IScene_8hpp_source.html">IScene.hpp</a> の <a class="el" href="IScene_8hpp_source.html#l00069">69</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="IScene_8hpp_source.html">IScene.hpp</a> の <a class="el" href="IScene_8hpp_source.html#l00073">73</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -493,7 +523,7 @@ IScene の継承関係図</div>
 <p>シーンが進行中かを判定 </p>
 <dl class="section return"><dt>戻り値</dt><dd>進行中の場合true </dd></dl>
 
-<p class="definition"> <a class="el" href="IScene_8cpp_source.html">IScene.cpp</a> の <a class="el" href="IScene_8cpp_source.html#l00005">5</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="IScene_8cpp_source.html">IScene.cpp</a> の <a class="el" href="IScene_8cpp_source.html#l00007">7</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -520,9 +550,9 @@ IScene の継承関係図</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="IScene_8cpp_source.html">IScene.cpp</a> の <a class="el" href="IScene_8cpp_source.html#l00043">43</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="IScene_8cpp_source.html">IScene.cpp</a> の <a class="el" href="IScene_8cpp_source.html#l00063">63</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="SceneSwitcher_8cpp_source.html#l00222">SceneSwitcher::GetContext()</a>, <a class="el" href="SceneSwitcher_8hpp_source.html#l00026">SceneSwitcher::Context::particle</a>.</p>
+<p class="reference">参照先 <a class="el" href="SceneSwitcher_8cpp_source.html#l00224">SceneSwitcher::GetContext()</a>, <a class="el" href="SceneSwitcher_8hpp_source.html#l00026">SceneSwitcher::Context::particle</a>.</p>
 
 <p class="reference">参照元 <a class="el" href="ParticleTestScene_8cpp_source.html#l00011">ParticleTestScene::Initialize()</a>, <a class="el" href="ParticleTestScene_8cpp_source.html#l00037">ParticleTestScene::Update()</a>.</p>
 
@@ -578,9 +608,9 @@ IScene の継承関係図</div>
   </dd>
 </dl>
 
-<p class="definition"> <a class="el" href="IScene_8cpp_source.html">IScene.cpp</a> の <a class="el" href="IScene_8cpp_source.html#l00029">29</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="IScene_8cpp_source.html">IScene.cpp</a> の <a class="el" href="IScene_8cpp_source.html#l00049">49</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="SceneSwitcher_8cpp_source.html#l00226">SceneSwitcher::PlayTransition()</a>.</p>
+<p class="reference">参照先 <a class="el" href="SceneSwitcher_8cpp_source.html#l00228">SceneSwitcher::PlayTransition()</a>.</p>
 
 </div>
 </div>
@@ -627,9 +657,9 @@ IScene の継承関係図</div>
   </dd>
 </dl>
 
-<p class="definition"> <a class="el" href="IScene_8cpp_source.html">IScene.cpp</a> の <a class="el" href="IScene_8cpp_source.html#l00034">34</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="IScene_8cpp_source.html">IScene.cpp</a> の <a class="el" href="IScene_8cpp_source.html#l00054">54</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="SceneSwitcher_8cpp_source.html#l00226">SceneSwitcher::PlayTransition()</a>.</p>
+<p class="reference">参照先 <a class="el" href="SceneSwitcher_8cpp_source.html#l00228">SceneSwitcher::PlayTransition()</a>.</p>
 
 </div>
 </div>
@@ -656,9 +686,9 @@ IScene の継承関係図</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="IScene_8cpp_source.html">IScene.cpp</a> の <a class="el" href="IScene_8cpp_source.html#l00039">39</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="IScene_8cpp_source.html">IScene.cpp</a> の <a class="el" href="IScene_8cpp_source.html#l00059">59</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="SceneSwitcher_8cpp_source.html#l00222">SceneSwitcher::GetContext()</a>, <a class="el" href="SceneSwitcher_8hpp_source.html#l00025">SceneSwitcher::Context::ppe</a>.</p>
+<p class="reference">参照先 <a class="el" href="SceneSwitcher_8cpp_source.html#l00224">SceneSwitcher::GetContext()</a>, <a class="el" href="SceneSwitcher_8hpp_source.html#l00025">SceneSwitcher::Context::ppe</a>.</p>
 
 </div>
 </div>
@@ -686,7 +716,43 @@ IScene の継承関係図</div>
   </dd>
 </dl>
 
-<p class="definition"> <a class="el" href="IScene_8cpp_source.html">IScene.cpp</a> の <a class="el" href="IScene_8cpp_source.html#l00018">18</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="IScene_8cpp_source.html">IScene.cpp</a> の <a class="el" href="IScene_8cpp_source.html#l00020">20</a> 行目に定義があります。</p>
+
+</div>
+</div>
+<a id="af5c44ea6ef4823e6fa6160c9f26c3ec7" name="af5c44ea6ef4823e6fa6160c9f26c3ec7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af5c44ea6ef4823e6fa6160c9f26c3ec7">&#9670;&#160;</a></span>SetSky()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void IScene::SetSky </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>_textureKey</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>空のテクスチャを設定（未生成なら生成し、Modelの反射テクスチャも同期する） </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_textureKey</td><td>空に使うテクスチャキー </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition"> <a class="el" href="IScene_8cpp_source.html">IScene.cpp</a> の <a class="el" href="IScene_8cpp_source.html#l00024">24</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -714,7 +780,7 @@ IScene の継承関係図</div>
   </dd>
 </dl>
 
-<p class="definition"> <a class="el" href="IScene_8cpp_source.html">IScene.cpp</a> の <a class="el" href="IScene_8cpp_source.html#l00014">14</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="IScene_8cpp_source.html">IScene.cpp</a> の <a class="el" href="IScene_8cpp_source.html#l00016">16</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -747,6 +813,27 @@ IScene の継承関係図</div>
 
 </div>
 </div>
+<a id="a5e149e209193cdc72e41de4dd5479023" name="a5e149e209193cdc72e41de4dd5479023"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5e149e209193cdc72e41de4dd5479023">&#9670;&#160;</a></span>UpdateSky()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void IScene::UpdateSky </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Skyboxを更新（SceneSwitcherが毎フレーム呼び出す） </p>
+
+<p class="definition"> <a class="el" href="IScene_8cpp_source.html">IScene.cpp</a> の <a class="el" href="IScene_8cpp_source.html#l00034">34</a> 行目に定義があります。</p>
+
+</div>
+</div>
 <h2 class="groupheader">メンバ詳解</h2>
 <a id="a3fcac30ea7958c649184f90e7ab44aa7" name="a3fcac30ea7958c649184f90e7ab44aa7"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3fcac30ea7958c649184f90e7ab44aa7">&#9670;&#160;</a></span>entryTransition_</h2>
@@ -768,9 +855,9 @@ IScene の継承関係図</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="IScene_8hpp_source.html">IScene.hpp</a> の <a class="el" href="IScene_8hpp_source.html#l00025">25</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="IScene_8hpp_source.html">IScene.hpp</a> の <a class="el" href="IScene_8hpp_source.html#l00029">29</a> 行目に定義があります。</p>
 
-<p class="reference">参照元 <a class="el" href="IScene_8hpp_source.html#l00074">GetEntryTransition()</a>.</p>
+<p class="reference">参照元 <a class="el" href="IScene_8hpp_source.html#l00078">GetEntryTransition()</a>.</p>
 
 </div>
 </div>
@@ -794,9 +881,9 @@ IScene の継承関係図</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="IScene_8hpp_source.html">IScene.hpp</a> の <a class="el" href="IScene_8hpp_source.html#l00026">26</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="IScene_8hpp_source.html">IScene.hpp</a> の <a class="el" href="IScene_8hpp_source.html#l00030">30</a> 行目に定義があります。</p>
 
-<p class="reference">参照元 <a class="el" href="IScene_8hpp_source.html#l00079">GetExitTransition()</a>.</p>
+<p class="reference">参照元 <a class="el" href="IScene_8hpp_source.html#l00083">GetExitTransition()</a>.</p>
 
 </div>
 </div>
@@ -820,9 +907,9 @@ IScene の継承関係図</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition"> <a class="el" href="IScene_8hpp_source.html">IScene.hpp</a> の <a class="el" href="IScene_8hpp_source.html#l00023">23</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="IScene_8hpp_source.html">IScene.hpp</a> の <a class="el" href="IScene_8hpp_source.html#l00027">27</a> 行目に定義があります。</p>
 
-<p class="reference">参照元 <a class="el" href="IScene_8cpp_source.html#l00022">Change()</a>.</p>
+<p class="reference">参照元 <a class="el" href="IScene_8cpp_source.html#l00042">Change()</a>.</p>
 
 </div>
 </div>
@@ -836,7 +923,7 @@ IScene の継承関係図</div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classIScene.html">IScene</a></li>
-    <li class="footer">2026年09月12日(土) 17時53分24秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年09月13日(日) 13時21分07秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

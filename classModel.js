@@ -13,7 +13,6 @@ var classModel =
     [ "operator=", "classModel.html#afff1471fe521f1cade9d624e79390109", null ],
     [ "SetCanvasName", "classModel.html#ad4de389488cabbc9b19f6183de27f96f", null ],
     [ "SetColor", "classModel.html#a1383c2438fe27c1a30663a2f67b1593d", null ],
-    [ "SetEnvironmentTexture", "classModel.html#a98665feaf1aa6bcfece778fa2ee159c3", null ],
     [ "SetName", "classModel.html#a1283682065736d6e05195fe7c5ade532", null ],
     [ "SetRotate", "classModel.html#a85e6eb03318710650ab9216a994582ff", null ],
     [ "SetScale", "classModel.html#aaeec97faf5c37734a5695613e17eb970", null ],
