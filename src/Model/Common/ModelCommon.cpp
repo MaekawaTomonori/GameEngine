@@ -12,6 +12,7 @@
 #include "src/DirectX/RootSignature/RootSignature.hpp"
 #include "src/DirectX/Shader/Shader.h"
 #include "src/Model/Loader/ModelLoaderFactory.hpp"
+#include "src/Texture/TextureManager.hpp"
 
 ModelCommon::~ModelCommon() = default;
 
@@ -32,6 +33,13 @@ void ModelCommon::Initialize(const GESTD::ReferencePtr<DirectXAdapter>& _adapter
 
     cameraResource_ = _adapter->CreateBufferResource(sizeof(CameraForGpu));
     cameraResource_->Get()->Map(0, nullptr, reinterpret_cast<void**>(&cameraData_));
+
+    Singleton<TextureManager>::GetInstance()->Load(environmentTexture_);
+}
+
+void ModelCommon::SetEnvironmentTexture(const std::string& _texture) {
+    Singleton<TextureManager>::GetInstance()->Load(_texture);
+    environmentTexture_ = _texture;
 }
 
 void ModelCommon::CreateSkinningPipeline() const {

@@ -54,11 +54,6 @@ void ModelInstance::InitializeCommon(const std::string& _name) {
         {0,0,0},
     };
 
-    if (environmentTexture_.empty()) {
-        environmentTexture_ = "white_x16.png";
-        Singleton<TextureManager>::GetInstance()->Load(environmentTexture_);
-    }
-
     common_->RegisterUpdate(uuid_, [this](){ UpdateMapData(); });
     common_->RegisterDebug(uuid_, [this](){ Debug(); });
     common_->RegisterShadowDraw(uuid_, [this]() {
@@ -87,15 +82,6 @@ ModelInstance& ModelInstance::SetRotate(const Vector3& _rotate) {
 
 ModelInstance& ModelInstance::SetScale(const Vector3& _scale) {
     transform_.scale = _scale;
-    return *this;
-}
-
-ModelInstance& ModelInstance::SetEnvironmentTexture(const std::string& _texture) {
-    environmentTexture_ = _texture;
-    if (!_texture.empty()) {
-        const auto tm = Singleton<TextureManager>::GetInstance();
-        tm->Load(_texture);
-    }
     return *this;
 }
 

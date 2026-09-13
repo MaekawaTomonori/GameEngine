@@ -1,11 +1,13 @@
 #ifndef IScene_HPP_
 #define IScene_HPP_
 #include <functional>
+#include <memory>
 #include <string>
 
 #include "ReferencePtr.hpp"
 #include "src/ParticleSystem/ParticleSystem.hpp"
 #include "src/Scene/Transition/Transition.hpp"
+#include "src/Sky/Skybox.hpp"
 
 class SceneSwitcher;
 class DebugUI;
@@ -18,6 +20,8 @@ class IScene {
     SceneSwitcher* switcher_ = nullptr;
     bool progress_ = false;
     std::string name_;
+
+    std::unique_ptr<Skybox> sky_;
 
 protected:
     std::string next_;
@@ -83,7 +87,18 @@ public:
      */
     void SetName(const std::string& _name);
 
+    /** @brief Skyboxを更新（SceneSwitcherが毎フレーム呼び出す） */
+    void UpdateSky();
+
+    /** @brief Skyboxを描画（SceneSwitcherが毎フレーム呼び出す） */
+    void DrawSky();
+
 protected:
+    /** @brief 空のテクスチャを設定（未生成なら生成し、Modelの反射テクスチャも同期する）
+     * @param _textureKey 空に使うテクスチャキー
+     */
+    void SetSky(const std::string& _textureKey);
+
     /** @brief シーンをnext_に変更
      */
     void Change();
