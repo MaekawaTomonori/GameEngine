@@ -1,5 +1,10 @@
 var NAVTREEINDEX2 =
 {
+"TimeSystem_8cpp.html":[2,0,1,34,2],
+"TimeSystem_8cpp_source.html":[2,0,1,34,2],
+"TimeSystem_8hpp.html":[2,0,1,34,3],
+"TimeSystem_8hpp_source.html":[2,0,1,34,3],
+"Time_8cpp.html":[2,0,1,34,0],
 "Time_8cpp_source.html":[2,0,1,34,0],
 "Time_8hpp.html":[2,0,1,34,1],
 "Time_8hpp_source.html":[2,0,1,34,1],
@@ -7,10 +12,10 @@ var NAVTREEINDEX2 =
 "Timer_8cpp_source.html":[2,0,1,35,0],
 "Timer_8hpp.html":[2,0,1,35,1],
 "Timer_8hpp_source.html":[2,0,1,35,1],
-"Transition_8cpp.html":[2,0,1,24,2,3],
-"Transition_8cpp_source.html":[2,0,1,24,2,3],
-"Transition_8hpp.html":[2,0,1,24,2,4],
-"Transition_8hpp_source.html":[2,0,1,24,2,4],
+"Transition_8cpp.html":[2,0,1,24,3,3],
+"Transition_8cpp_source.html":[2,0,1,24,3,3],
+"Transition_8hpp.html":[2,0,1,24,3,4],
+"Transition_8hpp_source.html":[2,0,1,24,3,4],
 "UiAnimation_8hpp.html":[2,0,0,2,3],
 "UiAnimation_8hpp.html#a0fd75b2323cdd2adf5865d707c01ac14":[2,0,0,2,3,1],
 "UiAnimation_8hpp_source.html":[2,0,0,2,3],
@@ -244,10 +249,5 @@ var NAVTREEINDEX2 =
 "classEmitter.html#ade89f82a8db08880833a0786ed8f812f":[1,0,24,0],
 "classEmitter.html#ae21fe745d7375257ee5c6b405ecd7f34":[1,0,24,14],
 "classEmitter.html#ae8cc5409733765eac82c3002a59377cf":[1,0,24,20],
-"classEmitter.html#af3723d6f82e61f1f999cbee7989c32f1":[1,0,24,11],
-"classEmitter.html#af9b9a14463df850af2688eaf06693865":[1,0,24,18],
-"classEmitterHandle.html":[1,0,25],
-"classEmitterHandle.html#a3d12f4b7aa503f8bc45ae61093b7a7be":[1,0,25,3],
-"classEmitterHandle.html#a77c962c3b7f70766dd5f03a6629b4944":[1,0,25,4],
-"classEmitterHandle.html#aa68045092a069681351dcefadd5fb0fb":[1,0,25,2]
+"classEmitter.html#af3723d6f82e61f1f999cbee7989c32f1":[1,0,24,11]
 };

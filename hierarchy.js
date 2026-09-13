@@ -69,6 +69,7 @@ var hierarchy =
     ] ],
     [ "IScene", "classIScene.html", [
       [ "ParticleTestScene", "classParticleTestScene.html", null ],
+      [ "PerformanceTestScene", "classPerformanceTestScene.html", null ],
       [ "SampleScene", "classSampleScene.html", null ]
     ] ],
     [ "ITransitionEffect", "classITransitionEffect.html", [

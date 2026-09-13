@@ -1,0 +1,274 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>PortfolioGame Engine: /home/runner/work/GameEngine/GameEngine/src/Scene/PerformanceTest/PerformanceTestScene.cpp ソースファイル</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">PortfolioGame Engine<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">C++20 DirectX12 Game Engine</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','検索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function() { init_codefold(0); });
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('PerformanceTestScene_8cpp_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">読み取り中…</div>
+<div class="SRStatus" id="Searching">検索中…</div>
+<div class="SRStatus" id="NoMatches">一致する文字列を見つけられません</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">PerformanceTestScene.cpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="PerformanceTestScene_8cpp.html">[詳解]</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#include &quot;<a class="code" href="PerformanceTestScene_8hpp.html">PerformanceTestScene.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;imgui.h&quot;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="Time_8hpp.html">src/Time/Time.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">namespace </span>{</div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span>    <span class="keyword">constexpr</span> <span class="keyword">const</span> <span class="keywordtype">char</span>* TEST_TEMPLATE = <span class="stringliteral">&quot;perf_test_particle&quot;</span>;</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>    <span class="keyword">constexpr</span> <span class="keywordtype">int</span> GRID_WIDTH = 32;</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>    <span class="keyword">constexpr</span> <span class="keywordtype">float</span> GRID_SPACING = 2.0f;</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>    <span class="keyword">constexpr</span> <span class="keywordtype">int</span> MAX_SPAWN_PER_FRAME = 20;</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>}</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="foldopen" id="foldopen00013" data-start="{" data-end="}">
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="classPerformanceTestScene.html#a270b5c5893c2db66b64896a329f1b7c3">   13</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classPerformanceTestScene.html#a270b5c5893c2db66b64896a329f1b7c3">PerformanceTestScene::Initialize</a>() {</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    <a class="code hl_struct" href="structParticleSystem_1_1EmitterConfig.html">ParticleSystem::EmitterConfig</a> config;</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    config.<a class="code hl_variable" href="structParticleSystem_1_1EmitterConfig.html#af2ec61f245c0b9c882f70872b3e193b9">texture</a> = <span class="stringliteral">&quot;white_x16.png&quot;</span>;</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    config.<a class="code hl_variable" href="structParticleSystem_1_1EmitterConfig.html#aef380ed9f570c0e0c96a08d4c5a0c0bc">frequency</a> = 0.f;</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    config.<a class="code hl_variable" href="structParticleSystem_1_1EmitterConfig.html#a4457af19f9a804b4f6bf0020aa0e6428">duration</a> = 0.f;</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    config.<a class="code hl_variable" href="structParticleSystem_1_1EmitterConfig.html#a9efff02e92442978dec875db6e46d45b">spawnCount</a> = 10;</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    config.<a class="code hl_variable" href="structParticleSystem_1_1EmitterConfig.html#ac367143e9a1ea8ba183076d47267477e">size</a> = {0.3f, 0.3f, 0.3f};</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    config.<a class="code hl_variable" href="structParticleSystem_1_1EmitterConfig.html#ab8ca8de929c85f1091451c89cdebdbdc">velocity</a> = {0.f, 2.f, 0.f};</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    config.<a class="code hl_variable" href="structParticleSystem_1_1EmitterConfig.html#a8e01733a6eafbf7e743d8e8fba05b676">color</a> = {1.f, 1.f, 1.f, 1.f};</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    config.<a class="code hl_variable" href="structParticleSystem_1_1EmitterConfig.html#ace2b0a26ed9873c4fe398368e9e4d348">particleLifetime</a> = 1.5f;</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    config.<a class="code hl_variable" href="structParticleSystem_1_1EmitterConfig.html#a5dcdf49ced7b24d2252c93fcbefcd96d">colorKeys</a> = {</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>        <a class="code hl_struct" href="structGradientKey.html">GradientKey&lt;Vector4&gt;</a>{0.0f, {1.f, 1.f, 1.f, 1.f}},</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        <a class="code hl_struct" href="structGradientKey.html">GradientKey&lt;Vector4&gt;</a>{1.0f, {1.f, 1.f, 1.f, 0.f}}</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    };</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <a class="code hl_struct" href="structParticleSystem_1_1Template.html">ParticleSystem::Template</a> tmpl;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    tmpl.<a class="code hl_variable" href="structParticleSystem_1_1Template.html#a2c378ab21d043f36c8da4b2d119ce554">emitters</a>.push_back(config);</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <a class="code hl_function" href="classIScene.html#a60e0d5ab487faa91cf3134395826292c">Particle</a>()-&gt;Register(TEST_TEMPLATE, tmpl, <span class="keyword">true</span>);</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>}</div>
+</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
+<div class="foldopen" id="foldopen00033" data-start="{" data-end="}">
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="classPerformanceTestScene.html#a98512ca434785742a7696c9dfa578d26">   33</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classPerformanceTestScene.html#a98512ca434785742a7696c9dfa578d26">PerformanceTestScene::Update</a>() {</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="keyword">const</span> <span class="keywordtype">float</span> dt = <a class="code hl_class" href="classTime.html">Time</a>().<a class="code hl_function" href="classTime.html#a282bf69fc11f56f832e46c096ea54349">GetDeltaTime</a>();</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; entry : models_) {</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        entry.model-&gt;Update();</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    }</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    UpdateModelSpawning(dt);</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    UpdateParticleEmission(dt);</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>}</div>
+</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="keywordtype">void</span> PerformanceTestScene::UpdateModelSpawning(<span class="keywordtype">float</span> _deltaTime) {</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <span class="keywordflow">if</span> (modelSpawnRatePerSecond_ &lt;= 0.f) <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <span class="keyword">const</span> <span class="keywordtype">float</span> interval = 1.f / modelSpawnRatePerSecond_;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    modelSpawnAccumulator_ += _deltaTime;</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <span class="keywordtype">int</span> processedThisFrame = 0;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <span class="keywordflow">while</span> (modelSpawnAccumulator_ &gt;= interval &amp;&amp; processedThisFrame &lt; MAX_SPAWN_PER_FRAME) {</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        <span class="keywordflow">if</span> (<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(models_.size()) &lt; targetModelCount_) {</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>            SpawnModel();</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(models_.size()) &gt; targetModelCount_) {</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>            DespawnModel();</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        }</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>        modelSpawnAccumulator_ -= interval;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        ++processedThisFrame;</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    }</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>}</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="keywordtype">void</span> PerformanceTestScene::UpdateParticleEmission(<span class="keywordtype">float</span> _deltaTime) {</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <span class="keywordflow">if</span> (particleEmitRatePerSecond_ &lt;= 0.f) <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    <span class="keyword">const</span> <span class="keywordtype">float</span> interval = 1.f / particleEmitRatePerSecond_;</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    particleEmitAccumulator_ += _deltaTime;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    <span class="keywordflow">while</span> (particleEmitAccumulator_ &gt;= interval) {</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>        <a class="code hl_function" href="classIScene.html#a60e0d5ab487faa91cf3134395826292c">Particle</a>()-&gt;Emit(TEST_TEMPLATE, {0.f, 1.f, 0.f});</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>        particleEmitAccumulator_ -= interval;</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    }</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>}</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="keywordtype">void</span> PerformanceTestScene::SpawnModel() {</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    Entry entry;</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    entry.model = std::make_unique&lt;Model&gt;();</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    entry.model-&gt;Initialize(<span class="stringliteral">&quot;plane&quot;</span>);</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> index = <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(models_.size());</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    <span class="keyword">const</span> <span class="keywordtype">float</span> x = <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(index % GRID_WIDTH) * GRID_SPACING;</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    <span class="keyword">const</span> <span class="keywordtype">float</span> z = <span class="keyword">static_cast&lt;</span><span class="keywordtype">float</span><span class="keyword">&gt;</span>(index / GRID_WIDTH) * GRID_SPACING;</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    entry.position = {x, 0.f, z};</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    entry.rotation = {4.5f, 0.f, 0.f};</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    entry.model-&gt;SetTranslate(entry.position);</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    entry.model-&gt;SetRotate(entry.rotation);</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    entry.model-&gt;SetScale({0.8f, 0.8f, 1.f});</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    models_.push_back(std::move(entry));</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>}</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span> </div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="keywordtype">void</span> PerformanceTestScene::DespawnModel() {</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    <span class="keywordflow">if</span> (!models_.empty()) {</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>        models_.pop_back();</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    }</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>}</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
+<div class="foldopen" id="foldopen00099" data-start="{" data-end="}">
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno"><a class="line" href="classPerformanceTestScene.html#aa0ca131c551bc5578cebb408ecb3c6a3">   99</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classPerformanceTestScene.html#aa0ca131c551bc5578cebb408ecb3c6a3">PerformanceTestScene::Draw</a>() {</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; entry : models_) {</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>        entry.model-&gt;Draw();</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    }</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>}</div>
+</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
+<div class="foldopen" id="foldopen00105" data-start="{" data-end="}">
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno"><a class="line" href="classPerformanceTestScene.html#a7d48baf0951ce3cc1e526f89eb839d70">  105</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classPerformanceTestScene.html#a7d48baf0951ce3cc1e526f89eb839d70">PerformanceTestScene::Debug</a>() {</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    ImGui::Begin(<span class="stringliteral">&quot;PerformanceTest&quot;</span>);</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    ImGui::Text(<span class="stringliteral">&quot;Active Models: %d / %d&quot;</span>, <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(models_.size()), targetModelCount_);</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    ImGui::SliderInt(<span class="stringliteral">&quot;Target Model Count&quot;</span>, &amp;targetModelCount_, 0, 1000);</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    ImGui::SliderFloat(<span class="stringliteral">&quot;Model Spawn Rate (per sec)&quot;</span>, &amp;modelSpawnRatePerSecond_, 0.f, 200.f);</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    ImGui::Separator();</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    ImGui::SliderFloat(<span class="stringliteral">&quot;Particle Emit Rate (per sec)&quot;</span>, &amp;particleEmitRatePerSecond_, 0.f, 60.f);</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    ImGui::Separator();</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    ImGui::Text(<span class="stringliteral">&quot;Bulk Model Edit (applies once per click)&quot;</span>);</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span> </div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    <span class="keyword">static</span> Vector3 rotationDelta = {0.f, 0.f, 0.f};</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    ImGui::DragFloat3(<span class="stringliteral">&quot;Rotation Delta&quot;</span>, &amp;rotationDelta.x, 0.01f);</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    <span class="keywordflow">if</span> (ImGui::Button(<span class="stringliteral">&quot;Apply Rotation To All&quot;</span>)) {</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>        <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; entry : models_) {</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>            entry.rotation += rotationDelta;</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>            entry.model-&gt;SetRotate(entry.rotation);</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>        }</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    }</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span> </div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    <span class="keyword">static</span> Vector3 positionDelta = {0.f, 0.f, 0.f};</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    ImGui::DragFloat3(<span class="stringliteral">&quot;Position Delta&quot;</span>, &amp;positionDelta.x, 0.1f);</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    <span class="keywordflow">if</span> (ImGui::Button(<span class="stringliteral">&quot;Apply Position Offset To All&quot;</span>)) {</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>        <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; entry : models_) {</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>            entry.position += positionDelta;</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>            entry.model-&gt;SetTranslate(entry.position);</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>        }</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    }</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    ImGui::End();</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>}</div>
+</div>
+<div class="ttc" id="aPerformanceTestScene_8hpp_html"><div class="ttname"><a href="PerformanceTestScene_8hpp.html">PerformanceTestScene.hpp</a></div></div>
+<div class="ttc" id="aTime_8hpp_html"><div class="ttname"><a href="Time_8hpp.html">Time.hpp</a></div></div>
+<div class="ttc" id="aclassIScene_html_a60e0d5ab487faa91cf3134395826292c"><div class="ttname"><a href="classIScene.html#a60e0d5ab487faa91cf3134395826292c">IScene::Particle</a></div><div class="ttdeci">GESTD::ReferencePtr&lt; ParticleSystem &gt; Particle() const</div><div class="ttdef"><b>Definition</b> <a href="IScene_8cpp_source.html#l00063">IScene.cpp:63</a></div></div>
+<div class="ttc" id="aclassPerformanceTestScene_html_a270b5c5893c2db66b64896a329f1b7c3"><div class="ttname"><a href="classPerformanceTestScene.html#a270b5c5893c2db66b64896a329f1b7c3">PerformanceTestScene::Initialize</a></div><div class="ttdeci">void Initialize() override</div><div class="ttdoc">初期化処理（純粋仮想関数）</div><div class="ttdef"><b>Definition</b> <a href="PerformanceTestScene_8cpp_source.html#l00013">PerformanceTestScene.cpp:13</a></div></div>
+<div class="ttc" id="aclassPerformanceTestScene_html_a7d48baf0951ce3cc1e526f89eb839d70"><div class="ttname"><a href="classPerformanceTestScene.html#a7d48baf0951ce3cc1e526f89eb839d70">PerformanceTestScene::Debug</a></div><div class="ttdeci">void Debug() override</div><div class="ttdoc">Debug用 ImGuiはここで扱うようにする</div><div class="ttdef"><b>Definition</b> <a href="PerformanceTestScene_8cpp_source.html#l00105">PerformanceTestScene.cpp:105</a></div></div>
+<div class="ttc" id="aclassPerformanceTestScene_html_a98512ca434785742a7696c9dfa578d26"><div class="ttname"><a href="classPerformanceTestScene.html#a98512ca434785742a7696c9dfa578d26">PerformanceTestScene::Update</a></div><div class="ttdeci">void Update() override</div><div class="ttdoc">更新処理（純粋仮想関数）</div><div class="ttdef"><b>Definition</b> <a href="PerformanceTestScene_8cpp_source.html#l00033">PerformanceTestScene.cpp:33</a></div></div>
+<div class="ttc" id="aclassPerformanceTestScene_html_aa0ca131c551bc5578cebb408ecb3c6a3"><div class="ttname"><a href="classPerformanceTestScene.html#aa0ca131c551bc5578cebb408ecb3c6a3">PerformanceTestScene::Draw</a></div><div class="ttdeci">void Draw() override</div><div class="ttdoc">描画処理（純粋仮想関数）</div><div class="ttdef"><b>Definition</b> <a href="PerformanceTestScene_8cpp_source.html#l00099">PerformanceTestScene.cpp:99</a></div></div>
+<div class="ttc" id="aclassTime_html"><div class="ttname"><a href="classTime.html">Time</a></div><div class="ttdoc">ゲーム全体の時間を扱うハンドルクラス タイムスケール(ヒットストップ、スローモーション等)を適用した 1Tick分の経過秒数を提供する。</div><div class="ttdef"><b>Definition</b> <a href="Time_8hpp_source.html#l00008">Time.hpp:8</a></div></div>
+<div class="ttc" id="aclassTime_html_a282bf69fc11f56f832e46c096ea54349"><div class="ttname"><a href="classTime.html#a282bf69fc11f56f832e46c096ea54349">Time::GetDeltaTime</a></div><div class="ttdeci">float GetDeltaTime() const</div><div class="ttdoc">タイムスケール適用後の、1Tick分の経過秒数を取得</div><div class="ttdef"><b>Definition</b> <a href="Time_8cpp_source.html#l00006">Time.cpp:6</a></div></div>
+<div class="ttc" id="astructGradientKey_html"><div class="ttname"><a href="structGradientKey.html">GradientKey</a></div><div class="ttdoc">時間(0～1)と値の組。パーティクルの色・サイズなどを寿命に沿って補間するための制御点 Animation/KeyFrame.hpp の Keyframe とは無関係（用途が異なるため別定義）</div><div class="ttdef"><b>Definition</b> <a href="Keyframe_8hpp_source.html#l00012">Keyframe.hpp:12</a></div></div>
+<div class="ttc" id="astructParticleSystem_1_1EmitterConfig_html"><div class="ttname"><a href="structParticleSystem_1_1EmitterConfig.html">ParticleSystem::EmitterConfig</a></div><div class="ttdef"><b>Definition</b> <a href="ParticleSystem_8hpp_source.html#l00026">ParticleSystem.hpp:26</a></div></div>
+<div class="ttc" id="astructParticleSystem_1_1EmitterConfig_html_a4457af19f9a804b4f6bf0020aa0e6428"><div class="ttname"><a href="structParticleSystem_1_1EmitterConfig.html#a4457af19f9a804b4f6bf0020aa0e6428">ParticleSystem::EmitterConfig::duration</a></div><div class="ttdeci">float duration</div><div class="ttdef"><b>Definition</b> <a href="ParticleSystem_8hpp_source.html#l00029">ParticleSystem.hpp:29</a></div></div>
+<div class="ttc" id="astructParticleSystem_1_1EmitterConfig_html_a5dcdf49ced7b24d2252c93fcbefcd96d"><div class="ttname"><a href="structParticleSystem_1_1EmitterConfig.html#a5dcdf49ced7b24d2252c93fcbefcd96d">ParticleSystem::EmitterConfig::colorKeys</a></div><div class="ttdeci">std::vector&lt; GradientKey&lt; Vector4 &gt; &gt; colorKeys</div><div class="ttdef"><b>Definition</b> <a href="ParticleSystem_8hpp_source.html#l00034">ParticleSystem.hpp:34</a></div></div>
+<div class="ttc" id="astructParticleSystem_1_1EmitterConfig_html_a8e01733a6eafbf7e743d8e8fba05b676"><div class="ttname"><a href="structParticleSystem_1_1EmitterConfig.html#a8e01733a6eafbf7e743d8e8fba05b676">ParticleSystem::EmitterConfig::color</a></div><div class="ttdeci">Vector4 color</div><div class="ttdef"><b>Definition</b> <a href="ParticleSystem_8hpp_source.html#l00033">ParticleSystem.hpp:33</a></div></div>
+<div class="ttc" id="astructParticleSystem_1_1EmitterConfig_html_a9efff02e92442978dec875db6e46d45b"><div class="ttname"><a href="structParticleSystem_1_1EmitterConfig.html#a9efff02e92442978dec875db6e46d45b">ParticleSystem::EmitterConfig::spawnCount</a></div><div class="ttdeci">uint16_t spawnCount</div><div class="ttdef"><b>Definition</b> <a href="ParticleSystem_8hpp_source.html#l00030">ParticleSystem.hpp:30</a></div></div>
+<div class="ttc" id="astructParticleSystem_1_1EmitterConfig_html_ab8ca8de929c85f1091451c89cdebdbdc"><div class="ttname"><a href="structParticleSystem_1_1EmitterConfig.html#ab8ca8de929c85f1091451c89cdebdbdc">ParticleSystem::EmitterConfig::velocity</a></div><div class="ttdeci">Vector3 velocity</div><div class="ttdef"><b>Definition</b> <a href="ParticleSystem_8hpp_source.html#l00032">ParticleSystem.hpp:32</a></div></div>
+<div class="ttc" id="astructParticleSystem_1_1EmitterConfig_html_ac367143e9a1ea8ba183076d47267477e"><div class="ttname"><a href="structParticleSystem_1_1EmitterConfig.html#ac367143e9a1ea8ba183076d47267477e">ParticleSystem::EmitterConfig::size</a></div><div class="ttdeci">Vector3 size</div><div class="ttdef"><b>Definition</b> <a href="ParticleSystem_8hpp_source.html#l00031">ParticleSystem.hpp:31</a></div></div>
+<div class="ttc" id="astructParticleSystem_1_1EmitterConfig_html_ace2b0a26ed9873c4fe398368e9e4d348"><div class="ttname"><a href="structParticleSystem_1_1EmitterConfig.html#ace2b0a26ed9873c4fe398368e9e4d348">ParticleSystem::EmitterConfig::particleLifetime</a></div><div class="ttdeci">float particleLifetime</div><div class="ttdef"><b>Definition</b> <a href="ParticleSystem_8hpp_source.html#l00036">ParticleSystem.hpp:36</a></div></div>
+<div class="ttc" id="astructParticleSystem_1_1EmitterConfig_html_aef380ed9f570c0e0c96a08d4c5a0c0bc"><div class="ttname"><a href="structParticleSystem_1_1EmitterConfig.html#aef380ed9f570c0e0c96a08d4c5a0c0bc">ParticleSystem::EmitterConfig::frequency</a></div><div class="ttdeci">float frequency</div><div class="ttdef"><b>Definition</b> <a href="ParticleSystem_8hpp_source.html#l00028">ParticleSystem.hpp:28</a></div></div>
+<div class="ttc" id="astructParticleSystem_1_1EmitterConfig_html_af2ec61f245c0b9c882f70872b3e193b9"><div class="ttname"><a href="structParticleSystem_1_1EmitterConfig.html#af2ec61f245c0b9c882f70872b3e193b9">ParticleSystem::EmitterConfig::texture</a></div><div class="ttdeci">std::string texture</div><div class="ttdef"><b>Definition</b> <a href="ParticleSystem_8hpp_source.html#l00027">ParticleSystem.hpp:27</a></div></div>
+<div class="ttc" id="astructParticleSystem_1_1Template_html"><div class="ttname"><a href="structParticleSystem_1_1Template.html">ParticleSystem::Template</a></div><div class="ttdef"><b>Definition</b> <a href="ParticleSystem_8hpp_source.html#l00046">ParticleSystem.hpp:46</a></div></div>
+<div class="ttc" id="astructParticleSystem_1_1Template_html_a2c378ab21d043f36c8da4b2d119ce554"><div class="ttname"><a href="structParticleSystem_1_1Template.html#a2c378ab21d043f36c8da4b2d119ce554">ParticleSystem::Template::emitters</a></div><div class="ttdeci">std::vector&lt; EmitterConfig &gt; emitters</div><div class="ttdef"><b>Definition</b> <a href="ParticleSystem_8hpp_source.html#l00047">ParticleSystem.hpp:47</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_204260ac86670e69c647eaba8962e745.html">Scene</a></li><li class="navelem"><a class="el" href="dir_09d55669ebed03bba1980b9af04979fe.html">PerformanceTest</a></li><li class="navelem"><a class="el" href="PerformanceTestScene_8cpp.html">PerformanceTestScene.cpp</a></li>
+    <li class="footer">2026年09月13日(日) 16時22分30秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+  </ul>
+</div>
+</body>
+</html>
