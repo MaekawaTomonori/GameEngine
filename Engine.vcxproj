@@ -131,6 +131,7 @@
     <ClInclude Include="src\Debug\FrameDebugger.hpp" />
     <ClInclude Include="include\Factory\PostEffectFactory.hpp" />
     <ClInclude Include="src\Scene\ParticleTest\ParticleTestScene.hpp" />
+    <ClInclude Include="src\Scene\PerformanceTest\PerformanceTestScene.hpp" />
     <ClInclude Include="src\Scene\Sample\SampleScene.hpp" />
     <ClInclude Include="src\Scene\SceneFactory.hpp" />
     <ClInclude Include="include\Framework.hpp" />
@@ -250,6 +251,7 @@
   <ItemGroup>
     <ClCompile Include="src\Config\ConfigLoader.cpp" />
     <ClCompile Include="src\Scene\ParticleTest\ParticleTestScene.cpp" />
+    <ClCompile Include="src\Scene\PerformanceTest\PerformanceTestScene.cpp" />
     <ClCompile Include="src\Scene\Sample\SampleScene.cpp" />
     <ClCompile Include="src\Screen\Screen.cpp" />
     <ClCompile Include="src\Shadow\ShadowCubeMap.cpp" />
