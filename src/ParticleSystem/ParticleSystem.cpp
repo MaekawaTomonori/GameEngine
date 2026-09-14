@@ -406,6 +406,13 @@ void ParticleSystem::Debug() {
     debugUI_->RegisterCommand("Particle", [&] {
         ImGui::Begin("Particle Editor", &debugUI_->IsVisible("Particle"));
 
+        uint32_t totalActiveParticles = 0;
+        for (const Emitter* emitter : active_) {
+            totalActiveParticles += emitter->GetActiveParticleCount();
+        }
+        ImGui::Text("Total Active Particles: %u", totalActiveParticles);
+        ImGui::Separator();
+
         // 登録済みテンプレート一覧
         std::string toDelete;
         for (auto& [name, tmpl] : templates_) {

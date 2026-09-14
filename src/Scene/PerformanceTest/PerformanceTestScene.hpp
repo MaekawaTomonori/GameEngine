@@ -11,12 +11,8 @@
  ** SceneSwitcherデバッグパネルから "perf" として切り替えて使う。
  */
 class PerformanceTestScene final : public IScene {
-    struct Entry {
-        std::unique_ptr<Model> model;
-        Vector3 position;
-        Vector3 rotation;
-    };
-    std::vector<Entry> models_;
+    std::unique_ptr<Model> floor_;
+    std::vector<std::unique_ptr<Model>> models_;
 
     int targetModelCount_ = 0;
     float modelSpawnRatePerSecond_ = 10.f;
@@ -24,6 +20,9 @@ class PerformanceTestScene final : public IScene {
 
     float particleEmitRatePerSecond_ = 5.f;
     float particleEmitAccumulator_ = 0.f;
+
+    int gridWidth_ = 32;
+    float gridSpacing_ = 2.0f;
 
 public:
     void Initialize() override;

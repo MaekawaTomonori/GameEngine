@@ -118,13 +118,20 @@ Matrix4x4 MathUtils::Matrix::MakeAffineMatrix(const ::Transform& _transform) {
 }
 
 Matrix4x4 MathUtils::Matrix::MakeAffineMatrix(const Vector3& _scale, const Vector3& _rotate, const Vector3& _translate) {
-    Matrix4x4 scaleMat = MakeScaleMatrix(_scale);
-    Matrix4x4 rotateMatX = MakeRotateX(_rotate.x);
-    Matrix4x4 rotateMatY = MakeRotateY(_rotate.y);
-    Matrix4x4 rotateMatZ = MakeRotateZ(_rotate.z);
-    Matrix4x4 rotateMat = rotateMatX * rotateMatY * rotateMatZ;
-    Matrix4x4 translateMat = MakeTranslateMatrix(_translate);
-    return scaleMat * rotateMat * translateMat;
+    const Vector3 sin = { std::sinf(_rotate.x), std::sinf(_rotate.y), std::sinf(_rotate.z) };
+    const Vector3 cos = { std::cosf(_rotate.x), std::cosf(_rotate.y), std::cosf(_rotate.z) };
+
+    // RotateX * RotateY * RotateZ を展開した各行（回転後の各ローカル軸）
+    const Vector3 rotatedAxisX = { cos.y * cos.z, cos.y * sin.z, -sin.y };
+    const Vector3 rotatedAxisY = { sin.x * sin.y * cos.z - cos.x * sin.z, sin.x * sin.y * sin.z + cos.x * cos.z, sin.x * cos.y };
+    const Vector3 rotatedAxisZ = { cos.x * sin.y * cos.z + sin.x * sin.z, cos.x * sin.y * sin.z - sin.x * cos.z, cos.x * cos.y };
+
+    return Matrix4x4{
+        _scale.x * rotatedAxisX.x, _scale.x * rotatedAxisX.y, _scale.x * rotatedAxisX.z, 0.f,
+        _scale.y * rotatedAxisY.x, _scale.y * rotatedAxisY.y, _scale.y * rotatedAxisY.z, 0.f,
+        _scale.z * rotatedAxisZ.x, _scale.z * rotatedAxisZ.y, _scale.z * rotatedAxisZ.z, 0.f,
+        _translate.x, _translate.y, _translate.z, 1.f
+    };
 }
 
 Matrix4x4 MathUtils::Matrix::MakeAffineMatrix(const Vector3& _scale, const Quaternion& _rotate, const Vector3& _translate) {
@@ -161,8 +168,7 @@ Matrix4x4 MathUtils::Matrix::MakePerspectiveFovMatrix(float _fovY, float _aspect
     };
 }
 
-Matrix4x4 MathUtils::Matrix::MakeViewportMatrix(float _left, float _right, float _top, float _bottom, float _depthMax,
-                                                float _depthMin) {
+Matrix4x4 MathUtils::Matrix::MakeViewportMatrix(float _left, float _right, float _top, float _bottom, float _depthMax, float _depthMin) {
     return Matrix4x4 {
         (_right - _left) / 2, 0, 0, 0,
         0, -(_top - _bottom) / 2, 0, 0,
