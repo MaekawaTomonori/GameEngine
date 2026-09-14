@@ -153,6 +153,9 @@ public:
     /** @brief 所属Canvas名を取得する */
     const std::string& GetCanvasName() const { return canvasName_; }
 
+    /** @brief 現在生存しているパーティクル数を取得する */
+    uint16_t GetActiveParticleCount() const { return actives_; }
+
     /** @brief パーティクル1個あたりの寿命（秒）を設定 */
     Emitter& SetParticleLifetime(const float& _lifetime);
 

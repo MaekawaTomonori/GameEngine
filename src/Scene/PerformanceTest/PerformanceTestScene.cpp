@@ -2,11 +2,11 @@
 
 #include "imgui.h"
 #include "src/Time/Time.hpp"
+#include "Pattern/Singleton.hpp"
+#include "src/Camera/Controller/CameraController.hpp"
 
 namespace {
     constexpr const char* TEST_TEMPLATE = "perf_test_particle";
-    constexpr int GRID_WIDTH = 32;
-    constexpr float GRID_SPACING = 2.0f;
     constexpr int MAX_SPAWN_PER_FRAME = 20;
 }
 
@@ -28,13 +28,23 @@ void PerformanceTestScene::Initialize() {
     ParticleSystem::Template tmpl;
     tmpl.emitters.push_back(config);
     Particle()->Register(TEST_TEMPLATE, tmpl, true);
+
+    floor_ = std::make_unique<Model>();
+    floor_->Initialize("plane");
+    floor_->SetTexture("white_x16.png");
+    floor_->SetColor({0.5f, 0.5f, 0.5f, 1.0f});
+    floor_->SetTranslate({0.f, 0.f, 0.f});
+    floor_->SetRotate({-1.5707963f, 0.f, 0.f});
+    floor_->SetScale({40.f, 40.f, 1.f});
 }
 
 void PerformanceTestScene::Update() {
     const float dt = Time().GetDeltaTime();
 
-    for (auto& entry : models_) {
-        entry.model->Update();
+    floor_->Update();
+
+    for (auto& model : models_) {
+        model->Update();
     }
 
     UpdateModelSpawning(dt);
@@ -74,20 +84,16 @@ void PerformanceTestScene::UpdateParticleEmission(float _deltaTime) {
 }
 
 void PerformanceTestScene::SpawnModel() {
-    Entry entry;
-    entry.model = std::make_unique<Model>();
-    entry.model->Initialize("plane");
+    auto model = std::make_unique<Model>();
+    model->Initialize("bunny");
 
     const int index = static_cast<int>(models_.size());
-    const float x = static_cast<float>(index % GRID_WIDTH) * GRID_SPACING;
-    const float z = static_cast<float>(index / GRID_WIDTH) * GRID_SPACING;
-    entry.position = {x, 0.f, z};
-    entry.rotation = {4.5f, 0.f, 0.f};
-    entry.model->SetTranslate(entry.position);
-    entry.model->SetRotate(entry.rotation);
-    entry.model->SetScale({0.8f, 0.8f, 1.f});
+    const float x = static_cast<float>(index % gridWidth_) * gridSpacing_;
+    const float z = static_cast<float>(index / gridWidth_) * gridSpacing_;
+    model->SetTranslate({x, 0.f, z});
+    model->SetScale({0.8f, 0.8f, 0.8f});
 
-    models_.push_back(std::move(entry));
+    models_.push_back(std::move(model));
 }
 
 void PerformanceTestScene::DespawnModel() {
@@ -97,8 +103,10 @@ void PerformanceTestScene::DespawnModel() {
 }
 
 void PerformanceTestScene::Draw() {
-    for (auto& entry : models_) {
-        entry.model->Draw();
+    floor_->Draw();
+
+    for (auto& model : models_) {
+        model->Draw();
     }
 }
 
@@ -110,23 +118,17 @@ void PerformanceTestScene::Debug() {
     ImGui::Separator();
     ImGui::SliderFloat("Particle Emit Rate (per sec)", &particleEmitRatePerSecond_, 0.f, 60.f);
     ImGui::Separator();
-    ImGui::Text("Bulk Model Edit (applies once per click)");
+    ImGui::Text("Grid Layout");
+    ImGui::SliderInt("Grid Width", &gridWidth_, 1, 64);
+    ImGui::DragFloat("Grid Spacing", &gridSpacing_, 0.1f, 0.5f, 10.f);
 
-    static Vector3 rotationDelta = {0.f, 0.f, 0.f};
-    ImGui::DragFloat3("Rotation Delta", &rotationDelta.x, 0.01f);
-    if (ImGui::Button("Apply Rotation To All")) {
-        for (auto& entry : models_) {
-            entry.rotation += rotationDelta;
-            entry.model->SetRotate(entry.rotation);
-        }
-    }
-
-    static Vector3 positionDelta = {0.f, 0.f, 0.f};
-    ImGui::DragFloat3("Position Delta", &positionDelta.x, 0.1f);
-    if (ImGui::Button("Apply Position Offset To All")) {
-        for (auto& entry : models_) {
-            entry.position += positionDelta;
-            entry.model->SetTranslate(entry.position);
+    ImGui::Separator();
+    ImGui::Text("Camera Adjust (Active Camera)");
+    auto camera = Singleton<CameraController>::GetInstance()->GetActive();
+    if (camera) {
+        ImGui::DragFloat3("Camera Position", &camera->transform_.translate.x, 0.1f);
+        if (std::holds_alternative<Vector3>(camera->transform_.rotate)) {
+            ImGui::DragFloat3("Camera Rotation", &std::get<Vector3>(camera->transform_.rotate).x, 0.01f);
         }
     }
     ImGui::End();

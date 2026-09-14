@@ -126,7 +126,7 @@ void ModelInstance::UpdateMapData() const {
 
     wd_->world = MathUtils::Matrix::MakeAffineMatrix(transform_.scale, std::get<Vector3>(transform_.rotate), transform_.translate);
     wd_->wvp = wd_->world * camera->GetViewProjection();
-    wd_->inverse = wd_->world.Inverse().Transpose();
+    wd_->inverse = wd_->world.AffineInverse().Transpose();
 }
 
 void ModelInstance::DebugTransformSection() {

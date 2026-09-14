@@ -143,6 +143,59 @@ struct Matrix4x4{
         } / a;
     }
 
+    /** @brief アフィン変換専用の逆行列計算(3x3部分のみ逆行列化して高速化)
+     ** @return 逆行列
+     **/
+    Matrix4x4 AffineInverse() const {
+        const Matrix3x3 linear{
+            matrix[0][0], matrix[0][1], matrix[0][2],
+            matrix[1][0], matrix[1][1], matrix[1][2],
+            matrix[2][0], matrix[2][1], matrix[2][2]
+        };
+
+        const float det = linear.matrix[0][0] * (linear.matrix[1][1] * linear.matrix[2][2] - linear.matrix[1][2] * linear.matrix[2][1])
+                         - linear.matrix[0][1] * (linear.matrix[1][0] * linear.matrix[2][2] - linear.matrix[1][2] * linear.matrix[2][0])
+                         + linear.matrix[0][2] * (linear.matrix[1][0] * linear.matrix[2][1] - linear.matrix[1][1] * linear.matrix[2][0]);
+
+        if (std::abs(det) < 1e-8f) {
+            return Matrix4x4{
+                1,0,0,0,
+                0,1,0,0,
+                0,0,1,0,
+                0,0,0,1
+            };
+        }
+
+        const float invDet = 1.f / det;
+
+        const Matrix3x3 inv{
+            (linear.matrix[1][1] * linear.matrix[2][2] - linear.matrix[1][2] * linear.matrix[2][1]) * invDet,
+            (linear.matrix[0][2] * linear.matrix[2][1] - linear.matrix[0][1] * linear.matrix[2][2]) * invDet,
+            (linear.matrix[0][1] * linear.matrix[1][2] - linear.matrix[0][2] * linear.matrix[1][1]) * invDet,
+
+            (linear.matrix[1][2] * linear.matrix[2][0] - linear.matrix[1][0] * linear.matrix[2][2]) * invDet,
+            (linear.matrix[0][0] * linear.matrix[2][2] - linear.matrix[0][2] * linear.matrix[2][0]) * invDet,
+            (linear.matrix[0][2] * linear.matrix[1][0] - linear.matrix[0][0] * linear.matrix[1][2]) * invDet,
+
+            (linear.matrix[1][0] * linear.matrix[2][1] - linear.matrix[1][1] * linear.matrix[2][0]) * invDet,
+            (linear.matrix[0][1] * linear.matrix[2][0] - linear.matrix[0][0] * linear.matrix[2][1]) * invDet,
+            (linear.matrix[0][0] * linear.matrix[1][1] - linear.matrix[0][1] * linear.matrix[1][0]) * invDet
+        };
+
+        const float tx = matrix[3][0], ty = matrix[3][1], tz = matrix[3][2];
+        Vector3 invT = {-(tx * inv.matrix[0][0] + ty * inv.matrix[1][0] + tz * inv.matrix[2][0]), 
+            -(tx * inv.matrix[0][1] + ty * inv.matrix[1][1] + tz * inv.matrix[2][1]),
+            -(tx * inv.matrix[0][2] + ty * inv.matrix[1][2] + tz * inv.matrix[2][2])
+        };
+
+        return Matrix4x4{
+            inv.matrix[0][0], inv.matrix[0][1], inv.matrix[0][2], 0.f,
+            inv.matrix[1][0], inv.matrix[1][1], inv.matrix[1][2], 0.f,
+            inv.matrix[2][0], inv.matrix[2][1], inv.matrix[2][2], 0.f,
+            invT.x, invT.y, invT.z, 1.f
+        };
+    }
+
     Matrix4x4 Transpose() const {
         Matrix4x4 m {};
 
