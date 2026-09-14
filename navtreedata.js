@@ -65,8 +65,8 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "AbstractSceneFactory_8hpp.html",
-"Material_8cpp_source.html",
-"TimeSystem_8cpp.html",
+"Material_8hpp.html",
+"TimeSystem_8cpp_source.html",
 "classEmitter.html#af9b9a14463df850af2688eaf06693865",
 "classMesh.html#a7ad596a926670dd6f6b6d59df3de4ec3",
 "classRawDirectionalLight.html#a3b525dcd2678e2ec324a0b673430e387",

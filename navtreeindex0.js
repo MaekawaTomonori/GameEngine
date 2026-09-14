@@ -107,8 +107,7 @@ var NAVTREEINDEX0 =
 "Debugger_8hpp.html":[2,0,1,8,1],
 "Debugger_8hpp_source.html":[2,0,1,8,1],
 "DirectXAdapter_8cpp.html":[2,0,1,9,8],
-"DirectXAdapter_8cpp.html#a1a4015effd65ce85fe7463f88aa6833c":[2,0,1,9,8,0],
-"DirectXAdapter_8cpp.html#a9f918755b601cf4bffca775992e6fb90":[2,0,1,9,8,1],
+"DirectXAdapter_8cpp.html#a9f918755b601cf4bffca775992e6fb90":[2,0,1,9,8,0],
 "DirectXAdapter_8cpp_source.html":[2,0,1,9,8],
 "DirectXAdapter_8hpp.html":[2,0,1,9,9],
 "DirectXAdapter_8hpp_source.html":[2,0,1,9,9],
@@ -249,5 +248,6 @@ var NAVTREEINDEX0 =
 "Log_8cpp_source.html":[2,0,1,31,0],
 "Log_8hpp.html":[2,0,0,10],
 "Log_8hpp_source.html":[2,0,0,10],
-"Material_8cpp.html":[2,0,1,7,0]
+"Material_8cpp.html":[2,0,1,7,0],
+"Material_8cpp_source.html":[2,0,1,7,0]
 };

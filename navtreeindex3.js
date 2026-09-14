@@ -1,6 +1,6 @@
 var NAVTREEINDEX3 =
 {
-"classEmitter.html#af9b9a14463df850af2688eaf06693865":[1,0,24,18],
+"classEmitter.html#af9b9a14463df850af2688eaf06693865":[1,0,24,19],
 "classEmitterHandle.html":[1,0,25],
 "classEmitterHandle.html#a3d12f4b7aa503f8bc45ae61093b7a7be":[1,0,25,3],
 "classEmitterHandle.html#a77c962c3b7f70766dd5f03a6629b4944":[1,0,25,4],

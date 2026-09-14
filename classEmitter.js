@@ -5,6 +5,7 @@ var classEmitter =
     [ "Draw", "classEmitter.html#a1a7f88acfebb09e0a3ab3bc6740a7287", null ],
     [ "Emit", "classEmitter.html#ac8a3d960532f37088635aae0bbaeec82", null ],
     [ "Enable", "classEmitter.html#a15dfb67ed3eee79e5160770747dc18b2", null ],
+    [ "GetActiveParticleCount", "classEmitter.html#acb8b10e5a8736977f66190c97af5c218", null ],
     [ "GetCanvasName", "classEmitter.html#a1702bbddab513af0bb953899d186c759", null ],
     [ "Initialize", "classEmitter.html#aca523935cb30696904d953e0f8193b9a", null ],
     [ "IsFinished", "classEmitter.html#a32cd672a9952510f7c6edb57d600e4d5", null ],
