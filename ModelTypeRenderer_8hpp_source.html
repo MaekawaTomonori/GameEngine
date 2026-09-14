@@ -141,28 +141,54 @@ $(document).ready(function(){initNavTree('ModelTypeRenderer_8hpp_source.html',''
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keyword">static</span> <span class="keywordtype">void</span> FlushQueue(std::vector&lt;Entry&gt;&amp; _queue, <a class="code hl_class" href="classPipelineStateObject.html">PipelineStateObject</a>* _pipeline, <a class="code hl_class" href="classRenderer.html">Renderer</a>* _renderer, <span class="keyword">const</span> std::function&lt;<span class="keywordtype">void</span>()&gt;&amp; _bindShadow) {</div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        <span class="keywordflow">if</span> (_queue.empty()) <span class="keywordflow">return</span>;</div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        std::unordered_map&lt;std::string, std::vector&lt;T*&gt;&gt; groups;</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; entry : _queue) {</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>            groups[entry.canvasName].push_back(entry.instance);</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        }</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        _queue.clear();</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; [canvasName, instances] : groups) {</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>            _renderer-&gt;<a class="code hl_function" href="classRenderer.html#ad05020bfe81b672b8b7a0202f51399f4">Register</a>([_pipeline, instances = std::move(instances), _bindShadow]() {</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>                <span class="keywordflow">if</span> (_pipeline) {</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>                    _pipeline-&gt;<a class="code hl_function" href="classPipelineStateObject.html#a3891084de2a3929eeb491ed042ed03ca">DrawCall</a>();</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>                }</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>                _bindShadow();</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>                <span class="keywordflow">for</span> (T* instance : instances) {</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>                    instance-&gt;ExecuteDraw();</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>                }</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>            }, canvasName);</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>        }</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    }</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>}; <span class="comment">// class ModelTypeRenderer</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        <span class="keyword">auto</span> registerBatch = [_pipeline, _renderer, &amp;_bindShadow](std::vector&lt;T*&gt; _instances, <span class="keyword">const</span> std::string&amp; _canvasName) {</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>            _renderer-&gt;Register([_pipeline, instances = std::move(_instances), _bindShadow]() {</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>                <span class="keywordflow">if</span> (_pipeline) {</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>                    _pipeline-&gt;<a class="code hl_function" href="classPipelineStateObject.html#a3891084de2a3929eeb491ed042ed03ca">DrawCall</a>();</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>                }</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>                _bindShadow();</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>                <span class="keywordflow">for</span> (T* instance : instances) {</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>                    instance-&gt;ExecuteDraw();</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>                }</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>            }, _canvasName);</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        };</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        <span class="comment">// 大半のフレームはCanvasが1種類のみなので、単一Canvasならmapを経由せず直接バッチ化する</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        <span class="keyword">const</span> std::string&amp; firstCanvas = _queue.front().canvasName;</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        <span class="keywordtype">bool</span> singleCanvas = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; entry : _queue) {</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>            <span class="keywordflow">if</span> (entry.canvasName != firstCanvas) {</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>                singleCanvas = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>                <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>            }</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        }</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        <span class="keywordflow">if</span> (singleCanvas) {</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>            std::vector&lt;T*&gt; instances;</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>            instances.reserve(_queue.size());</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>            <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; entry : _queue) {</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>                instances.push_back(entry.instance);</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>            }</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>            <span class="keyword">const</span> std::string canvasName = firstCanvas;</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>            _queue.clear();</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>            registerBatch(std::move(instances), canvasName);</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>            <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>        }</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>        std::unordered_map&lt;std::string, std::vector&lt;T*&gt;&gt; groups;</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>        <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; entry : _queue) {</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>            groups[entry.canvasName].push_back(entry.instance);</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>        }</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>        _queue.clear();</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>        <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; [canvasName, instances] : groups) {</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>            registerBatch(std::move(instances), canvasName);</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>        }</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    }</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>}; <span class="comment">// class ModelTypeRenderer</span></div>
 </div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="preprocessor">#endif </span><span class="comment">// ModelTypeRenderer_HPP_</span></div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="preprocessor">#endif </span><span class="comment">// ModelTypeRenderer_HPP_</span></div>
 <div class="ttc" id="aPipelineStateObject_8hpp_html"><div class="ttname"><a href="PipelineStateObject_8hpp.html">PipelineStateObject.hpp</a></div></div>
 <div class="ttc" id="aRenderer_8hpp_html"><div class="ttname"><a href="Renderer_8hpp.html">Renderer.hpp</a></div></div>
 <div class="ttc" id="aclassModelTypeRenderer_html"><div class="ttname"><a href="classModelTypeRenderer.html">ModelTypeRenderer</a></div><div class="ttdoc">モデル種別ごとの描画キューとPSOをまとめて管理するテンプレート 種別ごとにExecuteDraw()を非virtualに直接呼び出すため、std::functionによる型消去を経由しない。 新しいモ...</div><div class="ttdef"><b>Definition</b> <a href="ModelTypeRenderer_8hpp_source.html#l00017">ModelTypeRenderer.hpp:17</a></div></div>
@@ -173,14 +199,13 @@ $(document).ready(function(){initNavTree('ModelTypeRenderer_8hpp_source.html',''
 <div class="ttc" id="aclassPipelineStateObject_html"><div class="ttname"><a href="classPipelineStateObject.html">PipelineStateObject</a></div><div class="ttdef"><b>Definition</b> <a href="PipelineStateObject_8hpp_source.html#l00012">PipelineStateObject.hpp:12</a></div></div>
 <div class="ttc" id="aclassPipelineStateObject_html_a3891084de2a3929eeb491ed042ed03ca"><div class="ttname"><a href="classPipelineStateObject.html#a3891084de2a3929eeb491ed042ed03ca">PipelineStateObject::DrawCall</a></div><div class="ttdeci">void DrawCall() const</div><div class="ttdef"><b>Definition</b> <a href="PipelineStateObject_8cpp_source.html#l00144">PipelineStateObject.cpp:144</a></div></div>
 <div class="ttc" id="aclassRenderer_html"><div class="ttname"><a href="classRenderer.html">Renderer</a></div><div class="ttdoc">レンダラークラス 描画タスクの管理とポストプロセス適用を制御</div><div class="ttdef"><b>Definition</b> <a href="Renderer_8hpp_source.html#l00016">Renderer.hpp:16</a></div></div>
-<div class="ttc" id="aclassRenderer_html_ad05020bfe81b672b8b7a0202f51399f4"><div class="ttname"><a href="classRenderer.html#ad05020bfe81b672b8b7a0202f51399f4">Renderer::Register</a></div><div class="ttdeci">void Register(std::function&lt; void()&gt; _task, const std::string &amp;_canvasName=&quot;None&quot;)</div><div class="ttdoc">描画タスクを登録</div><div class="ttdef"><b>Definition</b> <a href="Renderer_8cpp_source.html#l00013">Renderer.cpp:13</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_32e188284d239da8bb14ec1dabb0c35f.html">Model</a></li><li class="navelem"><a class="el" href="dir_b2f92e52a2eafb814cc1aab98605e6c6.html">Common</a></li><li class="navelem"><a class="el" href="ModelTypeRenderer_8hpp.html">ModelTypeRenderer.hpp</a></li>
-    <li class="footer">2026年09月14日(月) 10時12分32秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年09月14日(月) 13時59分43秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

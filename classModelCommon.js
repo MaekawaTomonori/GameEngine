@@ -7,6 +7,7 @@ var classModelCommon =
     [ "ExecuteShadowDraw", "classModelCommon.html#a32e8662a3ef23d366bd4c41eebd60619", null ],
     [ "GetCameraCBVAddress", "classModelCommon.html#a85b4554b586b362f55f3c860b3ccab12", null ],
     [ "GetEnvironmentTexture", "classModelCommon.html#ac119446c44e462a0cc0ce0bb1a2ca6ee", null ],
+    [ "GetEnvironmentTextureHandle", "classModelCommon.html#a11726c5018062b49f06019af428abb1b", null ],
     [ "GetResourceRepository", "classModelCommon.html#afd34699d268cba689c22a142466850e6", null ],
     [ "GetSRVManager", "classModelCommon.html#a33e697baa0ec17fc95e1f952c04f57ca", null ],
     [ "Initialize", "classModelCommon.html#a44949376048a801f3a992f7370bdf846", null ],

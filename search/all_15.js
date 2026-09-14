@@ -8,7 +8,7 @@ var searchData=
   ['wd_5f_5',['wd_',['../classModelInstance.html#a9d42c0b5a0822574fe7dc51b5d769cb7',1,'ModelInstance']]],
   ['weight_6',['weight',['../structVertexWeightData.html#a946382fc31458260ff891a050688a918',1,'VertexWeightData']]],
   ['weights_7',['weights',['../structJointWeightData.html#a0e723bfafc04bb284deb1794cf335f51',1,'JointWeightData']]],
-  ['width_8',['width',['../classScreen.html#aa6dac6b449a55c265cfd7497242d4e77',1,'Screen::Width()'],['../structGameEngine_1_1Config.html#a466d7d763648938c319d6e265135b7ff',1,'GameEngine::Config::width']]],
+  ['width_8',['width',['../structGameEngine_1_1Config.html#a466d7d763648938c319d6e265135b7ff',1,'GameEngine::Config::width'],['../classScreen.html#aa6dac6b449a55c265cfd7497242d4e77',1,'Screen::Width()']]],
   ['winapp_9',['WinApp',['../classWinApp.html',1,'']]],
   ['winapp_2ecpp_10',['WinApp.cpp',['../WinApp_8cpp.html',1,'']]],
   ['winapp_2ehpp_11',['WinApp.hpp',['../WinApp_8hpp.html',1,'']]],

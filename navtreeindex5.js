@@ -1,5 +1,6 @@
 var NAVTREEINDEX5 =
 {
+"classRawDirectionalLight.html":[1,0,78],
 "classRawDirectionalLight.html#a3b525dcd2678e2ec324a0b673430e387":[1,0,78,6],
 "classRawDirectionalLight.html#a600956b1551f342a46577352fe65fc08":[1,0,78,0],
 "classRawDirectionalLight.html#a72af48a284ad54859b3b08d39a9e2253":[1,0,78,4],
@@ -248,6 +249,5 @@ var NAVTREEINDEX5 =
 "classStageLoader.html#a5b9499ad4fb2ff0ab7e8cf962d119d17":[1,0,104,1],
 "classStageLoader.html#afc33e2c70cb372b8a3f5227a9287b3d5":[1,0,104,0],
 "classStageRepository.html":[1,0,105],
-"classStageRepository.html#a60778b0c1ced642de3891a07a3055703":[1,0,105,2],
-"classStageRepository.html#a9ce971d01562ac7ed7cdf748dde11250":[1,0,105,1]
+"classStageRepository.html#a60778b0c1ced642de3891a07a3055703":[1,0,105,2]
 };
