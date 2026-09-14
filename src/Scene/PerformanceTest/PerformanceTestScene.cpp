@@ -85,7 +85,7 @@ void PerformanceTestScene::UpdateParticleEmission(float _deltaTime) {
 
 void PerformanceTestScene::SpawnModel() {
     auto model = std::make_unique<Model>();
-    model->Initialize("bunny");
+    model->Initialize("cube");
 
     const int index = static_cast<int>(models_.size());
     const float x = static_cast<float>(index % gridWidth_) * gridSpacing_;

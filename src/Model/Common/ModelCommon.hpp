@@ -32,6 +32,7 @@ class ModelCommon : public Common{
     std::vector<std::unique_ptr<ModelInstance>> instances_;
 
     std::string environmentTexture_ = "white_x16.png";
+    D3D12_GPU_DESCRIPTOR_HANDLE environmentTextureHandle_{};
 
     void Initialize(const GESTD::ReferencePtr<DirectXAdapter>& _adapter, const GESTD::ReferencePtr<DebugUI>& _debugUi) override;
     void CreateSkinningPipeline() const;
@@ -67,6 +68,7 @@ public:
 
     void SetEnvironmentTexture(const std::string& _texture);
     const std::string& GetEnvironmentTexture() const { return environmentTexture_; }
+    D3D12_GPU_DESCRIPTOR_HANDLE GetEnvironmentTextureHandle() const { return environmentTextureHandle_; }
 
     void Draw(Renderer* _renderer) override;
 

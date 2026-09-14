@@ -27,10 +27,9 @@ void StaticModelInstance::Draw() {
 }
 
 void StaticModelInstance::ExecuteDraw() const {
-    const auto tm = Singleton<TextureManager>::GetInstance();
     commandList_->SetGraphicsRootShaderResourceView(1, wr_->Get()->GetGPUVirtualAddress());
     commandList_->SetGraphicsRootConstantBufferView(4, common_->GetCameraCBVAddress());
-    commandList_->SetGraphicsRootDescriptorTable(8, tm->GetGPUHandle(common_->GetEnvironmentTexture()));
+    commandList_->SetGraphicsRootDescriptorTable(8, common_->GetEnvironmentTextureHandle());
     mesh_->Draw();
 }
 

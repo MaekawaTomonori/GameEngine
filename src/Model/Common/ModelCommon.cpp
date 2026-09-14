@@ -35,11 +35,13 @@ void ModelCommon::Initialize(const GESTD::ReferencePtr<DirectXAdapter>& _adapter
     cameraResource_->Get()->Map(0, nullptr, reinterpret_cast<void**>(&cameraData_));
 
     Singleton<TextureManager>::GetInstance()->Load(environmentTexture_);
+    environmentTextureHandle_ = Singleton<TextureManager>::GetInstance()->GetGPUHandle(environmentTexture_);
 }
 
 void ModelCommon::SetEnvironmentTexture(const std::string& _texture) {
     Singleton<TextureManager>::GetInstance()->Load(_texture);
     environmentTexture_ = _texture;
+    environmentTextureHandle_ = Singleton<TextureManager>::GetInstance()->GetGPUHandle(environmentTexture_);
 }
 
 void ModelCommon::CreateSkinningPipeline() const {

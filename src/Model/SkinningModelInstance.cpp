@@ -34,10 +34,9 @@ void SkinningModelInstance::Draw() {
 }
 
 void SkinningModelInstance::ExecuteDraw() const {
-    const auto tm = Singleton<TextureManager>::GetInstance();
     commandList_->SetGraphicsRootConstantBufferView(1, wr_->Get()->GetGPUVirtualAddress());
     commandList_->SetGraphicsRootConstantBufferView(4, common_->GetCameraCBVAddress());
-    commandList_->SetGraphicsRootDescriptorTable(8, tm->GetGPUHandle(common_->GetEnvironmentTexture()));
+    commandList_->SetGraphicsRootDescriptorTable(8, common_->GetEnvironmentTextureHandle());
     commandList_->SetGraphicsRootDescriptorTable(11, skinning_->GetPaletteHandle());
     mesh_->Draw();
 }

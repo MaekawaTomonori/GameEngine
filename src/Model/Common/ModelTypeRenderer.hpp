@@ -40,14 +40,8 @@ private:
     static void FlushQueue(std::vector<Entry>& _queue, PipelineStateObject* _pipeline, Renderer* _renderer, const std::function<void()>& _bindShadow) {
         if (_queue.empty()) return;
 
-        std::unordered_map<std::string, std::vector<T*>> groups;
-        for (const auto& entry : _queue) {
-            groups[entry.canvasName].push_back(entry.instance);
-        }
-        _queue.clear();
-
-        for (auto& [canvasName, instances] : groups) {
-            _renderer->Register([_pipeline, instances = std::move(instances), _bindShadow]() {
+        auto registerBatch = [_pipeline, _renderer, &_bindShadow](std::vector<T*> _instances, const std::string& _canvasName) {
+            _renderer->Register([_pipeline, instances = std::move(_instances), _bindShadow]() {
                 if (_pipeline) {
                     _pipeline->DrawCall();
                 }
@@ -55,7 +49,39 @@ private:
                 for (T* instance : instances) {
                     instance->ExecuteDraw();
                 }
-            }, canvasName);
+            }, _canvasName);
+        };
+
+        // 大半のフレームはCanvasが1種類のみなので、単一Canvasならmapを経由せず直接バッチ化する
+        const std::string& firstCanvas = _queue.front().canvasName;
+        bool singleCanvas = true;
+        for (const auto& entry : _queue) {
+            if (entry.canvasName != firstCanvas) {
+                singleCanvas = false;
+                break;
+            }
+        }
+
+        if (singleCanvas) {
+            std::vector<T*> instances;
+            instances.reserve(_queue.size());
+            for (const auto& entry : _queue) {
+                instances.push_back(entry.instance);
+            }
+            const std::string canvasName = firstCanvas;
+            _queue.clear();
+            registerBatch(std::move(instances), canvasName);
+            return;
+        }
+
+        std::unordered_map<std::string, std::vector<T*>> groups;
+        for (const auto& entry : _queue) {
+            groups[entry.canvasName].push_back(entry.instance);
+        }
+        _queue.clear();
+
+        for (auto& [canvasName, instances] : groups) {
+            registerBatch(std::move(instances), canvasName);
         }
     }
 }; // class ModelTypeRenderer
