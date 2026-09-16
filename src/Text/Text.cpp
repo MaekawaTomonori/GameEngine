@@ -24,7 +24,8 @@ void Text::Draw() {
         text_,
         position_.x, position_.y,
         fontSize_,
-        color_.x, color_.y, color_.z, color_.w);
+        color_.x, color_.y, color_.z, color_.w,
+        fixed_);
 }
 
 void Text::SetText(const std::string& _text)   { text_ = _text; }
@@ -32,3 +33,4 @@ void Text::SetPosition(float _x, float _y)     { position_ = {_x, _y}; }
 void Text::SetFontSize(float _fontSize)        { fontSize_ = _fontSize; }
 void Text::SetColor(const Vector4& _color)     { color_ = _color; }
 void Text::SetVisible(bool _visible)           { visible_ = _visible; }
+void Text::SetFixed(bool _fixed)               { fixed_ = _fixed; }

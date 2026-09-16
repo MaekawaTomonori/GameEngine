@@ -177,6 +177,10 @@ void Window::RestoreWindowMode() const {
     )) {
         Utils::DisplayLastErr();
     }
+
+    // フォーカスを維持（BorderlessFullScreenと対称にする）
+    SetForegroundWindow(hWnd_);
+    SetFocus(hWnd_);
 }
 
 HWND Window::GetWindowHandle() const {

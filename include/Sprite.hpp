@@ -137,6 +137,11 @@ public:
      * @param _texture テクスチャパス
      */
     void SetTexture(const std::string& _texture);
+
+    /** @brief 位置を基準解像度前提にする（自動スケール対象にする）か設定
+     * @param _fixed 対象にする場合true
+     */
+    void SetFixed(bool _fixed);
 }; // class Sprite
 
 #endif // Sprite_HPP_

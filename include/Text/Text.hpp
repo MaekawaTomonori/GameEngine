@@ -38,6 +38,7 @@ class Text {
     float       fontSize_ = 32.f;
     Vector4     color_    = {1.f, 1.f, 1.f, 1.f};
     bool        visible_  = true;
+    bool        fixed_    = false;
 
 public:
     Text();
@@ -76,6 +77,11 @@ public:
 
     /** @brief 表示 / 非表示を切り替え */
     void SetVisible(bool _visible);
+
+    /** @brief 位置を基準解像度前提にする（自動スケール対象にする）か設定
+     * @param _fixed 対象にする場合true
+     */
+    void SetFixed(bool _fixed);
 
     // ─── Getters ──────────────────────────────────────────────────
 

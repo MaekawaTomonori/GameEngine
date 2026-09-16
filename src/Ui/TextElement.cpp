@@ -34,7 +34,8 @@ namespace Ui {
             data_.text,
             pos.x, pos.y,
             data_.fontSize,
-            animColor_.x, animColor_.y, animColor_.z, animColor_.w);
+            animColor_.x, animColor_.y, animColor_.z, animColor_.w,
+            true);
     }
 
     void TextElement::DebugParams() {

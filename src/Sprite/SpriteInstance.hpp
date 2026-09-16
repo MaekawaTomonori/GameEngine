@@ -86,6 +86,9 @@ class SpriteInstance {
 
     bool posteffect_ = false;
 
+    /** @brief trueの場合、位置を基準解像度前提として扱いライブ解像度へ自動スケールする（falseならライブ解像度の値としてそのまま使う） */
+    bool fixed_ = false;
+
     GESTD::LifetimeSentinel lifetime_;
 
 public:
@@ -207,6 +210,11 @@ public:
      * @param _texture テクスチャパス
      */
     void SetTexture(const std::string& _texture);
+
+    /** @brief 位置を基準解像度前提にする（自動スケール対象にする）か設定
+     * @param _fixed 対象にする場合true
+     */
+    void SetFixed(bool _fixed);
 
     /** @brief 自身への安全な参照を取得する
      * SpriteCommon がハンドル（Sprite）生成時にのみ使用する。

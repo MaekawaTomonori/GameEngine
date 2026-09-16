@@ -79,6 +79,7 @@ class TextCommon : public Common {
         float       fontSize = 32.f;
         Vector4     color    = {1.f, 1.f, 1.f, 1.f};
         bool        visible  = true;
+        bool        fixed    = true;
     };
 
     std::vector<Text*>                        texts_;       ///< 登録済み Text インスタンス一覧（デバッグ表示用）
@@ -125,7 +126,8 @@ public:
         const std::string& _text,
         float _x, float _y,
         float _fontSize,
-        float _r, float _g, float _b, float _a);
+        float _r, float _g, float _b, float _a,
+        bool _fixed);
 
     /** @brief 積まれたグリフを 1 回の DrawInstanced でレンダラーに登録
      * @note 呼び出し後 pendingGlyphs_ がリセットされる

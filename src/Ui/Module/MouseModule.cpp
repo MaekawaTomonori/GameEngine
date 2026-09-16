@@ -5,14 +5,17 @@
 
 #include "imgui.h"
 #include "Input.hpp"
+#include "Pattern/Singleton.hpp"
 #include "Sprite.hpp"
 #include "Utils.hpp"
+#include "src/Screen/Screen.hpp"
 
 namespace Ui {
     void MouseModule::ApplyPendingTexture() {
         if (!sprite_) {
             sprite_ = std::make_unique<Sprite>();
             sprite_->Initialize(textureName_);
+            sprite_->SetFixed(true);
         }
         
         if (pendingTexture_.empty()) return;
@@ -30,7 +33,9 @@ namespace Ui {
 
         ApplyPendingTexture();
 
-        mousePos_ = input.GetMousePosition();
+        // Spriteは基準解像度空間の座標を前提とするため、ライブ解像度空間から変換する
+        const float scale = Singleton<Screen>::GetInstance()->GetScale();
+        mousePos_ = input.GetMousePosition() / scale;
 
         const Vector2 canvasPos = canvas.GetPosition();
         int hovered = -1;
