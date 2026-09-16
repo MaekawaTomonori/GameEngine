@@ -40,6 +40,7 @@ namespace Ui {
 
         sprite_ = std::make_unique<Sprite>();
         sprite_->Initialize(data_.texture);
+        sprite_->SetFixed(true);
         sprite_->SetPosition(position_);
         sprite_->SetSize(data_.size);
         sprite_->SetColor(color_);

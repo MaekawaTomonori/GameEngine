@@ -127,3 +127,7 @@ void Sprite::SetActivePostEffect(bool _active) {
 void Sprite::SetTexture(const std::string& _texture) {
     if (instance_) instance_->SetTexture(_texture);
 }
+
+void Sprite::SetFixed(bool _fixed) {
+    if (instance_) instance_->SetFixed(_fixed);
+}

@@ -10,6 +10,7 @@ Fade::Fade() {
 
 void Fade::Initialize() {
     sprite_->Initialize("BlackFilter.png");
+    sprite_->SetFixed(true);
 
     float width = static_cast<float>(1920);
     float height = static_cast<float>(720);

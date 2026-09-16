@@ -6,6 +6,7 @@
 #include "Math/MathUtils.hpp"
 #include "Common/SpriteCommon.hpp"
 
+#include "src/Screen/Screen.hpp"
 #include "src/Texture/TextureManager.hpp"
 
 #include "DirectXTex.h"
@@ -121,7 +122,11 @@ void SpriteInstance::UpdateMapData() const {
     vd_[3].uv= {texRight, texTop};
 #pragma endregion
 
-    wd_->world = MathUtils::Matrix::MakeAffineMatrix({size_.x, size_.y, 1}, Vector3{0, 0, rotation_}, {position_.x, position_.y, 0});
+    const float scale = Singleton<Screen>::GetInstance()->GetScale();
+    const Vector2 scaledSize = size_ * scale;
+    const Vector2 scaledPosition = fixed_ ? position_ * scale : position_;
+
+    wd_->world = MathUtils::Matrix::MakeAffineMatrix({scaledSize.x, scaledSize.y, 1}, Vector3{0, 0, rotation_}, {scaledPosition.x, scaledPosition.y, 0});
     Matrix4x4 viewProjection = MathUtils::Matrix::MakeIdentity() * MathUtils::Matrix::MakeOrthogonalMatrix(0, static_cast<float>(adapter_->GetWidth()), 0, static_cast<float>(adapter_->GetHeight()), 0, 100.f);
 
     wd_->wvp = (wd_->world * viewProjection);
@@ -243,4 +248,8 @@ void SpriteInstance::SetTexture(const std::string& _texture) {
     texturePath_ = _texture;
     Singleton<TextureManager>::GetInstance()->Load(texturePath_);
     AdjustTextureSize();
+}
+
+void SpriteInstance::SetFixed(const bool _fixed) {
+    fixed_ = _fixed;
 }

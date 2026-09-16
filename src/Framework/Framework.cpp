@@ -213,7 +213,7 @@ void Framework::Update() const {
     input_->Update();
 
     /// Borderless fullscreen toggle
-    if (input_->IsTrigger(DIK_F10)) {
+    if (input_->IsTrigger(DIK_F11)) {
         windows_->ToggleBorderless();
 
         int width, height;

@@ -15,11 +15,13 @@
 #include "Math/Vector4.hpp"
 
 #include "Log.hpp"
+#include "Pattern/Singleton.hpp"
 #include "Utils.hpp"
 #include "src/DirectX/RootSignature/BlendMode.hpp"
 #include "src/DirectX/RootSignature/RootSignature.hpp"
 #include "src/DirectX/Shader/Shader.h"
 #include "src/Renderer/Renderer.hpp"
+#include "src/Screen/Screen.hpp"
 #include "src/Texture/TextureManager.hpp"
 
 #ifdef _DEBUG
@@ -340,12 +342,17 @@ void TextCommon::UnregisterText(Text* _text) {
     std::erase(texts_, _text);
 }
 
-void TextCommon::SubmitEntry(const std::string& _text, float _x, float _y, float _fontSize, float _r, float _g, float _b, float _a) {
+void TextCommon::SubmitEntry(const std::string& _text, float _x, float _y, float _fontSize, float _r, float _g, float _b, float _a, bool _fixed) {
     if (!fontReady_ || !mappedInstances_) return;
 
-    const float sizeScale = _fontSize / kAtlasFontPx;
-    const float baseline  = _y + fontAscent_ * sizeScale;
-    float penX = _x;
+    const float scale     = Singleton<Screen>::GetInstance()->GetScale();
+    const float x         = _fixed ? _x * scale : _x;
+    const float y         = _fixed ? _y * scale : _y;
+    const float fontSize  = _fontSize * scale;
+
+    const float sizeScale = fontSize / kAtlasFontPx;
+    const float baseline  = y + fontAscent_ * sizeScale;
+    float penX = x;
 
     for (const unsigned char ch : _text) {
         if (pendingGlyphs_ >= kMaxGlyphs) break;
@@ -381,7 +388,7 @@ void TextCommon::Draw(Renderer* _renderer) {
         if (it == entries_.end() || !it->second.visible || it->second.text.empty()) continue;
         const TextData& d = it->second;
         SubmitEntry(d.text, d.position.x, d.position.y, d.fontSize,
-                    d.color.x, d.color.y, d.color.z, d.color.w);
+                    d.color.x, d.color.y, d.color.z, d.color.w, d.fixed);
     }
 
     const uint32_t count = pendingGlyphs_;
