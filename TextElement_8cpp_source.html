@@ -141,38 +141,39 @@ $(document).ready(function(){initNavTree('TextElement_8cpp_source.html',''); ini
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>            data_.<a class="code hl_variable" href="structUi_1_1TextElement_1_1Data.html#a727808e59ab863f95a6a531ed0ca7b63">text</a>,</div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>            pos.x, pos.y,</div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>            data_.<a class="code hl_variable" href="structUi_1_1TextElement_1_1Data.html#a4b82ff7f89e90da7c507408ad714fb9d">fontSize</a>,</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>            <a class="code hl_variable" href="classUi_1_1Element.html#a27ebb09b0662e62cb491a88be509c90a">animColor_</a>.x, <a class="code hl_variable" href="classUi_1_1Element.html#a27ebb09b0662e62cb491a88be509c90a">animColor_</a>.y, <a class="code hl_variable" href="classUi_1_1Element.html#a27ebb09b0662e62cb491a88be509c90a">animColor_</a>.z, <a class="code hl_variable" href="classUi_1_1Element.html#a27ebb09b0662e62cb491a88be509c90a">animColor_</a>.w);</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    }</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>            <a class="code hl_variable" href="classUi_1_1Element.html#a27ebb09b0662e62cb491a88be509c90a">animColor_</a>.x, <a class="code hl_variable" href="classUi_1_1Element.html#a27ebb09b0662e62cb491a88be509c90a">animColor_</a>.y, <a class="code hl_variable" href="classUi_1_1Element.html#a27ebb09b0662e62cb491a88be509c90a">animColor_</a>.z, <a class="code hl_variable" href="classUi_1_1Element.html#a27ebb09b0662e62cb491a88be509c90a">animColor_</a>.w,</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>            <span class="keyword">true</span>);</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    }</div>
 </div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
-<div class="foldopen" id="foldopen00040" data-start="{" data-end="}">
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="classUi_1_1TextElement.html#aa842ad733b274e42d2a14b67a5605abe">   40</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classUi_1_1TextElement.html#aa842ad733b274e42d2a14b67a5605abe">TextElement::DebugParams</a>() {</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        <span class="keyword">static</span> <span class="keywordtype">char</span> textBuf[256]{};</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        strncpy_s(textBuf, data_.<a class="code hl_variable" href="structUi_1_1TextElement_1_1Data.html#a727808e59ab863f95a6a531ed0ca7b63">text</a>.c_str(), _TRUNCATE);</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        ImGui::Text(<span class="stringliteral">&quot;Text&quot;</span>);</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        ImGui::SetNextItemWidth(180.f);</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        <span class="keywordflow">if</span> (ImGui::InputText(<span class="stringliteral">&quot;##text&quot;</span>, textBuf, <span class="keyword">sizeof</span>(textBuf))) {</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>            data_.<a class="code hl_variable" href="structUi_1_1TextElement_1_1Data.html#a727808e59ab863f95a6a531ed0ca7b63">text</a> = textBuf;</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        }</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        ImGui::Text(<span class="stringliteral">&quot;FontSize&quot;</span>);</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        ImGui::SetNextItemWidth(100.f);</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        ImGui::DragFloat(<span class="stringliteral">&quot;##fontSize&quot;</span>, &amp;data_.<a class="code hl_variable" href="structUi_1_1TextElement_1_1Data.html#a4b82ff7f89e90da7c507408ad714fb9d">fontSize</a>, 0.5f, 4.f, 256.f);</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    }</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
+<div class="foldopen" id="foldopen00041" data-start="{" data-end="}">
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="classUi_1_1TextElement.html#aa842ad733b274e42d2a14b67a5605abe">   41</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classUi_1_1TextElement.html#aa842ad733b274e42d2a14b67a5605abe">TextElement::DebugParams</a>() {</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        <span class="keyword">static</span> <span class="keywordtype">char</span> textBuf[256]{};</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        strncpy_s(textBuf, data_.<a class="code hl_variable" href="structUi_1_1TextElement_1_1Data.html#a727808e59ab863f95a6a531ed0ca7b63">text</a>.c_str(), _TRUNCATE);</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        ImGui::Text(<span class="stringliteral">&quot;Text&quot;</span>);</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        ImGui::SetNextItemWidth(180.f);</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        <span class="keywordflow">if</span> (ImGui::InputText(<span class="stringliteral">&quot;##text&quot;</span>, textBuf, <span class="keyword">sizeof</span>(textBuf))) {</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>            data_.<a class="code hl_variable" href="structUi_1_1TextElement_1_1Data.html#a727808e59ab863f95a6a531ed0ca7b63">text</a> = textBuf;</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        }</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        ImGui::Text(<span class="stringliteral">&quot;FontSize&quot;</span>);</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        ImGui::SetNextItemWidth(100.f);</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        ImGui::DragFloat(<span class="stringliteral">&quot;##fontSize&quot;</span>, &amp;data_.<a class="code hl_variable" href="structUi_1_1TextElement_1_1Data.html#a4b82ff7f89e90da7c507408ad714fb9d">fontSize</a>, 0.5f, 4.f, 256.f);</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    }</div>
 </div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
-<div class="foldopen" id="foldopen00055" data-start="{" data-end="}">
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno"><a class="line" href="classUi_1_1TextElement.html#af2fa505318fb86e66125b4c3b2fd7909">   55</a></span>    std::unique_ptr&lt;Element&gt; <a class="code hl_function" href="classUi_1_1TextElement.html#af2fa505318fb86e66125b4c3b2fd7909">TextElement::Clone</a>()<span class="keyword"> const </span>{</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        <span class="keyword">auto</span> clone = std::make_unique&lt;TextElement&gt;();</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        clone-&gt;Initialize();</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        <a class="code hl_function" href="classUi_1_1Element.html#a972a864fcacd8e30b8ce24e55d7ca559">CopyCommonTo</a>(*clone);</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>        clone-&gt;SetTextData(data_);</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        <span class="keywordflow">return</span> clone;</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    }</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
+<div class="foldopen" id="foldopen00056" data-start="{" data-end="}">
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno"><a class="line" href="classUi_1_1TextElement.html#af2fa505318fb86e66125b4c3b2fd7909">   56</a></span>    std::unique_ptr&lt;Element&gt; <a class="code hl_function" href="classUi_1_1TextElement.html#af2fa505318fb86e66125b4c3b2fd7909">TextElement::Clone</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        <span class="keyword">auto</span> clone = std::make_unique&lt;TextElement&gt;();</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        clone-&gt;Initialize();</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>        <a class="code hl_function" href="classUi_1_1Element.html#a972a864fcacd8e30b8ce24e55d7ca559">CopyCommonTo</a>(*clone);</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        clone-&gt;SetTextData(data_);</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>        <span class="keywordflow">return</span> clone;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    }</div>
 </div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>} <span class="comment">// namespace Ui</span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>} <span class="comment">// namespace Ui</span></div>
 <div class="ttc" id="aTextCommon_8hpp_html"><div class="ttname"><a href="TextCommon_8hpp.html">TextCommon.hpp</a></div></div>
 <div class="ttc" id="aTextElement_8hpp_html"><div class="ttname"><a href="TextElement_8hpp.html">TextElement.hpp</a></div></div>
 <div class="ttc" id="aclassUi_1_1Element_html_a0139ae6bbf966f00a4d2fbf80f623c29"><div class="ttname"><a href="classUi_1_1Element.html#a0139ae6bbf966f00a4d2fbf80f623c29">Ui::Element::position_</a></div><div class="ttdeci">Vector2 position_</div><div class="ttdef"><b>Definition</b> <a href="Element_8hpp_source.html#l00039">Element.hpp:39</a></div></div>
@@ -184,10 +185,10 @@ $(document).ready(function(){initNavTree('TextElement_8cpp_source.html',''); ini
 <div class="ttc" id="aclassUi_1_1TextElement_html_a3d67a03e4377b91881ba303f5500a311"><div class="ttname"><a href="classUi_1_1TextElement.html#a3d67a03e4377b91881ba303f5500a311">Ui::TextElement::SetTextData</a></div><div class="ttdeci">void SetTextData(const Data &amp;_data)</div><div class="ttdef"><b>Definition</b> <a href="TextElement_8cpp_source.html#l00011">TextElement.cpp:11</a></div></div>
 <div class="ttc" id="aclassUi_1_1TextElement_html_a9411036448ec3bf9f8f1a142a203efb2"><div class="ttname"><a href="classUi_1_1TextElement.html#a9411036448ec3bf9f8f1a142a203efb2">Ui::TextElement::OnInitialize</a></div><div class="ttdeci">void OnInitialize() override</div><div class="ttdef"><b>Definition</b> <a href="TextElement_8cpp_source.html#l00015">TextElement.cpp:15</a></div></div>
 <div class="ttc" id="aclassUi_1_1TextElement_html_aa3e7477e8e89bffaf0c95b5e8ed2f696"><div class="ttname"><a href="classUi_1_1TextElement.html#aa3e7477e8e89bffaf0c95b5e8ed2f696">Ui::TextElement::OnUpdate</a></div><div class="ttdeci">void OnUpdate(float dt) override</div><div class="ttdef"><b>Definition</b> <a href="TextElement_8cpp_source.html#l00022">TextElement.cpp:22</a></div></div>
-<div class="ttc" id="aclassUi_1_1TextElement_html_aa842ad733b274e42d2a14b67a5605abe"><div class="ttname"><a href="classUi_1_1TextElement.html#aa842ad733b274e42d2a14b67a5605abe">Ui::TextElement::DebugParams</a></div><div class="ttdeci">void DebugParams() override</div><div class="ttdef"><b>Definition</b> <a href="TextElement_8cpp_source.html#l00040">TextElement.cpp:40</a></div></div>
+<div class="ttc" id="aclassUi_1_1TextElement_html_aa842ad733b274e42d2a14b67a5605abe"><div class="ttname"><a href="classUi_1_1TextElement.html#aa842ad733b274e42d2a14b67a5605abe">Ui::TextElement::DebugParams</a></div><div class="ttdeci">void DebugParams() override</div><div class="ttdef"><b>Definition</b> <a href="TextElement_8cpp_source.html#l00041">TextElement.cpp:41</a></div></div>
 <div class="ttc" id="aclassUi_1_1TextElement_html_abd94ed4d56a24973a0f97efc1e64869c"><div class="ttname"><a href="classUi_1_1TextElement.html#abd94ed4d56a24973a0f97efc1e64869c">Ui::TextElement::OnDraw</a></div><div class="ttdeci">void OnDraw() const override</div><div class="ttdef"><b>Definition</b> <a href="TextElement_8cpp_source.html#l00026">TextElement.cpp:26</a></div></div>
 <div class="ttc" id="aclassUi_1_1TextElement_html_ad23fb18c59e73493465ff96e070e2947"><div class="ttname"><a href="classUi_1_1TextElement.html#ad23fb18c59e73493465ff96e070e2947">Ui::TextElement::GetTextData</a></div><div class="ttdeci">Data GetTextData() const</div><div class="ttdef"><b>Definition</b> <a href="TextElement_8cpp_source.html#l00009">TextElement.cpp:9</a></div></div>
-<div class="ttc" id="aclassUi_1_1TextElement_html_af2fa505318fb86e66125b4c3b2fd7909"><div class="ttname"><a href="classUi_1_1TextElement.html#af2fa505318fb86e66125b4c3b2fd7909">Ui::TextElement::Clone</a></div><div class="ttdeci">std::unique_ptr&lt; Element &gt; Clone() const override</div><div class="ttdef"><b>Definition</b> <a href="TextElement_8cpp_source.html#l00055">TextElement.cpp:55</a></div></div>
+<div class="ttc" id="aclassUi_1_1TextElement_html_af2fa505318fb86e66125b4c3b2fd7909"><div class="ttname"><a href="classUi_1_1TextElement.html#af2fa505318fb86e66125b4c3b2fd7909">Ui::TextElement::Clone</a></div><div class="ttdeci">std::unique_ptr&lt; Element &gt; Clone() const override</div><div class="ttdef"><b>Definition</b> <a href="TextElement_8cpp_source.html#l00056">TextElement.cpp:56</a></div></div>
 <div class="ttc" id="anamespaceUi_html"><div class="ttname"><a href="namespaceUi.html">Ui</a></div><div class="ttdef"><b>Definition</b> <a href="Element_8hpp_source.html#l00015">Element.hpp:15</a></div></div>
 <div class="ttc" id="astructUi_1_1TextElement_1_1Data_html"><div class="ttname"><a href="structUi_1_1TextElement_1_1Data.html">Ui::TextElement::Data</a></div><div class="ttdef"><b>Definition</b> <a href="TextElement_8hpp_source.html#l00015">TextElement.hpp:15</a></div></div>
 <div class="ttc" id="astructUi_1_1TextElement_1_1Data_html_a4b82ff7f89e90da7c507408ad714fb9d"><div class="ttname"><a href="structUi_1_1TextElement_1_1Data.html#a4b82ff7f89e90da7c507408ad714fb9d">Ui::TextElement::Data::fontSize</a></div><div class="ttdeci">float fontSize</div><div class="ttdef"><b>Definition</b> <a href="TextElement_8hpp_source.html#l00017">TextElement.hpp:17</a></div></div>
@@ -198,7 +199,7 @@ $(document).ready(function(){initNavTree('TextElement_8cpp_source.html',''); ini
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_e796c29efe043a3b967d81e1c9f5f281.html">Ui</a></li><li class="navelem"><a class="el" href="TextElement_8cpp.html">TextElement.cpp</a></li>
-    <li class="footer">2026年09月14日(月) 13時59分43秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年09月16日(水) 06時11分39秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

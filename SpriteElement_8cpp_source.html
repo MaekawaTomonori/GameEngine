@@ -149,77 +149,78 @@ $(document).ready(function(){initNavTree('SpriteElement_8cpp_source.html',''); i
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        sprite_ = std::make_unique&lt;Sprite&gt;();</div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        sprite_-&gt;Initialize(data_.<a class="code hl_variable" href="structUi_1_1SpriteElement_1_1Data.html#a12f3d59343c00f1c8b94468803640bb6">texture</a>);</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        sprite_-&gt;SetPosition(<a class="code hl_variable" href="classUi_1_1Element.html#a0139ae6bbf966f00a4d2fbf80f623c29">position_</a>);</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        sprite_-&gt;SetSize(data_.<a class="code hl_variable" href="structUi_1_1SpriteElement_1_1Data.html#a6861296be77e7d219ab75ce8cdba363a">size</a>);</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        sprite_-&gt;SetColor(<a class="code hl_variable" href="classUi_1_1Element.html#a68cd0a58f218e08030cba6a609cf6cfb">color_</a>);</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    }</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        sprite_-&gt;SetFixed(<span class="keyword">true</span>);</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        sprite_-&gt;SetPosition(<a class="code hl_variable" href="classUi_1_1Element.html#a0139ae6bbf966f00a4d2fbf80f623c29">position_</a>);</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        sprite_-&gt;SetSize(data_.<a class="code hl_variable" href="structUi_1_1SpriteElement_1_1Data.html#a6861296be77e7d219ab75ce8cdba363a">size</a>);</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        sprite_-&gt;SetColor(<a class="code hl_variable" href="classUi_1_1Element.html#a68cd0a58f218e08030cba6a609cf6cfb">color_</a>);</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    }</div>
 </div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
-<div class="foldopen" id="foldopen00048" data-start="{" data-end="}">
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="classUi_1_1SpriteElement.html#a2d74957bc4fc2b880c510325d9e0a178">   48</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classUi_1_1SpriteElement.html#a2d74957bc4fc2b880c510325d9e0a178">SpriteElement::OnUpdate</a>(<span class="keywordtype">float</span> <span class="comment">/*dt*/</span>) {</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        <span class="keywordflow">if</span> (textureBuff_[0] != <span class="charliteral">&#39;\0&#39;</span>) {</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>            data_.<a class="code hl_variable" href="structUi_1_1SpriteElement_1_1Data.html#a12f3d59343c00f1c8b94468803640bb6">texture</a> = textureBuff_.data();</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>            textureBuff_.fill(<span class="charliteral">&#39;\0&#39;</span>);</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        }</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        sprite_-&gt;SetTexture(data_.<a class="code hl_variable" href="structUi_1_1SpriteElement_1_1Data.html#a12f3d59343c00f1c8b94468803640bb6">texture</a>);</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        sprite_-&gt;SetPosition(<a class="code hl_variable" href="classUi_1_1Element.html#a0139ae6bbf966f00a4d2fbf80f623c29">position_</a> + <a class="code hl_variable" href="classUi_1_1Element.html#a4588b3e5da53d0741cebd24f20fbc511">parent_</a> + <a class="code hl_variable" href="classUi_1_1Element.html#ab4c9b0e00eee58d7422e2012e8c56b91">posOffset_</a>);</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        sprite_-&gt;SetSize(data_.<a class="code hl_variable" href="structUi_1_1SpriteElement_1_1Data.html#a6861296be77e7d219ab75ce8cdba363a">size</a>);</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        sprite_-&gt;SetColor(<a class="code hl_variable" href="classUi_1_1Element.html#a27ebb09b0662e62cb491a88be509c90a">animColor_</a>);</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>        <span class="keywordflow">if</span> (data_.<a class="code hl_variable" href="structUi_1_1SpriteElement_1_1Data.html#a0b0c425c99b2cb2cf42558c55f4ced26">textureSize</a>.x &gt; 0.f &amp;&amp; data_.<a class="code hl_variable" href="structUi_1_1SpriteElement_1_1Data.html#a0b0c425c99b2cb2cf42558c55f4ced26">textureSize</a>.y &gt; 0.f) {</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>            sprite_-&gt;SetTextureLeftTop(data_.<a class="code hl_variable" href="structUi_1_1SpriteElement_1_1Data.html#a5d596efd280cc43cc87007aca4e99280">textureLeftTop</a>);</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>            sprite_-&gt;SetTextureSize(data_.<a class="code hl_variable" href="structUi_1_1SpriteElement_1_1Data.html#a0b0c425c99b2cb2cf42558c55f4ced26">textureSize</a>);</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        }</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        sprite_-&gt;Update();</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    }</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
+<div class="foldopen" id="foldopen00049" data-start="{" data-end="}">
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno"><a class="line" href="classUi_1_1SpriteElement.html#a2d74957bc4fc2b880c510325d9e0a178">   49</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classUi_1_1SpriteElement.html#a2d74957bc4fc2b880c510325d9e0a178">SpriteElement::OnUpdate</a>(<span class="keywordtype">float</span> <span class="comment">/*dt*/</span>) {</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        <span class="keywordflow">if</span> (textureBuff_[0] != <span class="charliteral">&#39;\0&#39;</span>) {</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>            data_.<a class="code hl_variable" href="structUi_1_1SpriteElement_1_1Data.html#a12f3d59343c00f1c8b94468803640bb6">texture</a> = textureBuff_.data();</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>            textureBuff_.fill(<span class="charliteral">&#39;\0&#39;</span>);</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        }</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        sprite_-&gt;SetTexture(data_.<a class="code hl_variable" href="structUi_1_1SpriteElement_1_1Data.html#a12f3d59343c00f1c8b94468803640bb6">texture</a>);</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        sprite_-&gt;SetPosition(<a class="code hl_variable" href="classUi_1_1Element.html#a0139ae6bbf966f00a4d2fbf80f623c29">position_</a> + <a class="code hl_variable" href="classUi_1_1Element.html#a4588b3e5da53d0741cebd24f20fbc511">parent_</a> + <a class="code hl_variable" href="classUi_1_1Element.html#ab4c9b0e00eee58d7422e2012e8c56b91">posOffset_</a>);</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        sprite_-&gt;SetSize(data_.<a class="code hl_variable" href="structUi_1_1SpriteElement_1_1Data.html#a6861296be77e7d219ab75ce8cdba363a">size</a>);</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        sprite_-&gt;SetColor(<a class="code hl_variable" href="classUi_1_1Element.html#a27ebb09b0662e62cb491a88be509c90a">animColor_</a>);</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        <span class="keywordflow">if</span> (data_.<a class="code hl_variable" href="structUi_1_1SpriteElement_1_1Data.html#a0b0c425c99b2cb2cf42558c55f4ced26">textureSize</a>.x &gt; 0.f &amp;&amp; data_.<a class="code hl_variable" href="structUi_1_1SpriteElement_1_1Data.html#a0b0c425c99b2cb2cf42558c55f4ced26">textureSize</a>.y &gt; 0.f) {</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>            sprite_-&gt;SetTextureLeftTop(data_.<a class="code hl_variable" href="structUi_1_1SpriteElement_1_1Data.html#a5d596efd280cc43cc87007aca4e99280">textureLeftTop</a>);</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>            sprite_-&gt;SetTextureSize(data_.<a class="code hl_variable" href="structUi_1_1SpriteElement_1_1Data.html#a0b0c425c99b2cb2cf42558c55f4ced26">textureSize</a>);</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        }</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        sprite_-&gt;Update();</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    }</div>
 </div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
-<div class="foldopen" id="foldopen00067" data-start="{" data-end="}">
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno"><a class="line" href="classUi_1_1SpriteElement.html#a7a102b6f1e9ffa2bb3e67843570cdaa1">   67</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classUi_1_1SpriteElement.html#a7a102b6f1e9ffa2bb3e67843570cdaa1">SpriteElement::OnDraw</a>()<span class="keyword"> const </span>{</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        sprite_-&gt;Draw();</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    }</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
+<div class="foldopen" id="foldopen00068" data-start="{" data-end="}">
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno"><a class="line" href="classUi_1_1SpriteElement.html#a7a102b6f1e9ffa2bb3e67843570cdaa1">   68</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classUi_1_1SpriteElement.html#a7a102b6f1e9ffa2bb3e67843570cdaa1">SpriteElement::OnDraw</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        sprite_-&gt;Draw();</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    }</div>
 </div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
-<div class="foldopen" id="foldopen00071" data-start="{" data-end="}">
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno"><a class="line" href="classUi_1_1SpriteElement.html#a6c79eb8f9383cfc0effd3fa6b9143eb2">   71</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classUi_1_1SpriteElement.html#a6c79eb8f9383cfc0effd3fa6b9143eb2">SpriteElement::DebugParams</a>() {</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>        ImGui::Text(<span class="stringliteral">&quot;Texture :&quot;</span>);</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>        ImGui::SameLine();</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>        <span class="keywordflow">if</span> (!data_.<a class="code hl_variable" href="structUi_1_1SpriteElement_1_1Data.html#a12f3d59343c00f1c8b94468803640bb6">texture</a>.empty()) {</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>            ImGui::TextColored(ImVec4(0.5f, 0.8f, 0.5f, 1.f), <span class="stringliteral">&quot;%s&quot;</span>, data_.<a class="code hl_variable" href="structUi_1_1SpriteElement_1_1Data.html#a12f3d59343c00f1c8b94468803640bb6">texture</a>.c_str());</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>        }</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>        ImGui::SameLine();</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>        <span class="keywordflow">if</span> (ImGui::Button(<span class="stringliteral">&quot;...##BrowseTexture&quot;</span>)) {</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>            <span class="keyword">const</span> std::string selected = Utils::OpenFileDialog(<span class="stringliteral">&quot;PNG&quot;</span>);</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>            <span class="keywordflow">if</span> (!selected.empty()) {</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>                <span class="keyword">const</span> std::string filename = std::filesystem::path(selected).filename().string();</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>                strcpy_s(textureBuff_.data(), textureBuff_.size(), filename.c_str());</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>            }</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>        }</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>        ImGui::Text(<span class="stringliteral">&quot;Size : AspectLock&quot;</span>); ImGui::SameLine();</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>        ImGui::Checkbox(<span class="stringliteral">&quot;##asplock&quot;</span>, &amp;aspectLock_);</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>        ImGui::SetNextItemWidth(130.f);</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>        <span class="keywordflow">if</span> (aspectLock_) {</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>            <span class="keywordflow">if</span> (ImGui::DragFloat(<span class="stringliteral">&quot;##size&quot;</span>, &amp;data_.<a class="code hl_variable" href="structUi_1_1SpriteElement_1_1Data.html#a6861296be77e7d219ab75ce8cdba363a">size</a>.x)) data_.<a class="code hl_variable" href="structUi_1_1SpriteElement_1_1Data.html#a6861296be77e7d219ab75ce8cdba363a">size</a>.y = data_.<a class="code hl_variable" href="structUi_1_1SpriteElement_1_1Data.html#a6861296be77e7d219ab75ce8cdba363a">size</a>.x;</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>        } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>            ImGui::DragFloat2(<span class="stringliteral">&quot;##size&quot;</span>, &amp;data_.<a class="code hl_variable" href="structUi_1_1SpriteElement_1_1Data.html#a6861296be77e7d219ab75ce8cdba363a">size</a>.x);</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>        }</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    }</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
+<div class="foldopen" id="foldopen00072" data-start="{" data-end="}">
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno"><a class="line" href="classUi_1_1SpriteElement.html#a6c79eb8f9383cfc0effd3fa6b9143eb2">   72</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classUi_1_1SpriteElement.html#a6c79eb8f9383cfc0effd3fa6b9143eb2">SpriteElement::DebugParams</a>() {</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>        ImGui::Text(<span class="stringliteral">&quot;Texture :&quot;</span>);</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>        ImGui::SameLine();</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>        <span class="keywordflow">if</span> (!data_.<a class="code hl_variable" href="structUi_1_1SpriteElement_1_1Data.html#a12f3d59343c00f1c8b94468803640bb6">texture</a>.empty()) {</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>            ImGui::TextColored(ImVec4(0.5f, 0.8f, 0.5f, 1.f), <span class="stringliteral">&quot;%s&quot;</span>, data_.<a class="code hl_variable" href="structUi_1_1SpriteElement_1_1Data.html#a12f3d59343c00f1c8b94468803640bb6">texture</a>.c_str());</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>        }</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>        ImGui::SameLine();</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>        <span class="keywordflow">if</span> (ImGui::Button(<span class="stringliteral">&quot;...##BrowseTexture&quot;</span>)) {</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>            <span class="keyword">const</span> std::string selected = Utils::OpenFileDialog(<span class="stringliteral">&quot;PNG&quot;</span>);</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>            <span class="keywordflow">if</span> (!selected.empty()) {</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>                <span class="keyword">const</span> std::string filename = std::filesystem::path(selected).filename().string();</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>                strcpy_s(textureBuff_.data(), textureBuff_.size(), filename.c_str());</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>            }</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>        }</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>        ImGui::Text(<span class="stringliteral">&quot;Size : AspectLock&quot;</span>); ImGui::SameLine();</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>        ImGui::Checkbox(<span class="stringliteral">&quot;##asplock&quot;</span>, &amp;aspectLock_);</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>        ImGui::SetNextItemWidth(130.f);</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>        <span class="keywordflow">if</span> (aspectLock_) {</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>            <span class="keywordflow">if</span> (ImGui::DragFloat(<span class="stringliteral">&quot;##size&quot;</span>, &amp;data_.<a class="code hl_variable" href="structUi_1_1SpriteElement_1_1Data.html#a6861296be77e7d219ab75ce8cdba363a">size</a>.x)) data_.<a class="code hl_variable" href="structUi_1_1SpriteElement_1_1Data.html#a6861296be77e7d219ab75ce8cdba363a">size</a>.y = data_.<a class="code hl_variable" href="structUi_1_1SpriteElement_1_1Data.html#a6861296be77e7d219ab75ce8cdba363a">size</a>.x;</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>            ImGui::DragFloat2(<span class="stringliteral">&quot;##size&quot;</span>, &amp;data_.<a class="code hl_variable" href="structUi_1_1SpriteElement_1_1Data.html#a6861296be77e7d219ab75ce8cdba363a">size</a>.x);</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>        }</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    }</div>
 </div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
-<div class="foldopen" id="foldopen00096" data-start="{" data-end="}">
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno"><a class="line" href="classUi_1_1SpriteElement.html#a5272c62b733e3269f0152fc7ed22c929">   96</a></span>    std::unique_ptr&lt;Element&gt; <a class="code hl_function" href="classUi_1_1SpriteElement.html#a5272c62b733e3269f0152fc7ed22c929">SpriteElement::Clone</a>()<span class="keyword"> const </span>{</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>        <span class="keyword">auto</span> clone = std::make_unique&lt;SpriteElement&gt;();</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>        clone-&gt;Initialize();</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>        <a class="code hl_function" href="classUi_1_1Element.html#a972a864fcacd8e30b8ce24e55d7ca559">CopyCommonTo</a>(*clone);</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>        clone-&gt;SetSpriteData(data_);</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>        <span class="keywordflow">return</span> clone;</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    }</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span> </div>
+<div class="foldopen" id="foldopen00097" data-start="{" data-end="}">
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno"><a class="line" href="classUi_1_1SpriteElement.html#a5272c62b733e3269f0152fc7ed22c929">   97</a></span>    std::unique_ptr&lt;Element&gt; <a class="code hl_function" href="classUi_1_1SpriteElement.html#a5272c62b733e3269f0152fc7ed22c929">SpriteElement::Clone</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>        <span class="keyword">auto</span> clone = std::make_unique&lt;SpriteElement&gt;();</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>        clone-&gt;Initialize();</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>        <a class="code hl_function" href="classUi_1_1Element.html#a972a864fcacd8e30b8ce24e55d7ca559">CopyCommonTo</a>(*clone);</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>        clone-&gt;SetSpriteData(data_);</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>        <span class="keywordflow">return</span> clone;</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    }</div>
 </div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span> </div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>} <span class="comment">// namespace Ui</span></div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>} <span class="comment">// namespace Ui</span></div>
 <div class="ttc" id="aSpriteElement_8hpp_html"><div class="ttname"><a href="SpriteElement_8hpp.html">SpriteElement.hpp</a></div></div>
 <div class="ttc" id="aclassUi_1_1Element_html_a0139ae6bbf966f00a4d2fbf80f623c29"><div class="ttname"><a href="classUi_1_1Element.html#a0139ae6bbf966f00a4d2fbf80f623c29">Ui::Element::position_</a></div><div class="ttdeci">Vector2 position_</div><div class="ttdef"><b>Definition</b> <a href="Element_8hpp_source.html#l00039">Element.hpp:39</a></div></div>
 <div class="ttc" id="aclassUi_1_1Element_html_a27ebb09b0662e62cb491a88be509c90a"><div class="ttname"><a href="classUi_1_1Element.html#a27ebb09b0662e62cb491a88be509c90a">Ui::Element::animColor_</a></div><div class="ttdeci">Vector4 animColor_</div><div class="ttdef"><b>Definition</b> <a href="Element_8hpp_source.html#l00043">Element.hpp:43</a></div></div>
@@ -228,11 +229,11 @@ $(document).ready(function(){initNavTree('SpriteElement_8cpp_source.html',''); i
 <div class="ttc" id="aclassUi_1_1Element_html_a972a864fcacd8e30b8ce24e55d7ca559"><div class="ttname"><a href="classUi_1_1Element.html#a972a864fcacd8e30b8ce24e55d7ca559">Ui::Element::CopyCommonTo</a></div><div class="ttdeci">void CopyCommonTo(Element &amp;_dst) const</div><div class="ttdoc">Clone 実装用：基底の共通フィールドを dst へコピーする</div><div class="ttdef"><b>Definition</b> <a href="Element_8cpp_source.html#l00198">Element.cpp:198</a></div></div>
 <div class="ttc" id="aclassUi_1_1Element_html_ab4c9b0e00eee58d7422e2012e8c56b91"><div class="ttname"><a href="classUi_1_1Element.html#ab4c9b0e00eee58d7422e2012e8c56b91">Ui::Element::posOffset_</a></div><div class="ttdeci">Vector2 posOffset_</div><div class="ttdef"><b>Definition</b> <a href="Element_8hpp_source.html#l00042">Element.hpp:42</a></div></div>
 <div class="ttc" id="aclassUi_1_1SpriteElement_html_a2b2c6bcfd3a20227369674a54180751d"><div class="ttname"><a href="classUi_1_1SpriteElement.html#a2b2c6bcfd3a20227369674a54180751d">Ui::SpriteElement::SetTexture</a></div><div class="ttdeci">void SetTexture(const std::string &amp;_tex) override</div><div class="ttdef"><b>Definition</b> <a href="SpriteElement_8cpp_source.html#l00011">SpriteElement.cpp:11</a></div></div>
-<div class="ttc" id="aclassUi_1_1SpriteElement_html_a2d74957bc4fc2b880c510325d9e0a178"><div class="ttname"><a href="classUi_1_1SpriteElement.html#a2d74957bc4fc2b880c510325d9e0a178">Ui::SpriteElement::OnUpdate</a></div><div class="ttdeci">void OnUpdate(float dt) override</div><div class="ttdef"><b>Definition</b> <a href="SpriteElement_8cpp_source.html#l00048">SpriteElement.cpp:48</a></div></div>
+<div class="ttc" id="aclassUi_1_1SpriteElement_html_a2d74957bc4fc2b880c510325d9e0a178"><div class="ttname"><a href="classUi_1_1SpriteElement.html#a2d74957bc4fc2b880c510325d9e0a178">Ui::SpriteElement::OnUpdate</a></div><div class="ttdeci">void OnUpdate(float dt) override</div><div class="ttdef"><b>Definition</b> <a href="SpriteElement_8cpp_source.html#l00049">SpriteElement.cpp:49</a></div></div>
 <div class="ttc" id="aclassUi_1_1SpriteElement_html_a4ce07c74c16d15bffa355c92b18f9f96"><div class="ttname"><a href="classUi_1_1SpriteElement.html#a4ce07c74c16d15bffa355c92b18f9f96">Ui::SpriteElement::OnInitialize</a></div><div class="ttdeci">void OnInitialize() override</div><div class="ttdef"><b>Definition</b> <a href="SpriteElement_8cpp_source.html#l00037">SpriteElement.cpp:37</a></div></div>
-<div class="ttc" id="aclassUi_1_1SpriteElement_html_a5272c62b733e3269f0152fc7ed22c929"><div class="ttname"><a href="classUi_1_1SpriteElement.html#a5272c62b733e3269f0152fc7ed22c929">Ui::SpriteElement::Clone</a></div><div class="ttdeci">std::unique_ptr&lt; Element &gt; Clone() const override</div><div class="ttdef"><b>Definition</b> <a href="SpriteElement_8cpp_source.html#l00096">SpriteElement.cpp:96</a></div></div>
-<div class="ttc" id="aclassUi_1_1SpriteElement_html_a6c79eb8f9383cfc0effd3fa6b9143eb2"><div class="ttname"><a href="classUi_1_1SpriteElement.html#a6c79eb8f9383cfc0effd3fa6b9143eb2">Ui::SpriteElement::DebugParams</a></div><div class="ttdeci">void DebugParams() override</div><div class="ttdef"><b>Definition</b> <a href="SpriteElement_8cpp_source.html#l00071">SpriteElement.cpp:71</a></div></div>
-<div class="ttc" id="aclassUi_1_1SpriteElement_html_a7a102b6f1e9ffa2bb3e67843570cdaa1"><div class="ttname"><a href="classUi_1_1SpriteElement.html#a7a102b6f1e9ffa2bb3e67843570cdaa1">Ui::SpriteElement::OnDraw</a></div><div class="ttdeci">void OnDraw() const override</div><div class="ttdef"><b>Definition</b> <a href="SpriteElement_8cpp_source.html#l00067">SpriteElement.cpp:67</a></div></div>
+<div class="ttc" id="aclassUi_1_1SpriteElement_html_a5272c62b733e3269f0152fc7ed22c929"><div class="ttname"><a href="classUi_1_1SpriteElement.html#a5272c62b733e3269f0152fc7ed22c929">Ui::SpriteElement::Clone</a></div><div class="ttdeci">std::unique_ptr&lt; Element &gt; Clone() const override</div><div class="ttdef"><b>Definition</b> <a href="SpriteElement_8cpp_source.html#l00097">SpriteElement.cpp:97</a></div></div>
+<div class="ttc" id="aclassUi_1_1SpriteElement_html_a6c79eb8f9383cfc0effd3fa6b9143eb2"><div class="ttname"><a href="classUi_1_1SpriteElement.html#a6c79eb8f9383cfc0effd3fa6b9143eb2">Ui::SpriteElement::DebugParams</a></div><div class="ttdeci">void DebugParams() override</div><div class="ttdef"><b>Definition</b> <a href="SpriteElement_8cpp_source.html#l00072">SpriteElement.cpp:72</a></div></div>
+<div class="ttc" id="aclassUi_1_1SpriteElement_html_a7a102b6f1e9ffa2bb3e67843570cdaa1"><div class="ttname"><a href="classUi_1_1SpriteElement.html#a7a102b6f1e9ffa2bb3e67843570cdaa1">Ui::SpriteElement::OnDraw</a></div><div class="ttdeci">void OnDraw() const override</div><div class="ttdef"><b>Definition</b> <a href="SpriteElement_8cpp_source.html#l00068">SpriteElement.cpp:68</a></div></div>
 <div class="ttc" id="aclassUi_1_1SpriteElement_html_ab66b93a9f3c2e334f883c3d9b7f444bb"><div class="ttname"><a href="classUi_1_1SpriteElement.html#ab66b93a9f3c2e334f883c3d9b7f444bb">Ui::SpriteElement::SetTextureRegion</a></div><div class="ttdeci">void SetTextureRegion(const Vector2 &amp;_leftTop, const Vector2 &amp;_size) override</div><div class="ttdoc">UV クリップ領域を設定する</div><div class="ttdef"><b>Definition</b> <a href="SpriteElement_8cpp_source.html#l00015">SpriteElement.cpp:15</a></div></div>
 <div class="ttc" id="aclassUi_1_1SpriteElement_html_ad1f306da5183d7970001945066de675e"><div class="ttname"><a href="classUi_1_1SpriteElement.html#ad1f306da5183d7970001945066de675e">Ui::SpriteElement::GetSpriteData</a></div><div class="ttdeci">Data GetSpriteData() const</div><div class="ttdef"><b>Definition</b> <a href="SpriteElement_8cpp_source.html#l00024">SpriteElement.cpp:24</a></div></div>
 <div class="ttc" id="aclassUi_1_1SpriteElement_html_ad4d9c3f59d980eee127d94722f06c7cc"><div class="ttname"><a href="classUi_1_1SpriteElement.html#ad4d9c3f59d980eee127d94722f06c7cc">Ui::SpriteElement::SetSize</a></div><div class="ttdeci">void SetSize(const Vector2 &amp;_size) override</div><div class="ttdoc">スクリーン上のサイズを設定する（SpriteElement で有効）</div><div class="ttdef"><b>Definition</b> <a href="SpriteElement_8cpp_source.html#l00020">SpriteElement.cpp:20</a></div></div>
@@ -249,7 +250,7 @@ $(document).ready(function(){initNavTree('SpriteElement_8cpp_source.html',''); i
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_e796c29efe043a3b967d81e1c9f5f281.html">Ui</a></li><li class="navelem"><a class="el" href="SpriteElement_8cpp.html">SpriteElement.cpp</a></li>
-    <li class="footer">2026年09月14日(月) 13時59分43秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年09月16日(水) 06時11分39秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

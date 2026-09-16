@@ -18,6 +18,7 @@ var classSpriteInstance =
     [ "SetActivePostEffect", "classSpriteInstance.html#a2becebd5e4ca48cca7b5be1cb82aa713", null ],
     [ "SetAnchorPoint", "classSpriteInstance.html#adda329425bc56b8f4021ef9b1c6100ee", null ],
     [ "SetColor", "classSpriteInstance.html#a5e7542ba770f5a15a807214f1bb0a4e3", null ],
+    [ "SetFixed", "classSpriteInstance.html#abdec858c732e5599689fc97197be5230", null ],
     [ "SetFlipX", "classSpriteInstance.html#ae095eacc4b9edbb0aaf5b81a82e1c099", null ],
     [ "SetFlipY", "classSpriteInstance.html#a5f348443070c0cc6f0251d41c91e8bde", null ],
     [ "SetPosition", "classSpriteInstance.html#a200d2e3a10371643cbed33af28afe582", null ],

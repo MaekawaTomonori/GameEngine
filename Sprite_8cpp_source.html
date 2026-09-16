@@ -279,6 +279,12 @@ $(document).ready(function(){initNavTree('Sprite_8cpp_source.html',''); initResi
 <div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    <span class="keywordflow">if</span> (instance_) instance_-&gt;SetTexture(_texture);</div>
 <div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>}</div>
 </div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span> </div>
+<div class="foldopen" id="foldopen00131" data-start="{" data-end="}">
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno"><a class="line" href="classSprite.html#a0ceab81f3c29db913150d3d7cc86dae3">  131</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classSprite.html#a0ceab81f3c29db913150d3d7cc86dae3">Sprite::SetFixed</a>(<span class="keywordtype">bool</span> _fixed) {</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    <span class="keywordflow">if</span> (instance_) instance_-&gt;SetFixed(_fixed);</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>}</div>
+</div>
 <div class="ttc" id="aSpriteCommon_8hpp_html"><div class="ttname"><a href="SpriteCommon_8hpp.html">SpriteCommon.hpp</a></div></div>
 <div class="ttc" id="aSpriteInstance_8hpp_html"><div class="ttname"><a href="SpriteInstance_8hpp.html">SpriteInstance.hpp</a></div></div>
 <div class="ttc" id="aSprite_8hpp_html"><div class="ttname"><a href="Sprite_8hpp.html">Sprite.hpp</a></div></div>
@@ -287,6 +293,7 @@ $(document).ready(function(){initNavTree('Sprite_8cpp_source.html',''); initResi
 <div class="ttc" id="aclassSprite_html_a04e10b224c20c9bea7e2a5062c6afc75"><div class="ttname"><a href="classSprite.html#a04e10b224c20c9bea7e2a5062c6afc75">Sprite::SetAnchorPoint</a></div><div class="ttdeci">void SetAnchorPoint(const Vector2 &amp;_a)</div><div class="ttdoc">アンカーポイントを設定</div><div class="ttdef"><b>Definition</b> <a href="Sprite_8cpp_source.html#l00085">Sprite.cpp:85</a></div></div>
 <div class="ttc" id="aclassSprite_html_a054a4c340c14c3d218b99e484bf83d21"><div class="ttname"><a href="classSprite.html#a054a4c340c14c3d218b99e484bf83d21">Sprite::Draw</a></div><div class="ttdeci">void Draw()</div><div class="ttdoc">スプライトを描画</div><div class="ttdef"><b>Definition</b> <a href="Sprite_8cpp_source.html#l00041">Sprite.cpp:41</a></div></div>
 <div class="ttc" id="aclassSprite_html_a0795a3e6168f4b7f87d2d2785ffb824f"><div class="ttname"><a href="classSprite.html#a0795a3e6168f4b7f87d2d2785ffb824f">Sprite::SetSize</a></div><div class="ttdeci">void SetSize(const Vector2 &amp;_s)</div><div class="ttdoc">サイズを設定</div><div class="ttdef"><b>Definition</b> <a href="Sprite_8cpp_source.html#l00059">Sprite.cpp:59</a></div></div>
+<div class="ttc" id="aclassSprite_html_a0ceab81f3c29db913150d3d7cc86dae3"><div class="ttname"><a href="classSprite.html#a0ceab81f3c29db913150d3d7cc86dae3">Sprite::SetFixed</a></div><div class="ttdeci">void SetFixed(bool _fixed)</div><div class="ttdoc">位置を基準解像度前提にする（自動スケール対象にする）か設定</div><div class="ttdef"><b>Definition</b> <a href="Sprite_8cpp_source.html#l00131">Sprite.cpp:131</a></div></div>
 <div class="ttc" id="aclassSprite_html_a12cba3ac1868418add3c4d95ce87e615"><div class="ttname"><a href="classSprite.html#a12cba3ac1868418add3c4d95ce87e615">Sprite::Sprite</a></div><div class="ttdeci">Sprite()</div></div>
 <div class="ttc" id="aclassSprite_html_a16ed1c935326cf777f14c3ed82c3001c"><div class="ttname"><a href="classSprite.html#a16ed1c935326cf777f14c3ed82c3001c">Sprite::SetPosition</a></div><div class="ttdeci">void SetPosition(const Vector2 &amp;_p)</div><div class="ttdoc">位置を設定</div><div class="ttdef"><b>Definition</b> <a href="Sprite_8cpp_source.html#l00050">Sprite.cpp:50</a></div></div>
 <div class="ttc" id="aclassSprite_html_a225170eee0c00e25d1c3eff955b8024f"><div class="ttname"><a href="classSprite.html#a225170eee0c00e25d1c3eff955b8024f">Sprite::operator=</a></div><div class="ttdeci">Sprite &amp; operator=(const Sprite &amp;)=delete</div></div>
@@ -315,7 +322,7 @@ $(document).ready(function(){initNavTree('Sprite_8cpp_source.html',''); initResi
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_909c286288939002c1b25213a067bdba.html">Sprite</a></li><li class="navelem"><a class="el" href="Sprite_8cpp.html">Sprite.cpp</a></li>
-    <li class="footer">2026年09月14日(月) 13時59分43秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年09月16日(水) 06時11分39秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

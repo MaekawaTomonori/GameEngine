@@ -70,10 +70,10 @@ var NAVTREEINDEX =
 "classEmitter.html#af9b9a14463df850af2688eaf06693865",
 "classMesh.html#a7ad596a926670dd6f6b6d59df3de4ec3",
 "classRawDirectionalLight.html",
-"classStageRepository.html#a9ce971d01562ac7ed7cdf748dde11250",
-"classUi_1_1Element.html#a902733f2bf87998fe839cbefef172c03",
-"dir_a316e9605cf2e65295ae387cbf599266.html",
-"structPlaneTextureLayer.html#a53d76d11a510bfbc45087cbdd5628a93"
+"classStageLoader.html#afc33e2c70cb372b8a3f5227a9287b3d5",
+"classUi_1_1Element.html#a8acbcc9fd64fa3f0cf34a3c4dd116419",
+"dir_8f6aab17bf85ffc60ccef3721c0e9e08.html",
+"structPlaneTextureLayer.html#a218cb3ffc8a889939dd8600e79ee3366"
 ];
 
 var SYNCONMSG = 'クリックで同期表示が無効になります';

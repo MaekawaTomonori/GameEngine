@@ -174,54 +174,56 @@ $(document).ready(function(){initNavTree('TextCommon_8hpp_source.html',''); init
 <div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>        <span class="keywordtype">float</span>       fontSize = 32.f;</div>
 <div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>        Vector4     color    = {1.f, 1.f, 1.f, 1.f};</div>
 <div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>        <span class="keywordtype">bool</span>        visible  = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    };</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span> </div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    std::vector&lt;Text*&gt;                        texts_;       </div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    std::vector&lt;std::string&gt;                  entryOrder_;  </div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    std::unordered_map&lt;std::string, TextData&gt; entries_;     </div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> </div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    <span class="keywordtype">char</span> fontPathBuf_[256] = <span class="stringliteral">&quot;Assets/Fonts/&quot;</span>;</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    <span class="keyword">const</span> std::string DEFAULT_FONT = <span class="stringliteral">&quot;Assets/Fonts/Satoshi-Variable.ttf&quot;</span>;</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    <a class="code hl_function" href="classTextCommon.html#a40d54493daa27f6cb225a4006d7d51ec">~TextCommon</a>() <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span> </div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classTextCommon.html#afb845800642f73dfe2f013edd3c60513">Initialize</a>(</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>        <span class="keyword">const</span> GESTD::ReferencePtr&lt;DirectXAdapter&gt;&amp; _adapter,</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>        <span class="keyword">const</span> GESTD::ReferencePtr&lt;DebugUI&gt;&amp;         _debugUi,</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>        <a class="code hl_class" href="classTextureManager.html">TextureManager</a>*                             _texture,</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>        <a class="code hl_class" href="classSRVManager.html">SRVManager</a>*                                 _srv);</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span> </div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classTextCommon.html#aa91749dc14f12b6298075d2c0093720b">LoadFont</a>(<span class="keyword">const</span> std::string&amp; _path);</div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span> </div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classTextCommon.html#ade770f2c68e6a06a03330707327c157a">RegisterText</a>(<a class="code hl_class" href="classText.html">Text</a>* _text);</div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span> </div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classTextCommon.html#a6250eca6d9e6520929e7718b61b2272f">UnregisterText</a>(<a class="code hl_class" href="classText.html">Text</a>* _text);</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span> </div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classTextCommon.html#a877881e72f70f3a0a0f151dad4c49675">SubmitEntry</a>(</div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>        <span class="keyword">const</span> std::string&amp; _text,</div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>        <span class="keywordtype">float</span> _x, <span class="keywordtype">float</span> _y,</div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>        <span class="keywordtype">float</span> _fontSize,</div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>        <span class="keywordtype">float</span> _r, <span class="keywordtype">float</span> _g, <span class="keywordtype">float</span> _b, <span class="keywordtype">float</span> _a);</div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span> </div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classTextCommon.html#ab5c5964723a80ca36b616a322d1edf95">Draw</a>(<a class="code hl_class" href="classRenderer.html">Renderer</a>* _renderer) <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span> </div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classTextCommon.html#afb845800642f73dfe2f013edd3c60513">Initialize</a>(</div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>        <span class="keyword">const</span> GESTD::ReferencePtr&lt;DirectXAdapter&gt;&amp; _adapter,</div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>        <span class="keyword">const</span> GESTD::ReferencePtr&lt;DebugUI&gt;&amp;         _debugUi) <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span> </div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>    <span class="keywordtype">void</span> SetupPipeline();</div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>    <span class="keywordtype">void</span> LoadFromJson();</div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>    <span class="keywordtype">void</span> SaveToJson();</div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span> </div>
-<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>    <span class="keyword">static</span> <span class="keyword">constexpr</span> std::string_view kJsonDir  = <span class="stringliteral">&quot;Assets/Data/Text/&quot;</span>;</div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>    <span class="keyword">static</span> <span class="keyword">constexpr</span> std::string_view kJsonFile = <span class="stringliteral">&quot;Assets/Data/Text/texts.json&quot;</span>;</div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>};</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>        <span class="keywordtype">bool</span>        fixed    = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    };</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    std::vector&lt;Text*&gt;                        texts_;       </div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    std::vector&lt;std::string&gt;                  entryOrder_;  </div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    std::unordered_map&lt;std::string, TextData&gt; entries_;     </div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    <span class="keywordtype">char</span> fontPathBuf_[256] = <span class="stringliteral">&quot;Assets/Fonts/&quot;</span>;</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    <span class="keyword">const</span> std::string DEFAULT_FONT = <span class="stringliteral">&quot;Assets/Fonts/Satoshi-Variable.ttf&quot;</span>;</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span> </div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    <a class="code hl_function" href="classTextCommon.html#a40d54493daa27f6cb225a4006d7d51ec">~TextCommon</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classTextCommon.html#afb845800642f73dfe2f013edd3c60513">Initialize</a>(</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>        <span class="keyword">const</span> GESTD::ReferencePtr&lt;DirectXAdapter&gt;&amp; _adapter,</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>        <span class="keyword">const</span> GESTD::ReferencePtr&lt;DebugUI&gt;&amp;         _debugUi,</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>        <a class="code hl_class" href="classTextureManager.html">TextureManager</a>*                             _texture,</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>        <a class="code hl_class" href="classSRVManager.html">SRVManager</a>*                                 _srv);</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span> </div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classTextCommon.html#aa91749dc14f12b6298075d2c0093720b">LoadFont</a>(<span class="keyword">const</span> std::string&amp; _path);</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span> </div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classTextCommon.html#ade770f2c68e6a06a03330707327c157a">RegisterText</a>(<a class="code hl_class" href="classText.html">Text</a>* _text);</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span> </div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classTextCommon.html#a6250eca6d9e6520929e7718b61b2272f">UnregisterText</a>(<a class="code hl_class" href="classText.html">Text</a>* _text);</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span> </div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classTextCommon.html#a87c6545008cd05e578c39331654c3105">SubmitEntry</a>(</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>        <span class="keyword">const</span> std::string&amp; _text,</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>        <span class="keywordtype">float</span> _x, <span class="keywordtype">float</span> _y,</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>        <span class="keywordtype">float</span> _fontSize,</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>        <span class="keywordtype">float</span> _r, <span class="keywordtype">float</span> _g, <span class="keywordtype">float</span> _b, <span class="keywordtype">float</span> _a,</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>        <span class="keywordtype">bool</span> _fixed);</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span> </div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classTextCommon.html#ab5c5964723a80ca36b616a322d1edf95">Draw</a>(<a class="code hl_class" href="classRenderer.html">Renderer</a>* _renderer) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span> </div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classTextCommon.html#afb845800642f73dfe2f013edd3c60513">Initialize</a>(</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>        <span class="keyword">const</span> GESTD::ReferencePtr&lt;DirectXAdapter&gt;&amp; _adapter,</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>        <span class="keyword">const</span> GESTD::ReferencePtr&lt;DebugUI&gt;&amp;         _debugUi) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span> </div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>    <span class="keywordtype">void</span> SetupPipeline();</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>    <span class="keywordtype">void</span> LoadFromJson();</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>    <span class="keywordtype">void</span> SaveToJson();</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span> </div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>    <span class="keyword">static</span> <span class="keyword">constexpr</span> std::string_view kJsonDir  = <span class="stringliteral">&quot;Assets/Data/Text/&quot;</span>;</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>    <span class="keyword">static</span> <span class="keyword">constexpr</span> std::string_view kJsonFile = <span class="stringliteral">&quot;Assets/Data/Text/texts.json&quot;</span>;</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>};</div>
 </div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span> </div>
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span><span class="preprocessor">#endif </span><span class="comment">// TextCommon_HPP_</span></div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span> </div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span><span class="preprocessor">#endif </span><span class="comment">// TextCommon_HPP_</span></div>
 <div class="ttc" id="aCommon_8hpp_html"><div class="ttname"><a href="Common_8hpp.html">Common.hpp</a></div></div>
 <div class="ttc" id="aDX12Resource_8hpp_html"><div class="ttname"><a href="DX12Resource_8hpp.html">DX12Resource.hpp</a></div></div>
 <div class="ttc" id="aSRVHandle_8hpp_html"><div class="ttname"><a href="SRVHandle_8hpp.html">SRVHandle.hpp</a></div></div>
@@ -231,13 +233,13 @@ $(document).ready(function(){initNavTree('TextCommon_8hpp_source.html',''); init
 <div class="ttc" id="aclassSRVHandle_html"><div class="ttname"><a href="classSRVHandle.html">SRVHandle</a></div><div class="ttdoc">SRVスロットの所有権を表すRAIIハンドル 破棄時にSRVManagerへスロットを自動的に返却する</div><div class="ttdef"><b>Definition</b> <a href="SRVHandle_8hpp_source.html#l00010">SRVHandle.hpp:10</a></div></div>
 <div class="ttc" id="aclassSRVManager_html"><div class="ttname"><a href="classSRVManager.html">SRVManager</a></div><div class="ttdef"><b>Definition</b> <a href="SRVManager_8h_source.html#l00011">SRVManager.h:11</a></div></div>
 <div class="ttc" id="aclassTextCommon_html"><div class="ttname"><a href="classTextCommon.html">TextCommon</a></div><div class="ttdoc">テキスト描画の内部システムクラス</div><div class="ttdef"><b>Definition</b> <a href="TextCommon_8hpp_source.html#l00023">TextCommon.hpp:23</a></div></div>
-<div class="ttc" id="aclassTextCommon_html_a40d54493daa27f6cb225a4006d7d51ec"><div class="ttname"><a href="classTextCommon.html#a40d54493daa27f6cb225a4006d7d51ec">TextCommon::~TextCommon</a></div><div class="ttdeci">~TextCommon() override</div><div class="ttdef"><b>Definition</b> <a href="TextCommon_8cpp_source.html#l00236">TextCommon.cpp:236</a></div></div>
-<div class="ttc" id="aclassTextCommon_html_a6250eca6d9e6520929e7718b61b2272f"><div class="ttname"><a href="classTextCommon.html#a6250eca6d9e6520929e7718b61b2272f">TextCommon::UnregisterText</a></div><div class="ttdeci">void UnregisterText(Text *_text)</div><div class="ttdoc">Text インスタンスを解除（Text デストラクタから呼ぶ）</div><div class="ttdef"><b>Definition</b> <a href="TextCommon_8cpp_source.html#l00337">TextCommon.cpp:337</a></div></div>
-<div class="ttc" id="aclassTextCommon_html_a877881e72f70f3a0a0f151dad4c49675"><div class="ttname"><a href="classTextCommon.html#a877881e72f70f3a0a0f151dad4c49675">TextCommon::SubmitEntry</a></div><div class="ttdeci">void SubmitEntry(const std::string &amp;_text, float _x, float _y, float _fontSize, float _r, float _g, float _b, float _a)</div><div class="ttdoc">テキスト1件をグリフインスタンスとして GPU バッファへ積む</div><div class="ttdef"><b>Definition</b> <a href="TextCommon_8cpp_source.html#l00343">TextCommon.cpp:343</a></div></div>
-<div class="ttc" id="aclassTextCommon_html_aa91749dc14f12b6298075d2c0093720b"><div class="ttname"><a href="classTextCommon.html#aa91749dc14f12b6298075d2c0093720b">TextCommon::LoadFont</a></div><div class="ttdeci">bool LoadFont(const std::string &amp;_path)</div><div class="ttdoc">フォントファイルを読み込み SDF アトラスを GPU にアップロード</div><div class="ttdef"><b>Definition</b> <a href="TextCommon_8cpp_source.html#l00240">TextCommon.cpp:240</a></div></div>
-<div class="ttc" id="aclassTextCommon_html_ab5c5964723a80ca36b616a322d1edf95"><div class="ttname"><a href="classTextCommon.html#ab5c5964723a80ca36b616a322d1edf95">TextCommon::Draw</a></div><div class="ttdeci">void Draw(Renderer *_renderer) override</div><div class="ttdoc">積まれたグリフを 1 回の DrawInstanced でレンダラーに登録</div><div class="ttdef"><b>Definition</b> <a href="TextCommon_8cpp_source.html#l00378">TextCommon.cpp:378</a></div></div>
-<div class="ttc" id="aclassTextCommon_html_ade770f2c68e6a06a03330707327c157a"><div class="ttname"><a href="classTextCommon.html#ade770f2c68e6a06a03330707327c157a">TextCommon::RegisterText</a></div><div class="ttdeci">void RegisterText(Text *_text)</div><div class="ttdoc">Text インスタンスを登録（Text コンストラクタから呼ぶ）</div><div class="ttdef"><b>Definition</b> <a href="TextCommon_8cpp_source.html#l00331">TextCommon.cpp:331</a></div></div>
-<div class="ttc" id="aclassTextCommon_html_afb845800642f73dfe2f013edd3c60513"><div class="ttname"><a href="classTextCommon.html#afb845800642f73dfe2f013edd3c60513">TextCommon::Initialize</a></div><div class="ttdeci">void Initialize(const GESTD::ReferencePtr&lt; DirectXAdapter &gt; &amp;_adapter, const GESTD::ReferencePtr&lt; DebugUI &gt; &amp;_debugUi, TextureManager *_texture, SRVManager *_srv)</div><div class="ttdoc">初期化（Framework から呼ぶ）</div><div class="ttdef"><b>Definition</b> <a href="TextCommon_8cpp_source.html#l00032">TextCommon.cpp:32</a></div></div>
+<div class="ttc" id="aclassTextCommon_html_a40d54493daa27f6cb225a4006d7d51ec"><div class="ttname"><a href="classTextCommon.html#a40d54493daa27f6cb225a4006d7d51ec">TextCommon::~TextCommon</a></div><div class="ttdeci">~TextCommon() override</div><div class="ttdef"><b>Definition</b> <a href="TextCommon_8cpp_source.html#l00238">TextCommon.cpp:238</a></div></div>
+<div class="ttc" id="aclassTextCommon_html_a6250eca6d9e6520929e7718b61b2272f"><div class="ttname"><a href="classTextCommon.html#a6250eca6d9e6520929e7718b61b2272f">TextCommon::UnregisterText</a></div><div class="ttdeci">void UnregisterText(Text *_text)</div><div class="ttdoc">Text インスタンスを解除（Text デストラクタから呼ぶ）</div><div class="ttdef"><b>Definition</b> <a href="TextCommon_8cpp_source.html#l00339">TextCommon.cpp:339</a></div></div>
+<div class="ttc" id="aclassTextCommon_html_a87c6545008cd05e578c39331654c3105"><div class="ttname"><a href="classTextCommon.html#a87c6545008cd05e578c39331654c3105">TextCommon::SubmitEntry</a></div><div class="ttdeci">void SubmitEntry(const std::string &amp;_text, float _x, float _y, float _fontSize, float _r, float _g, float _b, float _a, bool _fixed)</div><div class="ttdoc">テキスト1件をグリフインスタンスとして GPU バッファへ積む</div><div class="ttdef"><b>Definition</b> <a href="TextCommon_8cpp_source.html#l00345">TextCommon.cpp:345</a></div></div>
+<div class="ttc" id="aclassTextCommon_html_aa91749dc14f12b6298075d2c0093720b"><div class="ttname"><a href="classTextCommon.html#aa91749dc14f12b6298075d2c0093720b">TextCommon::LoadFont</a></div><div class="ttdeci">bool LoadFont(const std::string &amp;_path)</div><div class="ttdoc">フォントファイルを読み込み SDF アトラスを GPU にアップロード</div><div class="ttdef"><b>Definition</b> <a href="TextCommon_8cpp_source.html#l00242">TextCommon.cpp:242</a></div></div>
+<div class="ttc" id="aclassTextCommon_html_ab5c5964723a80ca36b616a322d1edf95"><div class="ttname"><a href="classTextCommon.html#ab5c5964723a80ca36b616a322d1edf95">TextCommon::Draw</a></div><div class="ttdeci">void Draw(Renderer *_renderer) override</div><div class="ttdoc">積まれたグリフを 1 回の DrawInstanced でレンダラーに登録</div><div class="ttdef"><b>Definition</b> <a href="TextCommon_8cpp_source.html#l00385">TextCommon.cpp:385</a></div></div>
+<div class="ttc" id="aclassTextCommon_html_ade770f2c68e6a06a03330707327c157a"><div class="ttname"><a href="classTextCommon.html#ade770f2c68e6a06a03330707327c157a">TextCommon::RegisterText</a></div><div class="ttdeci">void RegisterText(Text *_text)</div><div class="ttdoc">Text インスタンスを登録（Text コンストラクタから呼ぶ）</div><div class="ttdef"><b>Definition</b> <a href="TextCommon_8cpp_source.html#l00333">TextCommon.cpp:333</a></div></div>
+<div class="ttc" id="aclassTextCommon_html_afb845800642f73dfe2f013edd3c60513"><div class="ttname"><a href="classTextCommon.html#afb845800642f73dfe2f013edd3c60513">TextCommon::Initialize</a></div><div class="ttdeci">void Initialize(const GESTD::ReferencePtr&lt; DirectXAdapter &gt; &amp;_adapter, const GESTD::ReferencePtr&lt; DebugUI &gt; &amp;_debugUi, TextureManager *_texture, SRVManager *_srv)</div><div class="ttdoc">初期化（Framework から呼ぶ）</div><div class="ttdef"><b>Definition</b> <a href="TextCommon_8cpp_source.html#l00034">TextCommon.cpp:34</a></div></div>
 <div class="ttc" id="aclassText_html"><div class="ttname"><a href="classText.html">Text</a></div><div class="ttdoc">テキスト描画オブジェクト</div><div class="ttdef"><b>Definition</b> <a href="Text_8hpp_source.html#l00033">Text.hpp:33</a></div></div>
 <div class="ttc" id="aclassTextureManager_html"><div class="ttname"><a href="classTextureManager.html">TextureManager</a></div><div class="ttdoc">テクスチャ管理クラス テクスチャの読み込み、キャッシュ、GPUアップロードを管理</div><div class="ttdef"><b>Definition</b> <a href="TextureManager_8hpp_source.html#l00022">TextureManager.hpp:22</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
@@ -246,7 +248,7 @@ $(document).ready(function(){initNavTree('TextCommon_8hpp_source.html',''); init
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_f23f8d8d203f062cf45ea93806d80b0f.html">Text</a></li><li class="navelem"><a class="el" href="TextCommon_8hpp.html">TextCommon.hpp</a></li>
-    <li class="footer">2026年09月14日(月) 13時59分43秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年09月16日(水) 06時11分39秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

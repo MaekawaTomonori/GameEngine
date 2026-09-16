@@ -10,6 +10,7 @@ var classText =
     [ "Initialize", "classText.html#a54601d2eec677236ce7bc72795ce83e4", null ],
     [ "IsVisible", "classText.html#af767da155a2b724c306d415e521e42e1", null ],
     [ "SetColor", "classText.html#a10463b3ab14b32454137e7076a60c5d5", null ],
+    [ "SetFixed", "classText.html#a1c362e4d58de4e614e7497e470333f0a", null ],
     [ "SetFontSize", "classText.html#a9846acf31ff242fc3ef68d86980dc1e6", null ],
     [ "SetPosition", "classText.html#a8310fcc0e0c143e332ccd07ce42d297e", null ],
     [ "SetText", "classText.html#adbda6d25e35ad310db3e40d0b2b72b21", null ],
