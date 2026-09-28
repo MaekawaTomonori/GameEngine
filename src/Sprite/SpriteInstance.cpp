@@ -14,6 +14,7 @@
 SpriteInstance::SpriteInstance() {
     common_ = Singleton<SpriteCommon>::GetInstance();
     adapter_ = common_->GetAdapter();
+    textureManager_ = Singleton<TextureManager>::GetInstance();
     commandList_ = adapter_->GetCommandList();
 
     uuid_ = Utils::GenerateUniqueId();
@@ -27,7 +28,7 @@ SpriteInstance::~SpriteInstance() {
 
 void SpriteInstance::Initialize(const std::string&_texture) {
     texturePath_ = _texture;
-    Singleton<TextureManager>::GetInstance()->Load(texturePath_);
+    textureHandle_ = textureManager_->Request(texturePath_);
 
     vr_ = adapter_->CreateBufferResource(sizeof(VertexData) * 4);
     vbv_.BufferLocation = vr_->Get()->GetGPUVirtualAddress();
@@ -110,16 +111,18 @@ void SpriteInstance::UpdateMapData() const {
 #pragma endregion
 
 #pragma region Vertex texcoord
-    const DirectX::TexMetadata& metadata = Singleton<TextureManager>::GetInstance()->GetTextureMetadata(texturePath_);
-    float texLeft = leftTop_.x / static_cast<float>(metadata.width);
-    float texRight = (leftTop_.x + texSize_.x) / static_cast<float>(metadata.width);
-    float texTop = leftTop_.y / static_cast<float>(metadata.height);
-    float texBottom = (leftTop_.y + texSize_.y) / static_cast<float>(metadata.height);
+    const DirectX::TexMetadata& metadata = textureManager_->GetMetadataOf(textureHandle_.GetId());
+    if (metadata.width != 0 && metadata.height != 0) {
+        float texLeft = leftTop_.x / static_cast<float>(metadata.width);
+        float texRight = (leftTop_.x + texSize_.x) / static_cast<float>(metadata.width);
+        float texTop = leftTop_.y / static_cast<float>(metadata.height);
+        float texBottom = (leftTop_.y + texSize_.y) / static_cast<float>(metadata.height);
 
-    vd_[0].uv= {texLeft, texBottom};
-    vd_[1].uv= {texLeft, texTop};
-    vd_[2].uv= {texRight, texBottom};
-    vd_[3].uv= {texRight, texTop};
+        vd_[0].uv= {texLeft, texBottom};
+        vd_[1].uv= {texLeft, texTop};
+        vd_[2].uv= {texRight, texBottom};
+        vd_[3].uv= {texRight, texTop};
+    }
 #pragma endregion
 
     const float scale = Singleton<Screen>::GetInstance()->GetScale();
@@ -142,13 +145,13 @@ void SpriteInstance::ExecuteDraw() const {
     commandList_->IASetIndexBuffer(&ibv_);
     commandList_->SetGraphicsRootConstantBufferView(0, mr_->Get()->GetGPUVirtualAddress());
     commandList_->SetGraphicsRootConstantBufferView(1, wr_->Get()->GetGPUVirtualAddress());
-    commandList_->SetGraphicsRootDescriptorTable(2, Singleton<TextureManager>::GetInstance()->GetGPUHandle(texturePath_));
+    commandList_->SetGraphicsRootDescriptorTable(2, textureManager_->GetGpuHandleOf(textureHandle_.GetId()));
 
     commandList_->DrawIndexedInstanced(6, 1, 0, 0, 0);
 }
 
 void SpriteInstance::AdjustTextureSize() {
-    const DirectX::TexMetadata& metadata = Singleton<TextureManager>::GetInstance()->GetTextureMetadata(texturePath_);
+    const DirectX::TexMetadata& metadata = textureManager_->GetMetadataOf(textureHandle_.GetId());
     texSize_ = {static_cast<float>(metadata.width), static_cast<float>(metadata.height)};
     size_ = texSize_;
 }
@@ -245,8 +248,10 @@ void SpriteInstance::SetActivePostEffect(const bool _active) {
 }
 
 void SpriteInstance::SetTexture(const std::string& _texture) {
+    if (texturePath_ == _texture) return;
+
     texturePath_ = _texture;
-    Singleton<TextureManager>::GetInstance()->Load(texturePath_);
+    textureHandle_ = textureManager_->Request(texturePath_);
     AdjustTextureSize();
 }
 

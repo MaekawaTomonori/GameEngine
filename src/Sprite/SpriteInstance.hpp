@@ -4,12 +4,14 @@
 #include "Math/Matrix.hpp"
 #include "Math/Vector2.hpp"
 #include "Math/Vector4.hpp"
+#include "Texture/TextureHandle.hpp"
 #include "src/DirectX/Resource/DX12Resource.hpp"
 #include <memory>
 
 #include "src/DirectX/DirectXAdapter.hpp"
 
 class SpriteCommon;
+class TextureManager;
 
 /** @brief 2Dスプライトの実体（Engine内部専用）
  * 生成・破棄は SpriteCommon が行い、外部からは公開ハンドルの Sprite 経由でのみ操作される。
@@ -37,12 +39,14 @@ class SpriteInstance {
 
     GESTD::ReferencePtr<SpriteCommon> common_;
     GESTD::ReferencePtr<DirectXAdapter> adapter_ = nullptr;
+    GESTD::ReferencePtr<TextureManager> textureManager_;
 
     Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> commandList_ = nullptr;
 
     std::string uuid_;
 
     std::string texturePath_;
+    TextureHandle textureHandle_;
 
     /** vertex resource
      */

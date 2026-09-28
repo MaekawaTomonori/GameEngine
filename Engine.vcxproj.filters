@@ -710,6 +710,9 @@
     <ClCompile Include="src\Texture\Composition\PlaneTextureLayoutEditor.cpp">
       <Filter>src\Texture\Composition</Filter>
     </ClCompile>
+    <ClCompile Include="src\Texture\TextureHandle.cpp">
+      <Filter>src\Texture</Filter>
+    </ClCompile>
     <ClCompile Include="src\Texture\TextureManager.cpp">
       <Filter>src\Texture</Filter>
     </ClCompile>

@@ -1,6 +1,7 @@
 #ifndef TEXTUREMANAGER_HPP_
 #define TEXTUREMANAGER_HPP_
 
+#include <atomic>
 #include <d3d12.h>
 #include <mutex>
 #include <wrl/client.h>
@@ -9,6 +10,7 @@
 #include <memory>
 #include <vector>
 
+#include "Texture/TextureHandle.hpp"
 #include "src/DirectX/DirectXAdapter.hpp"
 #include "src/DirectX/Heap/SRVHandle.hpp"
 #include "src/DirectX/Heap/SRVManager.h"
@@ -20,14 +22,32 @@
  * テクスチャの読み込み、キャッシュ、GPUアップロードを管理
  */
 class TextureManager{
-    /** @brief テクスチャデータ
+    /** SRVヒープ容量が上限。slots_はこの数で予約し再確保させない */
+    static constexpr uint32_t MAX_TEXTURE_SLOTS = 512;
+    static constexpr uint32_t INVALID_SLOT_ID = UINT32_MAX;
+    static constexpr const char* DEFAULT_TEXTURE = "white_x16.png";
+
+    /** @brief スロットの内部状態（公開状態より細かい段階を持つ）
      */
-    struct Texture{
+    enum class SlotState{
+        Queued,
+        Loading,
+        PendingUpload,
+        Ready,
+        Failed,
+    };
+
+    /** @brief テクスチャ1枚分のスロット
+     * ハンドルのidがそのままslots_の添字になる
+     */
+    struct TextureSlot{
+        std::string name;
         SRVHandle srvIndex;
-        DirectX::TexMetadata metadata;
+        DirectX::TexMetadata metadata {};
         std::unique_ptr<DX12Resource> resource;
-        D3D12_CPU_DESCRIPTOR_HANDLE cpuHandle;
-        D3D12_GPU_DESCRIPTOR_HANDLE gpuHandle;
+        D3D12_CPU_DESCRIPTOR_HANDLE cpuHandle {};
+        D3D12_GPU_DESCRIPTOR_HANDLE gpuHandle {};
+        std::atomic<SlotState> state {SlotState::Queued};
     };
 
 private: //Variables
@@ -39,11 +59,19 @@ private: //Variables
     Microsoft::WRL::ComPtr<ID3D12CommandAllocator> uploadCommandAllocator_;
     Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> uploadCommandList_;
 
-    std::mutex mutex_;
+    mutable std::mutex mutex_;
 
     std::string folderPath_ = "Assets/Resources/";
 
-    std::unordered_map<std::string, Texture> textures_;
+    std::vector<std::unique_ptr<TextureSlot>> slots_;
+
+    /** slots_の確定要素数。GetSrvIndexOf()がロックなしで境界を判定するために持つ */
+    std::atomic<uint32_t> slotCount_ {0};
+
+    std::unordered_map<std::string, uint32_t> nameToId_;
+
+    /** 未Ready・失敗時の代替に使うスロット。ロックなしで読むためatomic */
+    std::atomic<uint32_t> defaultId_ {INVALID_SLOT_ID};
 
 public:
     ~TextureManager();
@@ -53,6 +81,12 @@ public:
      * @param _srv SRVマネージャー
      */
     void Initialize(DirectXAdapter* _adapter, SRVManager* _srv);
+
+    /** @brief テクスチャを要求しハンドルを取得（同一名は既存スロットを返す）
+     * @param _fileName ファイル名
+     * @return テクスチャハンドル
+     */
+    TextureHandle Request(const std::string& _fileName);
 
     /** @brief テクスチャを読み込み
      * @param fileName ファイル名
@@ -65,7 +99,7 @@ public:
      * @param _width  横幅
      * @param _height 縦幅
      * @param _format DXGI フォーマット（デフォルト RGBA8、SDF アトラスは R8_UNORM を指定）
-     * @return 成功なら true（既登録キーは true を返してスキップ）
+     * @return 成功なら true
      */
     bool LoadFromRawPixels(const std::string& _name, const uint8_t* _pixels,
                            uint32_t _width, uint32_t _height,
@@ -74,6 +108,36 @@ public:
     /** @brief すべてのテクスチャをアンロード（クリア）
      */
     void Unload();
+
+    /** @brief ハンドルidからSRVインデックスを取得（TextureHandle経由で使う）
+     * ロックを取らない。Readyでなければ既定テクスチャのインデックスを返す
+     * @param _id スロットid
+     * @return SRVインデックス
+     */
+    uint32_t GetSrvIndexOf(uint32_t _id) const;
+
+    /** @brief ハンドルidからGPUハンドルを取得（ロックなし）
+     * @param _id スロットid
+     * @return GPUディスクリプタハンドル
+     */
+    D3D12_GPU_DESCRIPTOR_HANDLE GetGpuHandleOf(uint32_t _id) const;
+
+    /** @brief ハンドルidからメタデータを取得（ロックなし）
+     * @param _id スロットid
+     * @return Readyなら実体、それ以外は既定テクスチャのメタデータ
+     */
+    const DirectX::TexMetadata& GetMetadataOf(uint32_t _id) const;
+
+    /** @brief ハンドルidから読み込み状態を取得（TextureHandle経由で使う）
+     * @param _id スロットid
+     * @return 読み込み状態
+     */
+    TextureState GetStateOf(uint32_t _id) const;
+
+    /** @brief 既定テクスチャのSRVインデックスを取得
+     * @return SRVインデックス
+     */
+    uint32_t GetDefaultSrvIndex() const;
 
     /** @brief テクスチャメタデータを取得
      * @param fileName ファイル名
@@ -125,7 +189,21 @@ public:
     std::vector<std::string> GetLoadedTextureNames() const;
 
 private: //Methods
-    DirectX::ScratchImage LoadTexture(const std::string& _filename) const;
+    /** @brief folderPath_ を除去したキー形式へ正規化する */
+    std::string NormalizeName(const std::string& _fileName) const;
+
+    /** @brief 正規化済みキーのスロットidを取得（なければ作成）。mutex_保持が前提 */
+    uint32_t ResolveIdUnlocked(const std::string& _normalized);
+
+    /** @brief 未読み込みならこの場で読み込む。mutex_保持が前提 */
+    bool EnsureLoadedUnlocked(uint32_t _id);
+
+    /** @brief Ready なスロットを返す。未Readyなら既定テクスチャ、それも無ければnullptr（ロックなし） */
+    const TextureSlot* FindReadySlot(uint32_t _id) const;
+
+    /** @brief ファイルを読み込みCPU側でデコードする（GPUには触らない） */
+    DirectX::ScratchImage DecodeImage(const std::string& _fileName) const;
+
     void UploadTextureData(DX12Resource* _texture, const DirectX::ScratchImage& _mipImages) const;
 
     static DirectX::ScratchImage LoadDDS(const std::wstring& _path);
