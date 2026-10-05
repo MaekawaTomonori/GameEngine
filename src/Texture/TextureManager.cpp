@@ -133,14 +133,17 @@ void TextureManager::Initialize(DirectXAdapter* _adapter, SRVManager* _srv) {
         uploadCommandList_->Close();
     }
 
+    decodePool_.Start();
+
+    // 既定テクスチャは代替先として常に必要なため、ここで確実に読み終える
     const TextureHandle fallback = Request(DEFAULT_TEXTURE);
-    if (fallback.IsReady()) {
+    if (fallback.IsValid() && Load(DEFAULT_TEXTURE)) {
         defaultId_.store(fallback.GetId(), std::memory_order_release);
     } else {
         Log::Send(Log::Level::WARNING, std::format("TextureManager: default texture not available: {}", DEFAULT_TEXTURE));
     }
 
-    Log::Send(Log::Level::INFO, "TextureManager Initialized");
+    Log::Send(Log::Level::INFO, std::format("TextureManager Initialized (decode threads: {})", decodePool_.GetThreadCount()));
 }
 
 std::string TextureManager::NormalizeName(const std::string& _fileName) const {
@@ -180,52 +183,61 @@ uint32_t TextureManager::ResolveIdUnlocked(const std::string& _normalized) {
     return id;
 }
 
-bool TextureManager::EnsureLoadedUnlocked(const uint32_t _id) {
-    if (_id == INVALID_SLOT_ID || _id >= slots_.size()) return false;
-
+void TextureManager::DecodeSlot(const uint32_t _id) {
+    // slots_は再確保されないため、ロックなしで対象スロットを参照してよい。
+    // nameはスロット生成時に確定しており、以降変化しない
     TextureSlot& slot = *slots_[_id];
 
-    switch (slot.state.load(std::memory_order_acquire)) {
-        case SlotState::Ready:  return true;
-        case SlotState::Failed: return false;
-        default: break;
-    }
-
-    if (!adapter_ || !srv_) {
-        Log::Send(Log::Level::ERR, std::format("TextureManager: not initialized: {}", slot.name));
-        slot.state.store(SlotState::Failed, std::memory_order_release);
-        return false;
-    }
-
-    slot.state.store(SlotState::Loading, std::memory_order_relaxed);
-
     DirectX::ScratchImage img = DecodeImage(slot.name);
+
+    std::lock_guard<std::mutex> lock(mutex_);
 
     if (!img.GetImages() || img.GetImageCount() == 0) {
         Log::Send(Log::Level::ERR, std::format("TextureManager: failed to decode: {}", slot.name));
         slot.state.store(SlotState::Failed, std::memory_order_release);
-        return false;
+    } else {
+        slot.decoded = std::move(img);
+        slot.state.store(SlotState::PendingUpload, std::memory_order_release);
+        pendingUploads_.push_back(_id);
     }
 
-    slot.state.store(SlotState::PendingUpload, std::memory_order_relaxed);
+    slotCv_.notify_all();
+}
 
-    if (srv_->IsFull()) {
-        Log::Send(Log::Level::ERR, std::format("TextureManager: SRV heap is full: {}", slot.name));
-        Utils::Alert(std::format("TextureManager: SRV heap is full: {}", slot.name));
+bool TextureManager::UploadSlotUnlocked(const uint32_t _id) {
+    if (_id == INVALID_SLOT_ID || _id >= slots_.size()) return false;
+
+    TextureSlot& slot = *slots_[_id];
+
+    const SlotState state = slot.state.load(std::memory_order_acquire);
+    if (state == SlotState::Ready)  return true;
+    if (state != SlotState::PendingUpload) return false;
+
+    const auto fail = [&slot](const std::string& _message) {
+        Log::Send(Log::Level::ERR, _message);
+        slot.decoded.Release();
         slot.state.store(SlotState::Failed, std::memory_order_release);
+    };
+
+    if (!adapter_ || !srv_) {
+        fail(std::format("TextureManager: not initialized: {}", slot.name));
+        return false;
+    }
+    if (srv_->IsFull()) {
+        Utils::Alert(std::format("TextureManager: SRV heap is full: {}", slot.name));
+        fail(std::format("TextureManager: SRV heap is full: {}", slot.name));
         return false;
     }
 
-    slot.metadata = img.GetMetadata();
+    slot.metadata = slot.decoded.GetMetadata();
     slot.resource = adapter_->CreateTextureResource(slot.metadata);
 
     if (!slot.resource) {
-        Log::Send(Log::Level::ERR, std::format("TextureManager: failed to create resource: {}", slot.name));
-        slot.state.store(SlotState::Failed, std::memory_order_release);
+        fail(std::format("TextureManager: failed to create resource: {}", slot.name));
         return false;
     }
 
-    UploadTextureData(slot.resource.get(), img);
+    UploadTextureData(slot.resource.get(), slot.decoded);
 
     slot.srvIndex = srv_->Allocate();
     slot.cpuHandle = srv_->GetCPUHandle(slot.srvIndex);
@@ -237,9 +249,13 @@ bool TextureManager::EnsureLoadedUnlocked(const uint32_t _id) {
         srv_->CreateSRVForTexture2D(slot.srvIndex, slot.resource->Get(), slot.metadata.format, static_cast<UINT>(slot.metadata.mipLevels));
     }
 
+    // アップロード済みのためCPU側のピクセルは保持しない
+    slot.decoded.Release();
+
     // Ready への遷移をreleaseにすることで、ロックなしの読み手がacquireで
-    // srvIndex/gpuHandle を安全に読める
+    // srvIndex/gpuHandle/metadata を安全に読める
     slot.state.store(SlotState::Ready, std::memory_order_release);
+    slotCv_.notify_all();
 
     Log::Send(Log::Level::INFO, std::format("TextureManager::Load: {}", slot.name));
     return true;
@@ -248,17 +264,55 @@ bool TextureManager::EnsureLoadedUnlocked(const uint32_t _id) {
 TextureHandle TextureManager::Request(const std::string& _fileName) {
     const std::string name = NormalizeName(_fileName);
 
-    std::lock_guard<std::mutex> lock(mutex_);
+    uint32_t id = INVALID_SLOT_ID;
+    {
+        std::lock_guard<std::mutex> lock(mutex_);
 
-    const uint32_t id = ResolveIdUnlocked(name);
-    if (id == INVALID_SLOT_ID) return {};
+        id = ResolveIdUnlocked(name);
+        if (id == INVALID_SLOT_ID) return {};
 
-    EnsureLoadedUnlocked(id);
+        // Queued のものだけを掴む（既に誰かが進めている場合は触らない）
+        if (slots_[id]->state.load(std::memory_order_acquire) != SlotState::Queued) {
+            return TextureHandle(id);
+        }
+        slots_[id]->state.store(SlotState::Loading, std::memory_order_release);
+    }
+
+    decodePool_.Enqueue([this, id]() { DecodeSlot(id); });
+
     return TextureHandle(id);
 }
 
 bool TextureManager::Load(const std::string& _fileName) {
-    return Request(_fileName).IsReady();
+    const TextureHandle handle = Request(_fileName);
+    if (!handle.IsValid()) return false;
+
+    const uint32_t id = handle.GetId();
+
+    std::unique_lock<std::mutex> lock(mutex_);
+
+    // ワーカーがデコード中なら完了まで待つ
+    slotCv_.wait(lock, [this, id]() {
+        const SlotState state = slots_[id]->state.load(std::memory_order_acquire);
+        return state == SlotState::PendingUpload
+            || state == SlotState::Ready
+            || state == SlotState::Failed;
+    });
+
+    return UploadSlotUnlocked(id);
+}
+
+void TextureManager::Update() {
+    std::lock_guard<std::mutex> lock(mutex_);
+
+    if (pendingUploads_.empty()) return;
+
+    std::vector<uint32_t> ids;
+    ids.swap(pendingUploads_);
+
+    for (const uint32_t id : ids) {
+        UploadSlotUnlocked(id);
+    }
 }
 
 const TextureManager::TextureSlot* TextureManager::FindReadySlot(const uint32_t _id) const {
@@ -381,28 +435,37 @@ bool TextureManager::LoadFromRawPixels(const std::string& _name, const uint8_t* 
 }
 
 void TextureManager::Unload() {
+    // ワーカーがslots_を参照するため、クリアの前に必ず停止する。
+    // mutex_を保持したまま停止するとDecodeSlot待ちのワーカーとデッドロックする
+    decodePool_.Stop();
+
     std::lock_guard<std::mutex> lock(mutex_);
 
     defaultId_.store(INVALID_SLOT_ID, std::memory_order_release);
     slotCount_.store(0, std::memory_order_release);
 
+    pendingUploads_.clear();
     nameToId_.clear();
     slots_.clear();
 }
 
 const DirectX::TexMetadata& TextureManager::GetTextureMetadata(const std::string& _fileName) {
+    static const DirectX::TexMetadata EMPTY{};
+
+    // 呼び出し側は即座に有効なメタデータを期待するため、ここは待つ
+    if (!Load(_fileName)) {
+        Log::Send(Log::Level::ERR, std::format("TextureManager::GetTextureMetadata: {} not found", _fileName));
+        return EMPTY;
+    }
+
     const std::string name = NormalizeName(_fileName);
 
     std::lock_guard<std::mutex> lock(mutex_);
 
-    const uint32_t id = ResolveIdUnlocked(name);
-    if (EnsureLoadedUnlocked(id)) {
-        return slots_[id]->metadata;
-    }
+    const auto it = nameToId_.find(name);
+    if (it == nameToId_.end()) return EMPTY;
 
-    Log::Send(Log::Level::ERR, std::format("TextureManager::GetTextureMetadata: {} not found", name));
-    static const DirectX::TexMetadata EMPTY{};
-    return EMPTY;
+    return slots_[it->second]->metadata;
 }
 
 uint32_t TextureManager::GetSrvIndex(const std::string& _fileName) {

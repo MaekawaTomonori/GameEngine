@@ -93,6 +93,12 @@ class SpriteInstance {
     /** @brief trueの場合、位置を基準解像度前提として扱いライブ解像度へ自動スケールする（falseならライブ解像度の値としてそのまま使う） */
     bool fixed_ = false;
 
+    /** @brief テクスチャ未Ready時にtexSize_の確定を保留しているか */
+    bool pendingAutoSize_ = false;
+
+    /** @brief size_が明示指定済みか。trueならテクスチャのネイティブサイズで上書きしない */
+    bool sizeSpecified_ = false;
+
     GESTD::LifetimeSentinel lifetime_;
 
 public:
@@ -230,6 +236,10 @@ private:
     /** @brief テクスチャサイズの調整
      */
     void AdjustTextureSize();
+
+    /** @brief 保留中のサイズ決定を、テクスチャがReadyになった時点で反映する
+     */
+    void ApplyPendingTextureSize();
 
     /** @brief マップデータの更新（頂点・WVP行列）
      */

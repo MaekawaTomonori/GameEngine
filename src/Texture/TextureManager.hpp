@@ -2,8 +2,11 @@
 #define TEXTUREMANAGER_HPP_
 
 #include <atomic>
+#include <condition_variable>
 #include <d3d12.h>
+#include <deque>
 #include <mutex>
+#include <thread>
 #include <wrl/client.h>
 #include <string>
 #include <unordered_map>
@@ -11,6 +14,7 @@
 #include <vector>
 
 #include "Texture/TextureHandle.hpp"
+#include "Thread/ThreadPool.hpp"
 #include "src/DirectX/DirectXAdapter.hpp"
 #include "src/DirectX/Heap/SRVHandle.hpp"
 #include "src/DirectX/Heap/SRVManager.h"
@@ -48,6 +52,9 @@ class TextureManager{
         D3D12_CPU_DESCRIPTOR_HANDLE cpuHandle {};
         D3D12_GPU_DESCRIPTOR_HANDLE gpuHandle {};
         std::atomic<SlotState> state {SlotState::Queued};
+
+        /** デコード結果。アップロード完了時に解放する */
+        DirectX::ScratchImage decoded;
     };
 
 private: //Variables
@@ -73,6 +80,15 @@ private: //Variables
     /** 未Ready・失敗時の代替に使うスロット。ロックなしで読むためatomic */
     std::atomic<uint32_t> defaultId_ {INVALID_SLOT_ID};
 
+    /** CPUデコード専用。GPU処理は含めない */
+    GESTD::ThreadPool decodePool_;
+
+    /** デコード済みでアップロード待ちのスロット。消化はメインスレッドのみ */
+    std::vector<uint32_t> pendingUploads_;
+
+    /** スロットの状態遷移を待つ（Load()のブロッキング待ち用） */
+    std::condition_variable slotCv_;
+
 public:
     ~TextureManager();
 
@@ -82,16 +98,22 @@ public:
      */
     void Initialize(DirectXAdapter* _adapter, SRVManager* _srv);
 
-    /** @brief テクスチャを要求しハンドルを取得（同一名は既存スロットを返す）
+    /** @brief テクスチャを要求しハンドルを取得（非同期・同一名は既存スロットを返す）
+     * デコードはワーカーへ投げ、即座に返る。返却直後は未Readyの可能性がある
      * @param _fileName ファイル名
      * @return テクスチャハンドル
      */
     TextureHandle Request(const std::string& _fileName);
 
-    /** @brief テクスチャを読み込み
+    /** @brief テクスチャを読み込み、使用可能になるまで待つ（ブロッキング）
      * @param fileName ファイル名
      */
     bool Load(const std::string& _fileName);
+
+    /** @brief デコード済みテクスチャをGPUへアップロードする
+     * メインスレッドから毎フレーム呼ぶ
+     */
+    void Update();
 
     /** @brief 生ピクセルデータからテクスチャを登録
      * @param _name  テクスチャを識別するキー（ファイル名の代わり）
@@ -195,8 +217,13 @@ private: //Methods
     /** @brief 正規化済みキーのスロットidを取得（なければ作成）。mutex_保持が前提 */
     uint32_t ResolveIdUnlocked(const std::string& _normalized);
 
-    /** @brief 未読み込みならこの場で読み込む。mutex_保持が前提 */
-    bool EnsureLoadedUnlocked(uint32_t _id);
+    /** @brief スロットをデコードする（ワーカーから呼ばれる。mutex_は保持しない） */
+    void DecodeSlot(uint32_t _id);
+
+    /** @brief デコード済みスロットをGPUへアップロードしReadyにする。mutex_保持が前提
+     * SRV確保とコマンドリストを使うためメインスレッドからのみ呼ぶ
+     */
+    bool UploadSlotUnlocked(uint32_t _id);
 
     /** @brief Ready なスロットを返す。未Readyなら既定テクスチャ、それも無ければnullptr（ロックなし） */
     const TextureSlot* FindReadySlot(uint32_t _id) const;

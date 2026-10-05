@@ -78,7 +78,7 @@ void SpriteInstance::Initialize(const std::string&_texture) {
 
     AdjustTextureSize();
 
-    common_->RegisterUpdate(uuid_, [this]() { UpdateMapData(); });
+    common_->RegisterUpdate(uuid_, [this]() { ApplyPendingTextureSize(); UpdateMapData(); });
     common_->RegisterDebug(uuid_,  [this]() { Debug(); });
 }
 
@@ -151,9 +151,24 @@ void SpriteInstance::ExecuteDraw() const {
 }
 
 void SpriteInstance::AdjustTextureSize() {
+    // 未Readyのまま既定テクスチャのサイズを採用しないよう、Readyまで保留する
+    if (!textureHandle_.IsReady()) {
+        pendingAutoSize_ = true;
+        return;
+    }
+
     const DirectX::TexMetadata& metadata = textureManager_->GetMetadataOf(textureHandle_.GetId());
+
+    // texSize_ はUVの切り出し範囲なので、サイズ明示の有無に関わらず必ずテクスチャに合わせる
     texSize_ = {static_cast<float>(metadata.width), static_cast<float>(metadata.height)};
-    size_ = texSize_;
+    if (!sizeSpecified_) size_ = texSize_;
+
+    pendingAutoSize_ = false;
+}
+
+void SpriteInstance::ApplyPendingTextureSize() {
+    if (!pendingAutoSize_) return;
+    AdjustTextureSize();
 }
 
 void SpriteInstance::Debug() {
@@ -184,6 +199,7 @@ const Vector2& SpriteInstance::GetSize() const {
 }
 
 void SpriteInstance::SetSize(const Vector2& _s) {
+    sizeSpecified_ = true;
     size_ = _s;
 }
 
@@ -252,6 +268,9 @@ void SpriteInstance::SetTexture(const std::string& _texture) {
 
     texturePath_ = _texture;
     textureHandle_ = textureManager_->Request(texturePath_);
+
+    // 差し替え後は新しいテクスチャのサイズを採用する（従来挙動）
+    sizeSpecified_ = false;
     AdjustTextureSize();
 }
 

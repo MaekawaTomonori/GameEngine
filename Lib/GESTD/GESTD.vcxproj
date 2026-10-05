@@ -22,6 +22,7 @@
     <ClInclude Include="include\Pattern\Singleton.hpp" />
     <ClInclude Include="include\Random\RandomEngine.hpp" />
     <ClInclude Include="include\Utils.hpp" />
+    <ClInclude Include="include\Thread\ThreadPool.hpp" />
     <ClInclude Include="src\LifetimeSentinel.hpp" />
     <ClInclude Include="include\ReferencePtr.hpp" />
   </ItemGroup>
@@ -32,6 +33,7 @@
     <ClCompile Include="src\Math\Vector3.cpp" />
     <ClCompile Include="src\Pattern\Singleton.cpp" />
     <ClCompile Include="src\Random\RandomEngine.cpp" />
+    <ClCompile Include="src\Thread\ThreadPool.cpp" />
     <ClCompile Include="src\Utils\Utils.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
