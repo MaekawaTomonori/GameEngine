@@ -174,7 +174,24 @@ void SpriteInstance::ApplyPendingTextureSize() {
 void SpriteInstance::Debug() {
     ImGui::PushID(uuid_.c_str());
     if (ImGui::CollapsingHeader(texturePath_.c_str())){
-        ImGui::Text("Texture Path: %s", texturePath_.c_str());
+        if (ImGui::BeginCombo("Texture", texturePath_.c_str())) {
+            // ディスク走査は重いため、ドロップダウンが開いた瞬間だけ更新する
+            static std::vector<std::string> available;
+            if (ImGui::IsWindowAppearing()) available = textureManager_->ListAvailableTextures();
+
+            for (const std::string& tex : available) {
+                if (ImGui::Selectable(tex.c_str(), tex == texturePath_)) {
+                    SetTexture(tex);
+                }
+            }
+            ImGui::EndCombo();
+        }
+
+        switch (textureHandle_.GetState()) {
+            case TextureState::Ready:    ImGui::TextDisabled("Ready"); break;
+            case TextureState::NotReady: ImGui::TextColored(ImVec4(1.f, 0.8f, 0.3f, 1.f), "Loading..."); break;
+            case TextureState::Failed:   ImGui::TextColored(ImVec4(1.f, 0.3f, 0.3f, 1.f), "Failed"); break;
+        }
         ImGui::DragFloat2("Position", &position_.x, 1.f);
         ImGui::DragFloat2("Size", &size_.x, 1);
         ImGui::DragFloat("Rotation", &rotation_, 0.01f);
