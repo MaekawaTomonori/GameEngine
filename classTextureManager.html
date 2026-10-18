@@ -110,15 +110,36 @@ $(document).ready(function(){initNavTree('classTextureManager.html',''); initRes
 <tr class="memitem:aa0b611b9efc8c6ad6483697908ca69d2" id="r_aa0b611b9efc8c6ad6483697908ca69d2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTextureManager.html#aa0b611b9efc8c6ad6483697908ca69d2">Initialize</a> (<a class="el" href="classDirectXAdapter.html">DirectXAdapter</a> *_adapter, <a class="el" href="classSRVManager.html">SRVManager</a> *_srv)</td></tr>
 <tr class="memdesc:aa0b611b9efc8c6ad6483697908ca69d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">テクスチャマネージャーを初期化  <br /></td></tr>
 <tr class="separator:aa0b611b9efc8c6ad6483697908ca69d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ee72654b4a528b8f533fcb0c7aba0c4" id="r_a3ee72654b4a528b8f533fcb0c7aba0c4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classTextureHandle.html">TextureHandle</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTextureManager.html#a3ee72654b4a528b8f533fcb0c7aba0c4">Request</a> (const std::string &amp;_fileName)</td></tr>
+<tr class="memdesc:a3ee72654b4a528b8f533fcb0c7aba0c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">テクスチャを要求しハンドルを取得（非同期・同一名は既存スロットを返す） デコードはワーカーへ投げ、即座に返る。返却直後は未Readyの可能性がある  <br /></td></tr>
+<tr class="separator:a3ee72654b4a528b8f533fcb0c7aba0c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad7d3de3b18a76f2c0116321d6f91c332" id="r_ad7d3de3b18a76f2c0116321d6f91c332"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTextureManager.html#ad7d3de3b18a76f2c0116321d6f91c332">Load</a> (const std::string &amp;_fileName)</td></tr>
-<tr class="memdesc:ad7d3de3b18a76f2c0116321d6f91c332"><td class="mdescLeft">&#160;</td><td class="mdescRight">テクスチャを読み込み  <br /></td></tr>
+<tr class="memdesc:ad7d3de3b18a76f2c0116321d6f91c332"><td class="mdescLeft">&#160;</td><td class="mdescRight">テクスチャを読み込み、使用可能になるまで待つ（ブロッキング）  <br /></td></tr>
 <tr class="separator:ad7d3de3b18a76f2c0116321d6f91c332"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8b16d7742027e3057538405fb777b7e" id="r_ac8b16d7742027e3057538405fb777b7e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTextureManager.html#ac8b16d7742027e3057538405fb777b7e">Update</a> ()</td></tr>
+<tr class="memdesc:ac8b16d7742027e3057538405fb777b7e"><td class="mdescLeft">&#160;</td><td class="mdescRight">デコード済みテクスチャをGPUへアップロードする メインスレッドから毎フレーム呼ぶ  <br /></td></tr>
+<tr class="separator:ac8b16d7742027e3057538405fb777b7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1e2c5d36c9a06ae42cd061da2f6b85ac" id="r_a1e2c5d36c9a06ae42cd061da2f6b85ac"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTextureManager.html#a1e2c5d36c9a06ae42cd061da2f6b85ac">LoadFromRawPixels</a> (const std::string &amp;_name, const uint8_t *_pixels, uint32_t _width, uint32_t _height, DXGI_FORMAT _format=DXGI_FORMAT_R8G8B8A8_UNORM)</td></tr>
 <tr class="memdesc:a1e2c5d36c9a06ae42cd061da2f6b85ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">生ピクセルデータからテクスチャを登録  <br /></td></tr>
 <tr class="separator:a1e2c5d36c9a06ae42cd061da2f6b85ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac1747fe5df0613980d545934904c949a" id="r_ac1747fe5df0613980d545934904c949a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTextureManager.html#ac1747fe5df0613980d545934904c949a">Unload</a> ()</td></tr>
 <tr class="memdesc:ac1747fe5df0613980d545934904c949a"><td class="mdescLeft">&#160;</td><td class="mdescRight">すべてのテクスチャをアンロード（クリア）  <br /></td></tr>
 <tr class="separator:ac1747fe5df0613980d545934904c949a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a306f897aef708f7956482f503cb5bcf9" id="r_a306f897aef708f7956482f503cb5bcf9"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTextureManager.html#a306f897aef708f7956482f503cb5bcf9">GetSrvIndexOf</a> (uint32_t _id) const</td></tr>
+<tr class="memdesc:a306f897aef708f7956482f503cb5bcf9"><td class="mdescLeft">&#160;</td><td class="mdescRight">ハンドルidからSRVインデックスを取得（TextureHandle経由で使う） ロックを取らない。Readyでなければ既定テクスチャのインデックスを返す  <br /></td></tr>
+<tr class="separator:a306f897aef708f7956482f503cb5bcf9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae788dc48a0cf69b8c9d49df208d6b247" id="r_ae788dc48a0cf69b8c9d49df208d6b247"><td class="memItemLeft" align="right" valign="top">D3D12_GPU_DESCRIPTOR_HANDLE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTextureManager.html#ae788dc48a0cf69b8c9d49df208d6b247">GetGpuHandleOf</a> (uint32_t _id) const</td></tr>
+<tr class="memdesc:ae788dc48a0cf69b8c9d49df208d6b247"><td class="mdescLeft">&#160;</td><td class="mdescRight">ハンドルidからGPUハンドルを取得（ロックなし）  <br /></td></tr>
+<tr class="separator:ae788dc48a0cf69b8c9d49df208d6b247"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63d78c2021f020941cb2a66a54747c3f" id="r_a63d78c2021f020941cb2a66a54747c3f"><td class="memItemLeft" align="right" valign="top">const DirectX::TexMetadata &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTextureManager.html#a63d78c2021f020941cb2a66a54747c3f">GetMetadataOf</a> (uint32_t _id) const</td></tr>
+<tr class="memdesc:a63d78c2021f020941cb2a66a54747c3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">ハンドルidからメタデータを取得（ロックなし）  <br /></td></tr>
+<tr class="separator:a63d78c2021f020941cb2a66a54747c3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a11b78a6446822c225bf9349e012e7ec3" id="r_a11b78a6446822c225bf9349e012e7ec3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="TextureHandle_8hpp.html#ae94f6a1c61028cab9327a11db08935e4">TextureState</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTextureManager.html#a11b78a6446822c225bf9349e012e7ec3">GetStateOf</a> (uint32_t _id) const</td></tr>
+<tr class="memdesc:a11b78a6446822c225bf9349e012e7ec3"><td class="mdescLeft">&#160;</td><td class="mdescRight">ハンドルidから読み込み状態を取得（TextureHandle経由で使う）  <br /></td></tr>
+<tr class="separator:a11b78a6446822c225bf9349e012e7ec3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adea8b583429e831392a5f3a8709b313e" id="r_adea8b583429e831392a5f3a8709b313e"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTextureManager.html#adea8b583429e831392a5f3a8709b313e">GetDefaultSrvIndex</a> () const</td></tr>
+<tr class="memdesc:adea8b583429e831392a5f3a8709b313e"><td class="mdescLeft">&#160;</td><td class="mdescRight">既定テクスチャのSRVインデックスを取得  <br /></td></tr>
+<tr class="separator:adea8b583429e831392a5f3a8709b313e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3f3a61e562dad63752a8bf8150c6537e" id="r_a3f3a61e562dad63752a8bf8150c6537e"><td class="memItemLeft" align="right" valign="top">const DirectX::TexMetadata &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTextureManager.html#a3f3a61e562dad63752a8bf8150c6537e">GetTextureMetadata</a> (const std::string &amp;_fileName)</td></tr>
 <tr class="memdesc:a3f3a61e562dad63752a8bf8150c6537e"><td class="mdescLeft">&#160;</td><td class="mdescRight">テクスチャメタデータを取得  <br /></td></tr>
 <tr class="separator:a3f3a61e562dad63752a8bf8150c6537e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -147,7 +168,7 @@ $(document).ready(function(){initNavTree('classTextureManager.html',''); initRes
 <a name="details" id="details"></a><h2 class="groupheader">詳解</h2>
 <div class="textblock"><p>テクスチャ管理クラス テクスチャの読み込み、キャッシュ、GPUアップロードを管理 </p>
 
-<p class="definition"> <a class="el" href="TextureManager_8hpp_source.html">TextureManager.hpp</a> の <a class="el" href="TextureManager_8hpp_source.html#l00022">22</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="TextureManager_8hpp_source.html">TextureManager.hpp</a> の <a class="el" href="TextureManager_8hpp_source.html#l00028">28</a> 行目に定義があります。</p>
 </div><h2 class="groupheader">構築子と解体子</h2>
 <a id="a001d6d74674961db79987e3222682576" name="a001d6d74674961db79987e3222682576"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a001d6d74674961db79987e3222682576">&#9670;&#160;</a></span>~TextureManager()</h2>
@@ -166,11 +187,37 @@ $(document).ready(function(){initNavTree('classTextureManager.html',''); initRes
 
 <p class="definition"> <a class="el" href="TextureManager_8cpp_source.html">TextureManager.cpp</a> の <a class="el" href="TextureManager_8cpp_source.html#l00012">12</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="TextureManager_8cpp_source.html#l00273">Unload()</a>.</p>
+<p class="reference">参照先 <a class="el" href="TextureManager_8cpp_source.html#l00437">Unload()</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">関数詳解</h2>
+<a id="adea8b583429e831392a5f3a8709b313e" name="adea8b583429e831392a5f3a8709b313e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adea8b583429e831392a5f3a8709b313e">&#9670;&#160;</a></span>GetDefaultSrvIndex()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t TextureManager::GetDefaultSrvIndex </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>既定テクスチャのSRVインデックスを取得 </p>
+<dl class="section return"><dt>戻り値</dt><dd>SRVインデックス </dd></dl>
+
+<p class="definition"> <a class="el" href="TextureManager_8cpp_source.html">TextureManager.cpp</a> の <a class="el" href="TextureManager_8cpp_source.html#l00362">362</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="TextureManager_8cpp_source.html#l00335">GetSrvIndexOf()</a>.</p>
+
+<p class="reference">参照元 <a class="el" href="TextureManager_8cpp_source.html#l00471">GetSrvIndex()</a>, <a class="el" href="TextureManager_8cpp_source.html#l00487">GetTextureIndexByFilePath()</a>.</p>
+
+</div>
+</div>
 <a id="ab10fdb00af3862499ba1f5e915ffe756" name="ab10fdb00af3862499ba1f5e915ffe756"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab10fdb00af3862499ba1f5e915ffe756">&#9670;&#160;</a></span>GetGPUHandle() <span class="overload">[1/2]</span></h2>
 
@@ -196,9 +243,9 @@ $(document).ready(function(){initNavTree('classTextureManager.html',''); initRes
 </dl>
 <dl class="section return"><dt>戻り値</dt><dd>GPUディスクリプタハンドル </dd></dl>
 
-<p class="definition"> <a class="el" href="TextureManager_8cpp_source.html">TextureManager.cpp</a> の <a class="el" href="TextureManager_8cpp_source.html#l00339">339</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="TextureManager_8cpp_source.html">TextureManager.cpp</a> の <a class="el" href="TextureManager_8cpp_source.html#l00503">503</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::ERR</a>, <a class="el" href="Input_8hpp_source.html#l00114">name</a>, <a class="el" href="Log_8cpp_source.html#l00108">Log::Send()</a>.</p>
+<p class="reference">参照先 <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::ERR</a>, <a class="el" href="TextureManager_8cpp_source.html#l00340">GetGpuHandleOf()</a>, <a class="el" href="Input_8hpp_source.html#l00114">name</a>, <a class="el" href="Log_8cpp_source.html#l00108">Log::Send()</a>.</p>
 
 <p class="reference">参照元 <a class="el" href="TextCommon_8cpp_source.html#l00385">TextCommon::Draw()</a>.</p>
 
@@ -229,9 +276,40 @@ $(document).ready(function(){initNavTree('classTextureManager.html',''); initRes
 </dl>
 <dl class="section return"><dt>戻り値</dt><dd>GPUディスクリプタハンドル </dd></dl>
 
-<p class="definition"> <a class="el" href="TextureManager_8cpp_source.html">TextureManager.cpp</a> の <a class="el" href="TextureManager_8cpp_source.html#l00357">357</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="TextureManager_8cpp_source.html">TextureManager.cpp</a> の <a class="el" href="TextureManager_8cpp_source.html#l00519">519</a> 行目に定義があります。</p>
 
 <p class="reference">参照先 <a class="el" href="SRVManager_8cpp_source.html#l00101">SRVManager::GetGPUHandle()</a>.</p>
+
+</div>
+</div>
+<a id="ae788dc48a0cf69b8c9d49df208d6b247" name="ae788dc48a0cf69b8c9d49df208d6b247"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae788dc48a0cf69b8c9d49df208d6b247">&#9670;&#160;</a></span>GetGpuHandleOf()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">D3D12_GPU_DESCRIPTOR_HANDLE TextureManager::GetGpuHandleOf </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>_id</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>ハンドルidからGPUハンドルを取得（ロックなし） </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_id</td><td>スロットid </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>戻り値</dt><dd>GPUディスクリプタハンドル </dd></dl>
+
+<p class="definition"> <a class="el" href="TextureManager_8cpp_source.html">TextureManager.cpp</a> の <a class="el" href="TextureManager_8cpp_source.html#l00340">340</a> 行目に定義があります。</p>
+
+<p class="reference">参照元 <a class="el" href="TextureManager_8cpp_source.html#l00503">GetGPUHandle()</a>.</p>
 
 </div>
 </div>
@@ -253,11 +331,38 @@ $(document).ready(function(){initNavTree('classTextureManager.html',''); initRes
 <p>既に読み込み済み（GPUへアップロード済み）のテクスチャキー一覧を取得 ディスクを走査せず、現在使用可能なテクスチャだけを返す（デバッグUIの選択肢表示用） </p>
 <dl class="section return"><dt>戻り値</dt><dd>ソート済みの読み込み済みテクスチャキー一覧 </dd></dl>
 
-<p class="definition"> <a class="el" href="TextureManager_8cpp_source.html">TextureManager.cpp</a> の <a class="el" href="TextureManager_8cpp_source.html#l00395">395</a> 行目に定義があります。</p>
-
-<p class="reference">参照先 <a class="el" href="Input_8hpp_source.html#l00114">name</a>.</p>
+<p class="definition"> <a class="el" href="TextureManager_8cpp_source.html">TextureManager.cpp</a> の <a class="el" href="TextureManager_8cpp_source.html#l00564">564</a> 行目に定義があります。</p>
 
 <p class="reference">参照元 <a class="el" href="Mesh_8cpp_source.html#l00097">Mesh::Debug()</a>.</p>
+
+</div>
+</div>
+<a id="a63d78c2021f020941cb2a66a54747c3f" name="a63d78c2021f020941cb2a66a54747c3f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a63d78c2021f020941cb2a66a54747c3f">&#9670;&#160;</a></span>GetMetadataOf()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const DirectX::TexMetadata &amp; TextureManager::GetMetadataOf </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>_id</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>ハンドルidからメタデータを取得（ロックなし） </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_id</td><td>スロットid </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>戻り値</dt><dd>Readyなら実体、それ以外は既定テクスチャのメタデータ </dd></dl>
+
+<p class="definition"> <a class="el" href="TextureManager_8cpp_source.html">TextureManager.cpp</a> の <a class="el" href="TextureManager_8cpp_source.html#l00345">345</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -286,7 +391,9 @@ $(document).ready(function(){initNavTree('classTextureManager.html',''); initRes
 </dl>
 <dl class="section return"><dt>戻り値</dt><dd>リソースポインタ。未登録の場合 nullptr </dd></dl>
 
-<p class="definition"> <a class="el" href="TextureManager_8cpp_source.html">TextureManager.cpp</a> の <a class="el" href="TextureManager_8cpp_source.html#l00362">362</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="TextureManager_8cpp_source.html">TextureManager.cpp</a> の <a class="el" href="TextureManager_8cpp_source.html#l00524">524</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="Input_8hpp_source.html#l00114">name</a>.</p>
 
 </div>
 </div>
@@ -315,9 +422,71 @@ $(document).ready(function(){initNavTree('classTextureManager.html',''); initRes
 </dl>
 <dl class="section return"><dt>戻り値</dt><dd>SRVインデックス </dd></dl>
 
-<p class="definition"> <a class="el" href="TextureManager_8cpp_source.html">TextureManager.cpp</a> の <a class="el" href="TextureManager_8cpp_source.html#l00311">311</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="TextureManager_8cpp_source.html">TextureManager.cpp</a> の <a class="el" href="TextureManager_8cpp_source.html#l00471">471</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::ERR</a>, <a class="el" href="Input_8hpp_source.html#l00114">name</a>, <a class="el" href="Log_8cpp_source.html#l00108">Log::Send()</a>.</p>
+<p class="reference">参照先 <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::ERR</a>, <a class="el" href="TextureManager_8cpp_source.html#l00362">GetDefaultSrvIndex()</a>, <a class="el" href="Input_8hpp_source.html#l00114">name</a>, <a class="el" href="Log_8cpp_source.html#l00108">Log::Send()</a>.</p>
+
+</div>
+</div>
+<a id="a306f897aef708f7956482f503cb5bcf9" name="a306f897aef708f7956482f503cb5bcf9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a306f897aef708f7956482f503cb5bcf9">&#9670;&#160;</a></span>GetSrvIndexOf()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t TextureManager::GetSrvIndexOf </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>_id</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>ハンドルidからSRVインデックスを取得（TextureHandle経由で使う） ロックを取らない。Readyでなければ既定テクスチャのインデックスを返す </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_id</td><td>スロットid </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>戻り値</dt><dd>SRVインデックス </dd></dl>
+
+<p class="definition"> <a class="el" href="TextureManager_8cpp_source.html">TextureManager.cpp</a> の <a class="el" href="TextureManager_8cpp_source.html#l00335">335</a> 行目に定義があります。</p>
+
+<p class="reference">参照元 <a class="el" href="TextureManager_8cpp_source.html#l00362">GetDefaultSrvIndex()</a>.</p>
+
+</div>
+</div>
+<a id="a11b78a6446822c225bf9349e012e7ec3" name="a11b78a6446822c225bf9349e012e7ec3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a11b78a6446822c225bf9349e012e7ec3">&#9670;&#160;</a></span>GetStateOf()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="TextureHandle_8hpp.html#ae94f6a1c61028cab9327a11db08935e4">TextureState</a> TextureManager::GetStateOf </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>_id</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>ハンドルidから読み込み状態を取得（TextureHandle経由で使う） </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_id</td><td>スロットid </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>戻り値</dt><dd>読み込み状態 </dd></dl>
+
+<p class="definition"> <a class="el" href="TextureManager_8cpp_source.html">TextureManager.cpp</a> の <a class="el" href="TextureManager_8cpp_source.html#l00352">352</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="TextureHandle_8hpp.html#ae94f6a1c61028cab9327a11db08935e4ad7c8c85bf79bbe1b7188497c32c3b0ca">Failed</a>, <a class="el" href="TextureHandle_8hpp.html#ae94f6a1c61028cab9327a11db08935e4add353567e8118a2b8df4e822e59084ab">NotReady</a>, <a class="el" href="TextureHandle_8hpp.html#ae94f6a1c61028cab9327a11db08935e4ae7d31fc0602fb2ede144d18cdffd816b">Ready</a>.</p>
 
 </div>
 </div>
@@ -346,9 +515,9 @@ $(document).ready(function(){initNavTree('classTextureManager.html',''); initRes
 </dl>
 <dl class="section return"><dt>戻り値</dt><dd>テクスチャインデックス </dd></dl>
 
-<p class="definition"> <a class="el" href="TextureManager_8cpp_source.html">TextureManager.cpp</a> の <a class="el" href="TextureManager_8cpp_source.html#l00329">329</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="TextureManager_8cpp_source.html">TextureManager.cpp</a> の <a class="el" href="TextureManager_8cpp_source.html#l00487">487</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::ERR</a>, <a class="el" href="Log_8cpp_source.html#l00108">Log::Send()</a>.</p>
+<p class="reference">参照先 <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::ERR</a>, <a class="el" href="TextureManager_8cpp_source.html#l00362">GetDefaultSrvIndex()</a>, <a class="el" href="Input_8hpp_source.html#l00114">name</a>, <a class="el" href="Log_8cpp_source.html#l00108">Log::Send()</a>.</p>
 
 </div>
 </div>
@@ -377,9 +546,9 @@ $(document).ready(function(){initNavTree('classTextureManager.html',''); initRes
 </dl>
 <dl class="section return"><dt>戻り値</dt><dd>テクスチャメタデータへの参照 </dd></dl>
 
-<p class="definition"> <a class="el" href="TextureManager_8cpp_source.html">TextureManager.cpp</a> の <a class="el" href="TextureManager_8cpp_source.html#l00282">282</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="TextureManager_8cpp_source.html">TextureManager.cpp</a> の <a class="el" href="TextureManager_8cpp_source.html#l00452">452</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::ERR</a>, <a class="el" href="TextureManager_8cpp_source.html#l00135">Load()</a>, <a class="el" href="Input_8hpp_source.html#l00114">name</a>, <a class="el" href="Log_8cpp_source.html#l00108">Log::Send()</a>.</p>
+<p class="reference">参照先 <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::ERR</a>, <a class="el" href="TextureManager_8cpp_source.html#l00286">Load()</a>, <a class="el" href="Input_8hpp_source.html#l00114">name</a>, <a class="el" href="Log_8cpp_source.html#l00108">Log::Send()</a>.</p>
 
 </div>
 </div>
@@ -420,7 +589,7 @@ $(document).ready(function(){initNavTree('classTextureManager.html',''); initRes
 
 <p class="definition"> <a class="el" href="TextureManager_8cpp_source.html">TextureManager.cpp</a> の <a class="el" href="TextureManager_8cpp_source.html#l00101">101</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="DirectXAdapter_8cpp_source.html#l00710">DirectXAdapter::GetDevice()</a>, <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::INFO</a>, <a class="el" href="Log_8cpp_source.html#l00108">Log::Send()</a>.</p>
+<p class="reference">参照先 <a class="el" href="DirectXAdapter_8cpp_source.html#l00705">DirectXAdapter::GetDevice()</a>, <a class="el" href="TextureHandle_8hpp_source.html#l00038">TextureHandle::GetId()</a>, <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::INFO</a>, <a class="el" href="TextureHandle_8hpp_source.html#l00034">TextureHandle::IsValid()</a>, <a class="el" href="TextureManager_8cpp_source.html#l00286">Load()</a>, <a class="el" href="TextureManager_8cpp_source.html#l00264">Request()</a>, <a class="el" href="Log_8cpp_source.html#l00108">Log::Send()</a>, <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531ea059e9861e0400dfbe05c98a841f3f96b">Log::WARNING</a>.</p>
 
 </div>
 </div>
@@ -442,7 +611,7 @@ $(document).ready(function(){initNavTree('classTextureManager.html',''); initRes
 <p>読み込み可能な画像ファイルの一覧を取得（デバッグUIの選択肢表示用） folderPath_ 配下を再帰的に走査し、対応拡張子（png/jpg/jpeg/dds/tga）のファイルを folderPath_ からの相対パス（Load等にそのまま渡せるキー形式）で返す </p>
 <dl class="section return"><dt>戻り値</dt><dd>ソート済みの相対パス一覧 </dd></dl>
 
-<p class="definition"> <a class="el" href="TextureManager_8cpp_source.html">TextureManager.cpp</a> の <a class="el" href="TextureManager_8cpp_source.html#l00369">369</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="TextureManager_8cpp_source.html">TextureManager.cpp</a> の <a class="el" href="TextureManager_8cpp_source.html#l00538">538</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -462,28 +631,19 @@ $(document).ready(function(){initNavTree('classTextureManager.html',''); initRes
       </table>
 </div><div class="memdoc">
 
-<p>テクスチャを読み込み </p>
+<p>テクスチャを読み込み、使用可能になるまで待つ（ブロッキング） </p>
 <dl class="params"><dt>引数</dt><dd>
   <table class="params">
     <tr><td class="paramname">fileName</td><td>ファイル名 </td></tr>
   </table>
   </dd>
 </dl>
-<p>FLOW</p><ol type="1">
-<li>Load Texture Data in CPU</li>
-<li>Create TextureResource (VRAM)</li>
-<li>Create UploadHeap Resource (IntermediateResource)</li>
-<li>Upload IntermediateResource to CPU</li>
-<li>Stack Command (3 -&gt; 2) to CommandList</li>
-<li>Execute Using CommandQueue</li>
-<li>Wait</li>
-</ol>
 
-<p class="definition"> <a class="el" href="TextureManager_8cpp_source.html">TextureManager.cpp</a> の <a class="el" href="TextureManager_8cpp_source.html#l00135">135</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="TextureManager_8cpp_source.html">TextureManager.cpp</a> の <a class="el" href="TextureManager_8cpp_source.html#l00286">286</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="SRVManager_8cpp_source.html#l00032">SRVManager::Allocate()</a>, <a class="el" href="SRVManager_8cpp_source.html#l00076">SRVManager::CreateSRVForCubeMap()</a>, <a class="el" href="SRVManager_8cpp_source.html#l00054">SRVManager::CreateSRVForTexture2D()</a>, <a class="el" href="DirectXAdapter_8cpp_source.html#l00115">DirectXAdapter::CreateTextureResource()</a>, <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::ERR</a>, <a class="el" href="SRVManager_8cpp_source.html#l00096">SRVManager::GetCPUHandle()</a>, <a class="el" href="SRVManager_8cpp_source.html#l00101">SRVManager::GetGPUHandle()</a>, <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::INFO</a>, <a class="el" href="SRVManager_8cpp_source.html#l00045">SRVManager::IsFull()</a>, <a class="el" href="Input_8hpp_source.html#l00114">name</a>, <a class="el" href="Log_8cpp_source.html#l00108">Log::Send()</a>.</p>
+<p class="reference">参照先 <a class="el" href="TextureHandle_8hpp_source.html#l00038">TextureHandle::GetId()</a>, <a class="el" href="TextureHandle_8hpp_source.html#l00034">TextureHandle::IsValid()</a>, <a class="el" href="TextureManager_8cpp_source.html#l00264">Request()</a>.</p>
 
-<p class="reference">参照元 <a class="el" href="TextureManager_8cpp_source.html#l00282">GetTextureMetadata()</a>.</p>
+<p class="reference">参照元 <a class="el" href="TextureManager_8cpp_source.html#l00452">GetTextureMetadata()</a>, <a class="el" href="TextureManager_8cpp_source.html#l00101">Initialize()</a>.</p>
 
 </div>
 </div>
@@ -542,13 +702,46 @@ $(document).ready(function(){initNavTree('classTextureManager.html',''); initRes
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>戻り値</dt><dd>成功なら true（既登録キーは true を返してスキップ） </dd></dl>
+<dl class="section return"><dt>戻り値</dt><dd>成功なら true </dd></dl>
 
-<p class="definition"> <a class="el" href="TextureManager_8cpp_source.html">TextureManager.cpp</a> の <a class="el" href="TextureManager_8cpp_source.html#l00197">197</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="TextureManager_8cpp_source.html">TextureManager.cpp</a> の <a class="el" href="TextureManager_8cpp_source.html#l00366">366</a> 行目に定義があります。</p>
 
-<p class="reference">参照先 <a class="el" href="SRVManager_8cpp_source.html#l00032">SRVManager::Allocate()</a>, <a class="el" href="SRVManager_8cpp_source.html#l00054">SRVManager::CreateSRVForTexture2D()</a>, <a class="el" href="DirectXAdapter_8cpp_source.html#l00115">DirectXAdapter::CreateTextureResource()</a>, <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::ERR</a>, <a class="el" href="SRVManager_8cpp_source.html#l00096">SRVManager::GetCPUHandle()</a>, <a class="el" href="SRVManager_8cpp_source.html#l00101">SRVManager::GetGPUHandle()</a>, <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::INFO</a>, <a class="el" href="SRVManager_8cpp_source.html#l00045">SRVManager::IsFull()</a>, <a class="el" href="Log_8cpp_source.html#l00108">Log::Send()</a>.</p>
+<p class="reference">参照先 <a class="el" href="SRVManager_8cpp_source.html#l00032">SRVManager::Allocate()</a>, <a class="el" href="SRVManager_8cpp_source.html#l00054">SRVManager::CreateSRVForTexture2D()</a>, <a class="el" href="DirectXAdapter_8cpp_source.html#l00110">DirectXAdapter::CreateTextureResource()</a>, <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531eacd22bad976363fdd1bfbf6759fede482">Log::ERR</a>, <a class="el" href="SRVManager_8cpp_source.html#l00096">SRVManager::GetCPUHandle()</a>, <a class="el" href="SRVManager_8cpp_source.html#l00101">SRVManager::GetGPUHandle()</a>, <a class="el" href="classLog.html#afb5d4c945d835d194a295461d752531ea551b723eafd6a31d444fcb2f5920fbd3">Log::INFO</a>, <a class="el" href="SRVManager_8cpp_source.html#l00045">SRVManager::IsFull()</a>, <a class="el" href="Input_8hpp_source.html#l00114">name</a>, <a class="el" href="Log_8cpp_source.html#l00108">Log::Send()</a>.</p>
 
 <p class="reference">参照元 <a class="el" href="TextCommon_8cpp_source.html#l00242">TextCommon::LoadFont()</a>.</p>
+
+</div>
+</div>
+<a id="a3ee72654b4a528b8f533fcb0c7aba0c4" name="a3ee72654b4a528b8f533fcb0c7aba0c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ee72654b4a528b8f533fcb0c7aba0c4">&#9670;&#160;</a></span>Request()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classTextureHandle.html">TextureHandle</a> TextureManager::Request </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>_fileName</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>テクスチャを要求しハンドルを取得（非同期・同一名は既存スロットを返す） デコードはワーカーへ投げ、即座に返る。返却直後は未Readyの可能性がある </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_fileName</td><td>ファイル名 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>戻り値</dt><dd>テクスチャハンドル </dd></dl>
+
+<p class="definition"> <a class="el" href="TextureManager_8cpp_source.html">TextureManager.cpp</a> の <a class="el" href="TextureManager_8cpp_source.html#l00264">264</a> 行目に定義があります。</p>
+
+<p class="reference">参照先 <a class="el" href="Input_8hpp_source.html#l00114">name</a>.</p>
+
+<p class="reference">参照元 <a class="el" href="TextureManager_8cpp_source.html#l00101">Initialize()</a>, <a class="el" href="TextureManager_8cpp_source.html#l00286">Load()</a>.</p>
 
 </div>
 </div>
@@ -569,9 +762,30 @@ $(document).ready(function(){initNavTree('classTextureManager.html',''); initRes
 
 <p>すべてのテクスチャをアンロード（クリア） </p>
 
-<p class="definition"> <a class="el" href="TextureManager_8cpp_source.html">TextureManager.cpp</a> の <a class="el" href="TextureManager_8cpp_source.html#l00273">273</a> 行目に定義があります。</p>
+<p class="definition"> <a class="el" href="TextureManager_8cpp_source.html">TextureManager.cpp</a> の <a class="el" href="TextureManager_8cpp_source.html#l00437">437</a> 行目に定義があります。</p>
 
 <p class="reference">参照元 <a class="el" href="TextureManager_8cpp_source.html#l00012">~TextureManager()</a>.</p>
+
+</div>
+</div>
+<a id="ac8b16d7742027e3057538405fb777b7e" name="ac8b16d7742027e3057538405fb777b7e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8b16d7742027e3057538405fb777b7e">&#9670;&#160;</a></span>Update()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void TextureManager::Update </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>デコード済みテクスチャをGPUへアップロードする メインスレッドから毎フレーム呼ぶ </p>
+
+<p class="definition"> <a class="el" href="TextureManager_8cpp_source.html">TextureManager.cpp</a> の <a class="el" href="TextureManager_8cpp_source.html#l00305">305</a> 行目に定義があります。</p>
 
 </div>
 </div>
@@ -585,7 +799,7 @@ $(document).ready(function(){initNavTree('classTextureManager.html',''); initRes
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classTextureManager.html">TextureManager</a></li>
-    <li class="footer">2026年09月16日(水) 06時11分39秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+    <li class="footer">2026年10月18日(日) 08時56分43秒作成 - PortfolioGame Engine / 構成:  <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
 </body>

@@ -131,6 +131,7 @@ var annotated_dup =
     [ "StaticModelInstance", "classStaticModelInstance.html", "classStaticModelInstance" ],
     [ "Text", "classText.html", "classText" ],
     [ "TextCommon", "classTextCommon.html", "classTextCommon" ],
+    [ "TextureHandle", "classTextureHandle.html", "classTextureHandle" ],
     [ "TextureManager", "classTextureManager.html", "classTextureManager" ],
     [ "Time", "classTime.html", "classTime" ],
     [ "Timer", "classTimer.html", "classTimer" ],

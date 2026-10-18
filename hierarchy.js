@@ -150,6 +150,7 @@ var hierarchy =
     [ "ParticleSystem::Template", "structParticleSystem_1_1Template.html", null ],
     [ "ParticleSystem::TemplateEditor", "classParticleSystem_1_1TemplateEditor.html", null ],
     [ "Text", "classText.html", null ],
+    [ "TextureHandle", "classTextureHandle.html", null ],
     [ "TextureManager", "classTextureManager.html", null ],
     [ "Time", "classTime.html", null ],
     [ "Timer", "classTimer.html", null ],
