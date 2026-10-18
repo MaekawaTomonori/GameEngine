@@ -254,6 +254,7 @@ void Framework::Update() const {
     }
 #endif
 
+    { PROFILE_SCOPE("Texture"); texture_->Update(); }
     { PROFILE_SCOPE("Camera");  camera_->Update(); }
     { PROFILE_SCOPE("Light");   light_->Update(); }
     { PROFILE_SCOPE("Model");   model_->Update(); }

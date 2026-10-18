@@ -13,9 +13,9 @@ TextureManager::~TextureManager() {
     Unload();
 }
 
-DirectX::ScratchImage TextureManager::LoadTexture(const std::string& _filename) const {
+DirectX::ScratchImage TextureManager::DecodeImage(const std::string& _fileName) const {
     DirectX::ScratchImage image {};
-    std::string fullPath = folderPath_ + _filename;
+    std::string fullPath = folderPath_ + _fileName;
     std::wstring filePathW = Utils::Convert(fullPath);
 
     if (filePathW.ends_with(L".dds"))return LoadDDS(filePathW);
@@ -99,134 +99,303 @@ DirectX::ScratchImage TextureManager::LoadDDS(const std::wstring& _path) {
 
 
 void TextureManager::Initialize(DirectXAdapter* _adapter, SRVManager* _srv) {
-    std::lock_guard<std::mutex> lock(mutex_);
+    {
+        std::lock_guard<std::mutex> lock(mutex_);
 
-    adapter_ = _adapter;
-    srv_ = _srv;
+        adapter_ = _adapter;
+        srv_ = _srv;
 
-    // テクスチャアップロード専用のコマンドアロケーターとコマンドリストを作成
-    HRESULT hr = adapter_->GetDevice()->CreateCommandAllocator(
-        D3D12_COMMAND_LIST_TYPE_DIRECT,
-        IID_PPV_ARGS(&uploadCommandAllocator_)
-    );
-    if (FAILED(hr)) {
-        Utils::Alert("Failed to create upload command allocator");
-        return;
+        slots_.reserve(MAX_TEXTURE_SLOTS);
+
+        // テクスチャアップロード専用のコマンドアロケーターとコマンドリストを作成
+        HRESULT hr = adapter_->GetDevice()->CreateCommandAllocator(
+            D3D12_COMMAND_LIST_TYPE_DIRECT,
+            IID_PPV_ARGS(&uploadCommandAllocator_)
+        );
+        if (FAILED(hr)) {
+            Utils::Alert("Failed to create upload command allocator");
+            return;
+        }
+
+        hr = adapter_->GetDevice()->CreateCommandList(
+            0,
+            D3D12_COMMAND_LIST_TYPE_DIRECT,
+            uploadCommandAllocator_.Get(),
+            nullptr,
+            IID_PPV_ARGS(&uploadCommandList_)
+        );
+        if (FAILED(hr)) {
+            Utils::Alert("Failed to create upload command list");
+            return;
+        }
+
+        // 初期状態では閉じておく
+        uploadCommandList_->Close();
     }
 
-    hr = adapter_->GetDevice()->CreateCommandList(
-        0,
-        D3D12_COMMAND_LIST_TYPE_DIRECT,
-        uploadCommandAllocator_.Get(),
-        nullptr,
-        IID_PPV_ARGS(&uploadCommandList_)
-    );
-    if (FAILED(hr)) {
-        Utils::Alert("Failed to create upload command list");
-        return;
+    decodePool_.Start();
+
+    // 既定テクスチャは代替先として常に必要なため、ここで確実に読み終える
+    const TextureHandle fallback = Request(DEFAULT_TEXTURE);
+    if (fallback.IsValid() && Load(DEFAULT_TEXTURE)) {
+        defaultId_.store(fallback.GetId(), std::memory_order_release);
+    } else {
+        Log::Send(Log::Level::WARNING, std::format("TextureManager: default texture not available: {}", DEFAULT_TEXTURE));
     }
 
-    // 初期状態では閉じておく
-    uploadCommandList_->Close();
-
-    Log::Send(Log::Level::INFO, "TextureManager Initialized");
+    Log::Send(Log::Level::INFO, std::format("TextureManager Initialized (decode threads: {})", decodePool_.GetThreadCount()));
 }
 
-bool TextureManager::Load(const std::string& _fileName) {
-    std::lock_guard<std::mutex> lock(mutex_);
-
-    //Remove FolderPath
+std::string TextureManager::NormalizeName(const std::string& _fileName) const {
     std::string name = _fileName;
     size_t pos = 0;
-    while((pos = name.find(folderPath_, pos)) != std::string::npos){
+    while ((pos = name.find(folderPath_, pos)) != std::string::npos){
         name.erase(pos, folderPath_.length());
     }
+    return name;
+}
 
-    //Check if texture is already loaded
-    if (textures_.contains(name)){
-        return true;
+uint32_t TextureManager::ResolveIdUnlocked(const std::string& _normalized) {
+    if (const auto it = nameToId_.find(_normalized); it != nameToId_.end()) {
+        return it->second;
     }
 
-    assert(!srv_->IsFull());
+    if (slots_.size() >= MAX_TEXTURE_SLOTS) {
+        Log::Send(Log::Level::ERR, std::format("TextureManager: slot capacity exceeded: {}", _normalized));
+        Utils::Alert(std::format("TextureManager: slot capacity exceeded: {}", _normalized));
+        return INVALID_SLOT_ID;
+    }
 
-    /// FLOW
-    /// 1. Load Texture Data in CPU
-    /// 2. Create TextureResource (VRAM)
-    /// 3. Create UploadHeap Resource (IntermediateResource)
-    /// 4. Upload IntermediateResource to CPU
-    /// 5. Stack Command (3 -> 2) to CommandList
-    /// 6. Execute Using CommandQueue
-    /// 7. Wait
+    // GetSrvIndexOf()等がロックなしでslots_を添字参照するため、再確保を起こさせない
+    if (slots_.capacity() < MAX_TEXTURE_SLOTS) {
+        slots_.reserve(MAX_TEXTURE_SLOTS);
+    }
 
+    const uint32_t id = static_cast<uint32_t>(slots_.size());
 
-    //Load Texture
-    DirectX::ScratchImage img = LoadTexture(name);
+    auto slot = std::make_unique<TextureSlot>();
+    slot->name = _normalized;
+    slots_.push_back(std::move(slot));
+
+    nameToId_[_normalized] = id;
+    slotCount_.store(static_cast<uint32_t>(slots_.size()), std::memory_order_release);
+
+    return id;
+}
+
+void TextureManager::DecodeSlot(const uint32_t _id) {
+    // slots_は再確保されないため、ロックなしで対象スロットを参照してよい。
+    // nameはスロット生成時に確定しており、以降変化しない
+    TextureSlot& slot = *slots_[_id];
+
+    DirectX::ScratchImage img = DecodeImage(slot.name);
+
+    std::lock_guard<std::mutex> lock(mutex_);
 
     if (!img.GetImages() || img.GetImageCount() == 0) {
-        Log::Send(Log::Level::ERR, std::format("TextureManager::Load: Failed to load texture: {}", name));
+        Log::Send(Log::Level::ERR, std::format("TextureManager: failed to decode: {}", slot.name));
+        slot.state.store(SlotState::Failed, std::memory_order_release);
+    } else {
+        slot.decoded = std::move(img);
+        slot.state.store(SlotState::PendingUpload, std::memory_order_release);
+        pendingUploads_.push_back(_id);
+    }
+
+    slotCv_.notify_all();
+}
+
+bool TextureManager::UploadSlotUnlocked(const uint32_t _id) {
+    if (_id == INVALID_SLOT_ID || _id >= slots_.size()) return false;
+
+    TextureSlot& slot = *slots_[_id];
+
+    const SlotState state = slot.state.load(std::memory_order_acquire);
+    if (state == SlotState::Ready)  return true;
+    if (state != SlotState::PendingUpload) return false;
+
+    const auto fail = [&slot](const std::string& _message) {
+        Log::Send(Log::Level::ERR, _message);
+        slot.decoded.Release();
+        slot.state.store(SlotState::Failed, std::memory_order_release);
+    };
+
+    if (!adapter_ || !srv_) {
+        fail(std::format("TextureManager: not initialized: {}", slot.name));
+        return false;
+    }
+    if (srv_->IsFull()) {
+        Utils::Alert(std::format("TextureManager: SRV heap is full: {}", slot.name));
+        fail(std::format("TextureManager: SRV heap is full: {}", slot.name));
         return false;
     }
 
-    Texture texture;
-    texture.metadata = img.GetMetadata();
-    texture.resource = adapter_->CreateTextureResource(img.GetMetadata());
+    slot.metadata = slot.decoded.GetMetadata();
+    slot.resource = adapter_->CreateTextureResource(slot.metadata);
 
-    if (!texture.resource) {
-        Log::Send(Log::Level::ERR, std::format("TextureManager::Load: Failed to create texture resource: {}", name));
+    if (!slot.resource) {
+        fail(std::format("TextureManager: failed to create resource: {}", slot.name));
         return false;
     }
 
-    UploadTextureData(texture.resource.get(), img);
+    UploadTextureData(slot.resource.get(), slot.decoded);
 
-    texture.srvIndex = srv_->Allocate();
-    texture.cpuHandle = srv_->GetCPUHandle(texture.srvIndex);
-    texture.gpuHandle = srv_->GetGPUHandle(texture.srvIndex);
+    slot.srvIndex = srv_->Allocate();
+    slot.cpuHandle = srv_->GetCPUHandle(slot.srvIndex);
+    slot.gpuHandle = srv_->GetGPUHandle(slot.srvIndex);
 
-    if (texture.metadata.IsCubemap()) {
-        srv_->CreateSRVForCubeMap(texture.srvIndex, texture.resource->Get(), texture.metadata.format);
-    }else{
-        srv_->CreateSRVForTexture2D(texture.srvIndex, texture.resource->Get(), texture.metadata.format, static_cast<UINT>(texture.metadata.mipLevels));
+    if (slot.metadata.IsCubemap()) {
+        srv_->CreateSRVForCubeMap(slot.srvIndex, slot.resource->Get(), slot.metadata.format);
+    } else {
+        srv_->CreateSRVForTexture2D(slot.srvIndex, slot.resource->Get(), slot.metadata.format, static_cast<UINT>(slot.metadata.mipLevels));
     }
 
-    textures_[name] = std::move(texture);
+    // アップロード済みのためCPU側のピクセルは保持しない
+    slot.decoded.Release();
 
-    Log::Send(Log::Level::INFO, std::format("TextureManager::Load: {}", name));
+    // Ready への遷移をreleaseにすることで、ロックなしの読み手がacquireで
+    // srvIndex/gpuHandle/metadata を安全に読める
+    slot.state.store(SlotState::Ready, std::memory_order_release);
+    slotCv_.notify_all();
+
+    Log::Send(Log::Level::INFO, std::format("TextureManager::Load: {}", slot.name));
     return true;
 }
 
-bool TextureManager::LoadFromRawPixels(const std::string& _name, const uint8_t* _pixels, uint32_t _width, uint32_t _height, DXGI_FORMAT _format) {
+TextureHandle TextureManager::Request(const std::string& _fileName) {
+    const std::string name = NormalizeName(_fileName);
+
+    uint32_t id = INVALID_SLOT_ID;
+    {
+        std::lock_guard<std::mutex> lock(mutex_);
+
+        id = ResolveIdUnlocked(name);
+        if (id == INVALID_SLOT_ID) return {};
+
+        // Queued のものだけを掴む（既に誰かが進めている場合は触らない）
+        if (slots_[id]->state.load(std::memory_order_acquire) != SlotState::Queued) {
+            return TextureHandle(id);
+        }
+        slots_[id]->state.store(SlotState::Loading, std::memory_order_release);
+    }
+
+    decodePool_.Enqueue([this, id]() { DecodeSlot(id); });
+
+    return TextureHandle(id);
+}
+
+bool TextureManager::Load(const std::string& _fileName) {
+    const TextureHandle handle = Request(_fileName);
+    if (!handle.IsValid()) return false;
+
+    const uint32_t id = handle.GetId();
+
+    std::unique_lock<std::mutex> lock(mutex_);
+
+    // ワーカーがデコード中なら完了まで待つ
+    slotCv_.wait(lock, [this, id]() {
+        const SlotState state = slots_[id]->state.load(std::memory_order_acquire);
+        return state == SlotState::PendingUpload
+            || state == SlotState::Ready
+            || state == SlotState::Failed;
+    });
+
+    return UploadSlotUnlocked(id);
+}
+
+void TextureManager::Update() {
     std::lock_guard<std::mutex> lock(mutex_);
 
-    const auto existing = textures_.find(_name);
+    if (pendingUploads_.empty()) return;
 
-    // 新規キーの場合のみディスクリプタ枯渇をチェックする（既存キー更新はSRVスロットを使い回すため枯渇しない）
-    if (existing == textures_.end() && srv_->IsFull()) {
-        Log::Send(Log::Level::ERR, std::format("TextureManager::LoadFromRawPixels: SRV heap is full: {}", _name));
-        Utils::Alert(std::format("TextureManager::LoadFromRawPixels: SRV heap is full: {}", _name));
+    std::vector<uint32_t> ids;
+    ids.swap(pendingUploads_);
+
+    for (const uint32_t id : ids) {
+        UploadSlotUnlocked(id);
+    }
+}
+
+const TextureManager::TextureSlot* TextureManager::FindReadySlot(const uint32_t _id) const {
+    const uint32_t count = slotCount_.load(std::memory_order_acquire);
+
+    if (_id < count) {
+        const TextureSlot* slot = slots_[_id].get();
+        if (slot->state.load(std::memory_order_acquire) == SlotState::Ready) return slot;
+    }
+
+    const uint32_t fallback = defaultId_.load(std::memory_order_acquire);
+    if (fallback < count) {
+        const TextureSlot* slot = slots_[fallback].get();
+        if (slot->state.load(std::memory_order_acquire) == SlotState::Ready) return slot;
+    }
+
+    return nullptr;
+}
+
+uint32_t TextureManager::GetSrvIndexOf(const uint32_t _id) const {
+    const TextureSlot* slot = FindReadySlot(_id);
+    return slot ? slot->srvIndex.Get() : 0;
+}
+
+D3D12_GPU_DESCRIPTOR_HANDLE TextureManager::GetGpuHandleOf(const uint32_t _id) const {
+    const TextureSlot* slot = FindReadySlot(_id);
+    return slot ? slot->gpuHandle : D3D12_GPU_DESCRIPTOR_HANDLE{};
+}
+
+const DirectX::TexMetadata& TextureManager::GetMetadataOf(const uint32_t _id) const {
+    static const DirectX::TexMetadata EMPTY{};
+
+    const TextureSlot* slot = FindReadySlot(_id);
+    return slot ? slot->metadata : EMPTY;
+}
+
+TextureState TextureManager::GetStateOf(const uint32_t _id) const {
+    if (_id >= slotCount_.load(std::memory_order_acquire)) return TextureState::Failed;
+
+    switch (slots_[_id]->state.load(std::memory_order_acquire)) {
+        case SlotState::Ready:  return TextureState::Ready;
+        case SlotState::Failed: return TextureState::Failed;
+        default: return TextureState::NotReady;
+    }
+}
+
+uint32_t TextureManager::GetDefaultSrvIndex() const {
+    return GetSrvIndexOf(INVALID_SLOT_ID);
+}
+
+bool TextureManager::LoadFromRawPixels(const std::string& _name, const uint8_t* _pixels, uint32_t _width, uint32_t _height, DXGI_FORMAT _format) {
+    const std::string name = NormalizeName(_name);
+
+    std::lock_guard<std::mutex> lock(mutex_);
+
+    if (!adapter_ || !srv_) {
+        Log::Send(Log::Level::ERR, std::format("TextureManager::LoadFromRawPixels: not initialized: {}", name));
         return false;
     }
 
-    // 2D テクスチャ用メタデータを手動構築（ミップなし）
-    DirectX::TexMetadata meta{};
-    meta.width     = _width;
-    meta.height    = _height;
-    meta.depth     = 1;
-    meta.arraySize = 1;
-    meta.mipLevels = 1;
-    meta.format    = _format;
-    meta.dimension = DirectX::TEX_DIMENSION_TEXTURE2D;
+    const uint32_t id = ResolveIdUnlocked(name);
+    if (id == INVALID_SLOT_ID) return false;
+
+    TextureSlot& slot = *slots_[id];
+
+    // 既存スロットはSRVスロットを使い回すため枯渇しない
+    if (!slot.srvIndex.IsValid() && srv_->IsFull()) {
+        Log::Send(Log::Level::ERR, std::format("TextureManager::LoadFromRawPixels: SRV heap is full: {}", name));
+        Utils::Alert(std::format("TextureManager::LoadFromRawPixels: SRV heap is full: {}", name));
+        return false;
+    }
 
     // ScratchImage を確保してピクセルをコピー
     DirectX::ScratchImage img;
     HRESULT hr = img.Initialize2D(_format, _width, _height, 1, 1);
     if (FAILED(hr)) {
-        Log::Send(Log::Level::ERR, std::format("TextureManager::LoadFromRawPixels: ScratchImage init failed: {}", _name));
+        Log::Send(Log::Level::ERR, std::format("TextureManager::LoadFromRawPixels: ScratchImage init failed: {}", name));
         return false;
     }
 
     const DirectX::Image* imageSlice = img.GetImage(0, 0, 0);
     if (!imageSlice) {
-        Log::Send(Log::Level::ERR, std::format("TextureManager::LoadFromRawPixels: internal ScratchImage error: {}", _name));
+        Log::Send(Log::Level::ERR, std::format("TextureManager::LoadFromRawPixels: internal ScratchImage error: {}", name));
         return false;
     }
 
@@ -238,130 +407,130 @@ bool TextureManager::LoadFromRawPixels(const std::string& _name, const uint8_t* 
                srcRowPitch);
     }
 
-    // 生成・アップロードが完了するまでは既存エントリに触れない
+    // 生成・アップロードが完了するまでは既存の内容に触れない
     std::unique_ptr<DX12Resource> resource = adapter_->CreateTextureResource(img.GetMetadata());
     if (!resource) {
-        Log::Send(Log::Level::ERR, std::format("TextureManager::LoadFromRawPixels: CreateTextureResource failed: {}", _name));
+        Log::Send(Log::Level::ERR, std::format("TextureManager::LoadFromRawPixels: CreateTextureResource failed: {}", name));
         return false;
     }
 
     UploadTextureData(resource.get(), img);
 
-    if (existing != textures_.end()) {
-        // UploadTextureData 内でフェンス待ち済みのため旧リソースは解放してよい
-        // SRVスロットは使い回す
-        existing->second.metadata = img.GetMetadata();
-        existing->second.resource = std::move(resource);
-        srv_->CreateSRVForTexture2D(existing->second.srvIndex, existing->second.resource->Get(), _format, 1);
-        Log::Send(Log::Level::INFO, std::format("TextureManager::LoadFromRawPixels: updated {}", _name));
-        return true;
+    // UploadTextureData 内でフェンス待ち済みのため旧リソースは解放してよい
+    slot.metadata = img.GetMetadata();
+    slot.resource = std::move(resource);
+
+    if (!slot.srvIndex.IsValid()) {
+        slot.srvIndex = srv_->Allocate();
+        slot.cpuHandle = srv_->GetCPUHandle(slot.srvIndex);
+        slot.gpuHandle = srv_->GetGPUHandle(slot.srvIndex);
     }
 
-    Texture texture;
-    texture.metadata  = img.GetMetadata();
-    texture.resource  = std::move(resource);
-    texture.srvIndex  = srv_->Allocate();
-    texture.cpuHandle = srv_->GetCPUHandle(texture.srvIndex);
-    texture.gpuHandle = srv_->GetGPUHandle(texture.srvIndex);
-    srv_->CreateSRVForTexture2D(texture.srvIndex, texture.resource->Get(), _format, 1);
+    srv_->CreateSRVForTexture2D(slot.srvIndex, slot.resource->Get(), _format, 1);
 
-    textures_[_name] = std::move(texture);
-    Log::Send(Log::Level::INFO, std::format("TextureManager::LoadFromRawPixels: {}", _name));
+    slot.state.store(SlotState::Ready, std::memory_order_release);
+
+    Log::Send(Log::Level::INFO, std::format("TextureManager::LoadFromRawPixels: {}", name));
     return true;
 }
 
 void TextureManager::Unload() {
-    for (auto itr = textures_.begin(); itr != textures_.end(); ){
-        itr->second.resource.reset();
+    // ワーカーがslots_を参照するため、クリアの前に必ず停止する。
+    // mutex_を保持したまま停止するとDecodeSlot待ちのワーカーとデッドロックする
+    decodePool_.Stop();
 
-        itr = textures_.erase(itr);
-    }
-    textures_.clear();
+    std::lock_guard<std::mutex> lock(mutex_);
+
+    defaultId_.store(INVALID_SLOT_ID, std::memory_order_release);
+    slotCount_.store(0, std::memory_order_release);
+
+    pendingUploads_.clear();
+    nameToId_.clear();
+    slots_.clear();
 }
 
 const DirectX::TexMetadata& TextureManager::GetTextureMetadata(const std::string& _fileName) {
-    std::string name = _fileName;
-    size_t pos = 0;
-    while ((pos = name.find(folderPath_, pos)) != std::string::npos){
-        name.erase(pos, folderPath_.length());
-    }
-
-    {
-        std::lock_guard<std::mutex> lock(mutex_);
-        if (textures_.contains(name)){
-            return textures_.at(name).metadata;
-        }
-    }
-
-    Load(_fileName);
-
-    {
-        std::lock_guard<std::mutex> lock(mutex_);
-        if (textures_.contains(name)){
-            return textures_.at(name).metadata;
-        }
-    }
-
-    Log::Send(Log::Level::ERR, std::format("TextureManager::GetTextureMetadata: {} not found", name));
-    Utils::Alert(std::format("TextureManager::GetTextureMetadata: {} not found", name));
     static const DirectX::TexMetadata EMPTY{};
-    return EMPTY;
+
+    // 呼び出し側は即座に有効なメタデータを期待するため、ここは待つ
+    if (!Load(_fileName)) {
+        Log::Send(Log::Level::ERR, std::format("TextureManager::GetTextureMetadata: {} not found", _fileName));
+        return EMPTY;
+    }
+
+    const std::string name = NormalizeName(_fileName);
+
+    std::lock_guard<std::mutex> lock(mutex_);
+
+    const auto it = nameToId_.find(name);
+    if (it == nameToId_.end()) return EMPTY;
+
+    return slots_[it->second]->metadata;
 }
 
 uint32_t TextureManager::GetSrvIndex(const std::string& _fileName) {
+    const std::string name = NormalizeName(_fileName);
+
     std::lock_guard<std::mutex> lock(mutex_);
 
-    std::string name = _fileName;
-    size_t pos = 0;
-    while ((pos = name.find(folderPath_, pos)) != std::string::npos){
-        name.erase(pos, folderPath_.length());
-    }
-
-    if (textures_.contains(name)){
-        return textures_.at(name).srvIndex;
+    if (const auto it = nameToId_.find(name); it != nameToId_.end()) {
+        const TextureSlot& slot = *slots_[it->second];
+        if (slot.state.load(std::memory_order_acquire) == SlotState::Ready) {
+            return slot.srvIndex.Get();
+        }
     }
 
     Log::Send(Log::Level::ERR, std::format("TextureManager::GetSrvIndex: {} not found", name));
-    assert(0);
-    return 0;
+    return GetDefaultSrvIndex();
 }
 
 uint32_t TextureManager::GetTextureIndexByFilePath(const std::string& _path) const {
-    if (textures_.contains(_path)){
-        return textures_.at(_path).srvIndex;
+    const std::string name = NormalizeName(_path);
+
+    std::lock_guard<std::mutex> lock(mutex_);
+
+    if (const auto it = nameToId_.find(name); it != nameToId_.end()) {
+        const TextureSlot& slot = *slots_[it->second];
+        if (slot.state.load(std::memory_order_acquire) == SlotState::Ready) {
+            return slot.srvIndex.Get();
+        }
     }
 
-    Log::Send(Log::Level::ERR, std::format("TextureManager::GetTextureIndexByFilePath: {} not found", _path));
-    assert(0);
-    return 0;
+    Log::Send(Log::Level::ERR, std::format("TextureManager::GetTextureIndexByFilePath: {} not found", name));
+    return GetDefaultSrvIndex();
 }
 
 D3D12_GPU_DESCRIPTOR_HANDLE TextureManager::GetGPUHandle(const std::string& _fileName) {
+    const std::string name = NormalizeName(_fileName);
+
     std::lock_guard<std::mutex> lock(mutex_);
 
-    std::string name = _fileName;
-    size_t pos = 0;
-    while ((pos = name.find(folderPath_, pos)) != std::string::npos){
-        name.erase(pos, folderPath_.length());
-    }
-
-    if (textures_.contains(name)){
-        return textures_.at(name).gpuHandle;
+    if (const auto it = nameToId_.find(name); it != nameToId_.end()) {
+        const TextureSlot& slot = *slots_[it->second];
+        if (slot.state.load(std::memory_order_acquire) == SlotState::Ready) {
+            return slot.gpuHandle;
+        }
     }
 
     Log::Send(Log::Level::ERR, std::format("TextureManager::GetGPUHandle: {} not found", name));
-    assert(0);
-    return {};
+    return GetGpuHandleOf(INVALID_SLOT_ID);
 }
 
 D3D12_GPU_DESCRIPTOR_HANDLE TextureManager::GetGPUHandle(const uint32_t _index) const {
-    assert(_index <= textures_.size());
+    if (!srv_) return {};
     return srv_->GetGPUHandle(_index);
 }
 
 ID3D12Resource* TextureManager::GetResource(const std::string& _name) const {
-    if (const auto it = textures_.find(_name); it != textures_.end()) {
-        return it->second.resource->Get();
+    const std::string name = NormalizeName(_name);
+
+    std::lock_guard<std::mutex> lock(mutex_);
+
+    if (const auto it = nameToId_.find(name); it != nameToId_.end()) {
+        const TextureSlot& slot = *slots_[it->second];
+        if (slot.state.load(std::memory_order_acquire) == SlotState::Ready && slot.resource) {
+            return slot.resource->Get();
+        }
     }
     return nullptr;
 }
@@ -393,11 +562,17 @@ std::vector<std::string> TextureManager::ListAvailableTextures() const {
 }
 
 std::vector<std::string> TextureManager::GetLoadedTextureNames() const {
+    std::lock_guard<std::mutex> lock(mutex_);
+
     std::vector<std::string> result;
-    result.reserve(textures_.size());
-    for (const auto& [name, tex] : textures_) {
-        result.push_back(name);
+    result.reserve(slots_.size());
+
+    for (const auto& slot : slots_) {
+        if (slot->state.load(std::memory_order_acquire) == SlotState::Ready) {
+            result.push_back(slot->name);
+        }
     }
+
     std::sort(result.begin(), result.end());
     return result;
 }

@@ -6,6 +6,7 @@
 
 #include "Log.hpp"
 #include "Utils.hpp"
+#include "src/DirectX/DirectXAdapter.hpp"
 
 Shader::Shader(const std::wstring& _name) {
     if (!Create(_name)) {
@@ -111,8 +112,12 @@ IDxcBlob* Shader::Compile(const std::wstring& _directoryPath, const std::wstring
         L"-E", L"main", //EntryPoint
         L"-T", _profile, //ShaderProfile
         L"-I", _directoryPath.c_str(), //IncludePath
+#if ENGINE_DEBUG
         L"-Zi", L"-Qembed_debug", //DebugInfo
-        L"-Od",
+        L"-Od", 
+#else
+        L"-O3", //最適化
+#endif
         L"-Zpr",
     };
 

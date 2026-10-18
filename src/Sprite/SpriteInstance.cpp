@@ -14,6 +14,7 @@
 SpriteInstance::SpriteInstance() {
     common_ = Singleton<SpriteCommon>::GetInstance();
     adapter_ = common_->GetAdapter();
+    textureManager_ = Singleton<TextureManager>::GetInstance();
     commandList_ = adapter_->GetCommandList();
 
     uuid_ = Utils::GenerateUniqueId();
@@ -27,7 +28,7 @@ SpriteInstance::~SpriteInstance() {
 
 void SpriteInstance::Initialize(const std::string&_texture) {
     texturePath_ = _texture;
-    Singleton<TextureManager>::GetInstance()->Load(texturePath_);
+    textureHandle_ = textureManager_->Request(texturePath_);
 
     vr_ = adapter_->CreateBufferResource(sizeof(VertexData) * 4);
     vbv_.BufferLocation = vr_->Get()->GetGPUVirtualAddress();
@@ -77,7 +78,7 @@ void SpriteInstance::Initialize(const std::string&_texture) {
 
     AdjustTextureSize();
 
-    common_->RegisterUpdate(uuid_, [this]() { UpdateMapData(); });
+    common_->RegisterUpdate(uuid_, [this]() { ApplyPendingTextureSize(); UpdateMapData(); });
     common_->RegisterDebug(uuid_,  [this]() { Debug(); });
 }
 
@@ -110,16 +111,18 @@ void SpriteInstance::UpdateMapData() const {
 #pragma endregion
 
 #pragma region Vertex texcoord
-    const DirectX::TexMetadata& metadata = Singleton<TextureManager>::GetInstance()->GetTextureMetadata(texturePath_);
-    float texLeft = leftTop_.x / static_cast<float>(metadata.width);
-    float texRight = (leftTop_.x + texSize_.x) / static_cast<float>(metadata.width);
-    float texTop = leftTop_.y / static_cast<float>(metadata.height);
-    float texBottom = (leftTop_.y + texSize_.y) / static_cast<float>(metadata.height);
+    const DirectX::TexMetadata& metadata = textureManager_->GetMetadataOf(textureHandle_.GetId());
+    if (metadata.width != 0 && metadata.height != 0) {
+        float texLeft = leftTop_.x / static_cast<float>(metadata.width);
+        float texRight = (leftTop_.x + texSize_.x) / static_cast<float>(metadata.width);
+        float texTop = leftTop_.y / static_cast<float>(metadata.height);
+        float texBottom = (leftTop_.y + texSize_.y) / static_cast<float>(metadata.height);
 
-    vd_[0].uv= {texLeft, texBottom};
-    vd_[1].uv= {texLeft, texTop};
-    vd_[2].uv= {texRight, texBottom};
-    vd_[3].uv= {texRight, texTop};
+        vd_[0].uv= {texLeft, texBottom};
+        vd_[1].uv= {texLeft, texTop};
+        vd_[2].uv= {texRight, texBottom};
+        vd_[3].uv= {texRight, texTop};
+    }
 #pragma endregion
 
     const float scale = Singleton<Screen>::GetInstance()->GetScale();
@@ -142,21 +145,53 @@ void SpriteInstance::ExecuteDraw() const {
     commandList_->IASetIndexBuffer(&ibv_);
     commandList_->SetGraphicsRootConstantBufferView(0, mr_->Get()->GetGPUVirtualAddress());
     commandList_->SetGraphicsRootConstantBufferView(1, wr_->Get()->GetGPUVirtualAddress());
-    commandList_->SetGraphicsRootDescriptorTable(2, Singleton<TextureManager>::GetInstance()->GetGPUHandle(texturePath_));
+    commandList_->SetGraphicsRootDescriptorTable(2, textureManager_->GetGpuHandleOf(textureHandle_.GetId()));
 
     commandList_->DrawIndexedInstanced(6, 1, 0, 0, 0);
 }
 
 void SpriteInstance::AdjustTextureSize() {
-    const DirectX::TexMetadata& metadata = Singleton<TextureManager>::GetInstance()->GetTextureMetadata(texturePath_);
+    // 未Readyのまま既定テクスチャのサイズを採用しないよう、Readyまで保留する
+    if (!textureHandle_.IsReady()) {
+        pendingAutoSize_ = true;
+        return;
+    }
+
+    const DirectX::TexMetadata& metadata = textureManager_->GetMetadataOf(textureHandle_.GetId());
+
+    // texSize_ はUVの切り出し範囲なので、サイズ明示の有無に関わらず必ずテクスチャに合わせる
     texSize_ = {static_cast<float>(metadata.width), static_cast<float>(metadata.height)};
-    size_ = texSize_;
+    if (!sizeSpecified_) size_ = texSize_;
+
+    pendingAutoSize_ = false;
+}
+
+void SpriteInstance::ApplyPendingTextureSize() {
+    if (!pendingAutoSize_) return;
+    AdjustTextureSize();
 }
 
 void SpriteInstance::Debug() {
     ImGui::PushID(uuid_.c_str());
     if (ImGui::CollapsingHeader(texturePath_.c_str())){
-        ImGui::Text("Texture Path: %s", texturePath_.c_str());
+        if (ImGui::BeginCombo("Texture", texturePath_.c_str())) {
+            // ディスク走査は重いため、ドロップダウンが開いた瞬間だけ更新する
+            static std::vector<std::string> available;
+            if (ImGui::IsWindowAppearing()) available = textureManager_->ListAvailableTextures();
+
+            for (const std::string& tex : available) {
+                if (ImGui::Selectable(tex.c_str(), tex == texturePath_)) {
+                    SetTexture(tex);
+                }
+            }
+            ImGui::EndCombo();
+        }
+
+        switch (textureHandle_.GetState()) {
+            case TextureState::Ready:    ImGui::TextDisabled("Ready"); break;
+            case TextureState::NotReady: ImGui::TextColored(ImVec4(1.f, 0.8f, 0.3f, 1.f), "Loading..."); break;
+            case TextureState::Failed:   ImGui::TextColored(ImVec4(1.f, 0.3f, 0.3f, 1.f), "Failed"); break;
+        }
         ImGui::DragFloat2("Position", &position_.x, 1.f);
         ImGui::DragFloat2("Size", &size_.x, 1);
         ImGui::DragFloat("Rotation", &rotation_, 0.01f);
@@ -181,6 +216,7 @@ const Vector2& SpriteInstance::GetSize() const {
 }
 
 void SpriteInstance::SetSize(const Vector2& _s) {
+    sizeSpecified_ = true;
     size_ = _s;
 }
 
@@ -245,8 +281,13 @@ void SpriteInstance::SetActivePostEffect(const bool _active) {
 }
 
 void SpriteInstance::SetTexture(const std::string& _texture) {
+    if (texturePath_ == _texture) return;
+
     texturePath_ = _texture;
-    Singleton<TextureManager>::GetInstance()->Load(texturePath_);
+    textureHandle_ = textureManager_->Request(texturePath_);
+
+    // 差し替え後は新しいテクスチャのサイズを採用する（従来挙動）
+    sizeSpecified_ = false;
     AdjustTextureSize();
 }
 

@@ -17,6 +17,13 @@
 #include "DirectXTex.h"
 #include "ReferencePtr.hpp"
 
+// DX12 Debug Layer : Enable(1) / Disable(0)
+#ifdef _DEBUG
+#define ENGINE_DEBUG 0
+#else
+#define ENGINE_DEBUG 0
+#endif
+
 class DebugUI;
 
 /** @brief DirectX12アダプタークラス
