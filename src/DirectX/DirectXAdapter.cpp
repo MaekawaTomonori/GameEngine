@@ -21,11 +21,6 @@
 #pragma comment(lib, "dxguid.lib")
 #pragma comment(lib, "dxcompiler.lib")
 
-// DX12デバッグレイヤー(GPU-Based Validation等)を有効化するかどうか。
-#ifdef _DEBUG
-#define ENGINE_DEBUG 0
-#endif
-
 DirectXAdapter::DirectXAdapter(const HWND _hWnd, size_t _width, size_t _height) :
     windowSize_(_width, _height), hWnd_(_hWnd), dsvHandle_() {
     Log::Send(Log::Level::INFO, "DirectXAdapter Created");
