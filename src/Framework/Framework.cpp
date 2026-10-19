@@ -113,9 +113,6 @@ Framework::Framework() {
     collision_ = std::make_unique<CollisionManager>();
     collision_->Initialize(dbg);
 
-    ui_ = Singleton<Ui::Manager>::GetInstance();
-    ui_->Setup(dbg, input_);
-
 #ifdef _DEBUG
     Debugger::WatchGroup("Engine")
         .Watch("FPS", &config_.fps)
@@ -232,7 +229,6 @@ void Framework::Update() const {
     debugger_->Debug();
     model_->Debug();
     sprite_->Debug();
-    ui_->Debug();
     text_->Debug();
     planeTextureEditor_->Debug();
     //audioPanel_->Debug();
@@ -259,7 +255,6 @@ void Framework::Update() const {
     { PROFILE_SCOPE("Light");   light_->Update(); }
     { PROFILE_SCOPE("Model");   model_->Update(); }
     { PROFILE_SCOPE("Sprite");  sprite_->Update(); }
-    { PROFILE_SCOPE("UI");      ui_->Update(); }
     text_->Update();
 }
 
@@ -277,7 +272,6 @@ void Framework::Draw() const {
 #endif
 
     scene_->Draw();
-    ui_->Draw();
     scene_->DrawTransition();
 
     sky_->Draw(renderer_.get());

@@ -120,9 +120,6 @@
     <ClInclude Include="include\DebugUIWidgets.hpp" />
     <ClInclude Include="include\PerformanceProfiler.hpp" />
     <ClInclude Include="include\ScreenUtils.hpp" />
-    <ClInclude Include="include\Ui\Module\IModule.hpp" />
-    <ClInclude Include="include\Ui\Module\KeyboardModule.hpp" />
-    <ClInclude Include="include\Ui\Module\MouseModule.hpp" />
     <ClInclude Include="include\WatchDebugger.hpp" />
     <ClInclude Include="src\Audio\AudioDebugPanel.hpp" />
     <ClInclude Include="src\Collision\CollisionManager.hpp" />
@@ -241,13 +238,6 @@
     <ClInclude Include="src\Window\Window.hpp" />
     <ClInclude Include="externals\MagicEnum\magic_enum.hpp" />
     <ClInclude Include="externals\assimp\include\assimp\AssertHandler.h" />
-    <ClInclude Include="include\Ui\EventSystem.hpp" />
-    <ClInclude Include="include\Ui\Element.hpp" />
-    <ClInclude Include="src\Ui\SpriteElement.hpp" />
-    <ClInclude Include="src\Ui\TextElement.hpp" />
-    <ClInclude Include="include\Ui\UiAnimation.hpp" />
-    <ClInclude Include="include\Ui\UserInterface.hpp" />
-    <ClInclude Include="include\Ui\UiManager.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Config\ConfigLoader.cpp" />
@@ -257,14 +247,6 @@
     <ClCompile Include="src\Screen\Screen.cpp" />
     <ClCompile Include="src\Shadow\ShadowCubeMap.cpp" />
     <ClCompile Include="src\Shadow\ShadowPass.cpp" />
-    <ClCompile Include="src\Ui\EventSystem.cpp" />
-    <ClCompile Include="src\Ui\Element.cpp" />
-    <ClCompile Include="src\Ui\Module\KeyboardModule.cpp" />
-    <ClCompile Include="src\Ui\Module\MouseModule.cpp" />
-    <ClCompile Include="src\Ui\SpriteElement.cpp" />
-    <ClCompile Include="src\Ui\TextElement.cpp" />
-    <ClCompile Include="src\Ui\UserInterface.cpp" />
-    <ClCompile Include="src\Ui\UiManager.cpp" />
     <ClCompile Include="src\Camera\Camera.cpp" />
     <ClCompile Include="src\Camera\Controller\CameraController.cpp" />
     <ClCompile Include="src\Camera\Director\CameraDirector.cpp" />
@@ -380,6 +362,9 @@
     </ProjectReference>
     <ProjectReference Include="Lib\GESTD\GESTD.vcxproj">
       <Project>{a1b2c3d4-e5f6-7890-abcd-ef1234567890}</Project>
+    </ProjectReference>
+    <ProjectReference Include="Lib\GEUI\GEUI.vcxproj">
+      <Project>{e3aa4de1-7698-4618-82d0-6f8ab76995c6}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

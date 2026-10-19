@@ -9,7 +9,6 @@
 #include "src/Debug/Debugger.hpp"
 #include "src/Texture/Composition/PlaneTextureLayoutEditor.hpp"
 #endif
-#include "Ui/UiManager.hpp"
 #include "src/Camera/Controller/CameraController.hpp"
 #include "src/Camera/Director/CameraDirector.hpp"
 #include "src/Platform/WinApp.hpp"
@@ -65,8 +64,6 @@ class Framework {
 
     GESTD::ReferencePtr<CameraController> camera_;
     GESTD::ReferencePtr<CameraDirector> cameraDirector_;
-
-    GESTD::ReferencePtr<Ui::Manager> ui_;
 
     std::unique_ptr<ShadowCubeMap> shadowCubeMap_;
     std::unique_ptr<ShadowPass>    shadowPass_;
