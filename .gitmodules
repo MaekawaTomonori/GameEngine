@@ -7,3 +7,6 @@
 [submodule "Lib/Audio"]
 	path = Lib/Audio
 	url = https://github.com/MaekawaTomonori/AudioLib.git
+[submodule "Lib/GEUI"]
+	path = Lib/GEUI
+	url = https://github.com/MaekawaTomonori/GEUI.git
