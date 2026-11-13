@@ -15,11 +15,18 @@
 namespace {
     /** @brief Overlay行の選択状態を他Canvasと同じマップで管理するための予約キー */
     constexpr const char* OVERLAY_KEY = "Overlay";
+
+    /** @brief Windows 一覧に載せる名前。開閉の状態は DebugUI の一覧と共有する */
+    constexpr const char* WINDOW_NAME = "Canvas Editor";
 } // namespace
 
 void CanvasLayerEditor::Initialize(const GESTD::ReferencePtr<DebugUI>& _debug, const GESTD::ReferencePtr<PostProcessExecutor>& _executor) {
     debug_ = _debug;
     executor_ = _executor;
+
+    if (debug_) {
+        debug_->RegisterMenuButton(WINDOW_NAME);
+    }
 }
 
 void CanvasLayerEditor::ShowEditor() {
@@ -29,11 +36,9 @@ void CanvasLayerEditor::ShowEditor() {
     // （ただし編集対象は常に1つだけで、DebugUIの通常ウィンドウ一覧には登録しない）
     RenderEditingCanvasWindow();
 
-    if (!showEditor_) return;
-
-    debug_->RegisterCommand("Canvas Editor", [this]() {
+    debug_->RegisterCommand(WINDOW_NAME, [this]() {
         ImGui::SetNextWindowSize(ImVec2(500, 400), ImGuiCond_FirstUseEver);
-        ImGui::Begin("Canvas Editor", &showEditor_);
+        ImGui::Begin(WINDOW_NAME, &debug_->IsVisible(WINDOW_NAME));
 
         RenderCanvasList();
         ImGui::Separator();
@@ -44,11 +49,15 @@ void CanvasLayerEditor::ShowEditor() {
 }
 
 void CanvasLayerEditor::OpenEditor() {
-    showEditor_ = true;
+    if (debug_) debug_->IsVisible(WINDOW_NAME) = true;
 }
 
 void CanvasLayerEditor::CloseEditor() {
-    showEditor_ = false;
+    if (debug_) debug_->IsVisible(WINDOW_NAME) = false;
+}
+
+bool CanvasLayerEditor::IsOpen() const {
+    return debug_ && debug_->IsVisible(WINDOW_NAME);
 }
 
 void CanvasLayerEditor::RenderCanvasList() {

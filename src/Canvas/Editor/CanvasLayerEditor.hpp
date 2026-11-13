@@ -17,8 +17,6 @@ class CanvasLayerEditor {
     GESTD::ReferencePtr<DebugUI> debug_ = nullptr;
     GESTD::ReferencePtr<PostProcessExecutor> executor_ = nullptr;
 
-    bool showEditor_ = false;
-
     char newCanvasNameBuf_[128] = "";
 
     /** @brief 現在詳細編集中のCanvas名。空なら編集ウィンドウは非表示
@@ -49,7 +47,7 @@ public:
     void ShowEditor();
     void OpenEditor();
     void CloseEditor();
-    bool IsOpen() const { return showEditor_; }
+    bool IsOpen() const;
 
 private:
     void RenderCanvasList();
