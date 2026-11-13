@@ -44,8 +44,6 @@ class Skybox {
 
     Transform transform_ {};
 
-    bool posteffect_ = true;
-
 public:
     void Initialize(const std::string& _texture);
     void Update();

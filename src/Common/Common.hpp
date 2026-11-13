@@ -42,7 +42,7 @@ public:
 
     void RegisterDebug(const std::string& _id, const std::function<void()>& _func);
     void RegisterUpdate(const std::string& _id, const std::function<void()>& _func);
-    void RegisterDraw(const std::function<void()>& _command);
+    void RegisterDraw(const std::function<void()>& _command, const std::string& _canvasName = "None");
 
     void Unregister(const std::string& _uuid);
 

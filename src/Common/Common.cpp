@@ -1,6 +1,7 @@
 #include "Common.hpp"
 
 #include <algorithm>
+#include <map>
 
 #ifdef _DEBUG
 #include "imgui.h"
@@ -38,23 +39,24 @@ void Common::Debug() {
 }
 
 void Common::Draw(Renderer* _renderer) {
-    std::vector<std::function<void()>> tasks;
+    // Canvas ごとに深度がクリアされるので、深度で前後を判定したいものは描き先を分けて登録する
+    std::map<std::string, std::vector<std::function<void()>>> tasksByCanvas;
     {
         for (auto& command : drawFunctions_){
             if (!command.func)continue;
-            tasks.push_back(std::move(command.func));
+            tasksByCanvas[command.canvasName].push_back(std::move(command.func));
         }
         drawFunctions_.clear();
     }
 
     if (!pipeline_) return;
-    if (!tasks.empty()) {
+    for (auto& [canvasName, tasks] : tasksByCanvas) {
         _renderer->Register([this, tasks = std::move(tasks)](){
             pipeline_->DrawCall();
             for (auto& task : tasks){
                 task();
             }
-        }, "None");
+        }, canvasName);
     }
 }
 
@@ -70,8 +72,8 @@ void Common::RegisterUpdate(const std::string& _id, const std::function<void()>&
     updateCommands_.push_back({ _id, _func });
 }
 
-void Common::RegisterDraw(const std::function<void()>& _command) {
-    drawFunctions_.push_back({ _command });
+void Common::RegisterDraw(const std::function<void()>& _command, const std::string& _canvasName) {
+    drawFunctions_.push_back({ _command, _canvasName });
 }
 
 void Common::Unregister(const std::string& _uuid) {
