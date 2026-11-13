@@ -3,6 +3,7 @@
 #include <stdexcept>
 #include <dwmapi.h>
 
+#include "GEUI.hpp"
 #include "Utils.hpp"
 #include "imgui.h"
 
@@ -14,6 +15,7 @@ LRESULT Window::WindowProc(HWND _hwnd, UINT _uMsg, WPARAM _wParam, LPARAM _lPara
 #ifdef _DEBUG
     if (ImGui_ImplWin32_WndProcHandler(_hwnd, _uMsg, _wParam, _lParam))return true;
 #endif
+    if (GEUI::HandleMessage(_hwnd, _uMsg, _wParam, _lParam)) return 0;
 
     switch (_uMsg){
         case WM_DESTROY:

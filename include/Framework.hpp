@@ -3,6 +3,7 @@
 
 #include <memory>
 
+#include "GEUI.hpp"
 #include "ReferencePtr.hpp"
 #include "Input.hpp"
 #ifdef _DEBUG
@@ -46,6 +47,8 @@ class Framework {
     std::unique_ptr<PostProcessExecutor> postProcessor_;
     std::unique_ptr<Renderer> renderer_;
     std::unique_ptr<ResourceRepository> resources_;
+    std::unique_ptr<GEUI::TextureProvider> uiTextures_;
+    std::unique_ptr<GEUI::System> ui_;
 #ifdef _DEBUG
     std::unique_ptr<Debugger>        debugger_;
     std::unique_ptr<PlaneTextureLayoutEditor> planeTextureEditor_;

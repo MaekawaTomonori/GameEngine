@@ -210,6 +210,11 @@ public:
      */
     std::vector<std::string> GetLoadedTextureNames() const;
 
+    /** @brief テクスチャを読み込むフォルダを取得
+     * @return フォルダのパス（作業ディレクトリからの相対）
+     */
+    const std::string& GetFolderPath() const { return folderPath_; }
+
 private: //Methods
     /** @brief folderPath_ を除去したキー形式へ正規化する */
     std::string NormalizeName(const std::string& _fileName) const;

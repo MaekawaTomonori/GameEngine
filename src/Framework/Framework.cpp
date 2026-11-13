@@ -10,12 +10,60 @@
 #include "src/Scene/PerformanceTest/PerformanceTestScene.hpp"
 #include "src/Scene/Sample/SampleScene.hpp"
 #include "src/Config/ConfigLoader.hpp"
+#include "src/DirectX/Heap/SRVHandle.hpp"
 #include "src/Screen/Screen.hpp"
 #include "src/Time/Time.hpp"
 #include "src/Time/TimeSystem.hpp"
 
 namespace {
     constexpr const char* APP_CONFIG_PATH = "Assets/Config/App.cnf";
+
+    /** @brief GEUI のテクスチャを TextureManager から解決する
+     */
+    class UITextureProvider final : public GEUI::TextureProvider {
+        SRVManager* srv_;
+        // GEUI に貸している枠。返却を頼まれたら手放し、SRVHandle の破棄でヒープへ戻す
+        std::vector<SRVHandle> lent_;
+
+    public:
+        explicit UITextureProvider(SRVManager* _srv) : srv_(_srv) {}
+
+        bool AllocateDescriptor(GEUI::DescriptorSlot& _slot) override {
+            SRVHandle handle = srv_->Allocate();
+            if (!handle.IsValid()) {
+                return false;
+            }
+            _slot.index = handle.Get();
+            _slot.cpu = srv_->GetCPUHandle(handle.Get()).ptr;
+            lent_.push_back(std::move(handle));
+            return true;
+        }
+
+        void FreeDescriptor(uint32_t _index) override {
+            std::erase_if(lent_, [_index](const SRVHandle& _handle) { return _handle.Get() == _index; });
+        }
+
+        GEUI::DescriptorHandle GetHeap() const override {
+            return { srv_->GetGPUHandle(0).ptr };
+        }
+
+        uint32_t Resolve(std::string_view _name) override {
+            // 読み込み中は既定テクスチャの番号が返る
+            return Singleton<TextureManager>::GetInstance()->Request(std::string(_name)).GetSrvIndex();
+        }
+
+        void GetLoadedNames(std::vector<std::string>& _names) const override {
+            _names = Singleton<TextureManager>::GetInstance()->GetLoadedTextureNames();
+        }
+
+        void GetAvailableNames(std::vector<std::string>& _names) const override {
+            _names = Singleton<TextureManager>::GetInstance()->ListAvailableTextures();
+        }
+
+        std::filesystem::path GetDirectory() const override {
+            return Singleton<TextureManager>::GetInstance()->GetFolderPath();
+        }
+    };
 }
 
 Framework::Framework() {
@@ -59,6 +107,15 @@ Framework::Framework() {
 
     renderer_ = std::make_unique<Renderer>();
     renderer_->Initialize(GESTD::ReferencePtr(dxAdapter_), GESTD::ReferencePtr(postProcessor_));
+
+    uiTextures_ = std::make_unique<UITextureProvider>(srv_.get());
+    ui_ = std::make_unique<GEUI::System>();
+    if (!ui_->Setup(dxAdapter_->GetDevice(), DXGI_FORMAT_R8G8B8A8_UNORM_SRGB, static_cast<uint32_t>(config_.width), static_cast<uint32_t>(config_.height), uiTextures_.get())) {
+        Log::Send(Log::Level::ERR, "GEUI: Setup failed");
+    }
+#ifdef _DEBUG
+    dbg->RegisterMenuButton("GEUI");
+#endif
 
     resources_ = std::make_unique<ResourceRepository>();
     resources_->Initialize();
@@ -231,6 +288,7 @@ void Framework::Update() const {
     sprite_->Debug();
     text_->Debug();
     planeTextureEditor_->Debug();
+    debugger_->GetUI()->RegisterCommand("GEUI", [this] { GEUI::Debug(&debugger_->GetUI()->IsVisible("GEUI")); });
     //audioPanel_->Debug();
 
     scene_->Debug();
@@ -287,6 +345,7 @@ void Framework::Draw() const {
     line_->Draw(renderer_.get());
     sprite_->Draw(renderer_.get());
     text_->Draw(renderer_.get());
+    renderer_->Register([this] { ui_->Render(dxAdapter_->GetCommandList()); });
 
 #ifdef _DEBUG
     renderer_->RegisterUI([&] { debugger_->Render(); });
@@ -318,6 +377,10 @@ void Framework::Shutdown() {
     texture_->Unload();
     particle_.reset();
     postProcessor_.reset();
+    ui_->Teardown();
+    ui_.reset();
+    // 貸した枠を返す先の SRVManager より先に片付ける
+    uiTextures_.reset();
     renderer_.reset();
     resources_.reset();
 
@@ -349,6 +412,7 @@ void Framework::HandleWindowResize(int _width, int _height) const {
         static_cast<float>(_width),
         static_cast<float>(_height));
     postProcessor_->ResizeRenderTextures();
+    ui_->Resize(static_cast<uint32_t>(_width), static_cast<uint32_t>(_height));
 
 #ifdef _DEBUG
     debugger_->UpdateDisplaySize(_width, _height);

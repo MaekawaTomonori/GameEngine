@@ -3,6 +3,7 @@
 #include "imgui.h"
 #include "json.hpp"
 #include "DebugUI.hpp"
+#include "GEUI.hpp"
 #include "Log.hpp"
 #include "Input.hpp"
 #include "Pattern/Singleton.hpp"
@@ -165,6 +166,7 @@ void PostProcessExecutor::Debug() {
     // SceneView が閉じているときは入力座標変換を無効化する。
     if (!debugUI_->IsVisible("Scene")) {
         Singleton<Input>::GetInstance()->SetSceneViewTransform(false, {}, {}, {});
+        GEUI::ResetViewport();
     }
 
     debugUI_->RegisterCommand("Scene", [this]() {
@@ -200,8 +202,10 @@ void PostProcessExecutor::Debug() {
                 { imgSize.x, imgSize.y },
                 { static_cast<float>(adapter_->GetWidth()), static_cast<float>(adapter_->GetHeight()) }
             );
+            GEUI::SetViewport({ imgMin.x, imgMin.y, imgMin.x + imgSize.x, imgMin.y + imgSize.y });
         } else {
             Singleton<Input>::GetInstance()->SetSceneViewTransform(false, {}, {}, {});
+            GEUI::ResetViewport();
         }
     });
 #endif
