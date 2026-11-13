@@ -48,12 +48,16 @@ class PostProcessExecutor {
     std::vector<TemporaryEffectData> temporaries_;
     uint32_t nextTemporaryId_ = 1;
 
-    /** Animation state */
-    bool isAnimating_ = false;
-    float animationTimer_ = 0.f;
-    float animationDuration_ = 0.f;
-    std::vector<uint32_t> animatingTemporaries_;  // animation target temporary effect ids
-    std::function<void()> onAnimationComplete_;  // animation completion callback
+    /** @brief ApplyPreset 1回分の再生状態。演出が重なっても、それぞれが最後まで進んで自分の分だけを片付ける */
+    struct PresetAnimation {
+        std::vector<uint32_t> temporaries;  // 対象の一時エフェクトのid
+        float duration = 0.f;
+        float timer = 0.f;
+        std::function<void()> onComplete;
+    };
+
+    std::vector<PresetAnimation> animations_;
+    float animationDuration_ = 0.f;  // 最後に再生したプリセットの長さ（SavePreset が書き出す）
 
     /** Preset editor（ワンショット演出用） */
     std::unique_ptr<PostProcessPresetEditor> presetEditor_;

@@ -311,9 +311,6 @@ void PostProcessExecutor::RemoveTemporary(uint32_t _id) {
 }
 
 void PostProcessExecutor::ApplyPreset(const std::string& _presetName, std::function<void()> _onComplete) {
-    // 完了時コールバックを保持する。
-    onAnimationComplete_ = _onComplete;
-
     std::string path = PresetsFilePath();
 
     // preset 定義ファイルの存在確認。
@@ -340,11 +337,11 @@ void PostProcessExecutor::ApplyPreset(const std::string& _presetName, std::funct
 
     const auto& presetData = presetsJson[_presetName];
 
-    // アニメーション時間を読み取る。
-    animationDuration_ = presetData.value("duration", 0.0f);
-
-    // 今回のアニメーション対象（一時エフェクトのid）を初期化する。
-    animatingTemporaries_.clear();
+    // 再生中の演出には触れず、今回の分を別に持つ。
+    PresetAnimation animation;
+    animation.duration = presetData.value("duration", 0.0f);
+    animation.onComplete = std::move(_onComplete);
+    animationDuration_ = animation.duration;
 
     if (presetData.contains("members")) {
         for (const auto& memberEntry : presetData["members"]) {
@@ -364,30 +361,26 @@ void PostProcessExecutor::ApplyPreset(const std::string& _presetName, std::funct
             effect->LoadPreset(presetName);
             Log::Send(Log::Level::DBG, std::format("Loaded preset '{}' for temporary effect ({})", presetName, type));
 
-            animatingTemporaries_.push_back(id);
+            animation.temporaries.push_back(id);
         }
     }
 
     // アニメーションありの場合は更新ループへ移行する。
-    if (animationDuration_ > 0.0f) {
-        isAnimating_ = true;
-        animationTimer_ = 0.0f;
+    if (animation.duration > 0.0f) {
         Log::Send(Log::Level::INFO, std::format("Started animation for preset '{}' (duration: {:.1f}s, effects: {})",
-            _presetName, animationDuration_, animatingTemporaries_.size()));
+            _presetName, animation.duration, animation.temporaries.size()));
+        animations_.push_back(std::move(animation));
     } else {
         // duration が 0 の場合は即座に最終状態を適用してから破棄する。
-        for (const uint32_t id : animatingTemporaries_) {
+        for (const uint32_t id : animation.temporaries) {
             if (IPostEffect* effect = GetTemporary(id)) {
                 effect->UpdateAnimation(1.0f);
             }
             RemoveTemporary(id);
         }
-        animatingTemporaries_.clear();
-        isAnimating_ = false;
 
-        if (onAnimationComplete_) {
-            onAnimationComplete_();
-            onAnimationComplete_ = nullptr;
+        if (animation.onComplete) {
+            animation.onComplete();
         }
     }
 
@@ -395,35 +388,39 @@ void PostProcessExecutor::ApplyPreset(const std::string& _presetName, std::funct
 }
 
 void PostProcessExecutor::Update(float _deltaTime) {
-    if (!isAnimating_) return;
+    if (animations_.empty()) return;
 
-    animationTimer_ += _deltaTime;
-    float t = std::min(animationTimer_ / animationDuration_, 1.0f);
+    // コールバックの中で ApplyPreset が呼ばれて animations_ が伸びることがあるので、終わった分を取り出してから呼ぶ。
+    std::vector<std::function<void()>> completed;
 
-    // アニメーション対象の一時エフェクトを進行度 t で更新する。
-    for (const uint32_t id : animatingTemporaries_) {
-        if (IPostEffect* effect = GetTemporary(id)) {
-            effect->UpdateAnimation(t);
+    std::erase_if(animations_, [this, _deltaTime, &completed](PresetAnimation& _animation) {
+        _animation.timer += _deltaTime;
+        const float t = std::min(_animation.timer / _animation.duration, 1.0f);
+
+        // アニメーション対象の一時エフェクトを進行度 t で更新する。
+        for (const uint32_t id : _animation.temporaries) {
+            if (IPostEffect* effect = GetTemporary(id)) {
+                effect->UpdateAnimation(t);
+            }
         }
-    }
 
-    // 最後まで到達したら一時エフェクトを破棄する。
-    if (t >= 1.0f) {
-        isAnimating_ = false;
+        if (t < 1.0f) return false;
 
-        for (const uint32_t id : animatingTemporaries_) {
+        // 最後まで到達したら、この演出の一時エフェクトだけを破棄する。
+        for (const uint32_t id : _animation.temporaries) {
             RemoveTemporary(id);
         }
-        animatingTemporaries_.clear();
-
         Log::Send(Log::Level::INFO, "PostEffect animation completed and temporary effects removed");
 
-        // 完了コールバックがあれば呼び出す。
-        if (onAnimationComplete_) {
-            Log::Send(Log::Level::INFO, "Calling animation complete callback");
-            onAnimationComplete_();
-            onAnimationComplete_ = nullptr;
+        if (_animation.onComplete) {
+            completed.push_back(std::move(_animation.onComplete));
         }
+        return true;
+    });
+
+    for (const auto& callback : completed) {
+        Log::Send(Log::Level::INFO, "Calling animation complete callback");
+        callback();
     }
 }
 
