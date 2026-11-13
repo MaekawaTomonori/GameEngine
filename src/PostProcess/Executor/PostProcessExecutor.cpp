@@ -146,6 +146,9 @@ void PostProcessExecutor::Draw() const {
 
     // SwapChainのバインドを取り戻す（クリアされるが、まだ何も描いていないため問題ない）。
     adapter_->SetSwapChainRenderTarget();
+
+    // SceneView に映している間はウィンドウ側に描かない（前フレームの表示状態で判定する）
+    if (IsSceneViewActive()) return;
 #endif
 
     chain_->Draw();
@@ -156,7 +159,7 @@ void PostProcessExecutor::SetActive(const std::string& _type, bool _enable) {
     chain_->SetActive(_type, _enable);
 }
 
-bool PostProcessExecutor::IsSceneViewActive() {
+bool PostProcessExecutor::IsSceneViewActive() const {
     if (!debugUI_) return false;
     return debugUI_->IsVisible("Scene");
 }

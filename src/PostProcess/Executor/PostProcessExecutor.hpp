@@ -193,7 +193,7 @@ public:
     void ResizeRenderTextures();
 
     /** @brief SceneView が表示中かどうか */
-    bool IsSceneViewActive();
+    bool IsSceneViewActive() const;
 
     /** @brief SceneView の表示スケールを取得 */
     float GetSceneViewScale() const { return sceneViewScale_; }
