@@ -43,11 +43,12 @@ void Skybox::Update() {
     });
 
     transform_.scale = {scale, scale, scale};
-
-    wd_->wvp = MathUtils::Matrix::MakeAffineMatrix(transform_) * Singleton<CameraController>::GetInstance()->GetActive()->GetViewProjection();
 }
 
 void Skybox::Draw() {
+    // Update が呼ばれないフレーム（シーン切り替えの暗転中など）でも、今のカメラで描けるようにここで計算する
+    wd_->wvp = MathUtils::Matrix::MakeAffineMatrix(transform_) * Singleton<CameraController>::GetInstance()->GetActive()->GetViewProjection();
+
     common_->RegisterDraw([this]() {
         const auto tm = Singleton<TextureManager>::GetInstance();
         ID3D12GraphicsCommandList* commandList = adapter_->GetCommandList();

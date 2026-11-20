@@ -69,9 +69,8 @@ void Mesh::DrawGeometryOnly() const {
 }
 
 void Mesh::Update() {
-    if (material_) {
-        material_->uvTransform = MathUtils::Matrix::MakeScaleMatrix({ material_->tilingMul.x, material_->tilingMul.y, 1.0f });
-    }
+    // デバッグ UI でタイリングを変えたときのために、毎フレームも反映する
+    ApplyTiling();
 }
 
 void Mesh::Draw(const uint16_t _instanceCount) const {
@@ -199,6 +198,13 @@ void Mesh::SetTexture(const std::string& _texturePath) {
 void Mesh::SetTextureSize(const Vector2 _tilingMul) const {
     if (material_) {
         material_->tilingMul = _tilingMul;
+        ApplyTiling();
+    }
+}
+
+void Mesh::ApplyTiling() const {
+    if (material_) {
+        material_->uvTransform = MathUtils::Matrix::MakeScaleMatrix({ material_->tilingMul.x, material_->tilingMul.y, 1.0f });
     }
 }
 

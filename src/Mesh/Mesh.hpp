@@ -133,6 +133,11 @@ public:
     D3D12_GPU_VIRTUAL_ADDRESS GetMaterialAddress() const { return mr_ ? mr_->Get()->GetGPUVirtualAddress() : 0; }
     const std::string& GetTextureName() const { return texture_; }
     uint32_t GetTextureSrvIndex() const { return textureSrvIndex_; }
+
+private:
+    /** @brief タイリング倍率を UV 変換行列に反映する
+     */
+    void ApplyTiling() const;
 }; // class Mesh
 
 #endif // Mesh_HPP_
