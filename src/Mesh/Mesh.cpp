@@ -69,7 +69,7 @@ void Mesh::DrawGeometryOnly() const {
 }
 
 void Mesh::Update() {
-    // デバッグ UI でタイリングを変えたときのために、毎フレームも反映する
+    // デバッグ画面での変更も反映する
     ApplyTiling();
 }
 
