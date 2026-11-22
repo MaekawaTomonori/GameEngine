@@ -107,7 +107,7 @@ private:
      */
     bool Check() const;
 
-    /** @brief ウィンドウリサイズ処理（DRY原則に基づく抽出）
+    /** @brief ウィンドウの大きさが変わったときに、描画先の大きさを合わせる
      * @param _width 新しい幅
      * @param _height 新しい高さ
      */

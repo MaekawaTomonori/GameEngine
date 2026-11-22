@@ -124,26 +124,31 @@ JsonParams::Group JsonParams::GetGroups(const std::string& _name) {
 }
 
 JsonParams::Value JsonParams::GetValue(const std::string& _name, const std::string& _group, const std::string& _key) const {
+    const Value* value = FindValue(_name, _group, _key);
+    return value ? *value : Value{};
+}
+
+const JsonParams::Value* JsonParams::FindValue(const std::string& _name, const std::string& _group, const std::string& _key) const {
     auto data = datas_.find(_name);
     const std::string funcMsg = "JsonParams: GetValue - ";
     if (data == datas_.end()){
         Log::Send(Log::Level::WARNING, funcMsg + "name not found: " + _name);
-        return {};
+        return nullptr;
     }
 
     auto group = data->second.find(_group);
     if (group == data->second.end()){
         Log::Send(Log::Level::WARNING, funcMsg + "group not found: " + _group);
-        return {};
+        return nullptr;
     }
 
     auto item = group->second.find(_key);
     if (item == group->second.end()){
         Log::Send(Log::Level::WARNING, funcMsg + "key not found: " + _key);
-        return {};
+        return nullptr;
     }
 
-    return item->second;
+    return &item->second;
 }
 
 void JsonParams::RemoveGroup(const std::string& _name, const std::string& _group) {

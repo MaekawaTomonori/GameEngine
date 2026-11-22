@@ -103,6 +103,10 @@ protected:
      */
     void Change();
 
+    /** @brief アプリケーションを終了する
+     */
+    void Quit();
+
     /** @brief トランジションを再生（Out→callback→In）
      * @param _outType アウト演出種別
      * @param _inType  イン演出種別

@@ -41,12 +41,27 @@ public:
     void SetValue(const std::string& _name, const std::string& _group, const std::string& _key, const Value& _value);
     Group GetGroups(const std::string& _name);
     Value GetValue(const std::string& _name, const std::string& _group, const std::string& _key) const;
+
+    /** @brief 値を読む。無い、または型が違うときは _out をそのままにして false を返す
+     */
+    template <typename T>
+    bool TryGetValue(const std::string& _name, const std::string& _group, const std::string& _key, T& _out) const {
+        const Value* value = FindValue(_name, _group, _key);
+        if (!value) return false;
+        const T* found = std::get_if<T>(value);
+        if (!found) return false;
+        _out = *found;
+        return true;
+    }
     void RemoveGroup(const std::string& _name, const std::string& _group);
 
     bool Load(const std::string& _path, const std::string& _name = "");
     void Save(const std::string& _path, const std::string& _name = "");
 
 private:
+    /** @brief 値を探す。無いときは nullptr
+     */
+    const Value* FindValue(const std::string& _name, const std::string& _group, const std::string& _key) const;
     void Register(const std::string& _name);
     void LoadJson(const std::string& _path, const std::string& _name);
 };

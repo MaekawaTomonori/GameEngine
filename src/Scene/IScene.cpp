@@ -1,5 +1,7 @@
 #include "IScene.hpp"
 
+#include <Windows.h>
+
 #include "Pattern/Singleton.hpp"
 #include "SceneSwitcher.hpp"
 #include "src/Model/Common/ModelCommon.hpp"
@@ -44,6 +46,11 @@ void IScene::Change() {
     if (next_.empty()) return;
     switcher_->Change(next_);
 	progress_ = false;
+}
+
+void IScene::Quit() {
+    // メインループは WM_QUIT を受け取ると抜ける
+    PostQuitMessage(0);
 }
 
 void IScene::PlayTransition(Transition::Type _outType, Transition::Type _inType, std::function<void()> _onMidpoint) {
